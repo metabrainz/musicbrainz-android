@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="org.musicbrainz.mobile"
+      android:versionCode="1"
+      android:versionName="0.0.1"
+      android:installLocation="auto">
+      
+    <application android:icon="@drawable/icon" 
+    	android:label="@string/app_name" 
+    	android:debuggable="true"
+    	android:theme="@style/CustomTheme">
+        
+        <activity android:name=".ui.activities.HomeActivity"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".ui.activities.AuthenticationActivity"
+        	android:label="@string/auth_title" 
+        	android:configChanges="keyboardHidden|orientation" />
+        
+        <activity android:name=".ui.activities.AboutActivity"
+        	android:label="@string/about_title" />
+        
+        <activity android:name=".ui.activities.DonateActivity"
+        	android:label="@string/donate_title" />
+        
+        <activity android:name=".ui.activities.BarcodeSearchActivity"
+        	android:label="@string/addupc_title" 
+        	android:configChanges="keyboardHidden|orientation" />
+        
+        <activity android:name=".ui.activities.SearchResultsActivity"
+        	android:label="@string/searchres_title" 
+        	android:configChanges="keyboardHidden|orientation" />
+        
+        <activity android:name=".ui.activities.ReleaseActivity"
+        	android:label="@string/release_title" 
+        	android:configChanges="keyboardHidden|orientation" />
+        
+        <activity android:name=".ui.activities.ArtistActivity"
+        	android:label="@string/artist_title" 
+        	android:configChanges="keyboardHidden|orientation" />
+        
+        <activity android:name=".ui.activities.CollectionActivity"
+        	android:label="@string/collection_title" />
+        
+        <activity android:name="com.paypal.android.MEP.PayPalActivity" />
+        
+    </application>
+
+	<uses-sdk android:minSdkVersion="4" 
+		android:targetSdkVersion="7" 
+		android:maxSdkVersion="10" />
+
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-feature android:name="android.hardware.camera" />
+
+</manifest> 

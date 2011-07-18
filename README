@@ -1,0 +1,16 @@
+The project requires the PayPal Mobile Payments Library which can be downloaded from:
+
+https://www.x.com/community/ppx/xspaces/mobile/mep
+
+The project also uses a remote exception logger which can be downloaded from:
+
+http://code.google.com/p/android-remote-stacktrace
+
+In Eclipse, create a directory called 'libs' within the project. Add the PayPal_MPL.jar to this directory. Right click the project and select 'Build Path' > 'Configure Build Path...' then 'Add JARs...' from the libraries tab and navigate to the directory you just created.
+
+The MusicBrainz logo by Robert Kaye is distributed under a Creative Commons Attribution, Share-Alike, Non-Commercial license.
+
+The following graphics by androidicons.com are distributed under a Creative Commons Attribution Share-Alike license:
+tab_music, tab_links, menu_heart, btn_barcode, btn_tag
+
+All other menu, button and tab graphics are from the Android platform.

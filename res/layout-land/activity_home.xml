@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/LaunchActivityLand">
+    
+    <LinearLayout
+    	style="@style/HomeTileRow">
+		
+		<Button android:id="@+id/scan_btn"
+			style="@style/HomeTile"
+			android:text="@string/scan_label"
+			android:drawableTop="@drawable/home_barcode" />
+			
+		<RelativeLayout
+			style="@style/WrapHeight"
+			android:layout_gravity="center"
+			android:layout_weight="0.5" >
+		
+			<Spinner android:id="@+id/search_spin"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" 
+				android:layout_alignParentTop="true" />
+				
+			<EditText android:id="@+id/query_input"
+				style="@style/SearchEdit"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@+id/search_btn"
+				android:layout_below="@+id/search_spin"
+				android:hint="@string/search_hint" />
+			
+			<ImageButton android:id="@+id/search_btn"
+				style="@style/SearchButton"
+				android:layout_alignParentRight="true"
+				android:layout_below="@+id/search_spin" />
+		</RelativeLayout>
+	</LinearLayout>
+	
+	<LinearLayout
+    	style="@style/HomeTileRow">
+    	
+    	<Button android:id="@+id/login_btn"
+			style="@style/HomeTile"
+			android:text="@string/login_label"
+			android:drawableTop="@drawable/home_login" />
+		
+		<Button android:id="@+id/about_btn"
+			style="@style/HomeTile"
+			android:text="@string/about_label"
+			android:drawableTop="@drawable/home_about" />
+		
+		<Button android:id="@+id/donate_btn"
+			style="@style/HomeTile"
+			android:text="@string/donate_label"
+			android:drawableTop="@drawable/home_donate" />
+	</LinearLayout>
+</LinearLayout>

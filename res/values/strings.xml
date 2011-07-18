@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<resources>
+	<!-- HomeActivity -->
+	<string name="app_name">MusicBrainz</string>
+	<string name="scan_label">Scan Barcode</string>
+	<string name="login_label">Log In</string>
+	<string name="logout_label">Log Out</string>
+	<string name="search_hint">Search MusicBrainz</string>
+	<string name="search_label">Search</string>
+	<string name="about_label">About</string>
+	<string name="donate_label">Donate</string>
+	<string name="hometext_header">Welcome to MusicBrainz!</string>
+	<string name="hometext_body">Scan a release or search to get started.\nLog in to submit tags and ratings.</string>
+
+	<!-- AuthenticateActivity -->
+	<string name="auth_title">MusicBrainz - Log In</string>
+	<string name="uname_hint">Username</string>
+	<string name="pass_hint">Password</string>
+	<string name="staylog_text">Stay logged in on this device?</string>
+	<string name="register_text">Not registered? Visit musicbrainz.org/register</string>
+	<string name="pd_authenticating">Authenticating...</string>
+	<string name="auth_fail">Autentication failed!\nPlease check your username and password.</string>
+	<string name="auth_pos">Okay</string>
+
+	<!-- SearchResultsActivity -->
+	<string name="searchres_title">MusicBrainz - Search Results</string>
+	<string name="noresults">No results found!</string>
+	
+	<!-- Search types -->
+	<string name="search_artist">Artist</string>
+	<string name="search_release">Release</string>
+
+	<!-- ReleaseActivity -->
+	<string name="release_title">MusicBrainz - Release</string>
+	<string name="artistinfo_label">Artist Information</string>
+	<string name="tab_tracks">Tracks</string>
+	
+	<string name="no_tags">No tags available!</string>
+	<string name="edit_login">You must log in before you can submit data!</string>
+
+	<!-- ArtistActivity -->
+	<string name="artist_title">MusicBrainz - Artist</string>
+	<string name="noreleases">No releases found</string>
+	<string name="nolinks">No links found</string>
+	
+	<string name="tab_releases">Releases</string>
+	<string name="tab_links">Links</string>
+	<string name="tab_edits">Edit</string>
+
+	<!-- Edit tabs -->
+	<string name="tag_hint">Tag</string>
+	<string name="tag_label">Tag</string>
+	<string name="rate_label">Rate</string>
+	<string name="addcollect_label">Add to my collection</string>
+
+	<!-- BarcodeSearchActivity -->
+	<string name="addupc_title">MusicBrainz - Add Barcode</string>
+	<string name="barcode_text">Product code: </string>
+	<string name="barcode_hint">Release title</string>
+	<string name="barcode_confirm">Add the barcode to this release?</string>
+
+	<!-- ConfirmBarcodeDialog -->
+	<string name="barcode_add_header">Add barcode</string>
+	<string name="barcode_add_body">Add this barcode to the following release?</string>
+	<string name="barcode_add_btn">Submit</string>
+	
+	<!-- PostService -->
+	<string name="service_title">MusicBrainz</string>
+	<string name="service_notification">Submitting data to MusicBrainz</string>
+
+	<!-- CollectionActivity -->
+	<string name="collection_title">MusicBrainz - Your Collection</string>
+
+	<!-- DonateActivity -->
+	<string name="donate_title">MusicBrainz - Donate</string>
+	<string name="donate_header">Donate to support the MetaBrainz Foundation</string>
+	<string name="donate_text">You can donate through PayPal to the non-profit MetaBrainz Foundation which operates the MusicBrainz project. For further information and alternative donation options, please visit metabrainz.org/donate</string>
+	<string name="paypal_label">Donate with PayPal</string>
+
+	<!-- AboutActivity -->
+	<string name="about_title">MusicBrainz - About</string>
+	<string name="about_header">About MusicBrainz on Android</string>
+	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis app provides easy access to that data on your Android device. Scan a CD barcode to look up the release information, add the barcode if it is not already stored, contribute tags and ratings, or simply browse the metadata.</string>
+
+	<!-- Menus -->
+	<string name="menu_about">About</string>
+	<string name="menu_donate">Donate to MB</string>
+	<string name="menu_collection">My Collection</string>
+	<string name="menu_add_collection">Add to Collection</string>
+	
+	<!-- Progress dialogs -->
+	<string name="pd_searching">Searching...</string>
+	<string name="pd_searching_bc">Searching for barcode...</string>
+	<string name="pd_loading">Loading...</string>
+	
+	<!-- Error dialogs -->
+	<string name="err_text">There was a problem connecting to the server. Retry?</string>
+	<string name="err_pos">Yes</string>
+	<string name="err_neg">No</string>
+
+	<!-- Toasts -->
+	<string name="toast_tag">Tag(s) submitted</string>
+	<string name="toast_tag_fail">Tag submission failed</string>
+	<string name="toast_rate">Rating submitted</string>
+	<string name="toast_rate_fail">Rating submission failed</string>
+	<string name="toast_collection">Added to your collection</string>
+	<string name="toast_search_err">Add some text to search</string>
+	<string name="toast_tag_err">Add some text to tag</string>
+	<string name="toast_auth_err">Username or password missing</string>
+	<string name="toast_barcode">Barcode added to release</string>
+	<string name="toast_barcode_help">Search for release and select result</string>
+	<string name="toast_noresults">Search returned no results</string>
+	<string name="toast_loggedIn">You are now logged in!</string>
+	
+	<!-- ZXing integration -->
+	<string name="zx_title">Install Barcode Scanner?</string>
+	<string name="zx_message">This application requires Barcode Scanner. Would you like to install it?</string>
+	<string name="zx_pos">Yes</string>
+	<string name="zx_neg">No</string>
+
+	<!-- BarcodeDialog -->
+	<string name="barcode_header">Barcode not found!</string>
+	<string name="barcode_info_log">This barcode is not yet stored in the MusicBrainz database. You can contribute to MusicBrainz by adding it to the appropriate release.</string>
+	<string name="barcode_info_nolog">This barcode is not yet stored in the MusicBrainz database. You can contribute to MusicBrainz by adding it to the appropriate release. Please log in first. If you don\'t have a MusicBrainz account you can register at musicbrainz.org</string>
+	<string name="barcode_btn">Add barcode</string>
+
+	<!-- ReleaseSelectionDialog -->
+	<string name="rg_title">Select a release</string>
+	<string name="rg_text">This title has been released more than once. Choose a specific release from the list.</string>
+	
+	<!-- Release group types -->
+	<string name="rt_album">Album</string>
+	<string name="rt_single">Single</string>
+	<string name="rt_ep">EP</string>
+	<string name="rt_compilation">Compilation</string>
+	<string name="rt_nat">NAT</string>
+	<string name="rt_soundtrack">Soundtrack</string>
+	<string name="rt_spokenword">Spoken word</string>
+	<string name="rt_interview">Interview</string>
+	<string name="rt_audiobook">Audio book</string>
+	<string name="rt_live">Live</string>
+	<string name="rt_remix">Remix</string>
+	<string name="rt_other">Other</string>
+	<string name="rt_unknown">Unknown</string>
+	
+	<!-- Release formats -->
+	<string name="fm_cd">CD</string>
+	<string name="fm_dvd">DVD</string>
+	<string name="fm_sacd">SACD</string>
+	<string name="fm_dd">DualDisc</string>
+	<string name="fm_ld">LaserDisc</string>
+	<string name="fm_md">MiniDisc</string>
+	<string name="fm_vinyl">Vinyl</string>
+	<string name="fm_cassette">Cassette</string>
+	<string name="fm_cartridge">Cartridge</string>
+	<string name="fm_rtr">Reel-to-reel</string>
+	<string name="fm_dat">DAT</string>
+	<string name="fm_dm">Digital Media</string>
+	<string name="fm_other">Other</string>
+	<string name="fm_wax">Wax Cylinder</string>
+	<string name="fm_pr">Piano Roll</string>
+	<string name="fm_dcc">Digital Compact Cassette</string>
+	<string name="fm_vhs">VHS</string>
+	<string name="fm_vcd">Video-CD</string>
+	<string name="fm_svcd">Super Video-CD</string>
+	<string name="fm_bm">Betamax</string>
+	<string name="fm_hdcd">HD Compatible Digital</string>
+	<string name="fm_usb">USB Flash Drive</string>
+	<string name="fm_sm">SlotMusic</string>
+	<string name="fm_umd">Universal Media Disc</string>
+	<string name="fm_hddvd">HD-DVD</string>
+	<string name="fm_dvda">DVD-Audio</string>
+	<string name="fm_dvdv">DVD-Video</string>
+	<string name="fm_br">Blu-ray</string>	
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<resources> 
+	<!-- Activity and Dialog layout styles -->
+
+	<style name="CustomTheme" parent="android:Theme.Light"> 
+        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+    </style> 
+
+    <style name="WindowTitleBackground">     
+        <item name="android:background">@color/mb_purple_medium</item>   
+        <item name="android:paddingLeft">@dimen/std_pad</item>
+        <item name="android:paddingRight">@dimen/std_pad</item>      
+    </style>
+    
+    <style name="Activity" parent="@style/Fill">
+    	<item name="android:orientation">vertical</item>
+    	<item name="android:background">@color/main_bg</item>
+    </style>
+    
+    <style name="PaddedActivity" parent="@style/Activity">
+    	<item name="android:padding">@dimen/home_pad</item>
+    </style>
+    
+    <style name="LaunchActivityLand" parent="@style/Activity">
+    	<item name="android:paddingTop">@dimen/std_pad</item>
+    	<item name="android:paddingBottom">@dimen/std_pad</item>
+    </style>
+    
+    <style name="Dialog" parent="@style/WrapHeight">
+    	<item name="android:orientation">vertical</item>
+    </style>
+</resources>

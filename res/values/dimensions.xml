@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<resources>
+    <dimen name="text_size_tag">13sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_entity">17sp</dimen>
+    <dimen name="text_size_xl">18sp</dimen>
+    
+    <dimen name="home_pad">14dip</dimen>
+    <dimen name="huge_pad">20dip</dimen>
+    <dimen name="std_pad">7dip</dimen>
+    <dimen name="small_pad">5dip</dimen>
+    <dimen name="startop_pad">13dip</dimen>
+    
+    <dimen name="tab_height">38dip</dimen>
+    <dimen name="vertical_minspace">38dip</dimen>
+    <dimen name="button_min">47dip</dimen>
+    <dimen name="launch_textarea_height">70dip</dimen>
+    <dimen name="separator_height">2dip</dimen>
+</resources>

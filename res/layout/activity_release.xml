@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/Activity">
+  
+  	<RelativeLayout 
+		style="@style/EntityInfo">
+  
+		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_release"
+			style="@style/EntityText"
+			android:layout_alignParentLeft="true"
+			android:layout_toLeftOf="@+id/release_rating" />
+		
+		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_artist"
+			style="@style/ScrollText"
+			android:layout_below="@+id/release_release"
+			
+			android:textColor="@color/main_text"
+			android:textSize="@dimen/text_size_entity" />
+			
+		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_label"
+			style="@style/ScrollText"
+			android:layout_below="@+id/release_artist"
+			android:layout_alignParentLeft="true"
+			android:layout_toLeftOf="@+id/release_date"
+			
+			android:textColor="@color/main_text"
+			android:textSize="@dimen/text_size_medium" />
+			
+		<TextView android:id="@+id/release_date"
+			style="@style/Wrap"
+			android:layout_below="@+id/release_artist"
+			android:layout_alignParentRight="true"
+			android:layout_marginLeft="5dip"
+			
+			android:textColor="@color/main_text"
+			android:textSize="@dimen/text_size_medium" />
+			
+		<ImageButton android:id="@+id/release_artist_btn"
+			style="@style/ButtonMin"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentRight="true"
+			android:background="@null"
+			android:src="@drawable/btn_artist" />
+			
+		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_tags"
+			style="@style/TagArea"
+			android:layout_below="@+id/release_label"
+			android:layout_toLeftOf="@+id/release_rating" />
+			
+		<RatingBar android:id="@+id/release_rating"
+			style="?android:attr/ratingBarStyleSmall"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			
+			android:layout_below="@+id/release_label" 
+			android:layout_alignParentRight="true"
+			android:layout_marginLeft="@dimen/std_pad"
+			android:layout_marginTop="@dimen/startop_pad" />
+		
+	</RelativeLayout>
+		
+	<TabHost android:id="@+id/release_tabhost"
+		style="@style/WrapHeight"
+		android:layout_weight="1">
+		
+	<TabWidget android:id="@android:id/tabs"
+		style="@style/WrapHeight" />
+		
+	<FrameLayout android:id="@android:id/tabcontent"
+		style="@style/Fill"
+		android:paddingTop="@dimen/tab_height">
+		
+	<RelativeLayout android:id="@+id/tracks_tab"
+		style="@style/Fill">
+		
+		<ListView android:id="@+id/release_tracks"
+			style="@style/List"/>
+  		
+  	</RelativeLayout>
+
+	<LinearLayout android:id="@+id/edit_tab"
+		style="@style/Fill"
+		android:background="@color/main_fg"
+		android:orientation="vertical"
+		android:padding="15dip">
+
+		<TextView android:id="@+id/login_warning"
+			style="@style/Wrap"
+			android:layout_marginBottom="10dip"
+			android:layout_gravity="center"
+			android:visibility="gone"
+			android:textColor="@color/mb_orange_dark"
+			android:text="@string/edit_login" />
+			
+		<EditText android:id="@+id/tag_input"
+			style="@style/WrapHeight"		
+			android:hint="@string/tag_hint" 
+			android:inputType="textFilter"
+			android:singleLine="true"
+			android:imeOptions="actionDone" />
+			
+		<RatingBar android:id="@+id/rating_input"
+			style="@style/RatingBar" />
+		
+		<LinearLayout
+			style="@style/WrapHeight"
+			android:layout_marginTop="5dip">
+		
+			<Button android:id="@+id/tag_btn"
+				style="@style/WrapHeight"
+				android:text="@string/tag_label" 
+				android:drawableRight="@drawable/btn_tag" 
+				android:layout_weight="1" />
+			
+			<Button android:id="@+id/rate_btn"
+				style="@style/WrapHeight"
+				android:text="@string/rate_label" 
+				android:drawableRight="@drawable/btn_star"
+				android:layout_weight="1" />
+
+		</LinearLayout>
+		
+	</LinearLayout>	
+	</FrameLayout>
+	</TabHost>
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/release_box"
+	style="@style/WrapHeight"
+	android:padding="@dimen/std_pad">
+	
+	<!-- release details -->	
+	<TextView android:id="@+id/list_release_date"
+  		style="@style/ListAuxMedium"
+  		android:layout_alignParentLeft="true" />
+		
+	<TextView android:id="@+id/list_release_labels"
+  		style="@style/ListAuxMedium"
+  		android:layout_toRightOf="@+id/list_release_date"
+  		android:layout_toLeftOf="@+id/list_release_country"
+  		android:layout_marginRight="@dimen/huge_pad"
+  		android:layout_marginLeft="@dimen/huge_pad" />
+		
+	<TextView android:id="@+id/list_release_country"
+  		style="@style/ListAuxMedium"
+  		android:layout_alignParentRight="true"
+  		android:layout_marginRight="@dimen/small_pad" />
+  		
+  	<!-- medium details -->
+  	<TextView android:id="@+id/list_release_tracksnum"
+  		style="@style/ListReleaseMedium"
+  		android:layout_alignParentLeft="true"
+  		android:layout_below="@+id/list_release_labels" />
+  			
+  	<TextView android:id="@+id/list_release_formats"
+  		style="@style/ListReleaseMedium"
+  		android:layout_toRightOf="@+id/list_release_tracksnum"
+  		android:layout_below="@+id/list_release_labels"
+  		android:layout_marginLeft="@dimen/huge_pad" />
+  		
+  	<!-- titles -->
+  	<TextView android:id="@+id/list_release"
+  		style="@style/ListReleaseTitles"
+  		android:layout_below="@+id/list_release_tracksnum"
+  		android:layout_alignParentLeft="true"
+  		android:layout_toLeftOf="@+id/list_release_artist" />
+  			
+  	<TextView android:id="@+id/list_release_artist"
+  		style="@style/ListReleaseTitles"
+  		android:layout_below="@+id/list_release_tracksnum"
+  		android:layout_alignParentRight="true"
+  		android:layout_marginLeft="@dimen/huge_pad"
+  		android:layout_marginRight="@dimen/small_pad" />
+</RelativeLayout>

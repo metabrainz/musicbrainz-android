@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<resources> 
+	<!-- General widget and custom styles -->
+
+	<!-- Home -->
+	<style name="HomeTileRow" parent="@style/WrapHeight">
+    	<item name="android:orientation">horizontal</item>
+    	<item name="android:layout_weight">1</item>
+    	<item name="android:paddingTop">@dimen/std_pad</item>
+    	<item name="android:paddingBottom">@dimen/std_pad</item>
+    	<item name="android:paddingRight">@dimen/home_pad</item>
+    	<item name="android:paddingLeft">@dimen/home_pad</item>
+    </style>
+
+    <style name="HomeTile" parent="@style/WrapHeight">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/main_text</item>
+        <item name="android:background">@null</item>
+        <item name="android:onClick">onClick</item>
+    </style>
+    
+    <!-- Entities -->
+    <style name="EntityText" parent="@style/ScrollText">
+    	<item name="android:textSize">@dimen/text_size_entity</item>
+    	<item name="android:textColor">@color/main_text</item>
+    	<item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="ScrollText" parent="@style/WrapHeight">
+    	<item name="android:singleLine">true</item>
+    	<item name="android:ellipsize">marquee</item>
+    	<item name="android:marqueeRepeatLimit">-1</item>
+    </style>
+    
+    <style name="TagArea" parent="@style/ScrollText">
+    	<item name="android:padding">@dimen/small_pad</item>
+    	<item name="android:background">@drawable/tagbox</item>
+    	<item name="android:layout_marginTop">@dimen/small_pad</item>
+    	<item name="android:textSize">@dimen/text_size_tag</item>
+    	<item name="android:textColor">@color/tag_text</item>
+    </style>
+    
+    <style name="RatingBar" parent="@android:style/Widget.RatingBar">
+    	<item name="android:layout_width">wrap_content</item>
+    	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:layout_gravity">center</item>
+    	<item name="android:numStars">5</item>
+    	<item name="android:stepSize">1</item>
+    </style>
+    
+    <!-- Searches -->
+    <style name="SearchEdit" parent="@style/Edit">
+    	<item name="android:imeOptions">actionSearch</item>
+    </style>
+    
+    <style name="SearchButton" parent="@style/ButtonMin">
+  		<item name="android:onClick">onClick</item>
+    	<item name="android:src">@drawable/btn_search</item>
+    </style>
+    
+    <style name="SearchHeader" parent="@style/VerticalMinPad">
+    	<item name="android:textSize">@dimen/text_size_large</item>
+    	<item name="android:textColor">@color/main_text</item>
+    </style>
+    
+    <style name="NoResults" parent="@style/Fill">
+    	<item name="android:gravity">center</item>
+    	<item name="android:visibility">gone</item>
+    	<item name="android:orientation">vertical</item>
+    </style>
+    
+    <style name="NoResultsText" parent="@style/Wrap">
+        <item name="android:text">@string/noresults</item>
+    	<item name="android:textSize">@dimen/text_size_large</item>
+    	<item name="android:textColor">@color/main_text</item>
+    	<item name="android:layout_marginTop">@dimen/std_pad</item>
+    </style>
+    
+    <!-- Text -->
+    <style name="TextHeader" parent="@style/WrapHeight">
+    	<item name="android:layout_marginBottom">@dimen/home_pad</item>
+    	<item name="android:textSize">@dimen/text_size_xl</item>
+    	<item name="android:textColor">@color/aux_text</item>
+    </style>
+    
+    <style name="TextBody" parent="@style/WrapHeight">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textColor">@color/main_text</item>
+    	<item name="android:autoLink">web</item>
+    </style>
+    
+    <style name="Edit" parent="@style/WrapHeight">
+    	<item name="android:singleLine">true</item>
+    	<item name="android:inputType">textFilter</item>
+    </style>
+    
+    <style name="Username" parent="Edit">
+    	<item name="android:hint">@string/uname_hint</item>
+    	<item name="android:imeOptions">actionNext</item>
+    </style>
+    
+    <style name="Password" parent="Edit">
+    	<item name="android:password">true</item>
+    	<item name="android:hint">@string/pass_hint</item>
+    	<item name="android:imeOptions">actionGo</item>
+    </style>
+    
+    <style name="CheckBoxText" parent="TextBody">
+    	<item name="android:layout_centerVertical">true</item>
+    	<item name="android:gravity">right</item>
+    	<item name="android:text">@string/staylog_text</item>
+    </style>
+    
+    <style name="Footer" parent="@style/TextBody">
+    	<item name="android:layout_alignParentBottom">true</item>
+    	<item name="android:gravity">center_horizontal</item>
+    </style>
+    
+    <style name="DialogHeader" parent="@style/WrapHeight">
+    	<item name="android:textSize">@dimen/text_size_xl</item>
+    	<item name="android:textColor">@color/dialog_text</item>
+    	<item name="android:padding">@dimen/std_pad</item>
+    </style>
+    
+    <style name="DialogBody" parent="@style/WrapHeight">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textColor">@color/dialog_text</item>
+    	<item name="android:paddingRight">@dimen/std_pad</item>
+    	<item name="android:paddingLeft">@dimen/std_pad</item>
+    	<item name="android:paddingBottom">@dimen/std_pad</item>
+    </style>
+    
+    <style name="Link" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textColor">@color/link_text</item>
+    	<item name="android:singleLine">true</item>
+    	<item name="android:ellipsize">marquee</item>
+    	<item name="android:marqueeRepeatLimit">-1</item>
+    </style>
+    
+    <style name="LinkDescription" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textColor">@color/list_text</item>
+    </style>
+    
+    <style name="LinkImage" parent="@style/Wrap">
+    	<item name="android:layout_centerVertical">true</item>
+    	<item name="android:layout_marginRight">@dimen/small_pad</item>
+    	<item name="android:layout_marginLeft">@dimen/small_pad</item>
+    	<item name="android:src">@drawable/ic_forward</item>
+    </style>
+    
+    <style name="HomeTextHeader" parent="@style/HomeText">
+    	<item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="HomeText" parent="@style/WrapHeight">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textColor">@color/main_text</item>
+    </style>
+    
+    <!-- List items -->
+    <style name="ListMain" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_large</item>
+    	<item name="android:textColor">@color/list_text</item>
+    </style>
+    
+    <style name="ListAux" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_small</item>
+    	<item name="android:textColor">@color/aux_text</item>
+    </style>
+    
+    <style name="ListAuxMedium" parent="@style/ListAux">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    
+    <style name="ListAuxPad" parent="@style/ListAux">
+    	<item name="android:layout_marginRight">@dimen/small_pad</item>
+    	<item name="android:layout_marginLeft">@dimen/std_pad</item>
+    	<item name="android:layout_centerVertical">true</item>
+    </style>
+    
+    <style name="ListMedium" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textColor">@color/list_text</item>
+    </style>
+    
+    <style name="ListReleaseMedium" parent="@style/ListMedium">
+    	<item name="android:textColor">@color/mb_orange_dark</item>
+    </style>
+    
+    <style name="ListReleaseTitles" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_small</item>
+    	<item name="android:textColor">@color/list_text</item>
+    </style>
+    
+    <style name="Track" parent="@style/ListMedium">
+    	<item name="android:layout_marginRight">@dimen/small_pad</item>
+    	<item name="android:layout_marginLeft">@dimen/std_pad</item>
+    </style>
+    
+    <style name="TrackArtist" parent="@style/Track">
+    	<item name="android:textColor">@color/aux_text</item>
+    	<item name="android:visibility">gone</item>
+    </style>
+    
+    <style name="TrackNum" parent="@style/ListMedium">
+    	<item name="android:layout_centerVertical">true</item>
+    </style>
+    
+    <style name="TrackTime" parent="@style/ListMedium">
+    	<item name="android:layout_marginRight">@dimen/small_pad</item>
+    	<item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <!-- Misc -->
+    <style name="Separator">
+    	<item name="android:layout_width">fill_parent</item>
+    	<item name="android:layout_height">@dimen/separator_height</item>
+    	<item name="android:background">@color/mb_purple_medium</item>
+    </style>
+    
+    <style name="CheckBox" parent="@style/Wrap">
+    	<item name="android:layout_alignParentRight">true</item>
+    	<item name="android:layout_marginLeft">@dimen/std_pad</item>
+    </style>
+    
+    <style name="StdButton" parent="@style/WrapHeight">
+    	<item name="android:onClick">onClick</item>
+    </style>
+</resources>
