@@ -20,10 +20,11 @@
 
 package org.musicbrainz.mobile.ui.activities;
 
+import java.math.BigDecimal;
+
 import org.musicbrainz.mobile.R;
 
 import com.paypal.android.MEP.PayPal;
-import com.paypal.android.MEP.PayPalActivity;
 import com.paypal.android.MEP.PayPalPayment;
 
 import android.content.Intent;
@@ -48,6 +49,9 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 	private Button donate;
 	
 	private PayPal payPal;
+	private static final int SERVER = PayPal.ENV_NONE;
+	private static final String APP_ID = "APP-80W284485P519543T";
+	private static final int REQUEST_CODE = 1;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +59,6 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_donate);
         
-        // initialise Spinner values from XML resource
         amount = (Spinner) findViewById(R.id.donate_spin);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -77,12 +80,9 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		
 		protected Void doInBackground(Void... v) {
 			
-			// TODO need an app ID, registered from MB PayPal
-			// ENV_NONE seems to actually be the sandbox environment?
 			payPal = PayPal.getInstance();
 			if (payPal == null) {
-			   	payPal = PayPal.initWithAppID(DonateActivity.this.getBaseContext(), "APP-80W284485P519543T", PayPal.ENV_NONE);
-			    payPal.setLang("en_US"); // TODO set language dynamically
+			   	payPal = PayPal.initWithAppID(DonateActivity.this, APP_ID, SERVER);
 			}
 		    
 			return null;
@@ -96,27 +96,25 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		
 	}
 	
-    /*
-     * Listener for donate button.
-     */
 	public void onClick(View v) {
+		String selection = (String) amount.getSelectedItem();
+		float amount = Float.valueOf(selection.substring(1));
+		PayPalPayment donation = createPayment(BigDecimal.valueOf(amount));
 		
-		// get Spinner value
-		String amtString = (String) amount.getSelectedItem();
-		float amt = Float.valueOf(amtString.substring(1));
+		Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
+		this.startActivityForResult(checkoutIntent, REQUEST_CODE);
+	}
 	
-		// create payment
+	private PayPalPayment createPayment(BigDecimal amount) {
 		PayPalPayment donation = new PayPalPayment();
-		donation.setAmount(amt);
-		donation.setCurrency("USD");
+		donation.setSubtotal(amount);
+		donation.setCurrencyType("USD");
+		donation.setPaymentType(PayPal.PAYMENT_TYPE_NONE);
+		donation.setPaymentSubtype(PayPal.PAYMENT_SUBTYPE_DONATIONS);
 		donation.setRecipient("paypal@metabrainz.org");
-		donation.setItemDescription("MusicBrainz Donation via Android");
 		donation.setMerchantName("MetaBrainz Foundation");
-		
-		// check out
-		Intent checkoutIntent = new Intent(this, PayPalActivity.class);
-		checkoutIntent.putExtra(PayPalActivity.EXTRA_PAYMENT_INFO, donation);
-		this.startActivityForResult(checkoutIntent, 1);
+		donation.setDescription("MusicBrainz Donation via Android app");
+		return donation;
 	}
     
     public boolean onPrepareOptionsMenu(Menu menu) {

@@ -45,7 +45,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
- * Class to perform all webservice requests which require the user to be
+ * Class to perform all webservice requests that need the user to be
  * authenticated.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
