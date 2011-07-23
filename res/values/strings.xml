@@ -123,7 +123,8 @@
 	<string name="toast_barcode">Barcode added to release</string>
 	<string name="toast_barcode_help">Search for release and select result</string>
 	<string name="toast_noresults">Search returned no results</string>
-	<string name="toast_loggedIn">You are now logged in!</string>
+	<string name="toast_loggedIn">Logged in</string>
+	<string name="toast_loggedOut">Logged out</string>
 	
 	<!-- ZXing integration -->
 	<string name="zx_title">Install Barcode Scanner?</string>

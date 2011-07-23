@@ -18,14 +18,14 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ui.activities;
+package org.musicbrainz.mobile.ui.activity;
 
 import java.io.IOException;
 import java.util.LinkedList;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.ReleaseStub;
-import org.musicbrainz.mobile.ui.dialogs.BarcodeConfirmDialog;
+import org.musicbrainz.mobile.ui.dialog.BarcodeConfirmDialog;
 import org.musicbrainz.mobile.ui.util.ReleaseStubAdapter;
 import org.musicbrainz.mobile.ws.WebService;
 import org.xml.sax.SAXException;

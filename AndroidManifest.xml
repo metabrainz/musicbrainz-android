@@ -29,7 +29,7 @@
     	android:debuggable="true"
     	android:theme="@style/CustomTheme">
         
-        <activity android:name=".ui.activities.HomeActivity"
+        <activity android:name=".ui.activity.HomeActivity"
         	android:label="@string/app_name"
         	android:launchMode="singleTop"
            	android:screenOrientation="portrait">
@@ -39,35 +39,35 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".ui.activities.AuthenticationActivity"
+        <activity android:name=".ui.activity.AuthenticationActivity"
         	android:label="@string/auth_title" 
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activities.AboutActivity"
+        <activity android:name=".ui.activity.AboutActivity"
         	android:label="@string/about_title"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activities.DonateActivity"
+        <activity android:name=".ui.activity.DonateActivity"
         	android:label="@string/donate_title"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activities.BarcodeSearchActivity"
+        <activity android:name=".ui.activity.BarcodeSearchActivity"
         	android:label="@string/addupc_title" 
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activities.SearchResultsActivity"
+        <activity android:name=".ui.activity.SearchResultsActivity"
         	android:label="@string/searchres_title" 
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activities.ReleaseActivity"
+        <activity android:name=".ui.activity.ReleaseActivity"
         	android:label="@string/release_title" 
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activities.ArtistActivity"
+        <activity android:name=".ui.activity.ArtistActivity"
         	android:label="@string/artist_title" 
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />

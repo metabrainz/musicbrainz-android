@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ui.activities;
+package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
 
@@ -56,7 +56,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	private Button login;
 	private InputMethodManager imm;
 	
-	private static final int LOGIN_REQUEST = 0; // authentication request code
+	private static final int LOGIN_REQUEST = 0;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +66,6 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		searchTerm = (EditText) findViewById(R.id.query_input);
 		searchTerm.setOnEditorActionListener(this);
 
-		// create search type spinner from XML resource
 		searchType = (Spinner) findViewById(R.id.search_spin);
 		ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,
 				R.array.searchType, 
@@ -75,44 +74,33 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		searchType.setAdapter(typeAdapter);
 
 		login = (Button) findViewById(R.id.login_btn);
-		
-		// set label based on login state
-		if (loggedIn)
+		if (loggedIn) {
 			login.setText(R.string.logout_label);
+		}
 		
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
 
-	/*
-	 * Handle result of barcode scan.
-	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		
 		if (requestCode == LOGIN_REQUEST) {
-			// get login result
 			if (resultCode == AuthenticationActivity.LOGGED_IN) {
 				loggedIn = true;
 				login.setText(R.string.logout_label);
-				Toast loginMessage = Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT);
-				loginMessage.show();
+				Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
 			} 
-		} else if (requestCode == IntentIntegrator.REQUEST_CODE) {
-			
+		} else if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
 			IntentResult scanResult = IntentIntegrator.parseActivityResult(
 					requestCode, resultCode, intent);
+			
 			if (scanResult.getContents() != null) {
-
 				Intent barcodeResult = new Intent(this, ReleaseActivity.class);
 				barcodeResult.putExtra("barcode", scanResult.getContents());
-				
 				startActivity(barcodeResult);
 			}
 		}
 	}
 
-	/*
-	 * Listener for button clicks.
-	 */
 	public void onClick(View v) {
 		
 		switch (v.getId()) {
@@ -121,12 +109,9 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 				Intent logInIntent = new Intent(this, AuthenticationActivity.class);
 				startActivityForResult(logInIntent, LOGIN_REQUEST);
 			} else {
-				SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-				Editor spe = prefs.edit();
-				spe.clear();
-				spe.commit();
+				logOut();
 				login.setText(R.string.login_label);
-				loggedIn = false;
+				Toast.makeText(this, R.string.toast_loggedOut, Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.scan_btn:
@@ -150,11 +135,15 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 			startActivity(donateIntent);
 		}
 	}
+	
+	private void logOut() {
+		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+		Editor spe = prefs.edit();
+		spe.clear();
+		spe.commit();
+		loggedIn = false;
+	}
 
-	/*
-	 * Start a search activity based on the current values of search type and
-	 * term.
-	 */
 	private void startSearch() {
 		
 		String term = searchTerm.getText().toString();
@@ -200,7 +189,6 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		boolean persist = prefs.getBoolean("persist", false);
 		
 		if (!persist) {
-			// clear login details
 			Editor spe = prefs.edit();
 			spe.clear();
 			spe.commit();

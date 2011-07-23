@@ -77,7 +77,7 @@ import android.net.Uri;
  */
 public final class IntentIntegrator {
 
-  public static final int REQUEST_CODE = 0x0ba7c0de; // get it?
+  public static final int BARCODE_REQUEST = 0x0ba7c0de; // get it?
 
   public static final String DEFAULT_TITLE = "Install Barcode Scanner?";
   public static final String DEFAULT_MESSAGE =
@@ -176,7 +176,7 @@ public final class IntentIntegrator {
     }
 
     try {
-      activity.startActivityForResult(intentScan, REQUEST_CODE);
+      activity.startActivityForResult(intentScan, BARCODE_REQUEST);
       return null;
     } catch (ActivityNotFoundException e) {
       return showDownloadDialog(activity, stringTitle, stringMessage, stringButtonYes, stringButtonNo);
@@ -214,7 +214,7 @@ public final class IntentIntegrator {
    *  the fields will be null.
    */
   public static IntentResult parseActivityResult(int requestCode, int resultCode, Intent intent) {
-    if (requestCode == REQUEST_CODE) {
+    if (requestCode == BARCODE_REQUEST) {
       if (resultCode == Activity.RESULT_OK) {
         String contents = intent.getStringExtra("SCAN_RESULT");
         String formatName = intent.getStringExtra("SCAN_RESULT_FORMAT");

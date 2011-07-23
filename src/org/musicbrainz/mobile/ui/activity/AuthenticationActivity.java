@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ui.activities;
+package org.musicbrainz.mobile.ui.activity;
 
 import java.io.IOException;
 

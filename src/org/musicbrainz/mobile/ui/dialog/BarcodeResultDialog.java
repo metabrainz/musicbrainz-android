@@ -18,11 +18,11 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ui.dialogs;
+package org.musicbrainz.mobile.ui.dialog;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.ui.activities.BarcodeSearchActivity;
-import org.musicbrainz.mobile.ui.activities.ReleaseActivity;
+import org.musicbrainz.mobile.ui.activity.BarcodeSearchActivity;
+import org.musicbrainz.mobile.ui.activity.ReleaseActivity;
 
 import android.app.Dialog;
 import android.content.Context;

@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ui.activities;
+package org.musicbrainz.mobile.ui.activity;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -30,8 +30,8 @@ import org.musicbrainz.mobile.data.Release;
 import org.musicbrainz.mobile.data.ReleaseStub;
 import org.musicbrainz.mobile.data.Track;
 import org.musicbrainz.mobile.data.UserData;
-import org.musicbrainz.mobile.ui.dialogs.BarcodeResultDialog;
-import org.musicbrainz.mobile.ui.dialogs.ReleaseSelectionDialog;
+import org.musicbrainz.mobile.ui.dialog.BarcodeResultDialog;
+import org.musicbrainz.mobile.ui.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
 import org.musicbrainz.mobile.ws.WebService;
 import org.musicbrainz.mobile.ws.WSUser;

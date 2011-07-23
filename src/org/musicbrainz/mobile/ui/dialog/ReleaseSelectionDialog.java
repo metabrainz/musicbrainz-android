@@ -18,13 +18,13 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ui.dialogs;
+package org.musicbrainz.mobile.ui.dialog;
 
 import java.util.LinkedList;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.ReleaseStub;
-import org.musicbrainz.mobile.ui.activities.ReleaseActivity;
+import org.musicbrainz.mobile.ui.activity.ReleaseActivity;
 import org.musicbrainz.mobile.ui.util.ReleaseStubAdapter;
 
 import android.app.Dialog;

@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.ReleaseGroup;
-import org.musicbrainz.mobile.ui.activities.SearchResultsActivity;
+import org.musicbrainz.mobile.ui.activity.SearchResultsActivity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
