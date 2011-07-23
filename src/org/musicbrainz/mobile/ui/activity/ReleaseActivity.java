@@ -92,7 +92,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	// edit buttons
 	private Button tagBtn;
 	private Button rateBtn;
-//	private Button addBtn;
 	
 	private WSUser user;
 	private UserData userData;
@@ -164,9 +163,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		rateBtn = (Button) findViewById(R.id.rate_btn);
 		rateBtn.setOnClickListener(this);
 		
-//		addBtn = (Button) findViewById(R.id.add_btn);
-//		addBtn.setOnClickListener(this);
-		
 		labels.setText(data.getFormattedLabels());
 		releaseDate.setText(data.getDate());
 		
@@ -194,9 +190,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			
 			rateBtn.setEnabled(false);
 			rateBtn.setFocusable(false);
-			
-//			addBtn.setEnabled(false);
-//			addBtn.setFocusable(false);
 			
 			findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
 		}
@@ -506,16 +499,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		}
 		
 	}
-
-    
-    /*
-     * TODO add release to collection
-     * This can be initiated either through a button click or menu item selection.
-     */
-    public void addToCollection() {
-    	Toast acMessage = Toast.makeText(this, R.string.toast_collection, Toast.LENGTH_SHORT);
-		acMessage.show();
-    }
     
 	/**
 	 * Adapter for list of tracks.
