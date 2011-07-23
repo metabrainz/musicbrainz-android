@@ -34,6 +34,7 @@ import org.musicbrainz.mobile.data.ArtistStub;
 import org.musicbrainz.mobile.data.Release;
 import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.data.ReleaseStub;
+import org.musicbrainz.mobile.util.Config;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -48,7 +49,7 @@ import org.xml.sax.XMLReader;
  */
 public class WebService {
 	
-	protected static final String WEB_SERVICE = "http://test.musicbrainz.org/ws/2/";
+	public static final String WEB_SERVICE = Config.WEB_SERVICE;
 	
 	// lookups
 	private static final String ARTIST_LOOKUP = "artist/";

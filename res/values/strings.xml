@@ -95,7 +95,7 @@
 
 	<!-- AboutActivity -->
 	<string name="about_title">About</string>
-	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis app provides easy access to that data on your Android device. Scan a CD barcode to look up the release information, add the barcode if it is not already stored, contribute tags and ratings, or simply browse the metadata.</string>
+	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis app provides easy access to that data on your Android device. Scan a CD barcode to look up the release information, add the barcode if it is not already stored, contribute tags and ratings, or simply browse the metadata.\n\nPlease note that this application is a work in progress. It began as a Google Summer of Code project in 2010 and is now developed in my spare time (when I have any). Bug reports and feedback welcome. Email me: jdamcd@gmail.com</string>
 
 	<!-- Menus -->
 	<string name="menu_about">About</string>

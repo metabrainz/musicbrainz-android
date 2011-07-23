@@ -39,6 +39,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.musicbrainz.mobile.data.UserData;
+import org.musicbrainz.mobile.util.Config;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -52,8 +53,8 @@ import org.xml.sax.XMLReader;
 public class WSUser extends WebService {
 	
 	// authentication
-	public static final String SCOPE = "test.musicbrainz.org";
-	public static final String REALM = "musicbrainz.org";
+	public static final String SCOPE = Config.SCOPE;
+	public static final String REALM = Config.REALM;
 
 	// request
 	private static final String TAG = "tag";

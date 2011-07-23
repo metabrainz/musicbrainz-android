@@ -38,9 +38,10 @@
 		android:text="@string/donate_text" />
 	
 	<LinearLayout
-		style="@style/Fill"
+		style="@style/WrapHeight"
 		android:orientation="vertical"
-		android:gravity="center" >
+		android:gravity="center"
+		android:paddingTop="@dimen/huge_pad" >
 		
 		<Spinner android:id="@+id/donate_spin"
 			style="@style/WrapHeight" />

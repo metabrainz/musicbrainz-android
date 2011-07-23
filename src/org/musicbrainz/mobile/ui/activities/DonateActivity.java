@@ -122,9 +122,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
     public boolean onPrepareOptionsMenu(Menu menu) {
     	super.onPrepareOptionsMenu(menu);
     	
-    	// disable current Activity menu item
-    	menu.findItem(R.id.menu_donate).setEnabled(false);
-    	
+    	menu.findItem(R.id.menu_donate).setEnabled(false);  	
     	return true;
     }
     

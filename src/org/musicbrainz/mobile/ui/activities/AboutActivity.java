@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.ui.activities;
 import org.musicbrainz.mobile.R;
 
 import android.os.Bundle;
+import android.view.Menu;
 
 /**
  * Activity to display information about the application.
@@ -35,6 +36,13 @@ public class AboutActivity extends SuperActivity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_about);
+    }
+    
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	super.onPrepareOptionsMenu(menu);
+    	
+    	menu.findItem(R.id.menu_about).setEnabled(false);  	
+    	return true;
     }
     
 }
