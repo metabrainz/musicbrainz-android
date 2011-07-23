@@ -30,7 +30,8 @@
     	android:theme="@style/CustomTheme">
         
         <activity android:name=".ui.activities.HomeActivity"
-                  android:label="@string/app_name">
+        	android:label="@string/app_name"
+           	android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,34 +40,39 @@
         
         <activity android:name=".ui.activities.AuthenticationActivity"
         	android:label="@string/auth_title" 
-        	android:configChanges="keyboardHidden|orientation" />
+        	android:configChanges="keyboardHidden|orientation"
+        	android:screenOrientation="portrait" />
         
         <activity android:name=".ui.activities.AboutActivity"
-        	android:label="@string/about_title" />
+        	android:label="@string/about_title"
+        	android:screenOrientation="portrait" />
         
         <activity android:name=".ui.activities.DonateActivity"
-        	android:label="@string/donate_title" />
+        	android:label="@string/donate_title"
+        	android:screenOrientation="portrait" />
         
         <activity android:name=".ui.activities.BarcodeSearchActivity"
         	android:label="@string/addupc_title" 
-        	android:configChanges="keyboardHidden|orientation" />
+        	android:configChanges="keyboardHidden|orientation"
+        	android:screenOrientation="portrait" />
         
         <activity android:name=".ui.activities.SearchResultsActivity"
         	android:label="@string/searchres_title" 
-        	android:configChanges="keyboardHidden|orientation" />
+        	android:configChanges="keyboardHidden|orientation"
+        	android:screenOrientation="portrait" />
         
         <activity android:name=".ui.activities.ReleaseActivity"
         	android:label="@string/release_title" 
-        	android:configChanges="keyboardHidden|orientation" />
+        	android:configChanges="keyboardHidden|orientation"
+        	android:screenOrientation="portrait" />
         
         <activity android:name=".ui.activities.ArtistActivity"
         	android:label="@string/artist_title" 
-        	android:configChanges="keyboardHidden|orientation" />
+        	android:configChanges="keyboardHidden|orientation"
+        	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activities.CollectionActivity"
-        	android:label="@string/collection_title" />
-        
-        <activity android:name="com.paypal.android.MEP.PayPalActivity" />
+        <activity android:name="com.paypal.android.MEP.PayPalActivity"
+        	android:screenOrientation="portrait" />
         
     </application>
 

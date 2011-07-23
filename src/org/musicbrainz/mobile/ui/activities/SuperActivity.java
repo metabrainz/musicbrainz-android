@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.ui.activities;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.ws.WSUser;
 
 import com.nullwire.trace.ExceptionHandler;
@@ -48,15 +49,15 @@ public abstract class SuperActivity extends Activity {
 	 */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		// register remote stack trace logger
-		ExceptionHandler.register(this, "http://www.jdamcd.com/mbbugs/server.php");
+	
+		if (!Config.DEV)
+			ExceptionHandler.register(this, "http://www.jdamcd.com/mbbugs/server.php");
 		
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-		String user = prefs.getString("username", null); // get user
+		String user = prefs.getString("username", null); 
 		
 		if (user != null) 
-			loggedIn = true; // details stored
+			loggedIn = true; 
 	}
 
 	/**
@@ -67,7 +68,6 @@ public abstract class SuperActivity extends Activity {
 	 */
 	protected WSUser getUser() {
 		
-		// get user info from preferences
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String username = prefs.getString("username", null);
 		String password = prefs.getString("password", null);
@@ -76,32 +76,18 @@ public abstract class SuperActivity extends Activity {
 		return poster;
 	}
     
-	/*
-	 * Inflate appropriate menu based on whether user is logged in.
-	 */
     public boolean onCreateOptionsMenu(Menu menu) {
 
     	MenuInflater inflater = getMenuInflater();
-    	
-    	if (loggedIn) 
-    		inflater.inflate(R.menu.general_login, menu);
-    	else 
-    		inflater.inflate(R.menu.general, menu);
+    	inflater.inflate(R.menu.general, menu);
     
     	return true;
     }
     
-	/*
-	 * Handles menu item selections.
-	 */
     public boolean onOptionsItemSelected(MenuItem item){
     	super.onOptionsItemSelected(item);
     	
         switch(item.getItemId()) {
-//        case R.id.menu_collection:
-//        	Intent collectionIntent = new Intent(this, CollectionActivity.class);
-//			startActivity(collectionIntent);
-//            return true;
         case R.id.menu_about:
         	Intent aboutIntent = new Intent(this, AboutActivity.class);
 			startActivity(aboutIntent);

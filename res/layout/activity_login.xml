@@ -19,11 +19,18 @@
 	<http://www.gnu.org/licenses/>. -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/PaddedActivity">
+	style="@style/Activity">
+	
+	<com.markupartist.android.widget.ActionBar
+    	android:id="@+id/actionbar"
+    	style="@style/ActionBar" />
+    	
+    <RelativeLayout
+    	style="@style/PaddedLayout"
+    	android:layout_below="@id/actionbar" >
 
 	<EditText android:id="@+id/uname_input"
-		style="@style/Username" 
-		android:layout_alignParentTop="true" />
+		style="@style/Username" />
 		
 	<EditText android:id="@+id/pass_input"
 		style="@style/Password" 
@@ -50,4 +57,5 @@
 	<TextView
 		style="@style/Footer"
 		android:text="@string/register_text" />
+	</RelativeLayout>
 </RelativeLayout>

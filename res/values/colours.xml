@@ -35,6 +35,10 @@
 	<color name="list_bg">#ffffff</color>
 	<color name="list_text">#000000</color>
 	
+	<color name="actionbar_background_start">@color/mb_purple_medium</color>
+	<color name="actionbar_background_end">@color/mb_purple_medium</color>
+	<color name="actionbar_separator">@color/mb_purple_dark</color>
+	
 	<!-- MusicBrainz branding -->
 	<color name="mb_purple_light">#bcaeed</color>
 	<color name="mb_purple_medium">#736dab</color>

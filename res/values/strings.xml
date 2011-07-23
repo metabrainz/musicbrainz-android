@@ -32,7 +32,7 @@
 	<string name="hometext_body">Scan a release or search to get started.\nLog in to submit tags and ratings.</string>
 
 	<!-- AuthenticateActivity -->
-	<string name="auth_title">MusicBrainz - Log In</string>
+	<string name="auth_title">Log In</string>
 	<string name="uname_hint">Username</string>
 	<string name="pass_hint">Password</string>
 	<string name="staylog_text">Stay logged in on this device?</string>
@@ -42,7 +42,7 @@
 	<string name="auth_pos">Okay</string>
 
 	<!-- SearchResultsActivity -->
-	<string name="searchres_title">MusicBrainz - Search Results</string>
+	<string name="searchres_title">Search Results</string>
 	<string name="noresults">No results found!</string>
 	
 	<!-- Search types -->
@@ -50,7 +50,7 @@
 	<string name="search_release">Release</string>
 
 	<!-- ReleaseActivity -->
-	<string name="release_title">MusicBrainz - Release</string>
+	<string name="release_title">Release</string>
 	<string name="artistinfo_label">Artist Information</string>
 	<string name="tab_tracks">Tracks</string>
 	
@@ -58,7 +58,7 @@
 	<string name="edit_login">You must log in before you can submit data!</string>
 
 	<!-- ArtistActivity -->
-	<string name="artist_title">MusicBrainz - Artist</string>
+	<string name="artist_title">Artist</string>
 	<string name="noreleases">No releases found</string>
 	<string name="nolinks">No links found</string>
 	
@@ -73,13 +73,13 @@
 	<string name="addcollect_label">Add to my collection</string>
 
 	<!-- BarcodeSearchActivity -->
-	<string name="addupc_title">MusicBrainz - Add Barcode</string>
+	<string name="addupc_title">Submit Barcode</string>
 	<string name="barcode_text">Product code: </string>
 	<string name="barcode_hint">Release title</string>
 	<string name="barcode_confirm">Add the barcode to this release?</string>
 
 	<!-- ConfirmBarcodeDialog -->
-	<string name="barcode_add_header">Add barcode</string>
+	<string name="barcode_add_header">Submit barcode</string>
 	<string name="barcode_add_body">Add this barcode to the following release?</string>
 	<string name="barcode_add_btn">Submit</string>
 	
@@ -87,25 +87,19 @@
 	<string name="service_title">MusicBrainz</string>
 	<string name="service_notification">Submitting data to MusicBrainz</string>
 
-	<!-- CollectionActivity -->
-	<string name="collection_title">MusicBrainz - Your Collection</string>
-
 	<!-- DonateActivity -->
-	<string name="donate_title">MusicBrainz - Donate</string>
-	<string name="donate_header">Donate to support the MetaBrainz Foundation</string>
+	<string name="donate_title">Donate</string>
+	<string name="donate_header">Support the MetaBrainz Foundation with a donation!</string>
 	<string name="donate_text">You can donate through PayPal to the non-profit MetaBrainz Foundation which operates the MusicBrainz project. For further information and alternative donation options, please visit metabrainz.org/donate</string>
 	<string name="paypal_label">Donate with PayPal</string>
 
 	<!-- AboutActivity -->
-	<string name="about_title">MusicBrainz - About</string>
-	<string name="about_header">About MusicBrainz on Android</string>
+	<string name="about_title">About</string>
 	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis app provides easy access to that data on your Android device. Scan a CD barcode to look up the release information, add the barcode if it is not already stored, contribute tags and ratings, or simply browse the metadata.</string>
 
 	<!-- Menus -->
 	<string name="menu_about">About</string>
 	<string name="menu_donate">Donate to MB</string>
-	<string name="menu_collection">My Collection</string>
-	<string name="menu_add_collection">Add to Collection</string>
 	
 	<!-- Progress dialogs -->
 	<string name="pd_searching">Searching...</string>

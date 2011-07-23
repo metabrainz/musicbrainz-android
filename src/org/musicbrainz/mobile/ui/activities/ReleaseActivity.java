@@ -46,8 +46,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -477,21 +475,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		}
 		
 	}
-	
-	/**
-	 * Inflate release specific options menu with 'add to collection'.
-	 */
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	
-    	MenuInflater inflater = getMenuInflater();
-    	
-    	if (loggedIn)
-    		inflater.inflate(R.menu.release_login, menu);
-    	else
-    		inflater.inflate(R.menu.general, menu);
-
-    	return true;
-    }
     
     /**
      * Listener for edit and artist button clicks.
@@ -520,26 +503,10 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			
 			int rating = (int) ratingInput.getRating();
 			new RatingTask().execute(rating);
-			break;
-//		case R.id.add_btn:
-//			addToCollection();	
 		}
 		
 	}
 
-	/**
-	 * Listener for release specific menu item selections.
-	 */
-//    public boolean onOptionsItemSelected(MenuItem item){
-//    	super.onOptionsItemSelected(item);
-//    	
-//        if (item.getItemId() == R.id.menu_add_collection) {
-//    		addToCollection();
-//    		return true;
-//        }
-//        
-//        return false;
-//    }
     
     /*
      * TODO add release to collection

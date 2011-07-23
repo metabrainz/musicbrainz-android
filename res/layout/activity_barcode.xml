@@ -21,6 +21,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/Activity"
 	android:paddingTop="@dimen/small_pad">
+	
+	<com.markupartist.android.widget.ActionBar
+    	android:id="@+id/actionbar"
+    	style="@style/ActionBar" />
   
 	<TextView android:id="@+id/barcode_text"
 		style="@style/WrapHeight"

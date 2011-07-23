@@ -18,14 +18,16 @@
 	along with MusicBrainz Mobile (Android). If not, see 
 	<http://www.gnu.org/licenses/>. -->
    
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/PaddedActivity">
-  
-	<TextView android:id="@+id/about_title"
-	  	style="@style/TextHeader" 
-	  	android:text="@string/about_header" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/Activity">
+	
+	<com.markupartist.android.widget.ActionBar
+    	android:id="@+id/actionbar"
+    	style="@style/ActionBar" />
 	  
 	<TextView android:id="@+id/about_text"
 	  	style="@style/TextBody" 
-	  	android:text="@string/about_body" />
-</LinearLayout>
+	  	android:text="@string/about_body"
+	  	android:padding="@dimen/home_pad"
+	  	android:layout_below="@id/actionbar" />
+</RelativeLayout>

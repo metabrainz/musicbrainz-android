@@ -18,9 +18,17 @@
 	along with MusicBrainz Mobile (Android). If not, see 
 	<http://www.gnu.org/licenses/>. -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/PaddedActivity">
-    
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/Activity">
+	
+	<com.markupartist.android.widget.ActionBar
+    	android:id="@+id/actionbar"
+    	style="@style/ActionBar" />
+    	
+    <LinearLayout 
+    	style="@style/PaddedLayoutFill"
+    	android:layout_below="@id/actionbar">
+    	
     <TextView
     	style="@style/TextHeader"
     	android:text="@string/donate_header" />
@@ -42,4 +50,5 @@
 			android:text="@string/paypal_label" />
 		
 	</LinearLayout>	
-</LinearLayout>
+	</LinearLayout>
+</RelativeLayout>

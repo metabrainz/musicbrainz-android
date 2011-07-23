@@ -21,23 +21,22 @@
 <resources> 
 	<!-- Activity and Dialog layout styles -->
 
-	<style name="CustomTheme" parent="android:Theme.Light"> 
-        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
+	<style name="CustomTheme" parent="@style/Theme.ActionBar"> 
         <item name="android:textColorHint">@color/hint_text</item>
     </style> 
-
-    <style name="WindowTitleBackground">     
-        <item name="android:background">@color/mb_purple_medium</item>   
-        <item name="android:paddingLeft">@dimen/std_pad</item>
-        <item name="android:paddingRight">@dimen/std_pad</item>      
-    </style>
     
     <style name="Activity" parent="@style/Fill">
     	<item name="android:orientation">vertical</item>
     	<item name="android:background">@color/main_bg</item>
     </style>
     
-    <style name="PaddedActivity" parent="@style/Activity">
+    <style name="PaddedLayout" parent="@style/WrapHeight">
+    	<item name="android:orientation">vertical</item>
+    	<item name="android:padding">@dimen/home_pad</item>
+    </style>
+    
+    <style name="PaddedLayoutFill" parent="@style/Fill">
+    	<item name="android:orientation">vertical</item>
     	<item name="android:padding">@dimen/home_pad</item>
     </style>
     
