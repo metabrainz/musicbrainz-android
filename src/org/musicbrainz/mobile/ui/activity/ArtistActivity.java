@@ -386,8 +386,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			
 			String tagString = tagInput.getText().toString();
 			if (tagString.length() == 0) {
-				Toast tagMessage = Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT);
-				tagMessage.show();
+				Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
 			} else {
 				new TagTask().execute(tagString);
 			}

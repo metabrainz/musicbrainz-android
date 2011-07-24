@@ -39,7 +39,7 @@
 		android:visibility="gone" />
 		
 	<LinearLayout android:id="@+id/noresults"
-		style="@style/NoResults"
+		style="@style/NoSearchResults"
 		android:layout_below="@id/topline">
 		
 		<ImageView
@@ -47,7 +47,7 @@
 			android:src="@drawable/img_noresults" />
 		
 		<TextView
-			style="@style/NoResultsText"
+			style="@style/NoSearchResultsText"
 			android:layout_below="@+id/topline"
 			android:layout_alignParentBottom="true" />
 	</LinearLayout>
