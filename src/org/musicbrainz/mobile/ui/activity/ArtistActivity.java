@@ -30,7 +30,7 @@ import org.musicbrainz.mobile.data.UserData;
 import org.musicbrainz.mobile.data.WebLink;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
 import org.musicbrainz.mobile.ws.WebService;
-import org.musicbrainz.mobile.ws.WSUser;
+import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
@@ -82,7 +82,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	private Button tagBtn;
 	private Button rateBtn;
 	
-	private WSUser user;
+	private WebServiceUser user;
 	private UserData userData;
 	
 	// status
@@ -236,7 +236,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 				if (loggedIn) {
 					user = getUser();
 					userData = user.getUserData(MBEntity.ARTIST, data.getMbid());
-					user.shutdown();
+					user.shutdownConnectionManager();
 				}
 				return true;
 			} catch (IOException e) {
@@ -299,13 +299,13 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
 		protected Boolean doInBackground(String... tags) {
 			
-			Collection<String> processedTags = WSUser.processTags(tags[0]);
+			Collection<String> processedTags = WebServiceUser.processTags(tags[0]);
 			
 			user = getUser();
 			try {
 				user.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
 				data.setTags(WebService.refreshTags(MBEntity.ARTIST, data.getMbid()));
-				user.shutdown();
+				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
@@ -322,14 +322,11 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			updateProgress();
 			tagBtn.setEnabled(true);
 			
-			Toast tagMessage;
 			if (success) {
-				tagMessage = Toast.makeText(ArtistActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT); 
+				Toast.makeText(ArtistActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT).show(); 
 			} else {
-				tagMessage = Toast.makeText(ArtistActivity.this, R.string.toast_tag_fail, Toast.LENGTH_SHORT);
-			}
-			
-			tagMessage.show();
+				Toast.makeText(ArtistActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
+			}	
 		}
 		
 	}
@@ -352,7 +349,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 				user.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
 				float newRating = WebService.refreshRating(MBEntity.ARTIST, data.getMbid());
 				data.setRating(newRating);
-				user.shutdown();
+				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
@@ -369,13 +366,11 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			updateProgress();
 			rateBtn.setEnabled(true);
 			
-			Toast rateMessage;
-			if (success) 
-				rateMessage = Toast.makeText(ArtistActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT); 
-			else
-				rateMessage = Toast.makeText(ArtistActivity.this, R.string.toast_rate_fail, Toast.LENGTH_SHORT);
-			
-			rateMessage.show();
+			if (success) {
+				Toast.makeText(ArtistActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(ArtistActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
+			}
 		}
 		
 	}

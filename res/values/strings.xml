@@ -116,10 +116,11 @@
 	<string name="toast_tag_fail">Tag submission failed</string>
 	<string name="toast_rate">Rating submitted</string>
 	<string name="toast_rate_fail">Rating submission failed</string>
+	<string name="toast_barcode">Barcode submitted</string>
+	<string name="toast_barcode_fail">Barcode submission failed</string>
 	<string name="toast_search_err">Add some text to search</string>
 	<string name="toast_tag_err">Add some text to tag</string>
 	<string name="toast_auth_err">Username or password missing</string>
-	<string name="toast_barcode">Barcode added to release</string>
 	<string name="toast_barcode_help">Search for release and select result</string>
 	<string name="toast_noresults">Search returned no results</string>
 	<string name="toast_loggedIn">Logged in</string>

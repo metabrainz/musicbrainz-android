@@ -23,7 +23,7 @@ package org.musicbrainz.mobile.ui.activity;
 import java.io.IOException;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.ws.WSUser;
+import org.musicbrainz.mobile.ws.WebServiceUser;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -104,7 +104,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
     	
 		protected Integer doInBackground(Void... v) {
 			
-			WSUser user = new WSUser(username, password, getClientVersion());
+			WebServiceUser user = new WebServiceUser(username, password, getClientVersion());
 			Boolean success = false;
 			try {
 				success = user.authenticate();
@@ -114,7 +114,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 				return ERROR;
 			}
 			
-			user.shutdown();
+			user.shutdownConnectionManager();
 
 			if (success)
 				// authentication success

@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.ws.WSUser;
+import org.musicbrainz.mobile.ws.WebServiceUser;
 
 import com.nullwire.trace.ExceptionHandler;
 
@@ -67,13 +67,13 @@ public abstract class SuperActivity extends Activity {
 	 * 
 	 * @return Webservice user.
 	 */
-	protected WSUser getUser() {
+	protected WebServiceUser getUser() {
 		
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String username = prefs.getString("username", null);
 		String password = prefs.getString("password", null);
 		
-		WSUser poster = new WSUser(username, password, getClientVersion());
+		WebServiceUser poster = new WebServiceUser(username, password, getClientVersion());
 		return poster;
 	}
 	

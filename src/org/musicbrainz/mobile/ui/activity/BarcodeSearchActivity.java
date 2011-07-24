@@ -28,6 +28,7 @@ import org.musicbrainz.mobile.data.ReleaseStub;
 import org.musicbrainz.mobile.ui.dialog.BarcodeConfirmDialog;
 import org.musicbrainz.mobile.ui.util.ReleaseStubAdapter;
 import org.musicbrainz.mobile.ws.WebService;
+import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.xml.sax.SAXException;
 
 import android.app.AlertDialog;
@@ -40,6 +41,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -75,6 +77,9 @@ public class BarcodeSearchActivity extends SuperActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setProgressBarIndeterminateVisibility(false);
+        
         setContentView(R.layout.activity_barcode);
         
         barcode = getIntent().getStringExtra("barcode");
@@ -91,8 +96,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
         matches = (ListView) findViewById(R.id.barcode_list);
         noRes = (TextView) findViewById(R.id.noresults);
         
-        Toast help = Toast.makeText(this, R.string.toast_barcode_help, Toast.LENGTH_SHORT);
-		help.show();
+        Toast.makeText(this, R.string.toast_barcode_help, Toast.LENGTH_SHORT).show();
 		
 		imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     }
@@ -203,16 +207,49 @@ public class BarcodeSearchActivity extends SuperActivity implements
 			imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
 			new SearchTask().execute();
 		} else {
-			Toast warning = Toast.makeText(this, R.string.toast_search_err,
-					Toast.LENGTH_SHORT);
-			warning.show();
+			Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	public void submitBarcode(String releaseMbid) {
+		new SubmitBarcodeTask().execute(releaseMbid);
+	}
+	
+	private class SubmitBarcodeTask extends AsyncTask<String, Void, Boolean> {
+
+		protected void onPreExecute() {
+			setProgressBarIndeterminateVisibility(true);
+		}
+		
+		@Override
+		protected Boolean doInBackground(String... releaseMbid) {
+			
+			WebServiceUser user = getUser();
+			try {
+				user.submitBarcode(releaseMbid[0], barcode);
+				user.shutdownConnectionManager();
+			} catch (IOException e) {
+				return false;
+			}
+			return true;
+		}
+		
+		protected void onPostExecute(Boolean success) {
+			
+			setProgressBarIndeterminateVisibility(false);
+			
+			if (success) {
+				Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode, Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode_fail, Toast.LENGTH_LONG).show();
+			}
+		}
+		
 	}
 	
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		
-		BarcodeConfirmDialog confirm = new BarcodeConfirmDialog(this, results.get(position));
-		confirm.show();	
+		new BarcodeConfirmDialog(this, results.get(position)).show();	
 	}
 
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

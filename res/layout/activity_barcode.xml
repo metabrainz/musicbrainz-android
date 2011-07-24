@@ -19,8 +19,7 @@
 	<http://www.gnu.org/licenses/>. -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/Activity"
-	android:paddingTop="@dimen/small_pad">
+	style="@style/Activity">
 	
 	<com.markupartist.android.widget.ActionBar
     	android:id="@+id/actionbar"
@@ -31,7 +30,8 @@
 		android:layout_margin="@dimen/small_pad"
 		android:text="@string/barcode_text"
 		android:textColor="@color/main_text"
-		android:textSize="@dimen/text_size_medium" />
+		android:textSize="@dimen/text_size_medium" 
+		android:paddingTop="@dimen/small_pad" />
 		
 	<RelativeLayout 
 		style="@style/WrapHeight"

@@ -34,7 +34,7 @@ import org.musicbrainz.mobile.ui.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.ui.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
 import org.musicbrainz.mobile.ws.WebService;
-import org.musicbrainz.mobile.ws.WSUser;
+import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
@@ -93,7 +93,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private Button tagBtn;
 	private Button rateBtn;
 	
-	private WSUser user;
+	private WebServiceUser user;
 	private UserData userData;
 	
 	// status
@@ -241,13 +241,13 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
 		protected Boolean doInBackground(String... tags) {
 			
-			Collection<String> processedTags = WSUser.processTags(tags[0]);
+			Collection<String> processedTags = WebServiceUser.processTags(tags[0]);
 			
 			user = getUser();
 			try {
 				user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
 				data.setTags(WebService.refreshTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
-				user.shutdown();
+				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
@@ -264,12 +264,11 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			updateProgress();
 			tagBtn.setEnabled(true);
 			
-			Toast tagMessage;
-			if (success) 
-				tagMessage = Toast.makeText(ReleaseActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT); 
-			else 
-				tagMessage = Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_SHORT);
-			tagMessage.show();
+			if (success) {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT); 
+			} else {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG);
+			}
 		}
 		
 	}
@@ -292,7 +291,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 				user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
 				float newRating = WebService.refreshRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 				data.setRating(newRating);
-				user.shutdown();
+				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
@@ -309,13 +308,11 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			updateProgress();
 			rateBtn.setEnabled(true);
 			
-			Toast rateMessage;
-			if (success) 
-				rateMessage = Toast.makeText(ReleaseActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT); 
-			else
-				rateMessage = Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_SHORT);
-			
-			rateMessage.show();
+			if (success) {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show(); 
+			} else {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
+			}
 		}
 
 	}
@@ -373,7 +370,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 					if (loggedIn) {
 						user = getUser();
 						userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-						user.shutdown();
+						user.shutdownConnectionManager();
 					}
 					return LOADED;
 				case BARCODE:
@@ -382,7 +379,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-							user.shutdown();
+							user.shutdownConnectionManager();
 						}
 						return LOADED;
 					} else {
@@ -399,7 +396,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-							user.shutdown();
+							user.shutdownConnectionManager();
 						}
 						return LOADED;
 					} else {

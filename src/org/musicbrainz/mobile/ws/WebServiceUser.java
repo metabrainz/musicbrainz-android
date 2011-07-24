@@ -44,15 +44,13 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import android.util.Log;
-
 /**
  * Class to perform all webservice requests that need the user to be
  * authenticated.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class WSUser extends WebService {
+public class WebServiceUser extends WebService {
 	
 	// authentication
 	public static final String SCOPE = Config.SCOPE;
@@ -69,7 +67,7 @@ public class WSUser extends WebService {
 	private String clientId = "?client=musicbrainz.android-";
 	private DefaultHttpClient httpClient;
 	
-	public WSUser (String username, String password, String clientVersion) {
+	public WebServiceUser (String username, String password, String clientVersion) {
 		httpClient = new DefaultHttpClient();
 		
 		clientId = clientId + clientVersion;
@@ -152,11 +150,11 @@ public class WSUser extends WebService {
 	 * Submit a collection of tags to a particular entity.
 	 * 
 	 * @param type
-	 * @param entityID
+	 * @param entityMbid
 	 * @param tags
 	 * @throws IOException
 	 */
-	public void submitTags(MBEntity type, String entityID, Collection<String> tags) throws IOException {
+	public void submitTags(MBEntity type, String entityMbid, Collection<String> tags) throws IOException {
 		
 		String tagUrl = WEB_SERVICE + TAG + clientId;
 		
@@ -168,14 +166,14 @@ public class WSUser extends WebService {
 		switch (type) {
 		case ARTIST:
 			content.append("<artist-list><artist id=\"" 
-				+ entityID 
+				+ entityMbid 
 				+ "\">" 
 				+ formatTags(tags) 
 				+ "</artist></artist-list>");
 			break;
 		case RELEASE_GROUP:
 			content.append("<release-group-list><release-group id=\"" 
-				+ entityID 
+				+ entityMbid 
 				+ "\">" 
 				+ formatTags(tags) 
 				+ "</release-group></release-group-list>");
@@ -211,11 +209,11 @@ public class WSUser extends WebService {
 	 * Submit a user rating to a particular entity.
 	 * 
 	 * @param type
-	 * @param entityID
+	 * @param entityMbid
 	 * @param rating
 	 * @throws IOException
 	 */
-	public void submitRating(MBEntity type, String entityID, int rating) throws IOException {
+	public void submitRating(MBEntity type, String entityMbid, int rating) throws IOException {
 		
 		String ratingUrl = WEB_SERVICE + RATING + clientId;
 		
@@ -227,13 +225,13 @@ public class WSUser extends WebService {
 		switch (type) {
 		case ARTIST:
 			content.append("<artist-list><artist id=\"" 
-				+ entityID + "\"><user-rating>" 
+				+ entityMbid + "\"><user-rating>" 
 				+ rating * 20 
 				+ "</user-rating></artist></artist-list>");
 			break;
 		case RELEASE_GROUP:
 			content.append("<release-group-list><release-group id=\"" 
-				+ entityID + "\"><user-rating>" 
+				+ entityMbid + "\"><user-rating>" 
 				+ rating * 20 
 				+ "</user-rating></release-group></release-group-list>");
 		}
@@ -250,25 +248,30 @@ public class WSUser extends WebService {
 
 	}
 	
-	/**
-	 * Add a release to the user collection given a release ID.
-	 * 
-	 * TODO Implement this feature when collection support becomes available in
-	 * the webservice.
-	 * 
-	 * @param releaseID
-	 */
-	public void addToCollection(String releaseID) {
-
+	public void submitBarcode(String releaseMbid, String barcode) throws IOException {
+		
+		String barcodeUrl = WEB_SERVICE + BARCODE + clientId;
+		HttpPost post = new HttpPost(barcodeUrl);
+		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
+		
+		StringBuilder content = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><metadata xmlns=\"http://musicbrainz.org/ns/mmd-2.0#\">");
+		content.append("<release-list><release id=\"" 
+				+ releaseMbid + "\"><barcode>"
+				+ barcode
+				+ "</barcode></release></release-list>");
+		content.append("</metadata>");
+		
+		StringEntity xml = new StringEntity(content.toString(), "UTF-8");
+		post.setEntity(xml);
+		
+		try {
+			httpClient.execute(post);
+		} catch (HttpResponseException e) {
+			System.err.println(e.getStatusCode() + ": " + e.getMessage());
+		}
+		
 	}
 	
-	/**
-	 * Shutdown HTTP connection manager.
-	 */
-	public void shutdown() {
-		httpClient.getConnectionManager().shutdown();
-	}
-
 	/**
 	 * Utility method to transform a string of potentially many comma separated
 	 * tags into a list for submission.
@@ -288,6 +291,10 @@ public class WSUser extends WebService {
 		}
 		
 		return tagList;
+	}
+	
+	public void shutdownConnectionManager() {
+		httpClient.getConnectionManager().shutdown();
 	}
 	
 }
