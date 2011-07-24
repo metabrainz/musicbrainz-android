@@ -44,6 +44,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import android.util.Log;
+
 /**
  * Class to perform all webservice requests that need the user to be
  * authenticated.
@@ -59,19 +61,21 @@ public class WSUser extends WebService {
 	// request
 	private static final String TAG = "tag";
 	private static final String RATING = "rating";
-	private static final String CLIENT = "?client=mb.android-0.1";
+	private static final String BARCODE = "release/";
 	
 	// MBID for Various Artists always exists
 	private static final String TEST = "artist/89ad4ac3-39f7-470e-963a-56509c546377?inc=user-tags";
 	
-	private DefaultHttpClient client;
+	private String clientId = "?client=musicbrainz.android-";
+	private DefaultHttpClient httpClient;
 	
-	public WSUser (String username, String password) {
-		client = new DefaultHttpClient();
+	public WSUser (String username, String password, String clientVersion) {
+		httpClient = new DefaultHttpClient();
 		
+		clientId = clientId + clientVersion;
 		AuthScope authScope = new AuthScope(SCOPE, 80, REALM, "Digest");
 		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
-		client.getCredentialsProvider().setCredentials(authScope, credentials);
+		httpClient.getCredentialsProvider().setCredentials(authScope, credentials);
 	}
 
 	/**
@@ -91,7 +95,7 @@ public class WSUser extends WebService {
 		ResponseHandler<String> handler = new BasicResponseHandler();
 		
 		try {
-			client.execute(test, handler);
+			httpClient.execute(test, handler);
 		} catch (HttpResponseException e) {
 			System.err.println(e.getStatusCode() +": "+ e.getMessage());
 			
@@ -124,7 +128,7 @@ public class WSUser extends WebService {
 		userGet.setHeader("Accept", "application/xml");
 		
 		ResponseHandler<String> responseHandler = new BasicResponseHandler();	
-		String response = client.execute(userGet, responseHandler);
+		String response = httpClient.execute(userGet, responseHandler);
 		
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		
@@ -154,7 +158,7 @@ public class WSUser extends WebService {
 	 */
 	public void submitTags(MBEntity type, String entityID, Collection<String> tags) throws IOException {
 		
-		String tagUrl = WEB_SERVICE + TAG + CLIENT;
+		String tagUrl = WEB_SERVICE + TAG + clientId;
 		
 		HttpPost post = new HttpPost(tagUrl);
 		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
@@ -183,7 +187,7 @@ public class WSUser extends WebService {
 		
 		// TODO execute is the blocking call, eventually we want this in a thread in PostService
 		try {
-			client.execute(post);
+			httpClient.execute(post);
 		} catch (HttpResponseException e) {
 			System.out.println(e.getStatusCode() + ": " + e.getMessage());
 		}
@@ -213,7 +217,7 @@ public class WSUser extends WebService {
 	 */
 	public void submitRating(MBEntity type, String entityID, int rating) throws IOException {
 		
-		String ratingUrl = WEB_SERVICE + RATING + CLIENT;
+		String ratingUrl = WEB_SERVICE + RATING + clientId;
 		
 		HttpPost post = new HttpPost(ratingUrl);
 		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
@@ -239,7 +243,7 @@ public class WSUser extends WebService {
 		post.setEntity(xml);
 		
 		try {
-			client.execute(post);
+			httpClient.execute(post);
 		} catch (HttpResponseException e) {
 			System.err.println(e.getStatusCode() + ": " + e.getMessage());
 		}
@@ -262,7 +266,7 @@ public class WSUser extends WebService {
 	 * Shutdown HTTP connection manager.
 	 */
 	public void shutdown() {
-		client.getConnectionManager().shutdown();
+		httpClient.getConnectionManager().shutdown();
 	}
 
 	/**

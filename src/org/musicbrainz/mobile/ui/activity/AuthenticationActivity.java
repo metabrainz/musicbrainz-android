@@ -104,7 +104,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
     	
 		protected Integer doInBackground(Void... v) {
 			
-			WSUser user = new WSUser(username, password);
+			WSUser user = new WSUser(username, password, getClientVersion());
 			Boolean success = false;
 			try {
 				success = user.authenticate();

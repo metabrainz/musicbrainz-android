@@ -29,6 +29,7 @@ import com.nullwire.trace.ExceptionHandler;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -72,8 +73,18 @@ public abstract class SuperActivity extends Activity {
 		String username = prefs.getString("username", null);
 		String password = prefs.getString("password", null);
 		
-		WSUser poster = new WSUser(username, password);
+		WSUser poster = new WSUser(username, password, getClientVersion());
 		return poster;
+	}
+	
+	public String getClientVersion() {
+		String version = "0.0";
+		try {
+			 version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return version;
 	}
     
     public boolean onCreateOptionsMenu(Menu menu) {
