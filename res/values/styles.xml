@@ -111,6 +111,12 @@
     	<item name="android:autoLink">web</item>
     </style>
     
+    <style name="VersionText" parent="@style/WrapHeight">
+    	<item name="android:textSize">@dimen/text_size_small</item>
+    	<item name="android:textColor">@color/mb_purple_dark</item>
+    	<item name="android:paddingTop">@dimen/home_pad</item>
+    </style>
+    
     <style name="Edit" parent="@style/WrapHeight">
     	<item name="android:singleLine">true</item>
     	<item name="android:inputType">textFilter</item>

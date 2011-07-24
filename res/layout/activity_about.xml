@@ -24,10 +24,19 @@
 	<com.markupartist.android.widget.ActionBar
     	android:id="@+id/actionbar"
     	style="@style/ActionBar" />
+    	
+    <RelativeLayout
+    	style="@style/Wrap"
+    	android:padding="@dimen/home_pad"
+    	android:layout_below="@id/actionbar">
 	  
 	<TextView android:id="@+id/about_text"
 	  	style="@style/TextBody" 
-	  	android:text="@string/about_body"
-	  	android:padding="@dimen/home_pad"
-	  	android:layout_below="@id/actionbar" />
+	  	android:text="@string/about_body" />
+	  	
+	<TextView android:id="@+id/version_text"
+		style="@style/VersionText"
+		android:layout_below="@id/about_text" />
+		
+	</RelativeLayout>
 </RelativeLayout>

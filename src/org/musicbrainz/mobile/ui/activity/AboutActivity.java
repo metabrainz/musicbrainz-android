@@ -22,8 +22,10 @@ package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
 
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
 
 /**
  * Activity to display information about the application.
@@ -36,6 +38,14 @@ public class AboutActivity extends SuperActivity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_about);
+        
+		try {
+			TextView versionLabel = (TextView) findViewById(R.id.version_text);
+			String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+			versionLabel.setText(getText(R.string.version_text) + " " + versionName);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
     }
     
     public boolean onPrepareOptionsMenu(Menu menu) {
