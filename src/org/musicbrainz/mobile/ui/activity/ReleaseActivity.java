@@ -38,6 +38,8 @@ import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
+import com.markupartist.android.widget.ActionBar;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -48,7 +50,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,6 +82,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private LinkedList<ReleaseStub> stubs;
 	private String barcode;
 	
+	private ActionBar actionBar;
+	
 	// refreshables
 	private FocusTextView tags;
 	private RatingBar rating;
@@ -109,10 +112,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
         barcode = getIntent().getStringExtra("barcode");
         
         new LookupTask().execute();
-		
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setProgressBarIndeterminateVisibility(false);
-        
         setContentView(R.layout.blank);
     }
     
@@ -122,9 +121,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private void populate() {
 		
 		setContentView(R.layout.activity_release);
+		actionBar = (ActionBar) findViewById(R.id.actionbar);
 		
 		// info header
-		
 		FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);
 		FocusTextView title = (FocusTextView) findViewById(R.id.release_release);
 		FocusTextView labels = (FocusTextView) findViewById(R.id.release_label);
@@ -222,10 +221,11 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	 * Refresh the background task status indicator.
 	 */
 	private void updateProgress() {
-		if (doingTag || doingRate)
-			setProgressBarIndeterminateVisibility(true);
-		else
-			setProgressBarIndeterminateVisibility(false);
+		if (doingTag || doingRate) {
+			actionBar.setProgressBarVisibility(View.VISIBLE);
+		} else {
+			actionBar.setProgressBarVisibility(View.GONE);
+		}
 	}
 	
 	/**

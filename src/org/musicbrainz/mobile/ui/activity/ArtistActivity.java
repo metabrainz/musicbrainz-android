@@ -34,6 +34,8 @@ import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
+import com.markupartist.android.widget.ActionBar;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -45,7 +47,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -69,6 +70,8 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	
 	// query data
 	private String id;
+	
+	private ActionBar actionBar;
 	
 	// refreshables
 	private RatingBar rating;
@@ -97,18 +100,15 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	
         new LookupTask().execute();
 		
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setProgressBarIndeterminateVisibility(false);
-		
 		setContentView(R.layout.blank);
     }
 	
 	protected void populate() {
 		
 		setContentView(R.layout.activity_artist);
+		actionBar = (ActionBar) findViewById(R.id.actionbar);
 		
 		// info header
-		
 		FocusTextView artist = (FocusTextView) findViewById(R.id.artist_artist);
 		rating = (RatingBar) findViewById(R.id.artist_rating);
 		tags = (FocusTextView) findViewById(R.id.artist_tags);
@@ -202,10 +202,11 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	}
 	
 	private void updateProgress() {
-		if (doingTag || doingRate)
-			setProgressBarIndeterminateVisibility(true);
-		else
-			setProgressBarIndeterminateVisibility(false);
+		if (doingTag || doingRate) {
+			actionBar.setProgressBarVisibility(View.VISIBLE);
+		} else {
+			actionBar.setProgressBarVisibility(View.GONE);
+		}
 	}
 	
 	/**

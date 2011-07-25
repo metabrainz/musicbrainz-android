@@ -31,6 +31,8 @@ import org.musicbrainz.mobile.ws.WebService;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.xml.sax.SAXException;
 
+import com.markupartist.android.widget.ActionBar;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -41,7 +43,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -62,6 +63,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
 		ListView.OnItemClickListener,
 		ListView.OnItemLongClickListener, OnEditorActionListener {
 	
+	private ActionBar actionBar;
 	private TextView top;
 	private EditText searchBox;
 	private ImageButton search;
@@ -77,10 +79,8 @@ public class BarcodeSearchActivity extends SuperActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setProgressBarIndeterminateVisibility(false);
-        
         setContentView(R.layout.activity_barcode);
+        actionBar = (ActionBar) findViewById(R.id.actionbar);
         
         barcode = getIntent().getStringExtra("barcode");
         
@@ -218,7 +218,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
 	private class SubmitBarcodeTask extends AsyncTask<String, Void, Boolean> {
 
 		protected void onPreExecute() {
-			setProgressBarIndeterminateVisibility(true);
+			actionBar.setProgressBarVisibility(View.VISIBLE);
 		}
 		
 		@Override
@@ -236,7 +236,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
 		
 		protected void onPostExecute(Boolean success) {
 			
-			setProgressBarIndeterminateVisibility(false);
+			actionBar.setProgressBarVisibility(View.GONE);
 			
 			if (success) {
 				Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode, Toast.LENGTH_SHORT).show();

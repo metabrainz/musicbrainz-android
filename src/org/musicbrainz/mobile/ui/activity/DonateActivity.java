@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.R;
 
+import com.markupartist.android.widget.ActionBar;
 import com.paypal.android.MEP.PayPal;
 import com.paypal.android.MEP.PayPalPayment;
 
@@ -32,7 +33,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,6 +45,7 @@ import android.widget.Spinner;
  */
 public class DonateActivity extends SuperActivity implements OnClickListener {
 
+	private ActionBar actionBar;
 	private Spinner amount;
 	private Button donate;
 	
@@ -56,8 +57,8 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_donate);
+        actionBar = (ActionBar) findViewById(R.id.actionbar);
         
         amount = (Spinner) findViewById(R.id.donate_spin);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation, android.R.layout.simple_spinner_item);
@@ -75,7 +76,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		
 		protected void onPreExecute() {
 			
-			setProgressBarIndeterminateVisibility(true);
+			actionBar.setProgressBarVisibility(View.VISIBLE);
 		}
 		
 		protected Void doInBackground(Void... v) {
@@ -90,7 +91,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		
 		protected void onPostExecute(Void v) {
 			
-			setProgressBarIndeterminateVisibility(false);
+			actionBar.setProgressBarVisibility(View.GONE);
 			donate.setEnabled(true);
 		}
 		
