@@ -121,7 +121,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private void populate() {
 		
 		setContentView(R.layout.activity_release);
-		actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar = setupActionBarWithHome();
 		
 		// info header
 		FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);

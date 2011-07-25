@@ -80,7 +80,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_barcode);
-        actionBar = (ActionBar) findViewById(R.id.actionbar);
+        actionBar = setupActionBarWithHome();
         
         barcode = getIntent().getStringExtra("barcode");
         

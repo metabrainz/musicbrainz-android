@@ -37,15 +37,16 @@ public class AboutActivity extends SuperActivity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_about);
-        
-		TextView versionLabel = (TextView) findViewById(R.id.version_text);
+        setupActionBarWithHome();
+		
+        TextView versionLabel = (TextView) findViewById(R.id.version_text);
 		versionLabel.setText(getText(R.string.version_text) + " " + getClientVersion());
     }
     
     public boolean onPrepareOptionsMenu(Menu menu) {
     	super.onPrepareOptionsMenu(menu);
     	
-    	menu.findItem(R.id.menu_about).setEnabled(false);  	
+    	menu.findItem(R.id.menu_about).setEnabled(false);
     	return true;
     }
     

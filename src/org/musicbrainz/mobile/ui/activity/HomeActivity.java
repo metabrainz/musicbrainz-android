@@ -201,5 +201,11 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
     public boolean onCreateOptionsMenu(Menu menu) {
     	return true;
     }
+    
+    public static Intent createIntent(Context context) {
+        Intent i = new Intent(context, HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return i;
+    }
 	
 }

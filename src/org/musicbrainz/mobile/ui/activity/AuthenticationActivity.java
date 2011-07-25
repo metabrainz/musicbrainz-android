@@ -72,6 +72,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_login);
+        setupActionBarWithHome();
         
         uname = (EditText) findViewById(R.id.uname_input);
         pass = (EditText) findViewById(R.id.pass_input);

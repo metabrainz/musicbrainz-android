@@ -63,6 +63,7 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 		super.onCreate(savedInstanceState);
 		
         setContentView(R.layout.activity_searchres);
+        setupActionBarWithHome();
         
         int type = getIntent().getIntExtra("type", 0);
         searchTerm = getIntent().getStringExtra("term");

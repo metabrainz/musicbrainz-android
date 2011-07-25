@@ -24,6 +24,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 
+import com.markupartist.android.widget.ActionBar;
 import com.nullwire.trace.ExceptionHandler;
 
 import android.app.Activity;
@@ -68,7 +69,6 @@ public abstract class SuperActivity extends Activity {
 	 * @return Webservice user.
 	 */
 	protected WebServiceUser getUser() {
-		
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String username = prefs.getString("username", null);
 		String password = prefs.getString("password", null);
@@ -85,6 +85,14 @@ public abstract class SuperActivity extends Activity {
 			e.printStackTrace();
 		}
 		return version;
+	}
+	
+	protected ActionBar setupActionBarWithHome() {
+        ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+        getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
+        actionBar.findAction(R.id.actionbar_item_home).setIntent(HomeActivity.createIntent(this));
+        actionBar.setDisplayShowHomeEnabled(true);
+        return actionBar;
 	}
     
     public boolean onCreateOptionsMenu(Menu menu) {

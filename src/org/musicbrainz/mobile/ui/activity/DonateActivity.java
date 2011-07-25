@@ -58,7 +58,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_donate);
-        actionBar = (ActionBar) findViewById(R.id.actionbar);
+        actionBar = setupActionBarWithHome();
         
         amount = (Spinner) findViewById(R.id.donate_spin);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation, android.R.layout.simple_spinner_item);

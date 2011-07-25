@@ -106,7 +106,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	protected void populate() {
 		
 		setContentView(R.layout.activity_artist);
-		actionBar = (ActionBar) findViewById(R.id.actionbar);
+		actionBar = setupActionBarWithHome();
 		
 		// info header
 		FocusTextView artist = (FocusTextView) findViewById(R.id.artist_artist);
