@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.ui.activity;
 import java.io.IOException;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 
 import android.app.AlertDialog;
@@ -129,12 +130,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 			
 			switch (resultCode) {
 			case SUCCESS:
-				// store info
-				Editor spe = getSharedPreferences("user", MODE_PRIVATE).edit();
-				spe.putString("username", username);
-				spe.putString("password", password);
-				spe.putBoolean("persist", persist);
-				spe.commit();
+				storeCredentials();
 				
 				setResult(LOGGED_IN);
 				pd.dismiss();
@@ -181,6 +177,15 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 			}
 		}
     	
+    }
+    
+    private void storeCredentials() {
+    	Editor spe = getSharedPreferences("user", MODE_PRIVATE).edit();
+		spe.putString("username", username);
+		String obscuredPassword = SimpleEncrypt.encrypt("secretsecretsecret", password);
+		spe.putString("password", obscuredPassword);
+		spe.putBoolean("persist", persist);
+		spe.commit();
     }
 
     /*

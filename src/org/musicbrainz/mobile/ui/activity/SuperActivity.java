@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 
 import com.markupartist.android.widget.ActionBar;
@@ -71,10 +72,9 @@ public abstract class SuperActivity extends Activity {
 	protected WebServiceUser getUser() {
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String username = prefs.getString("username", null);
-		String password = prefs.getString("password", null);
-		
-		WebServiceUser poster = new WebServiceUser(username, password, getClientVersion());
-		return poster;
+		String obscuredPassword = prefs.getString("password", null);
+		String password = SimpleEncrypt.decrypt("secretsecretsecret", obscuredPassword);
+		return new WebServiceUser(username, password, getClientVersion());
 	}
 	
 	public String getClientVersion() {
