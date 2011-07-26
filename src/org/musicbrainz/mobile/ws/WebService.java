@@ -21,7 +21,9 @@
 package org.musicbrainz.mobile.ws;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -178,14 +180,13 @@ public class WebService {
 	 */
 	public static LinkedList<ArtistStub> searchArtist(String term) throws IOException, SAXException {
 		
-		term = sanitize(term);
 		LinkedList<ArtistStub> results = new LinkedList<ArtistStub>();
 		
 		XMLReader reader = getXMLReader();
 		ArtistSearchParser handler = new ArtistSearchParser(results);
 		reader.setContentHandler(handler);
 
-		URL query = new URL(WEB_SERVICE + SEARCH_ARTIST + term);
+		URL query = new URL(WEB_SERVICE + SEARCH_ARTIST + sanitize(term));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
@@ -201,14 +202,13 @@ public class WebService {
 	 */
 	public static LinkedList<ReleaseGroup> searchReleaseGroup(String term) throws IOException, SAXException {
 		
-		term = sanitize(term);
 		LinkedList<ReleaseGroup> results = new LinkedList<ReleaseGroup>();
 		
 		XMLReader reader = getXMLReader();
 		RGSearchParser handler = new RGSearchParser(results);
 		reader.setContentHandler(handler);
 
-		URL query = new URL(WEB_SERVICE + SEARCH_RG + term);
+		URL query = new URL(WEB_SERVICE + SEARCH_RG + sanitize(term));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
@@ -224,14 +224,13 @@ public class WebService {
 	 */
 	public static LinkedList<ReleaseStub> searchRelease(String term) throws IOException, SAXException {
 		
-		term = sanitize(term);
 		LinkedList<ReleaseStub> results = new LinkedList<ReleaseStub>();
 		
 		XMLReader reader = getXMLReader();
 		ReleaseStubParser handler = new ReleaseStubParser(results);
 		reader.setContentHandler(handler);
 					
-		URL query = new URL(WEB_SERVICE + SEARCH_RELEASE + term);
+		URL query = new URL(WEB_SERVICE + SEARCH_RELEASE + sanitize(term));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
@@ -305,27 +304,8 @@ public class WebService {
 		return null;
 	}
 	
-	/*
-	 * Remove characters which are not safe in the web service request URL.
-	 * 
-	 * TODO This doesn't allow text search using Unicode characters.
-	 */
-	private static String sanitize(String input) {
-		
-		String output = "";
-		
-		for (char c : input.toCharArray()) {
-			if (c == ' ')
-				output += '+';
-			else if (c >= 48 && c <= 57)  
-				output += c; // 0-9
-			else if (c >= 65 && c <= 90)
-				output += c; // A-Z
-			else if (c >= 97 && c <= 122)
-				output += c; // a-z
-		}
-		
-		return output;
+	private static String sanitize(String input) throws UnsupportedEncodingException {
+		return URLEncoder.encode(input, "UTF-8");
 	}
 	
 	/**
