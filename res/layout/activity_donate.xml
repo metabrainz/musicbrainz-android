@@ -48,7 +48,9 @@
 			
 		<Button android:id="@+id/donate_btn"
 			style="@style/WrapHeight"
-			android:text="@string/paypal_label" />
+			android:enabled="false"
+			android:onClick="onClick"
+			android:text="@string/paypal_load_label" />
 		
 	</LinearLayout>	
 	</LinearLayout>

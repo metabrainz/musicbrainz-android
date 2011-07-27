@@ -65,10 +65,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         amount.setAdapter(typeAdapter);
-        
         donate = (Button) findViewById(R.id.donate_btn);
-		donate.setOnClickListener(DonateActivity.this);
-        donate.setEnabled(false);
               
         new LoadTask().execute();
     }
@@ -76,27 +73,28 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 	private class LoadTask extends AsyncTask<Void, Void, Void> {
 		
 		protected void onPreExecute() {
-			
 			actionBar.setProgressBarVisibility(View.VISIBLE);
 		}
 		
 		protected Void doInBackground(Void... v) {
-			
 			payPal = PayPal.getInstance();
 			if (payPal == null) {
 			   	payPal = PayPal.initWithAppID(DonateActivity.this, APP_ID, SERVER);
 			   	payPal.setShippingEnabled(false);
 			}
-		    
 			return null;
 		}
 		
 		protected void onPostExecute(Void v) {
-			
 			actionBar.setProgressBarVisibility(View.GONE);
-			donate.setEnabled(true);
+			enableButton();
 		}
 		
+	}
+	
+	private void enableButton() {
+		donate.setText(R.string.paypal_label);
+		donate.setEnabled(true);
 	}
 	
 	public void onClick(View v) {

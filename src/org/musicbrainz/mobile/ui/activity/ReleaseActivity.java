@@ -211,7 +211,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	
 	private void addActionBarArtist() {
 		Action artist = actionBar.newAction();
-    	artist.setIcon(R.drawable.ic_mb_artist);
+    	artist.setIcon(R.drawable.ic_actionbar_artist);
     	artist.setIntent(createArtistIntent());
     	actionBar.addAction(artist);
 	}
@@ -597,5 +597,11 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		RG_ID,
 		BARCODE
 	}
+	
+	 @Override
+	 public boolean onSearchRequested() {
+	     startActivity(HomeActivity.createIntent(this));
+	     return false;
+	 }
 
 }
