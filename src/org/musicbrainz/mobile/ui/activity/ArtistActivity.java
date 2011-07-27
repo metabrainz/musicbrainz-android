@@ -35,6 +35,7 @@ import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.Action;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -69,7 +70,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	private Artist data;
 	
 	// query data
-	private String id;
+	private String mbid;
 	
 	private ActionBar actionBar;
 	
@@ -96,7 +97,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		super.onCreate(savedInstanceState);
 		
 		// recover MBID from intent
-        id = getIntent().getStringExtra("mbid");
+        mbid = getIntent().getStringExtra("mbid");
 	
         new LookupTask().execute();
 		
@@ -107,6 +108,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		
 		setContentView(R.layout.activity_artist);
 		actionBar = setupActionBarWithHome();
+		addActionBarShare();
 		
 		// info header
 		FocusTextView artist = (FocusTextView) findViewById(R.id.artist_artist);
@@ -171,6 +173,19 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		}
 	}
 	
+    private void addActionBarShare() {
+    	Action share = actionBar.newAction();
+    	share.setIcon(R.drawable.ic_actionbar_share);
+    	share.setIntent(createShareIntent());
+    	actionBar.addAction(share);
+    }
+	
+    private Intent createShareIntent() {
+        final Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "http://www.musicbrainz.org/artist/" + mbid);
+        return Intent.createChooser(intent, getString(R.string.share));
+    }
+	
 	/*
 	 * Create and add tabs.
 	 */
@@ -233,7 +248,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		protected Boolean doInBackground(Void... params) {
 			
 			try {
-				data = WebService.lookupArtist(id);
+				data = WebService.lookupArtist(mbid);
 				if (loggedIn) {
 					user = getUser();
 					userData = user.getUserData(MBEntity.ARTIST, data.getMbid());

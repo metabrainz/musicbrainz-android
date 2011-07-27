@@ -58,13 +58,6 @@
 			android:textColor="@color/main_text"
 			android:textSize="@dimen/text_size_medium" />
 			
-		<ImageButton android:id="@+id/release_artist_btn"
-			style="@style/ButtonMin"
-			android:layout_alignParentTop="true"
-			android:layout_alignParentRight="true"
-			android:background="@null"
-			android:src="@drawable/btn_artist" />
-			
 		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_tags"
 			style="@style/TagArea"
 			android:layout_below="@+id/release_label"

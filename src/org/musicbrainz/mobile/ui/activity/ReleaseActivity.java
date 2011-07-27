@@ -39,6 +39,7 @@ import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
+import com.markupartist.android.widget.ActionBar.Action;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -53,7 +54,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TabHost;
@@ -77,8 +77,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	
 	// query data
 	private Source src;
-	private String releaseID;
-	private String releaseGroupID;
+	private String releaseMbid;
+	private String releaseGroupMbid;
 	private LinkedList<ReleaseStub> stubs;
 	private String barcode;
 	
@@ -107,8 +107,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         
         // recover ID or barcode from intent
-        releaseID = getIntent().getStringExtra("r_id");
-        releaseGroupID = getIntent().getStringExtra("rg_id");
+        releaseMbid = getIntent().getStringExtra("r_id");
+        releaseGroupMbid = getIntent().getStringExtra("rg_id");
         barcode = getIntent().getStringExtra("barcode");
         
         new LookupTask().execute();
@@ -122,6 +122,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		
 		setContentView(R.layout.activity_release);
 		actionBar = setupActionBarWithHome();
+		addActionBarShare();
 		
 		// info header
 		FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);
@@ -131,17 +132,18 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		
 		rating = (RatingBar) findViewById(R.id.release_rating);
 		tags = (FocusTextView) findViewById(R.id.release_tags);
-		
-		ImageButton artistInfo = (ImageButton) findViewById(R.id.release_artist_btn);
-        artistInfo.setOnClickListener(this);
         
-        // disable artist button for ignored artists (e.g. VA arist)
-        for (String id : Artist.IGNORE_LIST)
+		Boolean provideArtistAction = true;
+        for (String id : Artist.IGNORE_LIST) {
         	if (data.getArtistMbid().equals(id)) {
-        		artistInfo.setEnabled(false);
-        		artistInfo.setFocusable(false);
+        		provideArtistAction = false;
         	}
-		
+        }
+        
+        if (provideArtistAction) {
+        	addActionBarArtist();
+        }
+        
 		artist.setText(data.getArtistName());
 		title.setText(data.getTitle());
 		
@@ -193,6 +195,32 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
 		}
 	}
+	
+	private void addActionBarShare() {
+		Action share = actionBar.newAction();
+    	share.setIcon(R.drawable.ic_actionbar_share);
+    	share.setIntent(createShareIntent());
+    	actionBar.addAction(share);
+	}
+	
+    private Intent createShareIntent() {
+        final Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "http://www.musicbrainz.org/release/" + releaseMbid);
+        return Intent.createChooser(intent, getString(R.string.share));
+    }
+	
+	private void addActionBarArtist() {
+		Action artist = actionBar.newAction();
+    	artist.setIcon(R.drawable.ic_mb_artist);
+    	artist.setIntent(createArtistIntent());
+    	actionBar.addAction(artist);
+	}
+	
+    private Intent createArtistIntent() {
+    	final Intent releaseIntent = new Intent(this, ArtistActivity.class);
+		releaseIntent.putExtra("mbid", data.getArtistMbid());
+		return releaseIntent;
+    }
 	
 	/*
 	 * Create and add tabs.
@@ -346,10 +374,10 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	        	}
 	        };
 	        
-	        if (releaseID != null) {
+	        if (releaseMbid != null) {
 	        	src = Source.RELEASE_ID;
 	        	pd.setMessage(getText(R.string.pd_loading));
-	        } else if (releaseGroupID != null) {
+	        } else if (releaseGroupMbid != null) {
 	        	src = Source.RG_ID;
 	        	pd.setMessage(getText(R.string.pd_loading));
 	        } else {
@@ -366,7 +394,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			try {
 				switch (src) {
 				case RELEASE_ID:
-					data = WebService.lookupRelease(releaseID);
+					data = WebService.lookupRelease(releaseMbid);
 					if (loggedIn) {
 						user = getUser();
 						userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
@@ -386,13 +414,13 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						return NOT_FOUND;
 					}
 				case RG_ID:
-					stubs = WebService.browseReleases(releaseGroupID);
+					stubs = WebService.browseReleases(releaseGroupMbid);
 					
 					// lookup release if single release in release group
 					if (stubs.size() == 1) {
 						ReleaseStub r = stubs.getFirst();				
-						releaseID = r.getReleaseMbid();
-						data = WebService.lookupRelease(releaseID);
+						releaseMbid = r.getReleaseMbid();
+						data = WebService.lookupRelease(releaseMbid);
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
@@ -472,13 +500,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	public void onClick(View v) {
 		
 		switch(v.getId()) {
-		case R.id.release_artist_btn:
-			
-			Intent releaseIntent = new Intent(this, ArtistActivity.class);
-			System.err.println(data.getArtistMbid());
-			releaseIntent.putExtra("mbid", data.getArtistMbid());
-			startActivity(releaseIntent);
-			break;
 		case R.id.tag_btn:
 			
 			String tagString = tagInput.getText().toString();
@@ -576,5 +597,5 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		RG_ID,
 		BARCODE
 	}
-	
+
 }
