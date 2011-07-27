@@ -22,8 +22,8 @@ package org.musicbrainz.mobile.util;
 
 public class Config {
 	
-	public static final boolean DEV = true;
 	public static final String TAG = "MusicBrainz";
+	public static final boolean LIVE = false;
 	
 	/*
 	 * LIVE server
@@ -38,7 +38,5 @@ public class Config {
 //	public static final String WEB_SERVICE = "http://test.musicbrainz.org/ws/2/";
 //	public static final String REALM = "musicbrainz.org";
 //	public static final String SCOPE = "test.musicbrainz.org";
-	
-	public static final String PAYPAL_ID = "APP-80W284485P519543T";
 
 }

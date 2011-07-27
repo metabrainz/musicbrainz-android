@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.ui.activity;
 import java.io.IOException;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 
@@ -182,7 +183,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
     private void storeCredentials() {
     	Editor spe = getSharedPreferences("user", MODE_PRIVATE).edit();
 		spe.putString("username", username);
-		String obscuredPassword = SimpleEncrypt.encrypt("secretsecretsecret", password);
+		String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), password);
 		spe.putString("password", obscuredPassword);
 		spe.putBoolean("persist", persist);
 		spe.commit();

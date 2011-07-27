@@ -21,12 +21,11 @@
 package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 
 import com.markupartist.android.widget.ActionBar;
-import com.nullwire.trace.ExceptionHandler;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -52,9 +51,6 @@ public abstract class SuperActivity extends Activity {
 	 */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	
-		if (!Config.DEV)
-			ExceptionHandler.register(this, "http://www.jdamcd.com/mbbugs/server.php");
 		
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String user = prefs.getString("username", null); 
@@ -73,7 +69,7 @@ public abstract class SuperActivity extends Activity {
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String username = prefs.getString("username", null);
 		String obscuredPassword = prefs.getString("password", null);
-		String password = SimpleEncrypt.decrypt("secretsecretsecret", obscuredPassword);
+		String password = SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
 		return new WebServiceUser(username, password, getClientVersion());
 	}
 	

@@ -23,7 +23,7 @@ package org.musicbrainz.mobile.ui.activity;
 import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Secrets;
 
 import com.markupartist.android.widget.ActionBar;
 import com.paypal.android.MEP.PayPal;
@@ -52,7 +52,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 	
 	private PayPal payPal;
 	private static final int SERVER = PayPal.ENV_LIVE;
-	private static final String APP_ID = Config.PAYPAL_ID;
+	private static final String APP_ID = Secrets.PAYPAL_APP_ID;
 	private static final int REQUEST_CODE = 1;
 	
     public void onCreate(Bundle savedInstanceState) {

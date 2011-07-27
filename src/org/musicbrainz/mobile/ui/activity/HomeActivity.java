@@ -21,7 +21,10 @@
 package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Secrets;
 
+import com.bugsense.trace.BugSenseHandler;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -62,6 +65,10 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_home);
+		
+		if (Config.LIVE) {
+			BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
+		}
 
 		searchTerm = (EditText) findViewById(R.id.query_input);
 		searchTerm.setOnEditorActionListener(this);
