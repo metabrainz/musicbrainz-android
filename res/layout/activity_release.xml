@@ -31,36 +31,41 @@
 		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_release"
 			style="@style/EntityText"
 			android:layout_alignParentLeft="true"
-			android:layout_toLeftOf="@+id/release_rating" />
+			android:layout_toLeftOf="@+id/release_date" />
 		
 		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_artist"
 			style="@style/ScrollText"
 			android:layout_below="@+id/release_release"
+			android:layout_alignParentLeft="true"
+			android:layout_toLeftOf="@+id/release_label"
 			
 			android:textColor="@color/main_text"
 			android:textSize="@dimen/text_size_entity" />
 			
-		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_label"
-			style="@style/ScrollText"
-			android:layout_below="@+id/release_artist"
-			android:layout_alignParentLeft="true"
-			android:layout_toLeftOf="@+id/release_date"
+		<TextView android:id="@+id/release_date"
+			style="@style/Wrap"
+			android:layout_alignBaseline="@+id/release_release"
+			android:layout_alignParentRight="true"
+			android:layout_marginLeft="@dimen/small_pad"
 			
 			android:textColor="@color/main_text"
 			android:textSize="@dimen/text_size_medium" />
 			
-		<TextView android:id="@+id/release_date"
-			style="@style/Wrap"
-			android:layout_below="@+id/release_artist"
+		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_label"
+			style="@style/ScrollText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:maxWidth="150dp"
+			android:layout_alignBaseline="@+id/release_artist"
 			android:layout_alignParentRight="true"
-			android:layout_marginLeft="5dip"
+			android:layout_marginLeft="@dimen/small_pad"
 			
 			android:textColor="@color/main_text"
 			android:textSize="@dimen/text_size_medium" />
 			
 		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/release_tags"
 			style="@style/TagArea"
-			android:layout_below="@+id/release_label"
+			android:layout_below="@+id/release_artist"
 			android:layout_toLeftOf="@+id/release_rating" />
 			
 		<RatingBar android:id="@+id/release_rating"
@@ -68,7 +73,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" 
 			
-			android:layout_below="@+id/release_label" 
+			android:layout_below="@+id/release_artist" 
 			android:layout_alignParentRight="true"
 			android:layout_marginLeft="@dimen/std_pad"
 			android:layout_marginTop="@dimen/startop_pad" />
@@ -98,11 +103,11 @@
 		style="@style/Fill"
 		android:background="@color/main_fg"
 		android:orientation="vertical"
-		android:padding="15dip">
+		android:padding="@dimen/home_pad">
 
 		<TextView android:id="@+id/login_warning"
 			style="@style/Wrap"
-			android:layout_marginBottom="10dip"
+			android:layout_marginBottom="@dimen/home_pad"
 			android:layout_gravity="center"
 			android:visibility="gone"
 			android:textColor="@color/mb_orange_dark"
@@ -120,7 +125,7 @@
 		
 		<LinearLayout
 			style="@style/WrapHeight"
-			android:layout_marginTop="5dip">
+			android:layout_marginTop="@dimen/small_pad">
 		
 			<Button android:id="@+id/tag_btn"
 				style="@style/WrapHeight"

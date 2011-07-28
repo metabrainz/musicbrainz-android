@@ -26,15 +26,15 @@
     <dimen name="text_size_entity">17sp</dimen>
     <dimen name="text_size_xl">18sp</dimen>
     
-    <dimen name="home_pad">14dip</dimen>
-    <dimen name="huge_pad">20dip</dimen>
-    <dimen name="std_pad">7dip</dimen>
-    <dimen name="small_pad">5dip</dimen>
-    <dimen name="startop_pad">13dip</dimen>
+    <dimen name="home_pad">14dp</dimen>
+    <dimen name="huge_pad">20dp</dimen>
+    <dimen name="std_pad">7dp</dimen>
+    <dimen name="small_pad">5dp</dimen>
+    <dimen name="startop_pad">13dp</dimen>
     
-    <dimen name="tab_height">38dip</dimen>
-    <dimen name="vertical_minspace">38dip</dimen>
-    <dimen name="button_min">47dip</dimen>
-    <dimen name="launch_textarea_height">70dip</dimen>
-    <dimen name="separator_height">2dip</dimen>
+    <dimen name="tab_height">38dp</dimen>
+    <dimen name="vertical_minspace">38dp</dimen>
+    <dimen name="button_min">47dp</dimen>
+    <dimen name="launch_textarea_height">70dp</dimen>
+    <dimen name="separator_height">2dp</dimen>
 </resources>
