@@ -23,7 +23,7 @@ package org.musicbrainz.mobile.util;
 public class Config {
 	
 	public static final String TAG = "MusicBrainz";
-	public static final boolean LIVE = false;
+	public static final boolean LIVE = true;
 	
 	/*
 	 * LIVE server
