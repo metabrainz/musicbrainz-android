@@ -409,6 +409,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 							user.shutdownConnectionManager();
 						}
+						releaseMbid = data.getReleaseMbid();
 						return LOADED;
 					} else {
 						return NOT_FOUND;

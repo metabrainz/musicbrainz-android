@@ -54,7 +54,7 @@ import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
 
 /**
- * Activity to add a UPC to MusicBrainz if isn't already stored.
+ * Activity to add a barcode to MusicBrainz if isn't already stored.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
@@ -95,8 +95,6 @@ public class BarcodeSearchActivity extends SuperActivity implements
         
         matches = (ListView) findViewById(R.id.barcode_list);
         noRes = (TextView) findViewById(R.id.noresults);
-        
-        Toast.makeText(this, R.string.toast_barcode_help, Toast.LENGTH_SHORT).show();
 		
 		imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     }
@@ -141,6 +139,8 @@ public class BarcodeSearchActivity extends SuperActivity implements
 				matches.setOnItemClickListener(BarcodeSearchActivity.this);
 				matches.setOnItemLongClickListener(BarcodeSearchActivity.this);
 				
+				TextView instructions = (TextView) findViewById(R.id.barcode_instructions);
+				instructions.setVisibility(View.GONE);
 				if (results.isEmpty()) {
 					noRes.setVisibility(View.VISIBLE);
 					matches.setVisibility(View.INVISIBLE);

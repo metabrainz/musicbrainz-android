@@ -24,11 +24,12 @@
 	<com.markupartist.android.widget.ActionBar
     	android:id="@+id/actionbar"
     	style="@style/ActionBar" />
-    	
+    
+    <ScrollView style="@style/Wrap"
+    	android:layout_below="@id/actionbar">
     <RelativeLayout
     	style="@style/Wrap"
-    	android:padding="@dimen/home_pad"
-    	android:layout_below="@id/actionbar">
+    	android:padding="@dimen/home_pad">
 	  
 	<TextView android:id="@+id/about_text"
 	  	style="@style/TextBody" 
@@ -39,4 +40,5 @@
 		android:layout_below="@id/about_text" />
 		
 	</RelativeLayout>
+	</ScrollView>
 </RelativeLayout>

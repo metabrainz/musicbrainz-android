@@ -27,6 +27,7 @@ import org.musicbrainz.mobile.ui.activity.BarcodeSearchActivity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
 		this.rs = rs;
 		parent = (BarcodeSearchActivity) context;
 		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.dialog_bar_submit);
 		
 		Button confirm = (Button) findViewById(R.id.barcode_confirm);
@@ -69,6 +71,7 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
 			
 		String releaseID = rs.getReleaseMbid();
 		parent.submitBarcode(releaseID);
+		parent.finish();
 		dismiss();
 	}
 

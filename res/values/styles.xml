@@ -105,6 +105,14 @@
     	<item name="android:textColor">@color/main_text</item>
     </style>
     
+    <style name="BarcodeInstructions" parent="@style/Fill">
+    	<item name="android:text">@string/barcode_instructions</item>
+    	<item name="android:gravity">center</item>
+    	<item name="android:textSize">@dimen/text_size_large</item>
+    	<item name="android:textColor">@color/main_text</item>
+    	<item name="android:padding">@dimen/home_pad</item>
+    </style>
+    
     <!-- Text -->
     <style name="TextHeader" parent="@style/WrapHeight">
     	<item name="android:layout_marginBottom">@dimen/home_pad</item>

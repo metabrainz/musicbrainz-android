@@ -55,7 +55,7 @@
 	<string name="tab_tracks">Tracks</string>
 	
 	<string name="no_tags">No tags available!</string>
-	<string name="edit_login">You must log in before you can submit data!</string>
+	<string name="edit_login">You must log in before you can edit!</string>
 	
 	<string name="share">Share</string>
 
@@ -78,6 +78,7 @@
 	<string name="barcode_text">Product code: </string>
 	<string name="barcode_hint">Release title</string>
 	<string name="barcode_confirm">Add the barcode to this release?</string>
+	<string name="barcode_instructions">Search for the release that this barcode belongs to...</string>
 
 	<!-- ConfirmBarcodeDialog -->
 	<string name="barcode_add_header">Submit barcode</string>
@@ -97,7 +98,7 @@
 
 	<!-- AboutActivity -->
 	<string name="about_title">About</string>
-	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis application provides easy access to that data on your Android device. Scan a CD barcode to look up the release information, add the barcode if it is not already stored, contribute tags and ratings, or simply browse the metadata.\n\nPlease note that this application is a work in progress. It began as a Google Summer of Code project in 2010 and is now developed in my spare time. Bug reports and feedback welcome. Email me: jdamcd@gmail.com</string>
+	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis application provides easy access to that data on your Android device. Scan a CD barcode to look up the release information, add the barcode if it is not already stored, contribute tags and ratings, or simply browse the metadata.\n\nPlease note that this application is a work in progress. It began as a Google Summer of Code project in 2010 and is now developed in my spare time. Bug reports and feedback welcome. Email me: jdamcd@gmail.com\n\nPlease be aware that error logs are sent from this application in the event of a crash. Personally identifiable information is not included.</string>
 	<string name="version_text">App version: </string>
 
 	<!-- Menus -->
@@ -124,7 +125,6 @@
 	<string name="toast_search_err">Add some text to search</string>
 	<string name="toast_tag_err">Add some text to tag</string>
 	<string name="toast_auth_err">Username or password missing</string>
-	<string name="toast_barcode_help">Search for release and select result</string>
 	<string name="toast_noresults">Search returned no results</string>
 	<string name="toast_loggedIn">Logged in</string>
 	<string name="toast_loggedOut">Logged out</string>
