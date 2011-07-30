@@ -20,7 +20,12 @@
 
 package org.musicbrainz.mobile.data;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Log;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -32,13 +37,14 @@ import android.content.res.Resources;
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class ReleaseGroup {
+public class ReleaseGroup implements Comparable<Object> {
 
 	private String mbid;
 	
 	private String artist;
 	private String title;
 	private String type;
+	private Calendar firstRelease = Calendar.getInstance();
 	private int numberReleases;
 	
 	// MBID for release, if release group contains a single release.
@@ -125,6 +131,60 @@ public class ReleaseGroup {
 	
 	public void setSingleReleaseMbid(String singleReleaseMbid) {
 		this.singleReleaseMbid = singleReleaseMbid;
+	}
+	
+	public void setFirstRelease(String date) {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			firstRelease.setTime(dateFormat.parse(date));
+		} catch (ParseException e) {
+			formatNoDay(date);
+		}
+	}
+	
+	private void formatNoDay(String date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+		try {
+			firstRelease.setTime(dateFormat.parse(date));
+		} catch (ParseException e) {
+			formatNoMonth(date);
+		}
+	}
+	
+	private void formatNoMonth(String date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+		try {
+			firstRelease.setTime(dateFormat.parse(date));
+		} catch (ParseException e) {
+			firstRelease = null;
+		}
+	}
+	
+	public Calendar getFirstRelease() {
+		return firstRelease;
+	}
+	
+	public String getReleaseYear() {
+		if (firstRelease == null) {
+			return "";
+		} else {
+			return "" + firstRelease.get(Calendar.YEAR);
+		}
+	}
+
+	@Override
+	public int compareTo(Object another) {
+		ReleaseGroup comp = (ReleaseGroup) another;
+		if (this.getFirstRelease() == null) {
+			return 1;
+		} else if (comp.getFirstRelease() == null) {
+			return -1;
+		} else if (this.getFirstRelease() == null && comp.getFirstRelease() == null) {
+			return 0;
+		} else {
+			return comp.getFirstRelease().compareTo(this.getFirstRelease());
+		}
 	}
 	
 }

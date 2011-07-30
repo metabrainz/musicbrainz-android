@@ -444,6 +444,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			ReleaseGroup rData = data.getReleases().get(position);
 			
 			wrapper.getReleaseTitle().setText(rData.getTitle());
+			wrapper.getReleaseYear().setText(rData.getReleaseYear());
 			wrapper.getReleaseType().setText(rData.getFormattedType(getContext()));
 			
 			return release;
@@ -457,6 +458,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		
 		View base;
 		TextView releaseTitle = null;
+		TextView releaseYear = null;
 		TextView releaseType = null;
 		
 		ReleaseListWrapper(View base) {
@@ -464,10 +466,17 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		}
 		
 		TextView getReleaseTitle() {
-			if (releaseTitle == null)
+			if (releaseTitle == null) {
 				releaseTitle = (TextView) base.findViewById(R.id.list_rg_title);
-			
+			}
 			return releaseTitle;
+		}
+		
+		TextView getReleaseYear() {
+			if (releaseYear == null) {
+				releaseYear = (TextView) base.findViewById(R.id.list_rg_year);
+			}
+			return releaseYear;
 		}
 		
 		TextView getReleaseType() {

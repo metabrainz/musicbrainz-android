@@ -18,52 +18,66 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ws;
+package org.musicbrainz.mobile.parsers;
+
+import java.util.Collection;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * SAX parser handler for barcode search. Stores the MBID of the associated
- * release if found.
+ * SAX parser handler for refreshing tags and ratings.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class BarcodeSearchParser extends DefaultHandler {
+public class TagRatingParser extends DefaultHandler {
 	
-	private boolean found = false; // search success
+	private Collection<String> tags;
+	private float ratingValue;
 	
-	private String mbid;
-    
+	private StringBuilder sb;
+	
+	public TagRatingParser() {
+		// no parameter constructor for ratings
+	}
+	
+	public TagRatingParser(Collection<String> tags) {
+		this.tags = tags;
+	}
+	
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		
-		if (localName.equalsIgnoreCase("release-list")) {
-			String count = atts.getValue("count");
-			int c = Integer.parseInt(count); // number of results
-			if (c > 0)
-				found = true;
-		} else if (localName.equals("release")) {
-			mbid = atts.getValue("id");
+		if (localName.equals("tag")) {
+			sb = new StringBuilder();
+		} else if (localName.equals("rating")) {
+			sb = new StringBuilder();
 		} 
 	}
-
-	/**
-	 * Success status of the search.
-	 * 
-	 * @return boolean value representing whether a release was found from the
-	 *         barcode search.
-	 */
-    public boolean isFound() {
-    	return found;
-    }
-    
-    /**
-     * @return Release MBID.
-     */
-    public String getID() {
-    	return mbid;
-    }
+	
+	public void endElement(String namespaceURI, String localName, String qName)
+			throws SAXException {
+		
+		if (localName.equals("tag")) {
+			tags.add(sb.toString());
+		} else if (localName.equals("rating")) {
+			float rating = Float.parseFloat(sb.toString());
+			ratingValue = rating;
+		} 
+	}
+	
+	public void characters(char ch[], int start, int length) {
+		
+		if (sb != null) {
+			for (int i=start; i<start+length; i++) {
+	            sb.append(ch[i]);
+	        }
+		}
+	}
+	
+	public float getRating() {
+		return ratingValue;
+	}
 
 }

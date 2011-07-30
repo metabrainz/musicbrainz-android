@@ -39,6 +39,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.musicbrainz.mobile.data.UserData;
+import org.musicbrainz.mobile.parsers.UserDataParser;
 import org.musicbrainz.mobile.util.Config;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;

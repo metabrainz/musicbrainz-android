@@ -60,7 +60,6 @@ public class WebLink implements Comparable<Object> {
 		this.type = type;
 	}
 
-	// Comparable method for alphabetical ordering.
 	public int compareTo(Object another) {
 		WebLink comp = (WebLink) another;
 		return this.getFormattedType().compareTo(comp.getFormattedType());

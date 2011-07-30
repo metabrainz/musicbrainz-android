@@ -18,66 +18,52 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ws;
-
-import java.util.Collection;
+package org.musicbrainz.mobile.parsers;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * SAX parser handler for refreshing tags and ratings.
+ * SAX parser handler for barcode search. Stores the MBID of the associated
+ * release if found.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class TagRatingParser extends DefaultHandler {
+public class BarcodeSearchParser extends DefaultHandler {
 	
-	private Collection<String> tags;
-	private float ratingValue;
+	private boolean found = false; // search success
 	
-	private StringBuilder sb;
-	
-	public TagRatingParser() {
-		// no parameter constructor for ratings
-	}
-	
-	public TagRatingParser(Collection<String> tags) {
-		this.tags = tags;
-	}
-	
+	private String mbid;
+    
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		
-		if (localName.equals("tag")) {
-			sb = new StringBuilder();
-		} else if (localName.equals("rating")) {
-			sb = new StringBuilder();
+		if (localName.equalsIgnoreCase("release-list")) {
+			String count = atts.getValue("count");
+			int c = Integer.parseInt(count); // number of results
+			if (c > 0)
+				found = true;
+		} else if (localName.equals("release")) {
+			mbid = atts.getValue("id");
 		} 
 	}
-	
-	public void endElement(String namespaceURI, String localName, String qName)
-			throws SAXException {
-		
-		if (localName.equals("tag")) {
-			tags.add(sb.toString());
-		} else if (localName.equals("rating")) {
-			float rating = Float.parseFloat(sb.toString());
-			ratingValue = rating;
-		} 
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
-		}
-	}
-	
-	public float getRating() {
-		return ratingValue;
-	}
+
+	/**
+	 * Success status of the search.
+	 * 
+	 * @return boolean value representing whether a release was found from the
+	 *         barcode search.
+	 */
+    public boolean isBarcodeFound() {
+    	return found;
+    }
+    
+    /**
+     * @return Release MBID.
+     */
+    public String getMbid() {
+    	return mbid;
+    }
 
 }

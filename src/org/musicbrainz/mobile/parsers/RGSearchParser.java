@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ws;
+package org.musicbrainz.mobile.parsers;
 
 import java.util.LinkedList;
 
@@ -45,7 +45,6 @@ public class RGSearchParser extends DefaultHandler {
     	this.stubs = results;
     }
 
-	// tag status
 	private boolean artist = false;
 	
 	public void startElement(String namespaceURI, String localName,

@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ws;
+package org.musicbrainz.mobile.parsers;
 
 import org.musicbrainz.mobile.data.Artist;
 import org.musicbrainz.mobile.data.ReleaseGroup;
@@ -34,13 +34,10 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class ArtistLookupParser extends DefaultHandler {
 	
-	// tags
     private boolean tag = false;
     private boolean releaseGroup = false;
     
-    // artist object
     private Artist data;
-    
     private ReleaseGroup stub;
     private WebLink link;
     
@@ -65,7 +62,7 @@ public class ArtistLookupParser extends DefaultHandler {
 			stub = new ReleaseGroup();
 			String id = atts.getValue("id");
 			 
-			// type isn't always returned - empty string for unknown
+			// Type isn't always returned - empty string for unknown
 			if (atts.getValue("type") != null)
 				stub.setType(atts.getValue("type"));
 			else 
@@ -80,6 +77,8 @@ public class ArtistLookupParser extends DefaultHandler {
 			link = new WebLink();
 			link.setType(atts.getValue("type"));
 		} else if (localName.equals("target")) {
+			sb = new StringBuilder();
+		} else if (localName.equals("first-release-date")) {
 			sb = new StringBuilder();
 		}
 	}
@@ -102,7 +101,7 @@ public class ArtistLookupParser extends DefaultHandler {
 		} else if (localName.equals("release-group")) {
 			releaseGroup = false;
 			
-			// ignore NAT
+			// Ignore NAT
 			if (!stub.getType().equals("non-album tracks"))
 				data.addRelease(stub);
 		} else if (localName.equals("title")) {
@@ -112,6 +111,8 @@ public class ArtistLookupParser extends DefaultHandler {
 			data.addLink(link);
 		} else if (localName.equals("target")) {
 			link.setUrl(sb.toString());
+		} else if (localName.equals("first-release-date")) {
+			stub.setFirstRelease(sb.toString());
 		}
 	}
 	

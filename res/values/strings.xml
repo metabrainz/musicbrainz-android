@@ -78,12 +78,11 @@
 	<string name="addupc_title">Submit Barcode</string>
 	<string name="barcode_text">Product code: </string>
 	<string name="barcode_hint">Release title</string>
-	<string name="barcode_confirm">Add the barcode to this release?</string>
 	<string name="barcode_instructions">Search for the release that the barcode belongs to...</string>
 
 	<!-- ConfirmBarcodeDialog -->
 	<string name="barcode_add_header">Submit barcode</string>
-	<string name="barcode_add_body">Add this barcode to the following release?</string>
+	<string name="barcode_add_body">Add this barcode to the following release?\n\nThis will submit and edit that other users can vote on. The barcode will not be added immediately.</string>
 	<string name="barcode_add_btn">Submit</string>
 	
 	<!-- PostService -->

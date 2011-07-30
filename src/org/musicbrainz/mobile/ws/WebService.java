@@ -36,6 +36,13 @@ import org.musicbrainz.mobile.data.ArtistStub;
 import org.musicbrainz.mobile.data.Release;
 import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.data.ReleaseStub;
+import org.musicbrainz.mobile.parsers.ArtistLookupParser;
+import org.musicbrainz.mobile.parsers.ArtistSearchParser;
+import org.musicbrainz.mobile.parsers.BarcodeSearchParser;
+import org.musicbrainz.mobile.parsers.RGSearchParser;
+import org.musicbrainz.mobile.parsers.ReleaseLookupParser;
+import org.musicbrainz.mobile.parsers.ReleaseStubParser;
+import org.musicbrainz.mobile.parsers.TagRatingParser;
 import org.musicbrainz.mobile.util.Config;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -45,7 +52,6 @@ import org.xml.sax.XMLReader;
  * This class makes the web service available to Activity classes. Static
  * methods manage web service calls and return the appropriate data objects. The
  * XML returned is parsed into data objects with custom SAX parser handlers.
- * This is really fast.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
@@ -88,14 +94,13 @@ public class WebService {
 		BarcodeSearchParser bHandler = new BarcodeSearchParser();
 		reader.setContentHandler(bHandler);
 		
-		URL bQuery = new URL(WEB_SERVICE + SEARCH_BARCODE + barcode
-				+ BARCODE_PARAMS);
+		URL bQuery = new URL(WEB_SERVICE + SEARCH_BARCODE + barcode + BARCODE_PARAMS);
 		reader.parse(new InputSource(bQuery.openStream()));
 		
-		if (bHandler.isFound())
-			return lookupRelease(bHandler.getID());
-		else
-			return null; // barcode not found
+		if (bHandler.isBarcodeFound()) {
+			return lookupRelease(bHandler.getMbid());
+		} 
+		return null;
 	}
 	
 	/**
@@ -106,16 +111,16 @@ public class WebService {
 	 * @throws SAXException 
 	 * @throws IOException 
 	 */
-	public static Release lookupRelease(String id) throws IOException, SAXException {
+	public static Release lookupRelease(String mbid) throws IOException, SAXException {
 		
 		Release release = new Release();
-		release.setReleaseMbid(id);
+		release.setReleaseMbid(mbid);
 		
 		XMLReader reader = getXMLReader();
 		ReleaseLookupParser rHandler = new ReleaseLookupParser(release);
 		reader.setContentHandler(rHandler);
 		
-		URL rQuery = new URL(WEB_SERVICE + RELEASE_LOOKUP + id + RELEASE_PARAMS);
+		URL rQuery = new URL(WEB_SERVICE + RELEASE_LOOKUP + mbid + RELEASE_PARAMS);
 		reader.parse(new InputSource(rQuery.openStream()));
 		
 		return release;
@@ -129,7 +134,7 @@ public class WebService {
 	 * @throws SAXException 
 	 * @throws IOException 
 	 */
-	public static LinkedList<ReleaseStub> browseReleases(String id) throws IOException, SAXException {
+	public static LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException, SAXException {
 		
 		LinkedList<ReleaseStub> stubs = new LinkedList<ReleaseStub>();
 		
@@ -137,7 +142,7 @@ public class WebService {
 		ReleaseStubParser handler = new ReleaseStubParser(stubs);
 		reader.setContentHandler(handler);
 		
-		URL query = new URL(WEB_SERVICE + RG_RELEASE_BROWSE + id
+		URL query = new URL(WEB_SERVICE + RG_RELEASE_BROWSE + mbid
 				+ RG_RELEASE_PARAMS);
 		reader.parse(new InputSource(query.openStream()));
 		
@@ -152,20 +157,20 @@ public class WebService {
 	 * @throws SAXException 
 	 * @throws IOException 
 	 */
-	public static Artist lookupArtist(String id) throws IOException, SAXException {
+	public static Artist lookupArtist(String mbid) throws IOException, SAXException {
 		
 		Artist artist = new Artist();
-		artist.setMbid(id);
+		artist.setMbid(mbid);
 
 		XMLReader reader = getXMLReader();
 		ArtistLookupParser handler = new ArtistLookupParser(artist);
 		reader.setContentHandler(handler);
 
-		URL query = new URL(WEB_SERVICE + ARTIST_LOOKUP + id + ARTIST_PARAMS);
-		reader.parse(new InputSource(query.openStream()));
-		// get release groups list
-		query = new URL(WEB_SERVICE + ARTIST_RG_BROWSE + id + ARTIST_RG_PARAMS);
-		reader.parse(new InputSource(query.openStream()));
+		URL artistQuery = new URL(WEB_SERVICE + ARTIST_LOOKUP + mbid + ARTIST_PARAMS);
+		reader.parse(new InputSource(artistQuery.openStream()));
+
+		URL releaseGroupQuery = new URL(WEB_SERVICE + ARTIST_RG_BROWSE + mbid + ARTIST_RG_PARAMS);
+		reader.parse(new InputSource(releaseGroupQuery.openStream()));
 
 		return artist;
 	}
@@ -178,7 +183,7 @@ public class WebService {
 	 * @throws SAXException 
 	 * @throws IOException 
 	 */
-	public static LinkedList<ArtistStub> searchArtist(String term) throws IOException, SAXException {
+	public static LinkedList<ArtistStub> searchArtist(String searchTerm) throws IOException, SAXException {
 		
 		LinkedList<ArtistStub> results = new LinkedList<ArtistStub>();
 		
@@ -186,7 +191,7 @@ public class WebService {
 		ArtistSearchParser handler = new ArtistSearchParser(results);
 		reader.setContentHandler(handler);
 
-		URL query = new URL(WEB_SERVICE + SEARCH_ARTIST + sanitize(term));
+		URL query = new URL(WEB_SERVICE + SEARCH_ARTIST + sanitize(searchTerm));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
@@ -200,7 +205,7 @@ public class WebService {
 	 * @throws SAXException 
 	 * @throws IOException 
 	 */
-	public static LinkedList<ReleaseGroup> searchReleaseGroup(String term) throws IOException, SAXException {
+	public static LinkedList<ReleaseGroup> searchReleaseGroup(String searchTerm) throws IOException, SAXException {
 		
 		LinkedList<ReleaseGroup> results = new LinkedList<ReleaseGroup>();
 		
@@ -208,7 +213,7 @@ public class WebService {
 		RGSearchParser handler = new RGSearchParser(results);
 		reader.setContentHandler(handler);
 
-		URL query = new URL(WEB_SERVICE + SEARCH_RG + sanitize(term));
+		URL query = new URL(WEB_SERVICE + SEARCH_RG + sanitize(searchTerm));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
@@ -222,7 +227,7 @@ public class WebService {
 	 * @throws SAXException 
 	 * @throws IOException 
 	 */
-	public static LinkedList<ReleaseStub> searchRelease(String term) throws IOException, SAXException {
+	public static LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException, SAXException {
 		
 		LinkedList<ReleaseStub> results = new LinkedList<ReleaseStub>();
 		
@@ -230,13 +235,13 @@ public class WebService {
 		ReleaseStubParser handler = new ReleaseStubParser(results);
 		reader.setContentHandler(handler);
 					
-		URL query = new URL(WEB_SERVICE + SEARCH_RELEASE + sanitize(term));
+		URL query = new URL(WEB_SERVICE + SEARCH_RELEASE + sanitize(searchTerm));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
 	}
 	
-	public static Collection<String> refreshTags(MBEntity type, String entityID) throws IOException, SAXException {
+	public static Collection<String> refreshTags(MBEntity type, String mbid) throws IOException, SAXException {
 		
 		LinkedList<String> tags = new LinkedList<String>();
 		
@@ -253,13 +258,13 @@ public class WebService {
 			entity = "release-group";
 		}
 		
-		URL tagQuery = new URL(WEB_SERVICE + entity + "/" + entityID + "?inc=tags");
+		URL tagQuery = new URL(WEB_SERVICE + entity + "/" + mbid + "?inc=tags");
 		reader.parse(new InputSource(tagQuery.openStream()));
 		
 		return tags;
 	}
 	
-	public static float refreshRating(MBEntity type, String entityID) throws IOException, SAXException {
+	public static float refreshRating(MBEntity type, String mbid) throws IOException, SAXException {
 		
 		float rating;
 		
@@ -276,7 +281,7 @@ public class WebService {
 			entity = "release-group";
 		}
 		
-		URL tagQuery = new URL(WEB_SERVICE + entity + "/" + entityID + "?inc=ratings");
+		URL tagQuery = new URL(WEB_SERVICE + entity + "/" + mbid + "?inc=ratings");
 		reader.parse(new InputSource(tagQuery.openStream()));
 		
 		rating = ratingHandler.getRating();
@@ -308,9 +313,6 @@ public class WebService {
 		return URLEncoder.encode(input, "UTF-8");
 	}
 	
-	/**
-	 * Types for tag/rating entities.
-	 */
 	public enum MBEntity {
 		ARTIST,
 		RELEASE_GROUP

@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ws;
+package org.musicbrainz.mobile.parsers;
 
 import java.util.LinkedList;
 
@@ -35,16 +35,13 @@ import org.xml.sax.helpers.DefaultHandler;
 public class ReleaseStubParser extends DefaultHandler {
 	
 	private LinkedList<ReleaseStub> results;
-	
 	private ReleaseStub stub;
-	
 	private StringBuilder sb;
 	
 	public ReleaseStubParser(LinkedList<ReleaseStub> results) {
 		this.results = results;
 	}
 
-	// tags status
 	private boolean artist = false;
 	private boolean label = false;
 	

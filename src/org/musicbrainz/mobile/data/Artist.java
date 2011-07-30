@@ -89,6 +89,7 @@ public class Artist {
 	}
 	
 	public ArrayList<ReleaseGroup> getReleases() {
+		Collections.sort(releases);
 		return releases;
 	}
 	
@@ -110,7 +111,7 @@ public class Artist {
 	}
 	
 	/*
-	 * Special purpose artists which can be ignored.
+	 * Special purpose artists, which can be ignored.
 	 */
 	public static final String[] IGNORE_LIST = {
 		

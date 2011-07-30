@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.ws;
+package org.musicbrainz.mobile.parsers;
 
 import org.musicbrainz.mobile.data.Release;
 import org.musicbrainz.mobile.data.Track;
