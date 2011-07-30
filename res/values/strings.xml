@@ -30,6 +30,7 @@
 	<string name="donate_label">Donate</string>
 	<string name="hometext_header">Welcome to MusicBrainz!</string>
 	<string name="hometext_body">Scan a release or search to get started.\nLog in to submit tags and ratings.</string>
+	<string name="hometext_loggedin">You are currently logged in as</string>
 
 	<!-- AuthenticateActivity -->
 	<string name="auth_title">Log In</string>

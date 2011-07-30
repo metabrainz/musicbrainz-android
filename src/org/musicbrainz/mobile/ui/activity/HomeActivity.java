@@ -56,7 +56,6 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	
 	private EditText searchTerm;
 	private Spinner searchType;
-	private Button login;
 	private InputMethodManager imm;
 	
 	private static final int LOGIN_REQUEST = 0;
@@ -79,13 +78,27 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 				android.R.layout.simple_spinner_item);
 		typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		searchType.setAdapter(typeAdapter);
-
-		login = (Button) findViewById(R.id.login_btn);
-		if (loggedIn) {
-			login.setText(R.string.logout_label);
-		}
 		
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+	}
+	
+	public void onResume() {
+		super.onResume();
+		updateLoginState();
+	}
+	
+	private void updateLoginState() {
+		
+		Button login = (Button) findViewById(R.id.login_btn);
+		TextView messageBody = (TextView) findViewById(R.id.hometext_body);
+		
+		if (loggedIn) {
+			login.setText(R.string.logout_label);
+			messageBody.setText(getString(R.string.hometext_loggedin) + " " + getUsername());
+		} else {
+			login.setText(R.string.login_label);
+			messageBody.setText(R.string.hometext_body);
+		}
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -93,7 +106,6 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		if (requestCode == LOGIN_REQUEST) {
 			if (resultCode == AuthenticationActivity.LOGGED_IN) {
 				loggedIn = true;
-				login.setText(R.string.logout_label);
 				Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
 			} 
 		} else if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
@@ -117,8 +129,8 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 				startActivityForResult(logInIntent, LOGIN_REQUEST);
 			} else {
 				logOut();
-				login.setText(R.string.login_label);
 				Toast.makeText(this, R.string.toast_loggedOut, Toast.LENGTH_SHORT).show();
+				updateLoginState();
 			}
 			break;
 		case R.id.scan_btn:

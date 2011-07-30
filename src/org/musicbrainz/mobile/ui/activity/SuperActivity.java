@@ -52,11 +52,14 @@ public abstract class SuperActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		if (getUsername() != null) {
+			loggedIn = true;
+		}
+	}
+	
+	protected String getUsername() {
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-		String user = prefs.getString("username", null); 
-		
-		if (user != null) 
-			loggedIn = true; 
+		return prefs.getString("username", null); 
 	}
 
 	/**
