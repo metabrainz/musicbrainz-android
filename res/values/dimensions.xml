@@ -28,6 +28,7 @@
     
     <dimen name="home_pad">14dp</dimen>
     <dimen name="huge_pad">20dp</dimen>
+    <dimen name="super_pad">32dp</dimen>
     <dimen name="std_pad">7dp</dimen>
     <dimen name="small_pad">5dp</dimen>
     <dimen name="startop_pad">13dp</dimen>

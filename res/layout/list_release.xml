@@ -30,10 +30,10 @@
 		
 	<TextView android:id="@+id/list_release_labels"
   		style="@style/ListAuxMedium"
-  		android:layout_toRightOf="@+id/list_release_date"
+  		android:layout_toRightOf="@+id/list_release_tracksnum"
   		android:layout_toLeftOf="@+id/list_release_country"
   		android:layout_marginRight="@dimen/huge_pad"
-  		android:layout_marginLeft="@dimen/huge_pad" />
+  		android:layout_marginLeft="@dimen/super_pad" />
 		
 	<TextView android:id="@+id/list_release_country"
   		style="@style/ListAuxMedium"
@@ -50,7 +50,7 @@
   		style="@style/ListReleaseMedium"
   		android:layout_toRightOf="@+id/list_release_tracksnum"
   		android:layout_below="@+id/list_release_labels"
-  		android:layout_marginLeft="@dimen/huge_pad" />
+  		android:layout_alignLeft="@id/list_release_labels" />
   		
   	<!-- titles -->
   	<TextView android:id="@+id/list_release"
