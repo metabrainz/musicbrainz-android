@@ -33,7 +33,6 @@ import org.xml.sax.SAXException;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -56,7 +55,6 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 	private SearchType searchType;
 	
 	private ListView results;
-	
 	private LinkedList<?> searchResults;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -94,22 +92,7 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 		private static final int ARTIST_RESULTS = 0;
 		private static final int RG_RESULTS = 1;
 		private static final int ERROR = 2;
-		
-		ProgressDialog pd;
 
-		protected void onPreExecute() {
-	        pd = new ProgressDialog(SearchResultsActivity.this) {
-	        	public void cancel() {
-	        		super.cancel();
-	        		SearchTask.this.cancel(true);
-	        		SearchResultsActivity.this.finish();
-	        	}
-	        };
-	        pd.setMessage(getText(R.string.pd_searching));
-	        pd.setCancelable(true);
-	        pd.show();	
-		}
-		
 		protected Integer doInBackground(Void... params) {
 
 			try {
@@ -145,7 +128,6 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 					LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
 					noRes.setVisibility(View.VISIBLE);
 				}
-				pd.dismiss();
 				break;
 			case RG_RESULTS:
 				
@@ -160,7 +142,6 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 					LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
 					noRes.setVisibility(View.VISIBLE);
 				}
-				pd.dismiss();
 				break;
 			case ERROR:
 				// error or connection timed out - retry dialog
@@ -175,6 +156,7 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 										// new search thread
 										new SearchTask().execute();
 										dialog.cancel();
+										toggleLoading();
 									}
 								})
 						.setNegativeButton(getString(R.string.err_neg),
@@ -185,11 +167,19 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 									}
 								});
 				Dialog conError = builder.create();
-				pd.dismiss();
 				conError.show();
 			}
+			toggleLoading();
 		}
-		
+	}
+	
+	private void toggleLoading() {
+		LinearLayout loading = (LinearLayout) findViewById(R.id.loading);
+		if (loading.getVisibility() == View.GONE) {
+			loading.setVisibility(View.VISIBLE);
+		} else {
+			loading.setVisibility(View.GONE);
+		}
 	}
 
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

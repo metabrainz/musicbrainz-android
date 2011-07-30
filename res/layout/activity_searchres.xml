@@ -32,7 +32,15 @@
 	<View android:id="@+id/topline"
 		style="@style/Separator"
   		android:layout_below="@+id/searchres_text" />
+  		
+  	<LinearLayout android:id="@+id/loading"
+		style="@style/Loading"
+		android:layout_below="@+id/topline">
 	
+		<ProgressBar 
+			style="@style/Wrap" />
+	</LinearLayout>
+  			
 	<ListView android:id="@+id/searchres_list"
 		style="@style/List"
 		android:layout_below="@+id/topline"

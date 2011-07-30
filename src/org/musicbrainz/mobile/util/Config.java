@@ -26,18 +26,8 @@ public class Config {
 	public static final boolean LIVE = true;
 	public static final String FEEDBACK_EMAIL = "jdamcd@gmail.com";
 	
-	/*
-	 * LIVE server
-	 */
 	public static final String WEB_SERVICE = "http://www.musicbrainz.org/ws/2/";
 	public static final String REALM = "musicbrainz.org";
 	public static final String SCOPE = "www.musicbrainz.org";
-	
-	/*
-	 * TEST server
-	 */
-//	public static final String WEB_SERVICE = "http://test.musicbrainz.org/ws/2/";
-//	public static final String REALM = "musicbrainz.org";
-//	public static final String SCOPE = "test.musicbrainz.org";
 
 }

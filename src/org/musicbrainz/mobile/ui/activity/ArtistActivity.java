@@ -29,6 +29,7 @@ import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.data.UserData;
 import org.musicbrainz.mobile.data.WebLink;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.ws.WebService;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.musicbrainz.mobile.ws.WebService.MBEntity;
@@ -39,7 +40,6 @@ import com.markupartist.android.widget.ActionBar.Action;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -96,12 +96,10 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// recover MBID from intent
         mbid = getIntent().getStringExtra("mbid");
-	
         new LookupTask().execute();
-		
-		setContentView(R.layout.blank);
+		setContentView(R.layout.loading);
+		setupActionBarWithHome();
     }
 	
 	protected void populate() {
@@ -228,22 +226,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	 * Task to retrieve artist data from webservice and populate page.
 	 */
 	private class LookupTask extends AsyncTask<Void, Void, Boolean> {
-		
-		ProgressDialog pd;
-		
-		protected void onPreExecute() {
-			pd = new ProgressDialog(ArtistActivity.this) {
-				public void cancel() {
-					super.cancel();
-					LookupTask.this.cancel(true);
-					ArtistActivity.this.finish();
-				}
-				
-			};
-			pd.setMessage(getText(R.string.pd_loading));
-			pd.setCancelable(true);
-			pd.show();
-		}
 
 		protected Boolean doInBackground(Void... params) {
 			
@@ -272,7 +254,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 					tagInput.setText(userData.getTagString());
 					ratingInput.setRating(userData.getRating());
 				}
-				pd.dismiss();
 			} else {
 				// error or connection timed out - retry dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(
@@ -294,9 +275,12 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 										ArtistActivity.this.finish();
 									}
 								});
-				Dialog conError = builder.create();
-				pd.dismiss();
-				conError.show();
+				try {
+					Dialog conError = builder.create();
+					conError.show();
+				} catch (Exception e) {
+					Log.e("Connection timed out but Activity has closed anyway");
+				}
 			}
 		}
 		

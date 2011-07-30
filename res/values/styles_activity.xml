@@ -30,6 +30,12 @@
     	<item name="android:background">@color/main_bg</item>
     </style>
     
+    <style name="Loading" parent="@style/Fill">
+    	<item name="android:orientation">vertical</item>
+    	<item name="android:background">@color/list_bg</item>
+    	<item name="android:gravity">center</item>
+    </style>
+    
     <style name="PaddedLayout" parent="@style/WrapHeight">
     	<item name="android:orientation">vertical</item>
     	<item name="android:padding">@dimen/home_pad</item>

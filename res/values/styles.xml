@@ -87,7 +87,7 @@
     
     <style name="NoSearchResults" parent="@style/Fill">
     	<item name="android:gravity">center</item>
-    	<item name="android:visibility">gone</item>
+    	<item name="android:visibility">invisible</item>
     	<item name="android:orientation">vertical</item>
     </style>
     

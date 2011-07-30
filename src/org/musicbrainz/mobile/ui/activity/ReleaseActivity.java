@@ -33,6 +33,7 @@ import org.musicbrainz.mobile.data.UserData;
 import org.musicbrainz.mobile.ui.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.ui.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.ws.WebService;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.musicbrainz.mobile.ws.WebService.MBEntity;
@@ -43,7 +44,6 @@ import com.markupartist.android.widget.ActionBar.Action;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -112,7 +112,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
         barcode = getIntent().getStringExtra("barcode");
         
         new LookupTask().execute();
-        setContentView(R.layout.blank);
+        setContentView(R.layout.loading);
+        setupActionBarWithHome();
     }
     
 	/**
@@ -359,34 +360,19 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		 * 3: Problem with request - typically IOException
 		 */
 		private static final int LOADED = 0;
-		private static final int NOT_FOUND = 1;
+		private static final int BARCODE_NOT_FOUND = 1;
 		private static final int RG_LOADED = 2;
 		private static final int ERROR = 3;
-
-		private ProgressDialog pd;
 		
 		protected void onPreExecute() {
-	        pd = new ProgressDialog(ReleaseActivity.this) {
-	        	public void cancel() {
-	        		super.cancel();
-	        		LookupTask.this.cancel(true);
-	        		ReleaseActivity.this.finish();
-	        	}
-	        };
 	        
 	        if (releaseMbid != null) {
 	        	src = Source.RELEASE_ID;
-	        	pd.setMessage(getText(R.string.pd_loading));
 	        } else if (releaseGroupMbid != null) {
 	        	src = Source.RG_ID;
-	        	pd.setMessage(getText(R.string.pd_loading));
 	        } else {
 	        	src = Source.BARCODE;
-	    		pd.setMessage(getText(R.string.pd_searching_bc));
 	        }
-	        
-	        pd.setCancelable(true);
-	        pd.show();
 		}
 		
 		protected Integer doInBackground(Void... params) {
@@ -412,7 +398,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						releaseMbid = data.getReleaseMbid();
 						return LOADED;
 					} else {
-						return NOT_FOUND;
+						return BARCODE_NOT_FOUND;
 					}
 				case RG_ID:
 					stubs = WebService.browseReleases(releaseGroupMbid);
@@ -450,23 +436,25 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 					tagInput.setText(userData.getTagString());
 					ratingInput.setRating(userData.getRating());
 				}
-				pd.dismiss();
 				break;
-			case NOT_FOUND:
-				// barcode not found dialog
-				BarcodeResultDialog bcode = new BarcodeResultDialog(ReleaseActivity.this, loggedIn, barcode);
-				bcode.setCancelable(true);
-				pd.dismiss();
-				bcode.show();
+			case BARCODE_NOT_FOUND:
+				try {
+					BarcodeResultDialog bcode = new BarcodeResultDialog(ReleaseActivity.this, loggedIn, barcode);
+					bcode.setCancelable(true);
+					bcode.show();
+				} catch (Exception e) {
+					Log.e("Barcode not found but Activity closed anyway");
+				}
 				break;
 			case RG_LOADED:
-				// display release selection dialog
-				ReleaseSelectionDialog rsd = new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
-				pd.dismiss();
-				rsd.show();
+				try {
+					ReleaseSelectionDialog rsd = new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
+					rsd.show();
+				} catch (Exception e) {
+					Log.e("Release groups loaded but Activity has closed");
+				}
 				break;
 			case ERROR:
-				// error or connection timed out - retry dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						ReleaseActivity.this);
 				builder.setMessage(
@@ -487,9 +475,12 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 										ReleaseActivity.this.finish();
 									}
 								});
-				Dialog conError = builder.create();
-				pd.dismiss();
-				conError.show();
+				try{
+					Dialog conError = builder.create();
+					conError.show();
+				} catch (Exception e) {
+					Log.e("Connection timed out but Activity has closed anyway");
+				}
 			}
 		}
 		

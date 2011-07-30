@@ -79,7 +79,7 @@
 	<string name="barcode_text">Product code: </string>
 	<string name="barcode_hint">Release title</string>
 	<string name="barcode_confirm">Add the barcode to this release?</string>
-	<string name="barcode_instructions">Search for the release that this barcode belongs to...</string>
+	<string name="barcode_instructions">Search for the release that the barcode belongs to...</string>
 
 	<!-- ConfirmBarcodeDialog -->
 	<string name="barcode_add_header">Submit barcode</string>
@@ -106,11 +106,6 @@
 	<string name="menu_about">About</string>
 	<string name="menu_donate">Donate to MB</string>
 	<string name="menu_feedback">Feedback</string>
-	
-	<!-- Progress dialogs -->
-	<string name="pd_searching">Searching...</string>
-	<string name="pd_searching_bc">Searching for barcode...</string>
-	<string name="pd_loading">Loading...</string>
 	
 	<!-- Error dialogs -->
 	<string name="err_text">There was a problem connecting to the server. Retry?</string>

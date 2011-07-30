@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/Activity"
-	android:gravity="center">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/Activity">
 	
+	<com.markupartist.android.widget.ActionBar
+    	android:id="@+id/actionbar"
+    	style="@style/ActionBar" />
+		
+	<RelativeLayout
+		style="@style/Fill"
+		android:layout_below="@id/actionbar">
+		
 		<ProgressBar 
-			style="?android:attr/progressBarStyleLarge" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" />
-    
-</LinearLayout>
+			style="@style/Wrap"
+			android:layout_centerInParent="true" />
+	</RelativeLayout> 
+</RelativeLayout>

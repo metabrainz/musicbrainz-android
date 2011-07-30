@@ -66,7 +66,16 @@
 		<TextView android:id="@+id/barcode_instructions"
 			style="@style/BarcodeInstructions"
 			android:layout_below="@+id/topline"
-			android:layout_alignParentBottom="true" />	
+			android:layout_alignParentBottom="true" />
+			
+		<LinearLayout android:id="@+id/loading"
+			style="@style/Loading"
+			android:visibility="invisible"
+			android:layout_below="@+id/topline">
+	
+			<ProgressBar 
+				style="@style/Wrap" />
+		</LinearLayout>
   			
   		<TextView android:id="@+id/noresults"
 			style="@style/NoResultsTextOnly"

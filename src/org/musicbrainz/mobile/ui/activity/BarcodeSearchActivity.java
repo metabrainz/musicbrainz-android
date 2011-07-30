@@ -27,6 +27,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.ReleaseStub;
 import org.musicbrainz.mobile.ui.dialog.BarcodeConfirmDialog;
 import org.musicbrainz.mobile.ui.util.ReleaseStubAdapter;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.ws.WebService;
 import org.musicbrainz.mobile.ws.WebServiceUser;
 import org.xml.sax.SAXException;
@@ -35,7 +36,6 @@ import com.markupartist.android.widget.ActionBar;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,6 +48,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +75,8 @@ public class BarcodeSearchActivity extends SuperActivity implements
 	private String barcode;	
 	private LinkedList<ReleaseStub> results;
 	
+	private LinearLayout loading;
+	
 	private InputMethodManager imm;
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
         
         matches = (ListView) findViewById(R.id.barcode_list);
         noRes = (TextView) findViewById(R.id.noresults);
+        loading = (LinearLayout) findViewById(R.id.loading);
 		
 		imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     }
@@ -104,19 +108,11 @@ public class BarcodeSearchActivity extends SuperActivity implements
      */
 	private class SearchTask extends AsyncTask<Void, Void, Boolean> {
 		
-		private ProgressDialog pd;
-		
 		protected void onPreExecute() {
-			pd = new ProgressDialog(BarcodeSearchActivity.this) {
-				public void cancel() {
-					super.cancel();
-					SearchTask.this.cancel(true);
-					BarcodeSearchActivity.this.finish();
-				}
-			};
-			pd.setMessage(getText(R.string.pd_searching));
-			pd.setCancelable(true);
-			pd.show();
+			search.setEnabled(false);
+			TextView instructions = (TextView) findViewById(R.id.barcode_instructions);
+			instructions.setVisibility(View.INVISIBLE);
+			loading.setVisibility(View.VISIBLE);
 		}
 
 		protected Boolean doInBackground(Void... arg0) {
@@ -139,18 +135,15 @@ public class BarcodeSearchActivity extends SuperActivity implements
 				matches.setOnItemClickListener(BarcodeSearchActivity.this);
 				matches.setOnItemLongClickListener(BarcodeSearchActivity.this);
 				
-				TextView instructions = (TextView) findViewById(R.id.barcode_instructions);
-				instructions.setVisibility(View.GONE);
 				if (results.isEmpty()) {
 					noRes.setVisibility(View.VISIBLE);
 					matches.setVisibility(View.INVISIBLE);
 				} else {
 					matches.setVisibility(View.VISIBLE);
-					noRes.setVisibility(View.GONE);
+					noRes.setVisibility(View.INVISIBLE);
 				}
-				pd.dismiss();
+				search.setEnabled(true);
 			} else {
-				// error or connection timed out - retry dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						BarcodeSearchActivity.this);
 				builder.setMessage(
@@ -162,6 +155,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
 										// restart search
 								        new SearchTask().execute();
 										dialog.cancel();
+										toggleLoading();
 									}
 								})
 						.setNegativeButton(getString(R.string.err_neg),
@@ -171,18 +165,30 @@ public class BarcodeSearchActivity extends SuperActivity implements
 										BarcodeSearchActivity.this.finish();
 									}
 								});
-				Dialog conError = builder.create();
-				pd.dismiss();
-				conError.show();
+				try {
+					Dialog conError = builder.create();
+					conError.show();
+				} catch (Exception e) {
+					Log.e("Connection timed out but Activity has closed anyway");
+				}
 			}
+			toggleLoading();
 		}	
+	}
+	
+	private void toggleLoading() {
+		if (loading.getVisibility() == View.INVISIBLE) {
+			loading.setVisibility(View.VISIBLE);
+		} else {
+			loading.setVisibility(View.INVISIBLE);
+		}
 	}
 	
     /*
      * Listener for button clicks.
      */
 	public void onClick(View v) {
-		search();
+		doSearch();
 	}
 	
 	/*
@@ -190,21 +196,17 @@ public class BarcodeSearchActivity extends SuperActivity implements
 	 */
 	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 		
-		if (v.getId() == R.id.barcode_search && actionId == EditorInfo.IME_NULL) 
-			search();
-		
+		if (v.getId() == R.id.barcode_search && actionId == EditorInfo.IME_NULL) {
+			doSearch();
+		}
 		return false;
 	}
 	
-	/*
-	 * Initiate release search task.
-	 */
-	private void search() {
+	private void doSearch() {
 		
 		String term = searchBox.getText().toString();
 		if (term.length() != 0) {
-			// hide virtual keyboard
-			imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+			imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0); // hide virtual keyboard
 			new SearchTask().execute();
 		} else {
 			Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
