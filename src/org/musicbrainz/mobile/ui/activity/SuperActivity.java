@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.ws.WebServiceUser;
@@ -28,13 +29,16 @@ import org.musicbrainz.mobile.ws.WebServiceUser;
 import com.markupartist.android.widget.ActionBar;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * Abstract class to represent items common to multiple Activity classes. The
@@ -77,7 +81,7 @@ public abstract class SuperActivity extends Activity {
 	}
 	
 	public String getClientVersion() {
-		String version = "0.0";
+		String version = "Unknown";
 		try {
 			 version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 		} catch (NameNotFoundException e) {
@@ -114,9 +118,26 @@ public abstract class SuperActivity extends Activity {
         	Intent donateIntent = new Intent(this, DonateActivity.class);
 			startActivity(donateIntent);
         	return true;
+        case R.id.menu_feedback:
+        	sendFeedback();
+        	return true;
         }
-        
         return false;
+    }
+    
+    private void sendFeedback() {
+    	try {
+    		startActivity(createFeedbackIntent());
+    	} catch (ActivityNotFoundException e){
+    		Toast.makeText(this, R.string.toast_feedback_fail, Toast.LENGTH_LONG).show();
+    	}
+    }
+    
+    private Intent createFeedbackIntent() {
+    	Uri uri = Uri.parse("mailto:" + Config.FEEDBACK_EMAIL);
+    	Intent feedback = new Intent(Intent.ACTION_SENDTO , uri);
+    	feedback.putExtra(Intent.EXTRA_SUBJECT, "[MBAndroid] Feedback");
+    	return feedback;
     }
     
 }

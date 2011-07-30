@@ -24,6 +24,7 @@ import org.musicbrainz.mobile.R;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TextView;
 
 /**
@@ -43,10 +44,9 @@ public class AboutActivity extends SuperActivity {
 		versionLabel.setText(getText(R.string.version_text) + " " + getClientVersion());
     }
     
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	super.onPrepareOptionsMenu(menu);
-    	
-    	menu.findItem(R.id.menu_about).setEnabled(false);
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.about, menu);
     	return true;
     }
     

@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -118,10 +119,9 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		return donation;
 	}
     
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	super.onPrepareOptionsMenu(menu);
-    	
-    	menu.findItem(R.id.menu_donate).setEnabled(false);  	
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.donate, menu);
     	return true;
     }
     

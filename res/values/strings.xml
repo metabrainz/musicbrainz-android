@@ -99,12 +99,13 @@
 
 	<!-- AboutActivity -->
 	<string name="about_title">About</string>
-	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis application provides easy access to that data on your Android device. Scan a CD barcode to look up the release information, add the barcode if it is not already stored, contribute tags and ratings, or simply browse the metadata.\n\nPlease note that this application is a work in progress. It began as a Google Summer of Code project in 2010 and is now developed in my spare time. Bug reports and feedback welcome. Email me: jdamcd@gmail.com\n\nPlease be aware that error logs are sent from this application in the event of a crash. Personally identifiable information is not included.</string>
+	<string name="about_body">MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.\n\nThis application provides easy access to that data on your Android device. You can scan a barcode to look up release information or search for artists and releases. Registered users can submit tags, ratings and unknown barcodes.\n\nPlease note that this application is a work in progress. It began as a Google Summer of Code project in 2010 and is now developed in my spare time. Bug reports and comments are welcomed. Just select \'Feedback\' from the menu.\n\nYou should be aware that error logs are sent from this application in the event of a crash. Personally identifiable information is not included.</string>
 	<string name="version_text">App version: </string>
 
 	<!-- Menus -->
 	<string name="menu_about">About</string>
 	<string name="menu_donate">Donate to MB</string>
+	<string name="menu_feedback">Feedback</string>
 	
 	<!-- Progress dialogs -->
 	<string name="pd_searching">Searching...</string>
@@ -129,6 +130,7 @@
 	<string name="toast_noresults">Search returned no results</string>
 	<string name="toast_loggedIn">Logged in</string>
 	<string name="toast_loggedOut">Logged out</string>
+	<string name="toast_feedback_fail">No email client available</string>
 	
 	<!-- ZXing integration -->
 	<string name="zx_title">Install Barcode Scanner?</string>

@@ -24,6 +24,7 @@ public class Config {
 	
 	public static final String TAG = "MusicBrainz";
 	public static final boolean LIVE = true;
+	public static final String FEEDBACK_EMAIL = "jdamcd@gmail.com";
 	
 	/*
 	 * LIVE server

@@ -35,6 +35,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -214,10 +215,9 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		}
 	}
 	
-	/*
-	 * Prevent superclass menu from being displayed.
-	 */
     public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.home, menu);
     	return true;
     }
     
