@@ -81,6 +81,10 @@ public class StringFormat {
 		
 		// TODO: Would be cleaner with two different String.format()s.
 		
+		if (duration == 0) {
+			return "";
+		}
+		
 		int s = duration / 1000;
 		int secs = s % 60;
 		int mins = (s % 3600) / 60;
