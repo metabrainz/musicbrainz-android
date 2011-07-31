@@ -39,7 +39,7 @@
 	
 		<ProgressBar 
 			style="@style/Wrap" 
-			android:indeterminateDrawable="@drawable/progress" />
+			android:indeterminateDrawable="@anim/progress" />
 	</LinearLayout>
   			
 	<ListView android:id="@+id/searchres_list"

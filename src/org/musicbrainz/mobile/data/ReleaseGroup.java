@@ -166,7 +166,7 @@ public class ReleaseGroup implements Comparable<Object> {
 	
 	public String getReleaseYear() {
 		if (firstRelease == null) {
-			return "";
+			return "--";
 		} else {
 			return "" + firstRelease.get(Calendar.YEAR);
 		}
@@ -182,7 +182,7 @@ public class ReleaseGroup implements Comparable<Object> {
 		} else if (this.getFirstRelease() == null && comp.getFirstRelease() == null) {
 			return 0;
 		} else {
-			return comp.getFirstRelease().compareTo(this.getFirstRelease());
+			return this.getFirstRelease().compareTo(comp.getFirstRelease());
 		}
 	}
 	

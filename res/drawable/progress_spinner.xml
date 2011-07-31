@@ -18,22 +18,21 @@
 	along with MusicBrainz Mobile (Android). If not, see 
 	<http://www.gnu.org/licenses/>. -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/VerticalMinPad">
-		
-	<TextView android:id="@+id/list_rg_title"
-  		style="@style/ListMain"
-  		android:layout_alignParentLeft="true"
-  		android:layout_toLeftOf="@+id/list_rg_type"
-  		android:layout_centerVertical="true" />
-
-	<TextView android:id="@+id/list_rg_year"
-  		style="@style/ListAuxPad"
-  		android:layout_alignParentRight="true" />
-	
-	<TextView android:id="@+id/list_rg_type"
-  		style="@style/ListAuxPad"
-  		android:layout_alignParentRight="true" 
-  		android:layout_below="@id/list_rg_year"
-  		android:textColor="@color/mb_orange_dark" />	
-</RelativeLayout>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:shape="ring" 
+    android:innerRadiusRatio="4" 
+    android:thicknessRatio="10" 
+    android:useLevel="false"> 
+        
+    <size 
+        android:width="@dimen/progress_spinner" 
+        android:height="@dimen/progress_spinner" /> 
+            
+    <gradient 
+        android:type="sweep" 
+        android:centerY="0.50" 
+        android:startColor="#00ffffff" 
+        android:centerColor="@color/mb_purple_light"
+        android:endColor="@color/mb_purple_medium"
+        android:useLevel="false" /> 
+</shape> 

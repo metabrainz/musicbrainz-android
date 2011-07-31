@@ -193,13 +193,16 @@
     	<item name="android:src">@drawable/ic_forward</item>
     </style>
     
-    <style name="HomeTextHeader" parent="@style/HomeText">
+    <style name="HomeTextHeader" parent="@style/WrapHeight">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textColor">@color/main_text</item>
     	<item name="android:textStyle">bold</item>
     </style>
     
-    <style name="HomeText" parent="@style/WrapHeight">
+    <style name="HomeText" parent="@style/Fill">
     	<item name="android:textSize">@dimen/text_size_medium</item>
     	<item name="android:textColor">@color/main_text</item>
+    	<item name="android:gravity">center_vertical</item>
     </style>
     
     <!-- List items -->
@@ -220,7 +223,6 @@
     <style name="ListAuxPad" parent="@style/ListAux">
     	<item name="android:layout_marginRight">@dimen/small_pad</item>
     	<item name="android:layout_marginLeft">@dimen/std_pad</item>
-    	<item name="android:layout_centerVertical">true</item>
     </style>
     
     <style name="ListMedium" parent="@style/Wrap">
