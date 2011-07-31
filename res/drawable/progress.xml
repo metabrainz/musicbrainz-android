@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?> 
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+	This file is part of MusicBrainz Mobile (Android).
+
+	MusicBrainz Mobile (Android) is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either 
+	version 3 of the License, or (at your option) any later version.
+
+	MusicBrainz Mobile (Android) is distributed in the hope that it 
+	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with MusicBrainz Mobile (Android). If not, see 
+	<http://www.gnu.org/licenses/>. -->
+
+<rotate xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:pivotX="50%" 
+        android:pivotY="50%" 
+        android:fromDegrees="0" 
+        android:toDegrees="359"
+        android:interpolator="@anim/linear_interpolator"> 
+        
+    <shape 
+        android:shape="ring" 
+        android:innerRadiusRatio="4" 
+        android:thicknessRatio="10" 
+        android:useLevel="false"> 
+        
+        <size 
+            android:width="@dimen/progress_spinner" 
+            android:height="@dimen/progress_spinner" /> 
+            
+        <gradient 
+            android:type="sweep" 
+            android:centerY="0.50" 
+            android:startColor="#00ffffff" 
+            android:centerColor="@color/mb_purple_light"
+            android:endColor="@color/mb_purple_medium"
+            android:useLevel="false" /> 
+            
+    </shape> 
+</rotate> 

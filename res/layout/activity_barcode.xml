@@ -74,7 +74,8 @@
 			android:layout_below="@+id/topline">
 	
 			<ProgressBar 
-				style="@style/Wrap" />
+				style="@style/Wrap"
+				android:indeterminateDrawable="@drawable/progress" />
 		</LinearLayout>
   			
   		<TextView android:id="@+id/noresults"

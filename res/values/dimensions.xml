@@ -38,4 +38,5 @@
     <dimen name="button_min">47dp</dimen>
     <dimen name="launch_textarea_height">70dp</dimen>
     <dimen name="separator_height">2dp</dimen>
+    <dimen name="progress_spinner">40dp</dimen>
 </resources>

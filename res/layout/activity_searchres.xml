@@ -38,7 +38,8 @@
 		android:layout_below="@+id/topline">
 	
 		<ProgressBar 
-			style="@style/Wrap" />
+			style="@style/Wrap" 
+			android:indeterminateDrawable="@drawable/progress" />
 	</LinearLayout>
   			
 	<ListView android:id="@+id/searchres_list"

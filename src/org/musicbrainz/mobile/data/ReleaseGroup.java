@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.Log;
 
 import android.content.Context;
 import android.content.res.Resources;
