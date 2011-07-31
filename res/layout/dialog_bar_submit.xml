@@ -25,7 +25,7 @@
 	  	style="@style/DialogHeader"
 	  	android:text="@string/barcode_add_header" />
 	  
-	<TextView android:id="@+id/barcode_add_text"
+	<TextView 
 	  	style="@style/DialogBody"
 	  	android:text="@string/barcode_add_body" />
 	  	
@@ -34,9 +34,16 @@
 	<include layout="@layout/list_release" />
 	
 	<View style="@style/Separator" />
+	
+	<TextView 
+		style="@style/DialogBody"
+		android:text="@string/barcode_add_info"
+		android:layout_marginTop="@dimen/std_pad" />
 	  	
 	<Button android:id="@+id/barcode_confirm"
 		style="@style/StdButton"
-		android:layout_margin="@dimen/std_pad"
-		android:text="@string/barcode_add_btn" />
+		android:text="@string/barcode_add_btn"
+		android:layout_marginRight="@dimen/std_pad"
+		android:layout_marginLeft="@dimen/std_pad"
+		android:layout_marginBottom="@dimen/std_pad" />
 </LinearLayout>

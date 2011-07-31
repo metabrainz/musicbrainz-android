@@ -82,7 +82,8 @@
 
 	<!-- ConfirmBarcodeDialog -->
 	<string name="barcode_add_header">Submit barcode</string>
-	<string name="barcode_add_body">Add this barcode to the following release?\n\nThis will submit and edit that other users can vote on. The barcode will not be added immediately.</string>
+	<string name="barcode_add_body">Add this barcode to the following release?</string>
+	<string name="barcode_add_info">This will submit and edit that other users can vote on. The barcode will not be added immediately.</string>
 	<string name="barcode_add_btn">Submit</string>
 	
 	<!-- PostService -->
