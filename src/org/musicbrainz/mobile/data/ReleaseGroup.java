@@ -174,15 +174,15 @@ public class ReleaseGroup implements Comparable<Object> {
 
 	@Override
 	public int compareTo(Object another) {
-		ReleaseGroup comp = (ReleaseGroup) another;
-		if (this.getFirstRelease() == null) {
-			return 1;
-		} else if (comp.getFirstRelease() == null) {
-			return -1;
-		} else if (this.getFirstRelease() == null && comp.getFirstRelease() == null) {
+		ReleaseGroup rg = (ReleaseGroup) another;
+		if (this.getFirstRelease() == null && rg.getFirstRelease() == null) {
 			return 0;
+		} else if (this.getFirstRelease() == null) {
+			return 1;
+		} else if (rg.getFirstRelease() == null) {
+			return -1;
 		} else {
-			return this.getFirstRelease().compareTo(comp.getFirstRelease());
+			return this.getFirstRelease().compareTo(rg.getFirstRelease());
 		}
 	}
 	
