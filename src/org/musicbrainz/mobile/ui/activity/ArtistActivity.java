@@ -66,10 +66,9 @@ import android.widget.TabHost.TabSpec;
  */
 public class ArtistActivity extends SuperActivity implements View.OnClickListener, ListView.OnItemClickListener {
 	
-	// data object
+	public static final String INTENT_MBID = "mbid";
+
 	private Artist data;
-	
-	// query data
 	private String mbid;
 	
 	private ActionBar actionBar;
@@ -96,7 +95,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-        mbid = getIntent().getStringExtra("mbid");
+        mbid = getIntent().getStringExtra(INTENT_MBID);
         new LookupTask().execute();
 		setContentView(R.layout.loading);
 		setupActionBarWithHome();

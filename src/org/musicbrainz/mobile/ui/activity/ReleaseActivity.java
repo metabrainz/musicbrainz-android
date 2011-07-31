@@ -72,7 +72,11 @@ import android.widget.TabHost.TabSpec;
  */
 public class ReleaseActivity extends SuperActivity implements View.OnClickListener {
 		
-	// data object
+
+	public static final String INTENT_RELEASE_MBID = "r_id";
+	public static final String INTENT_RG_MBID = "rg_id";
+	public static final String INTENT_BARCODE = "barcode";
+
 	private Release data;
 	
 	// query data
@@ -107,9 +111,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         
         // recover ID or barcode from intent
-        releaseMbid = getIntent().getStringExtra("r_id");
-        releaseGroupMbid = getIntent().getStringExtra("rg_id");
-        barcode = getIntent().getStringExtra("barcode");
+        releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
+        releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
+        barcode = getIntent().getStringExtra(INTENT_BARCODE);
         
         new LookupTask().execute();
         setContentView(R.layout.loading);
