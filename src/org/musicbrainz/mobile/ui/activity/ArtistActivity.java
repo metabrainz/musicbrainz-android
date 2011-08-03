@@ -151,23 +151,21 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			noRes.setVisibility(View.VISIBLE);
 		}
 		
-		// disable edit options if not logged in
 		if (!loggedIn) {
-			
-			tagInput.setEnabled(false);
-			tagInput.setFocusable(false);
-			
-			ratingInput.setEnabled(false);
-			ratingInput.setFocusable(false);
-			
-			tagBtn.setEnabled(false);
-			tagBtn.setFocusable(false);
-			
-			rateBtn.setEnabled(false);
-			rateBtn.setFocusable(false);
-			
+			disableEditViews();
 			findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
 		}
+	}
+	
+	private void  disableEditViews() {
+		tagInput.setEnabled(false);
+		tagInput.setFocusable(false);
+		ratingInput.setEnabled(false);
+		ratingInput.setFocusable(false);
+		tagBtn.setEnabled(false);
+		tagBtn.setFocusable(false);
+		rateBtn.setEnabled(false);
+		rateBtn.setFocusable(false);
 	}
 	
     private void addActionBarShare() {

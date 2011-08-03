@@ -28,6 +28,7 @@ import org.musicbrainz.mobile.data.ArtistStub;
 import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.ui.util.ArtistSearchAdapter;
 import org.musicbrainz.mobile.ui.util.ReleaseSearchAdapter;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.ws.WebService;
 import org.xml.sax.SAXException;
 
@@ -116,7 +117,7 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 			
 			switch (resultCode) {
 			case ARTIST_RESULTS:
-				// result returned
+
 				@SuppressWarnings("unchecked")
 				LinkedList<ArtistStub> rs = (LinkedList<ArtistStub>) searchResults;
 				
@@ -144,7 +145,6 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 				}
 				break;
 			case ERROR:
-				// error or connection timed out - retry dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						SearchResultsActivity.this);
 				builder.setMessage(
@@ -166,8 +166,12 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 										SearchResultsActivity.this.finish();
 									}
 								});
-				Dialog conError = builder.create();
-				conError.show();
+				try {
+					Dialog conError = builder.create();
+					conError.show();
+				} catch (Exception e) {
+					Log.e("Connection timed out but Activity has closed anyway");
+				}
 			}
 			toggleLoading();
 		}

@@ -56,7 +56,7 @@ public class UserDataParser extends DefaultHandler {
 		if (localName.equals("user-tag")) {
 			data.addTag(sb.toString());
 		} else if (localName.equals("user-rating")) {
-			int rating = Integer.parseInt(sb.toString());
+			float rating = Float.parseFloat(sb.toString());
 			data.setRating(rating);
 		} 
 	}

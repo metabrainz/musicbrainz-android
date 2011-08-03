@@ -25,14 +25,14 @@ import java.util.LinkedList;
 import org.musicbrainz.mobile.ui.util.StringFormat;
 
 /**
- * Class to holds user tags and rating data for a MusicBrainz entity.
+ * Class to hold user tags and rating data for a MusicBrainz entity.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class UserData {
 	
 	private LinkedList<String> tags;
-	private int rating;
+	private float rating;
 	
 	public UserData() {
 		tags = new LinkedList<String>();
@@ -50,11 +50,11 @@ public class UserData {
 		tags.add(tag);
 	}
 
-	public int getRating() {
+	public float getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 

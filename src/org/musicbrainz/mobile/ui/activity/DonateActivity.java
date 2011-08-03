@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.ui.activity;
 import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Secrets;
 
 import com.markupartist.android.widget.ActionBar;
@@ -88,12 +89,12 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		
 		protected void onPostExecute(Void v) {
 			actionBar.setProgressBarVisibility(View.GONE);
-			enableButton();
+			enablePayButton();
 		}
 		
 	}
 	
-	private void enableButton() {
+	private void enablePayButton() {
 		donate.setText(R.string.paypal_label);
 		donate.setEnabled(true);
 	}
@@ -103,8 +104,12 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		float amount = Float.valueOf(selection.substring(1));
 		PayPalPayment donation = createPayment(BigDecimal.valueOf(amount));
 		
-		Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
-		this.startActivityForResult(checkoutIntent, REQUEST_CODE);
+		try {
+			Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
+			this.startActivityForResult(checkoutIntent, REQUEST_CODE);
+		} catch (Exception e) {
+			Log.e("Unhandled exception within PayPal library");
+		}
 	}
 	
 	private PayPalPayment createPayment(BigDecimal amount) {
