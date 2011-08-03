@@ -23,7 +23,6 @@ package org.musicbrainz.mobile.ui.activity;
 import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Secrets;
 
 import com.markupartist.android.widget.ActionBar;
@@ -50,12 +49,12 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 
 	private ActionBar actionBar;
 	private Spinner amount;
-	private Button donate;
+	private Button donateButton;
 	
 	private PayPal payPal;
 	private static final int SERVER = PayPal.ENV_LIVE;
 	private static final String APP_ID = Secrets.PAYPAL_APP_ID;
-	private static final int REQUEST_CODE = 1;
+	private static final int PAYPAL_REQUEST_CODE = 1;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +66,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         amount.setAdapter(typeAdapter);
-        donate = (Button) findViewById(R.id.donate_btn);
+        donateButton = (Button) findViewById(R.id.donate_btn);
               
         new LoadTask().execute();
     }
@@ -89,14 +88,19 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		
 		protected void onPostExecute(Void v) {
 			actionBar.setProgressBarVisibility(View.GONE);
-			enablePayButton();
+			enableDonateButton();
 		}
 		
 	}
 	
-	private void enablePayButton() {
-		donate.setText(R.string.paypal_label);
-		donate.setEnabled(true);
+	private void enableDonateButton() {
+		donateButton.setText(R.string.paypal_label);
+		donateButton.setEnabled(true);
+	}
+	
+	private void loadingDonateButton() {
+		donateButton.setText(R.string.paypal_starting_label);
+		donateButton.setEnabled(false);
 	}
 	
 	public void onClick(View v) {
@@ -104,12 +108,9 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		float amount = Float.valueOf(selection.substring(1));
 		PayPalPayment donation = createPayment(BigDecimal.valueOf(amount));
 		
-		try {
-			Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
-			this.startActivityForResult(checkoutIntent, REQUEST_CODE);
-		} catch (Exception e) {
-			Log.e("Unhandled exception within PayPal library");
-		}
+		Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
+		this.startActivityForResult(checkoutIntent, PAYPAL_REQUEST_CODE);
+		loadingDonateButton();
 	}
 	
 	private PayPalPayment createPayment(BigDecimal amount) {
@@ -122,6 +123,12 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		donation.setMerchantName("MetaBrainz Foundation");
 		donation.setDescription("MusicBrainz Donation via Android app");
 		return donation;
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == PAYPAL_REQUEST_CODE) {
+			enableDonateButton();
+		}
 	}
     
     public boolean onCreateOptionsMenu(Menu menu) {

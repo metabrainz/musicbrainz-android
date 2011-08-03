@@ -96,6 +96,7 @@
 	<string name="donate_text">You can donate through PayPal to the non-profit MetaBrainz Foundation which operates the MusicBrainz project. For further information and alternative donation options, please visit metabrainz.org/donate</string>
 	<string name="paypal_load_label">Loading PayPal...</string>
 	<string name="paypal_label">Donate with PayPal</string>
+	<string name="paypal_starting_label">Loading...</string>
 
 	<!-- AboutActivity -->
 	<string name="about_title">About</string>
