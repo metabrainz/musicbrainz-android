@@ -52,6 +52,11 @@ import android.widget.TextView;
  */
 public class SearchResultsActivity extends SuperActivity implements ListView.OnItemClickListener {
 	
+	public static final String INTENT_TYPE = "type";
+	public static final String INTENT_QUERY = "term";
+	public static final String INTENT_ARTIST = "artist";
+	public static final String INTENT_RELEASE_GROUP = "rg";
+	
 	private String searchTerm;
 	private SearchType searchType;
 	
@@ -64,24 +69,19 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
         setContentView(R.layout.activity_searchres);
         setupActionBarWithHome();
         
-        int type = getIntent().getIntExtra("type", 0);
-        searchTerm = getIntent().getStringExtra("term");
-        
         TextView resultsText = (TextView) findViewById(R.id.searchres_text);
         results = (ListView) findViewById(R.id.searchres_list);
         
-        // spinner selection position as search type code
-        switch (type) {
-        case 0:
+        String intentType = getIntent().getStringExtra(INTENT_TYPE);
+        searchTerm = getIntent().getStringExtra(INTENT_QUERY);
+        
+        if (intentType.equals(INTENT_ARTIST)) {
         	searchType = SearchType.ARTIST;
         	resultsText.setText(getString(R.string.search_artist) + " '" + searchTerm + "'");
-        	break;
-        case 1:
+        } else if (intentType.equals(INTENT_RELEASE_GROUP)) {
         	searchType = SearchType.RELEASE_GROUP;
         	resultsText.setText(getString(R.string.search_release) + " '" + searchTerm + "'");
-
         }
-        
         new SearchTask().execute();
 	}
 	
@@ -213,7 +213,7 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 		}
 	}
 	
-	private enum SearchType {
+	public enum SearchType {
 		ARTIST,
 		RELEASE_GROUP
 	}

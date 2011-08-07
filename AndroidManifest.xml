@@ -48,6 +48,11 @@
         	</intent-filter>
         </activity>
         
+        <activity android:name=".ui.activity.IntentErrorActivity"
+        	android:label="@string/error_title"
+        	android:configChanges="keyboardHidden|orientation"
+        	android:screenOrientation="portrait" />
+        
         <activity android:name=".ui.activity.AuthenticationActivity"
         	android:label="@string/auth_title" 
         	android:configChanges="keyboardHidden|orientation"

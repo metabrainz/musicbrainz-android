@@ -17,28 +17,22 @@
 	You should have received a copy of the GNU General Public License
 	along with MusicBrainz Mobile (Android). If not, see 
 	<http://www.gnu.org/licenses/>. -->
-   
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/Activity">
 	
 	<com.markupartist.android.widget.ActionBar
     	android:id="@+id/actionbar"
     	style="@style/ActionBar" />
-    
-    <ScrollView style="@style/Wrap"
-    	android:layout_below="@id/actionbar">
+    	
     <RelativeLayout
     	style="@style/Wrap"
+    	android:layout_below="@id/actionbar"
     	android:padding="@dimen/home_pad">
 	  
-		<TextView android:id="@+id/about_text"
+		<TextView android:id="@+id/error_body"
 		  	style="@style/TextBody" 
-		  	android:text="@string/about_body" />
-		  	
-		<TextView android:id="@+id/version_text"
-			style="@style/VersionText"
-			android:layout_below="@id/about_text" />
+		  	android:text="@string/error_body" />
 		
 	</RelativeLayout>
-	</ScrollView>
 </RelativeLayout>

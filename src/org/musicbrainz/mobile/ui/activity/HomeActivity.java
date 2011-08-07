@@ -55,8 +55,8 @@ import android.widget.Toast;
  */
 public class HomeActivity extends SuperActivity implements OnEditorActionListener {
 	
-	private EditText searchTerm;
-	private Spinner searchType;
+	private EditText searchField;
+	private Spinner searchTypeSpinner;
 	private InputMethodManager imm;
 	
 	private static final int LOGIN_REQUEST = 0;
@@ -70,15 +70,15 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 			BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
 		}
 
-		searchTerm = (EditText) findViewById(R.id.query_input);
-		searchTerm.setOnEditorActionListener(this);
+		searchField = (EditText) findViewById(R.id.query_input);
+		searchField.setOnEditorActionListener(this);
 
-		searchType = (Spinner) findViewById(R.id.search_spin);
+		searchTypeSpinner = (Spinner) findViewById(R.id.search_spin);
 		ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,
 				R.array.searchType, 
 				android.R.layout.simple_spinner_item);
 		typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		searchType.setAdapter(typeAdapter);
+		searchTypeSpinner.setAdapter(typeAdapter);
 		
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
@@ -165,27 +165,28 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	}
 
 	private void startSearch() {
-		
-		String term = searchTerm.getText().toString();
+		String query = searchField.getText().toString();
 
-		if (term.length() != 0) {
-			imm.hideSoftInputFromWindow(searchTerm.getWindowToken(), 0);
-			int pos = searchType.getSelectedItemPosition();
+		if (query.length() > 0) {
+			imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
 			
 			Intent searchIntent = new Intent(this, SearchResultsActivity.class);
-			
-			searchIntent.putExtra("term", term);
-			searchIntent.putExtra("type", pos);
-
+			searchIntent.putExtra(SearchResultsActivity.INTENT_TYPE, getSearchTypeFromSpinner());
+			searchIntent.putExtra(SearchResultsActivity.INTENT_QUERY, query);
 			startActivity(searchIntent);
 		} else {
-			Toast warning = Toast.makeText(this,
-					R.string.toast_search_err,
-					Toast.LENGTH_SHORT);
-			warning.show();
+			Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
 		}
-		
-		searchTerm.setText(""); // clear search field
+		searchField.setText("");
+	}
+	
+	private String getSearchTypeFromSpinner() {
+		int spinnerPosition = searchTypeSpinner.getSelectedItemPosition();
+		if (spinnerPosition == 0) {
+			return SearchResultsActivity.INTENT_ARTIST;
+		} else {
+			return SearchResultsActivity.INTENT_RELEASE_GROUP;
+		}
 	}
 	
 	/*

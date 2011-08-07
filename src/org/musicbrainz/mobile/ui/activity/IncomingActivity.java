@@ -27,41 +27,83 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+/**
+ * This Activity parses incoming URI intents from external applications and starts
+ * the appropriate Activity before finishing.
+ * 
+ * @author Jamie McDonald - jdamcd@gmail.com
+ */
 public class IncomingActivity extends Activity {
 	
+	private static final String URI_SEARCH = "search";
+	private static final String URI_RELEASE = "rg";
+	private static final String URI_ARTIST = "artist";
 	private static final int MBID_LENGTH = 36;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
         Uri incoming = getIntent().getData();
-        List<String> segs = incoming.getPathSegments();
+        List<String> segments = incoming.getPathSegments();
+        String type = segments.get(0);
         
-        String type = segs.get(0);
-        String mbid = segs.get(1);
-        
-        if (type.equals("artist") && isValidMbid(mbid)) {
-            displayArtist(mbid);
-        } else if (type.equals("release") && isValidMbid(mbid)) {
-            displayRelease(mbid);
+        if (type.equals(URI_ARTIST)) {
+        	String mbid = segments.get(1);
+            startArtistActivity(mbid);
+        } else if (type.equals(URI_RELEASE)) {
+        	String mbid = segments.get(1);
+            startReleaseActivity(mbid);
+        } else if (type.equals(URI_SEARCH)) {
+        	String entity = segments.get(1);
+        	String query = segments.get(2);
+        	if (entity.equals(URI_ARTIST)) {
+    			startSearchResultsActivity(SearchResultsActivity.INTENT_ARTIST, query);
+    		} else if (entity.equals(URI_RELEASE)) {
+    			startSearchResultsActivity(SearchResultsActivity.INTENT_RELEASE_GROUP, query);
+    		} else {
+    			displayErrorLayout("Unrecognised URI segment: search type");
+    		}
+        } else {
+        	displayErrorLayout("Unrecognised URI segment: action");
         }
         this.finish();
     }
 	
-	private void displayArtist(String mbid) {
-		Intent artistIntent = new Intent (IncomingActivity.this, ArtistActivity.class);
-		artistIntent.putExtra(ArtistActivity.INTENT_MBID, mbid);
-		startActivity(artistIntent);
+	private void startArtistActivity(String mbid) {
+		if (isValidMbid(mbid)) {
+			Intent artistIntent = new Intent (IncomingActivity.this, ArtistActivity.class);
+			artistIntent.putExtra(ArtistActivity.INTENT_MBID, mbid);
+			startActivity(artistIntent);
+		} else {
+			displayErrorLayout("Invalid MBID");
+		}
 	}
 
-	private void displayRelease(String mbid) {
-		Intent releaseIntent = new Intent (IncomingActivity.this, ReleaseActivity.class);
-		releaseIntent.putExtra(ReleaseActivity.INTENT_RELEASE_MBID, mbid);
-		startActivity(releaseIntent);
+	private void startReleaseActivity(String mbid) {
+		if (isValidMbid(mbid)) {
+			Intent releaseIntent = new Intent (IncomingActivity.this, ReleaseActivity.class);
+			releaseIntent.putExtra(ReleaseActivity.INTENT_RELEASE_MBID, mbid);
+			startActivity(releaseIntent);
+		} else {
+			displayErrorLayout("Invalid MBID");
+		}
+	}
+	
+	private void startSearchResultsActivity(String type, String query) {
+		Intent searchIntent = new Intent (IncomingActivity.this, SearchResultsActivity.class);
+		searchIntent.putExtra(SearchResultsActivity.INTENT_TYPE, type);
+		searchIntent.putExtra(SearchResultsActivity.INTENT_QUERY, query);
+		startActivity(searchIntent);
 	}
 	
 	private boolean isValidMbid(String mbid) {
 		return (mbid.length() == MBID_LENGTH);
+	}
+	
+	private void displayErrorLayout(String message) {
+		Intent errorIntent = new Intent (IncomingActivity.this, IntentErrorActivity.class);
+		errorIntent.putExtra(IntentErrorActivity.INTENT_MESSAGE, message);
+		startActivity(errorIntent);
 	}
 	
 }
