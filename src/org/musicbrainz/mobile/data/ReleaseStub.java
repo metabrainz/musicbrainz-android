@@ -21,7 +21,10 @@
 package org.musicbrainz.mobile.data;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.ui.util.StringFormat;
@@ -122,77 +125,95 @@ public class ReleaseStub {
 	
 	public String getFormattedFormats(Context context) {
 		
-		// TODO: Display as 2xCD for multiples of same format.
-
+		Map<String, Integer> formatCounts = getFormatCounts();
+		Set<String> formats = formatCounts.keySet();
+		
+		if (formats.isEmpty()) {
+			return "";
+		}
+		
 		Resources res = context.getResources();
 		StringBuilder sb = new StringBuilder();
-
-		if (formats.isEmpty())
-			return sb.toString();
-
+		
 		for (String format : formats) {
-			if (format.equals("cd"))
+			
+			Integer number = formatCounts.get(format);
+			if (number > 1) {
+				sb.append(number + "x");
+			}
+			
+			if (format.equals("cd")) {
 				sb.append(res.getString(R.string.fm_cd));
-			else if (format.equals("vinyl"))
+			} else if (format.equals("vinyl")) {
 				sb.append(res.getString(R.string.fm_vinyl));
-			else if (format.equals("cassette"))
+			} else if (format.equals("cassette")) {
 				sb.append(res.getString(R.string.fm_cassette));
-			else if (format.equals("dvd"))
+			} else if (format.equals("dvd")) {
 				sb.append(res.getString(R.string.fm_dvd));
-			else if (format.equals("digital media"))
+			} else if (format.equals("digital media")) {
 				sb.append(res.getString(R.string.fm_dm));
-			else if (format.equals("sacd"))
+			} else if (format.equals("sacd")) {
 				sb.append(res.getString(R.string.fm_sacd));
-			else if (format.equals("dualdisc"))
+			} else if (format.equals("dualdisc")) {
 				sb.append(res.getString(R.string.fm_dd));
-			else if (format.equals("laserdisc"))
+			} else if (format.equals("laserdisc")) {
 				sb.append(res.getString(R.string.fm_ld));
-			else if (format.equals("minidisc"))
+			} else if (format.equals("minidisc")) {
 				sb.append(res.getString(R.string.fm_md));
-			else if (format.equals("cartridge"))
+			} else if (format.equals("cartridge")) {
 				sb.append(res.getString(R.string.fm_cartridge));
-			else if (format.equals("reel-to-reel"))
+			} else if (format.equals("reel-to-reel")) {
 				sb.append(res.getString(R.string.fm_rtr));
-			else if (format.equals("dat"))
+			} else if (format.equals("dat")) {
 				sb.append(res.getString(R.string.fm_dat));
-			else if (format.equals("other"))
+			} else if (format.equals("other")) {
 				sb.append(res.getString(R.string.fm_other));
-			else if (format.equals("wax cylinder"))
+			} else if (format.equals("wax cylinder")) {
 				sb.append(res.getString(R.string.fm_wax));
-			else if (format.equals("piano roll"))
+			} else if (format.equals("piano roll")) {
 				sb.append(res.getString(R.string.fm_pr));
-			else if (format.equals("digital compact cassette"))
+			} else if (format.equals("digital compact cassette")) {
 				sb.append(res.getString(R.string.fm_dcc));
-			else if (format.equals("vhs"))
+			} else if (format.equals("vhs")) {
 				sb.append(res.getString(R.string.fm_vhs));
-			else if (format.equals("video-cd"))
+			} else if (format.equals("video-cd")) {
 				sb.append(res.getString(R.string.fm_vcd));
-			else if (format.equals("super video-cd"))
+			} else if (format.equals("super video-cd")) {
 				sb.append(res.getString(R.string.fm_svcd));
-			else if (format.equals("betamax"))
+			} else if (format.equals("betamax")) {
 				sb.append(res.getString(R.string.fm_bm));
-			else if (format.equals("hd compatible digital"))
+			} else if (format.equals("hd compatible digital")) {
 				sb.append(res.getString(R.string.fm_hdcd));
-			else if (format.equals("usb flash drive"))
+			} else if (format.equals("usb flash drive")) {
 				sb.append(res.getString(R.string.fm_usb));
-			else if (format.equals("slotmusic"))
+			} else if (format.equals("slotmusic")) {
 				sb.append(res.getString(R.string.fm_sm));
-			else if (format.equals("universal media disc"))
+			} else if (format.equals("universal media disc")) {
 				sb.append(res.getString(R.string.fm_umd));
-			else if (format.equals("hd-dvd"))
+			} else if (format.equals("hd-dvd")) {
 				sb.append(res.getString(R.string.fm_hddvd));
-			else if (format.equals("dvd-audio"))
+			} else if (format.equals("dvd-audio")) {
 				sb.append(res.getString(R.string.fm_dvda));
-			else if (format.equals("dvd-video"))
+			} else if (format.equals("dvd-video")) {
 				sb.append(res.getString(R.string.fm_dvdv));
-			else if (format.equals("blu-ray"))
+			} else if (format.equals("blu-ray")) {
 				sb.append(res.getString(R.string.fm_br));
-			else
+			} else {
 				sb.append(format);
-
-			sb.append(", ");
+			}
+			sb.append(", ");	
 		}
 		return sb.substring(0, sb.length() - 2);
+	}
+	
+	private Map<String, Integer> getFormatCounts() {
+		
+		Map<String, Integer> formatCounts = new HashMap<String, Integer>();
+		for (String format : formats) {
+			Integer count = formatCounts.get(format);          
+			formatCounts.put(format, (count == null) ? 1 : count + 1);
+		}
+		return formatCounts;
 	}
 	
 }
