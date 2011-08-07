@@ -35,5 +35,7 @@
 		
 	<TextView android:id="@+id/search_release_type"
   		style="@style/ListAuxPad"
-  		android:layout_alignParentRight="true" />
+  		android:textColor="@color/mb_orange_dark"
+  		android:layout_alignParentRight="true"
+  		android:layout_centerVertical="true" />
 </RelativeLayout>

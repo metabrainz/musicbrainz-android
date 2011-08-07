@@ -18,12 +18,17 @@
 	along with MusicBrainz Mobile (Android). If not, see 
 	<http://www.gnu.org/licenses/>. -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/VerticalMinPad" >
   
-	<TextView android:id="@+id/search_artist_name"
-  		style="@style/ListMain" />
+	<LinearLayout android:id="@+id/wrapper"
+		style="@style/Fill">  
+		<TextView android:id="@+id/search_artist_name"
+	  		style="@style/ListMain" 
+	  		android:layout_centerVertical="true" />
+	</LinearLayout> 		
   	
 	<TextView android:id="@+id/search_artist_disambig"
-		style="@style/ListAux" />
-</LinearLayout>
+		style="@style/ListAux" 
+		android:layout_below="@id/wrapper" />
+</RelativeLayout>

@@ -27,7 +27,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.ArtistStub;
 import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.ui.util.ArtistSearchAdapter;
-import org.musicbrainz.mobile.ui.util.ReleaseSearchAdapter;
+import org.musicbrainz.mobile.ui.util.RGSearchAdapter;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.ws.WebService;
 import org.xml.sax.SAXException;
@@ -135,7 +135,7 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 				@SuppressWarnings("unchecked")
 				LinkedList<ReleaseGroup> rgs = (LinkedList<ReleaseGroup>) searchResults;
 				
-				results.setAdapter(new ReleaseSearchAdapter(SearchResultsActivity.this, rgs));
+				results.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgs));
 				results.setOnItemClickListener(SearchResultsActivity.this);
 				results.setVisibility(View.VISIBLE);
 				

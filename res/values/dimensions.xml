@@ -34,7 +34,7 @@
     <dimen name="startop_pad">13dp</dimen>
     
     <dimen name="tab_height">38dp</dimen>
-    <dimen name="vertical_minspace">38dp</dimen>
+    <dimen name="vertical_minspace">45dp</dimen>
     <dimen name="button_min">47dp</dimen>
     <dimen name="launch_textarea_height">70dp</dimen>
     <dimen name="separator_height">2dp</dimen>

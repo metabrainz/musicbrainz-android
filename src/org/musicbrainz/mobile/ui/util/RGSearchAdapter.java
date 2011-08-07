@@ -38,13 +38,13 @@ import android.widget.TextView;
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class ReleaseSearchAdapter extends ArrayAdapter<ReleaseGroup> {
+public class RGSearchAdapter extends ArrayAdapter<ReleaseGroup> {
 	
 	SearchResultsActivity context;
 	List<ReleaseGroup> resultData;
 
-	public ReleaseSearchAdapter(Context context, List<ReleaseGroup> resultData) {
-		super(context, R.layout.list_srch_release, resultData);
+	public RGSearchAdapter(Context context, List<ReleaseGroup> resultData) {
+		super(context, R.layout.list_srch_rg, resultData);
 		
 		this.context = (SearchResultsActivity) context;
 		this.resultData = resultData;
@@ -57,7 +57,7 @@ public class ReleaseSearchAdapter extends ArrayAdapter<ReleaseGroup> {
 		
 		if (release == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			release = inflater.inflate(R.layout.list_srch_release, parent, false);
+			release = inflater.inflate(R.layout.list_srch_rg, parent, false);
 			
 			wrapper = new ReleaseSearchWrapper(release);
 			release.setTag(wrapper);
