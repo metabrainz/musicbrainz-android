@@ -194,15 +194,14 @@
     </style>
     
     <style name="HomeTextHeader" parent="@style/WrapHeight">
-    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textSize">@dimen/text_size_small</item>
     	<item name="android:textColor">@color/main_text</item>
     	<item name="android:textStyle">bold</item>
     </style>
     
     <style name="HomeText" parent="@style/Fill">
-    	<item name="android:textSize">@dimen/text_size_medium</item>
+    	<item name="android:textSize">@dimen/text_size_small</item>
     	<item name="android:textColor">@color/main_text</item>
-    	<item name="android:gravity">center_vertical</item>
     </style>
     
     <!-- List items -->

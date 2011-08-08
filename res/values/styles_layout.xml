@@ -60,10 +60,13 @@
     
     <style name="HomeTextArea">
     	<item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">@dimen/launch_textarea_height</item>
+    	<item name="android:layout_height">@dimen/vertical_minspace</item>
     	<item name="android:orientation">vertical</item>
     	<item name="android:background">@color/main_fg</item>
-    	<item name="android:padding">@dimen/std_pad</item>
+    	<item name="android:paddingTop">@dimen/small_pad</item>
+    	<item name="android:paddingBottom">@dimen/small_pad</item>
+    	<item name="android:paddingLeft">@dimen/std_pad</item>
+    	<item name="android:paddingRight">@dimen/std_pad</item>
     </style>
     
     <style name="EntityInfo" parent="@style/WrapHeight">
