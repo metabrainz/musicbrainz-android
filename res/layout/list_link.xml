@@ -37,4 +37,3 @@
         android:layout_toLeftOf="@+id/icon"
         android:layout_below="@+id/list_link_title" />
 </RelativeLayout>
-

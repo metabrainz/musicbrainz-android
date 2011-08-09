@@ -72,16 +72,12 @@
 			android:drawableTop="@drawable/home_donate" />
 	</LinearLayout>
 	
-	<LinearLayout
+	<RelativeLayout
 		style="@style/HomeTextArea"
 		android:visibility="gone">
 			
-		<TextView android:id="@+id/hometext_header"
-			style="@style/HomeTextHeader"
-			android:text="@string/hometext_header" />
-			
-		<TextView android:id="@+id/hometext_body"
+		<TextView android:id="@+id/hometext"
 			style="@style/HomeText"
-			android:text="@string/hometext_body" />	
-	</LinearLayout>
+			android:text="@string/hometext" />	
+	</RelativeLayout>
 </LinearLayout>

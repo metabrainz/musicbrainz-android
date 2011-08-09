@@ -27,7 +27,7 @@
     	
     <RelativeLayout
     	style="@style/PaddedLayout"
-    	android:layout_below="@id/actionbar" >
+    	android:layout_below="@id/actionbar">
 
 	<EditText android:id="@+id/uname_input"
 		style="@style/Username" />
@@ -37,8 +37,9 @@
 		android:layout_below="@+id/uname_input" />
 		
 	<Button android:id="@+id/auth_btn"
-		style="@style/StdButton"
+		style="@style/LoginButton"
 		android:layout_below="@+id/pass_input"
+		android:layout_alignParentRight="true"
 		android:text="@string/login_label" />
 		
 	<RelativeLayout
@@ -54,8 +55,15 @@
 			style="@style/CheckBox" />	
 	</RelativeLayout>
 	
-	<TextView
-		style="@style/Footer"
-		android:text="@string/register_text" />
+	<Button android:id="@+id/forgotpass_link"
+		style="@style/LinkButton"
+		android:text="@string/forgotpass_text"
+		android:layout_alignParentBottom="true" />
+		
+	<Button android:id="@+id/register_link"
+		style="@style/LinkButton"
+		android:text="@string/register_text"
+		android:layout_above="@id/forgotpass_link" />
+	
 	</RelativeLayout>
 </RelativeLayout>

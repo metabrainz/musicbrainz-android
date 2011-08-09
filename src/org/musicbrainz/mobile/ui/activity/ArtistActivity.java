@@ -408,7 +408,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			startActivity(releaseIntent);
 		} else {
 			String link = data.getLinks().get(position).getUrl();
-			
 			Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
 			startActivity(urlIntent);
 		}

@@ -80,13 +80,8 @@
 	<RelativeLayout
 		style="@style/HomeTextArea">
 			
-		<TextView android:id="@+id/hometext_header"
-			style="@style/HomeTextHeader"
-			android:text="@string/hometext_header" />
-			
-		<TextView android:id="@+id/hometext_body"
+		<TextView android:id="@+id/hometext"
 			style="@style/HomeText"
-			android:layout_below="@id/hometext_header"
-			android:text="@string/hometext_body" />	
+			android:text="@string/hometext" />	
 	</RelativeLayout>
 </LinearLayout>

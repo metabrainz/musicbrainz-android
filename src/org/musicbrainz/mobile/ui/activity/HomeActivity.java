@@ -91,14 +91,14 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	private void updateLoginState() {
 		
 		Button login = (Button) findViewById(R.id.login_btn);
-		TextView messageBody = (TextView) findViewById(R.id.hometext_body);
+		TextView messageBody = (TextView) findViewById(R.id.hometext);
 		
 		if (loggedIn) {
 			login.setText(R.string.logout_label);
 			messageBody.setText(getString(R.string.hometext_loggedin) + " " + getUsername());
 		} else {
 			login.setText(R.string.login_label);
-			messageBody.setText(R.string.hometext_body);
+			messageBody.setText(R.string.hometext);
 		}
 	}
 

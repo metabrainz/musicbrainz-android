@@ -29,5 +29,8 @@ public class Config {
 	public static final String WEB_SERVICE = "http://www.musicbrainz.org/ws/2/";
 	public static final String REALM = "musicbrainz.org";
 	public static final String SCOPE = "www.musicbrainz.org";
+	
+	public static final String REGISTER_LINK = "http://www.musicbrainz.org/register";
+	public static final String FORGOTPASS_LINK = "http://www.musicbrainz.org/lost-password";
 
 }

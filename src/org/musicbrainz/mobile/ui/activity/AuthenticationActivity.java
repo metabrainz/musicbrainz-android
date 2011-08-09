@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.ui.activity;
 import java.io.IOException;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.ws.WebServiceUser;
@@ -32,7 +33,9 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -189,13 +192,19 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 		spe.commit();
     }
 
-    /*
-     * Handle log in button press.
-     */
 	public void onClick(View v) {
+		int id = v.getId();
 		
-		if (v.getId() == R.id.auth_btn)
+		switch (id) {
+		case R.id.about_btn:
 			login();
+			break;
+		case R.id.register_link:
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Config.REGISTER_LINK)));
+			break;
+		case R.id.forgotpass_link:
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Config.FORGOTPASS_LINK)));
+		}
 	}
 	
 	/*

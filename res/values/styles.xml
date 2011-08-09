@@ -190,18 +190,14 @@
     	<item name="android:layout_centerVertical">true</item>
     	<item name="android:layout_marginRight">@dimen/small_pad</item>
     	<item name="android:layout_marginLeft">@dimen/small_pad</item>
-    	<item name="android:src">@drawable/ic_forward</item>
+    	<item name="android:src">@drawable/ic_link</item>
     </style>
     
-    <style name="HomeTextHeader" parent="@style/WrapHeight">
-    	<item name="android:textSize">@dimen/text_size_small</item>
+    <style name="HomeText" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_medium</item>
     	<item name="android:textColor">@color/main_text</item>
-    	<item name="android:textStyle">bold</item>
-    </style>
-    
-    <style name="HomeText" parent="@style/Fill">
-    	<item name="android:textSize">@dimen/text_size_small</item>
-    	<item name="android:textColor">@color/main_text</item>
+    	<item name="android:layout_centerInParent">true</item>
+    	<item name="android:singleLine">true</item>
     </style>
     
     <!-- List items -->
@@ -270,6 +266,20 @@
     </style>
     
     <style name="StdButton" parent="@style/WrapHeight">
+    	<item name="android:onClick">onClick</item>
+    </style>
+    
+    <style name="LoginButton">
+    	<item name="android:layout_width">190dp</item>
+    	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:onClick">onClick</item>
+    </style>
+    
+    <style name="LinkButton" parent="@style/WrapHeight">
+    	<item name="android:background">@drawable/link_button</item>
+    	<item name="android:drawableRight">@drawable/ic_link</item>
+    	<item name="android:padding">@dimen/std_pad</item>
+    	<item name="android:layout_marginTop">@dimen/std_pad</item>
     	<item name="android:onClick">onClick</item>
     </style>
 </resources>

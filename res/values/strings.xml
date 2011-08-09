@@ -28,16 +28,16 @@
 	<string name="search_label">Search</string>
 	<string name="about_label">About</string>
 	<string name="donate_label">Donate</string>
-	<string name="hometext_header">Welcome to MusicBrainz!</string>
-	<string name="hometext_body">Scan a release or search to get started.</string>
-	<string name="hometext_loggedin">You are currently logged in as</string>
+	<string name="hometext">Welcome to MusicBrainz!</string>
+	<string name="hometext_loggedin">Logged in as</string>
 
 	<!-- AuthenticateActivity -->
 	<string name="auth_title">Log In</string>
 	<string name="uname_hint">Username</string>
 	<string name="pass_hint">Password</string>
 	<string name="staylog_text">Stay logged in on this device?</string>
-	<string name="register_text">Not registered? Visit musicbrainz.org/register</string>
+	<string name="register_text">Need to register?</string>
+	<string name="forgotpass_text">Forgot password?</string>
 	<string name="pd_authenticating">Authenticating...</string>
 	<string name="auth_fail">Autentication failed!\nPlease check your username and password.</string>
 	<string name="auth_pos">Okay</string>
