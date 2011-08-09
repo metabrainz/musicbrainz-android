@@ -24,6 +24,7 @@ import java.io.IOException;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.ws.WebServiceUser;
@@ -150,10 +151,14 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 				                dialog.cancel();
 				           }
 				       });
-				AlertDialog authFail = failBuilder.create();
 				
-				pd.dismiss();
-				authFail.show();
+				try {
+					AlertDialog authFail = failBuilder.create();
+					pd.dismiss();
+					authFail.show();
+				} catch (Exception e) {
+					Log.e("Login failed but Activity has closed anyway");
+				}
 				break;
 			case ERROR:
 				// connection fail dialog with option to restart auth thread
@@ -175,9 +180,13 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 										AuthenticationActivity.this.finish();
 									}
 								});
-				Dialog conError = errBuilder.create();
-				pd.dismiss();
-				conError.show();
+				try {
+					Dialog conError = errBuilder.create();
+					pd.dismiss();
+					conError.show();
+				} catch (Exception e) {
+					Log.e("Connection timed out but Activity has closed anyway");
+				}
 			}
 		}
     	
@@ -196,7 +205,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 		int id = v.getId();
 		
 		switch (id) {
-		case R.id.about_btn:
+		case R.id.auth_btn:
 			login();
 			break;
 		case R.id.register_link:
