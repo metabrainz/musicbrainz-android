@@ -23,13 +23,18 @@ package org.musicbrainz.mobile.ui.activity;
 import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
 
 import com.markupartist.android.widget.ActionBar;
+import com.paypal.android.MEP.CheckoutButton;
 import com.paypal.android.MEP.PayPal;
 import com.paypal.android.MEP.PayPalPayment;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,8 +42,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Activity to process a donation through PayPal MEP.
@@ -49,7 +56,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 
 	private ActionBar actionBar;
 	private Spinner amount;
-	private Button donateButton;
+	private CheckoutButton payPalButton;
 	
 	private PayPal payPal;
 	private static final int SERVER = PayPal.ENV_LIVE;
@@ -66,7 +73,6 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         amount.setAdapter(typeAdapter);
-        donateButton = (Button) findViewById(R.id.donate_btn);
               
         new LoadTask().execute();
     }
@@ -88,29 +94,44 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		
 		protected void onPostExecute(Void v) {
 			actionBar.setProgressBarVisibility(View.GONE);
-			enableDonateButton();
+			addPayPalButtonToLayout();
 		}
 		
 	}
 	
-	private void enableDonateButton() {
-		donateButton.setText(R.string.paypal_label);
-		donateButton.setEnabled(true);
+	private void addPayPalButtonToLayout() {
+		payPalButton = payPal.getCheckoutButton(DonateActivity.this, PayPal.BUTTON_294x45, CheckoutButton.TEXT_DONATE);
+		payPalButton.setLayoutParams(configureButtonParams()); 
+		payPalButton.setOnClickListener(this);
+		((RelativeLayout)findViewById(R.id.donate_layout)).addView(payPalButton);
 	}
 	
-	private void loadingDonateButton() {
-		donateButton.setText(R.string.paypal_starting_label);
-		donateButton.setEnabled(false);
+	private LayoutParams configureButtonParams() {
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.BELOW, R.id.donate_spin);
+		params.addRule(RelativeLayout.ALIGN_RIGHT, R.id.donate_spin);
+		params.addRule(RelativeLayout.ALIGN_LEFT, R.id.donate_spin);
+		params.leftMargin = 4;
+		params.rightMargin = 4;
+		return params;
 	}
 	
+	@Override
 	public void onClick(View v) {
-		String selection = (String) amount.getSelectedItem();
-		float amount = Float.valueOf(selection.substring(1));
-		PayPalPayment donation = createPayment(BigDecimal.valueOf(amount));
+		int id = v.getId();
 		
-		Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
-		this.startActivityForResult(checkoutIntent, PAYPAL_REQUEST_CODE);
-		loadingDonateButton();
+		switch(id) {
+		case R.id.alt_donate_link:
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Config.DONATE_LINK)));
+			break;
+		default:
+			String selection = (String) amount.getSelectedItem();
+			float amount = Float.valueOf(selection.substring(1));
+			PayPalPayment donation = createPayment(BigDecimal.valueOf(amount));
+			
+			Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
+			this.startActivityForResult(checkoutIntent, PAYPAL_REQUEST_CODE);
+		}
 	}
 	
 	private PayPalPayment createPayment(BigDecimal amount) {
@@ -127,7 +148,14 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == PAYPAL_REQUEST_CODE) {
-			enableDonateButton();
+			switch (resultCode) {
+			case Activity.RESULT_OK:
+				Toast.makeText(this, R.string.toast_donate_success, Toast.LENGTH_SHORT).show();
+				break;
+			case Activity.RESULT_CANCELED:
+				Toast.makeText(this, R.string.toast_donate_canceled, Toast.LENGTH_SHORT).show();
+			}
+			finish();
 		}
 	}
     

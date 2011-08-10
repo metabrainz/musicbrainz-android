@@ -32,5 +32,6 @@ public class Config {
 	
 	public static final String REGISTER_LINK = "http://www.musicbrainz.org/register";
 	public static final String FORGOTPASS_LINK = "http://www.musicbrainz.org/lost-password";
+	public static final String DONATE_LINK = "http://www.metabrainz.org/donate";
 
 }

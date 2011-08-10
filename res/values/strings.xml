@@ -93,10 +93,11 @@
 	<!-- DonateActivity -->
 	<string name="donate_title">Donate</string>
 	<string name="donate_header">Support the MetaBrainz Foundation with a donation!</string>
-	<string name="donate_text">You can donate through PayPal to the non-profit MetaBrainz Foundation which operates the MusicBrainz project. For further information and alternative donation options, please visit metabrainz.org/donate</string>
+	<string name="donate_text">You can donate via PayPal to the non-profit MetaBrainz Foundation, which operates the MusicBrainz project.</string>
 	<string name="paypal_load_label">Loading PayPal...</string>
 	<string name="paypal_label">Donate with PayPal</string>
 	<string name="paypal_starting_label">Loading...</string>
+	<string name="alt_donate_text">Other donation options...</string>
 
 	<!-- AboutActivity -->
 	<string name="about_title">About</string>
@@ -131,6 +132,9 @@
 	<string name="toast_loggedIn">Logged in</string>
 	<string name="toast_loggedOut">Logged out</string>
 	<string name="toast_feedback_fail">No email client available</string>
+	<string name="toast_donate_success">Thanks you for supporting MusicBrainz!</string>
+	<string name="toast_donate_canceled">Donation canceled</string>
+	<string name="toast_donate_failed">Donation failed</string>
 	
 	<!-- ZXing integration -->
 	<string name="zx_title">Install Barcode Scanner?</string>

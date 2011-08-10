@@ -25,33 +25,28 @@
     	android:id="@+id/actionbar"
     	style="@style/ActionBar" />
     	
-    <LinearLayout 
+    <RelativeLayout android:id="@+id/donate_layout"
     	style="@style/PaddedLayoutFill"
     	android:layout_below="@id/actionbar">
     	
-    <TextView
-    	style="@style/TextHeader"
-    	android:text="@string/donate_header" />
-		
-	<TextView 
-		style="@style/TextBody"
-		android:text="@string/donate_text" />
-	
-	<LinearLayout
-		style="@style/WrapHeight"
-		android:orientation="vertical"
-		android:gravity="center"
-		android:paddingTop="@dimen/huge_pad" >
+	    <TextView android:id="@+id/donate_title"
+	    	style="@style/TextHeader"
+	    	android:text="@string/donate_header"/>
+			
+		<TextView android:id="@+id/donate_body"
+			style="@style/TextBody"
+			android:text="@string/donate_text" 
+			android:layout_below="@id/donate_title" />
 		
 		<Spinner android:id="@+id/donate_spin"
-			style="@style/WrapHeight" />
+			style="@style/WrapHeight" 
+			android:layout_below="@id/donate_body" 
+			android:layout_marginTop="@dimen/huge_pad" />
 			
-		<Button android:id="@+id/donate_btn"
-			style="@style/WrapHeight"
-			android:enabled="false"
-			android:onClick="onClick"
-			android:text="@string/paypal_load_label" />
+		<Button android:id="@+id/alt_donate_link"
+			style="@style/LinkButton"
+			android:text="@string/alt_donate_text"
+			android:layout_alignParentBottom="true" />
 		
-	</LinearLayout>	
-	</LinearLayout>
+	</RelativeLayout>	
 </RelativeLayout>
