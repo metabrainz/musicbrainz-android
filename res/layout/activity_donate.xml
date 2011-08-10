@@ -43,6 +43,12 @@
 			android:layout_below="@id/donate_body" 
 			android:layout_marginTop="@dimen/huge_pad" />
 			
+		<TextView android:id="@+id/donate_loading_text"
+			style="@style/PayPalLoadingText"
+			android:layout_below="@id/donate_spin"
+			android:layout_centerHorizontal="true"
+			android:text="@string/paypal_loading_label" />
+			
 		<Button android:id="@+id/alt_donate_link"
 			style="@style/LinkButton"
 			android:text="@string/alt_donate_text"

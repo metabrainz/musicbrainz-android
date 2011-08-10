@@ -200,6 +200,12 @@
     	<item name="android:singleLine">true</item>
     </style>
     
+    <style name="PayPalLoadingText" parent="@style/Wrap">
+    	<item name="android:textSize">@dimen/text_size_xl</item>
+    	<item name="android:textColor">@color/aux_text</item>
+    	<item name="android:padding">@dimen/std_pad</item>
+    </style>
+    
     <!-- List items -->
     <style name="ListMain" parent="@style/Wrap">
     	<item name="android:textSize">@dimen/text_size_large</item>

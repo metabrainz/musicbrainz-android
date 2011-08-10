@@ -32,7 +32,6 @@ import com.paypal.android.MEP.PayPal;
 import com.paypal.android.MEP.PayPalPayment;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -45,6 +44,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -95,12 +95,18 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		protected void onPostExecute(Void v) {
 			actionBar.setProgressBarVisibility(View.GONE);
 			addPayPalButtonToLayout();
+			hideLoadingText();
 		}
 		
 	}
 	
+	private void hideLoadingText() {
+		TextView loading = (TextView) findViewById(R.id.donate_loading_text);
+		loading.setVisibility(View.GONE);
+	}
+	
 	private void addPayPalButtonToLayout() {
-		payPalButton = payPal.getCheckoutButton(DonateActivity.this, PayPal.BUTTON_294x45, CheckoutButton.TEXT_DONATE);
+		payPalButton = payPal.getCheckoutButton(DonateActivity.this, PayPal.BUTTON_278x43, CheckoutButton.TEXT_DONATE);
 		payPalButton.setLayoutParams(configureButtonParams()); 
 		payPalButton.setOnClickListener(this);
 		((RelativeLayout)findViewById(R.id.donate_layout)).addView(payPalButton);
@@ -131,6 +137,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 			
 			Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
 			this.startActivityForResult(checkoutIntent, PAYPAL_REQUEST_CODE);
+			setContentView(R.layout.starting_paypal);
 		}
 	}
 	
