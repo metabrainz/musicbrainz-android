@@ -27,7 +27,7 @@
 	<color name="aux_text">#666666</color>
 	<color name="hint_text">#c0c0c0</color>
 	<color name="dialog_text">#ffffff</color>
-	<color name="link_text">#0b0080</color>
+	<color name="link_text">#3366cc</color>
 	
 	<color name="tag_bg">#ffffff</color>
 	<color name="tag_text">#000000</color>

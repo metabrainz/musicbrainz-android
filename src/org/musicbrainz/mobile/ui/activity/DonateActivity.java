@@ -22,9 +22,9 @@ package org.musicbrainz.mobile.ui.activity;
 
 import java.math.BigDecimal;
 
+import org.musicbrainz.mobile.MBApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Secrets;
 
 import com.markupartist.android.widget.ActionBar;
 import com.paypal.android.MEP.CheckoutButton;
@@ -34,8 +34,8 @@ import com.paypal.android.MEP.PayPalPayment;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -58,9 +58,8 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 	private Spinner amount;
 	private CheckoutButton payPalButton;
 	
+	private Handler handler = new Handler();
 	private PayPal payPal;
-	private static final int SERVER = PayPal.ENV_LIVE;
-	private static final String APP_ID = Secrets.PAYPAL_APP_ID;
 	private static final int PAYPAL_REQUEST_CODE = 1;
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -73,31 +72,29 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         amount.setAdapter(typeAdapter);
-              
-        new LoadTask().execute();
+        
+        actionBar.setProgressBarVisibility(View.VISIBLE);
+        handler.post(loadingChecker);
     }
 	
-	private class LoadTask extends AsyncTask<Void, Void, Void> {
+	private Runnable loadingChecker = new Runnable() {
 		
-		protected void onPreExecute() {
-			actionBar.setProgressBarVisibility(View.VISIBLE);
-		}
-		
-		protected Void doInBackground(Void... v) {
-			payPal = PayPal.getInstance();
+		@Override
+		public void run() {
+			MBApplication app = (MBApplication) getApplication();
+			payPal = app.payPal;
 			if (payPal == null) {
-			   	payPal = PayPal.initWithAppID(DonateActivity.this, APP_ID, SERVER);
-			   	payPal.setShippingEnabled(false);
+				handler.postDelayed(this, 500);
+			} else {
+				onPayPalLoaded();
 			}
-			return null;
 		}
-		
-		protected void onPostExecute(Void v) {
-			actionBar.setProgressBarVisibility(View.GONE);
-			addPayPalButtonToLayout();
-			hideLoadingText();
-		}
-		
+	};
+	  
+	private void onPayPalLoaded() {
+		actionBar.setProgressBarVisibility(View.GONE);
+		addPayPalButtonToLayout();
+		hideLoadingText();
 	}
 	
 	private void hideLoadingText() {
