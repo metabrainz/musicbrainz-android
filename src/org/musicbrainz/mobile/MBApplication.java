@@ -20,11 +20,8 @@ public class MBApplication extends Application {
     	
         @Override 
         public void run() {
-    		payPal = PayPal.getInstance();
-    		if (payPal == null) {
-    		   	payPal = PayPal.initWithAppID(getApplicationContext(), Secrets.PAYPAL_APP_ID, PayPal.ENV_LIVE);
-    		   	payPal.setShippingEnabled(false);
-    		}
+    		payPal = PayPal.initWithAppID(getApplicationContext(), Secrets.PAYPAL_APP_ID, PayPal.ENV_LIVE);
+    		payPal.setShippingEnabled(false);
         }
     }
 	

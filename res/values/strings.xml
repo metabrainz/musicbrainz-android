@@ -97,6 +97,7 @@
 	<string name="paypal_load_label">Loading PayPal...</string>
 	<string name="paypal_label">Donate with PayPal</string>
 	<string name="paypal_loading_label">Loading...</string>
+	<string name="paypal_loading_timeout">Connection failure.</string>
 	<string name="alt_donate_text">Other donation options...</string>
 	<string name="starting_paypal">PayPal is starting...\nPlease bear with us.</string>
 

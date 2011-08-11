@@ -58,8 +58,10 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 	private Spinner amount;
 	private CheckoutButton payPalButton;
 	
-	private Handler handler = new Handler();
 	private PayPal payPal;
+	private Handler handler = new Handler();
+	private int initChecks;
+	private static final int MAX_CHECKS = 20;
 	private static final int PAYPAL_REQUEST_CODE = 1;
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,8 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         amount.setAdapter(typeAdapter);
         
         actionBar.setProgressBarVisibility(View.VISIBLE);
+        
+        initChecks = 0;
         handler.post(loadingChecker);
     }
 	
@@ -83,10 +87,13 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		public void run() {
 			MBApplication app = (MBApplication) getApplication();
 			payPal = app.payPal;
-			if (payPal == null) {
-				handler.postDelayed(this, 500);
-			} else {
+			if (payPal != null) {
 				onPayPalLoaded();
+			} else if (initChecks < MAX_CHECKS) {
+				handler.postDelayed(this, 500);
+				initChecks++;
+			} else {
+				handleTimeout();
 			}
 		}
 	};
@@ -97,9 +104,15 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		hideLoadingText();
 	}
 	
+	private void handleTimeout() {
+		actionBar.setProgressBarVisibility(View.GONE);
+		TextView loadText = (TextView) findViewById(R.id.donate_loading_text);
+		loadText.setText(R.string.paypal_loading_timeout);
+	}
+	
 	private void hideLoadingText() {
-		TextView loading = (TextView) findViewById(R.id.donate_loading_text);
-		loading.setVisibility(View.GONE);
+		TextView loadText = (TextView) findViewById(R.id.donate_loading_text);
+		loadText.setVisibility(View.GONE);
 	}
 	
 	private void addPayPalButtonToLayout() {
