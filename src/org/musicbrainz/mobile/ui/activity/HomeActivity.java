@@ -105,7 +105,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		
 		if (requestCode == LOGIN_REQUEST) {
-			if (resultCode == AuthenticationActivity.LOGGED_IN) {
+			if (resultCode == LoginActivity.LOGGED_IN) {
 				loggedIn = true;
 				Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
 			} 
@@ -126,7 +126,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		switch (v.getId()) {
 		case R.id.login_btn:
 			if (!loggedIn) {
-				Intent logInIntent = new Intent(this, AuthenticationActivity.class);
+				Intent logInIntent = new Intent(this, LoginActivity.class);
 				startActivityForResult(logInIntent, LOGIN_REQUEST);
 			} else {
 				logOut();

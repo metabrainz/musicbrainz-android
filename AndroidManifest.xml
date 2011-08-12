@@ -54,7 +54,7 @@
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activity.AuthenticationActivity"
+        <activity android:name=".ui.activity.LoginActivity"
         	android:label="@string/auth_title" 
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />

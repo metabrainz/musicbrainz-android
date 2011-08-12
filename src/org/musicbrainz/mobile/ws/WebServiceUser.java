@@ -41,81 +41,61 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.musicbrainz.mobile.data.UserData;
 import org.musicbrainz.mobile.parsers.UserDataParser;
 import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Log;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
- * Class to perform all webservice requests that need the user to be
- * authenticated.
+ * This class performs webservice requests specific to registered users.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class WebServiceUser extends WebService {
 	
-	// authentication
-	public static final String SCOPE = Config.SCOPE;
-	public static final String REALM = Config.REALM;
+	public static final String AUTH_SCOPE = Config.SCOPE;
+	public static final int AUTH_PORT = 80;
+	public static final String AUTH_REALM = Config.REALM;
+	public static final String AUTH_TYPE = "Digest";
+	
+	// MBID for Various Artists always exists.
+	private static final String AUTH_TEST = "artist/89ad4ac3-39f7-470e-963a-56509c546377?inc=user-tags";
 
-	// request
 	private static final String TAG = "tag";
 	private static final String RATING = "rating";
 	private static final String BARCODE = "release/";
-	
-	// MBID for Various Artists always exists
-	private static final String TEST = "artist/89ad4ac3-39f7-470e-963a-56509c546377?inc=user-tags";
 	
 	private String clientId = "?client=musicbrainz.android-";
 	private DefaultHttpClient httpClient;
 	
 	public WebServiceUser (String username, String password, String clientVersion) {
-		httpClient = new DefaultHttpClient();
 		
-		clientId = clientId + clientVersion;
-		AuthScope authScope = new AuthScope(SCOPE, 80, REALM, "Digest");
+		httpClient = new DefaultHttpClient();
+		clientId += clientVersion;
+		AuthScope authScope = new AuthScope(AUTH_SCOPE, AUTH_PORT, AUTH_REALM, AUTH_TYPE);
 		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
 		httpClient.getCredentialsProvider().setCredentials(authScope, credentials);
 	}
 
-	/**
-	 * Attempt to authenticate the username and password with the webservice and
-	 * return whether or not it was successful.
-	 * 
-	 * @param uname
-	 * @param pass
-	 * @return Authentication success
-	 * @throws IOException
-	 */
-	public boolean authenticate() throws IOException {
+	public boolean autenticateUserCredentials() throws IOException {
 		
-		HttpGet test = new HttpGet(WEB_SERVICE + TEST); // authentication test
-		test.setHeader("Accept", "application/xml");
-		
-		ResponseHandler<String> handler = new BasicResponseHandler();
-		
+		HttpGet authenticationTest = new HttpGet(WEB_SERVICE + AUTH_TEST);
+		authenticationTest.setHeader("Accept", "application/xml");
+	
 		try {
-			httpClient.execute(test, handler);
-		} catch (HttpResponseException e) {
-			System.err.println(e.getStatusCode() +": "+ e.getMessage());
-			
-			if (e.getStatusCode() == 401) 
-				return false; // authentication failure
+			httpClient.execute(authenticationTest, new BasicResponseHandler());
+		} catch (HttpResponseException e) {			
+			if (e.getStatusCode() == 401) {
+				return false;
+			}
 		}
 		return true;
 	}
 	
-	/**
-	 * Retrieve user tags and rating data for a particular entity.
-	 * 
-	 * @param type
-	 * @param entityID
-	 * @return UserData object
-	 * @throws IOException
-	 */
-	public UserData getUserData(MBEntity type, String entityID) throws IOException {
+	public UserData getUserData(MBEntity entityType, String entityMbid) throws IOException {
 		
 		String entity = "";
-		switch(type) {
+		switch(entityType) {
 		case ARTIST:
 			entity = "artist";
 			break;
@@ -123,14 +103,12 @@ public class WebServiceUser extends WebService {
 			entity = "release-group";
 		}
 		
-		HttpGet userGet = new HttpGet(WEB_SERVICE + entity + "/" + entityID + "?inc=user-tags+user-ratings");
+		HttpGet userGet = new HttpGet(WEB_SERVICE + entity + "/" + entityMbid + "?inc=user-tags+user-ratings");
 		userGet.setHeader("Accept", "application/xml");
-		
 		ResponseHandler<String> responseHandler = new BasicResponseHandler();	
 		String response = httpClient.execute(userGet, responseHandler);
 		
 		SAXParserFactory factory = SAXParserFactory.newInstance();
-		
 		UserData data = new UserData();
 		try {
 			SAXParser parser = factory.newSAXParser();
@@ -143,87 +121,80 @@ public class WebServiceUser extends WebService {
 		} catch (SAXException e) {
 			e.printStackTrace();
 		}
-		
 		return data;
 	}
 
-	/**
-	 * Submit a collection of tags to a particular entity.
-	 * 
-	 * @param type
-	 * @param entityMbid
-	 * @param tags
-	 * @throws IOException
-	 */
-	public void submitTags(MBEntity type, String entityMbid, Collection<String> tags) throws IOException {
+	public void submitTags(MBEntity entityType, String entityMbid, Collection<String> tags) throws IOException {
 		
-		String tagUrl = WEB_SERVICE + TAG + clientId;
-		
-		HttpPost post = new HttpPost(tagUrl);
+		String tagSubmissionUrl = WEB_SERVICE + TAG + clientId;
+		HttpPost post = new HttpPost(tagSubmissionUrl);
 		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
 		
-		// create tag submission XML
+		String requestContent = buildTagSubmissionXML(entityType, entityMbid, tags);
+		StringEntity xml = new StringEntity(requestContent, "UTF-8");
+		post.setEntity(xml);
+		
+		try {
+			httpClient.execute(post);
+		} catch (HttpResponseException e) {
+			Log.e(e.getStatusCode() + ": " + e.getMessage());
+		}
+	}
+
+	private String buildTagSubmissionXML(MBEntity entityType, String entityMbid, Collection<String> tags) {
+		
 		StringBuilder content = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><metadata xmlns=\"http://musicbrainz.org/ns/mmd-2.0#\">");
-		switch (type) {
+		switch (entityType) {
 		case ARTIST:
 			content.append("<artist-list><artist id=\"" 
 				+ entityMbid 
 				+ "\">" 
-				+ formatTags(tags) 
+				+ getTagsInXML(tags) 
 				+ "</artist></artist-list>");
 			break;
 		case RELEASE_GROUP:
 			content.append("<release-group-list><release-group id=\"" 
 				+ entityMbid 
 				+ "\">" 
-				+ formatTags(tags) 
+				+ getTagsInXML(tags) 
 				+ "</release-group></release-group-list>");
 		}
 		content.append("</metadata>");
-		
-		StringEntity xml = new StringEntity(content.toString(), "UTF-8");
-		post.setEntity(xml);
-		
-		// TODO execute is the blocking call, eventually we want this in a thread in PostService
-		try {
-			httpClient.execute(post);
-		} catch (HttpResponseException e) {
-			System.out.println(e.getStatusCode() + ": " + e.getMessage());
-		}
+		return content.toString();
 	}
 	
-	/*
-	 * Method takes a collection of individual tag strings and returns an XML
-	 * user tag list.
-	 */
-	private static String formatTags(Collection<String> tags) {
+	private static String getTagsInXML(Collection<String> tags) {
+		
 		StringBuilder tagString = new StringBuilder("<user-tag-list>");
-		
-		for (String tag : tags) 
+		for (String tag : tags) {
 			tagString.append("<user-tag><name>" + tag + "</name></user-tag>");
-		
+		}
 		tagString.append("</user-tag-list>");
 		return tagString.toString();
 	}
 	
-	/**
-	 * Submit a user rating to a particular entity.
-	 * 
-	 * @param type
-	 * @param entityMbid
-	 * @param rating
-	 * @throws IOException
-	 */
-	public void submitRating(MBEntity type, String entityMbid, int rating) throws IOException {
+	public void submitRating(MBEntity entityType, String entityMbid, int rating) throws IOException {
 		
-		String ratingUrl = WEB_SERVICE + RATING + clientId;
-		
-		HttpPost post = new HttpPost(ratingUrl);
+		String ratingSubmissionUrl = WEB_SERVICE + RATING + clientId;
+		HttpPost post = new HttpPost(ratingSubmissionUrl);
 		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
 		
-		// create rating submission XML
+		String requestContent = buildRatingSubmissionXML(entityType, entityMbid, rating);
+		StringEntity xml = new StringEntity(requestContent, "UTF-8");
+		post.setEntity(xml);
+		
+		try {
+			httpClient.execute(post);
+		} catch (HttpResponseException e) {
+			Log.e(e.getStatusCode() + ": " + e.getMessage());
+		}
+
+	}
+
+	private String buildRatingSubmissionXML(MBEntity entityType, String entityMbid, int rating) {
+		
 		StringBuilder content = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><metadata xmlns=\"http://musicbrainz.org/ns/mmd-2.0#\">");
-		switch (type) {
+		switch (entityType) {
 		case ARTIST:
 			content.append("<artist-list><artist id=\"" 
 				+ entityMbid + "\"><user-rating>" 
@@ -237,23 +208,27 @@ public class WebServiceUser extends WebService {
 				+ "</user-rating></release-group></release-group-list>");
 		}
 		content.append("</metadata>");
+		return content.toString();
+	}
+	
+	public void submitBarcode(String releaseMbid, String barcode) throws IOException {
 		
-		StringEntity xml = new StringEntity(content.toString(), "UTF-8");
+		String barcodeSubmissionUrl = WEB_SERVICE + BARCODE + clientId;
+		HttpPost post = new HttpPost(barcodeSubmissionUrl);
+		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
+		
+		String requestContent = buildBarcodeSubmissionXML(releaseMbid, barcode);
+		StringEntity xml = new StringEntity(requestContent, "UTF-8");
 		post.setEntity(xml);
 		
 		try {
 			httpClient.execute(post);
 		} catch (HttpResponseException e) {
-			System.err.println(e.getStatusCode() + ": " + e.getMessage());
+			Log.e(e.getStatusCode() + ": " + e.getMessage());
 		}
-
 	}
-	
-	public void submitBarcode(String releaseMbid, String barcode) throws IOException {
-		
-		String barcodeUrl = WEB_SERVICE + BARCODE + clientId;
-		HttpPost post = new HttpPost(barcodeUrl);
-		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
+
+	private String buildBarcodeSubmissionXML(String releaseMbid, String barcode) {
 		
 		StringBuilder content = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><metadata xmlns=\"http://musicbrainz.org/ns/mmd-2.0#\">");
 		content.append("<release-list><release id=\"" 
@@ -261,28 +236,12 @@ public class WebServiceUser extends WebService {
 				+ barcode
 				+ "</barcode></release></release-list>");
 		content.append("</metadata>");
-		
-		StringEntity xml = new StringEntity(content.toString(), "UTF-8");
-		post.setEntity(xml);
-		
-		try {
-			httpClient.execute(post);
-		} catch (HttpResponseException e) {
-			System.err.println(e.getStatusCode() + ": " + e.getMessage());
-		}
-		
+		return content.toString();
 	}
 	
-	/**
-	 * Utility method to transform a string of potentially many comma separated
-	 * tags into a list for submission.
-	 * 
-	 * @param tags String of one or more tags.
-	 * @return List of individual tag strings.
-	 */
-	public static LinkedList<String> processTags(String tags) {
-		LinkedList<String> tagList = new LinkedList<String>();
+	public static LinkedList<String> sanitiseCommaSeparatedTags(String tags) {
 		
+		LinkedList<String> tagList = new LinkedList<String>();
 		String[] split = tags.split(",");
 		
 		for (String tag : split) {
@@ -290,11 +249,10 @@ public class WebServiceUser extends WebService {
 			tag = tag.trim();
 			tagList.add(tag);
 		}
-		
 		return tagList;
 	}
 	
-	public void shutdownConnectionManager() {
+	public void shutdownConnection() {
 		httpClient.getConnectionManager().shutdown();
 	}
 	

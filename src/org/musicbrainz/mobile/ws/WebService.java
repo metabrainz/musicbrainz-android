@@ -49,9 +49,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
- * This class makes the web service available to Activity classes. Static
- * methods manage web service calls and return the appropriate data objects. The
- * XML returned is parsed into data objects with custom SAX parser handlers.
+ * This class makes the web service available to Activity classes. The XML
+ * returned is parsed into data objects with SAX parser handlers.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
@@ -59,42 +58,29 @@ public class WebService {
 	
 	public static final String WEB_SERVICE = Config.WEB_SERVICE;
 	
-	// lookups
-	private static final String ARTIST_LOOKUP = "artist/";
-	private static final String ARTIST_PARAMS = "?inc=url-rels+tags+ratings";
+	private static final String LOOKUP_ARTIST = "artist/";
+	private static final String LOOKUP_ARTIST_PARAMS = "?inc=url-rels+tags+ratings";
+	private static final String BROWSE_ARTIST_RGS = "release-group?artist=";
+	private static final String BROWSE_ARTIST_RGS_PARAMS = "&limit=100";
 	
-	private static final String ARTIST_RG_BROWSE = "release-group?artist=";
-	private static final String ARTIST_RG_PARAMS = "&limit=100";
+	private static final String LOOKUP_RELEASE = "release/";
+	private static final String LOOKUP_RELEASE_PARAMS = "?inc=release-groups+artists+recordings+labels+tags+ratings";
+	private static final String BROWSE_RG_RELEASES = "release?release-group=";
+	private static final String BROWSE_RG_RELEASES_PARAMS = "&inc=artist-credits+labels+mediums";
 	
-	private static final String RELEASE_LOOKUP = "release/";
-	private static final String RELEASE_PARAMS = "?inc=release-groups+artists+recordings+labels+tags+ratings";
-	
-	private static final String RG_RELEASE_BROWSE = "release?release-group=";
-	private static final String RG_RELEASE_PARAMS = "&inc=artist-credits+labels+mediums";
-	
-	// searches
 	private static final String SEARCH_ARTIST = "artist?query=";
 	private static final String SEARCH_RG = "release-group?query=";
 	private static final String SEARCH_RELEASE = "release?query=";
-	
 	private static final String SEARCH_BARCODE = "release/?query=barcode:";
-	private static final String BARCODE_PARAMS = "&limit=1";
+	private static final String SEARCH_BARCODE_PARAMS = "&limit=1";
 
-	/**
-	 * Search for barcode and if associated release is found, get release data
-	 * with the lookupRequest method.
-	 * 
-	 * @return Release object or null if barcode not found.
-	 * @throws SAXException 
-	 * @throws IOException 
-	 */
-	public static Release lookupBarcode(String barcode) throws IOException, SAXException {
+	public static Release lookupReleaseFromBarcode(String barcode) throws IOException, SAXException {
 		
 		XMLReader reader = getXMLReader();
 		BarcodeSearchParser bHandler = new BarcodeSearchParser();
 		reader.setContentHandler(bHandler);
 		
-		URL bQuery = new URL(WEB_SERVICE + SEARCH_BARCODE + barcode + BARCODE_PARAMS);
+		URL bQuery = new URL(WEB_SERVICE + SEARCH_BARCODE + barcode + SEARCH_BARCODE_PARAMS);
 		reader.parse(new InputSource(bQuery.openStream()));
 		
 		if (bHandler.isBarcodeFound()) {
@@ -103,14 +89,6 @@ public class WebService {
 		return null;
 	}
 	
-	/**
-	 * Lookup release and create Release object from the XML returned.
-	 * 
-	 * @param id: Release MBID.
-	 * @return Release data.
-	 * @throws SAXException 
-	 * @throws IOException 
-	 */
 	public static Release lookupRelease(String mbid) throws IOException, SAXException {
 		
 		Release release = new Release();
@@ -120,20 +98,12 @@ public class WebService {
 		ReleaseLookupParser rHandler = new ReleaseLookupParser(release);
 		reader.setContentHandler(rHandler);
 		
-		URL rQuery = new URL(WEB_SERVICE + RELEASE_LOOKUP + mbid + RELEASE_PARAMS);
+		URL rQuery = new URL(WEB_SERVICE + LOOKUP_RELEASE + mbid + LOOKUP_RELEASE_PARAMS);
 		reader.parse(new InputSource(rQuery.openStream()));
 		
 		return release;
 	}
 	
-	/**
-	 * Browse request which creates a list of ReleaseStubs given a release group ID.
-	 * 
-	 * @param Release group MBID.
-	 * @return Release stubs.
-	 * @throws SAXException 
-	 * @throws IOException 
-	 */
 	public static LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException, SAXException {
 		
 		LinkedList<ReleaseStub> stubs = new LinkedList<ReleaseStub>();
@@ -142,21 +112,13 @@ public class WebService {
 		ReleaseStubParser handler = new ReleaseStubParser(stubs);
 		reader.setContentHandler(handler);
 		
-		URL query = new URL(WEB_SERVICE + RG_RELEASE_BROWSE + mbid
-				+ RG_RELEASE_PARAMS);
+		URL query = new URL(WEB_SERVICE + BROWSE_RG_RELEASES + mbid
+				+ BROWSE_RG_RELEASES_PARAMS);
 		reader.parse(new InputSource(query.openStream()));
 		
 		return stubs;
 	}
 	
-	/**
-	 * Lookup artist and create Artist object from the XML returned.
-	 * 
-	 * @param Artist MBID.
-	 * @return Artist data.
-	 * @throws SAXException 
-	 * @throws IOException 
-	 */
 	public static Artist lookupArtist(String mbid) throws IOException, SAXException {
 		
 		Artist artist = new Artist();
@@ -166,23 +128,15 @@ public class WebService {
 		ArtistLookupParser handler = new ArtistLookupParser(artist);
 		reader.setContentHandler(handler);
 
-		URL artistQuery = new URL(WEB_SERVICE + ARTIST_LOOKUP + mbid + ARTIST_PARAMS);
+		URL artistQuery = new URL(WEB_SERVICE + LOOKUP_ARTIST + mbid + LOOKUP_ARTIST_PARAMS);
 		reader.parse(new InputSource(artistQuery.openStream()));
 
-		URL releaseGroupQuery = new URL(WEB_SERVICE + ARTIST_RG_BROWSE + mbid + ARTIST_RG_PARAMS);
+		URL releaseGroupQuery = new URL(WEB_SERVICE + BROWSE_ARTIST_RGS + mbid + BROWSE_ARTIST_RGS_PARAMS);
 		reader.parse(new InputSource(releaseGroupQuery.openStream()));
 
 		return artist;
 	}
 	
-	/**
-	 * Search for artists given a String search term.
-	 * 
-	 * @param Search term.
-	 * @return Artist matches list.
-	 * @throws SAXException 
-	 * @throws IOException 
-	 */
 	public static LinkedList<ArtistStub> searchArtist(String searchTerm) throws IOException, SAXException {
 		
 		LinkedList<ArtistStub> results = new LinkedList<ArtistStub>();
@@ -191,20 +145,12 @@ public class WebService {
 		ArtistSearchParser handler = new ArtistSearchParser(results);
 		reader.setContentHandler(handler);
 
-		URL query = new URL(WEB_SERVICE + SEARCH_ARTIST + sanitize(searchTerm));
+		URL query = new URL(WEB_SERVICE + SEARCH_ARTIST + sanitise(searchTerm));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
 	}
 	
-	/**
-	 * Search for release groups given a String search term.
-	 * 
-	 * @param Search term.
-	 * @return ReleaseGroup matches list.
-	 * @throws SAXException 
-	 * @throws IOException 
-	 */
 	public static LinkedList<ReleaseGroup> searchReleaseGroup(String searchTerm) throws IOException, SAXException {
 		
 		LinkedList<ReleaseGroup> results = new LinkedList<ReleaseGroup>();
@@ -213,20 +159,12 @@ public class WebService {
 		RGSearchParser handler = new RGSearchParser(results);
 		reader.setContentHandler(handler);
 
-		URL query = new URL(WEB_SERVICE + SEARCH_RG + sanitize(searchTerm));
+		URL query = new URL(WEB_SERVICE + SEARCH_RG + sanitise(searchTerm));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
 	}
 	
-	/**
-	 * Search for release groups given a String search term.
-	 * 
-	 * @param Search term.
-	 * @return ReleaseGroup matches list.
-	 * @throws SAXException 
-	 * @throws IOException 
-	 */
 	public static LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException, SAXException {
 		
 		LinkedList<ReleaseStub> results = new LinkedList<ReleaseStub>();
@@ -235,7 +173,7 @@ public class WebService {
 		ReleaseStubParser handler = new ReleaseStubParser(results);
 		reader.setContentHandler(handler);
 					
-		URL query = new URL(WEB_SERVICE + SEARCH_RELEASE + sanitize(searchTerm));
+		URL query = new URL(WEB_SERVICE + SEARCH_RELEASE + sanitise(searchTerm));
 		reader.parse(new InputSource(query.openStream()));
 
 		return results;
@@ -289,9 +227,6 @@ public class WebService {
 		return rating;
 	}
 	
-	/*
-	 * Create an XML reader. This happens for every request.
-	 */
 	private static XMLReader getXMLReader() {
 		
 		// TODO hang on to factory reference, avoid new instances
@@ -309,7 +244,7 @@ public class WebService {
 		return null;
 	}
 	
-	private static String sanitize(String input) throws UnsupportedEncodingException {
+	private static String sanitise(String input) throws UnsupportedEncodingException {
 		return URLEncoder.encode(input, "UTF-8");
 	}
 	

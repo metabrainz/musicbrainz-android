@@ -58,7 +58,7 @@ import android.widget.TextView.OnEditorActionListener;
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class AuthenticationActivity extends SuperActivity implements OnEditorActionListener {
+public class LoginActivity extends SuperActivity implements OnEditorActionListener {
 	
 	private EditText uname;
 	private EditText pass;
@@ -98,7 +98,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
     	private ProgressDialog pd;
 
     	protected void onPreExecute() {
-			pd = new ProgressDialog(AuthenticationActivity.this) {
+			pd = new ProgressDialog(LoginActivity.this) {
 				public void cancel() {
 					super.cancel();
 					AuthenticationTask.this.cancel(true);
@@ -114,14 +114,14 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 			WebServiceUser user = new WebServiceUser(username, password, getClientVersion());
 			Boolean success = false;
 			try {
-				success = user.authenticate();
+				success = user.autenticateUserCredentials();
 			} catch (IOException e) {
 				// connection failure
 				e.printStackTrace();
 				return ERROR;
 			}
 			
-			user.shutdownConnectionManager();
+			user.shutdown();
 
 			if (success)
 				// authentication success
@@ -143,7 +143,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 				break;
 			case FAILURE:
 				// authentication fail dialog
-				AlertDialog.Builder failBuilder = new AlertDialog.Builder(AuthenticationActivity.this);
+				AlertDialog.Builder failBuilder = new AlertDialog.Builder(LoginActivity.this);
 				failBuilder.setMessage(getText(R.string.auth_fail))
 				       .setCancelable(false)
 				       .setPositiveButton(getText(R.string.auth_pos), new DialogInterface.OnClickListener() {
@@ -162,7 +162,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 				break;
 			case ERROR:
 				// connection fail dialog with option to restart auth thread
-				AlertDialog.Builder errBuilder = new AlertDialog.Builder(AuthenticationActivity.this);
+				AlertDialog.Builder errBuilder = new AlertDialog.Builder(LoginActivity.this);
 				errBuilder.setMessage(getString(R.string.err_text))
 						.setCancelable(false)
 						.setPositiveButton(getString(R.string.err_pos),
@@ -177,7 +177,7 @@ public class AuthenticationActivity extends SuperActivity implements OnEditorAct
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog, int id) {
 										// finish activity
-										AuthenticationActivity.this.finish();
+										LoginActivity.this.finish();
 									}
 								});
 				try {

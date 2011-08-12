@@ -274,13 +274,13 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
 		protected Boolean doInBackground(String... tags) {
 			
-			Collection<String> processedTags = WebServiceUser.processTags(tags[0]);
+			Collection<String> processedTags = WebServiceUser.sanitiseCommaSeparatedTags(tags[0]);
 			
 			user = getUser();
 			try {
 				user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
 				data.setTags(WebService.refreshTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
-				user.shutdownConnectionManager();
+				user.shutdownConnection();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
@@ -324,7 +324,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 				user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
 				float newRating = WebService.refreshRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 				data.setRating(newRating);
-				user.shutdownConnectionManager();
+				user.shutdownConnection();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
@@ -388,16 +388,16 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 					if (loggedIn) {
 						user = getUser();
 						userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-						user.shutdownConnectionManager();
+						user.shutdownConnection();
 					}
 					return LOADED;
 				case BARCODE:
-					data = WebService.lookupBarcode(barcode);
+					data = WebService.lookupReleaseFromBarcode(barcode);
 					if (data != null) { // barcode found
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-							user.shutdownConnectionManager();
+							user.shutdownConnection();
 						}
 						releaseMbid = data.getReleaseMbid();
 						return LOADED;
@@ -415,7 +415,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-							user.shutdownConnectionManager();
+							user.shutdownConnection();
 						}
 						return LOADED;
 					} else {

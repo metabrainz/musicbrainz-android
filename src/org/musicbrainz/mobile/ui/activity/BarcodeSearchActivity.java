@@ -229,7 +229,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
 			WebServiceUser user = getUser();
 			try {
 				user.submitBarcode(releaseMbid[0], barcode);
-				user.shutdownConnectionManager();
+				user.shutdownConnection();
 			} catch (IOException e) {
 				return false;
 			}

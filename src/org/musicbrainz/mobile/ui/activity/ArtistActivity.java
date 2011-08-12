@@ -231,7 +231,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 				if (loggedIn) {
 					user = getUser();
 					userData = user.getUserData(MBEntity.ARTIST, data.getMbid());
-					user.shutdownConnectionManager();
+					user.shutdownConnection();
 				}
 				return true;
 			} catch (IOException e) {
@@ -296,13 +296,13 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
 		protected Boolean doInBackground(String... tags) {
 			
-			Collection<String> processedTags = WebServiceUser.processTags(tags[0]);
+			Collection<String> processedTags = WebServiceUser.sanitiseCommaSeparatedTags(tags[0]);
 			
 			user = getUser();
 			try {
 				user.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
 				data.setTags(WebService.refreshTags(MBEntity.ARTIST, data.getMbid()));
-				user.shutdownConnectionManager();
+				user.shutdownConnection();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
@@ -346,7 +346,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 				user.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
 				float newRating = WebService.refreshRating(MBEntity.ARTIST, data.getMbid());
 				data.setRating(newRating);
-				user.shutdownConnectionManager();
+				user.shutdownConnection();
 			} catch (IOException e) {
 				return false;
 			} catch (SAXException e) {
