@@ -79,7 +79,7 @@
 		</LinearLayout>
   			
   		<TextView android:id="@+id/noresults"
-			style="@style/NoResultsTextOnly"
+			style="@style/NoResultsText"
 			android:layout_below="@+id/topline"
 			android:layout_alignParentBottom="true" />	
   	</RelativeLayout>

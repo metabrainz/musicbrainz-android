@@ -49,19 +49,9 @@
 		android:layout_below="@+id/topline"
 		android:visibility="gone" />
 		
-	<LinearLayout android:id="@+id/noresults"
-		style="@style/NoSearchResults"
-		android:layout_below="@id/topline">
-		
-		<ImageView
-			style="@style/Wrap"
-			android:src="@drawable/img_noresults" />
-		
-		<TextView
-			style="@style/NoSearchResultsText"
-			android:layout_below="@+id/searchres_text"
-			android:layout_alignParentBottom="true" />
-	</LinearLayout>
+	<TextView android:id="@+id/noresults"
+		style="@style/NoResultsText"
+		android:layout_below="@id/topline" />
 	
 	<LinearLayout android:id="@+id/all_results"
 		style="@style/Fill"
@@ -83,12 +73,20 @@
 				style="@style/Fill">
 				<ListView android:id="@+id/searchres_rg_list"
 					style="@style/List" />
+			
+				<TextView android:id="@+id/no_rgs"
+					style="@style/NoResultsText"
+					android:text="@string/noresults" />
 			</RelativeLayout>
 			
 			<RelativeLayout android:id="@+id/artists_tab"
 				style="@style/Fill">
 				<ListView android:id="@+id/searchres_artist_list"
 					style="@style/List" />
+					
+				<TextView android:id="@+id/no_artists"
+					style="@style/NoResultsText"
+					android:text="@string/noresults" />
 			</RelativeLayout>
 		</FrameLayout>
 		</TabHost>

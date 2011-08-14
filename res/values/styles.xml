@@ -91,15 +91,7 @@
     	<item name="android:orientation">vertical</item>
     </style>
     
-    <style name="NoSearchResultsText" parent="@style/Wrap">
-        <item name="android:text">@string/noresults</item>
-    	<item name="android:textSize">@dimen/text_size_xl</item>
-    	<item name="android:textStyle">bold</item>
-    	<item name="android:textColor">@color/main_text</item>
-    	<item name="android:layout_marginTop">@dimen/std_pad</item>
-    </style>
-    
-    <style name="NoResultsTextOnly" parent="@style/NoSearchResults">
+    <style name="NoResultsText" parent="@style/NoSearchResults">
     	<item name="android:text">@string/noresults</item>
     	<item name="android:textSize">@dimen/text_size_large</item>
     	<item name="android:textColor">@color/main_text</item>

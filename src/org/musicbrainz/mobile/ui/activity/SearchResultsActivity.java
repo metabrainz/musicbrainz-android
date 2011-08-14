@@ -142,7 +142,7 @@ public class SearchResultsActivity extends SuperActivity {
 			artistResultsView.setVisibility(View.VISIBLE);
 			
 			if (artistSearchResults.isEmpty()) {
-				LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
+				TextView noRes = (TextView) findViewById(R.id.noresults);
 				noRes.setVisibility(View.VISIBLE);
 			}
 		}
@@ -181,7 +181,7 @@ public class SearchResultsActivity extends SuperActivity {
 			rgResultsView.setVisibility(View.VISIBLE);
 			
 			if (rgSearchResults.isEmpty()) {
-				LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
+				TextView noRes = (TextView) findViewById(R.id.noresults);
 				noRes.setVisibility(View.VISIBLE);
 			}
 		}
@@ -224,6 +224,11 @@ public class SearchResultsActivity extends SuperActivity {
 			artistResultsView.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, artistSearchResults));
 			artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
 			artistResultsView.setVisibility(View.VISIBLE);
+			
+			if (artistSearchResults.isEmpty()) {
+				TextView noRes = (TextView) findViewById(R.id.no_artists);
+				noRes.setVisibility(View.VISIBLE);
+			}
 		}
 		
 		private void displayRGResultsView() {
@@ -231,6 +236,11 @@ public class SearchResultsActivity extends SuperActivity {
 			rgResultsView.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgSearchResults));
 			rgResultsView.setOnItemClickListener(new RGItemClickListener());
 			rgResultsView.setVisibility(View.VISIBLE);
+			
+			if (rgSearchResults.isEmpty()) {
+				TextView noRes = (TextView) findViewById(R.id.no_rgs);
+				noRes.setVisibility(View.VISIBLE);
+			}
 		}
 		
 		private void setupTabs() {
