@@ -92,7 +92,7 @@
     </style>
     
     <style name="NoResultsText" parent="@style/NoSearchResults">
-    	<item name="android:text">@string/noresults</item>
+    	<item name="android:text">@string/no_results</item>
     	<item name="android:textSize">@dimen/text_size_large</item>
     	<item name="android:textColor">@color/main_text</item>
     </style>

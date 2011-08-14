@@ -127,24 +127,12 @@ public class SearchResultsActivity extends SuperActivity {
 		
 		protected void onPostExecute(Boolean success) {
 			if (success) {
-				displayArtistResults();
+				findViewById(R.id.topline).setVisibility(View.VISIBLE);
+				displayArtistResultsView(R.id.searchres_list, R.id.noresults);
 			} else {
 				displayErrorDialog();
 			}
 			toggleLoading();
-		}
-		
-		private void displayArtistResults() {
-			findViewById(R.id.topline).setVisibility(View.VISIBLE);
-			ListView artistResultsView = (ListView) findViewById(R.id.searchres_list);
-			artistResultsView.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, artistSearchResults));
-			artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
-			artistResultsView.setVisibility(View.VISIBLE);
-			
-			if (artistSearchResults.isEmpty()) {
-				TextView noRes = (TextView) findViewById(R.id.noresults);
-				noRes.setVisibility(View.VISIBLE);
-			}
 		}
 		
 	}
@@ -166,24 +154,12 @@ public class SearchResultsActivity extends SuperActivity {
 		
 		protected void onPostExecute(Boolean success) {
 			if (success) {
-				displayRGResults();
+				findViewById(R.id.topline).setVisibility(View.VISIBLE);
+				displayRGResultsView(R.id.searchres_list, R.id.noresults);
 			} else {
 				displayErrorDialog();
 			}
 			toggleLoading();
-		}
-		
-		private void displayRGResults() {
-			findViewById(R.id.topline).setVisibility(View.VISIBLE);
-			ListView rgResultsView = (ListView) findViewById(R.id.searchres_list);
-			rgResultsView.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgSearchResults));
-			rgResultsView.setOnItemClickListener(new RGItemClickListener());
-			rgResultsView.setVisibility(View.VISIBLE);
-			
-			if (rgSearchResults.isEmpty()) {
-				TextView noRes = (TextView) findViewById(R.id.noresults);
-				noRes.setVisibility(View.VISIBLE);
-			}
 		}
 		
 	}
@@ -215,32 +191,8 @@ public class SearchResultsActivity extends SuperActivity {
 		
 		private void displayMultiResults() {
 			setupTabs();
-			displayArtistResultsView();
-			displayRGResultsView();
-		}
-
-		private void displayArtistResultsView() {
-			ListView artistResultsView = (ListView) findViewById(R.id.searchres_artist_list);
-			artistResultsView.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, artistSearchResults));
-			artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
-			artistResultsView.setVisibility(View.VISIBLE);
-			
-			if (artistSearchResults.isEmpty()) {
-				TextView noRes = (TextView) findViewById(R.id.no_artists);
-				noRes.setVisibility(View.VISIBLE);
-			}
-		}
-		
-		private void displayRGResultsView() {
-			ListView rgResultsView = (ListView) findViewById(R.id.searchres_rg_list);
-			rgResultsView.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgSearchResults));
-			rgResultsView.setOnItemClickListener(new RGItemClickListener());
-			rgResultsView.setVisibility(View.VISIBLE);
-			
-			if (rgSearchResults.isEmpty()) {
-				TextView noRes = (TextView) findViewById(R.id.no_rgs);
-				noRes.setVisibility(View.VISIBLE);
-			}
+			displayArtistResultsView(R.id.searchres_artist_list, R.id.no_artists);
+			displayRGResultsView(R.id.searchres_rg_list, R.id.no_rgs);
 		}
 		
 		private void setupTabs() {
@@ -270,6 +222,30 @@ public class SearchResultsActivity extends SuperActivity {
 			tabs.addTab(artistsTab);
 		}
 		
+	}
+	
+	private void displayArtistResultsView(int listViewId, int noResultsId) {
+		ListView artistResultsView = (ListView) findViewById(listViewId);
+		artistResultsView.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, artistSearchResults));
+		artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
+		artistResultsView.setVisibility(View.VISIBLE);
+		
+		if (artistSearchResults.isEmpty()) {
+			TextView noRes = (TextView) findViewById(noResultsId);
+			noRes.setVisibility(View.VISIBLE);
+		}
+	}
+	
+	private void displayRGResultsView(int listViewId, int noResultsId) {
+		ListView rgResultsView = (ListView) findViewById(listViewId);
+		rgResultsView.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgSearchResults));
+		rgResultsView.setOnItemClickListener(new RGItemClickListener());
+		rgResultsView.setVisibility(View.VISIBLE);
+
+		if (rgSearchResults.isEmpty()) {
+			TextView noResults = (TextView) findViewById(noResultsId);
+			noResults.setVisibility(View.VISIBLE);
+		}
 	}
 	
 	private void displayErrorDialog() {

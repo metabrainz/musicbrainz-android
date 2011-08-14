@@ -44,7 +44,9 @@
 
 	<!-- SearchResultsActivity -->
 	<string name="searchres_title">Search Results</string>
-	<string name="noresults">No results found</string>
+	<string name="no_results">No results found</string>
+	<string name="no_artists">No artists found</string>
+	<string name="no_releases">No releases found</string>
 	<string name="tab_artists">Artists</string>
 	<string name="tab_rgs">Releases</string>
 	
