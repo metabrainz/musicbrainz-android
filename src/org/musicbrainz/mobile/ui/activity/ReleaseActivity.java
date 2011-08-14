@@ -80,7 +80,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private Release data;
 	
 	// query data
-	private Source src;
+	private LookupSource src;
 	private String releaseMbid;
 	private String releaseGroupMbid;
 	private LinkedList<ReleaseStub> stubs;
@@ -172,33 +172,28 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		labels.setText(data.getFormattedLabels());
 		releaseDate.setText(data.getDate());
 		
-		// hide release data row if empty
-		if (data.getFormattedLabels() == "" && data.getDate() == "") {
-			labels.setVisibility(View.GONE);
-			releaseDate.setVisibility(View.GONE);
-		}
-		
-		// notify user if no tags are returned
-		if (data.getTags() == "")
+		if (data.getTags() == "") {
 			tags.setText(getText(R.string.no_tags));
-		
-		// disable edit options if not logged in
+		}
+
 		if (!loggedIn) {
-			
-			tagInput.setEnabled(false);
-			tagInput.setFocusable(false);
-			
-			ratingInput.setEnabled(false);
-			ratingInput.setFocusable(false);
-			
-			tagBtn.setEnabled(false);
-			tagBtn.setFocusable(false);
-			
-			rateBtn.setEnabled(false);
-			rateBtn.setFocusable(false);
-			
+			disableEditFields();
 			findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
 		}
+	}
+
+	private void disableEditFields() {
+		tagInput.setEnabled(false);
+		tagInput.setFocusable(false);
+		
+		ratingInput.setEnabled(false);
+		ratingInput.setFocusable(false);
+		
+		tagBtn.setEnabled(false);
+		tagBtn.setFocusable(false);
+		
+		rateBtn.setEnabled(false);
+		rateBtn.setFocusable(false);
 	}
 	
 	private void addActionBarShare() {
@@ -227,12 +222,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		return releaseIntent;
     }
 	
-	/*
-	 * Create and add tabs.
-	 */
 	private void setupTabs() {
-		
-		TabHost tabs = (TabHost) this.findViewById(R.id.release_tabhost);
+		TabHost tabs = (TabHost) findViewById(R.id.release_tabhost);
 		tabs.setup();
 	
 		TabSpec tracksTab = tabs.newTabSpec("tracks");
@@ -250,10 +241,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		tabs.addTab(editsTab);
 	}
 	
-	/*
-	 * Refresh the background task status indicator.
-	 */
-	private void updateProgress() {
+	private void updateProgressStatus() {
 		if (doingTag || doingRate) {
 			actionBar.setProgressBarVisibility(View.VISIBLE);
 		} else {
@@ -261,98 +249,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		}
 	}
 	
-	/**
-	 * Task to submit user tags and refresh page tags list.
-	 */
-	private class TagTask extends AsyncTask<String, Void, Boolean> {
-		
-		protected void onPreExecute() {
-			doingTag = true;
-			updateProgress();
-			tagBtn.setEnabled(false);
-		}
-
-		protected Boolean doInBackground(String... tags) {
-			
-			Collection<String> processedTags = WebServiceUser.sanitiseCommaSeparatedTags(tags[0]);
-			
-			user = getUser();
-			try {
-				user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
-				data.setTags(WebService.refreshTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
-				user.shutdownConnection();
-			} catch (IOException e) {
-				return false;
-			} catch (SAXException e) {
-				return true;
-			}
-			return true;
-		}
-		
-		protected void onPostExecute(Boolean success) {
-			
-			tags.setText(data.getTags());
-			
-			doingTag = false;
-			updateProgress();
-			tagBtn.setEnabled(true);
-			
-			if (success) {
-				Toast.makeText(ReleaseActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT); 
-			} else {
-				Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG);
-			}
-		}
-		
-	}
-	
-	/**
-	 * Task to submit user rating and refresh page rating.
-	 */
-	private class RatingTask extends AsyncTask<Integer, Void, Boolean> {
-		
-		protected void onPreExecute() {
-			doingRate = true;
-			updateProgress();
-			rateBtn.setEnabled(false);
-		}
-
-		protected Boolean doInBackground(Integer... rating) {
-			
-			user = getUser();
-			try {
-				user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
-				float newRating = WebService.refreshRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-				data.setRating(newRating);
-				user.shutdownConnection();
-			} catch (IOException e) {
-				return false;
-			} catch (SAXException e) {
-				return true;
-			}
-			return true;
-		}
-		
-		protected void onPostExecute(Boolean success) {
-			
-			rating.setRating(data.getRating());
-			
-			doingRate = false;
-			updateProgress();
-			rateBtn.setEnabled(true);
-			
-			if (success) {
-				Toast.makeText(ReleaseActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show(); 
-			} else {
-				Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
-			}
-		}
-
-	}
-	
-	/**
-	 * Task to retrieve data from webservice and populate page.
-	 */
 	private class LookupTask extends AsyncTask<Void, Void, Integer> {
 		
 		/*
@@ -371,11 +267,11 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		protected void onPreExecute() {
 	        
 	        if (releaseMbid != null) {
-	        	src = Source.RELEASE_ID;
+	        	src = LookupSource.RELEASE_MBID;
 	        } else if (releaseGroupMbid != null) {
-	        	src = Source.RG_ID;
+	        	src = LookupSource.RG_MBID;
 	        } else {
-	        	src = Source.BARCODE;
+	        	src = LookupSource.BARCODE;
 	        }
 		}
 		
@@ -383,40 +279,30 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			
 			try {
 				switch (src) {
-				case RELEASE_ID:
-					data = WebService.lookupRelease(releaseMbid);
-					if (loggedIn) {
-						user = getUser();
-						userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-						user.shutdownConnection();
-					}
+				case RELEASE_MBID:
+					doReleaseLookup();
 					return LOADED;
 				case BARCODE:
 					data = WebService.lookupReleaseFromBarcode(barcode);
 					if (data != null) { // barcode found
+						releaseMbid = data.getReleaseMbid();
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-							user.shutdownConnection();
+							user.shutdownConnectionManager();
 						}
-						releaseMbid = data.getReleaseMbid();
 						return LOADED;
 					} else {
 						return BARCODE_NOT_FOUND;
 					}
-				case RG_ID:
+				case RG_MBID:
 					stubs = WebService.browseReleases(releaseGroupMbid);
 					
 					// lookup release if single release in release group
 					if (stubs.size() == 1) {
 						ReleaseStub r = stubs.getFirst();				
 						releaseMbid = r.getReleaseMbid();
-						data = WebService.lookupRelease(releaseMbid);
-						if (loggedIn) {
-							user = getUser();
-							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-							user.shutdownConnection();
-						}
+						doReleaseLookup();
 						return LOADED;
 					} else {
 						return RG_LOADED;
@@ -429,70 +315,178 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			}
 			return ERROR;
 		}
+
+		private void doReleaseLookup() throws IOException, SAXException {
+			data = WebService.lookupRelease(releaseMbid);
+			if (loggedIn) {
+				user = getUser();
+				userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+				user.shutdownConnectionManager();
+			}
+		}
 		
 		protected void onPostExecute(Integer resultCode) {
 			
 			switch (resultCode) {
 			case LOADED:
-				// display release data
-				populate();
-				if (loggedIn) {
-					tagInput.setText(userData.getTagString());
-					ratingInput.setRating(userData.getRating());
-				}
+				displayReleaseData();
 				break;
 			case BARCODE_NOT_FOUND:
-				try {
-					BarcodeResultDialog bcode = new BarcodeResultDialog(ReleaseActivity.this, loggedIn, barcode);
-					bcode.setCancelable(true);
-					bcode.show();
-				} catch (Exception e) {
-					Log.e("Barcode not found but Activity closed anyway");
-				}
+				displayBarcodeResultDialog();
 				break;
 			case RG_LOADED:
-				try {
-					ReleaseSelectionDialog rsd = new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
-					rsd.show();
-				} catch (Exception e) {
-					Log.e("Release groups loaded but Activity has closed");
-				}
+				displayReleaseSelectionDialog();
 				break;
 			case ERROR:
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						ReleaseActivity.this);
-				builder.setMessage(
-						getString(R.string.err_text))
-						.setCancelable(false)
-						.setPositiveButton(getString(R.string.err_pos),
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog, int id) {
-										// restart search thread
-										new LookupTask().execute();
-										dialog.cancel();
-									}
-								})
-						.setNegativeButton(getString(R.string.err_neg),
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog, int id) {
-										// finish activity
-										ReleaseActivity.this.finish();
-									}
-								});
-				try{
-					Dialog conError = builder.create();
-					conError.show();
-				} catch (Exception e) {
-					Log.e("Connection timed out but Activity has closed anyway");
-				}
+				displayErrorDialog();
+			}
+		}
+		
+		private void displayReleaseData() {
+			populate();
+			if (loggedIn) {
+				tagInput.setText(userData.getTagString());
+				ratingInput.setRating(userData.getRating());
+			}
+		}
+		
+		private void displayBarcodeResultDialog() {
+			try {
+				BarcodeResultDialog bcode = new BarcodeResultDialog(ReleaseActivity.this, loggedIn, barcode);
+				bcode.setCancelable(true);
+				bcode.show();
+			} catch (Exception e) {
+				Log.e("Barcode not found but Activity closed anyway");
+			}
+		}
+
+		private void displayReleaseSelectionDialog() {
+			try {
+				ReleaseSelectionDialog rsd = new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
+				rsd.show();
+			} catch (Exception e) {
+				Log.e("Release groups loaded but Activity has closed");
+			}
+		}
+
+		private void displayErrorDialog() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					ReleaseActivity.this);
+			builder.setMessage(
+					getString(R.string.err_text))
+					.setCancelable(false)
+					.setPositiveButton(getString(R.string.err_pos),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int id) {
+									// restart search thread
+									new LookupTask().execute();
+									dialog.cancel();
+								}
+							})
+					.setNegativeButton(getString(R.string.err_neg),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int id) {
+									// finish activity
+									ReleaseActivity.this.finish();
+								}
+							});
+			try{
+				Dialog conError = builder.create();
+				conError.show();
+			} catch (Exception e) {
+				Log.e("Connection timed out but Activity has closed anyway");
 			}
 		}
 		
 	}
-    
-    /**
-     * Listener for edit and artist button clicks.
-     */
+	
+	private class TagTask extends AsyncTask<String, Void, Boolean> {
+		
+		protected void onPreExecute() {
+			doingTag = true;
+			updateProgressStatus();
+			tagBtn.setEnabled(false);
+		}
+
+		protected Boolean doInBackground(String... tags) {
+			
+			Collection<String> processedTags = WebServiceUser.sanitiseCommaSeparatedTags(tags[0]);
+			
+			try {
+				submitThenRefreshTags(processedTags);
+			} catch (IOException e) {
+				return false;
+			} catch (SAXException e) {
+				return true;
+			}
+			return true;
+		}
+
+		private void submitThenRefreshTags(Collection<String> processedTags) throws IOException, SAXException {
+			user = getUser();
+			user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
+			data.setTags(WebService.refreshTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
+			user.shutdownConnectionManager();
+		}
+		
+		protected void onPostExecute(Boolean success) {
+			
+			tags.setText(data.getTags());
+			doingTag = false;
+			updateProgressStatus();
+			tagBtn.setEnabled(true);
+			if (success) {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT); 
+			} else {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG);
+			}
+		}
+		
+	}
+
+	private class RatingTask extends AsyncTask<Integer, Void, Boolean> {
+		
+		protected void onPreExecute() {
+			doingRate = true;
+			updateProgressStatus();
+			rateBtn.setEnabled(false);
+		}
+
+		protected Boolean doInBackground(Integer... rating) {
+		
+			try {
+				submitThenRefreshRating(rating);
+			} catch (IOException e) {
+				return false;
+			} catch (SAXException e) {
+				return true;
+			}
+			return true;
+		}
+
+		private void submitThenRefreshRating(Integer... rating) throws IOException, SAXException {
+			user = getUser();
+			user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
+			float newRating = WebService.refreshRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+			data.setRating(newRating);
+			user.shutdownConnectionManager();
+		}
+		
+		protected void onPostExecute(Boolean success) {
+			
+			rating.setRating(data.getRating());
+			doingRate = false;
+			updateProgressStatus();
+			rateBtn.setEnabled(true);
+			if (success) {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show(); 
+			} else {
+				Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
+			}
+		}
+
+	}
+	
 	public void onClick(View v) {
 		
 		switch(v.getId()) {
@@ -514,9 +508,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		
 	}
     
-	/**
-	 * Adapter for list of tracks.
-	 */
 	private class TrackAdapter extends ArrayAdapter<Track> {
 		
 		TrackAdapter() {
@@ -549,9 +540,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		
 	}
 	
-	/**
-	 * Holder pattern minimises executions of findViewById().
-	 */
+	// Holder pattern minimises executions of findViewById()
 	private class TrackListWrapper {
 		
 		View base;
@@ -585,12 +574,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		}
 	}
 	
-	/**
-	 * Type of data used to retrieve entity data.
-	 */
-	private enum Source {
-		RELEASE_ID,
-		RG_ID,
+	private enum LookupSource {
+		RELEASE_MBID,
+		RG_MBID,
 		BARCODE
 	}
 	

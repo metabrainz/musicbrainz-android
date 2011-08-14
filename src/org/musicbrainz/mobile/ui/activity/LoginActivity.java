@@ -121,7 +121,7 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
 				return ERROR;
 			}
 			
-			user.shutdown();
+			user.shutdownConnectionManager();
 
 			if (success)
 				// authentication success

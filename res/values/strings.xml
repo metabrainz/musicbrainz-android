@@ -45,17 +45,20 @@
 	<!-- SearchResultsActivity -->
 	<string name="searchres_title">Search Results</string>
 	<string name="noresults">No results found!</string>
+	<string name="tab_artists">Artists</string>
+	<string name="tab_rgs">Releases</string>
 	
 	<!-- Search types -->
 	<string name="search_artist">Artist</string>
 	<string name="search_release">Release</string>
+	<string name="search_all">Search</string>
 
 	<!-- ReleaseActivity -->
 	<string name="release_title">Release</string>
 	<string name="artistinfo_label">Artist Information</string>
 	<string name="tab_tracks">Tracks</string>
 	
-	<string name="no_tags">No tags available!</string>
+	<string name="no_tags">No tags found</string>
 	<string name="edit_login">You must log in before you can edit!</string>
 	
 	<string name="share">Share</string>

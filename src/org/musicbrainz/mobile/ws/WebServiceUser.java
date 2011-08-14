@@ -252,7 +252,7 @@ public class WebServiceUser extends WebService {
 		return tagList;
 	}
 	
-	public void shutdownConnection() {
+	public void shutdownConnectionManager() {
 		httpClient.getConnectionManager().shutdown();
 	}
 	

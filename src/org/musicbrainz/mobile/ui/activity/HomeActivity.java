@@ -182,10 +182,13 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	
 	private String getSearchTypeFromSpinner() {
 		int spinnerPosition = searchTypeSpinner.getSelectedItemPosition();
-		if (spinnerPosition == 0) {
+		switch (spinnerPosition) {
+		case 0:
 			return SearchResultsActivity.INTENT_ARTIST;
-		} else {
+		case 1:
 			return SearchResultsActivity.INTENT_RELEASE_GROUP;
+		default:
+			return SearchResultsActivity.INTENT_ALL;
 		}
 	}
 	
@@ -194,9 +197,9 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	 */
 	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 		
-		if (v.getId() == R.id.query_input && actionId == EditorInfo.IME_NULL) 
+		if (v.getId() == R.id.query_input && actionId == EditorInfo.IME_NULL) {
 			startSearch();
-		
+		}
 		return false;
 	}
 	

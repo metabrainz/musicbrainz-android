@@ -24,6 +24,16 @@
 	<com.markupartist.android.widget.ActionBar
     	android:id="@+id/actionbar"
     	style="@style/ActionBar" />
+    	
+   	<LinearLayout android:id="@+id/loading"
+		style="@style/Loading"
+		android:background="@color/main_bg"
+		android:layout_below="@+id/actionbar">
+	
+		<ProgressBar 
+			style="@style/Wrap" 
+			android:indeterminateDrawable="@anim/progress" />
+	</LinearLayout>
   
 	<TextView android:id="@+id/searchres_text"
 		style="@style/SearchHeader"
@@ -31,16 +41,8 @@
 		
 	<View android:id="@+id/topline"
 		style="@style/Separator"
-  		android:layout_below="@+id/searchres_text" />
-  		
-  	<LinearLayout android:id="@+id/loading"
-		style="@style/Loading"
-		android:layout_below="@+id/topline">
-	
-		<ProgressBar 
-			style="@style/Wrap" 
-			android:indeterminateDrawable="@anim/progress" />
-	</LinearLayout>
+  		android:layout_below="@+id/searchres_text"
+  		android:visibility="gone" />
   			
 	<ListView android:id="@+id/searchres_list"
 		style="@style/List"
@@ -57,8 +59,39 @@
 		
 		<TextView
 			style="@style/NoSearchResultsText"
-			android:layout_below="@+id/topline"
+			android:layout_below="@+id/searchres_text"
 			android:layout_alignParentBottom="true" />
+	</LinearLayout>
+	
+	<LinearLayout android:id="@+id/all_results"
+		style="@style/Fill"
+		android:layout_below="@+id/topline"
+		android:visibility="gone">
+	
+		<TabHost android:id="@+id/searchres_tabhost"
+			style="@style/WrapHeight"
+			android:layout_weight="1">
+			
+		<TabWidget android:id="@android:id/tabs"
+			style="@style/WrapHeight" />
+			
+		<FrameLayout android:id="@android:id/tabcontent"
+			style="@style/Fill"
+			android:paddingTop="@dimen/tab_height">
+			
+			<RelativeLayout android:id="@+id/rgs_tab"
+				style="@style/Fill">
+				<ListView android:id="@+id/searchres_rg_list"
+					style="@style/List" />
+			</RelativeLayout>
+			
+			<RelativeLayout android:id="@+id/artists_tab"
+				style="@style/Fill">
+				<ListView android:id="@+id/searchres_artist_list"
+					style="@style/List" />
+			</RelativeLayout>
+		</FrameLayout>
+		</TabHost>
 	</LinearLayout>
   		
 </RelativeLayout>

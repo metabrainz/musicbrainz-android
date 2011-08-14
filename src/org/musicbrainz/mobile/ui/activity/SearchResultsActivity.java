@@ -40,9 +40,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.TabHost.TabSpec;
 
 /**
  * Activity to display a list of search results to the user and support intents
@@ -50,130 +53,244 @@ import android.widget.TextView;
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class SearchResultsActivity extends SuperActivity implements ListView.OnItemClickListener {
+public class SearchResultsActivity extends SuperActivity {
 	
 	public static final String INTENT_TYPE = "type";
 	public static final String INTENT_QUERY = "term";
 	public static final String INTENT_ARTIST = "artist";
 	public static final String INTENT_RELEASE_GROUP = "rg";
+	public static final String INTENT_ALL = "all";
 	
 	private String searchTerm;
 	private SearchType searchType;
 	
-	private ListView results;
-	private LinkedList<?> searchResults;
+	private LinkedList<ArtistStub> artistSearchResults;
+	private LinkedList<ReleaseGroup> rgSearchResults;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
         setContentView(R.layout.activity_searchres);
         setupActionBarWithHome();
-        
-        TextView resultsText = (TextView) findViewById(R.id.searchres_text);
-        results = (ListView) findViewById(R.id.searchres_list);
-        
-        String intentType = getIntent().getStringExtra(INTENT_TYPE);
+   
         searchTerm = getIntent().getStringExtra(INTENT_QUERY);
-        
+        configureSearch();
+        doSearch();
+	}
+
+	private void configureSearch() {
+		String intentType = getIntent().getStringExtra(INTENT_TYPE);
         if (intentType.equals(INTENT_ARTIST)) {
         	searchType = SearchType.ARTIST;
-        	resultsText.setText(getString(R.string.search_artist) + " '" + searchTerm + "'");
+        	setHeaderText(R.string.search_artist);
         } else if (intentType.equals(INTENT_RELEASE_GROUP)) {
         	searchType = SearchType.RELEASE_GROUP;
-        	resultsText.setText(getString(R.string.search_release) + " '" + searchTerm + "'");
+        	setHeaderText(R.string.search_release);
+        } else if (intentType.equals(INTENT_ALL)) {
+        	searchType = SearchType.ALL;
+        	setHeaderText(R.string.search_all);
         }
-        new SearchTask().execute();
 	}
 	
-	/**
-	 * Task to perform search through the webservice and display results.
-	 */
-	private class SearchTask extends AsyncTask<Void, Void, Integer> {
-		
-		private static final int ARTIST_RESULTS = 0;
-		private static final int RG_RESULTS = 1;
-		private static final int ERROR = 2;
+	private void setHeaderText(int searchNameResource) {
+		TextView resultsText = (TextView) findViewById(R.id.searchres_text);
+		resultsText.setText(getString(searchNameResource) + " '" + searchTerm + "'");
+	}
+	
+	private void doSearch() {
+		switch (searchType) {
+		case ARTIST:
+			new ArtistSearchTask().execute();
+			break;
+		case RELEASE_GROUP:
+			new RGSearchTask().execute();
+			break;
+		case ALL:
+			new MultiSearchTask().execute();
+		}
+	}
+	
+	private class ArtistSearchTask extends AsyncTask<Void, Void, Boolean> {
 
-		protected Integer doInBackground(Void... params) {
-
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			boolean success = true;
 			try {
-				switch (searchType) {
-				case ARTIST:
-					searchResults = WebService.searchArtist(searchTerm);
-					return ARTIST_RESULTS;
-				case RELEASE_GROUP:
-					searchResults = WebService.searchReleaseGroup(searchTerm);
-					return RG_RESULTS;
-				}
+				artistSearchResults = WebService.searchArtist(searchTerm);
 			} catch (IOException e) {
-				return ERROR;
+				success = false;
 			} catch (SAXException e) {
-				return ERROR;
+				success = false;
 			}
-			return ERROR;
+			return success;
 		}
 		
-		protected void onPostExecute(Integer resultCode) {
-			
-			switch (resultCode) {
-			case ARTIST_RESULTS:
-
-				@SuppressWarnings("unchecked")
-				LinkedList<ArtistStub> rs = (LinkedList<ArtistStub>) searchResults;
-				
-				results.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, rs));
-				results.setOnItemClickListener(SearchResultsActivity.this);
-				results.setVisibility(View.VISIBLE);
-				
-				if (rs.isEmpty()) {
-					LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
-					noRes.setVisibility(View.VISIBLE);
-				}
-				break;
-			case RG_RESULTS:
-				
-				@SuppressWarnings("unchecked")
-				LinkedList<ReleaseGroup> rgs = (LinkedList<ReleaseGroup>) searchResults;
-				
-				results.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgs));
-				results.setOnItemClickListener(SearchResultsActivity.this);
-				results.setVisibility(View.VISIBLE);
-				
-				if (rgs.isEmpty()) {
-					LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
-					noRes.setVisibility(View.VISIBLE);
-				}
-				break;
-			case ERROR:
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						SearchResultsActivity.this);
-				builder.setMessage(
-						getString(R.string.err_text))
-						.setCancelable(false)
-						.setPositiveButton(getString(R.string.err_pos),
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog, int id) {
-										// new search thread
-										new SearchTask().execute();
-										dialog.cancel();
-										toggleLoading();
-									}
-								})
-						.setNegativeButton(getString(R.string.err_neg),
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog, int id) {
-										// finish activity
-										SearchResultsActivity.this.finish();
-									}
-								});
-				try {
-					Dialog conError = builder.create();
-					conError.show();
-				} catch (Exception e) {
-					Log.e("Connection timed out but Activity has closed anyway");
-				}
+		protected void onPostExecute(Boolean success) {
+			if (success) {
+				displayArtistResults();
+			} else {
+				displayErrorDialog();
 			}
 			toggleLoading();
+		}
+		
+		private void displayArtistResults() {
+			findViewById(R.id.topline).setVisibility(View.VISIBLE);
+			ListView artistResultsView = (ListView) findViewById(R.id.searchres_list);
+			artistResultsView.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, artistSearchResults));
+			artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
+			artistResultsView.setVisibility(View.VISIBLE);
+			
+			if (artistSearchResults.isEmpty()) {
+				LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
+				noRes.setVisibility(View.VISIBLE);
+			}
+		}
+		
+	}
+	
+	private class RGSearchTask extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			boolean success = true;
+			try {
+				rgSearchResults = WebService.searchReleaseGroup(searchTerm);
+			} catch (IOException e) {
+				success = false;
+			} catch (SAXException e) {
+				success = false;
+			}
+			return success;
+		}
+		
+		protected void onPostExecute(Boolean success) {
+			if (success) {
+				displayRGResults();
+			} else {
+				displayErrorDialog();
+			}
+			toggleLoading();
+		}
+		
+		private void displayRGResults() {
+			findViewById(R.id.topline).setVisibility(View.VISIBLE);
+			ListView rgResultsView = (ListView) findViewById(R.id.searchres_list);
+			rgResultsView.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgSearchResults));
+			rgResultsView.setOnItemClickListener(new RGItemClickListener());
+			rgResultsView.setVisibility(View.VISIBLE);
+			
+			if (rgSearchResults.isEmpty()) {
+				LinearLayout noRes = (LinearLayout) findViewById(R.id.noresults);
+				noRes.setVisibility(View.VISIBLE);
+			}
+		}
+		
+	}
+	
+	private class MultiSearchTask extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			boolean success = true;
+			try {
+				artistSearchResults = WebService.searchArtist(searchTerm);
+				rgSearchResults = WebService.searchReleaseGroup(searchTerm);
+			} catch (IOException e) {
+				success = false;
+			} catch (SAXException e) {
+				success = false;
+			}
+			return success;
+		}
+		
+		protected void onPostExecute(Boolean success) {
+			if (success) {
+				displayMultiResults();
+			} else {
+				displayErrorDialog();
+			}
+			toggleLoading();
+		}
+		
+		private void displayMultiResults() {
+			setupTabs();
+			displayArtistResultsView();
+			displayRGResultsView();
+		}
+
+		private void displayArtistResultsView() {
+			ListView artistResultsView = (ListView) findViewById(R.id.searchres_artist_list);
+			artistResultsView.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, artistSearchResults));
+			artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
+			artistResultsView.setVisibility(View.VISIBLE);
+		}
+		
+		private void displayRGResultsView() {
+			ListView rgResultsView = (ListView) findViewById(R.id.searchres_rg_list);
+			rgResultsView.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgSearchResults));
+			rgResultsView.setOnItemClickListener(new RGItemClickListener());
+			rgResultsView.setVisibility(View.VISIBLE);
+		}
+		
+		private void setupTabs() {
+			LinearLayout allResults = (LinearLayout) findViewById(R.id.all_results);
+			allResults.setVisibility(View.VISIBLE);
+			TabHost host = (TabHost) findViewById(R.id.searchres_tabhost);
+			host.setup();
+			setupArtistsTab(host);
+			setupRGsTab(host);
+		}
+
+		private void setupRGsTab(TabHost tabs) {
+			TabSpec rgsTab = tabs.newTabSpec("rgs");
+			final TextView rgsIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
+			rgsIndicator.setText(R.string.tab_rgs);
+			rgsTab.setIndicator(rgsIndicator);
+			rgsTab.setContent(R.id.rgs_tab);
+			tabs.addTab(rgsTab);
+		}
+
+		private void setupArtistsTab(TabHost tabs) {
+			TabSpec artistsTab = tabs.newTabSpec("artists");
+			final TextView artistsIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
+			artistsIndicator.setText(R.string.tab_artists);
+			artistsTab.setIndicator(artistsIndicator);
+			artistsTab.setContent(R.id.artists_tab);
+			tabs.addTab(artistsTab);
+		}
+		
+	}
+	
+	private void displayErrorDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(SearchResultsActivity.this);
+		builder.setMessage(getString(R.string.err_text));
+		builder.setCancelable(false);
+		builder.setPositiveButton(getString(R.string.err_pos), new ErrorPositiveListener());
+		builder.setNegativeButton(getString(R.string.err_neg), new ErrorNegativeListener());
+		try {
+			Dialog conError = builder.create();
+			conError.show();
+		} catch (Exception e) {
+			Log.e("Connection timed out but Activity has closed anyway");
+		}
+	}
+	
+	private class ErrorPositiveListener implements DialogInterface.OnClickListener {
+
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			doSearch();
+			dialog.cancel();
+			toggleLoading();
+		}
+	}
+	
+	private class ErrorNegativeListener implements DialogInterface.OnClickListener {
+
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			SearchResultsActivity.this.finish();
 		}
 	}
 	
@@ -185,37 +302,59 @@ public class SearchResultsActivity extends SuperActivity implements ListView.OnI
 			loading.setVisibility(View.GONE);
 		}
 	}
+	
+	private class ArtistItemClickListener implements OnItemClickListener {
 
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		
-		switch (searchType) {
-		case ARTIST:
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			startArtistActivity(position);
+		}
+
+		private void startArtistActivity(int position) {
 			Intent artistIntent = new Intent (SearchResultsActivity.this, ArtistActivity.class);
-			
-			ArtistStub stub = (ArtistStub) searchResults.get(position);
-			artistIntent.putExtra("mbid", stub.getMbid());
+			ArtistStub stub = (ArtistStub) artistSearchResults.get(position);
+			artistIntent.putExtra(ArtistActivity.INTENT_MBID, stub.getMbid());
 			startActivity(artistIntent);
-			break;
-		case RELEASE_GROUP:
-			ReleaseGroup r = (ReleaseGroup) searchResults.get(position);
-			if (r.getNumberReleases() == 1) {
-				// only one release in group - intent with release ID
-				String releaseID = r.getSingleReleaseMbid();
-				Intent releaseIntent = new Intent (SearchResultsActivity.this, ReleaseActivity.class);
-				releaseIntent.putExtra("r_id", releaseID);
-				startActivity(releaseIntent);
+		}
+		
+	}
+	
+	private class RGItemClickListener implements OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			ReleaseGroup rg = (ReleaseGroup) rgSearchResults.get(position);
+			if (rg.isSingleRelease()) {
+				startReleaseActivity(rg.getSingleReleaseMbid());
 			} else {
-				// multiple releases - intent with rg ID
-				Intent releaseIntent = new Intent (SearchResultsActivity.this, ReleaseActivity.class);
-				releaseIntent.putExtra("rg_id", r.getMbid());
-				startActivity(releaseIntent);
+				startRGActivity(rg.getMbid());
 			}
 		}
+
+		private void startRGActivity(String mbid) {
+			Intent releaseIntent = new Intent (SearchResultsActivity.this, ReleaseActivity.class);
+			releaseIntent.putExtra(ReleaseActivity.INTENT_RG_MBID, mbid);
+			startActivity(releaseIntent);
+		}
+
+		private void startReleaseActivity(String mbid) {
+			Intent releaseIntent = new Intent (SearchResultsActivity.this, ReleaseActivity.class);
+			releaseIntent.putExtra(ReleaseActivity.INTENT_RELEASE_MBID, mbid);
+			startActivity(releaseIntent);
+		}
+		
+	}
+	
+	@Override
+	public boolean onSearchRequested() {
+		startActivity(HomeActivity.createIntent(this));
+	    return false;
 	}
 	
 	public enum SearchType {
 		ARTIST,
-		RELEASE_GROUP
+		RELEASE_GROUP,
+		ALL
 	}
 
 }

@@ -23,7 +23,7 @@ package org.musicbrainz.mobile.util;
 public class Config {
 	
 	public static final String TAG = "MusicBrainz";
-	public static final boolean LIVE = true;
+	public static final boolean LIVE = false;
 	public static final String FEEDBACK_EMAIL = "support@musicbrainz.org";
 	
 	public static final String WEB_SERVICE = "http://www.musicbrainz.org/ws/2/";
