@@ -48,26 +48,43 @@ public class IncomingActivity extends Activity {
         String type = segments.get(0);
         
         if (type.equals(URI_ARTIST)) {
-        	String mbid = segments.get(1);
-            startArtistActivity(mbid);
+            startArtistActivity(segments.get(1));
         } else if (type.equals(URI_RELEASE)) {
-        	String mbid = segments.get(1);
-            startReleaseActivity(mbid);
+            startReleaseActivity(segments.get(1));
         } else if (type.equals(URI_SEARCH)) {
-        	String entity = segments.get(1);
-        	String query = segments.get(2);
-        	if (entity.equals(URI_ARTIST)) {
-    			startSearchResultsActivity(SearchResultsActivity.INTENT_ARTIST, query);
-    		} else if (entity.equals(URI_RELEASE)) {
-    			startSearchResultsActivity(SearchResultsActivity.INTENT_RELEASE_GROUP, query);
-    		} else {
-    			displayErrorLayout("Unrecognised URI segment: search type");
-    		}
+        	doSearch(segments);
         } else {
         	displayErrorLayout("Unrecognised URI segment: action");
         }
         this.finish();
     }
+
+	private void doSearch(List<String> segments) {
+		if (segments.size() == 2) {
+			allSearch(segments);
+		} else if (segments.size() == 3) {
+			entitySearch(segments);
+		} else {
+			displayErrorLayout("Too many URI segments");
+		}
+	}
+
+	private void allSearch(List<String> segments) {
+		String query = segments.get(1);
+		startSearchResultsActivity(SearchResultsActivity.INTENT_ALL, query);
+	}
+
+	private void entitySearch(List<String> segments) {
+		String entity = segments.get(1);
+		String query = segments.get(2);
+		if (entity.equals(URI_ARTIST)) {
+			startSearchResultsActivity(SearchResultsActivity.INTENT_ARTIST, query);
+		} else if (entity.equals(URI_RELEASE)) {
+			startSearchResultsActivity(SearchResultsActivity.INTENT_RELEASE_GROUP, query);
+		} else {
+			displayErrorLayout("Unrecognised URI segment: search type");
+		}
+	}
 	
 	private void startArtistActivity(String mbid) {
 		if (isValidMbid(mbid)) {
