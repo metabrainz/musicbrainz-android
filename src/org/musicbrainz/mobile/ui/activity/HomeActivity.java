@@ -170,9 +170,9 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		if (query.length() > 0) {
 			imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
 			
-			Intent searchIntent = new Intent(this, SearchResultsActivity.class);
-			searchIntent.putExtra(SearchResultsActivity.INTENT_TYPE, getSearchTypeFromSpinner());
-			searchIntent.putExtra(SearchResultsActivity.INTENT_QUERY, query);
+			Intent searchIntent = new Intent(this, SearchActivity.class);
+			searchIntent.putExtra(SearchActivity.INTENT_TYPE, getSearchTypeFromSpinner());
+			searchIntent.putExtra(SearchActivity.INTENT_QUERY, query);
 			startActivity(searchIntent);
 		} else {
 			Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
@@ -184,11 +184,11 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		int spinnerPosition = searchTypeSpinner.getSelectedItemPosition();
 		switch (spinnerPosition) {
 		case 0:
-			return SearchResultsActivity.INTENT_ARTIST;
+			return SearchActivity.INTENT_ARTIST;
 		case 1:
-			return SearchResultsActivity.INTENT_RELEASE_GROUP;
+			return SearchActivity.INTENT_RELEASE_GROUP;
 		default:
-			return SearchResultsActivity.INTENT_ALL;
+			return SearchActivity.INTENT_ALL;
 		}
 	}
 	

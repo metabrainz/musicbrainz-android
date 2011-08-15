@@ -32,8 +32,11 @@ import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.ws.WebService;
 import org.xml.sax.SAXException;
 
+import com.markupartist.android.widget.ActionBar;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -53,7 +56,7 @@ import android.widget.TabHost.TabSpec;
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class SearchResultsActivity extends SuperActivity {
+public class SearchActivity extends SuperActivity {
 	
 	public static final String INTENT_TYPE = "type";
 	public static final String INTENT_QUERY = "term";
@@ -69,11 +72,25 @@ public class SearchResultsActivity extends SuperActivity {
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+	    handleIntent();
+	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+	    setIntent(intent);
+        handleIntent();
+	}
+
+	private void handleIntent() {
         setContentView(R.layout.activity_searchres);
-        setupActionBarWithHome();
-   
-        searchTerm = getIntent().getStringExtra(INTENT_QUERY);
+        ActionBar ab = setupActionBarWithHome();
+        ab.setTitle(R.string.searchres_title);
+		if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+	    	searchTerm = getIntent().getStringExtra(SearchManager.QUERY);
+	    	getIntent().putExtra(INTENT_TYPE, INTENT_ALL);
+	    } else {
+	        searchTerm = getIntent().getStringExtra(INTENT_QUERY);
+	    }
         configureSearch();
         doSearch();
 	}
@@ -86,7 +103,7 @@ public class SearchResultsActivity extends SuperActivity {
         } else if (intentType.equals(INTENT_RELEASE_GROUP)) {
         	searchType = SearchType.RELEASE_GROUP;
         	setHeaderText(R.string.search_release);
-        } else if (intentType.equals(INTENT_ALL)) {
+        } else {
         	searchType = SearchType.ALL;
         	setHeaderText(R.string.search_all);
         }
@@ -226,7 +243,7 @@ public class SearchResultsActivity extends SuperActivity {
 	
 	private void displayArtistResultsView(int listViewId, int noResultsId) {
 		ListView artistResultsView = (ListView) findViewById(listViewId);
-		artistResultsView.setAdapter(new ArtistSearchAdapter(SearchResultsActivity.this, artistSearchResults));
+		artistResultsView.setAdapter(new ArtistSearchAdapter(SearchActivity.this, artistSearchResults));
 		artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
 		artistResultsView.setVisibility(View.VISIBLE);
 		
@@ -238,7 +255,7 @@ public class SearchResultsActivity extends SuperActivity {
 	
 	private void displayRGResultsView(int listViewId, int noResultsId) {
 		ListView rgResultsView = (ListView) findViewById(listViewId);
-		rgResultsView.setAdapter(new RGSearchAdapter(SearchResultsActivity.this, rgSearchResults));
+		rgResultsView.setAdapter(new RGSearchAdapter(SearchActivity.this, rgSearchResults));
 		rgResultsView.setOnItemClickListener(new RGItemClickListener());
 		rgResultsView.setVisibility(View.VISIBLE);
 
@@ -249,7 +266,7 @@ public class SearchResultsActivity extends SuperActivity {
 	}
 	
 	private void displayErrorDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(SearchResultsActivity.this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
 		builder.setMessage(getString(R.string.err_text));
 		builder.setCancelable(false);
 		builder.setPositiveButton(getString(R.string.err_pos), new ErrorPositiveListener());
@@ -276,7 +293,7 @@ public class SearchResultsActivity extends SuperActivity {
 
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			SearchResultsActivity.this.finish();
+			SearchActivity.this.finish();
 		}
 	}
 	
@@ -297,7 +314,7 @@ public class SearchResultsActivity extends SuperActivity {
 		}
 
 		private void startArtistActivity(int position) {
-			Intent artistIntent = new Intent (SearchResultsActivity.this, ArtistActivity.class);
+			Intent artistIntent = new Intent (SearchActivity.this, ArtistActivity.class);
 			ArtistStub stub = (ArtistStub) artistSearchResults.get(position);
 			artistIntent.putExtra(ArtistActivity.INTENT_MBID, stub.getMbid());
 			startActivity(artistIntent);
@@ -318,23 +335,17 @@ public class SearchResultsActivity extends SuperActivity {
 		}
 
 		private void startRGActivity(String mbid) {
-			Intent releaseIntent = new Intent (SearchResultsActivity.this, ReleaseActivity.class);
+			Intent releaseIntent = new Intent (SearchActivity.this, ReleaseActivity.class);
 			releaseIntent.putExtra(ReleaseActivity.INTENT_RG_MBID, mbid);
 			startActivity(releaseIntent);
 		}
 
 		private void startReleaseActivity(String mbid) {
-			Intent releaseIntent = new Intent (SearchResultsActivity.this, ReleaseActivity.class);
+			Intent releaseIntent = new Intent (SearchActivity.this, ReleaseActivity.class);
 			releaseIntent.putExtra(ReleaseActivity.INTENT_RELEASE_MBID, mbid);
 			startActivity(releaseIntent);
 		}
 		
-	}
-	
-	@Override
-	public boolean onSearchRequested() {
-		startActivity(HomeActivity.createIntent(this));
-	    return false;
 	}
 	
 	public enum SearchType {

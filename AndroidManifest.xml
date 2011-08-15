@@ -29,6 +29,9 @@
     	android:label="@string/app_name" 
     	android:debuggable="false"
     	android:theme="@style/CustomTheme">
+    	
+    	<meta-data android:name="android.app.default_searchable"
+                   android:value=".ui.activity.SearchActivity" />
         
         <activity android:name=".ui.activity.HomeActivity"
         	android:label="@string/app_name"
@@ -72,10 +75,16 @@
         	android:configChanges="keyboardHidden|orientation"
         	android:screenOrientation="portrait" />
         
-        <activity android:name=".ui.activity.SearchResultsActivity"
-        	android:label="@string/searchres_title" 
+        <activity android:name=".ui.activity.SearchActivity"
         	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
+        	android:screenOrientation="portrait"
+        	android:launchMode="singleTop">
+        	<intent-filter>
+	            <action android:name="android.intent.action.SEARCH" />
+	        </intent-filter>
+	        <meta-data android:name="android.app.searchable"
+	        	android:resource="@xml/searchable"/>
+	    </activity>
         
         <activity android:name=".ui.activity.ReleaseActivity"
         	android:label="@string/release_title" 

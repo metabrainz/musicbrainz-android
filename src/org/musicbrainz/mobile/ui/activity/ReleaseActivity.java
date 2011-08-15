@@ -579,11 +579,5 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		RG_MBID,
 		BARCODE
 	}
-	
-	 @Override
-	 public boolean onSearchRequested() {
-	     startActivity(HomeActivity.createIntent(this));
-	     return false;
-	 }
 
 }

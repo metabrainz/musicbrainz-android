@@ -71,16 +71,16 @@ public class IncomingActivity extends Activity {
 
 	private void allSearch(List<String> segments) {
 		String query = segments.get(1);
-		startSearchResultsActivity(SearchResultsActivity.INTENT_ALL, query);
+		startSearchResultsActivity(SearchActivity.INTENT_ALL, query);
 	}
 
 	private void entitySearch(List<String> segments) {
 		String entity = segments.get(1);
 		String query = segments.get(2);
 		if (entity.equals(URI_ARTIST)) {
-			startSearchResultsActivity(SearchResultsActivity.INTENT_ARTIST, query);
+			startSearchResultsActivity(SearchActivity.INTENT_ARTIST, query);
 		} else if (entity.equals(URI_RELEASE)) {
-			startSearchResultsActivity(SearchResultsActivity.INTENT_RELEASE_GROUP, query);
+			startSearchResultsActivity(SearchActivity.INTENT_RELEASE_GROUP, query);
 		} else {
 			displayErrorLayout("Unrecognised URI segment: search type");
 		}
@@ -107,9 +107,9 @@ public class IncomingActivity extends Activity {
 	}
 	
 	private void startSearchResultsActivity(String type, String query) {
-		Intent searchIntent = new Intent (IncomingActivity.this, SearchResultsActivity.class);
-		searchIntent.putExtra(SearchResultsActivity.INTENT_TYPE, type);
-		searchIntent.putExtra(SearchResultsActivity.INTENT_QUERY, query);
+		Intent searchIntent = new Intent (IncomingActivity.this, SearchActivity.class);
+		searchIntent.putExtra(SearchActivity.INTENT_TYPE, type);
+		searchIntent.putExtra(SearchActivity.INTENT_QUERY, query);
 		startActivity(searchIntent);
 	}
 	

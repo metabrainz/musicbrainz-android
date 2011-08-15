@@ -544,10 +544,4 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		}
 	}
 	
-	 @Override
-	 public boolean onSearchRequested() {
-	     startActivity(HomeActivity.createIntent(this));
-	     return false;
-	 }
-	
 }

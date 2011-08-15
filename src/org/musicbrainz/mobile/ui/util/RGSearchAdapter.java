@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.ReleaseGroup;
-import org.musicbrainz.mobile.ui.activity.SearchResultsActivity;
+import org.musicbrainz.mobile.ui.activity.SearchActivity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -40,13 +40,13 @@ import android.widget.TextView;
  */
 public class RGSearchAdapter extends ArrayAdapter<ReleaseGroup> {
 	
-	SearchResultsActivity context;
+	SearchActivity context;
 	List<ReleaseGroup> resultData;
 
 	public RGSearchAdapter(Context context, List<ReleaseGroup> resultData) {
 		super(context, R.layout.list_srch_rg, resultData);
 		
-		this.context = (SearchResultsActivity) context;
+		this.context = (SearchActivity) context;
 		this.resultData = resultData;
 	}
 	

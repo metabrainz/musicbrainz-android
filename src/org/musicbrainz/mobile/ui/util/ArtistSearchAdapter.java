@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.ArtistStub;
-import org.musicbrainz.mobile.ui.activity.SearchResultsActivity;
+import org.musicbrainz.mobile.ui.activity.SearchActivity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -40,13 +40,13 @@ import android.widget.TextView;
  */
 public class ArtistSearchAdapter extends ArrayAdapter<ArtistStub> {
 	
-	SearchResultsActivity context;
+	SearchActivity context;
 	List<ArtistStub> resultData;
 
 	public ArtistSearchAdapter(Context context, List<ArtistStub> resultData) {
 		super(context, R.layout.list_srch_artist, resultData);
 		
-		this.context = (SearchResultsActivity) context;
+		this.context = (SearchActivity) context;
 		this.resultData = resultData;
 	}
 	

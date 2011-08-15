@@ -30,6 +30,10 @@
 	<string name="donate_label">Donate</string>
 	<string name="hometext">Welcome to MusicBrainz!</string>
 	<string name="hometext_loggedin">Logged in as</string>
+	
+	<!-- Searchable -->
+	<string name="search_name">MusicBrainz</string>
+	<string name="search_description">Artists and releases</string>
 
 	<!-- AuthenticateActivity -->
 	<string name="auth_title">Log In</string>
