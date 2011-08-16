@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2011 Jamie McDonald
 
 	This file is part of MusicBrainz Mobile (Android).
 
@@ -20,10 +20,6 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<item android:id="@+id/menu_feedback"
-		android:title="@string/menu_feedback"
-		android:icon="@drawable/menu_send" />
-		
 	<item android:id="@+id/menu_preferences"
 		android:title="@string/menu_preferences"
 		android:icon="@drawable/menu_preferences" />

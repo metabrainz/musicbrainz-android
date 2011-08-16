@@ -121,6 +121,10 @@ public abstract class SuperActivity extends Activity {
         case R.id.menu_feedback:
         	sendFeedback();
         	return true;
+        case R.id.menu_preferences:
+        	Intent prefsIntent = new Intent(this, PreferencesActivity.class);
+        	startActivity(prefsIntent);
+        	return true;
         }
         return false;
     }

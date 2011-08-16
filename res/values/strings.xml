@@ -123,6 +123,14 @@
 	<string name="menu_about">About</string>
 	<string name="menu_donate">Donate to MB</string>
 	<string name="menu_feedback">Feedback</string>
+	<string name="menu_preferences">Preferences</string>
+	
+	<!-- Preferences -->
+	<string name="preferences_title">Preferences</string>
+	<string name="preferences_search">Search</string>
+	<string name="preferences_suggestions">Suggestions</string>
+	<string name="preferences_suggestions_description">Store and display search suggestions</string>
+	<string name="preferences_clear">Clear search history</string>
 	
 	<!-- Error dialogs -->
 	<string name="err_text">There was a problem connecting to the server. Retry?</string>
@@ -146,6 +154,7 @@
 	<string name="toast_donate_success">Thanks you for supporting MusicBrainz!</string>
 	<string name="toast_donate_canceled">Donation canceled</string>
 	<string name="toast_donate_failed">Donation failed</string>
+	<string name="toast_search_cleared">Search history deleted</string>
 	
 	<!-- ZXing integration -->
 	<string name="zx_title">Install Barcode Scanner?</string>

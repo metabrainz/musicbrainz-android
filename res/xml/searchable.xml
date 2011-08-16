@@ -22,4 +22,6 @@
     android:label="@string/search_name"
     android:hint="@string/search_hint" 
     android:includeInGlobalSearch="true"
-    android:searchSettingsDescription="@string/search_description" />
+    android:searchSettingsDescription="@string/search_description" 
+    android:searchSuggestAuthority="org.musicbrainz.mobile.SearchSuggestionProvider"
+    android:searchSuggestSelection=" ?" />

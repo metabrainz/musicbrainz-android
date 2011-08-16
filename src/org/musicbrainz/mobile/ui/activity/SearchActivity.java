@@ -29,6 +29,7 @@ import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.ui.util.ArtistSearchAdapter;
 import org.musicbrainz.mobile.ui.util.RGSearchAdapter;
 import org.musicbrainz.mobile.util.Log;
+import org.musicbrainz.mobile.util.SuggestionProvider;
 import org.musicbrainz.mobile.ws.WebService;
 import org.xml.sax.SAXException;
 
@@ -39,8 +40,13 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.SearchRecentSuggestions;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -64,7 +70,7 @@ public class SearchActivity extends SuperActivity {
 	public static final String INTENT_RELEASE_GROUP = "rg";
 	public static final String INTENT_ALL = "all";
 	
-	private String searchTerm;
+	private String searchQuery;
 	private SearchType searchType;
 	
 	private LinkedList<ArtistStub> artistSearchResults;
@@ -86,15 +92,45 @@ public class SearchActivity extends SuperActivity {
         ActionBar ab = setupActionBarWithHome();
         ab.setTitle(R.string.searchres_title);
 		if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-	    	searchTerm = getIntent().getStringExtra(SearchManager.QUERY);
+	    	searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
 	    	getIntent().putExtra(INTENT_TYPE, INTENT_ALL);
 	    } else {
-	        searchTerm = getIntent().getStringExtra(INTENT_QUERY);
+	        searchQuery = getIntent().getStringExtra(INTENT_QUERY);
 	    }
-        configureSearch();
         doSearch();
+        saveQueryAsSuggestion();
 	}
-
+	
+	private void saveQueryAsSuggestion() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean shouldStoreSuggestions = prefs.getBoolean("search_suggestions", true); 
+		if (shouldStoreSuggestions) {
+			 SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+					 SuggestionProvider.AUTHORITY, 
+		             SuggestionProvider.MODE);
+		     suggestions.saveRecentQuery(searchQuery, null);
+		}
+	}
+	
+	private void setHeaderText(int searchNameResource) {
+		TextView resultsText = (TextView) findViewById(R.id.searchres_text);
+		resultsText.setText(getString(searchNameResource) + " '" + searchQuery + "'");
+	}
+	
+	private void doSearch() {
+		configureSearch();
+		switch (searchType) {
+		case ARTIST:
+			new ArtistSearchTask().execute();
+			break;
+		case RELEASE_GROUP:
+			new RGSearchTask().execute();
+			break;
+		case ALL:
+			new MultiSearchTask().execute();
+		}
+	}
+	
 	private void configureSearch() {
 		String intentType = getIntent().getStringExtra(INTENT_TYPE);
         if (intentType.equals(INTENT_ARTIST)) {
@@ -109,31 +145,13 @@ public class SearchActivity extends SuperActivity {
         }
 	}
 	
-	private void setHeaderText(int searchNameResource) {
-		TextView resultsText = (TextView) findViewById(R.id.searchres_text);
-		resultsText.setText(getString(searchNameResource) + " '" + searchTerm + "'");
-	}
-	
-	private void doSearch() {
-		switch (searchType) {
-		case ARTIST:
-			new ArtistSearchTask().execute();
-			break;
-		case RELEASE_GROUP:
-			new RGSearchTask().execute();
-			break;
-		case ALL:
-			new MultiSearchTask().execute();
-		}
-	}
-	
 	private class ArtistSearchTask extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			boolean success = true;
 			try {
-				artistSearchResults = WebService.searchArtist(searchTerm);
+				artistSearchResults = WebService.searchArtist(searchQuery);
 			} catch (IOException e) {
 				success = false;
 			} catch (SAXException e) {
@@ -160,7 +178,7 @@ public class SearchActivity extends SuperActivity {
 		protected Boolean doInBackground(Void... params) {
 			boolean success = true;
 			try {
-				rgSearchResults = WebService.searchReleaseGroup(searchTerm);
+				rgSearchResults = WebService.searchReleaseGroup(searchQuery);
 			} catch (IOException e) {
 				success = false;
 			} catch (SAXException e) {
@@ -187,8 +205,8 @@ public class SearchActivity extends SuperActivity {
 		protected Boolean doInBackground(Void... params) {
 			boolean success = true;
 			try {
-				artistSearchResults = WebService.searchArtist(searchTerm);
-				rgSearchResults = WebService.searchReleaseGroup(searchTerm);
+				artistSearchResults = WebService.searchArtist(searchQuery);
+				rgSearchResults = WebService.searchReleaseGroup(searchQuery);
 			} catch (IOException e) {
 				success = false;
 			} catch (SAXException e) {
@@ -347,6 +365,12 @@ public class SearchActivity extends SuperActivity {
 		}
 		
 	}
+	
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.search, menu);
+    	return true;
+    }
 	
 	public enum SearchType {
 		ARTIST,

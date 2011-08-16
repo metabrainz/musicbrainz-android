@@ -40,8 +40,8 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -55,7 +55,7 @@ import android.widget.Toast;
  */
 public class HomeActivity extends SuperActivity implements OnEditorActionListener {
 	
-	private EditText searchField;
+	private AutoCompleteTextView searchField;
 	private Spinner searchTypeSpinner;
 	private InputMethodManager imm;
 	
@@ -70,7 +70,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 			BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
 		}
 
-		searchField = (EditText) findViewById(R.id.query_input);
+		searchField = (AutoCompleteTextView) findViewById(R.id.query_input);
 		searchField.setOnEditorActionListener(this);
 
 		searchTypeSpinner = (Spinner) findViewById(R.id.search_spin);
@@ -230,5 +230,5 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return i;
     }
-	
+
 }
