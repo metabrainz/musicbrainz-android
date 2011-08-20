@@ -21,7 +21,7 @@
 <resources> 
 	<!-- Activity and Dialog layout styles -->
 
-	<style name="CustomTheme" parent="@style/Theme.ActionBar"> 
+	<style name="CustomTheme" parent="@style/Theme.ActionBar.Light"> 
         <item name="android:textColorHint">@color/hint_text</item>
     </style> 
     

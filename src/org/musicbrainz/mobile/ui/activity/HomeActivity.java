@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.ui.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.SuggestionHelper;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
 
@@ -58,6 +59,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 	private AutoCompleteTextView searchField;
 	private Spinner searchTypeSpinner;
 	private InputMethodManager imm;
+	private SuggestionHelper suggestionHelper;
 	
 	private static final int LOGIN_REQUEST = 0;
 
@@ -81,11 +83,18 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		searchTypeSpinner.setAdapter(typeAdapter);
 		
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		suggestionHelper = new SuggestionHelper(this);
 	}
 	
 	public void onResume() {
 		super.onResume();
 		updateLoginState();
+		
+		if (shouldProvideSearchSuggestions()) {
+			searchField.setAdapter(suggestionHelper.getAdapter());
+		} else {
+			searchField.setAdapter(suggestionHelper.getEmptyAdapter());
+		}
 	}
 	
 	private void updateLoginState() {

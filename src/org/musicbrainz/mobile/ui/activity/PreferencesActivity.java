@@ -56,14 +56,18 @@ public class PreferencesActivity extends PreferenceActivity implements OnPrefere
 	public boolean onPreferenceClick(Preference preference) {
 		
 		if (preference.getKey().equals("clear_suggestions")) {
-			SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
-			        SuggestionProvider.AUTHORITY,
-			        SuggestionProvider.MODE);
-			suggestions.clearHistory();
-			Toast.makeText(this, R.string.toast_search_cleared, Toast.LENGTH_SHORT).show();
+			clearSuggestionHistory();
 			return true;
 		}
 		return false;
+	}
+
+	private void clearSuggestionHistory() {
+		SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+		        SuggestionProvider.AUTHORITY,
+		        SuggestionProvider.MODE);
+		suggestions.clearHistory();
+		Toast.makeText(this, R.string.toast_search_cleared, Toast.LENGTH_SHORT).show();
 	}
 	
 }

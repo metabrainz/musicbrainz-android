@@ -40,10 +40,8 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -102,9 +100,7 @@ public class SearchActivity extends SuperActivity {
 	}
 	
 	private void saveQueryAsSuggestion() {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		boolean shouldStoreSuggestions = prefs.getBoolean("search_suggestions", true); 
-		if (shouldStoreSuggestions) {
+		if (shouldProvideSearchSuggestions()) {
 			 SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
 					 SuggestionProvider.AUTHORITY, 
 		             SuggestionProvider.MODE);

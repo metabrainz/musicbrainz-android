@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -65,13 +66,12 @@ public abstract class SuperActivity extends Activity {
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		return prefs.getString("username", null); 
 	}
+	
+	protected boolean shouldProvideSearchSuggestions() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		return prefs.getBoolean("search_suggestions", true);
+	}
 
-	/**
-	 * Create a webservice user from previously authenticated
-	 * credentials stored in preferences.
-	 * 
-	 * @return Webservice user.
-	 */
 	protected WebServiceUser getUser() {
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String username = prefs.getString("username", null);
@@ -102,7 +102,6 @@ public abstract class SuperActivity extends Activity {
 
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.general, menu);
-    
     	return true;
     }
     
