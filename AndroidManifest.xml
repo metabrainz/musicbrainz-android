@@ -112,8 +112,13 @@
     </application>
 
 	<uses-sdk android:minSdkVersion="4" 
-		android:targetSdkVersion="7" 
-		android:maxSdkVersion="10" />
+		android:targetSdkVersion="7" />
+		
+	<supports-screens
+		android:smallScreens="true"
+		android:normalScreens="true"
+		android:largeScreens="true"
+		android:xlargeScreens="false" />
 
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

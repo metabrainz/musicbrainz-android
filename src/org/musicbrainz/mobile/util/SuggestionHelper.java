@@ -27,7 +27,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.widget.ArrayAdapter;
 import android.widget.FilterQueryProvider;
-import android.widget.ListAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 
@@ -65,7 +64,7 @@ public class SuggestionHelper {
 		@Override
 		public CharSequence convertToString(Cursor cursor) {
 			int columnIndex = cursor.getColumnIndexOrThrow(COLUMN);
-            return cursor.getString(columnIndex);
+			return cursor.getString(columnIndex);
 		}
     }
     
