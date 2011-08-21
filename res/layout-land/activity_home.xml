@@ -39,7 +39,7 @@
 				android:layout_height="wrap_content" 
 				android:layout_alignParentTop="true" />
 				
-			<EditText android:id="@+id/query_input"
+			<AutoCompleteTextView android:id="@+id/query_input"
 				style="@style/SearchEdit"
 				android:layout_alignParentLeft="true"
 				android:layout_toLeftOf="@+id/search_btn"

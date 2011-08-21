@@ -34,6 +34,7 @@
 	
 	<color name="list_bg">#ffffff</color>
 	<color name="list_text">#000000</color>
+	<color name="list_divider">#eeeeee</color>
 	
 	<color name="actionbar_background_start">#817abf</color>
 	<color name="actionbar_background_end">@color/mb_purple_medium</color>

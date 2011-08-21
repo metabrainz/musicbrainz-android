@@ -23,6 +23,7 @@
 
 	<style name="CustomTheme" parent="@style/Theme.ActionBar.Light"> 
         <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:listViewStyle">@style/List</item>
     </style> 
     
     <style name="Activity" parent="@style/Fill">

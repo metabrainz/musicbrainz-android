@@ -44,6 +44,7 @@
     <style name="List" parent="@style/Fill">
     	<item name="android:background">@color/list_bg</item>
     	<item name="android:cacheColorHint">@color/list_bg</item>
+    	<item name="android:divider">@drawable/list_divider</item>
     </style>
     
     <style name="ButtonMin">
