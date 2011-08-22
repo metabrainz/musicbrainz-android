@@ -25,6 +25,7 @@ import org.musicbrainz.mobile.R;
 import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.content.CursorLoader;
 import android.widget.ArrayAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.SimpleCursorAdapter;
@@ -84,8 +85,10 @@ public class SuggestionHelper {
         
         String where = COLUMN + " LIKE ?";
     	String[] args = {constraint.trim() + "%"};
+    	
+    	CursorLoader cursorLoader = new CursorLoader(activity, Uri.parse(URI), null, where, args, COLUMN + " ASC");
+    	Cursor cursor = cursorLoader.loadInBackground();
 
-        Cursor cursor = activity.managedQuery(Uri.parse(URI), null, where, args, COLUMN + " ASC");
         if (cursor != null) {
             cursor.moveToFirst();
         }
