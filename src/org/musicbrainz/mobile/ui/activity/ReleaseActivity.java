@@ -21,12 +21,14 @@
 package org.musicbrainz.mobile.ui.activity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.data.Artist;
 import org.musicbrainz.mobile.data.Release;
+import org.musicbrainz.mobile.data.ReleaseArtist;
 import org.musicbrainz.mobile.data.ReleaseStub;
 import org.musicbrainz.mobile.data.Track;
 import org.musicbrainz.mobile.data.UserData;
@@ -128,8 +130,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		setContentView(R.layout.activity_release);
 		actionBar = setupActionBarWithHome();
 		addActionBarShare();
-		
-		// info header
+
 		FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);
 		FocusTextView title = (FocusTextView) findViewById(R.id.release_release);
 		FocusTextView labels = (FocusTextView) findViewById(R.id.release_label);
@@ -139,17 +140,24 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		tags = (FocusTextView) findViewById(R.id.release_tags);
         
 		Boolean provideArtistAction = true;
-        for (String id : Artist.IGNORE_LIST) {
-        	if (data.getArtistMbid().equals(id)) {
-        		provideArtistAction = false;
-        	}
-        }
+		
+		ArrayList<ReleaseArtist> releaseArtists = data.getArtists();
+		if (releaseArtists.size() > 1) {
+			provideArtistAction = false;
+		} else {
+			ReleaseArtist singleArtist = releaseArtists.get(0);
+	        for (String id : Artist.IGNORE_LIST) {
+	        	if (singleArtist.mbid.equals(id)) {
+	        		provideArtistAction = false;
+	        	}
+	        }
+		}
         
         if (provideArtistAction) {
         	addActionBarArtist();
         }
         
-		artist.setText(data.getArtistName());
+		artist.setText(data.getFormattedArtist());
 		title.setText(data.getTitle());
 		
 		tags.setText(data.getTags());
@@ -218,7 +226,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	
     private Intent createArtistIntent() {
     	final Intent releaseIntent = new Intent(this, ArtistActivity.class);
-		releaseIntent.putExtra("mbid", data.getArtistMbid());
+		releaseIntent.putExtra("mbid", data.getArtists().get(0).mbid);
 		return releaseIntent;
     }
 	
@@ -537,7 +545,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
 			return track;
 		}
-		
 	}
 	
 	// Holder pattern minimises executions of findViewById()

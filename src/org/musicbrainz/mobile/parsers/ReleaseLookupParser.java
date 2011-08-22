@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.parsers;
 
 import org.musicbrainz.mobile.data.Release;
+import org.musicbrainz.mobile.data.ReleaseArtist;
 import org.musicbrainz.mobile.data.Track;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -34,6 +35,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class ReleaseLookupParser extends DefaultHandler {
 	
     private Release data;
+    private ReleaseArtist releaseArtist;
     private Track trk;
     
     private StringBuilder sb;
@@ -57,8 +59,8 @@ public class ReleaseLookupParser extends DefaultHandler {
 			sb = new StringBuilder();
 		} else if (localName.equals("artist")) {
 			artist = true;
-			String mbid = atts.getValue("id");
-			data.setArtistMbid(mbid);
+			releaseArtist = new ReleaseArtist();
+			releaseArtist.mbid = atts.getValue("id");
 		} else if (localName.equals("name")) {
 			sb = new StringBuilder();
 		} else if (localName.equals("date")) {
@@ -102,12 +104,14 @@ public class ReleaseLookupParser extends DefaultHandler {
 		} else if (localName.equals("artist")) {
 			artist = false;
 		} else if (localName.equals("name")) {
-			if (artist && !tag)
-				data.setArtistName(sb.toString());
-			else if (label && !tag)
+			if (artist && !tag) {
+				releaseArtist.name = sb.toString();
+				data.addArtist(releaseArtist);
+			} else if (label && !tag) {
 				data.addLabel(sb.toString());
-			else if (releaseGroup && tag)
+			} else if (releaseGroup && tag) {
 				data.addTag(sb.toString());
+			}
 		} else if (localName.equals("date")) {
 			data.setDate(sb.toString());
 		} else if (localName.equals("label")) {

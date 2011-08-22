@@ -36,9 +36,8 @@ public class Release {
 	private String releaseMbid;
 	private String releaseGroupMbid;
 	private String barcode;
-	private String artistMbid;
+	private ArrayList<ReleaseArtist> artists;
 	
-	private String artistName;
 	private String title;
 	private String date;
 	private float rating;
@@ -47,6 +46,7 @@ public class Release {
 	private ArrayList<Track> tracks;
 	
 	public Release() {
+		artists = new ArrayList<ReleaseArtist>();
 		labels = new LinkedList<String>();
 		tags = new LinkedList<String>();
 		tracks = new ArrayList<Track>();
@@ -76,20 +76,20 @@ public class Release {
 		this.barcode = barcode;
 	}
 	
-	public String getArtistMbid() {
-		return artistMbid;
+	public ArrayList<ReleaseArtist> getArtists() {
+		return artists;
 	}
 	
-	public void setArtistMbid(String artistMbid) {
-		this.artistMbid = artistMbid;
+	public void addArtist(ReleaseArtist artist) {
+		artists.add(artist);
 	}
 	
-	public String getArtistName() {
-		return artistName;
-	}
-	
-	public void setArtistName(String artistName) {
-		this.artistName = artistName;
+	public String getFormattedArtist() {
+		String formatted = "";
+		for (ReleaseArtist artist : artists) {
+			formatted += artist.name + ", ";
+		}
+		return formatted.substring(0, formatted.length()-2);
 	}
 	
 	public String getTitle() {
