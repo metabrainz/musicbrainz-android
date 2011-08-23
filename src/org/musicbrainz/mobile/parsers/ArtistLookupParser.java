@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.parsers;
 
 import org.musicbrainz.mobile.data.Artist;
+import org.musicbrainz.mobile.data.ReleaseArtist;
 import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.data.WebLink;
 import org.xml.sax.Attributes;
@@ -63,12 +64,14 @@ public class ArtistLookupParser extends DefaultHandler {
 			String id = atts.getValue("id");
 			 
 			// Type isn't always returned - empty string for unknown
-			if (atts.getValue("type") != null)
+			if (atts.getValue("type") != null) {
 				stub.setType(atts.getValue("type"));
-			else 
+			} else {
 				stub.setType("");
-			
-			stub.setArtist(data.getName());
+			}
+			ReleaseArtist releaseArtist = new ReleaseArtist();
+			releaseArtist.name = data.getName();
+			stub.addArtist(releaseArtist);
 			stub.setMbid(id);
 		} else if (localName.equals("title")) {
 			if (releaseGroup)

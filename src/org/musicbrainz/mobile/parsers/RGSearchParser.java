@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.parsers;
 
 import java.util.LinkedList;
 
+import org.musicbrainz.mobile.data.ReleaseArtist;
 import org.musicbrainz.mobile.data.ReleaseGroup;
 
 import org.xml.sax.Attributes;
@@ -36,9 +37,8 @@ import org.xml.sax.helpers.DefaultHandler;
 public class RGSearchParser extends DefaultHandler {
 	
 	private LinkedList<ReleaseGroup> stubs;
-	
 	private ReleaseGroup rg;
-	
+	private ReleaseArtist releaseArtist;
 	private StringBuilder sb;
 	
 	public RGSearchParser(LinkedList<ReleaseGroup> results) {
@@ -62,6 +62,8 @@ public class RGSearchParser extends DefaultHandler {
 			sb = new StringBuilder();
 		} else if (localName.equals("artist")) {
 			artist = true;
+			releaseArtist = new ReleaseArtist();
+			releaseArtist.mbid = atts.getValue("id");
 		} else if (localName.equals("name")) {
 			if (artist)
 				sb = new StringBuilder();
@@ -85,8 +87,10 @@ public class RGSearchParser extends DefaultHandler {
 		} else if (localName.equals("artist")) {
 			artist = false;
 		} else if (localName.equals("name")) {
-			if (artist)
-				rg.setArtist(sb.toString());
+			if (artist) {
+				releaseArtist.name = sb.toString();
+				rg.addArtist(releaseArtist);
+			}
 		}
 	}
 	

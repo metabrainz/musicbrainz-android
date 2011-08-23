@@ -37,7 +37,6 @@ public class ReleaseLookupParser extends DefaultHandler {
     private Release data;
     private ReleaseArtist releaseArtist;
     private Track trk;
-    
     private StringBuilder sb;
     
     public ReleaseLookupParser(Release data) {

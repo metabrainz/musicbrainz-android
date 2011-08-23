@@ -68,7 +68,7 @@ public class RGSearchAdapter extends ArrayAdapter<ReleaseGroup> {
 		ReleaseGroup rgData = (ReleaseGroup) resultData.get(position);
 		
 		wrapper.getTitle().setText(rgData.getTitle());
-		wrapper.getArtist().setText(rgData.getArtist());	
+		wrapper.getArtist().setText(rgData.getFormattedArtist());	
 		wrapper.getType().setText(rgData.getFormattedType(getContext()));
 		
 		return release;

@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.data;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.musicbrainz.mobile.R;
@@ -40,7 +41,7 @@ public class ReleaseGroup implements Comparable<Object> {
 
 	private String mbid;
 	
-	private String artist;
+	private ArrayList<ReleaseArtist> artists;
 	private String title;
 	private String type;
 	private Calendar firstRelease = Calendar.getInstance();
@@ -48,6 +49,10 @@ public class ReleaseGroup implements Comparable<Object> {
 	
 	// MBID for release, if release group contains a single release.
 	private String singleReleaseMbid;
+	
+	public ReleaseGroup() {
+		artists = new ArrayList<ReleaseArtist>();
+	}
 
 	public String getMbid() {
 		return mbid;
@@ -57,12 +62,20 @@ public class ReleaseGroup implements Comparable<Object> {
 		this.mbid = mbid;
 	}
 	
-	public String getArtist() {
-		return artist;
+	public ArrayList<ReleaseArtist> getArtists() {
+		return artists;
 	}
 	
-	public void setArtist(String artist) {
-		this.artist = artist;
+	public String getFormattedArtist() {
+		String formatted = "";
+		for (ReleaseArtist artist : artists) {
+			formatted += artist.name + ", ";
+		}
+		return formatted.substring(0, formatted.length()-2);
+	}
+	
+	public void addArtist(ReleaseArtist artist) {
+		artists.add(artist);
 	}
 
 	public String getTitle() {
