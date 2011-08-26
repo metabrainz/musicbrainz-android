@@ -159,7 +159,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
 		donation.setPaymentSubtype(PayPal.PAYMENT_SUBTYPE_DONATIONS);
 		donation.setRecipient("paypal@metabrainz.org");
 		donation.setMerchantName("MetaBrainz Foundation");
-		donation.setDescription("MusicBrainz Donation via Android app");
+		donation.setDescription("MusicBrainz donation via Android app");
 		return donation;
 	}
 	

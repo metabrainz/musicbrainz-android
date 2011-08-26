@@ -40,6 +40,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -54,7 +56,7 @@ import android.widget.Toast;
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
-public class HomeActivity extends SuperActivity implements OnEditorActionListener {
+public class HomeActivity extends SuperActivity implements OnEditorActionListener, OnItemClickListener {
 	
 	private AutoCompleteTextView searchField;
 	private Spinner searchTypeSpinner;
@@ -92,9 +94,15 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		
 		if (shouldProvideSearchSuggestions()) {
 			searchField.setAdapter(suggestionHelper.getAdapter());
+			searchField.setOnItemClickListener(this);
 		} else {
 			searchField.setAdapter(suggestionHelper.getEmptyAdapter());
 		}
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		startSearch();
 	}
 	
 	private void updateLoginState() {
@@ -201,9 +209,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		}
 	}
 	
-	/*
-	 * Start search on enter editor action.
-	 */
+	@Override
 	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 		
 		if (v.getId() == R.id.query_input && actionId == EditorInfo.IME_NULL) {

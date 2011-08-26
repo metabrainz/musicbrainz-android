@@ -45,7 +45,6 @@ public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemCli
 	
 	private ReleaseActivity parent;
 	private LinkedList<ReleaseStub> data;
-	
 	private ListView releaseList;
 
 	public ReleaseSelectionDialog(Context context, LinkedList<ReleaseStub> data) {
@@ -80,6 +79,11 @@ public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemCli
 	public void cancel() {
 		super.cancel();
 		parent.finish();
+	}
+	
+	@Override
+	public boolean onSearchRequested() {
+		return false;
 	}
 	
 }

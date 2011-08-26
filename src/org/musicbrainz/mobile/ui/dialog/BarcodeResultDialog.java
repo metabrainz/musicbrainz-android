@@ -40,7 +40,6 @@ import android.widget.TextView;
 public class BarcodeResultDialog extends Dialog implements View.OnClickListener {
 	
 	private ReleaseActivity parent;
-	
 	private String barcode;
 	
 	public BarcodeResultDialog(Context context, boolean loggedIn, String barcode) {
@@ -77,6 +76,11 @@ public class BarcodeResultDialog extends Dialog implements View.OnClickListener 
 	public void cancel() {
 		super.cancel();
 		parent.finish();
+	}
+	
+	@Override
+	public boolean onSearchRequested() {
+		return false;
 	}
 	
 }

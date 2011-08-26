@@ -112,7 +112,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // recover ID or barcode from intent
         releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
         barcode = getIntent().getStringExtra(INTENT_BARCODE);
@@ -580,7 +579,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			return trackTime;
 		}
 	}
-	
+
 	private enum LookupSource {
 		RELEASE_MBID,
 		RG_MBID,

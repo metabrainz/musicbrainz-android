@@ -96,16 +96,6 @@ public class SearchActivity extends SuperActivity {
 	        searchQuery = getIntent().getStringExtra(INTENT_QUERY);
 	    }
         doSearch();
-        saveQueryAsSuggestion();
-	}
-	
-	private void saveQueryAsSuggestion() {
-		if (shouldProvideSearchSuggestions()) {
-			 SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
-					 SuggestionProvider.AUTHORITY, 
-		             SuggestionProvider.MODE);
-		     suggestions.saveRecentQuery(searchQuery, null);
-		}
 	}
 	
 	private void setHeaderText(int searchNameResource) {
@@ -264,6 +254,8 @@ public class SearchActivity extends SuperActivity {
 		if (artistSearchResults.isEmpty()) {
 			TextView noRes = (TextView) findViewById(noResultsId);
 			noRes.setVisibility(View.VISIBLE);
+		} else {
+			saveQueryAsSuggestion();
 		}
 	}
 	
@@ -276,6 +268,17 @@ public class SearchActivity extends SuperActivity {
 		if (rgSearchResults.isEmpty()) {
 			TextView noResults = (TextView) findViewById(noResultsId);
 			noResults.setVisibility(View.VISIBLE);
+		} else {
+			saveQueryAsSuggestion();
+		}
+	}
+	
+	private void saveQueryAsSuggestion() {
+		if (shouldProvideSearchSuggestions()) {
+			 SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+					 SuggestionProvider.AUTHORITY, 
+		             SuggestionProvider.MODE);
+		     suggestions.saveRecentQuery(searchQuery, null);
 		}
 	}
 	

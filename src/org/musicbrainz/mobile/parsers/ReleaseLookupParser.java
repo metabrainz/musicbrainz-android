@@ -43,7 +43,6 @@ public class ReleaseLookupParser extends DefaultHandler {
         this.data = data;
     }	
 	
-	// tags status
     private boolean artist = false;
     private boolean label = false;
     private boolean releaseGroup = false;
