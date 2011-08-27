@@ -38,7 +38,7 @@
 	
 	<color name="actionbar_background_start">#817abf</color>
 	<color name="actionbar_background_end">@color/mb_purple_medium</color>
-	<color name="actionbar_divider">@color/mb_purple_light</color>
+	<color name="actionbar_divider">@color/mb_purple_medium</color>
 	
 	<!-- MusicBrainz branding -->
 	<color name="mb_purple_light">#bcaeed</color>
