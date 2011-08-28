@@ -25,6 +25,11 @@
 		<item>All</item>
 	</string-array>
 	
+	<string-array name="searchBar">
+		<item>@string/search_bar_artists</item>
+		<item>@string/search_bar_rgs</item>
+	</string-array>
+	
 	<array name="donation">
 		<item>$5</item>
 		<item>$10</item>

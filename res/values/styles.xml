@@ -87,6 +87,7 @@
     </style>
     
     <style name="NoSearchResults" parent="@style/Fill">
+    	<item name="android:background">@color/main_fg</item>
     	<item name="android:gravity">center</item>
     	<item name="android:visibility">invisible</item>
     	<item name="android:orientation">vertical</item>
@@ -100,6 +101,7 @@
     
     <style name="BarcodeInstructions" parent="@style/Fill">
     	<item name="android:text">@string/barcode_instructions</item>
+    	<item name="android:background">@color/main_fg</item>
     	<item name="android:gravity">center</item>
     	<item name="android:textSize">@dimen/text_size_large</item>
     	<item name="android:textColor">@color/main_text</item>

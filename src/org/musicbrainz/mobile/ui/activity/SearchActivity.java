@@ -48,11 +48,11 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
+import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.ListView;
-import android.widget.TabHost;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.TabHost.TabSpec;
 
 /**
  * Activity to display a list of search results to the user and support intents
@@ -71,6 +71,8 @@ public class SearchActivity extends SuperActivity {
 	private String searchQuery;
 	private SearchType searchType;
 	
+	private ActionBar actionBar;
+	
 	private LinkedList<ArtistStub> artistSearchResults;
 	private LinkedList<ReleaseGroup> rgSearchResults;
 	
@@ -87,29 +89,31 @@ public class SearchActivity extends SuperActivity {
 
 	private void handleIntent() {
         setContentView(R.layout.activity_searchres);
-        ActionBar ab = setupActionBarWithHome();
-        ab.setTitle(R.string.searchres_title);
+        actionBar = setupActionBarWithHome();
 		if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
 	    	searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
 	    	getIntent().putExtra(INTENT_TYPE, INTENT_ALL);
 	    } else {
 	        searchQuery = getIntent().getStringExtra(INTENT_QUERY);
 	    }
+		setHeaderText();
         doSearch();
 	}
 	
-	private void setHeaderText(int searchNameResource) {
+	private void setHeaderText() {
 		TextView resultsText = (TextView) findViewById(R.id.searchres_text);
-		resultsText.setText(getString(searchNameResource) + " '" + searchQuery + "'");
+		resultsText.setText("'" + searchQuery + "'");
 	}
 	
 	private void doSearch() {
 		configureSearch();
 		switch (searchType) {
 		case ARTIST:
+			actionBar.setTitle(R.string.search_bar_artists);
 			new ArtistSearchTask().execute();
 			break;
 		case RELEASE_GROUP:
+			actionBar.setTitle(R.string.search_bar_rgs);
 			new RGSearchTask().execute();
 			break;
 		case ALL:
@@ -121,13 +125,10 @@ public class SearchActivity extends SuperActivity {
 		String intentType = getIntent().getStringExtra(INTENT_TYPE);
         if (intentType.equals(INTENT_ARTIST)) {
         	searchType = SearchType.ARTIST;
-        	setHeaderText(R.string.search_artist);
         } else if (intentType.equals(INTENT_RELEASE_GROUP)) {
         	searchType = SearchType.RELEASE_GROUP;
-        	setHeaderText(R.string.search_release);
         } else {
         	searchType = SearchType.ALL;
-        	setHeaderText(R.string.search_all);
         }
 	}
 	
@@ -149,13 +150,12 @@ public class SearchActivity extends SuperActivity {
 		protected void onPostExecute(Boolean success) {
 			if (success) {
 				findViewById(R.id.topline).setVisibility(View.VISIBLE);
-				displayArtistResultsView(R.id.searchres_list, R.id.noresults);
+				displayArtistResultsView();
 			} else {
 				displayErrorDialog();
 			}
 			toggleLoading();
-		}
-		
+		}	
 	}
 	
 	private class RGSearchTask extends AsyncTask<Void, Void, Boolean> {
@@ -176,13 +176,12 @@ public class SearchActivity extends SuperActivity {
 		protected void onPostExecute(Boolean success) {
 			if (success) {
 				findViewById(R.id.topline).setVisibility(View.VISIBLE);
-				displayRGResultsView(R.id.searchres_list, R.id.noresults);
+				displayRGResultsView();
 			} else {
 				displayErrorDialog();
 			}
 			toggleLoading();
 		}
-		
 	}
 	
 	private class MultiSearchTask extends AsyncTask<Void, Void, Boolean> {
@@ -203,6 +202,9 @@ public class SearchActivity extends SuperActivity {
 		
 		protected void onPostExecute(Boolean success) {
 			if (success) {
+				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		        SpinnerAdapter listAdapter = ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar, R.layout.actionbar_list_dropdown_item);
+		        actionBar.setListNavigationCallbacks(listAdapter, new ActionBarListListener());
 				displayMultiResults();
 			} else {
 				displayErrorDialog();
@@ -211,62 +213,53 @@ public class SearchActivity extends SuperActivity {
 		}
 		
 		private void displayMultiResults() {
-			setupTabs();
-			displayArtistResultsView(R.id.searchres_artist_list, R.id.no_artists);
-			displayRGResultsView(R.id.searchres_rg_list, R.id.no_rgs);
+			displayArtistResultsView();
+			displayRGResultsView();
 		}
-		
-		private void setupTabs() {
-			LinearLayout allResults = (LinearLayout) findViewById(R.id.all_results);
-			allResults.setVisibility(View.VISIBLE);
-			TabHost host = (TabHost) findViewById(R.id.searchres_tabhost);
-			host.setup();
-			setupArtistsTab(host);
-			setupRGsTab(host);
-		}
-
-		private void setupRGsTab(TabHost tabs) {
-			TabSpec rgsTab = tabs.newTabSpec("rgs");
-			final TextView rgsIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
-			rgsIndicator.setText(R.string.tab_rgs);
-			rgsTab.setIndicator(rgsIndicator);
-			rgsTab.setContent(R.id.rgs_tab);
-			tabs.addTab(rgsTab);
-		}
-
-		private void setupArtistsTab(TabHost tabs) {
-			TabSpec artistsTab = tabs.newTabSpec("artists");
-			final TextView artistsIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
-			artistsIndicator.setText(R.string.tab_artists);
-			artistsTab.setIndicator(artistsIndicator);
-			artistsTab.setContent(R.id.artists_tab);
-			tabs.addTab(artistsTab);
-		}
-		
 	}
 	
-	private void displayArtistResultsView(int listViewId, int noResultsId) {
-		ListView artistResultsView = (ListView) findViewById(listViewId);
+	private class ActionBarListListener implements ActionBar.OnNavigationListener {
+		
+		@Override
+        public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+			
+			RelativeLayout artistResults = (RelativeLayout) findViewById(R.id.artist_results_container);
+			RelativeLayout rgResults = (RelativeLayout) findViewById(R.id.rg_results_container);
+			if (itemPosition == 0) {
+				artistResults.setVisibility(View.VISIBLE);
+				rgResults.setVisibility(View.GONE);
+			} else if (itemPosition == 1) {
+				rgResults.setVisibility(View.VISIBLE);
+				artistResults.setVisibility(View.GONE);
+			}
+            return true;
+        }
+	}
+	
+	private void displayArtistResultsView() {
+		ListView artistResultsView = (ListView) findViewById(R.id.searchres_artist_list);
 		artistResultsView.setAdapter(new ArtistSearchAdapter(SearchActivity.this, artistSearchResults));
 		artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
 		artistResultsView.setVisibility(View.VISIBLE);
 		
 		if (artistSearchResults.isEmpty()) {
-			TextView noRes = (TextView) findViewById(noResultsId);
+			RelativeLayout artistResults = (RelativeLayout) findViewById(R.id.artist_results_container);
+			TextView noRes = (TextView) artistResults.findViewById(R.id.noresults);
 			noRes.setVisibility(View.VISIBLE);
 		} else {
 			saveQueryAsSuggestion();
 		}
 	}
 	
-	private void displayRGResultsView(int listViewId, int noResultsId) {
-		ListView rgResultsView = (ListView) findViewById(listViewId);
+	private void displayRGResultsView() {
+		ListView rgResultsView = (ListView) findViewById(R.id.searchres_rg_list);
 		rgResultsView.setAdapter(new RGSearchAdapter(SearchActivity.this, rgSearchResults));
 		rgResultsView.setOnItemClickListener(new RGItemClickListener());
 		rgResultsView.setVisibility(View.VISIBLE);
 
 		if (rgSearchResults.isEmpty()) {
-			TextView noResults = (TextView) findViewById(noResultsId);
+			RelativeLayout rgResults = (RelativeLayout) findViewById(R.id.rg_results_container);
+			TextView noResults = (TextView) rgResults.findViewById(R.id.noresults);
 			noResults.setVisibility(View.VISIBLE);
 		} else {
 			saveQueryAsSuggestion();
@@ -315,7 +308,7 @@ public class SearchActivity extends SuperActivity {
 	}
 	
 	private void toggleLoading() {
-		LinearLayout loading = (LinearLayout) findViewById(R.id.loading);
+		RelativeLayout loading = (RelativeLayout) findViewById(R.id.loading);
 		if (loading.getVisibility() == View.GONE) {
 			loading.setVisibility(View.VISIBLE);
 		} else {
@@ -335,8 +328,7 @@ public class SearchActivity extends SuperActivity {
 			ArtistStub stub = (ArtistStub) artistSearchResults.get(position);
 			artistIntent.putExtra(ArtistActivity.INTENT_MBID, stub.getMbid());
 			startActivity(artistIntent);
-		}
-		
+		}	
 	}
 	
 	private class RGItemClickListener implements OnItemClickListener {
@@ -362,7 +354,6 @@ public class SearchActivity extends SuperActivity {
 			releaseIntent.putExtra(ReleaseActivity.INTENT_RELEASE_MBID, mbid);
 			startActivity(releaseIntent);
 		}
-		
 	}
 	
     public boolean onCreateOptionsMenu(Menu menu) {

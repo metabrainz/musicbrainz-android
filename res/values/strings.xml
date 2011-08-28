@@ -47,17 +47,9 @@
 	<string name="auth_pos">Okay</string>
 
 	<!-- SearchResultsActivity -->
-	<string name="searchres_title">Search Results</string>
 	<string name="no_results">No results found</string>
-	<string name="no_artists">No artists found</string>
-	<string name="no_releases">No releases found</string>
-	<string name="tab_artists">Artists</string>
-	<string name="tab_rgs">Releases</string>
-	
-	<!-- Search types -->
-	<string name="search_artist">Artist</string>
-	<string name="search_release">Release</string>
-	<string name="search_all">Search</string>
+	<string name="search_bar_artists">Artist Results</string>
+	<string name="search_bar_rgs">Releases Results</string>
 
 	<!-- ReleaseActivity -->
 	<string name="release_title">Release</string>
