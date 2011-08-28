@@ -36,7 +36,7 @@
     <dimen name="tab_height">38dp</dimen>
     <dimen name="vertical_minspace">45dp</dimen>
     <dimen name="button_min">47dp</dimen>
-	<dimen name="separator_height">1dp</dimen>
+	<dimen name="separator_height">2px</dimen>
     <dimen name="progress_spinner">40dp</dimen>
     
     <dimen name="link_button_corners">2dp</dimen>
