@@ -23,7 +23,8 @@
 
 	<style name="CustomTheme" parent="@style/Theme.ActionBar.Light"> 
         <item name="android:textColorHint">@color/hint_text</item>
-        <item name="android:listViewStyle">@style/List</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbarFadeDuration">500</item>
     </style> 
     
     <style name="Activity" parent="@style/Fill">
