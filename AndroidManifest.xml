@@ -19,10 +19,10 @@
 	<http://www.gnu.org/licenses/>. -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="org.musicbrainz.mobile"
-      android:versionCode="3"
-      android:versionName="1.0.2"
-      android:installLocation="auto">
+	package="org.musicbrainz.mobile"
+	android:versionCode="4"
+	android:versionName="1.0.2"
+	android:installLocation="auto">
       
     <application android:icon="@drawable/icon" 
     	android:name=".MBApplication"
@@ -111,18 +111,34 @@
         
     </application>
 
-	<uses-sdk android:minSdkVersion="4" 
-		android:targetSdkVersion="7" />
-		
-	<supports-screens
+	<uses-sdk android:minSdkVersion="4" />
+	
+	<supports-screens 
 		android:smallScreens="true"
 		android:normalScreens="true"
 		android:largeScreens="true"
 		android:xlargeScreens="false" />
+		
+	<compatible-screens>
+        <screen android:screenSize="small" android:screenDensity="ldpi" />
+        <screen android:screenSize="small" android:screenDensity="mdpi" />
+        <screen android:screenSize="small" android:screenDensity="hdpi" />
+        <screen android:screenSize="small" android:screenDensity="xhdpi" />
 
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-<uses-feature android:name="android.hardware.camera" />
+        <screen android:screenSize="normal" android:screenDensity="ldpi" />
+        <screen android:screenSize="normal" android:screenDensity="mdpi" />
+        <screen android:screenSize="normal" android:screenDensity="hdpi" />
+        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+        
+        <screen android:screenSize="large" android:screenDensity="ldpi" />
+        <screen android:screenSize="large" android:screenDensity="mdpi" />
+        <screen android:screenSize="large" android:screenDensity="hdpi" />
+        <screen android:screenSize="large" android:screenDensity="xhdpi" />
+	</compatible-screens>
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-feature android:name="android.hardware.camera" />
 
 </manifest> 
