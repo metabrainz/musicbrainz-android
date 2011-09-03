@@ -20,9 +20,10 @@
 
 package org.musicbrainz.mobile.ui.dialog;
 
+import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.ReleaseStub;
 import org.musicbrainz.mobile.ui.activity.BarcodeSearchActivity;
+import org.musicbrainz.mobile.ui.util.StringMapper;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -57,7 +58,7 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
 		((TextView) findViewById(R.id.list_release_artist)).setText(rs.getArtistName());
 		
 		((TextView) findViewById(R.id.list_release_tracksnum)).setText(rs.getTracksNum() + " tracks");
-		((TextView) findViewById(R.id.list_release_formats)).setText(rs.getFormattedFormats(getContext()));
+		((TextView) findViewById(R.id.list_release_formats)).setText(StringMapper.buildReleaseFormatsString(getContext(), rs.getFormats()));
 		
 		((TextView) findViewById(R.id.list_release_labels)).setText(rs.getLabels());
 		((TextView) findViewById(R.id.list_release_date)).setText(rs.getDate());

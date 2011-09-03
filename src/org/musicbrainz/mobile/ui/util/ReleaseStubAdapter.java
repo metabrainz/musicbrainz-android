@@ -22,8 +22,8 @@ package org.musicbrainz.mobile.ui.util;
 
 import java.util.List;
 
+import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.ReleaseStub;
 
 import android.app.Activity;
 import android.content.Context;
@@ -71,7 +71,7 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
 		wrapper.getArtist().setText(stub.getArtistName());
 		
 		wrapper.getTrackNum().setText(stub.getTracksNum() + " tracks");
-		wrapper.getFormat().setText(stub.getFormattedFormats(getContext()));
+		wrapper.getFormat().setText(StringMapper.buildReleaseFormatsString(getContext(), stub.getFormats()));
 		
 		wrapper.getLabels().setText(stub.getLabels());
 		wrapper.getCountry().setText(stub.getCountryCode());

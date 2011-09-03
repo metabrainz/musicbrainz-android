@@ -22,8 +22,8 @@ package org.musicbrainz.mobile.ui.util;
 
 import java.util.List;
 
+import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.ArtistStub;
 import org.musicbrainz.mobile.ui.activity.SearchActivity;
 
 import android.content.Context;
@@ -52,7 +52,7 @@ public class ArtistSearchAdapter extends ArrayAdapter<ArtistStub> {
 	
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
-		View artist = convertView; // reuse View
+		View artist = convertView; 
 		ArtistSearchWrapper wrapper = null;
 		
 		if (artist == null) {
@@ -73,7 +73,6 @@ public class ArtistSearchAdapter extends ArrayAdapter<ArtistStub> {
 		String disambiguation = aData.getDisambiguation();
 		option.setText(disambiguation);
 		
-		// set disambiguation text visible if it exists, save space if not
 		if (disambiguation != null)
 			option.setVisibility(View.VISIBLE);
 		else 
@@ -82,14 +81,11 @@ public class ArtistSearchAdapter extends ArrayAdapter<ArtistStub> {
 		return artist;
 	}
 	
-	/**
-	 * Holder pattern minimises executions of findViewById().
-	 */
 	private class ArtistSearchWrapper {
 		
 		View base;
 		TextView artistName = null;
-		TextView disambig = null;
+		TextView disambiguation = null;
 		
 		ArtistSearchWrapper(View base) {
 			this.base = base;
@@ -103,10 +99,10 @@ public class ArtistSearchAdapter extends ArrayAdapter<ArtistStub> {
 		}
 		
 		TextView getDisambiguation() {
-			if (disambig == null)
-				disambig = (TextView) base.findViewById(R.id.search_artist_disambig);
+			if (disambiguation == null)
+				disambiguation = (TextView) base.findViewById(R.id.search_artist_disambig);
 			
-			return disambig;
+			return disambiguation;
 		}
 	}
 	

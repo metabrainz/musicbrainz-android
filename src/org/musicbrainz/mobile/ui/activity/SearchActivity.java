@@ -23,14 +23,14 @@ package org.musicbrainz.mobile.ui.activity;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import org.musicbrainz.android.api.data.ArtistStub;
+import org.musicbrainz.android.api.data.ReleaseGroup;
+import org.musicbrainz.android.api.ws.WebService;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.ArtistStub;
-import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.ui.util.ArtistSearchAdapter;
 import org.musicbrainz.mobile.ui.util.RGSearchAdapter;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.SuggestionProvider;
-import org.musicbrainz.mobile.ws.WebService;
 import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
@@ -76,8 +76,11 @@ public class SearchActivity extends SuperActivity {
 	private LinkedList<ArtistStub> artistSearchResults;
 	private LinkedList<ReleaseGroup> rgSearchResults;
 	
+	private WebService webService;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		webService = new WebService();
 	    handleIntent();
 	}
 	
@@ -138,7 +141,7 @@ public class SearchActivity extends SuperActivity {
 		protected Boolean doInBackground(Void... params) {
 			boolean success = true;
 			try {
-				artistSearchResults = WebService.searchArtist(searchQuery);
+				artistSearchResults = webService.searchArtists(searchQuery);
 			} catch (IOException e) {
 				success = false;
 			} catch (SAXException e) {
@@ -164,7 +167,7 @@ public class SearchActivity extends SuperActivity {
 		protected Boolean doInBackground(Void... params) {
 			boolean success = true;
 			try {
-				rgSearchResults = WebService.searchReleaseGroup(searchQuery);
+				rgSearchResults = webService.searchReleaseGroup(searchQuery);
 			} catch (IOException e) {
 				success = false;
 			} catch (SAXException e) {
@@ -190,8 +193,8 @@ public class SearchActivity extends SuperActivity {
 		protected Boolean doInBackground(Void... params) {
 			boolean success = true;
 			try {
-				artistSearchResults = WebService.searchArtist(searchQuery);
-				rgSearchResults = WebService.searchReleaseGroup(searchQuery);
+				artistSearchResults = webService.searchArtists(searchQuery);
+				rgSearchResults = webService.searchReleaseGroup(searchQuery);
 			} catch (IOException e) {
 				success = false;
 			} catch (SAXException e) {

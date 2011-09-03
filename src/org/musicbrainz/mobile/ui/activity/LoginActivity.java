@@ -22,12 +22,12 @@ package org.musicbrainz.mobile.ui.activity;
 
 import java.io.IOException;
 
+import org.musicbrainz.android.api.ws.WebServiceUser;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
-import org.musicbrainz.mobile.ws.WebServiceUser;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

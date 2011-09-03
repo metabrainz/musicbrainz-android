@@ -20,11 +20,11 @@
 
 package org.musicbrainz.mobile.ui.activity;
 
+import org.musicbrainz.android.api.ws.WebServiceUser;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
-import org.musicbrainz.mobile.ws.WebServiceUser;
 
 import com.markupartist.android.widget.ActionBar;
 

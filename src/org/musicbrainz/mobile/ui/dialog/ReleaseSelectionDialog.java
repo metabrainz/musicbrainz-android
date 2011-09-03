@@ -22,8 +22,8 @@ package org.musicbrainz.mobile.ui.dialog;
 
 import java.util.LinkedList;
 
+import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.ReleaseStub;
 import org.musicbrainz.mobile.ui.activity.ReleaseActivity;
 import org.musicbrainz.mobile.ui.util.ReleaseStubAdapter;
 

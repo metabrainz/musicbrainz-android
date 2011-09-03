@@ -22,8 +22,8 @@ package org.musicbrainz.mobile.ui.util;
 
 import java.util.List;
 
+import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.ReleaseGroup;
 import org.musicbrainz.mobile.ui.activity.SearchActivity;
 
 import android.content.Context;
@@ -69,7 +69,7 @@ public class RGSearchAdapter extends ArrayAdapter<ReleaseGroup> {
 		
 		wrapper.getTitle().setText(rgData.getTitle());
 		wrapper.getArtist().setText(rgData.getFormattedArtist());	
-		wrapper.getType().setText(rgData.getFormattedType(getContext()));
+		wrapper.getType().setText(StringMapper.formatRGTypeString(getContext(), rgData.getType()));
 		
 		return release;
 	}

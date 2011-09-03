@@ -23,16 +23,17 @@ package org.musicbrainz.mobile.ui.activity;
 import java.io.IOException;
 import java.util.Collection;
 
+import org.musicbrainz.android.api.data.Artist;
+import org.musicbrainz.android.api.data.ReleaseGroup;
+import org.musicbrainz.android.api.data.UserData;
+import org.musicbrainz.android.api.data.WebLink;
+import org.musicbrainz.android.api.ws.WebService;
+import org.musicbrainz.android.api.ws.WebService.MBEntity;
+import org.musicbrainz.android.api.ws.WebServiceUser;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.Artist;
-import org.musicbrainz.mobile.data.ReleaseGroup;
-import org.musicbrainz.mobile.data.UserData;
-import org.musicbrainz.mobile.data.WebLink;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
+import org.musicbrainz.mobile.ui.util.StringMapper;
 import org.musicbrainz.mobile.util.Log;
-import org.musicbrainz.mobile.ws.WebService;
-import org.musicbrainz.mobile.ws.WebServiceUser;
-import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
@@ -92,8 +93,11 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	private boolean doingTag = false;
 	private boolean doingRate = false;
 	
+	private WebService webService;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		webService = new WebService();
 		
         mbid = getIntent().getStringExtra(INTENT_MBID);
         new LookupTask().execute();
@@ -227,7 +231,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		protected Boolean doInBackground(Void... params) {
 			
 			try {
-				data = WebService.lookupArtist(mbid);
+				data = webService.lookupArtist(mbid);
 				if (loggedIn) {
 					user = getUser();
 					userData = user.getUserData(MBEntity.ARTIST, data.getMbid());
@@ -301,7 +305,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			user = getUser();
 			try {
 				user.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
-				data.setTags(WebService.refreshTags(MBEntity.ARTIST, data.getMbid()));
+				data.setTags(webService.lookupTags(MBEntity.ARTIST, data.getMbid()));
 				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
@@ -344,7 +348,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			user = getUser();
 			try {
 				user.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
-				float newRating = WebService.refreshRating(MBEntity.ARTIST, data.getMbid());
+				float newRating = webService.lookupRating(MBEntity.ARTIST, data.getMbid());
 				data.setRating(newRating);
 				user.shutdownConnectionManager();
 			} catch (IOException e) {
@@ -441,7 +445,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			
 			wrapper.getReleaseTitle().setText(rData.getTitle());
 			wrapper.getReleaseYear().setText(rData.getReleaseYear());
-			wrapper.getReleaseType().setText(rData.getFormattedType(getContext()));
+			wrapper.getReleaseType().setText(StringMapper.formatRGTypeString(getContext(), rData.getType()));
 			
 			return release;
 		}

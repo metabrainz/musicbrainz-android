@@ -25,20 +25,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import org.musicbrainz.android.api.data.Artist;
+import org.musicbrainz.android.api.data.Release;
+import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.Track;
+import org.musicbrainz.android.api.data.UserData;
+import org.musicbrainz.android.api.ws.WebService;
+import org.musicbrainz.android.api.ws.WebService.MBEntity;
+import org.musicbrainz.android.api.ws.WebServiceUser;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.data.Artist;
-import org.musicbrainz.mobile.data.Release;
-import org.musicbrainz.mobile.data.ReleaseArtist;
-import org.musicbrainz.mobile.data.ReleaseStub;
-import org.musicbrainz.mobile.data.Track;
-import org.musicbrainz.mobile.data.UserData;
 import org.musicbrainz.mobile.ui.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.ui.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
 import org.musicbrainz.mobile.util.Log;
-import org.musicbrainz.mobile.ws.WebService;
-import org.musicbrainz.mobile.ws.WebServiceUser;
-import org.musicbrainz.mobile.ws.WebService.MBEntity;
 import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
@@ -109,9 +109,11 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private boolean doingTag = false;
 	private boolean doingRate = false;
 	
+	private WebService webService;
+	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        webService = new WebService();
         releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
         barcode = getIntent().getStringExtra(INTENT_BARCODE);
@@ -290,7 +292,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 					doReleaseLookup();
 					return LOADED;
 				case BARCODE:
-					data = WebService.lookupReleaseFromBarcode(barcode);
+					data = webService.lookupReleaseFromBarcode(barcode);
 					if (data != null) { // barcode found
 						releaseMbid = data.getReleaseMbid();
 						if (loggedIn) {
@@ -303,7 +305,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						return BARCODE_NOT_FOUND;
 					}
 				case RG_MBID:
-					stubs = WebService.browseReleases(releaseGroupMbid);
+					stubs = webService.browseReleases(releaseGroupMbid);
 					
 					// lookup release if single release in release group
 					if (stubs.size() == 1) {
@@ -324,7 +326,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		}
 
 		private void doReleaseLookup() throws IOException, SAXException {
-			data = WebService.lookupRelease(releaseMbid);
+			data = webService.lookupRelease(releaseMbid);
 			if (loggedIn) {
 				user = getUser();
 				userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
@@ -432,7 +434,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		private void submitThenRefreshTags(Collection<String> processedTags) throws IOException, SAXException {
 			user = getUser();
 			user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
-			data.setTags(WebService.refreshTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
+			data.setTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
 			user.shutdownConnectionManager();
 		}
 		
@@ -474,7 +476,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		private void submitThenRefreshRating(Integer... rating) throws IOException, SAXException {
 			user = getUser();
 			user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
-			float newRating = WebService.refreshRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+			float newRating = webService.lookupRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 			data.setRating(newRating);
 			user.shutdownConnectionManager();
 		}
