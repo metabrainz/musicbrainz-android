@@ -32,38 +32,18 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class BarcodeSearchParser extends DefaultHandler {
 	
-	private boolean found = false; // search success
-	
 	private String mbid;
     
-	public void startElement(String namespaceURI, String localName,
-			String qName, Attributes atts) throws SAXException {
-		
-		if (localName.equalsIgnoreCase("release-list")) {
-			String count = atts.getValue("count");
-			int c = Integer.parseInt(count); // number of results
-			if (c > 0)
-				found = true;
-		} else if (localName.equals("release")) {
-			mbid = atts.getValue("id");
-		} 
-	}
-
-	/**
-	 * Success status of the search.
-	 * 
-	 * @return boolean value representing whether a release was found from the
-	 *         barcode search.
-	 */
-    public boolean hasFoundBarcode() {
-    	return found;
-    }
-    
-    /**
-     * @return Release MBID.
-     */
     public String getMbid() {
     	return mbid;
     }
+	
+	public void startElement(String namespaceURI, String localName,
+			String qName, Attributes atts) throws SAXException {
+		
+		if (localName.equals("release")) {
+			mbid = atts.getValue("id");
+		} 
+	}
 
 }

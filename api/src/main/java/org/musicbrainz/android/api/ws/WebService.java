@@ -65,19 +65,19 @@ public class WebService {
 	public Release lookupReleaseFromBarcode(String barcode) throws IOException, SAXException {
 		URL url = QueryBuilder.barcodeLookup(barcode); 
 		InputSource xmlStream = new InputSource(url.openStream());
-		return parseReleaseFromBarcode(xmlStream);
+		String barcodeMbid = parseMbidFromBarcode(xmlStream);
+		if (barcodeMbid == null) {
+			throw new BarcodeNotFoundException(barcode);
+		}
+		return lookupRelease(barcodeMbid);
 	}
 	
-	private Release parseReleaseFromBarcode(InputSource source) throws IOException, SAXException {
+	private String parseMbidFromBarcode(InputSource source) throws IOException, SAXException {
 		XMLReader reader = getXMLReader();
 		BarcodeSearchParser parser = new BarcodeSearchParser();
 		reader.setContentHandler(parser);
 		reader.parse(source);
-		if (parser.hasFoundBarcode()) {
-			return lookupRelease(parser.getMbid());
-		} else {
-			throw new RuntimeException();
-		}
+		return parser.getMbid();
 	}
 	
 	public Release lookupRelease(String mbid) throws IOException, SAXException {

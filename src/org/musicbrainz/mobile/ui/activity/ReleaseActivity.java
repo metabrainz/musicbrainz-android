@@ -31,6 +31,7 @@ import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.data.UserData;
+import org.musicbrainz.android.api.ws.BarcodeNotFoundException;
 import org.musicbrainz.android.api.ws.WebService;
 import org.musicbrainz.android.api.ws.WebService.MBEntity;
 import org.musicbrainz.android.api.ws.WebServiceUser;
@@ -292,8 +293,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 					doReleaseLookup();
 					return LOADED;
 				case BARCODE:
-					data = webService.lookupReleaseFromBarcode(barcode);
-					if (data != null) { // barcode found
+					try {
+						data = webService.lookupReleaseFromBarcode(barcode);
 						releaseMbid = data.getReleaseMbid();
 						if (loggedIn) {
 							user = getUser();
@@ -301,7 +302,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 							user.shutdownConnectionManager();
 						}
 						return LOADED;
-					} else {
+					} catch (BarcodeNotFoundException e) {
 						return BARCODE_NOT_FOUND;
 					}
 				case RG_MBID:

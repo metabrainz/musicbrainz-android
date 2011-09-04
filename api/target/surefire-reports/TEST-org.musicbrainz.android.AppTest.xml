@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.023" errors="0" skipped="0" tests="1" name="org.musicbrainz.android.AppTest">
+<testsuite failures="0" time="0.008" errors="0" skipped="0" tests="1" name="org.musicbrainz.android.AppTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -22,7 +22,7 @@
     <property name="basedir" value="/Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api"/>
     <property name="java.endorsed.dirs" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/endorsed"/>
     <property name="os.arch" value="x86_64"/>
-    <property name="surefire.real.class.path" value="/Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefirebooter921149755307375222.jar"/>
+    <property name="surefire.real.class.path" value="/Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefirebooter2655911974595926118.jar"/>
     <property name="java.io.tmpdir" value="/var/folders/99/lh7lkmdn3lz2d6_4fr23tkmc0000gn/T/"/>
     <property name="line.separator" value="
 "/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"/>
-    <property name="sun.java.command" value="/Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefirebooter921149755307375222.jar /Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefire4858400479613222231tmp /Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefire1941749401019010332tmp"/>
+    <property name="sun.java.command" value="/Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefirebooter2655911974595926118.jar /Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefire2864313463715719084tmp /Users/jdamcd/Desktop/Dropbox/Code/MusicBrainz/api/target/surefire/surefire9145819691241802286tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="apple.awt.CToolkit"/>
