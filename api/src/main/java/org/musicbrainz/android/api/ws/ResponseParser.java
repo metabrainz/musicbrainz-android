@@ -39,6 +39,10 @@ public class ResponseParser {
 		factory = SAXParserFactory.newInstance();
 	}
 	
+	public ResponseParser(SAXParserFactory factory) {
+		this.factory = factory;
+	}
+	
 	public String parseMbidFromBarcode(InputStream stream) throws IOException {
 		BarcodeSearchParser handler = new BarcodeSearchParser();
 		doParsing(stream, handler);

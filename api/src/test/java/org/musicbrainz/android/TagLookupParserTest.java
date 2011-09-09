@@ -28,7 +28,7 @@ public class TagLookupParserTest extends BaseXmlParsingTestCase {
 		assertNotNull(stream);
 		
 		try {
-			ResponseParser responseParser = new ResponseParser();
+			ResponseParser responseParser = getResponseParser();
 			Collection<String> tags = responseParser.parseTagLookup(stream);
 			assertEquals(expected, tags.size());
 			
