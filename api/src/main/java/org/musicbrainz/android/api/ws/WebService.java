@@ -21,208 +21,117 @@
 package org.musicbrainz.android.api.ws;
 
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
+import org.musicbrainz.android.api.WebserviceConfig;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.ReleaseStub;
-import org.musicbrainz.android.api.parsers.ArtistLookupParser;
-import org.musicbrainz.android.api.parsers.ArtistSearchParser;
-import org.musicbrainz.android.api.parsers.BarcodeSearchParser;
-import org.musicbrainz.android.api.parsers.RGBrowseParser;
-import org.musicbrainz.android.api.parsers.RGSearchParser;
-import org.musicbrainz.android.api.parsers.RatingParser;
-import org.musicbrainz.android.api.parsers.ReleaseLookupParser;
-import org.musicbrainz.android.api.parsers.ReleaseStubParser;
-import org.musicbrainz.android.api.parsers.TagParser;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 
 /**
  * This class makes the web service available to Activity classes. The XML
- * returned is parsed into data objects with SAX parser handlers.
+ * returned is parsed into data objects with SAX.
  * 
  * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class WebService {
 	
-	private SAXParserFactory factory;
+	protected DefaultHttpClient httpClient;
+	protected ResponseParser responseParser;
 	
 	public WebService() {
-		factory = SAXParserFactory.newInstance();
+		configureHttpClient();
+		responseParser = new ResponseParser();
 	}
 	
-	public Release lookupReleaseFromBarcode(String barcode) throws IOException, SAXException {
-		URL url = QueryBuilder.barcodeLookup(barcode); 
-		InputSource xmlStream = new InputSource(url.openStream());
-		String barcodeMbid = parseMbidFromBarcode(xmlStream);
+	protected void configureHttpClient() {
+		httpClient = new DefaultHttpClient();
+		httpClient.getParams().setParameter(CoreProtocolPNames.USER_AGENT, WebserviceConfig.USER_AGENT);
+	}
+	
+	public Release lookupReleaseFromBarcode(String barcode) throws IOException {
+		String url = QueryBuilder.barcodeLookup(barcode); 
+		InputStream response = get(url);
+		String barcodeMbid = responseParser.parseMbidFromBarcode(response);
 		if (barcodeMbid == null) {
 			throw new BarcodeNotFoundException(barcode);
 		}
 		return lookupRelease(barcodeMbid);
 	}
 	
-	private String parseMbidFromBarcode(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		BarcodeSearchParser parser = new BarcodeSearchParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getMbid();
+	public Release lookupRelease(String mbid) throws IOException {
+		String url = QueryBuilder.releaseLookup(mbid);
+		InputStream response = get(url);
+		return responseParser.parseRelease(response);
 	}
 	
-	public Release lookupRelease(String mbid) throws IOException, SAXException {
-		URL url = QueryBuilder.releaseLookup(mbid);
-		InputSource xmlStream = new InputSource(url.openStream());
-		return parseRelease(xmlStream);
+	public LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException {
+		String url = QueryBuilder.releaseGroupReleaseBrowse(mbid);
+		InputStream response = get(url);
+		return responseParser.parseRGReleases(response);
 	}
 	
-	private Release parseRelease(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		ReleaseLookupParser parser = new ReleaseLookupParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getResult();
-	}
-	
-	public LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException, SAXException {
-		URL url = QueryBuilder.releaseGroupReleaseBrowse(mbid);
-		InputSource xmlStream = new InputSource(url.openStream());
-		return parseRGReleases(xmlStream);
-	}
-	
-	private LinkedList<ReleaseStub> parseRGReleases(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		ReleaseStubParser parser = new ReleaseStubParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getResults();
-	}
-	
-	public Artist lookupArtist(String mbid) throws IOException, SAXException {
-		URL artistUrl = QueryBuilder.artistLookup(mbid);
-		InputSource artistXmlStream = new InputSource(artistUrl.openStream());
-		Artist artist = parseArtist(artistXmlStream);
+	public Artist lookupArtist(String mbid) throws IOException {
+		String artistUrl = QueryBuilder.artistLookup(mbid);
+		InputStream artistResponse = get(artistUrl);
+		Artist artist = responseParser.parseArtist(artistResponse);
 		
-		URL rgUrl = QueryBuilder.artistReleaseGroupBrowse(mbid);
-		InputSource rgXmlStream = new InputSource(rgUrl.openStream());
-		ArrayList<ReleaseGroup> releases = parseReleaseGroupBrowse(rgXmlStream);
+		String rgUrl = QueryBuilder.artistReleaseGroupBrowse(mbid);
+		InputStream rgResponse = get(rgUrl);
+		ArrayList<ReleaseGroup> releases = responseParser.parseReleaseGroupBrowse(rgResponse);
 		
 		artist.setReleaseGroups(releases);
 		return artist;
 	}
 	
-	private Artist parseArtist(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		ArtistLookupParser parser = new ArtistLookupParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getResult();
+	public LinkedList<ArtistStub> searchArtists(String searchTerm) throws IOException {
+		String url = QueryBuilder.artistSearch(searchTerm);
+		InputStream response = get(url);
+		return responseParser.parseArtistSearch(response);
 	}
 	
-	private ArrayList<ReleaseGroup> parseReleaseGroupBrowse(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		RGBrowseParser parser = new RGBrowseParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getResults();		
+	public LinkedList<ReleaseGroup> searchReleaseGroup(String searchTerm) throws IOException {
+		String url = QueryBuilder.releaseGroupSearch(searchTerm);
+		InputStream response = get(url);
+		return responseParser.parseReleaseGroupSearch(response);
 	}
 	
-	public LinkedList<ArtistStub> searchArtists(String searchTerm) throws IOException, SAXException {
-		URL url = QueryBuilder.artistSearch(searchTerm);
-		InputSource xmlStream = new InputSource(url.openStream());
-		return parseArtistSearch(xmlStream);
+	public LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException {
+		String url = QueryBuilder.releaseSearch(searchTerm);
+		InputStream response = get(url);
+		return responseParser.parseReleaseSearch(response);
 	}
 	
-	private LinkedList<ArtistStub> parseArtistSearch(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		ArtistSearchParser parser = new ArtistSearchParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getResults();
+	public Collection<String> lookupTags(MBEntity type, String mbid) throws IOException {
+		String url = QueryBuilder.tagLookup(type, mbid);
+		InputStream response = get(url);
+		return responseParser.parseTagLookup(response);
 	}
 	
-	public LinkedList<ReleaseGroup> searchReleaseGroup(String searchTerm) throws IOException, SAXException {
-		URL url = QueryBuilder.releaseGroupSearch(searchTerm);
-		InputSource xmlStream = new InputSource(url.openStream());
-		return parseReleaseGroupSearch(xmlStream);
+	public float lookupRating(MBEntity type, String mbid) throws IOException  {
+		String url = QueryBuilder.ratingLookup(type, mbid);
+		InputStream response = get(url);
+		return responseParser.parseRatingLookup(response);
 	}
 	
-	private LinkedList<ReleaseGroup> parseReleaseGroupSearch(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		RGSearchParser parser = new RGSearchParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getResults();
+	protected InputStream get(String url) throws IOException {
+		HttpGet get = new HttpGet(url);
+		get.setHeader("Accept", "application/xml");
+		HttpResponse response = httpClient.execute(get);
+		return response.getEntity().getContent();
 	}
 	
-	public LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException, SAXException {
-		URL url = QueryBuilder.releaseSearch(searchTerm);
-		InputSource xmlStream = new InputSource(url.openStream());
-		return parseReleaseSearch(xmlStream);
-	}
-	
-	private LinkedList<ReleaseStub> parseReleaseSearch(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		ReleaseStubParser parser = new ReleaseStubParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getResults();
-	}
-	
-	public Collection<String> lookupTags(MBEntity type, String mbid) throws IOException, SAXException {
-		URL url = QueryBuilder.tagLookup(type, mbid);
-		InputSource xmlStream = new InputSource(url.openStream());
-		return parseTagLookup(xmlStream);
-	}
-	
-	private Collection<String> parseTagLookup(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		TagParser parser = new TagParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getTags();
-	}
-	
-	public float lookupRating(MBEntity type, String mbid) throws IOException, SAXException {
-		URL url = QueryBuilder.ratingLookup(type, mbid);
-		InputSource xmlStream= new InputSource(url.openStream());
-		return parseRatingLookup(xmlStream);
-	}
-	
-	private float parseRatingLookup(InputSource source) throws IOException, SAXException {
-		XMLReader reader = getXMLReader();
-		RatingParser parser = new RatingParser();
-		reader.setContentHandler(parser);
-		reader.parse(source);
-		return parser.getRating();
-	}
-	
-	private XMLReader getXMLReader() {
-
-		try {
-			SAXParser parser = factory.newSAXParser();
-			return parser.getXMLReader();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public enum MBEntity {
-		ARTIST,
-		RELEASE_GROUP
+	public void shutdownConnectionManager() {
+		httpClient.getConnectionManager().shutdown();
 	}
 	
 }

@@ -32,9 +32,10 @@ import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.ws.BarcodeNotFoundException;
+import org.musicbrainz.android.api.ws.MBEntity;
+import org.musicbrainz.android.api.ws.UserService;
 import org.musicbrainz.android.api.ws.WebService;
-import org.musicbrainz.android.api.ws.WebService.MBEntity;
-import org.musicbrainz.android.api.ws.WebServiceUser;
+import org.musicbrainz.android.api.ws.WebServiceUtils;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.ui.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.ui.dialog.ReleaseSelectionDialog;
@@ -103,7 +104,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private Button tagBtn;
 	private Button rateBtn;
 	
-	private WebServiceUser user;
+	private UserService user;
 	private UserData userData;
 	
 	// status
@@ -420,7 +421,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
 		protected Boolean doInBackground(String... tags) {
 			
-			Collection<String> processedTags = WebServiceUser.sanitiseCommaSeparatedTags(tags[0]);
+			Collection<String> processedTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags[0]);
 			
 			try {
 				submitThenRefreshTags(processedTags);

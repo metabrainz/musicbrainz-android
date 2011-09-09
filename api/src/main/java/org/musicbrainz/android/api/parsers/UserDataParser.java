@@ -32,12 +32,11 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class UserDataParser extends DefaultHandler {
 	
-	private UserData data;
-	
+	private UserData data = new UserData();
 	private StringBuilder sb;
 	
-	public UserDataParser(UserData data) {
-		this.data = data;
+	public UserData getResult() {
+		return data;
 	}
 	
 	public void startElement(String namespaceURI, String localName,

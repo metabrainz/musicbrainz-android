@@ -1,12 +1,7 @@
 package org.musicbrainz.android.api.ws;
 
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-
 import org.musicbrainz.android.api.WebserviceConfig;
-import org.musicbrainz.android.api.ws.WebService.MBEntity;
+import org.musicbrainz.android.api.ws.MBEntity;
 
 public class QueryBuilder {
 
@@ -31,63 +26,72 @@ public class QueryBuilder {
 	private static final String TAG_PARAMS = "?inc=tags";
 	private static final String RATING_PARAMS = "?inc=ratings";
 	
-	public static URL barcodeLookup(String barcode) throws MalformedURLException {
-		return new URL(WEB_SERVICE + SEARCH_BARCODE + barcode + SEARCH_BARCODE_PARAMS);
+	// MBID for Various Artists always exists.
+	private static final String AUTH_TEST = "artist/89ad4ac3-39f7-470e-963a-56509c546377?inc=user-tags";
+	
+	private static final String USER_PARAMS = "?inc=user-tags+user-ratings";
+	private static final String TAG = "tag";
+	private static final String RATING = "rating";
+	private static final String BARCODE = "release/";
+	
+	public static String barcodeLookup(String barcode) {
+		return new String(WEB_SERVICE + SEARCH_BARCODE + barcode + SEARCH_BARCODE_PARAMS);
 	}
 	
-	public static URL releaseLookup(String mbid) throws MalformedURLException {
-		return new URL(WEB_SERVICE + LOOKUP_RELEASE + mbid + LOOKUP_RELEASE_PARAMS);
+	public static String releaseLookup(String mbid) {
+		return new String(WEB_SERVICE + LOOKUP_RELEASE + mbid + LOOKUP_RELEASE_PARAMS);
 	}
 
-	public static URL releaseGroupReleaseBrowse(String mbid) throws MalformedURLException {
-		return new URL(WEB_SERVICE + BROWSE_RG_RELEASES + mbid + BROWSE_RG_RELEASES_PARAMS);
+	public static String releaseGroupReleaseBrowse(String mbid) {
+		return new String(WEB_SERVICE + BROWSE_RG_RELEASES + mbid + BROWSE_RG_RELEASES_PARAMS);
 	}
 	
-	public static URL artistLookup(String mbid) throws MalformedURLException {
-		return new URL(WEB_SERVICE + LOOKUP_ARTIST + mbid + LOOKUP_ARTIST_PARAMS);
+	public static String artistLookup(String mbid) {
+		return new String(WEB_SERVICE + LOOKUP_ARTIST + mbid + LOOKUP_ARTIST_PARAMS);
 	}
 	
-	public static URL artistReleaseGroupBrowse(String mbid) throws MalformedURLException {
-		return new URL(WEB_SERVICE + BROWSE_ARTIST_RGS + mbid + BROWSE_ARTIST_RGS_PARAMS);
+	public static String artistReleaseGroupBrowse(String mbid) {
+		return new String(WEB_SERVICE + BROWSE_ARTIST_RGS + mbid + BROWSE_ARTIST_RGS_PARAMS);
 	}
 	
-	public static URL artistSearch(String searchTerm) throws MalformedURLException {
-		return new URL(WEB_SERVICE + SEARCH_ARTIST + sanitise(searchTerm));
+	public static String artistSearch(String searchTerm) {
+		return new String(WEB_SERVICE + SEARCH_ARTIST + WebServiceUtils.sanitise(searchTerm));
 	}
 	
-	public static URL releaseGroupSearch(String searchTerm) throws MalformedURLException {
-		return new URL(WEB_SERVICE + SEARCH_RG + sanitise(searchTerm));
+	public static String releaseGroupSearch(String searchTerm) {
+		return new String(WEB_SERVICE + SEARCH_RG + WebServiceUtils.sanitise(searchTerm));
 	}
 	
-	public static URL releaseSearch(String searchTerm) throws MalformedURLException {
-		return new URL(WEB_SERVICE + SEARCH_RELEASE + sanitise(searchTerm));
+	public static String releaseSearch(String searchTerm) {
+		return new String(WEB_SERVICE + SEARCH_RELEASE + WebServiceUtils.sanitise(searchTerm));
 	}
 	
-	public static URL tagLookup(MBEntity type, String mbid) throws MalformedURLException {
-		return new URL(WEB_SERVICE + entityString(type) + "/" + mbid + TAG_PARAMS);
+	public static String tagLookup(MBEntity type, String mbid) {
+		return new String(WEB_SERVICE + WebServiceUtils.entityString(type) + "/" + mbid + TAG_PARAMS);
 	}
 	
-	public static URL ratingLookup(MBEntity type, String mbid) throws MalformedURLException {
-		return new URL(WEB_SERVICE + entityString(type) + "/" + mbid + RATING_PARAMS);
+	public static String ratingLookup(MBEntity type, String mbid) {
+		return new String(WEB_SERVICE + WebServiceUtils.entityString(type) + "/" + mbid + RATING_PARAMS);
 	}
 	
-	private static String sanitise(String input) {
-		try {
-			return URLEncoder.encode(input, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			return input;
-		}
+	public static String authenticationCheck() {
+		return new String(WEB_SERVICE + AUTH_TEST);
 	}
 	
-	private static String entityString(MBEntity entity) {
-		switch(entity) {
-		case ARTIST:
-			return "artist";
-		case RELEASE_GROUP:
-			return "release-group";
-		default:
-			return "artist";
-		}
+	public static String userData(MBEntity entity, String mbid) {
+		return new String(WEB_SERVICE + WebServiceUtils.entityString(entity) + "/" + mbid + USER_PARAMS);
+	}
+	
+	public static String tagSubmission(String clientId) {
+		return new String(WEB_SERVICE + TAG + clientId);
+	}
+	
+	public static String ratingSubmission(String clientId) {
+		return new String(WEB_SERVICE + RATING + clientId);
+	}
+	
+	public static String barcodeSubmission(String clientId) {
+		return new String(WEB_SERVICE + BARCODE + clientId);
 	}
 	
 }

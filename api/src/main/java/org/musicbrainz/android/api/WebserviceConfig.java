@@ -25,5 +25,7 @@ public class WebserviceConfig {
 	public static final String WEB_SERVICE = "http://www.musicbrainz.org/ws/2/";
 	public static final String REALM = "musicbrainz.org";
 	public static final String SCOPE = "www.musicbrainz.org";
+	
+	public static final String USER_AGENT = "MBAndroid/1.0";
 
 }

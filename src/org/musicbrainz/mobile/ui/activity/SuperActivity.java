@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.ui.activity;
 
-import org.musicbrainz.android.api.ws.WebServiceUser;
+import org.musicbrainz.android.api.ws.UserService;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
@@ -72,12 +72,12 @@ public abstract class SuperActivity extends Activity {
 		return prefs.getBoolean("search_suggestions", true);
 	}
 
-	protected WebServiceUser getUser() {
+	protected UserService getUser() {
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
 		String username = prefs.getString("username", null);
 		String obscuredPassword = prefs.getString("password", null);
 		String password = SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
-		return new WebServiceUser(username, password, getClientVersion());
+		return new UserService(username, password, getClientVersion());
 	}
 	
 	public String getClientVersion() {

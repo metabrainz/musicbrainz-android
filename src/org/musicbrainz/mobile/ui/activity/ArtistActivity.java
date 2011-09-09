@@ -27,14 +27,14 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.data.WebLink;
+import org.musicbrainz.android.api.ws.MBEntity;
+import org.musicbrainz.android.api.ws.UserService;
 import org.musicbrainz.android.api.ws.WebService;
-import org.musicbrainz.android.api.ws.WebService.MBEntity;
-import org.musicbrainz.android.api.ws.WebServiceUser;
+import org.musicbrainz.android.api.ws.WebServiceUtils;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.ui.util.FocusTextView;
 import org.musicbrainz.mobile.ui.util.StringMapper;
 import org.musicbrainz.mobile.util.Log;
-import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
@@ -86,7 +86,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	private Button tagBtn;
 	private Button rateBtn;
 	
-	private WebServiceUser user;
+	private UserService user;
 	private UserData userData;
 	
 	// status
@@ -241,9 +241,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			} catch (IOException e) {
 				e.printStackTrace();
 				return false;
-			} catch (SAXException e) {
-				e.printStackTrace();
-				return false;
 			}
 		}
 		
@@ -300,7 +297,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
 		protected Boolean doInBackground(String... tags) {
 			
-			Collection<String> processedTags = WebServiceUser.sanitiseCommaSeparatedTags(tags[0]);
+			Collection<String> processedTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags[0]);
 			
 			user = getUser();
 			try {
@@ -309,8 +306,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
-			} catch (SAXException e) {
-				return true;
 			}
 			return true;
 		}
@@ -353,8 +348,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
-			} catch (SAXException e) {
-				return true; // refresh failed but submission okay
 			}
 			return true;
 		}

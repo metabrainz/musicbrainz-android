@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.ui.activity;
 
 import java.io.IOException;
 
-import org.musicbrainz.android.api.ws.WebServiceUser;
+import org.musicbrainz.android.api.ws.UserService;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
@@ -111,7 +111,7 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
     	
 		protected Integer doInBackground(Void... v) {
 			
-			WebServiceUser user = new WebServiceUser(username, password, getClientVersion());
+			UserService user = new UserService(username, password, getClientVersion());
 			Boolean success = false;
 			try {
 				success = user.autenticateUserCredentials();

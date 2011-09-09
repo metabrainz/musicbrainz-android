@@ -24,13 +24,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.ws.UserService;
 import org.musicbrainz.android.api.ws.WebService;
-import org.musicbrainz.android.api.ws.WebServiceUser;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.ui.dialog.BarcodeConfirmDialog;
 import org.musicbrainz.mobile.ui.util.ReleaseStubAdapter;
 import org.musicbrainz.mobile.util.Log;
-import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
 
@@ -123,9 +122,6 @@ public class BarcodeSearchActivity extends SuperActivity implements
 				results = webService.searchRelease(searchBox.getText().toString());
 				return true;
 			} catch (IOException e) {
-				e.printStackTrace();
-				return false;
-			} catch (SAXException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -229,7 +225,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
 		@Override
 		protected Boolean doInBackground(String... releaseMbid) {
 			
-			WebServiceUser user = getUser();
+			UserService user = getUser();
 			try {
 				user.submitBarcode(releaseMbid[0], barcode);
 				user.shutdownConnectionManager();

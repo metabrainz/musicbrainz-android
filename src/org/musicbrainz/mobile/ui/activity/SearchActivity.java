@@ -31,7 +31,6 @@ import org.musicbrainz.mobile.ui.util.ArtistSearchAdapter;
 import org.musicbrainz.mobile.ui.util.RGSearchAdapter;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.SuggestionProvider;
-import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
 
@@ -144,8 +143,6 @@ public class SearchActivity extends SuperActivity {
 				artistSearchResults = webService.searchArtists(searchQuery);
 			} catch (IOException e) {
 				success = false;
-			} catch (SAXException e) {
-				success = false;
 			}
 			return success;
 		}
@@ -169,8 +166,6 @@ public class SearchActivity extends SuperActivity {
 			try {
 				rgSearchResults = webService.searchReleaseGroup(searchQuery);
 			} catch (IOException e) {
-				success = false;
-			} catch (SAXException e) {
 				success = false;
 			}
 			return success;
@@ -196,8 +191,6 @@ public class SearchActivity extends SuperActivity {
 				artistSearchResults = webService.searchArtists(searchQuery);
 				rgSearchResults = webService.searchReleaseGroup(searchQuery);
 			} catch (IOException e) {
-				success = false;
-			} catch (SAXException e) {
 				success = false;
 			}
 			return success;

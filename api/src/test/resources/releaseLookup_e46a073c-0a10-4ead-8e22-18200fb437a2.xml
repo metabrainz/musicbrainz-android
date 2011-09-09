@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#">
+	<release id="e46a073c-0a10-4ead-8e22-18200fb437a2">
+		<title>At Home With Owen</title>
+		<status>Official</status>
+		<quality>normal</quality>
+		<text-representation>
+			<language>eng</language>
+			<script>Latn</script>
+		</text-representation>
+		<artist-credit>
+			<name-credit>
+				<artist id="2b0ce8c8-9c9a-4807-9414-24b22af7a679">
+					<name>Owen</name>
+					<sort-name>Owen</sort-name>
+					<tag-list>
+						<tag count="1">
+							<name>american</name>
+						</tag>
+						<tag count="1">
+							<name>indie</name>
+						</tag>
+						<tag count="1">
+							<name>indie rock</name>
+						</tag>
+					</tag-list>
+					<rating votes-count="2">5</rating>
+				</artist>
+			</name-credit>
+		</artist-credit>
+		<release-group type="Album"
+			id="1dc836a9-fa65-399b-858f-29fc2f840504">
+			<title>At Home With Owen</title>
+			<first-release-date>2006-11-07</first-release-date>
+		</release-group>
+		<date>2006-11-07</date>
+		<country>US</country>
+		<asin>B000IOMXWQ</asin>
+		<label-info-list count="1">
+			<label-info>
+				<catalog-number>PRC-118</catalog-number>
+				<label id="2ad60482-164f-4e5c-ac78-1f5267d4fdc0">
+					<name>Polyvinyl</name>
+					<sort-name>Polyvinyl</sort-name>
+					<tag-list>
+						<tag count="1">
+							<name>american</name>
+						</tag>
+						<tag count="1">
+							<name>américain</name>
+						</tag>
+						<tag count="1">
+							<name>indie pop</name>
+						</tag>
+						<tag count="1">
+							<name>neo-psychedelia</name>
+						</tag>
+						<tag count="1">
+							<name>usa</name>
+						</tag>
+					</tag-list>
+					<rating votes-count="1">1</rating>
+				</label>
+			</label-info>
+		</label-info-list>
+		<medium-list count="1">
+			<medium>
+				<position>1</position>
+				<track-list count="8" offset="0">
+					<track>
+						<position>1</position>
+						<length>390906</length>
+						<recording id="bee7f397-a08a-4957-89b3-304a3742f977">
+							<title>Bad News</title>
+							<length>390906</length>
+						</recording>
+					</track>
+					<track>
+						<position>2</position>
+						<length>193346</length>
+						<recording id="7becddee-09e8-460f-af66-8b45af7a5d93">
+							<title>The Sad Waltzes of Pietro Crespi</title>
+							<length>193346</length>
+						</recording>
+					</track>
+					<track>
+						<position>3</position>
+						<length>232480</length>
+						<recording id="8fa4e1e2-b30f-48eb-b4c6-d819308101d7">
+							<title>Bags of Bones</title>
+							<length>232480</length>
+						</recording>
+					</track>
+					<track>
+						<position>4</position>
+						<length>266986</length>
+						<recording id="2228b78a-1f72-4f97-8a09-42bef39eaeca">
+							<title>Use Your Words</title>
+							<length>266986</length>
+						</recording>
+					</track>
+					<track>
+						<position>5</position>
+						<length>452986</length>
+						<recording id="12c764d7-ea0d-4a1f-99b1-809a028ac5ea">
+							<title>A Bird in Hand</title>
+							<length>452986</length>
+						</recording>
+					</track>
+					<track>
+						<position>6</position>
+						<length>287013</length>
+						<recording id="23151a39-19aa-49af-a21e-3b9aa282a2c8">
+							<title>Windows and Doorways</title>
+							<length>287013</length>
+						</recording>
+					</track>
+					<track>
+						<position>7</position>
+						<length>214546</length>
+						<recording id="37c13e00-c7f6-4400-8411-62bc7bc89584">
+							<title>Femme Fetale</title>
+							<length>214546</length>
+						</recording>
+					</track>
+					<track>
+						<position>8</position>
+						<length>224413</length>
+						<recording id="3256268a-17f2-4d42-a1f8-b18067bba322">
+							<title>One of These Days</title>
+							<length>224413</length>
+						</recording>
+					</track>
+				</track-list>
+			</medium>
+		</medium-list>
+	</release>
+</metadata>
