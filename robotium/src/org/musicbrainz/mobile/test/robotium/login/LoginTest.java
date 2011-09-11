@@ -1,6 +1,26 @@
+/*
+ * Copyright (C) 2011 Jamie McDonald
+ * 
+ * This file is part of MusicBrainz Mobile (Android).
+ * 
+ * MusicBrainz Mobile (Android) is free software: you can redistribute 
+ * it and/or modify it under the terms of the GNU General Public 
+ * License as published by the Free Software Foundation, either 
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * MusicBrainz Mobile (Android) is distributed in the hope that it 
+ * will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ * See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with MusicBrainz Mobile (Android). If not, see 
+ * <http://www.gnu.org/licenses/>.
+ */
+
 package org.musicbrainz.mobile.test.robotium.login;
 
-import org.musicbrainz.mobile.test.robotium.Secrets;
+import org.musicbrainz.mobile.test.robotium.Account;
 import org.musicbrainz.mobile.ui.activity.HomeActivity;
 import org.musicbrainz.mobile.ui.activity.LoginActivity;
 
@@ -31,7 +51,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<HomeActivity> {
 	}
 	
 	private void enterInvalidCredentials() {
-		solo.enterText(0, "jdamcd");
+		solo.enterText(0, Account.USERNAME);
 		solo.enterText(1, "blah");
 		solo.clickOnButton("Log In");
 	}
@@ -45,8 +65,8 @@ public class LoginTest extends ActivityInstrumentationTestCase2<HomeActivity> {
 	}
 	
 	private void enterValidCredentials() {
-		solo.enterText(0, "jdamcd");
-		solo.enterText(1, Secrets.PASSWORD);
+		solo.enterText(0, Account.USERNAME);
+		solo.enterText(1, Account.PASSWORD);
 		solo.clickOnButton("Log In");
 	}
 	
