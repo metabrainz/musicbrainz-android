@@ -1,10 +1,31 @@
+This is a list of example queries made by the Android app:
+
 artistLookup: 
-artistReleaseGroupBrowse:
-artistSearch:
-barcodeLookup:
-ratingLookup:
-releaseGroupReleaseBrowse:
-releaseGroupSearch:
-releaseLookup:
-releaseSearch:
-tagLookup:
+www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=url-rels+tags+ratings
+
+artistReleaseGroupBrowse: 
+www.musicbrainz.org/ws/2/release-group?artist=b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&limit=100
+
+artistSearch: 
+www.musicbrainz.org/ws/2/artist?query=owen
+
+barcodeSearch: 
+www.musicbrainz.org/ws/2/release/?query=barcode:792258106329
+
+ratingLookup: 
+www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=ratings
+
+releaseGroupReleaseBrowse: 
+www.musicbrainz.org/ws/2/release?release-group=dca03435-8adb-30a5-ba82-5a162267ff38&inc=artist-credits+labels+mediums
+
+releaseGroupSearch: 
+www.musicbrainz.org/ws/2/release-group?query=songs about leaving
+
+releaseLookup: 
+www.musicbrainz.org/ws/2/release/e46a073c-0a10-4ead-8e22-18200fb437a2?inc=release-groups+artists+recordings+labels+tags+ratings
+
+releaseSearch: 
+www.musicbrainz.org/ws/2/release?query=songs about leaving
+
+tagLookup: 
+www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=tags

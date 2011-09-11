@@ -59,7 +59,7 @@ public class WebService {
 	}
 	
 	public Release lookupReleaseFromBarcode(String barcode) throws IOException {
-		String url = QueryBuilder.barcodeLookup(barcode); 
+		String url = QueryBuilder.barcodeSearch(barcode); 
 		InputStream response = get(url);
 		String barcodeMbid = responseParser.parseMbidFromBarcode(response);
 		if (barcodeMbid == null) {

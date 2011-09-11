@@ -34,7 +34,7 @@ public class QueryBuilder {
 	private static final String RATING = "rating";
 	private static final String BARCODE = "release/";
 	
-	public static String barcodeLookup(String barcode) {
+	public static String barcodeSearch(String barcode) {
 		return new String(WEB_SERVICE + SEARCH_BARCODE + barcode + SEARCH_BARCODE_PARAMS);
 	}
 	
