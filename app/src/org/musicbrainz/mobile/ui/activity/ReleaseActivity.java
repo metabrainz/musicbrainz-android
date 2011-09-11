@@ -149,8 +149,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			provideArtistAction = false;
 		} else {
 			ReleaseArtist singleArtist = releaseArtists.get(0);
-	        for (String id : Artist.IGNORE_LIST) {
-	        	if (singleArtist.mbid.equals(id)) {
+	        for (String id : Artist.SPECIAL_PURPOSE) {
+	        	if (singleArtist.getMbid().equals(id)) {
 	        		provideArtistAction = false;
 	        	}
 	        }
@@ -229,7 +229,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	
     private Intent createArtistIntent() {
     	final Intent releaseIntent = new Intent(this, ArtistActivity.class);
-		releaseIntent.putExtra("mbid", data.getArtists().get(0).mbid);
+		releaseIntent.putExtra("mbid", data.getArtists().get(0).getMbid());
 		return releaseIntent;
     }
 	

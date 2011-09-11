@@ -30,16 +30,16 @@ import org.musicbrainz.android.api.util.StringFormat;
  */
 public class WebLink implements Comparable<Object> {
 
-	private String url;
+	private String target;
 	private String type;
 
 	public String getUrl() {
-		return url;
+		return target;
 	}
 	
 	public String getFormattedLink() {
 		// Remove "http://"
-		String formattedLink = url.substring(7);
+		String formattedLink = target.substring(7);
 		
 		if (formattedLink.endsWith("/"))
 			formattedLink = formattedLink.substring(0, formattedLink.length()-1);
@@ -48,7 +48,7 @@ public class WebLink implements Comparable<Object> {
 	}
 
 	public void setUrl(String url) {
-		this.url = url;
+		this.target = url;
 	}
 
 	public String getFormattedType() {

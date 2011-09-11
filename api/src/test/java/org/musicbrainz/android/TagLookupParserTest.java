@@ -33,6 +33,7 @@ public class TagLookupParserTest extends BaseXmlParsingTestCase {
 			assertEquals(expected, tags.size());
 			
 		} catch (IOException e) {
+			e.printStackTrace();
 			fail();
 		}
 	}

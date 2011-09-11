@@ -61,7 +61,7 @@ public class ReleaseLookupParser extends DefaultHandler {
 		} else if (localName.equals("artist")) {
 			artist = true;
 			releaseArtist = new ReleaseArtist();
-			releaseArtist.mbid = atts.getValue("id");
+			releaseArtist.setMbid(atts.getValue("id"));
 		} else if (localName.equals("name")) {
 			sb = new StringBuilder();
 		} else if (localName.equals("date")) {
@@ -106,7 +106,7 @@ public class ReleaseLookupParser extends DefaultHandler {
 			artist = false;
 		} else if (localName.equals("name")) {
 			if (artist && !tag) {
-				releaseArtist.name = sb.toString();
+				releaseArtist.setName(sb.toString());
 				data.addArtist(releaseArtist);
 			} else if (label && !tag) {
 				data.addLabel(sb.toString());

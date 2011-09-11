@@ -112,16 +112,13 @@ public class ResponseParser {
 	protected void doParsing(InputStream stream, DefaultHandler handler) throws IOException {
 		try {
 			SAXParser parser = factory.newSAXParser();
-			
 			XMLReader reader = parser.getXMLReader();
 			InputSource source = new InputSource(stream);
 			reader.setContentHandler(handler);
 			reader.parse(source);
 		} catch (SAXException e) {
-			System.out.println("" + e.getMessage());
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
-			System.out.println("" + e.getMessage());
 			e.printStackTrace();
 		}
 	}

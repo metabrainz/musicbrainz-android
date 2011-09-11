@@ -22,7 +22,6 @@ public abstract class BaseXmlParsingTestCase {
 	protected ResponseParser getResponseParser() {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setNamespaceAware(true);
-		factory.setValidating(true);
 		return new ResponseParser(factory);
 	}
 	

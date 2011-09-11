@@ -87,7 +87,7 @@ public class Release {
 	public String getFormattedArtist() {
 		String formatted = "";
 		for (ReleaseArtist artist : artists) {
-			formatted += artist.name + ", ";
+			formatted += artist.getName() + ", ";
 		}
 		return formatted.substring(0, formatted.length()-2);
 	}

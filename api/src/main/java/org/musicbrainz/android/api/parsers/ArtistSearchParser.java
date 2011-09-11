@@ -70,7 +70,7 @@ public class ArtistSearchParser extends DefaultHandler {
 			
 			// check id against special purpose artist list
 			boolean ignored = false;
-			for (String id : Artist.IGNORE_LIST)
+			for (String id : Artist.SPECIAL_PURPOSE)
 				if (stub.getMbid().equals(id))
 					ignored = true;
 			

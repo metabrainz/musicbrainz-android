@@ -62,7 +62,7 @@ public class RGSearchParser extends DefaultHandler {
 		} else if (localName.equals("artist")) {
 			artist = true;
 			releaseArtist = new ReleaseArtist();
-			releaseArtist.mbid = atts.getValue("id");
+			releaseArtist.setMbid(atts.getValue("id"));
 		} else if (localName.equals("name")) {
 			if (artist)
 				sb = new StringBuilder();
@@ -87,7 +87,7 @@ public class RGSearchParser extends DefaultHandler {
 			artist = false;
 		} else if (localName.equals("name")) {
 			if (artist) {
-				releaseArtist.name = sb.toString();
+				releaseArtist.setName(sb.toString());
 				rg.addArtist(releaseArtist);
 			}
 		}

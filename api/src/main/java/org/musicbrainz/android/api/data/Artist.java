@@ -37,10 +37,20 @@ public class Artist {
 	private String mbid;
 	
 	private String name;
+
+	private String type;
+	private String country;
+	
+	private String start;
+	private String end;
+	
+	private int ratingCount;
 	private float rating;
+	
 	private Collection<String> tags;
-	private ArrayList<ReleaseGroup> releaseGroups;
 	private ArrayList<WebLink> links;
+	
+	private ArrayList<ReleaseGroup> releaseGroups;
 	
 	public Artist() {
 		tags = new LinkedList<String>();
@@ -62,6 +72,54 @@ public class Artist {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String begin) {
+		this.start = begin;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
+	public int getRatingCount() {
+		return ratingCount;
+	}
+
+	public void setRatingCount(int ratingCount) {
+		this.ratingCount = ratingCount;
+	}
+
+	public ArrayList<ReleaseGroup> getReleaseGroups() {
+		return releaseGroups;
+	}
+
+	public void setLinks(ArrayList<WebLink> links) {
+		this.links = links;
 	}
 
 	public float getRating() {
@@ -107,9 +165,9 @@ public class Artist {
 	}
 	
 	/*
-	 * Special purpose artists, which can be ignored.
+	 * Special purpose artists, which can often be ignored.
 	 */
-	public static final String[] IGNORE_LIST = {
+	public static final String[] SPECIAL_PURPOSE = {
 		
 		"89ad4ac3-39f7-470e-963a-56509c546377", // Various artists
 		"f731ccc4-e22a-43af-a747-64213329e088", // Anonymous
