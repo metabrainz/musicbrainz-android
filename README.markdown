@@ -25,8 +25,8 @@ This app uses the excellent [android-actionbar](https://github.com/johannilsson/
 
 If you want to build the app with Maven, you will need the following profile:
 
-<profile>
-  <id>novoda</id>
+    <profile>
+    <id>novoda</id>
 	<repositories>
 		<repository>
 			<id>central</id>
@@ -46,4 +46,4 @@ If you want to build the app with Maven, you will need the following profile:
 			<url>https://github.com/novoda/public-mvn-repo/raw/master/releases</url>
 		</repository>
 	</repositories>
-</profile>
+    </profile>
