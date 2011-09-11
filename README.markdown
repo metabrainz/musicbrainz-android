@@ -19,4 +19,31 @@ Graphics originating from [androidicons.com](https://www.androidicons.com) are i
 
 ### Libraries
 
-This app uses the excellent [android-actionbar](https://github.com/johannilsson/android-actionbar) library. The [PayPal Mobile Payments Library](https://www.x.com/community/ppx/sdks) is also used to facilitate in-app donations.
+This app uses the excellent [android-actionbar](https://github.com/johannilsson/android-actionbar) library. The [PayPal Mobile Payments Library](https://www.x.com/community/ppx/sdks) is used to facilitate in-app donations. The Android compatibility library is also required.
+
+### Maven
+
+If you want to build the app with Maven, you will need the following profile:
+
+    <profile>
+    <id>novoda</id>
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>public-mvn-repo-snapshots</id>
+			<url>https://github.com/novoda/public-mvn-repo/raw/master/snapshots</url>
+		</repository>
+		<repository>
+			<id>public-mvn-repo-releases</id>
+			<url>https://github.com/novoda/public-mvn-repo/raw/master/releases</url>
+		</repository>
+	</repositories>
+    </profile>
