@@ -34,7 +34,7 @@ import org.musicbrainz.android.api.WebserviceConfig;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
-import org.musicbrainz.android.api.data.ReleaseGroup;
+import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 
 /**
@@ -87,7 +87,7 @@ public class WebService {
 		
 		String rgUrl = QueryBuilder.artistReleaseGroupBrowse(mbid);
 		InputStream rgResponse = get(rgUrl);
-		ArrayList<ReleaseGroup> releases = responseParser.parseReleaseGroupBrowse(rgResponse);
+		ArrayList<ReleaseGroupStub> releases = responseParser.parseReleaseGroupBrowse(rgResponse);
 		
 		artist.setReleaseGroups(releases);
 		return artist;
@@ -99,7 +99,7 @@ public class WebService {
 		return responseParser.parseArtistSearch(response);
 	}
 	
-	public LinkedList<ReleaseGroup> searchReleaseGroup(String searchTerm) throws IOException {
+	public LinkedList<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException {
 		String url = QueryBuilder.releaseGroupSearch(searchTerm);
 		InputStream response = get(url);
 		return responseParser.parseReleaseGroupSearch(response);

@@ -20,9 +20,9 @@
 
 package org.musicbrainz.mobile.test.robotium.search;
 
-import org.musicbrainz.mobile.ui.activity.HomeActivity;
-import org.musicbrainz.mobile.ui.activity.ReleaseActivity;
-import org.musicbrainz.mobile.ui.activity.SearchActivity;
+import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.ReleaseActivity;
+import org.musicbrainz.mobile.activity.SearchActivity;
 
 import com.jayway.android.robotium.solo.Solo;
 

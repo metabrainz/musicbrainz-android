@@ -55,6 +55,7 @@
 	<string name="release_title">Release</string>
 	<string name="artistinfo_label">Artist Information</string>
 	<string name="tab_tracks">Tracks</string>
+	<string name="label_tracks">tracks</string>
 	
 	<string name="no_tags">No tags found</string>
 	<string name="edit_login">You must log in before you can edit!</string>

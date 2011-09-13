@@ -20,9 +20,9 @@
 
 package org.musicbrainz.mobile.test.robotium.login;
 
+import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.LoginActivity;
 import org.musicbrainz.mobile.test.robotium.Account;
-import org.musicbrainz.mobile.ui.activity.HomeActivity;
-import org.musicbrainz.mobile.ui.activity.LoginActivity;
 
 import com.jayway.android.robotium.solo.Solo;
 

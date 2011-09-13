@@ -20,10 +20,10 @@
 
 package org.musicbrainz.mobile.test.robotium.navigation;
 
-import org.musicbrainz.mobile.ui.activity.AboutActivity;
-import org.musicbrainz.mobile.ui.activity.DonateActivity;
-import org.musicbrainz.mobile.ui.activity.HomeActivity;
-import org.musicbrainz.mobile.ui.activity.LoginActivity;
+import org.musicbrainz.mobile.activity.AboutActivity;
+import org.musicbrainz.mobile.activity.DonateActivity;
+import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.LoginActivity;
 
 import com.jayway.android.robotium.solo.Solo;
 

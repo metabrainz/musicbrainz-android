@@ -1,16 +1,16 @@
 This is a list of example queries made by the Android app:
 
 artistLookup: 
-www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=url-rels+tags+ratings
+www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=url-rels+artist-rels+label-rels+tags+ratings
 
 artistReleaseGroupBrowse: 
-www.musicbrainz.org/ws/2/release-group?artist=b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&limit=100
+www.musicbrainz.org/ws/2/release-group?artist=b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&offset=0&limit=100
 
 artistSearch: 
 www.musicbrainz.org/ws/2/artist?query=owen
 
 barcodeSearch: 
-www.musicbrainz.org/ws/2/release/?query=barcode:792258106329
+www.musicbrainz.org/ws/2/release/?query=barcode:792258106329&limit=1
 
 ratingLookup: 
 www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=ratings
@@ -18,7 +18,7 @@ www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=ratings
 releaseGroupReleaseBrowse: 
 www.musicbrainz.org/ws/2/release?release-group=dca03435-8adb-30a5-ba82-5a162267ff38&inc=artist-credits+labels+mediums
 
-releaseGroupSearch: 
+releaseGroupSearch:
 www.musicbrainz.org/ws/2/release-group?query=songs about leaving
 
 releaseLookup: 

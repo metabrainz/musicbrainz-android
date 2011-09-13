@@ -50,11 +50,11 @@ public class Artist {
 	private Collection<String> tags;
 	private ArrayList<WebLink> links;
 	
-	private ArrayList<ReleaseGroup> releaseGroups;
+	private ArrayList<ReleaseGroupStub> releaseGroupStubs;
 	
 	public Artist() {
 		tags = new LinkedList<String>();
-		releaseGroups = new ArrayList<ReleaseGroup>();
+		releaseGroupStubs = new ArrayList<ReleaseGroupStub>();
 		links = new ArrayList<WebLink>();
 	}
 	
@@ -114,8 +114,8 @@ public class Artist {
 		this.ratingCount = ratingCount;
 	}
 
-	public ArrayList<ReleaseGroup> getReleaseGroups() {
-		return releaseGroups;
+	public ArrayList<ReleaseGroupStub> getReleaseGroups() {
+		return releaseGroupStubs;
 	}
 
 	public void setLinks(ArrayList<WebLink> links) {
@@ -146,13 +146,13 @@ public class Artist {
 		tags.add(tag);
 	}
 	
-	public ArrayList<ReleaseGroup> getReleases() {
-		Collections.sort(releaseGroups);
-		return releaseGroups;
+	public ArrayList<ReleaseGroupStub> getReleases() {
+		Collections.sort(releaseGroupStubs);
+		return releaseGroupStubs;
 	}
 	
-	public void setReleaseGroups(ArrayList<ReleaseGroup> releases) {
-		this.releaseGroups = releases;
+	public void setReleaseGroups(ArrayList<ReleaseGroupStub> releases) {
+		this.releaseGroupStubs = releases;
 	}
 	
 	public ArrayList<WebLink> getLinks() {

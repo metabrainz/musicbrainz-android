@@ -18,7 +18,7 @@ public class ArtistLookupParserTest extends BaseXmlParsingTestCase {
 		InputStream stream = getFileStream("artistLookup_b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.xml");
 		assertNotNull(stream);
 		
-		ResponseParser responseParser = getResponseParser();
+		ResponseParser responseParser = new ResponseParser();
 		try {
 			Artist artist = responseParser.parseArtist(stream);
 			

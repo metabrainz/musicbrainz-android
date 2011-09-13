@@ -27,7 +27,7 @@ public class RatingLookupParserTest extends BaseXmlParsingTestCase {
 		assertNotNull(stream);
 		
 		try {
-			ResponseParser responseParser = getResponseParser();
+			ResponseParser responseParser = new ResponseParser();
 			float actual = responseParser.parseRatingLookup(stream);
 			assertEquals(expected, actual, 0.01);
 		} catch (IOException e) {

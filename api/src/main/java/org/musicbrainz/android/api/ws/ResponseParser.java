@@ -13,19 +13,19 @@ import javax.xml.parsers.SAXParserFactory;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
-import org.musicbrainz.android.api.data.ReleaseGroup;
+import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.parsers.ArtistLookupParser;
-import org.musicbrainz.android.api.parsers.ArtistSearchParser;
-import org.musicbrainz.android.api.parsers.BarcodeSearchParser;
-import org.musicbrainz.android.api.parsers.RGBrowseParser;
-import org.musicbrainz.android.api.parsers.RGSearchParser;
-import org.musicbrainz.android.api.parsers.RatingParser;
-import org.musicbrainz.android.api.parsers.ReleaseLookupParser;
-import org.musicbrainz.android.api.parsers.ReleaseStubParser;
-import org.musicbrainz.android.api.parsers.TagParser;
-import org.musicbrainz.android.api.parsers.UserDataParser;
+import org.musicbrainz.android.api.handlers.ArtistLookupHandler;
+import org.musicbrainz.android.api.handlers.ArtistSearchHandler;
+import org.musicbrainz.android.api.handlers.BarcodeSearchHandler;
+import org.musicbrainz.android.api.handlers.ReleaseGroupBrowseHandler;
+import org.musicbrainz.android.api.handlers.ReleaseGroupSearchHandler;
+import org.musicbrainz.android.api.handlers.RatingHandler;
+import org.musicbrainz.android.api.handlers.ReleaseLookupHandler;
+import org.musicbrainz.android.api.handlers.ReleaseStubHandler;
+import org.musicbrainz.android.api.handlers.TagHandler;
+import org.musicbrainz.android.api.handlers.UserDataHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -37,6 +37,7 @@ public class ResponseParser {
 	
 	public ResponseParser() {
 		factory = SAXParserFactory.newInstance();
+		factory.setNamespaceAware(true);
 	}
 	
 	public ResponseParser(SAXParserFactory factory) {
@@ -44,67 +45,67 @@ public class ResponseParser {
 	}
 	
 	public String parseMbidFromBarcode(InputStream stream) throws IOException {
-		BarcodeSearchParser handler = new BarcodeSearchParser();
+		BarcodeSearchHandler handler = new BarcodeSearchHandler();
 		doParsing(stream, handler);
 		return handler.getMbid();
 	}
 	
 	public Release parseRelease(InputStream stream) throws IOException {
-		ReleaseLookupParser handler = new ReleaseLookupParser();
+		ReleaseLookupHandler handler = new ReleaseLookupHandler();
 		doParsing(stream, handler);
 		return handler.getResult();
 	}
 	
 	public LinkedList<ReleaseStub> parseRGReleases(InputStream stream) throws IOException {
-		ReleaseStubParser handler = new ReleaseStubParser();
+		ReleaseStubHandler handler = new ReleaseStubHandler();
 		doParsing(stream, handler);
 		return handler.getResults();
 	}
 	
 	public Artist parseArtist(InputStream stream) throws IOException {
-		ArtistLookupParser handler = new ArtistLookupParser();
+		ArtistLookupHandler handler = new ArtistLookupHandler();
 		doParsing(stream, handler);
 		return handler.getResult();
 	}
 	
-	public ArrayList<ReleaseGroup> parseReleaseGroupBrowse(InputStream stream) throws IOException {
-		RGBrowseParser handler = new RGBrowseParser();
+	public ArrayList<ReleaseGroupStub> parseReleaseGroupBrowse(InputStream stream) throws IOException {
+		ReleaseGroupBrowseHandler handler = new ReleaseGroupBrowseHandler();
 		doParsing(stream, handler);
 		return handler.getResults();		
 	}
 	
 	public LinkedList<ArtistStub> parseArtistSearch(InputStream stream) throws IOException {
-		ArtistSearchParser handler = new ArtistSearchParser();
+		ArtistSearchHandler handler = new ArtistSearchHandler();
 		doParsing(stream, handler);
 		return handler.getResults();
 	}
 	
-	public LinkedList<ReleaseGroup> parseReleaseGroupSearch(InputStream stream) throws IOException {
-		RGSearchParser handler = new RGSearchParser();
+	public LinkedList<ReleaseGroupStub> parseReleaseGroupSearch(InputStream stream) throws IOException {
+		ReleaseGroupSearchHandler handler = new ReleaseGroupSearchHandler();
 		doParsing(stream, handler);
 		return handler.getResults();
 	}
 	
 	public LinkedList<ReleaseStub> parseReleaseSearch(InputStream stream) throws IOException {
-		ReleaseStubParser handler = new ReleaseStubParser();
+		ReleaseStubHandler handler = new ReleaseStubHandler();
 		doParsing(stream, handler);
 		return handler.getResults();
 	}
 	
 	public Collection<String> parseTagLookup(InputStream stream) throws IOException {
-		TagParser handler = new TagParser();
+		TagHandler handler = new TagHandler();
 		doParsing(stream, handler);
 		return handler.getTags();
 	}
 	
 	public float parseRatingLookup(InputStream stream) throws IOException {
-		RatingParser handler = new RatingParser();
+		RatingHandler handler = new RatingHandler();
 		doParsing(stream, handler);
 		return handler.getRating();
 	}
 	
 	public UserData parseUserData(InputStream stream) throws IOException {
-		UserDataParser handler = new UserDataParser();
+		UserDataHandler handler = new UserDataHandler();
 		doParsing(stream, handler);
 		return handler.getResult();
 	}

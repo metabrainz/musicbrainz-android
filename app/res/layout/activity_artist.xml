@@ -28,11 +28,11 @@
 	<RelativeLayout
 		style="@style/EntityInfo">
   
-		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/artist_artist"
+		<org.musicbrainz.mobile.widget.FocusTextView android:id="@+id/artist_artist"
 			style="@style/EntityText"
 			android:layout_alignParentLeft="true" />
 			
-		<org.musicbrainz.mobile.ui.util.FocusTextView android:id="@+id/artist_tags"
+		<org.musicbrainz.mobile.widget.FocusTextView android:id="@+id/artist_tags"
 			style="@style/TagArea"
 			android:layout_below="@+id/artist_artist"
 			android:layout_toLeftOf="@+id/artist_rating" />
