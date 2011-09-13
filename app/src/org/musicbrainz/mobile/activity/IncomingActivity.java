@@ -30,8 +30,6 @@ import android.os.Bundle;
 /**
  * This Activity parses incoming URI intents from external applications and starts
  * the appropriate Activity before finishing.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class IncomingActivity extends Activity {
 	

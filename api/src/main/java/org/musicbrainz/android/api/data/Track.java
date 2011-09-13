@@ -23,9 +23,7 @@ package org.musicbrainz.android.api.data;
 import org.musicbrainz.android.api.util.StringFormat;
 
 /**
- * Class to represent basic track information displayed for a release.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Track data for release.
  */
 public class Track {
 	

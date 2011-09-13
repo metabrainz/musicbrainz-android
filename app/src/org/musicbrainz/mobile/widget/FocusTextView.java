@@ -26,11 +26,9 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * Simple subclass of TextView to maintain focus. This allows the text to
- * marquee continuously so that a large String of tags can be displayed in a
- * vertically small View.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Subclass of TextView to maintain focus. This allows the text to marquee
+ * continuously so that a large String can be displayed in a vertically small
+ * View.
  */
 public class FocusTextView extends TextView {
 

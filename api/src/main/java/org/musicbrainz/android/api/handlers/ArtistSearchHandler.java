@@ -28,11 +28,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- * SAX parser handler for artist search.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
- */
 public class ArtistSearchHandler extends DefaultHandler {
 	
 	private LinkedList<ArtistStub> results = new LinkedList<ArtistStub>();

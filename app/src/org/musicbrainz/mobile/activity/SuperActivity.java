@@ -42,10 +42,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 /**
- * Abstract class to represent items common to multiple Activity classes. The
- * menu which is inflated depends on user login status.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Abstract class to represent items common to most Activity classes.
  */
 public abstract class SuperActivity extends Activity {
 

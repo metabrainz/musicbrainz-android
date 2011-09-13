@@ -26,11 +26,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- * SAX parser handler for artist lookup.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
- */
 public class ArtistLookupHandler extends DefaultHandler {
 	
     private boolean releaseGroup = false;

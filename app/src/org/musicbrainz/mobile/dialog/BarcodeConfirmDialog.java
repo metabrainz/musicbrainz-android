@@ -33,9 +33,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Dialog that confirms the release to which the user is submitting the barcode.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Dialog that confirms the release details for barcode submission.
  */
 public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener {
 	

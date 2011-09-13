@@ -48,9 +48,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Activity to process a donation through PayPal MEP.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Activity to process a donation to MetaBrainz through the PayPal MPL.
  */
 public class DonateActivity extends SuperActivity implements OnClickListener {
 

@@ -20,6 +20,9 @@
 
 package org.musicbrainz.android.api.data;
 
+/**
+ * Artist name and MBID pair for release.
+ */
 public class ReleaseArtist {
 	
 	private String mbid;

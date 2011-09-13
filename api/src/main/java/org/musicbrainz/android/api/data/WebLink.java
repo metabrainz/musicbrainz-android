@@ -23,10 +23,7 @@ package org.musicbrainz.android.api.data;
 import org.musicbrainz.android.api.util.StringFormat;
 
 /**
- * Class to holds a web link URL and description of the link type. The URL and
- * description are a pair of Strings with methods to format for display.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Link URL and type description pair. 
  */
 public class WebLink implements Comparable<Object> {
 

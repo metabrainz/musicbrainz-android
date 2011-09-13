@@ -32,6 +32,9 @@ import android.preference.PreferenceActivity;
 import android.provider.SearchRecentSuggestions;
 import android.widget.Toast;
 
+/**
+ * Activity to manage user preferences.
+ */
 public class PreferencesActivity extends PreferenceActivity implements OnPreferenceClickListener {
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2011 Jamie McDonald
  * 
  * This file is part of MusicBrainz Mobile (Android).
  * 

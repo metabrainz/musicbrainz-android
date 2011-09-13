@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.LinkedList;
 
 /**
- * Class to represent basic information about a release group.
+ * Partial release group data.
  */
 public class ReleaseGroupStub implements Comparable<ReleaseGroupStub> {
 	

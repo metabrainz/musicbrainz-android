@@ -24,12 +24,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- * SAX parser handler for barcode search. Stores the MBID of the associated
- * release if found.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
- */
 public class BarcodeSearchHandler extends DefaultHandler {
 	
 	private String mbid;

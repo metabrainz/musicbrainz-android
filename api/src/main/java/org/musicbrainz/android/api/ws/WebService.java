@@ -38,10 +38,8 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 
 /**
- * This class makes the web service available to Activity classes. The XML
- * returned is parsed into data objects with SAX.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Makes the web service available to Activity classes. The XML returned is
+ * parsed into pojos with SAX.
  */
 public class WebService {
 	

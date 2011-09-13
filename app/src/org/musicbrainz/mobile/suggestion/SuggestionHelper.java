@@ -33,9 +33,7 @@ import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 
 /**
  * This is a helper class to provide a Cursor to the suggestions database.
- * The content provider isn't public, so this might break in future.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * The content provider is not public, so this might stop working in future.
  */
 public class SuggestionHelper {
 

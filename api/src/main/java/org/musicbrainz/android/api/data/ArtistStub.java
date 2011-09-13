@@ -21,10 +21,8 @@
 package org.musicbrainz.android.api.data;
 
 /**
- * Class to represent enough information about an artist to select between
- * similar artists in a list of search results.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Partial artist data to select between similar artists in a list of search
+ * results.
  */
 public class ArtistStub {
 	

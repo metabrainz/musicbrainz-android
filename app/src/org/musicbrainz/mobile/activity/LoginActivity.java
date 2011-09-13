@@ -51,12 +51,6 @@ import android.widget.TextView.OnEditorActionListener;
 
 /**
  * Activity to facilitate user authentication.
- * 
- * It would be nice not to store the password in user preferences. This could be
- * visible on a rooted device. Ideally we would just store
- * MD5(username:realm:password) as required for digest authentication.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class LoginActivity extends SuperActivity implements OnEditorActionListener {
 	

@@ -34,10 +34,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
 /**
- * This class provides simple weak encryption to ensure that user passwords are
- * obscured on rooted devices.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * This class provides basic hashing to ensure that user passwords are obscured
+ * on rooted devices.
  */
 public class SimpleEncrypt {
 	

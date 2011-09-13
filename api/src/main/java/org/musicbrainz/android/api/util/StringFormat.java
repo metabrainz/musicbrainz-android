@@ -24,18 +24,15 @@ import java.util.Collection;
 import java.util.StringTokenizer;
 
 /**
- * Class providing static methods for String formatting.
+ * Set of static methods for String formatting.
  * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * TODO currently duplicated in api and app. Eliminate one or other.
  */
 public class StringFormat {
 
 	/**
 	 * Takes a Collection of strings and formats them comma separated as
 	 * "st1, st2, st3".
-	 * 
-	 * @param collection Collection of strings.
-	 * @return Formatted string.
 	 */
 	public static String commaSeparate(Collection<String> collection) {
 		
@@ -52,9 +49,6 @@ public class StringFormat {
 	
 	/**
 	 * Takes a string and returns the string with initial capitals.
-	 * 
-	 * @param text String.
-	 * @return String with initial caps.
 	 */
 	public static String initialCaps(String text) {
 
@@ -73,9 +67,6 @@ public class StringFormat {
 	
 	/**
 	 * Takes a track duration and formats as a String for display.
-	 * 
-	 * @param duration Track duration.
-	 * @return Formatted String representing track duration.
 	 */
 	public static String trackDuration(int duration) {
 		

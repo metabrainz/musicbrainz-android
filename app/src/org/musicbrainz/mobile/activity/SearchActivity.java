@@ -56,8 +56,6 @@ import android.widget.TextView;
 /**
  * Activity to display a list of search results to the user and support intents
  * to info Activity types based on the selection.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class SearchActivity extends SuperActivity {
 	

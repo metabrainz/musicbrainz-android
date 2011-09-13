@@ -26,10 +26,8 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.util.StringFormat;
 
 /**
- * Class to represent enough information about a release to differentiate
- * between similar releases (e.g. part of the same release group).
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Partial release data to differentiate between similar releases (e.g. part of
+ * the same release group).
  */
 public class ReleaseStub {
 

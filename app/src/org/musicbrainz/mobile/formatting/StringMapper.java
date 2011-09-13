@@ -30,6 +30,9 @@ import org.musicbrainz.mobile.R;
 import android.content.Context;
 import android.content.res.Resources;
 
+/**
+ * Static methods to map strings returned by webservice to values in strings.xml
+ */
 public class StringMapper {
 	
 	public static String formatRGTypeString(Context c, String type) {

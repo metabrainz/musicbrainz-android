@@ -28,8 +28,6 @@ import android.widget.TextView;
 /**
  * This Activity displays an error message to the user when an incoming URI in
  * not valid.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class IntentErrorActivity extends SuperActivity {
 

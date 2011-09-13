@@ -36,10 +36,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
- * Dialog which allows the user to choose a specific release when a release
+ * Dialog that allows the user to choose a specific release when a release
  * group contains more than one release.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemClickListener {
 	

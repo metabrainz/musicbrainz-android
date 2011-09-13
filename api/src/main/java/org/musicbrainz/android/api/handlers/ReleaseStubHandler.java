@@ -27,11 +27,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- * SAX parser handler for release search.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
- */
 public class ReleaseStubHandler extends DefaultHandler {
 	
 	private LinkedList<ReleaseStub> results = new LinkedList<ReleaseStub>();

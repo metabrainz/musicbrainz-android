@@ -67,9 +67,7 @@ import android.widget.TabHost.TabSpec;
  * 
  * This Activity initiates lookups given three sources that generally result in
  * display of release information. An intent will contain either a barcode, a
- * release ID or a release group ID.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * release MBID or a release group MBID.
  */
 public class ReleaseActivity extends SuperActivity implements View.OnClickListener {
 		

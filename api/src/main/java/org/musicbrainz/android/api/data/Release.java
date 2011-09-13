@@ -27,9 +27,7 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.util.StringFormat;
 
 /**
- * Class to hold information displayed about a release.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Full release data.
  */
 public class Release {
 	

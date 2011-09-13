@@ -28,11 +28,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- * SAX parser handler for release group search.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
- */
 public class ReleaseGroupSearchHandler extends DefaultHandler {
 	
 	private LinkedList<ReleaseGroupStub> stubs = new LinkedList<ReleaseGroupStub>();

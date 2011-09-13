@@ -35,9 +35,7 @@ import org.musicbrainz.android.api.WebserviceConfig;
 import org.musicbrainz.android.api.data.UserData;
 
 /**
- * This class performs webservice requests specific to registered users.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Performs webservice requests specific to registered users.
  */
 public class UserService extends WebService {
 	

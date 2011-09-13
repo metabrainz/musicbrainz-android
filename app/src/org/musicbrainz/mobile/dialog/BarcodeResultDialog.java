@@ -34,8 +34,6 @@ import android.widget.TextView;
 
 /**
  * Dialog to handle barcode scans which are not yet stored in MusicBrainz.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class BarcodeResultDialog extends Dialog implements View.OnClickListener {
 	

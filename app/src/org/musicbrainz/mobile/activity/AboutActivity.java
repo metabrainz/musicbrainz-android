@@ -29,8 +29,6 @@ import android.widget.TextView;
 
 /**
  * Activity to display information about the application.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class AboutActivity extends SuperActivity {
 

@@ -54,9 +54,8 @@ import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
 
 /**
- * Activity to add a barcode to MusicBrainz if isn't already stored.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Activity to submit a barcode to a selected release in MusicBrainz if isn't
+ * already stored.
  */
 public class BarcodeSearchActivity extends SuperActivity implements
 		View.OnClickListener, 

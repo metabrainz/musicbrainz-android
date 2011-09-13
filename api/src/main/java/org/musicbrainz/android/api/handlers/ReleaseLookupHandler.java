@@ -27,11 +27,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- * SAX parser handler for release lookup.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
- */
 public class ReleaseLookupHandler extends DefaultHandler {
 	
     private Release data = new Release();

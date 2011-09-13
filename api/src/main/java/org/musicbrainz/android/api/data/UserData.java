@@ -25,9 +25,7 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.util.StringFormat;
 
 /**
- * Class to hold user tags and rating data for a MusicBrainz entity.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * User tags and rating data for a MusicBrainz entity.
  */
 public class UserData {
 	

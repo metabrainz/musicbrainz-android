@@ -28,9 +28,7 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.util.StringFormat;
 
 /**
- * Class to hold information retrieved about an artist.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Full artist data.
  */
 public class Artist {
 	

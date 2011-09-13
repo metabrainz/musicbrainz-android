@@ -51,10 +51,8 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 /**
- * Main Activity which allows the user to initiate any of the high level
- * tasks facilitated by the application.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
+ * Main Activity that presents the user with a dashboard to initiate the
+ * high-level functionalities of the app.
  */
 public class HomeActivity extends SuperActivity implements OnEditorActionListener, OnItemClickListener {
 	

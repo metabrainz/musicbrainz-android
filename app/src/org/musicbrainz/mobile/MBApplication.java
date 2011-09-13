@@ -27,11 +27,9 @@ import com.paypal.android.MEP.PayPal;
 import android.app.Application;
 
 /**
- * This class starts initialising PayPal in the background when the app is
- * started. This prevents the user from having to wait when they visit the
+ * Application starts initialising PayPal in the background when the app is
+ * created. This prevents the user from having to wait when they visit the
  * donation page for the first time.
- * 
- * @author Jamie McDonald - jdamcd@gmail.com
  */
 public class MBApplication extends Application {
 	
