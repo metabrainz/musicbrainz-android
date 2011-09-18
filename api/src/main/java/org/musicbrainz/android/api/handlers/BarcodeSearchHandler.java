@@ -35,7 +35,7 @@ public class BarcodeSearchHandler extends DefaultHandler {
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		
-		if (localName.equals("release")) {
+		if (localName.equalsIgnoreCase("release")) {
 			mbid = atts.getValue("id");
 		} 
 	}

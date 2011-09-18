@@ -12,15 +12,21 @@ public class ReleaseGroupBrowseHandler extends DefaultHandler {
 	private ArrayList<ReleaseGroupStub> results = new ArrayList<ReleaseGroupStub>();
 	private ReleaseGroupStub stub;
     private StringBuilder sb;
+    
+    private int total = 0;
 	
 	public ArrayList<ReleaseGroupStub> getResults() {
 		return results;
 	}
 	
+	public int getTotal() {
+		return total;
+	}
+	
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		
-		if (localName.equals("release-group")) {
+		if (localName.equalsIgnoreCase("release-group")) {
 			stub = new ReleaseGroupStub();
 			String mbid = atts.getValue("id");
 			stub.setMbid(mbid); 
@@ -30,21 +36,23 @@ public class ReleaseGroupBrowseHandler extends DefaultHandler {
 			} else {
 				stub.setType("unknown");
 			}	
-		} else if (localName.equals("title")) {
+		} else if (localName.equalsIgnoreCase("title")) {
 			sb = new StringBuilder();
-		} else if (localName.equals("first-release-date")) {
+		} else if (localName.equalsIgnoreCase("first-release-date")) {
 			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("release-group-list")) {
+			total = Integer.parseInt(atts.getValue("count"));
 		}
 	}
 	
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
 
-		if (localName.equals("release-group")) {
+		if (localName.equalsIgnoreCase("release-group")) {
 			results.add(stub);
-		} else if (localName.equals("title")) {
+		} else if (localName.equalsIgnoreCase("title")) {
 			stub.setTitle(sb.toString());
-		} else if (localName.equals("first-release-date")) {
+		} else if (localName.equalsIgnoreCase("first-release-date")) {
 			stub.setFirstRelease(sb.toString());
 		}
 	}

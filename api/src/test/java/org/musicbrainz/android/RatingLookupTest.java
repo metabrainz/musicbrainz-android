@@ -10,7 +10,7 @@ import java.io.InputStream;
 import org.junit.Test;
 import org.musicbrainz.android.api.ws.ResponseParser;
 
-public class RatingLookupParserTest extends BaseXmlParsingTestCase {
+public class RatingLookupTest extends BaseXmlParsingTestCase {
 
 	@Test
     public void testRatingLookupFromArtist() {

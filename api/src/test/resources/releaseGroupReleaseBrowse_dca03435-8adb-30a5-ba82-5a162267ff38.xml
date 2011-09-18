@@ -491,37 +491,3 @@
 		</release>
 	</release-list>
 </metadata>
-<quality>normal</quality>
-<text-representation>
-	<language>eng</language>
-	<script>Latn</script>
-</text-representation>
-<artist-credit>
-	<name-credit>
-		<artist id="b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d">
-			<name>The Beatles</name>
-			<sort-name>Beatles, The</sort-name>
-		</artist>
-	</name-credit>
-</artist-credit>
-<date>1965</date>
-<country>JP</country>
-<label-info-list count="1">
-	<label-info>
-		<catalog-number>EAS-70135</catalog-number>
-		<label id="d5a60c75-26e2-4363-a5db-58c12b578cd5">
-			<name>東芝EMI</name>
-			<sort-name>Toshiba EMI</sort-name>
-		</label>
-	</label-info>
-</label-info-list>
-<medium-list count="1">
-	<medium>
-		<position>1</position>
-		<format>Vinyl</format>
-		<track-list count="14" />
-	</medium>
-</medium-list>
-</release>
-</release-list>
-</metadata>

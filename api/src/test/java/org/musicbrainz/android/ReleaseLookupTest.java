@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.ws.ResponseParser;
 
-public class ReleaseLookupParserTest extends BaseXmlParsingTestCase {
+public class ReleaseLookupTest extends BaseXmlParsingTestCase {
 
 	@Test
 	public void testReleaseLookup() {

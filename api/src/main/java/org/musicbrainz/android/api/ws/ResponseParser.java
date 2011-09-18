@@ -76,7 +76,7 @@ public class ResponseParser {
 		return handler.getResult();
 	}
 	
-	public LinkedList<ReleaseStub> parseRGReleases(InputStream stream) throws IOException {
+	public LinkedList<ReleaseStub> parseReleaseGroupReleases(InputStream stream) throws IOException {
 		ReleaseStubHandler handler = new ReleaseStubHandler();
 		doParsing(stream, handler);
 		return handler.getResults();

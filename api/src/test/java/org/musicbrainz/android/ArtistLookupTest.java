@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.ws.ResponseParser;
 
-public class ArtistLookupParserTest extends BaseXmlParsingTestCase {
+public class ArtistLookupTest extends BaseXmlParsingTestCase {
 	
 	@Test
 	public void testArtistLookup() {

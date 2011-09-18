@@ -75,7 +75,7 @@ public class WebService {
 	public LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException {
 		String url = QueryBuilder.releaseGroupReleaseBrowse(mbid);
 		InputStream response = get(url);
-		return responseParser.parseRGReleases(response);
+		return responseParser.parseReleaseGroupReleases(response);
 	}
 	
 	public Artist lookupArtist(String mbid) throws IOException {

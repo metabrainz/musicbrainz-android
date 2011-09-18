@@ -11,7 +11,7 @@ import java.util.Collection;
 import org.junit.Test;
 import org.musicbrainz.android.api.ws.ResponseParser;
 
-public class TagLookupParserTest extends BaseXmlParsingTestCase {
+public class TagLookupTest extends BaseXmlParsingTestCase {
 
 	@Test
     public void testTagLookupFromArtist() {
