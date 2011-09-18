@@ -8,6 +8,82 @@
 			<begin>1957</begin>
 			<end>1970-04-10</end>
 		</life-span>
+		<relation-list target-type="artist">
+			<relation type="member of band">
+				<target>0d4ab0f9-bbda-4ab1-ae2c-f772ffcfbea9</target>
+				<direction>backward</direction>
+				<begin>1960-08-12</begin>
+				<end>1962-08-16</end>
+				<artist id="0d4ab0f9-bbda-4ab1-ae2c-f772ffcfbea9">
+					<name>Pete Best</name>
+					<sort-name>Best, Pete</sort-name>
+					<disambiguation>original drummer in The Beatles.</disambiguation>
+				</artist>
+			</relation>
+			<relation type="member of band">
+				<target>300c4c73-33ac-4255-9d57-4e32627f5e13</target>
+				<direction>backward</direction>
+				<begin>1962-08</begin>
+				<end>1970-04-10</end>
+				<artist id="300c4c73-33ac-4255-9d57-4e32627f5e13">
+					<name>Ringo Starr</name>
+					<sort-name>Starr, Ringo</sort-name>
+				</artist>
+			</relation>
+			<relation type="member of band">
+				<target>42a8f507-8412-4611-854f-926571049fa0</target>
+				<direction>backward</direction>
+				<end>1970-04-10</end>
+				<attribute-list>
+					<attribute>founder</attribute>
+				</attribute-list>
+				<artist id="42a8f507-8412-4611-854f-926571049fa0">
+					<name>George Harrison</name>
+					<sort-name>Harrison, George</sort-name>
+					<disambiguation>The Beatles</disambiguation>
+					<ipi>00013482508</ipi>
+				</artist>
+			</relation>
+			<relation type="member of band">
+				<target>49a51491-650e-44b3-8085-2f07ac2986dd</target>
+				<direction>backward</direction>
+				<begin>1960</begin>
+				<end>1962</end>
+				<artist id="49a51491-650e-44b3-8085-2f07ac2986dd">
+					<name>Stuart Sutcliffe</name>
+					<sort-name>Sutcliffe, Stuart</sort-name>
+				</artist>
+			</relation>
+			<relation type="member of band">
+				<target>4d5447d7-c61c-4120-ba1b-d7f471d385b9</target>
+				<direction>backward</direction>
+				<end>1970-04-10</end>
+				<artist id="4d5447d7-c61c-4120-ba1b-d7f471d385b9">
+					<name>John Lennon</name>
+					<sort-name>Lennon, John</sort-name>
+					<ipi>00017798450</ipi>
+				</artist>
+			</relation>
+			<relation type="member of band">
+				<target>ba550d0e-adac-4864-b88b-407cab5e76af</target>
+				<direction>backward</direction>
+				<end>1970-04-10</end>
+				<artist id="ba550d0e-adac-4864-b88b-407cab5e76af">
+					<name>Paul McCartney</name>
+					<sort-name>McCartney, Paul</sort-name>
+					<ipi>00018873266</ipi>
+				</artist>
+			</relation>
+		</relation-list>
+		<relation-list target-type="label">
+			<relation type="label founder">
+				<target>cf7fc5cf-e011-4ef4-b511-cd0188537910</target>
+				<label id="cf7fc5cf-e011-4ef4-b511-cd0188537910">
+					<name>Apple Records</name>
+					<sort-name>Apple Records</sort-name>
+				</label>
+			</relation>
+		</relation-list>
 		<relation-list target-type="url">
 			<relation type="allmusic">
 				<target>http://allmusic.com/artist/p3644</target>
@@ -19,7 +95,8 @@
 				<target>http://lyrics.wikia.com/The_Beatles</target>
 			</relation>
 			<relation type="musicmoz">
-				<target>http://musicmoz.org/Bands_and_Artists/B/Beatles,_The/
+				<target>
+					http://musicmoz.org/Bands_and_Artists/B/Beatles,_The/
 				</target>
 			</relation>
 			<relation type="microblog">
@@ -29,7 +106,8 @@
 				<target>http://www.aboutthebeatles.com/</target>
 			</relation>
 			<relation type="BBC Music page">
-				<target>http://www.bbc.co.uk/music/artists/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d
+				<target>
+					http://www.bbc.co.uk/music/artists/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d
 				</target>
 			</relation>
 			<relation type="fanpage">

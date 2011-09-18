@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#">
+	<release id="2d9f9aac-1884-3939-a3b7-01437151e495">
+		<title>xx</title>
+		<status>Official</status>
+		<quality>normal</quality>
+		<text-representation>
+			<language>eng</language>
+			<script>Latn</script>
+		</text-representation>
+		<artist-credit>
+			<name-credit>
+				<artist id="c5c2ea1c-4bde-4f4d-bd0b-47b200bf99d6">
+					<name>The xx</name>
+					<sort-name>xx, The</sort-name>
+					<tag-list>
+						<tag count="1">
+							<name>britannique</name>
+						</tag>
+						<tag count="2">
+							<name>british</name>
+						</tag>
+						<tag count="1">
+							<name>english</name>
+						</tag>
+						<tag count="2">
+							<name>uk</name>
+						</tag>
+					</tag-list>
+					<rating votes-count="2">5</rating>
+				</artist>
+			</name-credit>
+		</artist-credit>
+		<release-group type="Album"
+			id="23355caf-a543-4b5f-80fe-449101868fc1">
+			<title>xx</title>
+			<first-release-date>2009-08-14</first-release-date>
+			<tag-list>
+				<tag count="2">
+					<name>indie</name>
+				</tag>
+				<tag count="2">
+					<name>pop</name>
+				</tag>
+			</tag-list>
+			<rating votes-count="2">4</rating>
+		</release-group>
+		<date>2009-08-17</date>
+		<country>GB</country>
+		<barcode>609008295007</barcode>
+		<label-info-list count="1">
+			<label-info>
+				<catalog-number>YT031CDX</catalog-number>
+				<label id="87667892-a93f-43e4-a004-f8b9182788df">
+					<name>Young Turks</name>
+					<sort-name>Young Turks</sort-name>
+					<label-code>5667</label-code>
+				</label>
+			</label-info>
+		</label-info-list>
+		<medium-list count="1">
+			<medium>
+				<position>1</position>
+				<track-list count="11" offset="0">
+					<track>
+						<position>1</position>
+						<length>127920</length>
+						<recording id="773a1557-a974-4f1e-978e-c240be4c3cb8">
+							<title>Intro</title>
+							<length>127920</length>
+						</recording>
+					</track>
+					<track>
+						<position>2</position>
+						<length>177093</length>
+						<recording id="57b5c897-cf7d-4a73-b38d-6d5d83c298c8">
+							<title>VCR</title>
+							<length>177093</length>
+							<rating votes-count="1">5</rating>
+						</recording>
+					</track>
+					<track>
+						<position>3</position>
+						<length>201946</length>
+						<recording id="28565ecb-6f65-4f57-ab7f-1846d643c1d7">
+							<title>Crystalised</title>
+							<length>201946</length>
+							<tag-list>
+								<tag count="1">
+									<name>alternative</name>
+								</tag>
+								<tag count="2">
+									<name>indie</name>
+								</tag>
+							</tag-list>
+							<rating votes-count="1">5</rating>
+						</recording>
+					</track>
+					<track>
+						<position>4</position>
+						<length>160720</length>
+						<recording id="4b95b3fb-3c50-4940-b8bf-d39f77a9691f">
+							<title>Islands</title>
+							<length>160720</length>
+						</recording>
+					</track>
+					<track>
+						<position>5</position>
+						<length>242266</length>
+						<recording id="e8b1d374-07e0-4d44-a3c2-c43ac21362cd">
+							<title>Heart Skipped a Beat</title>
+							<length>242266</length>
+						</recording>
+					</track>
+					<track>
+						<position>6</position>
+						<length>158240</length>
+						<recording id="45e5789e-edf4-4cf0-a6a2-94aa06a7313a">
+							<title>Fantasy</title>
+							<length>158240</length>
+						</recording>
+					</track>
+					<track>
+						<position>7</position>
+						<length>270240</length>
+						<recording id="55e82e79-df88-4454-830b-f50016560101">
+							<title>Shelter</title>
+							<length>270240</length>
+						</recording>
+					</track>
+					<track>
+						<position>8</position>
+						<length>188120</length>
+						<recording id="8afec71e-8d69-4160-a0f2-8a8fcc2fc84b">
+							<title>Basic Space</title>
+							<length>188120</length>
+						</recording>
+					</track>
+					<track>
+						<position>9</position>
+						<length>313386</length>
+						<recording id="312fe5d3-cdcc-4c38-805d-97f856c5e076">
+							<title>Infinity</title>
+							<length>313386</length>
+						</recording>
+					</track>
+					<track>
+						<position>10</position>
+						<length>216853</length>
+						<recording id="b3ac14a8-1231-4652-a671-1199958a2ffe">
+							<title>Night Time</title>
+							<length>216853</length>
+							<rating votes-count="1">2</rating>
+						</recording>
+					</track>
+					<track>
+						<position>11</position>
+						<length>262640</length>
+						<recording id="3b2d8c3a-ca92-4cfb-bd40-1e629008ec70">
+							<title>Stars</title>
+							<length>262640</length>
+						</recording>
+					</track>
+				</track-list>
+			</medium>
+		</medium-list>
+		<relation-list target-type="artist">
+			<relation type="engineer">
+				<target>423f74d0-c1cf-477c-a7cc-179ad11d5c7c</target>
+				<direction>backward</direction>
+				<artist id="423f74d0-c1cf-477c-a7cc-179ad11d5c7c">
+					<name>Rodaidh McDonald</name>
+					<sort-name>McDonald, Rodaidh</sort-name>
+				</artist>
+			</relation>
+			<relation type="mix">
+				<target>423f74d0-c1cf-477c-a7cc-179ad11d5c7c</target>
+				<direction>backward</direction>
+				<artist id="423f74d0-c1cf-477c-a7cc-179ad11d5c7c">
+					<name>Rodaidh McDonald</name>
+					<sort-name>McDonald, Rodaidh</sort-name>
+				</artist>
+			</relation>
+			<relation type="producer">
+				<target>c33e79e4-4a9e-4b80-82b7-174b33301c68</target>
+				<direction>backward</direction>
+				<artist id="c33e79e4-4a9e-4b80-82b7-174b33301c68">
+					<name>Jamie Smith</name>
+					<sort-name>Smith, Jamie</sort-name>
+				</artist>
+			</relation>
+			<relation type="mix">
+				<target>c33e79e4-4a9e-4b80-82b7-174b33301c68</target>
+				<direction>backward</direction>
+				<artist id="c33e79e4-4a9e-4b80-82b7-174b33301c68">
+					<name>Jamie Smith</name>
+					<sort-name>Smith, Jamie</sort-name>
+				</artist>
+			</relation>
+			<relation type="photography">
+				<target>c5c2ea1c-4bde-4f4d-bd0b-47b200bf99d6</target>
+				<direction>backward</direction>
+				<artist id="c5c2ea1c-4bde-4f4d-bd0b-47b200bf99d6">
+					<name>The xx</name>
+					<sort-name>xx, The</sort-name>
+					<tag-list>
+						<tag count="1">
+							<name>britannique</name>
+						</tag>
+						<tag count="2">
+							<name>british</name>
+						</tag>
+						<tag count="1">
+							<name>english</name>
+						</tag>
+						<tag count="2">
+							<name>uk</name>
+						</tag>
+					</tag-list>
+					<rating votes-count="2">5</rating>
+				</artist>
+			</relation>
+		</relation-list>
+	</release>
+</metadata>

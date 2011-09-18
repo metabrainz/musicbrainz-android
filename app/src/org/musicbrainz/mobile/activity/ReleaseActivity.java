@@ -71,7 +71,6 @@ import android.widget.TabHost.TabSpec;
  */
 public class ReleaseActivity extends SuperActivity implements View.OnClickListener {
 		
-
 	public static final String INTENT_RELEASE_MBID = "r_id";
 	public static final String INTENT_RG_MBID = "rg_id";
 	public static final String INTENT_BARCODE = "barcode";

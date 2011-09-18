@@ -1,31 +1,34 @@
-This is a list of example queries made by the Android app:
+This is a list of example queries made by the Android app API:
 
 artistLookup: 
-www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=url-rels+artist-rels+label-rels+tags+ratings
+musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=url-rels+artist-rels+label-rels+tags+ratings
 
 artistReleaseGroupBrowse: 
-www.musicbrainz.org/ws/2/release-group?artist=b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&offset=0&limit=100
+musicbrainz.org/ws/2/release-group?artist=b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d&offset=0&limit=100
 
 artistSearch: 
-www.musicbrainz.org/ws/2/artist?query=owen
+musicbrainz.org/ws/2/artist?query=owen
 
 barcodeSearch: 
-www.musicbrainz.org/ws/2/release/?query=barcode:792258106329&limit=1
+musicbrainz.org/ws/2/release/?query=barcode:792258106329&limit=1
 
 ratingLookup: 
-www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=ratings
+musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=ratings
 
 releaseGroupReleaseBrowse: 
-www.musicbrainz.org/ws/2/release?release-group=dca03435-8adb-30a5-ba82-5a162267ff38&inc=artist-credits+labels+mediums
+musicbrainz.org/ws/2/release?release-group=dca03435-8adb-30a5-ba82-5a162267ff38&inc=artist-credits+labels+mediums
 
 releaseGroupSearch:
-www.musicbrainz.org/ws/2/release-group?query=songs about leaving
+musicbrainz.org/ws/2/release-group?query=songs about leaving
+
+releaseGroupLookup:
+musicbrainz.org/ws/2/release-group/dca03435-8adb-30a5-ba82-5a162267ff38?inc=artists+tags+ratings+url-rels+releases
 
 releaseLookup: 
-www.musicbrainz.org/ws/2/release/e46a073c-0a10-4ead-8e22-18200fb437a2?inc=release-groups+artists+recordings+labels+tags+ratings
+musicbrainz.org/ws/2/release/2d9f9aac-1884-3939-a3b7-01437151e495?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels
 
 releaseSearch: 
-www.musicbrainz.org/ws/2/release?query=songs about leaving
+musicbrainz.org/ws/2/release?query=songs about leaving
 
 tagLookup: 
-www.musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=tags
+musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=tags

@@ -45,7 +45,7 @@
 		<release-group type="Album"
 			id="1ca2e2d6-ba87-4158-83b2-23862a36db6b">
 			<title>Rubber Soul / "Yesterday"... and Today</title>
-			<first-release-date></first-release-date>
+			<first-release-date />
 		</release-group>
 		<release-group type="Single"
 			id="1d0c4220-1130-3ef3-a7ea-11d4d4fbadf2">
@@ -74,8 +74,9 @@
 		</release-group>
 		<release-group type="Album"
 			id="2e635678-77e4-4f2c-894b-9119f8552132">
-			<title>The Beatles Collection, Volume 5: Sgt. Pepper's Lonely Hearts
-				Club Band</title>
+			<title>
+				The Beatles Collection, Volume 5: Sgt. Pepper's Lonely Hearts Club Band
+			</title>
 			<first-release-date>1994</first-release-date>
 		</release-group>
 		<release-group type="Album"
@@ -210,8 +211,10 @@
 		</release-group>
 		<release-group type="Album"
 			id="748d13dc-44f4-4c0a-bdab-a2215e4ff5ae">
-			<title>The Beatles Collection, Volume 7: The Beatles, Part 2 /
-				Magical Mystery Tour</title>
+			<title>
+				The Beatles Collection, Volume 7: The Beatles, Part 2 / Magical Mystery
+				Tour
+			</title>
 			<first-release-date>1994</first-release-date>
 		</release-group>
 		<release-group type="Single"
@@ -271,12 +274,16 @@
 		</release-group>
 		<release-group type="Album"
 			id="928aa116-1489-4929-8b51-63116cb8c3a1">
-			<title>The Beatles Collection, Volume 4: Revolver / Let It Be</title>
+			<title>
+				The Beatles Collection, Volume 4: Revolver / Let It Be
+			</title>
 			<first-release-date>1994</first-release-date>
 		</release-group>
 		<release-group type="Album"
 			id="9296b351-fe40-4051-b09b-29fb1cef57ef">
-			<title>The Beatles Collection, Volume 6: The Beatles, Part 1</title>
+			<title>
+				The Beatles Collection, Volume 6: The Beatles, Part 1
+			</title>
 			<first-release-date>1994</first-release-date>
 		</release-group>
 		<release-group type="Single"
@@ -351,8 +358,10 @@
 		</release-group>
 		<release-group type="Single"
 			id="c26e10e9-c5ea-330d-a6c4-a64f18fedea4">
-			<title>Sgt. Pepper’s Lonely Hearts Club Band / With a Little Help
-				From My Friends</title>
+			<title>
+				Sgt. Pepper’s Lonely Hearts Club Band / With a Little Help From My
+				Friends
+			</title>
 			<first-release-date>1978-08-02</first-release-date>
 		</release-group>
 		<release-group type="Album"
@@ -417,9 +426,10 @@
 		</release-group>
 		<release-group type="Album"
 			id="d54d4b12-6f87-4686-9449-2681e4d33e66">
-			<title>For No One: The Best of the Beatles’ Private Recordings
-				1960–69</title>
-			<first-release-date></first-release-date>
+			<title>
+				For No One: The Best of the Beatles’ Private Recordings 1960–69
+			</title>
+			<first-release-date />
 		</release-group>
 		<release-group type="Single"
 			id="d577cc79-9558-3008-b674-86bd1a09a513">
