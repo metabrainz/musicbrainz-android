@@ -18,20 +18,19 @@ public class ArtistLookupParserTest extends BaseXmlParsingTestCase {
 		InputStream stream = getFileStream("artistLookup_b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.xml");
 		assertNotNull(stream);
 		
-		ResponseParser responseParser = new ResponseParser();
 		try {
-			Artist artist = responseParser.parseArtist(stream);
+			Artist artist = new ResponseParser().parseArtist(stream);
 			
+			assertEquals("b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d", artist.getMbid());
 			assertEquals("The Beatles", artist.getName());
-//			assertEquals("Group", artist.getType());
-//			
-//			assertEquals("GB", artist.getCountry());
-//			
-//			assertEquals("1957", artist.getStart());
-//			assertEquals("1970-04-10", artist.getEnd());
+			assertEquals("Group", artist.getType());
+			assertEquals("GB", artist.getCountry());
+			assertEquals("1957", artist.getStart());
+			assertEquals("1970-04-10", artist.getEnd());
 			
 			assertEquals(34, artist.getTagList().size());
 			assertEquals(4.7f, artist.getRating(), 0.01);
+			assertEquals(57, artist.getRatingCount());
 			
 		} catch (IOException e) {
 			e.printStackTrace();

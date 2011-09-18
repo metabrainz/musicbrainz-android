@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.adapter;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.Track;
+import org.musicbrainz.android.api.data.RecordingStub;
 import org.musicbrainz.mobile.R;
 
 import android.app.Activity;
@@ -35,12 +35,12 @@ import android.widget.TextView;
 /**
  * List adapter for release tracks.
  */
-public class ReleaseTrackAdapter extends ArrayAdapter<Track> {
+public class ReleaseTrackAdapter extends ArrayAdapter<RecordingStub> {
 	
 	private Activity context;
-	private List<Track> tracks;
+	private List<RecordingStub> tracks;
 	
-	public ReleaseTrackAdapter(Activity context, List<Track> tracks) {
+	public ReleaseTrackAdapter(Activity context, List<RecordingStub> tracks) {
 		super(context, R.layout.list_track, tracks);
 		this.context = context;
 		this.tracks = tracks;
@@ -60,7 +60,7 @@ public class ReleaseTrackAdapter extends ArrayAdapter<Track> {
 			holder = (ReleaseTrackHolder) track.getTag();
 		}
 		
-		Track trackData = tracks.get(position);
+		RecordingStub trackData = tracks.get(position);
 		holder.getTrackNum().setText("" + trackData.getPosition() + ".");
 		holder.getTrackName().setText(trackData.getTitle());
 		holder.getTrackTime().setText(trackData.getFormattedDuration());

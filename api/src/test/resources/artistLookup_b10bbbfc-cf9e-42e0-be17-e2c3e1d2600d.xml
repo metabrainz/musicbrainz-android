@@ -95,9 +95,7 @@
 				<target>http://lyrics.wikia.com/The_Beatles</target>
 			</relation>
 			<relation type="musicmoz">
-				<target>
-					http://musicmoz.org/Bands_and_Artists/B/Beatles,_The/
-				</target>
+				<target>http://musicmoz.org/Bands_and_Artists/B/Beatles,_The/</target>
 			</relation>
 			<relation type="microblog">
 				<target>http://twitter.com/thebeatles</target>
@@ -106,9 +104,7 @@
 				<target>http://www.aboutthebeatles.com/</target>
 			</relation>
 			<relation type="BBC Music page">
-				<target>
-					http://www.bbc.co.uk/music/artists/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d
-				</target>
+				<target>http://www.bbc.co.uk/music/artists/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d</target>
 			</relation>
 			<relation type="fanpage">
 				<target>http://www.britishbeatlesfanclub.co.uk/</target>

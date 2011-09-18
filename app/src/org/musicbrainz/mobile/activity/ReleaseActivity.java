@@ -157,8 +157,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		artist.setText(data.getFormattedArtist());
 		title.setText(data.getTitle());
 		
-		tags.setText(data.getTags());
-		rating.setRating(data.getRating());
+		tags.setText(data.getReleaseGroupTags());
+		rating.setRating(data.getReleaseGroupRating());
 		
 		ListView trackList = (ListView) findViewById(R.id.release_tracks);
 		trackList.setAdapter(new ReleaseTrackAdapter(this, data.getTrackList()));
@@ -177,7 +177,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		labels.setText(data.getFormattedLabels());
 		releaseDate.setText(data.getDate());
 		
-		if (data.getTags() == "") {
+		if (data.getReleaseGroupTags() == "") {
 			tags.setText(getText(R.string.no_tags));
 		}
 
@@ -290,7 +290,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 				case BARCODE:
 					try {
 						data = webService.lookupReleaseFromBarcode(barcode);
-						releaseMbid = data.getReleaseMbid();
+						releaseMbid = data.getMbid();
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
@@ -430,13 +430,13 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		private void submitThenRefreshTags(Collection<String> processedTags) throws IOException, SAXException {
 			user = getUser();
 			user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
-			data.setTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
+			data.setReleaseGroupTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
 			user.shutdownConnectionManager();
 		}
 		
 		protected void onPostExecute(Boolean success) {
 			
-			tags.setText(data.getTags());
+			tags.setText(data.getReleaseGroupTags());
 			doingTag = false;
 			updateProgressStatus();
 			tagBtn.setEnabled(true);
@@ -473,13 +473,13 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			user = getUser();
 			user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
 			float newRating = webService.lookupRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-			data.setRating(newRating);
+			data.setReleaseGroupRating(newRating);
 			user.shutdownConnectionManager();
 		}
 		
 		protected void onPostExecute(Boolean success) {
 			
-			rating.setRating(data.getRating());
+			rating.setRating(data.getReleaseGroupRating());
 			doingRate = false;
 			updateProgressStatus();
 			rateBtn.setEnabled(true);

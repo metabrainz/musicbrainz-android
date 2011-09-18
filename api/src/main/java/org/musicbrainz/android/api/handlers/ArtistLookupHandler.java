@@ -27,70 +27,127 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class ArtistLookupHandler extends DefaultHandler {
-	
-    private boolean releaseGroup = false;
-    private boolean tag = false;
+
+    private boolean inTag = false;
+    private boolean inUrlRelations = false;
+    private boolean inArtistRelations = false;
+    private boolean inLabelRelations = false;
+    private boolean inLifeSpan = false;
     
-    private Artist data = new Artist();
+    private Artist artist = new Artist();
     private WebLink link;
-    
     private StringBuilder sb;
     
     public Artist getResult() {
-    	return data;
+    	return artist;
     }
     
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		
-		if (localName.equals("artist")) {
-			String mbid = atts.getValue("id");
-			data.setMbid(mbid);
-		} else if (localName.equals("name")) {
-			sb = new StringBuilder();
-		} else if (localName.equals("tag")) {
-			tag = true;
-		} else if (localName.equals("rating")) {
-			if (!releaseGroup) {
-				sb = new StringBuilder();
+		if (localName.equalsIgnoreCase("artist")) {
+			if (inArtistRelations) {
+				
+			} else {
+				String mbid = atts.getValue("id");
+				artist.setMbid(mbid);
+				String type = atts.getValue("type");
+				artist.setType(type);
 			}
-		} else if (localName.equals("relation")) {
-			link = new WebLink();
-			link.setType(atts.getValue("type"));
-		} else if (localName.equals("target")) {
+		} else if (localName.equalsIgnoreCase("name")) {
 			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("tag")) {
+			inTag = true;
+		} else if (localName.equalsIgnoreCase("rating")) {
+			int ratingCount = Integer.parseInt(atts.getValue("votes-count"));
+			artist.setRatingCount(ratingCount);
+			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("country")) {
+			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("relation")) {
+			if (inUrlRelations) {
+				link = new WebLink();
+				link.setType(atts.getValue("type"));
+			}
+		} else if (localName.equalsIgnoreCase("target")) {
+			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("tag")) {
+			inTag = true;
+		} else if (localName.equalsIgnoreCase("life-span")) {
+			inLifeSpan = true;
+		} else if (localName.equalsIgnoreCase("begin")) {
+			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("end")) {
+			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("relation-list")) {
+			String type = atts.getValue("target-type");
+			setRelationStatus(type);
+		} 
+	}
+
+	private void setRelationStatus(String type) {
+		if (type.equalsIgnoreCase("url")) {
+			inUrlRelations = true;
+		} else if (type.equalsIgnoreCase("artist")) {
+			inArtistRelations = true;
+		} else if (type.equalsIgnoreCase("label")) {
+			inLabelRelations = true;
 		}
 	}
 	
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
 		
-		if (localName.equals("name")) {
-			if (tag) {
-				data.addTag(sb.toString());
-			}else {
-				data.setName(sb.toString());
+		if (localName.equalsIgnoreCase("name")) {
+			if (inTag) {
+				artist.addTag(sb.toString());
+			} else if (inArtistRelations) {
+			
+			} else if (inLabelRelations) {
+				
+			} else{
+				artist.setName(sb.toString());
 			}
-		} else if (localName.equals("tag")) {
-			tag = false;
-		} else if (localName.equals("rating")) {
-			if (!releaseGroup) {
-				float rating = Float.parseFloat(sb.toString());
-				data.setRating(rating);
+		} else if (localName.equalsIgnoreCase("rating")) {
+			float rating = Float.parseFloat(sb.toString());
+			artist.setRating(rating);
+		} else if (localName.equalsIgnoreCase("country")) {
+			artist.setCountry(sb.toString());
+		} else if (localName.equalsIgnoreCase("relation")) {
+			if (inUrlRelations){
+				artist.addLink(link);
 			}
-		} else if (localName.equals("release-group")) {
-			releaseGroup = false;
-		} else if (localName.equals("relation")) {
-			data.addLink(link);
-		} else if (localName.equals("target")) {
-			link.setUrl(sb.toString());
+		} else if (localName.equalsIgnoreCase("target")) {
+			if (inUrlRelations) {
+				link.setUrl(sb.toString());
+			} else if (inArtistRelations){
+				
+			} else if (inLabelRelations) {
+				
+			}
+		} else if (localName.equalsIgnoreCase("tag")) {
+			inTag = false;
+		} else if (localName.equalsIgnoreCase("life-span")) {
+			inLifeSpan = false;
+		} else if (localName.equalsIgnoreCase("begin")) {
+			if (inLifeSpan) {
+				artist.setBegin(sb.toString());
+			}
+		} else if (localName.equalsIgnoreCase("end")) {
+			if (inLifeSpan) {
+				artist.setEnd(sb.toString());
+			}
+		} else if (localName.equalsIgnoreCase("relation")) {
+			inUrlRelations = false;
+			inArtistRelations = false;
+			inLabelRelations = false;
 		}
 	}
 	
 	public void characters(char ch[], int start, int length) {
 		
 		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
+			for (int i = start; i < start + length; i++) {
 	            sb.append(ch[i]);
 	        }
 		}

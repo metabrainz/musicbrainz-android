@@ -37,20 +37,24 @@ public class Release {
 	private ArrayList<ReleaseArtist> artists;
 	
 	private String title;
+	private String status;
 	private String date;
-	private float rating;
-	private Collection<String> tags;
+	
+	private float releaseGroupRating;
+	private int releaseGroupRatingCount;
+	private Collection<String> releaseGroupTags;
+	
 	private Collection<String> labels;
-	private ArrayList<Track> tracks;
+	private ArrayList<RecordingStub> tracks;
 	
 	public Release() {
 		artists = new ArrayList<ReleaseArtist>();
 		labels = new LinkedList<String>();
-		tags = new LinkedList<String>();
-		tracks = new ArrayList<Track>();
+		releaseGroupTags = new LinkedList<String>();
+		tracks = new ArrayList<RecordingStub>();
 	}
 	
-	public String getReleaseMbid() {
+	public String getMbid() {
 		return releaseMbid;
 	}
 
@@ -98,6 +102,14 @@ public class Release {
 		this.title = title;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	public String getDate() {
 		return date;
 	}
@@ -106,28 +118,36 @@ public class Release {
 		this.date = date;
 	}
 	
-	public float getRating() {
-		return rating;
+	public float getReleaseGroupRating() {
+		return releaseGroupRating;
 	}
 	
-	public void setRating(float rating) {
-		this.rating = rating;
+	public void setReleaseGroupRating(float releaseGroupRating) {
+		this.releaseGroupRating = releaseGroupRating;
 	}
 	
-	public Collection<String> getTagList() {
-		return tags;
+	public int getReleaseGroupRatingCount() {
+		return releaseGroupRatingCount;
 	}
 	
-	public String getTags() {
-		return StringFormat.commaSeparate(tags);
+	public void setReleaseGroupRatingCount(int releaseGroupRatingCount) {
+		this.releaseGroupRatingCount = releaseGroupRatingCount;
 	}
 	
-	public void setTags(Collection<String> tags) {
-		this.tags = tags;
+	public Collection<String> getReleaseGroupTagList() {
+		return releaseGroupTags;
 	}
 	
-	public void addTag(String tag) {
-		tags.add(tag);
+	public String getReleaseGroupTags() {
+		return StringFormat.commaSeparate(releaseGroupTags);
+	}
+	
+	public void setReleaseGroupTags(Collection<String> tags) {
+		this.releaseGroupTags = tags;
+	}
+	
+	public void addReleaseGroupTag(String tag) {
+		releaseGroupTags.add(tag);
 	}
 	
 	public Collection<String> getLabels() {
@@ -146,15 +166,15 @@ public class Release {
 		labels.add(label);
 	}
 	
-	public ArrayList<Track> getTrackList() {
+	public ArrayList<RecordingStub> getTrackList() {
 		return tracks;
 	}
 	
-	public void setTrackList(ArrayList<Track> trackList) {
+	public void setTrackList(ArrayList<RecordingStub> trackList) {
 		this.tracks = trackList;
 	}
 	
-	public void addTrack(Track track) {
+	public void addTrack(RecordingStub track) {
 		tracks.add(track);
 	}
 

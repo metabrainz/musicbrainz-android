@@ -35,10 +35,8 @@ public class Artist {
 	private String mbid;
 	
 	private String name;
-
 	private String type;
 	private String country;
-	
 	private String start;
 	private String end;
 	
@@ -92,7 +90,7 @@ public class Artist {
 		return start;
 	}
 
-	public void setStart(String begin) {
+	public void setBegin(String begin) {
 		this.start = begin;
 	}
 

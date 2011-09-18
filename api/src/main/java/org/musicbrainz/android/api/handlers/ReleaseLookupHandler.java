@@ -22,119 +22,129 @@ package org.musicbrainz.android.api.handlers;
 
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseArtist;
-import org.musicbrainz.android.api.data.Track;
+import org.musicbrainz.android.api.data.RecordingStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class ReleaseLookupHandler extends DefaultHandler {
 	
-    private Release data = new Release();
-    private ReleaseArtist releaseArtist;
-    private Track trk;
-    private StringBuilder sb;
+    private boolean inArtist = false;
+    private boolean inLabel = false;
+    private boolean inReleaseGroup = false;
+    private boolean inTrack = false;
+    private boolean inRecording = false;
+    private boolean inTag = false;
 	
-    private boolean artist = false;
-    private boolean label = false;
-    private boolean releaseGroup = false;
-    private boolean track = false;
-    private boolean recording = false;
-    private boolean tag = false;
+    private Release release = new Release();
+    private ReleaseArtist releaseArtist;
+    private RecordingStub track;
+    private StringBuilder sb;
     
     public Release getResult() {
-    	return data;
+    	return release;
     }
     
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		
-		if (localName.equals("release")) {
+		if (localName.equalsIgnoreCase("release")) {
 			String releaseMbid = atts.getValue("id");
-			data.setReleaseMbid(releaseMbid);
-		} else if (localName.equals("title")) {
+			release.setReleaseMbid(releaseMbid);
+		} else if (localName.equalsIgnoreCase("title")) {
 			sb = new StringBuilder();
-		} else if (localName.equals("artist")) {
-			artist = true;
+		} else if (localName.equalsIgnoreCase("status")) {
+			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("barcode")) {
+			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("artist")) {
+			inArtist = true;
 			releaseArtist = new ReleaseArtist();
 			releaseArtist.setMbid(atts.getValue("id"));
-		} else if (localName.equals("name")) {
+		} else if (localName.equalsIgnoreCase("name")) {
 			sb = new StringBuilder();
-		} else if (localName.equals("date")) {
+		} else if (localName.equalsIgnoreCase("date")) {
 			sb = new StringBuilder();
-		} else if (localName.equals("label")) {
-			label = true;
-		} else if (localName.equals("release-group")) {
-			releaseGroup = true;
+		} else if (localName.equalsIgnoreCase("label")) {
+			inLabel = true;
+		} else if (localName.equalsIgnoreCase("release-group")) {
+			inReleaseGroup = true;
 			String rgID = atts.getValue("id");
-			data.setReleaseGroupMbid(rgID);
-		} else if (localName.equals("track")) {
-			track = true;
-			trk = new Track();
-		} else if (localName.equals("recording")) {
-			recording = true;
-		} else if (localName.equals("position")) {
+			release.setReleaseGroupMbid(rgID);
+		} else if (localName.equalsIgnoreCase("track")) {
+			inTrack = true;
+			track = new RecordingStub();
+		} else if (localName.equalsIgnoreCase("recording")) {
+			inRecording = true;
+		} else if (localName.equalsIgnoreCase("position")) {
 			sb = new StringBuilder();
-		} else if (localName.equals("length")) {
+		} else if (localName.equalsIgnoreCase("length")) {
 			sb = new StringBuilder();
-		} else if (localName.equals("tag")) {
-			tag = true;
-		} else if (localName.equals("rating")) {
-			if (releaseGroup)
+		} else if (localName.equalsIgnoreCase("tag")) {
+			inTag = true;
+		} else if (localName.equalsIgnoreCase("rating")) {
+			if (inReleaseGroup) {
+				int ratingCount = Integer.parseInt(atts.getValue("votes-count"));
+				release.setReleaseGroupRatingCount(ratingCount);
 				sb = new StringBuilder();
-		}
+			}
+		} 
 	}
 	
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
 		
-		if (localName.equals("title")) {
-			if (!track)
-				data.setTitle(sb.toString());
-			else if (track && !recording)
-				trk.setTitle(sb.toString());
-			else if (recording) {
-				// ensure recording title doesn't replace track title if specified
-				if (trk.getTitle() == null)
-					trk.setTitle(sb.toString());
+		if (localName.equalsIgnoreCase("title")) {
+			if (inTrack && !inRecording) {
+				track.setTitle(sb.toString());
+			} else if (inRecording) {
+				if (track.getTitle() == null)
+					track.setTitle(sb.toString());
+			} else {
+				release.setTitle(sb.toString());
 			}
-		} else if (localName.equals("artist")) {
-			artist = false;
-		} else if (localName.equals("name")) {
-			if (artist && !tag) {
+		} else if (localName.equalsIgnoreCase("status")) {
+			release.setStatus(sb.toString());
+		} else if (localName.equalsIgnoreCase("barcode")) {
+			release.setBarcode(sb.toString());
+		} else if (localName.equalsIgnoreCase("artist")) {
+			inArtist = false;
+		} else if (localName.equalsIgnoreCase("name")) {
+			if (inArtist && !inTag) {
 				releaseArtist.setName(sb.toString());
-				data.addArtist(releaseArtist);
-			} else if (label && !tag) {
-				data.addLabel(sb.toString());
-			} else if (releaseGroup && tag) {
-				data.addTag(sb.toString());
+				release.addArtist(releaseArtist);
+			} else if (inLabel && !inTag) {
+				release.addLabel(sb.toString());
+			} else if (inReleaseGroup && inTag) {
+				release.addReleaseGroupTag(sb.toString());
 			}
-		} else if (localName.equals("date")) {
-			data.setDate(sb.toString());
-		} else if (localName.equals("label")) {
-			label = false;
-		} else if (localName.equals("release-group")) {
-			releaseGroup = false;
-		} else if (localName.equals("track")) {
-			track = false;
-			data.addTrack(trk);
-		} else if (localName.equals("recording")) {
-			recording = false;
-		} else if (localName.equals("position")) {
-			if (track) {
+		} else if (localName.equalsIgnoreCase("date")) {
+			release.setDate(sb.toString());
+		} else if (localName.equalsIgnoreCase("label")) {
+			inLabel = false;
+		} else if (localName.equalsIgnoreCase("release-group")) {
+			inReleaseGroup = false;
+		} else if (localName.equalsIgnoreCase("track")) {
+			inTrack = false;
+			release.addTrack(track);
+		} else if (localName.equalsIgnoreCase("recording")) {
+			inRecording = false;
+		} else if (localName.equalsIgnoreCase("position")) {
+			if (inTrack) {
 			int pos = Integer.parseInt(sb.toString());
-			trk.setPosition(pos);
+			track.setPosition(pos);
 			}
-		} else if (localName.equals("length")) {
-			if (track) {
+		} else if (localName.equalsIgnoreCase("length")) {
+			if (inTrack) {
 			int dur = Integer.parseInt(sb.toString());
-			trk.setDuration(dur);
+			track.setDuration(dur);
 			}
-		} else if (localName.equals("tag")) {
-			tag = false;
-		} else if (localName.equals("rating")) {
-			if (releaseGroup) {
+		} else if (localName.equalsIgnoreCase("tag")) {
+			inTag = false;
+		} else if (localName.equalsIgnoreCase("rating")) {
+			if (inReleaseGroup) {
 				float rating = Float.parseFloat(sb.toString());
-				data.setRating(rating);
+				release.setReleaseGroupRating(rating);
 			}
 		}
 	}
@@ -142,7 +152,7 @@ public class ReleaseLookupHandler extends DefaultHandler {
 	public void characters(char ch[], int start, int length) {
 		
 		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
+			for (int i = start; i < start + length; i++) {
 	            sb.append(ch[i]);
 	        }
 		}

@@ -23,9 +23,9 @@ package org.musicbrainz.android.api.data;
 import org.musicbrainz.android.api.util.StringFormat;
 
 /**
- * Track data for release.
+ * Basic recording data for tracks in release.
  */
-public class Track {
+public class RecordingStub {
 	
 	private String title;
 	private int position;
