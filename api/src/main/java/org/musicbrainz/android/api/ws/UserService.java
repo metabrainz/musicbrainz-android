@@ -25,13 +25,13 @@ import java.io.InputStream;
 import java.util.Collection;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.musicbrainz.android.api.WebserviceConfig;
 import org.musicbrainz.android.api.data.UserData;
 
@@ -62,8 +62,7 @@ public class UserService extends WebService {
 		HttpGet authenticationTest = new HttpGet(QueryBuilder.authenticationCheck());
 		authenticationTest.setHeader("Accept", "application/xml");
 		try {
-			HttpResponse response = httpClient.execute(authenticationTest);
-			response.getEntity().consumeContent();
+			httpClient.execute(authenticationTest, new BasicResponseHandler());
 		} catch (HttpResponseException e) {		
 			return false;
 		}
