@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -50,9 +51,10 @@ public class WebService {
 	}
 	
 	public Release lookupReleaseFromBarcode(String barcode) throws IOException {
-		String url = QueryBuilder.barcodeSearch(barcode); 
-		InputStream response = get(url);
+		HttpEntity entity = get(QueryBuilder.barcodeSearch(barcode));
+		InputStream response = entity.getContent();
 		String barcodeMbid = responseParser.parseMbidFromBarcode(response);
+		finalise(entity, response);
 		if (barcodeMbid == null) {
 			throw new BarcodeNotFoundException(barcode);
 		}
@@ -60,65 +62,88 @@ public class WebService {
 	}
 	
 	public Release lookupRelease(String mbid) throws IOException {
-		String url = QueryBuilder.releaseLookup(mbid);
-		InputStream response = get(url);
-		return responseParser.parseRelease(response);
+		HttpEntity entity = get(QueryBuilder.releaseLookup(mbid));
+		InputStream response = entity.getContent();
+		Release release = responseParser.parseRelease(response);
+		finalise(entity, response);
+		return release;
 	}
 	
 	public LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException {
-		String url = QueryBuilder.releaseGroupReleaseBrowse(mbid);
-		InputStream response = get(url);
-		return responseParser.parseReleaseGroupReleases(response);
+		HttpEntity entity = get(QueryBuilder.releaseGroupReleaseBrowse(mbid));
+		InputStream response = entity.getContent();
+		LinkedList<ReleaseStub> releases = responseParser.parseReleaseGroupReleases(response);
+		finalise(entity, response);
+		return releases;
 	}
 	
 	public Artist lookupArtist(String mbid) throws IOException {
-		String artistUrl = QueryBuilder.artistLookup(mbid);
-		InputStream artistResponse = get(artistUrl);
+		HttpEntity artistEntity = get(QueryBuilder.artistLookup(mbid));
+		InputStream artistResponse = artistEntity.getContent();
 		Artist artist = responseParser.parseArtist(artistResponse);
-		
-		String rgUrl = QueryBuilder.artistReleaseGroupBrowse(mbid);
-		InputStream rgResponse = get(rgUrl);
-		ArrayList<ReleaseGroupStub> releases = responseParser.parseReleaseGroupBrowse(rgResponse);
-		
-		artist.setReleaseGroups(releases);
+		finalise(artistEntity, artistResponse);
+		artist.setReleaseGroups(browseArtistReleaseGroups(mbid));
 		return artist;
+	}
+
+	private ArrayList<ReleaseGroupStub> browseArtistReleaseGroups(String mbid) throws IOException {
+		HttpEntity rgEntity = get(QueryBuilder.artistReleaseGroupBrowse(mbid));
+		InputStream rgResponse = rgEntity.getContent();
+		ArrayList<ReleaseGroupStub> releases = responseParser.parseReleaseGroupBrowse(rgResponse);
+		finalise(rgEntity, rgResponse);
+		return releases;
 	}
 	
 	public LinkedList<ArtistStub> searchArtists(String searchTerm) throws IOException {
-		String url = QueryBuilder.artistSearch(searchTerm);
-		InputStream response = get(url);
-		return responseParser.parseArtistSearch(response);
+		HttpEntity entity = get(QueryBuilder.artistSearch(searchTerm));
+		InputStream response = entity.getContent();
+		LinkedList<ArtistStub> artists = responseParser.parseArtistSearch(response);
+		finalise(entity, response);
+		return artists;
 	}
 	
 	public LinkedList<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException {
-		String url = QueryBuilder.releaseGroupSearch(searchTerm);
-		InputStream response = get(url);
-		return responseParser.parseReleaseGroupSearch(response);
+		HttpEntity entity = get(QueryBuilder.releaseGroupSearch(searchTerm));
+		InputStream response = entity.getContent();
+		LinkedList<ReleaseGroupStub> releaseGroups = responseParser.parseReleaseGroupSearch(response);
+		finalise(entity, response);
+		return releaseGroups;
 	}
 	
 	public LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException {
-		String url = QueryBuilder.releaseSearch(searchTerm);
-		InputStream response = get(url);
-		return responseParser.parseReleaseSearch(response);
+		HttpEntity entity = get(QueryBuilder.releaseSearch(searchTerm));
+		InputStream response = entity.getContent();
+		LinkedList<ReleaseStub> releases = responseParser.parseReleaseSearch(response);
+		finalise(entity, response);
+		return releases;
 	}
 	
 	public Collection<String> lookupTags(MBEntity type, String mbid) throws IOException {
-		String url = QueryBuilder.tagLookup(type, mbid);
-		InputStream response = get(url);
-		return responseParser.parseTagLookup(response);
+		HttpEntity entity = get(QueryBuilder.tagLookup(type, mbid));
+		InputStream response = entity.getContent();
+		Collection<String> tags = responseParser.parseTagLookup(response);
+		finalise(entity, response);
+		return tags;
 	}
 	
 	public float lookupRating(MBEntity type, String mbid) throws IOException  {
-		String url = QueryBuilder.ratingLookup(type, mbid);
-		InputStream response = get(url);
-		return responseParser.parseRatingLookup(response);
+		HttpEntity entity = get(QueryBuilder.ratingLookup(type, mbid));
+		InputStream response = entity.getContent();
+		float rating = responseParser.parseRatingLookup(response);
+		finalise(entity, response);
+		return rating;
+	}
+
+	protected void finalise(HttpEntity entity, InputStream response) throws IOException {
+		response.close();
+		entity.consumeContent();
 	}
 	
-	protected InputStream get(String url) throws IOException {
+	protected HttpEntity get(String url) throws IOException {
 		HttpGet get = new HttpGet(url);
 		get.setHeader("Accept", "application/xml");
 		HttpResponse response = httpClient.execute(get);
-		return response.getEntity().getContent();
+		return response.getEntity();
 	}
 	
 }

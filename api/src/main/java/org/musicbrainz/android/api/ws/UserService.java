@@ -24,13 +24,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.musicbrainz.android.api.WebserviceConfig;
 import org.musicbrainz.android.api.data.UserData;
 
@@ -61,7 +62,8 @@ public class UserService extends WebService {
 		HttpGet authenticationTest = new HttpGet(QueryBuilder.authenticationCheck());
 		authenticationTest.setHeader("Accept", "application/xml");
 		try {
-			httpClient.execute(authenticationTest, new BasicResponseHandler());
+			HttpResponse response = httpClient.execute(authenticationTest);
+			response.getEntity().consumeContent();
 		} catch (HttpResponseException e) {		
 			return false;
 		}
@@ -69,9 +71,11 @@ public class UserService extends WebService {
 	}
 	
 	public UserData getUserData(MBEntity entityType, String mbid) throws IOException {
-		String url = QueryBuilder.userData(entityType, mbid);
-		InputStream response = get(url);
-		return responseParser.parseUserData(response);
+		HttpEntity entity = get(QueryBuilder.userData(entityType, mbid));
+		InputStream response = entity.getContent();
+		UserData userData = responseParser.parseUserData(response);
+		finalise(entity, response);
+		return userData;
 	}
 
 	public void submitTags(MBEntity entityType, String mbid, Collection<String> tags) throws IOException {
