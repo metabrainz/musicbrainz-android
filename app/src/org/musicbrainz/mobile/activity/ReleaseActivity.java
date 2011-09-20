@@ -294,7 +294,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						if (loggedIn) {
 							user = getUser();
 							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-							user.shutdownConnectionManager();
 						}
 						return LOADED;
 					} catch (BarcodeNotFoundException e) {
@@ -326,7 +325,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			if (loggedIn) {
 				user = getUser();
 				userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-				user.shutdownConnectionManager();
 			}
 		}
 		
@@ -431,7 +429,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			user = getUser();
 			user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
 			data.setReleaseGroupTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
-			user.shutdownConnectionManager();
 		}
 		
 		protected void onPostExecute(Boolean success) {
@@ -474,7 +471,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 			user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
 			float newRating = webService.lookupRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 			data.setReleaseGroupRating(newRating);
-			user.shutdownConnectionManager();
 		}
 		
 		protected void onPostExecute(Boolean success) {

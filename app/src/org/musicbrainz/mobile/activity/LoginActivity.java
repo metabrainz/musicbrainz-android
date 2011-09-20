@@ -114,15 +114,12 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
 				e.printStackTrace();
 				return ERROR;
 			}
-			
-			user.shutdownConnectionManager();
 
-			if (success)
-				// authentication success
+			if (success) {
 				return SUCCESS;
-			else
-				// authentication failure
+			} else {
 				return FAILURE;
+			}
 		}
 		
 		protected void onPostExecute(Integer resultCode) {

@@ -29,8 +29,6 @@ import java.util.LinkedList;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.CoreProtocolPNames;
-import org.musicbrainz.android.api.WebserviceConfig;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
@@ -47,13 +45,8 @@ public class WebService {
 	protected ResponseParser responseParser;
 	
 	public WebService() {
-		configureHttpClient();
+		httpClient = HttpClientFactory.getClient();
 		responseParser = new ResponseParser();
-	}
-	
-	protected void configureHttpClient() {
-		httpClient = new DefaultHttpClient();
-		httpClient.getParams().setParameter(CoreProtocolPNames.USER_AGENT, WebserviceConfig.USER_AGENT);
 	}
 	
 	public Release lookupReleaseFromBarcode(String barcode) throws IOException {
@@ -126,10 +119,6 @@ public class WebService {
 		get.setHeader("Accept", "application/xml");
 		HttpResponse response = httpClient.execute(get);
 		return response.getEntity().getContent();
-	}
-	
-	public void shutdownConnectionManager() {
-		httpClient.getConnectionManager().shutdown();
 	}
 	
 }

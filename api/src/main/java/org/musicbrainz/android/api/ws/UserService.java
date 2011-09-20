@@ -52,7 +52,6 @@ public class UserService extends WebService {
 	}
 	
 	private void configureHttpClient(String username, String password) {
-		super.configureHttpClient();
 		AuthScope authScope = new AuthScope(AUTH_SCOPE, AUTH_PORT, AUTH_REALM, AUTH_TYPE);
 		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
 		httpClient.getCredentialsProvider().setCredentials(authScope, credentials);

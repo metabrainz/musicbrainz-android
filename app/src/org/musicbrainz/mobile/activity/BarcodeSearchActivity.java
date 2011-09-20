@@ -227,7 +227,6 @@ public class BarcodeSearchActivity extends SuperActivity implements
 			UserService user = getUser();
 			try {
 				user.submitBarcode(releaseMbid[0], barcode);
-				user.shutdownConnectionManager();
 			} catch (IOException e) {
 				return false;
 			}
