@@ -73,7 +73,7 @@ public class UserService extends WebService {
 		HttpEntity entity = get(QueryBuilder.userData(entityType, mbid));
 		InputStream response = entity.getContent();
 		UserData userData = responseParser.parseUserData(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		return userData;
 	}
 

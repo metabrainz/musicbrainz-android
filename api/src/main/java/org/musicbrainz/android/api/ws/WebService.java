@@ -54,7 +54,7 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.barcodeSearch(barcode));
 		InputStream response = entity.getContent();
 		String barcodeMbid = responseParser.parseMbidFromBarcode(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		if (barcodeMbid == null) {
 			throw new BarcodeNotFoundException(barcode);
 		}
@@ -65,7 +65,7 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.releaseLookup(mbid));
 		InputStream response = entity.getContent();
 		Release release = responseParser.parseRelease(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		return release;
 	}
 	
@@ -73,24 +73,24 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.releaseGroupReleaseBrowse(mbid));
 		InputStream response = entity.getContent();
 		LinkedList<ReleaseStub> releases = responseParser.parseReleaseGroupReleases(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		return releases;
 	}
 	
 	public Artist lookupArtist(String mbid) throws IOException {
-		HttpEntity artistEntity = get(QueryBuilder.artistLookup(mbid));
-		InputStream artistResponse = artistEntity.getContent();
+		HttpEntity entity = get(QueryBuilder.artistLookup(mbid));
+		InputStream artistResponse = entity.getContent();
 		Artist artist = responseParser.parseArtist(artistResponse);
-		finalise(artistEntity, artistResponse);
+		entity.consumeContent();
 		artist.setReleaseGroups(browseArtistReleaseGroups(mbid));
 		return artist;
 	}
 
 	private ArrayList<ReleaseGroupStub> browseArtistReleaseGroups(String mbid) throws IOException {
-		HttpEntity rgEntity = get(QueryBuilder.artistReleaseGroupBrowse(mbid));
-		InputStream rgResponse = rgEntity.getContent();
+		HttpEntity entity = get(QueryBuilder.artistReleaseGroupBrowse(mbid));
+		InputStream rgResponse = entity.getContent();
 		ArrayList<ReleaseGroupStub> releases = responseParser.parseReleaseGroupBrowse(rgResponse);
-		finalise(rgEntity, rgResponse);
+		entity.consumeContent();
 		return releases;
 	}
 	
@@ -98,7 +98,7 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.artistSearch(searchTerm));
 		InputStream response = entity.getContent();
 		LinkedList<ArtistStub> artists = responseParser.parseArtistSearch(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		return artists;
 	}
 	
@@ -106,7 +106,7 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.releaseGroupSearch(searchTerm));
 		InputStream response = entity.getContent();
 		LinkedList<ReleaseGroupStub> releaseGroups = responseParser.parseReleaseGroupSearch(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		return releaseGroups;
 	}
 	
@@ -114,7 +114,7 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.releaseSearch(searchTerm));
 		InputStream response = entity.getContent();
 		LinkedList<ReleaseStub> releases = responseParser.parseReleaseSearch(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		return releases;
 	}
 	
@@ -122,7 +122,7 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.tagLookup(type, mbid));
 		InputStream response = entity.getContent();
 		Collection<String> tags = responseParser.parseTagLookup(response);
-		finalise(entity, response);
+		entity.consumeContent();
 		return tags;
 	}
 	
@@ -130,13 +130,8 @@ public class WebService {
 		HttpEntity entity = get(QueryBuilder.ratingLookup(type, mbid));
 		InputStream response = entity.getContent();
 		float rating = responseParser.parseRatingLookup(response);
-		finalise(entity, response);
-		return rating;
-	}
-
-	protected void finalise(HttpEntity entity, InputStream response) throws IOException {
-		response.close();
 		entity.consumeContent();
+		return rating;
 	}
 	
 	protected HttpEntity get(String url) throws IOException {
