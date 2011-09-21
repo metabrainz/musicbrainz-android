@@ -29,7 +29,7 @@ import java.util.LinkedList;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.AbstractHttpClient;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
@@ -42,11 +42,11 @@ import org.musicbrainz.android.api.data.ReleaseStub;
  */
 public class WebClient {
 	
-	protected DefaultHttpClient httpClient;
+	protected AbstractHttpClient httpClient;
 	protected ResponseParser responseParser;
 	
 	public WebClient() {
-		httpClient = HttpClientFactory.client;
+		httpClient = HttpClientFactory.getHttpClient();
 		responseParser = new ResponseParser();
 	}
 	
