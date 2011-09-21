@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
-import org.musicbrainz.android.api.ws.ResponseParser;
+import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseGroupBrowseTest extends BaseXmlParsingTestCase {
 

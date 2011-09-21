@@ -18,14 +18,13 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.ws;
+package org.musicbrainz.android.api.webservice;
 
-import org.musicbrainz.android.api.WebserviceConfig;
-import org.musicbrainz.android.api.ws.MBEntity;
+import org.musicbrainz.android.api.webservice.MBEntity;
 
 public class QueryBuilder {
 
-	public static final String WEB_SERVICE = WebserviceConfig.WEB_SERVICE;
+	private static final String WEB_SERVICE = "http://musicbrainz.org/ws/2/";
 	
 	private static final String LOOKUP_ARTIST = "artist/";
 	private static final String LOOKUP_ARTIST_PARAMS = "?inc=url-rels+tags+ratings";

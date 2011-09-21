@@ -18,14 +18,30 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api;
+package org.musicbrainz.android.api.webservice;
 
-public class WebserviceConfig {
+public class BarcodeNotFoundException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
+	private static final String MESSAGE = "Barcode not found in the MusicBrainz database: ";
 	
-	public static final String WEB_SERVICE = "http://musicbrainz.org/ws/2/";
-	public static final String REALM = "musicbrainz.org";
-	public static final String SCOPE = "musicbrainz.org";
+	private String barcode;
 	
-	public static final String USER_AGENT = "MBAndroid/1.0";
+	public BarcodeNotFoundException() {
+		barcode = "unknown";
+	}
+	
+	public BarcodeNotFoundException(String barcode) {
+		this.barcode = barcode;
+	}
+	
+	public String getBarcode() {
+		return barcode;
+	}
+	
+	@Override
+	public String getMessage() {
+		return MESSAGE + barcode;
+	}
 
 }

@@ -25,7 +25,7 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
-import org.musicbrainz.android.api.ws.WebService;
+import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
@@ -73,11 +73,11 @@ public class SearchActivity extends SuperActivity {
 	private LinkedList<ArtistStub> artistSearchResults;
 	private LinkedList<ReleaseGroupStub> rgSearchResults;
 	
-	private WebService webService;
+	private WebClient webService;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		webService = new WebService();
+		webService = new WebClient();
 	    handleIntent();
 	}
 	

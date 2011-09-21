@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.ws;
+package org.musicbrainz.android.api.webservice;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,13 +40,13 @@ import org.musicbrainz.android.api.data.ReleaseStub;
  * Makes the web service available to Activity classes. The XML returned is
  * parsed into pojos with SAX.
  */
-public class WebService {
+public class WebClient {
 	
 	protected DefaultHttpClient httpClient;
 	protected ResponseParser responseParser;
 	
-	public WebService() {
-		httpClient = HttpClientFactory.getClient();
+	public WebClient() {
+		httpClient = HttpClientFactory.client;
 		responseParser = new ResponseParser();
 	}
 	

@@ -18,13 +18,14 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.ws;
+package org.musicbrainz.android.api.webservice;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpResponseException;
@@ -32,22 +33,21 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
-import org.musicbrainz.android.api.WebserviceConfig;
 import org.musicbrainz.android.api.data.UserData;
 
 /**
  * Performs webservice requests specific to registered users.
  */
-public class UserService extends WebService {
+public class UserClient extends WebClient {
 	
-	public static final String AUTH_SCOPE = WebserviceConfig.SCOPE;
-	public static final String AUTH_REALM = WebserviceConfig.REALM;
+	public static final String AUTH_REALM = "musicbrainz.org";
+	public static final String AUTH_SCOPE = "musicbrainz.org";
 	public static final int AUTH_PORT = 80;
 	public static final String AUTH_TYPE = "Digest";
 	
 	private String clientId = "?client=musicbrainz.android-";
 	
-	public UserService (String username, String password, String clientVersion) {
+	public UserClient (String username, String password, String clientVersion) {
 		configureHttpClient(username, password);
 		clientId += clientVersion;
 	}
@@ -100,7 +100,10 @@ public class UserService extends WebService {
 		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
 		StringEntity xml = new StringEntity(content, "UTF-8");
 		post.setEntity(xml);
-		httpClient.execute(post);
+		HttpResponse response = httpClient.execute(post);
+		if (response != null) {
+			response.getEntity().consumeContent();
+		}
 	}
 	
 }

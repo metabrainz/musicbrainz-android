@@ -24,8 +24,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
-import org.musicbrainz.android.api.ws.UserService;
-import org.musicbrainz.android.api.ws.WebService;
+import org.musicbrainz.android.api.webservice.UserClient;
+import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
@@ -77,11 +77,11 @@ public class BarcodeSearchActivity extends SuperActivity implements
 	
 	private InputMethodManager imm;
 	
-	private WebService webService;
+	private WebClient webService;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebService();
+        webService = new WebClient();
         
         setContentView(R.layout.activity_barcode);
         actionBar = setupActionBarWithHome();
@@ -224,7 +224,7 @@ public class BarcodeSearchActivity extends SuperActivity implements
 		@Override
 		protected Boolean doInBackground(String... releaseMbid) {
 			
-			UserService user = getUser();
+			UserClient user = getUser();
 			try {
 				user.submitBarcode(releaseMbid[0], barcode);
 			} catch (IOException e) {

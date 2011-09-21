@@ -18,30 +18,44 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.ws;
+package org.musicbrainz.android.api.webservice;
 
-public class BarcodeNotFoundException extends RuntimeException {
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.LinkedList;
 
-	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE = "Barcode not found in the MusicBrainz database: ";
-	
-	private String barcode;
-	
-	public BarcodeNotFoundException() {
-		barcode = "unknown";
-	}
-	
-	public BarcodeNotFoundException(String barcode) {
-		this.barcode = barcode;
-	}
-	
-	public String getBarcode() {
-		return barcode;
-	}
-	
-	@Override
-	public String getMessage() {
-		return MESSAGE + barcode;
-	}
+public class WebServiceUtils {
 
+	static String sanitise(String input) {
+		try {
+			return URLEncoder.encode(input, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return input;
+		}
+	}
+	
+	static String entityString(MBEntity entity) {
+		switch(entity) {
+		case ARTIST:
+			return "artist";
+		case RELEASE_GROUP:
+			return "release-group";
+		default:
+			return "artist";
+		}
+	}
+	
+	public static LinkedList<String> sanitiseCommaSeparatedTags(String tags) {
+		
+		LinkedList<String> tagList = new LinkedList<String>();
+		String[] split = tags.split(",");
+		
+		for (String tag : split) {
+			tag = tag.toLowerCase();
+			tag = tag.trim();
+			tagList.add(tag);
+		}
+		return tagList;
+	}
+	
 }

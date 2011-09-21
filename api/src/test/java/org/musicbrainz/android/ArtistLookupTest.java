@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 import org.junit.Test;
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.ws.ResponseParser;
+import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ArtistLookupTest extends BaseXmlParsingTestCase {
 	

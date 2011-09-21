@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.ws;
+package org.musicbrainz.android.api.webservice;
 
 import java.util.Collection;
 

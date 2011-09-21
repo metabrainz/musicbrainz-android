@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 import org.junit.Test;
 import org.musicbrainz.android.api.data.Release;
-import org.musicbrainz.android.api.ws.ResponseParser;
+import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseLookupTest extends BaseXmlParsingTestCase {
 

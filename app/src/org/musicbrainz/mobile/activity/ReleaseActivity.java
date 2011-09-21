@@ -30,11 +30,11 @@ import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.ws.BarcodeNotFoundException;
-import org.musicbrainz.android.api.ws.MBEntity;
-import org.musicbrainz.android.api.ws.UserService;
-import org.musicbrainz.android.api.ws.WebService;
-import org.musicbrainz.android.api.ws.WebServiceUtils;
+import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
+import org.musicbrainz.android.api.webservice.MBEntity;
+import org.musicbrainz.android.api.webservice.UserClient;
+import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
@@ -98,18 +98,18 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	private Button tagBtn;
 	private Button rateBtn;
 	
-	private UserService user;
+	private UserClient user;
 	private UserData userData;
 	
 	// status
 	private boolean doingTag = false;
 	private boolean doingRate = false;
 	
-	private WebService webService;
+	private WebClient webService;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebService();
+        webService = new WebClient();
         releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
         barcode = getIntent().getStringExtra(INTENT_BARCODE);
