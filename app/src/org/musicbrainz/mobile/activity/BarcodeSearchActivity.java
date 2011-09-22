@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
-import org.musicbrainz.android.api.webservice.UserClient;
 import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
@@ -224,9 +223,10 @@ public class BarcodeSearchActivity extends SuperActivity implements
 		@Override
 		protected Boolean doInBackground(String... releaseMbid) {
 			
-			UserClient user = getUser();
 			try {
-				user.submitBarcode(releaseMbid[0], barcode);
+				webService.setCredentials(getUsername(), getPassword());
+				webService.setAppVersion(getVersion());
+				webService.submitBarcode(releaseMbid[0], barcode);
 			} catch (IOException e) {
 				return false;
 			}

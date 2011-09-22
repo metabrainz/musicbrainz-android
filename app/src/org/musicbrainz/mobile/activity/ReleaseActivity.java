@@ -32,7 +32,6 @@ import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
 import org.musicbrainz.android.api.webservice.MBEntity;
-import org.musicbrainz.android.api.webservice.UserClient;
 import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
@@ -97,8 +96,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 	// edit buttons
 	private Button tagBtn;
 	private Button rateBtn;
-	
-	private UserClient user;
+
 	private UserData userData;
 	
 	// status
@@ -292,8 +290,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 						data = webService.lookupReleaseFromBarcode(barcode);
 						releaseMbid = data.getMbid();
 						if (loggedIn) {
-							user = getUser();
-							userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+							webService.setCredentials(getUsername(), getPassword());
+							webService.setAppVersion(getVersion());
+							userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 						}
 						return LOADED;
 					} catch (BarcodeNotFoundException e) {
@@ -323,8 +322,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		private void doReleaseLookup() throws IOException, SAXException {
 			data = webService.lookupRelease(releaseMbid);
 			if (loggedIn) {
-				user = getUser();
-				userData = user.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+				webService.setCredentials(getUsername(), getPassword());
+				webService.setAppVersion(getVersion());
+				userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 			}
 		}
 		
@@ -426,8 +426,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		}
 
 		private void submitThenRefreshTags(Collection<String> processedTags) throws IOException, SAXException {
-			user = getUser();
-			user.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
+			webService.setCredentials(getUsername(), getPassword());
+			webService.setAppVersion(getVersion());
+			webService.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
 			data.setReleaseGroupTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
 		}
 		
@@ -467,8 +468,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		}
 
 		private void submitThenRefreshRating(Integer... rating) throws IOException, SAXException {
-			user = getUser();
-			user.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
+			webService.setCredentials(getUsername(), getPassword());
+			webService.setAppVersion(getVersion());
+			webService.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
 			float newRating = webService.lookupRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
 			data.setReleaseGroupRating(newRating);
 		}

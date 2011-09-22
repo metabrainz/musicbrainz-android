@@ -39,7 +39,7 @@ public class AboutActivity extends SuperActivity {
         setupActionBarWithHome();
 		
         TextView versionLabel = (TextView) findViewById(R.id.version_text);
-		versionLabel.setText(getText(R.string.version_text) + " " + getClientVersion());
+		versionLabel.setText(getText(R.string.version_text) + " " + getVersion());
     }
     
     public boolean onCreateOptionsMenu(Menu menu) {

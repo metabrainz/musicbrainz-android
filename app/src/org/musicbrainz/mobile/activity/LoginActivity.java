@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import java.io.IOException;
 
-import org.musicbrainz.android.api.webservice.UserClient;
+import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
@@ -105,12 +105,11 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
     	
 		protected Integer doInBackground(Void... v) {
 			
-			UserClient user = new UserClient(username, password, getClientVersion());
+			WebClient client = new WebClient(username, password, getVersion());
 			Boolean success = false;
 			try {
-				success = user.autenticateUserCredentials();
+				success = client.autenticateUserCredentials();
 			} catch (IOException e) {
-				// connection failure
 				e.printStackTrace();
 				return ERROR;
 			}

@@ -51,7 +51,7 @@ import org.apache.http.protocol.HttpContext;
  * Configures the static http client.
  * Gzip code is based on BetterHttp in droid-fu.
  */
-public class HttpClientFactory {
+public class HttpClient {
 	
 	private static final String USER_AGENT = "MBAndroid/1.0";
 	private static final int TIMEOUT = 20000;
@@ -59,7 +59,7 @@ public class HttpClientFactory {
 
 	private static DefaultHttpClient client;
 	
-    public static AbstractHttpClient getHttpClient() {
+    public static AbstractHttpClient getClient() {
         return client;
     }
 
@@ -89,6 +89,10 @@ public class HttpClientFactory {
 		return schemeRegistry;
 	}
 	
+	public static void clearCredentials() {
+		client.getCredentialsProvider().clear();
+	}
+	
     private static void enableGzipEncoding() {
         client.addRequestInterceptor(new GzipHttpRequestInterceptor());
         client.addResponseInterceptor(new GzipHttpResponseInterceptor());
@@ -115,16 +119,16 @@ public class HttpClientFactory {
 		private void inflateGzip(final HttpResponse response, final Header encoding) {
 			for (HeaderElement element : encoding.getElements()) {
 			    if (element.getName().equalsIgnoreCase("gzip")) {
-			        response.setEntity(new GZIPInflatingEntity(response.getEntity()));
+			        response.setEntity(new GzipInflatingEntity(response.getEntity()));
 			        break;
 			    }
 			}
 		}
     }
 
-    private static class GZIPInflatingEntity extends HttpEntityWrapper {
+    private static class GzipInflatingEntity extends HttpEntityWrapper {
     	
-        public GZIPInflatingEntity(final HttpEntity wrapped) {
+        public GzipInflatingEntity(final HttpEntity wrapped) {
             super(wrapped);
         }
 

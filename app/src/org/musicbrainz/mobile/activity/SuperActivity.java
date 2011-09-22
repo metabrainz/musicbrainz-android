@@ -20,7 +20,6 @@
 
 package org.musicbrainz.mobile.activity;
 
-import org.musicbrainz.android.api.webservice.UserClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
@@ -59,26 +58,25 @@ public abstract class SuperActivity extends Activity {
 		}
 	}
 	
-	protected String getUsername() {
-		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-		return prefs.getString("username", null); 
-	}
-	
 	protected boolean shouldProvideSearchSuggestions() {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		return prefs.getBoolean("search_suggestions", true);
 	}
 
-	protected UserClient getUser() {
+	protected String getUsername() {
 		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-		String username = prefs.getString("username", null);
-		String obscuredPassword = prefs.getString("password", null);
-		String password = SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
-		return new UserClient(username, password, getClientVersion());
+		return prefs.getString("username", null);
 	}
 	
-	public String getClientVersion() {
-		String version = "Unknown";
+	protected String getPassword() {
+		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+		String obscuredPassword = prefs.getString("password", null);
+		String password = SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
+		return password;
+	}
+	
+	public String getVersion() {
+		String version = "unknown";
 		try {
 			 version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 		} catch (NameNotFoundException e) {

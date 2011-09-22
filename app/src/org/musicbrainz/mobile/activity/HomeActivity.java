@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
+import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
 import org.musicbrainz.mobile.util.Config;
@@ -176,6 +177,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 		Editor spe = prefs.edit();
 		spe.clear();
 		spe.commit();
+		HttpClient.clearCredentials();
 		loggedIn = false;
 	}
 

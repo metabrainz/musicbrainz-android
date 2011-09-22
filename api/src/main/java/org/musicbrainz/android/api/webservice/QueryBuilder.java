@@ -47,6 +47,7 @@ public class QueryBuilder {
 	
 	// MBID for Various Artists always exists.
 	private static final String AUTH_TEST = "artist/89ad4ac3-39f7-470e-963a-56509c546377?inc=user-tags";
+	private static final String CLIENT = "?client=musicbrainz.android-";
 	
 	private static final String USER_PARAMS = "?inc=user-tags+user-ratings";
 	private static final String TAG = "tag";
@@ -102,15 +103,15 @@ public class QueryBuilder {
 	}
 	
 	public static String tagSubmission(String clientId) {
-		return new String(WEB_SERVICE + TAG + clientId);
+		return new String(WEB_SERVICE + TAG + CLIENT + clientId);
 	}
 	
 	public static String ratingSubmission(String clientId) {
-		return new String(WEB_SERVICE + RATING + clientId);
+		return new String(WEB_SERVICE + RATING + CLIENT + clientId);
 	}
 	
 	public static String barcodeSubmission(String clientId) {
-		return new String(WEB_SERVICE + BARCODE + clientId);
+		return new String(WEB_SERVICE + BARCODE + CLIENT + clientId);
 	}
 	
 }

@@ -27,7 +27,6 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.MBEntity;
-import org.musicbrainz.android.api.webservice.UserClient;
 import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
@@ -82,7 +81,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 	private Button tagBtn;
 	private Button rateBtn;
 	
-	private UserClient user;
 	private UserData userData;
 	
 	// status
@@ -229,8 +227,9 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			try {
 				data = webService.lookupArtist(mbid);
 				if (loggedIn) {
-					user = getUser();
-					userData = user.getUserData(MBEntity.ARTIST, data.getMbid());
+					webService.setCredentials(getUsername(), getPassword());
+					webService.setAppVersion(getVersion());
+					userData = webService.getUserData(MBEntity.ARTIST, data.getMbid());
 				}
 				return true;
 			} catch (IOException e) {
@@ -294,9 +293,10 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			
 			Collection<String> processedTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags[0]);
 			
-			user = getUser();
 			try {
-				user.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
+				webService.setCredentials(getUsername(), getPassword());
+				webService.setAppVersion(getVersion());
+				webService.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
 				data.setTags(webService.lookupTags(MBEntity.ARTIST, data.getMbid()));
 			} catch (IOException e) {
 				return false;
@@ -334,9 +334,10 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
 		protected Boolean doInBackground(Integer... rating) {
 			
-			user = getUser();
 			try {
-				user.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
+				webService.setCredentials(getUsername(), getPassword());
+				webService.setAppVersion(getVersion());
+				webService.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
 				float newRating = webService.lookupRating(MBEntity.ARTIST, data.getMbid());
 				data.setRating(newRating);
 			} catch (IOException e) {
