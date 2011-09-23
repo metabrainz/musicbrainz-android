@@ -13,17 +13,15 @@ import org.musicbrainz.android.api.webservice.ResponseParser;
 public class ArtistSearchTest extends BaseXmlParsingTestCase {
 
 	@Test
-	public void testArtistSearch() {
+	public void testArtistSearch() throws IOException {
+		
 		InputStream stream = getFileStream("artistSearch_owen.xml");
 		assertNotNull(stream);
 		
-		try {
-			LinkedList<ArtistStub> artists = new ResponseParser().parseArtistSearch(stream);
-			assertEquals(25, artists.size());
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail();
-		}
+		LinkedList<ArtistStub> artists = new ResponseParser().parseArtistSearch(stream);
+		assertEquals(25, artists.size());
+		
+		stream.close();
 	}
 
 }

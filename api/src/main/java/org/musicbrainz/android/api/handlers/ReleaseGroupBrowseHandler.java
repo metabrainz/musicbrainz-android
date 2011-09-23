@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class ReleaseGroupBrowseHandler extends DefaultHandler {
+public class ReleaseGroupBrowseHandler extends MBHandler {
 
 	private ArrayList<ReleaseGroupStub> results = new ArrayList<ReleaseGroupStub>();
 	private ReleaseGroupStub stub;
-    private StringBuilder sb;
     
     private int total = 0;
 	
@@ -54,15 +52,6 @@ public class ReleaseGroupBrowseHandler extends DefaultHandler {
 			stub.setTitle(sb.toString());
 		} else if (localName.equalsIgnoreCase("first-release-date")) {
 			stub.setFirstRelease(sb.toString());
-		}
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
 		}
 	}
 	

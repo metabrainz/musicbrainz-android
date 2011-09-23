@@ -31,7 +31,7 @@ import org.musicbrainz.android.api.util.StringFormat;
  */
 public class Release {
 	
-	private String releaseMbid;
+	private String mbid;
 	private String releaseGroupMbid;
 	private String barcode;
 	private ArrayList<ReleaseArtist> artists;
@@ -55,11 +55,11 @@ public class Release {
 	}
 	
 	public String getMbid() {
-		return releaseMbid;
+		return mbid;
 	}
 
 	public void setReleaseMbid(String releaseMbid) {
-		this.releaseMbid = releaseMbid;
+		this.mbid = releaseMbid;
 	}
 	
 	public String getReleaseGroupMbid() {

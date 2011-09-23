@@ -25,13 +25,11 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class ReleaseStubHandler extends DefaultHandler {
+public class ReleaseStubHandler extends MBHandler {
 	
 	private LinkedList<ReleaseStub> results = new LinkedList<ReleaseStub>();
 	private ReleaseStub stub;
-	private StringBuilder sb;
 
 	private boolean artist = false;
 	private boolean label = false;
@@ -89,15 +87,6 @@ public class ReleaseStubHandler extends DefaultHandler {
 			label = false;
 		} else if (localName.equals("format")) {
 			stub.addFormat(sb.toString());
-		}
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
 		}
 	}
 	

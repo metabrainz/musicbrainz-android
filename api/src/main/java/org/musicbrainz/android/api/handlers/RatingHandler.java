@@ -22,12 +22,10 @@ package org.musicbrainz.android.api.handlers;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class RatingHandler extends DefaultHandler {
+public class RatingHandler extends MBHandler {
 	
 	private float rating = 0;
-	private StringBuilder sb;
 	
 	public float getRating() {
 		return rating;
@@ -48,15 +46,6 @@ public class RatingHandler extends DefaultHandler {
 			float value = Float.parseFloat(sb.toString());
 			rating = value;
 		} 
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
-		}
 	}
 
 }

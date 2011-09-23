@@ -166,13 +166,6 @@ public class WebClient {
 		return rating;
 	}
 	
-	protected HttpEntity get(String url) throws IOException {
-		HttpGet get = new HttpGet(url);
-		get.setHeader("Accept", "application/xml");
-		HttpResponse response = httpClient.execute(get);
-		return response.getEntity();
-	}
-	
 	public boolean autenticateUserCredentials() throws IOException {
 		HttpGet authenticationTest = new HttpGet(QueryBuilder.authenticationCheck());
 		authenticationTest.setHeader("Accept", "application/xml");
@@ -210,11 +203,19 @@ public class WebClient {
 		post(url, content);
 	}
 	
+	private HttpEntity get(String url) throws IOException {
+		HttpGet get = new HttpGet(url);
+		get.setHeader("Accept", "application/xml");
+		HttpResponse response = httpClient.execute(get);
+		return response.getEntity();
+	}
+	
 	private void post(String url, String content) throws IOException {
 		HttpPost post = new HttpPost(url);
 		post.addHeader("Content-Type", "application/xml; charset=UTF-8");
 		StringEntity xml = new StringEntity(content, "UTF-8");
 		post.setEntity(xml);
+		
 		HttpResponse response = httpClient.execute(post);
 		if (response != null) {
 			response.getEntity().consumeContent();

@@ -22,9 +22,8 @@ package org.musicbrainz.android.api.handlers;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class BarcodeSearchHandler extends DefaultHandler {
+public class BarcodeSearchHandler extends MBHandler {
 	
 	private String mbid;
     

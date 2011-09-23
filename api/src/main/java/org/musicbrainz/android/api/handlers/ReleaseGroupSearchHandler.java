@@ -26,14 +26,12 @@ import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class ReleaseGroupSearchHandler extends DefaultHandler {
+public class ReleaseGroupSearchHandler extends MBHandler {
 	
 	private LinkedList<ReleaseGroupStub> stubs = new LinkedList<ReleaseGroupStub>();
 	private ReleaseGroupStub rg;
 	private ReleaseArtist releaseArtist;
-	private StringBuilder sb;
 
 	private boolean artist = false;
 	
@@ -80,15 +78,6 @@ public class ReleaseGroupSearchHandler extends DefaultHandler {
 				releaseArtist.setName(sb.toString());
 				rg.addArtist(releaseArtist);
 			}
-		}
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
 		}
 	}
 	

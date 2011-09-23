@@ -25,12 +25,10 @@ import java.util.LinkedList;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class TagHandler extends DefaultHandler {
+public class TagHandler extends MBHandler {
 	
 	private Collection<String> tags = new LinkedList<String>();
-	private StringBuilder sb;
 	
 	public Collection<String> getTags() {
 		return tags;
@@ -50,15 +48,6 @@ public class TagHandler extends DefaultHandler {
 		if (localName.equals("tag")) {
 			tags.add(sb.toString());
 		} 
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
-		}
 	}
 
 }

@@ -23,12 +23,10 @@ package org.musicbrainz.android.api.handlers;
 import org.musicbrainz.android.api.data.UserData;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class UserDataHandler extends DefaultHandler {
+public class UserDataHandler extends MBHandler {
 	
 	private UserData data = new UserData();
-	private StringBuilder sb;
 	
 	public UserData getResult() {
 		return data;
@@ -55,13 +53,4 @@ public class UserDataHandler extends DefaultHandler {
 		} 
 	}
 	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
-		}
-	}
-
 }

@@ -13,17 +13,15 @@ import org.musicbrainz.android.api.webservice.ResponseParser;
 public class ReleaseGroupReleaseBrowseTest extends BaseXmlParsingTestCase {
 
 	@Test
-	public void testReleaseGroupReleases() {
+	public void testReleaseGroupReleases() throws IOException {
+		
 		InputStream stream = getFileStream("releaseGroupReleaseBrowse_dca03435-8adb-30a5-ba82-5a162267ff38.xml");
 		assertNotNull(stream);
 		
-		try {
-			LinkedList<ReleaseStub> releases = new ResponseParser().parseReleaseGroupReleases(stream);
-			assertEquals(14, releases.size());
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail();
-		}
+		LinkedList<ReleaseStub> releases = new ResponseParser().parseReleaseGroupReleases(stream);
+		assertEquals(14, releases.size());
+
+		stream.close();
 	}
 
 }

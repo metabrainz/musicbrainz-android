@@ -25,9 +25,8 @@ import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.RecordingStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class ReleaseLookupHandler extends DefaultHandler {
+public class ReleaseLookupHandler extends MBHandler {
 	
     private boolean inArtist = false;
     private boolean inLabel = false;
@@ -39,7 +38,6 @@ public class ReleaseLookupHandler extends DefaultHandler {
     private Release release = new Release();
     private ReleaseArtist releaseArtist;
     private RecordingStub track;
-    private StringBuilder sb;
     
     public Release getResult() {
     	return release;
@@ -146,15 +144,6 @@ public class ReleaseLookupHandler extends DefaultHandler {
 				float rating = Float.parseFloat(sb.toString());
 				release.setReleaseGroupRating(rating);
 			}
-		}
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i = start; i < start + length; i++) {
-	            sb.append(ch[i]);
-	        }
 		}
 	}
     

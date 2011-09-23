@@ -24,9 +24,8 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.WebLink;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class ArtistLookupHandler extends DefaultHandler {
+public class ArtistLookupHandler extends MBHandler {
 
     private boolean inTag = false;
     private boolean inUrlRelations = false;
@@ -36,7 +35,6 @@ public class ArtistLookupHandler extends DefaultHandler {
     
     private Artist artist = new Artist();
     private WebLink link;
-    private StringBuilder sb;
     
     public Artist getResult() {
     	return artist;
@@ -141,15 +139,6 @@ public class ArtistLookupHandler extends DefaultHandler {
 			inUrlRelations = false;
 			inArtistRelations = false;
 			inLabelRelations = false;
-		}
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i = start; i < start + length; i++) {
-	            sb.append(ch[i]);
-	        }
 		}
 	}
 

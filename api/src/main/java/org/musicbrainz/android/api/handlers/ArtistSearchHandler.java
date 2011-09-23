@@ -26,14 +26,11 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-public class ArtistSearchHandler extends DefaultHandler {
+public class ArtistSearchHandler extends MBHandler {
 	
 	private LinkedList<ArtistStub> results = new LinkedList<ArtistStub>();
-	
 	private ArtistStub stub;
-	private StringBuilder sb;
 	
 	private boolean tag = false;
 	
@@ -79,15 +76,6 @@ public class ArtistSearchHandler extends DefaultHandler {
 			stub.setDisambiguation(sb.toString());
 		} else if (localName.equals("tag")) {
 			tag = false;
-		}
-	}
-	
-	public void characters(char ch[], int start, int length) {
-		
-		if (sb != null) {
-			for (int i=start; i<start+length; i++) {
-	            sb.append(ch[i]);
-	        }
 		}
 	}
 
