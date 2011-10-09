@@ -34,6 +34,7 @@ public class Release {
 	private String mbid;
 	private String releaseGroupMbid;
 	private String barcode;
+	private String asin;
 	private ArrayList<ReleaseArtist> artists;
 	
 	private String title;
@@ -78,7 +79,15 @@ public class Release {
 		this.barcode = barcode;
 	}
 	
-	public ArrayList<ReleaseArtist> getArtists() {
+	public String getAsin() {
+        return asin;
+    }
+
+    public void setAsin(String asin) {
+        this.asin = asin;
+    }
+
+    public ArrayList<ReleaseArtist> getArtists() {
 		return artists;
 	}
 	

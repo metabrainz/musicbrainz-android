@@ -55,6 +55,8 @@ public class ReleaseLookupHandler extends MBHandler {
 			sb = new StringBuilder();
 		} else if (localName.equalsIgnoreCase("barcode")) {
 			sb = new StringBuilder();
+		} else if (localName.equalsIgnoreCase("asin")) {
+		    sb = new StringBuilder();
 		} else if (localName.equalsIgnoreCase("artist")) {
 			inArtist = true;
 			releaseArtist = new ReleaseArtist();
@@ -105,6 +107,8 @@ public class ReleaseLookupHandler extends MBHandler {
 			release.setStatus(sb.toString());
 		} else if (localName.equalsIgnoreCase("barcode")) {
 			release.setBarcode(sb.toString());
+		} else if (localName.equalsIgnoreCase("asin")) {
+		    release.setAsin(sb.toString());
 		} else if (localName.equalsIgnoreCase("artist")) {
 			inArtist = false;
 		} else if (localName.equalsIgnoreCase("name")) {

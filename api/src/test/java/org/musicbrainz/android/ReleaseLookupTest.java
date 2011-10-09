@@ -26,6 +26,7 @@ public class ReleaseLookupTest extends BaseXmlParsingTestCase {
 		assertEquals("Official", release.getStatus());
 		assertEquals("2004-08-02", release.getDate());
 		assertEquals("The Dillinger Escape Plan", release.getArtists().get(0).getName());
+		assertEquals("B00029J24Y", release.getAsin());
 			
 		assertEquals(0, release.getReleaseGroupTagList().size());
 		assertEquals(4.5, release.getReleaseGroupRating(), 0.01);
