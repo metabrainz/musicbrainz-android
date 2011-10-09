@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.formatting.StringFormat;
 import org.musicbrainz.mobile.formatting.StringMapper;
 
 import android.app.Activity;
@@ -37,68 +38,68 @@ import android.widget.TextView;
  * List adapter for release group search results.
  */
 public class SearchReleaseGroupAdapter extends ArrayAdapter<ReleaseGroupStub> {
-	
-	private Activity context;
-	private List<ReleaseGroupStub> resultData;
 
-	public SearchReleaseGroupAdapter(Activity context, List<ReleaseGroupStub> resultData) {
-		super(context, R.layout.list_srch_rg, resultData);
-		this.context = context;
-		this.resultData = resultData;
-	}
-	
-	public View getView(int position, View convertView, ViewGroup parent) {
-		
-		View release = convertView;
-		SearchReleaseGroupHolder holder = null;
-		
-		if (release == null) {
-			LayoutInflater inflater = context.getLayoutInflater();
-			release = inflater.inflate(R.layout.list_srch_rg, parent, false);
-			holder = new SearchReleaseGroupHolder(release);
-			release.setTag(holder);
-		} else {
-			holder = (SearchReleaseGroupHolder) release.getTag();
-		}
-		
-		ReleaseGroupStub releaseGroup = resultData.get(position);
-		holder.getTitle().setText(releaseGroup.getTitle());
-		holder.getArtist().setText(releaseGroup.getFormattedArtist());	
-		holder.getType().setText(StringMapper.formatRGTypeString(getContext(), releaseGroup.getType()));
-		return release;
-	}
+    private Activity context;
+    private List<ReleaseGroupStub> resultData;
 
-	private class SearchReleaseGroupHolder {
-		
-		View base;
-		TextView title = null;
-		TextView artist = null;
-		TextView type = null;
-		
-		SearchReleaseGroupHolder(View base) {
-			this.base = base;
-		}
-		
-		TextView getTitle() {
-			if (title == null) {
-				title = (TextView) base.findViewById(R.id.search_release);
-			}
-			return title;
-		}
-		
-		TextView getArtist() {
-			if (artist == null) {
-				artist = (TextView) base.findViewById(R.id.search_release_artist);
-			}
-			return artist;
-		}
-		
-		TextView getType() {
-			if (type == null) {
-				type = (TextView) base.findViewById(R.id.search_release_type);
-			}
-			return type;
-		}
-	}
-	
+    public SearchReleaseGroupAdapter(Activity context, List<ReleaseGroupStub> resultData) {
+        super(context, R.layout.list_srch_rg, resultData);
+        this.context = context;
+        this.resultData = resultData;
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        View release = convertView;
+        SearchReleaseGroupHolder holder = null;
+
+        if (release == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            release = inflater.inflate(R.layout.list_srch_rg, parent, false);
+            holder = new SearchReleaseGroupHolder(release);
+            release.setTag(holder);
+        } else {
+            holder = (SearchReleaseGroupHolder) release.getTag();
+        }
+
+        ReleaseGroupStub releaseGroup = resultData.get(position);
+        holder.getTitle().setText(releaseGroup.getTitle());
+        holder.getArtist().setText(StringFormat.commaSeparateArtists(releaseGroup.getArtists()));
+        holder.getType().setText(StringMapper.mapRGTypeString(getContext(), releaseGroup.getType()));
+        return release;
+    }
+
+    private class SearchReleaseGroupHolder {
+
+        View base;
+        TextView title = null;
+        TextView artist = null;
+        TextView type = null;
+
+        SearchReleaseGroupHolder(View base) {
+            this.base = base;
+        }
+
+        TextView getTitle() {
+            if (title == null) {
+                title = (TextView) base.findViewById(R.id.search_release);
+            }
+            return title;
+        }
+
+        TextView getArtist() {
+            if (artist == null) {
+                artist = (TextView) base.findViewById(R.id.search_release_artist);
+            }
+            return artist;
+        }
+
+        TextView getType() {
+            if (type == null) {
+                type = (TextView) base.findViewById(R.id.search_release_type);
+            }
+            return type;
+        }
+    }
+
 }

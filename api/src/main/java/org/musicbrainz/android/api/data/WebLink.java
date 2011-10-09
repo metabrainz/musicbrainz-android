@@ -34,21 +34,24 @@ public class WebLink implements Comparable<Object> {
 		return target;
 	}
 	
-	public String getFormattedLink() {
+	public String getPrettyUrl() {
 		// Remove "http://"
-		String formattedLink = target.substring(7);
-		
-		if (formattedLink.endsWith("/"))
-			formattedLink = formattedLink.substring(0, formattedLink.length()-1);
-		
-		return formattedLink;
+		String prettyUrl = target.substring(7);
+		if (prettyUrl.endsWith("/")) {
+			prettyUrl = prettyUrl.substring(0, prettyUrl.length()-1);
+		}
+		return prettyUrl;
 	}
 
 	public void setUrl(String url) {
 		this.target = url;
 	}
+	
+	public String getType() {
+	    return type;
+	}
 
-	public String getFormattedType() {
+	public String getPrettyType() {
 		type = type.replace('_', ' ');
 		return StringFormat.initialCaps(type);
 	}
@@ -59,7 +62,7 @@ public class WebLink implements Comparable<Object> {
 
 	public int compareTo(Object another) {
 		WebLink comp = (WebLink) another;
-		return this.getFormattedType().compareTo(comp.getFormattedType());
-	}
+        return this.getPrettyType().compareTo(comp.getPrettyType());
+    }
 
 }

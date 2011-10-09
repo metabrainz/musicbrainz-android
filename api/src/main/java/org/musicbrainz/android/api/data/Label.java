@@ -21,7 +21,8 @@
 package org.musicbrainz.android.api.data;
 
 /**
- * Record label data.
+ * Record label data. 
+ * TODO Parse labels.
  */
 public class Label {
 

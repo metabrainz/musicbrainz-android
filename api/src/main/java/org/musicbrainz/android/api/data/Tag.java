@@ -21,24 +21,28 @@
 package org.musicbrainz.android.api.data;
 
 /**
- * Tag name and count pair. Count can be used for weighting.
+ * Tag name and count pair. Count can be used for weighting. TODO Modify
+ * entities to use weighted tags.
  */
 public class Tag {
 
-	private String name;
-	private String count;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCount() {
-		return count;
-	}
-	public void setCount(String count) {
-		this.count = count;
-	}
-	
+    private String name;
+    private String count;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
 }

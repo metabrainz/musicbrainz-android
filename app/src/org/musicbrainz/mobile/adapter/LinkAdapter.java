@@ -61,8 +61,8 @@ public class LinkAdapter extends ArrayAdapter<WebLink> {
 		}
 		
 		WebLink linkData = links.get(position);
-		holder.getLinkTitle().setText(linkData.getFormattedType());
-		holder.getLink().setText(linkData.getFormattedLink());
+		holder.getLinkTitle().setText(linkData.getPrettyType());
+		holder.getLink().setText(linkData.getPrettyUrl());
 		return link;
 	}
 	

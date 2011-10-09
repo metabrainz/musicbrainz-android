@@ -24,62 +24,50 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import org.musicbrainz.android.api.util.StringFormat;
-
-/**
- * Full release data.
- */
 public class Release {
-	
-	private String mbid;
-	private String releaseGroupMbid;
-	private String barcode;
-	private String asin;
-	private ArrayList<ReleaseArtist> artists;
-	
-	private String title;
-	private String status;
-	private String date;
-	
-	private float releaseGroupRating;
-	private int releaseGroupRatingCount;
-	private Collection<String> releaseGroupTags;
-	
-	private Collection<String> labels;
-	private ArrayList<RecordingStub> tracks;
-	
-	public Release() {
-		artists = new ArrayList<ReleaseArtist>();
-		labels = new LinkedList<String>();
-		releaseGroupTags = new LinkedList<String>();
-		tracks = new ArrayList<RecordingStub>();
-	}
-	
-	public String getMbid() {
-		return mbid;
-	}
 
-	public void setReleaseMbid(String releaseMbid) {
-		this.mbid = releaseMbid;
-	}
-	
-	public String getReleaseGroupMbid() {
-		return releaseGroupMbid;
-	}
-	
-	public void setReleaseGroupMbid(String releaseGroupMbid) {
-		this.releaseGroupMbid = releaseGroupMbid;
-	}
-	
-	public String getBarcode() {
-		return barcode;
-	}
-	
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
-	}
-	
-	public String getAsin() {
+    private String mbid;
+    private String releaseGroupMbid;
+    private String barcode;
+    private String asin;
+    private ArrayList<ReleaseArtist> artists = new ArrayList<ReleaseArtist>();
+
+    private String title;
+    private String status;
+    private String date;
+
+    private float releaseGroupRating;
+    private int releaseGroupRatingCount;
+    private Collection<String> releaseGroupTags = new LinkedList<String>();
+
+    private Collection<String> labels = new LinkedList<String>();
+    private ArrayList<RecordingStub> tracks = new ArrayList<RecordingStub>();
+
+    public String getMbid() {
+        return mbid;
+    }
+
+    public void setReleaseMbid(String releaseMbid) {
+        this.mbid = releaseMbid;
+    }
+
+    public String getReleaseGroupMbid() {
+        return releaseGroupMbid;
+    }
+
+    public void setReleaseGroupMbid(String releaseGroupMbid) {
+        this.releaseGroupMbid = releaseGroupMbid;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getAsin() {
         return asin;
     }
 
@@ -88,103 +76,87 @@ public class Release {
     }
 
     public ArrayList<ReleaseArtist> getArtists() {
-		return artists;
-	}
-	
-	public void addArtist(ReleaseArtist artist) {
-		artists.add(artist);
-	}
-	
-	public String getFormattedArtist() {
-		String formatted = "";
-		for (ReleaseArtist artist : artists) {
-			formatted += artist.getName() + ", ";
-		}
-		return formatted.substring(0, formatted.length()-2);
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public String getStatus() {
-		return status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	public String getDate() {
-		return date;
-	}
-	
-	public void setDate(String date) {
-		this.date = date;
-	}
-	
-	public float getReleaseGroupRating() {
-		return releaseGroupRating;
-	}
-	
-	public void setReleaseGroupRating(float releaseGroupRating) {
-		this.releaseGroupRating = releaseGroupRating;
-	}
-	
-	public int getReleaseGroupRatingCount() {
-		return releaseGroupRatingCount;
-	}
-	
-	public void setReleaseGroupRatingCount(int releaseGroupRatingCount) {
-		this.releaseGroupRatingCount = releaseGroupRatingCount;
-	}
-	
-	public Collection<String> getReleaseGroupTagList() {
-		return releaseGroupTags;
-	}
-	
-	public String getReleaseGroupTags() {
-		return StringFormat.commaSeparate(releaseGroupTags);
-	}
-	
-	public void setReleaseGroupTags(Collection<String> tags) {
-		this.releaseGroupTags = tags;
-	}
-	
-	public void addReleaseGroupTag(String tag) {
-		releaseGroupTags.add(tag);
-	}
-	
-	public Collection<String> getLabels() {
-		return labels;
-	}
-	
-	public String getFormattedLabels() {
-		return StringFormat.commaSeparate(labels);
-	}
-	
-	public void setLabels(LinkedList<String> labels) {
-		this.labels = labels;
-	}
-	
-	public void addLabel(String label) {
-		labels.add(label);
-	}
-	
-	public ArrayList<RecordingStub> getTrackList() {
-		return tracks;
-	}
-	
-	public void setTrackList(ArrayList<RecordingStub> trackList) {
-		this.tracks = trackList;
-	}
-	
-	public void addTrack(RecordingStub track) {
-		tracks.add(track);
-	}
+        return artists;
+    }
+
+    public void addArtist(ReleaseArtist artist) {
+        artists.add(artist);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public float getReleaseGroupRating() {
+        return releaseGroupRating;
+    }
+
+    public void setReleaseGroupRating(float releaseGroupRating) {
+        this.releaseGroupRating = releaseGroupRating;
+    }
+
+    public int getReleaseGroupRatingCount() {
+        return releaseGroupRatingCount;
+    }
+
+    public void setReleaseGroupRatingCount(int releaseGroupRatingCount) {
+        this.releaseGroupRatingCount = releaseGroupRatingCount;
+    }
+
+    public Collection<String> getReleaseGroupTags() {
+        return releaseGroupTags;
+    }
+
+    public void setReleaseGroupTags(Collection<String> tags) {
+        this.releaseGroupTags = tags;
+    }
+
+    public void addReleaseGroupTag(String tag) {
+        releaseGroupTags.add(tag);
+    }
+
+    public Collection<String> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(LinkedList<String> labels) {
+        this.labels = labels;
+    }
+
+    public void addLabel(String label) {
+        labels.add(label);
+    }
+
+    public ArrayList<RecordingStub> getTrackList() {
+        return tracks;
+    }
+
+    public void setTrackList(ArrayList<RecordingStub> trackList) {
+        this.tracks = trackList;
+    }
+
+    public void addTrack(RecordingStub track) {
+        tracks.add(track);
+    }
 
 }

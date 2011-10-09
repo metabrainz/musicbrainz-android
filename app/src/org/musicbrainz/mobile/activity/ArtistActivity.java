@@ -32,6 +32,7 @@ import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.LinkAdapter;
+import org.musicbrainz.mobile.formatting.StringFormat;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
@@ -112,7 +113,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		
 		artist.setText(data.getName());
 		rating.setRating(data.getRating());
-		tags.setText(data.getTags());
+		tags.setText(StringFormat.commaSeparate(data.getTags()));
 		
 		ListView releaseList = (ListView) findViewById(R.id.artist_releases);
 		releaseList.setOnItemClickListener(this);
@@ -136,7 +137,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		rateBtn.setOnClickListener(this);
 		
 		// display messages for no tags, no releases or no links
-		if (data.getTags() == "")
+		if (data.getTags().isEmpty())
 			tags.setText(getText(R.string.no_tags));
 		
 		if (data.getReleases().isEmpty()) {
@@ -243,7 +244,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 			if (success) {
 				populate();
 				if (loggedIn) {
-					tagInput.setText(userData.getTagString());
+					tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
 					ratingInput.setRating(userData.getRating());
 				}
 			} else {
@@ -306,7 +307,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 		
 		protected void onPostExecute(Boolean success) {
 			
-			tags.setText(data.getTags());
+			tags.setText(StringFormat.commaSeparate(data.getTags()));
 			
 			doingTag = false;
 			updateProgress();

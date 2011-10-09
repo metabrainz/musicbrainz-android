@@ -25,33 +25,33 @@ package org.musicbrainz.android.api.data;
  * results.
  */
 public class ArtistStub {
-	
-	private String mbid;
-	private String name;
-	private String disambiguation;
 
-	public String getMbid() {
-		return mbid;
-	}
+    private String mbid;
+    private String name;
+    private String disambiguation;
 
-	public void setMbid(String mbid) {
-		this.mbid = mbid;
-	}
-	
-	public String getName() {
-		return name;
-	}
+    public String getMbid() {
+        return mbid;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setMbid(String mbid) {
+        this.mbid = mbid;
+    }
 
-	public String getDisambiguation() {
-		return disambiguation;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDisambiguation(String disambiguation) {
-		this.disambiguation = disambiguation;
-	}
-	
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDisambiguation() {
+        return disambiguation;
+    }
+
+    public void setDisambiguation(String disambiguation) {
+        this.disambiguation = disambiguation;
+    }
+
 }

@@ -27,7 +27,7 @@ public class ArtistLookupTest extends BaseXmlParsingTestCase {
 		assertEquals("1957", artist.getStart());
 		assertEquals("1970-04-10", artist.getEnd());
 			
-		assertEquals(34, artist.getTagList().size());
+		assertEquals(34, artist.getTags().size());
 		assertEquals(4.7f, artist.getRating(), 0.01);
 		assertEquals(57, artist.getRatingCount());
 		

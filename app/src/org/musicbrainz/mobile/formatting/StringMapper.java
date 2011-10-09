@@ -35,7 +35,7 @@ import android.content.res.Resources;
  */
 public class StringMapper {
 	
-	public static String formatRGTypeString(Context c, String type) {
+	public static String mapRGTypeString(Context c, String type) {
 
 		Resources res = c.getResources();
 		if (type.equalsIgnoreCase("album"))

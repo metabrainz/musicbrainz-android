@@ -21,74 +21,28 @@
 package org.musicbrainz.mobile.formatting;
 
 import java.util.Collection;
-import java.util.StringTokenizer;
 
-/**
- * Static methods for String formatting.
- */
+import org.musicbrainz.android.api.data.ReleaseArtist;
+
 public class StringFormat {
 
-	/**
-	 * Takes a Collection of strings and formats them comma separated as
-	 * "st1, st2, st3".
-	 */
-	public static String commaSeparate(Collection<String> collection) {
-		
-		StringBuilder sb = new StringBuilder();
-		
-		if (collection.isEmpty())
-			return sb.toString();
-		
-		for (String item : collection) 
-			sb.append(item + ", ");
-		
-		return sb.substring(0, sb.length() - 2);
-	}
-	
-	/**
-	 * Takes a string and returns the string with initial capitals.
-	 */
-	public static String initialCaps(String text) {
+    public static String commaSeparate(Collection<String> collection) {
+        StringBuilder sb = new StringBuilder();
+        if (collection.isEmpty()) {
+            return sb.toString();
+        }
+        for (String item : collection) {
+            sb.append(item + ", ");
+        }
+        return sb.substring(0, sb.length() - 2);
+    }
+    
+    public static String commaSeparateArtists(Collection<ReleaseArtist> artists) {
+        StringBuilder sb = new StringBuilder();
+        for (ReleaseArtist artist : artists) {
+            sb.append(artist.getName() + ", ");
+        }
+        return sb.substring(0, sb.length() - 2);
+    }
 
-		StringTokenizer tokenizer = new StringTokenizer(text, " ", true);
-		StringBuilder sb = new StringBuilder();
-
-		while (tokenizer.hasMoreTokens()) {
-			String token = tokenizer.nextToken();
-			token = String.format("%s%s", Character
-					.toUpperCase(token.charAt(0)), token.substring(1));
-			sb.append(token);
-		}
-
-		return sb.toString();
-	}
-	
-	/**
-	 * Takes a track duration in milliseconds and formats as a String for
-	 * display.
-	 */
-	public static String trackDuration(int duration) {
-		if (duration == 0) {
-			return "";
-		}
-		
-		int s = duration / 1000;
-		int secs = s % 60;
-		int mins = (s % 3600) / 60;
-		int hrs = s / 3600;
-		
-		String mS = "" + mins;
-		String sS = "" + secs;
-		if (secs < 10) 
-			sS = "0" + secs;
-		
-		if (hrs == 0) {
-			return mS + ':' + sS;
-		} else {
-			if (mins < 10) 
-				mS = "0" + mins;
-			return hrs + ":" + mS + ":" + sS;
-		}
-	}
-	
 }

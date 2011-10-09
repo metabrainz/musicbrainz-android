@@ -21,7 +21,7 @@
 package org.musicbrainz.android.api.data;
 
 /**
- * Full recording data.
+ * TODO Parse full recording data.
  */
 public class Recording {
 

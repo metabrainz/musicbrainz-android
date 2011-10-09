@@ -38,6 +38,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
+import org.musicbrainz.mobile.formatting.StringFormat;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.widget.FocusTextView;
 import org.xml.sax.SAXException;
@@ -152,10 +153,10 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
         	addActionBarArtist();
         }
         
-		artist.setText(data.getFormattedArtist());
+		artist.setText(StringFormat.commaSeparateArtists(data.getArtists()));
 		title.setText(data.getTitle());
 		
-		tags.setText(data.getReleaseGroupTags());
+		tags.setText(StringFormat.commaSeparate(data.getReleaseGroupTags()));
 		rating.setRating(data.getReleaseGroupRating());
 		
 		ListView trackList = (ListView) findViewById(R.id.release_tracks);
@@ -172,10 +173,10 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		rateBtn = (Button) findViewById(R.id.rate_btn);
 		rateBtn.setOnClickListener(this);
 		
-		labels.setText(data.getFormattedLabels());
+		labels.setText(StringFormat.commaSeparate(data.getLabels()));
 		releaseDate.setText(data.getDate());
 		
-		if (data.getReleaseGroupTags() == "") {
+		if (data.getReleaseGroupTags().isEmpty()) {
 			tags.setText(getText(R.string.no_tags));
 		}
 
@@ -348,7 +349,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		private void displayReleaseData() {
 			populate();
 			if (loggedIn) {
-				tagInput.setText(userData.getTagString());
+				tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
 				ratingInput.setRating(userData.getRating());
 			}
 		}
@@ -434,7 +435,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 		
 		protected void onPostExecute(Boolean success) {
 			
-			tags.setText(data.getReleaseGroupTags());
+			tags.setText(StringFormat.commaSeparate(data.getReleaseGroupTags()));
 			doingTag = false;
 			updateProgressStatus();
 			tagBtn.setEnabled(true);

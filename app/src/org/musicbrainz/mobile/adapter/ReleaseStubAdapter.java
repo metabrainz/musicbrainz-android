@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.formatting.StringFormat;
 import org.musicbrainz.mobile.formatting.StringMapper;
 
 import android.app.Activity;
@@ -69,7 +70,7 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
 		holder.getTrackNum().setText(stub.getTracksNum() + " " + context.getString(R.string.label_tracks));
 		holder.getFormat().setText(StringMapper.buildReleaseFormatsString(getContext(), stub.getFormats()));
 		
-		holder.getLabels().setText(stub.getLabels());
+		holder.getLabels().setText(StringFormat.commaSeparate(stub.getLabels()));
 		holder.getCountry().setText(stub.getCountryCode());
 		holder.getDate().setText(stub.getDate());
 		return release;

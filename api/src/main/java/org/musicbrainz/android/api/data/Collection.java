@@ -21,7 +21,8 @@
 package org.musicbrainz.android.api.data;
 
 /**
- * User collection data.
+ * User collection data. 
+ * TODO Parse user collections.
  */
 public class Collection {
 

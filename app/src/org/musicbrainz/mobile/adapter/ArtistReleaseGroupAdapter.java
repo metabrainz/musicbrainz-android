@@ -64,7 +64,7 @@ public class ArtistReleaseGroupAdapter extends ArrayAdapter<ReleaseGroupStub> {
 		ReleaseGroupStub rData = releaseGroups.get(position);
 		holder.getReleaseTitle().setText(rData.getTitle());
 		holder.getReleaseYear().setText(rData.getReleaseYear());
-		holder.getReleaseType().setText(StringMapper.formatRGTypeString(getContext(), rData.getType()));
+		holder.getReleaseType().setText(StringMapper.mapRGTypeString(getContext(), rData.getType()));
 		return release;
 	}
 	

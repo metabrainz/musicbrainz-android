@@ -23,95 +23,84 @@ package org.musicbrainz.android.api.data;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import org.musicbrainz.android.api.util.StringFormat;
-
 /**
  * Partial release data to differentiate between similar releases (e.g. part of
  * the same release group).
  */
 public class ReleaseStub {
 
-	private String releaseMbid;
-	
-	private String title;
-	private String artistName;
-	private String date;
-	private int tracksNum;
-	private String countryCode;
-	private Collection<String> labels;
-	private Collection<String> formats;
-	
-	public ReleaseStub() {
-		labels = new LinkedList<String>();
-		formats = new LinkedList<String>();
-	}
-	
-	public String getReleaseMbid() {
-		return releaseMbid;
-	}
-	
-	public void setReleaseMbid(String releaseMbid) {
-		this.releaseMbid = releaseMbid;
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public String getArtistName() {
-		return artistName;
-	}
-	
-	public void setArtistName(String artist) {
-		this.artistName = artist;
-	}
-	
-	public String getDate() {
-		return date;
-	}
+    private String releaseMbid;
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    private String title;
+    private String artistName;
+    private String date;
+    private int tracksNum;
+    private String countryCode;
+    private Collection<String> labels = new LinkedList<String>();
+    private Collection<String> formats = new LinkedList<String>();
 
-	public String getCountryCode() {
-		return countryCode;
-	}
+    public String getReleaseMbid() {
+        return releaseMbid;
+    }
 
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
-	
-	public int getTracksNum() {
-		return tracksNum;
-	}
+    public void setReleaseMbid(String releaseMbid) {
+        this.releaseMbid = releaseMbid;
+    }
 
-	public void setTracksNum(int tracks) {
-		this.tracksNum = tracks;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public Collection<String> getLabelList() {
-		return labels;
-	}
-	
-	public String getLabels() {
-		return StringFormat.commaSeparate(labels);
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void addLabel(String label) {
-		labels.add(label);
-	}
+    public String getArtistName() {
+        return artistName;
+    }
 
-	public Collection<String> getFormats() {
-		return formats;
-	}
-	
-	public void addFormat(String format) {
-		formats.add(format);
-	}
-	
+    public void setArtistName(String artist) {
+        this.artistName = artist;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public int getTracksNum() {
+        return tracksNum;
+    }
+
+    public void setTracksNum(int tracks) {
+        this.tracksNum = tracks;
+    }
+
+    public Collection<String> getLabels() {
+        return labels;
+    }
+
+    public void addLabel(String label) {
+        labels.add(label);
+    }
+
+    public Collection<String> getFormats() {
+        return formats;
+    }
+
+    public void addFormat(String format) {
+        formats.add(format);
+    }
+
 }
