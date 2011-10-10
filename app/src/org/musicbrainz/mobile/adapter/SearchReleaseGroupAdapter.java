@@ -24,8 +24,8 @@ import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.formatting.StringFormat;
-import org.musicbrainz.mobile.formatting.StringMapper;
+import org.musicbrainz.mobile.uiutil.StringFormat;
+import org.musicbrainz.mobile.uiutil.StringMapper;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

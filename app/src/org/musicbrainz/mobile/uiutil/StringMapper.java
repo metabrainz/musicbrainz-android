@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.formatting;
+package org.musicbrainz.mobile.uiutil;
 
 import java.util.Collection;
 import java.util.HashMap;

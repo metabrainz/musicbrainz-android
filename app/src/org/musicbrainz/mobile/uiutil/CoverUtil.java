@@ -18,31 +18,16 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.formatting;
+package org.musicbrainz.mobile.uiutil;
 
-import java.util.Collection;
-
-import org.musicbrainz.android.api.data.ReleaseArtist;
-
-public class StringFormat {
-
-    public static String commaSeparate(Collection<String> collection) {
-        StringBuilder sb = new StringBuilder();
-        if (collection.isEmpty()) {
-            return sb.toString();
-        }
-        for (String item : collection) {
-            sb.append(item + ", ");
-        }
-        return sb.substring(0, sb.length() - 2);
+public class CoverUtil {
+    
+    public static String makeCoverUrl(String asin) {
+        return "ec1.images-amazon.com/images/P/" + asin;
     }
-
-    public static String commaSeparateArtists(Collection<ReleaseArtist> artists) {
-        StringBuilder sb = new StringBuilder();
-        for (ReleaseArtist artist : artists) {
-            sb.append(artist.getName() + ", ");
-        }
-        return sb.substring(0, sb.length() - 2);
+    
+    public static String makeThumbUrl(String asin) {
+        return "ec1.images-amazon.com/images/P/" + asin + ".01.THUMZ";
     }
 
 }

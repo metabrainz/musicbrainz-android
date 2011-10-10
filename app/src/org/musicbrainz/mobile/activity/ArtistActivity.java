@@ -32,7 +32,7 @@ import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.LinkAdapter;
-import org.musicbrainz.mobile.formatting.StringFormat;
+import org.musicbrainz.mobile.uiutil.StringFormat;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
