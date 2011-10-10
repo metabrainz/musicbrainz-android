@@ -2,43 +2,43 @@
 
 <!-- Copyright (C) 2010 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
 <resources>
-    <dimen name="text_size_tag">13sp</dimen>
-    <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size_medium">14sp</dimen>
-    <dimen name="text_size_large">16sp</dimen>
-    <dimen name="text_size_entity">17sp</dimen>
-    <dimen name="text_size_xl">18sp</dimen>
-    
-    <dimen name="home_pad">14dp</dimen>
-    <dimen name="huge_pad">20dp</dimen>
-    <dimen name="super_pad">32dp</dimen>
-    <dimen name="std_pad">7dp</dimen>
-    <dimen name="small_pad">5dp</dimen>
-    <dimen name="startop_pad">13dp</dimen>
-    
-    <dimen name="tab_height">38dp</dimen>
-    <dimen name="vertical_minspace">45dp</dimen>
-    <dimen name="button_min">47dp</dimen>
-	<dimen name="separator_height">2px</dimen>
-    <dimen name="progress_spinner">40dp</dimen>
-    
-    <dimen name="link_button_corners">2dp</dimen>
-    <dimen name="tagbox_corners">2dp</dimen>
+  <dimen name="text_size_tag">13sp</dimen>
+  <dimen name="text_size_small">12sp</dimen>
+  <dimen name="text_size_medium">14sp</dimen>
+  <dimen name="text_size_large">16sp</dimen>
+  <dimen name="text_size_entity">17sp</dimen>
+  <dimen name="text_size_xl">18sp</dimen>
+
+  <dimen name="home_pad">14dp</dimen>
+  <dimen name="huge_pad">20dp</dimen>
+  <dimen name="super_pad">32dp</dimen>
+  <dimen name="std_pad">7dp</dimen>
+  <dimen name="small_pad">5dp</dimen>
+  <dimen name="startop_pad">13dp</dimen>
+
+  <dimen name="tab_height">38dp</dimen>
+  <dimen name="vertical_minspace">45dp</dimen>
+  <dimen name="button_min">47dp</dimen>
+  <dimen name="separator_height">2px</dimen>
+  <dimen name="progress_spinner">40dp</dimen>
+
+  <dimen name="link_button_corners">2dp</dimen>
+  <dimen name="tagbox_corners">2dp</dimen>
 </resources>

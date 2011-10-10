@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2010 Jamie McDonald
  * 
- * This file is part of MusicBrainz Mobile (Android).
+ * This file is part of MusicBrainz for Android.
  * 
- * MusicBrainz Mobile (Android) is free software: you can redistribute 
+ * MusicBrainz for Android is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public 
  * License as published by the Free Software Foundation, either 
  * version 3 of the License, or (at your option) any later version.
  * 
- * MusicBrainz Mobile (Android) is distributed in the hope that it 
+ * MusicBrainz for Android is distributed in the hope that it 
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied 
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
  * See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with MusicBrainz Mobile (Android). If not, see 
+ * along with MusicBrainz for Android. If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -45,97 +45,97 @@ import android.widget.Toast;
  */
 public abstract class SuperActivity extends Activity {
 
-	protected boolean loggedIn = false;
-	
-	/*
-	 * Get login status from shared preferences file and set local status.
-	 */
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		if (getUsername() != null) {
-			loggedIn = true;
-		}
-	}
-	
-	protected boolean shouldProvideSearchSuggestions() {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		return prefs.getBoolean("search_suggestions", true);
-	}
+    protected boolean loggedIn = false;
 
-	protected String getUsername() {
-		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-		return prefs.getString("username", null);
-	}
-	
-	protected String getPassword() {
-		SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-		String obscuredPassword = prefs.getString("password", null);
-		String password = SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
-		return password;
-	}
-	
-	public String getVersion() {
-		String version = "unknown";
-		try {
-			 version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		return version;
-	}
-	
-	protected ActionBar setupActionBarWithHome() {
+    /*
+     * Get login status from shared preferences file and set local status.
+     */
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getUsername() != null) {
+            loggedIn = true;
+        }
+    }
+
+    protected boolean shouldProvideSearchSuggestions() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        return prefs.getBoolean("search_suggestions", true);
+    }
+
+    protected String getUsername() {
+        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+        return prefs.getString("username", null);
+    }
+
+    protected String getPassword() {
+        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+        String obscuredPassword = prefs.getString("password", null);
+        String password = SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
+        return password;
+    }
+
+    public String getVersion() {
+        String version = "unknown";
+        try {
+            version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return version;
+    }
+
+    protected ActionBar setupActionBarWithHome() {
         ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
         getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
         actionBar.findAction(R.id.actionbar_item_home).setIntent(HomeActivity.createIntent(this));
         actionBar.setDisplayShowHomeEnabled(true);
         return actionBar;
-	}
-    
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
 
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.general, menu);
-    	return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.general, menu);
+        return true;
     }
-    
-    public boolean onOptionsItemSelected(MenuItem item){
-    	super.onOptionsItemSelected(item);
-    	
-        switch(item.getItemId()) {
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
         case R.id.menu_about:
-        	Intent aboutIntent = new Intent(this, AboutActivity.class);
-			startActivity(aboutIntent);
-        	return true;
+            Intent aboutIntent = new Intent(this, AboutActivity.class);
+            startActivity(aboutIntent);
+            return true;
         case R.id.menu_donate:
-        	Intent donateIntent = new Intent(this, DonateActivity.class);
-			startActivity(donateIntent);
-        	return true;
+            Intent donateIntent = new Intent(this, DonateActivity.class);
+            startActivity(donateIntent);
+            return true;
         case R.id.menu_feedback:
-        	sendFeedback();
-        	return true;
+            sendFeedback();
+            return true;
         case R.id.menu_preferences:
-        	Intent prefsIntent = new Intent(this, PreferencesActivity.class);
-        	startActivity(prefsIntent);
-        	return true;
+            Intent prefsIntent = new Intent(this, PreferencesActivity.class);
+            startActivity(prefsIntent);
+            return true;
         }
         return false;
     }
-    
+
     private void sendFeedback() {
-    	try {
-    		startActivity(createFeedbackIntent());
-    	} catch (ActivityNotFoundException e){
-    		Toast.makeText(this, R.string.toast_feedback_fail, Toast.LENGTH_LONG).show();
-    	}
+        try {
+            startActivity(createFeedbackIntent());
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.toast_feedback_fail, Toast.LENGTH_LONG).show();
+        }
     }
-    
+
     private Intent createFeedbackIntent() {
-    	Uri uri = Uri.parse("mailto:" + Config.FEEDBACK_EMAIL);
-    	Intent feedback = new Intent(Intent.ACTION_SENDTO , uri);
-    	feedback.putExtra(Intent.EXTRA_SUBJECT, "[MBAndroid] Feedback");
-    	return feedback;
+        Uri uri = Uri.parse("mailto:" + Config.FEEDBACK_EMAIL);
+        Intent feedback = new Intent(Intent.ACTION_SENDTO, uri);
+        feedback.putExtra(Intent.EXTRA_SUBJECT, "[MBAndroid] Feedback");
+        return feedback;
     }
-    
+
 }

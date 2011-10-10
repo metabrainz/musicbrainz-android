@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2010 Jamie McDonald
  * 
- * This file is part of MusicBrainz Mobile (Android).
+ * This file is part of MusicBrainz for Android.
  * 
- * MusicBrainz Mobile (Android) is free software: you can redistribute 
+ * MusicBrainz for Android is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public 
  * License as published by the Free Software Foundation, either 
  * version 3 of the License, or (at your option) any later version.
  * 
- * MusicBrainz Mobile (Android) is distributed in the hope that it 
+ * MusicBrainz for Android is distributed in the hope that it 
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied 
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
  * See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with MusicBrainz Mobile (Android). If not, see 
+ * along with MusicBrainz for Android. If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -34,18 +34,18 @@ public class AboutActivity extends SuperActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         setContentView(R.layout.activity_about);
         setupActionBarWithHome();
-		
+
         TextView versionLabel = (TextView) findViewById(R.id.version_text);
-		versionLabel.setText(getText(R.string.version_text) + " " + getVersion());
+        versionLabel.setText(getText(R.string.version_text) + " " + getVersion());
     }
-    
+
     public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.about, menu);
-    	return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.about, menu);
+        return true;
     }
-    
+
 }

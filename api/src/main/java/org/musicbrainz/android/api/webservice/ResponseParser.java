@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2011 Jamie McDonald
  * 
- * This file is part of MusicBrainz Mobile (Android).
+ * This file is part of MusicBrainz for Android.
  * 
- * MusicBrainz Mobile (Android) is free software: you can redistribute 
+ * MusicBrainz for Android is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public 
  * License as published by the Free Software Foundation, either 
  * version 3 of the License, or (at your option) any later version.
  * 
- * MusicBrainz Mobile (Android) is distributed in the hope that it 
+ * MusicBrainz for Android is distributed in the hope that it 
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied 
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
  * See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with MusicBrainz Mobile (Android). If not, see 
+ * along with MusicBrainz for Android. If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -52,96 +52,96 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class ResponseParser {
-	
-	private SAXParserFactory factory;
-	
-	public ResponseParser() {
-		factory = SAXParserFactory.newInstance();
-		factory.setNamespaceAware(true);
-	}
-	
-	public ResponseParser(SAXParserFactory factory) {
-		this.factory = factory;
-	}
-	
-	public String parseMbidFromBarcode(InputStream stream) throws IOException {
-		BarcodeSearchHandler handler = new BarcodeSearchHandler();
-		doParsing(stream, handler);
-		return handler.getMbid();
-	}
-	
-	public Release parseRelease(InputStream stream) throws IOException {
-		ReleaseLookupHandler handler = new ReleaseLookupHandler();
-		doParsing(stream, handler);
-		return handler.getResult();
-	}
-	
-	public LinkedList<ReleaseStub> parseReleaseGroupReleases(InputStream stream) throws IOException {
-		ReleaseStubHandler handler = new ReleaseStubHandler();
-		doParsing(stream, handler);
-		return handler.getResults();
-	}
-	
-	public Artist parseArtist(InputStream stream) throws IOException {
-		ArtistLookupHandler handler = new ArtistLookupHandler();
-		doParsing(stream, handler);
-		return handler.getResult();
-	}
-	
-	public ArrayList<ReleaseGroupStub> parseReleaseGroupBrowse(InputStream stream) throws IOException {
-		ReleaseGroupBrowseHandler handler = new ReleaseGroupBrowseHandler();
-		doParsing(stream, handler);
-		return handler.getResults();		
-	}
-	
-	public LinkedList<ArtistStub> parseArtistSearch(InputStream stream) throws IOException {
-		ArtistSearchHandler handler = new ArtistSearchHandler();
-		doParsing(stream, handler);
-		return handler.getResults();
-	}
-	
-	public LinkedList<ReleaseGroupStub> parseReleaseGroupSearch(InputStream stream) throws IOException {
-		ReleaseGroupSearchHandler handler = new ReleaseGroupSearchHandler();
-		doParsing(stream, handler);
-		return handler.getResults();
-	}
-	
-	public LinkedList<ReleaseStub> parseReleaseSearch(InputStream stream) throws IOException {
-		ReleaseStubHandler handler = new ReleaseStubHandler();
-		doParsing(stream, handler);
-		return handler.getResults();
-	}
-	
-	public Collection<String> parseTagLookup(InputStream stream) throws IOException {
-		TagHandler handler = new TagHandler();
-		doParsing(stream, handler);
-		return handler.getTags();
-	}
-	
-	public float parseRatingLookup(InputStream stream) throws IOException {
-		RatingHandler handler = new RatingHandler();
-		doParsing(stream, handler);
-		return handler.getRating();
-	}
-	
-	public UserData parseUserData(InputStream stream) throws IOException {
-		UserDataHandler handler = new UserDataHandler();
-		doParsing(stream, handler);
-		return handler.getResult();
-	}
-	
-	protected void doParsing(InputStream stream, DefaultHandler handler) throws IOException {
-		try {
-			SAXParser parser = factory.newSAXParser();
-			XMLReader reader = parser.getXMLReader();
-			InputSource source = new InputSource(stream);
-			reader.setContentHandler(handler);
-			reader.parse(source);
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
+    private SAXParserFactory factory;
+
+    public ResponseParser() {
+        factory = SAXParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+    }
+
+    public ResponseParser(SAXParserFactory factory) {
+        this.factory = factory;
+    }
+
+    public String parseMbidFromBarcode(InputStream stream) throws IOException {
+        BarcodeSearchHandler handler = new BarcodeSearchHandler();
+        doParsing(stream, handler);
+        return handler.getMbid();
+    }
+
+    public Release parseRelease(InputStream stream) throws IOException {
+        ReleaseLookupHandler handler = new ReleaseLookupHandler();
+        doParsing(stream, handler);
+        return handler.getResult();
+    }
+
+    public LinkedList<ReleaseStub> parseReleaseGroupReleases(InputStream stream) throws IOException {
+        ReleaseStubHandler handler = new ReleaseStubHandler();
+        doParsing(stream, handler);
+        return handler.getResults();
+    }
+
+    public Artist parseArtist(InputStream stream) throws IOException {
+        ArtistLookupHandler handler = new ArtistLookupHandler();
+        doParsing(stream, handler);
+        return handler.getResult();
+    }
+
+    public ArrayList<ReleaseGroupStub> parseReleaseGroupBrowse(InputStream stream) throws IOException {
+        ReleaseGroupBrowseHandler handler = new ReleaseGroupBrowseHandler();
+        doParsing(stream, handler);
+        return handler.getResults();
+    }
+
+    public LinkedList<ArtistStub> parseArtistSearch(InputStream stream) throws IOException {
+        ArtistSearchHandler handler = new ArtistSearchHandler();
+        doParsing(stream, handler);
+        return handler.getResults();
+    }
+
+    public LinkedList<ReleaseGroupStub> parseReleaseGroupSearch(InputStream stream) throws IOException {
+        ReleaseGroupSearchHandler handler = new ReleaseGroupSearchHandler();
+        doParsing(stream, handler);
+        return handler.getResults();
+    }
+
+    public LinkedList<ReleaseStub> parseReleaseSearch(InputStream stream) throws IOException {
+        ReleaseStubHandler handler = new ReleaseStubHandler();
+        doParsing(stream, handler);
+        return handler.getResults();
+    }
+
+    public Collection<String> parseTagLookup(InputStream stream) throws IOException {
+        TagHandler handler = new TagHandler();
+        doParsing(stream, handler);
+        return handler.getTags();
+    }
+
+    public float parseRatingLookup(InputStream stream) throws IOException {
+        RatingHandler handler = new RatingHandler();
+        doParsing(stream, handler);
+        return handler.getRating();
+    }
+
+    public UserData parseUserData(InputStream stream) throws IOException {
+        UserDataHandler handler = new UserDataHandler();
+        doParsing(stream, handler);
+        return handler.getResult();
+    }
+
+    protected void doParsing(InputStream stream, DefaultHandler handler) throws IOException {
+        try {
+            SAXParser parser = factory.newSAXParser();
+            XMLReader reader = parser.getXMLReader();
+            InputSource source = new InputSource(stream);
+            reader.setContentHandler(handler);
+            reader.parse(source);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

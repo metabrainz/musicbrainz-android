@@ -2,50 +2,50 @@
 
 <!-- Copyright (C) 2010 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
 <resources>
 
-	<!-- Theme -->
-	<color name="main_bg">#eeeeee</color>
-	<color name="main_fg">#ffffff</color>
-	<color name="main_text">#000000</color>
-	<color name="aux_text">#666666</color>
-	<color name="hint_text">#c0c0c0</color>
-	<color name="dialog_text">#ffffff</color>
-	<color name="link_text">#3366cc</color>
-	
-	<color name="tag_bg">#ffffff</color>
-	<color name="tag_text">#000000</color>
-	
-	<color name="list_bg">#ffffff</color>
-	<color name="list_text">#000000</color>
-	<color name="list_divider">#eeeeee</color>
-	
-	<color name="actionbar_background_start">#817abf</color>
-	<color name="actionbar_background_end">@color/mb_purple_medium</color>
-	<color name="actionbar_divider">@color/mb_purple_medium</color>
-	
-	<!-- MusicBrainz branding -->
-	<color name="mb_purple_light">#bcaeed</color>
-	<color name="mb_purple_medium">#736dab</color>
-	<color name="mb_purple_dark">#34176b</color>
-	
-	<color name="mb_orange">#ffba58</color>
-	<color name="mb_orange_dark">#cc9546</color>
-	
+  <!-- Theme -->
+  <color name="main_bg">#eeeeee</color>
+  <color name="main_fg">#ffffff</color>
+  <color name="main_text">#000000</color>
+  <color name="aux_text">#666666</color>
+  <color name="hint_text">#c0c0c0</color>
+  <color name="dialog_text">#ffffff</color>
+  <color name="link_text">#3366cc</color>
+
+  <color name="tag_bg">#ffffff</color>
+  <color name="tag_text">#000000</color>
+
+  <color name="list_bg">#ffffff</color>
+  <color name="list_text">#000000</color>
+  <color name="list_divider">#eeeeee</color>
+
+  <color name="actionbar_background_start">#817abf</color>
+  <color name="actionbar_background_end">@color/mb_purple_medium</color>
+  <color name="actionbar_divider">@color/mb_purple_medium</color>
+
+  <!-- MusicBrainz branding -->
+  <color name="mb_purple_light">#bcaeed</color>
+  <color name="mb_purple_medium">#736dab</color>
+  <color name="mb_purple_dark">#34176b</color>
+
+  <color name="mb_orange">#ffba58</color>
+  <color name="mb_orange_dark">#cc9546</color>
+
 </resources>

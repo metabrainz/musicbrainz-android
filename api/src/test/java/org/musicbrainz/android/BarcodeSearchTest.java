@@ -10,16 +10,16 @@ import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class BarcodeSearchTest extends BaseXmlParsingTestCase {
 
-	@Test
-	public void testBarcodeSearch() throws IOException {
-		
-		InputStream stream = getFileStream("barcodeSearch_792258106329.xml");
-		assertNotNull(stream);
-		
-		String mbid = new ResponseParser().parseMbidFromBarcode(stream);
-		assertEquals("7fe8ee44-68bb-31da-befc-bda6da88c379", mbid);
+    @Test
+    public void testBarcodeSearch() throws IOException {
 
-		stream.close();
-	}
+        InputStream stream = getFileStream("barcodeSearch_792258106329.xml");
+        assertNotNull(stream);
+
+        String mbid = new ResponseParser().parseMbidFromBarcode(stream);
+        assertEquals("7fe8ee44-68bb-31da-befc-bda6da88c379", mbid);
+
+        stream.close();
+    }
 
 }

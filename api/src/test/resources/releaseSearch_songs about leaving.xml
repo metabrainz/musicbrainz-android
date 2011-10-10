@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#" xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
-  <release-list offset="0" count="9206">
-    <release ext:score="100" id="948a8a4c-23f3-4bf2-b201-dcb68a89b897">
+<metadata
+  xmlns="http://musicbrainz.org/ns/mmd-2.0#"
+  xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
+  <release-list
+    offset="0"
+    count="9206">
+    <release
+      ext:score="100"
+      id="948a8a4c-23f3-4bf2-b201-dcb68a89b897">
       <title>Songs About Leaving</title>
       <status>Official</status>
       <text-representation>
@@ -16,7 +22,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="b8e69326-6882-3821-95ee-7609d9398ffd" />
       <date>2002-08-06</date>
       <country>US</country>
@@ -38,7 +45,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="75" id="5cb0483a-749d-48f0-bed2-c241aed537e5">
+    <release
+      ext:score="75"
+      id="5cb0483a-749d-48f0-bed2-c241aed537e5">
       <title>Yes We Can: Songs About Leaving Africa</title>
       <status>Official</status>
       <text-representation>
@@ -55,7 +64,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Compilation"
+      <release-group
+        type="Compilation"
         id="9b0995ef-3917-45f6-95ac-21df8fb04064" />
       <date>2010-06-25</date>
       <country>US</country>
@@ -76,7 +86,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="57" id="fe5d04bd-3b3b-4eb0-bcee-c41413a28e8a">
+    <release
+      ext:score="57"
+      id="fe5d04bd-3b3b-4eb0-bcee-c41413a28e8a">
       <title>Leaving Songs</title>
       <status>Official</status>
       <text-representation>
@@ -91,7 +103,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="0981f668-b2d5-3ef0-b30e-c5d3ff3bd496" />
       <date>2001</date>
       <country>SE</country>
@@ -104,7 +117,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="57" id="4a0f292f-3d24-4e6f-a8e1-7066816f5d10">
+    <release
+      ext:score="57"
+      id="4a0f292f-3d24-4e6f-a8e1-7066816f5d10">
       <title>Leaving Songs</title>
       <status>Official</status>
       <text-representation>
@@ -119,7 +134,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="e46e854e-f5c9-3ff0-9f0e-078871dea3ea" />
       <date>2006-05-29</date>
       <country>GB</country>
@@ -142,7 +158,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="57" id="1d0eae05-8fd5-3606-b3f4-e40a8c6a8210">
+    <release
+      ext:score="57"
+      id="1d0eae05-8fd5-3606-b3f4-e40a8c6a8210">
       <title>Leaving Songs</title>
       <status>Official</status>
       <text-representation>
@@ -157,7 +175,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="e46e854e-f5c9-3ff0-9f0e-078871dea3ea" />
       <date>2006-06-06</date>
       <country>US</country>
@@ -169,7 +188,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="57" id="4e7a0289-ca53-3aed-a065-26784edc92f3">
+    <release
+      ext:score="57"
+      id="4e7a0289-ca53-3aed-a065-26784edc92f3">
       <title>Leaving Songs</title>
       <status>Official</status>
       <text-representation>
@@ -184,7 +205,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="e46e854e-f5c9-3ff0-9f0e-078871dea3ea" />
       <date>2006-05-29</date>
       <country>GB</country>
@@ -206,7 +228,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="45" id="374f5f9c-34d2-48a3-bdd2-7be3e81d6e47">
+    <release
+      ext:score="45"
+      id="374f5f9c-34d2-48a3-bdd2-7be3e81d6e47">
       <title>Songs of Leaving</title>
       <status>Official</status>
       <text-representation>
@@ -221,7 +245,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="7185e949-f85e-3aa2-b87e-fe86926eef53" />
       <date>2002-10</date>
       <country>BE</country>
@@ -233,7 +258,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="45" id="b47b8b13-38ed-4d38-9ab9-0736883b193e">
+    <release
+      ext:score="45"
+      id="b47b8b13-38ed-4d38-9ab9-0736883b193e">
       <title>Songs of Leaving</title>
       <status>Official</status>
       <text-representation>
@@ -248,7 +275,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="143d7ce8-6300-3e63-9330-0e31ccf3f5d0" />
       <date>1997</date>
       <country>US</country>
@@ -270,7 +298,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="45" id="04516a1b-a3f7-45fb-9bfb-9995cebf7f61">
+    <release
+      ext:score="45"
+      id="04516a1b-a3f7-45fb-9bfb-9995cebf7f61">
       <title>Songs of Leaving</title>
       <status>Official</status>
       <text-representation>
@@ -285,7 +315,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="143d7ce8-6300-3e63-9330-0e31ccf3f5d0" />
       <date>1993</date>
       <country>US</country>
@@ -307,7 +338,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="45" id="27bea996-41da-4852-bb4d-6e7f716c1605">
+    <release
+      ext:score="45"
+      id="27bea996-41da-4852-bb4d-6e7f716c1605">
       <title>Leaving Traces: Songs 1994-2004</title>
       <status>Official</status>
       <text-representation>
@@ -322,7 +355,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="ee5cec5e-d50c-33e8-a89c-ede0867a8bd6" />
       <date>2004</date>
       <country>FR</country>
@@ -344,7 +378,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="38" id="eeb517fc-9a20-488f-925c-9023a43fc5d6">
+    <release
+      ext:score="38"
+      id="eeb517fc-9a20-488f-925c-9023a43fc5d6">
       <title>Songs About Songs</title>
       <artist-credit>
         <name-credit>
@@ -363,7 +399,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="b9e7bea6-63f3-4649-b272-b5e5fe3cdbcd">
+    <release
+      ext:score="33"
+      id="b9e7bea6-63f3-4649-b272-b5e5fe3cdbcd">
       <title>Leaving</title>
       <status>Official</status>
       <text-representation>
@@ -378,7 +416,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="c3788a26-38ff-4a4d-8ffc-5c98eb083374" />
       <date>2009-09-18</date>
       <country>XW</country>
@@ -391,7 +430,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="1072c0cd-9e35-4e94-b06f-142f3e183032">
+    <release
+      ext:score="33"
+      id="1072c0cd-9e35-4e94-b06f-142f3e183032">
       <title>Leaving</title>
       <status>Official</status>
       <artist-credit>
@@ -402,7 +443,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="35e9b7b8-6515-370f-be00-9ae01e450b2b" />
       <medium-list count="1">
         <track-count>9</track-count>
@@ -412,7 +454,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="6bad1e8f-a908-4d84-8084-10488860ade8">
+    <release
+      ext:score="33"
+      id="6bad1e8f-a908-4d84-8084-10488860ade8">
       <title>Songs About Jane</title>
       <status>Official</status>
       <text-representation>
@@ -427,7 +471,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="93d5a1d1-73c0-34d3-b7f1-49473c48face" />
       <date>2003-12-08</date>
       <country>GB</country>
@@ -449,7 +494,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="9adea766-5f40-3896-acff-a1027e62e7a3">
+    <release
+      ext:score="33"
+      id="9adea766-5f40-3896-acff-a1027e62e7a3">
       <title>Songs About Jane</title>
       <status>Official</status>
       <text-representation>
@@ -464,7 +511,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="93d5a1d1-73c0-34d3-b7f1-49473c48face" />
       <date>2002-06-25</date>
       <country>US</country>
@@ -487,7 +535,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="a51647b4-c867-4ed6-ba22-ee7b8cd15e27">
+    <release
+      ext:score="33"
+      id="a51647b4-c867-4ed6-ba22-ee7b8cd15e27">
       <title>Songs About Stuff</title>
       <status>Official</status>
       <artist-credit>
@@ -498,7 +548,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="c6e6e317-6194-3cf7-bba9-ca8557d754b2" />
       <date>1992</date>
       <country>US</country>
@@ -510,7 +561,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="0fb798fe-21d3-452e-8db0-d8eafc30a927">
+    <release
+      ext:score="33"
+      id="0fb798fe-21d3-452e-8db0-d8eafc30a927">
       <title>Songs About My Cats</title>
       <status>Official</status>
       <text-representation>
@@ -525,7 +578,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="5e26c8a8-0b74-327d-a596-8d3324a010eb" />
       <date>2001-04-30</date>
       <country>GB</country>
@@ -548,7 +602,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="f9076c85-4e65-4dd4-95cd-ead678567f11">
+    <release
+      ext:score="33"
+      id="f9076c85-4e65-4dd4-95cd-ead678567f11">
       <title>Little Songs About Raindrops</title>
       <status>Official</status>
       <text-representation>
@@ -563,7 +619,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="87527076-2743-3714-86de-794f96c1f1cd" />
       <date>2004-03-21</date>
       <country>JP</country>
@@ -585,7 +642,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="6e124b4d-5ae5-4e7b-b659-566503c68c37">
+    <release
+      ext:score="33"
+      id="6e124b4d-5ae5-4e7b-b659-566503c68c37">
       <title>Songs About Jane</title>
       <status>Official</status>
       <text-representation>
@@ -600,7 +659,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="93d5a1d1-73c0-34d3-b7f1-49473c48face" />
       <date>2002-06-25</date>
       <country>US</country>
@@ -612,7 +672,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="b9493001-5200-4035-9d92-83a2b54967c6">
+    <release
+      ext:score="33"
+      id="b9493001-5200-4035-9d92-83a2b54967c6">
       <title>Songs About Running Away</title>
       <status>Official</status>
       <text-representation>
@@ -627,7 +689,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="20316d76-5211-3ae7-b64a-ebe0dea8a274" />
       <date>2003</date>
       <country>SE</country>
@@ -640,7 +703,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="da8c78c7-b0ba-4f00-aa7a-b8a02144a2ac">
+    <release
+      ext:score="33"
+      id="da8c78c7-b0ba-4f00-aa7a-b8a02144a2ac">
       <title>Songs About Jane</title>
       <status>Official</status>
       <text-representation>
@@ -655,7 +720,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="93d5a1d1-73c0-34d3-b7f1-49473c48face" />
       <date>2004</date>
       <country>GB</country>
@@ -670,7 +736,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="3d8ae9e5-ea80-4206-972a-753777fcb026">
+    <release
+      ext:score="33"
+      id="3d8ae9e5-ea80-4206-972a-753777fcb026">
       <title>Songs About Fire</title>
       <status>Official</status>
       <text-representation>
@@ -685,7 +753,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="EP"
+      <release-group
+        type="EP"
         id="df17ae45-ead2-3054-a46e-0ddc4c919016" />
       <date>1995</date>
       <country>US</country>
@@ -697,7 +766,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="4a89a2f8-f139-41d9-abb9-f1e553c7b030">
+    <release
+      ext:score="33"
+      id="4a89a2f8-f139-41d9-abb9-f1e553c7b030">
       <title>Songs About Fucking</title>
       <status>Official</status>
       <text-representation>
@@ -712,7 +783,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="fcaabc32-5f03-3ade-b2cf-68c8c9615b6a" />
       <date>1987</date>
       <country>US</country>
@@ -735,7 +807,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="30778cab-22ce-3df8-bfd8-75d36d76d84f">
+    <release
+      ext:score="33"
+      id="30778cab-22ce-3df8-bfd8-75d36d76d84f">
       <title>Little Songs About Raindrops</title>
       <status>Official</status>
       <text-representation>
@@ -750,7 +824,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="87527076-2743-3714-86de-794f96c1f1cd" />
       <date>2004-06</date>
       <country>US</country>
@@ -773,7 +848,9 @@
         </medium>
       </medium-list>
     </release>
-    <release ext:score="33" id="d1a9e7b3-c872-4546-a271-d50c6faaf141">
+    <release
+      ext:score="33"
+      id="d1a9e7b3-c872-4546-a271-d50c6faaf141">
       <title>Songs About Teeth!</title>
       <status>Official</status>
       <text-representation>
@@ -788,7 +865,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="f428536d-efaf-3e58-82af-9e72a8f51869" />
       <date>2006</date>
       <country>US</country>

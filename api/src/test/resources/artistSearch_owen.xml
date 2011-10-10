@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#" xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
-  <artist-list offset="0" count="169">
-    <artist ext:score="100" type="unknown"
+<metadata
+  xmlns="http://musicbrainz.org/ns/mmd-2.0#"
+  xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
+  <artist-list
+    offset="0"
+    count="169">
+    <artist
+      ext:score="100"
+      type="unknown"
       id="2b0ce8c8-9c9a-4807-9414-24b22af7a679">
       <name>Owen</name>
       <sort-name>Owen</sort-name>
@@ -20,7 +26,9 @@
         </tag>
       </tag-list>
     </artist>
-    <artist ext:score="100" type="unknown"
+    <artist
+      ext:score="100"
+      type="unknown"
       id="f8cfd512-1e63-4108-ba15-f92d9b1315d4">
       <name>Owen</name>
       <sort-name>Owen</sort-name>
@@ -29,7 +37,9 @@
         <alias>Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="100" type="Person"
+    <artist
+      ext:score="100"
+      type="Person"
       id="003aee60-201a-4f52-aeba-20f68646eada">
       <name>Owen</name>
       <sort-name>Owen</sort-name>
@@ -38,7 +48,9 @@
         <alias>Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="79" type="Person"
+    <artist
+      ext:score="79"
+      type="Person"
       id="dd623af1-5e1d-4dd3-b480-98ce8d4f5178">
       <name>Mark Owen</name>
       <sort-name>Owen, Mark</sort-name>
@@ -60,7 +72,9 @@
         </tag>
       </tag-list>
     </artist>
-    <artist ext:score="79" type="Person"
+    <artist
+      ext:score="79"
+      type="Person"
       id="ee11baba-0b24-428b-9fec-396662f40db9">
       <name>Owen Gray</name>
       <sort-name>Gray, Owen</sort-name>
@@ -69,14 +83,18 @@
         <alias>Owen Gray</alias>
       </alias-list>
     </artist>
-    <artist ext:score="78" type="Person"
+    <artist
+      ext:score="78"
+      type="Person"
       id="6a0d1571-71a4-40f3-887a-f5b674139f39">
       <name>Owen</name>
       <sort-name>Owen</sort-name>
       <disambiguation>member of canadian goth band The Birthday Massacre
       </disambiguation>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="931c9ecc-4ea6-42ba-bd4f-8da8e4a8deb0">
       <name>Gwil Owen</name>
       <sort-name>Owen, Gwil</sort-name>
@@ -84,7 +102,9 @@
         <alias>Gwil Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="af9f1296-dafc-48cd-82c1-548fb17f2bc2">
       <name>Owen Howard</name>
       <sort-name>Howard, Owen</sort-name>
@@ -92,7 +112,9 @@
         <alias>Owen Howard</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="05b40717-f988-4b5a-9d55-bf9f6b942a65">
       <name>Owen Paul</name>
       <sort-name>Paul, Owen</sort-name>
@@ -104,7 +126,9 @@
         <alias>Owen Paul</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="c178b908-c00b-439c-a666-741e0ce81df9">
       <name>Judith Owen</name>
       <sort-name>Owen, Judith</sort-name>
@@ -112,7 +136,9 @@
         <alias>Judith Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="ade30e8e-acbc-4aab-912d-0b146bb49870">
       <name>Owen Wilson</name>
       <sort-name>Wilson, Owen</sort-name>
@@ -123,7 +149,9 @@
         <alias>Owen Wilson</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="e6d9f83e-f5b6-42d3-82d0-76774e99c0bb">
       <name>Jamie Owen</name>
       <sort-name>Owen, Jamie</sort-name>
@@ -131,7 +159,9 @@
         <alias>Jamie Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="05465041-762d-4e0a-9b83-5c1fecd60052">
       <name>Mack Owen</name>
       <sort-name>Owen, Mack</sort-name>
@@ -139,7 +169,9 @@
         <alias>Mack Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="09ccce69-cfeb-4a29-a849-4ecbf4f1d2b1">
       <name>Wilfred Owen</name>
       <sort-name>Owen, Wilfred</sort-name>
@@ -147,7 +179,9 @@
         <alias>Wilfred Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="a6d52ebd-4044-4f01-92bf-55a1ca8b9b7c">
       <name>Shane Owen</name>
       <sort-name>Shane Owen</sort-name>
@@ -155,7 +189,9 @@
         <alias>Shane Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="00c6f03c-af87-4780-aaaf-c7022e03e4e7">
       <name>Owen Temple</name>
       <sort-name>Temple, Owen</sort-name>
@@ -163,7 +199,9 @@
         <alias>Owen Temple</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="086c3c00-2277-48ca-b929-d8c6913a7163">
       <name>Robert Owen</name>
       <sort-name>Owen, Robert</sort-name>
@@ -171,7 +209,9 @@
         <alias>Robert Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="391a602e-f45a-40ae-a1dc-e16fcb60523c">
       <name>Charlie Owen</name>
       <sort-name>Owen, Charlie</sort-name>
@@ -179,7 +219,9 @@
         <alias>Charlie Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="f2bca83e-dfa5-41e5-8392-a3f814467514">
       <name>Owen Plant</name>
       <sort-name>Plant, Owen</sort-name>
@@ -187,7 +229,9 @@
         <alias>Owen Plant</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="50e18afa-96c2-4ede-b45e-d61e005b6d8e">
       <name>Owen Beverly</name>
       <sort-name>Owen Beverly</sort-name>
@@ -195,7 +239,9 @@
         <alias>Owen Beverly</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="7a530e09-3b22-47ff-bea5-9267780348e2">
       <name>Owen Hand</name>
       <sort-name>Hand, Owen</sort-name>
@@ -203,7 +249,9 @@
         <alias>Owen Hand</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="6d394418-a565-4c16-9dec-f5a89e213cde">
       <name>Owen Pallett</name>
       <sort-name>Pallett, Owen</sort-name>
@@ -231,7 +279,9 @@
         </tag>
       </tag-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="dbe90815-07da-4d47-8814-cf485b284f56">
       <name>Jessica Owen</name>
       <sort-name>Owen, Jessica</sort-name>
@@ -239,7 +289,9 @@
         <alias>Jessica Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="unknown"
+    <artist
+      ext:score="70"
+      type="unknown"
       id="c3387e6a-3379-4b91-91cc-76db6a74522d">
       <name>Channeling Owen</name>
       <sort-name>Channeling Owen</sort-name>
@@ -247,7 +299,9 @@
         <alias>Channeling Owen</alias>
       </alias-list>
     </artist>
-    <artist ext:score="70" type="Person"
+    <artist
+      ext:score="70"
+      type="Person"
       id="451008f0-74ca-42a9-8297-50487ef97ec7">
       <name>Harold Owen</name>
       <sort-name>Owen, Harold</sort-name>

@@ -2,43 +2,48 @@
 
 <!-- Copyright (C) 2010 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/WrapHeight"
-	android:padding="@dimen/std_pad">
-		
-	<TextView android:id="@+id/list_track_num"
-		style="@style/TrackNum"
-		android:layout_alignParentLeft="true"
-		android:layout_centerVertical="true" />
-		
-	<TextView android:id="@+id/list_track_va"
-		style="@style/TrackArtist"
-		android:layout_toRightOf="@+id/list_track_num"
-		android:layout_toLeftOf="@+id/list_track_time" 
-		android:layout_above="@+id/list_track_name" />
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/WrapHeight"
+  android:padding="@dimen/std_pad">
 
-	<TextView android:id="@+id/list_track_name"
-		style="@style/Track"
-		android:layout_toRightOf="@+id/list_track_num"
-		android:layout_toLeftOf="@+id/list_track_time" />
-		
-	<TextView android:id="@+id/list_track_time"
-		style="@style/TrackTime"
-		android:layout_alignParentRight="true" />
+  <TextView
+    android:id="@+id/list_track_num"
+    style="@style/TrackNum"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true" />
+
+  <TextView
+    android:id="@+id/list_track_va"
+    style="@style/TrackArtist"
+    android:layout_toRightOf="@+id/list_track_num"
+    android:layout_toLeftOf="@+id/list_track_time"
+    android:layout_above="@+id/list_track_name" />
+
+  <TextView
+    android:id="@+id/list_track_name"
+    style="@style/Track"
+    android:layout_toRightOf="@+id/list_track_num"
+    android:layout_toLeftOf="@+id/list_track_time" />
+
+  <TextView
+    android:id="@+id/list_track_time"
+    style="@style/TrackTime"
+    android:layout_alignParentRight="true" />
 </RelativeLayout>

@@ -2,68 +2,76 @@
 
 <!-- Copyright (C) 2010 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/Activity">
-	
-	<com.markupartist.android.widget.ActionBar
-    	android:id="@+id/actionbar"
-    	style="@style/ActionBar" />
-    	
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
+
+  <com.markupartist.android.widget.ActionBar
+    android:id="@+id/actionbar"
+    style="@style/ActionBar" />
+
+  <RelativeLayout
+    style="@style/PaddedLayout"
+    android:layout_below="@id/actionbar">
+
+    <EditText
+      android:id="@+id/uname_input"
+      style="@style/Username" />
+
+    <EditText
+      android:id="@+id/pass_input"
+      style="@style/Password"
+      android:layout_below="@+id/uname_input" />
+
+    <Button
+      android:id="@+id/auth_btn"
+      style="@style/LoginButton"
+      android:layout_below="@+id/pass_input"
+      android:layout_alignParentRight="true"
+      android:text="@string/login_label" />
+
     <RelativeLayout
-    	style="@style/PaddedLayout"
-    	android:layout_below="@id/actionbar">
+      style="@style/Wrap"
+      android:layout_below="@+id/auth_btn"
+      android:layout_alignParentRight="true">
 
-	<EditText android:id="@+id/uname_input"
-		style="@style/Username" />
-		
-	<EditText android:id="@+id/pass_input"
-		style="@style/Password" 
-		android:layout_below="@+id/uname_input" />
-		
-	<Button android:id="@+id/auth_btn"
-		style="@style/LoginButton"
-		android:layout_below="@+id/pass_input"
-		android:layout_alignParentRight="true"
-		android:text="@string/login_label" />
-		
-	<RelativeLayout
-		style="@style/Wrap"
-		android:layout_below="@+id/auth_btn"
-		android:layout_alignParentRight="true">
-		
-		<TextView android:id="@+id/staylog_text"
-			style="@style/CheckBoxText"
-			android:layout_toLeftOf="@+id/staylog_check" />
-		
-		<CheckBox android:id="@+id/staylog_check"
-			style="@style/CheckBox" />	
-	</RelativeLayout>
-	
-	<Button android:id="@+id/forgotpass_link"
-		style="@style/LinkButton"
-		android:text="@string/forgotpass_text"
-		android:layout_alignParentBottom="true" />
-		
-	<Button android:id="@+id/register_link"
-		style="@style/LinkButton"
-		android:text="@string/register_text"
-		android:layout_above="@id/forgotpass_link" />
-	
-	</RelativeLayout>
+      <TextView
+        android:id="@+id/staylog_text"
+        style="@style/CheckBoxText"
+        android:layout_toLeftOf="@+id/staylog_check" />
+
+      <CheckBox
+        android:id="@+id/staylog_check"
+        style="@style/CheckBox" />
+    </RelativeLayout>
+
+    <Button
+      android:id="@+id/forgotpass_link"
+      style="@style/LinkButton"
+      android:text="@string/forgotpass_text"
+      android:layout_alignParentBottom="true" />
+
+    <Button
+      android:id="@+id/register_link"
+      style="@style/LinkButton"
+      android:text="@string/register_text"
+      android:layout_above="@id/forgotpass_link" />
+
+  </RelativeLayout>
 </RelativeLayout>

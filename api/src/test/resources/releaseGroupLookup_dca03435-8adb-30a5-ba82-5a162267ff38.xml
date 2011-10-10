@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#">
-  <release-group type="Album"
+  <release-group
+    type="Album"
     id="dca03435-8adb-30a5-ba82-5a162267ff38">
     <title>Rubber Soul</title>
     <first-release-date>1965-12-03</first-release-date>

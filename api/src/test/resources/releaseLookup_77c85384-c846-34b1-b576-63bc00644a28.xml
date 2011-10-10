@@ -33,7 +33,8 @@
         </artist>
       </name-credit>
     </artist-credit>
-    <release-group type="Album"
+    <release-group
+      type="Album"
       id="60089b39-412b-326c-afc7-aaa47113d84f">
       <title>Miss Machine</title>
       <first-release-date>2004-07-20</first-release-date>
@@ -55,7 +56,9 @@
     <medium-list count="1">
       <medium>
         <position>1</position>
-        <track-list count="11" offset="0">
+        <track-list
+          count="11"
+          offset="0">
           <track>
             <position>1</position>
             <length>147093</length>

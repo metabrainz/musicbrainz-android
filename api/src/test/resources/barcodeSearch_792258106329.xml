@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#" xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
-  <release-list offset="0" count="1">
-    <release ext:score="100" id="7fe8ee44-68bb-31da-befc-bda6da88c379">
+<metadata
+  xmlns="http://musicbrainz.org/ns/mmd-2.0#"
+  xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
+  <release-list
+    offset="0"
+    count="1">
+    <release
+      ext:score="100"
+      id="7fe8ee44-68bb-31da-befc-bda6da88c379">
       <title>It's Hard to Find a Friend</title>
       <status>Official</status>
       <text-representation>
@@ -16,7 +22,8 @@
           </artist>
         </name-credit>
       </artist-credit>
-      <release-group type="Album"
+      <release-group
+        type="Album"
         id="340d0be6-1b34-324c-a143-d8f0a7696457" />
       <date>2001-10-16</date>
       <country>US</country>

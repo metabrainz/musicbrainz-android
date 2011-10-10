@@ -2,74 +2,80 @@
 
 <!-- Copyright (C) 2010 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
-<resources> 
-	<!-- Layout size styles -->
-    
-    <style name="Wrap">
-    	<item name="android:layout_width">wrap_content</item>
-    	<item name="android:layout_height">wrap_content</item>
-    </style>
-    
-    <style name="WrapWidth">
-    	<item name="android:layout_width">wrap_content</item>
-    	<item name="android:layout_height">fill_parent</item>
-    </style>
-    
-    <style name="WrapHeight">
-    	<item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">wrap_content</item>
-    </style>
-    
-    <style name="Fill">
-    	<item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">fill_parent</item>
-    </style>
-    
-    <style name="List" parent="@style/Fill">
-    	<item name="android:background">@color/list_bg</item>
-    	<item name="android:cacheColorHint">@color/list_bg</item>
-    	<item name="android:divider">@drawable/list_divider</item>
-    </style>
-    
-    <style name="ButtonMin">
-    	<item name="android:layout_width">@dimen/button_min</item>
-    	<item name="android:layout_height">@dimen/button_min</item>
-    </style>
-    
-    <style name="VerticalMinPad" parent="@style/WrapHeight">
-    	<item name="android:orientation">vertical</item>
-    	<item name="android:minHeight">@dimen/vertical_minspace</item>
-    	<item name="android:gravity">center_vertical</item>
-    	<item name="android:padding">@dimen/std_pad</item>
-    </style>
-    
-    <style name="HomeTextArea">
-    	<item name="android:background">@color/main_fg</item>
-    	<item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">@dimen/vertical_minspace</item>
-    	<item name="android:padding">@dimen/std_pad</item>
-    </style>
-    
-    <style name="EntityInfo" parent="@style/WrapHeight">
-    	<item name="android:layout_marginRight">@dimen/std_pad</item>
-    	<item name="android:layout_marginLeft">@dimen/std_pad</item>
-    	<item name="android:layout_marginTop">@dimen/std_pad</item>
-    	<item name="android:layout_marginBottom">@dimen/small_pad</item>
-    </style>
+<resources>
+  <!-- Layout size styles -->
+
+  <style name="Wrap">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="WrapWidth">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">fill_parent</item>
+  </style>
+
+  <style name="WrapHeight">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="Fill">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">fill_parent</item>
+  </style>
+
+  <style
+    name="List"
+    parent="@style/Fill">
+    <item name="android:background">@color/list_bg</item>
+    <item name="android:cacheColorHint">@color/list_bg</item>
+    <item name="android:divider">@drawable/list_divider</item>
+  </style>
+
+  <style name="ButtonMin">
+    <item name="android:layout_width">@dimen/button_min</item>
+    <item name="android:layout_height">@dimen/button_min</item>
+  </style>
+
+  <style
+    name="VerticalMinPad"
+    parent="@style/WrapHeight">
+    <item name="android:orientation">vertical</item>
+    <item name="android:minHeight">@dimen/vertical_minspace</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:padding">@dimen/std_pad</item>
+  </style>
+
+  <style name="HomeTextArea">
+    <item name="android:background">@color/main_fg</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">@dimen/vertical_minspace</item>
+    <item name="android:padding">@dimen/std_pad</item>
+  </style>
+
+  <style
+    name="EntityInfo"
+    parent="@style/WrapHeight">
+    <item name="android:layout_marginRight">@dimen/std_pad</item>
+    <item name="android:layout_marginLeft">@dimen/std_pad</item>
+    <item name="android:layout_marginTop">@dimen/std_pad</item>
+    <item name="android:layout_marginBottom">@dimen/small_pad</item>
+  </style>
 </resources>

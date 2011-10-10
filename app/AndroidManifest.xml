@@ -2,143 +2,184 @@
 
 <!-- Copyright (C) 2010 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="org.musicbrainz.mobile"
-	android:versionCode="4"
-	android:versionName="1.0.2"
-	android:installLocation="auto">
-      
-    <application android:icon="@drawable/icon" 
-    	android:name=".MBApplication"
-    	android:label="@string/app_name" 
-    	android:debuggable="false"
-    	android:theme="@style/CustomTheme">
-    	
-    	<meta-data android:name="android.app.default_searchable"
-        	android:value=".activity.SearchActivity" />
-                   
-        <provider android:name=".suggestion.SuggestionProvider"
-        	android:authorities="org.musicbrainz.mobile.SearchSuggestionProvider" />
-        
-        <activity android:name=".activity.HomeActivity"
-        	android:label="@string/app_name"
-        	android:launchMode="singleTop"
-           	android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        
-        <activity android:name=".activity.IncomingActivity"
-        	android:label="@string/app_name">
-        	<intent-filter>
-        		<action android:name="android.intent.action.VIEW" />
-        		<category android:name="android.intent.category.DEFAULT" />
-        		<data android:scheme="musicbrainz" />
-        	</intent-filter>
-        </activity>
-        
-        <activity android:name=".activity.IntentErrorActivity"
-        	android:label="@string/error_title"
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
-        
-        <activity android:name=".activity.LoginActivity"
-        	android:label="@string/auth_title" 
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
-        
-        <activity android:name=".activity.AboutActivity"
-        	android:label="@string/about_title"
-        	android:screenOrientation="portrait" />
-        
-        <activity android:name=".activity.DonateActivity"
-        	android:label="@string/donate_title"
-        	android:screenOrientation="portrait" />
-        
-        <activity android:name=".activity.BarcodeSearchActivity"
-        	android:label="@string/addupc_title" 
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
-        
-        <activity android:name=".activity.SearchActivity"
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait"
-        	android:launchMode="singleTop">
-        	<intent-filter>
-	            <action android:name="android.intent.action.SEARCH" />
-	        </intent-filter>
-	        <meta-data android:name="android.app.searchable"
-	        	android:resource="@xml/searchable"/>
-	    </activity>
-        
-        <activity android:name=".activity.ReleaseActivity"
-        	android:label="@string/release_title" 
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
-        
-        <activity android:name=".activity.ArtistActivity"
-        	android:label="@string/artist_title" 
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
-        	
-        <activity android:name=".activity.PreferencesActivity"
-        	android:label="@string/preferences_title"
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
-        
-        <activity android:name="com.paypal.android.MEP.PayPalActivity"
-        	android:theme="@android:style/Theme.Translucent.NoTitleBar"
-        	android:configChanges="keyboardHidden|orientation"
-        	android:screenOrientation="portrait" />
-        
-    </application>
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="org.musicbrainz.mobile"
+  android:versionCode="4"
+  android:versionName="1.0.2"
+  android:installLocation="auto">
 
-	<uses-sdk android:minSdkVersion="4" />
-	
-	<supports-screens 
-		android:smallScreens="true"
-		android:normalScreens="true"
-		android:largeScreens="true"
-		android:xlargeScreens="false" />
-		
-	<compatible-screens>
-        <screen android:screenSize="small" android:screenDensity="ldpi" />
-        <screen android:screenSize="small" android:screenDensity="mdpi" />
-        <screen android:screenSize="small" android:screenDensity="hdpi" />
-        <screen android:screenSize="small" android:screenDensity="xhdpi" />
+  <application
+    android:icon="@drawable/icon"
+    android:name=".MBApplication"
+    android:label="@string/app_name"
+    android:debuggable="false"
+    android:theme="@style/CustomTheme">
 
-        <screen android:screenSize="normal" android:screenDensity="ldpi" />
-        <screen android:screenSize="normal" android:screenDensity="mdpi" />
-        <screen android:screenSize="normal" android:screenDensity="hdpi" />
-        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
-        
-        <screen android:screenSize="large" android:screenDensity="ldpi" />
-        <screen android:screenSize="large" android:screenDensity="mdpi" />
-        <screen android:screenSize="large" android:screenDensity="hdpi" />
-        <screen android:screenSize="large" android:screenDensity="xhdpi" />
-	</compatible-screens>
+    <meta-data
+      android:name="android.app.default_searchable"
+      android:value=".activity.SearchActivity" />
 
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-	<uses-feature android:name="android.hardware.camera" />
+    <provider
+      android:name=".suggestion.SuggestionProvider"
+      android:authorities="org.musicbrainz.mobile.SearchSuggestionProvider" />
+
+    <activity
+      android:name=".activity.HomeActivity"
+      android:label="@string/app_name"
+      android:launchMode="singleTop"
+      android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+    <activity
+      android:name=".activity.IncomingActivity"
+      android:label="@string/app_name">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:scheme="musicbrainz" />
+      </intent-filter>
+    </activity>
+
+    <activity
+      android:name=".activity.IntentErrorActivity"
+      android:label="@string/error_title"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.LoginActivity"
+      android:label="@string/auth_title"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.AboutActivity"
+      android:label="@string/about_title"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.DonateActivity"
+      android:label="@string/donate_title"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.BarcodeSearchActivity"
+      android:label="@string/addupc_title"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.SearchActivity"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait"
+      android:launchMode="singleTop">
+      <intent-filter>
+        <action android:name="android.intent.action.SEARCH" />
+      </intent-filter>
+      <meta-data
+        android:name="android.app.searchable"
+        android:resource="@xml/searchable" />
+    </activity>
+
+    <activity
+      android:name=".activity.ReleaseActivity"
+      android:label="@string/release_title"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.ArtistActivity"
+      android:label="@string/artist_title"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.PreferencesActivity"
+      android:label="@string/preferences_title"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" />
+
+    <activity
+      android:name="com.paypal.android.MEP.PayPalActivity"
+      android:theme="@android:style/Theme.Translucent.NoTitleBar"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" />
+
+  </application>
+
+  <uses-sdk android:minSdkVersion="4" />
+
+  <supports-screens
+    android:smallScreens="true"
+    android:normalScreens="true"
+    android:largeScreens="true"
+    android:xlargeScreens="false" />
+
+  <compatible-screens>
+    <screen
+      android:screenSize="small"
+      android:screenDensity="ldpi" />
+    <screen
+      android:screenSize="small"
+      android:screenDensity="mdpi" />
+    <screen
+      android:screenSize="small"
+      android:screenDensity="hdpi" />
+    <screen
+      android:screenSize="small"
+      android:screenDensity="xhdpi" />
+
+    <screen
+      android:screenSize="normal"
+      android:screenDensity="ldpi" />
+    <screen
+      android:screenSize="normal"
+      android:screenDensity="mdpi" />
+    <screen
+      android:screenSize="normal"
+      android:screenDensity="hdpi" />
+    <screen
+      android:screenSize="normal"
+      android:screenDensity="xhdpi" />
+
+    <screen
+      android:screenSize="large"
+      android:screenDensity="ldpi" />
+    <screen
+      android:screenSize="large"
+      android:screenDensity="mdpi" />
+    <screen
+      android:screenSize="large"
+      android:screenDensity="hdpi" />
+    <screen
+      android:screenSize="large"
+      android:screenDensity="xhdpi" />
+  </compatible-screens>
+
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-feature android:name="android.hardware.camera" />
 
 </manifest> 

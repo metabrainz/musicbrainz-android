@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2010 Jamie McDonald
  * 
- * This file is part of MusicBrainz Mobile (Android).
+ * This file is part of MusicBrainz for Android.
  * 
- * MusicBrainz Mobile (Android) is free software: you can redistribute 
+ * MusicBrainz for Android is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public 
  * License as published by the Free Software Foundation, either 
  * version 3 of the License, or (at your option) any later version.
  * 
- * MusicBrainz Mobile (Android) is distributed in the hope that it 
+ * MusicBrainz for Android is distributed in the hope that it 
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied 
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
  * See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with MusicBrainz Mobile (Android). If not, see 
+ * along with MusicBrainz for Android. If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -32,22 +32,22 @@ import android.widget.TextView;
  */
 public class FocusTextView extends TextView {
 
-	public FocusTextView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public FocusTextView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	public void onFocusChanged(boolean focused, int direction, Rect prev) {
-		if (focused)
-			super.onFocusChanged(focused, direction, prev);
-	}
+    public void onFocusChanged(boolean focused, int direction, Rect prev) {
+        if (focused)
+            super.onFocusChanged(focused, direction, prev);
+    }
 
-	public void onWindowFocusChanged(boolean focused) {
-		if (focused)
-			super.onWindowFocusChanged(focused);
-	}
+    public void onWindowFocusChanged(boolean focused) {
+        if (focused)
+            super.onWindowFocusChanged(focused);
+    }
 
-	public boolean isFocused() {
-		return true;
-	}
+    public boolean isFocused() {
+        return true;
+    }
 
 }

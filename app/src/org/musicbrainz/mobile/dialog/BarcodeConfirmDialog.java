@@ -1,20 +1,20 @@
 /*
  * Copyright (C) 2010 Jamie McDonald
  * 
- * This file is part of MusicBrainz Mobile (Android).
+ * This file is part of MusicBrainz for Android.
  * 
- * MusicBrainz Mobile (Android) is free software: you can redistribute 
+ * MusicBrainz for Android is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public 
  * License as published by the Free Software Foundation, either 
  * version 3 of the License, or (at your option) any later version.
  * 
- * MusicBrainz Mobile (Android) is distributed in the hope that it 
+ * MusicBrainz for Android is distributed in the hope that it 
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied 
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
  * See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with MusicBrainz Mobile (Android). If not, see 
+ * along with MusicBrainz for Android. If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -37,42 +37,43 @@ import android.widget.TextView;
  * Dialog that confirms the release details for barcode submission.
  */
 public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener {
-	
-	private BarcodeSearchActivity parent;
-	private ReleaseStub rs;
 
-	public BarcodeConfirmDialog(Context context, ReleaseStub rs) {
-		super(context);
-		
-		this.rs = rs;
-		parent = (BarcodeSearchActivity) context;
-		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.dialog_bar_submit);
-		
-		Button confirm = (Button) findViewById(R.id.barcode_confirm);
-		confirm.setOnClickListener(this);
-		
-		((TextView) findViewById(R.id.list_release)).setText(rs.getTitle());
-		((TextView) findViewById(R.id.list_release_artist)).setText(rs.getArtistName());
-		
-		((TextView) findViewById(R.id.list_release_tracksnum)).setText(rs.getTracksNum() + " tracks");
-		((TextView) findViewById(R.id.list_release_formats)).setText(StringMapper.buildReleaseFormatsString(getContext(), rs.getFormats()));
-		
-		((TextView) findViewById(R.id.list_release_labels)).setText(StringFormat.commaSeparate(rs.getLabels()));
-		((TextView) findViewById(R.id.list_release_date)).setText(rs.getDate());
-		((TextView) findViewById(R.id.list_release_country)).setText(rs.getCountryCode());
-		
-		findViewById(R.id.release_box).setBackgroundResource(R.color.list_bg);
-		
-	}
+    private BarcodeSearchActivity parent;
+    private ReleaseStub rs;
 
-	public void onClick(View v) {
-			
-		String releaseID = rs.getReleaseMbid();
-		parent.submitBarcode(releaseID);
-		parent.finish();
-		dismiss();
-	}
+    public BarcodeConfirmDialog(Context context, ReleaseStub rs) {
+        super(context);
+
+        this.rs = rs;
+        parent = (BarcodeSearchActivity) context;
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.dialog_bar_submit);
+
+        Button confirm = (Button) findViewById(R.id.barcode_confirm);
+        confirm.setOnClickListener(this);
+
+        ((TextView) findViewById(R.id.list_release)).setText(rs.getTitle());
+        ((TextView) findViewById(R.id.list_release_artist)).setText(rs.getArtistName());
+
+        ((TextView) findViewById(R.id.list_release_tracksnum)).setText(rs.getTracksNum() + " tracks");
+        ((TextView) findViewById(R.id.list_release_formats)).setText(StringMapper.buildReleaseFormatsString(
+                getContext(), rs.getFormats()));
+
+        ((TextView) findViewById(R.id.list_release_labels)).setText(StringFormat.commaSeparate(rs.getLabels()));
+        ((TextView) findViewById(R.id.list_release_date)).setText(rs.getDate());
+        ((TextView) findViewById(R.id.list_release_country)).setText(rs.getCountryCode());
+
+        findViewById(R.id.release_box).setBackgroundResource(R.color.list_bg);
+
+    }
+
+    public void onClick(View v) {
+
+        String releaseID = rs.getReleaseMbid();
+        parent.submitBarcode(releaseID);
+        parent.finish();
+        dismiss();
+    }
 
 }

@@ -2,85 +2,93 @@
 
 <!-- Copyright (C) 2010 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/Activity">
-	
-	<com.markupartist.android.widget.ActionBar
-    	android:id="@+id/actionbar"
-    	style="@style/ActionBar" />
-  
-	<TextView android:id="@+id/barcode_text"
-		style="@style/WrapHeight"
-		android:layout_margin="@dimen/small_pad"
-		android:text="@string/barcode_text"
-		android:textColor="@color/main_text"
-		android:textSize="@dimen/text_size_medium" 
-		android:paddingTop="@dimen/small_pad" />
-		
-	<RelativeLayout 
-		style="@style/WrapHeight"
-		android:layout_marginLeft="@dimen/small_pad"
-		android:layout_marginRight="@dimen/small_pad"
-		android:layout_marginBottom="3dip">
-		
-		<EditText android:id="@+id/barcode_search"
-			style="@style/SearchEdit"
-			android:layout_alignParentLeft="true"
-			android:layout_toLeftOf="@+id/barcode_search_btn"
-			android:layout_centerVertical="true"
-			android:hint="@string/barcode_hint" />
-		
-		<ImageButton android:id="@+id/barcode_search_btn"
-			style="@style/SearchButton"
-			android:layout_alignParentRight="true" />	
-	</RelativeLayout>
-		
-	<RelativeLayout 
-		style="@style/WrapHeight">
-		
-		<View android:id="@+id/topline"
-			style="@style/Separator"
-  			android:layout_alignParentTop="true" />
-	
-		<ListView android:id="@+id/barcode_list"
-			style="@style/List"
-			android:layout_below="@+id/topline"
-			android:visibility="invisible" />
-			
-		<TextView android:id="@+id/barcode_instructions"
-			style="@style/BarcodeInstructions"
-			android:layout_below="@+id/topline"
-			android:layout_alignParentBottom="true" />
-			
-		<LinearLayout android:id="@+id/loading"
-			style="@style/Loading"
-			android:visibility="invisible"
-			android:layout_below="@+id/topline">
-	
-			<ProgressBar 
-				style="@style/Wrap"
-				android:indeterminateDrawable="@anim/progress" />
-		</LinearLayout>
-  			
-  		<TextView android:id="@+id/noresults"
-			style="@style/NoResultsText"
-			android:layout_below="@+id/topline"
-			android:layout_alignParentBottom="true" />	
-  	</RelativeLayout>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
+
+  <com.markupartist.android.widget.ActionBar
+    android:id="@+id/actionbar"
+    style="@style/ActionBar" />
+
+  <TextView
+    android:id="@+id/barcode_text"
+    style="@style/WrapHeight"
+    android:layout_margin="@dimen/small_pad"
+    android:text="@string/barcode_text"
+    android:textColor="@color/main_text"
+    android:textSize="@dimen/text_size_medium"
+    android:paddingTop="@dimen/small_pad" />
+
+  <RelativeLayout
+    style="@style/WrapHeight"
+    android:layout_marginLeft="@dimen/small_pad"
+    android:layout_marginRight="@dimen/small_pad"
+    android:layout_marginBottom="3dip">
+
+    <EditText
+      android:id="@+id/barcode_search"
+      style="@style/SearchEdit"
+      android:layout_alignParentLeft="true"
+      android:layout_toLeftOf="@+id/barcode_search_btn"
+      android:layout_centerVertical="true"
+      android:hint="@string/barcode_hint" />
+
+    <ImageButton
+      android:id="@+id/barcode_search_btn"
+      style="@style/SearchButton"
+      android:layout_alignParentRight="true" />
+  </RelativeLayout>
+
+  <RelativeLayout style="@style/WrapHeight">
+
+    <View
+      android:id="@+id/topline"
+      style="@style/Separator"
+      android:layout_alignParentTop="true" />
+
+    <ListView
+      android:id="@+id/barcode_list"
+      style="@style/List"
+      android:layout_below="@+id/topline"
+      android:visibility="invisible" />
+
+    <TextView
+      android:id="@+id/barcode_instructions"
+      style="@style/BarcodeInstructions"
+      android:layout_below="@+id/topline"
+      android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+      android:id="@+id/loading"
+      style="@style/Loading"
+      android:visibility="invisible"
+      android:layout_below="@+id/topline">
+
+      <ProgressBar
+        style="@style/Wrap"
+        android:indeterminateDrawable="@anim/progress" />
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/noresults"
+      style="@style/NoResultsText"
+      android:layout_below="@+id/topline"
+      android:layout_alignParentBottom="true" />
+  </RelativeLayout>
 </LinearLayout>

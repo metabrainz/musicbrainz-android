@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="org.musicbrainz.mobile.test"
-	android:versionCode="1"
-	android:versionName="1.0">
-    
-    <application android:label="@string/app_name">
-    	<uses-library android:name="android.test.runner" />
-    </application>  
-    
-    <instrumentation android:targetPackage="org.musicbrainz.mobile" 
-    	android:name="android.test.InstrumentationTestRunner" />
-    
-	<uses-sdk android:minSdkVersion="4" />
-	
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="org.musicbrainz.mobile.test"
+  android:versionCode="1"
+  android:versionName="1.0">
+
+  <application android:label="@string/app_name">
+    <uses-library android:name="android.test.runner" />
+  </application>
+
+  <instrumentation
+    android:targetPackage="org.musicbrainz.mobile"
+    android:name="android.test.InstrumentationTestRunner" />
+
+  <uses-sdk android:minSdkVersion="4" />
+
 </manifest>

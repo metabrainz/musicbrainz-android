@@ -12,16 +12,16 @@ import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseGroupSearchTest extends BaseXmlParsingTestCase {
 
-	@Test
-	public void testReleaseGroupSearch() throws IOException {
-		
-		InputStream stream = getFileStream("releaseGroupSearch_songs about leaving.xml");
-		assertNotNull(stream);
-		
-		LinkedList<ReleaseGroupStub> releaseGroups = new ResponseParser().parseReleaseGroupSearch(stream);
-		assertEquals(25, releaseGroups.size());
+    @Test
+    public void testReleaseGroupSearch() throws IOException {
 
-		stream.close();
-	}
+        InputStream stream = getFileStream("releaseGroupSearch_songs about leaving.xml");
+        assertNotNull(stream);
+
+        LinkedList<ReleaseGroupStub> releaseGroups = new ResponseParser().parseReleaseGroupSearch(stream);
+        assertEquals(25, releaseGroups.size());
+
+        stream.close();
+    }
 
 }

@@ -2,37 +2,36 @@
 
 <!-- Copyright (C) 2011 Jamie McDonald
 
-	This file is part of MusicBrainz Mobile (Android).
+  This file is part of MusicBrainz for Android.
 
-	MusicBrainz Mobile (Android) is free software: you can redistribute 
-	it and/or modify it under the terms of the GNU General Public 
-	License as published by the Free Software Foundation, either 
-	version 3 of the License, or (at your option) any later version.
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
 
-	MusicBrainz Mobile (Android) is distributed in the hope that it 
-	will be useful, but WITHOUT ANY WARRANTY; without even the implied 
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-	See the GNU General Public License for more details.
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with MusicBrainz Mobile (Android). If not, see 
-	<http://www.gnu.org/licenses/>. -->
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<PreferenceCategory
-        android:title="Search">
+  <PreferenceCategory android:title="Search">
 
-        <CheckBoxPreference
-        	android:key="search_suggestions"
-            android:title="@string/preferences_suggestions"
-            android:summary="@string/preferences_suggestions_description"
-            android:defaultValue="true" />
-                
-        <Preference
-        	android:key="clear_suggestions"
-    		android:title="@string/preferences_clear" />
+    <CheckBoxPreference
+      android:key="search_suggestions"
+      android:title="@string/preferences_suggestions"
+      android:summary="@string/preferences_suggestions_description"
+      android:defaultValue="true" />
 
-    </PreferenceCategory>
-    
+    <Preference
+      android:key="clear_suggestions"
+      android:title="@string/preferences_clear" />
+
+  </PreferenceCategory>
+
 </PreferenceScreen>

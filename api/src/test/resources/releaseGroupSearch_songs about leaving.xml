@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#" xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
-  <release-group-list offset="0" count="7901">
-    <release-group ext:score="100" type="Album"
+<metadata
+  xmlns="http://musicbrainz.org/ns/mmd-2.0#"
+  xmlns:ext="http://musicbrainz.org/ns/ext#-2.0">
+  <release-group-list
+    offset="0"
+    count="7901">
+    <release-group
+      ext:score="100"
+      type="Album"
       id="b8e69326-6882-3821-95ee-7609d9398ffd">
       <title>Songs About Leaving</title>
       <artist-credit>
@@ -29,7 +35,9 @@
         </tag>
       </tag-list>
     </release-group>
-    <release-group ext:score="75" type="Compilation"
+    <release-group
+      ext:score="75"
+      type="Compilation"
       id="9b0995ef-3917-45f6-95ac-21df8fb04064">
       <title>Yes We Can: Songs About Leaving Africa</title>
       <artist-credit>
@@ -48,7 +56,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="57" type="Album"
+    <release-group
+      ext:score="57"
+      type="Album"
       id="0981f668-b2d5-3ef0-b30e-c5d3ff3bd496">
       <title>Leaving Songs</title>
       <artist-credit>
@@ -65,7 +75,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="57" type="Album"
+    <release-group
+      ext:score="57"
+      type="Album"
       id="e46e854e-f5c9-3ff0-9f0e-078871dea3ea">
       <title>Leaving Songs</title>
       <artist-credit>
@@ -88,7 +100,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="45" type="Album"
+    <release-group
+      ext:score="45"
+      type="Album"
       id="ee5cec5e-d50c-33e8-a89c-ede0867a8bd6">
       <title>Leaving Traces: Songs 1994-2004</title>
       <artist-credit>
@@ -105,7 +119,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="45" type="Album"
+    <release-group
+      ext:score="45"
+      type="Album"
       id="7185e949-f85e-3aa2-b87e-fe86926eef53">
       <title>Songs of Leaving</title>
       <artist-credit>
@@ -122,7 +138,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="45" type="Album"
+    <release-group
+      ext:score="45"
+      type="Album"
       id="143d7ce8-6300-3e63-9330-0e31ccf3f5d0">
       <title>Songs of Leaving</title>
       <artist-credit>
@@ -142,7 +160,8 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="38"
+    <release-group
+      ext:score="38"
       id="6c4d59bd-a1a5-36c1-83f6-22c5017f7813">
       <title>Songs About Songs</title>
       <artist-credit>
@@ -159,7 +178,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="fcaabc32-5f03-3ade-b2cf-68c8c9615b6a">
       <title>Songs About Fucking</title>
       <artist-credit>
@@ -187,7 +208,9 @@
         </tag>
       </tag-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="5e26c8a8-0b74-327d-a596-8d3324a010eb">
       <title>Songs About My Cats</title>
       <artist-credit>
@@ -218,7 +241,9 @@
         </tag>
       </tag-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="c6e6e317-6194-3cf7-bba9-ca8557d754b2">
       <title>Songs About Stuff</title>
       <artist-credit>
@@ -235,7 +260,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="937e1207-da9c-39b5-88df-b87db13dc322">
       <title>More Songs About Me</title>
       <artist-credit>
@@ -252,7 +279,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="20316d76-5211-3ae7-b64a-ebe0dea8a274">
       <title>Songs About Running Away</title>
       <artist-credit>
@@ -273,7 +302,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Compilation"
+    <release-group
+      ext:score="33"
+      type="Compilation"
       id="3692763e-3b2e-33fb-a624-d15e6ac180f1">
       <title>Songs About Chicks</title>
       <artist-credit>
@@ -292,7 +323,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="0e6b7a8a-372e-3401-8e8b-ac0f4f2209fa">
       <title>Ten Songs About You</title>
       <artist-credit>
@@ -314,7 +347,9 @@
         </tag>
       </tag-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="2a7b919d-4a72-3483-8303-1d9a8a511b18">
       <title>Songs About Chris</title>
       <artist-credit>
@@ -331,7 +366,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="b57879a6-6778-3026-8c82-1576ba0745c3">
       <title>Songs About the Ocean</title>
       <artist-credit>
@@ -348,7 +385,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="5a226a60-1a54-3f47-b37f-855cae7e3125">
       <title>Songs About Decay</title>
       <artist-credit>
@@ -366,7 +405,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="87527076-2743-3714-86de-794f96c1f1cd">
       <title>Little Songs About Raindrops</title>
       <artist-credit>
@@ -397,7 +438,9 @@
         </tag>
       </tag-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="d237bf4f-60c6-32a6-b781-740fdd2cdef7">
       <title>Songs About You</title>
       <artist-credit>
@@ -414,7 +457,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="f823e28e-6e33-31f7-9766-c6f513c49b01">
       <title>Songs About Cowgirls</title>
       <artist-credit>
@@ -431,7 +476,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="0d4894be-24fa-379b-acee-60a45ad15ff5">
       <title>Songs About Me</title>
       <artist-credit>
@@ -448,7 +495,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="c3a26604-d3db-32ca-9cc2-4ebe37be8bb9">
       <title>Ten Songs About You</title>
       <artist-credit>
@@ -476,7 +525,9 @@
         </tag>
       </tag-list>
     </release-group>
-    <release-group ext:score="33" type="Album"
+    <release-group
+      ext:score="33"
+      type="Album"
       id="d73b02eb-3d8a-3c32-96ea-35a5b097a330">
       <title>Thirteen Songs About Love</title>
       <artist-credit>
@@ -493,7 +544,9 @@
         </release>
       </release-list>
     </release-group>
-    <release-group ext:score="33" type="EP"
+    <release-group
+      ext:score="33"
+      type="EP"
       id="df17ae45-ead2-3054-a46e-0ddc4c919016">
       <title>Songs About Fire</title>
       <artist-credit>
