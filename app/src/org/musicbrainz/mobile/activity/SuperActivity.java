@@ -24,6 +24,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
+import org.musicbrainz.mobile.util.Utils;
 
 import com.markupartist.android.widget.ActionBar;
 
@@ -131,17 +132,10 @@ public abstract class SuperActivity extends Activity {
 
     private void sendFeedback() {
         try {
-            startActivity(createFeedbackIntent());
+            startActivity(Utils.emailIntent(Config.FEEDBACK_EMAIL, Config.FEEDBACK_SUBJECT));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, R.string.toast_feedback_fail, Toast.LENGTH_LONG).show();
         }
-    }
-
-    private Intent createFeedbackIntent() {
-        Uri uri = Uri.parse("mailto:" + Config.FEEDBACK_EMAIL);
-        Intent feedback = new Intent(Intent.ACTION_SENDTO, uri);
-        feedback.putExtra(Intent.EXTRA_SUBJECT, "[MBAndroid] Feedback");
-        return feedback;
     }
 
 }

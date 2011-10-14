@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Jamie McDonald
+ * Copyright (C) 2010 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,18 +20,17 @@
 
 package org.musicbrainz.mobile.util;
 
-public class Config {
-
-    public static final String TAG = "MusicBrainz";
-    public static final boolean LIVE = false;
-    public static final String FEEDBACK_EMAIL = "support@musicbrainz.org";
-    public static final String FEEDBACK_SUBJECT = "[MBAndroid] Feedback";
-
-    public static final String USER_AGENT = "MBAndroid/1.0";
-    public static final String CLIENT_NAME = "musicbrainz.android";
-
-    public static final String REGISTER_LINK = "http://www.musicbrainz.org/register";
-    public static final String FORGOTPASS_LINK = "http://www.musicbrainz.org/lost-password";
-    public static final String DONATE_LINK = "http://www.metabrainz.org/donate";
+/**
+ * Utility methods specific to MusicBrainz for Android.
+ */
+public class AppUtils {
+    
+    public static String makeCoverUrl(String asin) {
+        return "ec1.images-amazon.com/images/P/" + asin;
+    }
+    
+    public static String makeThumbUrl(String asin) {
+        return "ec1.images-amazon.com/images/P/" + asin + ".01.THUMZ";
+    }
 
 }

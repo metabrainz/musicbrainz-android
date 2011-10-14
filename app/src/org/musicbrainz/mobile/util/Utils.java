@@ -18,16 +18,21 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.image;
+package org.musicbrainz.mobile.util;
 
-public class CoverUtil {
+import android.content.Intent;
+import android.net.Uri;
+
+/**
+ * A set of general Android utility methods.
+ */
+public class Utils {
     
-    public static String makeCoverUrl(String asin) {
-        return "ec1.images-amazon.com/images/P/" + asin;
-    }
-    
-    public static String makeThumbUrl(String asin) {
-        return "ec1.images-amazon.com/images/P/" + asin + ".01.THUMZ";
+    public static Intent emailIntent(String recipient, String subject) {
+        Uri uri = Uri.parse("mailto:" + recipient);
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        return intent;
     }
 
 }
