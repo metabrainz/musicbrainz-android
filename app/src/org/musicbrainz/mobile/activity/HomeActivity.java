@@ -51,10 +51,6 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-/**
- * Main Activity that presents the user with a dashboard to initiate the
- * high-level functionalities of the app.
- */
 public class HomeActivity extends SuperActivity implements OnEditorActionListener, OnItemClickListener {
 
     private AutoCompleteTextView searchField;
@@ -213,9 +209,6 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         return false;
     }
 
-    /*
-     * Handle user data on app destruction.
-     */
     public void onDestroy() {
         super.onDestroy();
 
@@ -236,9 +229,9 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
     }
 
     public static Intent createIntent(Context context) {
-        Intent i = new Intent(context, HomeActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        return i;
+        Intent intent = new Intent(context, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
     }
 
 }

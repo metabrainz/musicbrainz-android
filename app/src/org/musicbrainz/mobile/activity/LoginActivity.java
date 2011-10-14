@@ -49,23 +49,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
 
-/**
- * Activity to facilitate user authentication.
- */
 public class LoginActivity extends SuperActivity implements OnEditorActionListener {
+    
+    public static int NOT_LOGGED_IN = 0;
+    public static int LOGGED_IN = 1;
 
     private EditText uname;
     private EditText pass;
-
     private CheckBox stayLogged;
-
-    public static int NOT_LOGGED_IN = 0;
-    public static int LOGGED_IN = 1;
 
     private String username;
     private String password;
     private boolean persist;
-
     private InputMethodManager imm;
 
     public void onCreate(Bundle savedInstanceState) {

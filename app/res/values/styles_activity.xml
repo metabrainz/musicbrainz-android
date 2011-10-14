@@ -22,7 +22,7 @@
   <!-- Activity and Dialog layout styles -->
 
   <style
-    name="CustomTheme"
+    name="MusicBrainzTheme"
     parent="@style/Theme.ActionBar.Light">
     <item name="android:textColorHint">@color/hint_text</item>
     <item name="android:fadeScrollbars">true</item>
@@ -61,7 +61,6 @@
   <style
     name="LaunchActivityLand"
     parent="@style/Activity">
-    <item name="android:paddingTop">@dimen/std_pad</item>
     <item name="android:paddingBottom">@dimen/std_pad</item>
   </style>
 
