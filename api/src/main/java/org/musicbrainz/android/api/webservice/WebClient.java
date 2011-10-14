@@ -64,11 +64,11 @@ public class WebClient {
         responseParser = new ResponseParser();
     }
 
-    public WebClient(String username, String password, String userAgent, String appVersion) {
+    public WebClient(String userAgent, String username, String password, String clientId) {
         httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
         setCredentials(username, password);
-        clientId = appVersion;
+        this.clientId = clientId;
     }
 
     public void setCredentials(String username, String password) {
@@ -77,8 +77,8 @@ public class WebClient {
         httpClient.getCredentialsProvider().setCredentials(authScope, credentials);
     }
 
-    public void setAppVersion(String appVersion) {
-        clientId = appVersion;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
     public Release lookupReleaseFromBarcode(String barcode) throws IOException {

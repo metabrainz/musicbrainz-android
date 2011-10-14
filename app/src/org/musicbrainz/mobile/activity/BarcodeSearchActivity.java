@@ -196,9 +196,8 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
         String term = searchBox.getText().toString();
         if (term.length() != 0) {
-            imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0); // hide
-                                                                        // virtual
-                                                                        // keyboard
+            // hide virtual keyboard
+            imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
             new SearchTask().execute();
         } else {
             Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
@@ -220,7 +219,7 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
             try {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setAppVersion(getVersion());
+                webService.setClientId(generateClientId());
                 webService.submitBarcode(releaseMbid[0], barcode);
             } catch (IOException e) {
                 return false;

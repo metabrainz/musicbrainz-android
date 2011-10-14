@@ -76,13 +76,19 @@ public abstract class SuperActivity extends Activity {
     }
 
     public String getVersion() {
-        String version = "unknown";
         try {
-            version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
-            e.printStackTrace();
+            return "unknown";
         }
-        return version;
+    }
+    
+    public String generateClientId() {
+        return Config.CLIENT_NAME + "-" + getVersion();
+    }
+    
+    public String generateUserAgent() {
+        return Config.USER_AGENT + "/" + getVersion();
     }
 
     protected ActionBar setupActionBarWithHome() {

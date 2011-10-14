@@ -27,6 +27,7 @@ public class Config {
     public static final String FEEDBACK_EMAIL = "support@musicbrainz.org";
 
     public static final String USER_AGENT = "MBAndroid/1.0";
+    public static final String CLIENT_NAME = "musicbrainz.android";
 
     public static final String REGISTER_LINK = "http://www.musicbrainz.org/register";
     public static final String FORGOTPASS_LINK = "http://www.musicbrainz.org/lost-password";

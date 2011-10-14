@@ -292,7 +292,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
                         releaseMbid = data.getMbid();
                         if (loggedIn) {
                             webService.setCredentials(getUsername(), getPassword());
-                            webService.setAppVersion(getVersion());
+                            webService.setClientId(generateClientId());
                             userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
                         }
                         return LOADED;
@@ -324,7 +324,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
             data = webService.lookupRelease(releaseMbid);
             if (loggedIn) {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setAppVersion(getVersion());
+                webService.setClientId(generateClientId());
                 userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
             }
         }
@@ -422,7 +422,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
         private void submitThenRefreshTags(Collection<String> processedTags) throws IOException, SAXException {
             webService.setCredentials(getUsername(), getPassword());
-            webService.setAppVersion(getVersion());
+            webService.setClientId(generateClientId());
             webService.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
             data.setReleaseGroupTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
         }
@@ -464,7 +464,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
         private void submitThenRefreshRating(Integer... rating) throws IOException, SAXException {
             webService.setCredentials(getUsername(), getPassword());
-            webService.setAppVersion(getVersion());
+            webService.setClientId(generateClientId());
             webService.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
             float newRating = webService.lookupRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
             data.setReleaseGroupRating(newRating);

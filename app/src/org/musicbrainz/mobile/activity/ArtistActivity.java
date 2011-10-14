@@ -230,7 +230,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
                 data = webService.lookupArtist(mbid);
                 if (loggedIn) {
                     webService.setCredentials(getUsername(), getPassword());
-                    webService.setAppVersion(getVersion());
+                    webService.setClientId(generateClientId());
                     userData = webService.getUserData(MBEntity.ARTIST, data.getMbid());
                 }
                 return true;
@@ -292,7 +292,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
             try {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setAppVersion(getVersion());
+                webService.setClientId(generateClientId());
                 webService.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
                 data.setTags(webService.lookupTags(MBEntity.ARTIST, data.getMbid()));
             } catch (IOException e) {
@@ -333,7 +333,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
             try {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setAppVersion(getVersion());
+                webService.setClientId(generateClientId());
                 webService.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
                 float newRating = webService.lookupRating(MBEntity.ARTIST, data.getMbid());
                 data.setRating(newRating);
