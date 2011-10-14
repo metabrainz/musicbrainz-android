@@ -38,7 +38,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
-import org.musicbrainz.mobile.strings.StringFormat;
+import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.widget.FocusTextView;

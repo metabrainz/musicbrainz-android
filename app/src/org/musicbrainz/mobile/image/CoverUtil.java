@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.images;
+package org.musicbrainz.mobile.image;
 
 public class CoverUtil {
     

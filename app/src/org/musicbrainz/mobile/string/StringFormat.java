@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.strings;
+package org.musicbrainz.mobile.string;
 
 import java.util.Collection;
 

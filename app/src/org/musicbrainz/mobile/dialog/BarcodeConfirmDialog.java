@@ -23,8 +23,8 @@ package org.musicbrainz.mobile.dialog;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.BarcodeSearchActivity;
-import org.musicbrainz.mobile.strings.StringFormat;
-import org.musicbrainz.mobile.strings.StringMapper;
+import org.musicbrainz.mobile.string.StringFormat;
+import org.musicbrainz.mobile.string.StringMapper;
 
 import android.app.Dialog;
 import android.content.Context;
