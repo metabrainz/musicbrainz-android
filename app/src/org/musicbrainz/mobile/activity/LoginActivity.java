@@ -100,7 +100,7 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
 
         protected Integer doInBackground(Void... v) {
 
-            WebClient client = new WebClient(username, password, getVersion());
+            WebClient client = new WebClient(username, password, Config.USER_AGENT, getVersion());
             Boolean success = false;
             try {
                 success = client.autenticateUserCredentials();

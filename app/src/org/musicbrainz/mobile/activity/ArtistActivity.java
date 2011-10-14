@@ -32,7 +32,8 @@ import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.LinkAdapter;
-import org.musicbrainz.mobile.uiutil.StringFormat;
+import org.musicbrainz.mobile.strings.StringFormat;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
@@ -92,7 +93,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient();
+        webService = new WebClient(Config.USER_AGENT);
 
         mbid = getIntent().getStringExtra(INTENT_MBID);
         new LookupTask().execute();

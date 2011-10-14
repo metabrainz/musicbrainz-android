@@ -45,7 +45,8 @@ import org.musicbrainz.android.api.data.UserData;
 
 /**
  * Makes the web service available for Activity classes. Calls are blocking and
- * should be made inside AsyncTask. XML returned is parsed into pojos with SAX.
+ * should be made inside AsyncTask. The XML that is returned gets parsed into
+ * pojos with SAX.
  */
 public class WebClient {
 
@@ -56,16 +57,15 @@ public class WebClient {
 
     private AbstractHttpClient httpClient;
     private ResponseParser responseParser;
+    private String clientId;
 
-    private String clientId = "unknown";
-
-    public WebClient() {
-        httpClient = HttpClient.getClient();
+    public WebClient(String userAgent) {
+        httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
     }
 
-    public WebClient(String username, String password, String appVersion) {
-        httpClient = HttpClient.getClient();
+    public WebClient(String username, String password, String userAgent, String appVersion) {
+        httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
         setCredentials(username, password);
         clientId = appVersion;

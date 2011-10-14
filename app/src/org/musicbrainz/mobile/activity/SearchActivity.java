@@ -30,6 +30,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
 
 import com.markupartist.android.widget.ActionBar;
@@ -77,7 +78,7 @@ public class SearchActivity extends SuperActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient();
+        webService = new WebClient(Config.USER_AGENT);
         handleIntent();
     }
 

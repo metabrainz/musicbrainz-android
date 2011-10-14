@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.uiutil;
+package org.musicbrainz.mobile.strings;
 
 import java.util.Collection;
 import java.util.HashMap;

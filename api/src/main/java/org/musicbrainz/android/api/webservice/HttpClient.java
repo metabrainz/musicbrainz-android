@@ -53,13 +53,13 @@ import org.apache.http.protocol.HttpContext;
  */
 public class HttpClient {
 
-    private static final String USER_AGENT = "MBAndroid/1.0";
     private static final int TIMEOUT = 20000;
-    private static final int MAX_CONNECTIONS = 5;
+    private static final int MAX_CONNECTIONS = 4;
 
     private static DefaultHttpClient client;
 
-    public static AbstractHttpClient getClient() {
+    public static AbstractHttpClient getClient(String userAgent) {
+        setUserAgent(userAgent);
         return client;
     }
 
@@ -79,8 +79,11 @@ public class HttpClient {
         HttpConnectionParams.setSoTimeout(params, TIMEOUT);
         HttpConnectionParams.setTcpNoDelay(params, true);
         HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-        HttpProtocolParams.setUserAgent(params, USER_AGENT);
         return params;
+    }
+    
+    private static void setUserAgent(String userAgent) {
+        client.getParams().setParameter(HttpProtocolParams.USER_AGENT, userAgent);
     }
 
     private static SchemeRegistry setupSchemeRegistry() {

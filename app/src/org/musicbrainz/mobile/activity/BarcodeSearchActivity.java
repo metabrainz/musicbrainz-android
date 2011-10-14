@@ -28,6 +28,7 @@ import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
 
 import com.markupartist.android.widget.ActionBar;
@@ -78,7 +79,7 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient();
+        webService = new WebClient(Config.USER_AGENT);
 
         setContentView(R.layout.activity_barcode);
         actionBar = setupActionBarWithHome();

@@ -38,7 +38,8 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
-import org.musicbrainz.mobile.uiutil.StringFormat;
+import org.musicbrainz.mobile.strings.StringFormat;
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.widget.FocusTextView;
 import org.xml.sax.SAXException;
@@ -108,7 +109,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient();
+        webService = new WebClient(Config.USER_AGENT);
         releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
         barcode = getIntent().getStringExtra(INTENT_BARCODE);
