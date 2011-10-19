@@ -35,11 +35,10 @@
   <string name="search_name">MusicBrainz</string>
   <string name="search_description">Artists and releases</string>
 
-  <!-- AuthenticateActivity -->
+  <!-- LoginActivity -->
   <string name="auth_title">Log In</string>
   <string name="uname_hint">Username</string>
   <string name="pass_hint">Password</string>
-  <string name="staylog_text">Stay logged in on this device?</string>
   <string name="register_text">Need to register?</string>
   <string name="forgotpass_text">Forgot password?</string>
   <string name="pd_authenticating">Authenticating...</string>
@@ -88,10 +87,6 @@
   <string name="barcode_add_info">This will submit and edit that other users can vote on. The barcode will not
     be added immediately.</string>
   <string name="barcode_add_btn">Submit</string>
-
-  <!-- PostService -->
-  <string name="service_title">MusicBrainz</string>
-  <string name="service_notification">Submitting data to MusicBrainz</string>
 
   <!-- DonateActivity -->
   <string name="donate_title">Donate</string>

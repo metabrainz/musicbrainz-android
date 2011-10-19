@@ -23,10 +23,7 @@ package org.musicbrainz.mobile.activity;
 import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
-import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Secrets;
 
-import com.bugsense.trace.BugSenseHandler;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -53,21 +50,17 @@ import android.widget.Toast;
 
 public class HomeActivity extends SuperActivity implements OnEditorActionListener, OnItemClickListener {
 
+    private static final int REQUEST_LOGIN = 0;
+
     private AutoCompleteTextView searchField;
     private Spinner searchTypeSpinner;
-    private InputMethodManager imm;
     private SuggestionHelper suggestionHelper;
 
-    private static final int LOGIN_REQUEST = 0;
-
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
-
-        if (Config.LIVE) {
-            BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
-        }
 
         searchField = (AutoCompleteTextView) findViewById(R.id.query_input);
         searchField.setOnEditorActionListener(this);
@@ -77,11 +70,10 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
                 android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchTypeSpinner.setAdapter(typeAdapter);
-
-        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         suggestionHelper = new SuggestionHelper(this);
     }
 
+    @Override
     public void onResume() {
         super.onResume();
         updateLoginState();
@@ -100,7 +92,6 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
     }
 
     private void updateLoginState() {
-
         Button login = (Button) findViewById(R.id.login_btn);
         TextView messageBody = (TextView) findViewById(R.id.hometext);
 
@@ -113,16 +104,14 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         }
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
-        if (requestCode == LOGIN_REQUEST) {
-            if (resultCode == LoginActivity.LOGGED_IN) {
-                loggedIn = true;
-                Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
-            }
+        if (requestCode == REQUEST_LOGIN && resultCode == LoginActivity.RESULT_LOGGED_IN) {
+            loggedIn = true;
+            Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
         } else if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-
             if (scanResult.getContents() != null) {
                 Intent barcodeResult = new Intent(this, ReleaseActivity.class);
                 barcodeResult.putExtra("barcode", scanResult.getContents());
@@ -136,8 +125,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         switch (v.getId()) {
         case R.id.login_btn:
             if (!loggedIn) {
-                Intent logInIntent = new Intent(this, LoginActivity.class);
-                startActivityForResult(logInIntent, LOGIN_REQUEST);
+                startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
             } else {
                 logOut();
                 Toast.makeText(this, R.string.toast_loggedOut, Toast.LENGTH_SHORT).show();
@@ -154,12 +142,10 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
             startSearch();
             break;
         case R.id.about_btn:
-            Intent aboutIntent = new Intent(this, AboutActivity.class);
-            startActivity(aboutIntent);
+            startActivity(new Intent(this, AboutActivity.class));
             break;
         case R.id.donate_btn:
-            Intent donateIntent = new Intent(this, DonateActivity.class);
-            startActivity(donateIntent);
+            startActivity(new Intent(this, DonateActivity.class));
         }
     }
 
@@ -176,6 +162,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         String query = searchField.getText().toString();
 
         if (query.length() > 0) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
 
             Intent searchIntent = new Intent(this, SearchActivity.class);
@@ -209,19 +196,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         return false;
     }
 
-    public void onDestroy() {
-        super.onDestroy();
-
-        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-        boolean persist = prefs.getBoolean("persist", false);
-
-        if (!persist) {
-            Editor spe = prefs.edit();
-            spe.clear();
-            spe.commit();
-        }
-    }
-
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home, menu);

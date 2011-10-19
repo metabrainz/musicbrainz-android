@@ -33,7 +33,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -42,18 +41,14 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 /**
- * Abstract class to represent items common to most Activity classes.
+ * Provides methods used across many Activity classes.
  */
 public abstract class SuperActivity extends Activity {
 
     protected boolean loggedIn = false;
 
-    /*
-     * Get login status from shared preferences file and set local status.
-     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getUsername() != null) {
             loggedIn = true;
         }
@@ -72,8 +67,7 @@ public abstract class SuperActivity extends Activity {
     protected String getPassword() {
         SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
         String obscuredPassword = prefs.getString("password", null);
-        String password = SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
-        return password;
+        return SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
     }
 
     public String getVersion() {
@@ -101,7 +95,6 @@ public abstract class SuperActivity extends Activity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.general, menu);
         return true;

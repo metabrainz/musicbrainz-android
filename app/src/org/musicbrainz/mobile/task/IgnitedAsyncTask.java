@@ -1,5 +1,17 @@
 /*
- * TODO LICENSE
+ * Copyright 2011 Matthias Käppler
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.musicbrainz.mobile.task;
@@ -8,20 +20,22 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 /**
- * An extension to AsyncTask that removes some of the boilerplate that's typically involved. Some of
- * the things handled for you by this class are:
+ * An extension to AsyncTask that removes some of the boilerplate that's
+ * typically involved. Some of the things handled for you by this class are:
  * <ul>
- * <li>allows worker method to throw exceptions, which will be passed to {@link #onError}</li>
- * <li>it handles a {@link Context} reference for you, which is also passed to {@link #onStart},
- * {@link #onSuccess}, and {@link #onError}</li>
- * <li>allows re-using a task as a skeleton that delegates to different worker implementations via
- * {@link IgnitedAsyncTaskCallable}</li>
+ * <li>allows worker method to throw exceptions, which will be passed to
+ * {@link #onError}</li>
+ * <li>it handles a {@link Context} reference for you, which is also passed to
+ * {@link #onStart}, {@link #onSuccess}, and {@link #onError}</li>
+ * <li>allows re-using a task as a skeleton that delegates to different worker
+ * implementations via {@link IgnitedAsyncTaskCallable}</li>
  * </ul>
  * 
- * Since this class keeps a reference to a Context, you MUST ensure that this reference is cleared
- * when the Context gets destroyed. You can handle Context connection and disconnection using the
- * {@link #connect(Context)} and {@link #disconnect()} methods. For Activities, a good place to call
- * them is onRestoreInstanceState and onDestroy respectively.
+ * Since this class keeps a reference to a Context, you MUST ensure that this
+ * reference is cleared when the Context gets destroyed. You can handle Context
+ * connection and disconnection using the {@link #connect(Context)} and
+ * {@link #disconnect()} methods. For Activities, a good place to call them is
+ * onRestoreInstanceState and onDestroy respectively.
  * 
  * @author Matthias Kaeppler
  * 
@@ -30,12 +44,11 @@ import android.os.AsyncTask;
  * @param <ProgressT>
  * @param <ReturnT>
  */
-public abstract class IgnitedAsyncTask<ContextT extends Context, ParameterT, ProgressT, ReturnT>
-        extends AsyncTask<ParameterT, ProgressT, ReturnT> {
+public abstract class IgnitedAsyncTask<ContextT extends Context, ParameterT, ProgressT, ReturnT> extends
+        AsyncTask<ParameterT, ProgressT, ReturnT> {
 
     public interface IgnitedAsyncTaskCallable<ContextT extends Context, ParameterT, ProgressT, ReturnT> {
-        public ReturnT call(IgnitedAsyncTask<ContextT, ParameterT, ProgressT, ReturnT> task)
-                throws Exception;
+        public ReturnT call(IgnitedAsyncTask<ContextT, ParameterT, ProgressT, ReturnT> task) throws Exception;
     }
 
     private ContextT context;
@@ -69,10 +82,12 @@ public abstract class IgnitedAsyncTask<ContextT extends Context, ParameterT, Pro
     }
 
     /**
-     * Override this method to prepare task execution. The default implementation does nothing.
+     * Override this method to prepare task execution. The default
+     * implementation does nothing.
      * 
      * @param context
-     *            The most recent instance of the Context that executed this IgnitedAsyncTask
+     *            The most recent instance of the Context that executed this
+     *            IgnitedAsyncTask
      */
     protected void onStart(ContextT context) {
     }
@@ -115,33 +130,37 @@ public abstract class IgnitedAsyncTask<ContextT extends Context, ParameterT, Pro
     }
 
     /**
-     * Implement this method to handle a completed task execution, regardless of outcome. The
-     * default implementation does nothing.
+     * Implement this method to handle a completed task execution, regardless of
+     * outcome. The default implementation does nothing.
      * 
      * @param context
-     *            The most recent instance of the Context that executed this IgnitedAsyncTask
+     *            The most recent instance of the Context that executed this
+     *            IgnitedAsyncTask
      * @param result
      */
     protected void onCompleted(ContextT context, ReturnT result) {
     }
 
     /**
-     * Implement this method to handle a successful task execution. The default implementation does
-     * nothing.
+     * Implement this method to handle a successful task execution. The default
+     * implementation does nothing.
      * 
      * @param context
-     *            The most recent instance of the Context that executed this IgnitedAsyncTask
+     *            The most recent instance of the Context that executed this
+     *            IgnitedAsyncTask
      * @param result
      */
     protected void onSuccess(ContextT context, ReturnT result) {
     }
 
     /**
-     * Override this method to handle an error that occurred during task execution in a graceful
-     * manner. The default implementation prints a stack trace.
+     * Override this method to handle an error that occurred during task
+     * execution in a graceful manner. The default implementation prints a stack
+     * trace.
      * 
      * @param context
-     *            The most recent instance of the Context that executed this IgnitedAsyncTask
+     *            The most recent instance of the Context that executed this
+     *            IgnitedAsyncTask
      * @param error
      *            The exception that was thrown during task execution
      */
@@ -178,13 +197,13 @@ public abstract class IgnitedAsyncTask<ContextT extends Context, ParameterT, Pro
     }
 
     /**
-     * Use an {@link IgnitedAsyncTaskCallable} instead of overriding {@link #run}. This can be
-     * useful when creating task skeletons that need to implement the worker method differently.
+     * Use an {@link IgnitedAsyncTaskCallable} instead of overriding
+     * {@link #run}. This can be useful when creating task skeletons that need
+     * to implement the worker method differently.
      * 
      * @param callable
      */
-    public void setCallable(
-            IgnitedAsyncTaskCallable<ContextT, ParameterT, ProgressT, ReturnT> callable) {
+    public void setCallable(IgnitedAsyncTaskCallable<ContextT, ParameterT, ProgressT, ReturnT> callable) {
         this.callable = callable;
     }
 }

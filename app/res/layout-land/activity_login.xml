@@ -27,7 +27,7 @@
     style="@style/ActionBar" />
 
   <RelativeLayout
-    style="@style/PaddedLayout"
+    style="@style/PaddedLayoutFill"
     android:layout_below="@id/actionbar">
 
     <EditText
@@ -37,26 +37,30 @@
     <EditText
       android:id="@+id/pass_input"
       style="@style/Password"
-      android:layout_below="@+id/uname_input" />
+      android:layout_below="@id/uname_input" />
 
     <Button
       android:id="@+id/auth_btn"
       style="@style/LoginButton"
-      android:layout_below="@+id/pass_input"
+      android:layout_below="@id/pass_input"
       android:layout_alignParentRight="true"
       android:text="@string/login_label" />
 
-    <Button
-      android:id="@+id/forgotpass_link"
-      style="@style/LinkButton"
-      android:text="@string/forgotpass_text"
-      android:layout_alignParentBottom="true" />
+    <LinearLayout
+      style="@style/Wrap"
+      android:orientation="vertical"
+      android:layout_alignParentBottom="true">
 
-    <Button
-      android:id="@+id/register_link"
-      style="@style/LinkButton"
-      android:text="@string/register_text"
-      android:layout_above="@id/forgotpass_link" />
+      <Button
+        android:id="@+id/forgotpass_link"
+        style="@style/LinkButton"
+        android:text="@string/forgotpass_text" />
+
+      <Button
+        android:id="@+id/register_link"
+        style="@style/LinkButton"
+        android:text="@string/register_text" />
+    </LinearLayout>
 
   </RelativeLayout>
 </RelativeLayout>

@@ -20,8 +20,10 @@
 
 package org.musicbrainz.mobile;
 
+import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Secrets;
 
+import com.bugsense.trace.BugSenseHandler;
 import com.paypal.android.MEP.PayPal;
 
 import android.app.Application;
@@ -39,6 +41,9 @@ public class MBApplication extends Application {
     public void onCreate() {
         super.onCreate();
         new LoadPayPalThread().start();
+        if (Config.LIVE) {
+            BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
+        }
     }
 
     private class LoadPayPalThread extends Thread {

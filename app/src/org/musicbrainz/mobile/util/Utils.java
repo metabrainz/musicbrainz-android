@@ -34,5 +34,9 @@ public class Utils {
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         return intent;
     }
+    
+    public static Intent urlIntent(String url) {
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    }
 
 }

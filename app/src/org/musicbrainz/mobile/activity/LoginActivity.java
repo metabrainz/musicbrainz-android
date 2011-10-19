@@ -20,48 +20,46 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.io.IOException;
-
-import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.task.LoginTask;
 import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
+import org.musicbrainz.mobile.util.Utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences.Editor;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 public class LoginActivity extends SuperActivity implements OnEditorActionListener {
-    
-    public static int NOT_LOGGED_IN = 0;
-    public static int LOGGED_IN = 1;
 
-    private EditText uname;
-    private EditText pass;
-    private CheckBox stayLogged;
+    public static final int RESULT_NOT_LOGGED_IN = 0;
+    public static final int RESULT_LOGGED_IN = 1;
+
+    public static final int DIALOG_PROGRESS = 0;
+    private static final int DIALOG_LOGIN_FAILURE = 1;
+    private static final int DIALOG_CONNECTION_FAILURE = 2;
+
+    private EditText usernameBox;
+    private EditText passwordBox;
 
     private String username;
     private String password;
-    private boolean persist;
-    private InputMethodManager imm;
+
+    private LoginTask loginTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,161 +67,148 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
         setContentView(R.layout.activity_login);
         setupActionBarWithHome();
 
-        uname = (EditText) findViewById(R.id.uname_input);
-        pass = (EditText) findViewById(R.id.pass_input);
-        pass.setOnEditorActionListener(this);
-        stayLogged = (CheckBox) findViewById(R.id.staylog_check);
+        usernameBox = (EditText) findViewById(R.id.uname_input);
+        passwordBox = (EditText) findViewById(R.id.pass_input);
+        passwordBox.setOnEditorActionListener(this);
 
-        setResult(NOT_LOGGED_IN);
-        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        setResult(RESULT_NOT_LOGGED_IN);
+
+        Object retained = getLastNonConfigurationInstance();
+        if (getLastNonConfigurationInstance() instanceof LoginTask) {
+            loginTask = (LoginTask) retained;
+            loginTask.connect(this);
+        } else {
+            setupLoginTask();
+        }
     }
 
-    public class AuthenticationTask extends AsyncTask<Void, Void, Integer> {
-
-        private static final int SUCCESS = 0;
-        private static final int FAILURE = 1;
-        private static final int ERROR = 2;
-
-        private ProgressDialog pd;
-
-        protected void onPreExecute() {
-            pd = new ProgressDialog(LoginActivity.this) {
-                public void cancel() {
-                    super.cancel();
-                    AuthenticationTask.this.cancel(true);
-                }
-            };
-            pd.setMessage(getString(R.string.pd_authenticating));
-            pd.setCancelable(true);
-            pd.show();
-        }
-
-        protected Integer doInBackground(Void... v) {
-
-            WebClient client = new WebClient(generateUserAgent(), username, password, generateClientId());
-            Boolean success = false;
-            try {
-                success = client.autenticateUserCredentials();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return ERROR;
-            }
-
-            if (success) {
-                return SUCCESS;
-            } else {
-                return FAILURE;
-            }
-        }
-
-        protected void onPostExecute(Integer resultCode) {
-
-            switch (resultCode) {
-            case SUCCESS:
-                storeCredentials();
-
-                setResult(LOGGED_IN);
-                pd.dismiss();
-                finish();
-                break;
-            case FAILURE:
-                // authentication fail dialog
-                AlertDialog.Builder failBuilder = new AlertDialog.Builder(LoginActivity.this);
-                failBuilder.setMessage(getText(R.string.auth_fail)).setCancelable(false)
-                        .setPositiveButton(getText(R.string.auth_pos), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                try {
-                    AlertDialog authFail = failBuilder.create();
-                    pd.dismiss();
-                    authFail.show();
-                } catch (Exception e) {
-                    Log.e("Login failed but Activity has closed anyway");
-                }
-                break;
-            case ERROR:
-                // connection fail dialog with option to restart auth thread
-                AlertDialog.Builder errBuilder = new AlertDialog.Builder(LoginActivity.this);
-                errBuilder.setMessage(getString(R.string.err_text)).setCancelable(false)
-                        .setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // restart search thread
-                                new AuthenticationTask().execute();
-                                dialog.cancel();
-                            }
-                        }).setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // finish activity
-                                LoginActivity.this.finish();
-                            }
-                        });
-                try {
-                    Dialog conError = errBuilder.create();
-                    pd.dismiss();
-                    conError.show();
-                } catch (Exception e) {
-                    Log.e("Connection timed out but Activity has closed anyway");
-                }
-            }
-        }
-
+    private void setupLoginTask() {
+        loginTask = new LoginTask();
+        loginTask.connect(this);
     }
 
-    private void storeCredentials() {
+    private void executeLogin() {
+        Credentials creds = new Credentials(generateUserAgent(), username, password, generateClientId());
+        loginTask.execute(creds);
+    }
+
+    public void onLoginTaskFinished() {
+        if (loginTask.failed()) {
+            showDialog(DIALOG_CONNECTION_FAILURE);
+        } else if (loginTask.succeeded()) {
+            onLoginSuccess();
+        } else {
+            showDialog(DIALOG_LOGIN_FAILURE);
+        }
+    }
+
+    private void onLoginSuccess() {
         Editor spe = getSharedPreferences("user", MODE_PRIVATE).edit();
         spe.putString("username", username);
         String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), password);
         spe.putString("password", obscuredPassword);
-        spe.putBoolean("persist", persist);
         spe.commit();
+        setResult(RESULT_LOGGED_IN);
+        finish();
     }
 
     public void onClick(View v) {
-        int id = v.getId();
-
-        switch (id) {
+        switch (v.getId()) {
         case R.id.auth_btn:
-            login();
+            tryLogin();
             break;
         case R.id.register_link:
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Config.REGISTER_LINK)));
+            startActivity(Utils.urlIntent(Config.REGISTER_LINK));
             break;
         case R.id.forgotpass_link:
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Config.FORGOTPASS_LINK)));
+            startActivity(Utils.urlIntent(Config.FORGOTPASS_LINK));
         }
     }
 
-    /*
-     * Initiate login on enter editor action.
-     */
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-        if (v.getId() == R.id.pass_input && actionId == EditorInfo.IME_NULL)
-            login();
-
+        if (v.getId() == R.id.pass_input && actionId == EditorInfo.IME_NULL) {
+            tryLogin();
+        }
         return false;
     }
 
-    /*
-     * Start authentication task given the current username and password field
-     * text.
-     */
-    private void login() {
-
-        username = uname.getText().toString();
-        password = pass.getText().toString();
+    private void tryLogin() {
+        username = usernameBox.getText().toString();
+        password = passwordBox.getText().toString();
 
         if (username.length() == 0 || password.length() == 0) {
-            Toast warning = Toast.makeText(this, R.string.toast_auth_err, Toast.LENGTH_SHORT);
-            warning.show();
+            Toast.makeText(this, R.string.toast_auth_err, Toast.LENGTH_SHORT).show();
         } else {
-            imm.hideSoftInputFromWindow(pass.getWindowToken(), 0);
-            persist = stayLogged.isChecked();
-            new AuthenticationTask().execute();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(passwordBox.getWindowToken(), 0);
+            executeLogin();
         }
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_PROGRESS:
+            return createProgressDialog();
+        case DIALOG_LOGIN_FAILURE:
+            return createLoginFailureDialog();
+        case DIALOG_CONNECTION_FAILURE:
+            return createConnectionErrorDialog();
+        }
+        return null;
+    }
+    
+    public Dialog createProgressDialog() {
+        ProgressDialog progress = new ProgressDialog(this) {
+            public void cancel() {
+                super.cancel();
+                loginTask.cancel(true);
+            }
+        };
+        progress.setMessage(getString(R.string.pd_authenticating));
+        progress.setCancelable(true);
+        return progress;
+    }
+    
+    private Dialog createLoginFailureDialog() {
+        AlertDialog.Builder failureDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+        failureDialogBuilder.setMessage(getText(R.string.auth_fail)).setCancelable(false)
+                .setPositiveButton(getText(R.string.auth_pos), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        setupLoginTask();
+                    }
+                });
+        return failureDialogBuilder.create();
+    }
+
+    private Dialog createConnectionErrorDialog() {
+        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+        errorDialogBuilder.setMessage(getString(R.string.err_text)).setCancelable(false)
+                .setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        setupLoginTask();
+                        executeLogin();
+                        dialog.cancel();
+                    }
+                }).setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        LoginActivity.this.finish();
+                    }
+                });
+        return errorDialogBuilder.create();
+    }
+    
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        loginTask.disconnect();
+        return loginTask;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loginTask.disconnect();
     }
 
 }

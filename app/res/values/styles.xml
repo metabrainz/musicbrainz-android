@@ -180,14 +180,6 @@
   </style>
 
   <style
-    name="CheckBoxText"
-    parent="TextBody">
-    <item name="android:layout_centerVertical">true</item>
-    <item name="android:gravity">right</item>
-    <item name="android:text">@string/staylog_text</item>
-  </style>
-
-  <style
     name="Footer"
     parent="@style/TextBody">
     <item name="android:layout_alignParentBottom">true</item>
@@ -338,20 +330,13 @@
   </style>
 
   <style
-    name="CheckBox"
-    parent="@style/Wrap">
-    <item name="android:layout_alignParentRight">true</item>
-    <item name="android:layout_marginLeft">@dimen/std_pad</item>
-  </style>
-
-  <style
     name="StdButton"
     parent="@style/WrapHeight">
     <item name="android:onClick">onClick</item>
   </style>
 
   <style name="LoginButton">
-    <item name="android:layout_width">190dp</item>
+    <item name="android:layout_width">@dimen/login_buttons</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:onClick">onClick</item>
   </style>
@@ -363,6 +348,7 @@
     <item name="android:drawableRight">@drawable/ic_link</item>
     <item name="android:padding">@dimen/std_pad</item>
     <item name="android:layout_marginTop">@dimen/std_pad</item>
+    <item name="android:minWidth">@dimen/login_buttons</item>
     <item name="android:onClick">onClick</item>
   </style>
 </resources>

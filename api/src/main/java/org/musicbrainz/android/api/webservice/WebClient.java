@@ -42,6 +42,7 @@ import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.UserData;
+import org.musicbrainz.android.api.util.Credentials;
 
 /**
  * Makes the web service available for Activity classes. Calls are blocking and
@@ -63,12 +64,12 @@ public class WebClient {
         httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
     }
-
-    public WebClient(String userAgent, String username, String password, String clientId) {
-        httpClient = HttpClient.getClient(userAgent);
+    
+    public WebClient(Credentials creds) {
+        httpClient = HttpClient.getClient(creds.getUserAgent());
         responseParser = new ResponseParser();
-        setCredentials(username, password);
-        this.clientId = clientId;
+        setCredentials(creds.getUsername(), creds.getPassword());
+        this.clientId = creds.getClientId();
     }
 
     public void setCredentials(String username, String password) {

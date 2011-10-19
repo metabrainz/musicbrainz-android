@@ -28,6 +28,10 @@ public class Log {
         android.util.Log.e(TAG, message);
     }
 
+    public static void d(String message) {
+        android.util.Log.d(TAG, message);
+    }
+
     public static void v(String message) {
         android.util.Log.v(TAG, message);
     }
