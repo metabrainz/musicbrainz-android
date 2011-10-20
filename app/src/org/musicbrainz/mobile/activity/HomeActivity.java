@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.activity;
 import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
+import org.musicbrainz.mobile.util.Constants;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -114,15 +115,15 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
             if (scanResult.getContents() != null) {
                 Intent barcodeResult = new Intent(this, ReleaseActivity.class);
-                barcodeResult.putExtra("barcode", scanResult.getContents());
+                barcodeResult.putExtra(ReleaseActivity.INTENT_BARCODE, scanResult.getContents());
                 startActivity(barcodeResult);
             }
         }
     }
 
-    public void onClick(View v) {
+    public void onClick(View view) {
 
-        switch (v.getId()) {
+        switch (view.getId()) {
         case R.id.login_btn:
             if (!loggedIn) {
                 startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
@@ -150,7 +151,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
     }
 
     private void logOut() {
-        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(Constants.PREFS_USER, MODE_PRIVATE);
         Editor spe = prefs.edit();
         spe.clear();
         spe.commit();

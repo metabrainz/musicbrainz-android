@@ -210,7 +210,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     private Intent createShareIntent() {
         final Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "http://www.musicbrainz.org/release/" + releaseMbid);
+        intent.putExtra(Intent.EXTRA_TEXT, "http://musicbrainz.org/release/" + releaseMbid);
         return Intent.createChooser(intent, getString(R.string.share));
     }
 
@@ -223,7 +223,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     private Intent createArtistIntent() {
         final Intent releaseIntent = new Intent(this, ArtistActivity.class);
-        releaseIntent.putExtra("mbid", data.getArtists().get(0).getMbid());
+        releaseIntent.putExtra(ArtistActivity.INTENT_MBID, data.getArtists().get(0).getMbid());
         return releaseIntent;
     }
 

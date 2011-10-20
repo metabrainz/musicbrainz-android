@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Constants;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.util.Utils;
@@ -56,17 +57,17 @@ public abstract class SuperActivity extends Activity {
 
     protected boolean shouldProvideSearchSuggestions() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        return prefs.getBoolean("search_suggestions", true);
+        return prefs.getBoolean(Constants.PREF_SUGGESTIONS, true);
     }
 
     protected String getUsername() {
-        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-        return prefs.getString("username", null);
+        SharedPreferences prefs = getSharedPreferences(Constants.PREFS_USER, MODE_PRIVATE);
+        return prefs.getString(Constants.PREF_USERNAME, null);
     }
 
     protected String getPassword() {
-        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-        String obscuredPassword = prefs.getString("password", null);
+        SharedPreferences prefs = getSharedPreferences(Constants.PREFS_USER, MODE_PRIVATE);
+        String obscuredPassword = prefs.getString(Constants.PREF_PASSWORD, null);
         return SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
     }
 
@@ -105,19 +106,16 @@ public abstract class SuperActivity extends Activity {
 
         switch (item.getItemId()) {
         case R.id.menu_about:
-            Intent aboutIntent = new Intent(this, AboutActivity.class);
-            startActivity(aboutIntent);
+            startActivity(new Intent(this, AboutActivity.class));
             return true;
         case R.id.menu_donate:
-            Intent donateIntent = new Intent(this, DonateActivity.class);
-            startActivity(donateIntent);
+            startActivity(new Intent(this, DonateActivity.class));
+            return true;
+        case R.id.menu_preferences:
+            startActivity(new Intent(this, PreferencesActivity.class));
             return true;
         case R.id.menu_feedback:
             sendFeedback();
-            return true;
-        case R.id.menu_preferences:
-            Intent prefsIntent = new Intent(this, PreferencesActivity.class);
-            startActivity(prefsIntent);
             return true;
         }
         return false;

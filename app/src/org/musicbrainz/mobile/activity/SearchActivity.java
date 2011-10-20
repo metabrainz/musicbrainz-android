@@ -103,7 +103,7 @@ public class SearchActivity extends SuperActivity {
 
     private void setHeaderText() {
         TextView resultsText = (TextView) findViewById(R.id.searchres_text);
-        resultsText.setText("'" + searchQuery + "'");
+        resultsText.setText(searchQuery);
     }
 
     private void doSearch() {
@@ -280,7 +280,7 @@ public class SearchActivity extends SuperActivity {
             Dialog conError = builder.create();
             conError.show();
         } catch (Exception e) {
-            Log.e("Connection timed out but Activity has closed anyway");
+            Log.v("Connection timed out but Activity has closed anyway");
         }
     }
 
