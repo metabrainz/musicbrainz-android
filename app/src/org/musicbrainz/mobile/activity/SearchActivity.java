@@ -30,10 +30,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
-import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
-
-import com.markupartist.android.widget.ActionBar;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -49,10 +46,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
+import com.markupartist.android.widget.ActionBar;
 
 /**
  * Activity to display a list of search results to the user and support intents
@@ -78,7 +77,7 @@ public class SearchActivity extends SuperActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(Config.USER_AGENT);
+        webService = new WebClient(generateUserAgent());
         handleIntent();
     }
 

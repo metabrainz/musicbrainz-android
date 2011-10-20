@@ -28,10 +28,7 @@ import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
-import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
-
-import com.markupartist.android.widget.ActionBar;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -50,8 +47,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
+
+import com.markupartist.android.widget.ActionBar;
 
 /**
  * Activity to submit a barcode to a selected release in MusicBrainz if isn't
@@ -79,7 +78,7 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(Config.USER_AGENT);
+        webService = new WebClient(generateUserAgent());
 
         setContentView(R.layout.activity_barcode);
         actionBar = setupActionBarWithHome();

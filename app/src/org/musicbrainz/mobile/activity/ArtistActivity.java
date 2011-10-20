@@ -35,6 +35,7 @@ import org.musicbrainz.mobile.adapter.LinkAdapter;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
+import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
 import com.markupartist.android.widget.ActionBar;
@@ -71,29 +72,22 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
     private ActionBar actionBar;
 
-    // refreshables
     private RatingBar rating;
     private FocusTextView tags;
-
-    // input
     private EditText tagInput;
     private RatingBar ratingInput;
-
-    // edit buttons
     private Button tagBtn;
     private Button rateBtn;
 
-    private UserData userData;
-
-    // status
     private boolean doingTag = false;
     private boolean doingRate = false;
 
     private WebClient webService;
+    private UserData userData;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(Config.USER_AGENT);
+        webService = new WebClient(generateUserAgent());
 
         mbid = getIntent().getStringExtra(INTENT_MBID);
         new LookupTask().execute();
@@ -107,7 +101,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
         actionBar = setupActionBarWithHome();
         addActionBarShare();
 
-        // info header
         FocusTextView artist = (FocusTextView) findViewById(R.id.artist_artist);
         rating = (RatingBar) findViewById(R.id.artist_rating);
         tags = (FocusTextView) findViewById(R.id.artist_tags);
@@ -171,14 +164,8 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
     private void addActionBarShare() {
         Action share = actionBar.newAction();
         share.setIcon(R.drawable.ic_actionbar_share);
-        share.setIntent(createShareIntent());
+        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.ARTIST_SHARE + mbid));
         actionBar.addAction(share);
-    }
-
-    private Intent createShareIntent() {
-        final Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "http://www.musicbrainz.org/artist/" + mbid);
-        return Intent.createChooser(intent, getString(R.string.share));
     }
 
     /*
@@ -268,7 +255,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
                     Dialog conError = builder.create();
                     conError.show();
                 } catch (Exception e) {
-                    Log.e("Connection timed out but Activity has closed anyway");
+                    Log.v("Connection timed out but Activity has closed anyway");
                 }
             }
         }
@@ -363,12 +350,11 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
     /**
      * Handler for tag and rate buttons.
      */
-    public void onClick(View v) {
+    public void onClick(View view) {
 
-        switch (v.getId()) {
+        switch (view.getId()) {
 
         case R.id.tag_btn:
-
             String tagString = tagInput.getText().toString();
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
@@ -377,7 +363,6 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
             }
             break;
         case R.id.rate_btn:
-
             int rating = (int) ratingInput.getRating();
             new RatingTask().execute(rating);
         }
@@ -392,7 +377,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
             ReleaseGroupStub rg = data.getReleases().get(position);
 
             Intent releaseIntent = new Intent(ArtistActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra("rg_id", rg.getMbid());
+            releaseIntent.putExtra(ReleaseActivity.INTENT_RG_MBID, rg.getMbid());
             startActivity(releaseIntent);
         } else {
             String link = data.getLinks().get(position).getUrl();

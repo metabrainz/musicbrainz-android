@@ -22,16 +22,27 @@ package org.musicbrainz.mobile.util;
 
 public class Config {
 
-    public static final String TAG = "MusicBrainz";
     public static final boolean LIVE = false;
+    public static final String TAG = "MusicBrainz";
+    
     public static final String FEEDBACK_EMAIL = "support@musicbrainz.org";
     public static final String FEEDBACK_SUBJECT = "[MBAndroid] Feedback";
 
-    public static final String USER_AGENT = "MBAndroid/1.0";
+    public static final String USER_AGENT = "MBAndroid";
     public static final String CLIENT_NAME = "musicbrainz.android";
+    
+    public static final String DONATION_CURRENCY = "USD";
+    public static final String DONATION_EMAIL = "paypal@metabrainz.org";
+    public static final String DONATION_NAME = "MetaBrainz Foundation";
+    public static final String DONATION_DESCRIPTION = "MusicBrainz donation via Android app";
+    
+    public static final String WEBSITE = "http://musicbrainz.org/";
+    
+    public static final String REGISTER_LINK = WEBSITE + "register";
+    public static final String FORGOTPASS_LINK = WEBSITE + "lost-password";
+    public static final String DONATE_LINK = "http://metabrainz.org/donate";
 
-    public static final String REGISTER_LINK = "http://www.musicbrainz.org/register";
-    public static final String FORGOTPASS_LINK = "http://www.musicbrainz.org/lost-password";
-    public static final String DONATE_LINK = "http://www.metabrainz.org/donate";
-
+    public static final String ARTIST_SHARE = WEBSITE + "artist/";
+    public static final String RELEASE_SHARE = WEBSITE + "release/";
+    
 }

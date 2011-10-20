@@ -35,7 +35,7 @@ import android.app.Application;
  */
 public class MBApplication extends Application {
 
-    public PayPal payPal;
+    private PayPal payPal;
 
     @Override
     public void onCreate() {
@@ -44,6 +44,10 @@ public class MBApplication extends Application {
         if (Config.LIVE) {
             BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
         }
+    }
+    
+    public PayPal getPayPal() {
+        return payPal;
     }
 
     private class LoadPayPalThread extends Thread {

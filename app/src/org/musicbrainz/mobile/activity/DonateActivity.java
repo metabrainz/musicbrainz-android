@@ -51,6 +51,9 @@ import android.widget.Toast;
  * Activity to process a donation to MetaBrainz through the PayPal MPL.
  */
 public class DonateActivity extends SuperActivity implements OnClickListener {
+    
+    private static final int PAYPAL_REQUEST_CODE = 1;
+    private static final int MAX_CHECKS = 20;
 
     private ActionBar actionBar;
     private Spinner amount;
@@ -59,8 +62,6 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
     private PayPal payPal;
     private Handler handler = new Handler();
     private int initChecks;
-    private static final int MAX_CHECKS = 20;
-    private static final int PAYPAL_REQUEST_CODE = 1;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +86,7 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
         @Override
         public void run() {
             MBApplication app = (MBApplication) getApplication();
-            payPal = app.payPal;
+            payPal = app.getPayPal();
             if (payPal != null) {
                 onPayPalLoaded();
             } else if (initChecks < MAX_CHECKS) {
@@ -153,12 +154,12 @@ public class DonateActivity extends SuperActivity implements OnClickListener {
     private PayPalPayment createPayment(BigDecimal amount) {
         PayPalPayment donation = new PayPalPayment();
         donation.setSubtotal(amount);
-        donation.setCurrencyType("USD");
+        donation.setCurrencyType(Config.DONATION_CURRENCY);
         donation.setPaymentType(PayPal.PAYMENT_TYPE_NONE);
         donation.setPaymentSubtype(PayPal.PAYMENT_SUBTYPE_DONATIONS);
-        donation.setRecipient("paypal@metabrainz.org");
-        donation.setMerchantName("MetaBrainz Foundation");
-        donation.setDescription("MusicBrainz donation via Android app");
+        donation.setRecipient(Config.DONATION_EMAIL);
+        donation.setMerchantName(Config.DONATION_NAME);
+        donation.setDescription(Config.DONATION_DESCRIPTION);
         return donation;
     }
 

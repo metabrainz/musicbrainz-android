@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2010 Jamie McDonald
+
+  This file is part of MusicBrainz for Android.
+
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
+
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
+
+  <com.markupartist.android.widget.ActionBar
+    android:id="@+id/actionbar"
+    style="@style/ActionBar" />
+
+  <LinearLayout
+    style="@style/PaddedLayoutFill"
+    android:orientation="horizontal"
+    android:layout_below="@id/actionbar">
+
+    <RelativeLayout
+      style="@style/Fill"
+      android:layout_weight="3">
+      <TextView
+        android:id="@+id/donate_title"
+        style="@style/TextHeader"
+        android:text="@string/donate_header" />
+
+      <TextView
+        android:id="@+id/donate_body"
+        style="@style/TextBody"
+        android:text="@string/donate_text"
+        android:layout_below="@id/donate_title" />
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:id="@+id/donate_layout"
+      style="@style/Fill"
+      android:layout_weight="2"
+      android:layout_marginLeft="@dimen/home_pad">
+      <Spinner
+        android:id="@+id/donate_spin"
+        style="@style/WrapHeight" />
+
+      <TextView
+        android:id="@+id/donate_loading_text"
+        style="@style/PayPalLoadingText"
+        android:layout_below="@id/donate_spin"
+        android:layout_centerHorizontal="true"
+        android:text="@string/paypal_loading_label" />
+
+      <Button
+        android:id="@+id/alt_donate_link"
+        style="@style/LinkButton"
+        android:text="@string/alt_donate_text"
+        android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+  </LinearLayout>
+</RelativeLayout>

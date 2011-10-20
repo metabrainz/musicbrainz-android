@@ -41,6 +41,7 @@ import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
+import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 import org.xml.sax.SAXException;
 
@@ -78,7 +79,6 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     private Release data;
 
-    // query data
     private LookupSource src;
     private String releaseMbid;
     private String releaseGroupMbid;
@@ -87,29 +87,22 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     private ActionBar actionBar;
 
-    // refreshables
     private FocusTextView tags;
     private RatingBar rating;
-
-    // input
     private EditText tagInput;
     private RatingBar ratingInput;
-
-    // edit buttons
     private Button tagBtn;
     private Button rateBtn;
 
-    private UserData userData;
-
-    // status
     private boolean doingTag = false;
     private boolean doingRate = false;
 
     private WebClient webService;
+    private UserData userData;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(Config.USER_AGENT);
+        webService = new WebClient(generateUserAgent());
         releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
         barcode = getIntent().getStringExtra(INTENT_BARCODE);
@@ -204,14 +197,8 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
     private void addActionBarShare() {
         Action share = actionBar.newAction();
         share.setIcon(R.drawable.ic_actionbar_share);
-        share.setIntent(createShareIntent());
+        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
         actionBar.addAction(share);
-    }
-
-    private Intent createShareIntent() {
-        final Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "http://musicbrainz.org/release/" + releaseMbid);
-        return Intent.createChooser(intent, getString(R.string.share));
     }
 
     private void addActionBarArtist() {
@@ -360,7 +347,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
                 bcode.setCancelable(true);
                 bcode.show();
             } catch (Exception e) {
-                Log.e("Barcode not found but Activity closed anyway");
+                Log.v("Barcode not found but Activity closed anyway");
             }
         }
 
@@ -369,7 +356,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
                 ReleaseSelectionDialog rsd = new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
                 rsd.show();
             } catch (Exception e) {
-                Log.e("Release groups loaded but Activity has closed");
+                Log.v("Release groups loaded but Activity has closed");
             }
         }
 
@@ -392,7 +379,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
                 Dialog conError = builder.create();
                 conError.show();
             } catch (Exception e) {
-                Log.e("Connection timed out but Activity has closed anyway");
+                Log.v("Connection timed out but Activity has closed anyway");
             }
         }
 
@@ -485,11 +472,10 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     }
 
-    public void onClick(View v) {
+    public void onClick(View view) {
 
-        switch (v.getId()) {
+        switch (view.getId()) {
         case R.id.tag_btn:
-
             String tagString = tagInput.getText().toString();
             if (tagString.length() == 0) {
                 Toast tagMessage = Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT);
@@ -499,11 +485,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
             }
             break;
         case R.id.rate_btn:
-
             int rating = (int) ratingInput.getRating();
             new RatingTask().execute(rating);
         }
-
     }
 
     private enum LookupSource {

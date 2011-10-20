@@ -20,13 +20,22 @@
 
 package org.musicbrainz.mobile.util;
 
+import org.musicbrainz.mobile.R;
+
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
 /**
- * A set of general Android utility methods.
+ * A set of fairly general Android utility methods.
  */
 public class Utils {
+    
+    public static Intent shareIntent(Context context, String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        return Intent.createChooser(intent, context.getString(R.string.share));
+    }
     
     public static Intent emailIntent(String recipient, String subject) {
         Uri uri = Uri.parse("mailto:" + recipient);
