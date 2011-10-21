@@ -21,6 +21,7 @@
 package org.musicbrainz.android.api.handlers;
 
 import org.musicbrainz.android.api.data.Artist;
+import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.WebLink;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -34,6 +35,7 @@ public class ArtistLookupHandler extends MBHandler {
     private boolean inLifeSpan = false;
 
     private Artist artist = new Artist();
+    private Tag tag;
     private WebLink link;
 
     public Artist getResult() {
@@ -55,6 +57,9 @@ public class ArtistLookupHandler extends MBHandler {
             sb = new StringBuilder();
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = true;
+            sb = new StringBuilder();
+            tag = new Tag();
+            tag.setCount(Integer.parseInt(atts.getValue("count")));
         } else if (localName.equalsIgnoreCase("rating")) {
             int ratingCount = Integer.parseInt(atts.getValue("votes-count"));
             artist.setRatingCount(ratingCount);
@@ -63,13 +68,12 @@ public class ArtistLookupHandler extends MBHandler {
             sb = new StringBuilder();
         } else if (localName.equalsIgnoreCase("relation")) {
             if (inUrlRelations) {
+                sb = new StringBuilder();
                 link = new WebLink();
                 link.setType(atts.getValue("type"));
             }
         } else if (localName.equalsIgnoreCase("target")) {
             sb = new StringBuilder();
-        } else if (localName.equalsIgnoreCase("tag")) {
-            inTag = true;
         } else if (localName.equalsIgnoreCase("life-span")) {
             inLifeSpan = true;
         } else if (localName.equalsIgnoreCase("begin")) {
@@ -96,7 +100,8 @@ public class ArtistLookupHandler extends MBHandler {
 
         if (localName.equalsIgnoreCase("name")) {
             if (inTag) {
-                artist.addTag(sb.toString());
+                tag.setText(sb.toString());
+                artist.addTag(tag);
             } else if (inArtistRelations) {
 
             } else if (inLabelRelations) {

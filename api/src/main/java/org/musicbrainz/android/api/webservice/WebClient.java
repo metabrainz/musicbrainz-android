@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import org.apache.http.HttpEntity;
@@ -41,6 +42,7 @@ import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.util.Credentials;
 
@@ -150,11 +152,12 @@ public class WebClient {
         return releases;
     }
 
-    public Collection<String> lookupTags(MBEntity type, String mbid) throws IOException {
+    public LinkedList<Tag> lookupTags(MBEntity type, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.tagLookup(type, mbid));
         InputStream response = entity.getContent();
-        Collection<String> tags = responseParser.parseTagLookup(response);
+        LinkedList<Tag> tags = responseParser.parseTagLookup(response);
         entity.consumeContent();
+        Collections.sort(tags);
         return tags;
     }
 

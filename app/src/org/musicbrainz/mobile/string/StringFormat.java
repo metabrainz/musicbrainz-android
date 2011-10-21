@@ -21,8 +21,10 @@
 package org.musicbrainz.mobile.string;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.Tag;
 
 public class StringFormat {
 
@@ -41,6 +43,17 @@ public class StringFormat {
         StringBuilder sb = new StringBuilder();
         for (ReleaseArtist artist : artists) {
             sb.append(artist.getName() + ", ");
+        }
+        return sb.substring(0, sb.length() - 2);
+    }
+    
+    public static String commaSeparateTags(LinkedList<Tag> tags) {
+        StringBuilder sb = new StringBuilder();
+        if (tags.isEmpty()) {
+            return sb.toString();
+        }
+        for (Tag tag : tags) {
+            sb.append(tag.getText() + ", ");
         }
         return sb.substring(0, sb.length() - 2);
     }

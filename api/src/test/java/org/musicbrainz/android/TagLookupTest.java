@@ -5,9 +5,10 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
+import java.util.LinkedList;
 
 import org.junit.Test;
+import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class TagLookupTest extends BaseXmlParsingTestCase {
@@ -28,7 +29,7 @@ public class TagLookupTest extends BaseXmlParsingTestCase {
         assertNotNull(stream);
 
         ResponseParser responseParser = new ResponseParser();
-        Collection<String> tags = responseParser.parseTagLookup(stream);
+        LinkedList<Tag> tags = responseParser.parseTagLookup(stream);
         assertEquals(expected, tags.size());
 
         stream.close();

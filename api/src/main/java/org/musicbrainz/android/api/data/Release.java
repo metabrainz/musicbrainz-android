@@ -22,6 +22,7 @@ package org.musicbrainz.android.api.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Release {
@@ -38,7 +39,7 @@ public class Release {
 
     private float releaseGroupRating;
     private int releaseGroupRatingCount;
-    private Collection<String> releaseGroupTags = new LinkedList<String>();
+    private LinkedList<Tag> releaseGroupTags = new LinkedList<Tag>();
 
     private Collection<String> labels = new LinkedList<String>();
     private ArrayList<RecordingStub> tracks = new ArrayList<RecordingStub>();
@@ -123,15 +124,16 @@ public class Release {
         this.releaseGroupRatingCount = releaseGroupRatingCount;
     }
 
-    public Collection<String> getReleaseGroupTags() {
+    public LinkedList<Tag> getReleaseGroupTags() {
+        Collections.sort(releaseGroupTags);
         return releaseGroupTags;
     }
 
-    public void setReleaseGroupTags(Collection<String> tags) {
-        this.releaseGroupTags = tags;
+    public void setReleaseGroupTags(LinkedList<Tag> releaseGroupTags) {
+        this.releaseGroupTags = releaseGroupTags;
     }
-
-    public void addReleaseGroupTag(String tag) {
+    
+    public void addReleaseGroupTag(Tag tag) {
         releaseGroupTags.add(tag);
     }
 

@@ -23,7 +23,6 @@ package org.musicbrainz.android.api.webservice;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -35,13 +34,14 @@ import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.handlers.ArtistLookupHandler;
 import org.musicbrainz.android.api.handlers.ArtistSearchHandler;
 import org.musicbrainz.android.api.handlers.BarcodeSearchHandler;
+import org.musicbrainz.android.api.handlers.RatingHandler;
 import org.musicbrainz.android.api.handlers.ReleaseGroupBrowseHandler;
 import org.musicbrainz.android.api.handlers.ReleaseGroupSearchHandler;
-import org.musicbrainz.android.api.handlers.RatingHandler;
 import org.musicbrainz.android.api.handlers.ReleaseLookupHandler;
 import org.musicbrainz.android.api.handlers.ReleaseStubHandler;
 import org.musicbrainz.android.api.handlers.TagHandler;
@@ -112,7 +112,7 @@ public class ResponseParser {
         return handler.getResults();
     }
 
-    public Collection<String> parseTagLookup(InputStream stream) throws IOException {
+    public LinkedList<Tag> parseTagLookup(InputStream stream) throws IOException {
         TagHandler handler = new TagHandler();
         doParsing(stream, handler);
         return handler.getTags();

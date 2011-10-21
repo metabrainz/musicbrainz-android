@@ -25,7 +25,7 @@ import org.musicbrainz.android.api.util.StringFormat;
 /**
  * Link URL and type description pair.
  */
-public class WebLink implements Comparable<Object> {
+public class WebLink implements Comparable<WebLink> {
 
     private String target;
     private String type;
@@ -60,9 +60,8 @@ public class WebLink implements Comparable<Object> {
         this.type = type;
     }
 
-    public int compareTo(Object another) {
-        WebLink comp = (WebLink) another;
-        return this.getPrettyType().compareTo(comp.getPrettyType());
+    public int compareTo(WebLink another) {
+        return getPrettyType().compareTo(another.getPrettyType());
     }
 
 }

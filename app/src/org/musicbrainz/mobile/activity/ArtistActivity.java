@@ -107,7 +107,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
         artist.setText(data.getName());
         rating.setRating(data.getRating());
-        tags.setText(StringFormat.commaSeparate(data.getTags()));
+        tags.setText(StringFormat.commaSeparateTags(data.getTags()));
 
         ListView releaseList = (ListView) findViewById(R.id.artist_releases);
         releaseList.setOnItemClickListener(this);
@@ -290,7 +290,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
         protected void onPostExecute(Boolean success) {
 
-            tags.setText(StringFormat.commaSeparate(data.getTags()));
+            tags.setText(StringFormat.commaSeparateTags(data.getTags()));
 
             doingTag = false;
             updateProgress();

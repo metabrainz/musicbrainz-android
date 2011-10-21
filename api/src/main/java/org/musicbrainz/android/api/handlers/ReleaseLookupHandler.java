@@ -23,6 +23,7 @@ package org.musicbrainz.android.api.handlers;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.RecordingStub;
+import org.musicbrainz.android.api.data.Tag;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -38,6 +39,7 @@ public class ReleaseLookupHandler extends MBHandler {
     private Release release = new Release();
     private ReleaseArtist releaseArtist;
     private RecordingStub track;
+    private Tag tag;
 
     public Release getResult() {
         return release;
@@ -81,6 +83,9 @@ public class ReleaseLookupHandler extends MBHandler {
             sb = new StringBuilder();
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = true;
+            sb = new StringBuilder();
+            tag = new Tag();
+            tag.setCount(Integer.parseInt(atts.getValue("count")));
         } else if (localName.equalsIgnoreCase("rating")) {
             if (inReleaseGroup) {
                 int ratingCount = Integer.parseInt(atts.getValue("votes-count"));
@@ -116,7 +121,8 @@ public class ReleaseLookupHandler extends MBHandler {
             } else if (inLabel && !inTag) {
                 release.addLabel(sb.toString());
             } else if (inReleaseGroup && inTag) {
-                release.addReleaseGroupTag(sb.toString());
+                tag.setText(sb.toString());
+                release.addReleaseGroupTag(tag);
             }
         } else if (localName.equalsIgnoreCase("date")) {
             release.setDate(sb.toString());

@@ -150,7 +150,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
         artist.setText(StringFormat.commaSeparateArtists(data.getArtists()));
         title.setText(data.getTitle());
 
-        tags.setText(StringFormat.commaSeparate(data.getReleaseGroupTags()));
+        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
         rating.setRating(data.getReleaseGroupRating());
 
         ListView trackList = (ListView) findViewById(R.id.release_tracks);
@@ -416,7 +416,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
         protected void onPostExecute(Boolean success) {
 
-            tags.setText(StringFormat.commaSeparate(data.getReleaseGroupTags()));
+            tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
             doingTag = false;
             updateProgressStatus();
             tagBtn.setEnabled(true);
