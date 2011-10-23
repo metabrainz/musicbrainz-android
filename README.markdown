@@ -1,6 +1,6 @@
 ### MusicBrainz for Android
 
-This is the main repository for the [MusicBrainz](http://www.musicbrainz.org) Android app. This project started as a Google Summer of Code project in 2010. You might also be interested in the [official product page](http://http://musicbrainz.org/doc/MusicBrainz_for_Android).
+This is the main repository for the [MusicBrainz](http://www.musicbrainz.org) Android app. This project started as a Google Summer of Code project in 2010. You might also be interested in the [official product page](http://musicbrainz.org/doc/MusicBrainz_for_Android).
 
 ### Android Market
 
