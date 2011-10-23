@@ -30,8 +30,8 @@ import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.task.SearchAllTask;
 import org.musicbrainz.mobile.task.SearchArtistsTask;
-import org.musicbrainz.mobile.task.IgnitedAsyncTask;
 import org.musicbrainz.mobile.task.SearchRGsTask;
+import org.musicbrainz.mobile.task.SearchTask;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -76,7 +76,7 @@ public class SearchActivity extends SuperActivity {
     private LinkedList<ArtistStub> artistSearchResults;
     private LinkedList<ReleaseGroupStub> rgSearchResults;
 
-    private IgnitedAsyncTask<SearchActivity, String, Void, Void> searchTask;
+    private SearchTask searchTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
