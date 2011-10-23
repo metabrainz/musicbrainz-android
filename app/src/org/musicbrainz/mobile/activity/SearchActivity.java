@@ -20,24 +20,24 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.io.IOException;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
-import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
-import org.musicbrainz.mobile.util.Log;
+import org.musicbrainz.mobile.task.SearchAllTask;
+import org.musicbrainz.mobile.task.SearchArtistsTask;
+import org.musicbrainz.mobile.task.IgnitedAsyncTask;
+import org.musicbrainz.mobile.task.SearchRGsTask;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
@@ -47,6 +47,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -64,6 +65,8 @@ public class SearchActivity extends SuperActivity {
     public static final String INTENT_ARTIST = "artist";
     public static final String INTENT_RELEASE_GROUP = "rg";
     public static final String INTENT_ALL = "all";
+    
+    private static final int DIALOG_CONNECTION_FAILURE = 2;
 
     private String searchQuery;
     private SearchType searchType;
@@ -73,11 +76,10 @@ public class SearchActivity extends SuperActivity {
     private LinkedList<ArtistStub> artistSearchResults;
     private LinkedList<ReleaseGroupStub> rgSearchResults;
 
-    private WebClient webService;
+    private IgnitedAsyncTask<SearchActivity, String, Void, Void> searchTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(generateUserAgent());
         handleIntent();
     }
 
@@ -110,15 +112,16 @@ public class SearchActivity extends SuperActivity {
         switch (searchType) {
         case ARTIST:
             actionBar.setTitle(R.string.search_bar_artists);
-            new ArtistSearchTask().execute();
+            searchTask = new SearchArtistsTask(this);
             break;
         case RELEASE_GROUP:
             actionBar.setTitle(R.string.search_bar_rgs);
-            new RGSearchTask().execute();
+            searchTask = new SearchRGsTask(this);
             break;
         case ALL:
-            new MultiSearchTask().execute();
+            searchTask = new SearchAllTask(this);
         }
+        searchTask.execute(searchQuery);
     }
 
     private void configureSearch() {
@@ -131,86 +134,40 @@ public class SearchActivity extends SuperActivity {
             searchType = SearchType.ALL;
         }
     }
-
-    private class ArtistSearchTask extends AsyncTask<Void, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            boolean success = true;
-            try {
-                artistSearchResults = webService.searchArtists(searchQuery);
-            } catch (IOException e) {
-                success = false;
-            }
-            return success;
-        }
-
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                findViewById(R.id.topline).setVisibility(View.VISIBLE);
-                displayArtistResultsView();
-            } else {
-                displayErrorDialog();
-            }
-            toggleLoading();
+    
+    public void onSearchTaskFinished() {
+        toggleLoading();
+        if (searchTask.failed()) {
+            showDialog(DIALOG_CONNECTION_FAILURE);
+        } else {
+            handleResults();
         }
     }
-
-    private class RGSearchTask extends AsyncTask<Void, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            boolean success = true;
-            try {
-                rgSearchResults = webService.searchReleaseGroup(searchQuery);
-            } catch (IOException e) {
-                success = false;
-            }
-            return success;
-        }
-
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                findViewById(R.id.topline).setVisibility(View.VISIBLE);
-                displayRGResultsView();
-            } else {
-                displayErrorDialog();
-            }
-            toggleLoading();
-        }
-    }
-
-    private class MultiSearchTask extends AsyncTask<Void, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            boolean success = true;
-            try {
-                artistSearchResults = webService.searchArtists(searchQuery);
-                rgSearchResults = webService.searchReleaseGroup(searchQuery);
-            } catch (IOException e) {
-                success = false;
-            }
-            return success;
-        }
-
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-                SpinnerAdapter listAdapter = ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar,
-                        R.layout.actionbar_list_dropdown_item);
-                actionBar.setListNavigationCallbacks(listAdapter, new ActionBarListListener());
-                displayMultiResults();
-            } else {
-                displayErrorDialog();
-            }
-            toggleLoading();
-        }
-
-        private void displayMultiResults() {
+    
+    private void handleResults() {
+        if (searchType == SearchType.ARTIST) {
+            SearchArtistsTask task = (SearchArtistsTask) searchTask;
+            artistSearchResults = task.getArtistResults();
+            displayArtistResultsView();
+        } else if (searchType == SearchType.RELEASE_GROUP) {
+            SearchRGsTask task = (SearchRGsTask) searchTask;
+            rgSearchResults = task.getReleaseGroupResults();
+            displayRGResultsView();
+        } else {
+            SearchAllTask task = (SearchAllTask) searchTask;
+            artistSearchResults = task.getArtistResults();
+            rgSearchResults = task.getReleaseGroupResults();
+            enableTypeNavigation();
             displayArtistResultsView();
             displayRGResultsView();
         }
+    }
+
+    private void enableTypeNavigation() {
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        SpinnerAdapter listAdapter = ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar,
+                R.layout.actionbar_list_dropdown_item);
+        actionBar.setListNavigationCallbacks(listAdapter, new ActionBarListListener());
     }
 
     private class ActionBarListListener implements ActionBar.OnNavigationListener {
@@ -268,23 +225,26 @@ public class SearchActivity extends SuperActivity {
             suggestions.saveRecentQuery(searchQuery, null);
         }
     }
+    
+    @Override 
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_CONNECTION_FAILURE:
+            return createConnectionErrorDialog();
+        }
+        return null;
+    }
 
-    private void displayErrorDialog() {
+    private Dialog createConnectionErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
         builder.setMessage(getString(R.string.err_text));
         builder.setCancelable(false);
         builder.setPositiveButton(getString(R.string.err_pos), new ErrorPositiveListener());
         builder.setNegativeButton(getString(R.string.err_neg), new ErrorNegativeListener());
-        try {
-            Dialog conError = builder.create();
-            conError.show();
-        } catch (Exception e) {
-            Log.v("Connection timed out but Activity has closed anyway");
-        }
+        return builder.create();
     }
 
     private class ErrorPositiveListener implements DialogInterface.OnClickListener {
-
         @Override
         public void onClick(DialogInterface dialog, int which) {
             doSearch();
@@ -294,7 +254,6 @@ public class SearchActivity extends SuperActivity {
     }
 
     private class ErrorNegativeListener implements DialogInterface.OnClickListener {
-
         @Override
         public void onClick(DialogInterface dialog, int which) {
             SearchActivity.this.finish();
@@ -302,7 +261,7 @@ public class SearchActivity extends SuperActivity {
     }
 
     private void toggleLoading() {
-        RelativeLayout loading = (RelativeLayout) findViewById(R.id.loading);
+        ProgressBar loading = (ProgressBar) findViewById(R.id.loading);
         if (loading.getVisibility() == View.GONE) {
             loading.setVisibility(View.VISIBLE);
         } else {
@@ -311,7 +270,6 @@ public class SearchActivity extends SuperActivity {
     }
 
     private class ArtistItemClickListener implements OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             startArtistActivity(position);
@@ -319,25 +277,24 @@ public class SearchActivity extends SuperActivity {
 
         private void startArtistActivity(int position) {
             Intent artistIntent = new Intent(SearchActivity.this, ArtistActivity.class);
-            ArtistStub stub = (ArtistStub) artistSearchResults.get(position);
+            ArtistStub stub = artistSearchResults.get(position);
             artistIntent.putExtra(ArtistActivity.INTENT_MBID, stub.getMbid());
             startActivity(artistIntent);
         }
     }
 
     private class RGItemClickListener implements OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ReleaseGroupStub rg = (ReleaseGroupStub) rgSearchResults.get(position);
+            ReleaseGroupStub rg = rgSearchResults.get(position);
             if (rg.getNumberOfReleases() == 1) {
                 startReleaseActivity(rg.getReleaseMbids().getFirst());
             } else {
-                startRGActivity(rg.getMbid());
+                startReleaseGroupActivity(rg.getMbid());
             }
         }
 
-        private void startRGActivity(String mbid) {
+        private void startReleaseGroupActivity(String mbid) {
             Intent releaseIntent = new Intent(SearchActivity.this, ReleaseActivity.class);
             releaseIntent.putExtra(ReleaseActivity.INTENT_RG_MBID, mbid);
             startActivity(releaseIntent);

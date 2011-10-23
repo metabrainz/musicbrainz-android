@@ -87,7 +87,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(generateUserAgent());
+        webService = new WebClient(getUserAgent());
 
         mbid = getIntent().getStringExtra(INTENT_MBID);
         new LookupTask().execute();
@@ -217,7 +217,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
                 data = webService.lookupArtist(mbid);
                 if (loggedIn) {
                     webService.setCredentials(getUsername(), getPassword());
-                    webService.setClientId(generateClientId());
+                    webService.setClientId(getClientId());
                     userData = webService.getUserData(MBEntity.ARTIST, data.getMbid());
                 }
                 return true;
@@ -279,7 +279,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
             try {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setClientId(generateClientId());
+                webService.setClientId(getClientId());
                 webService.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
                 data.setTags(webService.lookupTags(MBEntity.ARTIST, data.getMbid()));
             } catch (IOException e) {
@@ -320,7 +320,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
 
             try {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setClientId(generateClientId());
+                webService.setClientId(getClientId());
                 webService.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
                 float newRating = webService.lookupRating(MBEntity.ARTIST, data.getMbid());
                 data.setRating(newRating);

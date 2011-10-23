@@ -37,12 +37,12 @@
     android:layout_below="@+id/searchres_text" />
 
   <RelativeLayout
-    android:id="@+id/loading"
     style="@style/Loading"
     android:background="@color/main_fg"
     android:layout_below="@+id/topline">
 
     <ProgressBar
+      android:id="@+id/loading"
       style="@style/Wrap"
       android:indeterminateDrawable="@anim/progress"
       android:layout_centerInParent="true" />

@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
+import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Constants;
@@ -79,12 +80,16 @@ public abstract class SuperActivity extends Activity {
         }
     }
     
-    public String generateClientId() {
+    public String getUserAgent() {
+        return Config.USER_AGENT + "/" + getVersion();
+    }
+    
+    public String getClientId() {
         return Config.CLIENT_NAME + "-" + getVersion();
     }
     
-    public String generateUserAgent() {
-        return Config.USER_AGENT + "/" + getVersion();
+    public Credentials getCredentials() {
+        return new Credentials(getUserAgent(), getUsername(), getPassword(), getClientId());
     }
 
     protected ActionBar setupActionBarWithHome() {

@@ -24,6 +24,7 @@ import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.task.LoginTask;
 import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Constants;
 import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.util.Utils;
@@ -88,7 +89,7 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
     }
 
     private void executeLogin() {
-        Credentials creds = new Credentials(generateUserAgent(), username, password, generateClientId());
+        Credentials creds = new Credentials(getUserAgent(), username, password, getClientId());
         loginTask.execute(creds);
     }
 
@@ -103,10 +104,10 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
     }
 
     private void onLoginSuccess() {
-        Editor spe = getSharedPreferences("user", MODE_PRIVATE).edit();
-        spe.putString("username", username);
+        Editor spe = getSharedPreferences(Constants.PREFS_USER, MODE_PRIVATE).edit();
+        spe.putString(Constants.PREF_USERNAME, username);
         String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), password);
-        spe.putString("password", obscuredPassword);
+        spe.putString(Constants.PREF_PASSWORD, obscuredPassword);
         spe.commit();
         setResult(RESULT_LOGGED_IN);
         finish();
@@ -171,32 +172,35 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
     }
     
     private Dialog createLoginFailureDialog() {
-        AlertDialog.Builder failureDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-        failureDialogBuilder.setMessage(getText(R.string.auth_fail)).setCancelable(false)
-                .setPositiveButton(getText(R.string.auth_pos), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        setupLoginTask();
-                    }
-                });
-        return failureDialogBuilder.create();
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage(getText(R.string.auth_fail));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getText(R.string.auth_pos), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+                setupLoginTask();
+            }
+        });
+        return builder.create();
     }
 
     private Dialog createConnectionErrorDialog() {
-        AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-        errorDialogBuilder.setMessage(getString(R.string.err_text)).setCancelable(false)
-                .setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        setupLoginTask();
-                        executeLogin();
-                        dialog.cancel();
-                    }
-                }).setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        LoginActivity.this.finish();
-                    }
-                });
-        return errorDialogBuilder.create();
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage(getString(R.string.err_text));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                setupLoginTask();
+                executeLogin();
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                LoginActivity.this.finish();
+            }
+        });
+        return builder.create();
     }
     
     @Override

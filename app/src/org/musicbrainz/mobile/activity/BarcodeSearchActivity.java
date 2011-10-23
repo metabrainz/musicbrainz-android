@@ -78,7 +78,7 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(generateUserAgent());
+        webService = new WebClient(getUserAgent());
 
         setContentView(R.layout.activity_barcode);
         actionBar = setupActionBarWithHome();
@@ -218,7 +218,7 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
             try {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setClientId(generateClientId());
+                webService.setClientId(getClientId());
                 webService.submitBarcode(releaseMbid[0], barcode);
             } catch (IOException e) {
                 return false;

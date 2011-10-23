@@ -102,7 +102,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(generateUserAgent());
+        webService = new WebClient(getUserAgent());
         releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
         barcode = getIntent().getStringExtra(INTENT_BARCODE);
@@ -279,7 +279,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
                         releaseMbid = data.getMbid();
                         if (loggedIn) {
                             webService.setCredentials(getUsername(), getPassword());
-                            webService.setClientId(generateClientId());
+                            webService.setClientId(getClientId());
                             userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
                         }
                         return LOADED;
@@ -311,7 +311,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
             data = webService.lookupRelease(releaseMbid);
             if (loggedIn) {
                 webService.setCredentials(getUsername(), getPassword());
-                webService.setClientId(generateClientId());
+                webService.setClientId(getClientId());
                 userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
             }
         }
@@ -409,7 +409,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
         private void submitThenRefreshTags(Collection<String> processedTags) throws IOException, SAXException {
             webService.setCredentials(getUsername(), getPassword());
-            webService.setClientId(generateClientId());
+            webService.setClientId(getClientId());
             webService.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
             data.setReleaseGroupTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
         }
@@ -451,7 +451,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
         private void submitThenRefreshRating(Integer... rating) throws IOException, SAXException {
             webService.setCredentials(getUsername(), getPassword());
-            webService.setClientId(generateClientId());
+            webService.setClientId(getClientId());
             webService.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
             float newRating = webService.lookupRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
             data.setReleaseGroupRating(newRating);
