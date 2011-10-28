@@ -24,6 +24,7 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.Extra;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
 
@@ -64,7 +65,7 @@ public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemCli
         ReleaseStub r = data.get(position);
 
         Intent releaseIntent = new Intent(this.parent, ReleaseActivity.class);
-        releaseIntent.putExtra("r_id", r.getReleaseMbid());
+        releaseIntent.putExtra(Extra.RELEASE_MBID, r.getReleaseMbid());
         this.parent.startActivity(releaseIntent);
         this.parent.finish();
         dismiss();
