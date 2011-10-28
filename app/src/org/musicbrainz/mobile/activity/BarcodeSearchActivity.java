@@ -66,13 +66,10 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
     private TextView noRes;
     private ListView matches;
+    private LinearLayout loading;
 
     private String barcode;
     private LinkedList<ReleaseStub> results;
-
-    private LinearLayout loading;
-
-    private InputMethodManager imm;
 
     private WebClient webService;
 
@@ -97,8 +94,6 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
         matches = (ListView) findViewById(R.id.barcode_list);
         noRes = (TextView) findViewById(R.id.noresults);
         loading = (LinearLayout) findViewById(R.id.loading);
-
-        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     /**
@@ -195,13 +190,17 @@ public class BarcodeSearchActivity extends SuperActivity implements View.OnClick
 
         String term = searchBox.getText().toString();
         if (term.length() != 0) {
-            // hide virtual keyboard
-            imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+        	hideKeyboard();
             new SearchTask().execute();
         } else {
             Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
         }
     }
+
+	private void hideKeyboard() {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+	}
 
     public void submitBarcode(String releaseMbid) {
         new SubmitBarcodeTask().execute(releaseMbid);

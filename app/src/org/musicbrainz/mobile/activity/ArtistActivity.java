@@ -65,8 +65,6 @@ import android.widget.TabHost.TabSpec;
  */
 public class ArtistActivity extends SuperActivity implements View.OnClickListener, ListView.OnItemClickListener {
 
-    public static final String INTENT_MBID = "mbid";
-
     private Artist data;
     private String mbid;
 
@@ -89,7 +87,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         webService = new WebClient(getUserAgent());
 
-        mbid = getIntent().getStringExtra(INTENT_MBID);
+        mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         new LookupTask().execute();
         setContentView(R.layout.loading);
         setupActionBarWithHome();
@@ -377,7 +375,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
             ReleaseGroupStub rg = data.getReleases().get(position);
 
             Intent releaseIntent = new Intent(ArtistActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra(ReleaseActivity.INTENT_RG_MBID, rg.getMbid());
+            releaseIntent.putExtra(Extra.RG_MBID, rg.getMbid());
             startActivity(releaseIntent);
         } else {
             String link = data.getLinks().get(position).getUrl();

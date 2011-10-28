@@ -59,12 +59,6 @@ import com.markupartist.android.widget.ActionBar;
  * to info Activity types based on the selection.
  */
 public class SearchActivity extends SuperActivity {
-
-    public static final String INTENT_TYPE = "type";
-    public static final String INTENT_QUERY = "term";
-    public static final String INTENT_ARTIST = "artist";
-    public static final String INTENT_RELEASE_GROUP = "rg";
-    public static final String INTENT_ALL = "all";
     
     private static final int DIALOG_CONNECTION_FAILURE = 2;
 
@@ -94,9 +88,9 @@ public class SearchActivity extends SuperActivity {
         actionBar = setupActionBarWithHome();
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
             searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
-            getIntent().putExtra(INTENT_TYPE, INTENT_ALL);
+            getIntent().putExtra(Extra.TYPE, Extra.ALL);
         } else {
-            searchQuery = getIntent().getStringExtra(INTENT_QUERY);
+            searchQuery = getIntent().getStringExtra(Extra.QUERY);
         }
         setHeaderText();
         doSearch();
@@ -125,10 +119,10 @@ public class SearchActivity extends SuperActivity {
     }
 
     private void configureSearch() {
-        String intentType = getIntent().getStringExtra(INTENT_TYPE);
-        if (intentType.equals(INTENT_ARTIST)) {
+        String intentType = getIntent().getStringExtra(Extra.TYPE);
+        if (intentType.equals(Extra.ARTIST)) {
             searchType = SearchType.ARTIST;
-        } else if (intentType.equals(INTENT_RELEASE_GROUP)) {
+        } else if (intentType.equals(Extra.RELEASE_GROUP)) {
             searchType = SearchType.RELEASE_GROUP;
         } else {
             searchType = SearchType.ALL;
@@ -278,7 +272,7 @@ public class SearchActivity extends SuperActivity {
         private void startArtistActivity(int position) {
             Intent artistIntent = new Intent(SearchActivity.this, ArtistActivity.class);
             ArtistStub stub = artistSearchResults.get(position);
-            artistIntent.putExtra(ArtistActivity.INTENT_MBID, stub.getMbid());
+            artistIntent.putExtra(Extra.ARTIST_MBID, stub.getMbid());
             startActivity(artistIntent);
         }
     }
@@ -296,13 +290,13 @@ public class SearchActivity extends SuperActivity {
 
         private void startReleaseGroupActivity(String mbid) {
             Intent releaseIntent = new Intent(SearchActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra(ReleaseActivity.INTENT_RG_MBID, mbid);
+            releaseIntent.putExtra(Extra.RG_MBID, mbid);
             startActivity(releaseIntent);
         }
 
         private void startReleaseActivity(String mbid) {
             Intent releaseIntent = new Intent(SearchActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra(ReleaseActivity.INTENT_RELEASE_MBID, mbid);
+            releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
             startActivity(releaseIntent);
         }
     }

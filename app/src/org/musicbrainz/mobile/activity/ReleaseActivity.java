@@ -73,10 +73,6 @@ import android.widget.TabHost.TabSpec;
  */
 public class ReleaseActivity extends SuperActivity implements View.OnClickListener {
 
-    public static final String INTENT_RELEASE_MBID = "r_id";
-    public static final String INTENT_RG_MBID = "rg_id";
-    public static final String INTENT_BARCODE = "barcode";
-
     private Release data;
 
     private LookupSource src;
@@ -103,9 +99,9 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         webService = new WebClient(getUserAgent());
-        releaseMbid = getIntent().getStringExtra(INTENT_RELEASE_MBID);
-        releaseGroupMbid = getIntent().getStringExtra(INTENT_RG_MBID);
-        barcode = getIntent().getStringExtra(INTENT_BARCODE);
+        releaseMbid = getIntent().getStringExtra(Extra.RELEASE_MBID);
+        releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);
+        barcode = getIntent().getStringExtra(Extra.BARCODE);
 
         new LookupTask().execute();
         setContentView(R.layout.loading);
@@ -210,7 +206,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     private Intent createArtistIntent() {
         final Intent releaseIntent = new Intent(this, ArtistActivity.class);
-        releaseIntent.putExtra(ArtistActivity.INTENT_MBID, data.getArtists().get(0).getMbid());
+        releaseIntent.putExtra(Extra.ARTIST_MBID, data.getArtists().get(0).getMbid());
         return releaseIntent;
     }
 

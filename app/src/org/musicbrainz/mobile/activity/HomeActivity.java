@@ -115,7 +115,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
             if (scanResult.getContents() != null) {
                 Intent barcodeResult = new Intent(this, ReleaseActivity.class);
-                barcodeResult.putExtra(ReleaseActivity.INTENT_BARCODE, scanResult.getContents());
+                barcodeResult.putExtra(Extra.BARCODE, scanResult.getContents());
                 startActivity(barcodeResult);
             }
         }
@@ -167,8 +167,8 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
             imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
 
             Intent searchIntent = new Intent(this, SearchActivity.class);
-            searchIntent.putExtra(SearchActivity.INTENT_TYPE, getSearchTypeFromSpinner());
-            searchIntent.putExtra(SearchActivity.INTENT_QUERY, query);
+            searchIntent.putExtra(Extra.TYPE, getSearchTypeFromSpinner());
+            searchIntent.putExtra(Extra.QUERY, query);
             startActivity(searchIntent);
         } else {
             Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
@@ -180,11 +180,11 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         int spinnerPosition = searchTypeSpinner.getSelectedItemPosition();
         switch (spinnerPosition) {
         case 0:
-            return SearchActivity.INTENT_ARTIST;
+            return Extra.ARTIST;
         case 1:
-            return SearchActivity.INTENT_RELEASE_GROUP;
+            return Extra.RELEASE_GROUP;
         default:
-            return SearchActivity.INTENT_ALL;
+            return Extra.ALL;
         }
     }
 

@@ -27,9 +27,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
 
-/**
- * Activity to display information about the application.
- */
 public class AboutActivity extends SuperActivity {
 
     public void onCreate(Bundle savedInstanceState) {

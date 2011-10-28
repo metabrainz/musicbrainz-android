@@ -31,15 +31,13 @@ import android.widget.TextView;
  */
 public class IntentErrorActivity extends SuperActivity {
 
-    public static final String INTENT_MESSAGE = "message";
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_intenterror);
         setupActionBarWithHome();
 
-        String message = getIntent().getStringExtra(INTENT_MESSAGE);
+        String message = getIntent().getStringExtra(Extra.MESSAGE);
         TextView errorMessage = (TextView) findViewById(R.id.error_body);
         errorMessage.setText(getString(R.string.error_body) + message);
     }

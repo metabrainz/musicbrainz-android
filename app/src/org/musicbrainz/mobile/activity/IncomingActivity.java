@@ -34,7 +34,7 @@ import android.os.Bundle;
 public class IncomingActivity extends Activity {
 
     private static final String URI_SEARCH = "search";
-    private static final String URI_RELEASE = "rg";
+    private static final String URI_RELEASE = "release";
     private static final String URI_ARTIST = "artist";
     private static final int MBID_LENGTH = 36;
 
@@ -69,16 +69,16 @@ public class IncomingActivity extends Activity {
 
     private void allSearch(List<String> segments) {
         String query = segments.get(1);
-        startSearchResultsActivity(SearchActivity.INTENT_ALL, query);
+        startSearchResultsActivity(Extra.ALL, query);
     }
 
     private void entitySearch(List<String> segments) {
         String entity = segments.get(1);
         String query = segments.get(2);
         if (entity.equals(URI_ARTIST)) {
-            startSearchResultsActivity(SearchActivity.INTENT_ARTIST, query);
+            startSearchResultsActivity(Extra.ARTIST, query);
         } else if (entity.equals(URI_RELEASE)) {
-            startSearchResultsActivity(SearchActivity.INTENT_RELEASE_GROUP, query);
+            startSearchResultsActivity(Extra.RELEASE_GROUP, query);
         } else {
             displayErrorLayout("Unrecognised URI segment: search type");
         }
@@ -87,7 +87,7 @@ public class IncomingActivity extends Activity {
     private void startArtistActivity(String mbid) {
         if (isValidMbid(mbid)) {
             Intent artistIntent = new Intent(IncomingActivity.this, ArtistActivity.class);
-            artistIntent.putExtra(ArtistActivity.INTENT_MBID, mbid);
+            artistIntent.putExtra(Extra.ARTIST_MBID, mbid);
             startActivity(artistIntent);
         } else {
             displayErrorLayout("Invalid MBID");
@@ -97,7 +97,7 @@ public class IncomingActivity extends Activity {
     private void startReleaseActivity(String mbid) {
         if (isValidMbid(mbid)) {
             Intent releaseIntent = new Intent(IncomingActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra(ReleaseActivity.INTENT_RELEASE_MBID, mbid);
+            releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
             startActivity(releaseIntent);
         } else {
             displayErrorLayout("Invalid MBID");
@@ -106,8 +106,8 @@ public class IncomingActivity extends Activity {
 
     private void startSearchResultsActivity(String type, String query) {
         Intent searchIntent = new Intent(IncomingActivity.this, SearchActivity.class);
-        searchIntent.putExtra(SearchActivity.INTENT_TYPE, type);
-        searchIntent.putExtra(SearchActivity.INTENT_QUERY, query);
+        searchIntent.putExtra(Extra.TYPE, type);
+        searchIntent.putExtra(Extra.QUERY, query);
         startActivity(searchIntent);
     }
 
@@ -117,7 +117,7 @@ public class IncomingActivity extends Activity {
 
     private void displayErrorLayout(String message) {
         Intent errorIntent = new Intent(IncomingActivity.this, IntentErrorActivity.class);
-        errorIntent.putExtra(IntentErrorActivity.INTENT_MESSAGE, message);
+        errorIntent.putExtra(Extra.MESSAGE, message);
         startActivity(errorIntent);
     }
 
