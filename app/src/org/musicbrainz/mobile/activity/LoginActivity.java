@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.task.LoginTask;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Constants;
@@ -45,7 +46,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-public class LoginActivity extends SuperActivity implements OnEditorActionListener {
+public class LoginActivity extends MusicBrainzActivity implements OnEditorActionListener {
 
     public static final int RESULT_NOT_LOGGED_IN = 0;
     public static final int RESULT_LOGGED_IN = 1;
@@ -75,7 +76,7 @@ public class LoginActivity extends SuperActivity implements OnEditorActionListen
         setResult(RESULT_NOT_LOGGED_IN);
 
         Object retained = getLastNonConfigurationInstance();
-        if (getLastNonConfigurationInstance() instanceof LoginTask) {
+        if (retained instanceof LoginTask) {
             loginTask = (LoginTask) retained;
             loginTask.connect(this);
         } else {

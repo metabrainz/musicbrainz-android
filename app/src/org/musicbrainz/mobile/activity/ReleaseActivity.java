@@ -20,9 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.Artist;
@@ -30,20 +28,22 @@ import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
 import org.musicbrainz.android.api.webservice.MBEntity;
-import org.musicbrainz.android.api.webservice.WebClient;
-import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.base.TagRateActivity;
 import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.string.StringFormat;
+import org.musicbrainz.mobile.task.LookupBarcodeTask;
+import org.musicbrainz.mobile.task.LookupRGStubsTask;
+import org.musicbrainz.mobile.task.LookupReleaseTask;
+import org.musicbrainz.mobile.task.MusicBrainzTask;
+import org.musicbrainz.mobile.task.RatingTask;
+import org.musicbrainz.mobile.task.TagTask;
 import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
-import org.xml.sax.SAXException;
 
 import com.markupartist.android.widget.ActionBar;
 import com.markupartist.android.widget.ActionBar.Action;
@@ -52,7 +52,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,14 +70,17 @@ import android.widget.TabHost.TabSpec;
  * display of release information. An intent will contain either a barcode, a
  * release MBID or a release group MBID.
  */
-public class ReleaseActivity extends SuperActivity implements View.OnClickListener {
+public class ReleaseActivity extends TagRateActivity implements View.OnClickListener {
 
+    private static final int DIALOG_RELEASE_SELECTION = 0;
+    private static final int DIALOG_BARCODE = 1;
+    
     private Release data;
+    private LinkedList<ReleaseStub> stubs;
+    private UserData userData;
 
-    private LookupSource src;
     private String releaseMbid;
     private String releaseGroupMbid;
-    private LinkedList<ReleaseStub> stubs;
     private String barcode;
 
     private ActionBar actionBar;
@@ -92,20 +94,65 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
 
     private boolean doingTag = false;
     private boolean doingRate = false;
-
-    private WebClient webService;
-    private UserData userData;
+    
+    private MusicBrainzTask lookupTask;
+    private TagTask tagTask;
+    private RatingTask ratingTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(getUserAgent());
+        
         releaseMbid = getIntent().getStringExtra(Extra.RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);
         barcode = getIntent().getStringExtra(Extra.BARCODE);
-
-        new LookupTask().execute();
+        
         setContentView(R.layout.loading);
         setupActionBarWithHome();
+        
+        Object retained = getLastNonConfigurationInstance();
+        if (retained instanceof TaskHolder) {
+            TaskHolder holder = (TaskHolder) retained;
+            reconnectTasks(holder);
+        } else {
+            newTask();
+        }
+    }
+    
+    private void newTask() {
+        if (releaseMbid != null) {
+            lookupTask = new LookupReleaseTask(this);
+            lookupTask.execute(releaseMbid);
+        } else if (releaseGroupMbid != null) {
+            lookupTask = new LookupRGStubsTask(this);
+            lookupTask.execute(releaseGroupMbid);
+        } else if (barcode != null) {
+            lookupTask = new LookupBarcodeTask(this);
+            lookupTask.execute(barcode);
+        } else {
+            this.finish();
+        }
+    }
+    
+    private void reconnectTasks(TaskHolder holder) {
+        lookupTask = (MusicBrainzTask) holder.lookupTask;
+        lookupTask.connect(this);
+        if (lookupTask.isFinished()) {
+            onTaskFinished();
+        }
+        if (holder.tagTask != null) {
+            tagTask = (TagTask) holder.tagTask;
+            tagTask.connect(this);
+            if (tagTask.isRunning()) {
+                onStartTagging();
+            }
+        }
+        if (holder.ratingTask != null) {
+            ratingTask = (RatingTask) holder.ratingTask;
+            ratingTask.connect(this);
+            if (ratingTask.isRunning()) {
+                onStartRating();
+            }
+        }
     }
 
     /**
@@ -170,7 +217,7 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
             tags.setText(getText(R.string.no_tags));
         }
 
-        if (!loggedIn) {
+        if (!isUserLoggedIn()) {
             disableEditFields();
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
@@ -237,257 +284,167 @@ public class ReleaseActivity extends SuperActivity implements View.OnClickListen
         }
     }
 
-    private class LookupTask extends AsyncTask<Void, Void, Integer> {
-
-        /*
-         * Result codes:
-         * 
-         * 0: Release data retrieved from ID or barcode 1: Barcode not found 2:
-         * Release group retrieved 3: Problem with request - typically
-         * IOException
-         */
-        private static final int LOADED = 0;
-        private static final int BARCODE_NOT_FOUND = 1;
-        private static final int RG_LOADED = 2;
-        private static final int ERROR = 3;
-
-        protected void onPreExecute() {
-
-            if (releaseMbid != null) {
-                src = LookupSource.RELEASE_MBID;
-            } else if (releaseGroupMbid != null) {
-                src = LookupSource.RG_MBID;
-            } else {
-                src = LookupSource.BARCODE;
-            }
-        }
-
-        protected Integer doInBackground(Void... params) {
-
-            try {
-                switch (src) {
-                case RELEASE_MBID:
-                    doReleaseLookup();
-                    return LOADED;
-                case BARCODE:
-                    try {
-                        data = webService.lookupReleaseFromBarcode(barcode);
-                        releaseMbid = data.getMbid();
-                        if (loggedIn) {
-                            webService.setCredentials(getUsername(), getPassword());
-                            webService.setClientId(getClientId());
-                            userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-                        }
-                        return LOADED;
-                    } catch (BarcodeNotFoundException e) {
-                        return BARCODE_NOT_FOUND;
-                    }
-                case RG_MBID:
-                    stubs = webService.browseReleases(releaseGroupMbid);
-
-                    // lookup release if single release in release group
-                    if (stubs.size() == 1) {
-                        ReleaseStub r = stubs.getFirst();
-                        releaseMbid = r.getReleaseMbid();
-                        doReleaseLookup();
-                        return LOADED;
-                    } else {
-                        return RG_LOADED;
-                    }
-                }
-            } catch (IOException e) {
-                return ERROR;
-            } catch (SAXException e) {
-                return ERROR;
-            }
-            return ERROR;
-        }
-
-        private void doReleaseLookup() throws IOException, SAXException {
-            data = webService.lookupRelease(releaseMbid);
-            if (loggedIn) {
-                webService.setCredentials(getUsername(), getPassword());
-                webService.setClientId(getClientId());
-                userData = webService.getUserData(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-            }
-        }
-
-        protected void onPostExecute(Integer resultCode) {
-
-            switch (resultCode) {
-            case LOADED:
-                displayReleaseData();
-                break;
-            case BARCODE_NOT_FOUND:
-                displayBarcodeResultDialog();
-                break;
-            case RG_LOADED:
-                displayReleaseSelectionDialog();
-                break;
-            case ERROR:
-                displayErrorDialog();
-            }
-        }
-
-        private void displayReleaseData() {
-            populate();
-            if (loggedIn) {
-                tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
-                ratingInput.setRating(userData.getRating());
-            }
-        }
-
-        private void displayBarcodeResultDialog() {
-            try {
-                BarcodeResultDialog bcode = new BarcodeResultDialog(ReleaseActivity.this, loggedIn, barcode);
-                bcode.setCancelable(true);
-                bcode.show();
-            } catch (Exception e) {
-                Log.v("Barcode not found but Activity closed anyway");
-            }
-        }
-
-        private void displayReleaseSelectionDialog() {
-            try {
-                ReleaseSelectionDialog rsd = new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
-                rsd.show();
-            } catch (Exception e) {
-                Log.v("Release groups loaded but Activity has closed");
-            }
-        }
-
-        private void displayErrorDialog() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ReleaseActivity.this);
-            builder.setMessage(getString(R.string.err_text)).setCancelable(false)
-                    .setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // restart search thread
-                            new LookupTask().execute();
-                            dialog.cancel();
-                        }
-                    }).setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // finish activity
-                            ReleaseActivity.this.finish();
-                        }
-                    });
-            try {
-                Dialog conError = builder.create();
-                conError.show();
-            } catch (Exception e) {
-                Log.v("Connection timed out but Activity has closed anyway");
-            }
-        }
-
-    }
-
-    private class TagTask extends AsyncTask<String, Void, Boolean> {
-
-        protected void onPreExecute() {
-            doingTag = true;
-            updateProgressStatus();
-            tagBtn.setEnabled(false);
-        }
-
-        protected Boolean doInBackground(String... tags) {
-
-            Collection<String> processedTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags[0]);
-
-            try {
-                submitThenRefreshTags(processedTags);
-            } catch (IOException e) {
-                return false;
-            } catch (SAXException e) {
-                return true;
-            }
-            return true;
-        }
-
-        private void submitThenRefreshTags(Collection<String> processedTags) throws IOException, SAXException {
-            webService.setCredentials(getUsername(), getPassword());
-            webService.setClientId(getClientId());
-            webService.submitTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), processedTags);
-            data.setReleaseGroupTags(webService.lookupTags(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid()));
-        }
-
-        protected void onPostExecute(Boolean success) {
-
-            tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
-            doingTag = false;
-            updateProgressStatus();
-            tagBtn.setEnabled(true);
-            if (success) {
-                Toast.makeText(ReleaseActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT);
-            } else {
-                Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG);
-            }
-        }
-
-    }
-
-    private class RatingTask extends AsyncTask<Integer, Void, Boolean> {
-
-        protected void onPreExecute() {
-            doingRate = true;
-            updateProgressStatus();
-            rateBtn.setEnabled(false);
-        }
-
-        protected Boolean doInBackground(Integer... rating) {
-
-            try {
-                submitThenRefreshRating(rating);
-            } catch (IOException e) {
-                return false;
-            } catch (SAXException e) {
-                return true;
-            }
-            return true;
-        }
-
-        private void submitThenRefreshRating(Integer... rating) throws IOException, SAXException {
-            webService.setCredentials(getUsername(), getPassword());
-            webService.setClientId(getClientId());
-            webService.submitRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid(), rating[0]);
-            float newRating = webService.lookupRating(MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
-            data.setReleaseGroupRating(newRating);
-        }
-
-        protected void onPostExecute(Boolean success) {
-
-            rating.setRating(data.getReleaseGroupRating());
-            doingRate = false;
-            updateProgressStatus();
-            rateBtn.setEnabled(true);
-            if (success) {
-                Toast.makeText(ReleaseActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
-            }
-        }
-
-    }
-
     public void onClick(View view) {
 
         switch (view.getId()) {
         case R.id.tag_btn:
             String tagString = tagInput.getText().toString();
             if (tagString.length() == 0) {
-                Toast tagMessage = Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT);
-                tagMessage.show();
+                Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
             } else {
-                new TagTask().execute(tagString);
+                tagTask = new TagTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+                tagTask.execute(tagString);
             }
             break;
         case R.id.rate_btn:
             int rating = (int) ratingInput.getRating();
-            new RatingTask().execute(rating);
+            ratingTask = new RatingTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+            ratingTask.execute(rating);
         }
     }
 
-    private enum LookupSource {
-        RELEASE_MBID, RG_MBID, BARCODE
+    @Override
+    public void onStartRating() {
+        doingRate = true;
+        updateProgressStatus();
+        rateBtn.setEnabled(false);
+    }
+
+    @Override
+    public void onDoneRating() {
+        data.setReleaseGroupRating(ratingTask.getUpdatedRating());
+        rating.setRating(data.getReleaseGroupRating());
+        doingRate = false;
+        updateProgressStatus();
+        rateBtn.setEnabled(true);
+    }
+
+    @Override
+    public void onStartTagging() {
+        doingTag = true;
+        updateProgressStatus();
+        tagBtn.setEnabled(false);
+    }
+
+    @Override
+    public void onDoneTagging() {
+        data.setReleaseGroupTags(tagTask.getUpdatedTags());
+        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
+        doingTag = false;
+        updateProgressStatus();
+        tagBtn.setEnabled(true);
+        
+    }
+    
+    @Override 
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_RELEASE_SELECTION:
+            return new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
+        case DIALOG_BARCODE:
+            BarcodeResultDialog barcodeDialog = new BarcodeResultDialog(ReleaseActivity.this, isUserLoggedIn(), barcode);
+            barcodeDialog.setCancelable(true);
+            return barcodeDialog;
+        case DIALOG_CONNECTION_FAILURE:
+            return createConnectionErrorDialog();
+        }
+        return null;
+    }
+
+    @Override
+    protected Dialog createConnectionErrorDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.err_text));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                newTask();
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                ReleaseActivity.this.finish();
+            }
+        });
+        return builder.create();
+    }
+
+    @Override
+    public void onTaskFinished() {
+        if (lookupTask.failed()) {
+            showDialog(DIALOG_CONNECTION_FAILURE);
+            return;
+        }
+        if (lookupTask instanceof LookupReleaseTask) {
+            LookupReleaseTask task = (LookupReleaseTask) lookupTask;
+            data = task.getRelease();
+            if (task.getUserData() != null) {
+                userData = task.getUserData();
+            }
+            displayReleaseData();
+        } else if (lookupTask instanceof LookupRGStubsTask) {
+            LookupRGStubsTask task = (LookupRGStubsTask) lookupTask;
+            stubs = task.getStubs();
+            if (stubs.size() == 1) {
+                ReleaseStub singleRelease = stubs.getFirst();
+                lookupTask = new LookupReleaseTask(this);
+                lookupTask.execute(singleRelease.getReleaseMbid());
+            } else {
+                showDialog(DIALOG_RELEASE_SELECTION);
+            }
+        } else if (lookupTask instanceof LookupBarcodeTask) {
+            LookupBarcodeTask task = (LookupBarcodeTask) lookupTask;
+            if (task.doesBarcodeExist()) {
+                data = task.getRelease();
+                if (task.getUserData() != null) {
+                    userData = task.getUserData();
+                }
+            } else {
+                showDialog(DIALOG_BARCODE);
+            }
+            displayReleaseData();
+        }
+    }
+    
+    private void displayReleaseData() {
+        populate();
+        if (isUserLoggedIn()) {
+            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
+            ratingInput.setRating(userData.getRating());
+        }
+    }
+    
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        disconnectTasks();
+        return new TaskHolder(lookupTask, tagTask, ratingTask);
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disconnectTasks();
+    }
+    
+    private void disconnectTasks() {
+        lookupTask.disconnect();
+        if (tagTask != null) tagTask.disconnect();
+        if (ratingTask != null) ratingTask.disconnect();
+    }
+    
+    private static class TaskHolder {
+        
+        public MusicBrainzTask lookupTask;
+        public TagTask tagTask;
+        public RatingTask ratingTask;
+        
+        public TaskHolder(MusicBrainzTask lookupTask, TagTask tagTask, RatingTask ratingTask) {
+            this.lookupTask = lookupTask;
+            this.tagTask = tagTask;
+            this.ratingTask = ratingTask;
+        }
     }
 
 }

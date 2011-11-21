@@ -25,13 +25,14 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.base.DataQueryActivity;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.task.SearchAllTask;
 import org.musicbrainz.mobile.task.SearchArtistsTask;
 import org.musicbrainz.mobile.task.SearchRGsTask;
-import org.musicbrainz.mobile.task.SearchTask;
+import org.musicbrainz.mobile.task.MusicBrainzTask;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -58,9 +59,7 @@ import com.markupartist.android.widget.ActionBar;
  * Activity to display a list of search results to the user and support intents
  * to info Activity types based on the selection.
  */
-public class SearchActivity extends SuperActivity {
-    
-    private static final int DIALOG_CONNECTION_FAILURE = 2;
+public class SearchActivity extends DataQueryActivity {
 
     private String searchQuery;
     private SearchType searchType;
@@ -70,7 +69,7 @@ public class SearchActivity extends SuperActivity {
     private LinkedList<ArtistStub> artistSearchResults;
     private LinkedList<ReleaseGroupStub> rgSearchResults;
 
-    private SearchTask searchTask;
+    private MusicBrainzTask searchTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,7 +128,7 @@ public class SearchActivity extends SuperActivity {
         }
     }
     
-    public void onSearchTaskFinished() {
+    public void onTaskFinished() {
         toggleLoading();
         if (searchTask.failed()) {
             showDialog(DIALOG_CONNECTION_FAILURE);
@@ -219,17 +218,8 @@ public class SearchActivity extends SuperActivity {
             suggestions.saveRecentQuery(searchQuery, null);
         }
     }
-    
-    @Override 
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_CONNECTION_FAILURE:
-            return createConnectionErrorDialog();
-        }
-        return null;
-    }
 
-    private Dialog createConnectionErrorDialog() {
+    protected Dialog createConnectionErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
         builder.setMessage(getString(R.string.err_text));
         builder.setCancelable(false);

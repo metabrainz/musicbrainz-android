@@ -6,7 +6,7 @@ import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.activity.SearchActivity;
 
-public class SearchArtistsTask extends SearchTask {
+public class SearchArtistsTask extends MusicBrainzTask {
 
     private LinkedList<ArtistStub> results;
 

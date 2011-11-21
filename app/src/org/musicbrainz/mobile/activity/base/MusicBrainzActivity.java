@@ -18,10 +18,14 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.activity;
+package org.musicbrainz.mobile.activity.base;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.AboutActivity;
+import org.musicbrainz.mobile.activity.DonateActivity;
+import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.PreferencesActivity;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Constants;
 import org.musicbrainz.mobile.util.Secrets;
@@ -45,15 +49,23 @@ import android.widget.Toast;
 /**
  * Provides methods used across many Activity classes.
  */
-public abstract class SuperActivity extends Activity {
+public abstract class MusicBrainzActivity extends Activity {
 
-    protected boolean loggedIn = false;
+    private boolean loggedIn = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getUsername() != null) {
             loggedIn = true;
         }
+    }
+    
+    public boolean isUserLoggedIn() {
+        return loggedIn;
+    }
+    
+    public void setLoginStatus(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     protected boolean shouldProvideSearchSuggestions() {

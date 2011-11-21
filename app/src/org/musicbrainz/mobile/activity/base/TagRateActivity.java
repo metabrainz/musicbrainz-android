@@ -18,29 +18,14 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.activity;
+package org.musicbrainz.mobile.activity.base;
 
-import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
-
-import android.os.Bundle;
-import android.widget.TextView;
-
-/**
- * This Activity displays an error message to the user when an incoming URI in
- * not valid.
- */
-public class IntentErrorActivity extends MusicBrainzActivity {
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_intenterror);
-        setupActionBarWithHome();
-
-        String message = getIntent().getStringExtra(Extra.MESSAGE);
-        TextView errorMessage = (TextView) findViewById(R.id.error_body);
-        errorMessage.setText(getString(R.string.error_body) + message);
-    }
+public abstract class TagRateActivity extends DataQueryActivity {
+    
+    public abstract void onStartRating();
+    public abstract void onDoneRating();
+    
+    public abstract void onStartTagging();
+    public abstract void onDoneTagging();
 
 }

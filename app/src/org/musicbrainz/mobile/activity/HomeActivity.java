@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
 import org.musicbrainz.mobile.util.Constants;
 
@@ -49,7 +50,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-public class HomeActivity extends SuperActivity implements OnEditorActionListener, OnItemClickListener {
+public class HomeActivity extends MusicBrainzActivity implements OnEditorActionListener, OnItemClickListener {
 
     private static final int REQUEST_LOGIN = 0;
 
@@ -96,7 +97,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         Button login = (Button) findViewById(R.id.login_btn);
         TextView messageBody = (TextView) findViewById(R.id.hometext);
 
-        if (loggedIn) {
+        if (isUserLoggedIn()) {
             login.setText(R.string.logout_label);
             messageBody.setText(getString(R.string.hometext_loggedin) + " " + getUsername());
         } else {
@@ -109,7 +110,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         if (requestCode == REQUEST_LOGIN && resultCode == LoginActivity.RESULT_LOGGED_IN) {
-            loggedIn = true;
+            setLoginStatus(true);
             Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
         } else if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
@@ -125,7 +126,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
 
         switch (view.getId()) {
         case R.id.login_btn:
-            if (!loggedIn) {
+            if (!isUserLoggedIn()) {
                 startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
             } else {
                 logOut();
@@ -156,7 +157,7 @@ public class HomeActivity extends SuperActivity implements OnEditorActionListene
         spe.clear();
         spe.commit();
         HttpClient.clearCredentials();
-        loggedIn = false;
+        setLoginStatus(false);
     }
 
     private void startSearch() {

@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.MBApplication;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.util.Config;
 
 import com.markupartist.android.widget.ActionBar;
@@ -50,7 +51,7 @@ import android.widget.Toast;
 /**
  * Activity to process a donation to MetaBrainz through the PayPal MPL.
  */
-public class DonateActivity extends SuperActivity implements OnClickListener {
+public class DonateActivity extends MusicBrainzActivity implements OnClickListener {
     
     private static final int PAYPAL_REQUEST_CODE = 1;
     private static final int MAX_CHECKS = 20;

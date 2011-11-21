@@ -7,7 +7,7 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.activity.SearchActivity;
 
-public class SearchAllTask extends SearchTask {
+public class SearchAllTask extends MusicBrainzTask {
 
     private LinkedList<ArtistStub> artistResults;
     private LinkedList<ReleaseGroupStub> releaseGroupResults;

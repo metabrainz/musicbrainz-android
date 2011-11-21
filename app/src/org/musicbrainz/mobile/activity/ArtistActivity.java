@@ -20,21 +20,19 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.io.IOException;
-import java.util.Collection;
-
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.MBEntity;
-import org.musicbrainz.android.api.webservice.WebClient;
-import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.base.TagRateActivity;
 import org.musicbrainz.mobile.adapter.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.LinkAdapter;
 import org.musicbrainz.mobile.string.StringFormat;
+import org.musicbrainz.mobile.task.LookupArtistTask;
+import org.musicbrainz.mobile.task.RatingTask;
+import org.musicbrainz.mobile.task.TagTask;
 import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
@@ -46,7 +44,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -63,10 +60,11 @@ import android.widget.TabHost.TabSpec;
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
  */
-public class ArtistActivity extends SuperActivity implements View.OnClickListener, ListView.OnItemClickListener {
+public class ArtistActivity extends TagRateActivity implements View.OnClickListener, ListView.OnItemClickListener {
 
-    private Artist data;
     private String mbid;
+    private Artist data;
+    private UserData userData;
 
     private ActionBar actionBar;
 
@@ -80,21 +78,60 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
     private boolean doingTag = false;
     private boolean doingRate = false;
 
-    private WebClient webService;
-    private UserData userData;
+    private LookupArtistTask lookupTask;
+    private TagTask tagTask;
+    private RatingTask ratingTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        webService = new WebClient(getUserAgent());
 
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
-        new LookupTask().execute();
         setContentView(R.layout.loading);
         setupActionBarWithHome();
+
+        Object retained = getLastNonConfigurationInstance();
+        if (retained instanceof TaskHolder) {
+            TaskHolder holder = (TaskHolder) retained;
+            reconnectTasks(holder);
+        } else {
+            lookupTask = new LookupArtistTask(this);
+            lookupTask.execute(mbid);
+        }
+    }
+
+    private void reconnectTasks(TaskHolder holder) {
+        lookupTask = (LookupArtistTask) holder.lookupTask;
+        lookupTask.connect(this);
+        if (lookupTask.isFinished()) {
+            updateDataVariables();
+            populate();
+        }
+        if (holder.tagTask != null) {
+            tagTask = (TagTask) holder.tagTask;
+            tagTask.connect(this);
+            if (tagTask.isRunning()) {
+                onStartTagging();
+            }
+        }
+        if (holder.ratingTask != null) {
+            ratingTask = (RatingTask) holder.ratingTask;
+            ratingTask.connect(this);
+            if (ratingTask.isRunning()) {
+                onStartRating();
+            }
+        }
+    }
+
+    private void updateDataVariables() {
+        data = lookupTask.getArtist();
+        if (lookupTask.getUserData() != null) {
+            userData = lookupTask.getUserData();
+            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
+            ratingInput.setRating(userData.getRating());
+        }
     }
 
     protected void populate() {
-
         setContentView(R.layout.activity_artist);
         actionBar = setupActionBarWithHome();
         addActionBarShare();
@@ -142,7 +179,7 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
             noRes.setVisibility(View.VISIBLE);
         }
 
-        if (!loggedIn) {
+        if (!isUserLoggedIn()) {
             disableEditViews();
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
@@ -204,145 +241,51 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
         }
     }
 
-    /**
-     * Task to retrieve artist data from webservice and populate page.
-     */
-    private class LookupTask extends AsyncTask<Void, Void, Boolean> {
-
-        protected Boolean doInBackground(Void... params) {
-
-            try {
-                data = webService.lookupArtist(mbid);
-                if (loggedIn) {
-                    webService.setCredentials(getUsername(), getPassword());
-                    webService.setClientId(getClientId());
-                    userData = webService.getUserData(MBEntity.ARTIST, data.getMbid());
-                }
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
+    protected Dialog createConnectionErrorDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.err_text));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                lookupTask = new LookupArtistTask(ArtistActivity.this);
+                lookupTask.execute(mbid);
+                dialog.cancel();
             }
-        }
-
-        protected void onPostExecute(Boolean success) {
-
-            if (success) {
-                populate();
-                if (loggedIn) {
-                    tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
-                    ratingInput.setRating(userData.getRating());
-                }
-            } else {
-                // error or connection timed out - retry dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(ArtistActivity.this);
-                builder.setMessage(getString(R.string.err_text)).setCancelable(false)
-                        .setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // restart search thread
-                                new LookupTask().execute();
-                                dialog.cancel();
-                            }
-                        }).setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // finish activity
-                                ArtistActivity.this.finish();
-                            }
-                        });
-                try {
-                    Dialog conError = builder.create();
-                    conError.show();
-                } catch (Exception e) {
-                    Log.v("Connection timed out but Activity has closed anyway");
-                }
+        });
+        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                ArtistActivity.this.finish();
             }
-        }
-
+        });
+        return builder.create();
     }
 
-    /**
-     * Task to submit user tag list and refresh page tags list.
-     */
-    private class TagTask extends AsyncTask<String, Void, Boolean> {
-
-        protected void onPreExecute() {
-            doingTag = true;
-            updateProgress();
-            tagBtn.setEnabled(false);
-        }
-
-        protected Boolean doInBackground(String... tags) {
-
-            Collection<String> processedTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags[0]);
-
-            try {
-                webService.setCredentials(getUsername(), getPassword());
-                webService.setClientId(getClientId());
-                webService.submitTags(MBEntity.ARTIST, data.getMbid(), processedTags);
-                data.setTags(webService.lookupTags(MBEntity.ARTIST, data.getMbid()));
-            } catch (IOException e) {
-                return false;
-            }
-            return true;
-        }
-
-        protected void onPostExecute(Boolean success) {
-
-            tags.setText(StringFormat.commaSeparateTags(data.getTags()));
-
-            doingTag = false;
-            updateProgress();
-            tagBtn.setEnabled(true);
-
-            if (success) {
-                Toast.makeText(ArtistActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(ArtistActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
-            }
-        }
-
+    public void onStartTagging() {
+        doingTag = true;
+        updateProgress();
+        tagBtn.setEnabled(false);
     }
 
-    /**
-     * Task to submit user rating and update page rating.
-     */
-    private class RatingTask extends AsyncTask<Integer, Void, Boolean> {
+    public void onDoneTagging() {
+        data.setTags(tagTask.getUpdatedTags());
+        tags.setText(StringFormat.commaSeparateTags(data.getTags()));
+        doingTag = false;
+        updateProgress();
+        tagBtn.setEnabled(true);
+    }
 
-        protected void onPreExecute() {
-            doingRate = true;
-            updateProgress();
-            rateBtn.setEnabled(false);
-        }
+    public void onStartRating() {
+        doingRate = true;
+        updateProgress();
+        rateBtn.setEnabled(false);
+    }
 
-        protected Boolean doInBackground(Integer... rating) {
-
-            try {
-                webService.setCredentials(getUsername(), getPassword());
-                webService.setClientId(getClientId());
-                webService.submitRating(MBEntity.ARTIST, data.getMbid(), rating[0]);
-                float newRating = webService.lookupRating(MBEntity.ARTIST, data.getMbid());
-                data.setRating(newRating);
-            } catch (IOException e) {
-                return false;
-            }
-            return true;
-        }
-
-        protected void onPostExecute(Boolean success) {
-
-            rating.setRating(data.getRating());
-
-            doingRate = false;
-            updateProgress();
-            rateBtn.setEnabled(true);
-
-            if (success) {
-                Toast.makeText(ArtistActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(ArtistActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
-            }
-        }
-
+    public void onDoneRating() {
+        data.setRating(ratingTask.getUpdatedRating());
+        rating.setRating(data.getRating());
+        doingRate = false;
+        updateProgress();
+        rateBtn.setEnabled(true);
     }
 
     /**
@@ -357,12 +300,14 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
             } else {
-                new TagTask().execute(tagString);
+                tagTask = new TagTask(this, MBEntity.ARTIST, mbid);
+                tagTask.execute(tagString);
             }
             break;
         case R.id.rate_btn:
             int rating = (int) ratingInput.getRating();
-            new RatingTask().execute(rating);
+            ratingTask = new RatingTask(this, MBEntity.ARTIST, mbid);
+            ratingTask.execute(rating);
         }
     }
 
@@ -381,6 +326,49 @@ public class ArtistActivity extends SuperActivity implements View.OnClickListene
             String link = data.getLinks().get(position).getUrl();
             Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
             startActivity(urlIntent);
+        }
+    }
+
+    @Override
+    public void onTaskFinished() {
+        if (lookupTask.failed()) {
+            showDialog(DIALOG_CONNECTION_FAILURE);
+        } else {
+            updateDataVariables();
+            populate();
+        }
+    }
+
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        disconnectTasks();
+        return new TaskHolder(lookupTask, tagTask, ratingTask);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disconnectTasks();
+    }
+
+    private void disconnectTasks() {
+        lookupTask.disconnect();
+        if (tagTask != null)
+            tagTask.disconnect();
+        if (ratingTask != null)
+            ratingTask.disconnect();
+    }
+
+    private static class TaskHolder {
+
+        public LookupArtistTask lookupTask;
+        public TagTask tagTask;
+        public RatingTask ratingTask;
+
+        public TaskHolder(LookupArtistTask lookupTask, TagTask tagTask, RatingTask ratingTask) {
+            this.lookupTask = lookupTask;
+            this.tagTask = tagTask;
+            this.ratingTask = ratingTask;
         }
     }
 

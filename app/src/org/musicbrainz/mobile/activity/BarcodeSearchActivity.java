@@ -26,6 +26,7 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
 import org.musicbrainz.mobile.util.Log;
@@ -56,7 +57,7 @@ import com.markupartist.android.widget.ActionBar;
  * Activity to submit a barcode to a selected release in MusicBrainz if isn't
  * already stored.
  */
-public class BarcodeSearchActivity extends SuperActivity implements View.OnClickListener, ListView.OnItemClickListener,
+public class BarcodeSearchActivity extends MusicBrainzActivity implements View.OnClickListener, ListView.OnItemClickListener,
         ListView.OnItemLongClickListener, OnEditorActionListener {
 
     private ActionBar actionBar;
