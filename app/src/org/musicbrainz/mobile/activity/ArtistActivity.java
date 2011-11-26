@@ -103,8 +103,7 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         lookupTask = (LookupArtistTask) holder.lookupTask;
         lookupTask.connect(this);
         if (lookupTask.isFinished()) {
-            updateDataVariables();
-            populate();
+            onTaskFinished();
         }
         if (holder.tagTask != null) {
             tagTask = (TagTask) holder.tagTask;
@@ -119,15 +118,6 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
             if (ratingTask.isRunning()) {
                 onStartRating();
             }
-        }
-    }
-
-    private void updateDataVariables() {
-        data = lookupTask.getArtist();
-        if (lookupTask.getUserData() != null) {
-            userData = lookupTask.getUserData();
-            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
-            ratingInput.setRating(userData.getRating());
         }
     }
 
@@ -166,6 +156,20 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         rateBtn.setOnClickListener(this);
 
         // display messages for no tags, no releases or no links
+        displayMessagesForEmptyData();
+        
+        if (userData.getTags() != null) {
+            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
+        }
+        ratingInput.setRating(userData.getRating());
+
+        if (!isUserLoggedIn()) {
+            disableEditViews();
+            findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void displayMessagesForEmptyData() {
         if (data.getTags().isEmpty())
             tags.setText(getText(R.string.no_tags));
 
@@ -177,11 +181,6 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         if (data.getLinks().isEmpty()) {
             TextView noRes = (TextView) findViewById(R.id.nolinks);
             noRes.setVisibility(View.VISIBLE);
-        }
-
-        if (!isUserLoggedIn()) {
-            disableEditViews();
-            findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
     }
 
@@ -334,7 +333,10 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         if (lookupTask.failed()) {
             showDialog(DIALOG_CONNECTION_FAILURE);
         } else {
-            updateDataVariables();
+            data = lookupTask.getArtist();
+            if (lookupTask.getUserData() != null) {
+                userData = lookupTask.getUserData();
+            }
             populate();
         }
     }
