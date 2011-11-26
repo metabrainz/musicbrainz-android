@@ -79,7 +79,7 @@
   <string name="addupc_title">Submit Barcode</string>
   <string name="barcode_text">Product code: </string>
   <string name="barcode_hint">Release title</string>
-  <string name="barcode_instructions">Search for the release that the barcode belongs to...</string>
+  <string name="barcode_instructions">Search for the appropriate release to add this barcode.</string>
 
   <!-- ConfirmBarcodeDialog -->
   <string name="barcode_add_header">Submit barcode</string>

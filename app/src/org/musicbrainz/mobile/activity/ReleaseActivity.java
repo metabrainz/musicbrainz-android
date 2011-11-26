@@ -401,10 +401,10 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
                 if (task.getUserData() != null) {
                     userData = task.getUserData();
                 }
+                displayReleaseData();
             } else {
                 showDialog(DIALOG_BARCODE);
             }
-            displayReleaseData();
         }
     }
     

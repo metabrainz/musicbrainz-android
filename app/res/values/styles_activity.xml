@@ -33,7 +33,7 @@
     name="Activity"
     parent="@style/Fill">
     <item name="android:orientation">vertical</item>
-    <item name="android:background">@drawable/textured_background</item>
+    <item name="android:background">@color/main_bg</item>
   </style>
 
   <style

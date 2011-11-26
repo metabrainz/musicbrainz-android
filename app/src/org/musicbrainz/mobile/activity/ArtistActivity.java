@@ -142,20 +142,16 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         linksList.setOnItemClickListener(this);
         linksList.setAdapter(new LinkAdapter(this, data.getLinks()));
 
-        // setup tabs
         setupTabs();
 
         tagInput = (EditText) findViewById(R.id.tag_input);
-
         tagBtn = (Button) findViewById(R.id.tag_btn);
         tagBtn.setOnClickListener(this);
 
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
-
         rateBtn = (Button) findViewById(R.id.rate_btn);
         rateBtn.setOnClickListener(this);
 
-        // display messages for no tags, no releases or no links
         displayMessagesForEmptyData();
         
         if (userData.getTags() != null) {
