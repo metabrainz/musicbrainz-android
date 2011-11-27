@@ -80,8 +80,7 @@
 
     <activity
       android:name=".activity.BarcodeSearchActivity"
-      android:label="@string/addupc_title" 
-      android:configChanges="keyboardHidden|orientation" />
+      android:label="@string/addupc_title" />
 
     <activity
       android:name=".activity.SearchActivity"

@@ -20,22 +20,26 @@
 
 package org.musicbrainz.mobile.task;
 
+import java.util.LinkedList;
+
+import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.base.TagRateActivity;
 
 import android.widget.Toast;
 
-public class RatingTask extends IgnitedAsyncTask<TagRateActivity, Integer, Void, Void> {
-
+public class SubmitTagsTask extends IgnitedAsyncTask<TagRateActivity, String, Void, Void> {
+    
     private Credentials creds;
     private MBEntity type;
     private String mbid;
-    private float updatedRating;
+    private LinkedList<Tag> updatedTags;
     
-    public RatingTask(TagRateActivity activity, MBEntity type, String mbid) {
+    public SubmitTagsTask(TagRateActivity activity, MBEntity type, String mbid) {
         super(activity);
         creds = activity.getCredentials();
         this.type = type;
@@ -44,35 +48,36 @@ public class RatingTask extends IgnitedAsyncTask<TagRateActivity, Integer, Void,
     
     @Override
     protected void onStart(TagRateActivity activity) {
-        activity.onStartRating();
+        activity.onStartTagging();
     }
     
     @Override
-    protected Void run(Integer... rating) throws Exception {
+    protected Void run(String... tags) throws Exception {
         WebClient client = new WebClient(creds);
-        client.submitRating(type, mbid, rating[0]);
-        updatedRating = client.lookupRating(type, mbid);
+        LinkedList<String> saneTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags[0]);
+        client.submitTags(type, mbid, saneTags);
+        updatedTags = client.lookupTags(type, mbid);
         return null;
     }
     
     @Override
     protected void onSuccess(TagRateActivity activity, Void v) {
         if (activity != null) {
-            Toast.makeText(activity, R.string.toast_rate, Toast.LENGTH_SHORT).show();
-            activity.onDoneRating();
+            Toast.makeText(activity, R.string.toast_tag, Toast.LENGTH_SHORT).show();
+            activity.onDoneTagging();
         }
     }
 
     @Override
     protected void onError(TagRateActivity activity, Exception e) {
         if (activity != null) {
-            Toast.makeText(activity, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
-            activity.onDoneRating();
+            Toast.makeText(activity, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
+            activity.onDoneTagging();
         }
     }
     
-    public float getUpdatedRating() {
-        return updatedRating;
+    public LinkedList<Tag> getUpdatedTags() {
+        return updatedTags;
     }
-    
+
 }

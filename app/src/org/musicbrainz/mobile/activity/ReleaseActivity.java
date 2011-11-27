@@ -39,8 +39,8 @@ import org.musicbrainz.mobile.task.LookupBarcodeTask;
 import org.musicbrainz.mobile.task.LookupRGStubsTask;
 import org.musicbrainz.mobile.task.LookupReleaseTask;
 import org.musicbrainz.mobile.task.MusicBrainzTask;
-import org.musicbrainz.mobile.task.RatingTask;
-import org.musicbrainz.mobile.task.TagTask;
+import org.musicbrainz.mobile.task.SubmitRatingTask;
+import org.musicbrainz.mobile.task.SubmitTagsTask;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
@@ -96,8 +96,8 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     private boolean doingRate = false;
     
     private MusicBrainzTask lookupTask;
-    private TagTask tagTask;
-    private RatingTask ratingTask;
+    private SubmitTagsTask tagTask;
+    private SubmitRatingTask ratingTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,14 +140,14 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             onTaskFinished();
         }
         if (holder.tagTask != null) {
-            tagTask = (TagTask) holder.tagTask;
+            tagTask = (SubmitTagsTask) holder.tagTask;
             tagTask.connect(this);
             if (tagTask.isRunning()) {
                 onStartTagging();
             }
         }
         if (holder.ratingTask != null) {
-            ratingTask = (RatingTask) holder.ratingTask;
+            ratingTask = (SubmitRatingTask) holder.ratingTask;
             ratingTask.connect(this);
             if (ratingTask.isRunning()) {
                 onStartRating();
@@ -292,13 +292,13 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
             } else {
-                tagTask = new TagTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+                tagTask = new SubmitTagsTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
                 tagTask.execute(tagString);
             }
             break;
         case R.id.rate_btn:
             int rating = (int) ratingInput.getRating();
-            ratingTask = new RatingTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+            ratingTask = new SubmitRatingTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
             ratingTask.execute(rating);
         }
     }
@@ -429,7 +429,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     }
     
     private void disconnectTasks() {
-        lookupTask.disconnect();
+        if (lookupTask != null) lookupTask.disconnect();
         if (tagTask != null) tagTask.disconnect();
         if (ratingTask != null) ratingTask.disconnect();
     }
@@ -437,10 +437,10 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     private static class TaskHolder {
         
         public MusicBrainzTask lookupTask;
-        public TagTask tagTask;
-        public RatingTask ratingTask;
+        public SubmitTagsTask tagTask;
+        public SubmitRatingTask ratingTask;
         
-        public TaskHolder(MusicBrainzTask lookupTask, TagTask tagTask, RatingTask ratingTask) {
+        public TaskHolder(MusicBrainzTask lookupTask, SubmitTagsTask tagTask, SubmitRatingTask ratingTask) {
             this.lookupTask = lookupTask;
             this.tagTask = tagTask;
             this.ratingTask = ratingTask;

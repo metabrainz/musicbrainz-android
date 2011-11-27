@@ -20,64 +20,49 @@
 
 package org.musicbrainz.mobile.task;
 
-import java.util.LinkedList;
-
-import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.util.Credentials;
-import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.android.api.webservice.WebClient;
-import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.TagRateActivity;
+import org.musicbrainz.mobile.activity.BarcodeSearchActivity;
 
 import android.widget.Toast;
 
-public class TagTask extends IgnitedAsyncTask<TagRateActivity, String, Void, Void> {
-    
+public class SubmitBarcodeTask extends IgnitedAsyncTask<BarcodeSearchActivity, String, Void, Void> {
+
     private Credentials creds;
-    private MBEntity type;
     private String mbid;
-    private LinkedList<Tag> updatedTags;
     
-    public TagTask(TagRateActivity activity, MBEntity type, String mbid) {
-        super(activity);
+    public SubmitBarcodeTask(BarcodeSearchActivity activity, String mbid) {
         creds = activity.getCredentials();
-        this.type = type;
         this.mbid = mbid;
     }
     
     @Override
-    protected void onStart(TagRateActivity activity) {
-        activity.onStartTagging();
+    protected void onStart(BarcodeSearchActivity activity) {
+        activity.onStartSubmission();
     }
     
     @Override
-    protected Void run(String... tags) throws Exception {
+    protected Void run(String... barcode) throws Exception {
         WebClient client = new WebClient(creds);
-        LinkedList<String> saneTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags[0]);
-        client.submitTags(type, mbid, saneTags);
-        updatedTags = client.lookupTags(type, mbid);
+        client.submitBarcode(mbid, barcode[0]);
         return null;
     }
     
     @Override
-    protected void onSuccess(TagRateActivity activity, Void v) {
+    protected void onSuccess(BarcodeSearchActivity activity, Void v) {
         if (activity != null) {
-            Toast.makeText(activity, R.string.toast_tag, Toast.LENGTH_SHORT).show();
-            activity.onDoneTagging();
-        }
-    }
-
-    @Override
-    protected void onError(TagRateActivity activity, Exception e) {
-        if (activity != null) {
-            Toast.makeText(activity, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
-            activity.onDoneTagging();
+            Toast.makeText(activity, R.string.toast_barcode, Toast.LENGTH_SHORT).show();
+            activity.onSubmissionDone();
         }
     }
     
-    public LinkedList<Tag> getUpdatedTags() {
-        return updatedTags;
+    @Override
+    protected void onError(BarcodeSearchActivity activity, Exception e) {
+        if (activity != null) {
+            Toast.makeText(activity, R.string.toast_barcode_fail, Toast.LENGTH_LONG).show();
+            activity.onSubmissionDone();
+        }
     }
-
 }
+

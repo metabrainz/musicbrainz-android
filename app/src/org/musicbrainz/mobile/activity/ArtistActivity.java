@@ -30,8 +30,8 @@ import org.musicbrainz.mobile.adapter.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.LinkAdapter;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.task.LookupArtistTask;
-import org.musicbrainz.mobile.task.RatingTask;
-import org.musicbrainz.mobile.task.TagTask;
+import org.musicbrainz.mobile.task.SubmitRatingTask;
+import org.musicbrainz.mobile.task.SubmitTagsTask;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
@@ -79,8 +79,8 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
     private boolean doingRate = false;
 
     private LookupArtistTask lookupTask;
-    private TagTask tagTask;
-    private RatingTask ratingTask;
+    private SubmitTagsTask tagTask;
+    private SubmitRatingTask ratingTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,20 +100,20 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
     }
 
     private void reconnectTasks(TaskHolder holder) {
-        lookupTask = (LookupArtistTask) holder.lookupTask;
+        lookupTask = holder.lookupTask;
         lookupTask.connect(this);
         if (lookupTask.isFinished()) {
             onTaskFinished();
         }
         if (holder.tagTask != null) {
-            tagTask = (TagTask) holder.tagTask;
+            tagTask = holder.tagTask;
             tagTask.connect(this);
             if (tagTask.isRunning()) {
                 onStartTagging();
             }
         }
         if (holder.ratingTask != null) {
-            ratingTask = (RatingTask) holder.ratingTask;
+            ratingTask = holder.ratingTask;
             ratingTask.connect(this);
             if (ratingTask.isRunning()) {
                 onStartRating();
@@ -287,21 +287,20 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
      * Handler for tag and rate buttons.
      */
     public void onClick(View view) {
-
+        
         switch (view.getId()) {
-
         case R.id.tag_btn:
             String tagString = tagInput.getText().toString();
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
             } else {
-                tagTask = new TagTask(this, MBEntity.ARTIST, mbid);
+                tagTask = new SubmitTagsTask(this, MBEntity.ARTIST, mbid);
                 tagTask.execute(tagString);
             }
             break;
         case R.id.rate_btn:
             int rating = (int) ratingInput.getRating();
-            ratingTask = new RatingTask(this, MBEntity.ARTIST, mbid);
+            ratingTask = new SubmitRatingTask(this, MBEntity.ARTIST, mbid);
             ratingTask.execute(rating);
         }
     }
@@ -350,20 +349,18 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
     }
 
     private void disconnectTasks() {
-        lookupTask.disconnect();
-        if (tagTask != null)
-            tagTask.disconnect();
-        if (ratingTask != null)
-            ratingTask.disconnect();
+        if (lookupTask != null) lookupTask.disconnect();
+        if (tagTask != null) tagTask.disconnect();
+        if (ratingTask != null) ratingTask.disconnect();
     }
 
     private static class TaskHolder {
 
         public LookupArtistTask lookupTask;
-        public TagTask tagTask;
-        public RatingTask ratingTask;
+        public SubmitTagsTask tagTask;
+        public SubmitRatingTask ratingTask;
 
-        public TaskHolder(LookupArtistTask lookupTask, TagTask tagTask, RatingTask ratingTask) {
+        public TaskHolder(LookupArtistTask lookupTask, SubmitTagsTask tagTask, SubmitRatingTask ratingTask) {
             this.lookupTask = lookupTask;
             this.tagTask = tagTask;
             this.ratingTask = ratingTask;

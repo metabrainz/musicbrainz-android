@@ -56,7 +56,7 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
         ((TextView) findViewById(R.id.list_release)).setText(rs.getTitle());
         ((TextView) findViewById(R.id.list_release_artist)).setText(rs.getArtistName());
 
-        ((TextView) findViewById(R.id.list_release_tracksnum)).setText(rs.getTracksNum() + " tracks");
+        ((TextView) findViewById(R.id.list_release_tracksnum)).setText(rs.getTracksNum() + " " + parent.getString(R.string.label_tracks));
         ((TextView) findViewById(R.id.list_release_formats)).setText(StringMapper.buildReleaseFormatsString(
                 getContext(), rs.getFormats()));
 
@@ -65,7 +65,6 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
         ((TextView) findViewById(R.id.list_release_country)).setText(rs.getCountryCode());
 
         findViewById(R.id.release_box).setBackgroundResource(R.color.list_bg);
-
     }
 
     public void onClick(View v) {
