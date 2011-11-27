@@ -135,12 +135,17 @@
   </style>
 
   <!-- Text -->
-  <style
+   <style
     name="TextHeader"
     parent="@style/WrapHeight">
-    <item name="android:layout_marginBottom">@dimen/home_pad</item>
     <item name="android:textSize">@dimen/text_size_xl</item>
     <item name="android:textColor">@color/aux_text</item>
+  </style>
+  
+  <style 
+    name="TextHeaderPad"
+    parent="TextHeader">
+    <item name="android:layout_marginBottom">@dimen/home_pad</item>
   </style>
 
   <style
@@ -156,7 +161,6 @@
     parent="@style/WrapHeight">
     <item name="android:textSize">@dimen/text_size_small</item>
     <item name="android:textColor">@color/mb_purple_dark</item>
-    <item name="android:paddingTop">@dimen/home_pad</item>
   </style>
 
   <style

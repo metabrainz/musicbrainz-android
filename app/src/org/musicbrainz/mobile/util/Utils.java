@@ -20,6 +20,10 @@
 
 package org.musicbrainz.mobile.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.musicbrainz.mobile.R;
 
 import android.content.Context;
@@ -46,6 +50,22 @@ public class Utils {
     
     public static Intent urlIntent(String url) {
         return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    }
+    
+    public static String stringFromAsset(Context context, String asset) {
+        try {
+            InputStream input = context.getResources().getAssets().open("about.html");
+            byte[] buffer = new byte[input.available()];  
+            input.read(buffer);  
+            ByteArrayOutputStream output = new ByteArrayOutputStream();  
+            output.write(buffer);  
+            output.close();  
+            input.close(); 
+            return output.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
 }

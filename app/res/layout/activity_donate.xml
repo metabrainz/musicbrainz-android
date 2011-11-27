@@ -33,7 +33,7 @@
 
     <TextView
       android:id="@+id/donate_title"
-      style="@style/TextHeader"
+      style="@style/TextHeaderPad"
       android:text="@string/donate_header" />
 
     <TextView
