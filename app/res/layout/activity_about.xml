@@ -43,7 +43,7 @@
         android:id="@+id/version_text"
         style="@style/VersionText" />
 
-      <TextView
+      <org.musicbrainz.mobile.widget.AssetTextView
         android:id="@+id/about_text"
         style="@style/TextBody"
         android:layout_marginTop="@dimen/home_pad" />

@@ -22,10 +22,9 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
-import org.musicbrainz.mobile.util.Utils;
+import org.musicbrainz.mobile.widget.AssetTextView;
 
 import android.os.Bundle;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
@@ -41,8 +40,8 @@ public class AboutActivity extends MusicBrainzActivity {
         TextView versionLabel = (TextView) findViewById(R.id.version_text);
         versionLabel.setText(getText(R.string.version_text) + " " + getVersion());
         
-        TextView body = (TextView) findViewById(R.id.about_text);
-        body.setText(Html.fromHtml(Utils.stringFromAsset(this, "about.html")));
+        AssetTextView body = (AssetTextView) findViewById(R.id.about_text);
+        body.setAsset("about.html");
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
