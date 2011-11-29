@@ -154,12 +154,10 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
 
         displayMessagesForEmptyData();
         
-        if (userData.getTags() != null) {
+        if (isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
-        }
-        ratingInput.setRating(userData.getRating());
-
-        if (!isUserLoggedIn()) {
+            ratingInput.setRating(userData.getRating());
+        } else {
             disableEditViews();
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }

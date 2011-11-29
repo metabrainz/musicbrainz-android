@@ -23,7 +23,7 @@
     <dependency>
       <groupId>com.jayway.android.robotium</groupId>
       <artifactId>robotium-solo</artifactId>
-      <version>3.0</version>
+      <version>2.5</version>
     </dependency>
     <dependency>
       <groupId>com.google.android</groupId>
@@ -60,7 +60,7 @@
           </sdk>
           <test>
             <skip>false</skip>
-            <instrumentationPackage>org.musicbrainz.mobile.robotium</instrumentationPackage>
+            <instrumentationPackage>org.musicbrainz.mobile.test</instrumentationPackage>
             <instrumentationRunner>android.test.InstrumentationTestRunner</instrumentationRunner>
           </test>
         </configuration>
