@@ -193,9 +193,6 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         artist.setText(StringFormat.commaSeparateArtists(data.getArtists()));
         title.setText(data.getTitle());
 
-        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
-        rating.setRating(data.getReleaseGroupRating());
-
         ListView trackList = (ListView) findViewById(R.id.release_tracks);
         trackList.setAdapter(new ReleaseTrackAdapter(this, data.getTrackList()));
         trackList.setDrawSelectorOnTop(false);
@@ -216,11 +213,15 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         if (data.getReleaseGroupTags().isEmpty()) {
             tags.setText(getText(R.string.no_tags));
         }
-
-        if (!isUserLoggedIn()) {
+        
+        if (isUserLoggedIn()) {
+            tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
+            rating.setRating(data.getReleaseGroupRating());
+        } else {
             disableEditFields();
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
+
     }
 
     private void disableEditFields() {
