@@ -92,8 +92,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     private Button tagBtn;
     private Button rateBtn;
 
-    private boolean doingTag = false;
-    private boolean doingRate = false;
+    private boolean doingTag, doingRate = false;
     
     private MusicBrainzTask lookupTask;
     private SubmitTagsTask tagTask;

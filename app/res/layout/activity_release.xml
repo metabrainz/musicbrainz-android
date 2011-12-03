@@ -108,53 +108,7 @@
           style="@style/List" />
       </RelativeLayout>
 
-      <LinearLayout
-        android:id="@+id/edit_tab"
-        style="@style/Fill"
-        android:background="@color/main_fg"
-        android:orientation="vertical"
-        android:padding="@dimen/home_pad">
-
-        <TextView
-          android:id="@+id/login_warning"
-          style="@style/Wrap"
-          android:layout_marginBottom="@dimen/home_pad"
-          android:layout_gravity="center"
-          android:visibility="gone"
-          android:textColor="@color/mb_orange_dark"
-          android:text="@string/edit_login" />
-
-        <EditText
-          android:id="@+id/tag_input"
-          style="@style/WrapHeight"
-          android:hint="@string/tag_hint"
-          android:inputType="textFilter"
-          android:singleLine="true"
-          android:imeOptions="actionDone" />
-
-        <RatingBar
-          android:id="@+id/rating_input"
-          style="@style/RatingBar" />
-
-        <LinearLayout
-          style="@style/WrapHeight"
-          android:layout_marginTop="@dimen/small_pad">
-
-          <Button
-            android:id="@+id/tag_btn"
-            style="@style/WrapHeight"
-            android:text="@string/tag_label"
-            android:drawableRight="@drawable/btn_tag"
-            android:layout_weight="1" />
-
-          <Button
-            android:id="@+id/rate_btn"
-            style="@style/WrapHeight"
-            android:text="@string/rate_label"
-            android:drawableRight="@drawable/btn_star"
-            android:layout_weight="1" />
-        </LinearLayout>
-      </LinearLayout>
+      <include layout="@layout/layout_edit" />
     </FrameLayout>
 
   </TabHost>

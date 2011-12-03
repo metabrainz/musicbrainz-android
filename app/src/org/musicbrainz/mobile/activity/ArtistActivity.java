@@ -75,8 +75,7 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
     private Button tagBtn;
     private Button rateBtn;
 
-    private boolean doingTag = false;
-    private boolean doingRate = false;
+    private boolean doingTag, doingRate = false;
 
     private LookupArtistTask lookupTask;
     private SubmitTagsTask tagTask;

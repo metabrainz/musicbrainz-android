@@ -43,7 +43,8 @@
         android:id="@+id/donate_body"
         style="@style/TextBody"
         android:text="@string/donate_text"
-        android:layout_below="@id/donate_title" />
+        android:layout_below="@id/donate_title"
+        android:layout_marginTop="@dimen/home_pad" />
     </RelativeLayout>
 
     <RelativeLayout
