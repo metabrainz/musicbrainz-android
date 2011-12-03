@@ -23,35 +23,8 @@ Please report issues on the [MusicBrainz issue tracker](http://tickets.musicbrai
 
 Code contributions are encouraged in the form of pull requests. Please use the following code formatting and style guidelines:
 
-* Tabs are 4 spaces
+* Tabs are 4 spaces in Java code and 2 spaces in XML
 * 120 character line width
-* Use descriptive naming and comment as a last resort
+* Use descriptive names and comment as a last resort
 
 It might be helpful to use this [eclipse code formatting configuration](https://github.com/novoda/public-mvn-repo/blob/master/eclipse/clean_code_formatter_profile.xml).
-
-### Maven
-
-If you want to build the project with Maven, you will need the following profile:
-
-    <profile>
-    <id>novoda</id>
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Maven Repository Switchboard</name>
-			<layout>default</layout>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>public-mvn-repo-snapshots</id>
-			<url>https://github.com/novoda/public-mvn-repo/raw/master/snapshots</url>
-		</repository>
-		<repository>
-			<id>public-mvn-repo-releases</id>
-			<url>https://github.com/novoda/public-mvn-repo/raw/master/releases</url>
-		</repository>
-	</repositories>
-    </profile>
