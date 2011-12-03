@@ -37,11 +37,6 @@
       <version>13</version>
     </dependency>
     <dependency>
-      <groupId>org.roboguice</groupId>
-      <artifactId>roboguice</artifactId>
-      <version>1.1.2</version>
-    </dependency>
-    <dependency>
       <groupId>com.paypal.android</groupId>
       <artifactId>paypal-mpl</artifactId>
       <version>1.5.5.40</version>

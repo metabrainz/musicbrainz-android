@@ -92,7 +92,7 @@
           android:id="@+id/nolinks"
           style="@style/NoResultsText"
           android:layout_alignParentBottom="true"
-          android:text="@string/nolinks" />
+          android:text="@string/no_links" />
       </RelativeLayout>
 
       <LinearLayout

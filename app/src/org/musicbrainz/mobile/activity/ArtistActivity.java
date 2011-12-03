@@ -121,36 +121,24 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         }
     }
 
-    protected void populate() {
+    protected void populateLayout() {
         setContentView(R.layout.activity_artist);
+        findViews();
+        setupTabs();
         actionBar = setupActionBarWithHome();
         addActionBarShare();
 
         FocusTextView artist = (FocusTextView) findViewById(R.id.artist_artist);
-        rating = (RatingBar) findViewById(R.id.artist_rating);
-        tags = (FocusTextView) findViewById(R.id.artist_tags);
+        ListView releaseList = (ListView) findViewById(R.id.artist_releases);
+        ListView linksList = (ListView) findViewById(R.id.artist_links);
 
         artist.setText(data.getName());
-        rating.setRating(data.getRating());
-        tags.setText(StringFormat.commaSeparateTags(data.getTags()));
-
-        ListView releaseList = (ListView) findViewById(R.id.artist_releases);
-        releaseList.setOnItemClickListener(this);
         releaseList.setAdapter(new ArtistReleaseGroupAdapter(this, data.getReleaseGroups()));
-
-        ListView linksList = (ListView) findViewById(R.id.artist_links);
-        linksList.setOnItemClickListener(this);
+        releaseList.setOnItemClickListener(this);
         linksList.setAdapter(new LinkAdapter(this, data.getLinks()));
-
-        setupTabs();
-
-        tagInput = (EditText) findViewById(R.id.tag_input);
-        tagBtn = (Button) findViewById(R.id.tag_btn);
-        tagBtn.setOnClickListener(this);
-
-        ratingInput = (RatingBar) findViewById(R.id.rating_input);
-        rateBtn = (Button) findViewById(R.id.rate_btn);
-        rateBtn.setOnClickListener(this);
+        linksList.setOnItemClickListener(this);
+        rating.setRating(data.getRating());
+        tags.setText(StringFormat.commaSeparateTags(data.getTags(), this));
 
         displayMessagesForEmptyData();
         
@@ -162,20 +150,17 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
     }
-
-    private void displayMessagesForEmptyData() {
-        if (data.getTags().isEmpty())
-            tags.setText(getText(R.string.no_tags));
-
-        if (data.getReleases().isEmpty()) {
-            TextView noRes = (TextView) findViewById(R.id.noreleases);
-            noRes.setVisibility(View.VISIBLE);
-        }
-
-        if (data.getLinks().isEmpty()) {
-            TextView noRes = (TextView) findViewById(R.id.nolinks);
-            noRes.setVisibility(View.VISIBLE);
-        }
+    
+    private void findViews() {
+        rating = (RatingBar) findViewById(R.id.artist_rating);
+        tags = (FocusTextView) findViewById(R.id.artist_tags);
+        tagInput = (EditText) findViewById(R.id.tag_input);
+        tagBtn = (Button) findViewById(R.id.tag_btn);
+        ratingInput = (RatingBar) findViewById(R.id.rating_input);
+        rateBtn = (Button) findViewById(R.id.rate_btn);
+        
+        tagBtn.setOnClickListener(this);
+        rateBtn.setOnClickListener(this);
     }
 
     private void disableEditViews() {
@@ -187,6 +172,17 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         tagBtn.setFocusable(false);
         rateBtn.setEnabled(false);
         rateBtn.setFocusable(false);
+    }
+    
+    private void displayMessagesForEmptyData() {
+        if (data.getReleases().isEmpty()) {
+            TextView noRes = (TextView) findViewById(R.id.noreleases);
+            noRes.setVisibility(View.VISIBLE);
+        }
+        if (data.getLinks().isEmpty()) {
+            TextView noRes = (TextView) findViewById(R.id.nolinks);
+            noRes.setVisibility(View.VISIBLE);
+        }
     }
 
     private void addActionBarShare() {
@@ -261,7 +257,7 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
 
     public void onDoneTagging() {
         data.setTags(tagTask.getUpdatedTags());
-        tags.setText(StringFormat.commaSeparateTags(data.getTags()));
+        tags.setText(StringFormat.commaSeparateTags(data.getTags(), this));
         doingTag = false;
         updateProgress();
         tagBtn.setEnabled(true);
@@ -330,7 +326,7 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
             if (lookupTask.getUserData() != null) {
                 userData = lookupTask.getUserData();
             }
-            populate();
+            populateLayout();
         }
     }
 

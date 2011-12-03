@@ -25,6 +25,9 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.Tag;
+import org.musicbrainz.mobile.R;
+
+import android.content.Context;
 
 public class StringFormat {
 
@@ -47,10 +50,10 @@ public class StringFormat {
         return sb.substring(0, sb.length() - 2);
     }
     
-    public static String commaSeparateTags(LinkedList<Tag> tags) {
+    public static String commaSeparateTags(LinkedList<Tag> tags, Context context) {
         StringBuilder sb = new StringBuilder();
         if (tags.isEmpty()) {
-            return sb.toString();
+            return context.getResources().getString(R.string.no_tags);
         }
         for (Tag tag : tags) {
             sb.append(tag.getText() + ", ");

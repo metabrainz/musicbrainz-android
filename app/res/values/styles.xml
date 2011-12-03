@@ -70,6 +70,7 @@
     <item name="android:layout_marginTop">@dimen/small_pad</item>
     <item name="android:textSize">@dimen/text_size_tag</item>
     <item name="android:textColor">@color/tag_text</item>
+    <item name="android:text">@string/no_tags</item>
   </style>
 
   <style

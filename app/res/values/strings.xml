@@ -64,7 +64,7 @@
   <!-- ArtistActivity -->
   <string name="artist_title">Artist</string>
   <string name="noreleases">No releases found</string>
-  <string name="nolinks">No links found</string>
+  <string name="no_links">No links found</string>
 
   <string name="tab_releases">Releases</string>
   <string name="tab_links">Links</string>

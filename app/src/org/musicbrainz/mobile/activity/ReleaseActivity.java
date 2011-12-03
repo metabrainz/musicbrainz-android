@@ -155,12 +155,10 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         }
     }
 
-    /**
-     * Set the content view and options associated with the information mode.
-     */
-    private void populate() {
-
+    private void populateLayout() {
         setContentView(R.layout.activity_release);
+        findViews();
+        setupTabs();
         actionBar = setupActionBarWithHome();
         addActionBarShare();
 
@@ -168,14 +166,32 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         FocusTextView title = (FocusTextView) findViewById(R.id.release_release);
         FocusTextView labels = (FocusTextView) findViewById(R.id.release_label);
         TextView releaseDate = (TextView) findViewById(R.id.release_date);
+        ListView trackList = (ListView) findViewById(R.id.release_tracks);
 
-        rating = (RatingBar) findViewById(R.id.release_rating);
-        tags = (FocusTextView) findViewById(R.id.release_tags);
+        displayArtistActionIfRequired();
+        artist.setText(StringFormat.commaSeparateArtists(data.getArtists()));
+        title.setText(data.getTitle());
+        trackList.setAdapter(new ReleaseTrackAdapter(this, data.getTrackList()));
+        trackList.setDrawSelectorOnTop(false);
+        labels.setText(StringFormat.commaSeparate(data.getLabels()));
+        releaseDate.setText(data.getDate());
+        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags(), this));
+        rating.setRating(data.getReleaseGroupRating());
+        
+        if (isUserLoggedIn()) {
+            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
+            ratingInput.setRating(userData.getRating());
+        } else {
+            disableEditFields();
+            findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
+        }
+    }
 
-        Boolean provideArtistAction = true;
-
+    private void displayArtistActionIfRequired() {
+        boolean provideArtistAction = true;
+        
         ArrayList<ReleaseArtist> releaseArtists = data.getArtists();
-        if (releaseArtists.size() > 1) {
+        if (releaseArtists.size() != 1) {
             provideArtistAction = false;
         } else {
             ReleaseArtist singleArtist = releaseArtists.get(0);
@@ -185,55 +201,30 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
                 }
             }
         }
-
         if (provideArtistAction) {
             addActionBarArtist();
         }
-
-        artist.setText(StringFormat.commaSeparateArtists(data.getArtists()));
-        title.setText(data.getTitle());
-
-        ListView trackList = (ListView) findViewById(R.id.release_tracks);
-        trackList.setAdapter(new ReleaseTrackAdapter(this, data.getTrackList()));
-        trackList.setDrawSelectorOnTop(false);
-
-        setupTabs();
-
+    }
+    
+    private void findViews() {
+        rating = (RatingBar) findViewById(R.id.release_rating);
+        tags = (FocusTextView) findViewById(R.id.release_tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
-        tagBtn = (Button) findViewById(R.id.tag_btn);
-        tagBtn.setOnClickListener(this);
-
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
+        tagBtn = (Button) findViewById(R.id.tag_btn);
         rateBtn = (Button) findViewById(R.id.rate_btn);
-        rateBtn.setOnClickListener(this);
-
-        labels.setText(StringFormat.commaSeparate(data.getLabels()));
-        releaseDate.setText(data.getDate());
-
-        if (data.getReleaseGroupTags().isEmpty()) {
-            tags.setText(getText(R.string.no_tags));
-        }
         
-        if (isUserLoggedIn()) {
-            tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
-            rating.setRating(data.getReleaseGroupRating());
-        } else {
-            disableEditFields();
-            findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
-        }
-
+        tagBtn.setOnClickListener(this);
+        rateBtn.setOnClickListener(this);
     }
 
     private void disableEditFields() {
         tagInput.setEnabled(false);
         tagInput.setFocusable(false);
-
         ratingInput.setEnabled(false);
         ratingInput.setFocusable(false);
-
         tagBtn.setEnabled(false);
         tagBtn.setFocusable(false);
-
         rateBtn.setEnabled(false);
         rateBtn.setFocusable(false);
     }
@@ -330,7 +321,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     @Override
     public void onDoneTagging() {
         data.setReleaseGroupTags(tagTask.getUpdatedTags());
-        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags()));
+        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags(), this));
         doingTag = false;
         updateProgressStatus();
         tagBtn.setEnabled(true);
@@ -410,7 +401,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     }
     
     private void displayReleaseData() {
-        populate();
+        populateLayout();
         if (isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
