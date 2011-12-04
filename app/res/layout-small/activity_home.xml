@@ -28,7 +28,7 @@
 
   <RelativeLayout
     style="@style/WrapHeight"
-    android:paddingTop="@dimen/huge_pad"
+    android:paddingTop="@dimen/std_pad"
     android:paddingRight="@dimen/home_pad"
     android:paddingLeft="@dimen/home_pad">
 
