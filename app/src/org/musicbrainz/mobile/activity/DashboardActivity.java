@@ -50,7 +50,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-public class HomeActivity extends MusicBrainzActivity implements OnEditorActionListener, OnItemClickListener {
+public class DashboardActivity extends MusicBrainzActivity implements OnEditorActionListener, OnItemClickListener {
 
     private static final int REQUEST_LOGIN = 0;
 
@@ -63,16 +63,20 @@ public class HomeActivity extends MusicBrainzActivity implements OnEditorActionL
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
+        findViews();
 
-        searchField = (AutoCompleteTextView) findViewById(R.id.query_input);
-        searchField.setOnEditorActionListener(this);
-
-        searchTypeSpinner = (Spinner) findViewById(R.id.search_spin);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.searchType,
                 android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchTypeSpinner.setAdapter(typeAdapter);
         suggestionHelper = new SuggestionHelper(this);
+    }
+    
+    private void findViews() {
+        searchField = (AutoCompleteTextView) findViewById(R.id.query_input);
+        searchTypeSpinner = (Spinner) findViewById(R.id.search_spin);
+        
+        searchField.setOnEditorActionListener(this);
     }
 
     @Override
@@ -136,7 +140,7 @@ public class HomeActivity extends MusicBrainzActivity implements OnEditorActionL
             break;
         case R.id.scan_btn:
             // ZXing integration with external strings and product code mode
-            IntentIntegrator.initiateScan(HomeActivity.this, getString(R.string.zx_title),
+            IntentIntegrator.initiateScan(DashboardActivity.this, getString(R.string.zx_title),
                     getString(R.string.zx_message), getString(R.string.zx_pos), getString(R.string.zx_neg),
                     IntentIntegrator.PRODUCT_CODE_TYPES);
             break;
@@ -206,7 +210,7 @@ public class HomeActivity extends MusicBrainzActivity implements OnEditorActionL
     }
 
     public static Intent createIntent(Context context) {
-        Intent intent = new Intent(context, HomeActivity.class);
+        Intent intent = new Intent(context, DashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return intent;
     }

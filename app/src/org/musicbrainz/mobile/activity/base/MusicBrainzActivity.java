@@ -24,7 +24,7 @@ import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
-import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.PreferencesActivity;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Constants;
@@ -107,7 +107,7 @@ public abstract class MusicBrainzActivity extends Activity {
     protected ActionBar setupActionBarWithHome() {
         ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
         getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
-        actionBar.findAction(R.id.actionbar_item_home).setIntent(HomeActivity.createIntent(this));
+        actionBar.findAction(R.id.actionbar_item_home).setIntent(DashboardActivity.createIntent(this));
         actionBar.setDisplayShowHomeEnabled(true);
         return actionBar;
     }

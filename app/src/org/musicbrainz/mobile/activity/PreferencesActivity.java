@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
+import org.musicbrainz.mobile.util.Constants;
 
 import com.markupartist.android.widget.ActionBar;
 
@@ -41,21 +42,21 @@ public class PreferencesActivity extends PreferenceActivity implements OnPrefere
         setupActionbarWithHome();
         addPreferencesFromResource(R.xml.preferences);
 
-        Preference clear = (Preference) findPreference("clear_suggestions");
+        Preference clear = (Preference) findPreference(Constants.PREF_CLEAR_SUGGESTIONS);
         clear.setOnPreferenceClickListener(this);
     }
 
     private void setupActionbarWithHome() {
         ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
         getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
-        actionBar.findAction(R.id.actionbar_item_home).setIntent(HomeActivity.createIntent(this));
+        actionBar.findAction(R.id.actionbar_item_home).setIntent(DashboardActivity.createIntent(this));
         actionBar.setDisplayShowHomeEnabled(true);
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if (preference.getKey().equals("clear_suggestions")) {
+        if (preference.getKey().equals(Constants.PREF_CLEAR_SUGGESTIONS)) {
             clearSuggestionHistory();
             return true;
         }

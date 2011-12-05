@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.test.robotium.search;
 
-import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.activity.SearchActivity;
 
@@ -28,12 +28,12 @@ import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-public class RGSearchTest extends ActivityInstrumentationTestCase2<HomeActivity> {
+public class RGSearchTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
     private Solo solo;
 
     public RGSearchTest() {
-        super("org.musicbrainz.mobile", HomeActivity.class);
+        super("org.musicbrainz.mobile", DashboardActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -43,7 +43,7 @@ public class RGSearchTest extends ActivityInstrumentationTestCase2<HomeActivity>
     public void testSearchWithNoQuery() throws Exception {
         solo.pressSpinnerItem(0, 1);
         solo.clickOnImageButton(0);
-        solo.assertCurrentActivity("", HomeActivity.class);
+        solo.assertCurrentActivity("", DashboardActivity.class);
     }
 
     public void testSearchWithExistingRG() throws Exception {

@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.test.robotium.login;
 
-import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.LoginActivity;
 import org.musicbrainz.mobile.test.robotium.Account;
 
@@ -28,14 +28,14 @@ import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-public class LoginTest extends ActivityInstrumentationTestCase2<HomeActivity> {
+public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
     private static final int DIALOG_TIMEOUT = 2 * 1000;
 
     private Solo solo;
 
     public LoginTest() {
-        super("org.musicbrainz.mobile", HomeActivity.class);
+        super("org.musicbrainz.mobile", DashboardActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -61,7 +61,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<HomeActivity> {
         solo.assertCurrentActivity("", LoginActivity.class);
         enterValidCredentials();
         solo.waitForDialogToClose(DIALOG_TIMEOUT);
-        solo.assertCurrentActivity("", HomeActivity.class);
+        solo.assertCurrentActivity("", DashboardActivity.class);
     }
 
     private void enterValidCredentials() {

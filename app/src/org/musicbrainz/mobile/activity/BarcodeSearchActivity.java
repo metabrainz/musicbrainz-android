@@ -60,51 +60,50 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
     private static final int DIALOG_SUBMIT_BARCODE = 1;
     
     private ActionBar actionBar;
-    private TextView top;
+    private TextView barcodeText;
     private EditText searchBox;
-    private ImageButton search;
+    private ImageButton searchButton;
 
     private TextView instructions;
-    private TextView noRes;
+    private TextView noResults;
     private ListView matches;
     private LinearLayout loading;
 
     private String barcode;
-    
     private SearchReleasesTask searchTask;
     private SubmitBarcodeTask submissionTask;
     
     private LinkedList<ReleaseStub> results;
-    
     private ReleaseStub selection;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_barcode);
+        findViews();
         actionBar = setupActionBarWithHome();
 
         barcode = getIntent().getStringExtra(Extra.BARCODE);
-
-        top = (TextView) findViewById(R.id.barcode_text);
-        top.setText(top.getText() + " " + barcode);
-
-        searchBox = (EditText) findViewById(R.id.barcode_search);
-        searchBox.setOnEditorActionListener(this);
-
-        search = (ImageButton) findViewById(R.id.barcode_search_btn);
-        search.setOnClickListener(this);
-
-        matches = (ListView) findViewById(R.id.barcode_list);
-        instructions = (TextView) findViewById(R.id.barcode_instructions);
-        noRes = (TextView) findViewById(R.id.noresults);
-        loading = (LinearLayout) findViewById(R.id.loading);
+        barcodeText.setText(barcodeText.getText() + " " + barcode);
         
         Object retained = getLastNonConfigurationInstance();
         if (retained instanceof TaskHolder) {
             TaskHolder holder = (TaskHolder) retained;
             reconnectTasks(holder);
         }
+    }
+    
+    private void findViews() {
+        searchBox = (EditText) findViewById(R.id.barcode_search);
+        barcodeText = (TextView) findViewById(R.id.barcode_text);
+        searchButton = (ImageButton) findViewById(R.id.barcode_search_btn);
+        matches = (ListView) findViewById(R.id.barcode_list);
+        instructions = (TextView) findViewById(R.id.barcode_instructions);
+        noResults = (TextView) findViewById(R.id.noresults);
+        loading = (LinearLayout) findViewById(R.id.loading);
+        
+        searchBox.setOnEditorActionListener(this);
+        searchButton.setOnClickListener(this);
     }
 
     private void reconnectTasks(TaskHolder holder) {
@@ -148,7 +147,7 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
     }
 
     private void preSearch() {
-        search.setEnabled(false);
+        searchButton.setEnabled(false);
         instructions.setVisibility(View.INVISIBLE);
         loading.setVisibility(View.VISIBLE);
     }
@@ -217,13 +216,13 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
 
             instructions.setVisibility(View.INVISIBLE);
             if (results.isEmpty()) {
-                noRes.setVisibility(View.VISIBLE);
+                noResults.setVisibility(View.VISIBLE);
                 matches.setVisibility(View.INVISIBLE);
             } else {
                 matches.setVisibility(View.VISIBLE);
-                noRes.setVisibility(View.INVISIBLE);
+                noResults.setVisibility(View.INVISIBLE);
             }
-            search.setEnabled(true);
+            searchButton.setEnabled(true);
         }
     }
     

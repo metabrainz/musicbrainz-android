@@ -21,7 +21,7 @@
 <resources>
   <!-- HomeActivity -->
   <string name="app_name">MusicBrainz</string>
-  <string name="scan_label">Scan Barcode</string>
+  <string name="scan_label">Scan</string>
   <string name="login_label">Log In</string>
   <string name="logout_label">Log Out</string>
   <string name="search_hint">Search MusicBrainz</string>

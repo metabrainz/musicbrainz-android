@@ -67,11 +67,8 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+        findViews();
         setupActionBarWithHome();
-
-        usernameBox = (EditText) findViewById(R.id.uname_input);
-        passwordBox = (EditText) findViewById(R.id.pass_input);
-        passwordBox.setOnEditorActionListener(this);
 
         setResult(RESULT_NOT_LOGGED_IN);
 
@@ -82,6 +79,13 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         } else {
             setupLoginTask();
         }
+    }
+
+    private void findViews() {
+        usernameBox = (EditText) findViewById(R.id.uname_input);
+        passwordBox = (EditText) findViewById(R.id.pass_input);
+        
+        passwordBox.setOnEditorActionListener(this);
     }
 
     private void setupLoginTask() {

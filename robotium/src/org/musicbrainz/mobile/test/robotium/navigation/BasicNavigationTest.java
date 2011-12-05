@@ -22,19 +22,19 @@ package org.musicbrainz.mobile.test.robotium.navigation;
 
 import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
-import org.musicbrainz.mobile.activity.HomeActivity;
+import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.LoginActivity;
 
 import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-public class BasicNavigationTest extends ActivityInstrumentationTestCase2<HomeActivity> {
+public class BasicNavigationTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
     private Solo solo;
 
     public BasicNavigationTest() {
-        super("org.musicbrainz.mobile", HomeActivity.class);
+        super("org.musicbrainz.mobile", DashboardActivity.class);
     }
 
     public void setUp() throws Exception {
@@ -67,7 +67,7 @@ public class BasicNavigationTest extends ActivityInstrumentationTestCase2<HomeAc
 
     private void goHomeViaActionBar() {
         solo.clickOnImageButton(0);
-        solo.assertCurrentActivity("", HomeActivity.class);
+        solo.assertCurrentActivity("", DashboardActivity.class);
     }
 
     public void testMenuNavigation() throws Exception {
@@ -99,7 +99,7 @@ public class BasicNavigationTest extends ActivityInstrumentationTestCase2<HomeAc
         solo.assertCurrentActivity("", AboutActivity.class);
         solo.goBack();
         solo.goBack();
-        solo.assertCurrentActivity("", HomeActivity.class);
+        solo.assertCurrentActivity("", DashboardActivity.class);
     }
 
     @Override
