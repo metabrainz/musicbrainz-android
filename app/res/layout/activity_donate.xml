@@ -22,14 +22,9 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <RelativeLayout
     android:id="@+id/donate_layout"
-    style="@style/PaddedLayoutFill"
-    android:layout_below="@id/actionbar">
+    style="@style/PaddedLayoutFill">
 
     <TextView
       android:id="@+id/donate_title"

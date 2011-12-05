@@ -22,10 +22,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <RelativeLayout
     style="@style/WrapHeight"
     android:paddingTop="@dimen/huge_pad"

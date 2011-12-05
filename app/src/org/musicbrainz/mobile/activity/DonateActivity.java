@@ -27,7 +27,6 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.util.Config;
 
-import com.markupartist.android.widget.ActionBar;
 import com.paypal.android.MEP.CheckoutButton;
 import com.paypal.android.MEP.PayPal;
 import com.paypal.android.MEP.PayPalPayment;
@@ -37,8 +36,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.support.v4.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -56,7 +54,6 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
     private static final int PAYPAL_REQUEST_CODE = 1;
     private static final int MAX_CHECKS = 20;
 
-    private ActionBar actionBar;
     private Spinner amount;
     private CheckoutButton payPalButton;
 
@@ -68,7 +65,6 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_donate);
-        actionBar = setupActionBarWithHome();
 
         amount = (Spinner) findViewById(R.id.donate_spin);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation,
@@ -76,7 +72,7 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         amount.setAdapter(typeAdapter);
 
-        actionBar.setProgressBarVisibility(View.VISIBLE);
+        // TODO start progress
 
         initChecks = 0;
         handler.post(loadingChecker);
@@ -100,13 +96,13 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
     };
 
     private void onPayPalLoaded() {
-        actionBar.setProgressBarVisibility(View.GONE);
+        // TODO stop progress
         addPayPalButtonToLayout();
         hideLoadingText();
     }
 
     private void handleTimeout() {
-        actionBar.setProgressBarVisibility(View.GONE);
+        // TODO stop progress
         TextView loadText = (TextView) findViewById(R.id.donate_loading_text);
         loadText.setText(R.string.paypal_loading_timeout);
     }
@@ -148,7 +144,7 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
 
             Intent checkoutIntent = PayPal.getInstance().checkout(donation, this);
             this.startActivityForResult(checkoutIntent, PAYPAL_REQUEST_CODE);
-            setContentView(R.layout.starting_paypal);
+            setContentView(R.layout.layout_starting_paypal);
         }
     }
 
@@ -178,8 +174,7 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.donate, menu);
+        getMenuInflater().inflate(R.menu.donate, menu);
         return true;
     }
 

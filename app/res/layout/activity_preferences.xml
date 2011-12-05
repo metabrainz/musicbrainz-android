@@ -22,10 +22,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <ListView
     android:id="@android:id/list"
     style="@style/List" />

@@ -24,8 +24,6 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.util.Constants;
 
-import com.markupartist.android.widget.ActionBar;
-
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -39,18 +37,10 @@ public class PreferencesActivity extends PreferenceActivity implements OnPrefere
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
-        setupActionbarWithHome();
         addPreferencesFromResource(R.xml.preferences);
 
         Preference clear = (Preference) findPreference(Constants.PREF_CLEAR_SUGGESTIONS);
         clear.setOnPreferenceClickListener(this);
-    }
-
-    private void setupActionbarWithHome() {
-        ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-        getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
-        actionBar.findAction(R.id.actionbar_item_home).setIntent(DashboardActivity.createIntent(this));
-        actionBar.setDisplayShowHomeEnabled(true);
     }
 
     @Override

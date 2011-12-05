@@ -49,8 +49,6 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-import com.markupartist.android.widget.ActionBar;
-
 /**
  * Activity to submit a barcode to a selected release in MusicBrainz.
  */
@@ -59,7 +57,6 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
 
     private static final int DIALOG_SUBMIT_BARCODE = 1;
     
-    private ActionBar actionBar;
     private TextView barcodeText;
     private EditText searchBox;
     private ImageButton searchButton;
@@ -81,7 +78,6 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
 
         setContentView(R.layout.activity_barcode);
         findViews();
-        actionBar = setupActionBarWithHome();
 
         barcode = getIntent().getStringExtra(Extra.BARCODE);
         barcodeText.setText(barcodeText.getText() + " " + barcode);
@@ -163,11 +159,11 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
     }
     
     public void onStartSubmission() {
-        actionBar.setProgressBarVisibility(View.VISIBLE);
+        // TODO start progress
     }
     
     public void onSubmissionDone() {
-        actionBar.setProgressBarVisibility(View.GONE);
+        // TODO stop progress
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -237,11 +233,12 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
         return null;
     }
     
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-        disconnectTasks();
-        return new TaskHolder(searchTask, submissionTask, selection);
-    }
+    // TODO ????
+//    @Override
+//    public Object onRetainNonConfigurationInstance() {
+//        disconnectTasks();
+//        return new TaskHolder(searchTask, submissionTask, selection);
+//    }
 
     @Override
     protected void onDestroy() {

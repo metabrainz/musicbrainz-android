@@ -41,8 +41,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.support.v4.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -53,8 +52,6 @@ import android.widget.RelativeLayout;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.markupartist.android.widget.ActionBar;
-
 /**
  * Activity to display a list of search results to the user and support intents
  * to info Activity types based on the selection.
@@ -63,8 +60,6 @@ public class SearchActivity extends DataQueryActivity {
 
     private String searchQuery;
     private SearchType searchType;
-
-    private ActionBar actionBar;
 
     private LinkedList<ArtistStub> artistSearchResults;
     private LinkedList<ReleaseGroupStub> rgSearchResults;
@@ -84,7 +79,6 @@ public class SearchActivity extends DataQueryActivity {
 
     private void handleIntent() {
         setContentView(R.layout.activity_searchres);
-        actionBar = setupActionBarWithHome();
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
             searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
             getIntent().putExtra(Extra.TYPE, Extra.ALL);
@@ -104,11 +98,13 @@ public class SearchActivity extends DataQueryActivity {
         configureSearch();
         switch (searchType) {
         case ARTIST:
-            actionBar.setTitle(R.string.search_bar_artists);
+            // TODO set title
+            //actionBar.setTitle(R.string.search_bar_artists);
             searchTask = new SearchArtistsTask(this);
             break;
         case RELEASE_GROUP:
-            actionBar.setTitle(R.string.search_bar_rgs);
+            // TODO set title
+            //actionBar.setTitle(R.string.search_bar_rgs);
             searchTask = new SearchRGsTask(this);
             break;
         case ALL:
@@ -150,36 +146,37 @@ public class SearchActivity extends DataQueryActivity {
             SearchAllTask task = (SearchAllTask) searchTask;
             artistSearchResults = task.getArtistResults();
             rgSearchResults = task.getReleaseGroupResults();
-            enableTypeNavigation();
+            //enableTypeNavigation();
             displayArtistResultsView();
             displayRGResultsView();
         }
     }
 
-    private void enableTypeNavigation() {
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        SpinnerAdapter listAdapter = ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar,
-                R.layout.actionbar_list_dropdown_item);
-        actionBar.setListNavigationCallbacks(listAdapter, new ActionBarListListener());
-    }
-
-    private class ActionBarListListener implements ActionBar.OnNavigationListener {
-
-        @Override
-        public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-
-            RelativeLayout artistResults = (RelativeLayout) findViewById(R.id.artist_results_container);
-            RelativeLayout rgResults = (RelativeLayout) findViewById(R.id.rg_results_container);
-            if (itemPosition == 0) {
-                artistResults.setVisibility(View.VISIBLE);
-                rgResults.setVisibility(View.GONE);
-            } else if (itemPosition == 1) {
-                rgResults.setVisibility(View.VISIBLE);
-                artistResults.setVisibility(View.GONE);
-            }
-            return true;
-        }
-    }
+    // TODO ????
+//    private void enableTypeNavigation() {
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//        SpinnerAdapter listAdapter = ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar,
+//                R.layout.actionbar_list_dropdown_item);
+//        actionBar.setListNavigationCallbacks(listAdapter, new ActionBarListListener());
+//    }
+//
+//    private class ActionBarListListener implements ActionBar.OnNavigationListener {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+//
+//            RelativeLayout artistResults = (RelativeLayout) findViewById(R.id.artist_results_container);
+//            RelativeLayout rgResults = (RelativeLayout) findViewById(R.id.rg_results_container);
+//            if (itemPosition == 0) {
+//                artistResults.setVisibility(View.VISIBLE);
+//                rgResults.setVisibility(View.GONE);
+//            } else if (itemPosition == 1) {
+//                rgResults.setVisibility(View.VISIBLE);
+//                artistResults.setVisibility(View.GONE);
+//            }
+//            return true;
+//        }
+//    }
 
     private void displayArtistResultsView() {
         ListView artistResultsView = (ListView) findViewById(R.id.searchres_artist_list);
@@ -291,9 +288,9 @@ public class SearchActivity extends DataQueryActivity {
         }
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.search, menu);
         return true;
     }
 

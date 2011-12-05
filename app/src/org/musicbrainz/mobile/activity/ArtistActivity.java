@@ -36,9 +36,6 @@ import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
-import com.markupartist.android.widget.ActionBar;
-import com.markupartist.android.widget.ActionBar.Action;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -66,8 +63,6 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
     private Artist data;
     private UserData userData;
 
-    private ActionBar actionBar;
-
     private RatingBar rating;
     private FocusTextView tags;
     private EditText tagInput;
@@ -85,8 +80,7 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
-        setContentView(R.layout.loading);
-        setupActionBarWithHome();
+        setContentView(R.layout.layout_loading);
 
         Object retained = getLastNonConfigurationInstance();
         if (retained instanceof TaskHolder) {
@@ -124,7 +118,6 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         setContentView(R.layout.activity_artist);
         findViews();
         setupTabs();
-        actionBar = setupActionBarWithHome();
         addActionBarShare();
 
         FocusTextView artist = (FocusTextView) findViewById(R.id.artist_artist);
@@ -185,10 +178,11 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
     }
 
     private void addActionBarShare() {
-        Action share = actionBar.newAction();
-        share.setIcon(R.drawable.ic_actionbar_share);
-        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.ARTIST_SHARE + mbid));
-        actionBar.addAction(share);
+          // TODO
+//        Action share = actionBar.newAction();
+//        share.setIcon(R.drawable.ic_actionbar_share);
+//        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.ARTIST_SHARE + mbid));
+//        actionBar.addAction(share);
     }
 
     /*
@@ -223,9 +217,9 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
 
     private void updateProgress() {
         if (doingTag || doingRate) {
-            actionBar.setProgressBarVisibility(View.VISIBLE);
+            // TODO start progress
         } else {
-            actionBar.setProgressBarVisibility(View.GONE);
+            // TODO stop progress
         }
     }
 
@@ -329,11 +323,12 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-        disconnectTasks();
-        return new TaskHolder(lookupTask, tagTask, ratingTask);
-    }
+    // TODO ????
+//    @Override
+//    public Object onRetainNonConfigurationInstance() {
+//        disconnectTasks();
+//        return new TaskHolder(lookupTask, tagTask, ratingTask);
+//    }
 
     @Override
     protected void onDestroy() {

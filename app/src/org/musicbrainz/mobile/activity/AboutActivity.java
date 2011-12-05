@@ -25,17 +25,16 @@ import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.widget.AssetTextView;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.support.v4.view.Menu;
 import android.widget.TextView;
 
 public class AboutActivity extends MusicBrainzActivity {
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_about);
-        setupActionBarWithHome();
 
         TextView versionLabel = (TextView) findViewById(R.id.version_text);
         versionLabel.setText(getText(R.string.version_text) + " " + getVersion());
@@ -44,9 +43,9 @@ public class AboutActivity extends MusicBrainzActivity {
         body.setAsset("about.html");
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.about, menu);
+        getMenuInflater().inflate(R.menu.about, menu);
         return true;
     }
 

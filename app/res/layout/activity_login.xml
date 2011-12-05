@@ -22,13 +22,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <RelativeLayout
-    style="@style/PaddedLayout"
-    android:layout_below="@id/actionbar">
+    style="@style/PaddedLayout">
 
     <EditText
       android:id="@+id/uname_input"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2011 Jamie McDonald
 
   This file is part of MusicBrainz for Android.
 
@@ -17,19 +17,14 @@
   You should have received a copy of the GNU General Public License
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
-
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
-
-  <RelativeLayout
-    style="@style/Wrap"
-    android:padding="@dimen/home_pad">
-
-    <TextView
-      android:id="@+id/error_body"
-      style="@style/TextBody"
-      android:text="@string/error_body" />
-
-  </RelativeLayout>
-</RelativeLayout>
+  
+<resources>
+  
+    <style
+    name="MusicBrainzTheme"
+    parent="@style/Theme.Sherlock.Light">
+    <item name="android:fadeScrollbars">true</item>
+    <item name="android:scrollbarFadeDuration">500</item>
+  </style>
+  
+</resources>

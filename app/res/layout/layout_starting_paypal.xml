@@ -22,17 +22,12 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <RelativeLayout
-    style="@style/Fill"
-    android:layout_below="@id/actionbar">
+    style="@style/Fill">
 
-    <ProgressBar
-      style="@style/Wrap"
+    <TextView
+      style="@style/PayPalLoadingText"
       android:layout_centerInParent="true"
-      android:indeterminateDrawable="@anim/progress" />
+      android:text="@string/starting_paypal" />
   </RelativeLayout>
 </RelativeLayout>

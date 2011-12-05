@@ -22,13 +22,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <ScrollView
-    style="@style/Wrap"
-    android:layout_below="@id/actionbar">
+    style="@style/Wrap">
     <LinearLayout
       style="@style/WrapHeight"
       android:padding="@dimen/home_pad"

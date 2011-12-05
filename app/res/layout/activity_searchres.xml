@@ -22,14 +22,9 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <TextView
     android:id="@+id/searchres_text"
-    style="@style/SearchHeader"
-    android:layout_below="@id/actionbar" />
+    style="@style/SearchHeader" />
 
   <View
     android:id="@+id/topline"

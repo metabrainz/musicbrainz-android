@@ -22,14 +22,6 @@
   <!-- Activity and Dialog layout styles -->
 
   <style
-    name="MusicBrainzTheme"
-    parent="@style/Theme.ActionBar.Light">
-    <item name="android:textColorHint">@color/hint_text</item>
-    <item name="android:fadeScrollbars">true</item>
-    <item name="android:scrollbarFadeDuration">500</item>
-  </style>
-
-  <style
     name="Activity"
     parent="@style/Fill">
     <item name="android:orientation">vertical</item>

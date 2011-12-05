@@ -68,7 +68,6 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
 
         setContentView(R.layout.activity_login);
         findViews();
-        setupActionBarWithHome();
 
         setResult(RESULT_NOT_LOGGED_IN);
 
@@ -208,11 +207,12 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         return builder.create();
     }
     
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-        loginTask.disconnect();
-        return loginTask;
-    }
+    // TODO ????
+//    @Override
+//    public Object onRetainNonConfigurationInstance() {
+//        loginTask.disconnect();
+//        return loginTask;
+//    }
 
     @Override
     protected void onDestroy() {

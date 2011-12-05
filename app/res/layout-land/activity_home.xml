@@ -22,10 +22,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/LaunchActivityLand">
 
-  <com.markupartist.android.widget.ActionBar
-    android:id="@+id/actionbar"
-    style="@style/ActionBar" />
-
   <LinearLayout style="@style/HomeTileRow">
 
     <Button

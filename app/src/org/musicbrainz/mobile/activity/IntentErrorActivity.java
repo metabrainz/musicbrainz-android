@@ -36,7 +36,6 @@ public class IntentErrorActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_intenterror);
-        setupActionBarWithHome();
 
         String message = getIntent().getStringExtra(Extra.MESSAGE);
         TextView errorMessage = (TextView) findViewById(R.id.error_body);

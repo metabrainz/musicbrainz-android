@@ -41,12 +41,7 @@ import org.musicbrainz.mobile.task.LookupReleaseTask;
 import org.musicbrainz.mobile.task.MusicBrainzTask;
 import org.musicbrainz.mobile.task.SubmitRatingTask;
 import org.musicbrainz.mobile.task.SubmitTagsTask;
-import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
-
-import com.markupartist.android.widget.ActionBar;
-import com.markupartist.android.widget.ActionBar.Action;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -83,8 +78,6 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     private String releaseGroupMbid;
     private String barcode;
 
-    private ActionBar actionBar;
-
     private FocusTextView tags;
     private RatingBar rating;
     private EditText tagInput;
@@ -105,8 +98,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);
         barcode = getIntent().getStringExtra(Extra.BARCODE);
         
-        setContentView(R.layout.loading);
-        setupActionBarWithHome();
+        setContentView(R.layout.layout_loading);
         
         Object retained = getLastNonConfigurationInstance();
         if (retained instanceof TaskHolder) {
@@ -158,7 +150,6 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         setContentView(R.layout.activity_release);
         findViews();
         setupTabs();
-        actionBar = setupActionBarWithHome();
         addActionBarShare();
 
         FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);
@@ -229,17 +220,19 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     }
 
     private void addActionBarShare() {
-        Action share = actionBar.newAction();
-        share.setIcon(R.drawable.ic_actionbar_share);
-        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
-        actionBar.addAction(share);
+        // TODO
+//        Action share = actionBar.newAction();
+//        share.setIcon(R.drawable.ic_actionbar_share);
+//        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
+//        actionBar.addAction(share);
     }
 
     private void addActionBarArtist() {
-        Action artist = actionBar.newAction();
-        artist.setIcon(R.drawable.ic_actionbar_artist);
-        artist.setIntent(createArtistIntent());
-        actionBar.addAction(artist);
+        // TODO
+//        Action artist = actionBar.newAction();
+//        artist.setIcon(R.drawable.ic_actionbar_artist);
+//        artist.setIntent(createArtistIntent());
+//        actionBar.addAction(artist);
     }
 
     private Intent createArtistIntent() {
@@ -269,9 +262,9 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     private void updateProgressStatus() {
         if (doingTag || doingRate) {
-            actionBar.setProgressBarVisibility(View.VISIBLE);
+            // TODO start progress
         } else {
-            actionBar.setProgressBarVisibility(View.GONE);
+           // TODO stop progress
         }
     }
 
@@ -407,11 +400,12 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         }
     }
     
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-        disconnectTasks();
-        return new TaskHolder(lookupTask, tagTask, ratingTask);
-    }
+    // TODO ????
+//    @Override
+//    public Object onRetainNonConfigurationInstance() {
+//        disconnectTasks();
+//        return new TaskHolder(lookupTask, tagTask, ratingTask);
+//    }
     
     @Override
     protected void onDestroy() {

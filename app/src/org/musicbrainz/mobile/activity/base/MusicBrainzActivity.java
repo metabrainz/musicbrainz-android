@@ -24,7 +24,6 @@ import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
-import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.PreferencesActivity;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Constants;
@@ -32,24 +31,21 @@ import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.util.Utils;
 
-import com.markupartist.android.widget.ActionBar;
-
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
 import android.widget.Toast;
 
 /**
  * Provides methods used across many Activity classes.
  */
-public abstract class MusicBrainzActivity extends Activity {
+public abstract class MusicBrainzActivity extends FragmentActivity {
 
     private boolean loggedIn = false;
 
@@ -104,17 +100,17 @@ public abstract class MusicBrainzActivity extends Activity {
         return new Credentials(getUserAgent(), getUsername(), getPassword(), getClientId());
     }
 
-    protected ActionBar setupActionBarWithHome() {
-        ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-        getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
-        actionBar.findAction(R.id.actionbar_item_home).setIntent(DashboardActivity.createIntent(this));
-        actionBar.setDisplayShowHomeEnabled(true);
-        return actionBar;
-    }
+    // TODO make home go home
+//    protected ActionBar setupActionBarWithHome() {
+//        ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
+//        getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
+//        actionBar.findAction(R.id.actionbar_item_home).setIntent(DashboardActivity.createIntent(this));
+//        actionBar.setDisplayShowHomeEnabled(true);
+//        return actionBar;
+//    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.general, menu);
+        getMenuInflater().inflate(R.menu.general, menu);
         return true;
     }
 
