@@ -101,7 +101,7 @@ import android.net.Uri;
  */
 public final class IntentIntegrator {
 
-    public static final int BARCODE_REQUEST = 0x0ba7c0de; // get it?
+    public static final int BARCODE_REQUEST = 404; 
 
     public static final String DEFAULT_TITLE = "Install Barcode Scanner?";
     public static final String DEFAULT_MESSAGE = "This application requires Barcode Scanner. Would you like to install it?";

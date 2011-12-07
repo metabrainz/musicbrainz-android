@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2011 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -23,7 +23,8 @@ package org.musicbrainz.mobile.activity;
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
-import org.musicbrainz.mobile.task.LoginTask;
+import org.musicbrainz.mobile.loader.AsyncResult;
+import org.musicbrainz.mobile.loader.LoginLoader;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Constants;
 import org.musicbrainz.mobile.util.Secrets;
@@ -37,6 +38,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -46,7 +49,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-public class LoginActivity extends MusicBrainzActivity implements OnEditorActionListener {
+public class LoginActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncResult<Boolean>>, OnEditorActionListener {
 
     public static final int RESULT_NOT_LOGGED_IN = 0;
     public static final int RESULT_LOGGED_IN = 1;
@@ -61,50 +64,18 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
     private String username;
     private String password;
 
-    private LoginTask loginTask;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
         findViews();
-
         setResult(RESULT_NOT_LOGGED_IN);
-
-        Object retained = getLastNonConfigurationInstance();
-        if (retained instanceof LoginTask) {
-            loginTask = (LoginTask) retained;
-            loginTask.connect(this);
-        } else {
-            setupLoginTask();
-        }
     }
 
     private void findViews() {
         usernameBox = (EditText) findViewById(R.id.uname_input);
         passwordBox = (EditText) findViewById(R.id.pass_input);
-        
         passwordBox.setOnEditorActionListener(this);
-    }
-
-    private void setupLoginTask() {
-        loginTask = new LoginTask();
-        loginTask.connect(this);
-    }
-
-    private void executeLogin() {
-        Credentials creds = new Credentials(getUserAgent(), username, password, getClientId());
-        loginTask.execute(creds);
-    }
-
-    public void onLoginTaskFinished() {
-        if (loginTask.failed()) {
-            showDialog(DIALOG_CONNECTION_FAILURE);
-        } else if (loginTask.succeeded()) {
-            onLoginSuccess();
-        } else {
-            showDialog(DIALOG_LOGIN_FAILURE);
-        }
     }
 
     private void onLoginSuccess() {
@@ -146,8 +117,13 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         } else {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(passwordBox.getWindowToken(), 0);
-            executeLogin();
+            startLogin();
         }
+    }
+    
+    private void startLogin() {
+        showDialog(DIALOG_PROGRESS);
+        getSupportLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -167,7 +143,7 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         ProgressDialog progress = new ProgressDialog(this) {
             public void cancel() {
                 super.cancel();
-                loginTask.cancel(true);
+                getSupportLoaderManager().destroyLoader(0);
             }
         };
         progress.setMessage(getString(R.string.pd_authenticating));
@@ -182,7 +158,6 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         builder.setPositiveButton(getText(R.string.auth_pos), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
-                setupLoginTask();
             }
         });
         return builder.create();
@@ -194,9 +169,8 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         builder.setCancelable(false);
         builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                setupLoginTask();
-                executeLogin();
                 dialog.cancel();
+                startLogin();
             }
         });
         builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
@@ -206,18 +180,37 @@ public class LoginActivity extends MusicBrainzActivity implements OnEditorAction
         });
         return builder.create();
     }
-    
-    // TODO ????
-//    @Override
-//    public Object onRetainNonConfigurationInstance() {
-//        loginTask.disconnect();
-//        return loginTask;
-//    }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        loginTask.disconnect();
+    public Loader<AsyncResult<Boolean>> onCreateLoader(int id, Bundle args) {
+        Credentials creds = new Credentials(getUserAgent(), username, password, getClientId());
+        return new LoginLoader(this, creds);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AsyncResult<Boolean>> loader, AsyncResult<Boolean> data) {
+        getSupportLoaderManager().destroyLoader(0);
+        dismissDialog(DIALOG_PROGRESS);
+        handleLoginResult(data);
+    }
+    
+    private void handleLoginResult(AsyncResult<Boolean> result) {
+        switch(result.getResult()) {
+        case SUCCESS:
+            if (result.getData()) {
+                onLoginSuccess();
+            } else {
+                showDialog(DIALOG_LOGIN_FAILURE);
+            }
+            break;
+        case EXCEPTION:
+            showDialog(DIALOG_CONNECTION_FAILURE);
+        }
+    }
+    
+    @Override
+    public void onLoaderReset(Loader<AsyncResult<Boolean>> loader) {
+        loader.reset();
     }
 
 }
