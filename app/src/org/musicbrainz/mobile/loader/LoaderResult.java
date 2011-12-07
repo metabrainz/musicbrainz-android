@@ -20,34 +20,6 @@
 
 package org.musicbrainz.mobile.loader;
 
-public class AsyncResult<T> {
-
-    private final LoaderResult result;
-    private final T data;
-    private final Throwable exception;
-    
-    public AsyncResult(LoaderResult result, T data) {
-        this.result = result;
-        this.data = data;
-        this.exception = null;
-    }
-    
-    public AsyncResult(LoaderResult result, Throwable exception) {
-        this.result = result;
-        this.data = null;
-        this.exception = exception;
-    }
-
-    public LoaderResult getResult() {
-        return result;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public Throwable getException() {
-        return exception;
-    }
-    
+public enum LoaderResult {
+    SUCCESS, EXCEPTION;
 }

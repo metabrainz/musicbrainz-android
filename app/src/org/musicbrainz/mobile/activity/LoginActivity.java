@@ -51,6 +51,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncResult<Boolean>>, OnEditorActionListener {
 
+    private static final int LOGIN_LOADER = 0;
     public static final int RESULT_NOT_LOGGED_IN = 0;
     public static final int RESULT_LOGGED_IN = 1;
 
@@ -123,9 +124,41 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
     
     private void startLogin() {
         showDialog(DIALOG_PROGRESS);
-        getSupportLoaderManager().initLoader(0, null, this);
+        getSupportLoaderManager().initLoader(LOGIN_LOADER, null, this);
     }
 
+    @Override
+    public Loader<AsyncResult<Boolean>> onCreateLoader(int id, Bundle args) {
+        Credentials creds = new Credentials(getUserAgent(), username, password, getClientId());
+        return new LoginLoader(this, creds);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AsyncResult<Boolean>> loader, AsyncResult<Boolean> data) {
+        getSupportLoaderManager().destroyLoader(LOGIN_LOADER);
+        dismissDialog(DIALOG_PROGRESS);
+        handleLoginResult(data);
+    }
+    
+    private void handleLoginResult(AsyncResult<Boolean> result) {
+        switch(result.getResult()) {
+        case SUCCESS:
+            if (result.getData()) {
+                onLoginSuccess();
+            } else {
+                showDialog(DIALOG_LOGIN_FAILURE);
+            }
+            break;
+        case EXCEPTION:
+            showDialog(DIALOG_CONNECTION_FAILURE);
+        }
+    }
+    
+    @Override
+    public void onLoaderReset(Loader<AsyncResult<Boolean>> loader) {
+        loader.reset();
+    }
+    
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -179,38 +212,6 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
             }
         });
         return builder.create();
-    }
-
-    @Override
-    public Loader<AsyncResult<Boolean>> onCreateLoader(int id, Bundle args) {
-        Credentials creds = new Credentials(getUserAgent(), username, password, getClientId());
-        return new LoginLoader(this, creds);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<AsyncResult<Boolean>> loader, AsyncResult<Boolean> data) {
-        getSupportLoaderManager().destroyLoader(0);
-        dismissDialog(DIALOG_PROGRESS);
-        handleLoginResult(data);
-    }
-    
-    private void handleLoginResult(AsyncResult<Boolean> result) {
-        switch(result.getResult()) {
-        case SUCCESS:
-            if (result.getData()) {
-                onLoginSuccess();
-            } else {
-                showDialog(DIALOG_LOGIN_FAILURE);
-            }
-            break;
-        case EXCEPTION:
-            showDialog(DIALOG_CONNECTION_FAILURE);
-        }
-    }
-    
-    @Override
-    public void onLoaderReset(Loader<AsyncResult<Boolean>> loader) {
-        loader.reset();
     }
 
 }

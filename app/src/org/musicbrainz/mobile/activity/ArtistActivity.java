@@ -28,12 +28,11 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.base.TagRateActivity;
 import org.musicbrainz.mobile.adapter.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.LinkAdapter;
+import org.musicbrainz.mobile.loader.ArtistLoader;
+import org.musicbrainz.mobile.loader.AsyncEntityResult;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.task.LookupArtistTask;
 import org.musicbrainz.mobile.task.SubmitRatingTask;
 import org.musicbrainz.mobile.task.SubmitTagsTask;
-import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
 import android.app.AlertDialog;
@@ -42,6 +41,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -49,15 +51,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.TabHost.TabSpec;
 
 /**
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
  */
-public class ArtistActivity extends TagRateActivity implements View.OnClickListener, ListView.OnItemClickListener {
+public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>, View.OnClickListener, ListView.OnItemClickListener {
 
     private String mbid;
     private Artist data;
@@ -72,7 +74,6 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
 
     private boolean doingTag, doingRate = false;
 
-    private LookupArtistTask lookupTask;
     private SubmitTagsTask tagTask;
     private SubmitRatingTask ratingTask;
 
@@ -81,37 +82,7 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
 
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.layout_loading);
-
-        Object retained = getLastNonConfigurationInstance();
-        if (retained instanceof TaskHolder) {
-            TaskHolder holder = (TaskHolder) retained;
-            reconnectTasks(holder);
-        } else {
-            lookupTask = new LookupArtistTask(this);
-            lookupTask.execute(mbid);
-        }
-    }
-
-    private void reconnectTasks(TaskHolder holder) {
-        lookupTask = holder.lookupTask;
-        lookupTask.connect(this);
-        if (lookupTask.isFinished()) {
-            onTaskFinished();
-        }
-        if (holder.tagTask != null) {
-            tagTask = holder.tagTask;
-            tagTask.connect(this);
-            if (tagTask.isRunning()) {
-                onStartTagging();
-            }
-        }
-        if (holder.ratingTask != null) {
-            ratingTask = holder.ratingTask;
-            ratingTask.connect(this);
-            if (ratingTask.isRunning()) {
-                onStartRating();
-            }
-        }
+        getSupportLoaderManager().initLoader(0, savedInstanceState, this);
     }
 
     protected void populateLayout() {
@@ -229,9 +200,8 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
         builder.setCancelable(false);
         builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                lookupTask = new LookupArtistTask(ArtistActivity.this);
-                lookupTask.execute(mbid);
                 dialog.cancel();
+                getSupportLoaderManager().initLoader(0, null, ArtistActivity.this);
             }
         });
         builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
@@ -312,47 +282,41 @@ public class ArtistActivity extends TagRateActivity implements View.OnClickListe
 
     @Override
     public void onTaskFinished() {
-        if (lookupTask.failed()) {
-            showDialog(DIALOG_CONNECTION_FAILURE);
-        } else {
-            data = lookupTask.getArtist();
-            if (lookupTask.getUserData() != null) {
-                userData = lookupTask.getUserData();
-            }
-            populateLayout();
-        }
+        // TODO REMOVE
     }
-
-    // TODO ????
-//    @Override
-//    public Object onRetainNonConfigurationInstance() {
-//        disconnectTasks();
-//        return new TaskHolder(lookupTask, tagTask, ratingTask);
-//    }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        disconnectTasks();
-    }
-
-    private void disconnectTasks() {
-        if (lookupTask != null) lookupTask.disconnect();
-        if (tagTask != null) tagTask.disconnect();
-        if (ratingTask != null) ratingTask.disconnect();
-    }
-
-    private static class TaskHolder {
-
-        public LookupArtistTask lookupTask;
-        public SubmitTagsTask tagTask;
-        public SubmitRatingTask ratingTask;
-
-        public TaskHolder(LookupArtistTask lookupTask, SubmitTagsTask tagTask, SubmitRatingTask ratingTask) {
-            this.lookupTask = lookupTask;
-            this.tagTask = tagTask;
-            this.ratingTask = ratingTask;
+    public Loader<AsyncEntityResult<Artist>> onCreateLoader(int id, Bundle args) {
+        if (isUserLoggedIn()) {
+            return new ArtistLoader(this, getCredentials(), mbid);
+        } else {
+            return new ArtistLoader(this, getUserAgent(), mbid);
         }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AsyncEntityResult<Artist>> loader, AsyncEntityResult<Artist> data) {
+        getSupportLoaderManager().destroyLoader(0);
+        handleLoadResult(data);
+    }
+
+    private void handleLoadResult(AsyncEntityResult<Artist> result) {
+        switch(result.getResult()) {
+        case SUCCESS:
+            data = result.getData();
+            if (result.hasUserData()) {
+                userData = result.getUserData();
+            }
+            populateLayout();
+            break;
+        case EXCEPTION:
+            showDialog(DIALOG_CONNECTION_FAILURE);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AsyncEntityResult<Artist>> loader) {
+        loader.reset();
     }
 
 }

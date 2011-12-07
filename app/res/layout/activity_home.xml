@@ -32,6 +32,12 @@
       android:id="@+id/search_spin"
       style="@style/WrapHeight"
       android:layout_alignParentTop="true" />
+    
+    <ImageButton
+      android:id="@+id/search_btn"
+      style="@style/SearchButton"
+      android:layout_alignParentRight="true"
+      android:layout_below="@+id/search_spin" />
 
     <AutoCompleteTextView
       android:id="@+id/query_input"
@@ -39,13 +45,8 @@
       android:layout_alignParentLeft="true"
       android:layout_toLeftOf="@+id/search_btn"
       android:layout_below="@+id/search_spin"
+      android:layout_alignBottom="@id/search_btn"
       android:hint="@string/search_hint" />
-
-    <ImageButton
-      android:id="@+id/search_btn"
-      style="@style/SearchButton"
-      android:layout_alignParentRight="true"
-      android:layout_below="@+id/search_spin" />
   </RelativeLayout>
 
   <LinearLayout style="@style/HomeTileRow">

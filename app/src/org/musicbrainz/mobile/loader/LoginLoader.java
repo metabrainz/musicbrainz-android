@@ -24,7 +24,6 @@ import java.io.IOException;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.WebClient;
-import org.musicbrainz.mobile.loader.AsyncResult.Result;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
@@ -49,9 +48,9 @@ public class LoginLoader extends AsyncTaskLoader<AsyncResult<Boolean>> {
         WebClient client = new WebClient(creds);
         try {
             boolean loginSuccess = client.autenticateUserCredentials();
-            return new AsyncResult<Boolean>(Result.SUCCESS, loginSuccess);
+            return new AsyncResult<Boolean>(LoaderResult.SUCCESS, loginSuccess);
         } catch (IOException e) {
-            return new AsyncResult<Boolean>(Result.EXCEPTION, e);
+            return new AsyncResult<Boolean>(LoaderResult.EXCEPTION, e);
         }
     }
 
