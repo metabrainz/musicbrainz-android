@@ -25,14 +25,15 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.DataQueryActivity;
+import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
+import org.musicbrainz.mobile.loader.AsyncResult;
+import org.musicbrainz.mobile.loader.SearchArtistLoader;
+import org.musicbrainz.mobile.loader.SearchLoader;
+import org.musicbrainz.mobile.loader.SearchReleaseGroupLoader;
+import org.musicbrainz.mobile.loader.SearchResults;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
-import org.musicbrainz.mobile.task.SearchAllTask;
-import org.musicbrainz.mobile.task.SearchArtistsTask;
-import org.musicbrainz.mobile.task.SearchRGsTask;
-import org.musicbrainz.mobile.task.MusicBrainzTask;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -41,30 +42,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.support.v4.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 /**
  * Activity to display a list of search results to the user and support intents
  * to info Activity types based on the selection.
  */
-public class SearchActivity extends DataQueryActivity {
+public class SearchActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncResult<SearchResults>> {
 
-    private String searchQuery;
-    private SearchType searchType;
+    private static final int SEARCH_ARTIST_LOADER = 0;
+    private static final int SEARCH_RELEASE_GROUP_LOADER = 1;
+    private static final int SEARCH_LOADER = 2;
+
+    private static final int DIALOG_CONNECTION_FAILURE = 0;
+
+    private String searchTerm;
 
     private LinkedList<ArtistStub> artistSearchResults;
     private LinkedList<ReleaseGroupStub> rgSearchResults;
-
-    private MusicBrainzTask searchTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +84,10 @@ public class SearchActivity extends DataQueryActivity {
     private void handleIntent() {
         setContentView(R.layout.activity_searchres);
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-            searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
+            searchTerm = getIntent().getStringExtra(SearchManager.QUERY);
             getIntent().putExtra(Extra.TYPE, Extra.ALL);
         } else {
-            searchQuery = getIntent().getStringExtra(Extra.QUERY);
+            searchTerm = getIntent().getStringExtra(Extra.QUERY);
         }
         setHeaderText();
         doSearch();
@@ -91,92 +95,52 @@ public class SearchActivity extends DataQueryActivity {
 
     private void setHeaderText() {
         TextView resultsText = (TextView) findViewById(R.id.searchres_text);
-        resultsText.setText(searchQuery);
+        resultsText.setText(searchTerm);
     }
 
     private void doSearch() {
-        configureSearch();
-        switch (searchType) {
-        case ARTIST:
-            // TODO set title
-            //actionBar.setTitle(R.string.search_bar_artists);
-            searchTask = new SearchArtistsTask(this);
-            break;
-        case RELEASE_GROUP:
-            // TODO set title
-            //actionBar.setTitle(R.string.search_bar_rgs);
-            searchTask = new SearchRGsTask(this);
-            break;
-        case ALL:
-            searchTask = new SearchAllTask(this);
-        }
-        searchTask.execute(searchQuery);
-    }
-
-    private void configureSearch() {
         String intentType = getIntent().getStringExtra(Extra.TYPE);
         if (intentType.equals(Extra.ARTIST)) {
-            searchType = SearchType.ARTIST;
+            getSupportActionBar().setTitle(R.string.search_bar_artists);
+            getSupportLoaderManager().initLoader(SEARCH_ARTIST_LOADER, null, this);
         } else if (intentType.equals(Extra.RELEASE_GROUP)) {
-            searchType = SearchType.RELEASE_GROUP;
+            getSupportActionBar().setTitle(R.string.search_bar_rgs);
+            getSupportLoaderManager().initLoader(SEARCH_RELEASE_GROUP_LOADER, null, this);
         } else {
-            searchType = SearchType.ALL;
-        }
-    }
-    
-    public void onTaskFinished() {
-        toggleLoading();
-        if (searchTask.failed()) {
-            showDialog(DIALOG_CONNECTION_FAILURE);
-        } else {
-            handleResults();
-        }
-    }
-    
-    private void handleResults() {
-        if (searchType == SearchType.ARTIST) {
-            SearchArtistsTask task = (SearchArtistsTask) searchTask;
-            artistSearchResults = task.getArtistResults();
-            displayArtistResultsView();
-        } else if (searchType == SearchType.RELEASE_GROUP) {
-            SearchRGsTask task = (SearchRGsTask) searchTask;
-            rgSearchResults = task.getReleaseGroupResults();
-            displayRGResultsView();
-        } else {
-            SearchAllTask task = (SearchAllTask) searchTask;
-            artistSearchResults = task.getArtistResults();
-            rgSearchResults = task.getReleaseGroupResults();
-            //enableTypeNavigation();
-            displayArtistResultsView();
-            displayRGResultsView();
+            getSupportLoaderManager().initLoader(SEARCH_LOADER, null, this);
         }
     }
 
     // TODO ????
-//    private void enableTypeNavigation() {
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-//        SpinnerAdapter listAdapter = ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar,
-//                R.layout.actionbar_list_dropdown_item);
-//        actionBar.setListNavigationCallbacks(listAdapter, new ActionBarListListener());
-//    }
-//
-//    private class ActionBarListListener implements ActionBar.OnNavigationListener {
-//
-//        @Override
-//        public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-//
-//            RelativeLayout artistResults = (RelativeLayout) findViewById(R.id.artist_results_container);
-//            RelativeLayout rgResults = (RelativeLayout) findViewById(R.id.rg_results_container);
-//            if (itemPosition == 0) {
-//                artistResults.setVisibility(View.VISIBLE);
-//                rgResults.setVisibility(View.GONE);
-//            } else if (itemPosition == 1) {
-//                rgResults.setVisibility(View.VISIBLE);
-//                artistResults.setVisibility(View.GONE);
-//            }
-//            return true;
-//        }
-//    }
+    // private void enableTypeNavigation() {
+    // actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+    // SpinnerAdapter listAdapter =
+    // ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar,
+    // R.layout.actionbar_list_dropdown_item);
+    // actionBar.setListNavigationCallbacks(listAdapter, new
+    // ActionBarListListener());
+    // }
+    //
+    // private class ActionBarListListener implements
+    // ActionBar.OnNavigationListener {
+    //
+    // @Override
+    // public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+    //
+    // RelativeLayout artistResults = (RelativeLayout)
+    // findViewById(R.id.artist_results_container);
+    // RelativeLayout rgResults = (RelativeLayout)
+    // findViewById(R.id.rg_results_container);
+    // if (itemPosition == 0) {
+    // artistResults.setVisibility(View.VISIBLE);
+    // rgResults.setVisibility(View.GONE);
+    // } else if (itemPosition == 1) {
+    // rgResults.setVisibility(View.VISIBLE);
+    // artistResults.setVisibility(View.GONE);
+    // }
+    // return true;
+    // }
+    // }
 
     private void displayArtistResultsView() {
         ListView artistResultsView = (ListView) findViewById(R.id.searchres_artist_list);
@@ -212,7 +176,7 @@ public class SearchActivity extends DataQueryActivity {
         if (shouldProvideSearchSuggestions()) {
             SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY,
                     SuggestionProvider.MODE);
-            suggestions.saveRecentQuery(searchQuery, null);
+            suggestions.saveRecentQuery(searchTerm, null);
         }
     }
 
@@ -294,8 +258,62 @@ public class SearchActivity extends DataQueryActivity {
         return true;
     }
 
-    public enum SearchType {
-        ARTIST, RELEASE_GROUP, ALL
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_CONNECTION_FAILURE:
+            return createConnectionErrorDialog();
+        }
+        return null;
+    }
+
+    @Override
+    public Loader<AsyncResult<SearchResults>> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+        case SEARCH_ARTIST_LOADER:
+            return new SearchArtistLoader(this, getUserAgent(), searchTerm);
+        case SEARCH_RELEASE_GROUP_LOADER:
+            return new SearchReleaseGroupLoader(this, getUserAgent(), searchTerm);
+        case SEARCH_LOADER:
+            return new SearchLoader(this, getUserAgent(), searchTerm);
+        }
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AsyncResult<SearchResults>> loader, AsyncResult<SearchResults> result) {
+        toggleLoading();
+        switch (result.getResult()) {
+        case SUCCESS:
+            handleResults(result.getData());
+            break;
+        case EXCEPTION:
+            showDialog(DIALOG_CONNECTION_FAILURE);
+        }
+    }
+
+    private void handleResults(SearchResults results) {
+        switch (results.getType()) {
+        case ARTIST:
+            artistSearchResults = results.getArtistResults();
+            displayArtistResultsView();
+            break;
+        case RELEASE_GROUP:
+            rgSearchResults = results.getReleaseGroupResults();
+            displayRGResultsView();
+            break;
+        case ALL:
+            artistSearchResults = results.getArtistResults();
+            rgSearchResults = results.getReleaseGroupResults();
+            // TODO enable dual navigation
+            displayArtistResultsView();
+            displayRGResultsView();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AsyncResult<SearchResults>> loader) {
+        loader.reset();
     }
 
 }

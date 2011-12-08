@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.activity.base;
 
+//TODO REMOVE, MAKE INTERFACE
 public abstract class TagRateActivity extends DataQueryActivity {
     
     public abstract void onStartRating();

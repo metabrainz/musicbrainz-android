@@ -24,33 +24,33 @@ import org.musicbrainz.android.api.data.UserData;
 
 public class AsyncEntityResult<T> {
     
-    private final LoaderResult result;
+    private final LoaderStatus result;
     private final T data;
     private final UserData userData;
     private final Throwable exception;
     
-    public AsyncEntityResult(LoaderResult result, T data) {
+    public AsyncEntityResult(LoaderStatus result, T data) {
         this.result = result;
         this.data = data;
         this.exception = null;
         this.userData = null;
     }
     
-    public AsyncEntityResult(LoaderResult result, T data, UserData userData) {
+    public AsyncEntityResult(LoaderStatus result, T data, UserData userData) {
         this.result = result;
         this.data = data;
         this.userData = userData;
         this.exception = null;
     }
     
-    public AsyncEntityResult(LoaderResult result, Throwable exception) {
+    public AsyncEntityResult(LoaderStatus result, Throwable exception) {
         this.result = result;
         this.exception = exception;
         this.data = null;
         this.userData = null;
     }
 
-    public LoaderResult getResult() {
+    public LoaderStatus getResult() {
         return result;
     }
 

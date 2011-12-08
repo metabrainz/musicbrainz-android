@@ -22,23 +22,23 @@ package org.musicbrainz.mobile.loader;
 
 public class AsyncResult<T> {
 
-    private final LoaderResult result;
+    private final LoaderStatus result;
     private final T data;
     private final Throwable exception;
     
-    public AsyncResult(LoaderResult result, T data) {
+    public AsyncResult(LoaderStatus result, T data) {
         this.result = result;
         this.data = data;
         this.exception = null;
     }
     
-    public AsyncResult(LoaderResult result, Throwable exception) {
+    public AsyncResult(LoaderStatus result, Throwable exception) {
         this.result = result;
         this.data = null;
         this.exception = exception;
     }
 
-    public LoaderResult getResult() {
+    public LoaderStatus getResult() {
         return result;
     }
 

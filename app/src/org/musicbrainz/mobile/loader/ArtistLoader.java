@@ -50,18 +50,13 @@ public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
         this.userAgent = userAgent;
         this.mbid = mbid;
     }
-    
-    @Override
-    protected void onStartLoading() {
-        forceLoad();
-    }
 
     @Override
     public AsyncEntityResult<Artist> loadInBackground() {
         try {
             return getData();
         } catch (Exception e) {
-            return new AsyncEntityResult<Artist>(LoaderResult.EXCEPTION, e);
+            return new AsyncEntityResult<Artist>(LoaderStatus.EXCEPTION, e);
         }
     }
 
@@ -76,7 +71,7 @@ public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
     private AsyncEntityResult<Artist> getArtist() throws IOException {
         WebClient client = new WebClient(userAgent);
         Artist artist = client.lookupArtist(mbid);
-        data = new AsyncEntityResult<Artist>(LoaderResult.SUCCESS, artist);
+        data = new AsyncEntityResult<Artist>(LoaderStatus.SUCCESS, artist);
         return data;
     }
 
@@ -84,39 +79,39 @@ public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
         WebClient client = new WebClient(creds);
         Artist artist = client.lookupArtist(mbid);
         UserData userData = client.getUserData(MBEntity.ARTIST, mbid);
-        data = new AsyncEntityResult<Artist>(LoaderResult.SUCCESS, artist, userData);
+        data = new AsyncEntityResult<Artist>(LoaderStatus.SUCCESS, artist, userData);
         return data;
     }
     
-//    @Override
-//    public void deliverResult(AsyncEntityResult<Artist> data) {
-//        if (isReset()) {
-//            return;
-//        }
-//        this.data = data;
-//        super.deliverResult(data);
-//    }
-//    
-//    @Override
-//    protected void onStartLoading() {
-//        if (data != null) {
-//            deliverResult(data);
-//        }
-//        if (takeContentChanged() || data == null) {
-//            forceLoad();
-//        }
-//    }
-//
-//    @Override
-//    protected void onStopLoading() {
-//        cancelLoad();
-//    }
-//
-//    @Override
-//    protected void onReset() {
-//        super.onReset();
-//        onStopLoading();
-//        data = null;
-//    }
+    @Override
+    public void deliverResult(AsyncEntityResult<Artist> data) {
+        if (isReset()) {
+            return;
+        }
+        this.data = data;
+        super.deliverResult(data);
+    }
+    
+    @Override
+    protected void onStartLoading() {
+        if (data != null) {
+            deliverResult(data);
+        }
+        if (takeContentChanged() || data == null) {
+            forceLoad();
+        }
+    }
+
+    @Override
+    protected void onStopLoading() {
+        cancelLoad();
+    }
+
+    @Override
+    protected void onReset() {
+        super.onReset();
+        onStopLoading();
+        data = null;
+    }
 
 }

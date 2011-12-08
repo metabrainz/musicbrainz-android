@@ -3,6 +3,7 @@ package org.musicbrainz.mobile.activity.base;
 
 import android.app.Dialog;
 
+// TODO REMOVE
 public abstract class DataQueryActivity extends MusicBrainzActivity {
 
     protected static final int DIALOG_CONNECTION_FAILURE = 2;

@@ -48,9 +48,9 @@ public class LoginLoader extends AsyncTaskLoader<AsyncResult<Boolean>> {
         WebClient client = new WebClient(creds);
         try {
             boolean loginSuccess = client.autenticateUserCredentials();
-            return new AsyncResult<Boolean>(LoaderResult.SUCCESS, loginSuccess);
+            return new AsyncResult<Boolean>(LoaderStatus.SUCCESS, loginSuccess);
         } catch (IOException e) {
-            return new AsyncResult<Boolean>(LoaderResult.EXCEPTION, e);
+            return new AsyncResult<Boolean>(LoaderStatus.EXCEPTION, e);
         }
     }
 

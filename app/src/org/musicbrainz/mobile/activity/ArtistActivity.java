@@ -41,7 +41,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -61,6 +60,8 @@ import android.widget.Toast;
  */
 public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>, View.OnClickListener, ListView.OnItemClickListener {
 
+    private static final int ARTIST_LOADER = 0;
+    
     private String mbid;
     private Artist data;
     private UserData userData;
@@ -82,7 +83,7 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
 
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.layout_loading);
-        getSupportLoaderManager().initLoader(0, savedInstanceState, this);
+        getSupportLoaderManager().initLoader(ARTIST_LOADER, savedInstanceState, this);
     }
 
     protected void populateLayout() {
@@ -296,7 +297,6 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
 
     @Override
     public void onLoadFinished(Loader<AsyncEntityResult<Artist>> loader, AsyncEntityResult<Artist> data) {
-        getSupportLoaderManager().destroyLoader(0);
         handleLoadResult(data);
     }
 
