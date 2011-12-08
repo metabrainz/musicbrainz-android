@@ -21,7 +21,6 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.widget.AssetTextView;
 
 import android.os.Bundle;

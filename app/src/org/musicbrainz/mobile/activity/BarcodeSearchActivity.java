@@ -24,10 +24,10 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.DataQueryActivity;
 import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
-import org.musicbrainz.mobile.task.SearchReleasesTask;
+import org.musicbrainz.mobile.loader.AsyncResult;
+import org.musicbrainz.mobile.loader.SearchReleaseLoader;
 import org.musicbrainz.mobile.task.SubmitBarcodeTask;
 
 import android.app.AlertDialog;
@@ -36,6 +36,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -52,9 +54,13 @@ import android.widget.Toast;
 /**
  * Activity to submit a barcode to a selected release in MusicBrainz.
  */
-public class BarcodeSearchActivity extends DataQueryActivity implements View.OnClickListener, ListView.OnItemClickListener,
+public class BarcodeSearchActivity extends MusicBrainzActivity implements
+        LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>>, View.OnClickListener, ListView.OnItemClickListener,
         ListView.OnItemLongClickListener, OnEditorActionListener {
+    
+    private static final int SEARCH_RELEASE_LOADER = 0;
 
+    private static final int DIALOG_CONNECTION_FAILURE = 0;
     private static final int DIALOG_SUBMIT_BARCODE = 1;
     
     private TextView barcodeText;
@@ -67,7 +73,8 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
     private LinearLayout loading;
 
     private String barcode;
-    private SearchReleasesTask searchTask;
+    private String searchTerm;
+
     private SubmitBarcodeTask submissionTask;
     
     private LinkedList<ReleaseStub> results;
@@ -81,12 +88,6 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
 
         barcode = getIntent().getStringExtra(Extra.BARCODE);
         barcodeText.setText(barcodeText.getText() + " " + barcode);
-        
-        Object retained = getLastNonConfigurationInstance();
-        if (retained instanceof TaskHolder) {
-            TaskHolder holder = (TaskHolder) retained;
-            reconnectTasks(holder);
-        }
     }
     
     private void findViews() {
@@ -100,23 +101,6 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
         
         searchBox.setOnEditorActionListener(this);
         searchButton.setOnClickListener(this);
-    }
-
-    private void reconnectTasks(TaskHolder holder) {
-        if (holder.searchTask != null) {
-            searchTask = holder.searchTask;
-            searchTask.connect(this);
-            if (searchTask.isRunning()) preSearch();
-            if (searchTask.isFinished()) onTaskFinished();
-        }
-        if (holder.submissionTask != null) {
-            submissionTask = holder.submissionTask;
-            submissionTask.connect(this);
-            if (submissionTask.isRunning()) {
-                onStartSubmission();
-            }
-        }
-        selection = holder.selection;
     }
 
     public void onClick(View v) {
@@ -135,8 +119,8 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
         String term = searchBox.getText().toString();
         if (term.length() != 0) {
         	hideKeyboard();
-        	searchTask = new SearchReleasesTask(this);
-            searchTask.execute(term);
+        	searchTerm = term;
+        	getSupportLoaderManager().initLoader(SEARCH_RELEASE_LOADER, null, this);
         } else {
             Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
         }
@@ -178,7 +162,6 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
         return true;
     }
 
-    @Override
     protected Dialog createConnectionErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(BarcodeSearchActivity.this);
         builder.setMessage(getString(R.string.err_text));
@@ -197,30 +180,6 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
         });
         return builder.create();
     }
-
-    @Override
-    public void onTaskFinished() {
-        loading.setVisibility(View.INVISIBLE);
-        if (searchTask.failed()) {
-            showDialog(DIALOG_CONNECTION_FAILURE);
-        } else {
-            results = searchTask.getResults();
-            
-            matches.setAdapter(new ReleaseStubAdapter(this, results));
-            matches.setOnItemClickListener(this);
-            matches.setOnItemLongClickListener(this);
-
-            instructions.setVisibility(View.INVISIBLE);
-            if (results.isEmpty()) {
-                noResults.setVisibility(View.VISIBLE);
-                matches.setVisibility(View.INVISIBLE);
-            } else {
-                matches.setVisibility(View.VISIBLE);
-                noResults.setVisibility(View.INVISIBLE);
-            }
-            searchButton.setEnabled(true);
-        }
-    }
     
     @Override 
     protected Dialog onCreateDialog(int id) {
@@ -232,36 +191,45 @@ public class BarcodeSearchActivity extends DataQueryActivity implements View.OnC
         }
         return null;
     }
-    
-    // TODO ????
-//    @Override
-//    public Object onRetainNonConfigurationInstance() {
-//        disconnectTasks();
-//        return new TaskHolder(searchTask, submissionTask, selection);
-//    }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        disconnectTasks();
+    public Loader<AsyncResult<LinkedList<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
+        return new SearchReleaseLoader(this, getUserAgent(), searchTerm);
     }
 
-    private void disconnectTasks() {
-        if (searchTask != null) searchTask.disconnect();
-        if (submissionTask != null) submissionTask.disconnect();
-    }
-
-    private static class TaskHolder {
-
-        public SearchReleasesTask searchTask;
-        public SubmitBarcodeTask submissionTask;
-        public ReleaseStub selection;
-
-        public TaskHolder(SearchReleasesTask searchTask, SubmitBarcodeTask submissionTask, ReleaseStub selection) {
-            this.searchTask = searchTask;
-            this.submissionTask = submissionTask;
-            this.selection = selection;
+    @Override
+    public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader,
+            AsyncResult<LinkedList<ReleaseStub>> data) {
+        loading.setVisibility(View.INVISIBLE);
+        switch(data.getResult()) {
+        case SUCCESS:
+            handleLoadResult(data);
+            break;
+        case EXCEPTION:
+            showDialog(DIALOG_CONNECTION_FAILURE);
         }
+    }
+    
+    private void handleLoadResult(AsyncResult<LinkedList<ReleaseStub>> result) {
+        results = result.getData();
+        matches.setAdapter(new ReleaseStubAdapter(this, results));
+        matches.setOnItemClickListener(this);
+        matches.setOnItemLongClickListener(this);
+
+        instructions.setVisibility(View.INVISIBLE);
+        if (results.isEmpty()) {
+            noResults.setVisibility(View.VISIBLE);
+            matches.setVisibility(View.INVISIBLE);
+        } else {
+            matches.setVisibility(View.VISIBLE);
+            noResults.setVisibility(View.INVISIBLE);
+        }
+        searchButton.setEnabled(true);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader) {
+        loader.reset();
     }
 
 }

@@ -22,7 +22,6 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
 import org.musicbrainz.mobile.util.Constants;
 

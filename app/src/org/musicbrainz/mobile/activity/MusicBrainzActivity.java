@@ -18,13 +18,10 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.activity.base;
+package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.AboutActivity;
-import org.musicbrainz.mobile.activity.DonateActivity;
-import org.musicbrainz.mobile.activity.PreferencesActivity;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Constants;
 import org.musicbrainz.mobile.util.Secrets;

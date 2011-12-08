@@ -12,10 +12,10 @@ public class SearchLoader extends AsyncTaskLoader<AsyncResult<SearchResults>> {
     private String userAgent;
     private String term;
 
-    public SearchLoader(Context context, String userAgent, String searchTerm) {
+    public SearchLoader(Context context, String userAgent, String term) {
         super(context);
         this.userAgent = userAgent;
-        this.term = searchTerm;
+        this.term = term;
     }
     
     @Override

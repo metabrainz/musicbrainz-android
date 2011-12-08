@@ -22,7 +22,6 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.loader.AsyncResult;
 import org.musicbrainz.mobile.loader.LoginLoader;
 import org.musicbrainz.mobile.util.Config;

@@ -25,7 +25,6 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.loader.AsyncResult;

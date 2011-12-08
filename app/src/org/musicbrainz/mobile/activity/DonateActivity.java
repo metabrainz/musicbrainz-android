@@ -24,7 +24,6 @@ import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.MBApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.MusicBrainzActivity;
 import org.musicbrainz.mobile.util.Config;
 
 import com.paypal.android.MEP.CheckoutButton;

@@ -1,6 +1,8 @@
 package org.musicbrainz.mobile.activity.base;
 
 
+import org.musicbrainz.mobile.activity.MusicBrainzActivity;
+
 import android.app.Dialog;
 
 // TODO REMOVE

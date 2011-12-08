@@ -13,10 +13,10 @@ public class SearchReleaseGroupLoader extends AsyncTaskLoader<AsyncResult<Search
     private String userAgent;
     private String term;
 
-    public SearchReleaseGroupLoader(Context context, String userAgent, String searchTerm) {
+    public SearchReleaseGroupLoader(Context context, String userAgent, String term) {
         super(context);
         this.userAgent = userAgent;
-        this.term = searchTerm;
+        this.term = term;
     }
     
     @Override
