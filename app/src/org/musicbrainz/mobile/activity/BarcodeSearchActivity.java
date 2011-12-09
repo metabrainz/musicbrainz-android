@@ -201,7 +201,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements
     public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader,
             AsyncResult<LinkedList<ReleaseStub>> data) {
         loading.setVisibility(View.INVISIBLE);
-        switch(data.getResult()) {
+        switch(data.getStatus()) {
         case SUCCESS:
             handleLoadResult(data);
             break;

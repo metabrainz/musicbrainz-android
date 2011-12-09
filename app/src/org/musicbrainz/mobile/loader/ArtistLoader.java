@@ -54,13 +54,13 @@ public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
     @Override
     public AsyncEntityResult<Artist> loadInBackground() {
         try {
-            return getData();
+            return getAvailableData();
         } catch (Exception e) {
             return new AsyncEntityResult<Artist>(LoaderStatus.EXCEPTION, e);
         }
     }
 
-    private AsyncEntityResult<Artist> getData() throws IOException {
+    private AsyncEntityResult<Artist> getAvailableData() throws IOException {
         if (creds == null) {
             return getArtist();
         } else {

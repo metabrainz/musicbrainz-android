@@ -28,17 +28,19 @@ import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.UserData;
+import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.base.TagRateActivity;
 import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
+import org.musicbrainz.mobile.loader.AsyncEntityResult;
+import org.musicbrainz.mobile.loader.AsyncResult;
+import org.musicbrainz.mobile.loader.BarcodeReleaseLoader;
+import org.musicbrainz.mobile.loader.ReleaseGroupStubsLoader;
+import org.musicbrainz.mobile.loader.ReleaseLoader;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.task.LookupBarcodeTask;
-import org.musicbrainz.mobile.task.LookupRGStubsTask;
-import org.musicbrainz.mobile.task.LookupReleaseTask;
-import org.musicbrainz.mobile.task.MusicBrainzTask;
 import org.musicbrainz.mobile.task.SubmitRatingTask;
 import org.musicbrainz.mobile.task.SubmitTagsTask;
 import org.musicbrainz.mobile.widget.FocusTextView;
@@ -48,15 +50,17 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.TabHost.TabSpec;
 
 /**
  * Activity which retrieves and displays information about a release.
@@ -67,10 +71,14 @@ import android.widget.TabHost.TabSpec;
  */
 public class ReleaseActivity extends TagRateActivity implements View.OnClickListener {
 
+    private static final int RELEASE_LOADER = 0;
+    private static final int RELEASE_GROUP_STUBS_LOADER = 1;
+    private static final int BARCODE_RELEASE_LOADER = 2;
+
     private static final int DIALOG_RELEASE_SELECTION = 0;
     private static final int DIALOG_BARCODE = 1;
-    
-    private Release data;
+
+    private Release release;
     private LinkedList<ReleaseStub> stubs;
     private UserData userData;
 
@@ -86,8 +94,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
     private Button rateBtn;
 
     private boolean doingTag, doingRate = false;
-    
-    private MusicBrainzTask lookupTask;
+
     private SubmitTagsTask tagTask;
     private SubmitRatingTask ratingTask;
 
@@ -99,50 +106,18 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         barcode = getIntent().getStringExtra(Extra.BARCODE);
         
         setContentView(R.layout.layout_loading);
-        
-        Object retained = getLastNonConfigurationInstance();
-        if (retained instanceof TaskHolder) {
-            TaskHolder holder = (TaskHolder) retained;
-            reconnectTasks(holder);
-        } else {
-            newTask();
-        }
+        configureLoader();
     }
-    
-    private void newTask() {
+
+    private void configureLoader() {
         if (releaseMbid != null) {
-            lookupTask = new LookupReleaseTask(this);
-            lookupTask.execute(releaseMbid);
+            getSupportLoaderManager().initLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
         } else if (releaseGroupMbid != null) {
-            lookupTask = new LookupRGStubsTask(this);
-            lookupTask.execute(releaseGroupMbid);
+            getSupportLoaderManager().initLoader(RELEASE_GROUP_STUBS_LOADER, null, releaseStubLoaderCallbacks);
         } else if (barcode != null) {
-            lookupTask = new LookupBarcodeTask(this);
-            lookupTask.execute(barcode);
+            getSupportLoaderManager().initLoader(BARCODE_RELEASE_LOADER, null, releaseLoaderCallbacks);
         } else {
             this.finish();
-        }
-    }
-    
-    private void reconnectTasks(TaskHolder holder) {
-        lookupTask = (MusicBrainzTask) holder.lookupTask;
-        lookupTask.connect(this);
-        if (lookupTask.isFinished()) {
-            onTaskFinished();
-        }
-        if (holder.tagTask != null) {
-            tagTask = (SubmitTagsTask) holder.tagTask;
-            tagTask.connect(this);
-            if (tagTask.isRunning()) {
-                onStartTagging();
-            }
-        }
-        if (holder.ratingTask != null) {
-            ratingTask = (SubmitRatingTask) holder.ratingTask;
-            ratingTask.connect(this);
-            if (ratingTask.isRunning()) {
-                onStartRating();
-            }
         }
     }
 
@@ -159,15 +134,15 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         ListView trackList = (ListView) findViewById(R.id.release_tracks);
 
         displayArtistActionIfRequired();
-        artist.setText(StringFormat.commaSeparateArtists(data.getArtists()));
-        title.setText(data.getTitle());
-        trackList.setAdapter(new ReleaseTrackAdapter(this, data.getTrackList()));
+        artist.setText(StringFormat.commaSeparateArtists(release.getArtists()));
+        title.setText(release.getTitle());
+        trackList.setAdapter(new ReleaseTrackAdapter(this, release.getTrackList()));
         trackList.setDrawSelectorOnTop(false);
-        labels.setText(StringFormat.commaSeparate(data.getLabels()));
-        releaseDate.setText(data.getDate());
-        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags(), this));
-        rating.setRating(data.getReleaseGroupRating());
-        
+        labels.setText(StringFormat.commaSeparate(release.getLabels()));
+        releaseDate.setText(release.getDate());
+        tags.setText(StringFormat.commaSeparateTags(release.getReleaseGroupTags(), this));
+        rating.setRating(release.getReleaseGroupRating());
+
         if (isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
@@ -179,8 +154,8 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     private void displayArtistActionIfRequired() {
         boolean provideArtistAction = true;
-        
-        ArrayList<ReleaseArtist> releaseArtists = data.getArtists();
+
+        ArrayList<ReleaseArtist> releaseArtists = release.getArtists();
         if (releaseArtists.size() != 1) {
             provideArtistAction = false;
         } else {
@@ -195,7 +170,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             addActionBarArtist();
         }
     }
-    
+
     private void findViews() {
         rating = (RatingBar) findViewById(R.id.release_rating);
         tags = (FocusTextView) findViewById(R.id.release_tags);
@@ -203,7 +178,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
         tagBtn = (Button) findViewById(R.id.tag_btn);
         rateBtn = (Button) findViewById(R.id.rate_btn);
-        
+
         tagBtn.setOnClickListener(this);
         rateBtn.setOnClickListener(this);
     }
@@ -221,23 +196,24 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     private void addActionBarShare() {
         // TODO
-//        Action share = actionBar.newAction();
-//        share.setIcon(R.drawable.ic_actionbar_share);
-//        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
-//        actionBar.addAction(share);
+        // Action share = actionBar.newAction();
+        // share.setIcon(R.drawable.ic_actionbar_share);
+        // share.setIntent(Utils.shareIntent(getApplicationContext(),
+        // Config.RELEASE_SHARE + releaseMbid));
+        // actionBar.addAction(share);
     }
 
     private void addActionBarArtist() {
         // TODO
-//        Action artist = actionBar.newAction();
-//        artist.setIcon(R.drawable.ic_actionbar_artist);
-//        artist.setIntent(createArtistIntent());
-//        actionBar.addAction(artist);
+        // Action artist = actionBar.newAction();
+        // artist.setIcon(R.drawable.ic_actionbar_artist);
+        // artist.setIntent(createArtistIntent());
+        // actionBar.addAction(artist);
     }
 
     private Intent createArtistIntent() {
         final Intent releaseIntent = new Intent(this, ArtistActivity.class);
-        releaseIntent.putExtra(Extra.ARTIST_MBID, data.getArtists().get(0).getMbid());
+        releaseIntent.putExtra(Extra.ARTIST_MBID, release.getArtists().get(0).getMbid());
         return releaseIntent;
     }
 
@@ -264,7 +240,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         if (doingTag || doingRate) {
             // TODO start progress
         } else {
-           // TODO stop progress
+            // TODO stop progress
         }
     }
 
@@ -276,13 +252,13 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
             } else {
-                tagTask = new SubmitTagsTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+                tagTask = new SubmitTagsTask(this, MBEntity.RELEASE_GROUP, release.getReleaseGroupMbid());
                 tagTask.execute(tagString);
             }
             break;
         case R.id.rate_btn:
             int rating = (int) ratingInput.getRating();
-            ratingTask = new SubmitRatingTask(this, MBEntity.RELEASE_GROUP, data.getReleaseGroupMbid());
+            ratingTask = new SubmitRatingTask(this, MBEntity.RELEASE_GROUP, release.getReleaseGroupMbid());
             ratingTask.execute(rating);
         }
     }
@@ -296,8 +272,8 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     @Override
     public void onDoneRating() {
-        data.setReleaseGroupRating(ratingTask.getUpdatedRating());
-        rating.setRating(data.getReleaseGroupRating());
+        release.setReleaseGroupRating(ratingTask.getUpdatedRating());
+        rating.setRating(release.getReleaseGroupRating());
         doingRate = false;
         updateProgressStatus();
         rateBtn.setEnabled(true);
@@ -312,15 +288,15 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     @Override
     public void onDoneTagging() {
-        data.setReleaseGroupTags(tagTask.getUpdatedTags());
-        tags.setText(StringFormat.commaSeparateTags(data.getReleaseGroupTags(), this));
+        release.setReleaseGroupTags(tagTask.getUpdatedTags());
+        tags.setText(StringFormat.commaSeparateTags(release.getReleaseGroupTags(), this));
         doingTag = false;
         updateProgressStatus();
         tagBtn.setEnabled(true);
-        
+
     }
-    
-    @Override 
+
+    @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
         case DIALOG_RELEASE_SELECTION:
@@ -343,7 +319,7 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                newTask();
+                configureLoader();
                 dialog.cancel();
             }
         });
@@ -357,41 +333,9 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     @Override
     public void onTaskFinished() {
-        if (lookupTask.failed()) {
-            showDialog(DIALOG_CONNECTION_FAILURE);
-            return;
-        }
-        if (lookupTask instanceof LookupReleaseTask) {
-            LookupReleaseTask task = (LookupReleaseTask) lookupTask;
-            data = task.getRelease();
-            if (task.getUserData() != null) {
-                userData = task.getUserData();
-            }
-            displayReleaseData();
-        } else if (lookupTask instanceof LookupRGStubsTask) {
-            LookupRGStubsTask task = (LookupRGStubsTask) lookupTask;
-            stubs = task.getStubs();
-            if (stubs.size() == 1) {
-                ReleaseStub singleRelease = stubs.getFirst();
-                lookupTask = new LookupReleaseTask(this);
-                lookupTask.execute(singleRelease.getReleaseMbid());
-            } else {
-                showDialog(DIALOG_RELEASE_SELECTION);
-            }
-        } else if (lookupTask instanceof LookupBarcodeTask) {
-            LookupBarcodeTask task = (LookupBarcodeTask) lookupTask;
-            if (task.doesBarcodeExist()) {
-                data = task.getRelease();
-                if (task.getUserData() != null) {
-                    userData = task.getUserData();
-                }
-                displayReleaseData();
-            } else {
-                showDialog(DIALOG_BARCODE);
-            }
-        }
+        // TODO REMOVE
     }
-    
+
     private void displayReleaseData() {
         populateLayout();
         if (isUserLoggedIn()) {
@@ -399,37 +343,82 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             ratingInput.setRating(userData.getRating());
         }
     }
-    
-    // TODO ????
-//    @Override
-//    public Object onRetainNonConfigurationInstance() {
-//        disconnectTasks();
-//        return new TaskHolder(lookupTask, tagTask, ratingTask);
-//    }
-    
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        disconnectTasks();
-    }
-    
-    private void disconnectTasks() {
-        if (lookupTask != null) lookupTask.disconnect();
-        if (tagTask != null) tagTask.disconnect();
-        if (ratingTask != null) ratingTask.disconnect();
-    }
-    
-    private static class TaskHolder {
-        
-        public MusicBrainzTask lookupTask;
-        public SubmitTagsTask tagTask;
-        public SubmitRatingTask ratingTask;
-        
-        public TaskHolder(MusicBrainzTask lookupTask, SubmitTagsTask tagTask, SubmitRatingTask ratingTask) {
-            this.lookupTask = lookupTask;
-            this.tagTask = tagTask;
-            this.ratingTask = ratingTask;
+
+    private LoaderCallbacks<AsyncEntityResult<Release>> releaseLoaderCallbacks = new LoaderCallbacks<AsyncEntityResult<Release>>() {
+
+        @Override
+        public Loader<AsyncEntityResult<Release>> onCreateLoader(int id, Bundle args) {
+            switch (id) {
+            case RELEASE_LOADER:
+                if (isUserLoggedIn()) {
+                    return new ReleaseLoader(ReleaseActivity.this, getCredentials(), releaseMbid);
+                } else {
+                    return new ReleaseLoader(ReleaseActivity.this, getUserAgent(), releaseMbid);
+                }
+            case BARCODE_RELEASE_LOADER:
+                if (isUserLoggedIn()) {
+                    return new BarcodeReleaseLoader(ReleaseActivity.this, getCredentials(), barcode);
+                } else {
+                    return new BarcodeReleaseLoader(ReleaseActivity.this, getUserAgent(), barcode);
+                }
+            }
+            return null;
         }
-    }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncEntityResult<Release>> loader, AsyncEntityResult<Release> container) {
+            switch (container.getStatus()) {
+            case EXCEPTION:
+                if (container.getException() instanceof BarcodeNotFoundException) {
+                    showDialog(DIALOG_BARCODE);
+                } else {
+                    showDialog(DIALOG_CONNECTION_FAILURE);
+                }
+                break;
+            case SUCCESS:
+                release = container.getData();
+                if (container.hasUserData()) {
+                    userData = container.getUserData();
+                }
+                displayReleaseData();
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncEntityResult<Release>> loader) {
+            loader.reset();
+        }
+    };
+
+    private LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>> releaseStubLoaderCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>>() {
+
+        @Override
+        public Loader<AsyncResult<LinkedList<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
+            return new ReleaseGroupStubsLoader(ReleaseActivity.this, getUserAgent(), releaseGroupMbid);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader, AsyncResult<LinkedList<ReleaseStub>> container) {
+            switch (container.getStatus()) {
+            case EXCEPTION:
+                showDialog(DIALOG_CONNECTION_FAILURE);
+                break;
+            case SUCCESS:
+                stubs = container.getData();
+                if (stubs.size() == 1) {
+                    ReleaseStub singleRelease = stubs.getFirst();
+                    releaseMbid = singleRelease.getReleaseMbid();
+                    getSupportLoaderManager().initLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
+                } else {
+                    showDialog(DIALOG_RELEASE_SELECTION);
+                }
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader) {
+            loader.reset();
+        }
+    };
 
 }

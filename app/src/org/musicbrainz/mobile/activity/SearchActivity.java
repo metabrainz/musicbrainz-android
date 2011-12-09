@@ -282,7 +282,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     @Override
     public void onLoadFinished(Loader<AsyncResult<SearchResults>> loader, AsyncResult<SearchResults> result) {
         toggleLoading();
-        switch (result.getResult()) {
+        switch (result.getStatus()) {
         case SUCCESS:
             handleResults(result.getData());
             break;

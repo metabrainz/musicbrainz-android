@@ -241,11 +241,7 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
         rateBtn.setEnabled(true);
     }
 
-    /**
-     * Handler for tag and rate buttons.
-     */
     public void onClick(View view) {
-        
         switch (view.getId()) {
         case R.id.tag_btn:
             String tagString = tagInput.getText().toString();
@@ -263,22 +259,25 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
         }
     }
 
-    /**
-     * Release group list selection handler.
-     */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         if (parent.getId() == R.id.artist_releases) {
-            ReleaseGroupStub rg = data.getReleases().get(position);
-
-            Intent releaseIntent = new Intent(ArtistActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra(Extra.RG_MBID, rg.getMbid());
-            startActivity(releaseIntent);
+            showRelease(position);
         } else {
-            String link = data.getLinks().get(position).getUrl();
-            Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-            startActivity(urlIntent);
+            openLink(position);
         }
+    }
+
+    private void showRelease(int position) {
+        ReleaseGroupStub rg = data.getReleases().get(position);
+        Intent releaseIntent = new Intent(ArtistActivity.this, ReleaseActivity.class);
+        releaseIntent.putExtra(Extra.RG_MBID, rg.getMbid());
+        startActivity(releaseIntent);
+    }
+
+    private void openLink(int position) {
+        String link = data.getLinks().get(position).getUrl();
+        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        startActivity(urlIntent);
     }
 
     @Override
@@ -296,12 +295,12 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
     }
 
     @Override
-    public void onLoadFinished(Loader<AsyncEntityResult<Artist>> loader, AsyncEntityResult<Artist> data) {
-        handleLoadResult(data);
+    public void onLoadFinished(Loader<AsyncEntityResult<Artist>> loader, AsyncEntityResult<Artist> container) {
+        handleLoadResult(container);
     }
 
     private void handleLoadResult(AsyncEntityResult<Artist> result) {
-        switch(result.getResult()) {
+        switch(result.getStatus()) {
         case SUCCESS:
             data = result.getData();
             if (result.hasUserData()) {
@@ -320,3 +319,4 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
     }
 
 }
+

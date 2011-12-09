@@ -140,7 +140,7 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
     }
     
     private void handleLoginResult(AsyncResult<Boolean> result) {
-        switch(result.getResult()) {
+        switch(result.getStatus()) {
         case SUCCESS:
             if (result.getData()) {
                 onLoginSuccess();

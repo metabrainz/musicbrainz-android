@@ -22,48 +22,27 @@ package org.musicbrainz.mobile.loader;
 
 import org.musicbrainz.android.api.data.UserData;
 
-public class AsyncEntityResult<T> {
+public class AsyncEntityResult<T> extends AsyncResult<T>{
     
-    private final LoaderStatus result;
-    private final T data;
-    private final UserData userData;
-    private final Throwable exception;
+    protected final UserData userData;
     
-    public AsyncEntityResult(LoaderStatus result, T data) {
-        this.result = result;
-        this.data = data;
-        this.exception = null;
+    public AsyncEntityResult(LoaderStatus status, T data) {
+        super(status, data);
         this.userData = null;
     }
     
-    public AsyncEntityResult(LoaderStatus result, T data, UserData userData) {
-        this.result = result;
-        this.data = data;
+    public AsyncEntityResult(LoaderStatus status, T data, UserData userData) {
+        super(status, data);
         this.userData = userData;
-        this.exception = null;
     }
     
-    public AsyncEntityResult(LoaderStatus result, Throwable exception) {
-        this.result = result;
-        this.exception = exception;
-        this.data = null;
+    public AsyncEntityResult(LoaderStatus status, Throwable exception) {
+        super(status, exception);
         this.userData = null;
-    }
-
-    public LoaderStatus getResult() {
-        return result;
-    }
-
-    public T getData() {
-        return data;
     }
 
     public UserData getUserData() {
         return userData;
-    }
-    
-    public Throwable getException() {
-        return exception;
     }
     
     public boolean hasUserData() {
