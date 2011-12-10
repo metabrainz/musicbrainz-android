@@ -50,6 +50,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
+import android.support.v4.view.Window;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -89,6 +90,8 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setProgressBarIndeterminateVisibility(Boolean.FALSE);
 
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.layout_loading);
@@ -207,9 +210,9 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private void updateProgress() {
         if (doingTag || doingRate) {
-            // TODO start progress
+            setProgressBarIndeterminateVisibility(Boolean.TRUE);
         } else {
-            // TODO stop progress
+            setProgressBarIndeterminateVisibility(Boolean.FALSE);
         }
     }
 

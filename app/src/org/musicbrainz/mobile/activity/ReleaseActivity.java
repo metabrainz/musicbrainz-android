@@ -106,6 +106,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setProgressBarIndeterminateVisibility(Boolean.FALSE);
 
         releaseMbid = getIntent().getStringExtra(Extra.RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);

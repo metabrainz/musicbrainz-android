@@ -36,6 +36,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.Menu;
+import android.support.v4.view.Window;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -62,6 +63,8 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setProgressBarIndeterminateVisibility(Boolean.TRUE);
 
         setContentView(R.layout.activity_donate);
 
@@ -70,8 +73,6 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
                 android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         amount.setAdapter(typeAdapter);
-
-        // TODO start progress
 
         initChecks = 0;
         handler.post(loadingChecker);
@@ -95,13 +96,13 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
     };
 
     private void onPayPalLoaded() {
-        // TODO stop progress
+        setProgressBarIndeterminateVisibility(Boolean.FALSE);
         addPayPalButtonToLayout();
         hideLoadingText();
     }
 
     private void handleTimeout() {
-        // TODO stop progress
+        setProgressBarIndeterminateVisibility(Boolean.FALSE);
         TextView loadText = (TextView) findViewById(R.id.donate_loading_text);
         loadText.setText(R.string.paypal_loading_timeout);
     }

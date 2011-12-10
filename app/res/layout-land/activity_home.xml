@@ -33,7 +33,8 @@
     <RelativeLayout
       style="@style/WrapHeight"
       android:layout_gravity="center"
-      android:layout_weight="0.5">
+      android:layout_weight="0.5"
+      android:paddingRight="@dimen/super_pad">
 
       <Spinner
         android:id="@+id/search_spin"
@@ -41,19 +42,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
 
+      <ImageButton
+        android:id="@+id/search_btn"
+        style="@style/SearchButton"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/search_spin" />
+
       <AutoCompleteTextView
         android:id="@+id/query_input"
         style="@style/SearchEdit"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/search_btn"
         android:layout_below="@+id/search_spin"
+        android:layout_alignBottom="@id/search_btn"
         android:hint="@string/search_hint" />
-
-      <ImageButton
-        android:id="@+id/search_btn"
-        style="@style/SearchButton"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/search_spin" />
     </RelativeLayout>
   </LinearLayout>
 
