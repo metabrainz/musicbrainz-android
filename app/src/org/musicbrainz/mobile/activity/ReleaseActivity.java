@@ -43,6 +43,8 @@ import org.musicbrainz.mobile.loader.ReleaseLoader;
 import org.musicbrainz.mobile.loader.SubmitRatingLoader;
 import org.musicbrainz.mobile.loader.SubmitTagsLoader;
 import org.musicbrainz.mobile.string.StringFormat;
+import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
 import android.app.AlertDialog;
@@ -52,6 +54,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
 import android.support.v4.view.Window;
 import android.view.View;
 import android.widget.Button;
@@ -127,7 +131,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         setContentView(R.layout.activity_release);
         findViews();
         setupTabs();
-        addActionBarShare();
 
         FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);
         FocusTextView title = (FocusTextView) findViewById(R.id.release_release);
@@ -169,7 +172,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
             }
         }
         if (provideArtistAction) {
-            addActionBarArtist();
+            // TODO
+            //addActionBarArtist();
         }
     }
 
@@ -195,22 +199,24 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         rateBtn.setEnabled(false);
         rateBtn.setFocusable(false);
     }
-
-    private void addActionBarShare() {
-        // TODO
-        // Action share = actionBar.newAction();
-        // share.setIcon(R.drawable.ic_actionbar_share);
-        // share.setIntent(Utils.shareIntent(getApplicationContext(),
-        // Config.RELEASE_SHARE + releaseMbid));
-        // actionBar.addAction(share);
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.release, menu);
+        return true;
     }
-
-    private void addActionBarArtist() {
-        // TODO
-        // Action artist = actionBar.newAction();
-        // artist.setIcon(R.drawable.ic_actionbar_artist);
-        // artist.setIntent(createArtistIntent());
-        // actionBar.addAction(artist);
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+        case R.id.action_share:
+            startActivity(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
+            return true;
+        case R.id.action_artist:
+            startActivity(createArtistIntent());
+        }
+        return false;
     }
 
     private Intent createArtistIntent() {

@@ -119,6 +119,7 @@
   
   <!--  Actions -->
   <string name="action_share">Share</string>
+  <string name="action_artist">Artist</string>
 
   <!-- Preferences -->
   <string name="preferences_title">Settings</string>
