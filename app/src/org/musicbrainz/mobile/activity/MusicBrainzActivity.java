@@ -35,7 +35,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
 import android.widget.Toast;
 
@@ -97,24 +96,14 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
         return new Credentials(getUserAgent(), getUsername(), getPassword(), getClientId());
     }
 
-    // TODO make home go home
-//    protected ActionBar setupActionBarWithHome() {
-//        ActionBar actionBar = (ActionBar) findViewById(R.id.actionbar);
-//        getMenuInflater().inflate(R.menu.actionbar, actionBar.asMenu());
-//        actionBar.findAction(R.id.actionbar_item_home).setIntent(DashboardActivity.createIntent(this));
-//        actionBar.setDisplayShowHomeEnabled(true);
-//        return actionBar;
-//    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.general, menu);
-        return true;
-    }
-
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
+        case android.R.id.home:
+            startActivity(DashboardActivity.createIntent(this));
+            return true;
         case R.id.menu_about:
             startActivity(new Intent(this, AboutActivity.class));
             return true;

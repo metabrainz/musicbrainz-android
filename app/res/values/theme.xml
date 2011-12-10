@@ -25,6 +25,8 @@
     parent="@style/Theme.Sherlock.Light">
     <item name="android:fadeScrollbars">true</item>
     <item name="android:scrollbarFadeDuration">500</item>
+    
+    <item name="abHeight">@dimen/actionbar_height</item>
   </style>
   
 </resources>

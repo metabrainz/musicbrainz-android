@@ -76,7 +76,7 @@
   <string name="rate_label">Rate</string>
 
   <!-- BarcodeSearchActivity -->
-  <string name="addupc_title">Submit Barcode</string>
+  <string name="barcodesearch_title">Submit Barcode</string>
   <string name="barcode_text">Product code: </string>
   <string name="barcode_hint">Release title</string>
   <string name="barcode_instructions">Search for the appropriate release to add this barcode.</string>
@@ -115,10 +115,10 @@
   <string name="menu_about">About</string>
   <string name="menu_donate">Donate to MB</string>
   <string name="menu_feedback">Feedback</string>
-  <string name="menu_preferences">Preferences</string>
+  <string name="menu_preferences">Settings</string>
 
   <!-- Preferences -->
-  <string name="preferences_title">Preferences</string>
+  <string name="preferences_title">Settings</string>
   <string name="preferences_search">Search</string>
   <string name="preferences_suggestions">Suggestions</string>
   <string name="preferences_suggestions_description">Store and display search suggestions</string>

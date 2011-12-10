@@ -80,7 +80,7 @@
 
     <activity
       android:name=".activity.BarcodeSearchActivity"
-      android:label="@string/addupc_title" />
+      android:label="@string/barcodesearch_title" />
 
     <activity
       android:name=".activity.SearchActivity"
@@ -112,7 +112,7 @@
 
   </application>
 
-  <uses-sdk android:minSdkVersion="4" />
+  <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="13" />
 
   <supports-screens
     android:smallScreens="true"
