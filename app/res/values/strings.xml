@@ -59,8 +59,6 @@
   <string name="no_tags">No tags found</string>
   <string name="edit_login">You must log in before you can edit!</string>
 
-  <string name="share">Share</string>
-
   <!-- ArtistActivity -->
   <string name="artist_title">Artist</string>
   <string name="noreleases">No releases found</string>
@@ -151,6 +149,7 @@
   <string name="toast_donate_canceled">Donation canceled</string>
   <string name="toast_donate_failed">Donation failed</string>
   <string name="toast_search_cleared">Search history deleted</string>
+  <string name="toast_no_artist_action">Sorry, this artist can\'t be displayed</string>
 
   <!-- ZXing integration -->
   <string name="zx_title">Install Barcode Scanner?</string>

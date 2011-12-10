@@ -38,7 +38,7 @@ public class Utils {
     public static Intent shareIntent(Context context, String text) {
         Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, text);
-        return Intent.createChooser(intent, context.getString(R.string.share));
+        return Intent.createChooser(intent, context.getString(R.string.action_share));
     }
     
     public static Intent emailIntent(String recipient, String subject) {

@@ -64,9 +64,9 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setProgressBarIndeterminateVisibility(Boolean.TRUE);
 
         setContentView(R.layout.activity_donate);
+        setProgressBarIndeterminateVisibility(Boolean.TRUE);
 
         amount = (Spinner) findViewById(R.id.donate_spin);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.donation,

@@ -102,17 +102,18 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
     private Button rateBtn;
 
     private boolean doingTag, doingRate = false;
+    private boolean provideArtistAction = true;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setProgressBarIndeterminateVisibility(Boolean.FALSE);
 
         releaseMbid = getIntent().getStringExtra(Extra.RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);
         barcode = getIntent().getStringExtra(Extra.BARCODE);
 
         setContentView(R.layout.layout_loading);
+        setProgressBarIndeterminateVisibility(Boolean.FALSE);
         configureLoader();
     }
 
@@ -139,7 +140,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         TextView releaseDate = (TextView) findViewById(R.id.release_date);
         ListView trackList = (ListView) findViewById(R.id.release_tracks);
 
-        displayArtistActionIfRequired();
+        checkIfArtistActionAvailable();
         artist.setText(StringFormat.commaSeparateArtists(release.getArtists()));
         title.setText(release.getTitle());
         trackList.setAdapter(new ReleaseTrackAdapter(this, release.getTrackList()));
@@ -158,9 +159,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         }
     }
 
-    private void displayArtistActionIfRequired() {
-        boolean provideArtistAction = true;
-
+    private void checkIfArtistActionAvailable() {
         ArrayList<ReleaseArtist> releaseArtists = release.getArtists();
         if (releaseArtists.size() != 1) {
             provideArtistAction = false;
@@ -171,10 +170,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
                     provideArtistAction = false;
                 }
             }
-        }
-        if (provideArtistAction) {
-            // TODO
-            //addActionBarArtist();
         }
     }
 
@@ -215,7 +210,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
             startActivity(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
             return true;
         case R.id.action_artist:
-            startActivity(createArtistIntent());
+            if (provideArtistAction) {
+                startActivity(createArtistIntent());
+            } else {
+                Toast.makeText(this, R.string.toast_no_artist_action, Toast.LENGTH_SHORT).show();
+            }
         }
         return false;
     }
