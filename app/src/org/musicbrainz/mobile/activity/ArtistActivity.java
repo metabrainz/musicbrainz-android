@@ -36,6 +36,8 @@ import org.musicbrainz.mobile.loader.AsyncResult;
 import org.musicbrainz.mobile.loader.SubmitRatingLoader;
 import org.musicbrainz.mobile.loader.SubmitTagsLoader;
 import org.musicbrainz.mobile.string.StringFormat;
+import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
 import android.app.AlertDialog;
@@ -46,6 +48,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -95,7 +99,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         setContentView(R.layout.activity_artist);
         findViews();
         setupTabs();
-        addActionBarShare();
 
         FocusTextView artistView = (FocusTextView) findViewById(R.id.artist_artist);
         ListView releaseList = (ListView) findViewById(R.id.artist_releases);
@@ -153,14 +156,23 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             noRes.setVisibility(View.VISIBLE);
         }
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.artist, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
 
-    private void addActionBarShare() {
-        // TODO
-        // Action share = actionBar.newAction();
-        // share.setIcon(R.drawable.ic_actionbar_share);
-        // share.setIntent(Utils.shareIntent(getApplicationContext(),
-        // Config.ARTIST_SHARE + mbid));
-        // actionBar.addAction(share);
+        switch (item.getItemId()) {
+        case R.id.action_share:
+            startActivity(Utils.shareIntent(getApplicationContext(), Config.ARTIST_SHARE + mbid));
+            return true;
+        }
+        return false;
     }
 
     /*

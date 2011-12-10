@@ -116,6 +116,9 @@
   <string name="menu_donate">Donate to MB</string>
   <string name="menu_feedback">Feedback</string>
   <string name="menu_preferences">Settings</string>
+  
+  <!--  Actions -->
+  <string name="action_share">Share</string>
 
   <!-- Preferences -->
   <string name="preferences_title">Settings</string>

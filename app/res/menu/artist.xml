@@ -17,26 +17,13 @@
   You should have received a copy of the GNU General Public License
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
-  
-<resources>
 
-  <style
-    name="MusicBrainzTheme"
-    parent="@style/Theme.Sherlock.Light">
-    <item name="android:fadeScrollbars">true</item>
-    <item name="android:scrollbarFadeDuration">500</item>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item name="abHeight">@dimen/actionbar_height</item>
-    <item name="abBackground">@color/mb_purple_medium</item>
-    <item name="abDivider">@null</item>
-    <item name="abTitleTextStyle">@style/ActionBarText</item>
-  </style>
+  <item
+    android:id="@+id/action_share"
+    android:title="@string/action_share"
+    android:icon="@drawable/action_share"
+    android:showAsAction="always" />
 
-  <style
-    name="ActionBarText"
-    parent="WrapWidth">
-    <item name="android:textColor">@color/white</item>
-    <item name="android:textSize">@dimen/text_size_entity</item>
-  </style>
-
-</resources>
+</menu>

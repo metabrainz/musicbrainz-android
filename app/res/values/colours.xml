@@ -19,6 +19,9 @@
   <http://www.gnu.org/licenses/>. -->
 
 <resources>
+  
+  <color name="white">#ffffff</color>
+  <color name="black">#000000</color>
 
   <!-- Theme -->
   <color name="main_bg">#eeeeee</color>
