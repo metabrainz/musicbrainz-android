@@ -27,11 +27,11 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.TagRateActivity;
 import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
@@ -40,9 +40,9 @@ import org.musicbrainz.mobile.loader.AsyncResult;
 import org.musicbrainz.mobile.loader.BarcodeReleaseLoader;
 import org.musicbrainz.mobile.loader.ReleaseGroupStubsLoader;
 import org.musicbrainz.mobile.loader.ReleaseLoader;
+import org.musicbrainz.mobile.loader.SubmitRatingLoader;
+import org.musicbrainz.mobile.loader.SubmitTagsLoader;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.task.SubmitRatingTask;
-import org.musicbrainz.mobile.task.SubmitTagsTask;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
 import android.app.AlertDialog;
@@ -52,6 +52,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.view.Window;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,14 +70,17 @@ import android.widget.Toast;
  * display of release information. An intent will contain either a barcode, a
  * release MBID or a release group MBID.
  */
-public class ReleaseActivity extends TagRateActivity implements View.OnClickListener {
+public class ReleaseActivity extends MusicBrainzActivity implements View.OnClickListener {
 
     private static final int RELEASE_LOADER = 0;
     private static final int RELEASE_GROUP_STUBS_LOADER = 1;
     private static final int BARCODE_RELEASE_LOADER = 2;
+    private static final int RATING_LOADER = 3;
+    private static final int TAG_LOADER = 4;
 
     private static final int DIALOG_RELEASE_SELECTION = 0;
     private static final int DIALOG_BARCODE = 1;
+    private static final int DIALOG_CONNECTION_FAILURE = 3;
 
     private Release release;
     private LinkedList<ReleaseStub> stubs;
@@ -95,16 +99,14 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     private boolean doingTag, doingRate = false;
 
-    private SubmitTagsTask tagTask;
-    private SubmitRatingTask ratingTask;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         releaseMbid = getIntent().getStringExtra(Extra.RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);
         barcode = getIntent().getStringExtra(Extra.BARCODE);
-        
+
         setContentView(R.layout.layout_loading);
         configureLoader();
     }
@@ -238,9 +240,9 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
 
     private void updateProgressStatus() {
         if (doingTag || doingRate) {
-            // TODO start progress
+            setProgressBarIndeterminateVisibility(Boolean.TRUE);
         } else {
-            // TODO stop progress
+            setProgressBarIndeterminateVisibility(Boolean.FALSE);
         }
     }
 
@@ -252,48 +254,18 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
             } else {
-                tagTask = new SubmitTagsTask(this, MBEntity.RELEASE_GROUP, release.getReleaseGroupMbid());
-                tagTask.execute(tagString);
+                doingTag = true;
+                updateProgressStatus();
+                tagBtn.setEnabled(false);
+                getSupportLoaderManager().initLoader(TAG_LOADER, null, tagSubmissionCallbacks);
             }
             break;
         case R.id.rate_btn:
-            int rating = (int) ratingInput.getRating();
-            ratingTask = new SubmitRatingTask(this, MBEntity.RELEASE_GROUP, release.getReleaseGroupMbid());
-            ratingTask.execute(rating);
+            doingRate = true;
+            updateProgressStatus();
+            rateBtn.setEnabled(false);
+            getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
         }
-    }
-
-    @Override
-    public void onStartRating() {
-        doingRate = true;
-        updateProgressStatus();
-        rateBtn.setEnabled(false);
-    }
-
-    @Override
-    public void onDoneRating() {
-        release.setReleaseGroupRating(ratingTask.getUpdatedRating());
-        rating.setRating(release.getReleaseGroupRating());
-        doingRate = false;
-        updateProgressStatus();
-        rateBtn.setEnabled(true);
-    }
-
-    @Override
-    public void onStartTagging() {
-        doingTag = true;
-        updateProgressStatus();
-        tagBtn.setEnabled(false);
-    }
-
-    @Override
-    public void onDoneTagging() {
-        release.setReleaseGroupTags(tagTask.getUpdatedTags());
-        tags.setText(StringFormat.commaSeparateTags(release.getReleaseGroupTags(), this));
-        doingTag = false;
-        updateProgressStatus();
-        tagBtn.setEnabled(true);
-
     }
 
     @Override
@@ -311,7 +283,6 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         return null;
     }
 
-    @Override
     protected Dialog createConnectionErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.err_text));
@@ -329,11 +300,6 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             }
         });
         return builder.create();
-    }
-
-    @Override
-    public void onTaskFinished() {
-        // TODO REMOVE
     }
 
     private void displayReleaseData() {
@@ -398,7 +364,8 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader, AsyncResult<LinkedList<ReleaseStub>> container) {
+        public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader,
+                AsyncResult<LinkedList<ReleaseStub>> container) {
             switch (container.getStatus()) {
             case EXCEPTION:
                 showDialog(DIALOG_CONNECTION_FAILURE);
@@ -420,5 +387,77 @@ public class ReleaseActivity extends TagRateActivity implements View.OnClickList
             loader.reset();
         }
     };
+
+    private LoaderCallbacks<AsyncResult<Float>> ratingSubmissionCallbacks = new LoaderCallbacks<AsyncResult<Float>>() {
+
+        @Override
+        public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
+            int rating = (int) ratingInput.getRating();
+            return new SubmitRatingLoader(ReleaseActivity.this, getCredentials(), MBEntity.RELEASE_GROUP,
+                    release.getReleaseGroupMbid(), rating);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<Float>> loader, AsyncResult<Float> data) {
+            getSupportLoaderManager().destroyLoader(RATING_LOADER);
+            switch (data.getStatus()) {
+            case EXCEPTION:
+                Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
+                break;
+            case SUCCESS:
+                Toast.makeText(ReleaseActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show();
+                updateRating(data.getData());
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<Float>> loader) {
+            loader.reset();
+        }
+    };
+
+    private void updateRating(Float newRating) {
+        release.setReleaseGroupRating(newRating);
+        rating.setRating(newRating);
+        doingRate = false;
+        updateProgressStatus();
+        rateBtn.setEnabled(true);
+    }
+
+    private LoaderCallbacks<AsyncResult<LinkedList<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<Tag>>>() {
+
+        @Override
+        public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
+            String tags = tagInput.getText().toString();
+            return new SubmitTagsLoader(ReleaseActivity.this, getCredentials(), MBEntity.RELEASE_GROUP,
+                    release.getReleaseGroupMbid(), tags);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<LinkedList<Tag>>> loader, AsyncResult<LinkedList<Tag>> data) {
+            getSupportLoaderManager().destroyLoader(TAG_LOADER);
+            switch (data.getStatus()) {
+            case EXCEPTION:
+                Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
+                break;
+            case SUCCESS:
+                Toast.makeText(ReleaseActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT).show();
+                updateTags(data.getData());
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<LinkedList<Tag>>> loader) {
+            loader.reset();
+        }
+    };
+
+    private void updateTags(LinkedList<Tag> newTags) {
+        release.setReleaseGroupTags(newTags);
+        tags.setText(StringFormat.commaSeparateTags(newTags, this));
+        doingTag = false;
+        updateProgressStatus();
+        tagBtn.setEnabled(true);
+    }
 
 }

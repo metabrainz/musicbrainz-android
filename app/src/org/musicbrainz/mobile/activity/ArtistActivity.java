@@ -20,19 +20,22 @@
 
 package org.musicbrainz.mobile.activity;
 
+import java.util.LinkedList;
+
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.base.TagRateActivity;
 import org.musicbrainz.mobile.adapter.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.LinkAdapter;
 import org.musicbrainz.mobile.loader.ArtistLoader;
 import org.musicbrainz.mobile.loader.AsyncEntityResult;
+import org.musicbrainz.mobile.loader.AsyncResult;
+import org.musicbrainz.mobile.loader.SubmitRatingLoader;
+import org.musicbrainz.mobile.loader.SubmitTagsLoader;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.task.SubmitRatingTask;
-import org.musicbrainz.mobile.task.SubmitTagsTask;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
 import android.app.AlertDialog;
@@ -58,12 +61,17 @@ import android.widget.Toast;
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
  */
-public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>, View.OnClickListener, ListView.OnItemClickListener {
+public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>,
+        View.OnClickListener, ListView.OnItemClickListener {
 
     private static final int ARTIST_LOADER = 0;
-    
+    private static final int RATING_LOADER = 1;
+    private static final int TAG_LOADER = 2;
+
+    private static final int DIALOG_CONNECTION_FAILURE = 0;
+
     private String mbid;
-    private Artist data;
+    private Artist artist;
     private UserData userData;
 
     private RatingBar rating;
@@ -74,9 +82,6 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
     private Button rateBtn;
 
     private boolean doingTag, doingRate = false;
-
-    private SubmitTagsTask tagTask;
-    private SubmitRatingTask ratingTask;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,20 +97,20 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
         setupTabs();
         addActionBarShare();
 
-        FocusTextView artist = (FocusTextView) findViewById(R.id.artist_artist);
+        FocusTextView artistView = (FocusTextView) findViewById(R.id.artist_artist);
         ListView releaseList = (ListView) findViewById(R.id.artist_releases);
         ListView linksList = (ListView) findViewById(R.id.artist_links);
 
-        artist.setText(data.getName());
-        releaseList.setAdapter(new ArtistReleaseGroupAdapter(this, data.getReleaseGroups()));
+        artistView.setText(artist.getName());
+        releaseList.setAdapter(new ArtistReleaseGroupAdapter(this, artist.getReleaseGroups()));
         releaseList.setOnItemClickListener(this);
-        linksList.setAdapter(new LinkAdapter(this, data.getLinks()));
+        linksList.setAdapter(new LinkAdapter(this, artist.getLinks()));
         linksList.setOnItemClickListener(this);
-        rating.setRating(data.getRating());
-        tags.setText(StringFormat.commaSeparateTags(data.getTags(), this));
+        rating.setRating(artist.getRating());
+        tags.setText(StringFormat.commaSeparateTags(artist.getTags(), this));
 
         displayMessagesForEmptyData();
-        
+
         if (isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
@@ -114,7 +119,7 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
     }
-    
+
     private void findViews() {
         rating = (RatingBar) findViewById(R.id.artist_rating);
         tags = (FocusTextView) findViewById(R.id.artist_tags);
@@ -122,7 +127,7 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
         tagBtn = (Button) findViewById(R.id.tag_btn);
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
         rateBtn = (Button) findViewById(R.id.rate_btn);
-        
+
         tagBtn.setOnClickListener(this);
         rateBtn.setOnClickListener(this);
     }
@@ -137,24 +142,25 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
         rateBtn.setEnabled(false);
         rateBtn.setFocusable(false);
     }
-    
+
     private void displayMessagesForEmptyData() {
-        if (data.getReleases().isEmpty()) {
+        if (artist.getReleases().isEmpty()) {
             TextView noRes = (TextView) findViewById(R.id.noreleases);
             noRes.setVisibility(View.VISIBLE);
         }
-        if (data.getLinks().isEmpty()) {
+        if (artist.getLinks().isEmpty()) {
             TextView noRes = (TextView) findViewById(R.id.nolinks);
             noRes.setVisibility(View.VISIBLE);
         }
     }
 
     private void addActionBarShare() {
-          // TODO
-//        Action share = actionBar.newAction();
-//        share.setIcon(R.drawable.ic_actionbar_share);
-//        share.setIntent(Utils.shareIntent(getApplicationContext(), Config.ARTIST_SHARE + mbid));
-//        actionBar.addAction(share);
+        // TODO
+        // Action share = actionBar.newAction();
+        // share.setIcon(R.drawable.ic_actionbar_share);
+        // share.setIntent(Utils.shareIntent(getApplicationContext(),
+        // Config.ARTIST_SHARE + mbid));
+        // actionBar.addAction(share);
     }
 
     /*
@@ -213,34 +219,6 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
         return builder.create();
     }
 
-    public void onStartTagging() {
-        doingTag = true;
-        updateProgress();
-        tagBtn.setEnabled(false);
-    }
-
-    public void onDoneTagging() {
-        data.setTags(tagTask.getUpdatedTags());
-        tags.setText(StringFormat.commaSeparateTags(data.getTags(), this));
-        doingTag = false;
-        updateProgress();
-        tagBtn.setEnabled(true);
-    }
-
-    public void onStartRating() {
-        doingRate = true;
-        updateProgress();
-        rateBtn.setEnabled(false);
-    }
-
-    public void onDoneRating() {
-        data.setRating(ratingTask.getUpdatedRating());
-        rating.setRating(data.getRating());
-        doingRate = false;
-        updateProgress();
-        rateBtn.setEnabled(true);
-    }
-
     public void onClick(View view) {
         switch (view.getId()) {
         case R.id.tag_btn:
@@ -248,14 +226,17 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
             } else {
-                tagTask = new SubmitTagsTask(this, MBEntity.ARTIST, mbid);
-                tagTask.execute(tagString);
+                doingTag = true;
+                updateProgress();
+                tagBtn.setEnabled(false);
+                getSupportLoaderManager().initLoader(TAG_LOADER, null, tagSubmissionCallbacks);
             }
             break;
         case R.id.rate_btn:
-            int rating = (int) ratingInput.getRating();
-            ratingTask = new SubmitRatingTask(this, MBEntity.ARTIST, mbid);
-            ratingTask.execute(rating);
+            doingRate = true;
+            updateProgress();
+            rateBtn.setEnabled(false);
+            getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
         }
     }
 
@@ -268,21 +249,16 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
     }
 
     private void showRelease(int position) {
-        ReleaseGroupStub rg = data.getReleases().get(position);
+        ReleaseGroupStub rg = artist.getReleases().get(position);
         Intent releaseIntent = new Intent(ArtistActivity.this, ReleaseActivity.class);
         releaseIntent.putExtra(Extra.RG_MBID, rg.getMbid());
         startActivity(releaseIntent);
     }
 
     private void openLink(int position) {
-        String link = data.getLinks().get(position).getUrl();
+        String link = artist.getLinks().get(position).getUrl();
         Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
         startActivity(urlIntent);
-    }
-
-    @Override
-    public void onTaskFinished() {
-        // TODO REMOVE
     }
 
     @Override
@@ -300,9 +276,9 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
     }
 
     private void handleLoadResult(AsyncEntityResult<Artist> result) {
-        switch(result.getStatus()) {
+        switch (result.getStatus()) {
         case SUCCESS:
-            data = result.getData();
+            artist = result.getData();
             if (result.hasUserData()) {
                 userData = result.getUserData();
             }
@@ -318,5 +294,75 @@ public class ArtistActivity extends TagRateActivity implements LoaderCallbacks<A
         loader.reset();
     }
 
-}
+    private LoaderCallbacks<AsyncResult<Float>> ratingSubmissionCallbacks = new LoaderCallbacks<AsyncResult<Float>>() {
 
+        @Override
+        public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
+            int rating = (int) ratingInput.getRating();
+            return new SubmitRatingLoader(ArtistActivity.this, getCredentials(), MBEntity.ARTIST, artist.getMbid(),
+                    rating);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<Float>> loader, AsyncResult<Float> data) {
+            getSupportLoaderManager().destroyLoader(RATING_LOADER);
+            switch (data.getStatus()) {
+            case EXCEPTION:
+                Toast.makeText(ArtistActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
+                break;
+            case SUCCESS:
+                Toast.makeText(ArtistActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show();
+                updateRating(data.getData());
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<Float>> loader) {
+            loader.reset();
+        }
+    };
+
+    private void updateRating(Float newRating) {
+        artist.setRating(newRating);
+        rating.setRating(newRating);
+        doingRate = false;
+        updateProgress();
+        rateBtn.setEnabled(true);
+    }
+
+    private LoaderCallbacks<AsyncResult<LinkedList<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<Tag>>>() {
+
+        @Override
+        public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
+            String tags = tagInput.getText().toString();
+            return new SubmitTagsLoader(ArtistActivity.this, getCredentials(), MBEntity.ARTIST, artist.getMbid(), tags);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<LinkedList<Tag>>> loader, AsyncResult<LinkedList<Tag>> data) {
+            getSupportLoaderManager().destroyLoader(TAG_LOADER);
+            switch (data.getStatus()) {
+            case EXCEPTION:
+                Toast.makeText(ArtistActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
+                break;
+            case SUCCESS:
+                Toast.makeText(ArtistActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT).show();
+                updateTags(data.getData());
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<LinkedList<Tag>>> loader) {
+            loader.reset();
+        }
+    };
+
+    private void updateTags(LinkedList<Tag> newTags) {
+        artist.setTags(newTags);
+        tags.setText(StringFormat.commaSeparateTags(newTags, this));
+        doingTag = false;
+        updateProgress();
+        tagBtn.setEnabled(true);
+    }
+
+}
