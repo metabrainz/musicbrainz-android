@@ -18,11 +18,13 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<LinearLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <RelativeLayout style="@style/EntityInfo">
+  <RelativeLayout
+    style="@style/EntityInfo"
+    android:id="@+id/entity_info">
 
     <org.musicbrainz.mobile.widget.FocusTextView
       android:id="@+id/artist_artist"
@@ -48,51 +50,17 @@
 
   </RelativeLayout>
 
-  <TabHost
-    android:id="@+id/artist_tabhost"
-    style="@style/Fill">
+  <com.viewpagerindicator.TabPageIndicator
+    android:id="@+id/indicator"
+    android:gravity="center"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/entity_info" />
 
-    <TabWidget
-      android:id="@android:id/tabs"
-      style="@style/WrapHeight" />
+  <android.support.v4.view.ViewPager
+    android:id="@+id/pager"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/indicator" />
 
-    <FrameLayout
-      android:id="@android:id/tabcontent"
-      style="@style/Fill"
-      android:paddingTop="@dimen/tab_height">
-
-      <RelativeLayout
-        android:id="@+id/releases_tab"
-        style="@style/WrapHeight">
-
-        <ListView
-          android:id="@+id/artist_releases"
-          style="@style/List" />
-
-        <TextView
-          android:id="@+id/noreleases"
-          style="@style/NoResultsText"
-          android:layout_alignParentBottom="true"
-          android:text="@string/noreleases" />
-      </RelativeLayout>
-
-      <RelativeLayout
-        android:id="@+id/links_tab"
-        style="@style/Fill">
-
-        <ListView
-          android:id="@+id/artist_links"
-          style="@style/List" />
-
-        <TextView
-          android:id="@+id/nolinks"
-          style="@style/NoResultsText"
-          android:layout_alignParentBottom="true"
-          android:text="@string/no_links" />
-      </RelativeLayout>
-
-      <include layout="@layout/layout_edit" />
-      
-    </FrameLayout>
-  </TabHost>
-</LinearLayout>
+</RelativeLayout>

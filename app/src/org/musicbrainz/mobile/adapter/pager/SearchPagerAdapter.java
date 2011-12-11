@@ -84,19 +84,15 @@ public class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
     }
 
     @Override
-    public void destroyItem(View container, int position, Object object) {
-    }
+    public void destroyItem(View container, int position, Object object) {}
 
     @Override
-    public void startUpdate(View container) {
-    }
+    public void startUpdate(View container) {}
 
     @Override
-    public void finishUpdate(View container) {
-    }
+    public void finishUpdate(View container) {}
 
     @Override
-    public void restoreState(Parcelable state, ClassLoader loader) {
-    }
+    public void restoreState(Parcelable state, ClassLoader loader) {}
     
 }

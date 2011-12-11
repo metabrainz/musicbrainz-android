@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2011 Jamie McDonald
 
   This file is part of MusicBrainz for Android.
 
@@ -18,15 +18,18 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<TextView
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/tab_label"
-  style="@style/WrapWidth"
-  android:layout_weight="1"
+  android:id="@+id/releases_tab"
+  style="@style/WrapHeight">
 
-  android:minHeight="@dimen/tab_height"
-  android:gravity="center"
+  <ListView
+    android:id="@+id/artist_releases"
+    style="@style/List" />
 
-  android:textSize="@dimen/text_size_medium"
-  android:textStyle="bold"
-  android:background="@drawable/minitab" />
+  <TextView
+    android:id="@+id/noreleases"
+    style="@style/NoResultsText"
+    android:layout_alignParentBottom="true"
+    android:text="@string/noreleases" />
+</RelativeLayout>

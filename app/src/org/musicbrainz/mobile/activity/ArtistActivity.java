@@ -30,6 +30,7 @@ import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.list.LinkAdapter;
+import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
 import org.musicbrainz.mobile.loader.ArtistLoader;
 import org.musicbrainz.mobile.loader.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.AsyncResult;
@@ -39,6 +40,8 @@ import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
+
+import com.viewpagerindicator.TabPageIndicator;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -50,6 +53,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
+import android.support.v4.view.ViewPager;
 import android.support.v4.view.Window;
 import android.view.View;
 import android.widget.AdapterView;
@@ -57,8 +61,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,8 +102,8 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     protected void populateLayout() {
         setContentView(R.layout.activity_artist);
+        configurePager();
         findViews();
-        setupTabs();
 
         FocusTextView artistView = (FocusTextView) findViewById(R.id.artist_artist);
         ListView releaseList = (ListView) findViewById(R.id.artist_releases);
@@ -124,6 +126,16 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             disableEditViews();
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
+    }
+    
+    private void configurePager() {
+        ArtistPagerAdapter adapter = new ArtistPagerAdapter(this);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+        adapter.instantiateItem(pager, 2);
+        TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+        indicator.setCurrentItem(1);
     }
 
     private void findViews() {
@@ -176,36 +188,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             return true;
         }
         return false;
-    }
-
-    /*
-     * Create and add tabs.
-     */
-    private void setupTabs() {
-        TabHost tabs = (TabHost) this.findViewById(R.id.artist_tabhost);
-        tabs.setup();
-
-        TabSpec releaseGroupsTab = tabs.newTabSpec("RGs");
-        final TextView rgIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
-        rgIndicator.setText(R.string.tab_releases);
-        releaseGroupsTab.setIndicator(rgIndicator);
-        releaseGroupsTab.setContent(R.id.releases_tab);
-
-        TabSpec linksTab = tabs.newTabSpec("links");
-        final TextView linksIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
-        linksIndicator.setText(R.string.tab_links);
-        linksTab.setIndicator(linksIndicator);
-        linksTab.setContent(R.id.links_tab);
-
-        TabSpec editTab = tabs.newTabSpec("edit");
-        final TextView editIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
-        editIndicator.setText(R.string.tab_edits);
-        editTab.setIndicator(editIndicator);
-        editTab.setContent(R.id.edit_tab);
-
-        tabs.addTab(releaseGroupsTab);
-        tabs.addTab(linksTab);
-        tabs.addTab(editTab);
     }
 
     private void updateProgress() {
