@@ -34,16 +34,24 @@ import org.musicbrainz.mobile.loader.SearchReleaseGroupLoader;
 import org.musicbrainz.mobile.loader.SearchResults;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 
+import com.viewpagerindicator.TabPageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
+import com.viewpagerindicator.TitleProvider;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.Menu;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -71,17 +79,17 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handleIntent();
+        configureSearch();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
-        handleIntent();
+        configureSearch();
     }
 
-    private void handleIntent() {
-        setContentView(R.layout.activity_searchres);
+    private void configureSearch() {
+        setContentView(R.layout.activity_search);
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
             searchTerm = getIntent().getStringExtra(SearchManager.QUERY);
             getIntent().putExtra(Extra.TYPE, Extra.ALL);
@@ -110,36 +118,78 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
         }
     }
 
-    // TODO ????
-    // private void enableTypeNavigation() {
-    // actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-    // SpinnerAdapter listAdapter =
-    // ArrayAdapter.createFromResource(SearchActivity.this, R.array.searchBar,
-    // R.layout.actionbar_list_dropdown_item);
-    // actionBar.setListNavigationCallbacks(listAdapter, new
-    // ActionBarListListener());
-    // }
-    //
-    // private class ActionBarListListener implements
-    // ActionBar.OnNavigationListener {
-    //
-    // @Override
-    // public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-    //
-    // RelativeLayout artistResults = (RelativeLayout)
-    // findViewById(R.id.artist_results_container);
-    // RelativeLayout rgResults = (RelativeLayout)
-    // findViewById(R.id.rg_results_container);
-    // if (itemPosition == 0) {
-    // artistResults.setVisibility(View.VISIBLE);
-    // rgResults.setVisibility(View.GONE);
-    // } else if (itemPosition == 1) {
-    // rgResults.setVisibility(View.VISIBLE);
-    // artistResults.setVisibility(View.GONE);
-    // }
-    // return true;
-    // }
-    // }
+    private void enableTypeNavigation() {
+        setContentView(R.layout.activity_search_all);
+        setHeaderText();
+        SearchPagerAdapter adapter = new SearchPagerAdapter(this);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+        TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+    }
+    
+    private class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
+        
+        private final Context context;
+        
+        public SearchPagerAdapter(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public String getTitle(int position) {
+            // TODO Externalise strings!
+            switch (position) {
+            case 0:
+                return "Artists";
+            case 1:
+                return "Releases";
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public Object instantiateItem(View container, int position) {
+            switch (position) {
+            case 0:
+                RelativeLayout artists = (RelativeLayout) getLayoutInflater().inflate(R.layout.layout_search_artists, null);
+                ((ViewPager) container).addView(artists, 0);
+                return artists;
+            case 1:
+                RelativeLayout releases = (RelativeLayout) getLayoutInflater().inflate(R.layout.layout_search_rgs, null);
+                ((ViewPager) container).addView(releases, 0);
+                return releases;
+            }
+            return null;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view.equals(object);
+        }
+
+        @Override
+        public Parcelable saveState() {
+            return null;
+        }
+
+        @Override
+        public void destroyItem(View container, int position, Object object) {}
+        
+        @Override
+        public void startUpdate(View container) {}
+
+        @Override
+        public void finishUpdate(View container) {}
+        
+        @Override
+        public void restoreState(Parcelable state, ClassLoader loader) {}
+    }
 
     private void displayArtistResultsView() {
         ListView artistResultsView = (ListView) findViewById(R.id.searchres_artist_list);
@@ -304,7 +354,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
         case ALL:
             artistSearchResults = results.getArtistResults();
             rgSearchResults = results.getReleaseGroupResults();
-            // TODO enable dual navigation
+            enableTypeNavigation();
             displayArtistResultsView();
             displayRGResultsView();
         }

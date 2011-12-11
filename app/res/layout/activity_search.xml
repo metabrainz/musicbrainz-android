@@ -18,21 +18,33 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<resources>
-  
-  <string-array name="searchType">
-    <item>Artist</item>
-    <item>Release</item>
-    <item>All</item>
-  </string-array>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
 
-  <array name="donation">
-    <item>$5</item>
-    <item>$10</item>
-    <item>$25</item>
-    <item>$50</item>
-    <item>$100</item>
-    <item>$500</item>
-  </array>
-  
-</resources>
+  <TextView
+    android:id="@+id/searchres_text"
+    style="@style/SearchHeader" />
+
+  <View
+    android:id="@+id/topline"
+    style="@style/Separator"
+    android:layout_below="@+id/searchres_text" />
+
+  <RelativeLayout
+    style="@style/Loading"
+    android:background="@color/main_fg"
+    android:layout_below="@+id/topline">
+
+    <ProgressBar
+      android:id="@+id/loading"
+      style="@style/Wrap"
+      android:indeterminateDrawable="@anim/progress"
+      android:layout_centerInParent="true" />
+  </RelativeLayout>
+
+  <include layout="@layout/layout_search_rgs" />
+
+  <include layout="@layout/layout_search_artists" />
+
+</RelativeLayout>

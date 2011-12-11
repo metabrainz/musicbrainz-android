@@ -31,47 +31,16 @@
     style="@style/Separator"
     android:layout_below="@+id/searchres_text" />
 
-  <RelativeLayout
-    style="@style/Loading"
-    android:background="@color/main_fg"
-    android:layout_below="@+id/topline">
+  <com.viewpagerindicator.TabPageIndicator
+    android:id="@+id/indicator"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_below="@id/topline" />
 
-    <ProgressBar
-      android:id="@+id/loading"
-      style="@style/Wrap"
-      android:indeterminateDrawable="@anim/progress"
-      android:layout_centerInParent="true" />
-  </RelativeLayout>
-
-  <RelativeLayout
-    android:id="@+id/rg_results_container"
-    style="@style/Fill"
-    android:layout_below="@id/topline">
-
-    <ListView
-      android:id="@+id/searchres_rg_list"
-      style="@style/List"
-      android:visibility="gone" />
-
-    <TextView
-      android:id="@+id/noresults"
-      style="@style/NoResultsText" />
-
-  </RelativeLayout>
-
-  <RelativeLayout
-    android:id="@+id/artist_results_container"
-    style="@style/Fill"
-    android:layout_below="@id/topline">
-
-    <ListView
-      android:id="@+id/searchres_artist_list"
-      style="@style/List"
-      android:visibility="gone" />
-
-    <TextView
-      android:id="@+id/noresults"
-      style="@style/NoResultsText" />
-  </RelativeLayout>
+  <android.support.v4.view.ViewPager
+    android:id="@+id/pager"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/indicator" />
 
 </RelativeLayout>

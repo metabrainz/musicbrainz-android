@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2011 Jamie McDonald
 
   This file is part of MusicBrainz for Android.
 
@@ -18,21 +18,18 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<resources>
-  
-  <string-array name="searchType">
-    <item>Artist</item>
-    <item>Release</item>
-    <item>All</item>
-  </string-array>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/rg_results_container"
+  style="@style/Fill"
+  android:layout_below="@id/topline">
 
-  <array name="donation">
-    <item>$5</item>
-    <item>$10</item>
-    <item>$25</item>
-    <item>$50</item>
-    <item>$100</item>
-    <item>$500</item>
-  </array>
-  
-</resources>
+  <ListView
+    android:id="@+id/searchres_rg_list"
+    style="@style/List"
+    android:visibility="gone" />
+
+  <TextView
+    android:id="@+id/noresults"
+    style="@style/NoResultsText" />
+</RelativeLayout>
