@@ -26,6 +26,7 @@ import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.SearchArtistAdapter;
+import org.musicbrainz.mobile.adapter.SearchPagerAdapter;
 import org.musicbrainz.mobile.adapter.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.loader.AsyncResult;
 import org.musicbrainz.mobile.loader.SearchArtistLoader;
@@ -34,23 +35,16 @@ import org.musicbrainz.mobile.loader.SearchReleaseGroupLoader;
 import org.musicbrainz.mobile.loader.SearchResults;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 
-import com.viewpagerindicator.TabPageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
-import com.viewpagerindicator.TitleProvider;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.Menu;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
@@ -59,6 +53,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.viewpagerindicator.TabPageIndicator;
 
 /**
  * Activity to display a list of search results to the user and support intents
@@ -118,77 +114,14 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
         }
     }
 
-    private void enableTypeNavigation() {
+    private void enableResultTabs() {
         setContentView(R.layout.activity_search_all);
-        setHeaderText();
+        getSupportActionBar().setTitle(searchTerm);
         SearchPagerAdapter adapter = new SearchPagerAdapter(this);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
-    }
-    
-    private class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
-        
-        private final Context context;
-        
-        public SearchPagerAdapter(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public String getTitle(int position) {
-            // TODO Externalise strings!
-            switch (position) {
-            case 0:
-                return "Artists";
-            case 1:
-                return "Releases";
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
-        @Override
-        public Object instantiateItem(View container, int position) {
-            switch (position) {
-            case 0:
-                RelativeLayout artists = (RelativeLayout) getLayoutInflater().inflate(R.layout.layout_search_artists, null);
-                ((ViewPager) container).addView(artists, 0);
-                return artists;
-            case 1:
-                RelativeLayout releases = (RelativeLayout) getLayoutInflater().inflate(R.layout.layout_search_rgs, null);
-                ((ViewPager) container).addView(releases, 0);
-                return releases;
-            }
-            return null;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view.equals(object);
-        }
-
-        @Override
-        public Parcelable saveState() {
-            return null;
-        }
-
-        @Override
-        public void destroyItem(View container, int position, Object object) {}
-        
-        @Override
-        public void startUpdate(View container) {}
-
-        @Override
-        public void finishUpdate(View container) {}
-        
-        @Override
-        public void restoreState(Parcelable state, ClassLoader loader) {}
     }
 
     private void displayArtistResultsView() {
@@ -354,7 +287,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
         case ALL:
             artistSearchResults = results.getArtistResults();
             rgSearchResults = results.getReleaseGroupResults();
-            enableTypeNavigation();
+            enableResultTabs();
             displayArtistResultsView();
             displayRGResultsView();
         }

@@ -30,6 +30,9 @@
     <item name="abBackground">@color/mb_purple_medium</item>
     <item name="abDivider">@null</item>
     <item name="abTitleTextStyle">@style/ActionBarText</item>
+    
+    <item name="vpiTabPageIndicatorStyle">@style/TabIndicator</item>
+    <item name="vpiTabTextStyle">@style/TabText</item>
   </style>
 
   <style
@@ -37,6 +40,16 @@
     parent="WrapWidth">
     <item name="android:textColor">@color/white</item>
     <item name="android:textSize">@dimen/text_size_entity</item>
+  </style>
+  
+  <style name="TabIndicator"
+    parent="Widget.TabPageIndicator">
+    
+  </style>
+  
+  <style name="TabText"
+    parent="Widget.TabPageIndicator.Text">
+    <item name="android:textColor">@color/black</item>
   </style>
 
 </resources>

@@ -49,6 +49,8 @@
   <string name="no_results">No results found</string>
   <string name="search_bar_artists">Artist Results</string>
   <string name="search_bar_rgs">Release Results</string>
+  <string name="results_artists">ARTISTS</string>
+  <string name="results_releases">RELEASES</string>
 
   <!-- ReleaseActivity -->
   <string name="release_title">Release</string>
