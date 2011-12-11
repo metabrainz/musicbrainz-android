@@ -47,7 +47,6 @@
       android:layout_alignParentRight="true"
       android:layout_marginLeft="@dimen/std_pad"
       android:layout_marginTop="@dimen/startop_pad" />
-
   </RelativeLayout>
 
   <com.viewpagerindicator.TabPageIndicator

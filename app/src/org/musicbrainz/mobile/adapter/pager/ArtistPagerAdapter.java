@@ -70,8 +70,7 @@ public class ArtistPagerAdapter extends PagerAdapter implements TitleProvider {
             ((ViewPager) container).addView(links, 0);
             return links;
         case 1:
-            RelativeLayout releases = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_artist_rgs,
-                    null);
+            RelativeLayout releases = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_artist_rgs,null);
             ((ViewPager) container).addView(releases, 0);
             return releases;
         case 2:

@@ -41,8 +41,6 @@ import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
 import org.musicbrainz.mobile.widget.FocusTextView;
 
-import com.viewpagerindicator.TabPageIndicator;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -63,6 +61,8 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.viewpagerindicator.TabPageIndicator;
 
 /**
  * Activity that retrieves and displays information about an artist given an
@@ -135,7 +135,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         adapter.instantiateItem(pager, 2);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
-        indicator.setCurrentItem(1);
+        pager.setCurrentItem(1);
     }
 
     private void findViews() {

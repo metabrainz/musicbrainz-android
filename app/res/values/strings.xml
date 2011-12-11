@@ -69,7 +69,7 @@
   <string name="tab_releases">RELEASES</string>
   <string name="tab_links">LINKS</string>
   <string name="tab_tracks">TRACKS</string>
-  <string name="tab_edits">TAG</string>
+  <string name="tab_edits">EDIT</string>
 
   <!-- Edit tabs -->
   <string name="tag_hint">Tag</string>
