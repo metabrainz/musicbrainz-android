@@ -165,8 +165,10 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         ReleasePagerAdapter adapter = new ReleasePagerAdapter(this);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
+        adapter.instantiateItem(pager, 1);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
+        pager.setCurrentItem(0);
     }
     
     private void findViews() {

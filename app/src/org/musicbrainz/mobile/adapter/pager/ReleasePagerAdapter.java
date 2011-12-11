@@ -37,9 +37,19 @@ import com.viewpagerindicator.TitleProvider;
 public class ReleasePagerAdapter extends PagerAdapter implements TitleProvider {
 
     private final Activity context;
+    
+    private RelativeLayout tracks;
+    private ScrollView edit;
+    private boolean viewsAdded;
 
     public ReleasePagerAdapter(Context context) {
         this.context = (Activity) context;
+        inflateViews();
+    }
+    
+    private void inflateViews() {
+        tracks = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_tracklist, null);
+        edit = (ScrollView) context.getLayoutInflater().inflate(R.layout.layout_edit, null);
     }
 
     @Override
@@ -61,14 +71,17 @@ public class ReleasePagerAdapter extends PagerAdapter implements TitleProvider {
 
     @Override
     public Object instantiateItem(View container, int position) {
+        
+        if (!viewsAdded) {
+            ((ViewPager) container).addView(tracks, 0);
+            ((ViewPager) container).addView(edit, 0);
+            viewsAdded = true;
+        }
+        
         switch (position) {
         case 0:
-            RelativeLayout tracks = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_tracklist, null);
-            ((ViewPager) container).addView(tracks, 0);
             return tracks;
         case 1:
-            ScrollView edit = (ScrollView) context.getLayoutInflater().inflate(R.layout.layout_edit, null);
-            ((ViewPager) container).addView(edit, 0);
             return edit;
         }
         return null;

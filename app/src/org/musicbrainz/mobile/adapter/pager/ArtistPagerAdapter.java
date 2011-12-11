@@ -37,9 +37,21 @@ import com.viewpagerindicator.TitleProvider;
 public class ArtistPagerAdapter extends PagerAdapter implements TitleProvider {
 
     private final Activity context;
+    
+    private RelativeLayout links;
+    private RelativeLayout releases;
+    private ScrollView edit;
+    private boolean viewsAdded;
 
     public ArtistPagerAdapter(Context context) {
         this.context = (Activity) context;
+        inflateViews();
+    }
+    
+    private void inflateViews() {
+        links = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_links, null);
+        releases = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_artist_rgs,null);
+        edit = (ScrollView) context.getLayoutInflater().inflate(R.layout.layout_edit, null);
     }
 
     @Override
@@ -63,19 +75,20 @@ public class ArtistPagerAdapter extends PagerAdapter implements TitleProvider {
 
     @Override
     public Object instantiateItem(View container, int position) {
+        
+        if (!viewsAdded) {
+            ((ViewPager) container).addView(links, 0);
+            ((ViewPager) container).addView(releases, 0);
+            ((ViewPager) container).addView(edit, 0);
+            viewsAdded = true;
+        }
 
         switch (position) {
         case 0:
-            RelativeLayout links = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_links, null);
-            ((ViewPager) container).addView(links, 0);
             return links;
         case 1:
-            RelativeLayout releases = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_artist_rgs,null);
-            ((ViewPager) container).addView(releases, 0);
             return releases;
         case 2:
-            ScrollView edit = (ScrollView) context.getLayoutInflater().inflate(R.layout.layout_edit, null);
-            ((ViewPager) container).addView(edit, 0);
             return edit;
         }
         return null;
