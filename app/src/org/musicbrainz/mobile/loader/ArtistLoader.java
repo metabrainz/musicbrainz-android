@@ -84,15 +84,6 @@ public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
     }
     
     @Override
-    public void deliverResult(AsyncEntityResult<Artist> data) {
-        if (isReset()) {
-            return;
-        }
-        this.data = data;
-        super.deliverResult(data);
-    }
-    
-    @Override
     protected void onStartLoading() {
         if (data != null) {
             deliverResult(data);
@@ -100,6 +91,15 @@ public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
         if (takeContentChanged() || data == null) {
             forceLoad();
         }
+    }
+    
+    @Override
+    public void deliverResult(AsyncEntityResult<Artist> data) {
+        if (isReset()) {
+            return;
+        }
+        this.data = data;
+        super.deliverResult(data);
     }
 
     @Override

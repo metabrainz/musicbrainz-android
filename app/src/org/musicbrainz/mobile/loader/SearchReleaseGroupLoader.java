@@ -32,6 +32,8 @@ public class SearchReleaseGroupLoader extends AsyncTaskLoader<AsyncResult<Search
 
     private String userAgent;
     private String term;
+    
+    private AsyncResult<SearchResults> data;
 
     public SearchReleaseGroupLoader(Context context, String userAgent, String term) {
         super(context);
@@ -40,20 +42,46 @@ public class SearchReleaseGroupLoader extends AsyncTaskLoader<AsyncResult<Search
     }
     
     @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        forceLoad();
-    }
-    
-    @Override
     public AsyncResult<SearchResults> loadInBackground() {
         try {
             WebClient client = new WebClient(userAgent);
             SearchResults results = new SearchResults(SearchType.RELEASE_GROUP, client.searchReleaseGroup(term));
-            return new AsyncResult<SearchResults>(LoaderStatus.SUCCESS, results);
+            data = new AsyncResult<SearchResults>(LoaderStatus.SUCCESS, results);
+            return data;
         } catch (IOException e) {
             return new AsyncResult<SearchResults>(LoaderStatus.EXCEPTION, e);
         }
+    }
+    
+    @Override
+    protected void onStartLoading() {
+        if (data != null) {
+            deliverResult(data);
+        }
+        if (takeContentChanged() || data == null) {
+            forceLoad();
+        }
+    }
+    
+    @Override
+    public void deliverResult(AsyncResult<SearchResults> data) {
+        if (isReset()) {
+            return;
+        }
+        this.data = data;
+        super.deliverResult(data);
+    }
+
+    @Override
+    protected void onStopLoading() {
+        cancelLoad();
+    }
+
+    @Override
+    protected void onReset() {
+        super.onReset();
+        onStopLoading();
+        data = null;
     }
     
 }
