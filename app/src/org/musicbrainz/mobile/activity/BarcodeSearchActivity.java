@@ -24,7 +24,7 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.ReleaseStubAdapter;
+import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
 import org.musicbrainz.mobile.loader.AsyncResult;
 import org.musicbrainz.mobile.loader.SearchReleaseLoader;

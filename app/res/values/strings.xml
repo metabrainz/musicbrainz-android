@@ -55,7 +55,6 @@
   <!-- ReleaseActivity -->
   <string name="release_title">Release</string>
   <string name="artistinfo_label">Artist Information</string>
-  <string name="tab_tracks">Tracks</string>
   <string name="label_tracks">tracks</string>
 
   <string name="no_tags">No tags found</string>
@@ -66,9 +65,11 @@
   <string name="noreleases">No releases found</string>
   <string name="no_links">No links found</string>
 
-  <string name="tab_releases">Releases</string>
-  <string name="tab_links">Links</string>
-  <string name="tab_edits">Edit</string>
+  <!-- Pager tabs -->
+  <string name="tab_releases">RELEASES</string>
+  <string name="tab_links">LINKS</string>
+  <string name="tab_tracks">TRACKS</string>
+  <string name="tab_edits">TAG</string>
 
   <!-- Edit tabs -->
   <string name="tag_hint">Tag</string>

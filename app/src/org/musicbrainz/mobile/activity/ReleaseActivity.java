@@ -32,7 +32,8 @@ import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.ReleaseTrackAdapter;
+import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
+import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.loader.AsyncEntityResult;
@@ -56,16 +57,17 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
+import android.support.v4.view.ViewPager;
 import android.support.v4.view.Window;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.viewpagerindicator.TabPageIndicator;
 
 /**
  * Activity which retrieves and displays information about a release.
@@ -131,8 +133,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
 
     private void populateLayout() {
         setContentView(R.layout.activity_release);
+        configurePager();
         findViews();
-        setupTabs();
 
         FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);
         FocusTextView title = (FocusTextView) findViewById(R.id.release_release);
@@ -158,6 +160,26 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
     }
+    
+    private void configurePager() {
+        ReleasePagerAdapter adapter = new ReleasePagerAdapter(this);
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+        TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+    }
+    
+    private void findViews() {
+        rating = (RatingBar) findViewById(R.id.release_rating);
+        tags = (FocusTextView) findViewById(R.id.release_tags);
+        tagInput = (EditText) findViewById(R.id.tag_input);
+        ratingInput = (RatingBar) findViewById(R.id.rating_input);
+        tagBtn = (Button) findViewById(R.id.tag_btn);
+        rateBtn = (Button) findViewById(R.id.rate_btn);
+
+        tagBtn.setOnClickListener(this);
+        rateBtn.setOnClickListener(this);
+    }
 
     private void checkIfArtistActionAvailable() {
         ArrayList<ReleaseArtist> releaseArtists = release.getArtists();
@@ -171,18 +193,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
                 }
             }
         }
-    }
-
-    private void findViews() {
-        rating = (RatingBar) findViewById(R.id.release_rating);
-        tags = (FocusTextView) findViewById(R.id.release_tags);
-        tagInput = (EditText) findViewById(R.id.tag_input);
-        ratingInput = (RatingBar) findViewById(R.id.rating_input);
-        tagBtn = (Button) findViewById(R.id.tag_btn);
-        rateBtn = (Button) findViewById(R.id.rate_btn);
-
-        tagBtn.setOnClickListener(this);
-        rateBtn.setOnClickListener(this);
     }
 
     private void disableEditFields() {
@@ -223,25 +233,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         final Intent releaseIntent = new Intent(this, ArtistActivity.class);
         releaseIntent.putExtra(Extra.ARTIST_MBID, release.getArtists().get(0).getMbid());
         return releaseIntent;
-    }
-
-    private void setupTabs() {
-        TabHost tabs = (TabHost) findViewById(R.id.release_tabhost);
-        tabs.setup();
-
-        TabSpec tracksTab = tabs.newTabSpec("tracks");
-        final TextView tracksIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
-        tracksIndicator.setText(R.string.tab_tracks);
-        tracksTab.setIndicator(tracksIndicator);
-        tracksTab.setContent(R.id.tracks_tab);
-        tabs.addTab(tracksTab);
-
-        TabSpec editsTab = tabs.newTabSpec("edit");
-        final TextView editIndicator = (TextView) getLayoutInflater().inflate(R.layout.tab_indicator, null, false);
-        editIndicator.setText(R.string.tab_edits);
-        editsTab.setIndicator(editIndicator);
-        editsTab.setContent(R.id.edit_tab);
-        tabs.addTab(editsTab);
     }
 
     private void updateProgressStatus() {

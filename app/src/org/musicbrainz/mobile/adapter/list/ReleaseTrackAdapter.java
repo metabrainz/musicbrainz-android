@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.adapter;
+package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.musicbrainz.mobile.adapter;
+package org.musicbrainz.mobile.adapter.pager;
 
 /*
  * Copyright (C) 2011 Jamie McDonald
@@ -98,4 +98,5 @@ public class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
     @Override
     public void restoreState(Parcelable state, ClassLoader loader) {
     }
+    
 }

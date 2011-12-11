@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Jamie McDonald
+ * Copyright (C) 2010 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -18,12 +18,13 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.adapter;
+package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.string.StringMapper;
 
 import android.app.Activity;
@@ -34,68 +35,68 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 /**
- * List adapter for artist release groups.
+ * List adapter for release group search results.
  */
-public class ArtistReleaseGroupAdapter extends ArrayAdapter<ReleaseGroupStub> {
+public class SearchReleaseGroupAdapter extends ArrayAdapter<ReleaseGroupStub> {
 
     private Activity context;
-    private List<ReleaseGroupStub> releaseGroups;
+    private List<ReleaseGroupStub> resultData;
 
-    public ArtistReleaseGroupAdapter(Activity context, List<ReleaseGroupStub> releaseGroups) {
-        super(context, R.layout.list_rg, releaseGroups);
+    public SearchReleaseGroupAdapter(Activity context, List<ReleaseGroupStub> resultData) {
+        super(context, R.layout.list_srch_rg, resultData);
         this.context = context;
-        this.releaseGroups = releaseGroups;
+        this.resultData = resultData;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View release = convertView;
-        ArtistReleaseGroupHolder holder = null;
+        SearchReleaseGroupHolder holder = null;
 
         if (release == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            release = inflater.inflate(R.layout.list_rg, parent, false);
-            holder = new ArtistReleaseGroupHolder(release);
+            release = inflater.inflate(R.layout.list_srch_rg, parent, false);
+            holder = new SearchReleaseGroupHolder(release);
             release.setTag(holder);
         } else {
-            holder = (ArtistReleaseGroupHolder) release.getTag();
+            holder = (SearchReleaseGroupHolder) release.getTag();
         }
 
-        ReleaseGroupStub rData = releaseGroups.get(position);
-        holder.getReleaseTitle().setText(rData.getTitle());
-        holder.getReleaseYear().setText(rData.getReleaseYear());
-        holder.getReleaseType().setText(StringMapper.mapRGTypeString(getContext(), rData.getType()));
+        ReleaseGroupStub releaseGroup = resultData.get(position);
+        holder.getTitle().setText(releaseGroup.getTitle());
+        holder.getArtist().setText(StringFormat.commaSeparateArtists(releaseGroup.getArtists()));
+        holder.getType().setText(StringMapper.mapRGTypeString(getContext(), releaseGroup.getType()));
         return release;
     }
 
-    private class ArtistReleaseGroupHolder {
+    private class SearchReleaseGroupHolder {
 
         View base;
         TextView title = null;
-        TextView year = null;
+        TextView artist = null;
         TextView type = null;
 
-        ArtistReleaseGroupHolder(View base) {
+        SearchReleaseGroupHolder(View base) {
             this.base = base;
         }
 
-        TextView getReleaseTitle() {
+        TextView getTitle() {
             if (title == null) {
-                title = (TextView) base.findViewById(R.id.list_rg_title);
+                title = (TextView) base.findViewById(R.id.search_release);
             }
             return title;
         }
 
-        TextView getReleaseYear() {
-            if (year == null) {
-                year = (TextView) base.findViewById(R.id.list_rg_year);
+        TextView getArtist() {
+            if (artist == null) {
+                artist = (TextView) base.findViewById(R.id.search_release_artist);
             }
-            return year;
+            return artist;
         }
 
-        TextView getReleaseType() {
+        TextView getType() {
             if (type == null) {
-                type = (TextView) base.findViewById(R.id.list_rg_type);
+                type = (TextView) base.findViewById(R.id.search_release_type);
             }
             return type;
         }

@@ -1,50 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<!-- Copyright (C) 2010 Jamie McDonald
+
+  This file is part of MusicBrainz for Android.
+
+  MusicBrainz for Android is free software: you can redistribute
+  it and/or modify it under the terms of the GNU General Public
+  License as published by the Free Software Foundation, either
+  version 3 of the License, or (at your option) any later version.
+
+  MusicBrainz for Android is distributed in the hope that it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with MusicBrainz for Android. If not, see
+  <http://www.gnu.org/licenses/>. -->
+
+<ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/edit_tab"
   style="@style/Fill"
-  android:background="@color/main_fg"
-  android:orientation="vertical"
-  android:padding="@dimen/home_pad">
-
-  <TextView
-    android:id="@+id/login_warning"
-    style="@style/Wrap"
-    android:layout_gravity="center"
-    android:layout_marginBottom="@dimen/home_pad"
-    android:text="@string/edit_login"
-    android:textColor="@color/mb_orange_dark"
-    android:visibility="gone" />
-
-  <EditText
-    android:id="@+id/tag_input"
-    style="@style/WrapHeight"
-    android:hint="@string/tag_hint"
-    android:imeOptions="actionDone"
-    android:inputType="textFilter"
-    android:singleLine="true" />
-
-  <RatingBar
-    android:id="@+id/rating_input"
-    style="@style/RatingBar" />
+  android:id="@+id/edit_tab"
+  android:background="@color/main_fg">
 
   <LinearLayout
-    style="@style/WrapHeight"
-    android:layout_marginTop="@dimen/small_pad">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Fill"
+    android:background="@color/main_fg"
+    android:orientation="vertical"
+    android:padding="@dimen/home_pad">
 
-    <Button
-      android:id="@+id/tag_btn"
-      style="@style/WrapHeight"
-      android:layout_weight="1"
-      android:drawableRight="@drawable/btn_tag"
-      android:text="@string/tag_label" />
+    <TextView
+      android:id="@+id/login_warning"
+      style="@style/Wrap"
+      android:layout_gravity="center"
+      android:layout_marginBottom="@dimen/home_pad"
+      android:text="@string/edit_login"
+      android:textColor="@color/mb_orange_dark"
+      android:visibility="gone" />
 
-    <Button
-      android:id="@+id/rate_btn"
+    <EditText
+      android:id="@+id/tag_input"
       style="@style/WrapHeight"
-      android:layout_weight="1"
-      android:drawableRight="@drawable/btn_star"
-      android:text="@string/rate_label" />
+      android:hint="@string/tag_hint"
+      android:imeOptions="actionDone"
+      android:inputType="textFilter"
+      android:singleLine="true" />
+
+    <RatingBar
+      android:id="@+id/rating_input"
+      style="@style/RatingBar" />
+
+    <LinearLayout
+      style="@style/WrapHeight"
+      android:layout_marginTop="@dimen/small_pad">
+
+      <Button
+        android:id="@+id/tag_btn"
+        style="@style/WrapHeight"
+        android:layout_weight="1"
+        android:drawableRight="@drawable/btn_tag"
+        android:text="@string/tag_label" />
+
+      <Button
+        android:id="@+id/rate_btn"
+        style="@style/WrapHeight"
+        android:layout_weight="1"
+        android:drawableRight="@drawable/btn_star"
+        android:text="@string/rate_label" />
+    </LinearLayout>
   </LinearLayout>
-</LinearLayout>
+</ScrollView>
