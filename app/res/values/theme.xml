@@ -44,7 +44,7 @@
   
   <style name="TabIndicator"
     parent="Widget.TabPageIndicator">
-    
+    <item name="android:background">@drawable/tab_indicator</item>
   </style>
   
   <style name="TabText"
