@@ -27,17 +27,16 @@ import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
+import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
 
-public class BarcodeReleaseLoader extends AsyncTaskLoader<AsyncEntityResult<Release>> {
+public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Release>> {
     
     private Credentials creds;
     private String userAgent;
     private String barcode;
-    
-    private AsyncEntityResult<Release> data;
 
     public BarcodeReleaseLoader(Context context, String userAgent, String barcode) {
         super(context);
@@ -82,38 +81,5 @@ public class BarcodeReleaseLoader extends AsyncTaskLoader<AsyncEntityResult<Rele
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, release, userData);
         return data;
     }
-   
-    
-    @Override
-    public void deliverResult(AsyncEntityResult<Release> data) {
-        if (isReset()) {
-            return;
-        }
-        this.data = data;
-        super.deliverResult(data);
-    }
-    
-    @Override
-    protected void onStartLoading() {
-        if (data != null) {
-            deliverResult(data);
-        }
-        if (takeContentChanged() || data == null) {
-            forceLoad();
-        }
-    }
-
-    @Override
-    protected void onStopLoading() {
-        cancelLoad();
-    }
-
-    @Override
-    protected void onReset() {
-        super.onReset();
-        onStopLoading();
-        data = null;
-    }
 
 }
-

@@ -27,17 +27,16 @@ import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
+import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
 
-public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
+public class ArtistLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Artist>> {
 
     private Credentials creds;
     private String userAgent;
     private String mbid;
-    
-    private AsyncEntityResult<Artist> data;
 
     public ArtistLoader(Context context, Credentials creds, String mbid) {
         super(context);
@@ -81,37 +80,6 @@ public class ArtistLoader extends AsyncTaskLoader<AsyncEntityResult<Artist>> {
         UserData userData = client.getUserData(MBEntity.ARTIST, mbid);
         data = new AsyncEntityResult<Artist>(LoaderStatus.SUCCESS, artist, userData);
         return data;
-    }
-    
-    @Override
-    protected void onStartLoading() {
-        if (data != null) {
-            deliverResult(data);
-        }
-        if (takeContentChanged() || data == null) {
-            forceLoad();
-        }
-    }
-    
-    @Override
-    public void deliverResult(AsyncEntityResult<Artist> data) {
-        if (isReset()) {
-            return;
-        }
-        this.data = data;
-        super.deliverResult(data);
-    }
-
-    @Override
-    protected void onStopLoading() {
-        cancelLoad();
-    }
-
-    @Override
-    protected void onReset() {
-        super.onReset();
-        onStopLoading();
-        data = null;
     }
 
 }

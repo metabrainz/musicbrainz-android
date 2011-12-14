@@ -23,17 +23,17 @@ package org.musicbrainz.mobile.loader;
 import java.io.IOException;
 
 import org.musicbrainz.android.api.webservice.WebClient;
-import org.musicbrainz.mobile.loader.SearchResults.SearchType;
+import org.musicbrainz.mobile.loader.result.AsyncResult;
+import org.musicbrainz.mobile.loader.result.LoaderStatus;
+import org.musicbrainz.mobile.loader.result.SearchResults;
+import org.musicbrainz.mobile.loader.result.SearchResults.SearchType;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
 
-public class SearchArtistLoader extends AsyncTaskLoader<AsyncResult<SearchResults>> {
+public class SearchArtistLoader extends PersistingAsyncTaskLoader<AsyncResult<SearchResults>> {
 
     private String userAgent;
     private String term;
-    
-    private AsyncResult<SearchResults> data;
 
     public SearchArtistLoader(Context context, String userAgent, String term) {
         super(context);
@@ -52,36 +52,4 @@ public class SearchArtistLoader extends AsyncTaskLoader<AsyncResult<SearchResult
             return new AsyncResult<SearchResults>(LoaderStatus.EXCEPTION, e);
         }
     }
-    
-    @Override
-    protected void onStartLoading() {
-        if (data != null) {
-            deliverResult(data);
-        }
-        if (takeContentChanged() || data == null) {
-            forceLoad();
-        }
-    }
-    
-    @Override
-    public void deliverResult(AsyncResult<SearchResults> data) {
-        if (isReset()) {
-            return;
-        }
-        this.data = data;
-        super.deliverResult(data);
-    }
-
-    @Override
-    protected void onStopLoading() {
-        cancelLoad();
-    }
-
-    @Override
-    protected void onReset() {
-        super.onReset();
-        onStopLoading();
-        data = null;
-    }
-    
 }

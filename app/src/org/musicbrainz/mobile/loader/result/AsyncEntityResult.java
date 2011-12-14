@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.loader;
+package org.musicbrainz.mobile.loader.result;
 
 import org.musicbrainz.android.api.data.UserData;
 

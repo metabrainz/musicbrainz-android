@@ -24,6 +24,8 @@ import java.io.IOException;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.mobile.loader.result.AsyncResult;
+import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;

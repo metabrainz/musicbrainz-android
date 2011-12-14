@@ -25,16 +25,15 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.mobile.loader.result.AsyncResult;
+import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
 
-public class SearchReleaseLoader extends AsyncTaskLoader<AsyncResult<LinkedList<ReleaseStub>>> {
+public class SearchReleaseLoader extends PersistingAsyncTaskLoader<AsyncResult<LinkedList<ReleaseStub>>> {
 
     private String userAgent;
     private String term;
-
-    AsyncResult<LinkedList<ReleaseStub>> data;
 
     public SearchReleaseLoader(Context context, String userAgent, String term) {
         super(context);
@@ -52,36 +51,4 @@ public class SearchReleaseLoader extends AsyncTaskLoader<AsyncResult<LinkedList<
             return new AsyncResult<LinkedList<ReleaseStub>>(LoaderStatus.EXCEPTION, e);
         }
     }
-
-    @Override
-    public void deliverResult(AsyncResult<LinkedList<ReleaseStub>> data) {
-        if (isReset()) {
-            return;
-        }
-        this.data = data;
-        super.deliverResult(data);
-    }
-
-    @Override
-    protected void onStartLoading() {
-        if (data != null) {
-            deliverResult(data);
-        }
-        if (takeContentChanged() || data == null) {
-            forceLoad();
-        }
-    }
-
-    @Override
-    protected void onStopLoading() {
-        cancelLoad();
-    }
-
-    @Override
-    protected void onReset() {
-        super.onReset();
-        onStopLoading();
-        data = null;
-    }
-
 }

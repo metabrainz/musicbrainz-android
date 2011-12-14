@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.loader;
+package org.musicbrainz.mobile.loader.result;
 
 public enum LoaderStatus {
     SUCCESS, EXCEPTION;
