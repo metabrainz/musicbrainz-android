@@ -25,5 +25,11 @@
     android:title="@string/action_share"
     android:icon="@drawable/action_share"
     android:showAsAction="always" />
+  
+  <item 
+    android:id="@+id/legacy_search"
+    android:title="Search"
+    android:icon="@drawable/action_search"
+    android:showAsAction="always" />
 
 </menu>

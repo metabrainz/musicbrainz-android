@@ -116,6 +116,9 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
         case R.id.menu_feedback:
             sendFeedback();
             return true;
+        case R.id.legacy_search:
+            onSearchRequested();
+            return true;
         }
         return false;
     }
