@@ -27,5 +27,6 @@ public class Constants {
     public static final String PREF_PASSWORD = "password";
     public static final String PREF_SUGGESTIONS = "search_suggestions";
     public static final String PREF_CLEAR_SUGGESTIONS = "clear_suggestions";
+    public static final String PREF_BUGSENSE = "send_crashlogs";
 
 }

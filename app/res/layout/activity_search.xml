@@ -22,19 +22,9 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <TextView
-    android:id="@+id/searchres_text"
-    style="@style/SearchHeader" />
-
-  <View
-    android:id="@+id/topline"
-    style="@style/Separator"
-    android:layout_below="@+id/searchres_text" />
-
   <RelativeLayout
     style="@style/Loading"
-    android:background="@color/main_fg"
-    android:layout_below="@+id/topline">
+    android:background="@color/main_fg">
 
     <ProgressBar
       android:id="@+id/loading"

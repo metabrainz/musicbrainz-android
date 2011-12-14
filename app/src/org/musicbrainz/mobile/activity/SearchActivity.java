@@ -92,31 +92,29 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
         } else {
             searchTerm = getIntent().getStringExtra(Extra.QUERY);
         }
-        setHeaderText();
         doSearch();
-    }
-
-    private void setHeaderText() {
-        TextView resultsText = (TextView) findViewById(R.id.searchres_text);
-        resultsText.setText(searchTerm);
     }
 
     private void doSearch() {
         String intentType = getIntent().getStringExtra(Extra.TYPE);
         if (intentType.equals(Extra.ARTIST)) {
-            getSupportActionBar().setTitle(R.string.search_bar_artists);
+            setTitle(getString(R.string.search_bar_artists) + " " + searchTerm);
             getSupportLoaderManager().initLoader(SEARCH_ARTIST_LOADER, null, this);
         } else if (intentType.equals(Extra.RELEASE_GROUP)) {
-            getSupportActionBar().setTitle(R.string.search_bar_rgs);
+            setTitle(getString(R.string.search_bar_rgs) + " " + searchTerm);
             getSupportLoaderManager().initLoader(SEARCH_RELEASE_GROUP_LOADER, null, this);
         } else {
+            setTitle(searchTerm);
             getSupportLoaderManager().initLoader(SEARCH_LOADER, null, this);
         }
+    }
+    
+    private void setTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
     private void enableResultTabs() {
         setContentView(R.layout.activity_search_all);
-        getSupportActionBar().setTitle(searchTerm);
         SearchPagerAdapter adapter = new SearchPagerAdapter(this);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);

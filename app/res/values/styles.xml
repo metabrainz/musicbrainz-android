@@ -99,15 +99,6 @@
   </style>
 
   <style
-    name="SearchHeader"
-    parent="@style/VerticalMinPad">
-    <item name="android:textSize">@dimen/text_size_large</item>
-    <item name="android:textColor">@color/main_text</item>
-    <item name="android:layout_marginLeft">@dimen/std_pad</item>
-    <item name="android:layout_marginRight">@dimen/std_pad</item>
-  </style>
-
-  <style
     name="NoSearchResults"
     parent="@style/Fill">
     <item name="android:background">@color/main_fg</item>

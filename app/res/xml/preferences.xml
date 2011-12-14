@@ -20,18 +20,28 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <PreferenceCategory android:title="Search">
+  <PreferenceCategory android:title="@string/settings_search">
 
     <CheckBoxPreference
       android:key="search_suggestions"
-      android:title="@string/preferences_suggestions"
-      android:summary="@string/preferences_suggestions_description"
+      android:title="@string/settings_suggestions"
+      android:summary="@string/settings_suggestions_summary"
       android:defaultValue="true" />
 
     <Preference
       android:key="clear_suggestions"
-      android:title="@string/preferences_clear" />
+      android:title="@string/settings_clear" />
 
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/settings_other">
+    
+    <CheckBoxPreference
+      android:key="send_crashlogs"
+      android:title="@string/settings_bugsense"
+      android:summary="@string/settings_bugsense_summary"
+      android:defaultValue="true" />
+    
   </PreferenceCategory>
 
 </PreferenceScreen>
