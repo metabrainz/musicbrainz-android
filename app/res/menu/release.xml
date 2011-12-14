@@ -25,11 +25,5 @@
     android:title="@string/action_share"
     android:icon="@drawable/action_share"
     android:showAsAction="always" />
-  
-  <item
-    android:id="@+id/action_artist"
-    android:title="@string/action_artist"
-    android:icon="@drawable/action_artist"
-    android:showAsAction="always" />
 
 </menu>

@@ -59,7 +59,7 @@
     parent="@style/WrapHeight">
     <item name="android:singleLine">true</item>
     <item name="android:ellipsize">marquee</item>
-    <item name="android:marqueeRepeatLimit">-1</item>
+    <item name="android:marqueeRepeatLimit">marquee_forever</item>
   </style>
 
   <style

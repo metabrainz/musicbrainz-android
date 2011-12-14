@@ -39,7 +39,6 @@ import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
-import org.musicbrainz.mobile.widget.FocusTextView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -82,7 +81,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     private UserData userData;
 
     private RatingBar rating;
-    private FocusTextView tags;
+    private TextView tags;
     private EditText tagInput;
     private RatingBar ratingInput;
     private Button tagBtn;
@@ -105,17 +104,20 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         configurePager();
         findViews();
 
-        FocusTextView artistView = (FocusTextView) findViewById(R.id.artist_artist);
+        TextView artistText = (TextView) findViewById(R.id.artist_artist);
         ListView releaseList = (ListView) findViewById(R.id.artist_releases);
         ListView linksList = (ListView) findViewById(R.id.artist_links);
 
-        artistView.setText(artist.getName());
+        artistText.setText(artist.getName());
         releaseList.setAdapter(new ArtistReleaseGroupAdapter(this, artist.getReleaseGroups()));
         releaseList.setOnItemClickListener(this);
         linksList.setAdapter(new LinkAdapter(this, artist.getLinks()));
         linksList.setOnItemClickListener(this);
         rating.setRating(artist.getRating());
         tags.setText(StringFormat.commaSeparateTags(artist.getTags(), this));
+
+        artistText.setSelected(true);
+        tags.setSelected(true);
 
         displayMessagesForEmptyData();
 
@@ -127,7 +129,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
     }
-    
+
     private void configurePager() {
         ArtistPagerAdapter adapter = new ArtistPagerAdapter(this);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -140,7 +142,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private void findViews() {
         rating = (RatingBar) findViewById(R.id.artist_rating);
-        tags = (FocusTextView) findViewById(R.id.artist_tags);
+        tags = (TextView) findViewById(R.id.artist_tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
         tagBtn = (Button) findViewById(R.id.tag_btn);
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
@@ -171,13 +173,13 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             noRes.setVisibility(View.VISIBLE);
         }
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.artist, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);

@@ -46,7 +46,6 @@ import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
-import org.musicbrainz.mobile.widget.FocusTextView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -96,7 +95,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
     private String releaseGroupMbid;
     private String barcode;
 
-    private FocusTextView tags;
+    private TextView tags;
     private RatingBar rating;
     private EditText tagInput;
     private RatingBar ratingInput;
@@ -136,13 +135,15 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         configurePager();
         findViews();
 
-        FocusTextView artist = (FocusTextView) findViewById(R.id.release_artist);
-        FocusTextView title = (FocusTextView) findViewById(R.id.release_release);
-        FocusTextView labels = (FocusTextView) findViewById(R.id.release_label);
+        TextView artist = (TextView) findViewById(R.id.release_artist);
+        TextView title = (TextView) findViewById(R.id.release_release);
+        TextView labels = (TextView) findViewById(R.id.release_label);
         TextView releaseDate = (TextView) findViewById(R.id.release_date);
         ListView trackList = (ListView) findViewById(R.id.release_tracks);
 
-        checkIfArtistActionAvailable();
+        if (isArtistUpAvailable()) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         artist.setText(StringFormat.commaSeparateArtists(release.getArtists()));
         title.setText(release.getTitle());
         trackList.setAdapter(new ReleaseTrackAdapter(this, release.getTrackList()));
@@ -151,6 +152,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         releaseDate.setText(release.getDate());
         tags.setText(StringFormat.commaSeparateTags(release.getReleaseGroupTags(), this));
         rating.setRating(release.getReleaseGroupRating());
+        
+        artist.setSelected(true);
+        title.setSelected(true);
+        labels.setSelected(true);
+        tags.setSelected(true);
 
         if (isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
@@ -173,7 +179,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
     
     private void findViews() {
         rating = (RatingBar) findViewById(R.id.release_rating);
-        tags = (FocusTextView) findViewById(R.id.release_tags);
+        tags = (TextView) findViewById(R.id.release_tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
         tagBtn = (Button) findViewById(R.id.tag_btn);
@@ -183,7 +189,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         rateBtn.setOnClickListener(this);
     }
 
-    private void checkIfArtistActionAvailable() {
+    private boolean isArtistUpAvailable() {
         ArrayList<ReleaseArtist> releaseArtists = release.getArtists();
         if (releaseArtists.size() != 1) {
             provideArtistAction = false;
@@ -195,6 +201,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
                 }
             }
         }
+        return provideArtistAction;
     }
 
     private void disableEditFields() {
@@ -221,11 +228,10 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         case R.id.action_share:
             startActivity(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
             return true;
-        case R.id.action_artist:
+        case android.R.id.home:
             if (provideArtistAction) {
                 startActivity(createArtistIntent());
-            } else {
-                Toast.makeText(this, R.string.toast_no_artist_action, Toast.LENGTH_SHORT).show();
+                return true;
             }
         }
         return false;

@@ -26,12 +26,12 @@
     style="@style/EntityInfo"
     android:id="@+id/entity_info">
 
-    <org.musicbrainz.mobile.widget.FocusTextView
+    <TextView
       android:id="@+id/artist_artist"
       style="@style/EntityText"
       android:layout_alignParentLeft="true" />
 
-    <org.musicbrainz.mobile.widget.FocusTextView
+    <TextView
       android:id="@+id/artist_tags"
       style="@style/TagArea"
       android:layout_below="@+id/artist_artist"

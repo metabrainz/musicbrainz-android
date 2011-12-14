@@ -26,13 +26,13 @@
     style="@style/EntityInfo"
     android:id="@+id/entity_info">
 
-    <org.musicbrainz.mobile.widget.FocusTextView
+    <TextView
       android:id="@+id/release_release"
       style="@style/EntityText"
       android:layout_alignParentLeft="true"
       android:layout_toLeftOf="@+id/release_date" />
 
-    <org.musicbrainz.mobile.widget.FocusTextView
+    <TextView
       android:id="@+id/release_artist"
       style="@style/ScrollText"
       android:layout_below="@+id/release_release"
@@ -52,7 +52,7 @@
       android:textColor="@color/main_text"
       android:textSize="@dimen/text_size_medium" />
 
-    <org.musicbrainz.mobile.widget.FocusTextView
+    <TextView
       android:id="@+id/release_label"
       style="@style/ScrollText"
       android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
       android:textColor="@color/main_text"
       android:textSize="@dimen/text_size_medium" />
 
-    <org.musicbrainz.mobile.widget.FocusTextView
+    <TextView
       android:id="@+id/release_tags"
       style="@style/TagArea"
       android:layout_below="@+id/release_artist"
@@ -81,7 +81,6 @@
       android:layout_alignParentRight="true"
       android:layout_marginLeft="@dimen/std_pad"
       android:layout_marginTop="@dimen/startop_pad" />
-
   </RelativeLayout>
 
   <com.viewpagerindicator.TabPageIndicator
