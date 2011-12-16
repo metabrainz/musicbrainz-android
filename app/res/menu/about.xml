@@ -23,11 +23,13 @@
   <item
     android:id="@+id/menu_feedback"
     android:title="@string/menu_feedback"
-    android:icon="@drawable/menu_send" />
-
+    android:icon="@drawable/action_feedback"
+    android:showAsAction="never" />
+  
   <item
-    android:id="@+id/menu_donate"
-    android:title="@string/menu_donate"
-    android:icon="@drawable/menu_heart" />
+    android:id="@+id/menu_preferences"
+    android:title="@string/menu_preferences"
+    android:icon="@drawable/action_settings"
+    android:showAsAction="always" />
 
 </menu>

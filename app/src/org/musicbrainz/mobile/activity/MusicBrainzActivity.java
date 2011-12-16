@@ -104,12 +104,6 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
         case android.R.id.home:
             startActivity(DashboardActivity.createIntent(this));
             return true;
-        case R.id.menu_about:
-            startActivity(new Intent(this, AboutActivity.class));
-            return true;
-        case R.id.menu_donate:
-            startActivity(new Intent(this, DonateActivity.class));
-            return true;
         case R.id.menu_preferences:
             startActivity(new Intent(this, PreferencesActivity.class));
             return true;

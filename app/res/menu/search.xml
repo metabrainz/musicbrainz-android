@@ -21,8 +21,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
+    android:id="@+id/legacy_search"
+    android:title="Search"
+    android:icon="@drawable/action_search"
+    android:showAsAction="always" />
+
+  <item
     android:id="@+id/menu_preferences"
     android:title="@string/menu_preferences"
-    android:icon="@drawable/menu_preferences" />
+    android:icon="@drawable/action_settings"
+    android:showAsAction="always" />
 
 </menu>

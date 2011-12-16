@@ -21,8 +21,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-    android:id="@+id/menu_about"
-    android:title="@string/menu_about"
-    android:icon="@drawable/menu_info" />
+    android:id="@+id/menu_feedback"
+    android:title="@string/menu_feedback"
+    android:icon="@drawable/action_feedback"
+    android:showAsAction="always" />
+  
+  <item
+    android:id="@+id/menu_preferences"
+    android:title="@string/menu_preferences"
+    android:icon="@drawable/action_settings"
+    android:showAsAction="always" />
 
 </menu>
