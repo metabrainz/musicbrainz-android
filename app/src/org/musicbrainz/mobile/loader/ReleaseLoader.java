@@ -77,7 +77,7 @@ public class ReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<R
     private AsyncEntityResult<Release> getReleaseWithUserData() throws IOException {
         WebClient client = new WebClient(creds);
         Release release = client.lookupRelease(mbid);
-        UserData userData = client.getUserData(MBEntity.RELEASE_GROUP, mbid);
+        UserData userData = client.lookupUserData(MBEntity.RELEASE_GROUP, mbid);
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, release, userData);
         return data;
     }

@@ -77,7 +77,7 @@ public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityR
     private AsyncEntityResult<Release> getReleaseWithUserData() throws IOException {
         WebClient client = new WebClient(creds);
         Release release = client.lookupReleaseFromBarcode(barcode);
-        UserData userData = client.getUserData(MBEntity.RELEASE_GROUP, release.getReleaseGroupMbid());
+        UserData userData = client.lookupUserData(MBEntity.RELEASE_GROUP, release.getReleaseGroupMbid());
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, release, userData);
         return data;
     }

@@ -283,6 +283,8 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
             displayRGResultsView();
             break;
         case ALL:
+            // TODO Find out why result is null here without destroying.
+            getSupportLoaderManager().destroyLoader(SEARCH_LOADER);
             artistSearchResults = results.getArtistResults();
             rgSearchResults = results.getReleaseGroupResults();
             enableResultTabs();

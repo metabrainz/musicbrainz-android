@@ -44,7 +44,7 @@ public class SearchLoader extends PersistingAsyncTaskLoader<AsyncResult<SearchRe
     public AsyncResult<SearchResults> loadInBackground() {
         try {
             WebClient client = new WebClient(userAgent);
-            SearchResults results = new SearchResults(client.searchArtists(term), client.searchReleaseGroup(term));
+            SearchResults results = new SearchResults(client.searchArtist(term), client.searchReleaseGroup(term));
             data = new AsyncResult<SearchResults>(LoaderStatus.SUCCESS, results);
             return data;
         } catch (IOException e) {

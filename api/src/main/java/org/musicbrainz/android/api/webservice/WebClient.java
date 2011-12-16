@@ -128,7 +128,7 @@ public class WebClient {
         return releases;
     }
 
-    public LinkedList<ArtistStub> searchArtists(String searchTerm) throws IOException {
+    public LinkedList<ArtistStub> searchArtist(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.artistSearch(searchTerm));
         InputStream response = entity.getContent();
         LinkedList<ArtistStub> artists = responseParser.parseArtistSearch(response);
@@ -180,7 +180,7 @@ public class WebClient {
         return true;
     }
 
-    public UserData getUserData(MBEntity entityType, String mbid) throws IOException {
+    public UserData lookupUserData(MBEntity entityType, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.userData(entityType, mbid));
         InputStream response = entity.getContent();
         UserData userData = responseParser.parseUserData(response);

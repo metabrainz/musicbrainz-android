@@ -77,7 +77,7 @@ public class ArtistLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Ar
     private AsyncEntityResult<Artist> getArtistWithUserData() throws IOException {
         WebClient client = new WebClient(creds);
         Artist artist = client.lookupArtist(mbid);
-        UserData userData = client.getUserData(MBEntity.ARTIST, mbid);
+        UserData userData = client.lookupUserData(MBEntity.ARTIST, mbid);
         data = new AsyncEntityResult<Artist>(LoaderStatus.SUCCESS, artist, userData);
         return data;
     }

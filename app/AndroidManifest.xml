@@ -140,8 +140,7 @@
 
     <activity
       android:name=".activity.SearchActivity"
-      android:launchMode="singleTop"
-      android:configChanges="keyboardHidden|orientation">
+      android:launchMode="singleTop">
       <intent-filter>
         <action android:name="android.intent.action.SEARCH" />
       </intent-filter>
