@@ -41,7 +41,7 @@
   <string name="pass_hint">Password</string>
   <string name="register_text">Need to register?</string>
   <string name="forgotpass_text">Forgot password?</string>
-  <string name="pd_authenticating">Authenticating...</string>
+  <string name="pd_authenticating">Authenticating…</string>
   <string name="auth_fail">Autentication failed!\nPlease check your username and password.</string>
   <string name="auth_pos">Okay</string>
 
@@ -94,12 +94,12 @@
   <string name="donate_header">Support the MetaBrainz Foundation with a donation!</string>
   <string name="donate_text">You can donate via PayPal to the non-profit MetaBrainz Foundation, which
     operates the MusicBrainz project.</string>
-  <string name="paypal_load_label">Loading PayPal...</string>
+  <string name="paypal_load_label">Loading PayPal…</string>
   <string name="paypal_label">Donate with PayPal</string>
-  <string name="paypal_loading_label">Loading...</string>
+  <string name="paypal_loading_label">Loading…</string>
   <string name="paypal_loading_timeout">Connection failure</string>
-  <string name="alt_donate_text">Other donation options...</string>
-  <string name="starting_paypal">PayPal is starting...\nPlease bear with us.</string>
+  <string name="alt_donate_text">Other donation options…</string>
+  <string name="starting_paypal">PayPal is starting…\nPlease bear with us.</string>
 
   <!-- AboutActivity -->
   <string name="about_title">About</string>
@@ -108,7 +108,7 @@
 
   <!-- IntentErrorActivity -->
   <string name="error_title">Error</string>
-  <string name="error_body">Something has gone wrong...\n\nAnother application has tried to show you a
+  <string name="error_body">Something has gone wrong…\n\nAnother application has tried to show you a
     MusicBrainz page but there was a problem with the Intent URI. You should report this to the
     developer of the application that you arrived from:\n\n</string>
 

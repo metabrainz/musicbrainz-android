@@ -24,7 +24,8 @@
 
   <LinearLayout
     style="@style/PaddedLayoutFill"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <RelativeLayout
       style="@style/Fill"
