@@ -22,12 +22,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <RelativeLayout
-    style="@style/Fill">
-
-    <TextView
-      style="@style/PayPalLoadingText"
-      android:layout_centerInParent="true"
-      android:text="@string/starting_paypal" />
-  </RelativeLayout>
+  <TextView
+    style="@style/PayPalLoadingText"
+    android:layout_centerInParent="true"
+    android:text="@string/starting_paypal" />
 </RelativeLayout>

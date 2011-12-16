@@ -18,31 +18,27 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<RelativeLayout
+<ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
+  <LinearLayout
+    style="@style/WrapHeight"
+    android:padding="@dimen/home_pad"
+    android:orientation="vertical">
 
-  <ScrollView
-    style="@style/Wrap">
-    <LinearLayout
-      style="@style/WrapHeight"
-      android:padding="@dimen/home_pad"
-      android:orientation="vertical">
-      
-      <TextView
-        android:id="@+id/app_name_official"
-        style="@style/TextHeader"
-        android:text="@string/app_name_official" />
-      
-      <TextView
-        android:id="@+id/version_text"
-        style="@style/VersionText" />
+    <TextView
+      android:id="@+id/app_name_official"
+      style="@style/TextHeader"
+      android:text="@string/app_name_official" />
 
-      <org.musicbrainz.mobile.widget.AssetTextView
-        android:id="@+id/about_text"
-        style="@style/TextBody"
-        android:layout_marginTop="@dimen/home_pad" />
+    <TextView
+      android:id="@+id/version_text"
+      style="@style/VersionText" />
 
-    </LinearLayout>
-  </ScrollView>
-</RelativeLayout>
+    <org.musicbrainz.mobile.widget.AssetTextView
+      android:id="@+id/about_text"
+      style="@style/TextBody"
+      android:layout_marginTop="@dimen/home_pad" />
+
+  </LinearLayout>
+</ScrollView>

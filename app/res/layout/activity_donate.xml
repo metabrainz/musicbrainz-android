@@ -20,41 +20,38 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
+  style="@style/Activity"
+  android:id="@+id/donate_layout"
+  android:padding="@dimen/home_pad">
 
-  <RelativeLayout
-    android:id="@+id/donate_layout"
-    style="@style/PaddedLayoutFill">
+  <TextView
+    android:id="@+id/donate_title"
+    style="@style/TextHeaderPad"
+    android:text="@string/donate_header" />
 
-    <TextView
-      android:id="@+id/donate_title"
-      style="@style/TextHeaderPad"
-      android:text="@string/donate_header" />
+  <TextView
+    android:id="@+id/donate_body"
+    style="@style/TextBody"
+    android:text="@string/donate_text"
+    android:layout_below="@id/donate_title" />
 
-    <TextView
-      android:id="@+id/donate_body"
-      style="@style/TextBody"
-      android:text="@string/donate_text"
-      android:layout_below="@id/donate_title" />
+  <Spinner
+    android:id="@+id/donate_spin"
+    style="@style/WrapHeight"
+    android:layout_below="@id/donate_body"
+    android:layout_marginTop="@dimen/huge_pad" />
 
-    <Spinner
-      android:id="@+id/donate_spin"
-      style="@style/WrapHeight"
-      android:layout_below="@id/donate_body"
-      android:layout_marginTop="@dimen/huge_pad" />
+  <TextView
+    android:id="@+id/donate_loading_text"
+    style="@style/PayPalLoadingText"
+    android:layout_below="@id/donate_spin"
+    android:layout_centerHorizontal="true"
+    android:text="@string/paypal_loading_label" />
 
-    <TextView
-      android:id="@+id/donate_loading_text"
-      style="@style/PayPalLoadingText"
-      android:layout_below="@id/donate_spin"
-      android:layout_centerHorizontal="true"
-      android:text="@string/paypal_loading_label" />
+  <Button
+    android:id="@+id/alt_donate_link"
+    style="@style/LinkButton"
+    android:text="@string/alt_donate_text"
+    android:layout_alignParentBottom="true" />
 
-    <Button
-      android:id="@+id/alt_donate_link"
-      style="@style/LinkButton"
-      android:text="@string/alt_donate_text"
-      android:layout_alignParentBottom="true" />
-
-  </RelativeLayout>
 </RelativeLayout>

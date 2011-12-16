@@ -25,7 +25,6 @@
   <string name="login_label">Log In</string>
   <string name="logout_label">Log Out</string>
   <string name="search_hint">Search MusicBrainz</string>
-  <string name="search_label">Search</string>
   <string name="about_label">About</string>
   <string name="donate_label">Donate</string>
   <string name="hometext">Welcome to MusicBrainz!</string>
@@ -56,9 +55,7 @@
 
   <!-- ReleaseActivity -->
   <string name="release_title">Release</string>
-  <string name="artistinfo_label">Artist Information</string>
   <string name="label_tracks">tracks</string>
-
   <string name="no_tags">No tags found</string>
   <string name="edit_login">You must log in before you can edit!</string>
 
@@ -96,9 +93,7 @@
   <string name="donate_header">Support the MetaBrainz Foundation with a donation!</string>
   <string name="donate_text">You can donate via PayPal to the non-profit MetaBrainz Foundation, which operates the MusicBrainz
     project.</string>
-  <string name="paypal_load_label">Loading PayPal…</string>
-  <string name="paypal_label">Donate with PayPal</string>
-  <string name="paypal_loading_label">Loading…</string>
+  <string name="paypal_loading_label">Loading PayPal…</string>
   <string name="paypal_loading_timeout">Connection failure</string>
   <string name="alt_donate_text">Other donation options…</string>
   <string name="starting_paypal">PayPal is starting…\nPlease bear with us.</string>
@@ -153,7 +148,6 @@
   <string name="toast_feedback_fail">No email client available</string>
   <string name="toast_donate_success">Thanks you for supporting MusicBrainz!</string>
   <string name="toast_donate_canceled">Donation canceled</string>
-  <string name="toast_donate_failed">Donation failed</string>
   <string name="toast_search_cleared">Search history deleted</string>
 
   <!-- ZXing integration -->

@@ -20,42 +20,38 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
+  style="@style/Activity"
+  android:padding="@dimen/home_pad">
 
-  <RelativeLayout
-    style="@style/PaddedLayoutFill">
+  <EditText
+    android:id="@+id/uname_input"
+    style="@style/Username" />
 
-    <EditText
-      android:id="@+id/uname_input"
-      style="@style/Username" />
+  <EditText
+    android:id="@+id/pass_input"
+    style="@style/Password"
+    android:layout_below="@id/uname_input" />
 
-    <EditText
-      android:id="@+id/pass_input"
-      style="@style/Password"
-      android:layout_below="@id/uname_input" />
+  <Button
+    android:id="@+id/auth_btn"
+    style="@style/LoginButton"
+    android:layout_below="@id/pass_input"
+    android:layout_alignParentRight="true"
+    android:text="@string/login_label" />
+
+  <LinearLayout
+    style="@style/Wrap"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true">
 
     <Button
-      android:id="@+id/auth_btn"
-      style="@style/LoginButton"
-      android:layout_below="@id/pass_input"
-      android:layout_alignParentRight="true"
-      android:text="@string/login_label" />
+      android:id="@+id/forgotpass_link"
+      style="@style/LinkButton"
+      android:text="@string/forgotpass_text" />
 
-    <LinearLayout
-      style="@style/Wrap"
-      android:orientation="vertical"
-      android:layout_alignParentBottom="true">
-
-      <Button
-        android:id="@+id/forgotpass_link"
-        style="@style/LinkButton"
-        android:text="@string/forgotpass_text" />
-
-      <Button
-        android:id="@+id/register_link"
-        style="@style/LinkButton"
-        android:text="@string/register_text" />
-    </LinearLayout>
-
-  </RelativeLayout>
+    <Button
+      android:id="@+id/register_link"
+      style="@style/LinkButton"
+      android:text="@string/register_text" />
+  </LinearLayout>
 </RelativeLayout>
