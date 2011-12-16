@@ -28,8 +28,6 @@
   <color name="main_fg">#ffffff</color>
   <color name="main_text">#000000</color>
   <color name="aux_text">#666666</color>
-  <color name="hint_text">#c0c0c0</color>
-  <color name="dialog_text">#ffffff</color>
   <color name="link_text">#3366cc</color>
 
   <color name="tag_bg">#ffffff</color>
@@ -41,7 +39,6 @@
 
   <color name="actionbar_background_start">#817abf</color>
   <color name="actionbar_background_end">@color/mb_purple_medium</color>
-  <color name="actionbar_divider">@color/mb_purple_medium</color>
 
   <!-- MusicBrainz branding -->
   <color name="mb_purple_light">#bcaeed</color>

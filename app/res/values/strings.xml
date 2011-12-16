@@ -30,6 +30,7 @@
   <string name="donate_label">Donate</string>
   <string name="hometext">Welcome to MusicBrainz!</string>
   <string name="hometext_loggedin">Logged in as</string>
+  <string name="description_search">Search</string>
 
   <!-- Searchable -->
   <string name="search_name">MusicBrainz</string>
@@ -44,6 +45,7 @@
   <string name="pd_authenticating">Authenticating…</string>
   <string name="auth_fail">Autentication failed!\nPlease check your username and password.</string>
   <string name="auth_pos">Okay</string>
+  <string name="description_web">Web link</string>
 
   <!-- SearchResultsActivity -->
   <string name="no_results">No results found</string>
@@ -85,15 +87,15 @@
   <!-- ConfirmBarcodeDialog -->
   <string name="barcode_add_header">Submit barcode</string>
   <string name="barcode_add_body">Add this barcode to the following release?</string>
-  <string name="barcode_add_info">This will submit and edit that other users can vote on. The barcode will not
-    be added immediately.</string>
+  <string name="barcode_add_info">This will submit and edit that other users can vote on. The barcode will not be added immediately.
+  </string>
   <string name="barcode_add_btn">Submit</string>
 
   <!-- DonateActivity -->
   <string name="donate_title">Donate</string>
   <string name="donate_header">Support the MetaBrainz Foundation with a donation!</string>
-  <string name="donate_text">You can donate via PayPal to the non-profit MetaBrainz Foundation, which
-    operates the MusicBrainz project.</string>
+  <string name="donate_text">You can donate via PayPal to the non-profit MetaBrainz Foundation, which operates the MusicBrainz
+    project.</string>
   <string name="paypal_load_label">Loading PayPal…</string>
   <string name="paypal_label">Donate with PayPal</string>
   <string name="paypal_loading_label">Loading…</string>
@@ -108,19 +110,18 @@
 
   <!-- IntentErrorActivity -->
   <string name="error_title">Error</string>
-  <string name="error_body">Something has gone wrong…\n\nAnother application has tried to show you a
-    MusicBrainz page but there was a problem with the Intent URI. You should report this to the
-    developer of the application that you arrived from:\n\n</string>
+  <string name="error_body">Something has gone wrong…\n\nAnother application has tried to show you a MusicBrainz page but
+    there was a problem with the Intent URI. You should report this to the developer of the application that you arrived
+    from:\n\n</string>
 
   <!-- Menus -->
   <string name="menu_about">About</string>
   <string name="menu_donate">Donate to MB</string>
   <string name="menu_feedback">Feedback</string>
   <string name="menu_preferences">Settings</string>
-  
-  <!--  Actions -->
+
+  <!-- Actions -->
   <string name="action_share">Share</string>
-  <string name="action_artist">Artist</string>
 
   <!-- Preferences -->
   <string name="preferences_title">Settings</string>
@@ -147,7 +148,6 @@
   <string name="toast_search_err">Add some text to search</string>
   <string name="toast_tag_err">Add some text to tag</string>
   <string name="toast_auth_err">Username or password missing</string>
-  <string name="toast_noresults">Search returned no results</string>
   <string name="toast_loggedIn">Logged in</string>
   <string name="toast_loggedOut">Logged out</string>
   <string name="toast_feedback_fail">No email client available</string>
@@ -155,7 +155,6 @@
   <string name="toast_donate_canceled">Donation canceled</string>
   <string name="toast_donate_failed">Donation failed</string>
   <string name="toast_search_cleared">Search history deleted</string>
-  <string name="toast_no_artist_action">Sorry, this artist can\'t be displayed</string>
 
   <!-- ZXing integration -->
   <string name="zx_title">Install Barcode Scanner?</string>
@@ -165,16 +164,15 @@
 
   <!-- BarcodeDialog -->
   <string name="barcode_header">Barcode not found!</string>
-  <string name="barcode_info_log">This barcode is not yet stored in the MusicBrainz database. You can contribute
-    to MusicBrainz by adding it to the appropriate release.</string>
-  <string name="barcode_info_nolog">This barcode is not yet stored in the MusicBrainz database. You can contribute
-    to MusicBrainz by adding it to the appropriate release, but you must log in first.</string>
+  <string name="barcode_info_log">This barcode is not yet stored in the MusicBrainz database. You can contribute to MusicBrainz by
+    adding it to the appropriate release.</string>
+  <string name="barcode_info_nolog">This barcode is not yet stored in the MusicBrainz database. You can contribute to MusicBrainz by
+    adding it to the appropriate release, but you must log in first.</string>
   <string name="barcode_btn">Add barcode</string>
 
   <!-- ReleaseSelectionDialog -->
   <string name="rg_title">Select a release</string>
-  <string name="rg_text">This title has been released more than once. Choose a specific release from
-    the list.</string>
+  <string name="rg_text">This title has been released more than once. Choose a specific release from the list.</string>
 
   <!-- Release group types -->
   <string name="rt_album">Album</string>
@@ -220,5 +218,5 @@
   <string name="fm_dvda">DVD-Audio</string>
   <string name="fm_dvdv">DVD-Video</string>
   <string name="fm_br">Blu-ray</string>
-  
+
 </resources>

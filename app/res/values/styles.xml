@@ -96,6 +96,7 @@
     parent="@style/ButtonMin">
     <item name="android:onClick">onClick</item>
     <item name="android:src">@drawable/btn_search</item>
+    <item name="android:contentDescription">@string/description_search</item>
   </style>
 
   <style
@@ -224,6 +225,7 @@
     <item name="android:layout_marginRight">@dimen/small_pad</item>
     <item name="android:layout_marginLeft">@dimen/small_pad</item>
     <item name="android:src">@drawable/ic_link</item>
+    <item name="android:contentDescription">@string/description_web</item>
   </style>
 
   <style
