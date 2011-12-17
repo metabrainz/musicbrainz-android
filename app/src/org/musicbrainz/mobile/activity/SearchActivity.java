@@ -172,9 +172,23 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     private class ErrorPositiveListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            doSearch();
+            
+            restartLoader();
+            // TODO
+            //doSearch();
             dialog.cancel();
             toggleLoading();
+        }
+    }
+    
+    private void restartLoader() {
+        String intentType = getIntent().getStringExtra(Extra.TYPE);
+        if (intentType.equals(Extra.ARTIST)) {
+            getSupportLoaderManager().restartLoader(SEARCH_ARTIST_LOADER, null, this);
+        } else if (intentType.equals(Extra.RELEASE_GROUP)) {
+            getSupportLoaderManager().restartLoader(SEARCH_RELEASE_GROUP_LOADER, null, this);
+        } else {
+            getSupportLoaderManager().restartLoader(SEARCH_LOADER, null, this);
         }
     }
 
@@ -283,7 +297,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
             displayRGResultsView();
             break;
         case ALL:
-            // TODO Find out why result is null here without destroying.
+            // TODO Figure out why result lists are null here without destroying.
             getSupportLoaderManager().destroyLoader(SEARCH_LOADER);
             artistSearchResults = results.getArtistResults();
             rgSearchResults = results.getReleaseGroupResults();
