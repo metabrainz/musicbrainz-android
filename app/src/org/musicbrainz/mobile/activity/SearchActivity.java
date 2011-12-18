@@ -172,10 +172,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     private class ErrorPositiveListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            
             restartLoader();
-            // TODO
-            //doSearch();
             dialog.cancel();
             toggleLoading();
         }

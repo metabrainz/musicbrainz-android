@@ -92,7 +92,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.layout_loading);
         setProgressBarIndeterminateVisibility(Boolean.FALSE);

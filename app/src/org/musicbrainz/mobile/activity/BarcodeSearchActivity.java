@@ -83,10 +83,15 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_barcode);
+        setProgressBarIndeterminateVisibility(Boolean.FALSE);
         findViews();
 
         barcode = getIntent().getStringExtra(Extra.BARCODE);
         barcodeText.setText(barcodeText.getText() + " " + barcode);
+        
+        if (getSupportLoaderManager().getLoader(SEARCH_RELEASE_LOADER) != null) {
+            getSupportLoaderManager().initLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
+        }
     }
 
     private void findViews() {
@@ -114,18 +119,19 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     }
 
     private void doSearch() {
-        preSearch();
         String term = searchBox.getText().toString();
         if (term.length() != 0) {
             hideKeyboard();
+            prepareSearch();
             searchTerm = term;
+            getSupportLoaderManager().destroyLoader(SEARCH_RELEASE_LOADER);
             getSupportLoaderManager().initLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
         } else {
             Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void preSearch() {
+    private void prepareSearch() {
         searchButton.setEnabled(false);
         instructions.setVisibility(View.INVISIBLE);
         loading.setVisibility(View.VISIBLE);
@@ -159,7 +165,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         builder.setCancelable(false);
         builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                doSearch();
+                getSupportLoaderManager().restartLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
                 dialog.cancel();
                 loading.setVisibility(View.VISIBLE);
             }
@@ -193,6 +199,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         @Override
         public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader,
                 AsyncResult<LinkedList<ReleaseStub>> data) {
+            instructions.setVisibility(View.INVISIBLE);
             loading.setVisibility(View.INVISIBLE);
             switch (data.getStatus()) {
             case SUCCESS:
@@ -215,7 +222,6 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         matches.setOnItemClickListener(this);
         matches.setOnItemLongClickListener(this);
 
-        instructions.setVisibility(View.INVISIBLE);
         if (results.isEmpty()) {
             noResults.setVisibility(View.VISIBLE);
             matches.setVisibility(View.INVISIBLE);
