@@ -288,14 +288,14 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         return null;
     }
 
-    protected Dialog createConnectionErrorDialog() {
+    private Dialog createConnectionErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.err_text));
         builder.setCancelable(false);
         builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                configureLoader();
+                restartLoader();
                 dialog.cancel();
             }
         });
@@ -305,6 +305,16 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
             }
         });
         return builder.create();
+    }
+    
+    private void restartLoader() {
+        if (releaseMbid != null) {
+            getSupportLoaderManager().restartLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
+        } else if (releaseGroupMbid != null) {
+            getSupportLoaderManager().restartLoader(RELEASE_GROUP_STUBS_LOADER, null, releaseStubLoaderCallbacks);
+        } else if (barcode != null) {
+            getSupportLoaderManager().restartLoader(BARCODE_RELEASE_LOADER, null, releaseLoaderCallbacks);
+        }
     }
 
     private void displayReleaseData() {

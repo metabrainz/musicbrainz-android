@@ -198,15 +198,24 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             setProgressBarIndeterminateVisibility(Boolean.FALSE);
         }
     }
+    
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_CONNECTION_FAILURE:
+            return createConnectionErrorDialog();
+        }
+        return null;
+    }
 
-    protected Dialog createConnectionErrorDialog() {
+    private Dialog createConnectionErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.err_text));
         builder.setCancelable(false);
         builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                getSupportLoaderManager().restartLoader(ARTIST_LOADER, null, ArtistActivity.this);
                 dialog.cancel();
-                getSupportLoaderManager().initLoader(0, null, ArtistActivity.this);
             }
         });
         builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
