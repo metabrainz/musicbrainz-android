@@ -21,8 +21,8 @@
 <shape
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:shape="ring"
-  android:innerRadiusRatio="4"
-  android:thicknessRatio="10"
+  android:innerRadiusRatio="5"
+  android:thicknessRatio="15"
   android:useLevel="false">
 
   <size

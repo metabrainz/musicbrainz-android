@@ -29,7 +29,7 @@
     <ProgressBar
       android:id="@+id/loading"
       style="@style/Wrap"
-      android:indeterminateDrawable="@anim/progress"
+      android:indeterminateDrawable="@anim/main_progress"
       android:layout_centerInParent="true" />
   </RelativeLayout>
 

@@ -78,7 +78,7 @@
 
       <ProgressBar
         style="@style/Wrap"
-        android:indeterminateDrawable="@anim/progress" />
+        android:indeterminateDrawable="@anim/main_progress" />
     </LinearLayout>
 
     <TextView
