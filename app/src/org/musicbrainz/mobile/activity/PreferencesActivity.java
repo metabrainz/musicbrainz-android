@@ -27,11 +27,12 @@ import org.musicbrainz.mobile.util.Constants;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.provider.SearchRecentSuggestions;
+import android.support.v4.app.SherlockPreferenceActivity;
+import android.support.v4.view.MenuItem;
 import android.widget.Toast;
 
-public class PreferencesActivity extends PreferenceActivity implements OnPreferenceClickListener {
+public class PreferencesActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,18 @@ public class PreferencesActivity extends PreferenceActivity implements OnPrefere
                 SuggestionProvider.MODE);
         suggestions.clearHistory();
         Toast.makeText(this, R.string.toast_search_cleared, Toast.LENGTH_SHORT).show();
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            startActivity(DashboardActivity.createIntent(this));
+            return true;
+        }
+        return false;
     }
 
 }

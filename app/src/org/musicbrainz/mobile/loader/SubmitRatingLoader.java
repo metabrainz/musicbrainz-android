@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.loader;
 
 import java.io.IOException;
 
+import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.MBEntity;
 import org.musicbrainz.android.api.webservice.WebClient;
@@ -54,7 +55,7 @@ public class SubmitRatingLoader extends AsyncTaskLoader<AsyncResult<Float>> {
 
     @Override
     public AsyncResult<Float> loadInBackground() {
-        WebClient client = new WebClient(creds);
+        MusicBrainz client = new WebClient(creds);
         try {
             client.submitRating(type, mbid, rating);
             Float updatedRating = client.lookupRating(type, mbid);

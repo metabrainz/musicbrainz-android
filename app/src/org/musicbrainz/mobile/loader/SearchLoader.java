@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.loader;
 
 import java.io.IOException;
 
+import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.webservice.WebClient;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
@@ -43,7 +44,7 @@ public class SearchLoader extends PersistingAsyncTaskLoader<AsyncResult<SearchRe
     @Override
     public AsyncResult<SearchResults> loadInBackground() {
         try {
-            WebClient client = new WebClient(userAgent);
+            MusicBrainz client = new WebClient(userAgent);
             SearchResults results = new SearchResults(client.searchArtist(term), client.searchReleaseGroup(term));
             data = new AsyncResult<SearchResults>(LoaderStatus.SUCCESS, results);
             return data;

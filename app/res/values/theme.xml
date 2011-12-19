@@ -50,6 +50,7 @@
   <style name="TabText"
     parent="Widget.TabPageIndicator.Text">
     <item name="android:textColor">@color/black</item>
+    <item name="android:textStyle">normal</item>
   </style>
 
 </resources>

@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.loader;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.MBEntity;
@@ -57,7 +58,7 @@ public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<LinkedList<Tag
 
     @Override
     public AsyncResult<LinkedList<Tag>> loadInBackground() {
-        WebClient client = new WebClient(creds);
+        MusicBrainz client = new WebClient(creds);
         LinkedList<String> saneTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags);
         try {
             client.submitTags(type, mbid, saneTags);

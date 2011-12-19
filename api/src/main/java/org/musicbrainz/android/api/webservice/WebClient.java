@@ -37,6 +37,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.BasicResponseHandler;
+import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistStub;
 import org.musicbrainz.android.api.data.Release;
@@ -51,7 +52,7 @@ import org.musicbrainz.android.api.util.Credentials;
  * should be made inside AsyncTask. The XML that is returned gets parsed into
  * pojos with SAX.
  */
-public class WebClient {
+public class WebClient implements MusicBrainz {
 
     private static final String AUTH_REALM = "musicbrainz.org";
     private static final String AUTH_SCOPE = "musicbrainz.org";
@@ -74,6 +75,7 @@ public class WebClient {
         this.clientId = creds.getClientId();
     }
 
+    @Override
     public void setCredentials(String username, String password) {
         AuthScope authScope = new AuthScope(AUTH_SCOPE, AUTH_PORT, AUTH_REALM, AUTH_TYPE);
         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
@@ -84,7 +86,8 @@ public class WebClient {
         this.clientId = clientId;
     }
 
-    public Release lookupReleaseFromBarcode(String barcode) throws IOException {
+    @Override
+    public Release lookupReleaseUsingBarcode(String barcode) throws IOException {
         HttpEntity entity = get(QueryBuilder.barcodeSearch(barcode));
         InputStream response = entity.getContent();
         String barcodeMbid = responseParser.parseMbidFromBarcode(response);
@@ -95,6 +98,7 @@ public class WebClient {
         return lookupRelease(barcodeMbid);
     }
 
+    @Override
     public Release lookupRelease(String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.releaseLookup(mbid));
         InputStream response = entity.getContent();
@@ -103,6 +107,7 @@ public class WebClient {
         return release;
     }
 
+    @Override
     public LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.releaseGroupReleaseBrowse(mbid));
         InputStream response = entity.getContent();
@@ -111,6 +116,7 @@ public class WebClient {
         return releases;
     }
 
+    @Override
     public Artist lookupArtist(String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.artistLookup(mbid));
         InputStream artistResponse = entity.getContent();
@@ -128,6 +134,7 @@ public class WebClient {
         return releases;
     }
 
+    @Override
     public LinkedList<ArtistStub> searchArtist(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.artistSearch(searchTerm));
         InputStream response = entity.getContent();
@@ -136,6 +143,7 @@ public class WebClient {
         return artists;
     }
 
+    @Override
     public LinkedList<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.releaseGroupSearch(searchTerm));
         InputStream response = entity.getContent();
@@ -144,6 +152,7 @@ public class WebClient {
         return releaseGroups;
     }
 
+    @Override
     public LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.releaseSearch(searchTerm));
         InputStream response = entity.getContent();
@@ -152,6 +161,7 @@ public class WebClient {
         return releases;
     }
 
+    @Override
     public LinkedList<Tag> lookupTags(MBEntity type, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.tagLookup(type, mbid));
         InputStream response = entity.getContent();
@@ -161,6 +171,7 @@ public class WebClient {
         return tags;
     }
 
+    @Override
     public float lookupRating(MBEntity type, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.ratingLookup(type, mbid));
         InputStream response = entity.getContent();
@@ -169,6 +180,7 @@ public class WebClient {
         return rating;
     }
 
+    @Override
     public boolean autenticateUserCredentials() throws IOException {
         HttpGet authenticationTest = new HttpGet(QueryBuilder.authenticationCheck());
         authenticationTest.setHeader("Accept", "application/xml");
@@ -180,6 +192,7 @@ public class WebClient {
         return true;
     }
 
+    @Override
     public UserData lookupUserData(MBEntity entityType, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.userData(entityType, mbid));
         InputStream response = entity.getContent();
@@ -188,18 +201,21 @@ public class WebClient {
         return userData;
     }
 
+    @Override
     public void submitTags(MBEntity entityType, String mbid, Collection<String> tags) throws IOException {
         String url = QueryBuilder.tagSubmission(clientId);
         String content = XmlBuilder.buildTagSubmissionXML(entityType, mbid, tags);
         post(url, content);
     }
 
+    @Override
     public void submitRating(MBEntity entityType, String mbid, int rating) throws IOException {
         String url = QueryBuilder.ratingSubmission(clientId);
         String content = XmlBuilder.buildRatingSubmissionXML(entityType, mbid, rating);
         post(url, content);
     }
 
+    @Override
     public void submitBarcode(String mbid, String barcode) throws IOException {
         String url = QueryBuilder.barcodeSubmission(clientId);
         String content = XmlBuilder.buildBarcodeSubmissionXML(mbid, barcode);

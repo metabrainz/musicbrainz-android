@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.loader;
 
 import java.io.IOException;
 
+import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.util.Credentials;
@@ -68,15 +69,15 @@ public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityR
     }
 
     private AsyncEntityResult<Release> getRelease() throws IOException {
-        WebClient client = new WebClient(userAgent);
-        Release release = client.lookupReleaseFromBarcode(barcode);
+        MusicBrainz client = new WebClient(userAgent);
+        Release release = client.lookupReleaseUsingBarcode(barcode);
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, release);
         return data;
     }
     
     private AsyncEntityResult<Release> getReleaseWithUserData() throws IOException {
-        WebClient client = new WebClient(creds);
-        Release release = client.lookupReleaseFromBarcode(barcode);
+        MusicBrainz client = new WebClient(creds);
+        Release release = client.lookupReleaseUsingBarcode(barcode);
         UserData userData = client.lookupUserData(MBEntity.RELEASE_GROUP, release.getReleaseGroupMbid());
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, release, userData);
         return data;
