@@ -45,6 +45,7 @@ import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.app.AlertDialog;
@@ -317,14 +318,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         }
     }
 
-    private void displayReleaseData() {
-        populateLayout();
-        if (isUserLoggedIn()) {
-            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
-            ratingInput.setRating(userData.getRating());
-        }
-    }
-
     private LoaderCallbacks<AsyncEntityResult<Release>> releaseLoaderCallbacks = new LoaderCallbacks<AsyncEntityResult<Release>>() {
 
         @Override
@@ -361,7 +354,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
                 if (container.hasUserData()) {
                     userData = container.getUserData();
                 }
-                displayReleaseData();
+                populateLayout();
             }
         }
 

@@ -22,7 +22,7 @@ package org.musicbrainz.android.api.webservice;
 
 public class BarcodeNotFoundException extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 118690723271061260L;
     private static final String MESSAGE = "Barcode not found in the MusicBrainz database: ";
 
     private String barcode;

@@ -27,7 +27,7 @@
     <item name="android:scrollbarFadeDuration">500</item>
 
     <item name="abHeight">@dimen/actionbar_height</item>
-    <item name="abBackground">@color/mb_purple_medium</item>
+    <item name="abBackground">@drawable/actionbar</item>
     <item name="abDivider">@null</item>
     <item name="abTitleTextStyle">@style/ActionBarText</item>
     
