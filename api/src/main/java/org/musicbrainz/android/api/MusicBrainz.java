@@ -31,7 +31,7 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.webservice.MBEntity;
+import org.musicbrainz.android.api.webservice.Entity;
 
 public interface MusicBrainz {
 
@@ -58,9 +58,9 @@ public interface MusicBrainz {
     /*
      * User data lookup
      */
-    public abstract LinkedList<Tag> lookupTags(MBEntity type, String mbid) throws IOException;
-    public abstract float lookupRating(MBEntity type, String mbid) throws IOException;
-    public abstract UserData lookupUserData(MBEntity entityType, String mbid) throws IOException;
+    public abstract LinkedList<Tag> lookupTags(Entity type, String mbid) throws IOException;
+    public abstract float lookupRating(Entity type, String mbid) throws IOException;
+    public abstract UserData lookupUserData(Entity entityType, String mbid) throws IOException;
     
     /*
      * Browse
@@ -70,8 +70,8 @@ public interface MusicBrainz {
     /*
      * Submission
      */
-    public abstract void submitTags(MBEntity entityType, String mbid, Collection<String> tags) throws IOException;
-    public abstract void submitRating(MBEntity entityType, String mbid, int rating) throws IOException;
+    public abstract void submitTags(Entity entityType, String mbid, Collection<String> tags) throws IOException;
+    public abstract void submitRating(Entity entityType, String mbid, int rating) throws IOException;
     public abstract void submitBarcode(String mbid, String barcode) throws IOException;
 
 }

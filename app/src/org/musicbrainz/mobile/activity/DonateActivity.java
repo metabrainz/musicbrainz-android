@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 
 import org.musicbrainz.mobile.MBApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.Config;
+import org.musicbrainz.mobile.config.Configuration;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -134,7 +134,7 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
 
         switch (id) {
         case R.id.alt_donate_link:
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Config.DONATE_LINK)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Configuration.DONATE_LINK)));
             break;
         default:
             String selection = (String) amount.getSelectedItem();
@@ -150,12 +150,12 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
     private PayPalPayment createPayment(BigDecimal amount) {
         PayPalPayment donation = new PayPalPayment();
         donation.setSubtotal(amount);
-        donation.setCurrencyType(Config.DONATION_CURRENCY);
+        donation.setCurrencyType(Configuration.DONATION_CURRENCY);
         donation.setPaymentType(PayPal.PAYMENT_TYPE_NONE);
         donation.setPaymentSubtype(PayPal.PAYMENT_SUBTYPE_DONATIONS);
-        donation.setRecipient(Config.DONATION_EMAIL);
-        donation.setMerchantName(Config.DONATION_NAME);
-        donation.setDescription(Config.DONATION_DESCRIPTION);
+        donation.setRecipient(Configuration.DONATION_EMAIL);
+        donation.setMerchantName(Configuration.DONATION_NAME);
+        donation.setDescription(Configuration.DONATION_DESCRIPTION);
         return donation;
     }
 

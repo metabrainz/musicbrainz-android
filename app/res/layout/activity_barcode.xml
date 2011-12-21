@@ -29,7 +29,8 @@
     android:text="@string/barcode_text"
     android:textColor="@color/main_text"
     android:textSize="@dimen/text_size_medium"
-    android:paddingTop="@dimen/small_pad" />
+    android:paddingTop="@dimen/small_pad"
+    android:paddingLeft="@dimen/small_pad" />
 
   <RelativeLayout
     style="@style/WrapHeight"
@@ -37,18 +38,18 @@
     android:layout_marginRight="@dimen/small_pad"
     android:layout_marginBottom="3dip">
 
+    <ImageButton
+      android:id="@+id/barcode_search_btn"
+      style="@style/SearchButton"
+      android:layout_alignParentRight="true" />
+
     <EditText
       android:id="@+id/barcode_search"
       style="@style/SearchEdit"
       android:layout_alignParentLeft="true"
       android:layout_toLeftOf="@+id/barcode_search_btn"
-      android:layout_centerVertical="true"
+      android:layout_alignBottom="@id/barcode_search_btn"
       android:hint="@string/barcode_hint" />
-
-    <ImageButton
-      android:id="@+id/barcode_search_btn"
-      style="@style/SearchButton"
-      android:layout_alignParentRight="true" />
   </RelativeLayout>
 
   <RelativeLayout style="@style/WrapHeight">

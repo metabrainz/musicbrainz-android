@@ -22,9 +22,9 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Constants;
-import org.musicbrainz.mobile.util.Secrets;
+import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.config.Constants;
+import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.util.Utils;
 
@@ -85,11 +85,11 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
     }
     
     public String getUserAgent() {
-        return Config.USER_AGENT + "/" + getVersion();
+        return Configuration.USER_AGENT + "/" + getVersion();
     }
     
     public String getClientId() {
-        return Config.CLIENT_NAME + "-" + getVersion();
+        return Configuration.CLIENT_NAME + "-" + getVersion();
     }
     
     public Credentials getCredentials() {
@@ -119,7 +119,7 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
 
     private void sendFeedback() {
         try {
-            startActivity(Utils.emailIntent(Config.FEEDBACK_EMAIL, Config.FEEDBACK_SUBJECT));
+            startActivity(Utils.emailIntent(Configuration.FEEDBACK_EMAIL, Configuration.FEEDBACK_SUBJECT));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, R.string.toast_feedback_fail, Toast.LENGTH_LONG).show();
         }

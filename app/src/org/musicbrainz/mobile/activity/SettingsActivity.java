@@ -21,8 +21,8 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
-import org.musicbrainz.mobile.util.Constants;
 
 import android.os.Bundle;
 import android.preference.Preference;

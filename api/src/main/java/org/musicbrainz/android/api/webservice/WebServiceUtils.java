@@ -34,7 +34,7 @@ public class WebServiceUtils {
         }
     }
 
-    static String entityString(MBEntity entity) {
+    static String entityString(Entity entity) {
         switch (entity) {
         case ARTIST:
             return "artist";

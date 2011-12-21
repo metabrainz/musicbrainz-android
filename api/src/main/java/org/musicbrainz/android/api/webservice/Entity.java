@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2011 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -18,15 +18,8 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.util;
+package org.musicbrainz.android.api.webservice;
 
-public class Constants {
-
-    public static final String PREFS_USER = "user";
-    public static final String PREF_USERNAME = "username";
-    public static final String PREF_PASSWORD = "password";
-    public static final String PREF_SUGGESTIONS = "search_suggestions";
-    public static final String PREF_CLEAR_SUGGESTIONS = "clear_suggestions";
-    public static final String PREF_BUGSENSE = "send_crashlogs";
-
+public enum Entity {
+    ARTIST, RELEASE_GROUP
 }

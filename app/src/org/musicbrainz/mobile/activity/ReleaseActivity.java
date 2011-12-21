@@ -30,10 +30,11 @@ import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
-import org.musicbrainz.android.api.webservice.MBEntity;
+import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
+import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.loader.BarcodeReleaseLoader;
@@ -44,7 +45,6 @@ import org.musicbrainz.mobile.loader.SubmitTagsLoader;
 import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Utils;
 
@@ -227,7 +227,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
         case R.id.action_share:
-            startActivity(Utils.shareIntent(getApplicationContext(), Config.RELEASE_SHARE + releaseMbid));
+            startActivity(Utils.shareIntent(getApplicationContext(), Configuration.RELEASE_SHARE + releaseMbid));
             return true;
         case android.R.id.home:
             if (provideArtistAction) {
@@ -401,7 +401,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         @Override
         public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
             int rating = (int) ratingInput.getRating();
-            return new SubmitRatingLoader(ReleaseActivity.this, getCredentials(), MBEntity.RELEASE_GROUP,
+            return new SubmitRatingLoader(ReleaseActivity.this, getCredentials(), Entity.RELEASE_GROUP,
                     release.getReleaseGroupMbid(), rating);
         }
 
@@ -437,7 +437,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         @Override
         public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
-            return new SubmitTagsLoader(ReleaseActivity.this, getCredentials(), MBEntity.RELEASE_GROUP,
+            return new SubmitTagsLoader(ReleaseActivity.this, getCredentials(), Entity.RELEASE_GROUP,
                     release.getReleaseGroupMbid(), tags);
         }
 

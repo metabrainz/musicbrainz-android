@@ -20,9 +20,11 @@
 
 package org.musicbrainz.mobile.util;
 
+import org.musicbrainz.mobile.config.Configuration;
+
 public class Log {
 
-    public static final String TAG = Config.TAG;
+    public static final String TAG = Configuration.TAG;
 
     public static void e(String message) {
         android.util.Log.e(TAG, message);

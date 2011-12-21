@@ -22,11 +22,11 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.config.Constants;
+import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.loader.LoginLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
-import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Constants;
-import org.musicbrainz.mobile.util.Secrets;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 import org.musicbrainz.mobile.util.Utils;
 
@@ -94,10 +94,10 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
             tryLogin();
             break;
         case R.id.register_link:
-            startActivity(Utils.urlIntent(Config.REGISTER_LINK));
+            startActivity(Utils.urlIntent(Configuration.REGISTER_LINK));
             break;
         case R.id.forgotpass_link:
-            startActivity(Utils.urlIntent(Config.FORGOTPASS_LINK));
+            startActivity(Utils.urlIntent(Configuration.FORGOTPASS_LINK));
         }
     }
 

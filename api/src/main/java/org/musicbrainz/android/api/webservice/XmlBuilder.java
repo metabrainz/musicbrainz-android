@@ -27,7 +27,7 @@ public class XmlBuilder {
     private static final String HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><metadata xmlns=\"http://musicbrainz.org/ns/mmd-2.0#\">";
     private static final String FOOT = "</metadata>";
 
-    static String buildTagSubmissionXML(MBEntity entityType, String entityMbid, Collection<String> tags) {
+    static String buildTagSubmissionXML(Entity entityType, String entityMbid, Collection<String> tags) {
         StringBuilder content = new StringBuilder(HEAD);
         switch (entityType) {
         case ARTIST:
@@ -51,7 +51,7 @@ public class XmlBuilder {
         return tagString.toString();
     }
 
-    static String buildRatingSubmissionXML(MBEntity entityType, String entityMbid, int rating) {
+    static String buildRatingSubmissionXML(Entity entityType, String entityMbid, int rating) {
         StringBuilder content = new StringBuilder(HEAD);
         switch (entityType) {
         case ARTIST:

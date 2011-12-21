@@ -52,9 +52,9 @@ import org.musicbrainz.android.api.util.Credentials;
  * should be made inside AsyncTask. The XML that is returned gets parsed into
  * pojos with SAX.
  */
-public class WebClient implements MusicBrainz {
+public class MusicBrainzWebClient implements MusicBrainz {
 
-    private static final String AUTH_REALM = "musicbrainz.org";
+    private static final String AUTH_REALM = "test.musicbrainz.org";
     private static final String AUTH_SCOPE = "musicbrainz.org";
     private static final int AUTH_PORT = 80;
     private static final String AUTH_TYPE = "Digest";
@@ -63,12 +63,12 @@ public class WebClient implements MusicBrainz {
     private ResponseParser responseParser;
     private String clientId;
 
-    public WebClient(String userAgent) {
+    public MusicBrainzWebClient(String userAgent) {
         httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
     }
     
-    public WebClient(Credentials creds) {
+    public MusicBrainzWebClient(Credentials creds) {
         httpClient = HttpClient.getClient(creds.getUserAgent());
         responseParser = new ResponseParser();
         setCredentials(creds.getUsername(), creds.getPassword());
@@ -162,7 +162,7 @@ public class WebClient implements MusicBrainz {
     }
 
     @Override
-    public LinkedList<Tag> lookupTags(MBEntity type, String mbid) throws IOException {
+    public LinkedList<Tag> lookupTags(Entity type, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.tagLookup(type, mbid));
         InputStream response = entity.getContent();
         LinkedList<Tag> tags = responseParser.parseTagLookup(response);
@@ -172,7 +172,7 @@ public class WebClient implements MusicBrainz {
     }
 
     @Override
-    public float lookupRating(MBEntity type, String mbid) throws IOException {
+    public float lookupRating(Entity type, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.ratingLookup(type, mbid));
         InputStream response = entity.getContent();
         float rating = responseParser.parseRatingLookup(response);
@@ -193,7 +193,7 @@ public class WebClient implements MusicBrainz {
     }
 
     @Override
-    public UserData lookupUserData(MBEntity entityType, String mbid) throws IOException {
+    public UserData lookupUserData(Entity entityType, String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.userData(entityType, mbid));
         InputStream response = entity.getContent();
         UserData userData = responseParser.parseUserData(response);
@@ -202,14 +202,14 @@ public class WebClient implements MusicBrainz {
     }
 
     @Override
-    public void submitTags(MBEntity entityType, String mbid, Collection<String> tags) throws IOException {
+    public void submitTags(Entity entityType, String mbid, Collection<String> tags) throws IOException {
         String url = QueryBuilder.tagSubmission(clientId);
         String content = XmlBuilder.buildTagSubmissionXML(entityType, mbid, tags);
         post(url, content);
     }
 
     @Override
-    public void submitRating(MBEntity entityType, String mbid, int rating) throws IOException {
+    public void submitRating(Entity entityType, String mbid, int rating) throws IOException {
         String url = QueryBuilder.ratingSubmission(clientId);
         String content = XmlBuilder.buildRatingSubmissionXML(entityType, mbid, rating);
         post(url, content);

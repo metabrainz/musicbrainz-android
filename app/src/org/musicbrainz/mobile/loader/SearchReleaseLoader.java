@@ -25,7 +25,7 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.ReleaseStub;
-import org.musicbrainz.android.api.webservice.WebClient;
+import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -45,7 +45,7 @@ public class SearchReleaseLoader extends PersistingAsyncTaskLoader<AsyncResult<L
     @Override
     public AsyncResult<LinkedList<ReleaseStub>> loadInBackground() {
         try {
-            MusicBrainz client = new WebClient(userAgent);
+            MusicBrainz client = new MusicBrainzWebClient(userAgent);
             data = new AsyncResult<LinkedList<ReleaseStub>>(LoaderStatus.SUCCESS, client.searchRelease(term));
             return data;
         } catch (IOException e) {

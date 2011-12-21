@@ -22,8 +22,8 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
-import org.musicbrainz.mobile.util.Constants;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;

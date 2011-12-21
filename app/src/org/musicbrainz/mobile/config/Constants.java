@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Jamie McDonald
+ * Copyright (C) 2010 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -18,20 +18,15 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.util;
+package org.musicbrainz.mobile.config;
 
-/**
- * These values are required to build the app but they are simply debug/sandbox
- * values. Release builds use a file with a different set of values for obvious
- * reasons.
- */
-public class Secrets {
+public class Constants {
 
-    public static final String BUGSENSE_API_KEY = "99f3740e";
-    public static final String PAYPAL_APP_ID = "APP-80W284485P519543T";
-
-    public String getKey() {
-        return "aplaceholderstring";
-    }
+    public static final String PREFS_USER = "user";
+    public static final String PREF_USERNAME = "username";
+    public static final String PREF_PASSWORD = "password";
+    public static final String PREF_SUGGESTIONS = "search_suggestions";
+    public static final String PREF_CLEAR_SUGGESTIONS = "clear_suggestions";
+    public static final String PREF_BUGSENSE = "send_crashlogs";
 
 }

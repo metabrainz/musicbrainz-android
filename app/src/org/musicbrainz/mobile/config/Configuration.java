@@ -18,9 +18,9 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.util;
+package org.musicbrainz.mobile.config;
 
-public class Config {
+public class Configuration {
 
     public static final boolean LIVE = false;
     public static final String TAG = "MusicBrainz";

@@ -20,7 +20,7 @@
 
 package org.musicbrainz.android.api.webservice;
 
-import org.musicbrainz.android.api.webservice.MBEntity;
+import org.musicbrainz.android.api.webservice.Entity;
 
 public class QueryBuilder {
 
@@ -86,11 +86,11 @@ public class QueryBuilder {
         return new String(WEB_SERVICE + SEARCH_RELEASE + WebServiceUtils.sanitise(searchTerm));
     }
 
-    public static String tagLookup(MBEntity type, String mbid) {
+    public static String tagLookup(Entity type, String mbid) {
         return new String(WEB_SERVICE + WebServiceUtils.entityString(type) + "/" + mbid + TAG_PARAMS);
     }
 
-    public static String ratingLookup(MBEntity type, String mbid) {
+    public static String ratingLookup(Entity type, String mbid) {
         return new String(WEB_SERVICE + WebServiceUtils.entityString(type) + "/" + mbid + RATING_PARAMS);
     }
 
@@ -98,7 +98,7 @@ public class QueryBuilder {
         return new String(WEB_SERVICE + AUTH_TEST);
     }
 
-    public static String userData(MBEntity entity, String mbid) {
+    public static String userData(Entity entity, String mbid) {
         return new String(WEB_SERVICE + WebServiceUtils.entityString(entity) + "/" + mbid + USER_PARAMS);
     }
 

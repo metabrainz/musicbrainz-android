@@ -26,18 +26,18 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.webservice.MBEntity;
+import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.list.LinkAdapter;
 import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
+import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.loader.ArtistLoader;
 import org.musicbrainz.mobile.loader.SubmitRatingLoader;
 import org.musicbrainz.mobile.loader.SubmitTagsLoader;
 import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.util.Config;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.app.AlertDialog;
@@ -185,7 +185,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
         switch (item.getItemId()) {
         case R.id.action_share:
-            startActivity(Utils.shareIntent(getApplicationContext(), Config.ARTIST_SHARE + mbid));
+            startActivity(Utils.shareIntent(getApplicationContext(), Configuration.ARTIST_SHARE + mbid));
             return true;
         }
         return false;
@@ -306,7 +306,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
             int rating = (int) ratingInput.getRating();
-            return new SubmitRatingLoader(ArtistActivity.this, getCredentials(), MBEntity.ARTIST, artist.getMbid(),
+            return new SubmitRatingLoader(ArtistActivity.this, getCredentials(), Entity.ARTIST, artist.getMbid(),
                     rating);
         }
 
@@ -342,7 +342,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
-            return new SubmitTagsLoader(ArtistActivity.this, getCredentials(), MBEntity.ARTIST, artist.getMbid(), tags);
+            return new SubmitTagsLoader(ArtistActivity.this, getCredentials(), Entity.ARTIST, artist.getMbid(), tags);
         }
 
         @Override

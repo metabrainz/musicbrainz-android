@@ -20,9 +20,10 @@
 
 package org.musicbrainz.mobile;
 
-import org.musicbrainz.mobile.util.Config;
-import org.musicbrainz.mobile.util.Constants;
-import org.musicbrainz.mobile.util.Secrets;
+
+import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.config.Constants;
+import org.musicbrainz.mobile.config.Secrets;
 
 import com.bugsense.trace.BugSenseHandler;
 import com.paypal.android.MEP.PayPal;
@@ -46,7 +47,7 @@ public class MBApplication extends Application {
         new LoadPayPalThread().start();
         
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (Config.LIVE && prefs.getBoolean(Constants.PREF_BUGSENSE, true)) {
+        if (Configuration.LIVE && prefs.getBoolean(Constants.PREF_BUGSENSE, true)) {
             BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
         }
     }
