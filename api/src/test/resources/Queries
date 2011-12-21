@@ -22,7 +22,7 @@ releaseGroupSearch:
 musicbrainz.org/ws/2/release-group?query=songs about leaving
 
 releaseGroupLookup:
-http://musicbrainz.org/ws/2/release/77c85384-c846-34b1-b576-63bc00644a28?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels
+musicbrainz.org/ws/2/release/77c85384-c846-34b1-b576-63bc00644a28?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels
 
 releaseLookup: 
 musicbrainz.org/ws/2/release/2d9f9aac-1884-3939-a3b7-01437151e495?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels

@@ -37,6 +37,7 @@ public class BasicNavigationTest extends ActivityInstrumentationTestCase2<Dashbo
         super("org.musicbrainz.mobile", DashboardActivity.class);
     }
 
+    @Override
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
     }
@@ -50,56 +51,19 @@ public class BasicNavigationTest extends ActivityInstrumentationTestCase2<Dashbo
     private void openCloseAboutActivity() {
         solo.clickOnButton("About");
         solo.assertCurrentActivity("", AboutActivity.class);
-        goHomeViaActionBar();
+        solo.goBack();
     }
 
     private void openCloseDonateActivity() {
         solo.clickOnButton("Donate");
         solo.assertCurrentActivity("", DonateActivity.class);
-        goHomeViaActionBar();
+        solo.goBack();
     }
 
     private void openCloseLoginActivity() {
         solo.clickOnButton("Log In");
         solo.assertCurrentActivity("", LoginActivity.class);
-        goHomeViaActionBar();
-    }
-
-    private void goHomeViaActionBar() {
-        solo.clickOnImageButton(0);
-        solo.assertCurrentActivity("", DashboardActivity.class);
-    }
-
-    public void testMenuNavigation() throws Exception {
-        visitLoginMenuItems();
-        visitAboutMenuItems();
-        visitDonateMenuItems();
-    }
-
-    private void visitLoginMenuItems() {
-        solo.clickOnButton("Log In");
-        solo.pressMenuItem(0);
-        solo.assertCurrentActivity("", AboutActivity.class);
         solo.goBack();
-        solo.pressMenuItem(1);
-        solo.assertCurrentActivity("", DonateActivity.class);
-        goHomeViaActionBar();
-    }
-
-    private void visitAboutMenuItems() {
-        solo.clickOnButton("About");
-        solo.pressMenuItem(2);
-        solo.assertCurrentActivity("", DonateActivity.class);
-        goHomeViaActionBar();
-    }
-
-    private void visitDonateMenuItems() {
-        solo.clickOnButton("Donate");
-        solo.pressMenuItem(0);
-        solo.assertCurrentActivity("", AboutActivity.class);
-        solo.goBack();
-        solo.goBack();
-        solo.assertCurrentActivity("", DashboardActivity.class);
     }
 
     @Override
