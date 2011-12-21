@@ -27,6 +27,7 @@ import org.musicbrainz.mobile.test.robotium.Account;
 import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.Smoke;
 
 public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
@@ -42,6 +43,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivit
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
+    @Smoke
     public void testWithInvalidPassword() throws Exception {
         solo.clickOnButton("Log In");
         solo.assertCurrentActivity("", LoginActivity.class);
@@ -81,13 +83,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivit
 
     @Override
     public void tearDown() throws Exception {
-        try {
-            solo.finalize();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        getActivity().finish();
-        super.tearDown();
+        solo.finishOpenedActivities();
     }
 
 }

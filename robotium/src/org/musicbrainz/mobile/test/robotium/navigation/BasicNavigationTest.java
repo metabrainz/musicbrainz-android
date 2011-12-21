@@ -68,13 +68,7 @@ public class BasicNavigationTest extends ActivityInstrumentationTestCase2<Dashbo
 
     @Override
     public void tearDown() throws Exception {
-        try {
-            solo.finalize();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        getActivity().finish();
-        super.tearDown();
+        solo.finishOpenedActivities();
     }
 
 }

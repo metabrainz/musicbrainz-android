@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.test.robotium.search;
 
+import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.activity.SearchActivity;
@@ -27,6 +28,7 @@ import org.musicbrainz.mobile.activity.SearchActivity;
 import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.Smoke;
 
 public class RGSearchTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
@@ -40,16 +42,11 @@ public class RGSearchTest extends ActivityInstrumentationTestCase2<DashboardActi
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void testSearchWithNoQuery() throws Exception {
-        solo.pressSpinnerItem(0, 1);
-        solo.clickOnImageButton(0);
-        solo.assertCurrentActivity("", DashboardActivity.class);
-    }
-
+    @Smoke
     public void testSearchWithExistingRG() throws Exception {
         solo.pressSpinnerItem(0, 1);
         solo.enterText(0, "codes and keys");
-        solo.clickOnImageButton(0);
+        clickSearch();
         solo.assertCurrentActivity("", SearchActivity.class);
         assertTrue(solo.searchText("Release"));
         solo.clickInList(0);
@@ -57,24 +54,14 @@ public class RGSearchTest extends ActivityInstrumentationTestCase2<DashboardActi
         solo.clickInList(0);
         assertTrue(solo.searchText("Death Cab for Cutie"));
     }
-
-    public void testSearchWithUnknownRG() throws Exception {
-        solo.pressSpinnerItem(0, 1);
-        solo.enterText(0, "nbagroypdnebto");
-        solo.clickOnImageButton(0);
-        solo.assertCurrentActivity("", SearchActivity.class);
-        assertTrue(solo.searchText("No results found"));
+    
+    private void clickSearch() {
+        solo.clickOnView(getActivity().findViewById(R.id.search_btn));
     }
 
     @Override
     public void tearDown() throws Exception {
-        try {
-            solo.finalize();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        getActivity().finish();
-        super.tearDown();
+        solo.finishOpenedActivities();
     }
 
 }

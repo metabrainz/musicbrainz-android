@@ -17,14 +17,14 @@
   <name>robotium</name>
   
   <properties>
-    <eclipse.excludeArtifactIds>android,android-support,android-test,api,app,bugsense-trace,commons-codec,commons-logging,guice,httpclient,httpcore,json,junit,opengl-api,paypal-mpl,roboguice,xmlParserAPIs,xpp3</eclipse.excludeArtifactIds>
+    <eclipse.excludeArtifactIds>android,android-support,android-test,api,app,bugsense-trace,commons-codec,commons-logging,guice,httpclient,httpcore,json,junit,opengl-api,paypal-mpl,roboguice,xmlParserAPIs,xpp3,plugin-preference</eclipse.excludeArtifactIds>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.jayway.android.robotium</groupId>
       <artifactId>robotium-solo</artifactId>
-      <version>2.5</version>
+      <version>3.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.android</groupId>
