@@ -32,7 +32,7 @@ import android.support.v4.app.SherlockPreferenceActivity;
 import android.support.v4.view.MenuItem;
 import android.widget.Toast;
 
-public class PreferencesActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {
+public class SettingsActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -105,7 +105,7 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
             startActivity(DashboardActivity.createIntent(this));
             return true;
         case R.id.menu_preferences:
-            startActivity(new Intent(this, PreferencesActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         case R.id.menu_feedback:
             sendFeedback();

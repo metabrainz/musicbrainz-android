@@ -46,10 +46,10 @@ public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivit
     @Smoke
     public void testWithInvalidPassword() throws Exception {
         solo.clickOnButton("Log In");
-        solo.assertCurrentActivity("", LoginActivity.class);
+        solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
         enterInvalidCredentials();
         solo.waitForDialogToClose(DIALOG_TIMEOUT);
-        solo.assertCurrentActivity("", LoginActivity.class);
+        solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
     }
 
     private void enterInvalidCredentials() {
@@ -60,10 +60,10 @@ public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivit
 
     public void ignore_testWithValidPassword() throws Exception {
         solo.clickOnButton("Log In");
-        solo.assertCurrentActivity("", LoginActivity.class);
+        solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
         enterValidCredentials();
         solo.waitForDialogToClose(DIALOG_TIMEOUT);
-        solo.assertCurrentActivity("", DashboardActivity.class);
+        solo.assertCurrentActivity("Expected Dashboard Activity", DashboardActivity.class);
     }
 
     private void enterValidCredentials() {

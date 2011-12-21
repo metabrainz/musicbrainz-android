@@ -24,16 +24,17 @@ import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
 import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.LoginActivity;
+import org.musicbrainz.mobile.activity.SettingsActivity;
 
 import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-public class BasicNavigationTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
+public class DashboardNavigationTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
     private Solo solo;
 
-    public BasicNavigationTest() {
+    public DashboardNavigationTest() {
         super("org.musicbrainz.mobile", DashboardActivity.class);
     }
 
@@ -43,26 +44,33 @@ public class BasicNavigationTest extends ActivityInstrumentationTestCase2<Dashbo
     }
 
     public void testDashboardNavigation() throws Exception {
-        openCloseAboutActivity();
-        openCloseDonateActivity();
-        openCloseLoginActivity();
+        openCloseAbout();
+        openCloseDonate();
+        openCloseLogin();
+        openCloseSettings();
     }
 
-    private void openCloseAboutActivity() {
+    private void openCloseAbout() {
         solo.clickOnButton("About");
-        solo.assertCurrentActivity("", AboutActivity.class);
+        solo.assertCurrentActivity("Expected About Activity", AboutActivity.class);
         solo.goBack();
     }
 
-    private void openCloseDonateActivity() {
+    private void openCloseDonate() {
         solo.clickOnButton("Donate");
-        solo.assertCurrentActivity("", DonateActivity.class);
+        solo.assertCurrentActivity("Expected Donate Activity", DonateActivity.class);
         solo.goBack();
     }
 
-    private void openCloseLoginActivity() {
+    private void openCloseLogin() {
         solo.clickOnButton("Log In");
-        solo.assertCurrentActivity("", LoginActivity.class);
+        solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
+        solo.goBack();
+    }
+    
+    private void openCloseSettings() {
+        solo.clickOnImageButton(0);
+        solo.assertCurrentActivity("Expected Settings Activity", SettingsActivity.class);
         solo.goBack();
     }
 

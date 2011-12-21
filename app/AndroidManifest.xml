@@ -159,7 +159,7 @@
       android:label="@string/artist_title" />
 
     <activity
-      android:name=".activity.PreferencesActivity"
+      android:name=".activity.SettingsActivity"
       android:label="@string/preferences_title" />
 
     <activity

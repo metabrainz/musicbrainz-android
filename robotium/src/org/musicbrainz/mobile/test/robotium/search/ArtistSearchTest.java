@@ -45,17 +45,17 @@ public class ArtistSearchTest extends ActivityInstrumentationTestCase2<Dashboard
     @Smoke
     public void testSearchWithNoQuery() throws Exception {
         clickSearch();
-        solo.assertCurrentActivity("", DashboardActivity.class);
+        solo.assertCurrentActivity("Expected Dashboard Activity", DashboardActivity.class);
     }
 
     @Smoke
     public void testSearchWithExistingArtist() throws Exception {
         solo.enterText(0, "the beatles");
         clickSearch();
-        solo.assertCurrentActivity("", SearchActivity.class);
+        solo.assertCurrentActivity("Expected Search Activity", SearchActivity.class);
         assertTrue(solo.searchText("Artist"));
         solo.clickInList(0);
-        solo.assertCurrentActivity("", ArtistActivity.class);
+        solo.assertCurrentActivity("Expected Artist Activity", ArtistActivity.class);
         assertTrue(solo.searchText("The Beatles"));
     }
 
@@ -63,7 +63,7 @@ public class ArtistSearchTest extends ActivityInstrumentationTestCase2<Dashboard
     public void testSearchWithUnknownArtist() throws Exception {
         solo.enterText(0, "nbagroypdnebto");
         clickSearch();
-        solo.assertCurrentActivity("", SearchActivity.class);
+        solo.assertCurrentActivity("Expected Search Activity", SearchActivity.class);
         assertTrue(solo.searchText("No results found"));
     }
 

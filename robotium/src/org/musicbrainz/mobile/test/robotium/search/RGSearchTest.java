@@ -47,10 +47,10 @@ public class RGSearchTest extends ActivityInstrumentationTestCase2<DashboardActi
         solo.pressSpinnerItem(0, 1);
         solo.enterText(0, "codes and keys");
         clickSearch();
-        solo.assertCurrentActivity("", SearchActivity.class);
+        solo.assertCurrentActivity("Expected Search Activity", SearchActivity.class);
         assertTrue(solo.searchText("Release"));
         solo.clickInList(0);
-        solo.assertCurrentActivity("", ReleaseActivity.class);
+        solo.assertCurrentActivity("Expected Release Activity", ReleaseActivity.class);
         solo.clickInList(0);
         assertTrue(solo.searchText("Death Cab for Cutie"));
     }
