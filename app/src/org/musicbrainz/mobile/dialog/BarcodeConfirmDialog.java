@@ -71,7 +71,6 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
 
         String releaseID = rs.getReleaseMbid();
         parent.submitBarcode(releaseID);
-        parent.finish();
         dismiss();
     }
 

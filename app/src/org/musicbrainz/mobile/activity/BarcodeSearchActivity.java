@@ -58,9 +58,9 @@ import android.widget.Toast;
 public class BarcodeSearchActivity extends MusicBrainzActivity implements View.OnClickListener,
         ListView.OnItemClickListener, ListView.OnItemLongClickListener, OnEditorActionListener {
 
+    private static final String INSTANCE_SELECTED = "selected_position";
     private static final int SEARCH_RELEASE_LOADER = 0;
     private static final int SUBMIT_BARCODE_LOADER = 1;
-
     private static final int DIALOG_CONNECTION_FAILURE = 0;
     private static final int DIALOG_SUBMIT_BARCODE = 1;
 
@@ -77,7 +77,8 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     private String searchTerm;
 
     private LinkedList<ReleaseStub> results;
-    private ReleaseStub selection;
+    private int selection = 0;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,7 +149,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selection = results.get(position);
+        selection = position;
         showDialog(DIALOG_SUBMIT_BARCODE);
     }
 
@@ -182,11 +183,23 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     protected Dialog onCreateDialog(int id) {
         switch (id) {
         case DIALOG_SUBMIT_BARCODE:
-            return new BarcodeConfirmDialog(this, selection);
+            return new BarcodeConfirmDialog(this, results.get(selection));
         case DIALOG_CONNECTION_FAILURE:
             return createConnectionErrorDialog();
         }
         return null;
+    }
+    
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(INSTANCE_SELECTED, selection);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+    
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        selection = savedInstanceState.getInt(INSTANCE_SELECTED);
     }
 
     private LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>> searchCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>>() {
@@ -236,7 +249,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
 
         @Override
         public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
-            return new SubmitBarcodeLoader(BarcodeSearchActivity.this, getCredentials(), selection.getReleaseMbid(),
+            return new SubmitBarcodeLoader(BarcodeSearchActivity.this, getCredentials(), getSelectedReleaseMbid(),
                     barcode);
         }
 
@@ -249,7 +262,8 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
                 Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode_fail, Toast.LENGTH_LONG).show();
                 break;
             case SUCCESS:
-                Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode, Toast.LENGTH_LONG).show();
+                BarcodeSearchActivity.this.finish();
             }
         }
 
@@ -258,5 +272,9 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
             loader.reset();
         }
     };
+    
+    private String getSelectedReleaseMbid() {
+        return results.get(selection).getReleaseMbid();
+    }
 
 }

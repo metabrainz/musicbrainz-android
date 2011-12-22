@@ -54,7 +54,7 @@ import org.musicbrainz.android.api.util.Credentials;
  */
 public class MusicBrainzWebClient implements MusicBrainz {
 
-    private static final String AUTH_REALM = "test.musicbrainz.org";
+    private static final String AUTH_REALM = "musicbrainz.org";
     private static final String AUTH_SCOPE = "musicbrainz.org";
     private static final int AUTH_PORT = 80;
     private static final String AUTH_TYPE = "Digest";
