@@ -28,3 +28,14 @@ Code contributions are encouraged in the form of pull requests. Please use the f
 * Use descriptive names and comment as a last resort
 
 It might be helpful to use this [eclipse code formatting configuration](https://github.com/novoda/public-mvn-repo/blob/master/eclipse/clean_code_formatter_profile.xml).
+
+### Building with Maven
+
+You will need [this profile](https://github.com/novoda/public-mvn-repo/blob/master/poms/settings.xml) in your ~/.m2/settings.xml.
+
+The following command will setup the project and copy the necessary dependencies so that you can work in Eclipse.
+
+    $mvn clean initialize -Peclipse
+  
+You can also just do something like `mvn install`, which will build, install and run the tests (you may need to attach an Android device first).
+  
