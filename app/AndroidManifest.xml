@@ -21,12 +21,12 @@
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="org.musicbrainz.mobile"
-  android:versionCode="5"
-  android:versionName="1.1-beta"
+  android:versionCode="6"
+  android:versionName="1.1"
   android:installLocation="auto">
 
   <uses-sdk
-    android:minSdkVersion="4"
+    android:minSdkVersion="7"
     android:targetSdkVersion="13" />
 
   <supports-screens

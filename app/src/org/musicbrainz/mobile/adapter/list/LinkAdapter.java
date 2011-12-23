@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -63,6 +64,14 @@ public class LinkAdapter extends ArrayAdapter<WebLink> {
         WebLink linkData = links.get(position);
         holder.getLinkTitle().setText(linkData.getPrettyType());
         holder.getLink().setText(linkData.getPrettyUrl());
+        
+        ImageView icon = (ImageView) link.findViewById(R.id.icon);
+        if (linkData.getType().equalsIgnoreCase("youtube")) {
+            icon.setImageResource(R.drawable.ic_forward);
+        } else {
+            icon.setImageResource(R.drawable.ic_link);
+        }
+        
         return link;
     }
 
