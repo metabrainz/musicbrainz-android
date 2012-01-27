@@ -54,7 +54,7 @@ public class Utils {
     
     public static String stringFromAsset(Context context, String asset) {
         try {
-            InputStream input = context.getResources().getAssets().open("about.html");
+            InputStream input = context.getResources().getAssets().open(asset);
             byte[] buffer = new byte[input.available()];  
             input.read(buffer);  
             ByteArrayOutputStream output = new ByteArrayOutputStream();  
@@ -63,7 +63,7 @@ public class Utils {
             input.close(); 
             return output.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("Error reading text file from assets folder.");
             return "";
         }
     }

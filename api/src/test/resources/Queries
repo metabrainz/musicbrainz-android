@@ -19,7 +19,7 @@ releaseGroupReleaseBrowse:
 musicbrainz.org/ws/2/release?release-group=dca03435-8adb-30a5-ba82-5a162267ff38&inc=artist-credits+labels+mediums
 
 releaseGroupSearch:
-musicbrainz.org/ws/2/release-group?query=songs about leaving
+musicbrainz.org/ws/2/release-group?query=songs%20about%20leaving
 
 releaseGroupLookup:
 musicbrainz.org/ws/2/release/77c85384-c846-34b1-b576-63bc00644a28?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels
@@ -28,7 +28,13 @@ releaseLookup:
 musicbrainz.org/ws/2/release/2d9f9aac-1884-3939-a3b7-01437151e495?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels
 
 releaseSearch: 
-musicbrainz.org/ws/2/release?query=songs about leaving
+musicbrainz.org/ws/2/release?query=songs%20about%20leaving
 
 tagLookup: 
 musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=tags
+
+labelSearch:
+musicbrainz.org/ws/2/label?query=count%20your%20lucky%20stars
+
+recordingSearch: (track)
+http://musicbrainz.org/ws/2/recording?query=pleaser

@@ -45,7 +45,6 @@ import org.musicbrainz.mobile.loader.SubmitTagsLoader;
 import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.app.AlertDialog;
