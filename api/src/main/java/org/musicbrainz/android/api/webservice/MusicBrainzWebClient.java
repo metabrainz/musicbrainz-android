@@ -39,7 +39,7 @@ import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ArtistStub;
+import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
@@ -135,10 +135,10 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public LinkedList<ArtistStub> searchArtist(String searchTerm) throws IOException {
+    public LinkedList<ArtistSearchStub> searchArtist(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.artistSearch(searchTerm));
         InputStream response = entity.getContent();
-        LinkedList<ArtistStub> artists = responseParser.parseArtistSearch(response);
+        LinkedList<ArtistSearchStub> artists = responseParser.parseArtistSearch(response);
         entity.consumeContent();
         return artists;
     }

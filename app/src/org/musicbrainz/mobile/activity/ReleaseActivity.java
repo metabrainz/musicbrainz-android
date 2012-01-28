@@ -25,7 +25,7 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.Release;
-import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
@@ -190,11 +190,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
     }
 
     private boolean isArtistUpAvailable() {
-        ArrayList<ReleaseArtist> releaseArtists = release.getArtists();
+        ArrayList<ArtistNameMbid> releaseArtists = release.getArtists();
         if (releaseArtists.size() != 1) {
             provideArtistAction = false;
         } else {
-            ReleaseArtist singleArtist = releaseArtists.get(0);
+            ArtistNameMbid singleArtist = releaseArtists.get(0);
             for (String id : Artist.SPECIAL_PURPOSE) {
                 if (singleArtist.getMbid().equals(id)) {
                     provideArtistAction = false;

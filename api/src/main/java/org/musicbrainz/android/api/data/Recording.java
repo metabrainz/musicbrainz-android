@@ -20,9 +20,88 @@
 
 package org.musicbrainz.android.api.data;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
- * TODO Parse full recording data.
+ * Recording (track) data.
  */
 public class Recording {
+	
+	private String mbid;
+	private String title;
+	private int length;
+	private ArtistNameMbid artist;
+	
+	private int ratingCount;
+	private float rating;
+	private LinkedList<Tag> tags = new LinkedList<Tag>();
+	
+	private ArrayList<ReleaseStub> releases = new ArrayList<ReleaseStub>();
+
+	public String getMbid() {
+		return mbid;
+	}
+
+	public void setMbid(String mbid) {
+		this.mbid = mbid;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public ArtistNameMbid getArtist() {
+		return artist;
+	}
+
+	public void setArtist(ArtistNameMbid artist) {
+		this.artist = artist;
+	}
+
+	public int getRatingCount() {
+		return ratingCount;
+	}
+
+	public void setRatingCount(int ratingCount) {
+		this.ratingCount = ratingCount;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	public LinkedList<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(LinkedList<Tag> tags) {
+		this.tags = tags;
+	}
+
+	public ArrayList<ReleaseStub> getReleases() {
+		return releases;
+	}
+
+	public void setReleases(ArrayList<ReleaseStub> releases) {
+		this.releases = releases;
+	}
 
 }
+

@@ -20,43 +20,38 @@
 
 package org.musicbrainz.android.api.data;
 
-import org.musicbrainz.android.api.util.StringFormat;
-
 /**
- * Basic recording data for tracks in release.
+ * Partial artist data to select between similar artists in a list of search
+ * results.
  */
-public class RecordingStub {
+public class ArtistSearchStub {
 
-    private String title;
-    private int position;
-    private int duration;
+    private String mbid;
+    private String name;
+    private String disambiguation;
 
-    public String getTitle() {
-        return title;
+    public String getMbid() {
+        return mbid;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMbid(String mbid) {
+        this.mbid = mbid;
     }
 
-    public int getPosition() {
-        return position;
+    public String getName() {
+        return name;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getDuration() {
-        return duration;
+    public String getDisambiguation() {
+        return disambiguation;
     }
 
-    public String getFormattedDuration() {
-        return StringFormat.formatDuration(duration);
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setDisambiguation(String disambiguation) {
+        this.disambiguation = disambiguation;
     }
 
 }

@@ -306,5 +306,33 @@
         <date>1999</date>
       </release>
     </release-list>
+    <relation-list target-type="url">
+      <relation type="logo">
+        <target>ftp://ftp.barsuk.com/2006BlueBarsukWithText.jpg</target>
+      </relation>
+      <relation type="wikipedia">
+        <target>http://en.wikipedia.org/wiki/Barsuk_Records</target>
+      </relation>
+      <relation type="official site">
+        <target>http://www.barsuk.com/</target>
+      </relation>
+      <relation type="discogs">
+        <target>http://www.discogs.com/label/Barsuk+Records</target>
+      </relation>
+    </relation-list>
+    <tag-list>
+      <tag count="1">
+        <name>american</name>
+      </tag>
+      <tag count="1">
+        <name>américain</name>
+      </tag>
+      <tag count="1">
+        <name>indie rock</name>
+      </tag>
+      <tag count="1">
+        <name>usa</name>
+      </tag>
+    </tag-list>
   </label>
 </metadata>

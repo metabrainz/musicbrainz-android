@@ -43,7 +43,7 @@ recordingSearch: (track)
 musicbrainz.org/ws/2/recording?query=pleaser
 
 recordingLookup:
-musicbrainz.org/ws/2/recording/e832b734-62e9-4eb7-84f8-0951f39e719e?inc=artists+releases+tags+ratings+url-rels
+http://musicbrainz.org/ws/2/recording/470d06f8-6c0c-443d-b521-4c4eed9f0e7e?inc=artists+releases+tags+ratings
 
 collectionListLookup:
 musicbrainz.org/ws/2/collection

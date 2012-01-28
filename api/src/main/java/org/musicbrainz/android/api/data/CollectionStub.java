@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,43 +20,46 @@
 
 package org.musicbrainz.android.api.data;
 
-import org.musicbrainz.android.api.util.StringFormat;
-
 /**
- * Basic recording data for tracks in release.
+ * Information about an editor's collection.
  */
-public class RecordingStub {
-
-    private String title;
-    private int position;
-    private int duration;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public String getFormattedDuration() {
-        return StringFormat.formatDuration(duration);
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
+public class CollectionStub {
+	
+	private String mbid;
+	private String name;
+	private String editor;
+	private int count;
+	
+	public String getMbid() {
+		return mbid;
+	}
+	
+	public void setMbid(String mbid) {
+		this.mbid = mbid;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getEditor() {
+		return editor;
+	}
+	
+	public void setEditor(String editor) {
+		this.editor = editor;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 }

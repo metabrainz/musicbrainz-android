@@ -34,7 +34,7 @@ public class ReleaseGroupStub implements Comparable<ReleaseGroupStub> {
     private String title;
     private String type;
     private Calendar firstRelease = Calendar.getInstance();
-    private LinkedList<ReleaseArtist> artists = new LinkedList<ReleaseArtist>();
+    private LinkedList<ArtistNameMbid> artists = new LinkedList<ArtistNameMbid>();
     private LinkedList<String> releaseMbids = new LinkedList<String>();
 
     public String getMbid() {
@@ -101,11 +101,11 @@ public class ReleaseGroupStub implements Comparable<ReleaseGroupStub> {
         }
     }
 
-    public LinkedList<ReleaseArtist> getArtists() {
+    public LinkedList<ArtistNameMbid> getArtists() {
         return artists;
     }
 
-    public void addArtist(ReleaseArtist artist) {
+    public void addArtist(ArtistNameMbid artist) {
         artists.add(artist);
     }
 

@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import java.util.LinkedList;
 
-import org.musicbrainz.android.api.data.ArtistStub;
+import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.SearchArtistAdapter;
@@ -70,7 +70,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private String searchTerm;
 
-    private LinkedList<ArtistStub> artistSearchResults;
+    private LinkedList<ArtistSearchStub> artistSearchResults;
     private LinkedList<ReleaseGroupStub> rgSearchResults;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -213,7 +213,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
         private void startArtistActivity(int position) {
             Intent artistIntent = new Intent(SearchActivity.this, ArtistActivity.class);
-            ArtistStub stub = artistSearchResults.get(position);
+            ArtistSearchStub stub = artistSearchResults.get(position);
             artistIntent.putExtra(Extra.ARTIST_MBID, stub.getMbid());
             startActivity(artistIntent);
         }

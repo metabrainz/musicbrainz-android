@@ -27,7 +27,6 @@ import java.util.LinkedList;
 public class Artist {
 
     private String mbid;
-
     private String name;
     private String type;
     private String country;

@@ -22,19 +22,19 @@ package org.musicbrainz.mobile.loader.result;
 
 import java.util.LinkedList;
 
-import org.musicbrainz.android.api.data.ArtistStub;
+import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 
 public class SearchResults {
     
     private final SearchType type;
-    private final LinkedList<ArtistStub> artistResults;
+    private final LinkedList<ArtistSearchStub> artistResults;
     private final LinkedList<ReleaseGroupStub> releaseGroupResults;
     
     @SuppressWarnings("unchecked")
     public SearchResults(SearchType type, LinkedList<?> results) {
         if (type == SearchType.ARTIST) {
-            artistResults = (LinkedList<ArtistStub>) results;
+            artistResults = (LinkedList<ArtistSearchStub>) results;
             releaseGroupResults = null;
         } else {
             artistResults = null;
@@ -43,7 +43,7 @@ public class SearchResults {
         this.type = type;
     }
     
-    public SearchResults(LinkedList<ArtistStub> artistResults, LinkedList<ReleaseGroupStub> releaseGroupResults) {
+    public SearchResults(LinkedList<ArtistSearchStub> artistResults, LinkedList<ReleaseGroupStub> releaseGroupResults) {
         this.artistResults = artistResults;
         this.releaseGroupResults = releaseGroupResults;
         this.type = SearchType.ALL;
@@ -53,7 +53,7 @@ public class SearchResults {
         return type;
     }
 
-    public LinkedList<ArtistStub> getArtistResults() {
+    public LinkedList<ArtistSearchStub> getArtistResults() {
         return artistResults;
     }
 

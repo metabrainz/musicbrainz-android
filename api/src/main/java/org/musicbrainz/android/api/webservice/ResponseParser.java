@@ -30,7 +30,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ArtistStub;
+import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
@@ -94,7 +94,7 @@ public class ResponseParser {
         return handler.getResults();
     }
 
-    public LinkedList<ArtistStub> parseArtistSearch(InputStream stream) throws IOException {
+    public LinkedList<ArtistSearchStub> parseArtistSearch(InputStream stream) throws IOException {
         ArtistSearchHandler handler = new ArtistSearchHandler();
         doParsing(stream, handler);
         return handler.getResults();

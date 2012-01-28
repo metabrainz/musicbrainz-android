@@ -34,5 +34,31 @@ public class StringFormat {
         }
         return sb.toString();
     }
+    
+    public static String formatDuration(int durationSeconds) {
+
+        // TODO: Would be much cleaner using String.format().
+        if (durationSeconds == 0) {
+            return "";
+        }
+
+        int s = durationSeconds / 1000;
+        int secs = s % 60;
+        int mins = (s % 3600) / 60;
+        int hrs = s / 3600;
+
+        String mS = "" + mins;
+        String sS = "" + secs;
+        if (secs < 10)
+            sS = "0" + secs;
+
+        if (hrs == 0) {
+            return mS + ':' + sS;
+        } else {
+            if (mins < 10)
+                mS = "0" + mins;
+            return hrs + ":" + mS + ":" + sS;
+        }
+    }
 
 }

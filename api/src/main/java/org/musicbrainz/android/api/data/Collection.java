@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,9 +20,21 @@
 
 package org.musicbrainz.android.api.data;
 
+import java.util.LinkedList;
+
 /**
- * User collection data. TODO Parse user collections.
+ * Collection including list of releases.
  */
-public class Collection {
+public class Collection extends CollectionStub {
+	
+	private LinkedList<ReleaseStub> releases = new LinkedList<ReleaseStub>();
+
+	public LinkedList<ReleaseStub> getReleases() {
+		return releases;
+	}
+
+	public void setReleases(LinkedList<ReleaseStub> releases) {
+		this.releases = releases;
+	}
 
 }

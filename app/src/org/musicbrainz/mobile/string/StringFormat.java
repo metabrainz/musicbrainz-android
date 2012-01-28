@@ -23,7 +23,7 @@ package org.musicbrainz.mobile.string;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.mobile.R;
 
@@ -42,9 +42,9 @@ public class StringFormat {
         return sb.substring(0, sb.length() - 2);
     }
 
-    public static String commaSeparateArtists(Collection<ReleaseArtist> artists) {
+    public static String commaSeparateArtists(Collection<ArtistNameMbid> artists) {
         StringBuilder sb = new StringBuilder();
-        for (ReleaseArtist artist : artists) {
+        for (ArtistNameMbid artist : artists) {
             sb.append(artist.getName() + ", ");
         }
         return sb.substring(0, sb.length() - 2);

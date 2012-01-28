@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ArtistStub;
+import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.mobile.R;
 
 import android.app.Activity;
@@ -35,12 +35,12 @@ import android.widget.TextView;
 /**
  * List adapter for artist stub search results.
  */
-public class SearchArtistAdapter extends ArrayAdapter<ArtistStub> {
+public class SearchArtistAdapter extends ArrayAdapter<ArtistSearchStub> {
 
     private Activity context;
-    private List<ArtistStub> resultData;
+    private List<ArtistSearchStub> resultData;
 
-    public SearchArtistAdapter(Activity context, List<ArtistStub> resultData) {
+    public SearchArtistAdapter(Activity context, List<ArtistSearchStub> resultData) {
         super(context, R.layout.list_srch_artist, resultData);
         this.context = context;
         this.resultData = resultData;
@@ -60,7 +60,7 @@ public class SearchArtistAdapter extends ArrayAdapter<ArtistStub> {
             holder = (ArtistSearchHolder) artist.getTag();
         }
 
-        ArtistStub artistData = resultData.get(position);
+        ArtistSearchStub artistData = resultData.get(position);
         holder.getArtistName().setText(artistData.getName());
 
         TextView option = holder.getDisambiguation();

@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ArtistStub;
+import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
@@ -44,7 +44,7 @@ public interface MusicBrainz {
     /*
      * Search
      */
-    public abstract LinkedList<ArtistStub> searchArtist(String searchTerm) throws IOException;
+    public abstract LinkedList<ArtistSearchStub> searchArtist(String searchTerm) throws IOException;
     public abstract LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException;
     public abstract LinkedList<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException;
 

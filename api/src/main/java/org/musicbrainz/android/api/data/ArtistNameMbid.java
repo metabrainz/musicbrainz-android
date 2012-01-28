@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2011 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,43 +20,28 @@
 
 package org.musicbrainz.android.api.data;
 
-import org.musicbrainz.android.api.util.StringFormat;
-
 /**
- * Basic recording data for tracks in release.
+ * Artist name and MBID pair for release.
  */
-public class RecordingStub {
+public class ArtistNameMbid {
 
-    private String title;
-    private int position;
-    private int duration;
+    private String mbid;
+    private String name;
 
-    public String getTitle() {
-        return title;
+    public String getMbid() {
+        return mbid;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMbid(String mbid) {
+        this.mbid = mbid;
     }
 
-    public int getPosition() {
-        return position;
+    public String getName() {
+        return name;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public String getFormattedDuration() {
-        return StringFormat.formatDuration(duration);
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

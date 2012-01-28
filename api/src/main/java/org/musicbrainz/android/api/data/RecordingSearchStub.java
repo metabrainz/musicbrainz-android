@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2011 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,38 +20,43 @@
 
 package org.musicbrainz.android.api.data;
 
-/**
- * Partial artist data to select between similar artists in a list of search
- * results.
- */
-public class ArtistStub {
-
-    private String mbid;
-    private String name;
-    private String disambiguation;
-
-    public String getMbid() {
-        return mbid;
-    }
-
-    public void setMbid(String mbid) {
-        this.mbid = mbid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
-    }
+public class RecordingSearchStub {
+	
+	private String mbid;
+	private String title;
+	private String artist;
+	private int length;
+	
+	public String getMbid() {
+		return mbid;
+	}
+	
+	public void setMbid(String mbid) {
+		this.mbid = mbid;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getArtist() {
+		return artist;
+	}
+	
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+	
+	public int getLength() {
+		return length;
+	}
+	
+	public void setLength(int length) {
+		this.length = length;
+	}
 
 }

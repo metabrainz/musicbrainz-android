@@ -22,7 +22,7 @@ package org.musicbrainz.android.api.handlers;
 
 import java.util.LinkedList;
 
-import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -31,7 +31,7 @@ public class ReleaseGroupSearchHandler extends MBHandler {
 
     private LinkedList<ReleaseGroupStub> stubs = new LinkedList<ReleaseGroupStub>();
     private ReleaseGroupStub rg;
-    private ReleaseArtist releaseArtist;
+    private ArtistNameMbid releaseArtist;
 
     private boolean artist = false;
 
@@ -53,7 +53,7 @@ public class ReleaseGroupSearchHandler extends MBHandler {
             sb = new StringBuilder();
         } else if (localName.equals("artist")) {
             artist = true;
-            releaseArtist = new ReleaseArtist();
+            releaseArtist = new ArtistNameMbid();
             releaseArtist.setMbid(atts.getValue("id"));
         } else if (localName.equals("name")) {
             if (artist)
