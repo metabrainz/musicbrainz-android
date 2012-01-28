@@ -1,0 +1,29 @@
+<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#">
+  <recording id="1003744a-48eb-4839-bac6-a43a2b09d09b">
+    <title>Pleaser</title>
+    <length>236000</length>
+    <artist-credit>
+      <name-credit>
+        <artist id="a459df95-6a50-4b22-8df8-076642ce62a7">
+          <name>Lemuria</name>
+          <sort-name>Lemuria</sort-name>
+          <disambiguation>Indie, power pop, punk from Buffalo, NY, USA</disambiguation>
+        </artist>
+      </name-credit>
+    </artist-credit>
+    <release-list count="1">
+      <release id="31bba7ea-0e15-4dfe-9a89-c77acd17d6ae">
+        <title>Pebble</title>
+        <status>Official</status>
+        <quality>normal</quality>
+        <text-representation>
+          <language>eng</language>
+          <script>Latn</script>
+        </text-representation>
+        <date>2011-01-11</date>
+        <country>US</country>
+        <barcode>811772024121</barcode>
+      </release>
+    </release-list>
+  </recording>
+</metadata>

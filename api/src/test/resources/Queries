@@ -36,5 +36,12 @@ musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?inc=tags
 labelSearch:
 musicbrainz.org/ws/2/label?query=count%20your%20lucky%20stars
 
+labelLookup:
+musicbrainz.org/ws/2/label/a4f904e0-f048-4c13-88ec-f9f31f3e6109?inc=releases
+
 recordingSearch: (track)
-http://musicbrainz.org/ws/2/recording?query=pleaser
+musicbrainz.org/ws/2/recording?query=pleaser
+
+recordingLookup:
+musicbrainz.org/ws/2/recording/1003744a-48eb-4839-bac6-a43a2b09d09b?inc=artists+releases
+
