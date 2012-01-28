@@ -1,0 +1,30 @@
+<metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#">
+  <collection id="c6f9fb72-e233-47f4-a2f6-19f16442d93a">
+    <name>My Collection</name>
+    <editor>jdamcd</editor>
+    <release-list count="2">
+      <release id="229fef25-8e57-3465-bb92-0569b3ed1b8c">
+        <title>Boston</title>
+        <status>Official</status>
+        <quality>normal</quality>
+        <text-representation>
+          <language>eng</language>
+          <script>Latn</script>
+        </text-representation>
+        <date>1977</date>
+        <country>GB</country>
+      </release>
+      <release id="9f00a4d3-82b2-4084-a48b-565703b812ce">
+        <title>New Leaves</title>
+        <status>Official</status>
+        <quality>normal</quality>
+        <text-representation>
+          <language>eng</language>
+          <script>Latn</script>
+        </text-representation>
+        <date>2009-09-22</date>
+        <country>US</country>
+      </release>
+    </release-list>
+  </collection>
+</metadata>

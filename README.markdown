@@ -8,7 +8,7 @@ This app is available on [Android Market](https://market.android.com/details?id=
 
 ### Betas
 
-There may occasionally be preview builds to test new functionality. Check the [downloads](https://github.com/jdamcd/MusicBrainzAndroid/downloads) page.
+There may occasionally be preview builds to test new functionality. Check the [downloads](https://github.com/jdamcd/musicbrainz-android/downloads) page.
 
 ### Licenses
 
