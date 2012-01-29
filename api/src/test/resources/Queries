@@ -49,4 +49,11 @@ collectionListLookup:
 musicbrainz.org/ws/2/collection
 
 collectionLookup:
-musicbrainz.org/ws/2/c6f9fb72-e233-47f4-a2f6-19f16442d93a/releases
+musicbrainz.org/ws/2/collection/c6f9fb72-e233-47f4-a2f6-19f16442d93a/releases
+
+collectionAdd:
+musicbrainz.org/ws/2/collection/c6f9fb72-e233-47f4-a2f6-19f16442d93a/releases/455641ea-fff4-49f6-8fb4-49f961d8f1ad;
+
+collectionRemove:
+musicbrainz.org/ws/2/collection/c6f9fb72-e233-47f4-a2f6-19f16442d93a/releases/455641ea-fff4-49f6-8fb4-49f961d8f1ad;
+

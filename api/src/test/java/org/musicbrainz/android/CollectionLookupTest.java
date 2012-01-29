@@ -20,23 +20,34 @@
 
 package org.musicbrainz.android;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import org.musicbrainz.android.api.data.EditorCollection;
+import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class CollectionLookupTest extends BaseXmlParsingTestCase {
-	
-    @Ignore
+
     @Test
-    public void testReleaseGroupLookup() {
+    public void testReleaseGroupLookup() throws IOException {
         InputStream stream = getFileStream("collectionLookup_c6f9fb72-e233-47f4-a2f6-19f16442d93a.xml");
         assertNotNull(stream);
 
-        fail("Collection lookups are not supported yet.");
+        ResponseParser responseParser = new ResponseParser();
+        EditorCollection result = responseParser.parseCollectionLookup(stream);
+
+        assertEquals("c6f9fb72-e233-47f4-a2f6-19f16442d93a", result.getMbid());
+        assertEquals("My Collection", result.getName());
+        assertEquals("jdamcd", result.getEditor());
+        assertEquals(2, result.getCount());
+
+        // TODO Test release parsing.
+
+        stream.close();
     }
 
 }

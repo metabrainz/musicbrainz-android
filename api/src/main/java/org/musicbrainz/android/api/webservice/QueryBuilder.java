@@ -20,6 +20,7 @@
 
 package org.musicbrainz.android.api.webservice;
 
+import org.musicbrainz.android.api.util.WebServiceUtils;
 import org.musicbrainz.android.api.webservice.Entity;
 
 public class QueryBuilder {
@@ -30,6 +31,10 @@ public class QueryBuilder {
     private static final String LOOKUP_ARTIST_PARAMS = "?inc=url-rels+tags+ratings";
     private static final String LOOKUP_RELEASE = "release/";
     private static final String LOOKUP_RELEASE_PARAMS = "?inc=release-groups+artists+recordings+labels+tags+ratings";
+    private static final String LOOKUP_LABEL = "label/";
+    private static final String LOOKUP_LABEL_PARAMS = "?inc=releases+tags+ratings+url-rels";
+    private static final String LOOKUP_RECORDING = "recording/";
+    private static final String LOOKUP_RECORDING_PARAMS = "?inc=artists+releases+tags+ratings";
 
     private static final String BROWSE_ARTIST_RGS = "release-group?artist=";
     private static final String BROWSE_ARTIST_RGS_PARAMS = "&limit=100";
@@ -41,6 +46,13 @@ public class QueryBuilder {
     private static final String SEARCH_RELEASE = "release?query=";
     private static final String SEARCH_BARCODE = "release/?query=barcode:";
     private static final String SEARCH_BARCODE_PARAMS = "&limit=1";
+    private static final String SEARCH_LABEL = "label?query=";
+    private static final String SEARCH_RECORDING = "recording?query=";
+    
+    private static final String LOOKUP_USER_COLLECTIONS = "collection";
+    private static final String COLLECTION = "collection/";
+    private static final String COLLECTION_LIST = "/release";
+    private static final String COLLECTION_EDIT = "/release/";;
 
     private static final String TAG_PARAMS = "?inc=tags";
     private static final String RATING_PARAMS = "?inc=ratings";
@@ -85,6 +97,22 @@ public class QueryBuilder {
     public static String releaseSearch(String searchTerm) {
         return new String(WEB_SERVICE + SEARCH_RELEASE + WebServiceUtils.sanitise(searchTerm));
     }
+    
+    public static String labelLookup(String mbid) {
+        return new String(WEB_SERVICE + LOOKUP_LABEL + mbid + LOOKUP_LABEL_PARAMS);
+    }
+    
+    public static String labelSearch(String searchTerm) {
+        return new String(WEB_SERVICE + SEARCH_LABEL + searchTerm);
+    }
+    
+    public static String recordingLookup(String mbid) {
+        return new String(WEB_SERVICE + LOOKUP_RECORDING + mbid + LOOKUP_RECORDING_PARAMS);
+    }
+    
+    public static String recordingSearch(String searchTerm) {
+        return new String(WEB_SERVICE + SEARCH_RECORDING + searchTerm);
+    }
 
     public static String tagLookup(Entity type, String mbid) {
         return new String(WEB_SERVICE + WebServiceUtils.entityString(type) + "/" + mbid + TAG_PARAMS);
@@ -112,6 +140,18 @@ public class QueryBuilder {
 
     public static String barcodeSubmission(String clientId) {
         return new String(WEB_SERVICE + BARCODE + CLIENT + clientId);
+    }
+    
+    public static String collectionList() {
+        return new String(WEB_SERVICE + LOOKUP_USER_COLLECTIONS);
+    }
+    
+    public static String collectionLookup(String collectionMbid) {
+        return new String(WEB_SERVICE + COLLECTION + collectionMbid + COLLECTION_LIST);
+    }
+    
+    public static String collectionEdit(String collectionMbid, String releaseMbid, String clientId) {
+        return new String(WEB_SERVICE + COLLECTION + collectionMbid + COLLECTION_EDIT + releaseMbid + ";" + CLIENT + clientId);
     }
 
 }

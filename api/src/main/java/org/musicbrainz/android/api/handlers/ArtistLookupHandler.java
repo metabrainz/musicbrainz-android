@@ -48,10 +48,8 @@ public class ArtistLookupHandler extends MBHandler {
             if (inArtistRelations) {
 
             } else {
-                String mbid = atts.getValue("id");
-                artist.setMbid(mbid);
-                String type = atts.getValue("type");
-                artist.setType(type);
+                artist.setMbid(atts.getValue("id"));
+                artist.setType(atts.getValue("type"));
             }
         } else if (localName.equalsIgnoreCase("name")) {
             sb = new StringBuilder();
@@ -61,8 +59,7 @@ public class ArtistLookupHandler extends MBHandler {
             tag = new Tag();
             tag.setCount(Integer.parseInt(atts.getValue("count")));
         } else if (localName.equalsIgnoreCase("rating")) {
-            int ratingCount = Integer.parseInt(atts.getValue("votes-count"));
-            artist.setRatingCount(ratingCount);
+            artist.setRatingCount(Integer.parseInt(atts.getValue("votes-count")));
             sb = new StringBuilder();
         } else if (localName.equalsIgnoreCase("country")) {
             sb = new StringBuilder();
@@ -81,8 +78,7 @@ public class ArtistLookupHandler extends MBHandler {
         } else if (localName.equalsIgnoreCase("end")) {
             sb = new StringBuilder();
         } else if (localName.equalsIgnoreCase("relation-list")) {
-            String type = atts.getValue("target-type");
-            setRelationStatus(type);
+            setRelationStatus(atts.getValue("target-type"));
         }
     }
 

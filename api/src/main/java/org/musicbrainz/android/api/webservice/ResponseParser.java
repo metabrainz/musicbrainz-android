@@ -31,6 +31,12 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistSearchStub;
+import org.musicbrainz.android.api.data.EditorCollection;
+import org.musicbrainz.android.api.data.EditorCollectionStub;
+import org.musicbrainz.android.api.data.Label;
+import org.musicbrainz.android.api.data.LabelSearchStub;
+import org.musicbrainz.android.api.data.Recording;
+import org.musicbrainz.android.api.data.RecordingSearchStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
@@ -39,6 +45,8 @@ import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.handlers.ArtistLookupHandler;
 import org.musicbrainz.android.api.handlers.ArtistSearchHandler;
 import org.musicbrainz.android.api.handlers.BarcodeSearchHandler;
+import org.musicbrainz.android.api.handlers.CollectionHandler;
+import org.musicbrainz.android.api.handlers.CollectionListHandler;
 import org.musicbrainz.android.api.handlers.RatingHandler;
 import org.musicbrainz.android.api.handlers.ReleaseGroupBrowseHandler;
 import org.musicbrainz.android.api.handlers.ReleaseGroupSearchHandler;
@@ -66,71 +74,103 @@ public class ResponseParser {
 
     public String parseMbidFromBarcode(InputStream stream) throws IOException {
         BarcodeSearchHandler handler = new BarcodeSearchHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getMbid();
     }
 
     public Release parseRelease(InputStream stream) throws IOException {
         ReleaseLookupHandler handler = new ReleaseLookupHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResult();
     }
 
     public LinkedList<ReleaseStub> parseReleaseGroupReleases(InputStream stream) throws IOException {
         ReleaseStubHandler handler = new ReleaseStubHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResults();
     }
 
     public Artist parseArtist(InputStream stream) throws IOException {
         ArtistLookupHandler handler = new ArtistLookupHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResult();
     }
 
     public ArrayList<ReleaseGroupStub> parseReleaseGroupBrowse(InputStream stream) throws IOException {
         ReleaseGroupBrowseHandler handler = new ReleaseGroupBrowseHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResults();
+    }
+    
+    public Label parseLabel(InputStream content) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public Recording parseRecording(InputStream content) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     public LinkedList<ArtistSearchStub> parseArtistSearch(InputStream stream) throws IOException {
         ArtistSearchHandler handler = new ArtistSearchHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResults();
     }
 
     public LinkedList<ReleaseGroupStub> parseReleaseGroupSearch(InputStream stream) throws IOException {
         ReleaseGroupSearchHandler handler = new ReleaseGroupSearchHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResults();
     }
 
     public LinkedList<ReleaseStub> parseReleaseSearch(InputStream stream) throws IOException {
         ReleaseStubHandler handler = new ReleaseStubHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResults();
+    }
+    
+    public LinkedList<LabelSearchStub> parseLabelSearch(InputStream content) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public LinkedList<RecordingSearchStub> parseRecordingSearch(InputStream content) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     public LinkedList<Tag> parseTagLookup(InputStream stream) throws IOException {
         TagHandler handler = new TagHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getTags();
     }
 
     public float parseRatingLookup(InputStream stream) throws IOException {
         RatingHandler handler = new RatingHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getRating();
     }
 
     public UserData parseUserData(InputStream stream) throws IOException {
         UserDataHandler handler = new UserDataHandler();
-        doParsing(stream, handler);
+        parse(stream, handler);
         return handler.getResult();
     }
 
-    protected void doParsing(InputStream stream, DefaultHandler handler) throws IOException {
+    public LinkedList<EditorCollectionStub> parseCollectionListLookup(InputStream stream) throws IOException {
+        CollectionListHandler handler = new CollectionListHandler();
+        parse(stream, handler);
+        return handler.getResults();
+    }
+
+    public EditorCollection parseCollectionLookup(InputStream stream) throws IOException {
+        CollectionHandler handler = new CollectionHandler();
+        parse(stream, handler);
+        return handler.getCollection();
+    }
+
+    protected void parse(InputStream stream, DefaultHandler handler) throws IOException {
         try {
             SAXParser parser = factory.newSAXParser();
             XMLReader reader = parser.getXMLReader();

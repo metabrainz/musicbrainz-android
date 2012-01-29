@@ -26,9 +26,9 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.util.Credentials;
+import org.musicbrainz.android.api.util.WebServiceUtils;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.android.api.webservice.WebServiceUtils;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 

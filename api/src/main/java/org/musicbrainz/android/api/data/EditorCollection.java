@@ -25,7 +25,7 @@ import java.util.LinkedList;
 /**
  * Collection including list of releases.
  */
-public class Collection extends CollectionStub {
+public class EditorCollection extends EditorCollectionStub {
 	
 	private LinkedList<ReleaseStub> releases = new LinkedList<ReleaseStub>();
 

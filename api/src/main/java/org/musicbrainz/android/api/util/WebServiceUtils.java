@@ -18,15 +18,17 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.webservice;
+package org.musicbrainz.android.api.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.LinkedList;
 
+import org.musicbrainz.android.api.webservice.Entity;
+
 public class WebServiceUtils {
 
-    static String sanitise(String input) {
+    public static String sanitise(String input) {
         try {
             return URLEncoder.encode(input, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -34,12 +36,16 @@ public class WebServiceUtils {
         }
     }
 
-    static String entityString(Entity entity) {
+    public static String entityString(Entity entity) {
         switch (entity) {
         case ARTIST:
             return "artist";
         case RELEASE_GROUP:
             return "release-group";
+        case LABEL:
+            return "label";
+        case RECORDING:
+            return "recording";
         default:
             return "artist";
         }

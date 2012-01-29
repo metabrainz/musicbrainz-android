@@ -26,6 +26,12 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistSearchStub;
+import org.musicbrainz.android.api.data.Label;
+import org.musicbrainz.android.api.data.LabelSearchStub;
+import org.musicbrainz.android.api.data.EditorCollection;
+import org.musicbrainz.android.api.data.EditorCollectionStub;
+import org.musicbrainz.android.api.data.Recording;
+import org.musicbrainz.android.api.data.RecordingSearchStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
@@ -47,6 +53,8 @@ public interface MusicBrainz {
     public abstract LinkedList<ArtistSearchStub> searchArtist(String searchTerm) throws IOException;
     public abstract LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException;
     public abstract LinkedList<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException;
+    public abstract LinkedList<LabelSearchStub> searchLabel(String searchTerm) throws IOException;
+    public abstract LinkedList<RecordingSearchStub> searchRecording(String searchTerm) throws IOException;
 
     /*
      * Lookup
@@ -54,6 +62,8 @@ public interface MusicBrainz {
     public abstract Artist lookupArtist(String mbid) throws IOException;
     public abstract Release lookupRelease(String mbid) throws IOException;
     public abstract Release lookupReleaseUsingBarcode(String barcode) throws IOException;
+    public abstract Label lookupLabel(String mbid) throws IOException;
+    public abstract Recording lookupRecording(String mbid) throws IOException;
     
     /*
      * User data lookup
@@ -73,5 +83,13 @@ public interface MusicBrainz {
     public abstract void submitTags(Entity entityType, String mbid, Collection<String> tags) throws IOException;
     public abstract void submitRating(Entity entityType, String mbid, int rating) throws IOException;
     public abstract void submitBarcode(String mbid, String barcode) throws IOException;
+    
+    /*
+     * Collection
+     */
+    public abstract void addReleaseToCollection(String collectionMbid, String releaseMbid) throws IOException;
+    public abstract void deleteReleaseFromCollection(String collectionMbid, String releaseMbid) throws IOException;
+    public abstract LinkedList<EditorCollectionStub> lookupUserCollections() throws IOException;
+    public abstract EditorCollection lookupCollection(String collectionMbid) throws IOException;
 
 }
