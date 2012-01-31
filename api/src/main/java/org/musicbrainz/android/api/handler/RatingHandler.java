@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.handlers;
+package org.musicbrainz.android.api.handler;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.handlers;
+package org.musicbrainz.android.api.handler;
 
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ArtistNameMbid;

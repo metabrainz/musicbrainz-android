@@ -18,36 +18,23 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android.api.handlers;
+package org.musicbrainz.android.api.handler;
 
-import org.musicbrainz.android.api.data.UserData;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-public class UserDataHandler extends MBHandler {
+public class BarcodeSearchHandler extends MBHandler {
 
-    private UserData data = new UserData();
+    private String mbid;
 
-    public UserData getResult() {
-        return data;
+    public String getMbid() {
+        return mbid;
     }
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equals("user-tag")) {
-            sb = new StringBuilder();
-        } else if (localName.equals("user-rating")) {
-            sb = new StringBuilder();
-        }
-    }
-
-    public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
-
-        if (localName.equals("user-tag")) {
-            data.addTag(sb.toString());
-        } else if (localName.equals("user-rating")) {
-            float rating = Float.parseFloat(sb.toString());
-            data.setRating(rating);
+        if (localName.equalsIgnoreCase("release")) {
+            mbid = atts.getValue("id");
         }
     }
 

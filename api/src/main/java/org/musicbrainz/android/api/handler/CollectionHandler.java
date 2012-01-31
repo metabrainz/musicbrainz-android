@@ -1,4 +1,4 @@
-package org.musicbrainz.android.api.handlers;
+package org.musicbrainz.android.api.handler;
 
 import org.musicbrainz.android.api.data.EditorCollection;
 import org.xml.sax.Attributes;

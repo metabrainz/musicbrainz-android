@@ -42,18 +42,22 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.handlers.ArtistLookupHandler;
-import org.musicbrainz.android.api.handlers.ArtistSearchHandler;
-import org.musicbrainz.android.api.handlers.BarcodeSearchHandler;
-import org.musicbrainz.android.api.handlers.CollectionHandler;
-import org.musicbrainz.android.api.handlers.CollectionListHandler;
-import org.musicbrainz.android.api.handlers.RatingHandler;
-import org.musicbrainz.android.api.handlers.ReleaseGroupBrowseHandler;
-import org.musicbrainz.android.api.handlers.ReleaseGroupSearchHandler;
-import org.musicbrainz.android.api.handlers.ReleaseLookupHandler;
-import org.musicbrainz.android.api.handlers.ReleaseStubHandler;
-import org.musicbrainz.android.api.handlers.TagHandler;
-import org.musicbrainz.android.api.handlers.UserDataHandler;
+import org.musicbrainz.android.api.handler.ArtistLookupHandler;
+import org.musicbrainz.android.api.handler.ArtistSearchHandler;
+import org.musicbrainz.android.api.handler.BarcodeSearchHandler;
+import org.musicbrainz.android.api.handler.CollectionHandler;
+import org.musicbrainz.android.api.handler.CollectionListHandler;
+import org.musicbrainz.android.api.handler.LabelLookupHandler;
+import org.musicbrainz.android.api.handler.LabelSearchHandler;
+import org.musicbrainz.android.api.handler.RatingHandler;
+import org.musicbrainz.android.api.handler.RecordingLookupHandler;
+import org.musicbrainz.android.api.handler.RecordingSearchHandler;
+import org.musicbrainz.android.api.handler.ReleaseGroupBrowseHandler;
+import org.musicbrainz.android.api.handler.ReleaseGroupSearchHandler;
+import org.musicbrainz.android.api.handler.ReleaseLookupHandler;
+import org.musicbrainz.android.api.handler.ReleaseStubHandler;
+import org.musicbrainz.android.api.handler.TagHandler;
+import org.musicbrainz.android.api.handler.UserDataHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -101,15 +105,17 @@ public class ResponseParser {
         parse(stream, handler);
         return handler.getResults();
     }
-    
-    public Label parseLabel(InputStream content) {
-        // TODO Auto-generated method stub
-        return null;
+
+    public Label parseLabel(InputStream stream) throws IOException {
+        LabelLookupHandler handler = new LabelLookupHandler();
+        parse(stream, handler);
+        return handler.getResult();
     }
 
-    public Recording parseRecording(InputStream content) {
-        // TODO Auto-generated method stub
-        return null;
+    public Recording parseRecording(InputStream stream) throws IOException {
+        RecordingLookupHandler handler = new RecordingLookupHandler();
+        parse(stream, handler);
+        return handler.getResult();
     }
 
     public LinkedList<ArtistSearchStub> parseArtistSearch(InputStream stream) throws IOException {
@@ -129,15 +135,17 @@ public class ResponseParser {
         parse(stream, handler);
         return handler.getResults();
     }
-    
-    public LinkedList<LabelSearchStub> parseLabelSearch(InputStream content) {
-        // TODO Auto-generated method stub
-        return null;
+
+    public LinkedList<LabelSearchStub> parseLabelSearch(InputStream stream) throws IOException {
+        LabelSearchHandler handler = new LabelSearchHandler();
+        parse(stream, handler);
+        return handler.getResults();
     }
 
-    public LinkedList<RecordingSearchStub> parseRecordingSearch(InputStream content) {
-        // TODO Auto-generated method stub
-        return null;
+    public LinkedList<RecordingSearchStub> parseRecordingSearch(InputStream stream) throws IOException {
+        RecordingSearchHandler handler = new RecordingSearchHandler();
+        parse(stream, handler);
+        return handler.getResults();
     }
 
     public LinkedList<Tag> parseTagLookup(InputStream stream) throws IOException {
