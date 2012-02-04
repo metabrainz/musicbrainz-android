@@ -24,7 +24,7 @@ public class RecordingSearchStub {
 	
 	private String mbid;
 	private String title;
-	private String artist;
+	private ArtistNameMbid artist;
 	private int length;
 	
 	public String getMbid() {
@@ -43,11 +43,11 @@ public class RecordingSearchStub {
 		this.title = title;
 	}
 	
-	public String getArtist() {
+	public ArtistNameMbid getArtist() {
 		return artist;
 	}
 	
-	public void setArtist(String artist) {
+	public void setArtist(ArtistNameMbid artist) {
 		this.artist = artist;
 	}
 	

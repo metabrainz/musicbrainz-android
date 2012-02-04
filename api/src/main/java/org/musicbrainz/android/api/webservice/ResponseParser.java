@@ -38,6 +38,7 @@ import org.musicbrainz.android.api.data.LabelSearchStub;
 import org.musicbrainz.android.api.data.Recording;
 import org.musicbrainz.android.api.data.RecordingSearchStub;
 import org.musicbrainz.android.api.data.Release;
+import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
@@ -53,6 +54,7 @@ import org.musicbrainz.android.api.handler.RatingHandler;
 import org.musicbrainz.android.api.handler.RecordingLookupHandler;
 import org.musicbrainz.android.api.handler.RecordingSearchHandler;
 import org.musicbrainz.android.api.handler.ReleaseGroupBrowseHandler;
+import org.musicbrainz.android.api.handler.ReleaseGroupHandler;
 import org.musicbrainz.android.api.handler.ReleaseGroupSearchHandler;
 import org.musicbrainz.android.api.handler.ReleaseLookupHandler;
 import org.musicbrainz.android.api.handler.ReleaseStubHandler;
@@ -104,6 +106,12 @@ public class ResponseParser {
         ReleaseGroupBrowseHandler handler = new ReleaseGroupBrowseHandler();
         parse(stream, handler);
         return handler.getResults();
+    }
+    
+    public ReleaseGroup parseReleaseGroupLookup(InputStream stream) throws IOException {
+        ReleaseGroupHandler handler = new ReleaseGroupHandler();
+        parse(stream, handler);
+        return handler.getResult();
     }
 
     public Label parseLabel(InputStream stream) throws IOException {

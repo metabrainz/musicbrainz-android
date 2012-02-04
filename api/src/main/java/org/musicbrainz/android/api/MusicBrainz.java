@@ -33,6 +33,7 @@ import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.android.api.data.Recording;
 import org.musicbrainz.android.api.data.RecordingSearchStub;
 import org.musicbrainz.android.api.data.Release;
+import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
@@ -64,6 +65,7 @@ public interface MusicBrainz {
     public abstract Release lookupReleaseUsingBarcode(String barcode) throws IOException;
     public abstract Label lookupLabel(String mbid) throws IOException;
     public abstract Recording lookupRecording(String mbid) throws IOException;
+    public abstract ReleaseGroup lookupReleaseGroup(String mbid) throws IOException;
     
     /*
      * User data lookup

@@ -20,22 +20,29 @@
 
 package org.musicbrainz.android;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import org.musicbrainz.android.api.data.LabelSearchStub;
+import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class LabelSearchTest extends BaseXmlParsingTestCase {
 	
-	@Ignore
 	@Test
-	public void testLabelSearch() {
+	public void testLabelSearch() throws IOException {
+	    
 		InputStream stream = getFileStream("labelSearch_count your lucky stars.xml");
 		assertNotNull(stream);
 		
-		fail("Label searches are not supported yet");
+		LinkedList<LabelSearchStub> labels = new ResponseParser().parseLabelSearch(stream);
+		assertEquals(25, labels.size());
+		
+		stream.close();
 	}
 
 }

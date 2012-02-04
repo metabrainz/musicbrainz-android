@@ -20,22 +20,38 @@
 
 package org.musicbrainz.android;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.RecordingSearchStub;
+import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class RecordingSearchTest extends BaseXmlParsingTestCase {
 
-	@Ignore
 	@Test
-	public void recordingSearchTest() {
+	public void recordingSearchTest() throws IOException {
+	    
 		InputStream stream = getFileStream("recordingSearch_pleaser.xml");
 		assertNotNull(stream);
 		
-		fail("Recording searches are not supported yet.");
+		LinkedList<RecordingSearchStub> recordings = new ResponseParser().parseRecordingSearch(stream);
+		assertEquals(25, recordings.size());
+		
+		RecordingSearchStub searchResult = recordings.get(2);
+		assertEquals("1003744a-48eb-4839-bac6-a43a2b09d09b", searchResult.getMbid());
+		assertEquals("Pleaser", searchResult.getTitle());
+		ArtistNameMbid artist = searchResult.getArtist();
+		assertEquals("a459df95-6a50-4b22-8df8-076642ce62a7", artist.getMbid());
+		assertEquals("Lemuria", artist.getName());
+		assertEquals(236000, searchResult.getLength());
+		
+		stream.close();
 	}
 	
 }

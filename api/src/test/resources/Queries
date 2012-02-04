@@ -22,7 +22,7 @@ releaseGroupSearch:
 musicbrainz.org/ws/2/release-group?query=songs%20about%20leaving
 
 releaseGroupLookup:
-musicbrainz.org/ws/2/release/77c85384-c846-34b1-b576-63bc00644a28?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels
+musicbrainz.org/ws/2/release-group/60089b39-412b-326c-afc7-aaa47113d84f?inc=releases+artist-credits+tags+ratings+url-rels
 
 releaseLookup: 
 musicbrainz.org/ws/2/release/2d9f9aac-1884-3939-a3b7-01437151e495?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels
@@ -43,7 +43,7 @@ recordingSearch: (track)
 musicbrainz.org/ws/2/recording?query=pleaser
 
 recordingLookup:
-http://musicbrainz.org/ws/2/recording/470d06f8-6c0c-443d-b521-4c4eed9f0e7e?inc=artists+releases+tags+ratings
+musicbrainz.org/ws/2/recording/470d06f8-6c0c-443d-b521-4c4eed9f0e7e?inc=artists+releases+tags+ratings
 
 collectionListLookup:
 musicbrainz.org/ws/2/collection

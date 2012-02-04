@@ -33,7 +33,7 @@ public class ReleaseGroupSearchHandler extends MBHandler {
     private ReleaseGroupStub rg;
     private ArtistNameMbid releaseArtist;
 
-    private boolean artist = false;
+    private boolean inArtist = false;
 
     public LinkedList<ReleaseGroupStub> getResults() {
         return stubs;
@@ -41,41 +41,34 @@ public class ReleaseGroupSearchHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equals("release-group")) {
+        if (localName.equalsIgnoreCase("release-group")) {
             rg = new ReleaseGroupStub();
             rg.setMbid(atts.getValue("id"));
-            // type isn't always returned - empty string for unknown
-            if (atts.getValue("type") != null)
-                rg.setType(atts.getValue("type"));
-            else
-                rg.setType("");
-        } else if (localName.equals("title")) {
+            rg.setType(atts.getValue("type"));
+        } else if (localName.equalsIgnoreCase("title")) {
             sb = new StringBuilder();
-        } else if (localName.equals("artist")) {
-            artist = true;
+        } else if (localName.equalsIgnoreCase("artist")) {
+            inArtist = true;
             releaseArtist = new ArtistNameMbid();
             releaseArtist.setMbid(atts.getValue("id"));
-        } else if (localName.equals("name")) {
-            if (artist)
-                sb = new StringBuilder();
-        } else if (localName.equals("release")) {
+        } else if (localName.equalsIgnoreCase("name") && inArtist) {
+            sb = new StringBuilder();
+        } else if (localName.equalsIgnoreCase("release")) {
             rg.addReleaseMbid(atts.getValue("id"));
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equals("release-group")) {
+        if (localName.equalsIgnoreCase("release-group")) {
             stubs.add(rg);
-        } else if (localName.equals("title")) {
+        } else if (localName.equalsIgnoreCase("title")) {
             rg.setTitle(sb.toString());
-        } else if (localName.equals("artist")) {
-            artist = false;
-        } else if (localName.equals("name")) {
-            if (artist) {
-                releaseArtist.setName(sb.toString());
-                rg.addArtist(releaseArtist);
-            }
+        } else if (localName.equalsIgnoreCase("artist")) {
+            inArtist = false;
+        } else if (localName.equalsIgnoreCase("name") && inArtist) {
+            releaseArtist.setName(sb.toString());
+            rg.addArtist(releaseArtist);
         }
     }
 

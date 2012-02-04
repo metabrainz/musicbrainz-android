@@ -31,8 +31,8 @@ public class Recording {
 	private String mbid;
 	private String title;
 	private int length;
-	private ArtistNameMbid artist;
-	
+	private ArrayList<ArtistNameMbid> artists = new ArrayList<ArtistNameMbid>();
+
 	private int ratingCount;
 	private float rating;
 	private LinkedList<Tag> tags = new LinkedList<Tag>();
@@ -63,13 +63,13 @@ public class Recording {
 		this.length = length;
 	}
 
-	public ArtistNameMbid getArtist() {
-		return artist;
-	}
+    public ArrayList<ArtistNameMbid> getArtists() {
+        return artists;
+    }
 
-	public void setArtist(ArtistNameMbid artist) {
-		this.artist = artist;
-	}
+    public void addArtist(ArtistNameMbid artist) {
+        artists.add(artist);
+    }
 
 	public int getRatingCount() {
 		return ratingCount;

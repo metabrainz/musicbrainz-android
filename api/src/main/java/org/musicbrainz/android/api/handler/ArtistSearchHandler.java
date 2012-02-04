@@ -32,7 +32,7 @@ public class ArtistSearchHandler extends MBHandler {
     private LinkedList<ArtistSearchStub> results = new LinkedList<ArtistSearchStub>();
     private ArtistSearchStub stub;
 
-    private boolean tag = false;
+    private boolean inTag = false;
 
     public LinkedList<ArtistSearchStub> getResults() {
         return results;
@@ -40,41 +40,38 @@ public class ArtistSearchHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equals("artist")) {
+        if (localName.equalsIgnoreCase("artist")) {
             stub = new ArtistSearchStub();
-            String id = atts.getValue("id");
-            stub.setMbid(id);
-        } else if (localName.equals("name")) {
-            if (!tag)
-                sb = new StringBuilder();
-        } else if (localName.equals("disambiguation")) {
+            stub.setMbid(atts.getValue("id"));
+        } else if (localName.equalsIgnoreCase("name") && !inTag) {
             sb = new StringBuilder();
-        } else if (localName.equals("tag")) {
-            tag = true;
+        } else if (localName.equalsIgnoreCase("disambiguation")) {
+            sb = new StringBuilder();
+        } else if (localName.equalsIgnoreCase("tag")) {
+            inTag = true;
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equals("artist")) {
-
-            // check id against special purpose artist list
-            boolean ignored = false;
-            for (String id : Artist.SPECIAL_PURPOSE)
-                if (stub.getMbid().equals(id))
-                    ignored = true;
-
-            // add result
-            if (!ignored)
-                results.add(stub);
-        } else if (localName.equals("name")) {
-            if (!tag)
-                stub.setName(sb.toString());
-        } else if (localName.equals("disambiguation")) {
+        if (localName.equalsIgnoreCase("artist")) {
+            addOrIgnoreResult();
+        } else if (localName.equalsIgnoreCase("name") && !inTag) {
+            stub.setName(sb.toString());
+        } else if (localName.equalsIgnoreCase("disambiguation")) {
             stub.setDisambiguation(sb.toString());
-        } else if (localName.equals("tag")) {
-            tag = false;
+        } else if (localName.equalsIgnoreCase("tag")) {
+            inTag = false;
         }
+    }
+
+    private void addOrIgnoreResult() {
+        for (String id : Artist.SPECIAL_PURPOSE) {
+            if (stub.getMbid().equalsIgnoreCase(id)) {
+                return;
+            }
+        }
+        results.add(stub);
     }
 
 }

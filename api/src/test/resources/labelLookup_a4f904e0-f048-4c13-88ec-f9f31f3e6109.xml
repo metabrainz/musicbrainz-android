@@ -8,7 +8,7 @@
     <life-span>
       <begin>1994</begin>
     </life-span>
-    <release-list count="97">
+    <release-list count="98">
       <release id="0858da40-f7a0-462b-a581-ffdb53e0d3a9">
         <title>Transactions + Replications</title>
         <status>Official</status>
@@ -250,6 +250,7 @@
       <release id="e602a3ae-fe8f-4abd-8638-f055517bacb2">
         <title>Transatlanticism</title>
         <status>Official</status>
+        <packaging>Jewel Case</packaging>
         <quality>normal</quality>
         <text-representation>
           <language>eng</language>
@@ -286,6 +287,7 @@
       <release id="f6a52cdb-1a1c-4ab4-be4d-70375369de14">
         <title>We Have the Facts and We're Voting Yes</title>
         <status>Official</status>
+        <packaging>Jewel Case</packaging>
         <quality>normal</quality>
         <text-representation>
           <language>eng</language>
@@ -334,5 +336,6 @@
         <name>usa</name>
       </tag>
     </tag-list>
+    <rating votes-count="1">5</rating>
   </label>
 </metadata>

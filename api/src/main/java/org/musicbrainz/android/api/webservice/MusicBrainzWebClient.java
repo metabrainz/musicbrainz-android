@@ -48,6 +48,7 @@ import org.musicbrainz.android.api.data.LabelSearchStub;
 import org.musicbrainz.android.api.data.Recording;
 import org.musicbrainz.android.api.data.RecordingSearchStub;
 import org.musicbrainz.android.api.data.Release;
+import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
@@ -74,7 +75,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
         httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
     }
-    
+
     public MusicBrainzWebClient(Credentials creds) {
         httpClient = HttpClient.getClient(creds.getUserAgent());
         responseParser = new ResponseParser();
@@ -135,7 +136,15 @@ public class MusicBrainzWebClient implements MusicBrainz {
         entity.consumeContent();
         return releases;
     }
-    
+
+    @Override
+    public ReleaseGroup lookupReleaseGroup(String mbid) throws IOException {
+        HttpEntity entity = get(QueryBuilder.releaseGroupLookup(mbid));
+        ReleaseGroup rg = responseParser.parseReleaseGroupLookup(entity.getContent());
+        entity.consumeContent();
+        return rg;
+    }
+
     @Override
     public Label lookupLabel(String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.labelLookup(mbid));
@@ -175,7 +184,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
         entity.consumeContent();
         return releases;
     }
-    
+
     @Override
     public LinkedList<LabelSearchStub> searchLabel(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.labelSearch(searchTerm));
@@ -249,7 +258,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
         String content = XmlBuilder.buildBarcodeSubmissionXML(mbid, barcode);
         post(url, content);
     }
-    
+
     @Override
     public void addReleaseToCollection(String collectionMbid, String releaseMbid) throws IOException {
         put(QueryBuilder.collectionEdit(collectionMbid, releaseMbid, clientId));
@@ -275,7 +284,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
         entity.consumeContent();
         return collection;
     }
-    
+
     private HttpEntity get(String url) throws IOException {
         HttpGet get = new HttpGet(url);
         get.setHeader("Accept", "application/xml");
@@ -294,7 +303,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
             response.getEntity().consumeContent();
         }
     }
-    
+
     private void delete(String url) throws IOException {
         HttpDelete delete = new HttpDelete(url);
         HttpResponse response = httpClient.execute(delete);
@@ -302,7 +311,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
             response.getEntity().consumeContent();
         }
     }
-    
+
     private void put(String url) throws IOException {
         HttpPut put = new HttpPut(url);
         HttpResponse response = httpClient.execute(put);
