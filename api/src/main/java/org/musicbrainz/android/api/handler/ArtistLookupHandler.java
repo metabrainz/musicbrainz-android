@@ -28,11 +28,11 @@ import org.xml.sax.SAXException;
 
 public class ArtistLookupHandler extends MBHandler {
 
-    private boolean inTag = false;
-    private boolean inUrlRelations = false;
-    private boolean inArtistRelations = false;
-    private boolean inLabelRelations = false;
-    private boolean inLifeSpan = false;
+    private boolean inTag;
+    private boolean inUrlRelations;
+    private boolean inArtistRelations;
+    private boolean inLabelRelations;
+    private boolean inLifeSpan;
 
     private Artist artist = new Artist();
     private Tag tag;
@@ -44,39 +44,33 @@ public class ArtistLookupHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("artist")) {
-            if (inArtistRelations) {
-
-            } else {
-                artist.setMbid(atts.getValue("id"));
-                artist.setType(atts.getValue("type"));
-            }
+        if (localName.equalsIgnoreCase("artist") && !inArtistRelations) {
+            artist.setMbid(atts.getValue("id"));
+            artist.setType(atts.getValue("type"));
         } else if (localName.equalsIgnoreCase("name")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = true;
-            sb = new StringBuilder();
+            buildString();
             tag = new Tag();
             tag.setCount(Integer.parseInt(atts.getValue("count")));
         } else if (localName.equalsIgnoreCase("rating")) {
             artist.setRatingCount(Integer.parseInt(atts.getValue("votes-count")));
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("country")) {
-            sb = new StringBuilder();
-        } else if (localName.equalsIgnoreCase("relation")) {
-            if (inUrlRelations) {
-                sb = new StringBuilder();
-                link = new WebLink();
-                link.setType(atts.getValue("type"));
-            }
+            buildString();
+        } else if (localName.equalsIgnoreCase("relation") && inUrlRelations) {
+            buildString();
+            link = new WebLink();
+            link.setType(atts.getValue("type"));
         } else if (localName.equalsIgnoreCase("target")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("life-span")) {
             inLifeSpan = true;
         } else if (localName.equalsIgnoreCase("begin")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("end")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("relation-list")) {
             setRelationStatus(atts.getValue("target-type"));
         }
@@ -96,45 +90,28 @@ public class ArtistLookupHandler extends MBHandler {
 
         if (localName.equalsIgnoreCase("name")) {
             if (inTag) {
-                tag.setText(sb.toString());
+                tag.setText(getString());
                 artist.addTag(tag);
-            } else if (inArtistRelations) {
-
-            } else if (inLabelRelations) {
-
-            } else {
-                artist.setName(sb.toString());
+            } else if (!inArtistRelations && !inLabelRelations) {
+                artist.setName(getString());
             }
         } else if (localName.equalsIgnoreCase("rating")) {
-            float rating = Float.parseFloat(sb.toString());
-            artist.setRating(rating);
+            artist.setRating(Float.parseFloat(getString()));
         } else if (localName.equalsIgnoreCase("country")) {
-            artist.setCountry(sb.toString());
-        } else if (localName.equalsIgnoreCase("relation")) {
-            if (inUrlRelations) {
-                artist.addLink(link);
-            }
-        } else if (localName.equalsIgnoreCase("target")) {
-            if (inUrlRelations) {
-                link.setUrl(sb.toString());
-            } else if (inArtistRelations) {
-
-            } else if (inLabelRelations) {
-
-            }
+            artist.setCountry(getString());
+        } else if (localName.equalsIgnoreCase("relation") && inUrlRelations) {
+            artist.addLink(link);
+        } else if (localName.equalsIgnoreCase("target") && inUrlRelations) {
+            link.setUrl(getString());
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = false;
         } else if (localName.equalsIgnoreCase("life-span")) {
             inLifeSpan = false;
-        } else if (localName.equalsIgnoreCase("begin")) {
-            if (inLifeSpan) {
-                artist.setBegin(sb.toString());
-            }
-        } else if (localName.equalsIgnoreCase("end")) {
-            if (inLifeSpan) {
-                artist.setEnd(sb.toString());
-            }
-        } else if (localName.equalsIgnoreCase("relation")) {
+        } else if (localName.equalsIgnoreCase("begin") && inLifeSpan) {
+            artist.setBegin(getString());
+        } else if (localName.equalsIgnoreCase("end") && inLifeSpan) {
+            artist.setEnd(getString());
+        } else if (localName.equalsIgnoreCase("relation-list")) {
             inUrlRelations = false;
             inArtistRelations = false;
             inLabelRelations = false;

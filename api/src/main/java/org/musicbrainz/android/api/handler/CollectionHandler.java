@@ -17,9 +17,9 @@ public class CollectionHandler extends MBHandler {
         if (localName.equalsIgnoreCase("collection")) {
             collection.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("name")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("editor")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("release-list")) {
             collection.setCount(Integer.parseInt(atts.getValue("count")));
         }
@@ -28,9 +28,9 @@ public class CollectionHandler extends MBHandler {
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
         if (localName.equalsIgnoreCase("name")) {
-            collection.setName(sb.toString());
+            collection.setName(getString());
         } else if (localName.equalsIgnoreCase("editor")) {
-            collection.setEditor(sb.toString());
+            collection.setEditor(getString());
         }
     }
 

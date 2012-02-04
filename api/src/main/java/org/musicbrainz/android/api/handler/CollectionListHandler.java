@@ -21,9 +21,9 @@ public class CollectionListHandler extends MBHandler {
             stub = new EditorCollectionStub();
             stub.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("name")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("editor")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("release-list")) {
             stub.setCount(Integer.parseInt(atts.getValue("count")));
         }
@@ -32,9 +32,9 @@ public class CollectionListHandler extends MBHandler {
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
         if (localName.equalsIgnoreCase("name")) {
-            stub.setName(sb.toString());
+            stub.setName(getString());
         } else if (localName.equalsIgnoreCase("editor")) {
-            stub.setEditor(sb.toString());
+            stub.setEditor(getString());
         } else if (localName.equalsIgnoreCase("collection")) {
             collections.add(stub);
         }

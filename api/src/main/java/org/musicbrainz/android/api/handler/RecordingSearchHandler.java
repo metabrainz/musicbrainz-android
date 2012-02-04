@@ -33,8 +33,8 @@ public class RecordingSearchHandler extends MBHandler {
     private RecordingSearchStub stub;
     private ArtistNameMbid recordingArtist;
 
-    private boolean inReleaseList = false;
-    private boolean inArtist = false;
+    private boolean inReleaseList;
+    private boolean inArtist;
 
     public LinkedList<RecordingSearchStub> getResults() {
         return results;
@@ -46,15 +46,15 @@ public class RecordingSearchHandler extends MBHandler {
             stub = new RecordingSearchStub();
             stub.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("title") && !inReleaseList) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("artist")) {
             inArtist = true;
             recordingArtist = new ArtistNameMbid();
             recordingArtist.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("name") && inArtist) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("length")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("release-list")) {
             inReleaseList = true;
         }
@@ -65,14 +65,14 @@ public class RecordingSearchHandler extends MBHandler {
         if (localName.equalsIgnoreCase("recording")) {
             results.add(stub);
         } else if (localName.equalsIgnoreCase("title") && !inReleaseList) {
-            stub.setTitle(sb.toString());
+            stub.setTitle(getString());
         } else if (localName.equals("artist")) {
             inArtist = false;
             stub.setArtist(recordingArtist);
         } else if (localName.equalsIgnoreCase("name") && inArtist) {
-            recordingArtist.setName(sb.toString());
+            recordingArtist.setName(getString());
         } else if (localName.equalsIgnoreCase("length")) {
-            stub.setLength(Integer.parseInt(sb.toString()));
+            stub.setLength(Integer.parseInt(getString()));
         } else if (localName.equalsIgnoreCase("release-list")) {
             inReleaseList = false;
         }

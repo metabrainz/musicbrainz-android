@@ -27,16 +27,11 @@ public class ReleaseGroupBrowseHandler extends MBHandler {
             stub = new ReleaseGroupStub();
             String mbid = atts.getValue("id");
             stub.setMbid(mbid);
-
-            if (atts.getValue("type") != null) {
-                stub.setType(atts.getValue("type"));
-            } else {
-                stub.setType("unknown");
-            }
+            stub.setType(atts.getValue("type"));
         } else if (localName.equalsIgnoreCase("title")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("first-release-date")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("release-group-list")) {
             total = Integer.parseInt(atts.getValue("count"));
         }
@@ -47,9 +42,9 @@ public class ReleaseGroupBrowseHandler extends MBHandler {
         if (localName.equalsIgnoreCase("release-group")) {
             results.add(stub);
         } else if (localName.equalsIgnoreCase("title")) {
-            stub.setTitle(sb.toString());
+            stub.setTitle(getString());
         } else if (localName.equalsIgnoreCase("first-release-date")) {
-            stub.setFirstRelease(sb.toString());
+            stub.setFirstRelease(getString());
         }
     }
 

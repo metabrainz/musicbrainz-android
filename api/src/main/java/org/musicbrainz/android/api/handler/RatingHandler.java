@@ -34,14 +34,14 @@ public class RatingHandler extends MBHandler {
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
         if (localName.equals("rating")) {
-            sb = new StringBuilder();
+            buildString();
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
         if (localName.equals("rating")) {
-            float value = Float.parseFloat(sb.toString());
+            float value = Float.parseFloat(getString());
             rating = value;
         }
     }

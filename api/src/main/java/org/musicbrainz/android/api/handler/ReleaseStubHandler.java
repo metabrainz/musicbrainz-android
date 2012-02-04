@@ -31,8 +31,8 @@ public class ReleaseStubHandler extends MBHandler {
     private LinkedList<ReleaseStub> results = new LinkedList<ReleaseStub>();
     private ReleaseStub stub;
 
-    private boolean artist = false;
-    private boolean label = false;
+    private boolean inArtist;
+    private boolean inLabel;
 
     public LinkedList<ReleaseStub> getResults() {
         return results;
@@ -44,23 +44,23 @@ public class ReleaseStubHandler extends MBHandler {
             stub = new ReleaseStub();
             stub.setReleaseMbid(atts.getValue("id"));
         } else if (localName.equals("title")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equals("artist")) {
-            artist = true;
+            inArtist = true;
         } else if (localName.equals("name")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equals("date")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equals("country")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equals("track-list")) {
             String num = atts.getValue("count");
             int tracks = Integer.parseInt(num);
             stub.setTracksNum(stub.getTracksNum() + tracks);
         } else if (localName.equals("label")) {
-            label = true;
+            inLabel = true;
         } else if (localName.equals("format")) {
-            sb = new StringBuilder();
+            buildString();
         }
     }
 
@@ -69,22 +69,22 @@ public class ReleaseStubHandler extends MBHandler {
         if (localName.equals("release")) {
             results.add(stub);
         } else if (localName.equals("title")) {
-            stub.setTitle(sb.toString());
+            stub.setTitle(getString());
         } else if (localName.equals("artist")) {
-            artist = false;
+            inArtist = false;
         } else if (localName.equals("name")) {
-            if (artist)
-                stub.setArtistName(sb.toString());
-            else if (label)
-                stub.addLabel(sb.toString());
+            if (inArtist)
+                stub.setArtistName(getString());
+            else if (inLabel)
+                stub.addLabel(getString());
         } else if (localName.equals("date")) {
-            stub.setDate(sb.toString());
+            stub.setDate(getString());
         } else if (localName.equals("country")) {
-            stub.setCountryCode(sb.toString().toUpperCase());
+            stub.setCountryCode(getString().toUpperCase());
         } else if (localName.equals("label")) {
-            label = false;
+            inLabel = false;
         } else if (localName.equals("format")) {
-            stub.addFormat(sb.toString());
+            stub.addFormat(getString());
         }
     }
 

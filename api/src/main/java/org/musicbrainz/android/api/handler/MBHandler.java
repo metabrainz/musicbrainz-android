@@ -4,7 +4,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class MBHandler extends DefaultHandler {
 
-    protected StringBuilder sb;
+    private StringBuilder sb;
 
     public void characters(char ch[], int start, int length) {
 
@@ -13,6 +13,14 @@ public class MBHandler extends DefaultHandler {
                 sb.append(ch[i]);
             }
         }
+    }
+    
+    protected void buildString() {
+        sb = new StringBuilder();
+    }
+    
+    protected String getString() {
+        return sb.toString();
     }
 
 }

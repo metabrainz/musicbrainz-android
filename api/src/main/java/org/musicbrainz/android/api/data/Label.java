@@ -102,6 +102,10 @@ public class Label {
 		return tags;
 	}
 
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+	
 	public void setTags(LinkedList<Tag> tags) {
 		this.tags = tags;
 	}
@@ -110,6 +114,10 @@ public class Label {
 		return links;
 	}
 
+    public void addLink(WebLink link) {
+        links.add(link);
+    }
+	
 	public void setLinks(ArrayList<WebLink> links) {
 		this.links = links;
 	}

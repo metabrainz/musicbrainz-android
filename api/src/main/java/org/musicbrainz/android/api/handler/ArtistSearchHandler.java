@@ -32,7 +32,7 @@ public class ArtistSearchHandler extends MBHandler {
     private LinkedList<ArtistSearchStub> results = new LinkedList<ArtistSearchStub>();
     private ArtistSearchStub stub;
 
-    private boolean inTag = false;
+    private boolean inTag;
 
     public LinkedList<ArtistSearchStub> getResults() {
         return results;
@@ -44,9 +44,9 @@ public class ArtistSearchHandler extends MBHandler {
             stub = new ArtistSearchStub();
             stub.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("name") && !inTag) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("disambiguation")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = true;
         }
@@ -57,9 +57,9 @@ public class ArtistSearchHandler extends MBHandler {
         if (localName.equalsIgnoreCase("artist")) {
             addOrIgnoreResult();
         } else if (localName.equalsIgnoreCase("name") && !inTag) {
-            stub.setName(sb.toString());
+            stub.setName(getString());
         } else if (localName.equalsIgnoreCase("disambiguation")) {
-            stub.setDisambiguation(sb.toString());
+            stub.setDisambiguation(getString());
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = false;
         }

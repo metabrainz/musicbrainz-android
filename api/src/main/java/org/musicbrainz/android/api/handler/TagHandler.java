@@ -37,7 +37,7 @@ public class TagHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
         if (localName.equals("tag")) {
-            sb = new StringBuilder();
+            buildString();
             tag = new Tag();
             tag.setCount(Integer.parseInt(atts.getValue("count")));
         }
@@ -46,7 +46,7 @@ public class TagHandler extends MBHandler {
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
         if (localName.equals("tag")) {
-            tag.setText(sb.toString());
+            tag.setText(getString());
             tags.add(tag);
         }
     }

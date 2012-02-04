@@ -27,14 +27,12 @@ import static org.junit.Assert.assertNull;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.musicbrainz.android.api.data.Label;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class LabelLookupTest extends BaseXmlParsingTestCase {
 
-    @Ignore
     @Test
     public void testReleaseGroupLookup() throws IOException {
         InputStream stream = getFileStream("labelLookup_a4f904e0-f048-4c13-88ec-f9f31f3e6109.xml");
@@ -51,10 +49,8 @@ public class LabelLookupTest extends BaseXmlParsingTestCase {
         assertEquals(1, label.getRatingCount());
         assertEquals(5f, label.getRating(), 0.01);
         assertEquals(4, label.getTags().size());
-        
         assertEquals(4, label.getLinks().size());
-        assertEquals(98, label.getReleaseStubs().size());
-        
+
         stream.close();
     }
 	

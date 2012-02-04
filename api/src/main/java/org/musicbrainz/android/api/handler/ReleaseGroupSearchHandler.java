@@ -33,7 +33,7 @@ public class ReleaseGroupSearchHandler extends MBHandler {
     private ReleaseGroupStub rg;
     private ArtistNameMbid releaseArtist;
 
-    private boolean inArtist = false;
+    private boolean inArtist;
 
     public LinkedList<ReleaseGroupStub> getResults() {
         return stubs;
@@ -46,13 +46,13 @@ public class ReleaseGroupSearchHandler extends MBHandler {
             rg.setMbid(atts.getValue("id"));
             rg.setType(atts.getValue("type"));
         } else if (localName.equalsIgnoreCase("title")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("artist")) {
             inArtist = true;
             releaseArtist = new ArtistNameMbid();
             releaseArtist.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("name") && inArtist) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("release")) {
             rg.addReleaseMbid(atts.getValue("id"));
         }
@@ -63,11 +63,11 @@ public class ReleaseGroupSearchHandler extends MBHandler {
         if (localName.equalsIgnoreCase("release-group")) {
             stubs.add(rg);
         } else if (localName.equalsIgnoreCase("title")) {
-            rg.setTitle(sb.toString());
+            rg.setTitle(getString());
         } else if (localName.equalsIgnoreCase("artist")) {
             inArtist = false;
         } else if (localName.equalsIgnoreCase("name") && inArtist) {
-            releaseArtist.setName(sb.toString());
+            releaseArtist.setName(getString());
             rg.addArtist(releaseArtist);
         }
     }

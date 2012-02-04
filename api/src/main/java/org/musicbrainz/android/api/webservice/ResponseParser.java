@@ -54,7 +54,7 @@ import org.musicbrainz.android.api.handler.RatingHandler;
 import org.musicbrainz.android.api.handler.RecordingLookupHandler;
 import org.musicbrainz.android.api.handler.RecordingSearchHandler;
 import org.musicbrainz.android.api.handler.ReleaseGroupBrowseHandler;
-import org.musicbrainz.android.api.handler.ReleaseGroupHandler;
+import org.musicbrainz.android.api.handler.ReleaseGroupLookupHandler;
 import org.musicbrainz.android.api.handler.ReleaseGroupSearchHandler;
 import org.musicbrainz.android.api.handler.ReleaseLookupHandler;
 import org.musicbrainz.android.api.handler.ReleaseStubHandler;
@@ -109,7 +109,7 @@ public class ResponseParser {
     }
     
     public ReleaseGroup parseReleaseGroupLookup(InputStream stream) throws IOException {
-        ReleaseGroupHandler handler = new ReleaseGroupHandler();
+        ReleaseGroupLookupHandler handler = new ReleaseGroupLookupHandler();
         parse(stream, handler);
         return handler.getResult();
     }

@@ -35,18 +35,18 @@ public class UserDataHandler extends MBHandler {
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
         if (localName.equals("user-tag")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equals("user-rating")) {
-            sb = new StringBuilder();
+            buildString();
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
         if (localName.equals("user-tag")) {
-            data.addTag(sb.toString());
+            data.addTag(getString());
         } else if (localName.equals("user-rating")) {
-            float rating = Float.parseFloat(sb.toString());
+            float rating = Float.parseFloat(getString());
             data.setRating(rating);
         }
     }

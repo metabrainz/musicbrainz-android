@@ -31,7 +31,7 @@ public class LabelSearchHandler extends MBHandler {
     private LinkedList<LabelSearchStub> results = new LinkedList<LabelSearchStub>();
     private LabelSearchStub stub;
     
-    private boolean inTag = false;
+    private boolean inTag;
 
     public LinkedList<LabelSearchStub> getResults() {
         return results;
@@ -43,9 +43,9 @@ public class LabelSearchHandler extends MBHandler {
             stub = new LabelSearchStub();
             stub.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("name") && !inTag) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("country")) {
-            sb = new StringBuilder();
+            buildString();
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = true;
         }
@@ -56,9 +56,9 @@ public class LabelSearchHandler extends MBHandler {
         if (localName.equalsIgnoreCase("label")) {
             results.add(stub);
         } else if (localName.equalsIgnoreCase("name") && !inTag) {
-            stub.setName(sb.toString());
+            stub.setName(getString());
         } else if (localName.equalsIgnoreCase("country")) {
-            stub.setCountry(sb.toString());
+            stub.setCountry(getString());
         } else if (localName.equalsIgnoreCase("tag")) {
             inTag = true;
         }
