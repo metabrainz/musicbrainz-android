@@ -32,12 +32,11 @@ public class QueryBuilder {
     private static final String LOOKUP_RELEASE = "release/";
     private static final String LOOKUP_RELEASE_PARAMS = "?inc=release-groups+artists+recordings+labels+tags+ratings";
     private static final String LOOKUP_LABEL = "label/";
-    private static final String LOOKUP_LABEL_PARAMS = "?inc=releases+tags+ratings+url-rels";
+    private static final String LOOKUP_LABEL_PARAMS = "?inc=tags+ratings+url-rels";
     private static final String LOOKUP_RECORDING = "recording/";
-    private static final String LOOKUP_RECORDING_PARAMS = "?inc=artists+releases+tags+ratings";
+    private static final String LOOKUP_RECORDING_PARAMS = "?inc=artists+tags+ratings";
     private static final String LOOKUP_RELEASE_GROUP = "release-group/";
-    private static final String LOOKUP_RELEASE_GROUP_PARAMS = "?inc=releases+artist-credits+tags+ratings+url-rels";
-    
+    private static final String LOOKUP_RELEASE_GROUP_PARAMS = "?inc=artist-credits+tags+ratings+url-rels";
 
     private static final String BROWSE_ARTIST_RGS = "release-group?artist=";
     private static final String BROWSE_ARTIST_RGS_PARAMS = "&limit=100";

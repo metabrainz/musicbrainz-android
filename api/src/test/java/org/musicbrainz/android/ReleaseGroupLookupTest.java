@@ -26,7 +26,6 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.ReleaseGroup;
@@ -34,7 +33,6 @@ import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseGroupLookupTest extends BaseXmlParsingTestCase {
 
-    @Ignore
     @Test
     public void testReleaseGroupLookup() throws IOException {
         InputStream stream = getFileStream("releaseGroupLookup_60089b39-412b-326c-afc7-aaa47113d84f.xml");
@@ -45,20 +43,16 @@ public class ReleaseGroupLookupTest extends BaseXmlParsingTestCase {
         assertEquals("60089b39-412b-326c-afc7-aaa47113d84f", rg.getMbid());
         assertEquals("Miss Machine", rg.getTitle());
         assertEquals("Album", rg.getType());
-        assertEquals(2004, rg.getReleaseYear());
+        assertEquals("2004", rg.getReleaseYear());
         
         ArtistNameMbid artist = rg.getArtists().get(0);
         assertEquals("The Dillinger Escape Plan", artist.getName());
         assertEquals("1bc41dff-5397-4c53-bb50-469d2c277197", artist.getMbid());
         
-        assertEquals(4, rg.getReleaseMbids().size());
-        
         assertEquals(2, rg.getRatingCount());
         assertEquals(4.5f, rg.getRating(), 0.01);
-        
         assertEquals(2, rg.getTags().size());
         assertEquals(2, rg.getLinks().size());
-        assertEquals(4, rg.getReleases().size());
 
         stream.close();
     }

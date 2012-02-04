@@ -90,6 +90,10 @@ public class Recording {
 	public LinkedList<Tag> getTags() {
 		return tags;
 	}
+	
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
 
 	public void setTags(LinkedList<Tag> tags) {
 		this.tags = tags;
