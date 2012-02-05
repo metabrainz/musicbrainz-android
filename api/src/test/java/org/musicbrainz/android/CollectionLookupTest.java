@@ -26,28 +26,30 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.musicbrainz.android.api.data.EditorCollection;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class CollectionLookupTest extends BaseXmlParsingTestCase {
+    
+    private static final String COLLECTION_LOOKUP_FIXTURE = "collectionLookup_c6f9fb72-e233-47f4-a2f6-19f16442d93a.xml";
+    private EditorCollection collection;
+    
+    @Before
+    public void doParsing() throws IOException {
+        InputStream stream = getFileStream(COLLECTION_LOOKUP_FIXTURE);
+        assertNotNull(stream);
+        collection = new ResponseParser().parseCollectionLookup(stream);
+        stream.close();
+    }
 
     @Test
     public void testReleaseGroupLookup() throws IOException {
-        InputStream stream = getFileStream("collectionLookup_c6f9fb72-e233-47f4-a2f6-19f16442d93a.xml");
-        assertNotNull(stream);
-
-        ResponseParser responseParser = new ResponseParser();
-        EditorCollection result = responseParser.parseCollectionLookup(stream);
-
-        assertEquals("c6f9fb72-e233-47f4-a2f6-19f16442d93a", result.getMbid());
-        assertEquals("My Collection", result.getName());
-        assertEquals("jdamcd", result.getEditor());
-        assertEquals(2, result.getCount());
-
-        // TODO Test release parsing.
-
-        stream.close();
+        assertEquals("c6f9fb72-e233-47f4-a2f6-19f16442d93a", collection.getMbid());
+        assertEquals("My Collection", collection.getName());
+        assertEquals("jdamcd", collection.getEditor());
+        assertEquals(2, collection.getCount());
     }
 
 }
