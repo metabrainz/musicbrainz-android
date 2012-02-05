@@ -69,95 +69,99 @@ public class QueryBuilder {
     private static final String BARCODE = "release/";
 
     public static String barcodeSearch(String barcode) {
-        return new String(WEB_SERVICE + SEARCH_BARCODE + barcode + SEARCH_BARCODE_PARAMS);
+        return buildQuery(SEARCH_BARCODE + barcode + SEARCH_BARCODE_PARAMS);
     }
 
     public static String releaseLookup(String mbid) {
-        return new String(WEB_SERVICE + LOOKUP_RELEASE + mbid + LOOKUP_RELEASE_PARAMS);
+        return buildQuery(LOOKUP_RELEASE + mbid + LOOKUP_RELEASE_PARAMS);
     }
 
     public static String releaseGroupReleaseBrowse(String mbid) {
-        return new String(WEB_SERVICE + BROWSE_RG_RELEASES + mbid + BROWSE_RG_RELEASES_PARAMS);
+        return buildQuery(BROWSE_RG_RELEASES + mbid + BROWSE_RG_RELEASES_PARAMS);
     }
 
     public static String artistLookup(String mbid) {
-        return new String(WEB_SERVICE + LOOKUP_ARTIST + mbid + LOOKUP_ARTIST_PARAMS);
+        return buildQuery(LOOKUP_ARTIST + mbid + LOOKUP_ARTIST_PARAMS);
     }
 
     public static String artistReleaseGroupBrowse(String mbid) {
-        return new String(WEB_SERVICE + BROWSE_ARTIST_RGS + mbid + BROWSE_ARTIST_RGS_PARAMS);
+        return buildQuery(BROWSE_ARTIST_RGS + mbid + BROWSE_ARTIST_RGS_PARAMS);
     }
 
     public static String artistSearch(String searchTerm) {
-        return new String(WEB_SERVICE + SEARCH_ARTIST + WebServiceUtils.sanitise(searchTerm));
+        return buildQuery(SEARCH_ARTIST + WebServiceUtils.sanitise(searchTerm));
     }
 
     public static String releaseGroupSearch(String searchTerm) {
-        return new String(WEB_SERVICE + SEARCH_RG + WebServiceUtils.sanitise(searchTerm));
+        return buildQuery(SEARCH_RG + WebServiceUtils.sanitise(searchTerm));
     }
 
     public static String releaseSearch(String searchTerm) {
-        return new String(WEB_SERVICE + SEARCH_RELEASE + WebServiceUtils.sanitise(searchTerm));
+        return buildQuery(SEARCH_RELEASE + WebServiceUtils.sanitise(searchTerm));
     }
     
     public static String releaseGroupLookup(String mbid) {
-        return new String(WEB_SERVICE + LOOKUP_RELEASE_GROUP + mbid + LOOKUP_RELEASE_GROUP_PARAMS);
+        return buildQuery(LOOKUP_RELEASE_GROUP + mbid + LOOKUP_RELEASE_GROUP_PARAMS);
     }
     
     public static String labelLookup(String mbid) {
-        return new String(WEB_SERVICE + LOOKUP_LABEL + mbid + LOOKUP_LABEL_PARAMS);
+        return buildQuery(LOOKUP_LABEL + mbid + LOOKUP_LABEL_PARAMS);
     }
     
     public static String labelSearch(String searchTerm) {
-        return new String(WEB_SERVICE + SEARCH_LABEL + searchTerm);
+        return buildQuery(SEARCH_LABEL + searchTerm);
     }
     
     public static String recordingLookup(String mbid) {
-        return new String(WEB_SERVICE + LOOKUP_RECORDING + mbid + LOOKUP_RECORDING_PARAMS);
+        return buildQuery(LOOKUP_RECORDING + mbid + LOOKUP_RECORDING_PARAMS);
     }
     
     public static String recordingSearch(String searchTerm) {
-        return new String(WEB_SERVICE + SEARCH_RECORDING + searchTerm);
+        return buildQuery(SEARCH_RECORDING + searchTerm);
     }
 
     public static String tagLookup(Entity type, String mbid) {
-        return new String(WEB_SERVICE + WebServiceUtils.entityString(type) + "/" + mbid + TAG_PARAMS);
+        return buildQuery(WebServiceUtils.entityString(type) + "/" + mbid + TAG_PARAMS);
     }
 
     public static String ratingLookup(Entity type, String mbid) {
-        return new String(WEB_SERVICE + WebServiceUtils.entityString(type) + "/" + mbid + RATING_PARAMS);
+        return buildQuery(WebServiceUtils.entityString(type) + "/" + mbid + RATING_PARAMS);
     }
 
     public static String authenticationCheck() {
-        return new String(WEB_SERVICE + AUTH_TEST);
+        return buildQuery(AUTH_TEST);
     }
 
     public static String userData(Entity entity, String mbid) {
-        return new String(WEB_SERVICE + WebServiceUtils.entityString(entity) + "/" + mbid + USER_PARAMS);
+        return buildQuery(WebServiceUtils.entityString(entity) + "/" + mbid + USER_PARAMS);
     }
 
     public static String tagSubmission(String clientId) {
-        return new String(WEB_SERVICE + TAG + CLIENT + clientId);
+        return buildQuery(TAG + CLIENT + clientId);
     }
 
     public static String ratingSubmission(String clientId) {
-        return new String(WEB_SERVICE + RATING + CLIENT + clientId);
+        return buildQuery(RATING + CLIENT + clientId);
     }
 
     public static String barcodeSubmission(String clientId) {
-        return new String(WEB_SERVICE + BARCODE + CLIENT + clientId);
+        return buildQuery(BARCODE + CLIENT + clientId);
     }
     
     public static String collectionList() {
-        return new String(WEB_SERVICE + LOOKUP_USER_COLLECTIONS);
+        return buildQuery(LOOKUP_USER_COLLECTIONS);
     }
     
     public static String collectionLookup(String collectionMbid) {
-        return new String(WEB_SERVICE + COLLECTION + collectionMbid + COLLECTION_LIST);
+        return buildQuery(COLLECTION + collectionMbid + COLLECTION_LIST);
     }
     
     public static String collectionEdit(String collectionMbid, String releaseMbid, String clientId) {
-        return new String(WEB_SERVICE + COLLECTION + collectionMbid + COLLECTION_EDIT + releaseMbid + ";" + CLIENT + clientId);
+        return buildQuery(COLLECTION + collectionMbid + COLLECTION_EDIT + releaseMbid + ";" + CLIENT + clientId);
+    }
+    
+    private static String buildQuery(String path) {
+        return new String(WEB_SERVICE + path);
     }
 
 }
