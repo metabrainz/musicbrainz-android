@@ -38,6 +38,11 @@ public class StringMapper {
     public static String mapRGTypeString(Context c, String type) {
 
         Resources res = c.getResources();
+        
+        if (type == null) {
+            return res.getString(R.string.rt_unknown);
+        }
+      
         if (type.equalsIgnoreCase("album"))
             return res.getString(R.string.rt_album);
         else if (type.equalsIgnoreCase("single"))
