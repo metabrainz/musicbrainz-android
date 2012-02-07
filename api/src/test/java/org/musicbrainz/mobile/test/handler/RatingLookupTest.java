@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android;
+package org.musicbrainz.mobile.test.handler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,28 +28,38 @@ import java.io.InputStream;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.EditorCollection;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
-public class CollectionLookupTest extends BaseXmlParsingTestCase {
-    
-    private static final String COLLECTION_LOOKUP_FIXTURE = "collectionLookup_c6f9fb72-e233-47f4-a2f6-19f16442d93a.xml";
-    private EditorCollection collection;
+public class RatingLookupTest extends BaseXmlParsingTestCase {
+
+    private static final String RG_RATING_FIXTURE = "ratingLookup_release-group_bc7630eb-521a-3312-a281-adfb8c5aac7d.xml";
+    private static final String ARTIST_RATING_FIXTURE = "ratingLookup_artist_b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.xml";
+    private float releaseGroupRating;
+    private float artistRating;
     
     @Before
     public void doParsing() throws IOException {
-        InputStream stream = getFileStream(COLLECTION_LOOKUP_FIXTURE);
+        artistRating = parseRating(ARTIST_RATING_FIXTURE);
+        releaseGroupRating = parseRating(RG_RATING_FIXTURE);
+    }
+
+    private float parseRating(String xmlFile) throws IOException {
+        InputStream stream = getFileStream(xmlFile);
         assertNotNull(stream);
-        collection = new ResponseParser().parseCollectionLookup(stream);
+        ResponseParser responseParser = new ResponseParser();
+        float rating = responseParser.parseRatingLookup(stream);
         stream.close();
+        return rating;
+    }
+    
+    @Test
+    public void testArtistRatings() {
+        assertEquals(artistRating, 4.7f, 0.01); 
     }
 
     @Test
-    public void testReleaseGroupLookup() throws IOException {
-        assertEquals("c6f9fb72-e233-47f4-a2f6-19f16442d93a", collection.getMbid());
-        assertEquals("My Collection", collection.getName());
-        assertEquals("jdamcd", collection.getEditor());
-        assertEquals(2, collection.getCount());
+    public void testReleaseGroupRatings() {
+        assertEquals(releaseGroupRating, 4f, 0.01); 
     }
-
+    
 }

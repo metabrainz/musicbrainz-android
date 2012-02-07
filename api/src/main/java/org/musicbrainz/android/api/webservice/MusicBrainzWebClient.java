@@ -131,7 +131,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     private ArrayList<ReleaseGroupStub> browseArtistReleaseGroups(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.artistReleaseGroupBrowse(mbid));
+        HttpEntity entity = get(QueryBuilder.artistReleaseGroupBrowse(mbid, 0));
         ArrayList<ReleaseGroupStub> releases = responseParser.parseReleaseGroupBrowse(entity.getContent());
         entity.consumeContent();
         return releases;

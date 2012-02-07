@@ -28,9 +28,9 @@ public class QueryBuilder {
     private static final String WEB_SERVICE = "http://musicbrainz.org/ws/2/";
 
     private static final String LOOKUP_ARTIST = "artist/";
-    private static final String LOOKUP_ARTIST_PARAMS = "?inc=url-rels+tags+ratings";
+    private static final String LOOKUP_ARTIST_PARAMS = "?inc=url-rels+artist-rels+label-rels+tags+ratings";
     private static final String LOOKUP_RELEASE = "release/";
-    private static final String LOOKUP_RELEASE_PARAMS = "?inc=release-groups+artists+recordings+labels+tags+ratings";
+    private static final String LOOKUP_RELEASE_PARAMS = "?inc=release-groups+artists+recordings+labels+tags+ratings+url-rels+artist-rels";
     private static final String LOOKUP_LABEL = "label/";
     private static final String LOOKUP_LABEL_PARAMS = "?inc=tags+ratings+url-rels";
     private static final String LOOKUP_RECORDING = "recording/";
@@ -42,6 +42,7 @@ public class QueryBuilder {
     private static final String BROWSE_ARTIST_RGS_PARAMS = "&limit=100";
     private static final String BROWSE_RG_RELEASES = "release?release-group=";
     private static final String BROWSE_RG_RELEASES_PARAMS = "&inc=artist-credits+labels+mediums";
+    private static final String BROWSE_OFFSET = "&offset=";
 
     private static final String SEARCH_ARTIST = "artist?query=";
     private static final String SEARCH_RG = "release-group?query=";
@@ -53,8 +54,8 @@ public class QueryBuilder {
     
     private static final String LOOKUP_USER_COLLECTIONS = "collection";
     private static final String COLLECTION = "collection/";
-    private static final String COLLECTION_LIST = "/release";
-    private static final String COLLECTION_EDIT = "/release/";;
+    private static final String COLLECTION_LIST = "/releases";
+    private static final String COLLECTION_EDIT = "/releases/";;
 
     private static final String TAG_PARAMS = "?inc=tags";
     private static final String RATING_PARAMS = "?inc=ratings";
@@ -84,8 +85,8 @@ public class QueryBuilder {
         return buildQuery(LOOKUP_ARTIST + mbid + LOOKUP_ARTIST_PARAMS);
     }
 
-    public static String artistReleaseGroupBrowse(String mbid) {
-        return buildQuery(BROWSE_ARTIST_RGS + mbid + BROWSE_ARTIST_RGS_PARAMS);
+    public static String artistReleaseGroupBrowse(String mbid, int offset) {
+        return buildQuery(BROWSE_ARTIST_RGS + mbid + BROWSE_ARTIST_RGS_PARAMS + BROWSE_OFFSET + offset);
     }
 
     public static String artistSearch(String searchTerm) {
@@ -109,7 +110,7 @@ public class QueryBuilder {
     }
     
     public static String labelSearch(String searchTerm) {
-        return buildQuery(SEARCH_LABEL + searchTerm);
+        return buildQuery(SEARCH_LABEL + WebServiceUtils.sanitise(searchTerm));
     }
     
     public static String recordingLookup(String mbid) {
