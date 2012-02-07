@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android;
+package org.musicbrainz.mobile.test.handler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,38 +28,41 @@ import java.io.InputStream;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
-public class RatingLookupTest extends BaseXmlParsingTestCase {
-
-    private static final String RG_RATING_FIXTURE = "ratingLookup_release-group_bc7630eb-521a-3312-a281-adfb8c5aac7d.xml";
-    private static final String ARTIST_RATING_FIXTURE = "ratingLookup_artist_b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.xml";
-    private float releaseGroupRating;
-    private float artistRating;
+public class ArtistLookupTest extends BaseXmlParsingTestCase {
+    
+    private static final String ARTIST_LOOKUP_FIXTURE = "artistLookup_b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.xml";
+    private Artist artist;
     
     @Before
     public void doParsing() throws IOException {
-        artistRating = parseRating(ARTIST_RATING_FIXTURE);
-        releaseGroupRating = parseRating(RG_RATING_FIXTURE);
+        InputStream stream = getFileStream(ARTIST_LOOKUP_FIXTURE);
+        assertNotNull(stream);
+        artist = new ResponseParser().parseArtist(stream);
+        stream.close();
     }
 
-    private float parseRating(String xmlFile) throws IOException {
-        InputStream stream = getFileStream(xmlFile);
-        assertNotNull(stream);
-        ResponseParser responseParser = new ResponseParser();
-        float rating = responseParser.parseRatingLookup(stream);
-        stream.close();
-        return rating;
+    @Test
+    public void testArtistData() {
+        assertEquals("b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d", artist.getMbid());
+        assertEquals("The Beatles", artist.getName());
+        assertEquals("Group", artist.getType());
+        assertEquals("GB", artist.getCountry());
+        assertEquals("1957", artist.getStart());
+        assertEquals("1970-04-10", artist.getEnd());
+    }
+    
+    @Test
+    public void testArtistTags() {
+        assertEquals(34, artist.getTags().size());
     }
     
     @Test
     public void testArtistRatings() {
-        assertEquals(artistRating, 4.7f, 0.01); 
+        assertEquals(4.7f, artist.getRating(), 0.01);
+        assertEquals(57, artist.getRatingCount());
     }
 
-    @Test
-    public void testReleaseGroupRatings() {
-        assertEquals(releaseGroupRating, 4f, 0.01); 
-    }
-    
 }

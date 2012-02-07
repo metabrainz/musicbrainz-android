@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android;
+package org.musicbrainz.mobile.test.handler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,51 +29,45 @@ import java.io.InputStream;
 import org.junit.Before;
 import org.junit.Test;
 import org.musicbrainz.android.api.data.ArtistNameMbid;
-import org.musicbrainz.android.api.data.ReleaseGroup;
+import org.musicbrainz.android.api.data.Recording;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
-public class ReleaseGroupLookupTest extends BaseXmlParsingTestCase {
+public class RecordingLookupTest extends BaseXmlParsingTestCase {
     
-    private static final String RG_LOOKUP_FIXTURE = "releaseGroupLookup_60089b39-412b-326c-afc7-aaa47113d84f.xml";
-    private ReleaseGroup releaseGroup;
-
+    private static final String RECORDING_LOOKUP_FIXTURE = "recordingLookup_470d06f8-6c0c-443d-b521-4c4eed9f0e7e.xml";
+    private Recording recording;
+    
     @Before
     public void doParsing() throws IOException {
-        InputStream stream = getFileStream(RG_LOOKUP_FIXTURE);
+        InputStream stream = getFileStream(RECORDING_LOOKUP_FIXTURE);
         assertNotNull(stream);
-        releaseGroup = new ResponseParser().parseReleaseGroupLookup(stream);
+        recording = new ResponseParser().parseRecording(stream);
         stream.close();
     }
-    
+	
     @Test
-    public void testReleaseGroupLookup() {
-        assertEquals("60089b39-412b-326c-afc7-aaa47113d84f", releaseGroup.getMbid());
-        assertEquals("Miss Machine", releaseGroup.getTitle());
-        assertEquals("Album", releaseGroup.getType());
-        assertEquals("2004", releaseGroup.getReleaseYear());
+    public void testRecordingData() {
+        assertEquals("470d06f8-6c0c-443d-b521-4c4eed9f0e7e", recording.getMbid());
+        assertEquals("Sgt. Pepper’s Lonely Hearts Club Band", recording.getTitle());
+        assertEquals(122000, recording.getLength());
     }
     
     @Test
-    public void testReleaseGroupArtist() {
-        ArtistNameMbid artist = releaseGroup.getArtists().get(0);
-        assertEquals("The Dillinger Escape Plan", artist.getName());
-        assertEquals("1bc41dff-5397-4c53-bb50-469d2c277197", artist.getMbid());
+    public void tstRecordingArtist() {
+        ArtistNameMbid artist = recording.getArtists().get(0);
+        assertEquals("b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d", artist.getMbid());
+        assertEquals("The Beatles", artist.getName());
     }
     
     @Test
     public void testTags() {
-        assertEquals(2, releaseGroup.getTags().size());
+        assertEquals(3, recording.getTags().size());
     }
     
     @Test
     public void testRatings() {
-        assertEquals(2, releaseGroup.getRatingCount());
-        assertEquals(4.5f, releaseGroup.getRating(), 0.01);
-    }
-    
-    @Test
-    public void testLinks() {
-        assertEquals(2, releaseGroup.getLinks().size());
+        assertEquals(59, recording.getRatingCount());
+        assertEquals(4.7f, recording.getRating(), 0.01);
     }
 
 }

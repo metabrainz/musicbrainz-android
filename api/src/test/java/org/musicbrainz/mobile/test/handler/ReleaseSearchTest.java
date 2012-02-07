@@ -18,35 +18,35 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.android;
+package org.musicbrainz.mobile.test.handler;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
-public class ReleaseGroupBrowseTest extends BaseXmlParsingTestCase {
+public class ReleaseSearchTest extends BaseXmlParsingTestCase {
     
-    private static final String RG_BROWSE_FIXTURE = "releaseGroupBrowse_b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.xml";
-    private ArrayList<ReleaseGroupStub> releaseGroups;
+    private static final String RELEASE_SEARCH_FIXTURE = "releaseSearch_songs about leaving.xml";
+    private LinkedList<ReleaseStub> releases;
     
     @Before
     public void doParsing() throws IOException {
-        InputStream stream = getFileStream(RG_BROWSE_FIXTURE);
+        InputStream stream = getFileStream(RELEASE_SEARCH_FIXTURE);
         assertNotNull(stream);
-        releaseGroups = new ResponseParser().parseReleaseGroupBrowse(stream);
+        releases = new ResponseParser().parseReleaseSearch(stream);
         stream.close();
     }
 
     @Test
-    public void testReleaseGroupBrowse() {
-        assertEquals(100, releaseGroups.size());
+    public void testReleaseSearch() {
+        assertEquals(25, releases.size());
     }
 
 }
