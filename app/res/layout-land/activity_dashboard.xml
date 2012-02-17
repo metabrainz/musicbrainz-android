@@ -27,36 +27,16 @@
     <Button
       android:id="@+id/scan_btn"
       style="@style/HomeTile"
-      android:text="@string/scan_label"
+      android:text="@string/dash_scan"
       android:drawableTop="@drawable/home_barcode" />
 
-    <RelativeLayout
+    <include
+      layout="@layout/layout_dash_search"
       style="@style/WrapHeight"
       android:layout_gravity="center"
       android:layout_weight="0.5"
-      android:paddingRight="@dimen/super_pad">
+      android:paddingRight="@dimen/super_pad" />
 
-      <Spinner
-        android:id="@+id/search_spin"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-
-      <ImageButton
-        android:id="@+id/search_btn"
-        style="@style/SearchButton"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/search_spin" />
-
-      <AutoCompleteTextView
-        android:id="@+id/query_input"
-        style="@style/SearchEdit"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/search_btn"
-        android:layout_below="@+id/search_spin"
-        android:layout_alignBottom="@id/search_btn"
-        android:hint="@string/search_hint" />
-    </RelativeLayout>
   </LinearLayout>
 
   <LinearLayout style="@style/HomeTileRow">
@@ -64,19 +44,19 @@
     <Button
       android:id="@+id/login_btn"
       style="@style/HomeTile"
-      android:text="@string/login_label"
+      android:text="@string/dash_collection"
       android:drawableTop="@drawable/home_login" />
 
     <Button
       android:id="@+id/about_btn"
       style="@style/HomeTile"
-      android:text="@string/about_label"
+      android:text="@string/dash_donate"
       android:drawableTop="@drawable/home_about" />
 
     <Button
       android:id="@+id/donate_btn"
       style="@style/HomeTile"
-      android:text="@string/donate_label"
+      android:text="@string/dash_about"
       android:drawableTop="@drawable/home_donate" />
   </LinearLayout>
 

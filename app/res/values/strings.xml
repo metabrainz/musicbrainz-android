@@ -19,17 +19,20 @@
   <http://www.gnu.org/licenses/>. -->
 
 <resources>
-  <!-- HomeActivity -->
+    
   <string name="app_name">MusicBrainz</string>
-  <string name="scan_label">Scan</string>
-  <string name="login_label">Log In</string>
-  <string name="logout_label">Log Out</string>
+    
+  <!-- DashboardActivity -->
   <string name="search_hint">Search MusicBrainz</string>
-  <string name="about_label">About</string>
-  <string name="donate_label">Donate</string>
+  <string name="description_search">Search</string>
+  <string name="dash_scan">Scan</string>
+  <string name="dash_collection">Collection</string>
+  <string name="dash_donate">Donate</string>
+  <string name="dash_about">About</string>
+  <string name="login">Log In</string>
+  <string name="logout">Log Out</string>
   <string name="hometext">Welcome to MusicBrainz!</string>
   <string name="hometext_loggedin">Logged in as</string>
-  <string name="description_search">Search</string>
 
   <!-- Searchable -->
   <string name="search_name">MusicBrainz</string>

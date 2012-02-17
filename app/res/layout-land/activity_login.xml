@@ -37,7 +37,7 @@
     style="@style/LoginButton"
     android:layout_below="@id/pass_input"
     android:layout_alignParentRight="true"
-    android:text="@string/login_label" />
+    android:text="@string/login" />
 
   <LinearLayout
     style="@style/Wrap"

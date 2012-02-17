@@ -18,38 +18,31 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity"
-  android:padding="@dimen/home_pad">
+  style="@style/WrapHeight"
+  android:paddingLeft="@dimen/home_pad"
+  android:paddingRight="@dimen/home_pad"
+  android:paddingTop="@dimen/huge_pad">
 
-  <EditText
-    android:id="@+id/uname_input"
-    style="@style/Username" />
+  <Spinner
+    android:id="@+id/search_spin"
+    style="@style/WrapHeight"
+    android:layout_alignParentTop="true" />
 
-  <EditText
-    android:id="@+id/pass_input"
-    style="@style/Password"
-    android:layout_below="@+id/uname_input" />
-
-  <Button
-    android:id="@+id/auth_btn"
-    style="@style/LoginButton"
-    android:layout_below="@+id/pass_input"
+  <ImageButton
+    android:id="@+id/search_btn"
+    style="@style/SearchButton"
     android:layout_alignParentRight="true"
-    android:text="@string/login" />
+    android:layout_below="@+id/search_spin"
+    android:contentDescription="@string/description_search" />
 
-  <Button
-    android:id="@+id/forgotpass_link"
-    style="@style/LinkButton"
-    android:text="@string/forgotpass_text"
-    android:layout_alignParentBottom="true" />
-
-  <Button
-    android:id="@+id/register_link"
-    style="@style/LinkButton"
-    android:text="@string/register_text"
-    android:layout_above="@id/forgotpass_link" />
-
+  <AutoCompleteTextView
+    android:id="@+id/query_input"
+    style="@style/SearchEdit"
+    android:layout_alignBottom="@id/search_btn"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/search_spin"
+    android:layout_toLeftOf="@+id/search_btn"
+    android:hint="@string/search_hint" />
 </RelativeLayout>

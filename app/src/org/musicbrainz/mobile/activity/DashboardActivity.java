@@ -60,7 +60,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_dashboard);
         findViews();
 
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.searchType,
@@ -100,10 +100,10 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
         TextView messageBody = (TextView) findViewById(R.id.hometext);
 
         if (isUserLoggedIn()) {
-            login.setText(R.string.logout_label);
+            login.setText(R.string.logout);
             messageBody.setText(getString(R.string.hometext_loggedin) + " " + getUsername());
         } else {
-            login.setText(R.string.login_label);
+            login.setText(R.string.login);
             messageBody.setText(R.string.hometext);
         }
     }
