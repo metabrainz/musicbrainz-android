@@ -20,14 +20,14 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/WrapHeight"
+  style="@style/MatchWidth"
   android:paddingLeft="@dimen/home_pad"
   android:paddingRight="@dimen/home_pad"
   android:paddingTop="@dimen/huge_pad">
 
   <Spinner
     android:id="@+id/search_spin"
-    style="@style/WrapHeight"
+    style="@style/MatchWidth"
     android:layout_alignParentTop="true" />
 
   <ImageButton

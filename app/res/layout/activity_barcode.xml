@@ -24,7 +24,7 @@
 
   <TextView
     android:id="@+id/barcode_text"
-    style="@style/WrapHeight"
+    style="@style/MatchWidth"
     android:layout_margin="@dimen/small_pad"
     android:text="@string/barcode_text"
     android:textColor="@color/main_text"
@@ -33,7 +33,7 @@
     android:paddingLeft="@dimen/small_pad" />
 
   <RelativeLayout
-    style="@style/WrapHeight"
+    style="@style/MatchWidth"
     android:layout_marginLeft="@dimen/small_pad"
     android:layout_marginRight="@dimen/small_pad"
     android:layout_marginBottom="3dip">
@@ -52,7 +52,7 @@
       android:hint="@string/barcode_hint" />
   </RelativeLayout>
 
-  <RelativeLayout style="@style/WrapHeight">
+  <RelativeLayout style="@style/MatchWidth">
 
     <View
       android:id="@+id/topline"

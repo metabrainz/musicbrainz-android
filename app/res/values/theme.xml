@@ -37,7 +37,7 @@
 
   <style
     name="ActionBarText"
-    parent="WrapWidth">
+    parent="MatchHeight">
     <item name="android:textColor">@color/white</item>
     <item name="android:textSize">@dimen/text_size_entity</item>
   </style>

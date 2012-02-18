@@ -24,8 +24,7 @@
   <!-- Home -->
   <style
     name="HomeTileRow"
-    parent="@style/WrapHeight">
-    <item name="android:orientation">horizontal</item>
+    parent="MatchWidthHorizontal">
     <item name="android:layout_weight">1</item>
     <item name="android:paddingTop">@dimen/std_pad</item>
     <item name="android:paddingBottom">@dimen/std_pad</item>
@@ -35,7 +34,7 @@
 
   <style
     name="HomeTile"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:layout_gravity">center_vertical</item>
     <item name="android:layout_weight">1</item>
     <item name="android:gravity">center_horizontal</item>
@@ -48,7 +47,7 @@
   <!-- Entities -->
   <style
     name="EntityText"
-    parent="@style/ScrollText">
+    parent="ScrollText">
     <item name="android:textSize">@dimen/text_size_entity</item>
     <item name="android:textColor">@color/main_text</item>
     <item name="android:textStyle">bold</item>
@@ -56,7 +55,7 @@
 
   <style
     name="ScrollText"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:singleLine">true</item>
     <item name="android:ellipsize">marquee</item>
     <item name="android:marqueeRepeatLimit">marquee_forever</item>
@@ -64,7 +63,7 @@
 
   <style
     name="TagArea"
-    parent="@style/ScrollText">
+    parent="ScrollText">
     <item name="android:padding">@dimen/small_pad</item>
     <item name="android:background">@drawable/tagbox</item>
     <item name="android:layout_marginTop">@dimen/small_pad</item>
@@ -86,14 +85,14 @@
   <!-- Searches -->
   <style
     name="SearchEdit"
-    parent="@style/Edit">
+    parent="Edit">
     <item name="android:textColor">@color/main_text</item>
     <item name="android:imeOptions">actionSearch</item>
   </style>
 
   <style
     name="SearchButton"
-    parent="@style/ButtonMin">
+    parent="ButtonMin">
     <item name="android:onClick">onClick</item>
     <item name="android:src">@drawable/btn_search</item>
     <item name="android:contentDescription">@string/description_search</item>
@@ -101,7 +100,7 @@
 
   <style
     name="NoSearchResults"
-    parent="@style/Fill">
+    parent="Match">
     <item name="android:background">@color/main_fg</item>
     <item name="android:gravity">center</item>
     <item name="android:visibility">invisible</item>
@@ -110,7 +109,7 @@
 
   <style
     name="NoResultsText"
-    parent="@style/NoSearchResults">
+    parent="NoSearchResults">
     <item name="android:text">@string/no_results</item>
     <item name="android:textSize">@dimen/text_size_large</item>
     <item name="android:textColor">@color/main_text</item>
@@ -118,7 +117,7 @@
 
   <style
     name="BarcodeInstructions"
-    parent="@style/Fill">
+    parent="Match">
     <item name="android:text">@string/barcode_instructions</item>
     <item name="android:background">@color/main_fg</item>
     <item name="android:gravity">center</item>
@@ -130,7 +129,7 @@
   <!-- Text -->
    <style
     name="TextHeader"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_xl</item>
     <item name="android:textColor">@color/aux_text</item>
   </style>
@@ -143,7 +142,7 @@
 
   <style
     name="TextBody"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:textColor">@color/main_text</item>
     <item name="android:autoLink">web</item>
@@ -151,14 +150,14 @@
 
   <style
     name="VersionText"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_small</item>
     <item name="android:textColor">@color/mb_purple_dark</item>
   </style>
 
   <style
     name="Edit"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:singleLine">true</item>
     <item name="android:inputType">textFilter</item>
   </style>
@@ -180,21 +179,21 @@
 
   <style
     name="Footer"
-    parent="@style/TextBody">
+    parent="TextBody">
     <item name="android:layout_alignParentBottom">true</item>
     <item name="android:gravity">center_horizontal</item>
   </style>
 
   <style
     name="DialogHeader"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_xl</item>
     <item name="android:padding">@dimen/std_pad</item>
   </style>
 
   <style
     name="DialogBody"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:paddingRight">@dimen/std_pad</item>
     <item name="android:paddingLeft">@dimen/std_pad</item>
@@ -203,7 +202,7 @@
 
   <style
     name="Link"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:textColor">@color/link_text</item>
     <item name="android:singleLine">true</item>
@@ -213,14 +212,14 @@
 
   <style
     name="LinkDescription"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
     name="LinkImage"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:layout_centerVertical">true</item>
     <item name="android:layout_marginRight">@dimen/small_pad</item>
     <item name="android:layout_marginLeft">@dimen/small_pad</item>
@@ -230,7 +229,7 @@
 
   <style
     name="HomeText"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:textColor">@color/main_text</item>
     <item name="android:layout_centerInParent">true</item>
@@ -239,7 +238,7 @@
 
   <style
     name="PayPalLoadingText"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_xl</item>
     <item name="android:textColor">@color/aux_text</item>
     <item name="android:padding">@dimen/std_pad</item>
@@ -248,74 +247,74 @@
   <!-- List items -->
   <style
     name="ListMain"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_large</item>
     <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
     name="ListAux"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_small</item>
     <item name="android:textColor">@color/aux_text</item>
   </style>
 
   <style
     name="ListAuxMedium"
-    parent="@style/ListAux">
+    parent="ListAux">
     <item name="android:textSize">@dimen/text_size_medium</item>
   </style>
 
   <style
     name="ListAuxPad"
-    parent="@style/ListAux">
+    parent="ListAux">
     <item name="android:layout_marginRight">@dimen/small_pad</item>
     <item name="android:layout_marginLeft">@dimen/std_pad</item>
   </style>
 
   <style
     name="ListMedium"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
     name="ListReleaseMedium"
-    parent="@style/ListMedium">
+    parent="ListMedium">
     <item name="android:textColor">@color/mb_orange_dark</item>
   </style>
 
   <style
     name="ListReleaseTitles"
-    parent="@style/Wrap">
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_small</item>
     <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
     name="Track"
-    parent="@style/ListMedium">
+    parent="ListMedium">
     <item name="android:layout_marginRight">@dimen/small_pad</item>
     <item name="android:layout_marginLeft">@dimen/std_pad</item>
   </style>
 
   <style
     name="TrackArtist"
-    parent="@style/Track">
+    parent="Track">
     <item name="android:textColor">@color/aux_text</item>
     <item name="android:visibility">gone</item>
   </style>
 
   <style
     name="TrackNum"
-    parent="@style/ListMedium">
+    parent="ListMedium">
     <item name="android:layout_centerVertical">true</item>
   </style>
 
   <style
     name="TrackTime"
-    parent="@style/ListMedium">
+    parent="ListMedium">
     <item name="android:layout_marginRight">@dimen/small_pad</item>
     <item name="android:layout_centerVertical">true</item>
   </style>
@@ -329,7 +328,7 @@
 
   <style
     name="StdButton"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:onClick">onClick</item>
   </style>
 
@@ -341,7 +340,7 @@
 
   <style
     name="LinkButton"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:background">@drawable/link_button</item>
     <item name="android:drawableRight">@drawable/ic_link</item>
     <item name="android:padding">@dimen/small_pad</item>

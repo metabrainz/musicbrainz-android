@@ -24,7 +24,7 @@
 
   <LinearLayout
     android:id="@+id/wrapper"
-    style="@style/Fill">
+    style="@style/Match">
     <TextView
       android:id="@+id/search_artist_name"
       style="@style/ListMain" />

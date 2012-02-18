@@ -37,7 +37,7 @@
 
   <Spinner
     android:id="@+id/donate_spin"
-    style="@style/WrapHeight"
+    style="@style/MatchWidth"
     android:layout_below="@id/donate_body"
     android:layout_marginTop="@dimen/huge_pad" />
 

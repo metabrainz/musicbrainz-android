@@ -23,7 +23,7 @@
   style="@style/Activity">
 
   <include layout="@layout/layout_dash_search" 
-      style="@style/WrapHeight"/>
+      style="@style/MatchWidth"/>
 
   <LinearLayout style="@style/HomeTileRow">
 

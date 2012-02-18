@@ -22,7 +22,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
   <LinearLayout
-    style="@style/WrapHeight"
+    style="@style/MatchWidth"
     android:padding="@dimen/home_pad"
     android:orientation="vertical">
 

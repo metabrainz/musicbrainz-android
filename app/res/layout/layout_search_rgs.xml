@@ -21,7 +21,7 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/rg_results_container"
-  style="@style/Fill"
+  style="@style/Match"
   android:layout_below="@id/topline">
 
   <ListView

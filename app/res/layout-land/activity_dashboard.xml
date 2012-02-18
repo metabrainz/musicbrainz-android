@@ -32,10 +32,10 @@
 
     <include
       layout="@layout/layout_dash_search"
-      style="@style/WrapHeight"
+      style="@style/MatchWidth"
       android:layout_gravity="center"
       android:layout_weight="0.5"
-      android:paddingRight="@dimen/super_pad" />
+      android:layout_marginRight="@dimen/super_pad" />
 
   </LinearLayout>
 

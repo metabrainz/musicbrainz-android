@@ -21,7 +21,7 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/releases_tab"
-  style="@style/WrapHeight">
+  style="@style/MatchWidth">
 
   <ListView
     android:id="@+id/artist_releases"

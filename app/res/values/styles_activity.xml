@@ -19,18 +19,17 @@
   <http://www.gnu.org/licenses/>. -->
 
 <resources>
-  <!-- Activity and Dialog layout styles -->
 
   <style
     name="Activity"
-    parent="@style/Fill">
+    parent="Match">
     <item name="android:orientation">vertical</item>
     <item name="android:background">@color/main_bg</item>
   </style>
 
   <style
     name="Loading"
-    parent="@style/Fill">
+    parent="Match">
     <item name="android:orientation">vertical</item>
     <item name="android:background">@color/list_bg</item>
     <item name="android:gravity">center</item>
@@ -38,27 +37,27 @@
 
   <style
     name="PaddedLayout"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:orientation">vertical</item>
     <item name="android:padding">@dimen/home_pad</item>
   </style>
 
   <style
     name="PaddedLayoutFill"
-    parent="@style/Fill">
+    parent="Match">
     <item name="android:orientation">vertical</item>
     <item name="android:padding">@dimen/home_pad</item>
   </style>
 
   <style
     name="LaunchActivityLand"
-    parent="@style/Activity">
+    parent="Activity">
     <item name="android:paddingBottom">@dimen/std_pad</item>
   </style>
 
   <style
     name="Dialog"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:orientation">vertical</item>
   </style>
 </resources>

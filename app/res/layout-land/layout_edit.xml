@@ -20,12 +20,12 @@
 
 <ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Fill"
+  style="@style/Match"
   android:id="@+id/edit_tab"
   android:background="@color/main_fg">
 
   <LinearLayout
-    style="@style/Fill"
+    style="@style/Match"
     android:orientation="vertical"
     android:padding="@dimen/home_pad">
 
@@ -38,11 +38,11 @@
       android:textColor="@color/mb_orange_dark"
       android:visibility="gone" />
 
-    <RelativeLayout style="@style/WrapHeight">
+    <RelativeLayout style="@style/MatchWidth">
 
       <EditText
         android:id="@+id/tag_input"
-        style="@style/WrapHeight"
+        style="@style/MatchWidth"
         android:layout_toLeftOf="@id/tag_btn"
         android:hint="@string/tag_hint"
         android:imeOptions="actionDone"
@@ -51,7 +51,7 @@
 
       <Button
         android:id="@+id/tag_btn"
-        style="@style/WrapHeight"
+        style="@style/MatchWidth"
         android:layout_toRightOf="@id/rating_input"
         android:drawableRight="@drawable/btn_tag"
         android:layout_marginLeft="@dimen/home_pad"
@@ -64,7 +64,7 @@
 
       <RelativeLayout
         android:id="@+id/rate_container"
-        style="@style/WrapHeight"
+        style="@style/MatchWidth"
         android:layout_below="@id/tag_input"
         android:layout_toRightOf="@id/rating_input"
         android:layout_marginLeft="@dimen/home_pad"
@@ -72,7 +72,7 @@
         android:layout_centerVertical="true">
         <Button
           android:id="@+id/rate_btn"
-          style="@style/WrapHeight"
+          style="@style/MatchWidth"
           android:layout_centerVertical="true"
           android:drawableRight="@drawable/btn_star"
           android:text="@string/rate_label" />

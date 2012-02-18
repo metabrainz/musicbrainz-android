@@ -24,7 +24,7 @@
 
   <include
     layout="@layout/layout_dash_search"
-    style="@style/WrapHeight"
+    style="@style/MatchWidth"
     android:paddingTop="@dimen/std_pad" />
 
   <LinearLayout style="@style/HomeTileRow">

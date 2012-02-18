@@ -19,31 +19,10 @@
   <http://www.gnu.org/licenses/>. -->
 
 <resources>
-  <!-- Layout size styles -->
-
-  <style name="Wrap">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-  </style>
-
-  <style name="WrapWidth">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">fill_parent</item>
-  </style>
-
-  <style name="WrapHeight">
-    <item name="android:layout_width">fill_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-  </style>
-
-  <style name="Fill">
-    <item name="android:layout_width">fill_parent</item>
-    <item name="android:layout_height">fill_parent</item>
-  </style>
-
+    
   <style
     name="List"
-    parent="@style/Fill">
+    parent="Match">
     <item name="android:background">@color/list_bg</item>
     <item name="android:cacheColorHint">@color/list_bg</item>
     <item name="android:divider">@drawable/list_divider</item>
@@ -56,8 +35,7 @@
 
   <style
     name="VerticalMinPad"
-    parent="@style/WrapHeight">
-    <item name="android:orientation">vertical</item>
+    parent="MatchWidth">
     <item name="android:minHeight">@dimen/vertical_minspace</item>
     <item name="android:gravity">center_vertical</item>
     <item name="android:padding">@dimen/std_pad</item>
@@ -72,7 +50,7 @@
 
   <style
     name="EntityInfo"
-    parent="@style/WrapHeight">
+    parent="MatchWidth">
     <item name="android:layout_marginRight">@dimen/std_pad</item>
     <item name="android:layout_marginLeft">@dimen/std_pad</item>
     <item name="android:layout_marginTop">@dimen/std_pad</item>
