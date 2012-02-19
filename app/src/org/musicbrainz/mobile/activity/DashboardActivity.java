@@ -21,9 +21,11 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.webservice.HttpClient;
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
+import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -82,7 +84,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
         super.onResume();
         updateLoginState();
 
-        if (shouldProvideSearchSuggestions()) {
+        if (PreferenceUtils.shouldProvideSearchSuggestions(getApplicationContext())) {
             searchField.setAdapter(suggestionHelper.getAdapter());
             searchField.setOnItemClickListener(this);
         } else {
@@ -101,7 +103,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
 
         if (isUserLoggedIn()) {
             login.setText(R.string.logout);
-            messageBody.setText(getString(R.string.hometext_loggedin) + " " + getUsername());
+            messageBody.setText(getString(R.string.hometext_loggedin) + " " + PreferenceUtils.getUsername(getApplicationContext()));
         } else {
             login.setText(R.string.login);
             messageBody.setText(R.string.hometext);
@@ -112,7 +114,8 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         if (requestCode == REQUEST_LOGIN && resultCode == LoginActivity.RESULT_LOGGED_IN) {
-            setLoginStatus(true);
+            MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
+            app.updateLoginStatus(true);
             Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
         } else if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
@@ -159,7 +162,8 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
         spe.clear();
         spe.commit();
         HttpClient.clearCredentials();
-        setLoginStatus(false);
+        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
+        app.updateLoginStatus(false);
     }
 
     private void startSearch() {

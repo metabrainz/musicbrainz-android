@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.widget.AssetTextView;
 
@@ -36,7 +37,8 @@ public class AboutActivity extends MusicBrainzActivity {
         setContentView(R.layout.activity_about);
 
         TextView versionLabel = (TextView) findViewById(R.id.version_text);
-        versionLabel.setText(getText(R.string.version_text) + " " + getVersion());
+        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
+        versionLabel.setText(getText(R.string.version_text) + " " + app.getVersion());
         
         AssetTextView body = (AssetTextView) findViewById(R.id.about_text);
         body.setAsset("about.html");

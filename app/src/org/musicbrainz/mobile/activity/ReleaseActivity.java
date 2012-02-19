@@ -152,7 +152,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         releaseDate.setText(release.getDate());
         tags.setText(StringFormat.commaSeparateTags(release.getReleaseGroupTags(), this));
         rating.setRating(release.getReleaseGroupRating());
-        
+
         artist.setSelected(true);
         title.setSelected(true);
         labels.setSelected(true);
@@ -166,7 +166,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
     }
-    
+
     private void configurePager() {
         ReleasePagerAdapter adapter = new ReleasePagerAdapter(this);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -176,7 +176,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         indicator.setViewPager(pager);
         pager.setCurrentItem(0);
     }
-    
+
     private void findViews() {
         rating = (RatingBar) findViewById(R.id.release_rating);
         tags = (TextView) findViewById(R.id.release_tags);
@@ -214,13 +214,13 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         rateBtn.setEnabled(false);
         rateBtn.setFocusable(false);
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.release, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -306,7 +306,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         });
         return builder.create();
     }
-    
+
     private void restartLoader() {
         if (releaseMbid != null) {
             getSupportLoaderManager().restartLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
@@ -323,17 +323,9 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         public Loader<AsyncEntityResult<Release>> onCreateLoader(int id, Bundle args) {
             switch (id) {
             case RELEASE_LOADER:
-                if (isUserLoggedIn()) {
-                    return new ReleaseLoader(ReleaseActivity.this, getCredentials(), releaseMbid);
-                } else {
-                    return new ReleaseLoader(ReleaseActivity.this, getUserAgent(), releaseMbid);
-                }
+                return new ReleaseLoader(getApplicationContext(), releaseMbid);
             case BARCODE_RELEASE_LOADER:
-                if (isUserLoggedIn()) {
-                    return new BarcodeReleaseLoader(ReleaseActivity.this, getCredentials(), barcode);
-                } else {
-                    return new BarcodeReleaseLoader(ReleaseActivity.this, getUserAgent(), barcode);
-                }
+                return new BarcodeReleaseLoader(getApplicationContext(), barcode);
             }
             return null;
         }
@@ -367,7 +359,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
 
         @Override
         public Loader<AsyncResult<LinkedList<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
-            return new ReleaseGroupStubsLoader(ReleaseActivity.this, getUserAgent(), releaseGroupMbid);
+            return new ReleaseGroupStubsLoader(getApplicationContext(), releaseGroupMbid);
         }
 
         @Override
@@ -400,8 +392,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         @Override
         public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
             int rating = (int) ratingInput.getRating();
-            return new SubmitRatingLoader(ReleaseActivity.this, getCredentials(), Entity.RELEASE_GROUP,
-                    release.getReleaseGroupMbid(), rating);
+            return new SubmitRatingLoader(getApplicationContext(), Entity.RELEASE_GROUP, release.getReleaseGroupMbid(),
+                    rating);
         }
 
         @Override
@@ -436,8 +428,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         @Override
         public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
-            return new SubmitTagsLoader(ReleaseActivity.this, getCredentials(), Entity.RELEASE_GROUP,
-                    release.getReleaseGroupMbid(), tags);
+            return new SubmitTagsLoader(getApplicationContext(), Entity.RELEASE_GROUP, release.getReleaseGroupMbid(),
+                    tags);
         }
 
         @Override

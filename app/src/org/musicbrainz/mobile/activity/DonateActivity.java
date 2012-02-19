@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import java.math.BigDecimal;
 
-import org.musicbrainz.mobile.MBApplication;
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 
@@ -81,7 +81,7 @@ public class DonateActivity extends MusicBrainzActivity implements OnClickListen
 
         @Override
         public void run() {
-            MBApplication app = (MBApplication) getApplication();
+            MusicBrainzApplication app = (MusicBrainzApplication) getApplication();
             payPal = app.getPayPal();
             if (payPal != null) {
                 onPayPalLoaded();

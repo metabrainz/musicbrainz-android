@@ -83,7 +83,7 @@
 
   <application
     android:icon="@drawable/icon"
-    android:name=".MBApplication"
+    android:name=".MusicBrainzApplication"
     android:label="@string/app_name"
     android:debuggable="false"
     android:hardwareAccelerated="true"

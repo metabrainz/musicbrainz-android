@@ -23,9 +23,9 @@ package org.musicbrainz.mobile.loader;
 import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
-import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -34,14 +34,14 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class SubmitRatingLoader extends AsyncTaskLoader<AsyncResult<Float>> {
 
-    private Credentials creds;
+    private MusicBrainzApplication app;
     private Entity type;
     private String mbid;
     private int rating;
 
-    public SubmitRatingLoader(Context context, Credentials creds, Entity type, String mbid, int rating) {
-        super(context);
-        this.creds = creds;
+    public SubmitRatingLoader(Context appContext, Entity type, String mbid, int rating) {
+        super(appContext);
+        app = (MusicBrainzApplication) appContext;
         this.type = type;
         this.mbid = mbid;
         this.rating = rating;
@@ -55,7 +55,7 @@ public class SubmitRatingLoader extends AsyncTaskLoader<AsyncResult<Float>> {
 
     @Override
     public AsyncResult<Float> loadInBackground() {
-        MusicBrainz client = new MusicBrainzWebClient(creds);
+        MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
         try {
             client.submitRating(type, mbid, rating);
             Float updatedRating = client.lookupRating(type, mbid);

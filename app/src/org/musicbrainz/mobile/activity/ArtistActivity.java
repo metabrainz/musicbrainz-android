@@ -198,7 +198,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             setProgressBarIndeterminateVisibility(Boolean.FALSE);
         }
     }
-    
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -270,11 +270,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     @Override
     public Loader<AsyncEntityResult<Artist>> onCreateLoader(int id, Bundle args) {
-        if (isUserLoggedIn()) {
-            return new ArtistLoader(this, getCredentials(), mbid);
-        } else {
-            return new ArtistLoader(this, getUserAgent(), mbid);
-        }
+        return new ArtistLoader(getApplicationContext(), mbid);
     }
 
     @Override
@@ -306,8 +302,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
             int rating = (int) ratingInput.getRating();
-            return new SubmitRatingLoader(ArtistActivity.this, getCredentials(), Entity.ARTIST, artist.getMbid(),
-                    rating);
+            return new SubmitRatingLoader(getApplicationContext(), Entity.ARTIST, artist.getMbid(), rating);
         }
 
         @Override
@@ -342,7 +337,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
-            return new SubmitTagsLoader(ArtistActivity.this, getCredentials(), Entity.ARTIST, artist.getMbid(), tags);
+            return new SubmitTagsLoader(getApplicationContext(), Entity.ARTIST, artist.getMbid(), tags);
         }
 
         @Override

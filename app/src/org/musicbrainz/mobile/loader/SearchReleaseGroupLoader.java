@@ -24,6 +24,7 @@ import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 import org.musicbrainz.mobile.loader.result.SearchResults;
@@ -33,24 +34,24 @@ import android.content.Context;
 
 public class SearchReleaseGroupLoader extends PersistingAsyncTaskLoader<AsyncResult<SearchResults>> {
 
-    private String userAgent;
+    private MusicBrainzApplication app;
     private String term;
 
-    public SearchReleaseGroupLoader(Context context, String userAgent, String term) {
-        super(context);
-        this.userAgent = userAgent;
+    public SearchReleaseGroupLoader(Context appContext, String term) {
+        super(appContext);
+        app = (MusicBrainzApplication) appContext;
         this.term = term;
     }
-    
+
     @Override
     public AsyncResult<SearchResults> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(userAgent);
+            MusicBrainz client = new MusicBrainzWebClient(app.getUserAgent());
             SearchResults results = new SearchResults(SearchType.RELEASE_GROUP, client.searchReleaseGroup(term));
             data = new AsyncResult<SearchResults>(LoaderStatus.SUCCESS, results);
             return data;
         } catch (IOException e) {
             return new AsyncResult<SearchResults>(LoaderStatus.EXCEPTION, e);
         }
-    } 
+    }
 }

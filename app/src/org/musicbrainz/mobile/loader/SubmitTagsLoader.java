@@ -25,10 +25,10 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Tag;
-import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.util.WebServiceUtils;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -37,14 +37,14 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<LinkedList<Tag>>> {
 
-    private Credentials creds;
+    private MusicBrainzApplication app;
     private Entity type;
     private String mbid;
     private String tags;
 
-    public SubmitTagsLoader(Context context, Credentials creds, Entity type, String mbid, String tags) {
-        super(context);
-        this.creds = creds;
+    public SubmitTagsLoader(Context appContext, Entity type, String mbid, String tags) {
+        super(appContext);
+        app = (MusicBrainzApplication) appContext;
         this.type = type;
         this.mbid = mbid;
         this.tags = tags;
@@ -58,7 +58,7 @@ public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<LinkedList<Tag
 
     @Override
     public AsyncResult<LinkedList<Tag>> loadInBackground() {
-        MusicBrainz client = new MusicBrainzWebClient(creds);
+        MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
         LinkedList<String> saneTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags);
         try {
             client.submitTags(type, mbid, saneTags);

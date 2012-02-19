@@ -206,7 +206,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
 
         @Override
         public Loader<AsyncResult<LinkedList<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
-            return new SearchReleaseLoader(BarcodeSearchActivity.this, getUserAgent(), searchTerm);
+            return new SearchReleaseLoader(getApplicationContext(), searchTerm);
         }
 
         @Override
@@ -249,7 +249,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
 
         @Override
         public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
-            return new SubmitBarcodeLoader(BarcodeSearchActivity.this, getCredentials(), getSelectedReleaseMbid(),
+            return new SubmitBarcodeLoader(getApplicationContext(), getSelectedReleaseMbid(),
                     barcode);
         }
 

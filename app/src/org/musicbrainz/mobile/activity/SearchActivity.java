@@ -34,6 +34,7 @@ import org.musicbrainz.mobile.loader.SearchReleaseGroupLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.SearchResults;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
+import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -153,7 +154,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     }
 
     private void saveQueryAsSuggestion() {
-        if (shouldProvideSearchSuggestions()) {
+        if (PreferenceUtils.shouldProvideSearchSuggestions(getApplicationContext())) {
             SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY,
                     SuggestionProvider.MODE);
             suggestions.saveRecentQuery(searchTerm, null);
@@ -262,11 +263,11 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     public Loader<AsyncResult<SearchResults>> onCreateLoader(int id, Bundle args) {
         switch (id) {
         case SEARCH_ARTIST_LOADER:
-            return new SearchArtistLoader(this, getUserAgent(), searchTerm);
+            return new SearchArtistLoader(getApplicationContext(), searchTerm);
         case SEARCH_RELEASE_GROUP_LOADER:
-            return new SearchReleaseGroupLoader(this, getUserAgent(), searchTerm);
+            return new SearchReleaseGroupLoader(getApplicationContext(), searchTerm);
         case SEARCH_LOADER:
-            return new SearchLoader(this, getUserAgent(), searchTerm);
+            return new SearchLoader(getApplicationContext(), searchTerm);
         }
         return null;
     }

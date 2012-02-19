@@ -20,7 +20,6 @@
 
 package org.musicbrainz.mobile.activity;
 
-import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.config.Constants;
@@ -128,8 +127,7 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
 
     @Override
     public Loader<AsyncResult<Boolean>> onCreateLoader(int id, Bundle args) {
-        Credentials creds = new Credentials(getUserAgent(), username, password, getClientId());
-        return new LoginLoader(this, creds);
+        return new LoginLoader(getApplicationContext(), username, password);
     }
 
     @Override
