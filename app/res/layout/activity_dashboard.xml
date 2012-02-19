@@ -43,16 +43,16 @@
   <LinearLayout style="@style/HomeTileRow">
 
     <Button
-      android:id="@+id/about_btn"
-      style="@style/HomeTile"
-      android:text="@string/dash_donate"
-      android:drawableTop="@drawable/home_about" />
-
-    <Button
       android:id="@+id/donate_btn"
       style="@style/HomeTile"
-      android:text="@string/dash_about"
+      android:text="@string/dash_donate"
       android:drawableTop="@drawable/home_donate" />
+
+    <Button
+      android:id="@+id/about_btn"
+      style="@style/HomeTile"
+      android:text="@string/dash_about"
+      android:drawableTop="@drawable/home_about" />
   </LinearLayout>
 
   <View style="@style/Separator" />
