@@ -43,7 +43,7 @@
 
   <style name="HomeTextArea">
     <item name="android:background">@color/main_fg</item>
-    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">@dimen/vertical_minspace</item>
     <item name="android:padding">@dimen/std_pad</item>
   </style>

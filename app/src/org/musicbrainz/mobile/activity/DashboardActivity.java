@@ -62,7 +62,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_dash);
         findViews();
 
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.searchType,

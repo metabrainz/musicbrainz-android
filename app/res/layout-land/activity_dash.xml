@@ -20,12 +20,7 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
-
-  <include
-    layout="@layout/layout_dash_search"
-    style="@style/MatchWidth"
-    android:paddingTop="@dimen/std_pad" />
+  style="@style/LaunchActivityLand">
 
   <LinearLayout style="@style/HomeTileRow">
 
@@ -35,14 +30,23 @@
       android:text="@string/dash_scan"
       android:drawableTop="@drawable/home_barcode" />
 
+    <fragment
+      android:id="@+id/search_fragment"
+      android:name="org.musicbrainz.mobile.fragment.DashSearchFragment"
+      style="@style/MatchWidth"
+      android:layout_gravity="center"
+      android:layout_weight="0.5"
+      android:layout_marginRight="@dimen/super_pad" />
+
+  </LinearLayout>
+
+  <LinearLayout style="@style/HomeTileRow">
+
     <Button
       android:id="@+id/login_btn"
       style="@style/HomeTile"
       android:text="@string/dash_collection"
       android:drawableTop="@drawable/home_login" />
-  </LinearLayout>
-
-  <LinearLayout style="@style/HomeTileRow">
 
     <Button
       android:id="@+id/donate_btn"
@@ -57,9 +61,9 @@
       android:drawableTop="@drawable/home_about" />
   </LinearLayout>
 
-  <View style="@style/Separator" />
-
-  <RelativeLayout style="@style/HomeTextArea">
+  <RelativeLayout
+    style="@style/HomeTextArea"
+    android:visibility="gone">
 
     <TextView
       android:id="@+id/hometext"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2012 Jamie McDonald
 
   This file is part of MusicBrainz for Android.
 
@@ -20,11 +20,7 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
-
-  <include layout="@layout/layout_dash_search" 
-      style="@style/MatchWidth"/>
-
+  style="@style/Match">
   <LinearLayout style="@style/HomeTileRow">
 
     <Button
@@ -54,14 +50,5 @@
       android:text="@string/dash_about"
       android:drawableTop="@drawable/home_about" />
   </LinearLayout>
-
-  <View style="@style/Separator" />
-
-  <RelativeLayout style="@style/HomeTextArea">
-
-    <TextView
-      android:id="@+id/hometext"
-      style="@style/HomeText"
-      android:text="@string/hometext" />
-  </RelativeLayout>
 </LinearLayout>
+
