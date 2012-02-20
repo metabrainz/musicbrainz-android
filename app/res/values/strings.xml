@@ -33,7 +33,12 @@
   <string name="logout">Log Out</string>
   <string name="hometext">Welcome to MusicBrainz!</string>
   <string name="hometext_loggedin">Logged in as</string>
-
+  
+  <string name="searchtype_artist">Artist</string>
+  <string name="searchtype_release">Release</string>
+  <string name="searchtype_label">Label</string>
+  <string name="searchtype_recording">Recording</string>
+  
   <!-- Searchable -->
   <string name="search_name">MusicBrainz</string>
   <string name="search_description">Artists and releases</string>
@@ -117,6 +122,8 @@
   <string name="menu_donate">Donate to MB</string>
   <string name="menu_feedback">Feedback</string>
   <string name="menu_preferences">Settings</string>
+  <string name="menu_login">Log in</string>
+  <string name="menu_logout">Log out</string>
 
   <!-- Actions -->
   <string name="action_share">Share</string>

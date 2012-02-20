@@ -21,9 +21,10 @@
 <resources>
   
   <string-array name="searchType">
-    <item>Artist</item>
-    <item>Release</item>
-    <item>All</item>
+    <item>@string/searchtype_artist</item>
+    <item>@string/searchtype_release</item>
+    <item>@string/searchtype_label</item>
+    <item>@string/searchtype_recording</item>
   </string-array>
 
   <array name="donation">
@@ -32,7 +33,6 @@
     <item>$25</item>
     <item>$50</item>
     <item>$100</item>
-    <item>$500</item>
   </array>
   
 </resources>

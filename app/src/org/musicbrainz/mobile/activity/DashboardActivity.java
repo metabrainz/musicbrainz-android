@@ -206,7 +206,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
+        getMenuInflater().inflate(R.menu.dash, menu);
         return true;
     }
 
