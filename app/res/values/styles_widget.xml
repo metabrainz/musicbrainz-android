@@ -28,8 +28,8 @@
     <item name="android:layout_weight">1</item>
     <item name="android:paddingTop">@dimen/std_pad</item>
     <item name="android:paddingBottom">@dimen/std_pad</item>
-    <item name="android:paddingRight">@dimen/home_pad</item>
-    <item name="android:paddingLeft">@dimen/home_pad</item>
+    <item name="android:paddingRight">@dimen/gutter_large</item>
+    <item name="android:paddingLeft">@dimen/gutter_large</item>
   </style>
 
   <style
@@ -123,7 +123,7 @@
     <item name="android:gravity">center</item>
     <item name="android:textSize">@dimen/text_size_large</item>
     <item name="android:textColor">@color/main_text</item>
-    <item name="android:padding">@dimen/home_pad</item>
+    <item name="android:padding">@dimen/gutter_large</item>
   </style>
 
   <!-- Text -->
@@ -137,7 +137,7 @@
   <style 
     name="TextHeaderPad"
     parent="TextHeader">
-    <item name="android:layout_marginBottom">@dimen/home_pad</item>
+    <item name="android:layout_marginBottom">@dimen/gutter_large</item>
   </style>
 
   <style

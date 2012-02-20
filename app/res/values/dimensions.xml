@@ -26,7 +26,7 @@
   <dimen name="text_size_entity">17sp</dimen>
   <dimen name="text_size_xl">18sp</dimen>
 
-  <dimen name="home_pad">14dp</dimen>
+  <dimen name="gutter_large">14dp</dimen>
   <dimen name="huge_pad">20dp</dimen>
   <dimen name="super_pad">32dp</dimen>
   <dimen name="std_pad">7dp</dimen>

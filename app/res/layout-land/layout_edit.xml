@@ -27,13 +27,13 @@
   <LinearLayout
     style="@style/Match"
     android:orientation="vertical"
-    android:padding="@dimen/home_pad">
+    android:padding="@dimen/gutter_large">
 
     <TextView
       android:id="@+id/login_warning"
       style="@style/Wrap"
       android:layout_gravity="center"
-      android:layout_marginBottom="@dimen/home_pad"
+      android:layout_marginBottom="@dimen/gutter_large"
       android:text="@string/edit_login"
       android:textColor="@color/mb_orange_dark"
       android:visibility="gone" />
@@ -54,7 +54,7 @@
         style="@style/MatchWidth"
         android:layout_toRightOf="@id/rating_input"
         android:drawableRight="@drawable/btn_tag"
-        android:layout_marginLeft="@dimen/home_pad"
+        android:layout_marginLeft="@dimen/gutter_large"
         android:text="@string/tag_label" />
 
       <RatingBar
@@ -67,7 +67,7 @@
         style="@style/MatchWidth"
         android:layout_below="@id/tag_input"
         android:layout_toRightOf="@id/rating_input"
-        android:layout_marginLeft="@dimen/home_pad"
+        android:layout_marginLeft="@dimen/gutter_large"
         android:layout_alignBottom="@id/rating_input"
         android:layout_centerVertical="true">
         <Button

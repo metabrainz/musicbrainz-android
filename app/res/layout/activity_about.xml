@@ -23,7 +23,7 @@
   style="@style/Activity">
   <LinearLayout
     style="@style/MatchWidth"
-    android:padding="@dimen/home_pad"
+    android:padding="@dimen/gutter_large"
     android:orientation="vertical">
 
     <TextView
@@ -38,7 +38,7 @@
     <org.musicbrainz.mobile.widget.AssetTextView
       android:id="@+id/about_text"
       style="@style/TextBody"
-      android:layout_marginTop="@dimen/home_pad" />
+      android:layout_marginTop="@dimen/gutter_large" />
 
   </LinearLayout>
 </ScrollView>

@@ -21,7 +21,7 @@
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity"
-  android:padding="@dimen/home_pad"
+  android:padding="@dimen/gutter_large"
   android:orientation="horizontal"
   android:baselineAligned="false">
 
@@ -38,14 +38,14 @@
       style="@style/TextBody"
       android:text="@string/donate_text"
       android:layout_below="@id/donate_title"
-      android:layout_marginTop="@dimen/home_pad" />
+      android:layout_marginTop="@dimen/gutter_large" />
   </RelativeLayout>
 
   <RelativeLayout
     android:id="@+id/donate_layout"
     style="@style/Match"
     android:layout_weight="2"
-    android:layout_marginLeft="@dimen/home_pad">
+    android:layout_marginLeft="@dimen/gutter_large">
     <Spinner
       android:id="@+id/donate_spin"
       style="@style/MatchWidth" />

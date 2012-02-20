@@ -21,9 +21,7 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/MatchWidth"
-  android:paddingLeft="@dimen/home_pad"
-  android:paddingRight="@dimen/home_pad"
-  android:paddingTop="@dimen/huge_pad">
+  android:padding="@dimen/gutter_large">
 
   <Spinner
     android:id="@+id/search_spin"

@@ -39,14 +39,14 @@
     name="PaddedLayout"
     parent="MatchWidth">
     <item name="android:orientation">vertical</item>
-    <item name="android:padding">@dimen/home_pad</item>
+    <item name="android:padding">@dimen/gutter_large</item>
   </style>
 
   <style
     name="PaddedLayoutFill"
     parent="Match">
     <item name="android:orientation">vertical</item>
-    <item name="android:padding">@dimen/home_pad</item>
+    <item name="android:padding">@dimen/gutter_large</item>
   </style>
 
   <style

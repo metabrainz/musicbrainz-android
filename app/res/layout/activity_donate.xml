@@ -22,7 +22,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity"
   android:id="@+id/donate_layout"
-  android:padding="@dimen/home_pad">
+  android:padding="@dimen/gutter_large">
 
   <TextView
     android:id="@+id/donate_title"
