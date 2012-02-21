@@ -11,6 +11,8 @@ public class Extra {
 	public static final String QUERY = "query";
 	public static final String ARTIST = "artist";
 	public static final String RELEASE_GROUP = "rg";
+	public static final String LABEL = "label";
+	public static final String RECORDING = "recording";
 	public static final String ALL = "all";
 	
 	public static final String MESSAGE = "message";

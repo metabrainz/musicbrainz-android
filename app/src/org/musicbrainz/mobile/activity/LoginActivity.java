@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.config.Constants;
@@ -83,7 +84,9 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
         String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), password);
         spe.putString(Constants.PREF_PASSWORD, obscuredPassword);
         spe.commit();
-        setResult(RESULT_LOGGED_IN);
+        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
+        app.updateLoginStatus(true);
+        Toast.makeText(this, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
         finish();
     }
 

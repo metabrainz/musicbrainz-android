@@ -32,7 +32,7 @@
 
     <fragment
       android:id="@+id/search_fragment"
-      android:name="org.musicbrainz.mobile.fragment.DashSearchFragment"
+      android:name="org.musicbrainz.mobile.fragment.SearchFragment"
       style="@style/MatchWidth"
       android:layout_gravity="center"
       android:layout_weight="0.5"
@@ -43,7 +43,7 @@
   <LinearLayout style="@style/HomeTileRow">
 
     <Button
-      android:id="@+id/login_btn"
+      android:id="@+id/collection_btn"
       style="@style/HomeTile"
       android:text="@string/dash_collection"
       android:drawableTop="@drawable/home_login" />
@@ -61,13 +61,4 @@
       android:drawableTop="@drawable/home_about" />
   </LinearLayout>
 
-  <RelativeLayout
-    style="@style/HomeTextArea"
-    android:visibility="gone">
-
-    <TextView
-      android:id="@+id/hometext"
-      style="@style/HomeText"
-      android:text="@string/hometext" />
-  </RelativeLayout>
 </LinearLayout>

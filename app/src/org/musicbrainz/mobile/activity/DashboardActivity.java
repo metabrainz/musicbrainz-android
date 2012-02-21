@@ -23,101 +23,31 @@ package org.musicbrainz.mobile.activity;
 import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.config.Constants;
-import org.musicbrainz.mobile.suggestion.SuggestionHelper;
+import org.musicbrainz.mobile.fragment.WelcomeFragment;
 import org.musicbrainz.mobile.util.PreferenceUtils;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.os.Bundle;
-import android.support.v4.view.Menu;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
-
-public class DashboardActivity extends MusicBrainzActivity implements OnEditorActionListener, OnItemClickListener {
-
-    private static final int REQUEST_LOGIN = 0;
-
-    private AutoCompleteTextView searchField;
-    private Spinner searchTypeSpinner;
-    private SuggestionHelper suggestionHelper;
+public class DashboardActivity extends MusicBrainzActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_dash);
-        findViews();
-
-        ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.searchType,
-                android.R.layout.simple_spinner_item);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        searchTypeSpinner.setAdapter(typeAdapter);
-        suggestionHelper = new SuggestionHelper(this);
-    }
-    
-    private void findViews() {
-        searchField = (AutoCompleteTextView) findViewById(R.id.query_input);
-        searchTypeSpinner = (Spinner) findViewById(R.id.search_spin);
-        
-        searchField.setOnEditorActionListener(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateLoginState();
-
-        if (PreferenceUtils.shouldProvideSearchSuggestions(getApplicationContext())) {
-            searchField.setAdapter(suggestionHelper.getAdapter());
-            searchField.setOnItemClickListener(this);
-        } else {
-            searchField.setAdapter(suggestionHelper.getEmptyAdapter());
-        }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startSearch();
-    }
-
-    private void updateLoginState() {
-        Button login = (Button) findViewById(R.id.login_btn);
-        TextView messageBody = (TextView) findViewById(R.id.hometext);
-
-        if (isUserLoggedIn()) {
-            login.setText(R.string.logout);
-            messageBody.setText(getString(R.string.hometext_loggedin) + " " + PreferenceUtils.getUsername(getApplicationContext()));
-        } else {
-            login.setText(R.string.login);
-            messageBody.setText(R.string.hometext);
-        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
-        if (requestCode == REQUEST_LOGIN && resultCode == LoginActivity.RESULT_LOGGED_IN) {
-            MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
-            app.updateLoginStatus(true);
-            Toast.makeText(this, R.string.toast_loggedIn, Toast.LENGTH_SHORT).show();
-        } else if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
+        if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
             if (scanResult.getContents() != null) {
                 Intent barcodeResult = new Intent(this, ReleaseActivity.class);
@@ -128,86 +58,62 @@ public class DashboardActivity extends MusicBrainzActivity implements OnEditorAc
     }
 
     public void onClick(View view) {
-
         switch (view.getId()) {
-        case R.id.login_btn:
-            if (!isUserLoggedIn()) {
-                startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
-            } else {
-                logOut();
-                Toast.makeText(this, R.string.toast_loggedOut, Toast.LENGTH_SHORT).show();
-                updateLoginState();
-            }
-            break;
         case R.id.scan_btn:
-            // ZXing integration with external strings and product code mode
             IntentIntegrator.initiateScan(DashboardActivity.this, getString(R.string.zx_title),
                     getString(R.string.zx_message), getString(R.string.zx_pos), getString(R.string.zx_neg),
                     IntentIntegrator.PRODUCT_CODE_TYPES);
             break;
-        case R.id.search_btn:
-            startSearch();
-            break;
-        case R.id.about_btn:
-            startActivity(new Intent(this, AboutActivity.class));
+        case R.id.collection_btn:
+            Toast.makeText(this, "Collections not implemented...", Toast.LENGTH_SHORT).show();
             break;
         case R.id.donate_btn:
             startActivity(new Intent(this, DonateActivity.class));
+            break;
+        case R.id.about_btn:
+            startActivity(new Intent(this, AboutActivity.class));
         }
-    }
-
-    private void logOut() {
-        SharedPreferences prefs = getSharedPreferences(Constants.PREFS_USER, MODE_PRIVATE);
-        Editor spe = prefs.edit();
-        spe.clear();
-        spe.commit();
-        HttpClient.clearCredentials();
-        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
-        app.updateLoginStatus(false);
-    }
-
-    private void startSearch() {
-        String query = searchField.getText().toString();
-
-        if (query.length() > 0) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
-
-            Intent searchIntent = new Intent(this, SearchActivity.class);
-            searchIntent.putExtra(Extra.TYPE, getSearchTypeFromSpinner());
-            searchIntent.putExtra(Extra.QUERY, query);
-            startActivity(searchIntent);
-        } else {
-            Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
-        }
-        searchField.setText("");
-    }
-
-    private String getSearchTypeFromSpinner() {
-        int spinnerPosition = searchTypeSpinner.getSelectedItemPosition();
-        switch (spinnerPosition) {
-        case 0:
-            return Extra.ARTIST;
-        case 1:
-            return Extra.RELEASE_GROUP;
-        default:
-            return Extra.ALL;
-        }
-    }
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-        if (v.getId() == R.id.query_input && actionId == EditorInfo.IME_NULL) {
-            startSearch();
-        }
-        return false;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dash, menu);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.menu_login).setVisible(!isUserLoggedIn());
+        menu.findItem(R.id.menu_logout).setVisible(isUserLoggedIn());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.menu_logout) {
+            logOut();
+            updateWelcomeText();
+            return true;
+        }
+        return false;
+    }
+
+    public void updateWelcomeText() {
+        try {
+            WelcomeFragment f = (WelcomeFragment) getSupportFragmentManager().findFragmentById(R.id.welcome_fragment);
+            f.updateText();
+        } catch (Exception e) {
+            // Fragment not attached, nothing to do.
+        }
+    }
+
+    private void logOut() {
+        PreferenceUtils.clearUser(getApplicationContext());
+        HttpClient.clearCredentials();
+        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
+        app.updateLoginStatus(false);
+        Toast.makeText(this, R.string.toast_logged_out, Toast.LENGTH_SHORT).show();
     }
 
     public static Intent createIntent(Context context) {

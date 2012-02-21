@@ -228,7 +228,7 @@
   </style>
 
   <style
-    name="HomeText"
+    name="WelcomeText"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:textColor">@color/main_text</item>

@@ -24,13 +24,13 @@
 
   <fragment
     android:id="@+id/search_fragment"
-    android:name="org.musicbrainz.mobile.fragment.DashSearchFragment"
+    android:name="org.musicbrainz.mobile.fragment.SearchFragment"
     style="@style/MatchWidth"
     android:layout_alignParentTop="true" />
 
   <fragment
     android:id="@+id/welcome_fragment"
-    android:name="org.musicbrainz.mobile.fragment.DashWelcomeFragment"
+    android:name="org.musicbrainz.mobile.fragment.WelcomeFragment"
     style="@style/MatchWidth"
     android:layout_alignParentBottom="true" />
 

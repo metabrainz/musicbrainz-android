@@ -30,7 +30,7 @@
       android:drawableTop="@drawable/home_barcode" />
 
     <Button
-      android:id="@+id/login_btn"
+      android:id="@+id/collection_btn"
       style="@style/HomeTile"
       android:text="@string/dash_collection"
       android:drawableTop="@drawable/home_login" />

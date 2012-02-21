@@ -50,6 +50,9 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
         case R.id.legacy_search:
             onSearchRequested();
             return true;
+        case R.id.menu_login:
+            startActivity(new Intent(this, LoginActivity.class));
+            return true;
         }
         return false;
     }
@@ -66,5 +69,5 @@ public abstract class MusicBrainzActivity extends FragmentActivity {
         MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
         return app.isUserLoggedIn();
     }
-
+    
 }

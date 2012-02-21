@@ -23,7 +23,7 @@
   style="@style/HomeTextArea">
 
   <TextView
-    android:id="@+id/hometext"
-    style="@style/HomeText"
-    android:text="@string/hometext" />
+    android:id="@+id/welcome_text"
+    style="@style/WelcomeText"
+    android:text="@string/welcome" />
 </RelativeLayout>

@@ -31,8 +31,8 @@
   <string name="dash_about">About</string>
   <string name="login">Log In</string>
   <string name="logout">Log Out</string>
-  <string name="hometext">Welcome to MusicBrainz!</string>
-  <string name="hometext_loggedin">Logged in as</string>
+  <string name="welcome">Welcome to MusicBrainz!</string>
+  <string name="welcome_loggedin">Logged in as</string>
   
   <string name="searchtype_artist">Artist</string>
   <string name="searchtype_release">Release</string>
@@ -118,12 +118,10 @@
     from:\n\n</string>
 
   <!-- Menus -->
-  <string name="menu_about">About</string>
-  <string name="menu_donate">Donate to MB</string>
   <string name="menu_feedback">Feedback</string>
   <string name="menu_preferences">Settings</string>
-  <string name="menu_login">Log in</string>
-  <string name="menu_logout">Log out</string>
+  <string name="menu_login">Log In</string>
+  <string name="menu_logout">Log Out</string>
 
   <!-- Actions -->
   <string name="action_share">Share</string>
@@ -153,8 +151,8 @@
   <string name="toast_search_err">Add some text to search</string>
   <string name="toast_tag_err">Add some text to tag</string>
   <string name="toast_auth_err">Username or password missing</string>
-  <string name="toast_loggedIn">Logged in</string>
-  <string name="toast_loggedOut">Logged out</string>
+  <string name="toast_logged_in">Logged in</string>
+  <string name="toast_logged_out">Logged out</string>
   <string name="toast_feedback_fail">No email client available</string>
   <string name="toast_donate_success">Thanks you for supporting MusicBrainz!</string>
   <string name="toast_donate_canceled">Donation canceled</string>

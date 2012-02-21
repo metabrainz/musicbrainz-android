@@ -24,6 +24,11 @@
     android:id="@+id/menu_login"
     android:title="@string/menu_login"
     android:showAsAction="never" />
+  
+  <item
+    android:id="@+id/menu_logout"
+    android:title="@string/menu_logout"
+    android:showAsAction="never" />
 
   <item
     android:id="@+id/menu_preferences"

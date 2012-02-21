@@ -25,6 +25,7 @@ import org.musicbrainz.mobile.config.Secrets;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
 public class PreferenceUtils {
@@ -36,6 +37,13 @@ public class PreferenceUtils {
     public static String getPassword(Context context) {
         String obscuredPassword = getUserPreferences(context).getString(Constants.PREF_PASSWORD, null);
         return SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
+    }
+    
+    public static void clearUser(Context context) {
+        SharedPreferences prefs = getUserPreferences(context);
+        Editor spe = prefs.edit();
+        spe.clear();
+        spe.commit();
     }
     
     private static SharedPreferences getUserPreferences(Context context) {

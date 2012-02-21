@@ -52,7 +52,7 @@
       style="@style/RatingBar" />
 
     <LinearLayout
-      style="@style/MatchWidth"
+      style="@style/MatchWidthHorizontal"
       android:layout_marginTop="@dimen/small_pad">
 
       <Button

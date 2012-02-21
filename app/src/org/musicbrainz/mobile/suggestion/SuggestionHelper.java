@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.suggestion;
 
 import org.musicbrainz.mobile.R;
 
-import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.content.CursorLoader;
@@ -33,29 +33,30 @@ import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 
 /**
  * This is a helper class to provide a Cursor to the suggestions database. The
- * content provider is not public, so this might stop working in future.
+ * content provider is not public, so this *could* stop working in future.
  */
 public class SuggestionHelper {
 
-    private final Activity activity;
     private static final String COLUMN = "display1";
     private static final String URI = "content://" + SuggestionProvider.AUTHORITY + "/suggestions";
     private static final String[] FROM = new String[] { COLUMN };
     private static final int[] TO = new int[] { R.id.dropdown_item };
+    
+    private final Context context;
 
-    public SuggestionHelper(Activity activity) {
-        this.activity = activity;
+    public SuggestionHelper(Context context) {
+        this.context = context;
     }
 
     public SimpleCursorAdapter getAdapter() {
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(activity, R.layout.dropdown_item, null, FROM, TO);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(context, R.layout.dropdown_item, null, FROM, TO);
         adapter.setCursorToStringConverter(new SuggestionCursorToString());
         adapter.setFilterQueryProvider(new SuggestionFilterQuery());
         return adapter;
     }
 
     public ArrayAdapter<String> getEmptyAdapter() {
-        return new ArrayAdapter<String>(activity, R.layout.dropdown_item, new String[] {});
+        return new ArrayAdapter<String>(context, R.layout.dropdown_item, new String[] {});
     }
 
     private class SuggestionCursorToString implements CursorToStringConverter {
@@ -84,7 +85,7 @@ public class SuggestionHelper {
         String where = COLUMN + " LIKE ?";
         String[] args = { constraint.trim() + "%" };
 
-        CursorLoader cursorLoader = new CursorLoader(activity, Uri.parse(URI), null, where, args, COLUMN + " ASC");
+        CursorLoader cursorLoader = new CursorLoader(context, Uri.parse(URI), null, where, args, COLUMN + " ASC");
         Cursor cursor = cursorLoader.loadInBackground();
 
         if (cursor != null) {

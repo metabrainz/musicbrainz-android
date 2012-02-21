@@ -20,20 +20,40 @@
 
 package org.musicbrainz.mobile.fragment;
 
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class DashWelcomeFragment extends Fragment {
+public class WelcomeFragment extends ContextFragment {
+
+    private TextView welcomeText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_dash_welcome, container);
+        welcomeText = (TextView) layout.findViewById(R.id.welcome_text);
         return layout;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateText();
+    }
+
+    public void updateText() {
+        MusicBrainzApplication app = (MusicBrainzApplication) context;
+        if (app.isUserLoggedIn()) {
+            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + PreferenceUtils.getUsername(context));
+        } else {
+            welcomeText.setText(R.string.welcome);
+        }
     }
 
 }
