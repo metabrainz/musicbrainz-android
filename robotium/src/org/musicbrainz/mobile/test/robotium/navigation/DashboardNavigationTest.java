@@ -21,14 +21,12 @@
 package org.musicbrainz.mobile.test.robotium.navigation;
 
 import org.musicbrainz.mobile.activity.AboutActivity;
-import org.musicbrainz.mobile.activity.DonateActivity;
 import org.musicbrainz.mobile.activity.DashboardActivity;
-import org.musicbrainz.mobile.activity.LoginActivity;
-import org.musicbrainz.mobile.activity.SettingsActivity;
-
-import com.jayway.android.robotium.solo.Solo;
+import org.musicbrainz.mobile.activity.DonateActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
+
+import com.jayway.android.robotium.solo.Solo;
 
 public class DashboardNavigationTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
@@ -46,8 +44,9 @@ public class DashboardNavigationTest extends ActivityInstrumentationTestCase2<Da
     public void testDashboardNavigation() throws Exception {
         openCloseAbout();
         openCloseDonate();
-        openCloseLogin();
+        openCloseCollection();
         openCloseSettings();
+        openCloseLogIn();
     }
 
     private void openCloseAbout() {
@@ -62,16 +61,16 @@ public class DashboardNavigationTest extends ActivityInstrumentationTestCase2<Da
         solo.goBack();
     }
 
-    private void openCloseLogin() {
-        solo.clickOnButton("Log In");
-        solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
-        solo.goBack();
+    private void openCloseCollection() {
+        solo.clickOnButton("Collection");
     }
     
     private void openCloseSettings() {
-        solo.clickOnImageButton(0);
-        solo.assertCurrentActivity("Expected Settings Activity", SettingsActivity.class);
-        solo.goBack();
+        // TODO
+    }
+    
+    private void openCloseLogIn() {
+        // TODO
     }
 
     @Override
