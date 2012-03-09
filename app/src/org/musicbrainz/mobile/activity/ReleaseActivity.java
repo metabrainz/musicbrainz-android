@@ -54,10 +54,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.support.v4.view.Menu;
-import android.support.v4.view.MenuItem;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.Window;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,6 +63,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
 import com.viewpagerindicator.TabPageIndicator;
 
 /**
@@ -217,7 +217,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.release, menu);
+        getSupportMenuInflater().inflate(R.menu.release, menu);
         return true;
     }
 

@@ -29,11 +29,11 @@ import org.musicbrainz.mobile.util.PreferenceUtils;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.Menu;
-import android.support.v4.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -77,7 +77,7 @@ public class DashboardActivity extends MusicBrainzActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.dash, menu);
+        getSupportMenuInflater().inflate(R.menu.dash, menu);
         return true;
     }
 

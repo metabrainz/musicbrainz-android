@@ -24,8 +24,9 @@ import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.widget.AssetTextView;
 
+import com.actionbarsherlock.view.Menu;
+
 import android.os.Bundle;
-import android.support.v4.view.Menu;
 import android.widget.TextView;
 
 public class AboutActivity extends MusicBrainzActivity {
@@ -33,7 +34,6 @@ public class AboutActivity extends MusicBrainzActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_about);
 
         TextView versionLabel = (TextView) findViewById(R.id.version_text);
@@ -46,7 +46,7 @@ public class AboutActivity extends MusicBrainzActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.about, menu);
+        getSupportMenuInflater().inflate(R.menu.about, menu);
         return true;
     }
 

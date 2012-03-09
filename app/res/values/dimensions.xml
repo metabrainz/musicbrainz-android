@@ -38,8 +38,6 @@
   <dimen name="separator_height">1dp</dimen>
   <dimen name="progress_spinner">40dp</dimen>
   <dimen name="login_buttons">190dp</dimen>
-  
-  <dimen name="actionbar_height">48dp</dimen>
 
   <dimen name="link_button_corners">2dp</dimen>
   <dimen name="tagbox_corners">2dp</dimen>

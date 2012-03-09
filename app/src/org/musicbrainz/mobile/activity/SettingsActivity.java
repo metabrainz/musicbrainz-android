@@ -24,12 +24,13 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.provider.SearchRecentSuggestions;
-import android.support.v4.app.SherlockPreferenceActivity;
-import android.support.v4.view.MenuItem;
 import android.widget.Toast;
 
 public class SettingsActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {

@@ -45,7 +45,6 @@ import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.support.v4.view.Menu;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,6 +54,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.Menu;
 import com.viewpagerindicator.TabPageIndicator;
 
 /**
@@ -246,7 +246,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search, menu);
+        getSupportMenuInflater().inflate(R.menu.search, menu);
         return true;
     }
 

@@ -27,38 +27,39 @@
       <version>${android.version}</version>
       <scope>provided</scope>
     </dependency>
+    
     <dependency>
       <groupId>org.musicbrainz.mobile</groupId>
       <artifactId>api</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+    
     <dependency>
       <groupId>com.jdamcd.boosterstrap</groupId>
       <artifactId>boosterstrap-library</artifactId>
       <version>1.0.0</version>
       <type>apklib</type>
     </dependency>
+    
     <dependency>
       <groupId>com.paypal.android</groupId>
       <artifactId>paypal-mpl</artifactId>
       <version>1.5.5.40</version>
     </dependency>
+    
     <dependency>
       <groupId>com.bugsense</groupId>
       <artifactId>bugsense-trace</artifactId>
       <version>1.1</version>
     </dependency>
+    
     <dependency>
       <groupId>com.actionbarsherlock</groupId>
       <artifactId>library</artifactId>
-      <version>3.5.0</version>
+      <version>4.0.0</version>
       <type>apklib</type>
     </dependency>
-    <dependency>
-      <groupId>com.actionbarsherlock</groupId>
-      <artifactId>plugin-preference</artifactId>
-      <version>3.5.0</version>
-    </dependency>
+    
     <dependency>
       <groupId>com.viewpagerindicator</groupId>
       <artifactId>library</artifactId>

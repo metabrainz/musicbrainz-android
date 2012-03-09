@@ -30,6 +30,8 @@ import org.musicbrainz.mobile.loader.SearchReleaseLoader;
 import org.musicbrainz.mobile.loader.SubmitBarcodeLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
+import com.actionbarsherlock.view.Window;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -38,7 +40,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.support.v4.view.Window;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;

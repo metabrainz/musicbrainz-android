@@ -27,11 +27,12 @@ import org.musicbrainz.mobile.util.Utils;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.MenuItem;
 import android.widget.Toast;
 
-public abstract class MusicBrainzActivity extends FragmentActivity {
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
+
+public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

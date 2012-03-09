@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.novoda</groupId>
@@ -17,8 +19,10 @@
   <name>aggregator</name>
 
   <properties>
-    <android.version>3.2_r1</android.version>
-    <android.sdk.platform>13</android.sdk.platform>
+    <android.version>4.0.3_r2</android.version>
+    <android-test.version>2.3.3</android-test.version>
+    <android.sdk.platform>15</android.sdk.platform>
+    <android-support.version>r6</android-support.version>
   </properties>
 
   <repositories>
