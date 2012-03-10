@@ -18,13 +18,29 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Match"
+  android:background="@color/main_bg">
   
-  <item
-    android:id="@+id/menu_preferences"
-    android:title="@string/menu_preferences"
-    android:icon="@drawable/action_settings"
-    android:showAsAction="always"
-    android:orderInCategory="1" />
+  <LinearLayout
+    style="@style/MatchWidth"
+    android:padding="@dimen/gutter_large"
+    android:orientation="vertical">
 
-</menu>
+    <TextView
+      android:id="@+id/app_name_official"
+      style="@style/TextHeader"
+      android:text="@string/app_name_official" />
+
+    <TextView
+      android:id="@+id/version_text"
+      style="@style/VersionText" />
+
+    <org.musicbrainz.mobile.widget.AssetTextView
+      android:id="@+id/about_text"
+      style="@style/TextBody"
+      android:layout_marginTop="@dimen/gutter_large" />
+
+  </LinearLayout>
+</ScrollView>

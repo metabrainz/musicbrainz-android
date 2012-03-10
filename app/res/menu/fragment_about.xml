@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2012 Jamie McDonald
 
   This file is part of MusicBrainz for Android.
 
@@ -24,12 +24,6 @@
     android:id="@+id/menu_feedback"
     android:title="@string/menu_feedback"
     android:icon="@drawable/action_feedback"
-    android:showAsAction="always" />
-  
-  <item
-    android:id="@+id/menu_preferences"
-    android:title="@string/menu_preferences"
-    android:icon="@drawable/action_settings"
-    android:showAsAction="always" />
+    android:showAsAction="never" />
 
 </menu>

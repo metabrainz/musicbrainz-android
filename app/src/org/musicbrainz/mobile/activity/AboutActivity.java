@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,14 +20,11 @@
 
 package org.musicbrainz.mobile.activity;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.widget.AssetTextView;
-
-import com.actionbarsherlock.view.Menu;
 
 import android.os.Bundle;
-import android.widget.TextView;
+
+import com.actionbarsherlock.view.Menu;
 
 public class AboutActivity extends MusicBrainzActivity {
 
@@ -35,13 +32,6 @@ public class AboutActivity extends MusicBrainzActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
-        TextView versionLabel = (TextView) findViewById(R.id.version_text);
-        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
-        versionLabel.setText(getText(R.string.version_text) + " " + app.getVersion());
-        
-        AssetTextView body = (AssetTextView) findViewById(R.id.about_text);
-        body.setAsset("about.html");
     }
 
     @Override
