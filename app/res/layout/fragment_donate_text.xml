@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2012 Jamie McDonald
 
   This file is part of MusicBrainz for Android.
 
@@ -20,10 +20,17 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
+  style="@style/Match">
 
   <TextView
-    style="@style/PayPalLoadingText"
-    android:layout_centerInParent="true"
-    android:text="@string/starting_paypal" />
+    android:id="@+id/donate_title"
+    style="@style/TextHeaderPad"
+    android:text="@string/donate_header" />
+
+  <TextView
+    android:id="@+id/donate_body"
+    style="@style/TextBody"
+    android:text="@string/donate_text"
+    android:layout_below="@id/donate_title" />
+
 </RelativeLayout>

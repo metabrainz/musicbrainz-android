@@ -20,18 +20,20 @@
 
 package org.musicbrainz.mobile.fragment;
 
-import android.app.Activity;
-import android.content.Context;
+import org.musicbrainz.mobile.R;
+
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class ContextFragment extends Fragment {
-
-    protected Context context;
+public class DonateTextFragment extends Fragment {
     
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        context = activity.getApplicationContext();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View layout = inflater.inflate(R.layout.fragment_donate_text, container);
+        return layout;
     }
-    
+
 }

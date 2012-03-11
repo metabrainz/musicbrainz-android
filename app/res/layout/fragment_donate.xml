@@ -20,19 +20,37 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity"
-  android:padding="@dimen/gutter_large">
+  style="@style/Match">
 
-  <fragment
-    android:id="@+id/donate_text_fragment"
+  <Spinner
+    android:id="@+id/donate_spin"
     style="@style/MatchWidth"
-    android:name="org.musicbrainz.mobile.fragment.DonateTextFragment" />
-  
-  <fragment
-    android:id="@+id/donate_fragment"
+    android:layout_marginBottom="@dimen/small_pad" />
+
+  <LinearLayout
+    android:id="@+id/donate_button_layout"
     style="@style/MatchWidth"
-    android:layout_below="@id/donate_text_fragment"
-    android:layout_marginTop="@dimen/huge_pad"
-    android:name="org.musicbrainz.mobile.fragment.DonateFragment" />
+    android:layout_below="@id/donate_spin">
+
+    <TextView
+      android:id="@+id/donate_loading_text"
+      style="@style/PayPalLoadingText"
+      android:text="@string/paypal_loading_label" />
+  </LinearLayout>
+
+  <TextView
+    android:id="@+id/donate_or"
+    style="@style/Wrap"
+    android:layout_below="@id/donate_button_layout"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="@dimen/small_pad"
+    android:textSize="20sp"
+    android:text="@string/donate_or" />
+
+  <Button
+    android:id="@+id/donate_options"
+    style="@style/LinkButton"
+    android:layout_below="@id/donate_or"
+    android:text="@string/alt_donate_text" />
 
 </RelativeLayout>

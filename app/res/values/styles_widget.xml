@@ -238,10 +238,11 @@
 
   <style
     name="PayPalLoadingText"
-    parent="Wrap">
+    parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_xl</item>
     <item name="android:textColor">@color/aux_text</item>
     <item name="android:padding">@dimen/std_pad</item>
+    <item name="android:gravity">center</item>
   </style>
 
   <!-- List items -->
@@ -346,7 +347,6 @@
     <item name="android:padding">@dimen/small_pad</item>
     <item name="android:layout_marginTop">@dimen/std_pad</item>
     <item name="android:minWidth">@dimen/login_buttons</item>
-    <item name="android:onClick">onClick</item>
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:layout_height">40dp</item>
   </style>

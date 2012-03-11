@@ -31,11 +31,6 @@ public class Configuration {
     public static final String USER_AGENT = "MBAndroid";
     public static final String CLIENT_NAME = "musicbrainz.android";
     
-    public static final String DONATION_CURRENCY = "USD";
-    public static final String DONATION_EMAIL = "paypal@metabrainz.org";
-    public static final String DONATION_NAME = "MetaBrainz Foundation";
-    public static final String DONATION_DESCRIPTION = "MusicBrainz donation via Android app";
-    
     public static final String WEBSITE = "http://musicbrainz.org/";
     
     public static final String REGISTER_LINK = WEBSITE + "register";
