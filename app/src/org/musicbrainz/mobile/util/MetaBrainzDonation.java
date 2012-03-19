@@ -46,11 +46,11 @@ public class MetaBrainzDonation {
         PayPalPayment donation = new PayPalPayment();
         donation.setSubtotal(getAmountAsBigDecimal());
         donation.setCurrencyType(DONATION_CURRENCY);
-        donation.setPaymentType(PayPal.PAYMENT_TYPE_NONE);
-        donation.setPaymentSubtype(PayPal.PAYMENT_SUBTYPE_DONATIONS);
         donation.setRecipient(DONATION_EMAIL);
         donation.setMerchantName(DONATION_NAME);
         donation.setDescription(DONATION_DESCRIPTION);
+        donation.setPaymentType(PayPal.PAYMENT_TYPE_NONE);
+        donation.setPaymentSubtype(PayPal.PAYMENT_SUBTYPE_DONATIONS);
         return donation;
     }
 

@@ -72,7 +72,7 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
         try {
             donationCallbacks = (DonationCallbacks) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement LoadingStatusCallbacks");
+            throw new ClassCastException(activity.toString() + " must implement " + DonationCallbacks.class.getSimpleName());
         }
     }
     

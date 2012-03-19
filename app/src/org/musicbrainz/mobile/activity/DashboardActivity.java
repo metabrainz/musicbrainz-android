@@ -43,6 +43,7 @@ public class DashboardActivity extends MusicBrainzActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash);
+        getSupportActionBar().setHomeButtonEnabled(false);
     }
 
     @Override
