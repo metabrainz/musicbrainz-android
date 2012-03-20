@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,143 +20,24 @@
 
 package org.musicbrainz.mobile.activity;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.config.Configuration;
-import org.musicbrainz.mobile.config.Constants;
-import org.musicbrainz.mobile.config.Secrets;
-import org.musicbrainz.mobile.loader.LoginLoader;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
-import org.musicbrainz.mobile.util.SimpleEncrypt;
-import org.musicbrainz.mobile.util.Utils;
+import org.musicbrainz.mobile.fragment.LoginFragment.LoginCallbacks;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 
-public class LoginActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncResult<Boolean>>, OnEditorActionListener {
-
-    private static final int LOGIN_LOADER = 0;
-    public static final int RESULT_NOT_LOGGED_IN = 0;
-    public static final int RESULT_LOGGED_IN = 1;
+public class LoginActivity extends MusicBrainzActivity implements LoginCallbacks {
 
     public static final int DIALOG_PROGRESS = 0;
     private static final int DIALOG_LOGIN_FAILURE = 1;
     private static final int DIALOG_CONNECTION_FAILURE = 2;
 
-    private EditText usernameBox;
-    private EditText passwordBox;
-
-    private String username;
-    private String password;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
-        findViews();
-        setResult(RESULT_NOT_LOGGED_IN);
-    }
-
-    private void findViews() {
-        usernameBox = (EditText) findViewById(R.id.uname_input);
-        passwordBox = (EditText) findViewById(R.id.pass_input);
-        passwordBox.setOnEditorActionListener(this);
-    }
-
-    private void onLoginSuccess() {
-        Editor spe = getSharedPreferences(Constants.PREFS_USER, MODE_PRIVATE).edit();
-        spe.putString(Constants.PREF_USERNAME, username);
-        String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), password);
-        spe.putString(Constants.PREF_PASSWORD, obscuredPassword);
-        spe.commit();
-        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
-        app.updateLoginStatus(true);
-        Toast.makeText(this, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
-        finish();
-    }
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-        case R.id.auth_btn:
-            tryLogin();
-            break;
-        case R.id.register_link:
-            startActivity(Utils.urlIntent(Configuration.REGISTER_LINK));
-            break;
-        case R.id.forgotpass_link:
-            startActivity(Utils.urlIntent(Configuration.FORGOTPASS_LINK));
-        }
-    }
-
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (v.getId() == R.id.pass_input && actionId == EditorInfo.IME_NULL) {
-            tryLogin();
-        }
-        return false;
-    }
-
-    private void tryLogin() {
-        username = usernameBox.getText().toString();
-        password = passwordBox.getText().toString();
-
-        if (username.length() == 0 || password.length() == 0) {
-            Toast.makeText(this, R.string.toast_auth_err, Toast.LENGTH_SHORT).show();
-        } else {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(passwordBox.getWindowToken(), 0);
-            startLogin();
-        }
-    }
-    
-    private void startLogin() {
-        showDialog(DIALOG_PROGRESS);
-        getSupportLoaderManager().initLoader(LOGIN_LOADER, null, this);
-    }
-
-    @Override
-    public Loader<AsyncResult<Boolean>> onCreateLoader(int id, Bundle args) {
-        return new LoginLoader(getApplicationContext(), username, password);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<AsyncResult<Boolean>> loader, AsyncResult<Boolean> data) {
-        getSupportLoaderManager().destroyLoader(LOGIN_LOADER);
-        dismissDialog(DIALOG_PROGRESS);
-        handleLoginResult(data);
-    }
-    
-    private void handleLoginResult(AsyncResult<Boolean> result) {
-        switch(result.getStatus()) {
-        case SUCCESS:
-            if (result.getData()) {
-                onLoginSuccess();
-            } else {
-                showDialog(DIALOG_LOGIN_FAILURE);
-            }
-            break;
-        case EXCEPTION:
-            showDialog(DIALOG_CONNECTION_FAILURE);
-        }
-    }
-    
-    @Override
-    public void onLoaderReset(Loader<AsyncResult<Boolean>> loader) {
-        loader.reset();
     }
     
     @Override
@@ -203,7 +84,7 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
         builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
-                startLogin();
+                //startLogin();
             }
         });
         builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
@@ -212,6 +93,11 @@ public class LoginActivity extends MusicBrainzActivity implements LoaderCallback
             }
         });
         return builder.create();
+    }
+
+    @Override
+    public void onLoggedIn() {
+        finish();
     }
 
 }

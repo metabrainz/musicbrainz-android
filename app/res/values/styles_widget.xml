@@ -336,7 +336,6 @@
   <style name="LoginButton">
     <item name="android:layout_width">@dimen/login_buttons</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:onClick">onClick</item>
   </style>
 
   <style

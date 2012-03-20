@@ -91,13 +91,12 @@ public class DashboardActivity extends MusicBrainzActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_logout) {
             logOut();
             updateWelcomeText();
             return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     public void updateWelcomeText() {

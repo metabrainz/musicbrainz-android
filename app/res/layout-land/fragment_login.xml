@@ -33,7 +33,7 @@
     android:layout_below="@id/uname_input" />
 
   <Button
-    android:id="@+id/auth_btn"
+    android:id="@+id/login_btn"
     style="@style/LoginButton"
     android:layout_below="@id/pass_input"
     android:layout_alignParentRight="true"
