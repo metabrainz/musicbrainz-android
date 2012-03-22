@@ -56,6 +56,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     
     public static final int LOGIN_LOADER = 0;
 
+    private View layout;
     private EditText usernameField;
     private EditText passwordField;
     private LoginCallbacks loginCallbacks;
@@ -77,7 +78,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_login, container, false);
+        layout = inflater.inflate(R.layout.fragment_login, container, false);
         usernameField = (EditText) layout.findViewById(R.id.uname_input);
         passwordField = (EditText) layout.findViewById(R.id.pass_input);
         passwordField.setOnEditorActionListener(this);
@@ -128,6 +129,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     }
 
     private void startLogin() {
+        hideLoginFailWarning();
         showLoadingDialog();
         getLoaderManager().initLoader(LOGIN_LOADER, null, this);
     }
@@ -160,6 +162,14 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
         spe.putString(Constants.PREF_PASSWORD, obscuredPassword);
         spe.commit();
     }
+    
+    public void showLoginFailWarning() {
+        layout.findViewById(R.id.login_failure_warning).setVisibility(View.VISIBLE);
+    }
+    
+    public void hideLoginFailWarning() {
+        layout.findViewById(R.id.login_failure_warning).setVisibility(View.GONE);
+    }
 
     @Override
     public Loader<AsyncResult<Boolean>> onCreateLoader(int id, Bundle args) {
@@ -179,8 +189,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
             if (result.getData()) {
                 onLoginSuccess();
             } else {
-                // TODO show login fail
-                Toast.makeText(context, "Login fail", Toast.LENGTH_SHORT).show();
+                showLoginFailWarning();
             }
             break;
         case EXCEPTION:

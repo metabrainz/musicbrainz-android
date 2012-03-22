@@ -19,9 +19,18 @@
   <http://www.gnu.org/licenses/>. -->
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
+  
+  <TextView 
+    android:id="@+id/login_failure_warning"
+    style="@style/MatchWidth"
+    android:visibility="gone"
+    android:gravity="center_horizontal"
+    android:text="@string/login_failure_warning" />
+  
   <EditText
     android:id="@+id/uname_input"
-    style="@style/Username" />
+    style="@style/Username"
+    android:layout_below="@id/login_failure_warning" />
 
   <EditText
     android:id="@+id/pass_input"

@@ -50,8 +50,7 @@
   <string name="register_text">Need to register?</string>
   <string name="forgotpass_text">Forgot password?</string>
   <string name="pd_authenticating">Authenticating…</string>
-  <string name="auth_fail">Autentication failed!\nPlease check your username and password.</string>
-  <string name="auth_pos">Okay</string>
+  <string name="login_failure_warning">Invalid username or password.</string>
   <string name="description_web">Web link</string>
 
   <!-- SearchResultsActivity -->
