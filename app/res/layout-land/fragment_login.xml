@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Copyright (C) 2010 Jamie McDonald
+<!-- Copyright (C) 2012 Jamie McDonald
 
   This file is part of MusicBrainz for Android.
 
@@ -23,35 +23,31 @@
   style="@style/Activity"
   android:padding="@dimen/gutter_large">
 
-  <EditText
-    android:id="@+id/uname_input"
-    style="@style/Username" />
+  <include
+    layout="@layout/layout_login"
+    style="@style/MatchWidth" />
 
-  <EditText
-    android:id="@+id/pass_input"
-    style="@style/Password"
-    android:layout_below="@id/uname_input" />
-
-  <Button
-    android:id="@+id/login_btn"
-    style="@style/LoginButton"
-    android:layout_below="@id/pass_input"
-    android:layout_alignParentRight="true"
-    android:text="@string/login" />
-
-  <LinearLayout
-    style="@style/Wrap"
-    android:orientation="vertical"
+  <RelativeLayout
+    style="@style/MatchWidth"
+    android:orientation="horizontal"
     android:layout_alignParentBottom="true">
 
-    <Button
-      android:id="@+id/forgotpass_link"
-      style="@style/LinkButton"
-      android:text="@string/forgotpass_text" />
+    <View
+      android:id="@+id/stub"
+      android:layout_width="@dimen/std_pad"
+      android:layout_height="0dp"
+      android:layout_centerInParent="true" />
 
     <Button
       android:id="@+id/register_link"
       style="@style/LinkButton"
-      android:text="@string/register_text" />
-  </LinearLayout>
+      android:text="@string/register_text"
+      android:layout_toLeftOf="@id/stub" />
+
+    <Button
+      android:id="@+id/forgotpass_link"
+      style="@style/LinkButton"
+      android:text="@string/forgotpass_text"
+      android:layout_toRightOf="@id/stub" />
+  </RelativeLayout>
 </RelativeLayout>

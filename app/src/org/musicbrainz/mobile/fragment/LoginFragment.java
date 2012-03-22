@@ -25,6 +25,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.config.Secrets;
+import org.musicbrainz.mobile.dialog.AuthenticatingDialog;
 import org.musicbrainz.mobile.loader.LoginLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
@@ -34,26 +35,27 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 public class LoginFragment extends ContextFragment implements LoaderCallbacks<AsyncResult<Boolean>>,
         OnEditorActionListener, OnClickListener {
     
-    private static final int LOGIN_LOADER = 0;
+    public static final int LOGIN_LOADER = 0;
 
-    private View layout;
     private EditText usernameField;
     private EditText passwordField;
     private LoginCallbacks loginCallbacks;
@@ -75,20 +77,16 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.fragment_login, container);
-        findViews();
-        return layout;
-    }
-
-    private void findViews() {
+        View layout = inflater.inflate(R.layout.fragment_login, container, false);
         usernameField = (EditText) layout.findViewById(R.id.uname_input);
         passwordField = (EditText) layout.findViewById(R.id.pass_input);
         passwordField.setOnEditorActionListener(this);
         layout.findViewById(R.id.login_btn).setOnClickListener(this);
         layout.findViewById(R.id.forgotpass_link).setOnClickListener(this);
         layout.findViewById(R.id.register_link).setOnClickListener(this);
+        return layout;
     }
-    
+
     private String getUsername() {
         return usernameField.getText().toString();
     }
@@ -130,20 +128,37 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     }
 
     private void startLogin() {
-        // TODO show loading dialog
+        showLoadingDialog();
         getLoaderManager().initLoader(LOGIN_LOADER, null, this);
+    }
+    
+    private void showLoadingDialog() {
+        DialogFragment loadingDialog = AuthenticatingDialog.newInstance(R.string.pd_authenticating);
+        loadingDialog.show(getFragmentManager(), AuthenticatingDialog.TAG);
+    }
+    
+    private void dismissLoadingDialog() {
+        Fragment frag = getFragmentManager().findFragmentByTag(AuthenticatingDialog.TAG);
+        if (frag != null) {
+            AuthenticatingDialog loading = (AuthenticatingDialog) frag;
+            loading.getDialog().dismiss();
+        }
     }
 
     private void onLoginSuccess() {
+        storeLoginData();
+        MusicBrainzApplication app = (MusicBrainzApplication) context;
+        app.updateLoginStatus(true);
+        Toast.makeText(context, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
+        loginCallbacks.onLoggedIn();
+    }
+
+    public void storeLoginData() {
         Editor spe = context.getSharedPreferences(Constants.PREFS_USER, Context.MODE_PRIVATE).edit();
         spe.putString(Constants.PREF_USERNAME, getUsername());
         String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), getPassword());
         spe.putString(Constants.PREF_PASSWORD, obscuredPassword);
         spe.commit();
-        MusicBrainzApplication app = (MusicBrainzApplication) context;
-        app.updateLoginStatus(true);
-        Toast.makeText(context, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
-        loginCallbacks.onLoggedIn();
     }
 
     @Override
@@ -154,7 +169,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     @Override
     public void onLoadFinished(Loader<AsyncResult<Boolean>> loader, AsyncResult<Boolean> data) {
         getLoaderManager().destroyLoader(LOGIN_LOADER);
-        // TODO dismiss loading dialog
+        dismissLoadingDialog();
         handleLoginResult(data);
     }
     
@@ -165,10 +180,12 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
                 onLoginSuccess();
             } else {
                 // TODO show login fail
+                Toast.makeText(context, "Login fail", Toast.LENGTH_SHORT).show();
             }
             break;
         case EXCEPTION:
             // TODO show connection fail
+            Toast.makeText(context, "Connection fail", Toast.LENGTH_SHORT).show();
         }
     }
 

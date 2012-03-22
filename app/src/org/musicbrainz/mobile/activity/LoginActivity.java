@@ -25,58 +25,16 @@ import org.musicbrainz.mobile.fragment.LoginFragment.LoginCallbacks;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 public class LoginActivity extends MusicBrainzActivity implements LoginCallbacks {
-
-    public static final int DIALOG_PROGRESS = 0;
-    private static final int DIALOG_LOGIN_FAILURE = 1;
-    private static final int DIALOG_CONNECTION_FAILURE = 2;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
     
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_PROGRESS:
-            return createProgressDialog();
-        case DIALOG_LOGIN_FAILURE:
-            return createLoginFailureDialog();
-        case DIALOG_CONNECTION_FAILURE:
-            return createConnectionErrorDialog();
-        }
-        return null;
-    }
-    
-    public Dialog createProgressDialog() {
-        ProgressDialog progress = new ProgressDialog(this) {
-            public void cancel() {
-                super.cancel();
-                getSupportLoaderManager().destroyLoader(0);
-            }
-        };
-        progress.setMessage(getString(R.string.pd_authenticating));
-        progress.setCancelable(true);
-        return progress;
-    }
-    
-    private Dialog createLoginFailureDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setMessage(getText(R.string.auth_fail));
-        builder.setCancelable(false);
-        builder.setPositiveButton(getText(R.string.auth_pos), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        return builder.create();
-    }
-
     private Dialog createConnectionErrorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         builder.setMessage(getString(R.string.err_text));

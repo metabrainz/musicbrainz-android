@@ -18,26 +18,23 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity"
-  android:padding="@dimen/gutter_large">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+  <EditText
+    android:id="@+id/uname_input"
+    style="@style/Username" />
 
-  <include
-    layout="@layout/layout_login"
-    style="@style/MatchWidth" />
+  <EditText
+    android:id="@+id/pass_input"
+    style="@style/Password"
+    android:layout_below="@+id/uname_input"
+    android:layout_marginTop="@dimen/small_pad" />
 
   <Button
-    android:id="@+id/forgotpass_link"
-    style="@style/LinkButton"
-    android:layout_alignParentBottom="true"
-    android:layout_marginTop="@dimen/std_pad" 
-    android:text="@string/forgotpass_text" />
-  
-  <Button
-    android:id="@+id/register_link"
-    style="@style/LinkButton"
-    android:layout_above="@id/forgotpass_link"
-    android:text="@string/register_text" />
+    android:id="@+id/login_btn"
+    style="@style/LoginButton"
+    android:layout_below="@+id/pass_input"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="@dimen/small_pad"
+    android:text="@string/login" />
+</merge>
 
-</RelativeLayout>
