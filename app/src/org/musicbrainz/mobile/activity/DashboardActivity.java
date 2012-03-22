@@ -29,7 +29,6 @@ import org.musicbrainz.mobile.util.PreferenceUtils;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
@@ -55,24 +54,6 @@ public class DashboardActivity extends MusicBrainzActivity {
                 barcodeResult.putExtra(Extra.BARCODE, scanResult.getContents());
                 startActivity(barcodeResult);
             }
-        }
-    }
-
-    public void onClick(View view) {
-        switch (view.getId()) {
-        case R.id.scan_btn:
-            IntentIntegrator.initiateScan(DashboardActivity.this, getString(R.string.zx_title),
-                    getString(R.string.zx_message), getString(R.string.zx_pos), getString(R.string.zx_neg),
-                    IntentIntegrator.PRODUCT_CODE_TYPES);
-            break;
-        case R.id.collection_btn:
-            Toast.makeText(this, "Collections not implemented...", Toast.LENGTH_SHORT).show();
-            break;
-        case R.id.donate_btn:
-            startActivity(new Intent(this, DonateActivity.class));
-            break;
-        case R.id.about_btn:
-            startActivity(new Intent(this, AboutActivity.class));
         }
     }
 

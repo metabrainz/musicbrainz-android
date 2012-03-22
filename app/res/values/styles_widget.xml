@@ -41,7 +41,6 @@
     <item name="android:textSize">@dimen/text_size_large</item>
     <item name="android:textColor">@color/main_text</item>
     <item name="android:background">@null</item>
-    <item name="android:onClick">onClick</item>
   </style>
 
   <!-- Entities -->

@@ -21,19 +21,47 @@
 package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.activity.AboutActivity;
+import org.musicbrainz.mobile.activity.DonateActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-public class DashButtonsFragment extends Fragment {
+import com.google.zxing.integration.android.IntentIntegrator;
+
+public class DashButtonsFragment extends ContextFragment implements OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_dash_buttons, container);
+        layout.findViewById(R.id.scan_btn).setOnClickListener(this);
+        layout.findViewById(R.id.collection_btn).setOnClickListener(this);
+        layout.findViewById(R.id.donate_btn).setOnClickListener(this);
+        layout.findViewById(R.id.about_btn).setOnClickListener(this);
         return layout;
     }
-    
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.scan_btn:
+            IntentIntegrator.initiateScan(getActivity(), getString(R.string.zx_title), getString(R.string.zx_message),
+                    getString(R.string.zx_pos), getString(R.string.zx_neg), IntentIntegrator.PRODUCT_CODE_TYPES);
+            break;
+        case R.id.collection_btn:
+            Toast.makeText(context, "Collections not implemented...", Toast.LENGTH_SHORT).show();
+            break;
+        case R.id.donate_btn:
+            startActivity(new Intent(context, DonateActivity.class));
+            break;
+        case R.id.about_btn:
+            startActivity(new Intent(context, AboutActivity.class));
+        }
+    }
+
 }
