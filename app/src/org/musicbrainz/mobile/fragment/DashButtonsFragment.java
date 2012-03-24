@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.fragment;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
+import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,8 +32,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.google.zxing.integration.android.IntentIntegrator;
 
 public class DashButtonsFragment extends ContextFragment implements OnClickListener {
 

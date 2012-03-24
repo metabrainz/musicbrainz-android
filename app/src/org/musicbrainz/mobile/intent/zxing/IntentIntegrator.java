@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.zxing.integration.android;
+package org.musicbrainz.mobile.intent.zxing;
 
 import android.app.AlertDialog;
 import android.app.Activity;

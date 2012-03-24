@@ -26,10 +26,10 @@ import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.dialog.AuthenticatingDialog;
+import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.loader.LoginLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
-import org.musicbrainz.mobile.util.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -113,10 +113,11 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
             tryLogin();
             break;
         case R.id.register_link:
-            startActivity(Utils.urlIntent(Configuration.REGISTER_LINK));
+            startActivity(IntentFactory.getWebViewIntent(context, R.string.web_register, Configuration.URL_REGISTER));
             break;
         case R.id.forgotpass_link:
-            startActivity(Utils.urlIntent(Configuration.FORGOTPASS_LINK));
+            startActivity(IntentFactory.getWebViewIntent(context, R.string.web_forgot_pass,
+                    Configuration.URL_FORGOT_PASS));
         }
     }
 

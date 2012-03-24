@@ -110,6 +110,11 @@
   <string name="about_title">About</string>
   <string name="app_name_official">MusicBrainz for Android</string>
   <string name="version_text">Version</string>
+  
+  <!-- WebView Activity titles -->
+  <string name="web_forgot_pass">Forgot Password</string>
+  <string name="web_register">Register</string>
+  <string name="web_donate">Donation Options</string>
 
   <!-- IntentErrorActivity -->
   <string name="error_title">Error</string>

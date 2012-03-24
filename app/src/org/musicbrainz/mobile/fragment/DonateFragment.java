@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.fragment;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.util.MetaBrainzDonation;
 
 import android.app.Activity;
@@ -145,7 +146,7 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.donate_options:
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Configuration.DONATE_LINK)));
+            startActivity(IntentFactory.getWebViewIntent(context, R.string.web_donate, Configuration.URL_DONATE));
             break;
         default:
             String selection = (String) amount.getSelectedItem();

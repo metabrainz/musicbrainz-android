@@ -24,6 +24,8 @@ import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.fragment.WelcomeFragment;
+import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
+import org.musicbrainz.mobile.intent.zxing.IntentResult;
 import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.content.Context;
@@ -33,8 +35,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 public class DashboardActivity extends MusicBrainzActivity {
 

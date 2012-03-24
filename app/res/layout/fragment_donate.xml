@@ -43,7 +43,7 @@
     style="@style/Wrap"
     android:layout_below="@id/donate_button_layout"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="@dimen/small_pad"
+    android:layout_margin="@dimen/small_pad"
     android:textSize="20sp"
     android:text="@string/donate_or" />
 

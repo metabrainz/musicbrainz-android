@@ -163,6 +163,10 @@
       android:label="@string/preferences_title" />
 
     <activity
+      android:name=".activity.WebActivity"
+      android:label="@string/app_name" />
+    
+    <activity
       android:name="com.paypal.android.MEP.PayPalActivity"
       android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 

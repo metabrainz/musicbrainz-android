@@ -18,8 +18,12 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<fragment
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/login_fragment"
-  style="@style/Match"
-  android:name="org.musicbrainz.mobile.fragment.LoginFragment" />
+  style="@style/Match">
+  
+  <WebView
+    android:id="@+id/webview"
+    style="@style/Match" />
+  
+</RelativeLayout>

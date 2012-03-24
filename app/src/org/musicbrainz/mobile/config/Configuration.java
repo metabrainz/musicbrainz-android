@@ -33,9 +33,9 @@ public class Configuration {
     
     public static final String WEBSITE = "http://musicbrainz.org/";
     
-    public static final String REGISTER_LINK = WEBSITE + "register";
-    public static final String FORGOTPASS_LINK = WEBSITE + "lost-password";
-    public static final String DONATE_LINK = "http://metabrainz.org/donate";
+    public static final String URL_REGISTER = WEBSITE + "register";
+    public static final String URL_FORGOT_PASS = WEBSITE + "lost-password";
+    public static final String URL_DONATE = "http://metabrainz.org/donate";
 
     public static final String ARTIST_SHARE = WEBSITE + "artist/";
     public static final String RELEASE_SHARE = WEBSITE + "release/";
