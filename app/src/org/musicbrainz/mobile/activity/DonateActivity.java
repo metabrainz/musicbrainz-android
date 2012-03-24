@@ -37,12 +37,12 @@ public class DonateActivity extends MusicBrainzActivity implements DonationCallb
     
     @Override
     public void onStartLoading() {
-        setProgressBarIndeterminateVisibility(true);
+        setSupportProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void onFinishedLoading() {
-        setProgressBarIndeterminateVisibility(false);
+        setSupportProgressBarIndeterminateVisibility(false);
     }
 
     @Override

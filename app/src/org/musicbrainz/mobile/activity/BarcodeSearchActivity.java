@@ -85,7 +85,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_barcode);
-        setProgressBarIndeterminateVisibility(Boolean.FALSE);
+        setSupportProgressBarIndeterminateVisibility(false);
         findViews();
 
         barcode = getIntent().getStringExtra(Extra.BARCODE);
@@ -145,7 +145,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     }
 
     public void submitBarcode(String releaseMbid) {
-        setProgressBarIndeterminateVisibility(Boolean.TRUE);
+        setSupportProgressBarIndeterminateVisibility(true);
         getSupportLoaderManager().initLoader(SUBMIT_BARCODE_LOADER, null, submissionCallbacks);
     }
 
@@ -257,7 +257,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         @Override
         public void onLoadFinished(Loader<AsyncResult<Void>> loader, AsyncResult<Void> data) {
             getSupportLoaderManager().destroyLoader(SUBMIT_BARCODE_LOADER);
-            setProgressBarIndeterminateVisibility(Boolean.FALSE);
+            setSupportProgressBarIndeterminateVisibility(false);
             switch (data.getStatus()) {
             case EXCEPTION:
                 Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode_fail, Toast.LENGTH_LONG).show();

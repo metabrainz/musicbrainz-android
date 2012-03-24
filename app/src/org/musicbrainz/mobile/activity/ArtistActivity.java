@@ -94,7 +94,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.layout_loading);
-        setProgressBarIndeterminateVisibility(Boolean.FALSE);
+        setSupportProgressBarIndeterminateVisibility(false);
         getSupportLoaderManager().initLoader(ARTIST_LOADER, savedInstanceState, this);
     }
 
@@ -193,9 +193,9 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private void updateProgress() {
         if (doingTag || doingRate) {
-            setProgressBarIndeterminateVisibility(Boolean.TRUE);
+            setSupportProgressBarIndeterminateVisibility(true);
         } else {
-            setProgressBarIndeterminateVisibility(Boolean.FALSE);
+            setSupportProgressBarIndeterminateVisibility(false);
         }
     }
 

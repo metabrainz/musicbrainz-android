@@ -21,12 +21,6 @@
 package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.intent.IntentFactory;
-
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -36,24 +30,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 public class WebFragment extends SherlockFragment {
-    
-    private String targetUrl;
+
     private WebView webView;
     private MenuItem refresh;
-    
+    private WebFragmentCallbacks callbacks;
+
+    public interface WebFragmentCallbacks {
+        public String getInitialUrl();
+        public void onPageStarted();
+        public void onPageFinished();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        targetUrl = activity.getIntent().getExtras().getString(IntentFactory.EXTRA_TARGET_URL);
+        try {
+            callbacks = (WebFragmentCallbacks) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement "
+                    + WebFragmentCallbacks.class.getSimpleName());
+        }
     }
 
     @Override
@@ -68,57 +77,59 @@ public class WebFragment extends SherlockFragment {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.setWebViewClient(new MBWebViewClient());
-        webView.loadUrl(targetUrl);
+        webView.loadUrl(callbacks.getInitialUrl());
     }
-    
+
     private class MBWebViewClient extends WebViewClient {
-        
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
         }
-        
+
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
             startRefresh();
         }
-        
+
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             stopRefresh();
         }
     }
-    
+
     private void startRefresh() {
-        refresh.setActionView(new ProgressBar(getActivity()));
+        refresh.setVisible(false);
+        callbacks.onPageStarted();
     }
-    
+
     private void stopRefresh() {
-        refresh.setActionView(null);
+        refresh.setVisible(true);
+        callbacks.onPageFinished();
     }
-    
+
     @Override
     public void onPause() {
         super.onPause();
         stopRefresh();
     }
-    
+
     @Override
-    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_web, menu);
         refresh = menu.findItem(R.id.menu_refresh);
     }
-    
+
     @Override
-    public boolean onOptionsItemSelected (MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_refresh) {
             webView.reload();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
 }

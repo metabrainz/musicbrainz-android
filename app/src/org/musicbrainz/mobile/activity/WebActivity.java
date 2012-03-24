@@ -21,17 +21,36 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.fragment.WebFragment.WebFragmentCallbacks;
 import org.musicbrainz.mobile.intent.IntentFactory;
+
+import com.actionbarsherlock.view.Window;
 
 import android.os.Bundle;
 
-public class WebActivity extends MusicBrainzActivity {
+public class WebActivity extends MusicBrainzActivity implements WebFragmentCallbacks {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_webview);
         getSupportActionBar().setTitle(getIntent().getIntExtra(IntentFactory.EXTRA_TITLE, R.string.app_name));
+    }
+
+    @Override
+    public String getInitialUrl() {
+        return getIntent().getStringExtra(IntentFactory.EXTRA_TARGET_URL);
+    }
+
+    @Override
+    public void onPageStarted() {
+        setSupportProgressBarIndeterminateVisibility(true);
+    }
+
+    @Override
+    public void onPageFinished() {
+        setSupportProgressBarIndeterminateVisibility(false);
     }
 
 }

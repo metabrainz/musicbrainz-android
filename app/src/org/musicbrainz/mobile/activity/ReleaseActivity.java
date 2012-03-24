@@ -114,7 +114,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         barcode = getIntent().getStringExtra(Extra.BARCODE);
 
         setContentView(R.layout.layout_loading);
-        setProgressBarIndeterminateVisibility(Boolean.FALSE);
+        setSupportProgressBarIndeterminateVisibility(false);
         configureLoader();
     }
 
@@ -245,9 +245,9 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
 
     private void updateProgressStatus() {
         if (doingTag || doingRate) {
-            setProgressBarIndeterminateVisibility(Boolean.TRUE);
+            setSupportProgressBarIndeterminateVisibility(true);
         } else {
-            setProgressBarIndeterminateVisibility(Boolean.FALSE);
+            setSupportProgressBarIndeterminateVisibility(false);
         }
     }
 
