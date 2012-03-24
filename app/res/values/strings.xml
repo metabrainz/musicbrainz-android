@@ -26,7 +26,7 @@
   <string name="search_hint">Search MusicBrainz</string>
   <string name="description_search">Search</string>
   <string name="dash_scan">Scan</string>
-  <string name="dash_collection">Collection</string>
+  <string name="dash_collection">Collections</string>
   <string name="dash_donate">Donate</string>
   <string name="dash_about">About</string>
   <string name="login">Log In</string>
