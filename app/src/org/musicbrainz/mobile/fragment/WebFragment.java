@@ -23,18 +23,32 @@ package org.musicbrainz.mobile.fragment;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.intent.IntentFactory;
 
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
-public class WebFragment extends ContextFragment {
+public class WebFragment extends SherlockFragment {
     
     private String targetUrl;
     private WebView webView;
+    private MenuItem refresh;
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
     
     @Override
     public void onAttach(Activity activity) {
@@ -58,11 +72,53 @@ public class WebFragment extends ContextFragment {
     }
     
     private class MBWebViewClient extends WebViewClient {
+        
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
         }
+        
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            startRefresh();
+        }
+        
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            stopRefresh();
+        }
+    }
+    
+    private void startRefresh() {
+        refresh.setActionView(new ProgressBar(getActivity()));
+    }
+    
+    private void stopRefresh() {
+        refresh.setActionView(null);
+    }
+    
+    @Override
+    public void onPause() {
+        super.onPause();
+        stopRefresh();
+    }
+    
+    @Override
+    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_web, menu);
+        refresh = menu.findItem(R.id.menu_refresh);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+        if (item.getItemId() == R.id.menu_refresh) {
+            webView.reload();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     
 }

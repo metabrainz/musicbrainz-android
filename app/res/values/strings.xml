@@ -127,6 +127,7 @@
   <string name="menu_preferences">Settings</string>
   <string name="menu_login">Log In</string>
   <string name="menu_logout">Log Out</string>
+  <string name="menu_refresh">Refresh</string>
 
   <!-- Actions -->
   <string name="action_share">Share</string>
