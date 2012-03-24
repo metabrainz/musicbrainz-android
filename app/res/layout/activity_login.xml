@@ -20,5 +20,6 @@
 
 <fragment
   xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/login_fragment"
   android:name="org.musicbrainz.mobile.fragment.LoginFragment"
   style="@style/Match" />

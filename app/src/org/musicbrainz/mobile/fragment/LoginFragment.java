@@ -53,7 +53,9 @@ import android.widget.Toast;
 
 public class LoginFragment extends ContextFragment implements LoaderCallbacks<AsyncResult<Boolean>>,
         OnEditorActionListener, OnClickListener {
-    
+
+    private static final String STATE_ERROR = "showing_error";
+
     public static final int LOGIN_LOADER = 0;
 
     private View layout;
@@ -86,6 +88,14 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
         layout.findViewById(R.id.forgotpass_link).setOnClickListener(this);
         layout.findViewById(R.id.register_link).setOnClickListener(this);
         return layout;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_ERROR)) {
+            layout.findViewById(R.id.login_failure_warning).setVisibility(View.VISIBLE);
+        }
     }
 
     private String getUsername() {
@@ -133,12 +143,12 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
         showLoadingDialog();
         getLoaderManager().initLoader(LOGIN_LOADER, null, this);
     }
-    
+
     private void showLoadingDialog() {
         DialogFragment loadingDialog = AuthenticatingDialog.newInstance(R.string.pd_authenticating);
         loadingDialog.show(getFragmentManager(), AuthenticatingDialog.TAG);
     }
-    
+
     private void dismissLoadingDialog() {
         Fragment frag = getFragmentManager().findFragmentByTag(AuthenticatingDialog.TAG);
         if (frag != null) {
@@ -162,13 +172,20 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
         spe.putString(Constants.PREF_PASSWORD, obscuredPassword);
         spe.commit();
     }
-    
+
     public void showLoginFailWarning() {
         layout.findViewById(R.id.login_failure_warning).setVisibility(View.VISIBLE);
     }
-    
+
     public void hideLoginFailWarning() {
         layout.findViewById(R.id.login_failure_warning).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(STATE_ERROR,
+                layout.findViewById(R.id.login_failure_warning).getVisibility() == View.VISIBLE);
     }
 
     @Override
@@ -182,9 +199,9 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
         dismissLoadingDialog();
         handleLoginResult(data);
     }
-    
+
     private void handleLoginResult(AsyncResult<Boolean> result) {
-        switch(result.getStatus()) {
+        switch (result.getStatus()) {
         case SUCCESS:
             if (result.getData()) {
                 onLoginSuccess();
