@@ -28,6 +28,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.SearchArtistAdapter;
 import org.musicbrainz.mobile.adapter.list.SearchReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.pager.SearchPagerAdapter;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.SearchArtistLoader;
 import org.musicbrainz.mobile.loader.SearchLoader;
 import org.musicbrainz.mobile.loader.SearchReleaseGroupLoader;

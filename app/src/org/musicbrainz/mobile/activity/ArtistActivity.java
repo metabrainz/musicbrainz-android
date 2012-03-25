@@ -32,6 +32,7 @@ import org.musicbrainz.mobile.adapter.list.ArtistReleaseGroupAdapter;
 import org.musicbrainz.mobile.adapter.list.LinkAdapter;
 import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
 import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.ArtistLoader;
 import org.musicbrainz.mobile.loader.SubmitRatingLoader;
 import org.musicbrainz.mobile.loader.SubmitTagsLoader;

@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.activity;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.fragment.WebFragment.WebFragmentCallbacks;
 import org.musicbrainz.mobile.intent.IntentFactory;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
 import com.actionbarsherlock.view.Window;
 
@@ -35,12 +36,12 @@ public class WebActivity extends MusicBrainzActivity implements WebFragmentCallb
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_webview);
-        getSupportActionBar().setTitle(getIntent().getIntExtra(IntentFactory.EXTRA_TITLE, R.string.app_name));
+        getSupportActionBar().setTitle(getIntent().getIntExtra(Extra.TITLE, R.string.app_name));
     }
 
     @Override
     public String getInitialUrl() {
-        return getIntent().getStringExtra(IntentFactory.EXTRA_TARGET_URL);
+        return getIntent().getStringExtra(Extra.TARGET_URL);
     }
 
     @Override

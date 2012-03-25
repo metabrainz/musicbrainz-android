@@ -21,8 +21,8 @@
 package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.Extra;
 import org.musicbrainz.mobile.activity.SearchActivity;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
 import org.musicbrainz.mobile.util.PreferenceUtils;
 

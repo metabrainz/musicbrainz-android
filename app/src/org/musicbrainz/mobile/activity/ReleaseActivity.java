@@ -37,6 +37,7 @@ import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.BarcodeReleaseLoader;
 import org.musicbrainz.mobile.loader.ReleaseGroupStubsLoader;
 import org.musicbrainz.mobile.loader.ReleaseLoader;

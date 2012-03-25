@@ -24,6 +24,7 @@ import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.fragment.WelcomeFragment;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
 import org.musicbrainz.mobile.intent.zxing.IntentResult;
 import org.musicbrainz.mobile.util.PreferenceUtils;

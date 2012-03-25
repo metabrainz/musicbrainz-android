@@ -49,7 +49,7 @@ public class SuggestionHelper {
     }
 
     public SimpleCursorAdapter getAdapter() {
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(context, R.layout.dropdown_item, null, FROM, TO);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(context, R.layout.dropdown_item, null, FROM, TO, 0);
         adapter.setCursorToStringConverter(new SuggestionCursorToString());
         adapter.setFilterQueryProvider(new SuggestionFilterQuery());
         return adapter;

@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
 import android.os.Bundle;
 import android.widget.TextView;

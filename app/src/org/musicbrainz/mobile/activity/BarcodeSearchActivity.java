@@ -26,6 +26,7 @@ import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
 import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.SearchReleaseLoader;
 import org.musicbrainz.mobile.loader.SubmitBarcodeLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;

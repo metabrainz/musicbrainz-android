@@ -22,6 +22,8 @@ package org.musicbrainz.mobile.activity;
 
 import java.util.List;
 
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
