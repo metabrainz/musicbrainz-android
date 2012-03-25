@@ -20,9 +20,61 @@
 
 package org.musicbrainz.mobile.dialog;
 
+import org.musicbrainz.mobile.R;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 public class ConnectionErrorDialog extends DialogFragment {
 
+    public static final String TAG = "connection_error";
+    
+    private Context context;
+    private ConnectionErrorCallbacks callbacks;
+    
+    public interface ConnectionErrorCallbacks {
+        public void onConnectionRetry();
+        public void onConnectionCancel();
+    }
+    
+    public static ConnectionErrorDialog newInstance() {
+        return new ConnectionErrorDialog();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        context = activity.getApplicationContext();
+        try {
+            callbacks = (ConnectionErrorCallbacks) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement "
+                    + ConnectionErrorCallbacks.class.getSimpleName());
+        }
+    }
+    
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(context.getResources().getString(R.string.err_text));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                callbacks.onConnectionRetry();
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                callbacks.onConnectionCancel();
+            }
+        });
+        return builder.create();
+    }
     
 }

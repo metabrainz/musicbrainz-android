@@ -51,6 +51,7 @@
   <string name="forgotpass_text">Forgot password?</string>
   <string name="pd_authenticating">Authenticating…</string>
   <string name="login_failure_warning">Invalid username or password.</string>
+  <string name="login_connection_warning">Connection failure.</string>
   <string name="description_web">Web link</string>
 
   <!-- SearchResultsActivity -->

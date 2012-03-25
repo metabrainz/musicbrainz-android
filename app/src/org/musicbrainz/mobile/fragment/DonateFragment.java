@@ -28,7 +28,6 @@ import org.musicbrainz.mobile.util.MetaBrainzDonation;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -37,10 +36,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.paypal.android.MEP.CheckoutButton;
 import com.paypal.android.MEP.PayPal;

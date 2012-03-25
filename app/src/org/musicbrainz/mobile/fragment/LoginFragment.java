@@ -54,16 +54,16 @@ import android.widget.Toast;
 public class LoginFragment extends ContextFragment implements LoaderCallbacks<AsyncResult<Boolean>>,
         OnEditorActionListener, OnClickListener {
 
-    private static final String STATE_ERROR = "showing_error";
-
     public static final int LOGIN_LOADER = 0;
+    private static final String STATE_FAILURE = "showing_login_failure";
+    private static final String STATE_CONNECTION = "showing_connection_error";
 
     private View layout;
     private EditText usernameField;
     private EditText passwordField;
-    private LoginCallbacks loginCallbacks;
+    private LoginCallback loginCallback;
 
-    public interface LoginCallbacks {
+    public interface LoginCallback {
         public void onLoggedIn();
     }
 
@@ -71,10 +71,9 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            loginCallbacks = (LoginCallbacks) activity;
+            loginCallback = (LoginCallback) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement "
-                    + LoginCallbacks.class.getSimpleName());
+            throw new ClassCastException(activity.toString() + " must implement " + LoginCallback.class.getSimpleName());
         }
     }
 
@@ -93,8 +92,12 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_ERROR)) {
-            layout.findViewById(R.id.login_failure_warning).setVisibility(View.VISIBLE);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean(STATE_FAILURE)) {
+                layout.findViewById(R.id.login_failure_warning).setVisibility(View.VISIBLE);
+            } else if (savedInstanceState.getBoolean(STATE_CONNECTION)) {
+                layout.findViewById(R.id.login_connection_warning).setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -140,7 +143,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     }
 
     private void startLogin() {
-        hideLoginFailWarning();
+        hideWarnings();
         showLoadingDialog();
         getLoaderManager().initLoader(LOGIN_LOADER, null, this);
     }
@@ -163,7 +166,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
         MusicBrainzApplication app = (MusicBrainzApplication) context;
         app.updateLoginStatus(true);
         Toast.makeText(context, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
-        loginCallbacks.onLoggedIn();
+        loginCallback.onLoggedIn();
     }
 
     public void storeLoginData() {
@@ -174,19 +177,34 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
         spe.commit();
     }
 
-    public void showLoginFailWarning() {
+    public void hideWarnings() {
+        hideLoginFailureWarning();
+        hideConnectionErrorWarning();
+    }
+
+    private void showLoginFailureWarning() {
         layout.findViewById(R.id.login_failure_warning).setVisibility(View.VISIBLE);
     }
 
-    public void hideLoginFailWarning() {
+    private void hideLoginFailureWarning() {
         layout.findViewById(R.id.login_failure_warning).setVisibility(View.GONE);
+    }
+
+    private void showConnectionErrorWarning() {
+        layout.findViewById(R.id.login_connection_warning).setVisibility(View.VISIBLE);
+    }
+
+    private void hideConnectionErrorWarning() {
+        layout.findViewById(R.id.login_connection_warning).setVisibility(View.GONE);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(STATE_ERROR,
+        outState.putBoolean(STATE_FAILURE,
                 layout.findViewById(R.id.login_failure_warning).getVisibility() == View.VISIBLE);
+        outState.putBoolean(STATE_CONNECTION,
+                layout.findViewById(R.id.login_connection_warning).getVisibility() == View.VISIBLE);
     }
 
     @Override
@@ -207,12 +225,11 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
             if (result.getData()) {
                 onLoginSuccess();
             } else {
-                showLoginFailWarning();
+                showLoginFailureWarning();
             }
             break;
         case EXCEPTION:
-            // TODO show connection fail
-            Toast.makeText(context, "Connection fail", Toast.LENGTH_SHORT).show();
+            showConnectionErrorWarning();
         }
     }
 

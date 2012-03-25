@@ -21,41 +21,20 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.fragment.LoginFragment.LoginCallbacks;
+import org.musicbrainz.mobile.fragment.LoginFragment.LoginCallback;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
-public class LoginActivity extends MusicBrainzActivity implements LoginCallbacks {
+public class LoginActivity extends MusicBrainzActivity implements LoginCallback {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-    }
-    
-    private Dialog createConnectionErrorDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setMessage(getString(R.string.err_text));
-        builder.setCancelable(false);
-        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-                //startLogin();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                LoginActivity.this.finish();
-            }
-        });
-        return builder.create();
     }
 
     @Override
     public void onLoggedIn() {
         finish();
     }
-
+    
 }
