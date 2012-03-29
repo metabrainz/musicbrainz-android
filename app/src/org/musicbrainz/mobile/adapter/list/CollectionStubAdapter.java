@@ -58,7 +58,7 @@ public class CollectionStubAdapter extends ArrayAdapter<EditorCollectionStub> {
         
         EditorCollectionStub stub = collectionStubs.get(position);
         holder.getTitle().setText(stub.getName());
-        holder.getCount().setText(stub.getCount());
+        holder.getCount().setText("" + stub.getCount());
         return collection;
     }
     

@@ -44,7 +44,7 @@ public class CollectionsLoader extends PersistingAsyncTaskLoader<AsyncResult<Lin
     @Override
     public AsyncResult<LinkedList<EditorCollectionStub>> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(app.getUserAgent());
+            MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
             data = new AsyncResult<LinkedList<EditorCollectionStub>>(LoaderStatus.SUCCESS, client.lookupUserCollections());
             return data;
         } catch (IOException e) {
