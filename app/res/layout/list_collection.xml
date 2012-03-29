@@ -18,8 +18,18 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<fragment
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/about_fragment"
-  style="@style/Match"
-  android:name="org.musicbrainz.mobile.fragment.AboutFragment" />
+  style="@style/MatchWidth">
+  
+  <TextView
+    android:id="@+id/list_collection_title"
+    style="@style/Wrap"
+    android:layout_centerVertical="true" />
+  
+  <TextView
+    android:id="@+id/list_collection_count"
+    style="@style/Wrap"
+    android:layout_centerVertical="true"
+    android:layout_alignParentRight="true" />
+</RelativeLayout>

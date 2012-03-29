@@ -34,9 +34,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/**
- * List adapter for release stub search results.
- */
 public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
 
     private Activity context;
@@ -49,7 +46,6 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View release = convertView;
         ReleaseStubHolder holder = null;
 
@@ -77,7 +73,6 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
     }
 
     private class ReleaseStubHolder {
-
         View base;
         TextView title = null;
         TextView artist = null;

@@ -18,8 +18,8 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<fragment
+<fragment 
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/about_fragment"
+  android:id="@+id/collections_fragment"
   style="@style/Match"
-  android:name="org.musicbrainz.mobile.fragment.AboutFragment" />
+  android:name="org.musicbrainz.mobile.fragment.CollectionFragment" />

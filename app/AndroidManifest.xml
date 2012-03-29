@@ -162,6 +162,14 @@
     <activity
       android:name=".activity.ArtistActivity"
       android:label="@string/artist_title" />
+    
+    <activity
+      android:name=".activity.CollectionsActivity"
+      android:label="@string/collections_title" />
+    
+    <activity
+      android:name=".activity.CollectionActivity"
+      android:label="@string/app_name" />
 
     <activity
       android:name=".activity.SettingsActivity"

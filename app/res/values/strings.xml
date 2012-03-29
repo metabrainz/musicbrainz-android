@@ -71,6 +71,9 @@
   <string name="artist_title">Artist</string>
   <string name="noreleases">No releases found</string>
   <string name="no_links">No links found</string>
+  
+  <!-- CollectionsActivity -->
+  <string name="collections_title">Collections</string>
 
   <!-- Pager tabs -->
   <string name="tab_releases">RELEASES</string>

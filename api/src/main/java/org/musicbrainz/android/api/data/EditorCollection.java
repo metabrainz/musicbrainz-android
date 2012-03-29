@@ -22,9 +22,6 @@ package org.musicbrainz.android.api.data;
 
 import java.util.LinkedList;
 
-/**
- * Collection including list of releases.
- */
 public class EditorCollection extends EditorCollectionStub {
 	
 	private LinkedList<ReleaseStub> releases = new LinkedList<ReleaseStub>();

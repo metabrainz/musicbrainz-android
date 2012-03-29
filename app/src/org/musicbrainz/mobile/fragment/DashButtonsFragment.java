@@ -20,9 +20,12 @@
 
 package org.musicbrainz.mobile.fragment;
 
+import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.AboutActivity;
+import org.musicbrainz.mobile.activity.CollectionsActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
+import org.musicbrainz.mobile.activity.LoginActivity;
 import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
 
 import android.content.Intent;
@@ -31,7 +34,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class DashButtonsFragment extends ContextFragment implements OnClickListener {
 
@@ -53,7 +55,12 @@ public class DashButtonsFragment extends ContextFragment implements OnClickListe
                     getString(R.string.zx_pos), getString(R.string.zx_neg), IntentIntegrator.PRODUCT_CODE_TYPES);
             break;
         case R.id.collection_btn:
-            Toast.makeText(context, "Collections not implemented...", Toast.LENGTH_SHORT).show();
+            MusicBrainzApplication app = (MusicBrainzApplication) context;
+            if (app.isUserLoggedIn()) {
+                startActivity(new Intent(context, CollectionsActivity.class));
+            } else {
+                startActivity(new Intent(context, LoginActivity.class));
+            }
             break;
         case R.id.donate_btn:
             startActivity(new Intent(context, DonateActivity.class));

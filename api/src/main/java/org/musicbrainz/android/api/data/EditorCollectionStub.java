@@ -20,9 +20,6 @@
 
 package org.musicbrainz.android.api.data;
 
-/**
- * Information about an editor's collection.
- */
 public class EditorCollectionStub {
 	
 	private String mbid;
