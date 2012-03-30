@@ -32,28 +32,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/**
- * List adapter for artist stub search results.
- */
-public class SearchArtistAdapter extends ArrayAdapter<ArtistSearchStub> {
+public class ArtistSearchAdapter extends ArrayAdapter<ArtistSearchStub> {
 
     private Activity context;
     private List<ArtistSearchStub> resultData;
 
-    public SearchArtistAdapter(Activity context, List<ArtistSearchStub> resultData) {
-        super(context, R.layout.list_srch_artist, resultData);
+    public ArtistSearchAdapter(Activity context, List<ArtistSearchStub> resultData) {
+        super(context, R.layout.list_search_artist, resultData);
         this.context = context;
         this.resultData = resultData;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View artist = convertView;
         ArtistSearchHolder holder = null;
 
         if (artist == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            artist = inflater.inflate(R.layout.list_srch_artist, parent, false);
+            artist = inflater.inflate(R.layout.list_search_artist, parent, false);
             holder = new ArtistSearchHolder(artist);
             artist.setTag(holder);
         } else {
@@ -76,7 +72,6 @@ public class SearchArtistAdapter extends ArrayAdapter<ArtistSearchStub> {
     }
 
     private class ArtistSearchHolder {
-
         View base;
         TextView artistName = null;
         TextView disambiguation = null;

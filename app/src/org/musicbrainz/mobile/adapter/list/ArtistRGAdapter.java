@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2011 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.string.StringMapper;
 
 import android.app.Activity;
@@ -34,69 +33,64 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/**
- * List adapter for release group search results.
- */
-public class SearchReleaseGroupAdapter extends ArrayAdapter<ReleaseGroupStub> {
+public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupStub> {
 
     private Activity context;
-    private List<ReleaseGroupStub> resultData;
+    private List<ReleaseGroupStub> releaseGroups;
 
-    public SearchReleaseGroupAdapter(Activity context, List<ReleaseGroupStub> resultData) {
-        super(context, R.layout.list_srch_rg, resultData);
+    public ArtistRGAdapter(Activity context, List<ReleaseGroupStub> releaseGroups) {
+        super(context, R.layout.list_rg, releaseGroups);
         this.context = context;
-        this.resultData = resultData;
+        this.releaseGroups = releaseGroups;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View release = convertView;
-        SearchReleaseGroupHolder holder = null;
+        ArtistReleaseGroupHolder holder = null;
 
         if (release == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            release = inflater.inflate(R.layout.list_srch_rg, parent, false);
-            holder = new SearchReleaseGroupHolder(release);
+            release = inflater.inflate(R.layout.list_rg, parent, false);
+            holder = new ArtistReleaseGroupHolder(release);
             release.setTag(holder);
         } else {
-            holder = (SearchReleaseGroupHolder) release.getTag();
+            holder = (ArtistReleaseGroupHolder) release.getTag();
         }
 
-        ReleaseGroupStub releaseGroup = resultData.get(position);
-        holder.getTitle().setText(releaseGroup.getTitle());
-        holder.getArtist().setText(StringFormat.commaSeparateArtists(releaseGroup.getArtists()));
-        holder.getType().setText(StringMapper.mapRGTypeString(getContext(), releaseGroup.getType()));
+        ReleaseGroupStub rData = releaseGroups.get(position);
+        holder.getReleaseTitle().setText(rData.getTitle());
+        holder.getReleaseYear().setText(rData.getReleaseYear());
+        holder.getReleaseType().setText(StringMapper.mapRGTypeString(getContext(), rData.getType()));
         return release;
     }
 
-    private class SearchReleaseGroupHolder {
-
+    private class ArtistReleaseGroupHolder {
         View base;
         TextView title = null;
-        TextView artist = null;
+        TextView year = null;
         TextView type = null;
 
-        SearchReleaseGroupHolder(View base) {
+        ArtistReleaseGroupHolder(View base) {
             this.base = base;
         }
 
-        TextView getTitle() {
+        TextView getReleaseTitle() {
             if (title == null) {
-                title = (TextView) base.findViewById(R.id.search_release);
+                title = (TextView) base.findViewById(R.id.list_rg_title);
             }
             return title;
         }
 
-        TextView getArtist() {
-            if (artist == null) {
-                artist = (TextView) base.findViewById(R.id.search_release_artist);
+        TextView getReleaseYear() {
+            if (year == null) {
+                year = (TextView) base.findViewById(R.id.list_rg_year);
             }
-            return artist;
+            return year;
         }
 
-        TextView getType() {
+        TextView getReleaseType() {
             if (type == null) {
-                type = (TextView) base.findViewById(R.id.search_release_type);
+                type = (TextView) base.findViewById(R.id.list_rg_type);
             }
             return type;
         }

@@ -25,8 +25,8 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.list.SearchArtistAdapter;
-import org.musicbrainz.mobile.adapter.list.SearchReleaseGroupAdapter;
+import org.musicbrainz.mobile.adapter.list.ArtistSearchAdapter;
+import org.musicbrainz.mobile.adapter.list.RGSearchAdapter;
 import org.musicbrainz.mobile.adapter.pager.SearchPagerAdapter;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.SearchArtistLoader;
@@ -126,7 +126,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private void displayArtistResultsView() {
         ListView artistResultsView = (ListView) findViewById(R.id.searchres_artist_list);
-        artistResultsView.setAdapter(new SearchArtistAdapter(SearchActivity.this, artistSearchResults));
+        artistResultsView.setAdapter(new ArtistSearchAdapter(SearchActivity.this, artistSearchResults));
         artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
         artistResultsView.setVisibility(View.VISIBLE);
 
@@ -141,7 +141,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private void displayRGResultsView() {
         ListView rgResultsView = (ListView) findViewById(R.id.searchres_rg_list);
-        rgResultsView.setAdapter(new SearchReleaseGroupAdapter(SearchActivity.this, rgSearchResults));
+        rgResultsView.setAdapter(new RGSearchAdapter(SearchActivity.this, rgSearchResults));
         rgResultsView.setOnItemClickListener(new RGItemClickListener());
         rgResultsView.setVisibility(View.VISIBLE);
 

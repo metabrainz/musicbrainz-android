@@ -28,8 +28,8 @@ import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.list.ArtistReleaseGroupAdapter;
-import org.musicbrainz.mobile.adapter.list.LinkAdapter;
+import org.musicbrainz.mobile.adapter.list.ArtistRGAdapter;
+import org.musicbrainz.mobile.adapter.list.WeblinkAdapter;
 import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
@@ -109,9 +109,9 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         ListView linksList = (ListView) findViewById(R.id.artist_links);
 
         artistText.setText(artist.getName());
-        releaseList.setAdapter(new ArtistReleaseGroupAdapter(this, artist.getReleaseGroups()));
+        releaseList.setAdapter(new ArtistRGAdapter(this, artist.getReleaseGroups()));
         releaseList.setOnItemClickListener(this);
-        linksList.setAdapter(new LinkAdapter(this, artist.getLinks()));
+        linksList.setAdapter(new WeblinkAdapter(this, artist.getLinks()));
         linksList.setOnItemClickListener(this);
         rating.setRating(artist.getRating());
         tags.setText(StringFormat.commaSeparateTags(artist.getTags(), this));

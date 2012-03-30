@@ -32,9 +32,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/**
- * List adapter for release tracks.
- */
 public class ReleaseTrackAdapter extends ArrayAdapter<RecordingStub> {
 
     private Activity context;
@@ -47,7 +44,6 @@ public class ReleaseTrackAdapter extends ArrayAdapter<RecordingStub> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View track = convertView;
         ReleaseTrackHolder holder = null;
 
@@ -68,7 +64,6 @@ public class ReleaseTrackAdapter extends ArrayAdapter<RecordingStub> {
     }
 
     private class ReleaseTrackHolder {
-
         View base;
         TextView number = null;
         TextView name = null;

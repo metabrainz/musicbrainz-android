@@ -33,22 +33,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * List adapter for web links.
- */
-public class LinkAdapter extends ArrayAdapter<WebLink> {
+public class WeblinkAdapter extends ArrayAdapter<WebLink> {
 
     private Activity context;
     private List<WebLink> links;
 
-    public LinkAdapter(Activity context, List<WebLink> links) {
+    public WeblinkAdapter(Activity context, List<WebLink> links) {
         super(context, R.layout.list_link, links);
         this.context = context;
         this.links = links;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View link = convertView;
         LinkHolder holder = null;
 
@@ -76,7 +72,6 @@ public class LinkAdapter extends ArrayAdapter<WebLink> {
     }
 
     private class LinkHolder {
-
         View base;
         TextView linkTitle = null;
         TextView link = null;
