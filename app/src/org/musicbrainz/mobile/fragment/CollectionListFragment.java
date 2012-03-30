@@ -38,7 +38,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CollectionsFragment extends ListFragment implements LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>> {
+public class CollectionListFragment extends ListFragment implements LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>> {
     
     private static final int COLLECTIONS_LOADER = 0;
     

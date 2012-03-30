@@ -23,7 +23,7 @@ package org.musicbrainz.mobile.fragment;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.AboutActivity;
-import org.musicbrainz.mobile.activity.CollectionsActivity;
+import org.musicbrainz.mobile.activity.CollectionListActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
 import org.musicbrainz.mobile.activity.LoginActivity;
 import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
@@ -57,7 +57,7 @@ public class DashButtonsFragment extends ContextFragment implements OnClickListe
         case R.id.collection_btn:
             MusicBrainzApplication app = (MusicBrainzApplication) context;
             if (app.isUserLoggedIn()) {
-                startActivity(new Intent(context, CollectionsActivity.class));
+                startActivity(new Intent(context, CollectionListActivity.class));
             } else {
                 startActivity(new Intent(context, LoginActivity.class));
             }

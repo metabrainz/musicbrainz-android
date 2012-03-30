@@ -22,4 +22,4 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/collections_fragment"
   style="@style/Match"
-  android:name="org.musicbrainz.mobile.fragment.CollectionsFragment" />
+  android:name="org.musicbrainz.mobile.fragment.CollectionListFragment" />

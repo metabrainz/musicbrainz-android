@@ -74,6 +74,8 @@
   
   <!-- CollectionsActivity -->
   <string name="collections_title">Collections</string>
+  <string name="plural">\'s</string>
+  <string name="collections">collections</string>
 
   <!-- Pager tabs -->
   <string name="tab_releases">RELEASES</string>

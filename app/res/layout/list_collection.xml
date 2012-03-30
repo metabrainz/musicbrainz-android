@@ -20,16 +20,16 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/MatchWidth">
+  style="@style/VerticalMinPad">
   
   <TextView
     android:id="@+id/list_collection_title"
-    style="@style/Wrap"
+    style="@style/ListMain"
     android:layout_centerVertical="true" />
   
   <TextView
     android:id="@+id/list_collection_count"
-    style="@style/Wrap"
+    style="@style/ListAux"
     android:layout_centerVertical="true"
     android:layout_alignParentRight="true" />
 </RelativeLayout>

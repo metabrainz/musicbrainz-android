@@ -164,7 +164,7 @@
       android:label="@string/artist_title" />
     
     <activity
-      android:name=".activity.CollectionsActivity"
+      android:name=".activity.CollectionListActivity"
       android:label="@string/collections_title" />
     
     <activity

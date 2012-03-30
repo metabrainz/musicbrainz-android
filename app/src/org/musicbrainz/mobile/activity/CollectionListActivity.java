@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -18,12 +18,25 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.fragment;
+package org.musicbrainz.mobile.activity;
 
-import android.support.v4.app.ListFragment;
+import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.util.PreferenceUtils;
 
-public class CollectionFragment extends ListFragment {
+import android.os.Bundle;
+
+public class CollectionListActivity extends MusicBrainzActivity {
     
-    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_collections);
+        setUserNameTitle();
+    }
+
+    public void setUserNameTitle() {
+        String userName = PreferenceUtils.getUsername(getApplicationContext());
+        getSupportActionBar().setTitle(userName + getString(R.string.plural) + " " + getString(R.string.collections));
+    }
 
 }
