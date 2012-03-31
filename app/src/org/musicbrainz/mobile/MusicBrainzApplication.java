@@ -27,6 +27,7 @@ import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceManager;
@@ -103,6 +104,10 @@ public class MusicBrainzApplication extends Application {
     public Credentials getCredentials() {
         return new Credentials(getUserAgent(), PreferenceUtils.getUsername(this), PreferenceUtils.getPassword(this),
                 getClientId());
+    }
+    
+    public static MusicBrainzApplication getApp(Context context) {
+        return (MusicBrainzApplication) context.getApplicationContext();
     }
 
 }

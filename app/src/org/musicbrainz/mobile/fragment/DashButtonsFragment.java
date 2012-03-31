@@ -20,15 +20,10 @@
 
 package org.musicbrainz.mobile.fragment;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.AboutActivity;
-import org.musicbrainz.mobile.activity.CollectionListActivity;
-import org.musicbrainz.mobile.activity.DonateActivity;
-import org.musicbrainz.mobile.activity.LoginActivity;
+import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,18 +50,13 @@ public class DashButtonsFragment extends ContextFragment implements OnClickListe
                     getString(R.string.zx_pos), getString(R.string.zx_neg), IntentIntegrator.PRODUCT_CODE_TYPES);
             break;
         case R.id.collection_btn:
-            MusicBrainzApplication app = (MusicBrainzApplication) context;
-            if (app.isUserLoggedIn()) {
-                startActivity(new Intent(context, CollectionListActivity.class));
-            } else {
-                startActivity(new Intent(context, LoginActivity.class));
-            }
+            startActivity(IntentFactory.getCollectionList(context));
             break;
         case R.id.donate_btn:
-            startActivity(new Intent(context, DonateActivity.class));
+            startActivity(IntentFactory.getDonate(context));
             break;
         case R.id.about_btn:
-            startActivity(new Intent(context, AboutActivity.class));
+            startActivity(IntentFactory.getAbout(context));
         }
     }
 

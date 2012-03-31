@@ -32,12 +32,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class CollectionStubAdapter extends ArrayAdapter<EditorCollectionStub> {
+public class CollectionListAdapter extends ArrayAdapter<EditorCollectionStub> {
 
     private Activity context;
     private List<EditorCollectionStub> collectionStubs;
     
-    public CollectionStubAdapter(Activity context, List<EditorCollectionStub> collectionStubs) {
+    public CollectionListAdapter(Activity context, List<EditorCollectionStub> collectionStubs) {
         super(context, R.layout.list_collection, collectionStubs);
         this.context = context;
         this.collectionStubs = collectionStubs;

@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
 import android.os.Bundle;
 
@@ -30,6 +31,12 @@ public class CollectionActivity extends MusicBrainzActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
+        setTitleFromIntent();
+    }
+
+    public void setTitleFromIntent() {
+        String collectionName = getIntent().getStringExtra(Extra.TITLE);
+        getSupportActionBar().setTitle(collectionName);
     }
     
 }

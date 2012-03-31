@@ -24,7 +24,8 @@ import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.list.CollectionStubAdapter;
+import org.musicbrainz.mobile.adapter.list.CollectionListAdapter;
+import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.loader.CollectionsLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
@@ -37,19 +38,20 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
-public class CollectionListFragment extends ListFragment implements LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>> {
-    
+public class CollectionListFragment extends ListFragment implements
+        LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>> {
+
     private static final int COLLECTIONS_LOADER = 0;
-    
     private Context appContext;
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         appContext = activity.getApplicationContext();
     }
-    
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -57,7 +59,7 @@ public class CollectionListFragment extends ListFragment implements LoaderCallba
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_collections, container, false);
         return layout;
     }
@@ -77,7 +79,7 @@ public class CollectionListFragment extends ListFragment implements LoaderCallba
         switch (result.getStatus()) {
         case SUCCESS:
             LinkedList<EditorCollectionStub> collection = result.getData();
-            setListAdapter(new CollectionStubAdapter(getActivity(), collection));
+            setListAdapter(new CollectionListAdapter(getActivity(), collection));
             break;
         case EXCEPTION:
             showConnectionErrorWarning();
@@ -92,5 +94,13 @@ public class CollectionListFragment extends ListFragment implements LoaderCallba
     public void onLoaderReset(Loader<AsyncResult<LinkedList<EditorCollectionStub>>> loader) {
         loader.reset();
     }
-    
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        CollectionListAdapter adapter = (CollectionListAdapter) getListAdapter();
+        String title = adapter.getItem(position).getName();
+        String mbid = adapter.getItem(position).getMbid();
+        startActivity(IntentFactory.getCollection(appContext, title, mbid));
+    }
+
 }
