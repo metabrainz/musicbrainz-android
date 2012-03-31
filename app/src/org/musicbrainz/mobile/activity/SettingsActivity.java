@@ -24,9 +24,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.util.Log;
+import org.musicbrainz.mobile.util.PreferenceUtils.Pref;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -49,7 +49,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
         setContentView(R.layout.activity_preferences);
         addPreferencesFromResource(R.xml.preferences);
 
-        Preference clear = (Preference) findPreference(Constants.PREF_CLEAR_SUGGESTIONS);
+        Preference clear = (Preference) findPreference(Pref.PREF_CLEAR_SUGGESTIONS);
         clear.setOnPreferenceClickListener(this);
     }
 
@@ -69,7 +69,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference.getKey().equals(Constants.PREF_CLEAR_SUGGESTIONS)) {
+        if (preference.getKey().equals(Pref.PREF_CLEAR_SUGGESTIONS)) {
             clearSuggestionHistory();
             return true;
         }

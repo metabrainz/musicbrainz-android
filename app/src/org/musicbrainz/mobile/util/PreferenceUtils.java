@@ -20,7 +20,6 @@
 
 package org.musicbrainz.mobile.util;
 
-import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.config.Secrets;
 
 import android.content.Context;
@@ -29,13 +28,22 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
 public class PreferenceUtils {
+    
+    public interface Pref {
+        public static final String PREFS_USER = "user";
+        public static final String PREF_USERNAME = "username";
+        public static final String PREF_PASSWORD = "password";
+        public static final String PREF_SUGGESTIONS = "search_suggestions";
+        public static final String PREF_CLEAR_SUGGESTIONS = "clear_suggestions";
+        public static final String PREF_BUGSENSE = "send_crashlogs";
+    }
 
     public static String getUsername(Context context) {
-        return getUserPreferences(context).getString(Constants.PREF_USERNAME, null);
+        return getUserPreferences(context).getString(Pref.PREF_USERNAME, null);
     }
 
     public static String getPassword(Context context) {
-        String obscuredPassword = getUserPreferences(context).getString(Constants.PREF_PASSWORD, null);
+        String obscuredPassword = getUserPreferences(context).getString(Pref.PREF_PASSWORD, null);
         return SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
     }
     
@@ -47,12 +55,12 @@ public class PreferenceUtils {
     }
     
     private static SharedPreferences getUserPreferences(Context context) {
-        return context.getSharedPreferences(Constants.PREFS_USER, Context.MODE_PRIVATE);
+        return context.getSharedPreferences(Pref.PREFS_USER, Context.MODE_PRIVATE);
     }
 
     public static boolean shouldProvideSearchSuggestions(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getBoolean(Constants.PREF_SUGGESTIONS, true);
+        return prefs.getBoolean(Pref.PREF_SUGGESTIONS, true);
     }
 
 }

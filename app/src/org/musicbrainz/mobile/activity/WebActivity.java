@@ -22,12 +22,11 @@ package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.fragment.WebFragment.WebFragmentCallbacks;
-import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
-import com.actionbarsherlock.view.Window;
-
 import android.os.Bundle;
+
+import com.actionbarsherlock.view.Window;
 
 public class WebActivity extends MusicBrainzActivity implements WebFragmentCallbacks {
 

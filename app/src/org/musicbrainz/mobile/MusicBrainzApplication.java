@@ -22,9 +22,9 @@ package org.musicbrainz.mobile;
 
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.mobile.config.Configuration;
-import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.util.PreferenceUtils;
+import org.musicbrainz.mobile.util.PreferenceUtils.Pref;
 
 import android.app.Application;
 import android.content.Context;
@@ -55,7 +55,7 @@ public class MusicBrainzApplication extends Application {
         }
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (Configuration.LIVE && prefs.getBoolean(Constants.PREF_BUGSENSE, true)) {
+        if (Configuration.LIVE && prefs.getBoolean(Pref.PREF_BUGSENSE, true)) {
             BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
         }
     }

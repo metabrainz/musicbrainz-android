@@ -23,12 +23,12 @@ package org.musicbrainz.mobile.fragment;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
-import org.musicbrainz.mobile.config.Constants;
 import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.dialog.AuthenticatingDialog;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.loader.LoginLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
+import org.musicbrainz.mobile.util.PreferenceUtils.Pref;
 import org.musicbrainz.mobile.util.SimpleEncrypt;
 
 import android.app.Activity;
@@ -170,10 +170,10 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     }
 
     public void storeLoginData() {
-        Editor spe = context.getSharedPreferences(Constants.PREFS_USER, Context.MODE_PRIVATE).edit();
-        spe.putString(Constants.PREF_USERNAME, getUsername());
+        Editor spe = context.getSharedPreferences(Pref.PREFS_USER, Context.MODE_PRIVATE).edit();
+        spe.putString(Pref.PREF_USERNAME, getUsername());
         String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), getPassword());
-        spe.putString(Constants.PREF_PASSWORD, obscuredPassword);
+        spe.putString(Pref.PREF_PASSWORD, obscuredPassword);
         spe.commit();
     }
 
