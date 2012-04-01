@@ -92,6 +92,6 @@ public interface MusicBrainz {
     public abstract void addReleaseToCollection(String collectionMbid, String releaseMbid) throws IOException;
     public abstract void deleteReleaseFromCollection(String collectionMbid, String releaseMbid) throws IOException;
     public abstract LinkedList<EditorCollectionStub> lookupUserCollections() throws IOException;
-    public abstract EditorCollection lookupCollection(String collectionMbid) throws IOException;
+    public abstract EditorCollection lookupCollection(String mbid) throws IOException;
 
 }

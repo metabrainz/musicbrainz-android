@@ -26,7 +26,7 @@ import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.CollectionListAdapter;
 import org.musicbrainz.mobile.intent.IntentFactory;
-import org.musicbrainz.mobile.loader.CollectionsLoader;
+import org.musicbrainz.mobile.loader.CollectionListLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
 import android.app.Activity;
@@ -66,7 +66,7 @@ public class CollectionListFragment extends ListFragment implements
 
     @Override
     public Loader<AsyncResult<LinkedList<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
-        return new CollectionsLoader(appContext);
+        return new CollectionListLoader(appContext);
     }
 
     @Override

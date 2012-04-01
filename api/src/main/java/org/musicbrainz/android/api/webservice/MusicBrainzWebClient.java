@@ -278,8 +278,8 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public EditorCollection lookupCollection(String collectionMbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.collectionLookup(collectionMbid));
+    public EditorCollection lookupCollection(String mbid) throws IOException {
+        HttpEntity entity = get(QueryBuilder.collectionLookup(mbid));
         EditorCollection collection = responseParser.parseCollectionLookup(entity.getContent());
         entity.consumeContent();
         return collection;

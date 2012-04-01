@@ -32,11 +32,11 @@ import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
 import android.content.Context;
 
-public class CollectionsLoader extends PersistingAsyncTaskLoader<AsyncResult<LinkedList<EditorCollectionStub>>> {
+public class CollectionListLoader extends PersistingAsyncTaskLoader<AsyncResult<LinkedList<EditorCollectionStub>>> {
 
     private MusicBrainzApplication app;
 
-    public CollectionsLoader(Context appContext) {
+    public CollectionListLoader(Context appContext) {
         super(appContext);
         app = (MusicBrainzApplication) appContext;
     }
