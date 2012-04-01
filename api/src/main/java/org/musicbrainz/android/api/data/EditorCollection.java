@@ -33,5 +33,9 @@ public class EditorCollection extends EditorCollectionStub {
 	public void setReleases(LinkedList<ReleaseStub> releases) {
 		this.releases = releases;
 	}
+	
+	public void addRelease(ReleaseStub release) {
+	    releases.add(release);
+	}
 
 }

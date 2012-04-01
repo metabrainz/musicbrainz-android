@@ -60,8 +60,7 @@ public class CollectionListFragment extends ListFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_collections, container, false);
-        return layout;
+        return inflater.inflate(R.layout.fragment_collections, container, false);
     }
 
     @Override
@@ -79,7 +78,11 @@ public class CollectionListFragment extends ListFragment implements
         switch (result.getStatus()) {
         case SUCCESS:
             LinkedList<EditorCollectionStub> collection = result.getData();
-            setListAdapter(new CollectionListAdapter(getActivity(), collection));
+            try {
+                setListAdapter(new CollectionListAdapter(getActivity(), collection));
+            } catch (Exception e) {
+                showConnectionErrorWarning(); // Fragment not connected.
+            }
             break;
         case EXCEPTION:
             showConnectionErrorWarning();

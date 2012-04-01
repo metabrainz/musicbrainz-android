@@ -11,6 +11,14 @@
           <language>eng</language>
           <script>Latn</script>
         </text-representation>
+        <artist-credit>
+          <name-credit>
+            <artist id="0d8b0d50-e4cf-4da4-965d-f24c58ec3268">
+              <name>Boston</name>
+              <sort-name>Boston</sort-name>
+            </artist>
+          </name-credit>
+        </artist-credit>
         <date>1977</date>
         <country>GB</country>
       </release>
@@ -22,6 +30,16 @@
           <language>eng</language>
           <script>Latn</script>
         </text-representation>
+        <artist-credit>
+          <name-credit>
+            <artist id="2b0ce8c8-9c9a-4807-9414-24b22af7a679">
+              <name>Owen</name>
+              <sort-name>Owen</sort-name>
+              <disambiguation>Mike Kinsella solo project
+              </disambiguation>
+            </artist>
+          </name-credit>
+        </artist-credit>
         <date>2009-09-22</date>
         <country>US</country>
       </release>

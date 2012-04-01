@@ -29,6 +29,7 @@ import java.io.InputStream;
 import org.junit.Before;
 import org.junit.Test;
 import org.musicbrainz.android.api.data.EditorCollection;
+import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class CollectionLookupTest extends BaseXmlParsingTestCase {
@@ -50,6 +51,26 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
         assertEquals("My Collection", collection.getName());
         assertEquals("jdamcd", collection.getEditor());
         assertEquals(2, collection.getCount());
+    }
+    
+    @Test
+    public void testFirstRelease() throws IOException {
+        ReleaseStub first = collection.getReleases().getFirst();
+        assertEquals("229fef25-8e57-3465-bb92-0569b3ed1b8c", first.getReleaseMbid());
+        assertEquals("Boston", first.getTitle());
+        assertEquals("Boston", first.getArtistName());
+        assertEquals("1977", first.getDate());
+        assertEquals("GB", first.getCountryCode());
+    }
+    
+    @Test
+    public void testLastRelease() throws IOException {
+        ReleaseStub last = collection.getReleases().getLast();
+        assertEquals("9f00a4d3-82b2-4084-a48b-565703b812ce", last.getReleaseMbid());
+        assertEquals("New Leaves", last.getTitle());
+        assertEquals("Owen", last.getArtistName());
+        assertEquals("2009-09-22", last.getDate());
+        assertEquals("US", last.getCountryCode());
     }
 
 }

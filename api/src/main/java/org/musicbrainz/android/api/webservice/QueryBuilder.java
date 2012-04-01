@@ -54,7 +54,7 @@ public class QueryBuilder {
     
     private static final String LOOKUP_USER_COLLECTIONS = "collection";
     private static final String COLLECTION = "collection/";
-    private static final String COLLECTION_LIST = "/releases";
+    private static final String COLLECTION_LIST = "/releases?inc=releases+artist-credits";
     private static final String COLLECTION_EDIT = "/releases/";;
 
     private static final String TAG_PARAMS = "?inc=tags";

@@ -18,8 +18,18 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<LinearLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Match">
-  
-</LinearLayout>
+
+  <ListView
+    android:id="@id/android:list"
+    style="@style/Match"
+    android:drawSelectorOnTop="false" />
+
+  <TextView
+    android:id="@id/android:empty"
+    style="@style/Match"
+    android:gravity="center"
+    android:text="No data" />
+</RelativeLayout>
