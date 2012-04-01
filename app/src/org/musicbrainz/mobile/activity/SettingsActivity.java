@@ -24,6 +24,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.PreferenceUtils.Pref;
@@ -89,7 +90,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
 
         switch (item.getItemId()) {
         case android.R.id.home:
-            startActivity(DashboardActivity.createIntent(this));
+            startActivity(IntentFactory.getDashboard(getApplicationContext()));
             return true;
         }
         return false;

@@ -23,6 +23,7 @@ package org.musicbrainz.mobile.activity;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.content.ActivityNotFoundException;
@@ -36,11 +37,9 @@ public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
         switch (item.getItemId()) {
         case android.R.id.home:
-            startActivity(DashboardActivity.createIntent(this));
+            startActivity(IntentFactory.getDashboard(getApplicationContext()));
             return true;
         case R.id.menu_preferences:
             startActivity(new Intent(this, SettingsActivity.class));
@@ -55,7 +54,7 @@ public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
             startActivity(new Intent(this, LoginActivity.class));
             return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     private void sendFeedback() {
@@ -67,8 +66,7 @@ public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
     }
     
     protected boolean isUserLoggedIn() {
-        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
-        return app.isUserLoggedIn();
+        return MusicBrainzApplication.getApp(this).isUserLoggedIn();
     }
     
 }

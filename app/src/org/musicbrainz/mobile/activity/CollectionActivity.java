@@ -21,9 +21,12 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
 import android.os.Bundle;
+
+import com.actionbarsherlock.view.MenuItem;
 
 public class CollectionActivity extends MusicBrainzActivity {
 
@@ -32,11 +35,21 @@ public class CollectionActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
         setTitleFromIntent();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void setTitleFromIntent() {
         String collectionName = getIntent().getStringExtra(Extra.TITLE);
         getSupportActionBar().setTitle(collectionName);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(IntentFactory.getCollectionList(getApplicationContext()));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     
 }

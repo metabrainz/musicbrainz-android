@@ -116,10 +116,10 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
             tryLogin();
             break;
         case R.id.register_link:
-            startActivity(IntentFactory.getWebViewIntent(context, R.string.web_register, Configuration.URL_REGISTER));
+            startActivity(IntentFactory.getWebView(context, R.string.web_register, Configuration.URL_REGISTER));
             break;
         case R.id.forgotpass_link:
-            startActivity(IntentFactory.getWebViewIntent(context, R.string.web_forgot_pass,
+            startActivity(IntentFactory.getWebView(context, R.string.web_forgot_pass,
                     Configuration.URL_FORGOT_PASS));
         }
     }

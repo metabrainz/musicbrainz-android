@@ -145,7 +145,7 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.donate_options:
-            startActivity(IntentFactory.getWebViewIntent(context, R.string.web_donate, Configuration.URL_DONATE));
+            startActivity(IntentFactory.getWebView(context, R.string.web_donate, Configuration.URL_DONATE));
             break;
         default:
             String selection = (String) amount.getSelectedItem();

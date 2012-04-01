@@ -24,6 +24,7 @@ import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.CollectionActivity;
 import org.musicbrainz.mobile.activity.CollectionListActivity;
+import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
 import org.musicbrainz.mobile.activity.LoginActivity;
 import org.musicbrainz.mobile.activity.WebActivity;
@@ -54,8 +55,14 @@ public class IntentFactory {
         public static final String TITLE = "title";
         public static final String TARGET_URL = "target_url";
     }
+    
+    public static Intent getDashboard(Context context) {
+        Intent intent = new Intent(context, DashboardActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
+    }
 
-    public static Intent getWebViewIntent(Context context, int titleId, String url) {
+    public static Intent getWebView(Context context, int titleId, String url) {
         Intent intent = new Intent(context, WebActivity.class);
         intent.putExtra(Extra.TITLE, titleId);
         intent.putExtra(Extra.TARGET_URL, url);
@@ -64,7 +71,9 @@ public class IntentFactory {
     
     public static Intent getCollectionList(Context context) {
         if (MusicBrainzApplication.getApp(context).isUserLoggedIn()) {
-            return new Intent(context, CollectionListActivity.class);
+            Intent intent = new Intent(context, CollectionListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            return intent;
         } else {
             return new Intent(context, LoginActivity.class);
         }

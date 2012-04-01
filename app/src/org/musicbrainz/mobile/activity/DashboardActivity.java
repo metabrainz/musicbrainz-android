@@ -29,7 +29,6 @@ import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
 import org.musicbrainz.mobile.intent.zxing.IntentResult;
 import org.musicbrainz.mobile.util.PreferenceUtils;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -96,12 +95,6 @@ public class DashboardActivity extends MusicBrainzActivity {
         MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
         app.updateLoginStatus(false);
         Toast.makeText(this, R.string.toast_logged_out, Toast.LENGTH_SHORT).show();
-    }
-
-    public static Intent createIntent(Context context) {
-        Intent intent = new Intent(context, DashboardActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        return intent;
     }
 
 }
