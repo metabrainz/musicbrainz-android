@@ -23,20 +23,20 @@
   <item
     android:state_focused="true"
     android:state_pressed="true"
-    android:drawable="@drawable/home_donate_pressed" />
+    android:drawable="@drawable/dash_scan_pressed" />
 
   <item
     android:state_focused="false"
     android:state_pressed="true"
-    android:drawable="@drawable/home_donate_pressed" />
+    android:drawable="@drawable/dash_scan_pressed" />
 
   <item
     android:state_focused="true"
-    android:drawable="@drawable/home_donate_selected" />
+    android:drawable="@drawable/dash_scan_default" />
 
   <item
     android:state_focused="false"
     android:state_pressed="false"
-    android:drawable="@drawable/home_donate_default" />
+    android:drawable="@drawable/dash_scan_default" />
 
 </selector>

@@ -28,7 +28,7 @@
       android:id="@+id/scan_btn"
       style="@style/HomeTile"
       android:text="@string/dash_scan"
-      android:drawableTop="@drawable/home_barcode" />
+      android:drawableTop="@drawable/dash_scan" />
 
     <fragment
       android:id="@+id/search_fragment"
@@ -46,19 +46,19 @@
       android:id="@+id/collection_btn"
       style="@style/HomeTile"
       android:text="@string/dash_collection"
-      android:drawableTop="@drawable/home_login" />
+      android:drawableTop="@drawable/dash_collections" />
 
     <Button
       android:id="@+id/donate_btn"
       style="@style/HomeTile"
       android:text="@string/dash_donate"
-      android:drawableTop="@drawable/home_donate" />
+      android:drawableTop="@drawable/dash_donate" />
 
     <Button
       android:id="@+id/about_btn"
       style="@style/HomeTile"
       android:text="@string/dash_about"
-      android:drawableTop="@drawable/home_about" />
+      android:drawableTop="@drawable/dash_about" />
   </LinearLayout>
 
 </LinearLayout>
