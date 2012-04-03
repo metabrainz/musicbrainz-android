@@ -35,7 +35,7 @@
 
   <dimen name="vertical_minspace">45dp</dimen>
   <dimen name="button_min">47dp</dimen>
-  <dimen name="separator_height">1dp</dimen>
+  <dimen name="separator_thickness">1dp</dimen>
   <dimen name="progress_spinner">40dp</dimen>
   <dimen name="login_buttons">200dp</dimen>
 

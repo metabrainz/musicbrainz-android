@@ -19,28 +19,25 @@
   <http://www.gnu.org/licenses/>. -->
 
 <resources>
-  <!-- General widget and custom styles -->
 
   <!-- Home -->
   <style
     name="HomeTileRow"
-    parent="MatchWidthHorizontal">
+    parent="MatchHorizontal">
     <item name="android:layout_weight">1</item>
-    <item name="android:paddingTop">@dimen/std_pad</item>
-    <item name="android:paddingBottom">@dimen/std_pad</item>
-    <item name="android:paddingRight">@dimen/gutter_large</item>
-    <item name="android:paddingLeft">@dimen/gutter_large</item>
   </style>
 
   <style
     name="HomeTile"
-    parent="MatchWidth">
-    <item name="android:layout_gravity">center_vertical</item>
+    parent="Match">
     <item name="android:layout_weight">1</item>
-    <item name="android:gravity">center_horizontal</item>
+  </style>
+
+  <style
+    name="TileText"
+    parent="Wrap">
     <item name="android:textSize">@dimen/text_size_large</item>
     <item name="android:textColor">@color/main_text</item>
-    <item name="android:background">@null</item>
   </style>
 
   <!-- Entities -->
@@ -321,8 +318,14 @@
 
   <!-- Misc -->
   <style name="Separator">
-    <item name="android:layout_width">fill_parent</item>
-    <item name="android:layout_height">@dimen/separator_height</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/separator_thickness</item>
+    <item name="android:background">@color/mb_purple_medium</item>
+  </style>
+
+  <style name="SeparatorVertical">
+    <item name="android:layout_width">@dimen/separator_thickness</item>
+    <item name="android:layout_height">match_parent</item>
     <item name="android:background">@color/mb_purple_medium</item>
   </style>
 

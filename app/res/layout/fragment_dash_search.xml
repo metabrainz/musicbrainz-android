@@ -21,6 +21,7 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/MatchWidth"
+  android:background="@color/white"
   android:padding="@dimen/gutter_large">
 
   <Spinner

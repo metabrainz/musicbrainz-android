@@ -20,34 +20,20 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
-
-  <fragment
-    android:id="@+id/search_fragment"
-    android:name="org.musicbrainz.mobile.fragment.SearchFragment"
-    style="@style/MatchWidth"
-    android:layout_alignParentTop="true" />
+  style="@style/Match">
   
-  <View
-    style="@style/Separator"
-    android:layout_below="@id/search_fragment" />
+  <RelativeLayout
+    style="@style/Wrap"
+    android:layout_centerInParent="true">
 
-  <fragment
-    android:id="@+id/welcome_fragment"
-    android:name="org.musicbrainz.mobile.fragment.WelcomeFragment"
-    style="@style/MatchWidth"
-    android:layout_alignParentBottom="true" />
+  <ImageView
+    android:id="@+id/dash_tile_icon"
+    style="@style/Wrap" />
 
-  <View
-    android:id="@+id/separator"
-    style="@style/Separator"
-    android:layout_above="@id/welcome_fragment" />
-
-  <include 
-    android:id="@+id/dash_buttons"
-    style="@style/Match"
-    layout="@layout/fragment_dash_buttons"
-    android:layout_below="@id/search_fragment"
-    android:layout_above="@id/separator" />
-
+  <TextView
+    android:id="@+id/dash_tile_text"
+    style="@style/TileText"
+    android:layout_below="@id/dash_tile_icon"
+    android:layout_centerHorizontal="true" />
+  </RelativeLayout>
 </RelativeLayout>

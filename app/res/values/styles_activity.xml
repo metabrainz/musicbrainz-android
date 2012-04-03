@@ -46,12 +46,6 @@
   </style>
 
   <style
-    name="LaunchActivityLand"
-    parent="Activity">
-    <item name="android:paddingBottom">@dimen/std_pad</item>
-  </style>
-
-  <style
     name="Dialog"
     parent="MatchWidth">
     <item name="android:orientation">vertical</item>

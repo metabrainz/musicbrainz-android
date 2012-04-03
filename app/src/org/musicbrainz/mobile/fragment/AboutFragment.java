@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.widget.AssetTextView;
+import org.musicbrainz.mobile.view.AssetTextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;

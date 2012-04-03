@@ -20,45 +20,49 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/LaunchActivityLand">
+  style="@style/Activity">
 
   <LinearLayout style="@style/HomeTileRow">
+    
+    <org.musicbrainz.mobile.view.DashTileView
+      android:id="@+id/dash_scan"
+      style="@style/HomeTile" />
 
-    <Button
-      android:id="@+id/scan_btn"
-      style="@style/HomeTile"
-      android:text="@string/dash_scan"
-      android:drawableTop="@drawable/dash_scan" />
-
-    <fragment
-      android:id="@+id/search_fragment"
-      android:name="org.musicbrainz.mobile.fragment.SearchFragment"
-      style="@style/MatchWidth"
-      android:layout_gravity="center"
+    <RelativeLayout
+      android:id="@+id/search_container"
+      style="@style/Match"
       android:layout_weight="0.5"
-      android:layout_marginRight="@dimen/super_pad" />
+      android:background="@color/white">
+
+      <fragment
+        android:id="@+id/search_fragment"
+        style="@style/MatchWidth"
+        android:layout_centerInParent="true"
+        android:name="org.musicbrainz.mobile.fragment.SearchFragment" />
+
+      <View
+        style="@style/Separator"
+        android:layout_alignParentBottom="true" />
+      <View
+        style="@style/SeparatorVertical"
+        android:layout_alignParentLeft="true" />
+    </RelativeLayout>
 
   </LinearLayout>
 
   <LinearLayout style="@style/HomeTileRow">
 
-    <Button
-      android:id="@+id/collection_btn"
-      style="@style/HomeTile"
-      android:text="@string/dash_collection"
-      android:drawableTop="@drawable/dash_collections" />
+    <org.musicbrainz.mobile.view.DashTileView
+      android:id="@+id/dash_collections"
+      style="@style/HomeTile" />
 
-    <Button
-      android:id="@+id/donate_btn"
-      style="@style/HomeTile"
-      android:text="@string/dash_donate"
-      android:drawableTop="@drawable/dash_donate" />
+    <org.musicbrainz.mobile.view.DashTileView
+      android:id="@+id/dash_donate"
+      style="@style/HomeTile" />
 
-    <Button
-      android:id="@+id/about_btn"
-      style="@style/HomeTile"
-      android:text="@string/dash_about"
-      android:drawableTop="@drawable/dash_about" />
+    <org.musicbrainz.mobile.view.DashTileView
+      android:id="@+id/dash_about"
+      style="@style/HomeTile" />
   </LinearLayout>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package org.musicbrainz.mobile.widget;
+package org.musicbrainz.mobile.view;
 
 import org.musicbrainz.mobile.util.Utils;
 
