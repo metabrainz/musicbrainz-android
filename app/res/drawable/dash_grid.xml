@@ -18,22 +18,25 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<merge
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Match">
-  
-  <RelativeLayout
-    style="@style/Wrap"
-    android:layout_centerInParent="true">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <ImageView
-    android:id="@+id/dash_tile_icon"
-    style="@style/Wrap" />
+  <item
+    android:state_focused="true"
+    android:state_pressed="true"
+    android:drawable="@drawable/tile_bg_focused" />
 
-  <TextView
-    android:id="@+id/dash_tile_text"
-    style="@style/TileText"
-    android:layout_below="@id/dash_tile_icon"
-    android:layout_centerHorizontal="true" />
-  </RelativeLayout>
-</merge>
+  <item
+    android:state_focused="false"
+    android:state_pressed="true"
+    android:drawable="@drawable/tile_bg_default" />
+
+  <item
+    android:state_focused="true"
+    android:drawable="@drawable/tile_bg_focused" />
+
+  <item
+    android:state_focused="false"
+    android:state_pressed="false"
+    android:drawable="@drawable/tile_bg_default" />
+
+</selector>
