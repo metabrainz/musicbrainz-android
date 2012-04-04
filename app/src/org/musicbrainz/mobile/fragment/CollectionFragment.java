@@ -39,7 +39,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class CollectionFragment extends ListFragment implements LoaderCallbacks<AsyncResult<EditorCollection>>{
     
@@ -79,7 +78,7 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
         switch (result.getStatus()) {
         case SUCCESS:
             EditorCollection collection = result.getData();
-            setListAdapter(new ReleaseStubAdapter(getActivity(), collection.getReleases()));
+            setListAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_collection_release, collection.getReleases()));
             break;
         case EXCEPTION:
             showConnectionErrorWarning();

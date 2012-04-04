@@ -38,10 +38,12 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
 
     private Activity context;
     private List<ReleaseStub> releaseStubs;
+    private int layoutId;
 
-    public ReleaseStubAdapter(Activity context, List<ReleaseStub> releaseStubs) {
-        super(context, R.layout.list_release, releaseStubs);
+    public ReleaseStubAdapter(Activity context, int layoutId, List<ReleaseStub> releaseStubs) {
+        super(context, layoutId, releaseStubs);
         this.context = context;
+        this.layoutId = layoutId;
         this.releaseStubs = releaseStubs;
     }
 
@@ -51,7 +53,7 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
 
         if (release == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            release = inflater.inflate(R.layout.list_release, parent, false);
+            release = inflater.inflate(layoutId, parent, false);
             holder = new ReleaseStubHolder(release);
             release.setTag(holder);
         } else {
@@ -59,16 +61,16 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
         }
 
         ReleaseStub stub = releaseStubs.get(position);
-
         holder.getTitle().setText(stub.getTitle());
         holder.getArtist().setText(StringFormat.commaSeparateArtists(stub.getArtists()));
-
-        holder.getTrackNum().setText(stub.getTracksNum() + " " + context.getString(R.string.label_tracks));
-        holder.getFormat().setText(StringMapper.buildReleaseFormatsString(getContext(), stub.getFormats()));
-
-        holder.getLabels().setText(StringFormat.commaSeparate(stub.getLabels()));
         holder.getCountry().setText(stub.getCountryCode());
         holder.getDate().setText(stub.getDate());
+
+        if (layoutId == R.layout.list_release) {
+            holder.getTrackNum().setText(stub.getTracksNum() + " " + context.getString(R.string.label_tracks));
+            holder.getFormat().setText(StringMapper.buildReleaseFormatsString(getContext(), stub.getFormats()));            
+            holder.getLabels().setText(StringFormat.commaSeparate(stub.getLabels()));
+        }
         return release;
     }
 
@@ -88,7 +90,7 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
 
         TextView getTitle() {
             if (title == null) {
-                title = (TextView) base.findViewById(R.id.list_release);
+                title = (TextView) base.findViewById(R.id.list_release_title);
             }
             return title;
         }

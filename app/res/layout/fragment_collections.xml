@@ -24,7 +24,7 @@
 
   <ListView
     android:id="@id/android:list"
-    style="@style/Match"
+    style="@style/List"
     android:drawSelectorOnTop="false" />
 
   <TextView

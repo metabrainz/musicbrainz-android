@@ -39,12 +39,12 @@ import android.widget.TextView;
 public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener {
 
     private BarcodeSearchActivity parent;
-    private ReleaseStub rs;
+    private ReleaseStub stub;
 
-    public BarcodeConfirmDialog(Context context, ReleaseStub rs) {
+    public BarcodeConfirmDialog(Context context, ReleaseStub stub) {
         super(context);
 
-        this.rs = rs;
+        this.stub = stub;
         parent = (BarcodeSearchActivity) context;
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,23 +53,22 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
         Button confirm = (Button) findViewById(R.id.barcode_confirm);
         confirm.setOnClickListener(this);
 
-        ((TextView) findViewById(R.id.list_release)).setText(rs.getTitle());
-        ((TextView) findViewById(R.id.list_release_artist)).setText(StringFormat.commaSeparateArtists(rs.getArtists()));
+        ((TextView) findViewById(R.id.list_release_title)).setText(stub.getTitle());
+        ((TextView) findViewById(R.id.list_release_artist)).setText(StringFormat.commaSeparateArtists(stub.getArtists()));
 
-        ((TextView) findViewById(R.id.list_release_tracksnum)).setText(rs.getTracksNum() + " " + parent.getString(R.string.label_tracks));
+        ((TextView) findViewById(R.id.list_release_tracksnum)).setText(stub.getTracksNum() + " " + parent.getString(R.string.label_tracks));
         ((TextView) findViewById(R.id.list_release_formats)).setText(StringMapper.buildReleaseFormatsString(
-                getContext(), rs.getFormats()));
+                getContext(), stub.getFormats()));
 
-        ((TextView) findViewById(R.id.list_release_labels)).setText(StringFormat.commaSeparate(rs.getLabels()));
-        ((TextView) findViewById(R.id.list_release_date)).setText(rs.getDate());
-        ((TextView) findViewById(R.id.list_release_country)).setText(rs.getCountryCode());
+        ((TextView) findViewById(R.id.list_release_labels)).setText(StringFormat.commaSeparate(stub.getLabels()));
+        ((TextView) findViewById(R.id.list_release_date)).setText(stub.getDate());
+        ((TextView) findViewById(R.id.list_release_country)).setText(stub.getCountryCode());
 
         findViewById(R.id.release_box).setBackgroundResource(R.color.list_bg);
     }
 
     public void onClick(View v) {
-
-        String releaseID = rs.getReleaseMbid();
+        String releaseID = stub.getReleaseMbid();
         parent.submitBarcode(releaseID);
         dismiss();
     }

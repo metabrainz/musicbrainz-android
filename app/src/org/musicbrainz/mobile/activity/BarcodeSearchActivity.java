@@ -233,7 +233,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
 
     private void handleSearchResults(AsyncResult<LinkedList<ReleaseStub>> result) {
         results = result.getData();
-        matches.setAdapter(new ReleaseStubAdapter(this, results));
+        matches.setAdapter(new ReleaseStubAdapter(this, R.layout.list_release, results));
         matches.setOnItemClickListener(this);
         matches.setOnItemLongClickListener(this);
 

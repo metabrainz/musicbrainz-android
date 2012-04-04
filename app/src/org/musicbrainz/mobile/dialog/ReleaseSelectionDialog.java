@@ -57,7 +57,7 @@ public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemCli
 
         releaseList = (ListView) findViewById(R.id.rg_release_list);
         releaseList.setOnItemClickListener(this);
-        releaseList.setAdapter(new ReleaseStubAdapter(parent, data));
+        releaseList.setAdapter(new ReleaseStubAdapter(parent, R.layout.list_release, data));
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

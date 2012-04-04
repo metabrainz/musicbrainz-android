@@ -26,6 +26,7 @@ import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.mobile.R;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +59,13 @@ public class CollectionListAdapter extends ArrayAdapter<EditorCollectionStub> {
         
         EditorCollectionStub stub = collectionStubs.get(position);
         holder.getTitle().setText(stub.getName());
-        holder.getCount().setText("" + stub.getCount());
+        holder.getCount().setText(getReleasesDisplayText(stub));
         return collection;
+    }
+
+    private String getReleasesDisplayText(EditorCollectionStub stub) {
+        Resources res = context.getResources();
+        return res.getQuantityString(R.plurals.release_plurals, stub.getCount(), stub.getCount());
     }
     
     private class CollectionStubHolder {

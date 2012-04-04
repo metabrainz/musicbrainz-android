@@ -60,7 +60,7 @@
 
   <!-- titles -->
   <TextView
-    android:id="@+id/list_release"
+    android:id="@+id/list_release_title"
     style="@style/ListReleaseTitles"
     android:layout_below="@+id/list_release_tracksnum"
     android:layout_alignParentLeft="true"

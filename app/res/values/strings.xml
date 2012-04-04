@@ -76,6 +76,12 @@
   <string name="collections_title">Collections</string>
   <string name="plural">\'s</string>
   <string name="collections">collections</string>
+  
+  <plurals name="release_plurals">
+    <item quantity="zero">No releases</item>
+    <item quantity="one">%d release</item>
+    <item quantity="other">%d releases</item>
+  </plurals>
 
   <!-- Pager tabs -->
   <string name="tab_releases">RELEASES</string>

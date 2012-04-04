@@ -20,16 +20,35 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/VerticalMinPad">
-  
+  android:id="@+id/release_box"
+  style="@style/MatchWidth"
+  android:padding="@dimen/std_pad">
+
   <TextView
-    android:id="@+id/list_collection_title"
-    style="@style/ListMain" />
-  
-  <TextView
-    android:id="@+id/list_collection_count"
-    style="@style/ListAux"
+    android:id="@+id/list_release_date"
+    style="@style/ListAuxMedium"
     android:layout_alignParentRight="true"
-    android:layout_alignBaseline="@id/list_collection_title" />
+    android:layout_marginLeft="@dimen/small_pad" />
+
+  <TextView
+    android:id="@+id/list_release_country"
+    style="@style/ListAuxMedium"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/list_release_date"
+    android:layout_marginLeft="@dimen/small_pad" />
+  
+  <TextView
+    android:id="@+id/list_release_title"
+    style="@style/ListMedium"
+    android:layout_alignParentLeft="true"
+    android:layout_toLeftOf="@id/list_release_date" />
+
+  <TextView
+    android:id="@+id/list_release_artist"
+    style="@style/ListMedium"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@id/list_release_title"
+    android:layout_marginRight="@dimen/small_pad"
+    android:layout_toLeftOf="@id/list_release_date" />
   
 </RelativeLayout>
