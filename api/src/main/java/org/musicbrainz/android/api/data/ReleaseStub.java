@@ -20,6 +20,7 @@
 
 package org.musicbrainz.android.api.data;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -32,7 +33,7 @@ public class ReleaseStub {
     private String releaseMbid;
 
     private String title;
-    private String artistName;
+    private ArrayList<ArtistNameMbid> artists = new ArrayList<ArtistNameMbid>();
     private String date;
     private int tracksNum;
     private String countryCode;
@@ -55,12 +56,12 @@ public class ReleaseStub {
         this.title = title;
     }
 
-    public String getArtistName() {
-        return artistName;
+    public ArrayList<ArtistNameMbid> getArtists() {
+        return artists;
     }
 
-    public void setArtistName(String artist) {
-        this.artistName = artist;
+    public void addArtist(ArtistNameMbid artist) {
+        artists.add(artist);
     }
 
     public String getDate() {

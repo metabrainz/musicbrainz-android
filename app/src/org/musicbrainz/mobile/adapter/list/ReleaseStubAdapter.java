@@ -61,7 +61,7 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
         ReleaseStub stub = releaseStubs.get(position);
 
         holder.getTitle().setText(stub.getTitle());
-        holder.getArtist().setText(stub.getArtistName());
+        holder.getArtist().setText(StringFormat.commaSeparateArtists(stub.getArtists()));
 
         holder.getTrackNum().setText(stub.getTracksNum() + " " + context.getString(R.string.label_tracks));
         holder.getFormat().setText(StringMapper.buildReleaseFormatsString(getContext(), stub.getFormats()));

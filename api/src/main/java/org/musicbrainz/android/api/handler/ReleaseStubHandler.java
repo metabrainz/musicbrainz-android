@@ -22,6 +22,7 @@ package org.musicbrainz.android.api.handler;
 
 import java.util.LinkedList;
 
+import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -30,6 +31,7 @@ public class ReleaseStubHandler extends MBHandler {
 
     private LinkedList<ReleaseStub> results = new LinkedList<ReleaseStub>();
     private ReleaseStub stub;
+    private ArtistNameMbid releaseArtist;
 
     private boolean inArtist;
     private boolean inLabel;
@@ -47,6 +49,8 @@ public class ReleaseStubHandler extends MBHandler {
             buildString();
         } else if (localName.equals("artist")) {
             inArtist = true;
+            releaseArtist = new ArtistNameMbid();
+            releaseArtist.setMbid(atts.getValue("id"));
         } else if (localName.equals("name")) {
             buildString();
         } else if (localName.equals("date")) {
@@ -72,11 +76,11 @@ public class ReleaseStubHandler extends MBHandler {
             stub.setTitle(getString());
         } else if (localName.equals("artist")) {
             inArtist = false;
-        } else if (localName.equals("name")) {
-            if (inArtist)
-                stub.setArtistName(getString());
-            else if (inLabel)
-                stub.addLabel(getString());
+        } else if (localName.equals("name") && inArtist) {
+            releaseArtist.setName(getString());
+            stub.addArtist(releaseArtist);
+        } else if (localName.equals("name") && inLabel) {
+            stub.addLabel(getString());
         } else if (localName.equals("date")) {
             stub.setDate(getString());
         } else if (localName.equals("country")) {

@@ -20,6 +20,7 @@
 
 package org.musicbrainz.android.api.handler;
 
+import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.EditorCollection;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.xml.sax.Attributes;
@@ -29,6 +30,7 @@ public class CollectionHandler extends MBHandler {
 
     private EditorCollection collection = new EditorCollection();
     private ReleaseStub stub;
+    private ArtistNameMbid releaseArtist;
 
     private boolean inArtist;
 
@@ -57,6 +59,8 @@ public class CollectionHandler extends MBHandler {
             buildString();
         } else if (localName.equalsIgnoreCase("artist")) {
             inArtist = true;
+            releaseArtist = new ArtistNameMbid();
+            releaseArtist.setMbid(atts.getValue("id"));
         }
     }
 
@@ -65,7 +69,8 @@ public class CollectionHandler extends MBHandler {
         if (localName.equalsIgnoreCase("name") && !inArtist) {
             collection.setName(getString());
         } else if (localName.equalsIgnoreCase("name")) {
-            stub.setArtistName(getString());
+            releaseArtist.setName(getString());
+            stub.addArtist(releaseArtist);
         } else if (localName.equalsIgnoreCase("editor")) {
             collection.setEditor(getString());
         } else if (localName.equalsIgnoreCase("release")) {

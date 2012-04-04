@@ -54,7 +54,7 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
         confirm.setOnClickListener(this);
 
         ((TextView) findViewById(R.id.list_release)).setText(rs.getTitle());
-        ((TextView) findViewById(R.id.list_release_artist)).setText(rs.getArtistName());
+        ((TextView) findViewById(R.id.list_release_artist)).setText(StringFormat.commaSeparateArtists(rs.getArtists()));
 
         ((TextView) findViewById(R.id.list_release_tracksnum)).setText(rs.getTracksNum() + " " + parent.getString(R.string.label_tracks));
         ((TextView) findViewById(R.id.list_release_formats)).setText(StringMapper.buildReleaseFormatsString(
