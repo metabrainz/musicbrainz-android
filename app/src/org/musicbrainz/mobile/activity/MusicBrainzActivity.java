@@ -27,7 +27,6 @@ import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -42,7 +41,7 @@ public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
             startActivity(IntentFactory.getDashboard(getApplicationContext()));
             return true;
         case R.id.menu_preferences:
-            startActivity(new Intent(this, SettingsActivity.class));
+            startActivity(IntentFactory.getSettings(getApplicationContext()));
             return true;
         case R.id.menu_feedback:
             sendFeedback();
@@ -51,7 +50,7 @@ public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
             onSearchRequested();
             return true;
         case R.id.menu_login:
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(IntentFactory.getLogin(getApplicationContext()));
             return true;
         }
         return super.onOptionsItemSelected(item);

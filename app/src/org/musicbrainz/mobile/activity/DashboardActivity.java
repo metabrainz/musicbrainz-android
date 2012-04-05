@@ -42,6 +42,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
 
+    private static final int COLLECTION_LOGIN_REQUEST = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
         getSupportActionBar().setHomeButtonEnabled(false);
         setupTiles();
     }
-    
+
     private void setupTiles() {
         setupTile(R.id.dash_scan, R.drawable.dash_scan, R.string.dash_scan);
         setupTile(R.id.dash_collections, R.drawable.dash_collections, R.string.dash_collections);
@@ -62,18 +64,6 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
         scanTile.setIcon(iconId);
         scanTile.setText(stringId);
         scanTile.setOnClickListener(this);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
-            IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-            if (scanResult.getContents() != null) {
-                Intent barcodeResult = new Intent(this, ReleaseActivity.class);
-                barcodeResult.putExtra(Extra.BARCODE, scanResult.getContents());
-                startActivity(barcodeResult);
-            }
-        }
     }
 
     @Override
@@ -124,13 +114,31 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                     getString(R.string.zx_pos), getString(R.string.zx_neg), IntentIntegrator.PRODUCT_CODE_TYPES);
             break;
         case R.id.dash_collections:
-            startActivity(IntentFactory.getCollectionList(getApplicationContext()));
+            if (isUserLoggedIn()) {
+                startActivity(IntentFactory.getCollectionList(getApplicationContext()));
+            } else {
+                startActivityForResult(IntentFactory.getLogin(getApplicationContext()), COLLECTION_LOGIN_REQUEST);
+            }
             break;
         case R.id.dash_donate:
             startActivity(IntentFactory.getDonate(getApplicationContext()));
             break;
         case R.id.dash_about:
             startActivity(IntentFactory.getAbout(getApplicationContext()));
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == IntentIntegrator.BARCODE_REQUEST) {
+            IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+            if (scanResult.getContents() != null) {
+                Intent barcodeResult = new Intent(this, ReleaseActivity.class);
+                barcodeResult.putExtra(Extra.BARCODE, scanResult.getContents());
+                startActivity(barcodeResult);
+            }
+        } else if (requestCode == COLLECTION_LOGIN_REQUEST && isUserLoggedIn()) {
+            startActivity(IntentFactory.getCollectionList(getApplicationContext()));
         }
     }
 

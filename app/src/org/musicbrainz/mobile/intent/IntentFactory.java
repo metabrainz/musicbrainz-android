@@ -20,13 +20,13 @@
 
 package org.musicbrainz.mobile.intent;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.CollectionActivity;
 import org.musicbrainz.mobile.activity.CollectionListActivity;
 import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
 import org.musicbrainz.mobile.activity.LoginActivity;
+import org.musicbrainz.mobile.activity.SettingsActivity;
 import org.musicbrainz.mobile.activity.WebActivity;
 
 import android.content.Context;
@@ -55,7 +55,7 @@ public class IntentFactory {
         public static final String TITLE = "title";
         public static final String TARGET_URL = "target_url";
     }
-    
+
     public static Intent getDashboard(Context context) {
         Intent intent = new Intent(context, DashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -68,15 +68,11 @@ public class IntentFactory {
         intent.putExtra(Extra.TARGET_URL, url);
         return intent;
     }
-    
+
     public static Intent getCollectionList(Context context) {
-        if (MusicBrainzApplication.getApp(context).isUserLoggedIn()) {
-            Intent intent = new Intent(context, CollectionListActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            return intent;
-        } else {
-            return new Intent(context, LoginActivity.class);
-        }
+        Intent intent = new Intent(context, CollectionListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
     }
 
     public static Intent getCollection(Context context, String title, String mbid) {
@@ -86,12 +82,20 @@ public class IntentFactory {
         return intent;
     }
     
+    public static Intent getLogin(Context context) {
+        return new Intent(context, LoginActivity.class);
+    }
+
     public static Intent getDonate(Context context) {
         return new Intent(context, DonateActivity.class);
     }
-    
+
     public static Intent getAbout(Context context) {
         return new Intent(context, AboutActivity.class);
+    }
+    
+    public static Intent getSettings(Context context) {
+        return new Intent(context, SettingsActivity.class);
     }
 
 }
