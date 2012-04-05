@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.test.robotium.navigation;
 
+import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.AboutActivity;
 import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.DonateActivity;
@@ -46,21 +47,21 @@ public class DashboardNavigationTest extends ActivityInstrumentationTestCase2<Da
 
     @Smoke
     public void testOpenCloseAbout() {
-        solo.clickOnButton("About");
+        solo.clickOnView(solo.getView(R.id.dash_about));
         solo.assertCurrentActivity("Expected About Activity", AboutActivity.class);
         solo.goBack();
     }
 
     @Smoke
     public void testOpenCloseDonate() {
-        solo.clickOnButton("Donate");
+        solo.clickOnView(solo.getView(R.id.dash_donate));
         solo.assertCurrentActivity("Expected Donate Activity", DonateActivity.class);
         solo.goBack();
     }
 
     @Smoke
     public void testOpenCloseCollection() {
-        solo.clickOnButton("Collections");
+        solo.clickOnView(solo.getView(R.id.dash_collections));
         solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
         solo.goBack();
     }
