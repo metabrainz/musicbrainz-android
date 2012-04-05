@@ -45,6 +45,7 @@ public class CollectionListFragment extends ListFragment implements
 
     private static final int COLLECTIONS_LOADER = 0;
     private Context appContext;
+    private View loading;
 
     @Override
     public void onAttach(Activity activity) {
@@ -60,7 +61,9 @@ public class CollectionListFragment extends ListFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_collections, container, false);
+        View layout = inflater.inflate(R.layout.fragment_collections, container, false);
+        loading = layout.findViewById(R.id.loading);
+        return layout;
     }
 
     @Override
@@ -71,6 +74,7 @@ public class CollectionListFragment extends ListFragment implements
     @Override
     public void onLoadFinished(Loader<AsyncResult<LinkedList<EditorCollectionStub>>> loader,
             AsyncResult<LinkedList<EditorCollectionStub>> data) {
+        hideLoading();
         handleResult(data);
     }
 
@@ -87,6 +91,10 @@ public class CollectionListFragment extends ListFragment implements
         case EXCEPTION:
             showConnectionErrorWarning();
         }
+    }
+    
+    private void hideLoading() {
+        loading.setVisibility(View.GONE);
     }
 
     private void showConnectionErrorWarning() {

@@ -45,6 +45,7 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
     private static final int COLLECTION_LOADER = 0;
     private Context appContext;
     private String mbid;
+    private View loading;
     
     @Override
     public void onAttach(Activity activity) {
@@ -61,7 +62,9 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_collection, container, false);
+        View layout = inflater.inflate(R.layout.fragment_collection, container, false);
+        loading = layout.findViewById(R.id.loading);
+        return layout;
     }
 
     @Override
@@ -71,6 +74,7 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
 
     @Override
     public void onLoadFinished(Loader<AsyncResult<EditorCollection>> loader, AsyncResult<EditorCollection> data) {
+        hideLoading();
         handleResult(data);
     }
 
@@ -83,6 +87,10 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
         case EXCEPTION:
             showConnectionErrorWarning();
         }
+    }
+    
+    private void hideLoading() {
+        loading.setVisibility(View.GONE);
     }
 
     private void showConnectionErrorWarning() {

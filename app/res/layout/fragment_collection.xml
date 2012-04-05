@@ -31,5 +31,11 @@
     android:id="@id/android:empty"
     style="@style/Match"
     android:gravity="center"
-    android:text="No data" />
+    android:text="@string/no_collection_releases" />
+
+  <include
+    android:id="@+id/loading"
+    style="@style/Match"
+    layout="@layout/layout_loading" />
+
 </RelativeLayout>

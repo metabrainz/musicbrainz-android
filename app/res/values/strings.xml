@@ -82,6 +82,9 @@
     <item quantity="one">%d release</item>
     <item quantity="other">%d releases</item>
   </plurals>
+  
+  <string name="no_collections">You don\'t have any collections.\nAdd collections at musicbrainz.org</string>
+  <string name="no_collection_releases">No releases in this collection.\nSearch for releases to add them.</string>
 
   <!-- Pager tabs -->
   <string name="tab_releases">RELEASES</string>
