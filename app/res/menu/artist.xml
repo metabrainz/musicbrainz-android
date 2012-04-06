@@ -22,7 +22,7 @@
 
   <item
     android:id="@+id/legacy_search"
-    android:title="Search"
+    android:title="@string/action_search"
     android:icon="@drawable/action_search"
     android:showAsAction="always" />
 

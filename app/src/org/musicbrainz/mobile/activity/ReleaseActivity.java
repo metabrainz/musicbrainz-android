@@ -218,7 +218,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.release, menu);
+        if(isUserLoggedIn()) {
+            getSupportMenuInflater().inflate(R.menu.release_logged_in, menu);
+        } else {
+            getSupportMenuInflater().inflate(R.menu.release, menu);            
+        }
         return true;
     }
 

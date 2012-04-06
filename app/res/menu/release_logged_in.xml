@@ -21,9 +21,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-    android:id="@+id/menu_feedback"
-    android:title="@string/action_feedback"
-    android:icon="@drawable/action_feedback"
-    android:showAsAction="never" />
+    android:id="@+id/legacy_search"
+    android:title="@string/action_search"
+    android:icon="@drawable/action_search"
+    android:showAsAction="always" />
+  
+  <item
+    android:id="@+id/action_add_collection"
+    android:title="@string/action_add_collection"
+    android:icon="@drawable/action_star"
+    android:showAsAction="always" />
+  
+  <item
+    android:id="@+id/action_share"
+    android:title="@string/action_share"
+    android:icon="@drawable/action_share"
+    android:showAsAction="always" />
 
 </menu>
