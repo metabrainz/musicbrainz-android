@@ -38,6 +38,8 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class CollectionFragment extends ListFragment implements LoaderCallbacks<AsyncResult<EditorCollection>>{
@@ -46,6 +48,7 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
     private Context appContext;
     private String mbid;
     private View loading;
+    private View error;
     
     @Override
     public void onAttach(Activity activity) {
@@ -64,6 +67,7 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_collection, container, false);
         loading = layout.findViewById(R.id.loading);
+        error = layout.findViewById(R.id.error);
         return layout;
     }
 
@@ -94,8 +98,16 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
     }
 
     private void showConnectionErrorWarning() {
-        // TODO Auto-generated method stub
-        
+        error.setVisibility(View.VISIBLE);
+        Button retry = ( Button)error.findViewById(R.id.retry_button);
+        retry.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loading.setVisibility(View.VISIBLE);
+                error.setVisibility(View.GONE);
+                getLoaderManager().restartLoader(COLLECTION_LOADER, null, CollectionFragment.this);
+            }
+        });
     }
 
     @Override

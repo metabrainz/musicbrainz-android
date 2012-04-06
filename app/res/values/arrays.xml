@@ -23,8 +23,8 @@
   <string-array name="searchType">
     <item>@string/searchtype_artist</item>
     <item>@string/searchtype_release</item>
-    <item>@string/searchtype_label</item>
-    <item>@string/searchtype_recording</item>
+<!--     <item>@string/searchtype_label</item>
+    <item>@string/searchtype_recording</item> -->
   </string-array>
 
   <array name="donation">

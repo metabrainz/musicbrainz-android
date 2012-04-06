@@ -157,10 +157,13 @@
   <string name="settings_bugsense">Send crash reports?</string>
   <string name="settings_bugsense_summary">Allow anonymous error data to be sent</string>
 
-  <!-- Error dialogs -->
+  <!-- Connection errors -->
   <string name="err_text">There was a problem connecting to the server. Retry?</string>
   <string name="err_pos">Yes</string>
   <string name="err_neg">No</string>
+  
+  <string name="connection_error">Could not connect to server...</string>
+  <string name="connection_error_retry">Retry</string>
 
   <!-- Toasts -->
   <string name="toast_tag">Tag(s) submitted</string>

@@ -37,5 +37,11 @@
     android:id="@+id/loading"
     style="@style/Match"
     layout="@layout/layout_loading" />
+  
+  <include
+    android:id="@+id/error"
+    style="@style/Match"
+    layout="@layout/layout_retry"
+    android:visibility="gone" />
 
 </RelativeLayout>
