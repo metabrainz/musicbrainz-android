@@ -18,13 +18,12 @@
  * <http://www.gnu.org/licenses/>.
  */
 
+
 package org.musicbrainz.mobile.loader;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
 import org.musicbrainz.android.api.MusicBrainz;
-import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
@@ -33,27 +32,38 @@ import org.musicbrainz.mobile.loader.result.LoaderStatus;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-public class CollectionListLoader extends AsyncTaskLoader<AsyncResult<LinkedList<EditorCollectionStub>>> {
-
+public class CollectionEditLoader extends AsyncTaskLoader<AsyncResult<Void>> {
+    
     private MusicBrainzApplication app;
-
-    public CollectionListLoader(Context appContext) {
+    private String collectionMbid;
+    private String releaseMbid;
+    private boolean isAdd;
+    
+    public CollectionEditLoader(Context appContext, String collectionMbid, String releaseMbid, boolean isAdd) {
         super(appContext);
         app = (MusicBrainzApplication) appContext;
+        this.collectionMbid = collectionMbid;
+        this.releaseMbid = releaseMbid;
     }
-    
+
     @Override
     protected void onStartLoading() {
+        super.onStartLoading();
         forceLoad();
     }
 
     @Override
-    public AsyncResult<LinkedList<EditorCollectionStub>> loadInBackground() {
+    public AsyncResult<Void> loadInBackground() {
         try {
             MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
-            return new AsyncResult<LinkedList<EditorCollectionStub>>(LoaderStatus.SUCCESS, client.lookupUserCollections());
+            if (isAdd) {
+                client.addReleaseToCollection(collectionMbid, releaseMbid);
+            } else {
+                client.deleteReleaseFromCollection(collectionMbid, releaseMbid);
+            }
+            return new AsyncResult<Void>(LoaderStatus.SUCCESS);
         } catch (IOException e) {
-            return new AsyncResult<LinkedList<EditorCollectionStub>>(LoaderStatus.EXCEPTION, e);
+            return new AsyncResult<Void>(LoaderStatus.EXCEPTION, e);
         }
     }
 

@@ -25,6 +25,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
+import org.musicbrainz.mobile.loader.CollectionEditLoader;
 import org.musicbrainz.mobile.loader.CollectionLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
@@ -39,12 +40,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
-public class CollectionFragment extends ListFragment implements LoaderCallbacks<AsyncResult<EditorCollection>>{
+public class CollectionFragment extends ListFragment {
     
     private static final int COLLECTION_LOADER = 0;
+    private static final int COLLECTION_EDIT_LOADER = 1;
+    
     private Context appContext;
     private String mbid;
     private View loading;
@@ -60,7 +66,8 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(COLLECTION_LOADER, savedInstanceState, this);
+        getLoaderManager().initLoader(COLLECTION_LOADER, savedInstanceState, loaderCallbacks);
+        getListView().setOnItemLongClickListener(deleteListener);
     }
     
     @Override
@@ -69,17 +76,6 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
         loading = layout.findViewById(R.id.loading);
         error = layout.findViewById(R.id.error);
         return layout;
-    }
-
-    @Override
-    public Loader<AsyncResult<EditorCollection>> onCreateLoader(int id, Bundle args) {
-        return new CollectionLoader(appContext, mbid);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<AsyncResult<EditorCollection>> loader, AsyncResult<EditorCollection> data) {
-        hideLoading();
-        handleResult(data);
     }
 
     private void handleResult(AsyncResult<EditorCollection> result) {
@@ -105,14 +101,9 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
             public void onClick(View v) {
                 loading.setVisibility(View.VISIBLE);
                 error.setVisibility(View.GONE);
-                getLoaderManager().restartLoader(COLLECTION_LOADER, null, CollectionFragment.this);
+                getLoaderManager().restartLoader(COLLECTION_LOADER, null, loaderCallbacks);
             }
         });
-    }
-
-    @Override
-    public void onLoaderReset(Loader<AsyncResult<EditorCollection>> loader) {
-        loader.reset();
     }
     
     @Override
@@ -123,5 +114,63 @@ public class CollectionFragment extends ListFragment implements LoaderCallbacks<
         intent.putExtra(Extra.RELEASE_MBID, releaseMbid);
         startActivity(intent);
     }
+    
+    OnItemLongClickListener deleteListener = new OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+            ReleaseStubAdapter adapter = (ReleaseStubAdapter) getListAdapter();
+            String releaseMbid = adapter.getItem(position).getReleaseMbid();
+            Bundle args = new Bundle();
+            args.putString("releaseMbid", releaseMbid);
+            getLoaderManager().initLoader(COLLECTION_EDIT_LOADER, args, editCallbacks);
+            Toast.makeText(getActivity(), "Deleting from collection", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+    };
+    
+    private LoaderCallbacks<AsyncResult<EditorCollection>> loaderCallbacks = new LoaderCallbacks<AsyncResult<EditorCollection>>() {
 
+        @Override
+        public Loader<AsyncResult<EditorCollection>> onCreateLoader(int id, Bundle args) {
+            return new CollectionLoader(appContext, mbid);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<EditorCollection>> loader, AsyncResult<EditorCollection> data) {
+            hideLoading();
+            handleResult(data);
+        }
+        
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<EditorCollection>> loader) {
+            loader.reset();
+        }
+    };
+    
+    private LoaderCallbacks<AsyncResult<Void>> editCallbacks = new LoaderCallbacks<AsyncResult<Void>>() {
+
+        @Override
+        public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
+            return new CollectionEditLoader(appContext, mbid, args.getString("releaseMbid"), false);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<Void>> loader, AsyncResult<Void> data) {
+            getLoaderManager().destroyLoader(COLLECTION_EDIT_LOADER);
+            switch (data.getStatus()) {
+            case EXCEPTION:
+                Toast.makeText(appContext, "Delete failed", Toast.LENGTH_SHORT).show();
+                break;
+            case SUCCESS:
+                Toast.makeText(appContext, "Release deleted", Toast.LENGTH_SHORT).show();
+                getLoaderManager().restartLoader(COLLECTION_LOADER, null, loaderCallbacks);
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<Void>> loader) {
+            loader.reset();
+        }
+    };
+    
 }

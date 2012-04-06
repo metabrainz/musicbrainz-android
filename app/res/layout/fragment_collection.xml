@@ -20,7 +20,8 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Match">
+  style="@style/Match"
+  android:background="@color/white">
 
   <ListView
     android:id="@id/android:list"
