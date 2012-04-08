@@ -227,15 +227,19 @@ public class CollectionFragment extends SherlockListFragment {
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             if (item.getItemId() == R.id.menu_delete) {
-                getListView().setItemChecked(selectedPosition, false);
-                Bundle args = new Bundle();
-                args.putString(RELEASE_MBID, selectedRelease.getReleaseMbid());
                 activityCallbacks.onLoadStart();
-                getLoaderManager().initLoader(COLLECTION_EDIT_LOADER, args, editCallbacks);
+                startDeleteLoader();
+                getListView().setItemChecked(selectedPosition, false);
                 mode.finish();
                 return true;
             }
             return false;
+        }
+
+        private void startDeleteLoader() {
+            Bundle args = new Bundle();
+            args.putString(RELEASE_MBID, selectedRelease.getReleaseMbid());
+            getLoaderManager().initLoader(COLLECTION_EDIT_LOADER, args, editCallbacks);
         }
 
         @Override
