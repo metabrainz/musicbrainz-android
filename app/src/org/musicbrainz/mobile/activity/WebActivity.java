@@ -39,17 +39,12 @@ public class WebActivity extends MusicBrainzActivity implements WebFragmentCallb
     }
 
     @Override
-    public String getInitialUrl() {
-        return getIntent().getStringExtra(Extra.TARGET_URL);
-    }
-
-    @Override
-    public void onPageStarted() {
+    public void onPageStart() {
         setSupportProgressBarIndeterminateVisibility(true);
     }
 
     @Override
-    public void onPageFinished() {
+    public void onPageFinish() {
         setSupportProgressBarIndeterminateVisibility(false);
     }
 

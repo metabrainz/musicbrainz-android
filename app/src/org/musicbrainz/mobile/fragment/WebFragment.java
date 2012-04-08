@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -41,11 +42,11 @@ public class WebFragment extends SherlockFragment {
     private WebView webView;
     private MenuItem refresh;
     private WebFragmentCallbacks callbacks;
+    private String initialUrl;
 
     public interface WebFragmentCallbacks {
-        public String getInitialUrl();
-        public void onPageStarted();
-        public void onPageFinished();
+        public void onPageStart();
+        public void onPageFinish();
     }
 
     @Override
@@ -57,6 +58,7 @@ public class WebFragment extends SherlockFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        initialUrl = activity.getIntent().getStringExtra(Extra.TARGET_URL);
         try {
             callbacks = (WebFragmentCallbacks) activity;
         } catch (ClassCastException e) {
@@ -77,7 +79,7 @@ public class WebFragment extends SherlockFragment {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.setWebViewClient(new MBWebViewClient());
-        webView.loadUrl(callbacks.getInitialUrl());
+        webView.loadUrl(initialUrl);
     }
 
     private class MBWebViewClient extends WebViewClient {
@@ -103,12 +105,12 @@ public class WebFragment extends SherlockFragment {
 
     private void startRefresh() {
         refresh.setVisible(false);
-        callbacks.onPageStarted();
+        callbacks.onPageStart();
     }
 
     private void stopRefresh() {
         refresh.setVisible(true);
-        callbacks.onPageFinished();
+        callbacks.onPageFinish();
     }
 
     @Override

@@ -21,6 +21,7 @@
 package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.android.api.data.EditorCollection;
+import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
@@ -30,6 +31,7 @@ import org.musicbrainz.mobile.loader.CollectionLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -52,6 +54,7 @@ import android.widget.Toast;
 
 public class CollectionFragment extends SherlockListFragment {
     
+    private static final String RELEASE_MBID = "releaseMbid";
     private static final int COLLECTION_LOADER = 0;
     private static final int COLLECTION_EDIT_LOADER = 1;
     
@@ -59,7 +62,13 @@ public class CollectionFragment extends SherlockListFragment {
     private String mbid;
     private View loading;
     private View error;
+    private FragmentLoadingCallbacks activityCallbacks;
     
+    public interface FragmentLoadingCallbacks {
+        public void onLoadStart();
+        public void onLoadFinish();
+    }
+     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,13 +80,20 @@ public class CollectionFragment extends SherlockListFragment {
         super.onAttach(activity);
         appContext = activity.getApplicationContext();
         mbid = activity.getIntent().getStringExtra(Extra.COLLECTION_MBID);
+        try {
+            activityCallbacks = (FragmentLoadingCallbacks) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement "
+                    + FragmentLoadingCallbacks.class.getSimpleName());
+        }
     }
     
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(COLLECTION_LOADER, savedInstanceState, loaderCallbacks);
-        getListView().setOnItemLongClickListener(deleteListener);
+        getListView().setOnItemLongClickListener(longPressListener);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
     
     @Override
@@ -125,15 +141,14 @@ public class CollectionFragment extends SherlockListFragment {
         startActivity(intent);
     }
     
-    OnItemLongClickListener deleteListener = new OnItemLongClickListener() {
+    OnItemLongClickListener longPressListener = new OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-            ReleaseStubAdapter adapter = (ReleaseStubAdapter) getListAdapter();
-            String releaseMbid = adapter.getItem(position).getReleaseMbid();
-            Bundle args = new Bundle();
-            args.putString("releaseMbid", releaseMbid);
-            getLoaderManager().initLoader(COLLECTION_EDIT_LOADER, args, editCallbacks);
-            Toast.makeText(getActivity(), "Deleting from collection", Toast.LENGTH_SHORT).show();
+            if (getListView().getCheckedItemPosition() == position) {
+                return false;
+            }
+            getListView().setItemChecked(position, true);
+            getSherlockActivity().startActionMode(new RemoveReleasesActionMode());
             return true;
         }
     };
@@ -154,6 +169,7 @@ public class CollectionFragment extends SherlockListFragment {
         public void onLoadFinished(Loader<AsyncResult<EditorCollection>> loader, AsyncResult<EditorCollection> data) {
             hideLoading();
             handleResult(data);
+            activityCallbacks.onLoadFinish();
         }
         
         @Override
@@ -166,7 +182,7 @@ public class CollectionFragment extends SherlockListFragment {
 
         @Override
         public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
-            return new CollectionEditLoader(appContext, mbid, args.getString("releaseMbid"), false);
+            return new CollectionEditLoader(appContext, mbid, args.getString(RELEASE_MBID), false);
         }
 
         @Override
@@ -174,10 +190,10 @@ public class CollectionFragment extends SherlockListFragment {
             getLoaderManager().destroyLoader(COLLECTION_EDIT_LOADER);
             switch (data.getStatus()) {
             case EXCEPTION:
-                Toast.makeText(appContext, "Delete failed", Toast.LENGTH_SHORT).show();
+                activityCallbacks.onLoadFinish();
+                Toast.makeText(appContext, R.string.collection_remove_fail, Toast.LENGTH_SHORT).show();
                 break;
             case SUCCESS:
-                Toast.makeText(appContext, "Release deleted", Toast.LENGTH_SHORT).show();
                 getLoaderManager().restartLoader(COLLECTION_LOADER, null, loaderCallbacks);
             }
         }
@@ -187,5 +203,46 @@ public class CollectionFragment extends SherlockListFragment {
             loader.reset();
         }
     };
+    
+    private final class RemoveReleasesActionMode implements ActionMode.Callback {
+        
+        private int selectedPosition;
+        private ReleaseStub selectedRelease;
+        
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.context_collection, menu);
+            selectedPosition = getListView().getCheckedItemPosition();
+            selectedRelease = (ReleaseStub) getListAdapter().getItem(selectedPosition);
+            mode.setTitle(selectedRelease.getTitle());
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            if (item.getItemId() == R.id.menu_delete) {
+                getListView().setItemChecked(selectedPosition, false);
+                Bundle args = new Bundle();
+                args.putString(RELEASE_MBID, selectedRelease.getReleaseMbid());
+                activityCallbacks.onLoadStart();
+                getLoaderManager().initLoader(COLLECTION_EDIT_LOADER, args, editCallbacks);
+                mode.finish();
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            getListView().setItemChecked(selectedPosition, false);
+        }
+        
+    }
     
 }

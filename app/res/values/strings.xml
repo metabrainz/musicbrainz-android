@@ -85,6 +85,7 @@
   
   <string name="no_collections">You don\'t have any collections.\nAdd collections at musicbrainz.org</string>
   <string name="no_collection_releases">No releases in this collection.\nSearch for releases to add them.</string>
+  <string name="collection_remove_fail">Failed to remove release</string>
 
   <!-- Pager tabs -->
   <string name="tab_releases">RELEASES</string>
@@ -142,6 +143,7 @@
   <string name="action_refresh">Refresh</string>
   <string name="action_search">Search</string>
   <string name="action_add_collection">Add to collection</string>
+  <string name="action_remove_collection">Remove from collection</string>
   <string name="action_feedback">Feedback</string>
   <string name="action_settings">Settings</string>
   <string name="action_login">Log In</string>

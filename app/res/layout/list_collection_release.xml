@@ -20,7 +20,6 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/release_box"
   style="@style/MatchWidth"
   android:padding="@dimen/std_pad">
 
