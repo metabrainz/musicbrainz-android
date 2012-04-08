@@ -29,11 +29,15 @@ import org.musicbrainz.mobile.loader.CollectionEditLoader;
 import org.musicbrainz.mobile.loader.CollectionLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
+import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -46,7 +50,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class CollectionFragment extends ListFragment {
+public class CollectionFragment extends SherlockListFragment {
     
     private static final int COLLECTION_LOADER = 0;
     private static final int COLLECTION_EDIT_LOADER = 1;
@@ -55,6 +59,12 @@ public class CollectionFragment extends ListFragment {
     private String mbid;
     private View loading;
     private View error;
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
     
     @Override
     public void onAttach(Activity activity) {
@@ -127,6 +137,11 @@ public class CollectionFragment extends ListFragment {
             return true;
         }
     };
+    
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_collection, menu);
+    }
     
     private LoaderCallbacks<AsyncResult<EditorCollection>> loaderCallbacks = new LoaderCallbacks<AsyncResult<EditorCollection>>() {
 
