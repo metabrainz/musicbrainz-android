@@ -309,6 +309,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public void onLoadFinished(Loader<AsyncResult<Float>> loader, AsyncResult<Float> data) {
             getSupportLoaderManager().destroyLoader(RATING_LOADER);
+            onFinishedRating();
             switch (data.getStatus()) {
             case EXCEPTION:
                 Toast.makeText(ArtistActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
@@ -324,13 +325,16 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             loader.reset();
         }
     };
+    
+    private void onFinishedRating() {
+        doingRate = false;
+        updateProgress();
+        rateBtn.setEnabled(true);
+    }
 
     private void updateRating(Float newRating) {
         artist.setRating(newRating);
         rating.setRating(newRating);
-        doingRate = false;
-        updateProgress();
-        rateBtn.setEnabled(true);
     }
 
     private LoaderCallbacks<AsyncResult<LinkedList<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<Tag>>>() {
@@ -344,6 +348,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public void onLoadFinished(Loader<AsyncResult<LinkedList<Tag>>> loader, AsyncResult<LinkedList<Tag>> data) {
             getSupportLoaderManager().destroyLoader(TAG_LOADER);
+            onFinishedTagging();
             switch (data.getStatus()) {
             case EXCEPTION:
                 Toast.makeText(ArtistActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
@@ -359,13 +364,16 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             loader.reset();
         }
     };
+    
+    private void onFinishedTagging() {
+        doingTag = false;
+        updateProgress();
+        tagBtn.setEnabled(true);
+    }
 
     private void updateTags(LinkedList<Tag> newTags) {
         artist.setTags(newTags);
         tags.setText(StringFormat.commaSeparateTags(newTags, this));
-        doingTag = false;
-        updateProgress();
-        tagBtn.setEnabled(true);
     }
 
 }

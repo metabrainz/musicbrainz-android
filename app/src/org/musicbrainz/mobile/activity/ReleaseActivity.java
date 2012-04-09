@@ -414,6 +414,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         @Override
         public void onLoadFinished(Loader<AsyncResult<Float>> loader, AsyncResult<Float> data) {
             getSupportLoaderManager().destroyLoader(RATING_LOADER);
+            onFinishedRating();
             switch (data.getStatus()) {
             case EXCEPTION:
                 Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
@@ -430,12 +431,15 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
     };
 
-    private void updateRating(Float newRating) {
-        release.setReleaseGroupRating(newRating);
-        rating.setRating(newRating);
+    private void onFinishedRating() {
         doingRate = false;
         updateProgressStatus();
         rateBtn.setEnabled(true);
+    }
+    
+    private void updateRating(Float newRating) {
+        release.setReleaseGroupRating(newRating);
+        rating.setRating(newRating);
     }
 
     private LoaderCallbacks<AsyncResult<LinkedList<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<Tag>>>() {
@@ -450,6 +454,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         @Override
         public void onLoadFinished(Loader<AsyncResult<LinkedList<Tag>>> loader, AsyncResult<LinkedList<Tag>> data) {
             getSupportLoaderManager().destroyLoader(TAG_LOADER);
+            onFinishedTagging();
             switch (data.getStatus()) {
             case EXCEPTION:
                 Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
@@ -465,13 +470,16 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             loader.reset();
         }
     };
+    
+    private void onFinishedTagging() {
+        doingTag = false;
+        updateProgressStatus();
+        tagBtn.setEnabled(true);
+    }
 
     private void updateTags(LinkedList<Tag> newTags) {
         release.setReleaseGroupTags(newTags);
         tags.setText(StringFormat.commaSeparateTags(newTags, this));
-        doingTag = false;
-        updateProgressStatus();
-        tagBtn.setEnabled(true);
     }
     
     private LoaderCallbacks<AsyncResult<Void>> collectionAddCallbacks = new LoaderCallbacks<AsyncResult<Void>>() {
