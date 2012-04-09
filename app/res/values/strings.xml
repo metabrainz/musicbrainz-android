@@ -66,6 +66,10 @@
   <string name="label_tracks">tracks</string>
   <string name="no_tags">No tags found</string>
   <string name="edit_login">You must log in before you can edit!</string>
+  
+  <string name="collection_add_fail">Failed adding release to collection</string>
+  <string name="collection_add_success">Added to collection</string>
+  <string name="collection_dialog_title">Add to collection</string>
 
   <!-- ArtistActivity -->
   <string name="artist_title">Artist</string>
@@ -164,7 +168,7 @@
   <string name="err_pos">Yes</string>
   <string name="err_neg">No</string>
   
-  <string name="connection_error">Could not connect to server...</string>
+  <string name="connection_error">Could not connect to server…</string>
   <string name="connection_error_retry">Retry</string>
 
   <!-- Toasts -->

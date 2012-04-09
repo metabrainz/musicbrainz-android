@@ -18,56 +18,79 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.musicbrainz.mobile.fragment;
+package org.musicbrainz.mobile.dialog;
 
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.CollectionListAdapter;
-import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.loader.CollectionListLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class CollectionListFragment extends ListFragment implements
-        LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>> {
+public class CollectionAddDialog extends DialogFragment implements
+        LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>>, OnItemClickListener {
 
-    private static final int COLLECTIONS_LOADER = 0;
+    public static final String TAG = "collection_add";
+    private static final int COLLECTIONS_LOADER = 10;
+    
+    private AddToCollectionCallback callback;
     private Context appContext;
     private View loading;
     private View error;
-
+    private View empty;
+    
+    private ListView list;
+    private CollectionListAdapter adapter;
+    
+    public interface AddToCollectionCallback {
+        public void addReleaseToCollection(String collectionMbid);
+    }
+    
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         appContext = activity.getApplicationContext();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(COLLECTIONS_LOADER, savedInstanceState, this);
+        try {
+            callback = (AddToCollectionCallback) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement "
+                    + AddToCollectionCallback.class.getSimpleName());
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getDialog().setTitle(R.string.collection_dialog_title);
         View layout = inflater.inflate(R.layout.fragment_collections, container, false);
+        list = (ListView) layout.findViewById(android.R.id.list);
+        list.setOnItemClickListener(this);
         loading = layout.findViewById(R.id.loading);
         error = layout.findViewById(R.id.error);
+        empty = layout.findViewById(android.R.id.empty);
+        empty.setVisibility(View.GONE);
         return layout;
+    }
+    
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getLoaderManager().initLoader(COLLECTIONS_LOADER, savedInstanceState, this);
     }
 
     @Override
@@ -77,26 +100,26 @@ public class CollectionListFragment extends ListFragment implements
 
     @Override
     public void onLoadFinished(Loader<AsyncResult<LinkedList<EditorCollectionStub>>> loader,
-            AsyncResult<LinkedList<EditorCollectionStub>> data) {
+            AsyncResult<LinkedList<EditorCollectionStub>> result) {
         loading.setVisibility(View.GONE);
-        handleResult(data);
-    }
-
-    private void handleResult(AsyncResult<LinkedList<EditorCollectionStub>> result) {
         switch (result.getStatus()) {
         case SUCCESS:
             LinkedList<EditorCollectionStub> collection = result.getData();
             try {
-                setListAdapter(new CollectionListAdapter(getActivity(), collection));
+                adapter = new CollectionListAdapter(getActivity(), collection);
+                if (adapter.isEmpty()) {
+                    empty.setVisibility(View.VISIBLE);
+                }
+                list.setAdapter(adapter);
             } catch (Exception e) {
                 // Fragment not connected.
             }
             break;
         case EXCEPTION:
             showConnectionErrorWarning();
-        }
+        }  
     }
-
+    
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
         Button retry = ( Button)error.findViewById(R.id.retry_button);
@@ -105,7 +128,7 @@ public class CollectionListFragment extends ListFragment implements
             public void onClick(View v) {
                 loading.setVisibility(View.VISIBLE);
                 error.setVisibility(View.GONE);
-                getLoaderManager().restartLoader(COLLECTIONS_LOADER, null, CollectionListFragment.this);
+                getLoaderManager().restartLoader(COLLECTIONS_LOADER, null, CollectionAddDialog.this);
             }
         });
     }
@@ -116,11 +139,10 @@ public class CollectionListFragment extends ListFragment implements
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        CollectionListAdapter adapter = (CollectionListAdapter) getListAdapter();
-        String title = adapter.getItem(position).getName();
-        String mbid = adapter.getItem(position).getMbid();
-        startActivity(IntentFactory.getCollection(appContext, title, mbid));
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String collectionMbid = adapter.getItem(position).getMbid();
+        callback.addReleaseToCollection(collectionMbid);
+        getDialog().dismiss();
     }
 
 }

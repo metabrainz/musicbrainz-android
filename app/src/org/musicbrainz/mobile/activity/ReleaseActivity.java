@@ -36,9 +36,12 @@ import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
+import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
+import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.BarcodeReleaseLoader;
+import org.musicbrainz.mobile.loader.CollectionEditLoader;
 import org.musicbrainz.mobile.loader.ReleaseGroupStubsLoader;
 import org.musicbrainz.mobile.loader.ReleaseLoader;
 import org.musicbrainz.mobile.loader.SubmitRatingLoader;
@@ -53,10 +56,12 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -73,16 +78,17 @@ import com.viewpagerindicator.TabPageIndicator;
  * Activity which retrieves and displays information about a release.
  * 
  * This Activity initiates lookups given three sources that generally result in
- * display of release information. An intent will contain either a barcode, a
+ * display of release information. The intent must contain either a barcode, a
  * release MBID or a release group MBID.
  */
-public class ReleaseActivity extends MusicBrainzActivity implements View.OnClickListener {
+public class ReleaseActivity extends MusicBrainzActivity implements OnClickListener, AddToCollectionCallback {
 
     private static final int RELEASE_LOADER = 0;
     private static final int RELEASE_GROUP_STUBS_LOADER = 1;
     private static final int BARCODE_RELEASE_LOADER = 2;
     private static final int RATING_LOADER = 3;
     private static final int TAG_LOADER = 4;
+    private static final int COLLECTION_ADD_LOADER = 5;
 
     private static final int DIALOG_RELEASE_SELECTION = 0;
     private static final int DIALOG_BARCODE = 1;
@@ -236,8 +242,12 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         case android.R.id.home:
             if (provideArtistAction) {
                 startActivity(createArtistIntent());
-                return true;
             }
+            return true;
+        case R.id.action_add_collection:
+            DialogFragment collectionDialog = new CollectionAddDialog();
+            collectionDialog.show(getSupportFragmentManager(), CollectionAddDialog.TAG);
+            return true;
         }
         return false;
     }
@@ -462,6 +472,39 @@ public class ReleaseActivity extends MusicBrainzActivity implements View.OnClick
         doingTag = false;
         updateProgressStatus();
         tagBtn.setEnabled(true);
+    }
+    
+    private LoaderCallbacks<AsyncResult<Void>> collectionAddCallbacks = new LoaderCallbacks<AsyncResult<Void>>() {
+
+        @Override
+        public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
+            return new CollectionEditLoader(getApplicationContext(), args.getString("collectionMbid"), args.getString("releaseMbid"), true);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncResult<Void>> loader, AsyncResult<Void> data) {
+            getSupportLoaderManager().destroyLoader(COLLECTION_ADD_LOADER);
+            switch (data.getStatus()) {
+            case EXCEPTION:
+                Toast.makeText(getApplicationContext(), R.string.collection_add_fail, Toast.LENGTH_LONG).show();
+                break;
+            case SUCCESS:
+                Toast.makeText(getApplicationContext(), R.string.collection_add_success, Toast.LENGTH_SHORT).show();
+            }  
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncResult<Void>> loader) {
+            loader.reset();
+        }  
+    };
+
+    @Override
+    public void addReleaseToCollection(String collectionMbid) {
+        Bundle args = new Bundle();
+        args.putString("collectionMbid", collectionMbid);
+        args.putString("releaseMbid", release.getMbid());
+        getSupportLoaderManager().initLoader(COLLECTION_ADD_LOADER, args, collectionAddCallbacks);
     }
 
 }

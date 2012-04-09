@@ -30,6 +30,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
+/*
+ * TODO This class is unused and should be removed unless I start
+ * using it pretty soon.
+ */
 public class ConnectionErrorDialog extends DialogFragment {
 
     public static final String TAG = "connection_error";

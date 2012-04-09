@@ -57,8 +57,8 @@ import org.musicbrainz.android.api.util.Credentials;
 
 /**
  * Makes the web service available for Activity classes. Calls are blocking and
- * should be made inside AsyncTask. The XML that is returned gets parsed into
- * pojos with SAX.
+ * should be made inside AsyncTask. The XML returned is parsed into pojos with
+ * SAX handlers.
  */
 public class MusicBrainzWebClient implements MusicBrainz {
 
@@ -297,27 +297,20 @@ public class MusicBrainzWebClient implements MusicBrainz {
         post.addHeader("Content-Type", "application/xml; charset=UTF-8");
         StringEntity xml = new StringEntity(content, "UTF-8");
         post.setEntity(xml);
-
         HttpResponse response = httpClient.execute(post);
-        if (response != null) {
-            response.getEntity().consumeContent();
-        }
+        response.getEntity().consumeContent();
     }
 
     private void delete(String url) throws IOException {
         HttpDelete delete = new HttpDelete(url);
         HttpResponse response = httpClient.execute(delete);
-        if (response != null) {
-            response.getEntity().consumeContent();
-        }
+        response.getEntity().consumeContent();
     }
 
     private void put(String url) throws IOException {
         HttpPut put = new HttpPut(url);
         HttpResponse response = httpClient.execute(put);
-        if (response != null) {
-            response.getEntity().consumeContent();
-        }
+        response.getEntity().consumeContent();
     }
 
 }

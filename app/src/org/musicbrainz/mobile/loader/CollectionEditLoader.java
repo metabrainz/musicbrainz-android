@@ -44,6 +44,7 @@ public class CollectionEditLoader extends AsyncTaskLoader<AsyncResult<Void>> {
         app = (MusicBrainzApplication) appContext;
         this.collectionMbid = collectionMbid;
         this.releaseMbid = releaseMbid;
+        this.isAdd = isAdd;
     }
 
     @Override
