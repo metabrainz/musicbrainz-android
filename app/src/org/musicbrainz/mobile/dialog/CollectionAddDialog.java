@@ -77,7 +77,7 @@ public class CollectionAddDialog extends DialogFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().setTitle(R.string.collection_dialog_title);
-        View layout = inflater.inflate(R.layout.fragment_collections, container, false);
+        View layout = inflater.inflate(R.layout.dialog_add_collection, container, false);
         list = (ListView) layout.findViewById(android.R.id.list);
         list.setOnItemClickListener(this);
         loading = layout.findViewById(R.id.loading);

@@ -492,6 +492,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         @Override
         public void onLoadFinished(Loader<AsyncResult<Void>> loader, AsyncResult<Void> data) {
             getSupportLoaderManager().destroyLoader(COLLECTION_ADD_LOADER);
+            setSupportProgressBarIndeterminateVisibility(false);
             switch (data.getStatus()) {
             case EXCEPTION:
                 Toast.makeText(getApplicationContext(), R.string.collection_add_fail, Toast.LENGTH_LONG).show();
@@ -513,6 +514,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         args.putString("collectionMbid", collectionMbid);
         args.putString("releaseMbid", release.getMbid());
         getSupportLoaderManager().initLoader(COLLECTION_ADD_LOADER, args, collectionAddCallbacks);
+        setSupportProgressBarIndeterminateVisibility(true);
     }
 
 }
