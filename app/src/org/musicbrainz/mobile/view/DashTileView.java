@@ -25,8 +25,6 @@ import org.musicbrainz.mobile.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,9 +43,8 @@ public class DashTileView extends RelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        setBackgroundResource(R.drawable.dash_grid);
         setFocusable(true);
-        setOnTouchListener(touchListener);
+        setBackgroundResource(R.drawable.dash_grid);
         icon = (ImageView) findViewById(R.id.dash_tile_icon);
         text = (TextView) findViewById(R.id.dash_tile_text);
     }
@@ -59,17 +56,5 @@ public class DashTileView extends RelativeLayout {
     public void setText(int stringId) {
         text.setText(stringId);
     }
-
-    OnTouchListener touchListener = new OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                icon.setPressed(true);
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                icon.setPressed(false);
-            }
-            return false;
-        }
-    };
 
 }

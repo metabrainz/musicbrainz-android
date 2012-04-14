@@ -27,11 +27,11 @@ import android.text.Html;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class AssetTextView extends TextView {
+public class HtmlAssetTextView extends TextView {
     
     private Context context;
     
-    public AssetTextView(Context context, AttributeSet attrs) {
+    public HtmlAssetTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
     }

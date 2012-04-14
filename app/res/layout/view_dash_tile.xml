@@ -24,16 +24,19 @@
   
   <RelativeLayout
     style="@style/Wrap"
-    android:layout_centerInParent="true">
+    android:layout_centerInParent="true"
+    android:duplicateParentState="true">
 
   <ImageView
     android:id="@+id/dash_tile_icon"
-    style="@style/Wrap" />
+    style="@style/Wrap"
+    android:duplicateParentState="true" />
 
   <TextView
     android:id="@+id/dash_tile_text"
     style="@style/TileText"
     android:layout_below="@id/dash_tile_icon"
-    android:layout_centerHorizontal="true" />
+    android:layout_centerHorizontal="true"
+    android:duplicateParentState="true" />
   </RelativeLayout>
 </merge>

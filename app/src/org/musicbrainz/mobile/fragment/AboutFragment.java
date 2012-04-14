@@ -22,7 +22,7 @@ package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.MusicBrainzApplication;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.view.AssetTextView;
+import org.musicbrainz.mobile.view.HtmlAssetTextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -48,7 +48,7 @@ public class AboutFragment extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_about, container);
         versionLabel = (TextView) layout.findViewById(R.id.version_text);
-        AssetTextView body = (AssetTextView) layout.findViewById(R.id.about_text);
+        HtmlAssetTextView body = (HtmlAssetTextView) layout.findViewById(R.id.about_text);
         body.setAsset("about.html");
         return layout;
     }
