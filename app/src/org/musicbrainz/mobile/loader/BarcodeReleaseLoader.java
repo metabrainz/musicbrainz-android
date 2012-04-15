@@ -34,7 +34,7 @@ import org.musicbrainz.mobile.loader.result.LoaderStatus;
 import android.content.Context;
 
 public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Release>> {
-    
+
     private MusicBrainzApplication app;
     private String barcode;
 
@@ -52,12 +52,12 @@ public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityR
             return new AsyncEntityResult<Release>(LoaderStatus.EXCEPTION, e);
         }
     }
-    
+
     private AsyncEntityResult<Release> getAvailableData() throws IOException {
         if (app.isUserLoggedIn()) {
-            return getRelease();
-        } else {
             return getReleaseWithUserData();
+        } else {
+            return getRelease();
         }
     }
 
@@ -66,7 +66,7 @@ public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityR
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, client.lookupReleaseUsingBarcode(barcode));
         return data;
     }
-    
+
     private AsyncEntityResult<Release> getReleaseWithUserData() throws IOException {
         MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
         Release release = client.lookupReleaseUsingBarcode(barcode);

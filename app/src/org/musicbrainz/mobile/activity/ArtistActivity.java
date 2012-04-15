@@ -121,7 +121,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
         displayMessagesForEmptyData();
 
-        if (isUserLoggedIn() && userData != null) {
+        if (isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {
@@ -283,9 +283,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         switch (result.getStatus()) {
         case SUCCESS:
             artist = result.getData();
-            if (result.hasUserData()) {
-                userData = result.getUserData();
-            }
+            userData = result.getUserData();
             populateLayout();
             break;
         case EXCEPTION:
@@ -325,7 +323,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             loader.reset();
         }
     };
-    
+
     private void onFinishedRating() {
         doingRate = false;
         updateProgress();
@@ -364,7 +362,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             loader.reset();
         }
     };
-    
+
     private void onFinishedTagging() {
         doingTag = false;
         updateProgress();

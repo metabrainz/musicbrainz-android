@@ -165,7 +165,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         labels.setSelected(true);
         tags.setSelected(true);
 
-        if (isUserLoggedIn() && userData != null) {
+        if (isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {
@@ -224,10 +224,10 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(isUserLoggedIn()) {
+        if (isUserLoggedIn()) {
             getSupportMenuInflater().inflate(R.menu.release_logged_in, menu);
         } else {
-            getSupportMenuInflater().inflate(R.menu.release, menu);            
+            getSupportMenuInflater().inflate(R.menu.release, menu);
         }
         return true;
     }
@@ -357,9 +357,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
                 break;
             case SUCCESS:
                 release = container.getData();
-                if (container.hasUserData()) {
-                    userData = container.getUserData();
-                }
+                userData = container.getUserData();
                 populateLayout();
             }
         }
@@ -436,7 +434,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         updateProgressStatus();
         rateBtn.setEnabled(true);
     }
-    
+
     private void updateRating(Float newRating) {
         release.setReleaseGroupRating(newRating);
         rating.setRating(newRating);
@@ -470,7 +468,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             loader.reset();
         }
     };
-    
+
     private void onFinishedTagging() {
         doingTag = false;
         updateProgressStatus();
@@ -481,12 +479,13 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         release.setReleaseGroupTags(newTags);
         tags.setText(StringFormat.commaSeparateTags(newTags, this));
     }
-    
+
     private LoaderCallbacks<AsyncResult<Void>> collectionAddCallbacks = new LoaderCallbacks<AsyncResult<Void>>() {
 
         @Override
         public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
-            return new CollectionEditLoader(getApplicationContext(), args.getString("collectionMbid"), args.getString("releaseMbid"), true);
+            return new CollectionEditLoader(getApplicationContext(), args.getString("collectionMbid"),
+                    args.getString("releaseMbid"), true);
         }
 
         @Override
@@ -499,13 +498,13 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
                 break;
             case SUCCESS:
                 Toast.makeText(getApplicationContext(), R.string.collection_add_success, Toast.LENGTH_SHORT).show();
-            }  
+            }
         }
 
         @Override
         public void onLoaderReset(Loader<AsyncResult<Void>> loader) {
             loader.reset();
-        }  
+        }
     };
 
     @Override
