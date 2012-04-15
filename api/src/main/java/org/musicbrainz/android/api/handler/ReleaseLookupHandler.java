@@ -35,6 +35,7 @@ public class ReleaseLookupHandler extends MBHandler {
     private boolean inTrack;
     private boolean inRecording;
     private boolean inTag;
+    private boolean inRelationships;
 
     private Release release = new Release();
     private ArtistNameMbid releaseArtist;
@@ -87,6 +88,8 @@ public class ReleaseLookupHandler extends MBHandler {
         } else if (localName.equalsIgnoreCase("rating") && inReleaseGroup) {
             release.setReleaseGroupRatingCount(Integer.parseInt(atts.getValue("votes-count")));
             buildString();
+        } else if (localName.equalsIgnoreCase("relation-list")) {
+            inRelationships = true;
         }
     }
 
@@ -110,7 +113,7 @@ public class ReleaseLookupHandler extends MBHandler {
         } else if (localName.equalsIgnoreCase("artist")) {
             inArtist = false;
         } else if (localName.equalsIgnoreCase("name")) {
-            if (inArtist && !inTag) {
+            if (inArtist && !inTag && !inRelationships) {
                 releaseArtist.setName(getString());
                 release.addArtist(releaseArtist);
             } else if (inLabel && !inTag) {
@@ -138,6 +141,8 @@ public class ReleaseLookupHandler extends MBHandler {
             inTag = false;
         } else if (localName.equalsIgnoreCase("rating") && inReleaseGroup) {
             release.setReleaseGroupRating(Float.parseFloat(getString()));
+        } else if (localName.equalsIgnoreCase("relation-list")) {
+            inRelationships = false;
         }
     }
 
