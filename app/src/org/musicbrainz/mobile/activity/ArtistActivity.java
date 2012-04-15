@@ -121,7 +121,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
         displayMessagesForEmptyData();
 
-        if (isUserLoggedIn()) {
+        if (isUserLoggedIn() && userData != null) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {

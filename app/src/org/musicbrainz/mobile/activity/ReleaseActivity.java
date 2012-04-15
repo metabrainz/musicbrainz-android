@@ -165,7 +165,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         labels.setSelected(true);
         tags.setSelected(true);
 
-        if (isUserLoggedIn()) {
+        if (isUserLoggedIn() && userData != null) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {
