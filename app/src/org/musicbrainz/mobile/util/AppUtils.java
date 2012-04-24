@@ -26,11 +26,11 @@ package org.musicbrainz.mobile.util;
 public class AppUtils {
     
     public static String makeCoverUrl(String asin) {
-        return "ec1.images-amazon.com/images/P/" + asin;
+        return "http://ec1.images-amazon.com/images/P/" + asin;
     }
     
     public static String makeThumbUrl(String asin) {
-        return "ec1.images-amazon.com/images/P/" + asin + ".01.THUMZ";
+        return "http://ec1.images-amazon.com/images/P/" + asin + ".01.THUMZ";
     }
 
 }
