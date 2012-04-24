@@ -36,7 +36,7 @@ import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.android.api.data.Label;
 import org.musicbrainz.android.api.data.LabelSearchStub;
 import org.musicbrainz.android.api.data.Recording;
-import org.musicbrainz.android.api.data.RecordingSearchStub;
+import org.musicbrainz.android.api.data.RecordingStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
@@ -150,7 +150,7 @@ public class ResponseParser {
         return handler.getResults();
     }
 
-    public LinkedList<RecordingSearchStub> parseRecordingSearch(InputStream stream) throws IOException {
+    public LinkedList<RecordingStub> parseRecordingSearch(InputStream stream) throws IOException {
         RecordingSearchHandler handler = new RecordingSearchHandler();
         parse(stream, handler);
         return handler.getResults();

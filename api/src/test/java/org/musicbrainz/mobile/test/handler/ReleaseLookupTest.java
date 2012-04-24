@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.Release;
+import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseLookupTest extends BaseXmlParsingTestCase {
@@ -82,6 +83,15 @@ public class ReleaseLookupTest extends BaseXmlParsingTestCase {
     @Test 
     public void testTrackList() {
         assertEquals(11, release.getTrackList().size());
+    }
+    
+    @Test
+    public void testTrackData() {
+        Track track = release.getTrackList().get(0);
+        assertEquals(1, track.getPosition());
+        assertEquals(147093, track.getDuration());
+        assertEquals("Panasonic Youth", track.getTitle());
+        assertEquals("a100efb8-0f18-44ed-8383-a503a4b7c728", track.getRecordingMbid());
     }
 
 }

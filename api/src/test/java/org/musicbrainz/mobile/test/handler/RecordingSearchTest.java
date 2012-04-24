@@ -30,13 +30,13 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 import org.musicbrainz.android.api.data.ArtistNameMbid;
-import org.musicbrainz.android.api.data.RecordingSearchStub;
+import org.musicbrainz.android.api.data.RecordingStub;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class RecordingSearchTest extends BaseXmlParsingTestCase {
     
     private static final String RECORDING_SEARCH_FIXTURE = "recordingSearch_pleaser.xml";
-    private LinkedList<RecordingSearchStub> recordings;
+    private LinkedList<RecordingStub> recordings;
     
     @Before
     public void doParsing() throws IOException {
@@ -53,7 +53,7 @@ public class RecordingSearchTest extends BaseXmlParsingTestCase {
 	
 	@Test
 	public void testSearchResult() {
-	    RecordingSearchStub searchResult = recordings.get(2);
+	    RecordingStub searchResult = recordings.get(2);
         assertEquals("1003744a-48eb-4839-bac6-a43a2b09d09b", searchResult.getMbid());
         assertEquals("Pleaser", searchResult.getTitle());
         ArtistNameMbid artist = searchResult.getArtist();

@@ -46,7 +46,7 @@ import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.android.api.data.Label;
 import org.musicbrainz.android.api.data.LabelSearchStub;
 import org.musicbrainz.android.api.data.Recording;
-import org.musicbrainz.android.api.data.RecordingSearchStub;
+import org.musicbrainz.android.api.data.RecordingStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
@@ -194,9 +194,9 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public LinkedList<RecordingSearchStub> searchRecording(String searchTerm) throws IOException {
+    public LinkedList<RecordingStub> searchRecording(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.recordingSearch(searchTerm));
-        LinkedList<RecordingSearchStub> recordings = responseParser.parseRecordingSearch(entity.getContent());
+        LinkedList<RecordingStub> recordings = responseParser.parseRecordingSearch(entity.getContent());
         entity.consumeContent();
         return recordings;
     }

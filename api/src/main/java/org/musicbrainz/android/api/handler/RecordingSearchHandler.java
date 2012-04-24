@@ -23,27 +23,27 @@ package org.musicbrainz.android.api.handler;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ArtistNameMbid;
-import org.musicbrainz.android.api.data.RecordingSearchStub;
+import org.musicbrainz.android.api.data.RecordingStub;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class RecordingSearchHandler extends MBHandler {
 
-    private LinkedList<RecordingSearchStub> results = new LinkedList<RecordingSearchStub>();
-    private RecordingSearchStub stub;
+    private LinkedList<RecordingStub> results = new LinkedList<RecordingStub>();
+    private RecordingStub stub;
     private ArtistNameMbid recordingArtist;
 
     private boolean inReleaseList;
     private boolean inArtist;
 
-    public LinkedList<RecordingSearchStub> getResults() {
+    public LinkedList<RecordingStub> getResults() {
         return results;
     }
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
         if (localName.equalsIgnoreCase("recording")) {
-            stub = new RecordingSearchStub();
+            stub = new RecordingStub();
             stub.setMbid(atts.getValue("id"));
         } else if (localName.equalsIgnoreCase("title") && !inReleaseList) {
             buildString();

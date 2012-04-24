@@ -42,7 +42,7 @@ public class Release {
     private LinkedList<Tag> releaseGroupTags = new LinkedList<Tag>();
 
     private Collection<String> labels = new LinkedList<String>();
-    private ArrayList<RecordingStub> tracks = new ArrayList<RecordingStub>();
+    private ArrayList<Track> tracks = new ArrayList<Track>();
 
     public String getMbid() {
         return mbid;
@@ -149,15 +149,15 @@ public class Release {
         labels.add(label);
     }
 
-    public ArrayList<RecordingStub> getTrackList() {
+    public ArrayList<Track> getTrackList() {
         return tracks;
     }
 
-    public void setTrackList(ArrayList<RecordingStub> trackList) {
+    public void setTrackList(ArrayList<Track> trackList) {
         this.tracks = trackList;
     }
 
-    public void addTrack(RecordingStub track) {
+    public void addTrack(Track track) {
         tracks.add(track);
     }
 

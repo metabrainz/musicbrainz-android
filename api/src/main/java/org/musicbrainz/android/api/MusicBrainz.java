@@ -31,7 +31,7 @@ import org.musicbrainz.android.api.data.LabelSearchStub;
 import org.musicbrainz.android.api.data.EditorCollection;
 import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.android.api.data.Recording;
-import org.musicbrainz.android.api.data.RecordingSearchStub;
+import org.musicbrainz.android.api.data.RecordingStub;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
@@ -55,7 +55,7 @@ public interface MusicBrainz {
     public abstract LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException;
     public abstract LinkedList<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException;
     public abstract LinkedList<LabelSearchStub> searchLabel(String searchTerm) throws IOException;
-    public abstract LinkedList<RecordingSearchStub> searchRecording(String searchTerm) throws IOException;
+    public abstract LinkedList<RecordingStub> searchRecording(String searchTerm) throws IOException;
 
     /*
      * Lookup

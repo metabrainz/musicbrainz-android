@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -21,7 +21,7 @@
 package org.musicbrainz.mobile.util;
 
 /**
- * Utility methods specific to MusicBrainz for Android.
+ * Utility methods specific to this app.
  */
 public class AppUtils {
     
