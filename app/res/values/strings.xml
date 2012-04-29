@@ -58,8 +58,6 @@
   <string name="no_results">No results found</string>
   <string name="search_bar_artists">Artists -</string>
   <string name="search_bar_rgs">Releases -</string>
-  <string name="results_artists">ARTISTS</string>
-  <string name="results_releases">RELEASES</string>
 
   <!-- ReleaseActivity -->
   <string name="release_title">Release</string>
@@ -96,6 +94,8 @@
   <string name="tab_links">MORE</string>
   <string name="tab_tracks">TRACKS</string>
   <string name="tab_edits">EDIT</string>
+  <string name="results_artists">ARTISTS</string>
+  <string name="results_releases">RELEASES</string>
 
   <!-- Edit tabs -->
   <string name="tag_hint">Tag</string>
@@ -126,7 +126,7 @@
 
   <!-- AboutActivity -->
   <string name="about_title">About</string>
-  <string name="app_name_official">MusicBrainz for Android</string>
+  <string name="app_name_official">MusicBrainz Android</string>
   <string name="version_text">Version</string>
   
   <!-- WebView Activity titles -->
@@ -170,7 +170,7 @@
   <string name="connection_error_retry">Retry</string>
 
   <!-- Toasts -->
-  <string name="toast_tag">Tag(s) submitted</string>
+  <string name="toast_tag">Tags submitted</string>
   <string name="toast_tag_fail">Tag submission failed</string>
   <string name="toast_rate">Rating submitted</string>
   <string name="toast_rate_fail">Rating submission failed</string>
@@ -181,7 +181,7 @@
   <string name="toast_auth_err">Username or password missing</string>
   <string name="toast_logged_in">Logged in</string>
   <string name="toast_logged_out">Logged out</string>
-  <string name="toast_feedback_fail">No email client available</string>
+  <string name="toast_feedback_fail">No email client found</string>
   <string name="toast_donate_success">Thanks you for supporting MusicBrainz!</string>
   <string name="toast_donate_canceled">Donation canceled</string>
   <string name="toast_search_cleared">Search history deleted</string>

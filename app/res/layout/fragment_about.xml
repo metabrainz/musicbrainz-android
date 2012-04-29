@@ -28,7 +28,7 @@
     android:padding="@dimen/gutter_large"
     android:orientation="vertical">
 
-    <TextView
+    <org.musicbrainz.mobile.view.RobotoLightTextView
       android:id="@+id/app_name_official"
       style="@style/TextHeader"
       android:text="@string/app_name_official" />

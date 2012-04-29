@@ -38,7 +38,7 @@
       android:text="@string/paypal_loading_label" />
   </LinearLayout>
 
-  <TextView
+  <org.musicbrainz.mobile.view.RobotoLightTextView
     android:id="@+id/donate_or"
     style="@style/Wrap"
     android:layout_below="@id/donate_button_layout"

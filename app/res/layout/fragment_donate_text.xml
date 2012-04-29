@@ -22,7 +22,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Match">
 
-  <TextView
+  <org.musicbrainz.mobile.view.RobotoLightTextView
     android:id="@+id/donate_title"
     style="@style/TextHeaderPad"
     android:text="@string/donate_header" />
