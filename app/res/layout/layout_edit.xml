@@ -34,6 +34,7 @@
       android:id="@+id/login_warning"
       style="@style/Wrap"
       android:layout_gravity="center"
+      android:layout_centerHorizontal="true"
       android:layout_marginBottom="@dimen/gutter_large"
       android:text="@string/edit_login"
       android:textColor="@color/mb_orange_dark"

@@ -76,6 +76,7 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:numStars">5</item>
     <item name="android:stepSize">1</item>
+    <item name="android:layout_marginBottom">@dimen/std_pad</item>
   </style>
 
   <!-- Searches -->
