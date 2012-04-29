@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
@@ -37,8 +37,8 @@ import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog;
-import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
+import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.BarcodeReleaseLoader;
 import org.musicbrainz.mobile.loader.CollectionEditLoader;
@@ -62,10 +62,11 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,8 +107,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     private RatingBar rating;
     private EditText tagInput;
     private RatingBar ratingInput;
-    private Button tagBtn;
-    private Button rateBtn;
+    private ImageButton tagBtn;
 
     private boolean doingTag, doingRate = false;
     private boolean provideArtistAction = true;
@@ -189,11 +189,9 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         tags = (TextView) findViewById(R.id.release_tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
-        tagBtn = (Button) findViewById(R.id.tag_btn);
-        rateBtn = (Button) findViewById(R.id.rate_btn);
-
+        ratingInput.setOnRatingBarChangeListener(ratingListener);
+        tagBtn = (ImageButton) findViewById(R.id.tag_btn);
         tagBtn.setOnClickListener(this);
-        rateBtn.setOnClickListener(this);
     }
 
     private boolean isArtistUpAvailable() {
@@ -212,14 +210,12 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     }
 
     private void disableEditFields() {
-        tagInput.setEnabled(false);
-        tagInput.setFocusable(false);
         ratingInput.setEnabled(false);
         ratingInput.setFocusable(false);
+        tagInput.setEnabled(false);
+        tagInput.setFocusable(false);
         tagBtn.setEnabled(false);
         tagBtn.setFocusable(false);
-        rateBtn.setEnabled(false);
-        rateBtn.setFocusable(false);
     }
 
     @Override
@@ -266,10 +262,9 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
     }
 
+    @Override
     public void onClick(View view) {
-
-        switch (view.getId()) {
-        case R.id.tag_btn:
+        if (view.getId() == R.id.tag_btn) {
             String tagString = tagInput.getText().toString();
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
@@ -279,14 +274,19 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
                 tagBtn.setEnabled(false);
                 getSupportLoaderManager().initLoader(TAG_LOADER, null, tagSubmissionCallbacks);
             }
-            break;
-        case R.id.rate_btn:
-            doingRate = true;
-            updateProgressStatus();
-            rateBtn.setEnabled(false);
-            getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
         }
     }
+    
+    private OnRatingBarChangeListener ratingListener = new OnRatingBarChangeListener() {
+        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+            if (fromUser) {
+                doingRate = true;
+                updateProgressStatus();
+                ratingInput.setEnabled(false);
+                getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
+            }
+        }
+    };
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -432,7 +432,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     private void onFinishedRating() {
         doingRate = false;
         updateProgressStatus();
-        rateBtn.setEnabled(true);
+        ratingInput.setEnabled(true);
     }
 
     private void updateRating(Float newRating) {

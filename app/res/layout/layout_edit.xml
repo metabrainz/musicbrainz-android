@@ -24,7 +24,7 @@
   android:id="@+id/edit_tab"
   android:background="@color/main_fg">
 
-  <LinearLayout
+  <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/Match"
     android:orientation="vertical"
@@ -39,35 +39,29 @@
       android:textColor="@color/mb_orange_dark"
       android:visibility="gone" />
 
+    <RatingBar
+      android:id="@+id/rating_input"
+      style="@style/RatingBar"
+      android:layout_centerHorizontal="true"
+      android:layout_below="@id/login_warning" />
+
+    <ImageButton
+      android:id="@+id/tag_btn"
+      style="@style/Wrap"
+      android:src="@drawable/btn_tag"
+      android:layout_below="@id/rating_input"
+      android:layout_alignParentRight="true" />
+
     <EditText
       android:id="@+id/tag_input"
       style="@style/MatchWidth"
       android:hint="@string/tag_hint"
       android:imeOptions="actionDone"
       android:inputType="textFilter"
-      android:singleLine="true" />
+      android:singleLine="true"
+      android:layout_below="@id/rating_input"
+      android:layout_toLeftOf="@id/tag_btn"
+      android:layout_alignBottom="@id/tag_btn" />
 
-    <RatingBar
-      android:id="@+id/rating_input"
-      style="@style/RatingBar" />
-
-    <LinearLayout
-      style="@style/MatchWidthHorizontal"
-      android:layout_marginTop="@dimen/small_pad">
-
-      <Button
-        android:id="@+id/tag_btn"
-        style="@style/MatchWidth"
-        android:layout_weight="1"
-        android:drawableRight="@drawable/btn_tag"
-        android:text="@string/tag_label" />
-
-      <Button
-        android:id="@+id/rate_btn"
-        style="@style/MatchWidth"
-        android:layout_weight="1"
-        android:drawableRight="@drawable/btn_star"
-        android:text="@string/rate_label" />
-    </LinearLayout>
-  </LinearLayout>
+  </RelativeLayout>
 </ScrollView>

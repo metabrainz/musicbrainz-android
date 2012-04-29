@@ -99,8 +99,6 @@
 
   <!-- Edit tabs -->
   <string name="tag_hint">Tag</string>
-  <string name="tag_label">Tag</string>
-  <string name="rate_label">Rate</string>
 
   <!-- BarcodeSearchActivity -->
   <string name="barcodesearch_title">Submit Barcode</string>

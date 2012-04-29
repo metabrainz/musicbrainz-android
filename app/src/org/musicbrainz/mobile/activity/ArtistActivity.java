@@ -52,10 +52,11 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,10 +84,9 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private RatingBar rating;
     private TextView tags;
-    private EditText tagInput;
     private RatingBar ratingInput;
-    private Button tagBtn;
-    private Button rateBtn;
+    private EditText tagInput;
+    private ImageButton tagBtn;
 
     private boolean doingTag, doingRate = false;
 
@@ -144,23 +144,19 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         rating = (RatingBar) findViewById(R.id.artist_rating);
         tags = (TextView) findViewById(R.id.artist_tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
-        tagBtn = (Button) findViewById(R.id.tag_btn);
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
-        rateBtn = (Button) findViewById(R.id.rate_btn);
-
+        ratingInput.setOnRatingBarChangeListener(ratingListener);
+        tagBtn = (ImageButton) findViewById(R.id.tag_btn);
         tagBtn.setOnClickListener(this);
-        rateBtn.setOnClickListener(this);
     }
 
     private void disableEditViews() {
-        tagInput.setEnabled(false);
-        tagInput.setFocusable(false);
         ratingInput.setEnabled(false);
         ratingInput.setFocusable(false);
+        tagInput.setEnabled(false);
+        tagInput.setFocusable(false);
         tagBtn.setEnabled(false);
         tagBtn.setFocusable(false);
-        rateBtn.setEnabled(false);
-        rateBtn.setFocusable(false);
     }
 
     private void displayMessagesForEmptyData() {
@@ -227,9 +223,9 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         return builder.create();
     }
 
+    @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-        case R.id.tag_btn:
+        if (view.getId() == R.id.tag_btn) {
             String tagString = tagInput.getText().toString();
             if (tagString.length() == 0) {
                 Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
@@ -239,15 +235,21 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
                 tagBtn.setEnabled(false);
                 getSupportLoaderManager().initLoader(TAG_LOADER, null, tagSubmissionCallbacks);
             }
-            break;
-        case R.id.rate_btn:
-            doingRate = true;
-            updateProgress();
-            rateBtn.setEnabled(false);
-            getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
         }
     }
-
+    
+    private OnRatingBarChangeListener ratingListener = new OnRatingBarChangeListener() {
+        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+            if (fromUser) {
+                doingRate = true;
+                updateProgress();
+                ratingInput.setEnabled(false);
+                getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
+            }
+        }
+    };
+    
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.artist_releases) {
             showRelease(position);
@@ -327,7 +329,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     private void onFinishedRating() {
         doingRate = false;
         updateProgress();
-        rateBtn.setEnabled(true);
+        ratingInput.setEnabled(true);
     }
 
     private void updateRating(Float newRating) {
