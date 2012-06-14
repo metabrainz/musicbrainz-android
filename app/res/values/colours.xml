@@ -20,6 +20,12 @@
 
 <resources>
 
+  <!-- Base -->
+  <color name="black">#000000</color>
+  <color name="white">#ffffff</color>
+  <color name="grey">#888888</color>
+  <color name="transparent">#00000000</color>
+  
   <!-- Theme -->
   <color name="main_bg">#eeeeee</color>
   <color name="main_fg">#ffffff</color>
@@ -34,7 +40,7 @@
   <color name="list_text">#000000</color>
   <color name="list_divider">#eeeeee</color>
 
-  <!-- MusicBrainz branding -->
+  <!-- Branding -->
   <color name="mb_purple_light">#bcaeed</color>
   <color name="mb_purple_medium">#736dab</color>
   <color name="mb_purple_dark">#34176b</color>

@@ -43,13 +43,12 @@ You can also do something like `mvn install`, which will build, install and run 
 
 Create an Android project from the source in app and a Java project from the source in api. Add the api project to the app project build path and set it to exported.
 
-There are three Android library projects that need to be included and specified in the Android project properties.
+There are two Android library projects that need to be included and specified in the Android project properties.
 
 * [ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock)
 * [ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator)
-* [Boosterstrap](https://github.com/jdamcd/boosterstrap)
   
-Clone these from the GitHub repos above, import them to your Eclipse workspace and point the app project to them in Properties > Android.
+Clone these from the GitHub repos above, import them to your Eclipse workspace and point the app project to them in Properties > Android. Make sure that the Android support library is only included in one of these projects and the others depend on it.
 
 ### Can I skip all this Maven stuff?
 

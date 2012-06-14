@@ -17,7 +17,7 @@
   <name>app</name>
 
   <properties>
-    <eclipse.excludeArtifactIds>android,api,commons-codec,commons-logging,httpclient,httpcore,json,opengl-api,xmlParserAPIs,xpp3</eclipse.excludeArtifactIds>
+    <eclipse.excludeArtifactIds>android,api,commons-codec,commons-logging,httpclient,httpcore,json,opengl-api,xmlParserAPIs,xpp3,support-v4</eclipse.excludeArtifactIds>
   </properties>
 
   <dependencies>
@@ -56,7 +56,7 @@
     <dependency>
       <groupId>com.actionbarsherlock</groupId>
       <artifactId>library</artifactId>
-      <version>4.0.0</version>
+      <version>4.1.0</version>
       <type>apklib</type>
     </dependency>
     
