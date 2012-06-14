@@ -32,6 +32,7 @@ public class AboutActivity extends MusicBrainzActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

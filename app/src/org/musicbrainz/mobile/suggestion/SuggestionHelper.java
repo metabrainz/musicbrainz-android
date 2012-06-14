@@ -32,8 +32,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 
 /**
- * This is a helper class to provide a Cursor to the suggestions database. The
- * content provider is not public, so this *could* stop working in future.
+ * This is a helper class to provide a Cursor to the suggestions database.
  */
 public class SuggestionHelper {
 
@@ -77,7 +76,6 @@ public class SuggestionHelper {
     }
 
     private Cursor getMatchingEntries(String constraint) {
-
         if (constraint == null) {
             return null;
         }

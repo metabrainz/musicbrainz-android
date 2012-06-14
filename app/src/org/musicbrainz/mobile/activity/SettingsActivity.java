@@ -49,6 +49,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
         addPreferencesFromResource(R.xml.preferences);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Preference clear = (Preference) findPreference(Pref.PREF_CLEAR_SUGGESTIONS);
         clear.setOnPreferenceClickListener(this);

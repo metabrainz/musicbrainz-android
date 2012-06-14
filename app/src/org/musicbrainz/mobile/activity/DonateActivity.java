@@ -33,6 +33,7 @@ public class DonateActivity extends MusicBrainzActivity implements DonationCallb
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_donate);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     
     @Override

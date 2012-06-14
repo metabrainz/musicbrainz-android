@@ -32,6 +32,7 @@ public class CollectionListActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections);
         setUserNameTitle();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void setUserNameTitle() {
