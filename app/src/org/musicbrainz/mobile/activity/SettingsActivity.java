@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 public class SettingsActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
