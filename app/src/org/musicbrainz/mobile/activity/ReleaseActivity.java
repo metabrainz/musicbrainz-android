@@ -73,6 +73,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.actionbarsherlock.widget.ShareActionProvider;
 import com.viewpagerindicator.TabPageIndicator;
 
 /**
@@ -225,6 +226,9 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         } else {
             getSupportMenuInflater().inflate(R.menu.release, menu);
         }
+        ShareActionProvider actionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
+        actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+        actionProvider.setShareIntent(Utils.shareIntent(getApplicationContext(), Configuration.RELEASE_SHARE + releaseMbid));
         return true;
     }
 
@@ -232,9 +236,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
-        case R.id.action_share:
-            startActivity(Utils.shareIntent(getApplicationContext(), Configuration.RELEASE_SHARE + releaseMbid));
-            return true;
         case android.R.id.home:
             if (provideArtistAction) {
                 startActivity(createArtistIntent());

@@ -63,6 +63,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.actionbarsherlock.widget.ShareActionProvider;
 import com.viewpagerindicator.TabPageIndicator;
 
 /**
@@ -173,19 +174,10 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.artist, menu);
+        ShareActionProvider actionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
+        actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+        actionProvider.setShareIntent(Utils.shareIntent(getApplicationContext(), Configuration.ARTIST_SHARE + mbid));
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        switch (item.getItemId()) {
-        case R.id.action_share:
-            startActivity(Utils.shareIntent(getApplicationContext(), Configuration.ARTIST_SHARE + mbid));
-            return true;
-        }
-        return false;
     }
 
     private void updateProgress() {

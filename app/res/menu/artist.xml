@@ -25,11 +25,11 @@
     android:title="@string/action_search"
     android:icon="@drawable/action_search"
     android:showAsAction="always" />
-
+  
   <item
     android:id="@+id/action_share"
     android:title="@string/action_share"
-    android:icon="@drawable/action_share"
+    android:actionProviderClass="com.actionbarsherlock.widget.ShareActionProvider"
     android:showAsAction="always" />
 
 </menu>

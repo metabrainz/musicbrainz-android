@@ -24,8 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.musicbrainz.mobile.R;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -37,8 +35,7 @@ public class Utils {
     
     public static Intent shareIntent(Context context, String text) {
         Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, text);
-        return Intent.createChooser(intent, context.getString(R.string.action_share));
+        return intent.putExtra(Intent.EXTRA_TEXT, text);
     }
     
     public static Intent emailIntent(String recipient, String subject) {
