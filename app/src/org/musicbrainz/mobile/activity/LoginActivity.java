@@ -30,6 +30,7 @@ public class LoginActivity extends MusicBrainzActivity implements LoginCallback 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
