@@ -37,10 +37,7 @@ import org.musicbrainz.mobile.loader.result.SearchResults;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.util.PreferenceUtils;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.SearchManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
@@ -48,8 +45,10 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -68,9 +67,8 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     private static final int SEARCH_RELEASE_GROUP_LOADER = 1;
     private static final int SEARCH_LOADER = 2;
 
-    private static final int DIALOG_CONNECTION_FAILURE = 0;
-
     private String searchTerm;
+    private View error;
 
     private LinkedList<ArtistSearchStub> artistSearchResults;
     private LinkedList<ReleaseGroupStub> rgSearchResults;
@@ -88,6 +86,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private void configureSearch() {
         setContentView(R.layout.activity_search);
+        error = findViewById(R.id.error);
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
             searchTerm = getIntent().getStringExtra(SearchManager.QUERY);
             getIntent().putExtra(Extra.TYPE, Extra.ALL);
@@ -162,24 +161,6 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
         }
     }
 
-    protected Dialog createConnectionErrorDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
-        builder.setMessage(getString(R.string.err_text));
-        builder.setCancelable(false);
-        builder.setPositiveButton(getString(R.string.err_pos), new ErrorPositiveListener());
-        builder.setNegativeButton(getString(R.string.err_neg), new ErrorNegativeListener());
-        return builder.create();
-    }
-
-    private class ErrorPositiveListener implements DialogInterface.OnClickListener {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            restartLoader();
-            dialog.cancel();
-            toggleLoading();
-        }
-    }
-    
     private void restartLoader() {
         String intentType = getIntent().getStringExtra(Extra.TYPE);
         if (intentType.equals(Extra.ARTIST)) {
@@ -188,13 +169,6 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
             getSupportLoaderManager().restartLoader(SEARCH_RELEASE_GROUP_LOADER, null, this);
         } else {
             getSupportLoaderManager().restartLoader(SEARCH_LOADER, null, this);
-        }
-    }
-
-    private class ErrorNegativeListener implements DialogInterface.OnClickListener {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            SearchActivity.this.finish();
         }
     }
 
@@ -252,15 +226,6 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_CONNECTION_FAILURE:
-            return createConnectionErrorDialog();
-        }
-        return null;
-    }
-
-    @Override
     public Loader<AsyncResult<SearchResults>> onCreateLoader(int id, Bundle args) {
         switch (id) {
         case SEARCH_ARTIST_LOADER:
@@ -281,8 +246,21 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
             handleResults(result.getData());
             break;
         case EXCEPTION:
-            showDialog(DIALOG_CONNECTION_FAILURE);
+            showConnectionWarning();
         }
+    }
+
+    private void showConnectionWarning() {
+        error.setVisibility(View.VISIBLE);
+        Button retry = (Button) error.findViewById(R.id.retry_button);
+        retry.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restartLoader();
+                toggleLoading();
+                error.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void handleResults(SearchResults results) {

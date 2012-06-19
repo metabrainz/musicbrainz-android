@@ -88,7 +88,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     private EditText tagInput;
     private ImageButton tagBtn;
 
-    private boolean doingTag, doingRate = false;
+    private boolean doingTag, doingRate;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

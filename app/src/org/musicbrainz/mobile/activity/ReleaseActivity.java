@@ -110,7 +110,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     private RatingBar ratingInput;
     private ImageButton tagBtn;
 
-    private boolean doingTag, doingRate = false;
+    private boolean doingTag, doingRate;
     private boolean provideArtistAction = true;
 
     public void onCreate(Bundle savedInstanceState) {

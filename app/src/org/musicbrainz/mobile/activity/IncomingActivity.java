@@ -120,7 +120,7 @@ public class IncomingActivity extends Activity {
     }
 
     private void displayErrorToast(String message) {
-        Toast.makeText(this, getString(R.string.error_body) + "\n" + message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.intent_error) + "\n" + message, Toast.LENGTH_LONG).show();
     }
 
 }
