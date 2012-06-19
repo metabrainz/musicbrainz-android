@@ -53,28 +53,28 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class CollectionFragment extends SherlockListFragment {
-    
+
     private static final String RELEASE_MBID = "releaseMbid";
     private static final int COLLECTION_LOADER = 0;
     private static final int COLLECTION_EDIT_LOADER = 1;
-    
+
     private Context appContext;
     private String mbid;
     private View loading;
     private View error;
     private FragmentLoadingCallbacks activityCallbacks;
-    
+
     public interface FragmentLoadingCallbacks {
         public void onLoadStart();
         public void onLoadFinish();
     }
-     
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -87,7 +87,7 @@ public class CollectionFragment extends SherlockListFragment {
                     + FragmentLoadingCallbacks.class.getSimpleName());
         }
     }
-    
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -95,7 +95,7 @@ public class CollectionFragment extends SherlockListFragment {
         getListView().setOnItemLongClickListener(longPressListener);
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_collection, container, false);
@@ -108,20 +108,21 @@ public class CollectionFragment extends SherlockListFragment {
         switch (result.getStatus()) {
         case SUCCESS:
             EditorCollection collection = result.getData();
-            setListAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_collection_release, collection.getReleases()));
+            setListAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_collection_release,
+                    collection.getReleases()));
             break;
         case EXCEPTION:
             showConnectionErrorWarning();
         }
     }
-    
+
     private void hideLoading() {
         loading.setVisibility(View.GONE);
     }
 
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
-        Button retry = ( Button)error.findViewById(R.id.retry_button);
+        Button retry = (Button) error.findViewById(R.id.retry_button);
         retry.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +132,7 @@ public class CollectionFragment extends SherlockListFragment {
             }
         });
     }
-    
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         ReleaseStubAdapter adapter = (ReleaseStubAdapter) getListAdapter();
@@ -140,7 +141,7 @@ public class CollectionFragment extends SherlockListFragment {
         intent.putExtra(Extra.RELEASE_MBID, releaseMbid);
         startActivity(intent);
     }
-    
+
     OnItemLongClickListener longPressListener = new OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
@@ -152,12 +153,12 @@ public class CollectionFragment extends SherlockListFragment {
             return true;
         }
     };
-    
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_collection, menu);
     }
-    
+
     private LoaderCallbacks<AsyncResult<EditorCollection>> loaderCallbacks = new LoaderCallbacks<AsyncResult<EditorCollection>>() {
 
         @Override
@@ -171,13 +172,13 @@ public class CollectionFragment extends SherlockListFragment {
             handleResult(data);
             activityCallbacks.onLoadFinish();
         }
-        
+
         @Override
         public void onLoaderReset(Loader<AsyncResult<EditorCollection>> loader) {
             loader.reset();
         }
     };
-    
+
     private LoaderCallbacks<AsyncResult<Void>> editCallbacks = new LoaderCallbacks<AsyncResult<Void>>() {
 
         @Override
@@ -203,12 +204,12 @@ public class CollectionFragment extends SherlockListFragment {
             loader.reset();
         }
     };
-    
+
     private final class RemoveReleasesActionMode implements ActionMode.Callback {
-        
+
         private int selectedPosition;
         private ReleaseStub selectedRelease;
-        
+
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
@@ -246,7 +247,7 @@ public class CollectionFragment extends SherlockListFragment {
         public void onDestroyActionMode(ActionMode mode) {
             getListView().setItemChecked(selectedPosition, false);
         }
-        
+
     }
-    
+
 }

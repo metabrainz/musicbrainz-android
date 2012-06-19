@@ -41,9 +41,6 @@ import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,7 +48,9 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -61,7 +60,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.actionbarsherlock.widget.ShareActionProvider;
 import com.viewpagerindicator.TabPageIndicator;
@@ -77,12 +75,13 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     private static final int RATING_LOADER = 1;
     private static final int TAG_LOADER = 2;
 
-    private static final int DIALOG_CONNECTION_FAILURE = 0;
-
     private String mbid;
     private Artist artist;
     private UserData userData;
 
+    private View loading;
+    private View error;
+    
     private RatingBar rating;
     private TextView tags;
     private RatingBar ratingInput;
@@ -95,16 +94,14 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
-        setContentView(R.layout.layout_loading);
+        setContentView(R.layout.activity_artist);
+        configurePager();
+        findViews();
         setSupportProgressBarIndeterminateVisibility(false);
         getSupportLoaderManager().initLoader(ARTIST_LOADER, savedInstanceState, this);
     }
 
     protected void populateLayout() {
-        setContentView(R.layout.activity_artist);
-        configurePager();
-        findViews();
-
         TextView artistText = (TextView) findViewById(R.id.artist_artist);
         ListView releaseList = (ListView) findViewById(R.id.artist_releases);
         ListView linksList = (ListView) findViewById(R.id.artist_links);
@@ -129,6 +126,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             disableEditViews();
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
+        loading.setVisibility(View.GONE);
     }
 
     private void configurePager() {
@@ -142,6 +140,8 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     }
 
     private void findViews() {
+        loading = findViewById(R.id.loading);
+        error = findViewById(R.id.error);
         rating = (RatingBar) findViewById(R.id.artist_rating);
         tags = (TextView) findViewById(R.id.artist_tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
@@ -186,33 +186,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         } else {
             setSupportProgressBarIndeterminateVisibility(false);
         }
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_CONNECTION_FAILURE:
-            return createConnectionErrorDialog();
-        }
-        return null;
-    }
-
-    private Dialog createConnectionErrorDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getString(R.string.err_text));
-        builder.setCancelable(false);
-        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                getSupportLoaderManager().restartLoader(ARTIST_LOADER, null, ArtistActivity.this);
-                dialog.cancel();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                ArtistActivity.this.finish();
-            }
-        });
-        return builder.create();
     }
 
     @Override
@@ -281,8 +254,21 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             populateLayout();
             break;
         case EXCEPTION:
-            showDialog(DIALOG_CONNECTION_FAILURE);
+            showConnectionErrorWarning();
         }
+    }
+
+    private void showConnectionErrorWarning() {
+        error.setVisibility(View.VISIBLE);
+        Button retry = (Button) error.findViewById(R.id.retry_button);
+        retry.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loading.setVisibility(View.VISIBLE);
+                error.setVisibility(View.GONE);
+                getSupportLoaderManager().restartLoader(ARTIST_LOADER, null, ArtistActivity.this);
+            }
+        });
     }
 
     @Override

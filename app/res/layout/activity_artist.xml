@@ -62,4 +62,15 @@
     android:layout_height="fill_parent"
     android:layout_below="@id/indicator" />
 
+  <include
+    android:id="@+id/loading"
+    style="@style/Match"
+    layout="@layout/layout_loading" />
+
+  <include
+    android:id="@+id/error"
+    style="@style/Match"
+    layout="@layout/layout_retry"
+    android:visibility="gone" />
+
 </RelativeLayout>
