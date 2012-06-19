@@ -22,12 +22,14 @@ package org.musicbrainz.mobile.activity;
 
 import java.util.List;
 
+import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 /**
  * This Activity parses incoming URI intents from external applications and
@@ -54,9 +56,9 @@ public class IncomingActivity extends Activity {
         } else if (type.equals(URI_SEARCH)) {
             doSearch(segments);
         } else {
-            displayErrorLayout("Unrecognised URI segment: action");
+            displayErrorToast("Unrecognised URI segment: action");
         }
-        this.finish();
+        finish();
     }
 
     private void doSearch(List<String> segments) {
@@ -65,7 +67,7 @@ public class IncomingActivity extends Activity {
         } else if (segments.size() == 3) {
             entitySearch(segments);
         } else {
-            displayErrorLayout("Too many URI segments");
+            displayErrorToast("Too many URI segments");
         }
     }
 
@@ -82,7 +84,7 @@ public class IncomingActivity extends Activity {
         } else if (entity.equals(URI_RELEASE)) {
             startSearchResultsActivity(Extra.RELEASE_GROUP, query);
         } else {
-            displayErrorLayout("Unrecognised URI segment: search type");
+            displayErrorToast("Unrecognised URI segment: search type");
         }
     }
 
@@ -92,7 +94,7 @@ public class IncomingActivity extends Activity {
             artistIntent.putExtra(Extra.ARTIST_MBID, mbid);
             startActivity(artistIntent);
         } else {
-            displayErrorLayout("Invalid MBID");
+            displayErrorToast("Invalid MBID");
         }
     }
 
@@ -102,7 +104,7 @@ public class IncomingActivity extends Activity {
             releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
             startActivity(releaseIntent);
         } else {
-            displayErrorLayout("Invalid MBID");
+            displayErrorToast("Invalid MBID");
         }
     }
 
@@ -117,10 +119,8 @@ public class IncomingActivity extends Activity {
         return (mbid.length() == MBID_LENGTH);
     }
 
-    private void displayErrorLayout(String message) {
-        Intent errorIntent = new Intent(IncomingActivity.this, IntentErrorActivity.class);
-        errorIntent.putExtra(Extra.MESSAGE, message);
-        startActivity(errorIntent);
+    private void displayErrorToast(String message) {
+        Toast.makeText(this, getString(R.string.error_body) + "\n" + message, Toast.LENGTH_LONG).show();
     }
 
 }

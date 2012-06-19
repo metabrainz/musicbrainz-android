@@ -134,11 +134,8 @@
   <string name="web_register">Register</string>
   <string name="web_donate">Donation Options</string>
 
-  <!-- IntentErrorActivity -->
-  <string name="error_title">Error</string>
-  <string name="error_body">Something has gone wrong…\n\nAnother application has tried to show you a MusicBrainz page but
-    there was a problem with the Intent URI. You should report this to the developer of the application that you arrived
-    from:\n\n</string>
+  <!-- IntentError -->
+  <string name="intent_error">Invalid URI for MusicBrainz Intent</string>
 
   <!-- Actions -->
   <string name="action_share">Share</string>
