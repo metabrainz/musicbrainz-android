@@ -27,12 +27,19 @@ import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.content.ActivityNotFoundException;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
 public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportActionBar().setHomeButtonEnabled(true);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

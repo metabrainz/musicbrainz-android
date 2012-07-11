@@ -27,7 +27,7 @@
 
   <uses-sdk
     android:minSdkVersion="7"
-    android:targetSdkVersion="13" />
+    android:targetSdkVersion="15" />
 
   <supports-screens
     android:smallScreens="true"
@@ -37,43 +37,50 @@
 
   <compatible-screens>
     <screen
-      android:screenSize="small"
-      android:screenDensity="ldpi" />
+      android:screenDensity="ldpi"
+      android:screenSize="small" />
     <screen
-      android:screenSize="small"
-      android:screenDensity="mdpi" />
+      android:screenDensity="mdpi"
+      android:screenSize="small" />
     <screen
-      android:screenSize="small"
-      android:screenDensity="hdpi" />
+      android:screenDensity="hdpi"
+      android:screenSize="small" />
     <screen
-      android:screenSize="small"
-      android:screenDensity="xhdpi" />
-
+      android:screenDensity="xhdpi"
+      android:screenSize="small" />
     <screen
-      android:screenSize="normal"
-      android:screenDensity="ldpi" />
+      android:screenDensity="213"
+      android:screenSize="small" />
     <screen
-      android:screenSize="normal"
-      android:screenDensity="mdpi" />
+      android:screenDensity="ldpi"
+      android:screenSize="normal" />
     <screen
-      android:screenSize="normal"
-      android:screenDensity="hdpi" />
+      android:screenDensity="mdpi"
+      android:screenSize="normal" />
     <screen
-      android:screenSize="normal"
-      android:screenDensity="xhdpi" />
-
+      android:screenDensity="hdpi"
+      android:screenSize="normal" />
     <screen
-      android:screenSize="large"
-      android:screenDensity="ldpi" />
+      android:screenDensity="xhdpi"
+      android:screenSize="normal" />
     <screen
-      android:screenSize="large"
-      android:screenDensity="mdpi" />
+      android:screenDensity="213"
+      android:screenSize="normal" />
     <screen
-      android:screenSize="large"
-      android:screenDensity="hdpi" />
+      android:screenDensity="ldpi"
+      android:screenSize="large" />
     <screen
-      android:screenSize="large"
-      android:screenDensity="xhdpi" />
+      android:screenDensity="mdpi"
+      android:screenSize="large" />
+    <screen
+      android:screenDensity="hdpi"
+      android:screenSize="large" />
+    <screen
+      android:screenDensity="xhdpi"
+      android:screenSize="large" />
+    <screen
+      android:screenDensity="213"
+      android:screenSize="large" />
   </compatible-screens>
 
   <uses-permission android:name="android.permission.INTERNET" />
@@ -98,9 +105,9 @@
       android:name=".suggestion.SuggestionProvider"
       android:authorities="org.musicbrainz.mobile.SearchSuggestionProvider" />
 
-  <meta-data
-    android:name="com.google.android.backup.api_key"
-    android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
+    <meta-data
+      android:name="com.google.android.backup.api_key"
+      android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
 
     <activity
       android:name=".activity.DashboardActivity"
@@ -157,12 +164,12 @@
     <activity
       android:name=".activity.ArtistActivity"
       android:label="@string/artist_title" />
-    
+
     <activity
       android:name=".activity.CollectionListActivity"
       android:launchMode="singleTop"
       android:label="@string/collections_title" />
-    
+
     <activity
       android:name=".activity.CollectionActivity"
       android:label="@string/app_name" />
@@ -174,7 +181,7 @@
     <activity
       android:name=".activity.WebActivity"
       android:label="@string/app_name" />
-    
+
     <activity
       android:name="com.paypal.android.MEP.PayPalActivity"
       android:theme="@android:style/Theme.Translucent.NoTitleBar" />
