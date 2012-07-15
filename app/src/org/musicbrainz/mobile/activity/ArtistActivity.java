@@ -91,8 +91,9 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     private boolean doingTag, doingRate;
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
+        
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.activity_artist);
         configurePager();

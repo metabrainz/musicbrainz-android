@@ -114,8 +114,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     private boolean provideArtistAction = true;
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
 
         releaseMbid = getIntent().getStringExtra(Extra.RELEASE_MBID);
         releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);

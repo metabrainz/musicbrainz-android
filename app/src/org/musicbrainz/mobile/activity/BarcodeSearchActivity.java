@@ -63,6 +63,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     private static final String INSTANCE_SELECTED = "selected_position";
     private static final int SEARCH_RELEASE_LOADER = 0;
     private static final int SUBMIT_BARCODE_LOADER = 1;
+    
     private static final int DIALOG_CONNECTION_FAILURE = 0;
     private static final int DIALOG_SUBMIT_BARCODE = 1;
 
