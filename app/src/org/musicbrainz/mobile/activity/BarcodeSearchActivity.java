@@ -31,21 +31,19 @@ import org.musicbrainz.mobile.loader.SearchReleaseLoader;
 import org.musicbrainz.mobile.loader.SubmitBarcodeLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
-import com.actionbarsherlock.view.Window;
-
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -53,6 +51,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+
+import com.actionbarsherlock.view.Window;
 
 /**
  * Activity to submit a barcode to a selected release in MusicBrainz.
@@ -64,7 +64,6 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     private static final int SEARCH_RELEASE_LOADER = 0;
     private static final int SUBMIT_BARCODE_LOADER = 1;
     
-    private static final int DIALOG_CONNECTION_FAILURE = 0;
     private static final int DIALOG_SUBMIT_BARCODE = 1;
 
     private TextView barcodeText;
@@ -74,7 +73,8 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     private TextView instructions;
     private TextView noResults;
     private ListView matches;
-    private LinearLayout loading;
+    private View loading;
+    private View error;
 
     private String barcode;
     private String searchTerm;
@@ -84,8 +84,9 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
 
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_barcode);
         setSupportProgressBarIndeterminateVisibility(false);
         findViews();
@@ -105,7 +106,8 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         matches = (ListView) findViewById(R.id.barcode_list);
         instructions = (TextView) findViewById(R.id.barcode_instructions);
         noResults = (TextView) findViewById(R.id.noresults);
-        loading = (LinearLayout) findViewById(R.id.loading);
+        loading = findViewById(R.id.loading);
+        error = findViewById(R.id.error);
 
         searchBox.setOnEditorActionListener(this);
         searchButton.setOnClickListener(this);
@@ -163,32 +165,11 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         return true;
     }
 
-    protected Dialog createConnectionErrorDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(BarcodeSearchActivity.this);
-        builder.setMessage(getString(R.string.err_text));
-        builder.setCancelable(false);
-        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                getSupportLoaderManager().restartLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
-                dialog.cancel();
-                loading.setVisibility(View.VISIBLE);
-            }
-        });
-        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                BarcodeSearchActivity.this.finish();
-            }
-        });
-        return builder.create();
-    }
-
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
         case DIALOG_SUBMIT_BARCODE:
             return new BarcodeConfirmDialog(this, results.get(selection));
-        case DIALOG_CONNECTION_FAILURE:
-            return createConnectionErrorDialog();
         }
         return null;
     }
@@ -222,7 +203,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
                 handleSearchResults(data);
                 break;
             case EXCEPTION:
-                showDialog(DIALOG_CONNECTION_FAILURE);
+                showConnectionErrorWarning();
             }
         }
 
@@ -231,6 +212,19 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
             loader.reset();
         }
     };
+    
+    private void showConnectionErrorWarning() {
+        error.setVisibility(View.VISIBLE);
+        Button retry = (Button) error.findViewById(R.id.retry_button);
+        retry.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loading.setVisibility(View.VISIBLE);
+                error.setVisibility(View.GONE);
+                getSupportLoaderManager().restartLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
+            }
+        });
+    }
 
     private void handleSearchResults(AsyncResult<LinkedList<ReleaseStub>> result) {
         results = result.getData();
@@ -238,6 +232,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         matches.setOnItemClickListener(this);
         matches.setOnItemLongClickListener(this);
 
+        error.setVisibility(View.GONE);
         if (results.isEmpty()) {
             noResults.setVisibility(View.VISIBLE);
             matches.setVisibility(View.INVISIBLE);

@@ -87,5 +87,11 @@
       style="@style/NoResultsText"
       android:layout_below="@+id/topline"
       android:layout_alignParentBottom="true" />
+
+    <include
+      android:id="@+id/error"
+      style="@style/Match"
+      layout="@layout/layout_retry"
+      android:visibility="gone" />
   </RelativeLayout>
 </LinearLayout>

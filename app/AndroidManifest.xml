@@ -27,13 +27,7 @@
 
   <uses-sdk
     android:minSdkVersion="7"
-    android:targetSdkVersion="15" />
-
-  <supports-screens
-    android:smallScreens="true"
-    android:normalScreens="true"
-    android:largeScreens="true"
-    android:xlargeScreens="false" />
+    android:targetSdkVersion="16" />
 
   <compatible-screens>
     <screen
@@ -143,7 +137,8 @@
 
     <activity
       android:name=".activity.BarcodeSearchActivity"
-      android:label="@string/barcodesearch_title" />
+      android:label="@string/barcodesearch_title"
+      android:windowSoftInputMode="adjustResize" />
 
     <activity
       android:name=".activity.SearchActivity"

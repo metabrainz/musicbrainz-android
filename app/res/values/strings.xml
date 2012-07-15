@@ -104,7 +104,7 @@
   <string name="barcodesearch_title">Submit Barcode</string>
   <string name="barcode_text">Product code: </string>
   <string name="barcode_hint">Release title</string>
-  <string name="barcode_instructions">Search for the appropriate release to add this barcode.</string>
+  <string name="barcode_instructions">Search for release to add barcode.</string>
 
   <!-- ConfirmBarcodeDialog -->
   <string name="barcode_add_header">Submit barcode</string>
@@ -191,10 +191,8 @@
 
   <!-- BarcodeDialog -->
   <string name="barcode_header">Barcode not found!</string>
-  <string name="barcode_info_log">This barcode is not yet stored in the MusicBrainz database. You can contribute to MusicBrainz by
-    adding it to the appropriate release.</string>
-  <string name="barcode_info_nolog">This barcode is not yet stored in the MusicBrainz database. You can contribute to MusicBrainz by
-    adding it to the appropriate release, but you must log in first.</string>
+  <string name="barcode_info_log">This barcode is not yet stored in MusicBrainz. Do you want to add it to the correct release?</string>
+  <string name="barcode_info_nolog">This barcode is not yet stored in MusicBrainz. Log in to add it to the correct release.</string>
   <string name="barcode_btn">Add barcode</string>
 
   <!-- ReleaseSelectionDialog -->
