@@ -46,7 +46,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -64,7 +63,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     private static final int SEARCH_RELEASE_LOADER = 0;
     private static final int SUBMIT_BARCODE_LOADER = 1;
     
-    private static final int DIALOG_SUBMIT_BARCODE = 1;
+    private static final int DIALOG_SUBMIT_BARCODE = 0;
 
     private TextView barcodeText;
     private EditText searchBox;
@@ -77,7 +76,6 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     private View error;
 
     private String barcode;
-    private String searchTerm;
 
     private LinkedList<ReleaseStub> results;
     private int selection = 0;
@@ -129,7 +127,6 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         if (term.length() != 0) {
             hideKeyboard();
             prepareSearch();
-            searchTerm = term;
             getSupportLoaderManager().destroyLoader(SEARCH_RELEASE_LOADER);
             getSupportLoaderManager().initLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
         } else {
@@ -190,7 +187,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
 
         @Override
         public Loader<AsyncResult<LinkedList<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
-            return new SearchReleaseLoader(getApplicationContext(), searchTerm);
+            return new SearchReleaseLoader(getApplicationContext(), searchBox.getText().toString());
         }
 
         @Override
@@ -214,6 +211,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     };
     
     private void showConnectionErrorWarning() {
+        matches.setAdapter(null);
         error.setVisibility(View.VISIBLE);
         Button retry = (Button) error.findViewById(R.id.retry_button);
         retry.setOnClickListener(new OnClickListener() {

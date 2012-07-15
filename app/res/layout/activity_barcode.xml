@@ -92,6 +92,7 @@
       android:id="@+id/error"
       style="@style/Match"
       layout="@layout/layout_retry"
+      android:layout_below="@+id/topline"
       android:visibility="gone" />
   </RelativeLayout>
 </LinearLayout>
