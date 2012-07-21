@@ -26,18 +26,11 @@
   <TextView
     android:id="@+id/list_link_title"
     style="@style/LinkDescription"
-    android:layout_alignParentLeft="true"
-    android:layout_toLeftOf="@+id/icon" />
-
-  <ImageView
-    android:id="@+id/icon"
-    style="@style/LinkImage"
-    android:layout_alignParentRight="true" />
+    android:layout_alignParentLeft="true" />
 
   <TextView
     android:id="@+id/list_link"
     style="@style/Link"
     android:layout_alignParentLeft="true"
-    android:layout_toLeftOf="@+id/icon"
     android:layout_below="@+id/list_link_title" />
 </RelativeLayout>

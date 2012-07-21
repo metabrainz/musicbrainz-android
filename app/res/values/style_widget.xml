@@ -215,16 +215,6 @@
   </style>
 
   <style
-    name="LinkImage"
-    parent="Wrap">
-    <item name="android:layout_centerVertical">true</item>
-    <item name="android:layout_marginRight">@dimen/small_pad</item>
-    <item name="android:layout_marginLeft">@dimen/small_pad</item>
-    <item name="android:src">@drawable/ic_link</item>
-    <item name="android:contentDescription">@string/description_web</item>
-  </style>
-
-  <style
     name="WelcomeText"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
