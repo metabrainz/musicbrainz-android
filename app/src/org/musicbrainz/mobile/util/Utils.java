@@ -33,7 +33,7 @@ import android.net.Uri;
  */
 public class Utils {
     
-    public static Intent shareIntent(Context context, String text) {
+    public static Intent shareIntent(String text) {
         Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain");
         return intent.putExtra(Intent.EXTRA_TEXT, text);
     }

@@ -20,7 +20,6 @@
 
 package org.musicbrainz.mobile.loader.result;
 
-
 public class AsyncResult<T> {
 
     protected final LoaderStatus status;

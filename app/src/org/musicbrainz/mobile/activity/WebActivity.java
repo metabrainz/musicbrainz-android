@@ -32,8 +32,8 @@ public class WebActivity extends MusicBrainzActivity implements WebFragmentCallb
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         getSupportActionBar().setTitle(getIntent().getIntExtra(Extra.TITLE, R.string.app_name));
     }

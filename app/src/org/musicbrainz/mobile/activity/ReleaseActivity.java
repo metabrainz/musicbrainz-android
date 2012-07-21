@@ -228,7 +228,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
         ShareActionProvider actionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
         actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
-        actionProvider.setShareIntent(Utils.shareIntent(getApplicationContext(), Configuration.RELEASE_SHARE + releaseMbid));
+        actionProvider.setShareIntent(Utils.shareIntent(Configuration.RELEASE_SHARE + releaseMbid));
         return true;
     }
 
