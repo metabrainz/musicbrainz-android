@@ -20,7 +20,7 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Dialog">
+  style="@style/MatchWidth">
 
   <TextView
     style="@style/DialogHeader"

@@ -23,7 +23,7 @@
   style="@style/Activity">
 
   <RelativeLayout
-    style="@style/EntityInfo"
+    style="@style/MatchWidth"
     android:id="@+id/entity_info">
 
     <TextView

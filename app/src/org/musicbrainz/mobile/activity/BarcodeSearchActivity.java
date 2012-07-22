@@ -80,7 +80,6 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
     private LinkedList<ReleaseStub> results;
     private int selection = 0;
 
-
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);

@@ -20,6 +20,52 @@
 
 <resources>
 
+  <style
+    name="Activity"
+    parent="Match">
+    <item name="android:background">@color/main_bg</item>
+  </style>
+
+  <style
+    name="Loading"
+    parent="Match">
+    <item name="android:background">@color/list_bg</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style
+    name="List"
+    parent="Match">
+    <item name="android:background">@color/list_bg</item>
+    <item name="android:cacheColorHint">@color/list_bg</item>
+    <item name="android:divider">@drawable/list_divider</item>
+  </style>
+
+  <style name="ButtonMin">
+    <item name="android:layout_width">@dimen/button_min</item>
+    <item name="android:layout_height">@dimen/button_min</item>
+  </style>
+
+  <style
+    name="VerticalMin"
+    parent="MatchWidth">
+    <item name="android:minHeight">@dimen/vertical_minspace</item>
+  </style>
+
+  <style
+    name="VerticalMinPad"
+    parent="VerticalMin">
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:padding">@dimen/std_pad</item>
+  </style>
+
+  <style
+    name="HomeTextArea"
+    parent="VerticalMin">
+    <item name="android:background">@color/main_fg</item>
+    <item name="android:padding">@dimen/std_pad</item>
+  </style>
+
   <!-- Home -->
   <style
     name="HomeTileRow"
@@ -124,14 +170,14 @@
   </style>
 
   <!-- Text -->
-   <style
+  <style
     name="TextHeader"
     parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_xl</item>
     <item name="android:textColor">@color/aux_text</item>
   </style>
-  
-  <style 
+
+  <style
     name="TextHeaderPad"
     parent="TextHeader">
     <item name="android:layout_marginBottom">@dimen/gutter_large</item>
