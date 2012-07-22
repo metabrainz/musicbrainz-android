@@ -186,8 +186,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     }
 
     private void findViews() {
-        rating = (RatingBar) findViewById(R.id.release_rating);
-        tags = (TextView) findViewById(R.id.release_tags);
+        rating = (RatingBar) findViewById(R.id.rating);
+        tags = (TextView) findViewById(R.id.tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
         ratingInput.setOnRatingBarChangeListener(ratingListener);

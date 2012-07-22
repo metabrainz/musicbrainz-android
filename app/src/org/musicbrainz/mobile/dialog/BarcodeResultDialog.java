@@ -62,8 +62,8 @@ public class BarcodeResultDialog extends Dialog implements View.OnClickListener 
         }
     }
 
+    @Override
     public void onClick(View v) {
-
         Intent barcodeIntent = new Intent(parent, BarcodeSearchActivity.class);
         barcodeIntent.putExtra("barcode", barcode);
         parent.startActivity(barcodeIntent);

@@ -67,6 +67,7 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
         findViewById(R.id.release_box).setBackgroundResource(R.color.list_bg);
     }
 
+    @Override
     public void onClick(View v) {
         String releaseID = stub.getReleaseMbid();
         parent.submitBarcode(releaseID);

@@ -20,7 +20,7 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/MatchWidth">
+  style="MatchWidth">
 
   <TextView
     style="@style/DialogHeader"
@@ -43,7 +43,7 @@
 
   <Button
     android:id="@+id/barcode_confirm"
-    style="@style/StdButton"
+    style="@style/MatchWidth"
     android:text="@string/barcode_add_btn"
     android:layout_marginRight="@dimen/std_pad"
     android:layout_marginLeft="@dimen/std_pad"

@@ -143,8 +143,8 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     private void findViews() {
         loading = findViewById(R.id.loading);
         error = findViewById(R.id.error);
-        rating = (RatingBar) findViewById(R.id.artist_rating);
-        tags = (TextView) findViewById(R.id.artist_tags);
+        rating = (RatingBar) findViewById(R.id.rating);
+        tags = (TextView) findViewById(R.id.tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
         ratingInput = (RatingBar) findViewById(R.id.rating_input);
         ratingInput.setOnRatingBarChangeListener(ratingListener);

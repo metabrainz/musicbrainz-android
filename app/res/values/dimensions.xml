@@ -40,5 +40,4 @@
   <dimen name="login_buttons">200dp</dimen>
 
   <dimen name="link_button_corners">1dp</dimen>
-  <dimen name="tagbox_corners">2dp</dimen>
 </resources>

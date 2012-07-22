@@ -22,39 +22,23 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <RelativeLayout
+  <TextView
+    android:id="@+id/artist_artist"
+    style="@style/EntityText"
+    android:layout_margin="@dimen/std_pad" />
+
+  <include
+    android:id="@+id/tags_rating"
     style="@style/MatchWidth"
-    android:id="@+id/entity_info">
-
-    <TextView
-      android:id="@+id/artist_artist"
-      style="@style/EntityText"
-      android:layout_alignParentLeft="true" />
-
-    <TextView
-      android:id="@+id/artist_tags"
-      style="@style/TagArea"
-      android:layout_below="@+id/artist_artist"
-      android:layout_toLeftOf="@+id/artist_rating" />
-
-    <RatingBar
-      android:id="@+id/artist_rating"
-      style="?android:attr/ratingBarStyleSmall"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-
-      android:layout_below="@+id/artist_artist"
-      android:layout_alignParentRight="true"
-      android:layout_marginLeft="@dimen/std_pad"
-      android:layout_marginTop="@dimen/startop_pad" />
-  </RelativeLayout>
+    android:layout_below="@id/artist_artist"
+    layout="@layout/layout_tags_rating" />
 
   <com.viewpagerindicator.TabPageIndicator
     android:id="@+id/indicator"
     android:gravity="center"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/entity_info" />
+    android:layout_below="@id/tags_rating" />
 
   <android.support.v4.view.ViewPager
     android:id="@+id/pager"

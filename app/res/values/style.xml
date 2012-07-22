@@ -104,11 +104,9 @@
   </style>
 
   <style
-    name="TagArea"
+    name="TagsText"
     parent="ScrollText">
     <item name="android:padding">@dimen/small_pad</item>
-    <item name="android:background">@drawable/tagbox</item>
-    <item name="android:layout_marginTop">@dimen/small_pad</item>
     <item name="android:textSize">@dimen/text_size_tag</item>
     <item name="android:textColor">@color/tag_text</item>
     <item name="android:text">@string/no_tags</item>
@@ -117,8 +115,6 @@
   <style
     name="RatingBar"
     parent="@android:style/Widget.Holo.RatingBar">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_gravity">center</item>
     <item name="android:numStars">5</item>
     <item name="android:stepSize">1</item>
@@ -364,12 +360,6 @@
     <item name="android:layout_width">@dimen/separator_thickness</item>
     <item name="android:layout_height">match_parent</item>
     <item name="android:background">@color/mb_purple_medium</item>
-  </style>
-
-  <style
-    name="StdButton"
-    parent="MatchWidth">
-    <item name="android:onClick">onClick</item>
   </style>
 
   <style name="LoginButton">

@@ -18,11 +18,13 @@
   along with MusicBrainz for Android. If not, see
   <http://www.gnu.org/licenses/>. -->
 
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
   <style
     name="MusicBrainzTheme"
     parent="Theme.Sherlock.Light.DarkActionBar">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
     <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
     <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
     <item name="vpiTabPageIndicatorStyle">@style/TabIndicator</item>

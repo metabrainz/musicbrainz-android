@@ -33,7 +33,7 @@
   <color name="aux_text">#666666</color>
   <color name="link_text">#3366cc</color>
 
-  <color name="tag_bg">#ffffff</color>
+  <color name="tag_rate_bg">#ffffff</color>
   <color name="tag_text">#000000</color>
 
   <color name="list_bg">#ffffff</color>
