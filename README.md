@@ -6,10 +6,6 @@ This is the primary repository for the [MusicBrainz](http://www.musicbrainz.org)
 
 This app has been available on the [Google Play Store](https://market.android.com/details?id=org.musicbrainz.mobile) since 1st August 2011.
 
-### Betas
-
-There may occasionally be preview builds to test new functionality. Check the [downloads](https://github.com/jdamcd/musicbrainz-android/downloads) page.
-
 ## Licenses
 
 This app is licensed under the GNU General Public License Version 3.
