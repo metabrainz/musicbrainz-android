@@ -53,7 +53,7 @@ public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemCli
         this.data = data;
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.dialog_rg);
+        setContentView(R.layout.dialog_release_group);
 
         releaseList = (ListView) findViewById(R.id.rg_release_list);
         releaseList.setOnItemClickListener(this);

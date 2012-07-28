@@ -62,11 +62,13 @@ public class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
     public Object instantiateItem(View container, int position) {
         switch (position) {
         case 0:
-            RelativeLayout artists = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_search_artists, null);
+            RelativeLayout artists = (RelativeLayout) context.getLayoutInflater().inflate(
+                    R.layout.layout_search_artists, null);
             ((ViewPager) container).addView(artists, 0);
             return artists;
         case 1:
-            RelativeLayout releases = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_search_rgs, null);
+            RelativeLayout releases = (RelativeLayout) context.getLayoutInflater().inflate(
+                    R.layout.layout_search_release_groups, null);
             ((ViewPager) container).addView(releases, 0);
             return releases;
         }
@@ -84,15 +86,19 @@ public class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
     }
 
     @Override
-    public void destroyItem(View container, int position, Object object) {}
+    public void destroyItem(View container, int position, Object object) {
+    }
 
     @Override
-    public void startUpdate(View container) {}
+    public void startUpdate(View container) {
+    }
 
     @Override
-    public void finishUpdate(View container) {}
+    public void finishUpdate(View container) {
+    }
 
     @Override
-    public void restoreState(Parcelable state, ClassLoader loader) {}
-    
+    public void restoreState(Parcelable state, ClassLoader loader) {
+    }
+
 }

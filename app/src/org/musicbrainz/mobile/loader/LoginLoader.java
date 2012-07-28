@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.util.Credentials;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -34,13 +34,13 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class LoginLoader extends AsyncTaskLoader<AsyncResult<Boolean>> {
 
-    private MusicBrainzApplication app;
+    private MusicBrainzApp app;
     private String username;
     private String password;
 
     public LoginLoader(Context appContext, String username, String password) {
         super(appContext);
-        app = (MusicBrainzApplication) appContext;
+        app = (MusicBrainzApp) appContext;
         this.username = username;
         this.password = password;
     }

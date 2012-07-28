@@ -21,7 +21,7 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.webservice.HttpClient;
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.fragment.WelcomeFragment;
 import org.musicbrainz.mobile.intent.IntentFactory;
@@ -101,7 +101,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
     private void logOut() {
         PreferenceUtils.clearUser(getApplicationContext());
         HttpClient.clearCredentials();
-        MusicBrainzApplication app = (MusicBrainzApplication) getApplicationContext();
+        MusicBrainzApp app = (MusicBrainzApp) getApplicationContext();
         app.updateLoginStatus(false);
         Toast.makeText(this, R.string.toast_logged_out, Toast.LENGTH_SHORT).show();
     }

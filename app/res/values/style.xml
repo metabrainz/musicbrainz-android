@@ -34,10 +34,15 @@
   </style>
 
   <style
-    name="List"
+    name="ListDefaultDivider"
     parent="Match">
     <item name="android:background">@color/list_bg</item>
     <item name="android:cacheColorHint">@color/list_bg</item>
+  </style>
+  
+  <style
+    name="List"
+    parent="ListDefaultDivider">
     <item name="android:divider">@drawable/list_divider</item>
   </style>
 

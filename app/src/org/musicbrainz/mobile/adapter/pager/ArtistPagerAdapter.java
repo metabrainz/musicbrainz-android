@@ -50,7 +50,7 @@ public class ArtistPagerAdapter extends PagerAdapter implements TitleProvider {
     
     private void inflateViews() {
         links = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_links, null);
-        releases = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_artist_rgs,null);
+        releases = (RelativeLayout) context.getLayoutInflater().inflate(R.layout.layout_artist_release_groups,null);
         edit = (ScrollView) context.getLayoutInflater().inflate(R.layout.layout_edit, null);
     }
 

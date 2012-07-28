@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.fragment;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.util.PreferenceUtils;
 
@@ -48,7 +48,7 @@ public class WelcomeFragment extends ContextFragment {
     }
 
     public void updateText() {
-        MusicBrainzApplication app = (MusicBrainzApplication) context;
+        MusicBrainzApp app = (MusicBrainzApp) context;
         if (app.isUserLoggedIn()) {
             welcomeText.setText(getString(R.string.welcome_loggedin) + " " + PreferenceUtils.getUsername(context));
         } else {

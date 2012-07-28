@@ -34,5 +34,5 @@
 
   <ListView
     android:id="@+id/rg_release_list"
-    style="@style/List" />
+    style="@style/ListDefaultDivider" />
 </LinearLayout>

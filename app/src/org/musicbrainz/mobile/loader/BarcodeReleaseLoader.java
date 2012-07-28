@@ -27,7 +27,7 @@ import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -35,12 +35,12 @@ import android.content.Context;
 
 public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Release>> {
 
-    private MusicBrainzApplication app;
+    private MusicBrainzApp app;
     private String barcode;
 
     public BarcodeReleaseLoader(Context appContext, String barcode) {
         super(appContext);
-        app = (MusicBrainzApplication) appContext;
+        app = (MusicBrainzApp) appContext;
         this.barcode = barcode;
     }
 

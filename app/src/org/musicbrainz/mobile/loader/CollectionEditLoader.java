@@ -25,7 +25,7 @@ import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -34,14 +34,14 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class CollectionEditLoader extends AsyncTaskLoader<AsyncResult<Void>> {
     
-    private MusicBrainzApplication app;
+    private MusicBrainzApp app;
     private String collectionMbid;
     private String releaseMbid;
     private boolean isAdd;
     
     public CollectionEditLoader(Context appContext, String collectionMbid, String releaseMbid, boolean isAdd) {
         super(appContext);
-        app = (MusicBrainzApplication) appContext;
+        app = (MusicBrainzApp) appContext;
         this.collectionMbid = collectionMbid;
         this.releaseMbid = releaseMbid;
         this.isAdd = isAdd;

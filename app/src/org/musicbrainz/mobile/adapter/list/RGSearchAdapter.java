@@ -40,7 +40,7 @@ public class RGSearchAdapter extends ArrayAdapter<ReleaseGroupStub> {
     private List<ReleaseGroupStub> resultData;
 
     public RGSearchAdapter(Activity context, List<ReleaseGroupStub> resultData) {
-        super(context, R.layout.list_search_rg, resultData);
+        super(context, R.layout.list_search_release_group, resultData);
         this.context = context;
         this.resultData = resultData;
     }
@@ -51,7 +51,7 @@ public class RGSearchAdapter extends ArrayAdapter<ReleaseGroupStub> {
 
         if (release == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            release = inflater.inflate(R.layout.list_search_rg, parent, false);
+            release = inflater.inflate(R.layout.list_search_release_group, parent, false);
             holder = new SearchReleaseGroupHolder(release);
             release.setTag(holder);
         } else {

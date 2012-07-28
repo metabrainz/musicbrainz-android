@@ -40,7 +40,7 @@ import com.paypal.android.MEP.PayPal;
  * created. This prevents the user from having to wait when they visit the
  * donation page for the first time.
  */
-public class MusicBrainzApplication extends Application {
+public class MusicBrainzApp extends Application {
 
     private boolean isUserLoggedIn;
     private PayPal payPal;
@@ -106,8 +106,8 @@ public class MusicBrainzApplication extends Application {
                 getClientId());
     }
     
-    public static MusicBrainzApplication getApp(Context context) {
-        return (MusicBrainzApplication) context.getApplicationContext();
+    public static MusicBrainzApp getApp(Context context) {
+        return (MusicBrainzApp) context.getApplicationContext();
     }
 
 }

@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.fragment;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory;
@@ -103,7 +103,7 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
 
         @Override
         public void run() {
-            MusicBrainzApplication app = (MusicBrainzApplication) context;
+            MusicBrainzApp app = (MusicBrainzApp) context;
             payPal = app.getPayPal();
             if (payPal != null) {
                 onPayPalLoaded();

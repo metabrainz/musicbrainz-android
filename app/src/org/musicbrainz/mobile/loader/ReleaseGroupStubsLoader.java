@@ -26,7 +26,7 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -35,12 +35,12 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class ReleaseGroupStubsLoader extends AsyncTaskLoader<AsyncResult<LinkedList<ReleaseStub>>> {
 
-    private MusicBrainzApplication app;
+    private MusicBrainzApp app;
     private String mbid;
 
     public ReleaseGroupStubsLoader(Context appContext, String mbid) {
         super(appContext);
-        app = (MusicBrainzApplication) appContext;
+        app = (MusicBrainzApp) appContext;
         this.mbid = mbid;
     }
 

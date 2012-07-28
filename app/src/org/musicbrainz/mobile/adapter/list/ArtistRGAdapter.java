@@ -39,7 +39,7 @@ public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupStub> {
     private List<ReleaseGroupStub> releaseGroups;
 
     public ArtistRGAdapter(Activity context, List<ReleaseGroupStub> releaseGroups) {
-        super(context, R.layout.list_rg, releaseGroups);
+        super(context, R.layout.list_release_group, releaseGroups);
         this.context = context;
         this.releaseGroups = releaseGroups;
     }
@@ -50,7 +50,7 @@ public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupStub> {
 
         if (release == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            release = inflater.inflate(R.layout.list_rg, parent, false);
+            release = inflater.inflate(R.layout.list_release_group, parent, false);
             holder = new ArtistReleaseGroupHolder(release);
             release.setTag(holder);
         } else {

@@ -26,7 +26,7 @@ import java.util.LinkedList;
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -35,11 +35,11 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class CollectionListLoader extends AsyncTaskLoader<AsyncResult<LinkedList<EditorCollectionStub>>> {
 
-    private MusicBrainzApplication app;
+    private MusicBrainzApp app;
 
     public CollectionListLoader(Context appContext) {
         super(appContext);
-        app = (MusicBrainzApplication) appContext;
+        app = (MusicBrainzApp) appContext;
     }
     
     @Override

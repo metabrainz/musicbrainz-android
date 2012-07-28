@@ -37,10 +37,11 @@
   <color name="tag_text">#000000</color>
 
   <color name="list_bg">#ffffff</color>
+  <color name="list_head">#33dddddd</color>
   <color name="list_text">#000000</color>
   <color name="list_divider">#eeeeee</color>
 
-  <!-- Branding -->
+  <!-- Brand -->
   <color name="mb_purple_light">#bcaeed</color>
   <color name="mb_purple_medium">#736dab</color>
   <color name="mb_purple_dark">#34176b</color>

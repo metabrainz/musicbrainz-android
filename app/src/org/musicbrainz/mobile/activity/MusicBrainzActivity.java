@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory;
@@ -72,7 +72,7 @@ public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
     }
     
     protected boolean isUserLoggedIn() {
-        return MusicBrainzApplication.getApp(this).isUserLoggedIn();
+        return MusicBrainzApp.getApp(this).isUserLoggedIn();
     }
     
 }

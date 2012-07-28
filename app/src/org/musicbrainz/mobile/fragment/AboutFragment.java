@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.fragment;
 
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.view.HtmlAssetTextView;
 
@@ -56,7 +56,7 @@ public class AboutFragment extends SherlockFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        MusicBrainzApplication app = (MusicBrainzApplication) getActivity().getApplicationContext();
+        MusicBrainzApp app = (MusicBrainzApp) getActivity().getApplicationContext();
         versionLabel.setText(getText(R.string.version_text) + " " + app.getVersion());
     }
     

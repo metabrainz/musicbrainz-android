@@ -33,7 +33,7 @@
       android:layout_centerInParent="true" />
   </RelativeLayout>
 
-  <include layout="@layout/layout_search_rgs" />
+  <include layout="@layout/layout_search_release_groups" />
 
   <include layout="@layout/layout_search_artists" />
 

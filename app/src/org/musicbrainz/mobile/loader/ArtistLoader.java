@@ -27,7 +27,7 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApplication;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -35,12 +35,12 @@ import android.content.Context;
 
 public class ArtistLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Artist>> {
 
-    private MusicBrainzApplication app;
+    private MusicBrainzApp app;
     private String mbid;
 
     public ArtistLoader(Context appContext, String mbid) {
         super(appContext);
-        app = (MusicBrainzApplication) appContext;
+        app = (MusicBrainzApp) appContext;
         this.mbid = mbid;
     }
 
