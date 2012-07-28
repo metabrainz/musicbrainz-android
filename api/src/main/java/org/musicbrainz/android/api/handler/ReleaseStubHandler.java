@@ -35,6 +35,7 @@ public class ReleaseStubHandler extends MBHandler {
 
     private boolean inArtist;
     private boolean inLabel;
+    private boolean inMedium;
 
     public LinkedList<ReleaseStub> getResults() {
         return results;
@@ -65,6 +66,8 @@ public class ReleaseStubHandler extends MBHandler {
             inLabel = true;
         } else if (localName.equals("format")) {
             buildString();
+        } else if (localName.equals("medium")) {
+            inMedium = true;
         }
     }
 
@@ -72,7 +75,7 @@ public class ReleaseStubHandler extends MBHandler {
 
         if (localName.equals("release")) {
             results.add(stub);
-        } else if (localName.equals("title")) {
+        } else if (localName.equals("title") && !inMedium) {
             stub.setTitle(getString());
         } else if (localName.equals("artist")) {
             inArtist = false;
@@ -89,6 +92,8 @@ public class ReleaseStubHandler extends MBHandler {
             inLabel = false;
         } else if (localName.equals("format")) {
             stub.addFormat(getString());
+        } else if (localName.equals("medium")) {
+            inMedium = false;
         }
     }
 
