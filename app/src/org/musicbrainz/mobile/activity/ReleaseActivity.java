@@ -51,9 +51,7 @@ import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -62,6 +60,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -94,11 +93,13 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
 
     private static final int DIALOG_RELEASE_SELECTION = 0;
     private static final int DIALOG_BARCODE = 1;
-    private static final int DIALOG_CONNECTION_FAILURE = 3;
 
     private Release release;
     private LinkedList<ReleaseStub> stubs;
     private UserData userData;
+    
+    private View loading;
+    private View error;
 
     private String releaseMbid;
     private String releaseGroupMbid;
@@ -121,9 +122,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         releaseGroupMbid = getIntent().getStringExtra(Extra.RG_MBID);
         barcode = getIntent().getStringExtra(Extra.BARCODE);
 
-        setContentView(R.layout.layout_loading);
         setSupportProgressBarIndeterminateVisibility(false);
         configureLoader();
+        setContentView(R.layout.activity_release);
+        configurePager();
+        findViews();
     }
 
     private void configureLoader() {
@@ -139,10 +142,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     }
 
     private void populateLayout() {
-        setContentView(R.layout.activity_release);
-        configurePager();
-        findViews();
-
         TextView artist = (TextView) findViewById(R.id.release_artist);
         TextView title = (TextView) findViewById(R.id.release_release);
         TextView labels = (TextView) findViewById(R.id.release_label);
@@ -173,6 +172,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             disableEditFields();
             findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
         }
+        loading.setVisibility(View.GONE);
     }
 
     private void configurePager() {
@@ -186,6 +186,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     }
 
     private void findViews() {
+        loading = findViewById(R.id.loading);
+        error = findViewById(R.id.error);
         rating = (RatingBar) findViewById(R.id.rating);
         tags = (TextView) findViewById(R.id.tags);
         tagInput = (EditText) findViewById(R.id.tag_input);
@@ -298,29 +300,22 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             BarcodeResultDialog barcodeDialog = new BarcodeResultDialog(ReleaseActivity.this, isUserLoggedIn(), barcode);
             barcodeDialog.setCancelable(true);
             return barcodeDialog;
-        case DIALOG_CONNECTION_FAILURE:
-            return createConnectionErrorDialog();
         }
         return null;
     }
 
-    private Dialog createConnectionErrorDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getString(R.string.err_text));
-        builder.setCancelable(false);
-        builder.setPositiveButton(getString(R.string.err_pos), new DialogInterface.OnClickListener() {
+    
+    private void showConnectionErrorWarning() {
+        error.setVisibility(View.VISIBLE);
+        Button retry = (Button) error.findViewById(R.id.retry_button);
+        retry.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
+                loading.setVisibility(View.VISIBLE);
+                error.setVisibility(View.GONE);
                 restartLoader();
-                dialog.cancel();
             }
         });
-        builder.setNegativeButton(getString(R.string.err_neg), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                ReleaseActivity.this.finish();
-            }
-        });
-        return builder.create();
     }
 
     private void restartLoader() {
@@ -353,7 +348,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
                 if (container.getException() instanceof BarcodeNotFoundException) {
                     showDialog(DIALOG_BARCODE);
                 } else {
-                    showDialog(DIALOG_CONNECTION_FAILURE);
+                    showConnectionErrorWarning();
                 }
                 break;
             case SUCCESS:
@@ -381,7 +376,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
                 AsyncResult<LinkedList<ReleaseStub>> container) {
             switch (container.getStatus()) {
             case EXCEPTION:
-                showDialog(DIALOG_CONNECTION_FAILURE);
+                showConnectionErrorWarning();
                 break;
             case SUCCESS:
                 stubs = container.getData();
