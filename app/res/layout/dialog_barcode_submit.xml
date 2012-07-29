@@ -20,32 +20,36 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="MatchWidth">
+  style="@style/MatchWidth"
+  android:divider="?android:attr/dividerHorizontal"
+  android:showDividers="middle">
 
-  <TextView
-    style="@style/DialogHeader"
-    android:text="@string/barcode_add_header" />
+  <LinearLayout style="@style/MatchWidth">
 
-  <TextView
-    style="@style/DialogBody"
-    android:text="@string/barcode_add_body" />
+    <TextView
+      style="@style/DialogHeader"
+      android:text="@string/barcode_add_header" />
 
-  <View style="@style/Separator" />
+    <TextView
+      style="@style/DialogBody"
+      android:text="@string/barcode_add_body" />
 
-  <include layout="@layout/list_release" />
+    <View style="@style/Separator" />
 
-  <View style="@style/Separator" />
+    <include layout="@layout/list_release" />
 
-  <TextView
-    style="@style/DialogBody"
-    android:text="@string/barcode_add_info"
-    android:layout_marginTop="@dimen/std_pad" />
+    <View style="@style/Separator" />
+
+    <TextView
+      style="@style/DialogBody"
+      android:text="@string/barcode_add_info"
+      android:layout_marginTop="@dimen/std_pad" />
+  </LinearLayout>
 
   <Button
     android:id="@+id/barcode_confirm"
-    style="@style/MatchWidth"
-    android:text="@string/barcode_add_btn"
-    android:layout_marginRight="@dimen/std_pad"
-    android:layout_marginLeft="@dimen/std_pad"
-    android:layout_marginBottom="@dimen/std_pad" />
+    style="?android:attr/buttonBarButtonStyle"
+    android:layout_width="match_parent"
+    android:text="@string/barcode_add_btn" />
+
 </LinearLayout>

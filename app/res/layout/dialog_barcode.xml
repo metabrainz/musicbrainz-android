@@ -20,19 +20,24 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/MatchWidth">
+  style="@style/MatchWidth"
+  android:divider="?android:attr/dividerHorizontal"
+  android:showDividers="middle">
 
-  <TextView
-    style="@style/DialogHeader"
-    android:text="@string/barcode_header" />
+  <LinearLayout style="@style/MatchWidth">
+    <TextView
+      style="@style/DialogHeader"
+      android:text="@string/barcode_header" />
 
-  <TextView
-    android:id="@+id/barcode_dialog_text"
-    style="@style/DialogBody" />
+    <TextView
+      android:id="@+id/barcode_dialog_text"
+      style="@style/DialogBody" />
+  </LinearLayout>
 
   <Button
     android:id="@+id/barcode_add"
-    style="@style/MatchWidth"
-    android:layout_margin="@dimen/std_pad"
+    style="?android:attr/buttonBarButtonStyle"
+    android:layout_width="match_parent"
     android:text="@string/barcode_btn" />
+
 </LinearLayout>

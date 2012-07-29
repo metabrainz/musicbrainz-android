@@ -33,9 +33,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Dialog that confirms the release details for barcode submission.
- */
 public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener {
 
     private BarcodeSearchActivity parent;
@@ -48,7 +45,7 @@ public class BarcodeConfirmDialog extends Dialog implements View.OnClickListener
         parent = (BarcodeSearchActivity) context;
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.dialog_bar_submit);
+        setContentView(R.layout.dialog_barcode_submit);
 
         Button confirm = (Button) findViewById(R.id.barcode_confirm);
         confirm.setOnClickListener(this);
