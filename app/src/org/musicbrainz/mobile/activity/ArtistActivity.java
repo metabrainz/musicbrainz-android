@@ -27,6 +27,7 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistRGAdapter;
 import org.musicbrainz.mobile.adapter.list.WeblinkAdapter;
@@ -120,7 +121,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
         displayMessagesForEmptyData();
 
-        if (isUserLoggedIn()) {
+        if (MusicBrainzApp.isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {
@@ -239,7 +240,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     @Override
     public Loader<AsyncEntityResult<Artist>> onCreateLoader(int id, Bundle args) {
-        return new ArtistLoader(getApplicationContext(), mbid);
+        return new ArtistLoader(mbid);
     }
 
     @Override
@@ -282,7 +283,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
             int rating = (int) ratingInput.getRating();
-            return new SubmitRatingLoader(getApplicationContext(), Entity.ARTIST, artist.getMbid(), rating);
+            return new SubmitRatingLoader(Entity.ARTIST, artist.getMbid(), rating);
         }
 
         @Override
@@ -321,7 +322,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         @Override
         public Loader<AsyncResult<List<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
-            return new SubmitTagsLoader(getApplicationContext(), Entity.ARTIST, artist.getMbid(), tags);
+            return new SubmitTagsLoader(Entity.ARTIST, artist.getMbid(), tags);
         }
 
         @Override

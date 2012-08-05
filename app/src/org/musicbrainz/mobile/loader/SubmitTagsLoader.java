@@ -32,19 +32,16 @@ import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
-import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
 public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<List<Tag>>> {
 
-    private MusicBrainzApp app;
     private Entity type;
     private String mbid;
     private String tags;
 
-    public SubmitTagsLoader(Context appContext, Entity type, String mbid, String tags) {
-        super(appContext);
-        app = (MusicBrainzApp) appContext;
+    public SubmitTagsLoader(Entity type, String mbid, String tags) {
+        super(MusicBrainzApp.getContext());
         this.type = type;
         this.mbid = mbid;
         this.tags = tags;
@@ -58,7 +55,7 @@ public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<List<Tag>>> {
 
     @Override
     public AsyncResult<List<Tag>> loadInBackground() {
-        MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
+        MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getCredentials());
         List<String> sanitisedTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags);
         try {
             client.submitTags(type, mbid, sanitisedTags);

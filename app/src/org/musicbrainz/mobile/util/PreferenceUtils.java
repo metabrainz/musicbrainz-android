@@ -20,6 +20,7 @@
 
 package org.musicbrainz.mobile.util;
 
+import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.config.Secrets;
 
 import android.content.Context;
@@ -38,24 +39,24 @@ public class PreferenceUtils {
         public static final String PREF_BUGSENSE = "send_crashlogs";
     }
 
-    public static String getUsername(Context context) {
-        return getUserPreferences(context).getString(Pref.PREF_USERNAME, null);
+    public static String getUsername() {
+        return getUserPreferences().getString(Pref.PREF_USERNAME, null);
     }
 
-    public static String getPassword(Context context) {
-        String obscuredPassword = getUserPreferences(context).getString(Pref.PREF_PASSWORD, null);
+    public static String getPassword() {
+        String obscuredPassword = getUserPreferences().getString(Pref.PREF_PASSWORD, null);
         return SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
     }
     
-    public static void clearUser(Context context) {
-        SharedPreferences prefs = getUserPreferences(context);
+    public static void clearUser() {
+        SharedPreferences prefs = getUserPreferences();
         Editor spe = prefs.edit();
         spe.clear();
         spe.commit();
     }
     
-    private static SharedPreferences getUserPreferences(Context context) {
-        return context.getSharedPreferences(Pref.PREFS_USER, Context.MODE_PRIVATE);
+    private static SharedPreferences getUserPreferences() {
+        return MusicBrainzApp.getContext().getSharedPreferences(Pref.PREFS_USER, Context.MODE_PRIVATE);
     }
 
     public static boolean shouldProvideSearchSuggestions(Context context) {

@@ -30,23 +30,18 @@ import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
-import android.content.Context;
-
 public class SearchReleaseLoader extends PersistingAsyncTaskLoader<AsyncResult<List<ReleaseStub>>> {
 
-    private MusicBrainzApp app;
     private String term;
 
-    public SearchReleaseLoader(Context appContext, String term) {
-        super(appContext);
-        app = (MusicBrainzApp) appContext;
+    public SearchReleaseLoader(String term) {
         this.term = term;
     }
 
     @Override
     public AsyncResult<List<ReleaseStub>> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(app.getUserAgent());
+            MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getUserAgent());
             data = new AsyncResult<List<ReleaseStub>>(LoaderStatus.SUCCESS, client.searchRelease(term));
             return data;
         } catch (IOException e) {

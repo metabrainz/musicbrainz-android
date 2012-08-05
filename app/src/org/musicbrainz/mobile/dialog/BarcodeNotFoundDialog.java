@@ -45,7 +45,7 @@ public class BarcodeNotFoundDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.barcode_header);
 
-        if (MusicBrainzApp.getApp(getActivity()).isUserLoggedIn()) {
+        if (MusicBrainzApp.isUserLoggedIn()) {
             builder.setMessage(R.string.barcode_info_log);
         } else {
             builder.setMessage(R.string.barcode_info_nolog);

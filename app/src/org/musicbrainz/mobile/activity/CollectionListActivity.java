@@ -36,7 +36,7 @@ public class CollectionListActivity extends MusicBrainzActivity {
     }
 
     public void setUserNameTitle() {
-        String userName = PreferenceUtils.getUsername(getApplicationContext());
+        String userName = PreferenceUtils.getUsername();
         getSupportActionBar().setTitle(userName + getString(R.string.plural) + " " + getString(R.string.collections));
     }
 

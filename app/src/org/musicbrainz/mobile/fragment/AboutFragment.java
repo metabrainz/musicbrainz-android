@@ -56,8 +56,7 @@ public class AboutFragment extends SherlockFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        MusicBrainzApp app = (MusicBrainzApp) getActivity().getApplicationContext();
-        versionLabel.setText(getText(R.string.version_text) + " " + app.getVersion());
+        versionLabel.setText(getText(R.string.version_text) + " " + MusicBrainzApp.getVersion());
     }
     
     @Override

@@ -48,9 +48,8 @@ public class WelcomeFragment extends ContextFragment {
     }
 
     public void updateText() {
-        MusicBrainzApp app = (MusicBrainzApp) context;
-        if (app.isUserLoggedIn()) {
-            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + PreferenceUtils.getUsername(context));
+        if (MusicBrainzApp.isUserLoggedIn()) {
+            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + PreferenceUtils.getUsername());
         } else {
             welcomeText.setText(R.string.welcome);
         }

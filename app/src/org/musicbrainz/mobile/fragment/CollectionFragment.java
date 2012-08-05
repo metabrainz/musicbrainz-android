@@ -163,7 +163,7 @@ public class CollectionFragment extends SherlockListFragment {
 
         @Override
         public Loader<AsyncResult<EditorCollection>> onCreateLoader(int id, Bundle args) {
-            return new CollectionLoader(appContext, mbid);
+            return new CollectionLoader(mbid);
         }
 
         @Override
@@ -183,7 +183,7 @@ public class CollectionFragment extends SherlockListFragment {
 
         @Override
         public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
-            return new CollectionEditLoader(appContext, mbid, args.getString(RELEASE_MBID), false);
+            return new CollectionEditLoader(mbid, args.getString(RELEASE_MBID), false);
         }
 
         @Override

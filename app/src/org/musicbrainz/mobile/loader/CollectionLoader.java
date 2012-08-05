@@ -29,23 +29,18 @@ import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
-import android.content.Context;
-
 public class CollectionLoader extends PersistingAsyncTaskLoader<AsyncResult<EditorCollection>> {
 
-    private MusicBrainzApp app;
     private String mbid;
     
-    public CollectionLoader(Context appContext, String mbid) {
-        super(appContext);
-        app = (MusicBrainzApp) appContext;
+    public CollectionLoader(String mbid) {
         this.mbid = mbid;
     }
     
     @Override
     public AsyncResult<EditorCollection> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
+            MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getCredentials());
             data = new AsyncResult<EditorCollection>(LoaderStatus.SUCCESS, client.lookupCollection(mbid));
             return data;
         } catch (IOException e) {

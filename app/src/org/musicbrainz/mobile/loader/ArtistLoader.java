@@ -31,16 +31,11 @@ import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
-import android.content.Context;
-
 public class ArtistLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Artist>> {
 
-    private MusicBrainzApp app;
     private String mbid;
 
-    public ArtistLoader(Context appContext, String mbid) {
-        super(appContext);
-        app = (MusicBrainzApp) appContext;
+    public ArtistLoader(String mbid) {
         this.mbid = mbid;
     }
 
@@ -54,7 +49,7 @@ public class ArtistLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Ar
     }
 
     private AsyncEntityResult<Artist> getAvailableData() throws IOException {
-        if (app.isUserLoggedIn()) {
+        if (MusicBrainzApp.isUserLoggedIn()) {
             return getArtistWithUserData();
         } else {
             return getArtist();
@@ -62,13 +57,13 @@ public class ArtistLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Ar
     }
 
     private AsyncEntityResult<Artist> getArtist() throws IOException {
-        MusicBrainz client = new MusicBrainzWebClient(app.getUserAgent());
+        MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getUserAgent());
         data = new AsyncEntityResult<Artist>(LoaderStatus.SUCCESS, client.lookupArtist(mbid));
         return data;
     }
 
     private AsyncEntityResult<Artist> getArtistWithUserData() throws IOException {
-        MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
+        MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getCredentials());
         Artist artist = client.lookupArtist(mbid);
         UserData userData = client.lookupUserData(Entity.ARTIST, mbid);
         data = new AsyncEntityResult<Artist>(LoaderStatus.SUCCESS, artist, userData);

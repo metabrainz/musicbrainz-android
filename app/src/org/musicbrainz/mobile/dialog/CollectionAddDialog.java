@@ -29,7 +29,6 @@ import org.musicbrainz.mobile.loader.CollectionListLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -50,7 +49,6 @@ public class CollectionAddDialog extends DialogFragment implements
     private static final int COLLECTIONS_LOADER = 10;
     
     private AddToCollectionCallback callback;
-    private Context appContext;
     private View loading;
     private View error;
     private View empty;
@@ -65,7 +63,6 @@ public class CollectionAddDialog extends DialogFragment implements
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        appContext = activity.getApplicationContext();
         try {
             callback = (AddToCollectionCallback) activity;
         } catch (ClassCastException e) {
@@ -95,7 +92,7 @@ public class CollectionAddDialog extends DialogFragment implements
 
     @Override
     public Loader<AsyncResult<List<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
-        return new CollectionListLoader(appContext);
+        return new CollectionListLoader();
     }
 
     @Override

@@ -229,11 +229,11 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     public Loader<AsyncResult<SearchResults>> onCreateLoader(int id, Bundle args) {
         switch (id) {
         case SEARCH_ARTIST_LOADER:
-            return new SearchArtistLoader(getApplicationContext(), searchTerm);
+            return new SearchArtistLoader(searchTerm);
         case SEARCH_RELEASE_GROUP_LOADER:
-            return new SearchReleaseGroupLoader(getApplicationContext(), searchTerm);
+            return new SearchReleaseGroupLoader(searchTerm);
         case SEARCH_LOADER:
-            return new SearchLoader(getApplicationContext(), searchTerm);
+            return new SearchLoader(searchTerm);
         }
         return null;
     }

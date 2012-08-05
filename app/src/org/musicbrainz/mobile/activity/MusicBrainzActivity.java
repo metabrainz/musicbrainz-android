@@ -20,7 +20,6 @@
 
 package org.musicbrainz.mobile.activity;
 
-import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory;
@@ -69,10 +68,6 @@ public abstract class MusicBrainzActivity extends SherlockFragmentActivity {
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, R.string.toast_feedback_fail, Toast.LENGTH_LONG).show();
         }
-    }
-    
-    protected boolean isUserLoggedIn() {
-        return MusicBrainzApp.getApp(this).isUserLoggedIn();
     }
     
 }

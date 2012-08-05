@@ -29,19 +29,16 @@ import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
-import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
 public class CollectionEditLoader extends AsyncTaskLoader<AsyncResult<Void>> {
     
-    private MusicBrainzApp app;
     private String collectionMbid;
     private String releaseMbid;
     private boolean isAdd;
     
-    public CollectionEditLoader(Context appContext, String collectionMbid, String releaseMbid, boolean isAdd) {
-        super(appContext);
-        app = (MusicBrainzApp) appContext;
+    public CollectionEditLoader(String collectionMbid, String releaseMbid, boolean isAdd) {
+        super(MusicBrainzApp.getContext());
         this.collectionMbid = collectionMbid;
         this.releaseMbid = releaseMbid;
         this.isAdd = isAdd;
@@ -56,7 +53,7 @@ public class CollectionEditLoader extends AsyncTaskLoader<AsyncResult<Void>> {
     @Override
     public AsyncResult<Void> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
+            MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getCredentials());
             if (isAdd) {
                 client.addReleaseToCollection(collectionMbid, releaseMbid);
             } else {

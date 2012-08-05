@@ -34,13 +34,11 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class LoginLoader extends AsyncTaskLoader<AsyncResult<Boolean>> {
 
-    private MusicBrainzApp app;
     private String username;
     private String password;
 
     public LoginLoader(Context appContext, String username, String password) {
-        super(appContext);
-        app = (MusicBrainzApp) appContext;
+        super(MusicBrainzApp.getContext());
         this.username = username;
         this.password = password;
     }
@@ -53,7 +51,7 @@ public class LoginLoader extends AsyncTaskLoader<AsyncResult<Boolean>> {
 
     @Override
     public AsyncResult<Boolean> loadInBackground() {
-        Credentials creds = new Credentials(app.getUserAgent(), username, password, app.getClientId());
+        Credentials creds = new Credentials(MusicBrainzApp.getUserAgent(), username, password, MusicBrainzApp.getClientId());
         MusicBrainz client = new MusicBrainzWebClient(creds);
         try {
             return new AsyncResult<Boolean>(LoaderStatus.SUCCESS, client.autenticateUserCredentials());

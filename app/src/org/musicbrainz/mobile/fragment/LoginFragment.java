@@ -163,8 +163,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
 
     private void onLoginSuccess() {
         storeLoginData();
-        MusicBrainzApp app = (MusicBrainzApp) context;
-        app.updateLoginStatus(true);
+        MusicBrainzApp.updateLoginStatus(true);
         Toast.makeText(context, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
         loginCallback.onLoggedIn();
     }

@@ -72,7 +72,7 @@ public class CollectionListFragment extends ListFragment implements
 
     @Override
     public Loader<AsyncResult<List<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
-        return new CollectionListLoader(appContext);
+        return new CollectionListLoader();
     }
 
     @Override

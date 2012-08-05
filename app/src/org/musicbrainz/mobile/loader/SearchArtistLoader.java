@@ -30,23 +30,18 @@ import org.musicbrainz.mobile.loader.result.LoaderStatus;
 import org.musicbrainz.mobile.loader.result.SearchResults;
 import org.musicbrainz.mobile.loader.result.SearchResults.SearchType;
 
-import android.content.Context;
-
 public class SearchArtistLoader extends PersistingAsyncTaskLoader<AsyncResult<SearchResults>> {
 
-    private MusicBrainzApp app;
     private String term;
 
-    public SearchArtistLoader(Context appContext, String term) {
-        super(appContext);
-        app = (MusicBrainzApp) appContext;
+    public SearchArtistLoader(String term) {
         this.term = term;
     }
 
     @Override
     public AsyncResult<SearchResults> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(app.getUserAgent());
+            MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getUserAgent());
             SearchResults results = new SearchResults(SearchType.ARTIST, client.searchArtist(term));
             data = new AsyncResult<SearchResults>(LoaderStatus.SUCCESS, results);
             return data;
