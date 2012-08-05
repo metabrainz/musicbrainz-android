@@ -23,6 +23,7 @@ package org.musicbrainz.android.api.data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Artist {
 
@@ -36,9 +37,8 @@ public class Artist {
     private int ratingCount;
     private float rating;
 
-    private LinkedList<Tag> tags = new LinkedList<Tag>();
+    private List<Tag> tags = new LinkedList<Tag>();
     private ArrayList<WebLink> links = new ArrayList<WebLink>();
-
     private ArrayList<ReleaseGroupStub> releaseGroupStubs = new ArrayList<ReleaseGroupStub>();
 
     public String getMbid() {
@@ -113,12 +113,12 @@ public class Artist {
         this.rating = rating;
     }
 
-    public LinkedList<Tag> getTags() {
+    public List<Tag> getTags() {
         Collections.sort(tags);
         return tags;
     }
     
-    public void setTags(LinkedList<Tag> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 

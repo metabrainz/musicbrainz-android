@@ -21,7 +21,7 @@
 package org.musicbrainz.mobile.loader;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Tag;
@@ -35,7 +35,7 @@ import org.musicbrainz.mobile.loader.result.LoaderStatus;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<LinkedList<Tag>>> {
+public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<List<Tag>>> {
 
     private MusicBrainzApp app;
     private Entity type;
@@ -57,15 +57,15 @@ public class SubmitTagsLoader extends AsyncTaskLoader<AsyncResult<LinkedList<Tag
     }
 
     @Override
-    public AsyncResult<LinkedList<Tag>> loadInBackground() {
+    public AsyncResult<List<Tag>> loadInBackground() {
         MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
-        LinkedList<String> saneTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags);
+        List<String> sanitisedTags = WebServiceUtils.sanitiseCommaSeparatedTags(tags);
         try {
-            client.submitTags(type, mbid, saneTags);
-            LinkedList<Tag> updatedTags = client.lookupTags(type, mbid);
-            return new AsyncResult<LinkedList<Tag>>(LoaderStatus.SUCCESS, updatedTags);
+            client.submitTags(type, mbid, sanitisedTags);
+            List<Tag> updatedTags = client.lookupTags(type, mbid);
+            return new AsyncResult<List<Tag>>(LoaderStatus.SUCCESS, updatedTags);
         } catch (IOException e) {
-            return new AsyncResult<LinkedList<Tag>>(LoaderStatus.EXCEPTION, e);
+            return new AsyncResult<List<Tag>>(LoaderStatus.EXCEPTION, e);
         }
     }
 }

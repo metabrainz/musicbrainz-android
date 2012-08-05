@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
@@ -77,7 +77,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
 
     private String barcode;
 
-    private LinkedList<ReleaseStub> results;
+    private List<ReleaseStub> results;
     private int selection = 0;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -182,16 +182,16 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         selection = savedInstanceState.getInt(INSTANCE_SELECTED);
     }
 
-    private LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>> searchCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>>() {
+    private LoaderCallbacks<AsyncResult<List<ReleaseStub>>> searchCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseStub>>>() {
 
         @Override
-        public Loader<AsyncResult<LinkedList<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<List<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
             return new SearchReleaseLoader(getApplicationContext(), searchBox.getText().toString());
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader,
-                AsyncResult<LinkedList<ReleaseStub>> data) {
+        public void onLoadFinished(Loader<AsyncResult<List<ReleaseStub>>> loader,
+                AsyncResult<List<ReleaseStub>> data) {
             instructions.setVisibility(View.INVISIBLE);
             loading.setVisibility(View.INVISIBLE);
             switch (data.getStatus()) {
@@ -204,7 +204,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<List<ReleaseStub>>> loader) {
             loader.reset();
         }
     };
@@ -223,7 +223,7 @@ public class BarcodeSearchActivity extends MusicBrainzActivity implements View.O
         });
     }
 
-    private void handleSearchResults(AsyncResult<LinkedList<ReleaseStub>> result) {
+    private void handleSearchResults(AsyncResult<List<ReleaseStub>> result) {
         results = result.getData();
         matches.setAdapter(new ReleaseStubAdapter(this, R.layout.list_release, results));
         matches.setOnItemClickListener(this);

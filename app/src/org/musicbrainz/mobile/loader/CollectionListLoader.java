@@ -21,7 +21,7 @@
 package org.musicbrainz.mobile.loader;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.EditorCollectionStub;
@@ -33,7 +33,7 @@ import org.musicbrainz.mobile.loader.result.LoaderStatus;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-public class CollectionListLoader extends AsyncTaskLoader<AsyncResult<LinkedList<EditorCollectionStub>>> {
+public class CollectionListLoader extends AsyncTaskLoader<AsyncResult<List<EditorCollectionStub>>> {
 
     private MusicBrainzApp app;
 
@@ -48,12 +48,12 @@ public class CollectionListLoader extends AsyncTaskLoader<AsyncResult<LinkedList
     }
 
     @Override
-    public AsyncResult<LinkedList<EditorCollectionStub>> loadInBackground() {
+    public AsyncResult<List<EditorCollectionStub>> loadInBackground() {
         try {
             MusicBrainz client = new MusicBrainzWebClient(app.getCredentials());
-            return new AsyncResult<LinkedList<EditorCollectionStub>>(LoaderStatus.SUCCESS, client.lookupUserCollections());
+            return new AsyncResult<List<EditorCollectionStub>>(LoaderStatus.SUCCESS, client.lookupUserCollections());
         } catch (IOException e) {
-            return new AsyncResult<LinkedList<EditorCollectionStub>>(LoaderStatus.EXCEPTION, e);
+            return new AsyncResult<List<EditorCollectionStub>>(LoaderStatus.EXCEPTION, e);
         }
     }
 

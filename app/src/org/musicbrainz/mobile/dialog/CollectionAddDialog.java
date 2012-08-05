@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.dialog;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.mobile.R;
@@ -36,15 +36,15 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class CollectionAddDialog extends DialogFragment implements
-        LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>>, OnItemClickListener {
+        LoaderCallbacks<AsyncResult<List<EditorCollectionStub>>>, OnItemClickListener {
 
     public static final String TAG = "collection_add";
     private static final int COLLECTIONS_LOADER = 10;
@@ -94,17 +94,17 @@ public class CollectionAddDialog extends DialogFragment implements
     }
 
     @Override
-    public Loader<AsyncResult<LinkedList<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
+    public Loader<AsyncResult<List<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
         return new CollectionListLoader(appContext);
     }
 
     @Override
-    public void onLoadFinished(Loader<AsyncResult<LinkedList<EditorCollectionStub>>> loader,
-            AsyncResult<LinkedList<EditorCollectionStub>> result) {
+    public void onLoadFinished(Loader<AsyncResult<List<EditorCollectionStub>>> loader,
+            AsyncResult<List<EditorCollectionStub>> result) {
         loading.setVisibility(View.GONE);
         switch (result.getStatus()) {
         case SUCCESS:
-            LinkedList<EditorCollectionStub> collection = result.getData();
+            List<EditorCollectionStub> collection = result.getData();
             try {
                 adapter = new CollectionListAdapter(getActivity(), collection);
                 if (adapter.isEmpty()) {
@@ -134,7 +134,7 @@ public class CollectionAddDialog extends DialogFragment implements
     }
 
     @Override
-    public void onLoaderReset(Loader<AsyncResult<LinkedList<EditorCollectionStub>>> loader) {
+    public void onLoaderReset(Loader<AsyncResult<List<EditorCollectionStub>>> loader) {
         loader.reset();
     }
 

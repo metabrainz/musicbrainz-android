@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.loader.result;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
@@ -28,22 +28,22 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 public class SearchResults {
     
     private final SearchType type;
-    private final LinkedList<ArtistSearchStub> artistResults;
-    private final LinkedList<ReleaseGroupStub> releaseGroupResults;
+    private final List<ArtistSearchStub> artistResults;
+    private final List<ReleaseGroupStub> releaseGroupResults;
     
     @SuppressWarnings("unchecked")
-    public SearchResults(SearchType type, LinkedList<?> results) {
+    public SearchResults(SearchType type, List<?> results) {
         if (type == SearchType.ARTIST) {
-            artistResults = (LinkedList<ArtistSearchStub>) results;
+            artistResults = (List<ArtistSearchStub>) results;
             releaseGroupResults = null;
         } else {
             artistResults = null;
-            releaseGroupResults = (LinkedList<ReleaseGroupStub>) results;
+            releaseGroupResults = (List<ReleaseGroupStub>) results;
         }
         this.type = type;
     }
     
-    public SearchResults(LinkedList<ArtistSearchStub> artistResults, LinkedList<ReleaseGroupStub> releaseGroupResults) {
+    public SearchResults(List<ArtistSearchStub> artistResults, List<ReleaseGroupStub> releaseGroupResults) {
         this.artistResults = artistResults;
         this.releaseGroupResults = releaseGroupResults;
         this.type = SearchType.ALL;
@@ -53,11 +53,11 @@ public class SearchResults {
         return type;
     }
 
-    public LinkedList<ArtistSearchStub> getArtistResults() {
+    public List<ArtistSearchStub> getArtistResults() {
         return artistResults;
     }
 
-    public LinkedList<ReleaseGroupStub> getReleaseGroupResults() {
+    public List<ReleaseGroupStub> getReleaseGroupResults() {
         return releaseGroupResults;
     }
 

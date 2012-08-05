@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.fragment;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.mobile.R;
@@ -43,7 +43,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class CollectionListFragment extends ListFragment implements
-        LoaderCallbacks<AsyncResult<LinkedList<EditorCollectionStub>>> {
+        LoaderCallbacks<AsyncResult<List<EditorCollectionStub>>> {
 
     private static final int COLLECTIONS_LOADER = 0;
     private Context appContext;
@@ -71,21 +71,21 @@ public class CollectionListFragment extends ListFragment implements
     }
 
     @Override
-    public Loader<AsyncResult<LinkedList<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
+    public Loader<AsyncResult<List<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
         return new CollectionListLoader(appContext);
     }
 
     @Override
-    public void onLoadFinished(Loader<AsyncResult<LinkedList<EditorCollectionStub>>> loader,
-            AsyncResult<LinkedList<EditorCollectionStub>> data) {
+    public void onLoadFinished(Loader<AsyncResult<List<EditorCollectionStub>>> loader,
+            AsyncResult<List<EditorCollectionStub>> data) {
         loading.setVisibility(View.GONE);
         handleResult(data);
     }
 
-    private void handleResult(AsyncResult<LinkedList<EditorCollectionStub>> result) {
+    private void handleResult(AsyncResult<List<EditorCollectionStub>> result) {
         switch (result.getStatus()) {
         case SUCCESS:
-            LinkedList<EditorCollectionStub> collection = result.getData();
+            List<EditorCollectionStub> collection = result.getData();
             try {
                 setListAdapter(new CollectionListAdapter(getActivity(), collection));
             } catch (Exception e) {
@@ -111,7 +111,7 @@ public class CollectionListFragment extends ListFragment implements
     }
 
     @Override
-    public void onLoaderReset(Loader<AsyncResult<LinkedList<EditorCollectionStub>>> loader) {
+    public void onLoaderReset(Loader<AsyncResult<List<EditorCollectionStub>>> loader) {
         loader.reset();
     }
 

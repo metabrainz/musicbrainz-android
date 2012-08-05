@@ -22,14 +22,14 @@ package org.musicbrainz.android.api;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistSearchStub;
-import org.musicbrainz.android.api.data.Label;
-import org.musicbrainz.android.api.data.LabelSearchStub;
 import org.musicbrainz.android.api.data.EditorCollection;
 import org.musicbrainz.android.api.data.EditorCollectionStub;
+import org.musicbrainz.android.api.data.Label;
+import org.musicbrainz.android.api.data.LabelSearchStub;
 import org.musicbrainz.android.api.data.Recording;
 import org.musicbrainz.android.api.data.RecordingStub;
 import org.musicbrainz.android.api.data.Release;
@@ -51,11 +51,11 @@ public interface MusicBrainz {
     /*
      * Search
      */
-    public abstract LinkedList<ArtistSearchStub> searchArtist(String searchTerm) throws IOException;
-    public abstract LinkedList<ReleaseStub> searchRelease(String searchTerm) throws IOException;
-    public abstract LinkedList<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException;
-    public abstract LinkedList<LabelSearchStub> searchLabel(String searchTerm) throws IOException;
-    public abstract LinkedList<RecordingStub> searchRecording(String searchTerm) throws IOException;
+    public abstract List<ArtistSearchStub> searchArtist(String searchTerm) throws IOException;
+    public abstract List<ReleaseStub> searchRelease(String searchTerm) throws IOException;
+    public abstract List<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException;
+    public abstract List<LabelSearchStub> searchLabel(String searchTerm) throws IOException;
+    public abstract List<RecordingStub> searchRecording(String searchTerm) throws IOException;
 
     /*
      * Lookup
@@ -70,14 +70,14 @@ public interface MusicBrainz {
     /*
      * User data lookup
      */
-    public abstract LinkedList<Tag> lookupTags(Entity type, String mbid) throws IOException;
+    public abstract List<Tag> lookupTags(Entity type, String mbid) throws IOException;
     public abstract float lookupRating(Entity type, String mbid) throws IOException;
     public abstract UserData lookupUserData(Entity entityType, String mbid) throws IOException;
     
     /*
      * Browse
      */
-    public abstract LinkedList<ReleaseStub> browseReleases(String mbid) throws IOException;
+    public abstract List<ReleaseStub> browseReleases(String mbid) throws IOException;
 
     /*
      * Submission
@@ -91,7 +91,7 @@ public interface MusicBrainz {
      */
     public abstract void addReleaseToCollection(String collectionMbid, String releaseMbid) throws IOException;
     public abstract void deleteReleaseFromCollection(String collectionMbid, String releaseMbid) throws IOException;
-    public abstract LinkedList<EditorCollectionStub> lookupUserCollections() throws IOException;
+    public abstract List<EditorCollectionStub> lookupUserCollections() throws IOException;
     public abstract EditorCollection lookupCollection(String mbid) throws IOException;
 
 }

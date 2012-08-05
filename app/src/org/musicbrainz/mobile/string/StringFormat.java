@@ -21,7 +21,6 @@
 package org.musicbrainz.mobile.string;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
 import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.Tag;
@@ -50,7 +49,7 @@ public class StringFormat {
         return sb.substring(0, sb.length() - 2);
     }
     
-    public static String commaSeparateTags(LinkedList<Tag> tags, Context context) {
+    public static String commaSeparateTags(Collection<Tag> tags, Context context) {
         StringBuilder sb = new StringBuilder();
         if (tags.isEmpty()) {
             return context.getResources().getString(R.string.no_tags);

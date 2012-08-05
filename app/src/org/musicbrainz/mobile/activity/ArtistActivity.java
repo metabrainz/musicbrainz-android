@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
@@ -316,16 +316,16 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         rating.setRating(newRating);
     }
 
-    private LoaderCallbacks<AsyncResult<LinkedList<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<Tag>>>() {
+    private LoaderCallbacks<AsyncResult<List<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<List<Tag>>>() {
 
         @Override
-        public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<List<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
             return new SubmitTagsLoader(getApplicationContext(), Entity.ARTIST, artist.getMbid(), tags);
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<LinkedList<Tag>>> loader, AsyncResult<LinkedList<Tag>> data) {
+        public void onLoadFinished(Loader<AsyncResult<List<Tag>>> loader, AsyncResult<List<Tag>> data) {
             getSupportLoaderManager().destroyLoader(TAG_LOADER);
             onFinishedTagging();
             switch (data.getStatus()) {
@@ -339,7 +339,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<LinkedList<Tag>>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<List<Tag>>> loader) {
             loader.reset();
         }
     };
@@ -350,7 +350,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         tagBtn.setEnabled(true);
     }
 
-    private void updateTags(LinkedList<Tag> newTags) {
+    private void updateTags(List<Tag> newTags) {
         artist.setTags(newTags);
         tags.setText(StringFormat.commaSeparateTags(newTags, this));
     }

@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
@@ -70,8 +70,8 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     private String searchTerm;
     private View error;
 
-    private LinkedList<ArtistSearchStub> artistSearchResults;
-    private LinkedList<ReleaseGroupStub> rgSearchResults;
+    private List<ArtistSearchStub> artistSearchResults;
+    private List<ReleaseGroupStub> rgSearchResults;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

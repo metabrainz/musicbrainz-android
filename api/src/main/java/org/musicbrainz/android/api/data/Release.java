@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Release {
 
@@ -39,7 +40,7 @@ public class Release {
 
     private float releaseGroupRating;
     private int releaseGroupRatingCount;
-    private LinkedList<Tag> releaseGroupTags = new LinkedList<Tag>();
+    private List<Tag> releaseGroupTags = new LinkedList<Tag>();
 
     private Collection<String> labels = new LinkedList<String>();
     private ArrayList<Track> tracks = new ArrayList<Track>();
@@ -124,12 +125,12 @@ public class Release {
         this.releaseGroupRatingCount = releaseGroupRatingCount;
     }
 
-    public LinkedList<Tag> getReleaseGroupTags() {
+    public List<Tag> getReleaseGroupTags() {
         Collections.sort(releaseGroupTags);
         return releaseGroupTags;
     }
 
-    public void setReleaseGroupTags(LinkedList<Tag> releaseGroupTags) {
+    public void setReleaseGroupTags(List<Tag> releaseGroupTags) {
         this.releaseGroupTags = releaseGroupTags;
     }
     

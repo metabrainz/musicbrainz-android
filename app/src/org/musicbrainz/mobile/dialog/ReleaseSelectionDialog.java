@@ -20,7 +20,7 @@
 
 package org.musicbrainz.mobile.dialog;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
@@ -43,10 +43,10 @@ import android.widget.ListView;
 public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemClickListener {
 
     private ReleaseActivity parent;
-    private LinkedList<ReleaseStub> data;
+    private List<ReleaseStub> data;
     private ListView releaseList;
 
-    public ReleaseSelectionDialog(Context context, LinkedList<ReleaseStub> data) {
+    public ReleaseSelectionDialog(Context context, List<ReleaseStub> data) {
         super(context);
 
         parent = (ReleaseActivity) context;

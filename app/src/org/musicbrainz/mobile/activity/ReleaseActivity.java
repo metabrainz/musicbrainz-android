@@ -22,6 +22,7 @@ package org.musicbrainz.mobile.activity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistNameMbid;
@@ -35,7 +36,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.config.Configuration;
-import org.musicbrainz.mobile.dialog.BarcodeResultDialog;
+import org.musicbrainz.mobile.dialog.BarcodeNotFoundDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
@@ -54,6 +55,8 @@ import org.musicbrainz.mobile.util.Utils;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -92,12 +95,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     private static final int COLLECTION_ADD_LOADER = 5;
 
     private static final int DIALOG_RELEASE_SELECTION = 0;
-    private static final int DIALOG_BARCODE = 1;
 
     private Release release;
-    private LinkedList<ReleaseStub> stubs;
+    private List<ReleaseStub> stubs;
     private UserData userData;
-    
+
     private View loading;
     private View error;
 
@@ -279,7 +281,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             }
         }
     }
-    
+
     private OnRatingBarChangeListener ratingListener = new OnRatingBarChangeListener() {
         public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
             if (fromUser) {
@@ -293,18 +295,12 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_RELEASE_SELECTION:
+        if (id == DIALOG_RELEASE_SELECTION) {
             return new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
-        case DIALOG_BARCODE:
-            BarcodeResultDialog barcodeDialog = new BarcodeResultDialog(ReleaseActivity.this, isUserLoggedIn(), barcode);
-            barcodeDialog.setCancelable(true);
-            return barcodeDialog;
         }
         return null;
     }
 
-    
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
         Button retry = (Button) error.findViewById(R.id.retry_button);
@@ -316,6 +312,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
                 restartLoader();
             }
         });
+    }
+    
+    private void showBarcodeNotFoundDialog() {
+        DialogFragment barcodeNotFound = new BarcodeNotFoundDialog();
+        barcodeNotFound.show(getSupportFragmentManager(), BarcodeNotFoundDialog.TAG);
     }
 
     private void restartLoader() {
@@ -346,7 +347,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             switch (container.getStatus()) {
             case EXCEPTION:
                 if (container.getException() instanceof BarcodeNotFoundException) {
-                    showDialog(DIALOG_BARCODE);
+                    handler.sendEmptyMessage(MESSAGE_NOT_FOUND);
                 } else {
                     showConnectionErrorWarning();
                 }
@@ -364,16 +365,16 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
     };
 
-    private LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>> releaseStubLoaderCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<ReleaseStub>>>() {
+    private LoaderCallbacks<AsyncResult<List<ReleaseStub>>> releaseStubLoaderCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseStub>>>() {
 
         @Override
-        public Loader<AsyncResult<LinkedList<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<List<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
             return new ReleaseGroupStubsLoader(getApplicationContext(), releaseGroupMbid);
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader,
-                AsyncResult<LinkedList<ReleaseStub>> container) {
+        public void onLoadFinished(Loader<AsyncResult<List<ReleaseStub>>> loader,
+                AsyncResult<List<ReleaseStub>> container) {
             switch (container.getStatus()) {
             case EXCEPTION:
                 showConnectionErrorWarning();
@@ -381,7 +382,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             case SUCCESS:
                 stubs = container.getData();
                 if (stubs.size() == 1) {
-                    ReleaseStub singleRelease = stubs.getFirst();
+                    ReleaseStub singleRelease = stubs.get(0);
                     releaseMbid = singleRelease.getReleaseMbid();
                     getSupportLoaderManager().initLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
                 } else {
@@ -391,7 +392,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<LinkedList<ReleaseStub>>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<List<ReleaseStub>>> loader) {
             loader.reset();
         }
     };
@@ -436,17 +437,17 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         rating.setRating(newRating);
     }
 
-    private LoaderCallbacks<AsyncResult<LinkedList<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<LinkedList<Tag>>>() {
+    private LoaderCallbacks<AsyncResult<List<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<List<Tag>>>() {
 
         @Override
-        public Loader<AsyncResult<LinkedList<Tag>>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<List<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
             return new SubmitTagsLoader(getApplicationContext(), Entity.RELEASE_GROUP, release.getReleaseGroupMbid(),
                     tags);
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<LinkedList<Tag>>> loader, AsyncResult<LinkedList<Tag>> data) {
+        public void onLoadFinished(Loader<AsyncResult<List<Tag>>> loader, AsyncResult<List<Tag>> data) {
             getSupportLoaderManager().destroyLoader(TAG_LOADER);
             onFinishedTagging();
             switch (data.getStatus()) {
@@ -460,7 +461,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<LinkedList<Tag>>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<List<Tag>>> loader) {
             loader.reset();
         }
     };
@@ -471,7 +472,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         tagBtn.setEnabled(true);
     }
 
-    private void updateTags(LinkedList<Tag> newTags) {
+    private void updateTags(List<Tag> newTags) {
         release.setReleaseGroupTags(newTags);
         tags.setText(StringFormat.commaSeparateTags(newTags, this));
     }
@@ -512,4 +513,23 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         setSupportProgressBarIndeterminateVisibility(true);
     }
 
+    public static final int MESSAGE_NOT_FOUND = 0;
+    
+    private Handler handler = new Handler() {
+        
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == MESSAGE_NOT_FOUND) {
+                showBarcodeNotFoundDialog();
+            }
+        }
+    };
+
+    public void doPositiveClick() {
+        Intent barcodeIntent = new Intent(this, BarcodeSearchActivity.class);
+        barcodeIntent.putExtra("barcode", barcode);
+        startActivity(barcodeIntent);
+        finish();
+    }
+    
 }
