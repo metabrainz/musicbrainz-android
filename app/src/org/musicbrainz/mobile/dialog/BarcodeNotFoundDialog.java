@@ -47,16 +47,22 @@ public class BarcodeNotFoundDialog extends DialogFragment {
 
         if (MusicBrainzApp.isUserLoggedIn()) {
             builder.setMessage(R.string.barcode_info_log);
+            builder.setPositiveButton(R.string.barcode_btn, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    ((ReleaseActivity) getActivity()).doPositiveClick();
+                }
+            });
         } else {
             builder.setMessage(R.string.barcode_info_nolog);
         }
 
-        builder.setPositiveButton(R.string.barcode_btn, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                ((ReleaseActivity) getActivity()).doPositiveClick();
-            }
-        });
         return builder.create();
+    }
+    
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        getActivity().finish();
     }
 
 }
