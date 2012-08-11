@@ -239,9 +239,7 @@
     name="DialogBody"
     parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_medium</item>
-    <item name="android:paddingRight">@dimen/std_pad</item>
-    <item name="android:paddingLeft">@dimen/std_pad</item>
-    <item name="android:paddingBottom">@dimen/std_pad</item>
+    <item name="android:padding">@dimen/std_pad</item>
   </style>
 
   <style

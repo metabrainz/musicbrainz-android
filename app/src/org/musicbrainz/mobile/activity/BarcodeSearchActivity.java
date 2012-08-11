@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -20,255 +20,33 @@
 
 package org.musicbrainz.mobile.activity;
 
-import java.util.List;
-
-import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
-import org.musicbrainz.mobile.dialog.BarcodeConfirmDialog;
-import org.musicbrainz.mobile.intent.IntentFactory.Extra;
-import org.musicbrainz.mobile.loader.SearchReleaseLoader;
-import org.musicbrainz.mobile.loader.SubmitBarcodeLoader;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
+import org.musicbrainz.mobile.fragment.BarcodeSearchFragment.LoadingCallbacks;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 
 import com.actionbarsherlock.view.Window;
 
 /**
  * Activity to submit a barcode to a selected release in MusicBrainz.
  */
-public class BarcodeSearchActivity extends MusicBrainzActivity implements View.OnClickListener,
-        ListView.OnItemClickListener, ListView.OnItemLongClickListener, OnEditorActionListener {
-
-    private static final String INSTANCE_SELECTED = "selected_position";
-    private static final int SEARCH_RELEASE_LOADER = 0;
-    private static final int SUBMIT_BARCODE_LOADER = 1;
-    
-    private static final int DIALOG_SUBMIT_BARCODE = 0;
-
-    private TextView barcodeText;
-    private EditText searchBox;
-    private ImageButton searchButton;
-
-    private TextView instructions;
-    private TextView noResults;
-    private ListView matches;
-    private View loading;
-    private View error;
-
-    private String barcode;
-
-    private List<ReleaseStub> results;
-    private int selection = 0;
+public class BarcodeSearchActivity extends MusicBrainzActivity implements LoadingCallbacks {
 
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
-        
         setContentView(R.layout.activity_barcode);
         setSupportProgressBarIndeterminateVisibility(false);
-        findViews();
-
-        barcode = getIntent().getStringExtra(Extra.BARCODE);
-        barcodeText.setText(barcodeText.getText() + " " + barcode);
-        
-        if (getSupportLoaderManager().getLoader(SEARCH_RELEASE_LOADER) != null) {
-            getSupportLoaderManager().initLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
-        }
-    }
-
-    private void findViews() {
-        searchBox = (EditText) findViewById(R.id.barcode_search);
-        barcodeText = (TextView) findViewById(R.id.barcode_text);
-        searchButton = (ImageButton) findViewById(R.id.barcode_search_btn);
-        matches = (ListView) findViewById(R.id.barcode_list);
-        instructions = (TextView) findViewById(R.id.barcode_instructions);
-        noResults = (TextView) findViewById(R.id.noresults);
-        loading = findViewById(R.id.loading);
-        error = findViewById(R.id.error);
-
-        searchBox.setOnEditorActionListener(this);
-        searchButton.setOnClickListener(this);
-    }
-
-    public void onClick(View v) {
-        doSearch();
-    }
-
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (v.getId() == R.id.barcode_search && actionId == EditorInfo.IME_NULL) {
-            doSearch();
-        }
-        return false;
-    }
-
-    private void doSearch() {
-        String term = searchBox.getText().toString();
-        if (term.length() != 0) {
-            hideKeyboard();
-            prepareSearch();
-            getSupportLoaderManager().destroyLoader(SEARCH_RELEASE_LOADER);
-            getSupportLoaderManager().initLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
-        } else {
-            Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void prepareSearch() {
-        searchButton.setEnabled(false);
-        instructions.setVisibility(View.INVISIBLE);
-        loading.setVisibility(View.VISIBLE);
-    }
-
-    private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
-    }
-
-    public void submitBarcode(String releaseMbid) {
-        setSupportProgressBarIndeterminateVisibility(true);
-        getSupportLoaderManager().initLoader(SUBMIT_BARCODE_LOADER, null, submissionCallbacks);
-    }
-
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selection = position;
-        showDialog(DIALOG_SUBMIT_BARCODE);
-    }
-
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent releaseIntent = new Intent(this, ReleaseActivity.class);
-        releaseIntent.putExtra(Extra.RELEASE_MBID, results.get(position).getReleaseMbid());
-        startActivity(releaseIntent);
-        return true;
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DIALOG_SUBMIT_BARCODE:
-            return new BarcodeConfirmDialog(this, results.get(selection));
-        }
-        return null;
+    public void startLoading() {
+        setSupportProgressBarIndeterminateVisibility(true);        
     }
-    
+
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putInt(INSTANCE_SELECTED, selection);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-    
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        selection = savedInstanceState.getInt(INSTANCE_SELECTED);
-    }
-
-    private LoaderCallbacks<AsyncResult<List<ReleaseStub>>> searchCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseStub>>>() {
-
-        @Override
-        public Loader<AsyncResult<List<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
-            return new SearchReleaseLoader(searchBox.getText().toString());
-        }
-
-        @Override
-        public void onLoadFinished(Loader<AsyncResult<List<ReleaseStub>>> loader,
-                AsyncResult<List<ReleaseStub>> data) {
-            instructions.setVisibility(View.INVISIBLE);
-            loading.setVisibility(View.INVISIBLE);
-            switch (data.getStatus()) {
-            case SUCCESS:
-                handleSearchResults(data);
-                break;
-            case EXCEPTION:
-                showConnectionErrorWarning();
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<AsyncResult<List<ReleaseStub>>> loader) {
-            loader.reset();
-        }
-    };
-    
-    private void showConnectionErrorWarning() {
-        matches.setAdapter(null);
-        error.setVisibility(View.VISIBLE);
-        Button retry = (Button) error.findViewById(R.id.retry_button);
-        retry.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loading.setVisibility(View.VISIBLE);
-                error.setVisibility(View.GONE);
-                getSupportLoaderManager().restartLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
-            }
-        });
-    }
-
-    private void handleSearchResults(AsyncResult<List<ReleaseStub>> result) {
-        results = result.getData();
-        matches.setAdapter(new ReleaseStubAdapter(this, R.layout.list_release, results));
-        matches.setOnItemClickListener(this);
-        matches.setOnItemLongClickListener(this);
-
-        error.setVisibility(View.GONE);
-        if (results.isEmpty()) {
-            noResults.setVisibility(View.VISIBLE);
-            matches.setVisibility(View.INVISIBLE);
-        } else {
-            matches.setVisibility(View.VISIBLE);
-            noResults.setVisibility(View.INVISIBLE);
-        }
-        searchButton.setEnabled(true);
-    }
-
-    private LoaderCallbacks<AsyncResult<Void>> submissionCallbacks = new LoaderCallbacks<AsyncResult<Void>>() {
-
-        @Override
-        public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
-            return new SubmitBarcodeLoader(getSelectedReleaseMbid(), barcode);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<AsyncResult<Void>> loader, AsyncResult<Void> data) {
-            getSupportLoaderManager().destroyLoader(SUBMIT_BARCODE_LOADER);
-            setSupportProgressBarIndeterminateVisibility(false);
-            switch (data.getStatus()) {
-            case EXCEPTION:
-                Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode_fail, Toast.LENGTH_LONG).show();
-                break;
-            case SUCCESS:
-                Toast.makeText(BarcodeSearchActivity.this, R.string.toast_barcode, Toast.LENGTH_LONG).show();
-                BarcodeSearchActivity.this.finish();
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<AsyncResult<Void>> loader) {
-            loader.reset();
-        }
-    };
-    
-    private String getSelectedReleaseMbid() {
-        return results.get(selection).getReleaseMbid();
+    public void stopLoading() {
+        setSupportProgressBarIndeterminateVisibility(false);        
     }
 
 }

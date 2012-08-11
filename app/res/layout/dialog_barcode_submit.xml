@@ -27,23 +27,20 @@
   <LinearLayout style="@style/MatchWidth">
 
     <TextView
-      style="@style/DialogHeader"
-      android:text="@string/barcode_add_header" />
-
-    <TextView
       style="@style/DialogBody"
       android:text="@string/barcode_add_body" />
 
     <View style="@style/Separator" />
 
-    <include layout="@layout/list_release" />
+    <include
+      layout="@layout/list_release"
+      android:background="@color/list_bg" />
 
     <View style="@style/Separator" />
 
     <TextView
       style="@style/DialogBody"
-      android:text="@string/barcode_add_info"
-      android:layout_marginTop="@dimen/std_pad" />
+      android:text="@string/barcode_add_info" />
   </LinearLayout>
 
   <Button

@@ -61,8 +61,8 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
     private DonationCallbacks donationCallbacks;
     
     public interface DonationCallbacks {
-        public void onStartLoading();
-        public void onFinishedLoading();
+        public void startLoading();
+        public void stopLoading();
         public void onResult();
     }
     
@@ -87,7 +87,7 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        donationCallbacks.onStartLoading();
+        donationCallbacks.startLoading();
         setupAmountsSpinner();
         handler.post(loadingChecker);
     }
@@ -117,13 +117,13 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
     };
 
     private void onPayPalLoaded() {
-        donationCallbacks.onFinishedLoading();
+        donationCallbacks.stopLoading();
         hideLoadingText();
         addPayPalButtonToLayout();
     }
 
     private void handleTimeout() {
-        donationCallbacks.onFinishedLoading();
+        donationCallbacks.stopLoading();
         TextView loadText = (TextView) layout.findViewById(R.id.donate_loading_text);
         loadText.setText(R.string.paypal_loading_timeout);
     }

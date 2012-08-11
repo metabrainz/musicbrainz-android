@@ -55,8 +55,13 @@ public class BarcodeNotFoundDialog extends DialogFragment {
         } else {
             builder.setMessage(R.string.barcode_info_nolog);
         }
-
         return builder.create();
+    }
+    
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getDialog().setCanceledOnTouchOutside(false);
     }
     
     @Override
