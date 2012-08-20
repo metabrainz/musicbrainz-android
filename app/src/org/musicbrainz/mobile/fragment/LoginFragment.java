@@ -37,6 +37,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.KeyEvent;
@@ -98,6 +99,16 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
             } else if (savedInstanceState.getBoolean(STATE_CONNECTION)) {
                 layout.findViewById(R.id.login_connection_warning).setVisibility(View.VISIBLE);
             }
+        }
+
+        continueLogin();
+    }
+
+    private void continueLogin() {
+        LoaderManager loaderManager = getLoaderManager();
+
+        if (loaderManager.getLoader(LOGIN_LOADER) != null) {
+            loaderManager.initLoader(LOGIN_LOADER, null, this);
         }
     }
 
