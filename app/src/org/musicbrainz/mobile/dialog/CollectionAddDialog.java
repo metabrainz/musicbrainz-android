@@ -57,7 +57,7 @@ public class CollectionAddDialog extends DialogFragment implements
     private CollectionListAdapter adapter;
     
     public interface AddToCollectionCallback {
-        public void addReleaseToCollection(String collectionMbid);
+        void addReleaseToCollection(String collectionMbid);
     }
     
     @Override

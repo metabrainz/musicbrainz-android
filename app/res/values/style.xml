@@ -229,13 +229,6 @@
   </style>
 
   <style
-    name="DialogHeader"
-    parent="MatchWidth">
-    <item name="android:textSize">@dimen/text_size_xl</item>
-    <item name="android:padding">@dimen/std_pad</item>
-  </style>
-
-  <style
     name="DialogBody"
     parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_medium</item>

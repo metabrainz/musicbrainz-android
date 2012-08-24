@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Jamie McDonald
+ * Copyright (C) 2012 Jamie McDonald
  * 
  * This file is part of MusicBrainz for Android.
  * 
@@ -24,65 +24,85 @@ import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
-import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
  * Dialog that allows the user to choose a specific release when a release group
  * contains more than one release.
  */
-public class ReleaseSelectionDialog extends Dialog implements ListView.OnItemClickListener {
+public class ReleaseSelectionDialog extends DialogFragment implements OnItemClickListener {
 
-    private ReleaseActivity parent;
-    private List<ReleaseStub> data;
+    public static final String TAG = "release_selection_dialog";
+    
+    private ReleaseSelectionCallbacks callbacks;
+    private List<ReleaseStub> stubs;
     private ListView releaseList;
-
-    public ReleaseSelectionDialog(Context context, List<ReleaseStub> data) {
-        super(context);
-
-        parent = (ReleaseActivity) context;
-        this.data = data;
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.dialog_release_group);
-
-        releaseList = (ListView) findViewById(R.id.rg_release_list);
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+    
+    public interface ReleaseSelectionCallbacks {
+        List<ReleaseStub> getReleaseStubs();
+        void onReleaseStubSelected(String mbid);
+    }
+    
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            callbacks = (ReleaseSelectionCallbacks) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement "
+                    + ReleaseSelectionCallbacks.class.getSimpleName());
+        }
+    }
+    
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        stubs = callbacks.getReleaseStubs();
+        if (stubs != null) {
+            releaseList.setAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_release, stubs));
+        }
+    }
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getDialog().setTitle(R.string.rg_title);
+        getDialog().setCanceledOnTouchOutside(false);
+        View layout = inflater.inflate(R.layout.dialog_release_group, container, false);
+        setupList(layout);
+        return layout;
+    }
+    
+    private void setupList(View layout) {
+        releaseList = (ListView) layout.findViewById(R.id.rg_release_list);
         releaseList.setOnItemClickListener(this);
-        releaseList.setAdapter(new ReleaseStubAdapter(parent, R.layout.list_release, data));
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        ReleaseStub r = data.get(position);
-
-        Intent releaseIntent = new Intent(this.parent, ReleaseActivity.class);
-        releaseIntent.putExtra(Extra.RELEASE_MBID, r.getReleaseMbid());
-        this.parent.startActivity(releaseIntent);
-        this.parent.finish();
+        callbacks.onReleaseStubSelected(stubs.get(position).getReleaseMbid());
         dismiss();
     }
 
-    /**
-     * Overrides the Dialog cancel() method to finish the parent Activity on
-     * cancel.
-     */
-    public void cancel() {
-        super.cancel();
-        parent.finish();
-    }
-
     @Override
-    public boolean onSearchRequested() {
-        return false;
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        getActivity().finish();
     }
 
 }

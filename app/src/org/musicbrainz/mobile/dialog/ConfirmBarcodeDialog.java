@@ -51,8 +51,8 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
     private ConfirmBarcodeCallbacks callbacks;
 
     public interface ConfirmBarcodeCallbacks {
-        public ReleaseStub getCurrentSelection();
-        public void confirmSubmission();
+        ReleaseStub getCurrentSelection();
+        void confirmSubmission();
     }
 
     @Override
@@ -68,7 +68,6 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        
         try {
             callbacks = (ConfirmBarcodeCallbacks) getFragmentManager().findFragmentById(R.id.barcode_search_fragment);
         } catch (ClassCastException e) {

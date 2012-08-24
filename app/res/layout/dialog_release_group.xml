@@ -23,10 +23,6 @@
   style="@style/MatchWidth">
 
   <TextView
-    style="@style/DialogHeader"
-    android:text="@string/rg_title" />
-
-  <TextView
     style="@style/DialogBody"
     android:text="@string/rg_text" />
 

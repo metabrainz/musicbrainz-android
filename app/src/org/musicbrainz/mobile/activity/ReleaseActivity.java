@@ -40,6 +40,7 @@ import org.musicbrainz.mobile.dialog.BarcodeNotFoundDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
+import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCallbacks;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.loader.BarcodeReleaseLoader;
 import org.musicbrainz.mobile.loader.CollectionEditLoader;
@@ -52,7 +53,6 @@ import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -85,7 +85,7 @@ import com.viewpagerindicator.TabPageIndicator;
  * display of release information. The intent must contain either a barcode, a
  * release MBID or a release group MBID.
  */
-public class ReleaseActivity extends MusicBrainzActivity implements OnClickListener, AddToCollectionCallback {
+public class ReleaseActivity extends MusicBrainzActivity implements OnClickListener, AddToCollectionCallback, ReleaseSelectionCallbacks {
 
     private static final int RELEASE_LOADER = 0;
     private static final int RELEASE_GROUP_STUBS_LOADER = 1;
@@ -93,8 +93,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     private static final int RATING_LOADER = 3;
     private static final int TAG_LOADER = 4;
     private static final int COLLECTION_ADD_LOADER = 5;
-
-    private static final int DIALOG_RELEASE_SELECTION = 0;
 
     private Release release;
     private List<ReleaseStub> stubs;
@@ -293,14 +291,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
     };
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        if (id == DIALOG_RELEASE_SELECTION) {
-            return new ReleaseSelectionDialog(ReleaseActivity.this, stubs);
-        }
-        return null;
-    }
-
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
         Button retry = (Button) error.findViewById(R.id.retry_button);
@@ -386,7 +376,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
                     releaseMbid = singleRelease.getReleaseMbid();
                     getSupportLoaderManager().initLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
                 } else {
-                    showDialog(DIALOG_RELEASE_SELECTION);
+                    handler.sendEmptyMessage(MESSAGE_RELEASE_STUBS);
                 }
             }
         }
@@ -396,6 +386,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             loader.reset();
         }
     };
+    
+    private void showReleaseSelectionDialog() {
+        DialogFragment releaseSelection = new ReleaseSelectionDialog();
+        releaseSelection.show(getSupportFragmentManager(), ReleaseSelectionDialog.TAG);
+    }
 
     private LoaderCallbacks<AsyncResult<Float>> ratingSubmissionCallbacks = new LoaderCallbacks<AsyncResult<Float>>() {
 
@@ -511,13 +506,18 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     }
 
     public static final int MESSAGE_NOT_FOUND = 0;
+    public static final int MESSAGE_RELEASE_STUBS = 1;
 
     private Handler handler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == MESSAGE_NOT_FOUND) {
+            switch (msg.what) {
+            case MESSAGE_NOT_FOUND:
                 showBarcodeNotFoundDialog();
+                break;
+            case MESSAGE_RELEASE_STUBS:
+                showReleaseSelectionDialog();
             }
         }
     };
@@ -526,6 +526,19 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         Intent barcodeIntent = new Intent(this, BarcodeSearchActivity.class);
         barcodeIntent.putExtra("barcode", barcode);
         startActivity(barcodeIntent);
+        finish();
+    }
+
+    @Override
+    public List<ReleaseStub> getReleaseStubs() {
+        return stubs;
+    }
+
+    @Override
+    public void onReleaseStubSelected(String mbid) {
+        Intent releaseIntent = new Intent(MusicBrainzApp.getContext(), ReleaseActivity.class);
+        releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
+        startActivity(releaseIntent);
         finish();
     }
 
