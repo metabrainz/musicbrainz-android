@@ -24,6 +24,7 @@ import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -34,10 +35,27 @@ public class BarcodeNotFoundDialog extends DialogFragment {
 
     public static final String TAG = "barcode_not_found";
     
+    private BarcodeNotFoundCallback callback;
+    
+    public interface BarcodeNotFoundCallback {
+        void addBarcode();
+    }
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+    }
+    
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            callback = (BarcodeNotFoundCallback) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement "
+                    + BarcodeNotFoundCallback.class.getSimpleName());
+        }
     }
 
     @Override
@@ -49,7 +67,7 @@ public class BarcodeNotFoundDialog extends DialogFragment {
             builder.setMessage(R.string.barcode_info_log);
             builder.setPositiveButton(R.string.barcode_btn, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    ((ReleaseActivity) getActivity()).doPositiveClick();
+                    callback.addBarcode();
                 }
             });
         } else {

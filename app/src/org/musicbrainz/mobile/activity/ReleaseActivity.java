@@ -37,6 +37,7 @@ import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.dialog.BarcodeNotFoundDialog;
+import org.musicbrainz.mobile.dialog.BarcodeNotFoundDialog.BarcodeNotFoundCallback;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
@@ -85,7 +86,7 @@ import com.viewpagerindicator.TabPageIndicator;
  * display of release information. The intent must contain either a barcode, a
  * release MBID or a release group MBID.
  */
-public class ReleaseActivity extends MusicBrainzActivity implements OnClickListener, AddToCollectionCallback, ReleaseSelectionCallbacks {
+public class ReleaseActivity extends MusicBrainzActivity implements OnClickListener, AddToCollectionCallback, ReleaseSelectionCallbacks, BarcodeNotFoundCallback {
 
     private static final int RELEASE_LOADER = 0;
     private static final int RELEASE_GROUP_STUBS_LOADER = 1;
@@ -522,13 +523,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         }
     };
 
-    public void doPositiveClick() {
-        Intent barcodeIntent = new Intent(this, BarcodeSearchActivity.class);
-        barcodeIntent.putExtra("barcode", barcode);
-        startActivity(barcodeIntent);
-        finish();
-    }
-
     @Override
     public List<ReleaseStub> getReleaseStubs() {
         return stubs;
@@ -539,6 +533,14 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         Intent releaseIntent = new Intent(MusicBrainzApp.getContext(), ReleaseActivity.class);
         releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
         startActivity(releaseIntent);
+        finish();
+    }
+
+    @Override
+    public void addBarcode() {
+        Intent barcodeIntent = new Intent(this, BarcodeSearchActivity.class);
+        barcodeIntent.putExtra("barcode", barcode);
+        startActivity(barcodeIntent);
         finish();
     }
 

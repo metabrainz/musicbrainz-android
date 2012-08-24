@@ -49,15 +49,15 @@ public class ReleaseSelectionDialog extends DialogFragment implements OnItemClic
     private List<ReleaseStub> stubs;
     private ListView releaseList;
     
+    public interface ReleaseSelectionCallbacks {
+        List<ReleaseStub> getReleaseStubs();
+        void onReleaseStubSelected(String mbid);
+    }
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-    }
-    
-    public interface ReleaseSelectionCallbacks {
-        List<ReleaseStub> getReleaseStubs();
-        void onReleaseStubSelected(String mbid);
     }
     
     @Override
