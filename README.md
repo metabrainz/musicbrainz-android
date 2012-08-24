@@ -2,9 +2,9 @@
 
 This is the primary repository for the [MusicBrainz](http://www.musicbrainz.org) Android app. This project started as a Google Summer of Code project in 2010. You might also be interested in the [official product page](http://musicbrainz.org/doc/MusicBrainz_for_Android) over at the MusicBrainz website.
 
-### Android Market
+### Google Play
 
-This app has been available on the [Google Play Store](https://market.android.com/details?id=org.musicbrainz.mobile) since 1st August 2011.
+The app can be downloaded from [Google Play](https://market.android.com/details?id=org.musicbrainz.mobile). It's been available since 1st August 2011.
 
 ## Licenses
 
