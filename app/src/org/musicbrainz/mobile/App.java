@@ -26,37 +26,44 @@ public class App extends Application {
     private static Typeface robotoLight;
 
     private boolean isUserLoggedIn;
-    private PayPal payPal;
+    private static boolean isPayPalLoaded;
+    private static PayPal payPal;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        new LoadPayPalThread().start();
-
+        instance = this;        
         if (PreferenceUtils.getUsername() != null) {
             isUserLoggedIn = true;
         }
+        setupPayPal();
         setupCrashLogging();
         loadCustomTypefaces();
     }
 
-    public void setupCrashLogging() {
+    private void setupPayPal() {
+        if (!isPayPalLoaded) {
+            isPayPalLoaded = true;
+            new LoadPayPalThread().start();
+        }
+    }
+
+    private void setupCrashLogging() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (Configuration.LIVE && prefs.getBoolean(Pref.PREF_BUGSENSE, true)) {
             BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
         }
     }
     
-    public void loadCustomTypefaces() {
+    private void loadCustomTypefaces() {
         robotoLight = Typeface.createFromAsset(instance.getAssets(), "Roboto-Light.ttf");
     }
 
-    public PayPal getPayPal() {
+    public static PayPal getPayPal() {
         return payPal;
     }
 
-    private class LoadPayPalThread extends Thread {
+    private static class LoadPayPalThread extends Thread {
 
         @Override
         public void run() {
@@ -64,7 +71,7 @@ public class App extends Application {
         }
 
         private void initialisePayPal() {
-            payPal = PayPal.initWithAppID(getApplicationContext(), Secrets.PAYPAL_APP_ID, PayPal.ENV_LIVE);
+            payPal = PayPal.initWithAppID(instance, Secrets.PAYPAL_APP_ID, PayPal.ENV_LIVE);
             payPal.setShippingEnabled(false);
         }
     }
