@@ -58,7 +58,7 @@
   <modules>
     <module>api</module>
     <module>app</module>
-    <module>robotium</module>
+    <module>instrumentation</module>
   </modules>
 
 </project>

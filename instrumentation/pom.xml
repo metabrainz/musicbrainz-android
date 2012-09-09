@@ -12,9 +12,9 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   
-  <artifactId>robotium</artifactId>
+  <artifactId>instrumentation</artifactId>
   <packaging>apk</packaging>
-  <name>robotium</name>
+  <name>instrumentation</name>
   
   <properties>
     <eclipse.excludeArtifactIds>android,android-support,android-test,api,app,bugsense-trace,commons-codec,commons-logging,guice,httpclient,httpcore,json,junit,opengl-api,paypal-mpl,roboguice,xmlParserAPIs,xpp3,plugin-preference</eclipse.excludeArtifactIds>
