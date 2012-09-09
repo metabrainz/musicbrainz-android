@@ -1,6 +1,6 @@
 package org.musicbrainz.mobile.fragment;
 
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.config.Secrets;
@@ -154,7 +154,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
 
     private void onLoginSuccess() {
         storeLoginData();
-        MusicBrainzApp.updateLoginStatus(true);
+        App.updateLoginStatus(true);
         Toast.makeText(context, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
         loginCallback.onLoggedIn();
     }

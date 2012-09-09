@@ -7,7 +7,7 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistRGAdapter;
 import org.musicbrainz.mobile.adapter.list.WeblinkAdapter;
@@ -101,7 +101,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
         displayMessagesForEmptyData();
 
-        if (MusicBrainzApp.isUserLoggedIn()) {
+        if (App.isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {

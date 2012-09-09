@@ -1,7 +1,7 @@
 package org.musicbrainz.mobile.dialog;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.string.StringMapper;
@@ -71,7 +71,7 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
         title.setText(stub.getTitle());
         artist.setText(StringFormat.commaSeparateArtists(stub.getArtists()));
         numberOfTracks.setText(stub.getTracksNum() + " " + getString(R.string.label_tracks));
-        formats.setText(StringMapper.buildReleaseFormatsString(MusicBrainzApp.getContext(), stub.getFormats()));
+        formats.setText(StringMapper.buildReleaseFormatsString(App.getContext(), stub.getFormats()));
         labels.setText(StringFormat.commaSeparate(stub.getLabels()));
         releaseDate.setText(stub.getDate());
         country.setText(stub.getCountryCode());

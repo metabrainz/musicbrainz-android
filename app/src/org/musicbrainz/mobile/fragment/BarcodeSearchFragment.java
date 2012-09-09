@@ -3,7 +3,7 @@ package org.musicbrainz.mobile.fragment;
 import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseStub;
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
@@ -135,7 +135,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
             getLoaderManager().destroyLoader(SEARCH_RELEASE_LOADER);
             getLoaderManager().initLoader(SEARCH_RELEASE_LOADER, null, searchCallbacks);
         } else {
-            Toast.makeText(MusicBrainzApp.getContext(), R.string.toast_search_err, Toast.LENGTH_SHORT).show();
+            Toast.makeText(App.getContext(), R.string.toast_search_err, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -146,7 +146,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     }
 
     private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) MusicBrainzApp.getContext().getSystemService(
+        InputMethodManager imm = (InputMethodManager) App.getContext().getSystemService(
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
     }
@@ -239,10 +239,10 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
             loadingCallbacks.stopLoading();
             switch (data.getStatus()) {
             case EXCEPTION:
-                Toast.makeText(MusicBrainzApp.getContext(), R.string.toast_barcode_fail, Toast.LENGTH_LONG).show();
+                Toast.makeText(App.getContext(), R.string.toast_barcode_fail, Toast.LENGTH_LONG).show();
                 break;
             case SUCCESS:
-                Toast.makeText(MusicBrainzApp.getContext(), R.string.toast_barcode, Toast.LENGTH_LONG).show();
+                Toast.makeText(App.getContext(), R.string.toast_barcode, Toast.LENGTH_LONG).show();
                 getActivity().finish();
             }
         }

@@ -11,7 +11,7 @@ import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
 import org.musicbrainz.android.api.webservice.Entity;
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
@@ -146,7 +146,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         labels.setSelected(true);
         tags.setSelected(true);
 
-        if (MusicBrainzApp.isUserLoggedIn()) {
+        if (App.isUserLoggedIn()) {
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {
@@ -204,7 +204,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (MusicBrainzApp.isUserLoggedIn()) {
+        if (App.isUserLoggedIn()) {
             getSupportMenuInflater().inflate(R.menu.release_logged_in, menu);
         } else {
             getSupportMenuInflater().inflate(R.menu.release, menu);
@@ -510,7 +510,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
 
     @Override
     public void onReleaseStubSelected(String mbid) {
-        Intent releaseIntent = new Intent(MusicBrainzApp.getContext(), ReleaseActivity.class);
+        Intent releaseIntent = new Intent(App.getContext(), ReleaseActivity.class);
         releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
         startActivity(releaseIntent);
         finish();

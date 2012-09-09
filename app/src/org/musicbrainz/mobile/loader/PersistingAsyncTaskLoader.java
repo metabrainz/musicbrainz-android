@@ -1,6 +1,6 @@
 package org.musicbrainz.mobile.loader;
 
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 
 import android.support.v4.content.AsyncTaskLoader;
 
@@ -9,7 +9,7 @@ public abstract class PersistingAsyncTaskLoader<D> extends AsyncTaskLoader<D> {
     protected D data;
     
     public PersistingAsyncTaskLoader() {
-        super(MusicBrainzApp.getContext());
+        super(App.getContext());
     }
 
     @Override

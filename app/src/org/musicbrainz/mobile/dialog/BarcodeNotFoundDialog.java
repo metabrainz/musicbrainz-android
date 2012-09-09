@@ -1,6 +1,6 @@
 package org.musicbrainz.mobile.dialog;
 
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 
 import android.app.Activity;
@@ -42,7 +42,7 @@ public class BarcodeNotFoundDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.barcode_header);
 
-        if (MusicBrainzApp.isUserLoggedIn()) {
+        if (App.isUserLoggedIn()) {
             builder.setMessage(R.string.barcode_info_log);
             builder.setPositiveButton(R.string.barcode_btn, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {

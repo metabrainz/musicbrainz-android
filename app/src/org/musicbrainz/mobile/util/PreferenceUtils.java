@@ -1,6 +1,6 @@
 package org.musicbrainz.mobile.util;
 
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.config.Secrets;
 
 import android.content.Context;
@@ -36,7 +36,7 @@ public class PreferenceUtils {
     }
     
     private static SharedPreferences getUserPreferences() {
-        return MusicBrainzApp.getContext().getSharedPreferences(Pref.PREFS_USER, Context.MODE_PRIVATE);
+        return App.getContext().getSharedPreferences(Pref.PREFS_USER, Context.MODE_PRIVATE);
     }
 
     public static boolean shouldProvideSearchSuggestions(Context context) {

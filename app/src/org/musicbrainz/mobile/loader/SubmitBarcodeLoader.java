@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -16,7 +16,7 @@ public class SubmitBarcodeLoader extends AsyncTaskLoader<AsyncResult<Void>> {
     private String barcode;
 
     public SubmitBarcodeLoader(String mbid, String barcode) {
-        super(MusicBrainzApp.getContext());
+        super(App.getContext());
         this.mbid = mbid;
         this.barcode = barcode;
     }
@@ -30,7 +30,7 @@ public class SubmitBarcodeLoader extends AsyncTaskLoader<AsyncResult<Void>> {
     @Override
     public AsyncResult<Void> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getCredentials());
+            MusicBrainz client = new MusicBrainzWebClient(App.getCredentials());
             client.submitBarcode(mbid, barcode);
             return new AsyncResult<Void>(LoaderStatus.SUCCESS);
         } catch (IOException e) {

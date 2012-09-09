@@ -6,7 +6,7 @@ import java.util.List;
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
@@ -17,7 +17,7 @@ public class ReleaseGroupStubsLoader extends AsyncTaskLoader<AsyncResult<List<Re
     private String mbid;
 
     public ReleaseGroupStubsLoader(String mbid) {
-        super(MusicBrainzApp.getContext());
+        super(App.getContext());
         this.mbid = mbid;
     }
 
@@ -30,7 +30,7 @@ public class ReleaseGroupStubsLoader extends AsyncTaskLoader<AsyncResult<List<Re
     @Override
     public AsyncResult<List<ReleaseStub>> loadInBackground() {
         try {
-            MusicBrainz client = new MusicBrainzWebClient(MusicBrainzApp.getUserAgent());
+            MusicBrainz client = new MusicBrainzWebClient(App.getUserAgent());
             return new AsyncResult<List<ReleaseStub>>(LoaderStatus.SUCCESS, client.browseReleases(mbid));
         } catch (IOException e) {
             return new AsyncResult<List<ReleaseStub>>(LoaderStatus.EXCEPTION, e);

@@ -1,5 +1,7 @@
 package org.musicbrainz.mobile.view;
 
+import org.musicbrainz.mobile.App;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
@@ -24,7 +26,7 @@ public class RobotoLightTextView extends TextView {
         if (isInEditMode()) {
             super.setTypeface(tf);
         } else {
-            super.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Roboto-Light.ttf"));
+            super.setTypeface(App.getRobotoLight());
         }
     }
 

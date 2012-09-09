@@ -1,7 +1,7 @@
 package org.musicbrainz.mobile.activity;
 
 import org.musicbrainz.android.api.webservice.HttpClient;
-import org.musicbrainz.mobile.MusicBrainzApp;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.fragment.WelcomeFragment;
 import org.musicbrainz.mobile.intent.IntentFactory;
@@ -54,7 +54,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean isLoggedIn = MusicBrainzApp.isUserLoggedIn();
+        boolean isLoggedIn = App.isUserLoggedIn();
         menu.findItem(R.id.menu_login).setVisible(!isLoggedIn);
         menu.findItem(R.id.menu_logout).setVisible(isLoggedIn);
         return true;
@@ -82,7 +82,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
     private void logOut() {
         PreferenceUtils.clearUser();
         HttpClient.clearCredentials();
-        MusicBrainzApp.updateLoginStatus(false);
+        App.updateLoginStatus(false);
         Toast.makeText(this, R.string.toast_logged_out, Toast.LENGTH_SHORT).show();
     }
 
@@ -94,7 +94,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                     getString(R.string.zx_pos), getString(R.string.zx_neg), IntentIntegrator.PRODUCT_CODE_TYPES);
             break;
         case R.id.dash_collections:
-            if (MusicBrainzApp.isUserLoggedIn()) {
+            if (App.isUserLoggedIn()) {
                 startActivity(IntentFactory.getCollectionList(getApplicationContext()));
             } else {
                 startActivityForResult(IntentFactory.getLogin(getApplicationContext()), COLLECTION_LOGIN_REQUEST);
@@ -117,7 +117,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                 barcodeResult.putExtra(Extra.BARCODE, scanResult.getContents());
                 startActivity(barcodeResult);
             }
-        } else if (requestCode == COLLECTION_LOGIN_REQUEST && MusicBrainzApp.isUserLoggedIn()) {
+        } else if (requestCode == COLLECTION_LOGIN_REQUEST && App.isUserLoggedIn()) {
             startActivity(IntentFactory.getCollectionList(getApplicationContext()));
         }
     }
