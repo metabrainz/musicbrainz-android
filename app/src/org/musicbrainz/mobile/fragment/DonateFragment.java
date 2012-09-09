@@ -1,30 +1,10 @@
-/*
- * Copyright (C) 2012 Jamie McDonald
- * 
- * This file is part of MusicBrainz for Android.
- * 
- * MusicBrainz for Android is free software: you can redistribute 
- * it and/or modify it under the terms of the GNU General Public 
- * License as published by the Free Software Foundation, either 
- * version 3 of the License, or (at your option) any later version.
- * 
- * MusicBrainz for Android is distributed in the hope that it 
- * will be useful, but WITHOUT ANY WARRANTY; without even the implied 
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- * See the GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with MusicBrainz for Android. If not, see 
- * <http://www.gnu.org/licenses/>.
- */
-
 package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.MusicBrainzApp;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory;
-import org.musicbrainz.mobile.util.MetaBrainzDonation;
+import org.musicbrainz.mobile.util.DonationBuilder;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -150,7 +130,7 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
         default:
             String selection = (String) amount.getSelectedItem();
             double amount = Double.valueOf(selection.substring(1));
-            PayPalPayment donation = new MetaBrainzDonation(amount).getPayPalPayment();
+            PayPalPayment donation = new DonationBuilder(amount).getPayPalPayment();
             Intent checkoutIntent = PayPal.getInstance().checkout(donation, context);
             startActivityForResult(checkoutIntent, PAYPAL_REQUEST_CODE);
         }

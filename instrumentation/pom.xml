@@ -48,7 +48,7 @@
     </dependency>
   </dependencies>
 
-    <build>
+  <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
@@ -64,6 +64,12 @@
             <instrumentationPackage>org.musicbrainz.mobile.test</instrumentationPackage>
             <instrumentationRunner>android.test.InstrumentationTestRunner</instrumentationRunner>
           </test>
+          <dex>
+            <jvmArguments>
+              <jvmArgument>-Xms256m</jvmArgument>
+              <jvmArgument>-Xmx512m</jvmArgument>
+            </jvmArguments>
+          </dex>
         </configuration>
       </plugin>
     </plugins>

@@ -8,9 +8,8 @@ The app can be downloaded from [Google Play](https://market.android.com/details?
 
 ## Licenses
 
-This app is licensed under the GNU General Public License Version 3.
-The ZXing barcode scanner integration code and other helper classes are licensed under the Apache License, Version 2.
-Refer to headers for further details.
+Copyright (C) 2012 Jamie McDonald. Licensed under the GNU General Public License Version 3.
+The ZXing barcode scanner integration code and some helper classes are licensed under the Apache License, Version 2 (see headers).
 
 ## Helping out
 
