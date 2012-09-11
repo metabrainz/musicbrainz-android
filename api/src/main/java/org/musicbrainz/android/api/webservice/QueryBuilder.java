@@ -21,7 +21,7 @@ public class QueryBuilder {
     private static final String BROWSE_ARTIST_RGS = "release-group?artist=";
     private static final String BROWSE_ARTIST_RGS_PARAMS = "&limit=100";
     private static final String BROWSE_RG_RELEASES = "release?release-group=";
-    private static final String BROWSE_RG_RELEASES_PARAMS = "&inc=artist-credits+labels+mediums";
+    private static final String BROWSE_RG_RELEASES_PARAMS = "&inc=artist-credits+labels+mediums&limit=100";
     private static final String BROWSE_OFFSET = "&offset=";
 
     private static final String SEARCH_ARTIST = "artist?query=";
@@ -34,7 +34,7 @@ public class QueryBuilder {
     
     private static final String LOOKUP_USER_COLLECTIONS = "collection";
     private static final String COLLECTION = "collection/";
-    private static final String COLLECTION_LIST = "/releases?inc=releases+artist-credits";
+    private static final String COLLECTION_LIST = "/releases?inc=releases+artist-credits&limit=100";
     private static final String COLLECTION_EDIT = "/releases/";;
 
     private static final String TAG_PARAMS = "?inc=tags";

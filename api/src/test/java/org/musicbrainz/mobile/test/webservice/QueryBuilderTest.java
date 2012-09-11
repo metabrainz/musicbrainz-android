@@ -45,7 +45,7 @@ public class QueryBuilderTest {
 
     @Test
     public void releaseGroupReleaseBrowse() {
-        String expected = "http://musicbrainz.org/ws/2/release?release-group=dca03435-8adb-30a5-ba82-5a162267ff38&inc=artist-credits+labels+mediums";
+        String expected = "http://musicbrainz.org/ws/2/release?release-group=dca03435-8adb-30a5-ba82-5a162267ff38&inc=artist-credits+labels+mediums&limit=100";
         String actual = QueryBuilder.releaseGroupReleaseBrowse("dca03435-8adb-30a5-ba82-5a162267ff38");
         assertEquals(expected, actual);
     }
@@ -122,7 +122,7 @@ public class QueryBuilderTest {
 
     @Test
     public void collectionLookup() {
-        String expected = "http://musicbrainz.org/ws/2/collection/c6f9fb72-e233-47f4-a2f6-19f16442d93a/releases?inc=releases+artist-credits";
+        String expected = "http://musicbrainz.org/ws/2/collection/c6f9fb72-e233-47f4-a2f6-19f16442d93a/releases?inc=releases+artist-credits&limit=100";
         String actual = QueryBuilder.collectionLookup("c6f9fb72-e233-47f4-a2f6-19f16442d93a");
         assertEquals(expected, actual);
     }
