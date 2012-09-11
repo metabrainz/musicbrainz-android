@@ -37,6 +37,10 @@ public class ApplicationTest extends ApplicationTestCase<App> {
         assertMatchesRegex(EXPECTED_VERSION_FORMAT, info.versionName);
     }
     
+    public void testGetVersion() {
+        assertMatchesRegex(EXPECTED_VERSION_FORMAT, App.getVersion());
+    }
+    
     public void testRobotoLightLoaded() {
         assertNotNull(App.getRobotoLight());
     }
