@@ -7,7 +7,6 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.util.Log;
-import org.musicbrainz.mobile.util.PreferenceUtils.Pref;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -23,6 +22,8 @@ import android.provider.SearchRecentSuggestions;
 import android.widget.Toast;
 
 public class SettingsActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {
+    
+    private static final String CLEAR_SUGGESTIONS = "clear_suggestions";
 
     @SuppressWarnings("deprecation")
     @Override
@@ -32,8 +33,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
         addPreferencesFromResource(R.xml.preferences);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Preference clear = (Preference) findPreference(Pref.PREF_CLEAR_SUGGESTIONS);
-        clear.setOnPreferenceClickListener(this);
+        findPreference(CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference.getKey().equals(Pref.PREF_CLEAR_SUGGESTIONS)) {
+        if (preference.getKey().equals(CLEAR_SUGGESTIONS)) {
             clearSuggestionHistory();
             return true;
         }

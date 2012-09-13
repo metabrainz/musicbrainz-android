@@ -25,7 +25,7 @@ public interface MusicBrainz {
     /*
      * Authentication
      */
-    public abstract void setCredentials(String username, String password);
+    public abstract void setUsernameAndPassword(String username, String password);
     public abstract boolean autenticateUserCredentials() throws IOException;
     
     /*

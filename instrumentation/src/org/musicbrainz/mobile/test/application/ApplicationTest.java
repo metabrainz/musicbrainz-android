@@ -49,6 +49,10 @@ public class ApplicationTest extends ApplicationTestCase<App> {
         assertNotNull(App.getContext());
     }
     
+    public void testUserExists() {
+        assertNotNull(App.getUser());
+    }
+    
     public void testValidUserAgent() {
         assertMatchesRegex(EXPECTED_USER_AGENT_FORMAT, App.getUserAgent());
     }

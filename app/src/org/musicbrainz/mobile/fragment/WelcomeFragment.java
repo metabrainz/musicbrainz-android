@@ -2,7 +2,6 @@ package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,7 +28,7 @@ public class WelcomeFragment extends ContextFragment {
 
     public void updateText() {
         if (App.isUserLoggedIn()) {
-            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + PreferenceUtils.getUsername());
+            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + App.getUser().getUsername());
         } else {
             welcomeText.setText(R.string.welcome);
         }

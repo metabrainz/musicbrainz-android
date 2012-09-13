@@ -83,8 +83,7 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
 
         @Override
         public void run() {
-            App app = (App) context;
-            payPal = app.getPayPal();
+            payPal = App.getPayPal();
             if (payPal != null) {
                 onPayPalLoaded();
             } else if (initChecks < MAX_CHECKS) {

@@ -19,6 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.musicbrainz.android.api.MusicBrainz;
+import org.musicbrainz.android.api.User;
 import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.EditorCollection;
@@ -33,11 +34,10 @@ import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.util.Credentials;
 
 /**
  * Makes the web service available for Activity classes. Calls are blocking and
- * should be made inside AsyncTask. The XML returned is parsed into pojos with
+ * should be made asynchronously. The XML returned is parsed into pojos with
  * SAX handlers.
  */
 public class MusicBrainzWebClient implements MusicBrainz {
@@ -56,15 +56,15 @@ public class MusicBrainzWebClient implements MusicBrainz {
         responseParser = new ResponseParser();
     }
 
-    public MusicBrainzWebClient(Credentials creds) {
-        httpClient = HttpClient.getClient(creds.getUserAgent());
+    public MusicBrainzWebClient(User user, String userAgent, String clientId) {
+        httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
-        setCredentials(creds.getUsername(), creds.getPassword());
-        this.clientId = creds.getClientId();
+        setUsernameAndPassword(user.getUsername(), user.getPassword());
+        this.clientId = clientId;
     }
 
     @Override
-    public void setCredentials(String username, String password) {
+    public void setUsernameAndPassword(String username, String password) {
         AuthScope authScope = new AuthScope(AUTH_SCOPE, AUTH_PORT, AUTH_REALM, AUTH_TYPE);
         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
         httpClient.getCredentialsProvider().setCredentials(authScope, credentials);

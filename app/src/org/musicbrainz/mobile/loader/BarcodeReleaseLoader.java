@@ -6,16 +6,17 @@ import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
-import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
 import org.musicbrainz.mobile.loader.result.LoaderStatus;
 
 public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Release>> {
 
+    private MusicBrainz client;
     private String barcode;
 
     public BarcodeReleaseLoader(String barcode) {
+        client = App.getWebClient();
         this.barcode = barcode;
     }
 
@@ -37,13 +38,11 @@ public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityR
     }
 
     private AsyncEntityResult<Release> getRelease() throws IOException {
-        MusicBrainz client = new MusicBrainzWebClient(App.getUserAgent());
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, client.lookupReleaseUsingBarcode(barcode));
         return data;
     }
 
     private AsyncEntityResult<Release> getReleaseWithUserData() throws IOException {
-        MusicBrainz client = new MusicBrainzWebClient(App.getCredentials());
         Release release = client.lookupReleaseUsingBarcode(barcode);
         UserData userData = client.lookupUserData(Entity.RELEASE_GROUP, release.getReleaseGroupMbid());
         data = new AsyncEntityResult<Release>(LoaderStatus.SUCCESS, release, userData);

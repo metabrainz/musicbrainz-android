@@ -1,7 +1,7 @@
 package org.musicbrainz.mobile.activity;
 
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.os.Bundle;
 
@@ -16,7 +16,7 @@ public class CollectionListActivity extends MusicBrainzActivity {
     }
 
     public void setUserNameTitle() {
-        String userName = PreferenceUtils.getUsername();
+        String userName = App.getUser().getUsername();
         getSupportActionBar().setTitle(userName + getString(R.string.plural) + " " + getString(R.string.collections));
     }
 

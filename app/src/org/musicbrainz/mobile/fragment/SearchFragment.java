@@ -1,10 +1,10 @@
 package org.musicbrainz.mobile.fragment;
 
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.SearchActivity;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.suggestion.SuggestionHelper;
-import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -59,7 +59,7 @@ public class SearchFragment extends ContextFragment implements OnEditorActionLis
     @Override
     public void onResume() {
         super.onResume();
-        if (PreferenceUtils.shouldProvideSearchSuggestions(context)) {
+        if (App.getUser().isSearchSuggestionsEnabled()) {
             searchField.setAdapter(suggestionHelper.getAdapter());
             searchField.setOnItemClickListener(this);
         } else {
@@ -86,7 +86,6 @@ public class SearchFragment extends ContextFragment implements OnEditorActionLis
             startSearch();
         }
     }
-
 
     private void startSearch() {
         String query = searchField.getText().toString();

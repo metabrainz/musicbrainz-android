@@ -3,7 +3,8 @@ package org.musicbrainz.mobile.loader;
 import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
-import org.musicbrainz.android.api.util.Credentials;
+import org.musicbrainz.android.api.SimpleUser;
+import org.musicbrainz.android.api.User;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
@@ -31,8 +32,8 @@ public class LoginLoader extends AsyncTaskLoader<AsyncResult<Boolean>> {
 
     @Override
     public AsyncResult<Boolean> loadInBackground() {
-        Credentials creds = new Credentials(App.getUserAgent(), username, password, App.getClientId());
-        MusicBrainz client = new MusicBrainzWebClient(creds);
+        User credentials = new SimpleUser(username, password);
+        MusicBrainz client = new MusicBrainzWebClient(credentials, App.getUserAgent(), App.getClientId());
         try {
             return new AsyncResult<Boolean>(LoaderStatus.SUCCESS, client.autenticateUserCredentials());
         } catch (IOException e) {

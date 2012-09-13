@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.musicbrainz.android.api.data.ArtistSearchStub;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistSearchAdapter;
 import org.musicbrainz.mobile.adapter.list.RGSearchAdapter;
@@ -15,7 +16,6 @@ import org.musicbrainz.mobile.loader.SearchReleaseGroupLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.loader.result.SearchResults;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
-import org.musicbrainz.mobile.util.PreferenceUtils;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -134,7 +134,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     }
 
     private void saveQueryAsSuggestion() {
-        if (PreferenceUtils.shouldProvideSearchSuggestions(getApplicationContext())) {
+        if (App.getUser().isSearchSuggestionsEnabled()) {
             SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY,
                     SuggestionProvider.MODE);
             suggestions.saveRecentQuery(searchTerm, null);

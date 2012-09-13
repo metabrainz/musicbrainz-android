@@ -3,17 +3,14 @@ package org.musicbrainz.mobile.fragment;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.config.Configuration;
-import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.dialog.AuthenticatingDialog;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.loader.LoginLoader;
 import org.musicbrainz.mobile.loader.result.AsyncResult;
-import org.musicbrainz.mobile.util.PreferenceUtils.Pref;
-import org.musicbrainz.mobile.util.SimpleEncrypt;
+import org.musicbrainz.mobile.user.AppUser;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -154,17 +151,14 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
 
     private void onLoginSuccess() {
         storeLoginData();
-        App.updateLoginStatus(true);
         Toast.makeText(context, R.string.toast_logged_in, Toast.LENGTH_SHORT).show();
         loginCallback.onLoggedIn();
     }
 
     public void storeLoginData() {
-        Editor spe = context.getSharedPreferences(Pref.PREFS_USER, Context.MODE_PRIVATE).edit();
-        spe.putString(Pref.PREF_USERNAME, getUsername());
-        String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), getPassword());
-        spe.putString(Pref.PREF_PASSWORD, obscuredPassword);
-        spe.commit();
+        AppUser user = App.getUser();
+        user.setUsername(getUsername());
+        user.setPassword(getPassword());
     }
 
     public void hideWarnings() {

@@ -8,7 +8,6 @@ import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.intent.zxing.IntentIntegrator;
 import org.musicbrainz.mobile.intent.zxing.IntentResult;
-import org.musicbrainz.mobile.util.PreferenceUtils;
 import org.musicbrainz.mobile.view.DashTileView;
 
 import android.content.Intent;
@@ -23,7 +22,7 @@ import com.actionbarsherlock.view.MenuItem;
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
 
     private static final int COLLECTION_LOGIN_REQUEST = 0;
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +79,8 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
     }
 
     private void logOut() {
-        PreferenceUtils.clearUser();
+        App.getUser().clearData();
         HttpClient.clearCredentials();
-        App.updateLoginStatus(false);
         Toast.makeText(this, R.string.toast_logged_out, Toast.LENGTH_SHORT).show();
     }
 

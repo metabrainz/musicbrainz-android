@@ -1,16 +1,14 @@
 package org.musicbrainz.mobile;
 
-import org.musicbrainz.android.api.util.Credentials;
+import org.musicbrainz.android.api.MusicBrainz;
+import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.config.Secrets;
-import org.musicbrainz.mobile.util.PreferenceUtils;
-import org.musicbrainz.mobile.util.PreferenceUtils.Pref;
+import org.musicbrainz.mobile.user.UserPreferences;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
-import android.preference.PreferenceManager;
 
 import com.bugsense.trace.BugSenseHandler;
 import com.paypal.android.MEP.PayPal;
@@ -25,17 +23,15 @@ public class App extends Application {
     private static App instance;
     private static Typeface robotoLight;
 
-    private boolean isUserLoggedIn;
+    private static UserPreferences user;
     private static boolean isPayPalLoaded;
     private static PayPal payPal;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;        
-        if (PreferenceUtils.getUsername() != null) {
-            isUserLoggedIn = true;
-        }
+        instance = this;   
+        user = new UserPreferences();
         setupPayPal();
         setupCrashLogging();
         loadCustomTypefaces();
@@ -49,8 +45,7 @@ public class App extends Application {
     }
 
     private void setupCrashLogging() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (Configuration.LIVE && prefs.getBoolean(Pref.PREF_BUGSENSE, true)) {
+        if (Configuration.LIVE && user.isCrashReportingEnabled()) {
             BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
         }
     }
@@ -91,22 +86,25 @@ public class App extends Application {
             return "unknown";
         }
     }
-
-    public static Credentials getCredentials() {
-        return new Credentials(getUserAgent(), PreferenceUtils.getUsername(), PreferenceUtils.getPassword(),
-                getClientId());
-    }
-    
-    public static boolean isUserLoggedIn() {
-        return instance.isUserLoggedIn;
-    }
-    
-    public static void updateLoginStatus(boolean isUserLoggedIn) {
-        instance.isUserLoggedIn = isUserLoggedIn;
-    }
     
     public static App getContext() {
         return instance;
+    }
+    
+    public static UserPreferences getUser() {
+        return user;
+    }
+    
+    public static boolean isUserLoggedIn() {
+        return user.isLoggedIn();
+    }
+    
+    public static MusicBrainz getWebClient() {
+        if (user.isLoggedIn()) {
+            return new MusicBrainzWebClient(user, getUserAgent(), getClientId());
+        } else {
+            return new MusicBrainzWebClient(getUserAgent());
+        }
     }
     
     public static Typeface getRobotoLight() {
