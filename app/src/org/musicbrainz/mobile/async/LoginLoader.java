@@ -1,4 +1,4 @@
-package org.musicbrainz.mobile.loader;
+package org.musicbrainz.mobile.async;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import org.musicbrainz.android.api.SimpleUser;
 import org.musicbrainz.android.api.User;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
 import org.musicbrainz.mobile.App;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
-import org.musicbrainz.mobile.loader.result.LoaderStatus;
+import org.musicbrainz.mobile.async.result.AsyncResult;
+import org.musicbrainz.mobile.async.result.LoaderStatus;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;

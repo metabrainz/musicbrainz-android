@@ -1,4 +1,4 @@
-package org.musicbrainz.mobile.loader;
+package org.musicbrainz.mobile.async;
 
 import org.musicbrainz.mobile.App;
 

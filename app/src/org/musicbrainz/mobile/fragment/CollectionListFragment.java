@@ -5,9 +5,9 @@ import java.util.List;
 import org.musicbrainz.android.api.data.EditorCollectionStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.CollectionListAdapter;
+import org.musicbrainz.mobile.async.CollectionListLoader;
+import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.intent.IntentFactory;
-import org.musicbrainz.mobile.loader.CollectionListLoader;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
 
 import android.app.Activity;
 import android.content.Context;

@@ -7,12 +7,12 @@ import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
+import org.musicbrainz.mobile.async.SearchReleaseLoader;
+import org.musicbrainz.mobile.async.SubmitBarcodeLoader;
+import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.dialog.ConfirmBarcodeDialog;
 import org.musicbrainz.mobile.dialog.ConfirmBarcodeDialog.ConfirmBarcodeCallbacks;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
-import org.musicbrainz.mobile.loader.SearchReleaseLoader;
-import org.musicbrainz.mobile.loader.SubmitBarcodeLoader;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
 
 import android.app.Activity;
 import android.content.Context;

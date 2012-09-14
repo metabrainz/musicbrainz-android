@@ -5,10 +5,10 @@ import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
+import org.musicbrainz.mobile.async.CollectionEditLoader;
+import org.musicbrainz.mobile.async.CollectionLoader;
+import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
-import org.musicbrainz.mobile.loader.CollectionEditLoader;
-import org.musicbrainz.mobile.loader.CollectionLoader;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;

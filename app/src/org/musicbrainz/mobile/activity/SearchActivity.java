@@ -9,12 +9,12 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistSearchAdapter;
 import org.musicbrainz.mobile.adapter.list.RGSearchAdapter;
 import org.musicbrainz.mobile.adapter.pager.SearchPagerAdapter;
+import org.musicbrainz.mobile.async.SearchArtistLoader;
+import org.musicbrainz.mobile.async.SearchLoader;
+import org.musicbrainz.mobile.async.SearchReleaseGroupLoader;
+import org.musicbrainz.mobile.async.result.AsyncResult;
+import org.musicbrainz.mobile.async.result.SearchResults;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
-import org.musicbrainz.mobile.loader.SearchArtistLoader;
-import org.musicbrainz.mobile.loader.SearchLoader;
-import org.musicbrainz.mobile.loader.SearchReleaseGroupLoader;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
-import org.musicbrainz.mobile.loader.result.SearchResults;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 
 import android.app.SearchManager;

@@ -1,4 +1,4 @@
-package org.musicbrainz.mobile.loader;
+package org.musicbrainz.mobile.async;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.mobile.App;
-import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
-import org.musicbrainz.mobile.loader.result.LoaderStatus;
+import org.musicbrainz.mobile.async.result.AsyncEntityResult;
+import org.musicbrainz.mobile.async.result.LoaderStatus;
 
 public class BarcodeReleaseLoader extends PersistingAsyncTaskLoader<AsyncEntityResult<Release>> {
 

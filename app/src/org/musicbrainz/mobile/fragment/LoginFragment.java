@@ -2,11 +2,11 @@ package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.async.LoginLoader;
+import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.dialog.AuthenticatingDialog;
 import org.musicbrainz.mobile.intent.IntentFactory;
-import org.musicbrainz.mobile.loader.LoginLoader;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.user.AppUser;
 
 import android.app.Activity;

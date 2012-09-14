@@ -12,13 +12,13 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistRGAdapter;
 import org.musicbrainz.mobile.adapter.list.WeblinkAdapter;
 import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
+import org.musicbrainz.mobile.async.ArtistLoader;
+import org.musicbrainz.mobile.async.SubmitRatingLoader;
+import org.musicbrainz.mobile.async.SubmitTagsLoader;
+import org.musicbrainz.mobile.async.result.AsyncEntityResult;
+import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
-import org.musicbrainz.mobile.loader.ArtistLoader;
-import org.musicbrainz.mobile.loader.SubmitRatingLoader;
-import org.musicbrainz.mobile.loader.SubmitTagsLoader;
-import org.musicbrainz.mobile.loader.result.AsyncEntityResult;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
 

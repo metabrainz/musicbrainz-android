@@ -1,12 +1,12 @@
-package org.musicbrainz.mobile.loader;
+package org.musicbrainz.mobile.async;
 
 import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.data.EditorCollection;
 import org.musicbrainz.mobile.App;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
-import org.musicbrainz.mobile.loader.result.LoaderStatus;
+import org.musicbrainz.mobile.async.result.AsyncResult;
+import org.musicbrainz.mobile.async.result.LoaderStatus;
 
 public class CollectionLoader extends PersistingAsyncTaskLoader<AsyncResult<EditorCollection>> {
 

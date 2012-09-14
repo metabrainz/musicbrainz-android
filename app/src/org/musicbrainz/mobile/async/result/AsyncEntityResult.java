@@ -1,4 +1,4 @@
-package org.musicbrainz.mobile.loader.result;
+package org.musicbrainz.mobile.async.result;
 
 import org.musicbrainz.android.api.data.UserData;
 

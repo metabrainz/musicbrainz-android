@@ -11,7 +11,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 
 import com.bugsense.trace.BugSenseHandler;
-import com.paypal.android.MEP.PayPal;
 
 /**
  * Application starts initialising PayPal in the background when the app is
@@ -22,26 +21,15 @@ public class App extends Application {
     
     private static App instance;
     private static Typeface robotoLight;
-
     private static UserPreferences user;
-    private static boolean isPayPalLoaded;
-    private static PayPal payPal;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;   
         user = new UserPreferences();
-        setupPayPal();
         setupCrashLogging();
         loadCustomTypefaces();
-    }
-
-    private void setupPayPal() {
-        if (!isPayPalLoaded) {
-            isPayPalLoaded = true;
-            new LoadPayPalThread().start();
-        }
     }
 
     private void setupCrashLogging() {
@@ -52,23 +40,6 @@ public class App extends Application {
     
     private void loadCustomTypefaces() {
         robotoLight = Typeface.createFromAsset(instance.getAssets(), "Roboto-Light.ttf");
-    }
-
-    public static PayPal getPayPal() {
-        return payPal;
-    }
-
-    private static class LoadPayPalThread extends Thread {
-
-        @Override
-        public void run() {
-            initialisePayPal();
-        }
-
-        private void initialisePayPal() {
-            payPal = PayPal.initWithAppID(instance, Secrets.PAYPAL_APP_ID, PayPal.ENV_LIVE);
-            payPal.setShippingEnabled(false);
-        }
     }
 
     public static String getUserAgent() {

@@ -1,7 +1,7 @@
 package org.musicbrainz.mobile.fragment;
 
-import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.async.LoadPayPalTask;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.util.DonationBuilder;
@@ -83,8 +83,8 @@ public class DonateFragment extends ContextFragment implements OnClickListener {
 
         @Override
         public void run() {
-            payPal = App.getPayPal();
-            if (payPal != null) {
+            payPal = PayPal.getInstance();
+            if (payPal != null && payPal.isLibraryInitialized()) {
                 onPayPalLoaded();
             } else if (initChecks < MAX_CHECKS) {
                 handler.postDelayed(this, 500);

@@ -3,6 +3,7 @@ package org.musicbrainz.mobile.activity;
 import org.musicbrainz.android.api.webservice.HttpClient;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.async.LoadPayPalTask;
 import org.musicbrainz.mobile.fragment.WelcomeFragment;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.paypal.android.MEP.PayPal;
 
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
 
@@ -29,6 +31,14 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
         setContentView(R.layout.activity_dash);
         getSupportActionBar().setHomeButtonEnabled(false);
         setupTiles();
+        loadPayPalInBackground();
+    }
+
+    private void loadPayPalInBackground() {
+        PayPal payPal = PayPal.getInstance();
+        if (payPal == null || !payPal.isLibraryInitialized()) {
+            new LoadPayPalTask().execute();
+        }
     }
 
     private void setupTiles() {

@@ -1,13 +1,13 @@
-package org.musicbrainz.mobile.loader;
+package org.musicbrainz.mobile.async;
 
 import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.mobile.App;
-import org.musicbrainz.mobile.loader.result.AsyncResult;
-import org.musicbrainz.mobile.loader.result.LoaderStatus;
-import org.musicbrainz.mobile.loader.result.SearchResults;
-import org.musicbrainz.mobile.loader.result.SearchResults.SearchType;
+import org.musicbrainz.mobile.async.result.AsyncResult;
+import org.musicbrainz.mobile.async.result.LoaderStatus;
+import org.musicbrainz.mobile.async.result.SearchResults;
+import org.musicbrainz.mobile.async.result.SearchResults.SearchType;
 
 public class SearchArtistLoader extends PersistingAsyncTaskLoader<AsyncResult<SearchResults>> {
 

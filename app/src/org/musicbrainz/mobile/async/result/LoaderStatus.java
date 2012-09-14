@@ -1,4 +1,4 @@
-package org.musicbrainz.mobile.loader.result;
+package org.musicbrainz.mobile.async.result;
 
 public enum LoaderStatus {
     SUCCESS, EXCEPTION;
