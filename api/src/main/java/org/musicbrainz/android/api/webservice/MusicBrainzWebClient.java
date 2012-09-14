@@ -59,12 +59,12 @@ public class MusicBrainzWebClient implements MusicBrainz {
     public MusicBrainzWebClient(User user, String userAgent, String clientId) {
         httpClient = HttpClient.getClient(userAgent);
         responseParser = new ResponseParser();
-        setUsernameAndPassword(user.getUsername(), user.getPassword());
+        setCredentials(user.getUsername(), user.getPassword());
         this.clientId = clientId;
     }
 
     @Override
-    public void setUsernameAndPassword(String username, String password) {
+    public void setCredentials(String username, String password) {
         AuthScope authScope = new AuthScope(AUTH_SCOPE, AUTH_PORT, AUTH_REALM, AUTH_TYPE);
         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
         httpClient.getCredentialsProvider().setCredentials(authScope, credentials);
@@ -199,7 +199,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public boolean autenticateUserCredentials() throws IOException {
+    public boolean autenticateCredentials() throws IOException {
         HttpGet authenticationTest = new HttpGet(QueryBuilder.authenticationCheck());
         authenticationTest.setHeader("Accept", "application/xml");
         try {

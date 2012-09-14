@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class TestTheTruth {
+public class TestProjectSetup {
     
     @Test
     public void testTheTruth() {

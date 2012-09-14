@@ -8,7 +8,7 @@ import org.musicbrainz.mobile.activity.LoginActivity;
 import org.musicbrainz.mobile.activity.SettingsActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.suitebuilder.annotation.Smoke;
+import android.test.suitebuilder.annotation.LargeTest;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -25,35 +25,35 @@ public class DashboardNavigationTest extends ActivityInstrumentationTestCase2<Da
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    @Smoke
+    @LargeTest
     public void testOpenCloseAbout() {
         solo.clickOnView(solo.getView(R.id.dash_about));
         solo.assertCurrentActivity("Expected About Activity", AboutActivity.class);
         solo.goBack();
     }
 
-    @Smoke
+    @LargeTest
     public void testOpenCloseDonate() {
         solo.clickOnView(solo.getView(R.id.dash_donate));
         solo.assertCurrentActivity("Expected Donate Activity", DonateActivity.class);
         solo.goBack();
     }
 
-    @Smoke
+    @LargeTest
     public void testOpenCloseCollection() {
         solo.clickOnView(solo.getView(R.id.dash_collections));
         solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
         solo.goBack();
     }
     
-    @Smoke
+    @LargeTest
     public void testOpenCloseSettings() {
         solo.clickOnMenuItem("Settings");
         solo.assertCurrentActivity("Expected Settings Activity", SettingsActivity.class);
         solo.goBack();
     }
     
-    @Smoke
+    @LargeTest
     public void testOpenCloseLogIn() {
         solo.clickOnMenuItem("Log In");
         solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);

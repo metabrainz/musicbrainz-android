@@ -5,25 +5,26 @@ import org.musicbrainz.mobile.activity.LoginActivity;
 import org.musicbrainz.mobile.test.robotium.Account;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.LargeTest;
 
 import com.jayway.android.robotium.solo.Solo;
 
-public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
+public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     private static final int DIALOG_TIMEOUT = 2 * 1000;
 
     private Solo solo;
 
     public LoginTest() {
-        super(DashboardActivity.class);
+        super(LoginActivity.class);
     }
 
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void ignore_testWithInvalidPassword() throws Exception {
-        solo.clickOnButton("Log In");
+    @LargeTest
+    public void testWithInvalidPassword() throws Exception {
         solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
         enterInvalidCredentials();
         solo.waitForDialogToClose(DIALOG_TIMEOUT);
@@ -36,8 +37,8 @@ public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivit
         solo.clickOnButton("Log In");
     }
 
+    @LargeTest
     public void ignore_testWithValidPassword() throws Exception {
-        solo.clickOnButton("Log In");
         solo.assertCurrentActivity("Expected Login Activity", LoginActivity.class);
         enterValidCredentials();
         solo.waitForDialogToClose(DIALOG_TIMEOUT);
@@ -50,9 +51,9 @@ public class LoginTest extends ActivityInstrumentationTestCase2<DashboardActivit
         solo.clickOnButton("Log In");
     }
 
+    @LargeTest
     public void ignore_testLoginStatusMessage() throws Exception {
         assertTrue(solo.searchText("Welcome to MusicBrainz!"));
-        solo.clickOnButton("Log In");
         enterValidCredentials();
         assertTrue(solo.searchText("Logged in as"));
         solo.clickOnButton("Log Out");

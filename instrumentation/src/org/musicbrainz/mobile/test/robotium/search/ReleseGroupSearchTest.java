@@ -5,10 +5,10 @@ import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.activity.SearchActivity;
 
-import com.jayway.android.robotium.solo.Solo;
-
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.suitebuilder.annotation.Smoke;
+import android.test.suitebuilder.annotation.LargeTest;
+
+import com.jayway.android.robotium.solo.Solo;
 
 public class ReleseGroupSearchTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
@@ -22,7 +22,7 @@ public class ReleseGroupSearchTest extends ActivityInstrumentationTestCase2<Dash
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    @Smoke
+    @LargeTest
     public void testSearchWithExistingRG() throws Exception {
         solo.pressSpinnerItem(0, 1);
         solo.enterText(0, "codes and keys");

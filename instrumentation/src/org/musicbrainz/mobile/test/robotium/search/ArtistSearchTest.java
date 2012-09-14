@@ -5,10 +5,10 @@ import org.musicbrainz.mobile.activity.ArtistActivity;
 import org.musicbrainz.mobile.activity.DashboardActivity;
 import org.musicbrainz.mobile.activity.SearchActivity;
 
-import com.jayway.android.robotium.solo.Solo;
-
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.suitebuilder.annotation.Smoke;
+import android.test.suitebuilder.annotation.LargeTest;
+
+import com.jayway.android.robotium.solo.Solo;
 
 public class ArtistSearchTest extends ActivityInstrumentationTestCase2<DashboardActivity> {
 
@@ -22,13 +22,13 @@ public class ArtistSearchTest extends ActivityInstrumentationTestCase2<Dashboard
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    @Smoke
+    @LargeTest
     public void testSearchWithNoQuery() throws Exception {
         clickSearch();
         solo.assertCurrentActivity("Expected Dashboard Activity", DashboardActivity.class);
     }
 
-    @Smoke
+    @LargeTest
     public void testSearchWithExistingArtist() throws Exception {
         solo.enterText(0, "the beatles");
         clickSearch();
@@ -39,7 +39,7 @@ public class ArtistSearchTest extends ActivityInstrumentationTestCase2<Dashboard
         assertTrue(solo.searchText("The Beatles"));
     }
 
-    @Smoke
+    @LargeTest
     public void testSearchWithUnknownArtist() throws Exception {
         solo.enterText(0, "nbagroypdnebto");
         clickSearch();

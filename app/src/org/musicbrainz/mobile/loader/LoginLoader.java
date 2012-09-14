@@ -35,7 +35,7 @@ public class LoginLoader extends AsyncTaskLoader<AsyncResult<Boolean>> {
         User credentials = new SimpleUser(username, password);
         MusicBrainz client = new MusicBrainzWebClient(credentials, App.getUserAgent(), App.getClientId());
         try {
-            return new AsyncResult<Boolean>(LoaderStatus.SUCCESS, client.autenticateUserCredentials());
+            return new AsyncResult<Boolean>(LoaderStatus.SUCCESS, client.autenticateCredentials());
         } catch (IOException e) {
             return new AsyncResult<Boolean>(LoaderStatus.EXCEPTION, e);
         }

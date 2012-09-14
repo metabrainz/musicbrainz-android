@@ -7,6 +7,7 @@ import static android.test.MoreAsserts.assertMatchesRegex;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.test.ApplicationTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 public class ApplicationTest extends ApplicationTestCase<App> {
     
@@ -27,36 +28,44 @@ public class ApplicationTest extends ApplicationTestCase<App> {
         application = getApplication();
     }
     
+    @SmallTest
     public void testPreconditions() {
         assertNotNull(application);
     }
 
+    @SmallTest
     public void testCorrectVersionNameFormat() throws NameNotFoundException {
         PackageInfo info = application.getPackageManager().getPackageInfo(application.getPackageName(), 0);
 
         assertMatchesRegex(EXPECTED_VERSION_FORMAT, info.versionName);
     }
     
+    @SmallTest
     public void testGetVersion() {
         assertMatchesRegex(EXPECTED_VERSION_FORMAT, App.getVersion());
     }
     
+    @SmallTest
     public void testRobotoLightLoaded() {
         assertNotNull(App.getRobotoLight());
     }
     
+    @SmallTest
     public void testApplicationInstanceExists() {
         assertNotNull(App.getContext());
     }
     
+    @SmallTest
     public void testUserExists() {
         assertNotNull(App.getUser());
     }
     
+    @SmallTest
     public void testValidUserAgent() {
         assertMatchesRegex(EXPECTED_USER_AGENT_FORMAT, App.getUserAgent());
     }
     
+    @SmallTest
     public void testValidClientId() {
         assertMatchesRegex(EXPECTED_CLIENT_ID_FORMAT, App.getClientId());
     }
