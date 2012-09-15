@@ -2,6 +2,7 @@ package org.musicbrainz.mobile.dialog;
 
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.intent.IntentFactory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -41,16 +42,14 @@ public class BarcodeNotFoundDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.barcode_header);
+        builder.setNegativeButton(android.R.string.cancel, cancelListener);
 
         if (App.isUserLoggedIn()) {
             builder.setMessage(R.string.barcode_info_log);
-            builder.setPositiveButton(R.string.barcode_btn, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    callback.addBarcode();
-                }
-            });
+            builder.setPositiveButton(R.string.barcode_btn, addBarcodeListener);
         } else {
             builder.setMessage(R.string.barcode_info_nolog);
+            builder.setPositiveButton(R.string.login, loginListener);
         }
         return builder.create();
     }
@@ -66,5 +65,30 @@ public class BarcodeNotFoundDialog extends DialogFragment {
         super.onCancel(dialog);
         getActivity().finish();
     }
+    
+    DialogInterface.OnClickListener addBarcodeListener = new DialogInterface.OnClickListener() {
+        
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+                callback.addBarcode();
+        }
+    };
+    
+    DialogInterface.OnClickListener loginListener = new DialogInterface.OnClickListener() {
+        
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            startActivity(IntentFactory.getLogin(getActivity()));
+            getDialog().cancel();
+        }
+    };
+    
+    DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+        
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            getDialog().cancel();
+        }
+    };
 
 }

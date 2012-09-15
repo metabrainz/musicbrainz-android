@@ -166,19 +166,19 @@
 
   <!-- ZXing integration -->
   <string name="zx_title">Install Barcode Scanner?</string>
-  <string name="zx_message">This application requires Barcode Scanner. Would you like to install it?</string>
-  <string name="zx_pos">Yes</string>
-  <string name="zx_neg">No</string>
+  <string name="zx_message">This action requires Barcode Scanner. Would you like to install it?</string>
+  <string name="zx_pos">Install</string>
+  <string name="zx_neg">Cancel</string>
 
   <!-- BarcodeDialog -->
   <string name="barcode_header">Barcode not found!</string>
-  <string name="barcode_info_log">This barcode is not yet stored in MusicBrainz. Do you want to add it to the correct release?</string>
-  <string name="barcode_info_nolog">This barcode is not yet stored in MusicBrainz. Log in to add it to the correct release.</string>
+  <string name="barcode_info_log">This barcode is not yet stored in MusicBrainz. Do you want to add it to a release?</string>
+  <string name="barcode_info_nolog">This barcode is not yet stored in MusicBrainz. Log in to add it to a release.</string>
   <string name="barcode_btn">Add barcode</string>
 
   <!-- ReleaseSelectionDialog -->
   <string name="rg_title">Select a release</string>
-  <string name="rg_text">This title has been released more than once. Choose a specific release from the list.</string>
+  <string name="rg_text">This has been released more than once. Choose a release from the list.</string>
 
   <!-- Release group types -->
   <string name="rt_album">Album</string>
