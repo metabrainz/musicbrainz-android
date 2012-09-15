@@ -25,8 +25,7 @@ A code formatting configuration file is included in the repo.
 
 ### Building with Maven
 
-You need [this profile](https://github.com/novoda/public-mvn-repo/blob/master/poms/settings.xml) in your ~/.m2/settings.xml. 
-Install the Android SDK (level 15) and Android Support Library using the Android SDK Manager. Deploy them to your local maven repo using the [Maven Android SDK Deployer](https://github.com/mosabua/maven-android-sdk-deployer).
+You need [this profile](https://github.com/novoda/public-mvn-repo/blob/master/poms/settings.xml) in your ~/.m2/settings.xml.
 
 The following command will setup the project and copy the necessary dependencies so that you can work in Eclipse.
 

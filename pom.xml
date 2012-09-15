@@ -19,10 +19,10 @@
   <name>aggregator</name>
 
   <properties>
-    <android.version>4.0.3_r2</android.version>
-    <android-test.version>2.3.3</android-test.version>
-    <android.sdk.platform>15</android.sdk.platform>
-    <android-support.version>r6</android-support.version>
+    <android.version>4.1.1.4</android.version>
+    <android-test.version>4.1.1.4</android-test.version>
+    <android.sdk.platform>16</android.sdk.platform>
+    <android-support.version>r7</android-support.version>
   </properties>
 
   <repositories>
