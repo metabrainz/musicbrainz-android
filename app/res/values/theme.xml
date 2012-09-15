@@ -10,7 +10,6 @@
     <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
     <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
     <item name="vpiTabPageIndicatorStyle">@style/TabIndicator</item>
-    <item name="vpiTabTextStyle">@style/TabText</item>
   </style>
   
   <style
@@ -24,11 +23,6 @@
     name="TabIndicator"
     parent="Widget.TabPageIndicator">
     <item name="android:background">@drawable/tab_indicator</item>
-  </style>
-
-  <style
-    name="TabText"
-    parent="Widget.TabPageIndicator.Text">
     <item name="android:textColor">@color/black</item>
     <item name="android:textStyle">normal</item>
   </style>

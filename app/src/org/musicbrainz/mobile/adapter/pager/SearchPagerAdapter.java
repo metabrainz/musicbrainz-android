@@ -11,9 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.viewpagerindicator.TitleProvider;
-
-public class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
+public class SearchPagerAdapter extends PagerAdapter {
 
     private final Activity context;
 
@@ -22,7 +20,7 @@ public class SearchPagerAdapter extends PagerAdapter implements TitleProvider {
     }
 
     @Override
-    public String getTitle(int position) {
+    public CharSequence getPageTitle(int position) {
         Resources res = context.getResources();
         switch (position) {
         case 0:

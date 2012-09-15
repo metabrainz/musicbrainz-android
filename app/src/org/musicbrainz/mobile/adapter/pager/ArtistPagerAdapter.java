@@ -12,9 +12,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.viewpagerindicator.TitleProvider;
-
-public class ArtistPagerAdapter extends PagerAdapter implements TitleProvider {
+public class ArtistPagerAdapter extends PagerAdapter {
 
     private final Activity context;
     
@@ -35,7 +33,7 @@ public class ArtistPagerAdapter extends PagerAdapter implements TitleProvider {
     }
 
     @Override
-    public String getTitle(int position) {
+    public CharSequence getPageTitle(int position) {
         Resources res = context.getResources();
         switch (position) {
         case 0:
