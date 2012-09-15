@@ -1,7 +1,6 @@
 package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.async.LoadPayPalTask;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.util.DonationBuilder;

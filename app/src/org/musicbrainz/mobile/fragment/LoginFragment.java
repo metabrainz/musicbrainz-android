@@ -17,6 +17,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +26,14 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 public class LoginFragment extends ContextFragment implements LoaderCallbacks<AsyncResult<Boolean>>,
-        OnEditorActionListener, OnClickListener {
+        OnEditorActionListener, OnClickListener, TextWatcher {
 
     public static final int LOGIN_LOADER = 0;
     private static final String STATE_FAILURE = "showing_login_failure";
@@ -40,6 +43,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     private EditText usernameField;
     private EditText passwordField;
     private LoginCallback loginCallback;
+    private Button loginButton;
 
     public interface LoginCallback {
         public void onLoggedIn();
@@ -58,13 +62,24 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.fragment_login, container, false);
+        findViews();
+        setListeners();
+        return layout;
+    }
+
+    public void findViews() {
         usernameField = (EditText) layout.findViewById(R.id.uname_input);
         passwordField = (EditText) layout.findViewById(R.id.pass_input);
+        loginButton = (Button) layout.findViewById(R.id.login_btn);
+    }
+    
+    public void setListeners() {
+        usernameField.addTextChangedListener(this);
+        passwordField.addTextChangedListener(this);
         passwordField.setOnEditorActionListener(this);
-        layout.findViewById(R.id.login_btn).setOnClickListener(this);
+        loginButton.setOnClickListener(this);
         layout.findViewById(R.id.forgotpass_link).setOnClickListener(this);
         layout.findViewById(R.id.register_link).setOnClickListener(this);
-        return layout;
     }
 
     @Override
@@ -121,13 +136,17 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     }
 
     private void tryLogin() {
-        if (getUsername().length() == 0 || getPassword().length() == 0) {
-            Toast.makeText(context, R.string.toast_auth_err, Toast.LENGTH_SHORT).show();
-        } else {
+        if (isFieldsPopulated()) {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(passwordField.getWindowToken(), 0);
             startLogin();
+        } else {
+            Toast.makeText(context, R.string.toast_auth_err, Toast.LENGTH_SHORT).show();
         }
+    }
+    
+    private boolean isFieldsPopulated() {
+        return getUsername().length() > 0 && getPassword().length() > 0;
     }
 
     private void startLogin() {
@@ -221,5 +240,16 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     public void onLoaderReset(Loader<AsyncResult<Boolean>> loader) {
         loader.reset();
     }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        loginButton.setEnabled(isFieldsPopulated());
+    }
+    
+    @Override
+    public void afterTextChanged(Editable s) {}
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
   <style
     name="Activity"
@@ -343,6 +343,7 @@
   <style name="LoginButton">
     <item name="android:layout_width">@dimen/login_buttons</item>
     <item name="android:layout_height">wrap_content</item>
+    <item name="android:enabled">false</item>
   </style>
 
   <style
