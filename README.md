@@ -1,27 +1,27 @@
 ## MusicBrainz Android
 
-This is the primary repository for the [MusicBrainz](http://www.musicbrainz.org) Android app. This project started as a Google Summer of Code project in 2010. You might also be interested in the [official product page](http://musicbrainz.org/doc/MusicBrainz_for_Android) over at the MusicBrainz website.
+This is the official [MusicBrainz](http://www.musicbrainz.org) Android app. It started as a Google Summer of Code project in 2010. Here is the [MusicBrainz product page](http://musicbrainz.org/doc/MusicBrainz_for_Android) for the app.
 
 ### Google Play
 
-The app can be downloaded from [Google Play](https://market.android.com/details?id=org.musicbrainz.mobile). It's been available since 1st August 2011.
+Downloaded the latest release from [Google Play](https://market.android.com/details?id=org.musicbrainz.mobile).
 
 ## Licenses
 
-Copyright (C) 2012 Jamie McDonald. Licensed under the GNU General Public License Version 3.
-The ZXing barcode scanner integration code and some helper classes are licensed under the Apache License, Version 2 (see headers).
+Copyright © 2012 Jamie McDonald. Licensed under the GNU General Public License Version 3.
+ZXing barcode scanner integration code and miscellaneous helper classes are licensed under the Apache License, Version 2 (see headers).
 
-## Helping out
+## Contributing
 
-Please report issues on the [MusicBrainz issue tracker](http://tickets.musicbrainz.org/).
+Please report issues on GitHub and submit feature requests on the [MusicBrainz issue tracker](http://tickets.musicbrainz.org/).
 
-Code contributions are encouraged in the form of pull requests. Please use the following code formatting and style guidelines:
+Code contributions are welcomed using [pull requests](https://help.github.com/articles/using-pull-requests). Please use the following code formatting and style guidelines:
 
 * Tabs are 4 spaces in Java code and 2 spaces in XML
 * 120 character line width
 * Use descriptive names and comment as a last resort
 
-It might be helpful to use this [eclipse code formatting configuration](https://github.com/novoda/public-mvn-repo/blob/master/eclipse/clean_code_formatter_profile.xml).
+A code formatting configuration file is included in the repo.
 
 ### Building with Maven
 
@@ -32,11 +32,11 @@ The following command will setup the project and copy the necessary dependencies
 
     $mvn clean initialize -Peclipse
   
-You can also do something like `mvn install`, which will build, install and run the tests (you need to attach an Android device for that).
+You can also do something like `mvn install`, which will build, install and run the tests (you'll need to attach an Android device for that).
 
 ### Eclipse project setup
 
-Create an Android project from the source in app and a Java project from the source in api. Add the api project to the app project build path and set it to exported.
+Create an Android project from the 'app' directory and a plain Java project from 'api' directory. Add the API project to the app project build path and set it as exported.
 
 There are two Android library projects that need to be included and specified in the Android project properties.
 
