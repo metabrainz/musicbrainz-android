@@ -11,8 +11,12 @@ public class LoadPayPalTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        PayPal payPal = PayPal.initWithAppID(App.getContext(), Secrets.PAYPAL_APP_ID, PayPal.ENV_LIVE);
-        payPal.setShippingEnabled(false);
+        try {
+            PayPal payPal = PayPal.initWithAppID(App.getContext(), Secrets.PAYPAL_APP_ID, PayPal.ENV_LIVE);
+            payPal.setShippingEnabled(false);
+        } catch (IllegalStateException e) {
+            // Already initialised.
+        }
         return null;
     }
 
