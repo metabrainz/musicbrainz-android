@@ -27,10 +27,13 @@ import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCallbacks;
+import org.musicbrainz.mobile.fragment.EditFragment;
 import org.musicbrainz.mobile.fragment.EditFragment.EditFragmentCallback;
+import org.musicbrainz.mobile.fragment.TracksFragment;
 import org.musicbrainz.mobile.fragment.TracksFragment.TracksFragmentCallback;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
+import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.content.Intent;
@@ -84,6 +87,8 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     private RatingBar ratingBar;
 
     private boolean provideArtistAction = true;
+    
+    private ReleasePagerAdapter pagerAdapter;
 
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -133,15 +138,26 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         labels.setSelected(true);
         tagView.setSelected(true);
 
+        updateFragments();
         loading.setVisibility(View.GONE);
     }
-
+    
     private void configurePager() {
-        ReleasePagerAdapter adapter = new ReleasePagerAdapter(getSupportFragmentManager());
+        pagerAdapter = new ReleasePagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        pager.setAdapter(pagerAdapter);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
+    }
+
+    private void updateFragments() {
+        
+        if(pagerAdapter == null) {
+            Log.e("PAGER ADAPTER NULL");
+        }
+        
+        ((TracksFragment) pagerAdapter.getFragment(0)).update();
+        ((EditFragment) pagerAdapter.getFragment(1)).update();
     }
 
     private void findViews() {

@@ -55,7 +55,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private RatingBar ratingBar;
     private TextView tagView;
-    
+
     private ArtistPagerAdapter pagerAdapter;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -82,15 +82,15 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
         displayMessagesForEmptyData(); // TODO move to fragments
 
-//        updateFragments();
+        updateFragments();
         loading.setVisibility(View.GONE);
     }
 
-//    private void updateFragments() {
-//        ((LinksFragment)pagerAdapter.getItem(0)).update();
-//        ((ArtistReleaseGroupsFragment)pagerAdapter.getItem(1)).update();
-//        ((EditFragment)pagerAdapter.getItem(2)).update();
-//    }
+    private void updateFragments() {
+        ((LinksFragment) pagerAdapter.getFragment(0)).update();
+        ((ArtistReleaseGroupsFragment) pagerAdapter.getFragment(1)).update();
+        ((EditFragment) pagerAdapter.getFragment(2)).update();
+    }
 
     private void configurePager() {
         pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());
