@@ -151,11 +151,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     }
 
     private void updateFragments() {
-        
-        if(pagerAdapter == null) {
-            Log.e("PAGER ADAPTER NULL");
-        }
-        
         ((TracksFragment) pagerAdapter.getFragment(0)).update();
         ((EditFragment) pagerAdapter.getFragment(1)).update();
     }

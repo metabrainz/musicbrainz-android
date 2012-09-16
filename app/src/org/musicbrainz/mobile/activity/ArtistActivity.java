@@ -99,6 +99,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         pager.setCurrentItem(1);
+        pager.setOffscreenPageLimit(2);
     }
 
     private void findViews() {
