@@ -23,6 +23,7 @@ import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
@@ -70,28 +71,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         getSupportLoaderManager().initLoader(ARTIST_LOADER, savedInstanceState, this);
     }
 
-    protected void populateLayout() {
-        TextView artistText = (TextView) findViewById(R.id.artist_artist);
-
-        artistText.setText(artist.getName());
-        ratingBar.setRating(artist.getRating());
-        tagView.setText(StringFormat.commaSeparateTags(artist.getTags(), this));
-
-        artistText.setSelected(true);
-        tagView.setSelected(true);
-
-        displayMessagesForEmptyData(); // TODO move to fragments
-
-        updateFragments();
-        loading.setVisibility(View.GONE);
-    }
-
-    private void updateFragments() {
-        ((LinksFragment) pagerAdapter.getFragment(0)).update();
-        ((ArtistReleaseGroupsFragment) pagerAdapter.getFragment(1)).update();
-        ((EditFragment) pagerAdapter.getFragment(2)).update();
-    }
-
     private void configurePager() {
         pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -118,6 +97,33 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
             TextView noRes = (TextView) findViewById(R.id.nolinks);
             noRes.setVisibility(View.VISIBLE);
         }
+    }
+
+    protected void populateLayout() {
+        TextView artistText = (TextView) findViewById(R.id.artist_artist);
+
+        artistText.setText(artist.getName());
+        ratingBar.setRating(artist.getRating());
+        tagView.setText(StringFormat.commaSeparateTags(artist.getTags(), this));
+
+        artistText.setSelected(true);
+        tagView.setSelected(true);
+
+        displayMessagesForEmptyData(); // TODO move to fragments
+
+        updateFragments();
+        loading.setVisibility(View.GONE);
+    }
+
+    private void updateFragments() {
+        FragmentManager fm = getSupportFragmentManager();
+        ((LinksFragment) fm.findFragmentByTag(makeTag(0))).update();
+        ((ArtistReleaseGroupsFragment) fm.findFragmentByTag(makeTag(1))).update();
+        ((EditFragment) fm.findFragmentByTag(makeTag(2))).update();
+    }
+
+    private String makeTag(int position) {
+        return "android:switcher:" + R.id.pager + ":" + position;
     }
 
     @Override

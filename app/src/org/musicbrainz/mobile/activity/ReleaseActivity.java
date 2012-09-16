@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
@@ -151,8 +152,13 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     }
 
     private void updateFragments() {
-        ((TracksFragment) pagerAdapter.getFragment(0)).update();
-        ((EditFragment) pagerAdapter.getFragment(1)).update();
+        FragmentManager fm = getSupportFragmentManager();
+        ((TracksFragment) fm.findFragmentByTag(makeTag(0))).update();
+        ((EditFragment) fm.findFragmentByTag(makeTag(1))).update();
+    }
+    
+    private String makeTag(int position) {
+        return "android:switcher:" + R.id.pager + ":" + position;
     }
 
     private void findViews() {
