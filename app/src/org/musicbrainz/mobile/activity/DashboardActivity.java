@@ -31,7 +31,9 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
         setContentView(R.layout.activity_dash);
         getSupportActionBar().setHomeButtonEnabled(false);
         setupTiles();
-        loadPayPalInBackground();
+        if (savedInstanceState == null) {
+            loadPayPalInBackground();
+        }
     }
 
     private void loadPayPalInBackground() {
