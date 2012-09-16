@@ -8,19 +8,16 @@ import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.data.Tag;
+import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
-import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
 import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.async.BarcodeReleaseLoader;
 import org.musicbrainz.mobile.async.CollectionEditLoader;
 import org.musicbrainz.mobile.async.ReleaseGroupStubsLoader;
 import org.musicbrainz.mobile.async.ReleaseLoader;
-import org.musicbrainz.mobile.async.SubmitRatingLoader;
-import org.musicbrainz.mobile.async.SubmitTagsLoader;
 import org.musicbrainz.mobile.async.result.AsyncEntityResult;
 import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.config.Configuration;
@@ -30,6 +27,8 @@ import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCallbacks;
+import org.musicbrainz.mobile.fragment.EditFragment.EditFragmentCallback;
+import org.musicbrainz.mobile.fragment.TracksFragment.TracksFragmentCallback;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
@@ -45,11 +44,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,14 +61,13 @@ import com.viewpagerindicator.TabPageIndicator;
  * display of release information. The intent must contain either a barcode, a
  * release MBID or a release group MBID.
  */
-public class ReleaseActivity extends MusicBrainzActivity implements OnClickListener, AddToCollectionCallback, ReleaseSelectionCallbacks, BarcodeNotFoundCallback {
+public class ReleaseActivity extends MusicBrainzActivity implements AddToCollectionCallback, ReleaseSelectionCallbacks,
+        BarcodeNotFoundCallback, TracksFragmentCallback, EditFragmentCallback {
 
     private static final int RELEASE_LOADER = 0;
     private static final int RELEASE_GROUP_STUBS_LOADER = 1;
     private static final int BARCODE_RELEASE_LOADER = 2;
-    private static final int RATING_LOADER = 3;
-    private static final int TAG_LOADER = 4;
-    private static final int COLLECTION_ADD_LOADER = 5;
+    private static final int COLLECTION_ADD_LOADER = 3;
 
     private Release release;
     private List<ReleaseStub> stubs;
@@ -86,13 +80,9 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
     private String releaseGroupMbid;
     private String barcode;
 
-    private TextView tags;
-    private RatingBar rating;
-    private EditText tagInput;
-    private RatingBar ratingInput;
-    private ImageButton tagBtn;
+    private TextView tagView;
+    private RatingBar ratingBar;
 
-    private boolean doingTag, doingRate;
     private boolean provideArtistAction = true;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -127,55 +117,38 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         TextView title = (TextView) findViewById(R.id.release_release);
         TextView labels = (TextView) findViewById(R.id.release_label);
         TextView releaseDate = (TextView) findViewById(R.id.release_date);
-        ListView trackList = (ListView) findViewById(R.id.release_tracks);
 
         if (isArtistUpAvailable()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         artist.setText(StringFormat.commaSeparateArtists(release.getArtists()));
         title.setText(release.getTitle());
-        trackList.setAdapter(new ReleaseTrackAdapter(this, release.getTrackList()));
-        trackList.setDrawSelectorOnTop(false);
         labels.setText(StringFormat.commaSeparate(release.getLabels()));
         releaseDate.setText(release.getDate());
-        tags.setText(StringFormat.commaSeparateTags(release.getReleaseGroupTags(), this));
-        rating.setRating(release.getReleaseGroupRating());
+        tagView.setText(StringFormat.commaSeparateTags(release.getReleaseGroupTags(), this));
+        ratingBar.setRating(release.getReleaseGroupRating());
 
         artist.setSelected(true);
         title.setSelected(true);
         labels.setSelected(true);
-        tags.setSelected(true);
+        tagView.setSelected(true);
 
-        if (App.isUserLoggedIn()) {
-            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
-            ratingInput.setRating(userData.getRating());
-        } else {
-            disableEditFields();
-            findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
-        }
         loading.setVisibility(View.GONE);
     }
 
     private void configurePager() {
-        ReleasePagerAdapter adapter = new ReleasePagerAdapter(this);
+        ReleasePagerAdapter adapter = new ReleasePagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
-        adapter.instantiateItem(pager, 1);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
-        pager.setCurrentItem(0);
     }
 
     private void findViews() {
         loading = findViewById(R.id.loading);
         error = findViewById(R.id.error);
-        rating = (RatingBar) findViewById(R.id.rating);
-        tags = (TextView) findViewById(R.id.tags);
-        tagInput = (EditText) findViewById(R.id.tag_input);
-        ratingInput = (RatingBar) findViewById(R.id.rating_input);
-        ratingInput.setOnRatingBarChangeListener(ratingListener);
-        tagBtn = (ImageButton) findViewById(R.id.tag_btn);
-        tagBtn.setOnClickListener(this);
+        ratingBar = (RatingBar) findViewById(R.id.rating);
+        tagView = (TextView) findViewById(R.id.tags);
     }
 
     private boolean isArtistUpAvailable() {
@@ -191,15 +164,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             }
         }
         return provideArtistAction;
-    }
-
-    private void disableEditFields() {
-        ratingInput.setEnabled(false);
-        ratingInput.setFocusable(false);
-        tagInput.setEnabled(false);
-        tagInput.setFocusable(false);
-        tagBtn.setEnabled(false);
-        tagBtn.setFocusable(false);
     }
 
     @Override
@@ -237,40 +201,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         releaseIntent.putExtra(Extra.ARTIST_MBID, release.getArtists().get(0).getMbid());
         return releaseIntent;
     }
-
-    private void updateProgressStatus() {
-        if (doingTag || doingRate) {
-            setSupportProgressBarIndeterminateVisibility(true);
-        } else {
-            setSupportProgressBarIndeterminateVisibility(false);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.tag_btn) {
-            String tagString = tagInput.getText().toString();
-            if (tagString.length() == 0) {
-                Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
-            } else {
-                doingTag = true;
-                updateProgressStatus();
-                tagBtn.setEnabled(false);
-                getSupportLoaderManager().initLoader(TAG_LOADER, null, tagSubmissionCallbacks);
-            }
-        }
-    }
-
-    private OnRatingBarChangeListener ratingListener = new OnRatingBarChangeListener() {
-        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-            if (fromUser) {
-                doingRate = true;
-                updateProgressStatus();
-                ratingInput.setEnabled(false);
-                getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
-            }
-        }
-    };
 
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
@@ -367,88 +297,10 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
             loader.reset();
         }
     };
-    
+
     private void showReleaseSelectionDialog() {
         DialogFragment releaseSelection = new ReleaseSelectionDialog();
         releaseSelection.show(getSupportFragmentManager(), ReleaseSelectionDialog.TAG);
-    }
-
-    private LoaderCallbacks<AsyncResult<Float>> ratingSubmissionCallbacks = new LoaderCallbacks<AsyncResult<Float>>() {
-
-        @Override
-        public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
-            int rating = (int) ratingInput.getRating();
-            return new SubmitRatingLoader(Entity.RELEASE_GROUP, release.getReleaseGroupMbid(), rating);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<AsyncResult<Float>> loader, AsyncResult<Float> data) {
-            getSupportLoaderManager().destroyLoader(RATING_LOADER);
-            onFinishedRating();
-            switch (data.getStatus()) {
-            case EXCEPTION:
-                Toast.makeText(ReleaseActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
-                break;
-            case SUCCESS:
-                Toast.makeText(ReleaseActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show();
-                updateRating(data.getData());
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<AsyncResult<Float>> loader) {
-            loader.reset();
-        }
-    };
-
-    private void onFinishedRating() {
-        doingRate = false;
-        updateProgressStatus();
-        ratingInput.setEnabled(true);
-    }
-
-    private void updateRating(Float newRating) {
-        release.setReleaseGroupRating(newRating);
-        rating.setRating(newRating);
-    }
-
-    private LoaderCallbacks<AsyncResult<List<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<List<Tag>>>() {
-
-        @Override
-        public Loader<AsyncResult<List<Tag>>> onCreateLoader(int id, Bundle args) {
-            String tags = tagInput.getText().toString();
-            return new SubmitTagsLoader(Entity.RELEASE_GROUP, release.getReleaseGroupMbid(), tags);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<AsyncResult<List<Tag>>> loader, AsyncResult<List<Tag>> data) {
-            getSupportLoaderManager().destroyLoader(TAG_LOADER);
-            onFinishedTagging();
-            switch (data.getStatus()) {
-            case EXCEPTION:
-                Toast.makeText(ReleaseActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
-                break;
-            case SUCCESS:
-                Toast.makeText(ReleaseActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT).show();
-                updateTags(data.getData());
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<AsyncResult<List<Tag>>> loader) {
-            loader.reset();
-        }
-    };
-
-    private void onFinishedTagging() {
-        doingTag = false;
-        updateProgressStatus();
-        tagBtn.setEnabled(true);
-    }
-
-    private void updateTags(List<Tag> newTags) {
-        release.setReleaseGroupTags(newTags);
-        tags.setText(StringFormat.commaSeparateTags(newTags, this));
     }
 
     private LoaderCallbacks<AsyncResult<Void>> collectionAddCallbacks = new LoaderCallbacks<AsyncResult<Void>>() {
@@ -522,6 +374,43 @@ public class ReleaseActivity extends MusicBrainzActivity implements OnClickListe
         barcodeIntent.putExtra("barcode", barcode);
         startActivity(barcodeIntent);
         finish();
+    }
+
+    @Override
+    public void showLoading() {
+        setSupportProgressBarIndeterminateVisibility(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        setSupportProgressBarIndeterminateVisibility(false);        
+    }
+
+    @Override
+    public String getMbid() {
+        return release.getReleaseGroupMbid();
+    }
+
+    @Override
+    public UserData getUserData() {
+        return userData;
+    }
+
+    @Override
+    public void updateTags(List<Tag> tags) {
+        release.setReleaseGroupTags(tags);
+        tagView.setText(StringFormat.commaSeparateTags(tags, this));
+    }
+
+    @Override
+    public void updateRating(Float rating) {
+        release.setReleaseGroupRating(rating);
+        ratingBar.setRating(rating);
+    }
+
+    @Override
+    public List<Track> getTracks() {
+        return release.getTrackList();
     }
 
 }

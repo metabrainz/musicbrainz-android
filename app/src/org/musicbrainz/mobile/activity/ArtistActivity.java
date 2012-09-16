@@ -6,39 +6,31 @@ import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.android.api.data.ReleaseGroupStub;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.webservice.Entity;
-import org.musicbrainz.mobile.App;
+import org.musicbrainz.android.api.data.WebLink;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.list.ArtistRGAdapter;
-import org.musicbrainz.mobile.adapter.list.WeblinkAdapter;
 import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
 import org.musicbrainz.mobile.async.ArtistLoader;
-import org.musicbrainz.mobile.async.SubmitRatingLoader;
-import org.musicbrainz.mobile.async.SubmitTagsLoader;
 import org.musicbrainz.mobile.async.result.AsyncEntityResult;
-import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.fragment.ArtistReleaseGroupsFragment;
+import org.musicbrainz.mobile.fragment.ArtistReleaseGroupsFragment.ReleaseGroupsFragmentCallback;
+import org.musicbrainz.mobile.fragment.EditFragment;
+import org.musicbrainz.mobile.fragment.EditFragment.EditFragmentCallback;
+import org.musicbrainz.mobile.fragment.LinksFragment;
+import org.musicbrainz.mobile.fragment.LinksFragment.LinksFragmentCallback;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.Window;
@@ -50,11 +42,9 @@ import com.viewpagerindicator.TabPageIndicator;
  * artist MBID.
  */
 public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>,
-        View.OnClickListener, ListView.OnItemClickListener {
+        LinksFragmentCallback, ReleaseGroupsFragmentCallback, EditFragmentCallback {
 
     private static final int ARTIST_LOADER = 0;
-    private static final int RATING_LOADER = 1;
-    private static final int TAG_LOADER = 2;
 
     private String mbid;
     private Artist artist;
@@ -62,19 +52,16 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private View loading;
     private View error;
-    
-    private RatingBar rating;
-    private TextView tags;
-    private RatingBar ratingInput;
-    private EditText tagInput;
-    private ImageButton tagBtn;
 
-    private boolean doingTag, doingRate;
+    private RatingBar ratingBar;
+    private TextView tagView;
+    
+    private ArtistPagerAdapter pagerAdapter;
 
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
-        
+
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.activity_artist);
         configurePager();
@@ -85,37 +72,30 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     protected void populateLayout() {
         TextView artistText = (TextView) findViewById(R.id.artist_artist);
-        ListView releaseList = (ListView) findViewById(R.id.artist_releases);
-        ListView linksList = (ListView) findViewById(R.id.artist_links);
 
         artistText.setText(artist.getName());
-        releaseList.setAdapter(new ArtistRGAdapter(this, artist.getReleaseGroups()));
-        releaseList.setOnItemClickListener(this);
-        linksList.setAdapter(new WeblinkAdapter(this, artist.getLinks()));
-        linksList.setOnItemClickListener(this);
-        rating.setRating(artist.getRating());
-        tags.setText(StringFormat.commaSeparateTags(artist.getTags(), this));
+        ratingBar.setRating(artist.getRating());
+        tagView.setText(StringFormat.commaSeparateTags(artist.getTags(), this));
 
         artistText.setSelected(true);
-        tags.setSelected(true);
+        tagView.setSelected(true);
 
-        displayMessagesForEmptyData();
+        displayMessagesForEmptyData(); // TODO move to fragments
 
-        if (App.isUserLoggedIn()) {
-            tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
-            ratingInput.setRating(userData.getRating());
-        } else {
-            disableEditViews();
-            findViewById(R.id.login_warning).setVisibility(View.VISIBLE);
-        }
+//        updateFragments();
         loading.setVisibility(View.GONE);
     }
 
+//    private void updateFragments() {
+//        ((LinksFragment)pagerAdapter.getItem(0)).update();
+//        ((ArtistReleaseGroupsFragment)pagerAdapter.getItem(1)).update();
+//        ((EditFragment)pagerAdapter.getItem(2)).update();
+//    }
+
     private void configurePager() {
-        ArtistPagerAdapter adapter = new ArtistPagerAdapter(this);
+        pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
-        adapter.instantiateItem(pager, 2);
+        pager.setAdapter(pagerAdapter);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         pager.setCurrentItem(1);
@@ -124,22 +104,8 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     private void findViews() {
         loading = findViewById(R.id.loading);
         error = findViewById(R.id.error);
-        rating = (RatingBar) findViewById(R.id.rating);
-        tags = (TextView) findViewById(R.id.tags);
-        tagInput = (EditText) findViewById(R.id.tag_input);
-        ratingInput = (RatingBar) findViewById(R.id.rating_input);
-        ratingInput.setOnRatingBarChangeListener(ratingListener);
-        tagBtn = (ImageButton) findViewById(R.id.tag_btn);
-        tagBtn.setOnClickListener(this);
-    }
-
-    private void disableEditViews() {
-        ratingInput.setEnabled(false);
-        ratingInput.setFocusable(false);
-        tagInput.setEnabled(false);
-        tagInput.setFocusable(false);
-        tagBtn.setEnabled(false);
-        tagBtn.setFocusable(false);
+        ratingBar = (RatingBar) findViewById(R.id.rating);
+        tagView = (TextView) findViewById(R.id.tags);
     }
 
     private void displayMessagesForEmptyData() {
@@ -160,62 +126,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
         actionProvider.setShareIntent(Utils.shareIntent(Configuration.ARTIST_SHARE + mbid));
         return true;
-    }
-
-    private void updateProgress() {
-        if (doingTag || doingRate) {
-            setSupportProgressBarIndeterminateVisibility(true);
-        } else {
-            setSupportProgressBarIndeterminateVisibility(false);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.tag_btn) {
-            String tagString = tagInput.getText().toString();
-            if (tagString.length() == 0) {
-                Toast.makeText(this, R.string.toast_tag_err, Toast.LENGTH_SHORT).show();
-            } else {
-                doingTag = true;
-                updateProgress();
-                tagBtn.setEnabled(false);
-                getSupportLoaderManager().initLoader(TAG_LOADER, null, tagSubmissionCallbacks);
-            }
-        }
-    }
-    
-    private OnRatingBarChangeListener ratingListener = new OnRatingBarChangeListener() {
-        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-            if (fromUser) {
-                doingRate = true;
-                updateProgress();
-                ratingInput.setEnabled(false);
-                getSupportLoaderManager().initLoader(RATING_LOADER, null, ratingSubmissionCallbacks);
-            }
-        }
-    };
-    
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getId() == R.id.artist_releases) {
-            showRelease(position);
-        } else {
-            openLink(position);
-        }
-    }
-
-    private void showRelease(int position) {
-        ReleaseGroupStub rg = artist.getReleases().get(position);
-        Intent releaseIntent = new Intent(ArtistActivity.this, ReleaseActivity.class);
-        releaseIntent.putExtra(Extra.RG_MBID, rg.getMbid());
-        startActivity(releaseIntent);
-    }
-
-    private void openLink(int position) {
-        String link = artist.getLinks().get(position).getUrl();
-        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-        startActivity(urlIntent);
     }
 
     @Override
@@ -258,82 +168,46 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         loader.reset();
     }
 
-    private LoaderCallbacks<AsyncResult<Float>> ratingSubmissionCallbacks = new LoaderCallbacks<AsyncResult<Float>>() {
-
-        @Override
-        public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
-            int rating = (int) ratingInput.getRating();
-            return new SubmitRatingLoader(Entity.ARTIST, artist.getMbid(), rating);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<AsyncResult<Float>> loader, AsyncResult<Float> data) {
-            getSupportLoaderManager().destroyLoader(RATING_LOADER);
-            onFinishedRating();
-            switch (data.getStatus()) {
-            case EXCEPTION:
-                Toast.makeText(ArtistActivity.this, R.string.toast_rate_fail, Toast.LENGTH_LONG).show();
-                break;
-            case SUCCESS:
-                Toast.makeText(ArtistActivity.this, R.string.toast_rate, Toast.LENGTH_SHORT).show();
-                updateRating(data.getData());
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<AsyncResult<Float>> loader) {
-            loader.reset();
-        }
-    };
-
-    private void onFinishedRating() {
-        doingRate = false;
-        updateProgress();
-        ratingInput.setEnabled(true);
+    @Override
+    public void showLoading() {
+        setSupportProgressBarIndeterminateVisibility(true);
     }
 
-    private void updateRating(Float newRating) {
-        artist.setRating(newRating);
-        rating.setRating(newRating);
+    @Override
+    public void hideLoading() {
+        setSupportProgressBarIndeterminateVisibility(false);
     }
 
-    private LoaderCallbacks<AsyncResult<List<Tag>>> tagSubmissionCallbacks = new LoaderCallbacks<AsyncResult<List<Tag>>>() {
-
-        @Override
-        public Loader<AsyncResult<List<Tag>>> onCreateLoader(int id, Bundle args) {
-            String tags = tagInput.getText().toString();
-            return new SubmitTagsLoader(Entity.ARTIST, artist.getMbid(), tags);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<AsyncResult<List<Tag>>> loader, AsyncResult<List<Tag>> data) {
-            getSupportLoaderManager().destroyLoader(TAG_LOADER);
-            onFinishedTagging();
-            switch (data.getStatus()) {
-            case EXCEPTION:
-                Toast.makeText(ArtistActivity.this, R.string.toast_tag_fail, Toast.LENGTH_LONG).show();
-                break;
-            case SUCCESS:
-                Toast.makeText(ArtistActivity.this, R.string.toast_tag, Toast.LENGTH_SHORT).show();
-                updateTags(data.getData());
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<AsyncResult<List<Tag>>> loader) {
-            loader.reset();
-        }
-    };
-
-    private void onFinishedTagging() {
-        doingTag = false;
-        updateProgress();
-        tagBtn.setEnabled(true);
+    @Override
+    public String getMbid() {
+        return mbid;
     }
 
-    private void updateTags(List<Tag> newTags) {
-        artist.setTags(newTags);
-        tags.setText(StringFormat.commaSeparateTags(newTags, this));
+    @Override
+    public UserData getUserData() {
+        return userData;
+    }
+
+    @Override
+    public void updateTags(List<Tag> tags) {
+        artist.setTags(tags);
+        tagView.setText(StringFormat.commaSeparateTags(tags, this));
+    }
+
+    @Override
+    public void updateRating(Float rating) {
+        artist.setRating(rating);
+        ratingBar.setRating(rating);
+    }
+
+    @Override
+    public List<ReleaseGroupStub> getReleaseGroups() {
+        return artist.getReleaseGroups();
+    }
+
+    @Override
+    public List<WebLink> getLinks() {
+        return artist.getLinks();
     }
 
 }
