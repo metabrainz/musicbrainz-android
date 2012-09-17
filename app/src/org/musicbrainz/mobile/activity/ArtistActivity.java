@@ -85,17 +85,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         tagView = (TextView) findViewById(R.id.tags);
     }
 
-    private void displayMessagesForEmptyData() {
-        if (artist.getReleases().isEmpty()) {
-            TextView noRes = (TextView) findViewById(R.id.noreleases);
-            noRes.setVisibility(View.VISIBLE);
-        }
-        if (artist.getLinks().isEmpty()) {
-            TextView noRes = (TextView) findViewById(R.id.nolinks);
-            noRes.setVisibility(View.VISIBLE);
-        }
-    }
-
     protected void populateLayout() {
         TextView artistText = (TextView) findViewById(R.id.artist_artist);
 
@@ -105,8 +94,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
         artistText.setSelected(true);
         tagView.setSelected(true);
-
-        displayMessagesForEmptyData(); // TODO move to fragments
 
         updateFragments();
         loading.setVisibility(View.GONE);
@@ -196,12 +183,14 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     public void updateTags(List<Tag> tags) {
         artist.setTags(tags);
         tagView.setText(StringFormat.commaSeparateTags(tags, this));
+        getSupportLoaderManager().destroyLoader(ARTIST_LOADER);
     }
 
     @Override
     public void updateRating(Float rating) {
         artist.setRating(rating);
         ratingBar.setRating(rating);
+        getSupportLoaderManager().destroyLoader(ARTIST_LOADER);
     }
 
     @Override

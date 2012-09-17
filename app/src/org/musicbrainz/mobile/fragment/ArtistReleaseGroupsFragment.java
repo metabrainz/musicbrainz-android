@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ArtistReleaseGroupsFragment extends ContractFragment<ArtistReleaseGroupsFragment.Callback> implements
         ListView.OnItemClickListener {
@@ -40,8 +41,13 @@ public class ArtistReleaseGroupsFragment extends ContractFragment<ArtistReleaseG
 
     public void update() {
         releaseGroups = getContract().getReleaseGroups();
-        releaseGroupList.setAdapter(new ArtistRGAdapter(getActivity(), releaseGroups));
-        releaseGroupList.setOnItemClickListener(this);
+        if (releaseGroups.isEmpty()) {
+            TextView noRes = (TextView) getView().findViewById(R.id.noreleases);
+            noRes.setVisibility(View.VISIBLE);
+        } else {
+            releaseGroupList.setAdapter(new ArtistRGAdapter(getActivity(), releaseGroups));
+            releaseGroupList.setOnItemClickListener(this);
+        }
     }
 
     @Override

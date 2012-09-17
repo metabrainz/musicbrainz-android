@@ -414,12 +414,14 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     public void updateTags(List<Tag> tags) {
         release.setReleaseGroupTags(tags);
         tagView.setText(StringFormat.commaSeparateTags(tags, this));
+        getSupportLoaderManager().destroyLoader(RELEASE_LOADER);
     }
 
     @Override
     public void updateRating(Float rating) {
         release.setReleaseGroupRating(rating);
         ratingBar.setRating(rating);
+        getSupportLoaderManager().destroyLoader(RELEASE_LOADER);
     }
 
     @Override

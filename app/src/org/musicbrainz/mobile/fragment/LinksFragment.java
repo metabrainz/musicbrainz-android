@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class LinksFragment extends ContractFragment<LinksFragment.Callback> implements ListView.OnItemClickListener {
 
@@ -37,8 +38,13 @@ public class LinksFragment extends ContractFragment<LinksFragment.Callback> impl
 
     public void update() {
         links = getContract().getLinks();
-        linksList.setAdapter(new WeblinkAdapter(getActivity(), links));
-        linksList.setOnItemClickListener(this);
+        if (links.isEmpty()) {
+            TextView noRes = (TextView) getView().findViewById(R.id.nolinks);
+            noRes.setVisibility(View.VISIBLE);
+        } else {
+            linksList.setAdapter(new WeblinkAdapter(getActivity(), links));
+            linksList.setOnItemClickListener(this);
+        }
     }
 
     @Override
