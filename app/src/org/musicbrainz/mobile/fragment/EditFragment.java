@@ -12,9 +12,7 @@ import org.musicbrainz.mobile.async.SubmitTagsLoader;
 import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.string.StringFormat;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -27,7 +25,7 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.Toast;
 
-public class EditFragment extends Fragment implements OnClickListener {
+public class EditFragment extends ContractFragment<EditFragment.Callback> implements OnClickListener {
 
     private static final int RATING_LOADER = 10;
     private static final int TAG_LOADER = 11;
@@ -46,26 +44,13 @@ public class EditFragment extends Fragment implements OnClickListener {
         return f;
     }
     
-    private EditFragmentCallback callback;
-    
-    public interface EditFragmentCallback {
+    public interface Callback {
         void showLoading();
         void hideLoading();
         String getMbid();
         UserData getUserData();
         void updateTags(List<Tag> tags);
         void updateRating(Float rating);
-    }
-    
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            callback = (EditFragmentCallback) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement "
-                    + EditFragmentCallback.class.getSimpleName());
-        }
     }
 
     @Override
@@ -89,7 +74,7 @@ public class EditFragment extends Fragment implements OnClickListener {
     
     public void update() {
         if (App.isUserLoggedIn()) {
-            UserData userData = callback.getUserData();
+            UserData userData = getContract().getUserData();
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
             ratingInput.setRating(userData.getRating());
         } else {
@@ -109,9 +94,9 @@ public class EditFragment extends Fragment implements OnClickListener {
     
     private void updateProgress() {
         if (doingTag || doingRate) {
-            callback.showLoading();
+            getContract().showLoading();
         } else {
-            callback.hideLoading();
+            getContract().hideLoading();
         }
     }
 
@@ -146,7 +131,7 @@ public class EditFragment extends Fragment implements OnClickListener {
         public Loader<AsyncResult<List<Tag>>> onCreateLoader(int id, Bundle args) {
             String tags = tagInput.getText().toString();
             Entity type = (Entity) getArguments().get("type");
-            return new SubmitTagsLoader(type, callback.getMbid(), tags);
+            return new SubmitTagsLoader(type, getContract().getMbid(), tags);
         }
 
         @Override
@@ -159,7 +144,7 @@ public class EditFragment extends Fragment implements OnClickListener {
                 break;
             case SUCCESS:
                 Toast.makeText(App.getContext(), R.string.toast_tag, Toast.LENGTH_SHORT).show();
-                callback.updateTags(data.getData());
+                getContract().updateTags(data.getData());
             }
         }
 
@@ -181,7 +166,7 @@ public class EditFragment extends Fragment implements OnClickListener {
         public Loader<AsyncResult<Float>> onCreateLoader(int id, Bundle args) {
             int rating = (int) ratingInput.getRating();
             Entity type = (Entity) getArguments().get("type");
-            return new SubmitRatingLoader(type, callback.getMbid(), rating);
+            return new SubmitRatingLoader(type, getContract().getMbid(), rating);
         }
 
         @Override
@@ -194,7 +179,7 @@ public class EditFragment extends Fragment implements OnClickListener {
                 break;
             case SUCCESS:
                 Toast.makeText(App.getContext(), R.string.toast_rate, Toast.LENGTH_SHORT).show();
-                callback.updateRating(data.getData());
+                getContract().updateRating(data.getData());
             }
         }
 

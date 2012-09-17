@@ -6,15 +6,13 @@ import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ReleaseTrackAdapter;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public class TracksFragment extends Fragment {
+public class TracksFragment extends ContractFragment<TracksFragment.Callback> {
     
     private ListView trackList;
 
@@ -22,21 +20,8 @@ public class TracksFragment extends Fragment {
         return new TracksFragment();
     }
     
-    private TracksFragmentCallback callback;
-    
-    public interface TracksFragmentCallback {
+    public interface Callback {
         List<Track> getTracks();
-    }
-    
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            callback = (TracksFragmentCallback) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement "
-                    + TracksFragmentCallback.class.getSimpleName());
-        }
     }
     
     @Override
@@ -47,7 +32,7 @@ public class TracksFragment extends Fragment {
     }
     
     public void update() {
-        trackList.setAdapter(new ReleaseTrackAdapter(getActivity(), callback.getTracks()));
+        trackList.setAdapter(new ReleaseTrackAdapter(getActivity(), getContract().getTracks()));
         trackList.setDrawSelectorOnTop(false);
     }
 

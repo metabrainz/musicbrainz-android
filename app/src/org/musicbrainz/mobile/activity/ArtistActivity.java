@@ -13,11 +13,8 @@ import org.musicbrainz.mobile.async.ArtistLoader;
 import org.musicbrainz.mobile.async.result.AsyncEntityResult;
 import org.musicbrainz.mobile.config.Configuration;
 import org.musicbrainz.mobile.fragment.ArtistReleaseGroupsFragment;
-import org.musicbrainz.mobile.fragment.ArtistReleaseGroupsFragment.ReleaseGroupsFragmentCallback;
 import org.musicbrainz.mobile.fragment.EditFragment;
-import org.musicbrainz.mobile.fragment.EditFragment.EditFragmentCallback;
 import org.musicbrainz.mobile.fragment.LinksFragment;
-import org.musicbrainz.mobile.fragment.LinksFragment.LinksFragmentCallback;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
@@ -43,7 +40,7 @@ import com.viewpagerindicator.TabPageIndicator;
  * artist MBID.
  */
 public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>,
-        LinksFragmentCallback, ReleaseGroupsFragmentCallback, EditFragmentCallback {
+        LinksFragment.Callback, ArtistReleaseGroupsFragment.Callback, EditFragment.Callback {
 
     private static final int ARTIST_LOADER = 0;
 

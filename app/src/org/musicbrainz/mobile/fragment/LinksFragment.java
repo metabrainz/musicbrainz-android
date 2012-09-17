@@ -6,40 +6,26 @@ import org.musicbrainz.android.api.data.WebLink;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.WeblinkAdapter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class LinksFragment extends Fragment implements ListView.OnItemClickListener {
+public class LinksFragment extends ContractFragment<LinksFragment.Callback> implements ListView.OnItemClickListener {
 
     private ListView linksList;
     private List<WebLink> links;
-    private LinksFragmentCallback callback;
 
     public static LinksFragment newInstance() {
         return new LinksFragment();
     }
 
-    public interface LinksFragmentCallback {
+    public interface Callback {
         List<WebLink> getLinks();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            callback = (LinksFragmentCallback) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement "
-                    + LinksFragmentCallback.class.getSimpleName());
-        }
     }
 
     @Override
@@ -50,7 +36,7 @@ public class LinksFragment extends Fragment implements ListView.OnItemClickListe
     }
 
     public void update() {
-        links = callback.getLinks();
+        links = getContract().getLinks();
         linksList.setAdapter(new WeblinkAdapter(getActivity(), links));
         linksList.setOnItemClickListener(this);
     }

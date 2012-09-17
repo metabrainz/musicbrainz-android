@@ -28,12 +28,9 @@ import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCallbacks;
 import org.musicbrainz.mobile.fragment.EditFragment;
-import org.musicbrainz.mobile.fragment.EditFragment.EditFragmentCallback;
 import org.musicbrainz.mobile.fragment.TracksFragment;
-import org.musicbrainz.mobile.fragment.TracksFragment.TracksFragmentCallback;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
-import org.musicbrainz.mobile.util.Log;
 import org.musicbrainz.mobile.util.Utils;
 
 import android.content.Intent;
@@ -66,7 +63,7 @@ import com.viewpagerindicator.TabPageIndicator;
  * release MBID or a release group MBID.
  */
 public class ReleaseActivity extends MusicBrainzActivity implements AddToCollectionCallback, ReleaseSelectionCallbacks,
-        BarcodeNotFoundCallback, TracksFragmentCallback, EditFragmentCallback {
+        BarcodeNotFoundCallback, TracksFragment.Callback, EditFragment.Callback {
 
     private static final int RELEASE_LOADER = 0;
     private static final int RELEASE_GROUP_STUBS_LOADER = 1;
