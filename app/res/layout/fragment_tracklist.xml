@@ -6,7 +6,8 @@
   style="@style/Match">
   
   <ListView
-    android:id="@+id/release_tracks"
-    style="@style/List" />
+    android:id="@android:id/list"
+    style="@style/List"
+    android:drawSelectorOnTop="false" />
   
 </RelativeLayout>

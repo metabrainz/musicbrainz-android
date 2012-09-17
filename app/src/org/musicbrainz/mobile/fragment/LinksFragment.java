@@ -12,14 +12,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class LinksFragment extends ContractFragment<LinksFragment.Callback> implements ListView.OnItemClickListener {
-
-    private ListView linksList;
-    private List<WebLink> links;
+public class LinksFragment extends ContractListFragment<LinksFragment.Callback> {
 
     public static LinksFragment newInstance() {
         return new LinksFragment();
@@ -31,26 +26,23 @@ public class LinksFragment extends ContractFragment<LinksFragment.Callback> impl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_links, container, false);
-        linksList = (ListView) layout.findViewById(R.id.artist_links);
-        return layout;
+        return inflater.inflate(R.layout.fragment_links, container, false);
     }
 
     public void update() {
-        links = getContract().getLinks();
-        if (links.isEmpty()) {
-            TextView noRes = (TextView) getView().findViewById(R.id.nolinks);
-            noRes.setVisibility(View.VISIBLE);
-        } else {
-            linksList.setAdapter(new WeblinkAdapter(getActivity(), links));
-            linksList.setOnItemClickListener(this);
-        }
+        List<WebLink> links = getContract().getLinks();
+        setListAdapter(new WeblinkAdapter(getActivity(), links));
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String link = links.get(position).getUrl();
-        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        WebLink link = (WebLink) getListAdapter().getItem(position);
+        startBrowserLink(link.getUrl());
+    }
+
+    private void startBrowserLink(String url) {
+        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(urlIntent);
     }
 

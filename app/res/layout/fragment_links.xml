@@ -6,11 +6,11 @@
   style="@style/Match">
 
   <ListView
-    android:id="@+id/artist_links"
+    android:id="@android:id/list"
     style="@style/List" />
 
   <TextView
-    android:id="@+id/nolinks"
+    android:id="@android:id/empty"
     style="@style/NoResultsText"
     android:layout_alignParentBottom="true"
     android:text="@string/no_links" />

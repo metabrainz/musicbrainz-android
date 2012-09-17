@@ -10,12 +10,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-public class TracksFragment extends ContractFragment<TracksFragment.Callback> {
+public class TracksFragment extends ContractListFragment<TracksFragment.Callback> {
     
-    private ListView trackList;
-
     public static TracksFragment newInstance() {
         return new TracksFragment();
     }
@@ -26,14 +23,11 @@ public class TracksFragment extends ContractFragment<TracksFragment.Callback> {
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_tracklist, container, false);
-        trackList = (ListView) layout.findViewById(R.id.release_tracks);
-        return layout;
+        return inflater.inflate(R.layout.fragment_tracklist, container, false);
     }
     
     public void update() {
-        trackList.setAdapter(new ReleaseTrackAdapter(getActivity(), getContract().getTracks()));
-        trackList.setDrawSelectorOnTop(false);
+        setListAdapter(new ReleaseTrackAdapter(getActivity(), getContract().getTracks()));
     }
 
 }
