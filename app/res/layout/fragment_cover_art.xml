@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Match"
+  android:background="@color/main_fg">
+
+  <LinearLayout
+    style="@style/Match">
+
+    <ImageView
+      android:id="@+id/cover_front"
+      style="@style/MatchWidth"
+      android:scaleType="fitCenter" />
+
+    <ImageView
+      android:id="@+id/cover_back"
+      style="@style/MatchWidth"
+      android:scaleType="fitCenter"
+      android:layout_marginTop="@dimen/std_pad" />
+
+  </LinearLayout>
+</ScrollView>

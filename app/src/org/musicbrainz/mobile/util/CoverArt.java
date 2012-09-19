@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.util;
 
 public class CoverArt {
     
-    private static final String CAA = "http://coverartarchive.org/";
+    private static final String CAA = "http://coverartarchive.org";
     
     public enum Size {
         SMALL, LARGE, FULL

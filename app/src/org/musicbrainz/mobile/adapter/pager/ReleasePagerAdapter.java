@@ -3,6 +3,7 @@ package org.musicbrainz.mobile.adapter.pager;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.fragment.CoverArtFragment;
 import org.musicbrainz.mobile.fragment.EditFragment;
 import org.musicbrainz.mobile.fragment.TracksFragment;
 
@@ -13,7 +14,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class ReleasePagerAdapter extends FragmentPagerAdapter {
 
-    private static final int[] TITLES = {R.string.tab_tracks, R.string.tab_edits};
+    private static final int[] TITLES = {R.string.tab_tracks, R.string.tab_cover_art, R.string.tab_edits};
     
     public ReleasePagerAdapter(FragmentManager fm) {
         super(fm);
@@ -25,6 +26,8 @@ public class ReleasePagerAdapter extends FragmentPagerAdapter {
         case 0:
             return TracksFragment.newInstance();
         case 1:
+            return CoverArtFragment.newInstance();
+        case 2:
             return EditFragment.newInstance(Entity.RELEASE_GROUP);
         }
         return null;

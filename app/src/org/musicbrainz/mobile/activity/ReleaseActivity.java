@@ -27,6 +27,7 @@ import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCallbacks;
+import org.musicbrainz.mobile.fragment.CoverArtFragment;
 import org.musicbrainz.mobile.fragment.EditFragment;
 import org.musicbrainz.mobile.fragment.TracksFragment;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
@@ -146,12 +147,14 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         pager.setAdapter(pagerAdapter);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
+        pager.setOffscreenPageLimit(2);
     }
 
     private void updateFragments() {
         FragmentManager fm = getSupportFragmentManager();
         ((TracksFragment) fm.findFragmentByTag(makeTag(0))).update();
-        ((EditFragment) fm.findFragmentByTag(makeTag(1))).update();
+        ((CoverArtFragment) fm.findFragmentByTag(makeTag(1))).update();
+        ((EditFragment) fm.findFragmentByTag(makeTag(2))).update();
     }
     
     private String makeTag(int position) {
