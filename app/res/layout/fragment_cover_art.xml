@@ -6,18 +6,39 @@
   android:background="@color/main_fg">
 
   <LinearLayout
-    style="@style/Match">
+    style="@style/Match"
+    android:padding="@dimen/std_pad">
 
-    <ImageView
-      android:id="@+id/cover_front"
-      style="@style/MatchWidth"
-      android:scaleType="fitCenter" />
+    <org.musicbrainz.mobile.view.WidthRelativeLayout
+      style="@style/Match"
+      android:background="@color/main_bg"
+      android:layout_marginBottom="@dimen/std_pad">
 
-    <ImageView
-      android:id="@+id/cover_back"
-      style="@style/MatchWidth"
-      android:scaleType="fitCenter"
-      android:layout_marginTop="@dimen/std_pad" />
+      <org.musicbrainz.mobile.view.RobotoLightTextView
+        android:layout_centerInParent="true"
+        android:text="@string/cover_art_front" />
+
+      <ImageView
+        android:id="@+id/cover_front"
+        style="@style/Match"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true" />
+    </org.musicbrainz.mobile.view.WidthRelativeLayout>
+
+    <org.musicbrainz.mobile.view.WidthRelativeLayout
+      style="@style/Match"
+      android:background="@color/main_bg">
+
+      <org.musicbrainz.mobile.view.RobotoLightTextView
+        android:layout_centerInParent="true"
+        android:text="@string/cover_art_back" />
+
+      <ImageView
+        android:id="@+id/cover_back"
+        style="@style/Match"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true" />
+    </org.musicbrainz.mobile.view.WidthRelativeLayout>
 
   </LinearLayout>
 </ScrollView>

@@ -50,6 +50,9 @@
   <string name="collection_add_fail">Failed adding release to collection</string>
   <string name="collection_add_success">Added to collection</string>
   <string name="collection_dialog_title">Add to collection</string>
+  
+  <string name="cover_art_front">FRONT</string>
+  <string name="cover_art_back">BACK</string>
 
   <!-- ArtistActivity -->
   <string name="artist_title">Artist</string>

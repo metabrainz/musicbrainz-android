@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/MatchHorizontal"
+  android:background="@color/main_fg"
+  android:padding="@dimen/std_pad"
+  android:gravity="center">
+
+  <org.musicbrainz.mobile.view.HeightRelativeLayout
+    style="@style/Match"
+    android:background="@color/main_bg"
+    android:layout_weight="1">
+
+    <org.musicbrainz.mobile.view.RobotoLightTextView
+      android:layout_centerInParent="true"
+      android:text="@string/cover_art_front" />
+
+    <ImageView
+      android:id="@+id/cover_front"
+      style="@style/Match"
+      android:scaleType="fitCenter"
+      android:adjustViewBounds="true" />
+  </org.musicbrainz.mobile.view.HeightRelativeLayout>
+
+  <View android:layout_width="@dimen/std_pad" />
+
+  <org.musicbrainz.mobile.view.HeightRelativeLayout
+    style="@style/Match"
+    android:background="@color/main_bg"
+    android:layout_weight="1">
+
+    <org.musicbrainz.mobile.view.RobotoLightTextView
+      android:layout_centerInParent="true"
+      android:text="@string/cover_art_back" />
+
+    <ImageView
+      android:id="@+id/cover_back"
+      style="@style/Match"
+      android:scaleType="fitCenter"
+      android:adjustViewBounds="true" />
+  </org.musicbrainz.mobile.view.HeightRelativeLayout>
+
+</LinearLayout>
