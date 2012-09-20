@@ -11,7 +11,7 @@
 
     <org.musicbrainz.mobile.view.WidthRelativeLayout
       style="@style/Match"
-      android:background="@color/main_bg"
+      android:background="@color/cover_bg"
       android:layout_marginBottom="@dimen/std_pad">
 
       <org.musicbrainz.mobile.view.RobotoLightTextView
@@ -27,7 +27,7 @@
 
     <org.musicbrainz.mobile.view.WidthRelativeLayout
       style="@style/Match"
-      android:background="@color/main_bg">
+      android:background="@color/cover_bg">
 
       <org.musicbrainz.mobile.view.RobotoLightTextView
         android:layout_centerInParent="true"

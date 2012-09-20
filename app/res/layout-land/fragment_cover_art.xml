@@ -9,7 +9,7 @@
 
   <org.musicbrainz.mobile.view.HeightRelativeLayout
     style="@style/Match"
-    android:background="@color/main_bg"
+    android:background="@color/cover_bg"
     android:layout_weight="1">
 
     <org.musicbrainz.mobile.view.RobotoLightTextView
@@ -27,7 +27,7 @@
 
   <org.musicbrainz.mobile.view.HeightRelativeLayout
     style="@style/Match"
-    android:background="@color/main_bg"
+    android:background="@color/cover_bg"
     android:layout_weight="1">
 
     <org.musicbrainz.mobile.view.RobotoLightTextView
