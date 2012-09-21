@@ -23,44 +23,44 @@ public class ReleaseGroupLookupHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("release-group")) {
+        if (localName.equals("release-group")) {
             releaseGroup.setMbid(atts.getValue("id"));
             releaseGroup.setType(atts.getValue("type"));
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("first-release-date")) {
+        } else if (localName.equals("first-release-date")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             artist = new ArtistNameMbid();
             artist.setMbid(atts.getValue("id"));
             inArtist = true;
         } else if (localName.equals("rating")) {
             releaseGroup.setRatingCount(Integer.parseInt(atts.getValue("votes-count")));
             buildString();
-        } else if (localName.equalsIgnoreCase("name")) {
+        } else if (localName.equals("name")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = true;
             buildString();
             tag = new Tag();
             tag.setCount(Integer.parseInt(atts.getValue("count")));
-        } else if (localName.equalsIgnoreCase("relation")) {
+        } else if (localName.equals("relation")) {
             link = new WebLink();
             link.setType(atts.getValue("type"));
-        } else if (localName.equalsIgnoreCase("target")) {
+        } else if (localName.equals("target")) {
             buildString();
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("title")) {
+        if (localName.equals("title")) {
             releaseGroup.setTitle(getString());
-        } else if (localName.equalsIgnoreCase("first-release-date")) {
+        } else if (localName.equals("first-release-date")) {
             releaseGroup.setFirstRelease(getString());
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = false;
-        } else if (localName.equalsIgnoreCase("name")) {
+        } else if (localName.equals("name")) {
             if (inArtist) {
                 artist.setName(getString());
                 releaseGroup.addArtist(artist);
@@ -68,11 +68,11 @@ public class ReleaseGroupLookupHandler extends MBHandler {
                 tag.setText(getString());
                 releaseGroup.addTag(tag);
             }
-        } else if (localName.equalsIgnoreCase("rating")) {
+        } else if (localName.equals("rating")) {
             releaseGroup.setRating(Float.parseFloat(getString()));
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = false;
-        } else if (localName.equalsIgnoreCase("target")) {
+        } else if (localName.equals("target")) {
             link.setUrl(getString());
             releaseGroup.addLink(link);
         }

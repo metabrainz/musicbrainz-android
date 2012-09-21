@@ -20,52 +20,52 @@ public class CollectionHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("collection")) {
+        if (localName.equals("collection")) {
             collection.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name")) {
+        } else if (localName.equals("name")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("editor")) {
+        } else if (localName.equals("editor")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("release-list")) {
+        } else if (localName.equals("release-list")) {
             collection.setCount(Integer.parseInt(atts.getValue("count")));
-        } else if (localName.equalsIgnoreCase("release")) {
+        } else if (localName.equals("release")) {
             stub = new ReleaseStub();
             stub.setReleaseMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("date")) {
+        } else if (localName.equals("date")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = true;
             releaseArtist = new ArtistNameMbid();
             releaseArtist.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("sort-name")) {
+        } else if (localName.equals("sort-name")) {
             buildString();
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("name") && !inArtist) {
+        if (localName.equals("name") && !inArtist) {
             collection.setName(getString());
-        } else if (localName.equalsIgnoreCase("name")) {
+        } else if (localName.equals("name")) {
             releaseArtist.setName(getString());
             stub.addArtist(releaseArtist);
-        } else if (localName.equalsIgnoreCase("editor")) {
+        } else if (localName.equals("editor")) {
             collection.setEditor(getString());
-        } else if (localName.equalsIgnoreCase("release")) {
+        } else if (localName.equals("release")) {
             collection.addRelease(stub);
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             stub.setTitle(getString());
-        } else if (localName.equalsIgnoreCase("date")) {
+        } else if (localName.equals("date")) {
             stub.setDate(getString());
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             stub.setCountryCode(getString());
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = false;
-        } else if (localName.equalsIgnoreCase("sort-name")) {
+        } else if (localName.equals("sort-name")) {
             releaseArtist.setSortName(getString());
         }
     }

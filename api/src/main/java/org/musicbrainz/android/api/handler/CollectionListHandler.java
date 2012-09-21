@@ -17,25 +17,25 @@ public class CollectionListHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("collection")) {
+        if (localName.equals("collection")) {
             stub = new EditorCollectionStub();
             stub.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name")) {
+        } else if (localName.equals("name")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("editor")) {
+        } else if (localName.equals("editor")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("release-list")) {
+        } else if (localName.equals("release-list")) {
             stub.setCount(Integer.parseInt(atts.getValue("count")));
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("name")) {
+        if (localName.equals("name")) {
             stub.setName(getString());
-        } else if (localName.equalsIgnoreCase("editor")) {
+        } else if (localName.equals("editor")) {
             stub.setEditor(getString());
-        } else if (localName.equalsIgnoreCase("collection")) {
+        } else if (localName.equals("collection")) {
             collections.add(stub);
         }
     }

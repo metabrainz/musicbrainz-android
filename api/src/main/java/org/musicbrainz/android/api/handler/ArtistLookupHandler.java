@@ -24,74 +24,74 @@ public class ArtistLookupHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("artist") && !inArtistRelations) {
+        if (localName.equals("artist") && !inArtistRelations) {
             artist.setMbid(atts.getValue("id"));
             artist.setType(atts.getValue("type"));
-        } else if (localName.equalsIgnoreCase("name")) {
+        } else if (localName.equals("name")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = true;
             buildString();
             tag = new Tag();
             tag.setCount(Integer.parseInt(atts.getValue("count")));
-        } else if (localName.equalsIgnoreCase("rating")) {
+        } else if (localName.equals("rating")) {
             artist.setRatingCount(Integer.parseInt(atts.getValue("votes-count")));
             buildString();
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("relation") && inUrlRelations) {
+        } else if (localName.equals("relation") && inUrlRelations) {
             buildString();
             link = new WebLink();
             link.setType(atts.getValue("type"));
-        } else if (localName.equalsIgnoreCase("target")) {
+        } else if (localName.equals("target")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("life-span")) {
+        } else if (localName.equals("life-span")) {
             inLifeSpan = true;
-        } else if (localName.equalsIgnoreCase("begin")) {
+        } else if (localName.equals("begin")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("end")) {
+        } else if (localName.equals("end")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("relation-list")) {
+        } else if (localName.equals("relation-list")) {
             setRelationStatus(atts.getValue("target-type"));
         }
     }
 
     private void setRelationStatus(String type) {
-        if (type.equalsIgnoreCase("url")) {
+        if (type.equals("url")) {
             inUrlRelations = true;
-        } else if (type.equalsIgnoreCase("artist")) {
+        } else if (type.equals("artist")) {
             inArtistRelations = true;
-        } else if (type.equalsIgnoreCase("label")) {
+        } else if (type.equals("label")) {
             inLabelRelations = true;
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("name")) {
+        if (localName.equals("name")) {
             if (inTag) {
                 tag.setText(getString());
                 artist.addTag(tag);
             } else if (!inArtistRelations && !inLabelRelations) {
                 artist.setName(getString());
             }
-        } else if (localName.equalsIgnoreCase("rating")) {
+        } else if (localName.equals("rating")) {
             artist.setRating(Float.parseFloat(getString()));
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             artist.setCountry(getString());
-        } else if (localName.equalsIgnoreCase("relation") && inUrlRelations) {
+        } else if (localName.equals("relation") && inUrlRelations) {
             artist.addLink(link);
-        } else if (localName.equalsIgnoreCase("target") && inUrlRelations) {
+        } else if (localName.equals("target") && inUrlRelations) {
             link.setUrl(getString());
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = false;
-        } else if (localName.equalsIgnoreCase("life-span")) {
+        } else if (localName.equals("life-span")) {
             inLifeSpan = false;
-        } else if (localName.equalsIgnoreCase("begin") && inLifeSpan) {
+        } else if (localName.equals("begin") && inLifeSpan) {
             artist.setBegin(getString());
-        } else if (localName.equalsIgnoreCase("end") && inLifeSpan) {
+        } else if (localName.equals("end") && inLifeSpan) {
             artist.setEnd(getString());
-        } else if (localName.equalsIgnoreCase("relation-list")) {
+        } else if (localName.equals("relation-list")) {
             inUrlRelations = false;
             inArtistRelations = false;
             inLabelRelations = false;

@@ -21,25 +21,25 @@ public class RecordingLookupHandler extends MBHandler {
     
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("recording")) {
+        if (localName.equals("recording")) {
             recording.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("length")) {
+        } else if (localName.equals("length")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = true;
             artist = new ArtistNameMbid();
             artist.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name")) {
+        } else if (localName.equals("name")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("tag-list")) {
+        } else if (localName.equals("tag-list")) {
             inTags = true;
-        } else if (localName.equalsIgnoreCase("tag") && !inArtist) {
+        } else if (localName.equals("tag") && !inArtist) {
             buildString();
             tag = new Tag();
             tag.setCount(Integer.parseInt(atts.getValue("count")));
-        } else if (localName.equalsIgnoreCase("rating")) {
+        } else if (localName.equals("rating")) {
             recording.setRatingCount(Integer.parseInt(atts.getValue("votes-count")));
             buildString();
         }
@@ -47,21 +47,21 @@ public class RecordingLookupHandler extends MBHandler {
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("title")) {
+        if (localName.equals("title")) {
             recording.setTitle(getString());
-        } else if (localName.equalsIgnoreCase("length")) {
+        } else if (localName.equals("length")) {
             recording.setLength(Integer.parseInt(getString()));
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = false;
-        } else if (localName.equalsIgnoreCase("name") && !inTags) {
+        } else if (localName.equals("name") && !inTags) {
             artist.setName(getString());
             recording.addArtist(artist);
-        } else if (localName.equalsIgnoreCase("tag-list")) {
+        } else if (localName.equals("tag-list")) {
             inTags = false;
-        } else if (localName.equalsIgnoreCase("tag") && !inArtist) {
+        } else if (localName.equals("tag") && !inArtist) {
             tag.setText(getString());
             recording.addTag(tag);
-        } else if (localName.equalsIgnoreCase("rating")) {
+        } else if (localName.equals("rating")) {
             recording.setRating(Float.parseFloat(getString()));
         }
     }

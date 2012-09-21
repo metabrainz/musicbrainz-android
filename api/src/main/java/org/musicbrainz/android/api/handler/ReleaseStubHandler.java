@@ -48,6 +48,8 @@ public class ReleaseStubHandler extends MBHandler {
             buildString();
         } else if (localName.equals("medium")) {
             inMedium = true;
+        } else if (localName.equals("sort-name")) {
+            buildString();
         }
     }
 
@@ -74,6 +76,8 @@ public class ReleaseStubHandler extends MBHandler {
             stub.addFormat(getString());
         } else if (localName.equals("medium")) {
             inMedium = false;
+        } else if (localName.equals("sort-name") && inArtist) {
+            releaseArtist.setSortName(getString());
         }
     }
 

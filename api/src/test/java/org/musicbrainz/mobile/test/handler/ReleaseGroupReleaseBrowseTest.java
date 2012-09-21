@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.musicbrainz.android.api.data.ArtistNameMbid;
 import org.musicbrainz.android.api.data.ReleaseStub;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
@@ -27,6 +28,13 @@ public class ReleaseGroupReleaseBrowseTest extends BaseXmlParsingTestCase {
     @Test
     public void testReleaseGroupReleases() {
         assertEquals(14, releases.size());
+    }
+    
+    @Test
+    public void testArtistSortName() {
+        ReleaseStub stub = releases.getFirst();
+        ArtistNameMbid artist = stub.getArtists().get(0);
+        assertEquals("Beatles, The", artist.getSortName());
     }
 
 }

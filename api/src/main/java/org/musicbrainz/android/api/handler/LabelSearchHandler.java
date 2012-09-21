@@ -19,27 +19,27 @@ public class LabelSearchHandler extends MBHandler {
     
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("label")) {
+        if (localName.equals("label")) {
             stub = new LabelSearchStub();
             stub.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name") && !inTag) {
+        } else if (localName.equals("name") && !inTag) {
             buildString();
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = true;
         }
     }
     
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("label")) {
+        if (localName.equals("label")) {
             results.add(stub);
-        } else if (localName.equalsIgnoreCase("name") && !inTag) {
+        } else if (localName.equals("name") && !inTag) {
             stub.setName(getString());
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             stub.setCountry(getString());
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = true;
         }
     }

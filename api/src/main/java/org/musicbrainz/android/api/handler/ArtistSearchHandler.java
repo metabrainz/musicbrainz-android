@@ -20,34 +20,34 @@ public class ArtistSearchHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("artist")) {
+        if (localName.equals("artist")) {
             stub = new ArtistSearchStub();
             stub.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name") && !inTag) {
+        } else if (localName.equals("name") && !inTag) {
             buildString();
-        } else if (localName.equalsIgnoreCase("disambiguation")) {
+        } else if (localName.equals("disambiguation")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = true;
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("artist")) {
+        if (localName.equals("artist")) {
             addOrIgnoreResult();
-        } else if (localName.equalsIgnoreCase("name") && !inTag) {
+        } else if (localName.equals("name") && !inTag) {
             stub.setName(getString());
-        } else if (localName.equalsIgnoreCase("disambiguation")) {
+        } else if (localName.equals("disambiguation")) {
             stub.setDisambiguation(getString());
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = false;
         }
     }
 
     private void addOrIgnoreResult() {
         for (String id : Artist.SPECIAL_PURPOSE) {
-            if (stub.getMbid().equalsIgnoreCase(id)) {
+            if (stub.getMbid().equals(id)) {
                 return;
             }
         }

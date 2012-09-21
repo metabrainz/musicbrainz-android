@@ -22,38 +22,38 @@ public class RecordingSearchHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("recording")) {
+        if (localName.equals("recording")) {
             stub = new RecordingStub();
             stub.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("title") && !inReleaseList) {
+        } else if (localName.equals("title") && !inReleaseList) {
             buildString();
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = true;
             recordingArtist = new ArtistNameMbid();
             recordingArtist.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name") && inArtist) {
+        } else if (localName.equals("name") && inArtist) {
             buildString();
-        } else if (localName.equalsIgnoreCase("length")) {
+        } else if (localName.equals("length")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("release-list")) {
+        } else if (localName.equals("release-list")) {
             inReleaseList = true;
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("recording")) {
+        if (localName.equals("recording")) {
             results.add(stub);
-        } else if (localName.equalsIgnoreCase("title") && !inReleaseList) {
+        } else if (localName.equals("title") && !inReleaseList) {
             stub.setTitle(getString());
         } else if (localName.equals("artist")) {
             inArtist = false;
             stub.setArtist(recordingArtist);
-        } else if (localName.equalsIgnoreCase("name") && inArtist) {
+        } else if (localName.equals("name") && inArtist) {
             recordingArtist.setName(getString());
-        } else if (localName.equalsIgnoreCase("length")) {
+        } else if (localName.equals("length")) {
             stub.setLength(Integer.parseInt(getString()));
-        } else if (localName.equalsIgnoreCase("release-list")) {
+        } else if (localName.equals("release-list")) {
             inReleaseList = false;
         }
     }

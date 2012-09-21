@@ -21,28 +21,28 @@ public class LabelLookupHandler extends MBHandler {
     
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("label")) {
+        if (localName.equals("label")) {
             label.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name") && !inTag) {
+        } else if (localName.equals("name") && !inTag) {
             buildString();
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = true;
             tag = new Tag();
             tag.setCount(Integer.parseInt(atts.getValue("count")));
-        } else if (localName.equalsIgnoreCase("rating")) {
+        } else if (localName.equals("rating")) {
             label.setRatingCount(Integer.parseInt(atts.getValue("votes-count")));
             buildString();
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("begin")) {
+        } else if (localName.equals("begin")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("end")) {
+        } else if (localName.equals("end")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("relation-list")) {
-            if (atts.getValue("target-type").equalsIgnoreCase("url")) {
+        } else if (localName.equals("relation-list")) {
+            if (atts.getValue("target-type").equals("url")) {
                 inUrlRelations = true;
             }
-        } else if (localName.equalsIgnoreCase("relation") && inUrlRelations) {
+        } else if (localName.equals("relation") && inUrlRelations) {
             buildString();
             link = new WebLink();
             link.setType(atts.getValue("type"));
@@ -51,22 +51,22 @@ public class LabelLookupHandler extends MBHandler {
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("name")) {
+        if (localName.equals("name")) {
             if (!inTag) {
                 label.setName(getString());    
             } else {
                 tag.setText(getString());
                 label.addTag(tag);
             }
-        } else if (localName.equalsIgnoreCase("tag")) {
+        } else if (localName.equals("tag")) {
             inTag = false;
-        } else if (localName.equalsIgnoreCase("rating")) {
+        } else if (localName.equals("rating")) {
             label.setRating(Float.parseFloat(getString()));
-        } else if (localName.equalsIgnoreCase("country")) {
+        } else if (localName.equals("country")) {
             label.setCountry(getString());
-        } else if (localName.equalsIgnoreCase("begin")) {
+        } else if (localName.equals("begin")) {
             label.setStart(getString());
-        } else if (localName.equalsIgnoreCase("end")) {
+        } else if (localName.equals("end")) {
             label.setEnd(getString());
         } else if (localName.equals("relation") && inUrlRelations) {
             link.setUrl(getString());

@@ -21,32 +21,32 @@ public class ReleaseGroupSearchHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("release-group")) {
+        if (localName.equals("release-group")) {
             rg = new ReleaseGroupStub();
             rg.setMbid(atts.getValue("id"));
             rg.setType(atts.getValue("type"));
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = true;
             releaseArtist = new ArtistNameMbid();
             releaseArtist.setMbid(atts.getValue("id"));
-        } else if (localName.equalsIgnoreCase("name") && inArtist) {
+        } else if (localName.equals("name") && inArtist) {
             buildString();
-        } else if (localName.equalsIgnoreCase("release")) {
+        } else if (localName.equals("release")) {
             rg.addReleaseMbid(atts.getValue("id"));
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("release-group")) {
+        if (localName.equals("release-group")) {
             stubs.add(rg);
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             rg.setTitle(getString());
-        } else if (localName.equalsIgnoreCase("artist")) {
+        } else if (localName.equals("artist")) {
             inArtist = false;
-        } else if (localName.equalsIgnoreCase("name") && inArtist) {
+        } else if (localName.equals("name") && inArtist) {
             releaseArtist.setName(getString());
             rg.addArtist(releaseArtist);
         }

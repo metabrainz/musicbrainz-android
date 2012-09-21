@@ -23,27 +23,27 @@ public class ReleaseGroupBrowseHandler extends MBHandler {
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-        if (localName.equalsIgnoreCase("release-group")) {
+        if (localName.equals("release-group")) {
             stub = new ReleaseGroupStub();
             String mbid = atts.getValue("id");
             stub.setMbid(mbid);
             stub.setType(atts.getValue("type"));
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("first-release-date")) {
+        } else if (localName.equals("first-release-date")) {
             buildString();
-        } else if (localName.equalsIgnoreCase("release-group-list")) {
+        } else if (localName.equals("release-group-list")) {
             total = Integer.parseInt(atts.getValue("count"));
         }
     }
 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
-        if (localName.equalsIgnoreCase("release-group")) {
+        if (localName.equals("release-group")) {
             results.add(stub);
-        } else if (localName.equalsIgnoreCase("title")) {
+        } else if (localName.equals("title")) {
             stub.setTitle(getString());
-        } else if (localName.equalsIgnoreCase("first-release-date")) {
+        } else if (localName.equals("first-release-date")) {
             stub.setFirstRelease(getString());
         }
     }
