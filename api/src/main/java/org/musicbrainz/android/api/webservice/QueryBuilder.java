@@ -32,7 +32,7 @@ public class QueryBuilder {
     private static final String SEARCH_LABEL = "label?query=";
     private static final String SEARCH_RECORDING = "recording?query=";
     
-    private static final String LOOKUP_USER_COLLECTIONS = "collection";
+    private static final String LOOKUP_USER_COLLECTIONS = "collection?limit=100";
     private static final String COLLECTION = "collection/";
     private static final String COLLECTION_LIST = "/releases?inc=releases+artist-credits&limit=100";
     private static final String COLLECTION_EDIT = "/releases/";;

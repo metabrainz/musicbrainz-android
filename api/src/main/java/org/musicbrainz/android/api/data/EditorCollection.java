@@ -1,5 +1,6 @@
 package org.musicbrainz.android.api.data;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class EditorCollection extends EditorCollectionStub {
@@ -7,6 +8,7 @@ public class EditorCollection extends EditorCollectionStub {
 	private LinkedList<ReleaseStub> releases = new LinkedList<ReleaseStub>();
 
 	public LinkedList<ReleaseStub> getReleases() {
+	    Collections.sort(releases);
 		return releases;
 	}
 

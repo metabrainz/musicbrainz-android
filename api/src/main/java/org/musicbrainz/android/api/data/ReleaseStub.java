@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * Partial release data to differentiate between similar releases (e.g. part of
  * the same release group).
  */
-public class ReleaseStub {
+public class ReleaseStub implements Comparable<ReleaseStub> {
 
     private String releaseMbid;
 
@@ -82,6 +82,24 @@ public class ReleaseStub {
 
     public void addFormat(String format) {
         formats.add(format);
+    }
+
+    @Override
+    public int compareTo(ReleaseStub another) {
+        int artistNameComparison = getArtists().get(0).getName().compareTo(another.getArtists().get(0).getName());
+        if (artistNameComparison != 0) {
+            return artistNameComparison;
+        }
+
+        if (getDate() == null && another.getDate() == null) {
+            return 0;
+        } else if (getDate() == null) {
+            return 1;
+        } else if (another.getDate() == null) {
+            return -1;
+        } else {
+            return getDate().compareTo(another.getDate());
+        }
     }
 
 }

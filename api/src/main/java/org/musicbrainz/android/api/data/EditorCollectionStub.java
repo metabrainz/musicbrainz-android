@@ -1,6 +1,6 @@
 package org.musicbrainz.android.api.data;
 
-public class EditorCollectionStub {
+public class EditorCollectionStub implements Comparable<EditorCollectionStub>{
 	
 	private String mbid;
 	private String name;
@@ -38,5 +38,10 @@ public class EditorCollectionStub {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+    @Override
+    public int compareTo(EditorCollectionStub another) {
+        return getName().compareTo(another.getName());
+    }
 
 }

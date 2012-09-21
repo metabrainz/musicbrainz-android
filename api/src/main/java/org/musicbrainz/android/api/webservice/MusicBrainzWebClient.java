@@ -254,6 +254,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
         HttpEntity entity = get(QueryBuilder.collectionList());
         LinkedList<EditorCollectionStub> collections = responseParser.parseCollectionListLookup(entity.getContent());
         entity.consumeContent();
+        Collections.sort(collections);
         return collections;
     }
 

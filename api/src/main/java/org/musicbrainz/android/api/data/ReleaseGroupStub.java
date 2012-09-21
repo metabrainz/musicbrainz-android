@@ -102,14 +102,14 @@ public class ReleaseGroupStub implements Comparable<ReleaseGroupStub> {
     }
 
     public int compareTo(ReleaseGroupStub another) {
-        if (this.getFirstRelease() == null && another.getFirstRelease() == null) {
+        if (getFirstRelease() == null && another.getFirstRelease() == null) {
             return 0;
-        } else if (this.getFirstRelease() == null) {
+        } else if (getFirstRelease() == null) {
             return 1;
         } else if (another.getFirstRelease() == null) {
             return -1;
         } else {
-            return this.getFirstRelease().compareTo(another.getFirstRelease());
+            return getFirstRelease().compareTo(another.getFirstRelease());
         }
     }
 

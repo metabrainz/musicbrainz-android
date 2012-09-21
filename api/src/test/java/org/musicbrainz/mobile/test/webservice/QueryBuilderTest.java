@@ -115,7 +115,7 @@ public class QueryBuilderTest {
 
     @Test
     public void collectionListLookup() {
-        String expected = "http://musicbrainz.org/ws/2/collection";
+        String expected = "http://musicbrainz.org/ws/2/collection?limit=100";
         String actual = QueryBuilder.collectionList();
         assertEquals(expected, actual);
     }
