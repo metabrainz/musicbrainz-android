@@ -31,9 +31,19 @@ public class ReleaseGroupReleaseBrowseTest extends BaseXmlParsingTestCase {
     }
     
     @Test
+    public void testBasicReleaseInfo() {
+        ReleaseStub release = releases.getFirst();
+        assertEquals("Rubber Soul", release.getTitle());
+        assertEquals("2c54468a-dedf-4ac9-a358-562c4c6c5dd7", release.getReleaseMbid());
+        assertEquals(14, release.getTracksNum());
+        assertEquals("GB", release.getCountryCode());
+        assertEquals("1965-12-03", release.getDate());
+    }
+    
+    @Test
     public void testArtistSortName() {
-        ReleaseStub stub = releases.getFirst();
-        ArtistNameMbid artist = stub.getArtists().get(0);
+        ReleaseStub release = releases.getFirst();
+        ArtistNameMbid artist = release.getArtists().get(0);
         assertEquals("Beatles, The", artist.getSortName());
     }
 
