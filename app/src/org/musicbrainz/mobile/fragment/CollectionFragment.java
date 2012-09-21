@@ -4,7 +4,7 @@ import org.musicbrainz.android.api.data.UserCollection;
 import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
-import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
+import org.musicbrainz.mobile.adapter.list.ReleaseInfoAdapter;
 import org.musicbrainz.mobile.async.CollectionEditLoader;
 import org.musicbrainz.mobile.async.CollectionLoader;
 import org.musicbrainz.mobile.async.result.AsyncResult;
@@ -88,7 +88,7 @@ public class CollectionFragment extends SherlockListFragment {
         switch (result.getStatus()) {
         case SUCCESS:
             UserCollection collection = result.getData();
-            setListAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_collection_release,
+            setListAdapter(new ReleaseInfoAdapter(getActivity(), R.layout.list_collection_release,
                     collection.getReleases()));
             break;
         case EXCEPTION:
@@ -115,7 +115,7 @@ public class CollectionFragment extends SherlockListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        ReleaseStubAdapter adapter = (ReleaseStubAdapter) getListAdapter();
+        ReleaseInfoAdapter adapter = (ReleaseInfoAdapter) getListAdapter();
         String releaseMbid = adapter.getItem(position).getReleaseMbid();
         Intent intent = new Intent(appContext, ReleaseActivity.class);
         intent.putExtra(Extra.RELEASE_MBID, releaseMbid);

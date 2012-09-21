@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
+import org.musicbrainz.mobile.adapter.list.ReleaseInfoAdapter;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -26,12 +26,12 @@ public class ReleaseSelectionDialog extends DialogFragment implements OnItemClic
     public static final String TAG = "release_selection_dialog";
     
     private ReleaseSelectionCallbacks callbacks;
-    private List<ReleaseInfo> stubs;
+    private List<ReleaseInfo> release;
     private ListView releaseList;
     
     public interface ReleaseSelectionCallbacks {
-        List<ReleaseInfo> getReleaseStubs();
-        void onReleaseStubSelected(String mbid);
+        List<ReleaseInfo> getReleasesInfo();
+        void onReleaseSelected(String mbid);
     }
     
     @Override
@@ -54,9 +54,9 @@ public class ReleaseSelectionDialog extends DialogFragment implements OnItemClic
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        stubs = callbacks.getReleaseStubs();
-        if (stubs != null) {
-            releaseList.setAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_release, stubs));
+        release = callbacks.getReleasesInfo();
+        if (release != null) {
+            releaseList.setAdapter(new ReleaseInfoAdapter(getActivity(), R.layout.list_release, release));
         }
     }
     
@@ -75,7 +75,7 @@ public class ReleaseSelectionDialog extends DialogFragment implements OnItemClic
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        callbacks.onReleaseStubSelected(stubs.get(position).getReleaseMbid());
+        callbacks.onReleaseSelected(release.get(position).getReleaseMbid());
         dismiss();
     }
 

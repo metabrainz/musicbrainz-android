@@ -11,12 +11,12 @@ import org.musicbrainz.mobile.async.result.LoaderStatus;
 
 import android.support.v4.content.AsyncTaskLoader;
 
-public class ReleaseGroupStubsLoader extends AsyncTaskLoader<AsyncResult<List<ReleaseInfo>>> {
+public class ReleaseGroupReleasesLoader extends AsyncTaskLoader<AsyncResult<List<ReleaseInfo>>> {
 
     private MusicBrainz client;
     private String mbid;
 
-    public ReleaseGroupStubsLoader(String mbid) {
+    public ReleaseGroupReleasesLoader(String mbid) {
         super(App.getContext());
         client = App.getWebClient();
         this.mbid = mbid;

@@ -169,8 +169,8 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
         private void startArtistActivity(int position) {
             Intent artistIntent = new Intent(SearchActivity.this, ArtistActivity.class);
-            ArtistSearchResult stub = artistSearchResults.get(position);
-            artistIntent.putExtra(Extra.ARTIST_MBID, stub.getMbid());
+            ArtistSearchResult artist = artistSearchResults.get(position);
+            artistIntent.putExtra(Extra.ARTIST_MBID, artist.getMbid());
             startActivity(artistIntent);
         }
     }

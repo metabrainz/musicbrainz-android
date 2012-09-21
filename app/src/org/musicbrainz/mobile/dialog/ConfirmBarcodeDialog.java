@@ -67,14 +67,14 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
         confirm = (Button) layout.findViewById(R.id.barcode_confirm);
     }
 
-    private void setViews(ReleaseInfo stub) {
-        title.setText(stub.getTitle());
-        artist.setText(StringFormat.commaSeparateArtists(stub.getArtists()));
-        numberOfTracks.setText(stub.getTracksNum() + " " + getString(R.string.label_tracks));
-        formats.setText(StringMapper.buildReleaseFormatsString(App.getContext(), stub.getFormats()));
-        labels.setText(StringFormat.commaSeparate(stub.getLabels()));
-        releaseDate.setText(stub.getDate());
-        country.setText(stub.getCountryCode());
+    private void setViews(ReleaseInfo release) {
+        title.setText(release.getTitle());
+        artist.setText(StringFormat.commaSeparateArtists(release.getArtists()));
+        numberOfTracks.setText(release.getTracksNum() + " " + getString(R.string.label_tracks));
+        formats.setText(StringMapper.buildReleaseFormatsString(App.getContext(), release.getFormats()));
+        labels.setText(StringFormat.commaSeparate(release.getLabels()));
+        releaseDate.setText(release.getDate());
+        country.setText(release.getCountryCode());
     }
 
     @Override

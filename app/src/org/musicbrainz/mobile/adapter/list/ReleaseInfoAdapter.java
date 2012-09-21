@@ -14,47 +14,47 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ReleaseStubAdapter extends ArrayAdapter<ReleaseInfo> {
+public class ReleaseInfoAdapter extends ArrayAdapter<ReleaseInfo> {
 
     private Activity context;
-    private List<ReleaseInfo> releaseStubs;
+    private List<ReleaseInfo> releasesInfo;
     private int layoutId;
 
-    public ReleaseStubAdapter(Activity context, int layoutId, List<ReleaseInfo> releaseStubs) {
-        super(context, layoutId, releaseStubs);
+    public ReleaseInfoAdapter(Activity context, int layoutId, List<ReleaseInfo> releasesInfo) {
+        super(context, layoutId, releasesInfo);
         this.context = context;
         this.layoutId = layoutId;
-        this.releaseStubs = releaseStubs;
+        this.releasesInfo = releasesInfo;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        View release = convertView;
-        ReleaseStubHolder holder = null;
+        View releaseView = convertView;
+        ReleaseInfoHolder holder = null;
 
-        if (release == null) {
+        if (releaseView == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            release = inflater.inflate(layoutId, parent, false);
-            holder = new ReleaseStubHolder(release);
-            release.setTag(holder);
+            releaseView = inflater.inflate(layoutId, parent, false);
+            holder = new ReleaseInfoHolder(releaseView);
+            releaseView.setTag(holder);
         } else {
-            holder = (ReleaseStubHolder) release.getTag();
+            holder = (ReleaseInfoHolder) releaseView.getTag();
         }
 
-        ReleaseInfo stub = releaseStubs.get(position);
-        holder.getTitle().setText(stub.getTitle());
-        holder.getArtist().setText(StringFormat.commaSeparateArtists(stub.getArtists()));
-        holder.getCountry().setText(stub.getCountryCode());
-        holder.getDate().setText(stub.getDate());
+        ReleaseInfo release = releasesInfo.get(position);
+        holder.getTitle().setText(release.getTitle());
+        holder.getArtist().setText(StringFormat.commaSeparateArtists(release.getArtists()));
+        holder.getCountry().setText(release.getCountryCode());
+        holder.getDate().setText(release.getDate());
 
         if (layoutId == R.layout.list_release) {
-            holder.getTrackNum().setText(stub.getTracksNum() + " " + context.getString(R.string.label_tracks));
-            holder.getFormat().setText(StringMapper.buildReleaseFormatsString(getContext(), stub.getFormats()));            
-            holder.getLabels().setText(StringFormat.commaSeparate(stub.getLabels()));
+            holder.getTrackNum().setText(release.getTracksNum() + " " + context.getString(R.string.label_tracks));
+            holder.getFormat().setText(StringMapper.buildReleaseFormatsString(getContext(), release.getFormats()));            
+            holder.getLabels().setText(StringFormat.commaSeparate(release.getLabels()));
         }
-        return release;
+        return releaseView;
     }
 
-    private class ReleaseStubHolder {
+    private class ReleaseInfoHolder {
         View base;
         TextView title = null;
         TextView artist = null;
@@ -64,7 +64,7 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseInfo> {
         TextView date = null;
         TextView country = null;
 
-        ReleaseStubHolder(View base) {
+        ReleaseInfoHolder(View base) {
             this.base = base;
         }
 

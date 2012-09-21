@@ -16,7 +16,7 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.pager.ReleasePagerAdapter;
 import org.musicbrainz.mobile.async.BarcodeReleaseLoader;
 import org.musicbrainz.mobile.async.CollectionEditLoader;
-import org.musicbrainz.mobile.async.ReleaseGroupStubsLoader;
+import org.musicbrainz.mobile.async.ReleaseGroupReleasesLoader;
 import org.musicbrainz.mobile.async.ReleaseLoader;
 import org.musicbrainz.mobile.async.result.AsyncEntityResult;
 import org.musicbrainz.mobile.async.result.AsyncResult;
@@ -67,12 +67,12 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         BarcodeNotFoundCallback, TracksFragment.Callback, EditFragment.Callback {
 
     private static final int RELEASE_LOADER = 0;
-    private static final int RELEASE_GROUP_STUBS_LOADER = 1;
+    private static final int RELEASE_GROUP_RELEASE_LOADER = 1;
     private static final int BARCODE_RELEASE_LOADER = 2;
     private static final int COLLECTION_ADD_LOADER = 3;
 
     private Release release;
-    private List<ReleaseInfo> stubs;
+    private List<ReleaseInfo> releasesInfo;
     private UserData userData;
 
     private View loading;
@@ -108,7 +108,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         if (releaseMbid != null) {
             getSupportLoaderManager().initLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
         } else if (releaseGroupMbid != null) {
-            getSupportLoaderManager().initLoader(RELEASE_GROUP_STUBS_LOADER, null, releaseStubLoaderCallbacks);
+            getSupportLoaderManager().initLoader(RELEASE_GROUP_RELEASE_LOADER, null, releasesInfoLoader);
         } else if (barcode != null) {
             getSupportLoaderManager().initLoader(BARCODE_RELEASE_LOADER, null, releaseLoaderCallbacks);
         } else {
@@ -241,7 +241,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         if (releaseMbid != null) {
             getSupportLoaderManager().restartLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
         } else if (releaseGroupMbid != null) {
-            getSupportLoaderManager().restartLoader(RELEASE_GROUP_STUBS_LOADER, null, releaseStubLoaderCallbacks);
+            getSupportLoaderManager().restartLoader(RELEASE_GROUP_RELEASE_LOADER, null, releasesInfoLoader);
         } else if (barcode != null) {
             getSupportLoaderManager().restartLoader(BARCODE_RELEASE_LOADER, null, releaseLoaderCallbacks);
         }
@@ -283,11 +283,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         }
     };
 
-    private LoaderCallbacks<AsyncResult<List<ReleaseInfo>>> releaseStubLoaderCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseInfo>>>() {
+    private LoaderCallbacks<AsyncResult<List<ReleaseInfo>>> releasesInfoLoader = new LoaderCallbacks<AsyncResult<List<ReleaseInfo>>>() {
 
         @Override
         public Loader<AsyncResult<List<ReleaseInfo>>> onCreateLoader(int id, Bundle args) {
-            return new ReleaseGroupStubsLoader(releaseGroupMbid);
+            return new ReleaseGroupReleasesLoader(releaseGroupMbid);
         }
 
         @Override
@@ -298,13 +298,13 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
                 showConnectionErrorWarning();
                 break;
             case SUCCESS:
-                stubs = container.getData();
-                if (stubs.size() == 1) {
-                    ReleaseInfo singleRelease = stubs.get(0);
+                releasesInfo = container.getData();
+                if (releasesInfo.size() == 1) {
+                    ReleaseInfo singleRelease = releasesInfo.get(0);
                     releaseMbid = singleRelease.getReleaseMbid();
                     getSupportLoaderManager().initLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
                 } else {
-                    handler.sendEmptyMessage(MESSAGE_RELEASE_STUBS);
+                    handler.sendEmptyMessage(MESSAGE_RELEASE_SELECTION);
                 }
             }
         }
@@ -356,7 +356,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     }
 
     public static final int MESSAGE_NOT_FOUND = 0;
-    public static final int MESSAGE_RELEASE_STUBS = 1;
+    public static final int MESSAGE_RELEASE_SELECTION = 1;
 
     private Handler handler = new Handler() {
 
@@ -366,19 +366,19 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
             case MESSAGE_NOT_FOUND:
                 showBarcodeNotFoundDialog();
                 break;
-            case MESSAGE_RELEASE_STUBS:
+            case MESSAGE_RELEASE_SELECTION:
                 showReleaseSelectionDialog();
             }
         }
     };
 
     @Override
-    public List<ReleaseInfo> getReleaseStubs() {
-        return stubs;
+    public List<ReleaseInfo> getReleasesInfo() {
+        return releasesInfo;
     }
 
     @Override
-    public void onReleaseStubSelected(String mbid) {
+    public void onReleaseSelected(String mbid) {
         Intent releaseIntent = new Intent(App.getContext(), ReleaseActivity.class);
         releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
         startActivity(releaseIntent);

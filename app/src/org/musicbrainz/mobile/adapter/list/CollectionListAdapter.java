@@ -16,44 +16,44 @@ import android.widget.TextView;
 public class CollectionListAdapter extends ArrayAdapter<UserCollectionInfo> {
 
     private Activity context;
-    private List<UserCollectionInfo> collectionStubs;
+    private List<UserCollectionInfo> userCollections;
     
-    public CollectionListAdapter(Activity context, List<UserCollectionInfo> collectionStubs) {
-        super(context, R.layout.list_collection, collectionStubs);
+    public CollectionListAdapter(Activity context, List<UserCollectionInfo> userCollections) {
+        super(context, R.layout.list_collection, userCollections);
         this.context = context;
-        this.collectionStubs = collectionStubs;
+        this.userCollections = userCollections;
     }
     
     public View getView(int position, View convertView, ViewGroup parent) {
-        View collection = convertView;
-        CollectionStubHolder holder = null;
+        View collectionView = convertView;
+        CollectionInfoHolder holder = null;
         
-        if (collection == null) {
+        if (collectionView == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            collection = inflater.inflate(R.layout.list_collection, parent, false);
-            holder = new CollectionStubHolder(collection);
-            collection.setTag(holder);
+            collectionView = inflater.inflate(R.layout.list_collection, parent, false);
+            holder = new CollectionInfoHolder(collectionView);
+            collectionView.setTag(holder);
         } else {
-            holder = (CollectionStubHolder) collection.getTag();
+            holder = (CollectionInfoHolder) collectionView.getTag();
         }
         
-        UserCollectionInfo stub = collectionStubs.get(position);
-        holder.getTitle().setText(stub.getName());
-        holder.getCount().setText(getReleasesDisplayText(stub));
-        return collection;
+        UserCollectionInfo collection = userCollections.get(position);
+        holder.getTitle().setText(collection.getName());
+        holder.getCount().setText(getReleasesDisplayText(collection));
+        return collectionView;
     }
 
-    private String getReleasesDisplayText(UserCollectionInfo stub) {
+    private String getReleasesDisplayText(UserCollectionInfo collection) {
         Resources res = context.getResources();
-        return res.getQuantityString(R.plurals.release_plurals, stub.getCount(), stub.getCount());
+        return res.getQuantityString(R.plurals.release_plurals, collection.getCount(), collection.getCount());
     }
     
-    private class CollectionStubHolder {
+    private class CollectionInfoHolder {
         View base;
         TextView title = null;
         TextView count = null;
         
-        CollectionStubHolder(View base) {
+        CollectionInfoHolder(View base) {
             this.base = base;
         }
         

@@ -6,7 +6,7 @@ import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
-import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
+import org.musicbrainz.mobile.adapter.list.ReleaseInfoAdapter;
 import org.musicbrainz.mobile.async.SearchReleaseLoader;
 import org.musicbrainz.mobile.async.SubmitBarcodeLoader;
 import org.musicbrainz.mobile.async.result.AsyncResult;
@@ -211,7 +211,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
 
     private void handleSearchResults(AsyncResult<List<ReleaseInfo>> result) {
         results = result.getData();
-        matches.setAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_release, results));
+        matches.setAdapter(new ReleaseInfoAdapter(getActivity(), R.layout.list_release, results));
         matches.setOnItemClickListener(this);
         matches.setOnItemLongClickListener(this);
 
