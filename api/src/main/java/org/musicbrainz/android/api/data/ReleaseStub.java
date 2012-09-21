@@ -86,7 +86,7 @@ public class ReleaseStub implements Comparable<ReleaseStub> {
 
     @Override
     public int compareTo(ReleaseStub another) {
-        int artistNameComparison = getArtists().get(0).getName().compareTo(another.getArtists().get(0).getName());
+        int artistNameComparison = getArtists().get(0).compareTo(another.getArtists().get(0));
         if (artistNameComparison != 0) {
             return artistNameComparison;
         }

@@ -41,6 +41,8 @@ public class CollectionHandler extends MBHandler {
             inArtist = true;
             releaseArtist = new ArtistNameMbid();
             releaseArtist.setMbid(atts.getValue("id"));
+        } else if (localName.equalsIgnoreCase("sort-name")) {
+            buildString();
         }
     }
 
@@ -63,6 +65,8 @@ public class CollectionHandler extends MBHandler {
             stub.setCountryCode(getString());
         } else if (localName.equalsIgnoreCase("artist")) {
             inArtist = false;
+        } else if (localName.equalsIgnoreCase("sort-name")) {
+            releaseArtist.setSortName(getString());
         }
     }
 

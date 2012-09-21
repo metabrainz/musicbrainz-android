@@ -57,6 +57,14 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
     }
     
     @Test
+    public void testArtistSortNames() throws IOException {
+        ReleaseStub stub = collection.getReleases().get(1);
+        ArrayList<ArtistNameMbid> artists = stub.getArtists();
+        assertEquals("Owen", artists.get(0).getSortName());
+        assertEquals("Rutabega, The", artists.get(1).getSortName());
+    }
+    
+    @Test
     public void testLastRelease() throws IOException {
         ReleaseStub last = collection.getReleases().getLast();
         assertEquals("9f00a4d3-82b2-4084-a48b-565703b812ce", last.getReleaseMbid());

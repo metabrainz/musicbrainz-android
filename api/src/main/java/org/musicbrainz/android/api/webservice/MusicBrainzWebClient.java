@@ -98,6 +98,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
         HttpEntity entity = get(QueryBuilder.releaseGroupReleaseBrowse(mbid));
         LinkedList<ReleaseStub> releases = responseParser.parseReleaseGroupReleases(entity.getContent());
         entity.consumeContent();
+        Collections.sort(releases);
         return releases;
     }
 
@@ -114,6 +115,7 @@ public class MusicBrainzWebClient implements MusicBrainz {
         HttpEntity entity = get(QueryBuilder.artistReleaseGroupBrowse(mbid, 0));
         ArrayList<ReleaseGroupStub> releases = responseParser.parseReleaseGroupBrowse(entity.getContent());
         entity.consumeContent();
+        Collections.sort(releases);
         return releases;
     }
 
