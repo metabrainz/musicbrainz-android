@@ -5,17 +5,17 @@ import java.util.Collection;
 import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ArtistSearchStub;
-import org.musicbrainz.android.api.data.EditorCollection;
-import org.musicbrainz.android.api.data.EditorCollectionStub;
+import org.musicbrainz.android.api.data.ArtistSearchResult;
+import org.musicbrainz.android.api.data.UserCollection;
+import org.musicbrainz.android.api.data.UserCollectionInfo;
 import org.musicbrainz.android.api.data.Label;
-import org.musicbrainz.android.api.data.LabelSearchStub;
+import org.musicbrainz.android.api.data.LabelSearchResult;
 import org.musicbrainz.android.api.data.Recording;
-import org.musicbrainz.android.api.data.RecordingStub;
+import org.musicbrainz.android.api.data.RecordingInfo;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.ReleaseGroup;
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.Entity;
@@ -31,11 +31,11 @@ public interface MusicBrainz {
     /*
      * Search
      */
-    List<ArtistSearchStub> searchArtist(String searchTerm) throws IOException;
-    List<ReleaseStub> searchRelease(String searchTerm) throws IOException;
-    List<ReleaseGroupStub> searchReleaseGroup(String searchTerm) throws IOException;
-    List<LabelSearchStub> searchLabel(String searchTerm) throws IOException;
-    List<RecordingStub> searchRecording(String searchTerm) throws IOException;
+    List<ArtistSearchResult> searchArtist(String searchTerm) throws IOException;
+    List<ReleaseInfo> searchRelease(String searchTerm) throws IOException;
+    List<ReleaseGroupInfo> searchReleaseGroup(String searchTerm) throws IOException;
+    List<LabelSearchResult> searchLabel(String searchTerm) throws IOException;
+    List<RecordingInfo> searchRecording(String searchTerm) throws IOException;
 
     /*
      * Lookup
@@ -57,7 +57,7 @@ public interface MusicBrainz {
     /*
      * Browse
      */
-    List<ReleaseStub> browseReleases(String mbid) throws IOException;
+    List<ReleaseInfo> browseReleases(String mbid) throws IOException;
 
     /*
      * Submission
@@ -71,7 +71,7 @@ public interface MusicBrainz {
      */
     void addReleaseToCollection(String collectionMbid, String releaseMbid) throws IOException;
     void deleteReleaseFromCollection(String collectionMbid, String releaseMbid) throws IOException;
-    List<EditorCollectionStub> lookupUserCollections() throws IOException;
-    EditorCollection lookupCollection(String mbid) throws IOException;
+    List<UserCollectionInfo> lookupUserCollections() throws IOException;
+    UserCollection lookupCollection(String mbid) throws IOException;
 
 }

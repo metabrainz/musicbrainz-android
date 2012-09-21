@@ -8,13 +8,13 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ArtistSearchStub;
+import org.musicbrainz.android.api.data.ArtistSearchResult;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ArtistSearchTest extends BaseXmlParsingTestCase {
     
     private static final String ARTIST_SEARCH_FIXTURE = "artistSearch_owen.xml";
-    private LinkedList<ArtistSearchStub> artists;
+    private LinkedList<ArtistSearchResult> artists;
     
     @Before
     public void doParsing() throws IOException {

@@ -1,6 +1,6 @@
 package org.musicbrainz.mobile.dialog;
 
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.string.StringFormat;
@@ -31,7 +31,7 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
     private ConfirmBarcodeCallbacks callbacks;
 
     public interface ConfirmBarcodeCallbacks {
-        ReleaseStub getCurrentSelection();
+        ReleaseInfo getCurrentSelection();
         void confirmSubmission();
     }
 
@@ -67,7 +67,7 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
         confirm = (Button) layout.findViewById(R.id.barcode_confirm);
     }
 
-    private void setViews(ReleaseStub stub) {
+    private void setViews(ReleaseInfo stub) {
         title.setText(stub.getTitle());
         artist.setText(StringFormat.commaSeparateArtists(stub.getArtists()));
         numberOfTracks.setText(stub.getTracksNum() + " " + getString(R.string.label_tracks));

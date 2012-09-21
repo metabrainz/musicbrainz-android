@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.string.StringMapper;
 
@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupStub> {
+public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupInfo> {
 
     private Activity context;
-    private List<ReleaseGroupStub> releaseGroups;
+    private List<ReleaseGroupInfo> releaseGroups;
 
-    public ArtistRGAdapter(Activity context, List<ReleaseGroupStub> releaseGroups) {
+    public ArtistRGAdapter(Activity context, List<ReleaseGroupInfo> releaseGroups) {
         super(context, R.layout.list_release_group, releaseGroups);
         this.context = context;
         this.releaseGroups = releaseGroups;
@@ -37,7 +37,7 @@ public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupStub> {
             holder = (ArtistReleaseGroupHolder) release.getTag();
         }
 
-        ReleaseGroupStub rData = releaseGroups.get(position);
+        ReleaseGroupInfo rData = releaseGroups.get(position);
         holder.getReleaseTitle().setText(rData.getTitle());
         holder.getReleaseYear().setText(rData.getReleaseYear());
         holder.getReleaseType().setText(StringMapper.mapRGTypeString(getContext(), rData.getType()));

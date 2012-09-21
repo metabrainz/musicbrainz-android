@@ -19,7 +19,7 @@ public class Artist {
 
     private List<Tag> tags = new LinkedList<Tag>();
     private ArrayList<WebLink> links = new ArrayList<WebLink>();
-    private ArrayList<ReleaseGroupStub> releaseGroupStubs = new ArrayList<ReleaseGroupStub>();
+    private ArrayList<ReleaseGroupInfo> releaseGroupsInfo = new ArrayList<ReleaseGroupInfo>();
 
     public String getMbid() {
         return mbid;
@@ -77,8 +77,8 @@ public class Artist {
         this.ratingCount = ratingCount;
     }
 
-    public ArrayList<ReleaseGroupStub> getReleaseGroups() {
-        return releaseGroupStubs;
+    public ArrayList<ReleaseGroupInfo> getReleaseGroups() {
+        return releaseGroupsInfo;
     }
 
     public void setLinks(ArrayList<WebLink> links) {
@@ -106,13 +106,13 @@ public class Artist {
         tags.add(tag);
     }
 
-    public ArrayList<ReleaseGroupStub> getReleases() {
-        Collections.sort(releaseGroupStubs);
-        return releaseGroupStubs;
+    public ArrayList<ReleaseGroupInfo> getReleases() {
+        Collections.sort(releaseGroupsInfo);
+        return releaseGroupsInfo;
     }
 
-    public void setReleaseGroups(ArrayList<ReleaseGroupStub> releases) {
-        this.releaseGroupStubs = releases;
+    public void setReleaseGroups(ArrayList<ReleaseGroupInfo> releases) {
+        this.releaseGroupsInfo = releases;
     }
 
     public ArrayList<WebLink> getLinks() {

@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ArtistSearchStub;
+import org.musicbrainz.android.api.data.ArtistSearchResult;
 import org.musicbrainz.mobile.R;
 
 import android.app.Activity;
@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ArtistSearchAdapter extends ArrayAdapter<ArtistSearchStub> {
+public class ArtistSearchAdapter extends ArrayAdapter<ArtistSearchResult> {
 
     private Activity context;
-    private List<ArtistSearchStub> resultData;
+    private List<ArtistSearchResult> resultData;
 
-    public ArtistSearchAdapter(Activity context, List<ArtistSearchStub> resultData) {
+    public ArtistSearchAdapter(Activity context, List<ArtistSearchResult> resultData) {
         super(context, R.layout.list_search_artist, resultData);
         this.context = context;
         this.resultData = resultData;
@@ -36,7 +36,7 @@ public class ArtistSearchAdapter extends ArrayAdapter<ArtistSearchStub> {
             holder = (ArtistSearchHolder) artist.getTag();
         }
 
-        ArtistSearchStub artistData = resultData.get(position);
+        ArtistSearchResult artistData = resultData.get(position);
         holder.getArtistName().setText(artistData.getName());
 
         TextView option = holder.getDisambiguation();

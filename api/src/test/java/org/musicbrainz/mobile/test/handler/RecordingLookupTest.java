@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.Recording;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
@@ -34,7 +34,7 @@ public class RecordingLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void tstRecordingArtist() {
-        ArtistNameMbid artist = recording.getArtists().get(0);
+        ReleaseArtist artist = recording.getArtists().get(0);
         assertEquals("b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d", artist.getMbid());
         assertEquals("The Beatles", artist.getName());
     }

@@ -3,7 +3,7 @@ package org.musicbrainz.mobile.activity;
 import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.data.WebLink;
@@ -194,7 +194,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
     }
 
     @Override
-    public List<ReleaseGroupStub> getReleaseGroups() {
+    public List<ReleaseGroupInfo> getReleaseGroups() {
         return artist.getReleaseGroups();
     }
 

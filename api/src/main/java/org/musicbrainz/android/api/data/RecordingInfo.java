@@ -1,10 +1,10 @@
 package org.musicbrainz.android.api.data;
 
-public class RecordingStub {
+public class RecordingInfo {
 	
 	private String mbid;
 	private String title;
-	private ArtistNameMbid artist;
+	private ReleaseArtist artist;
 	private int length;
 	
 	public String getMbid() {
@@ -23,11 +23,11 @@ public class RecordingStub {
 		this.title = title;
 	}
 	
-	public ArtistNameMbid getArtist() {
+	public ReleaseArtist getArtist() {
 		return artist;
 	}
 	
-	public void setArtist(ArtistNameMbid artist) {
+	public void setArtist(ReleaseArtist artist) {
 		this.artist = artist;
 	}
 	

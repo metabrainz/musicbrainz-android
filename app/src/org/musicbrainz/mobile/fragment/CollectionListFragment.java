@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.fragment;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.EditorCollectionStub;
+import org.musicbrainz.android.api.data.UserCollectionInfo;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.CollectionListAdapter;
 import org.musicbrainz.mobile.async.CollectionListLoader;
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class CollectionListFragment extends ListFragment implements
-        LoaderCallbacks<AsyncResult<List<EditorCollectionStub>>> {
+        LoaderCallbacks<AsyncResult<List<UserCollectionInfo>>> {
 
     private static final int COLLECTIONS_LOADER = 0;
     private Context appContext;
@@ -51,21 +51,21 @@ public class CollectionListFragment extends ListFragment implements
     }
 
     @Override
-    public Loader<AsyncResult<List<EditorCollectionStub>>> onCreateLoader(int id, Bundle args) {
+    public Loader<AsyncResult<List<UserCollectionInfo>>> onCreateLoader(int id, Bundle args) {
         return new CollectionListLoader();
     }
 
     @Override
-    public void onLoadFinished(Loader<AsyncResult<List<EditorCollectionStub>>> loader,
-            AsyncResult<List<EditorCollectionStub>> data) {
+    public void onLoadFinished(Loader<AsyncResult<List<UserCollectionInfo>>> loader,
+            AsyncResult<List<UserCollectionInfo>> data) {
         loading.setVisibility(View.GONE);
         handleResult(data);
     }
 
-    private void handleResult(AsyncResult<List<EditorCollectionStub>> result) {
+    private void handleResult(AsyncResult<List<UserCollectionInfo>> result) {
         switch (result.getStatus()) {
         case SUCCESS:
-            List<EditorCollectionStub> collection = result.getData();
+            List<UserCollectionInfo> collection = result.getData();
             try {
                 setListAdapter(new CollectionListAdapter(getActivity(), collection));
             } catch (Exception e) {
@@ -91,7 +91,7 @@ public class CollectionListFragment extends ListFragment implements
     }
 
     @Override
-    public void onLoaderReset(Loader<AsyncResult<List<EditorCollectionStub>>> loader) {
+    public void onLoaderReset(Loader<AsyncResult<List<UserCollectionInfo>>> loader) {
         loader.reset();
     }
 

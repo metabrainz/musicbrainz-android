@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.string.StringMapper;
@@ -14,13 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
+public class ReleaseStubAdapter extends ArrayAdapter<ReleaseInfo> {
 
     private Activity context;
-    private List<ReleaseStub> releaseStubs;
+    private List<ReleaseInfo> releaseStubs;
     private int layoutId;
 
-    public ReleaseStubAdapter(Activity context, int layoutId, List<ReleaseStub> releaseStubs) {
+    public ReleaseStubAdapter(Activity context, int layoutId, List<ReleaseInfo> releaseStubs) {
         super(context, layoutId, releaseStubs);
         this.context = context;
         this.layoutId = layoutId;
@@ -40,7 +40,7 @@ public class ReleaseStubAdapter extends ArrayAdapter<ReleaseStub> {
             holder = (ReleaseStubHolder) release.getTag();
         }
 
-        ReleaseStub stub = releaseStubs.get(position);
+        ReleaseInfo stub = releaseStubs.get(position);
         holder.getTitle().setText(stub.getTitle());
         holder.getArtist().setText(StringFormat.commaSeparateArtists(stub.getArtists()));
         holder.getCountry().setText(stub.getCountryCode());

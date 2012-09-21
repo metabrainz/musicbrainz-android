@@ -1,7 +1,7 @@
 package org.musicbrainz.android.api.handler;
 
 import org.musicbrainz.android.api.data.Release;
-import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.data.Tag;
 import org.xml.sax.Attributes;
@@ -19,7 +19,7 @@ public class ReleaseLookupHandler extends MBHandler {
     private boolean inMedium;
 
     private Release release = new Release();
-    private ArtistNameMbid releaseArtist;
+    private ReleaseArtist releaseArtist;
     private Track track;
     private Tag tag;
 
@@ -41,7 +41,7 @@ public class ReleaseLookupHandler extends MBHandler {
             buildString();
         } else if (localName.equals("artist")) {
             inArtist = true;
-            releaseArtist = new ArtistNameMbid();
+            releaseArtist = new ReleaseArtist();
             releaseArtist.setMbid(atts.getValue("id"));
         } else if (localName.equals("name")) {
             buildString();

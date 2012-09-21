@@ -8,14 +8,14 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ArtistNameMbid;
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseGroupReleaseBrowseTest extends BaseXmlParsingTestCase {
     
     private static final String RG_RELEASE_BROWSE_FIXTURE = "releaseGroupReleaseBrowse_dca03435-8adb-30a5-ba82-5a162267ff38.xml";
-    private LinkedList<ReleaseStub> releases;
+    private LinkedList<ReleaseInfo> releases;
 
     @Before
     public void doParsing() throws IOException {
@@ -32,7 +32,7 @@ public class ReleaseGroupReleaseBrowseTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testBasicReleaseInfo() {
-        ReleaseStub release = releases.getFirst();
+        ReleaseInfo release = releases.getFirst();
         assertEquals("Rubber Soul", release.getTitle());
         assertEquals("2c54468a-dedf-4ac9-a358-562c4c6c5dd7", release.getReleaseMbid());
         assertEquals(14, release.getTracksNum());
@@ -42,8 +42,8 @@ public class ReleaseGroupReleaseBrowseTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testArtistSortName() {
-        ReleaseStub release = releases.getFirst();
-        ArtistNameMbid artist = release.getArtists().get(0);
+        ReleaseInfo release = releases.getFirst();
+        ReleaseArtist artist = release.getArtists().get(0);
         assertEquals("Beatles, The", artist.getSortName());
     }
 

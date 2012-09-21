@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.string.StringMapper;
@@ -14,12 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class RGSearchAdapter extends ArrayAdapter<ReleaseGroupStub> {
+public class RGSearchAdapter extends ArrayAdapter<ReleaseGroupInfo> {
 
     private Activity context;
-    private List<ReleaseGroupStub> resultData;
+    private List<ReleaseGroupInfo> resultData;
 
-    public RGSearchAdapter(Activity context, List<ReleaseGroupStub> resultData) {
+    public RGSearchAdapter(Activity context, List<ReleaseGroupInfo> resultData) {
         super(context, R.layout.list_search_release_group, resultData);
         this.context = context;
         this.resultData = resultData;
@@ -38,7 +38,7 @@ public class RGSearchAdapter extends ArrayAdapter<ReleaseGroupStub> {
             holder = (SearchReleaseGroupHolder) release.getTag();
         }
 
-        ReleaseGroupStub releaseGroup = resultData.get(position);
+        ReleaseGroupInfo releaseGroup = resultData.get(position);
         holder.getTitle().setText(releaseGroup.getTitle());
         holder.getArtist().setText(StringFormat.commaSeparateArtists(releaseGroup.getArtists()));
         holder.getType().setText(StringMapper.mapRGTypeString(getContext(), releaseGroup.getType()));

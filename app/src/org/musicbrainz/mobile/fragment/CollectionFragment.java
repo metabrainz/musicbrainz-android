@@ -1,7 +1,7 @@
 package org.musicbrainz.mobile.fragment;
 
-import org.musicbrainz.android.api.data.EditorCollection;
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.UserCollection;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
@@ -84,10 +84,10 @@ public class CollectionFragment extends SherlockListFragment {
         return layout;
     }
 
-    private void handleResult(AsyncResult<EditorCollection> result) {
+    private void handleResult(AsyncResult<UserCollection> result) {
         switch (result.getStatus()) {
         case SUCCESS:
-            EditorCollection collection = result.getData();
+            UserCollection collection = result.getData();
             setListAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_collection_release,
                     collection.getReleases()));
             break;
@@ -139,22 +139,22 @@ public class CollectionFragment extends SherlockListFragment {
         inflater.inflate(R.menu.fragment_collection, menu);
     }
 
-    private LoaderCallbacks<AsyncResult<EditorCollection>> loaderCallbacks = new LoaderCallbacks<AsyncResult<EditorCollection>>() {
+    private LoaderCallbacks<AsyncResult<UserCollection>> loaderCallbacks = new LoaderCallbacks<AsyncResult<UserCollection>>() {
 
         @Override
-        public Loader<AsyncResult<EditorCollection>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<UserCollection>> onCreateLoader(int id, Bundle args) {
             return new CollectionLoader(mbid);
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<EditorCollection>> loader, AsyncResult<EditorCollection> data) {
+        public void onLoadFinished(Loader<AsyncResult<UserCollection>> loader, AsyncResult<UserCollection> data) {
             hideLoading();
             handleResult(data);
             activityCallbacks.onLoadFinish();
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<EditorCollection>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<UserCollection>> loader) {
             loader.reset();
         }
     };
@@ -188,14 +188,14 @@ public class CollectionFragment extends SherlockListFragment {
     private final class RemoveReleasesActionMode implements ActionMode.Callback {
 
         private int selectedPosition;
-        private ReleaseStub selectedRelease;
+        private ReleaseInfo selectedRelease;
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
             inflater.inflate(R.menu.context_collection, menu);
             selectedPosition = getListView().getCheckedItemPosition();
-            selectedRelease = (ReleaseStub) getListAdapter().getItem(selectedPosition);
+            selectedRelease = (ReleaseInfo) getListAdapter().getItem(selectedPosition);
             mode.setTitle(selectedRelease.getTitle());
             return true;
         }

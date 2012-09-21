@@ -8,13 +8,13 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseGroupSearchTest extends BaseXmlParsingTestCase {
     
     private static final String RG_SEARCH_FIXTURE = "releaseGroupSearch_songs about leaving.xml";
-    private LinkedList<ReleaseGroupStub> releaseGroups;
+    private LinkedList<ReleaseGroupInfo> releaseGroups;
     
     @Before
     public void doParsing() throws IOException {

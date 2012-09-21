@@ -1,6 +1,6 @@
 package org.musicbrainz.android.api.handler;
 
-import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseGroup;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.WebLink;
@@ -10,7 +10,7 @@ import org.xml.sax.SAXException;
 public class ReleaseGroupLookupHandler extends MBHandler {
 
     private ReleaseGroup releaseGroup = new ReleaseGroup();
-    private ArtistNameMbid artist;
+    private ReleaseArtist artist;
     private Tag tag;
     private WebLink link;
 
@@ -31,7 +31,7 @@ public class ReleaseGroupLookupHandler extends MBHandler {
         } else if (localName.equals("first-release-date")) {
             buildString();
         } else if (localName.equals("artist")) {
-            artist = new ArtistNameMbid();
+            artist = new ReleaseArtist();
             artist.setMbid(atts.getValue("id"));
             inArtist = true;
         } else if (localName.equals("rating")) {

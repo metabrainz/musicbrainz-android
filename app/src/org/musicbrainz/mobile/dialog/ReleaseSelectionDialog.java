@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.dialog;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ReleaseStubAdapter;
 
@@ -26,11 +26,11 @@ public class ReleaseSelectionDialog extends DialogFragment implements OnItemClic
     public static final String TAG = "release_selection_dialog";
     
     private ReleaseSelectionCallbacks callbacks;
-    private List<ReleaseStub> stubs;
+    private List<ReleaseInfo> stubs;
     private ListView releaseList;
     
     public interface ReleaseSelectionCallbacks {
-        List<ReleaseStub> getReleaseStubs();
+        List<ReleaseInfo> getReleaseStubs();
         void onReleaseStubSelected(String mbid);
     }
     

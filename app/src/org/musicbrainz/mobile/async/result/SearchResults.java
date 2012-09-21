@@ -2,28 +2,28 @@ package org.musicbrainz.mobile.async.result;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ArtistSearchStub;
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ArtistSearchResult;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 
 public class SearchResults {
     
     private final SearchType type;
-    private final List<ArtistSearchStub> artistResults;
-    private final List<ReleaseGroupStub> releaseGroupResults;
+    private final List<ArtistSearchResult> artistResults;
+    private final List<ReleaseGroupInfo> releaseGroupResults;
     
     @SuppressWarnings("unchecked")
     public SearchResults(SearchType type, List<?> results) {
         if (type == SearchType.ARTIST) {
-            artistResults = (List<ArtistSearchStub>) results;
+            artistResults = (List<ArtistSearchResult>) results;
             releaseGroupResults = null;
         } else {
             artistResults = null;
-            releaseGroupResults = (List<ReleaseGroupStub>) results;
+            releaseGroupResults = (List<ReleaseGroupInfo>) results;
         }
         this.type = type;
     }
     
-    public SearchResults(List<ArtistSearchStub> artistResults, List<ReleaseGroupStub> releaseGroupResults) {
+    public SearchResults(List<ArtistSearchResult> artistResults, List<ReleaseGroupInfo> releaseGroupResults) {
         this.artistResults = artistResults;
         this.releaseGroupResults = releaseGroupResults;
         this.type = SearchType.ALL;
@@ -33,11 +33,11 @@ public class SearchResults {
         return type;
     }
 
-    public List<ArtistSearchStub> getArtistResults() {
+    public List<ArtistSearchResult> getArtistResults() {
         return artistResults;
     }
 
-    public List<ReleaseGroupStub> getReleaseGroupResults() {
+    public List<ReleaseGroupInfo> getReleaseGroupResults() {
         return releaseGroupResults;
     }
 

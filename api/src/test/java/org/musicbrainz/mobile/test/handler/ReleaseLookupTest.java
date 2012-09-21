@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.Release;
 import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.webservice.ResponseParser;
@@ -39,7 +39,7 @@ public class ReleaseLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testArtist() {
-        ArtistNameMbid artist = release.getArtists().get(0);
+        ReleaseArtist artist = release.getArtists().get(0);
         assertEquals("1bc41dff-5397-4c53-bb50-469d2c277197", artist.getMbid());
         assertEquals("The Dillinger Escape Plan", artist.getName());
     }

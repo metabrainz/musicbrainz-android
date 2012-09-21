@@ -3,12 +3,12 @@ package org.musicbrainz.mobile.async;
 import java.io.IOException;
 
 import org.musicbrainz.android.api.MusicBrainz;
-import org.musicbrainz.android.api.data.EditorCollection;
+import org.musicbrainz.android.api.data.UserCollection;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.async.result.LoaderStatus;
 
-public class CollectionLoader extends PersistingAsyncTaskLoader<AsyncResult<EditorCollection>> {
+public class CollectionLoader extends PersistingAsyncTaskLoader<AsyncResult<UserCollection>> {
 
     private MusicBrainz client;
     private String mbid;
@@ -19,12 +19,12 @@ public class CollectionLoader extends PersistingAsyncTaskLoader<AsyncResult<Edit
     }
     
     @Override
-    public AsyncResult<EditorCollection> loadInBackground() {
+    public AsyncResult<UserCollection> loadInBackground() {
         try {
-            data = new AsyncResult<EditorCollection>(LoaderStatus.SUCCESS, client.lookupCollection(mbid));
+            data = new AsyncResult<UserCollection>(LoaderStatus.SUCCESS, client.lookupCollection(mbid));
             return data;
         } catch (IOException e) {
-            return new AsyncResult<EditorCollection>(LoaderStatus.EXCEPTION, e);
+            return new AsyncResult<UserCollection>(LoaderStatus.EXCEPTION, e);
         }
     }
 

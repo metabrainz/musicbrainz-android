@@ -9,13 +9,13 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.LabelSearchStub;
+import org.musicbrainz.android.api.data.LabelSearchResult;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class LabelSearchTest extends BaseXmlParsingTestCase {
     
     private static final String LABEL_SEARCH_FIXTURE = "labelSearch_count your lucky stars.xml";
-    private LinkedList<LabelSearchStub> labels;
+    private LinkedList<LabelSearchResult> labels;
     
     @Before
     public void doParsing() throws IOException {

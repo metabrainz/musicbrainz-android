@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseGroupBrowseTest extends BaseXmlParsingTestCase {
     
     private static final String RG_BROWSE_FIXTURE = "releaseGroupBrowse_b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.xml";
-    private ArrayList<ReleaseGroupStub> releaseGroups;
+    private ArrayList<ReleaseGroupInfo> releaseGroups;
     
     @Before
     public void doParsing() throws IOException {

@@ -1,9 +1,9 @@
 package org.musicbrainz.android.api.data;
 
 /**
- * Record label stub for search results.
+ * Record label info for search results.
  */
-public class LabelSearchStub {
+public class LabelSearchResult {
 	
 	private String mbid;
 	private String name;

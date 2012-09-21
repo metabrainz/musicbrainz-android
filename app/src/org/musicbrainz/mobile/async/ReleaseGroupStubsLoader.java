@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.util.List;
 
 import org.musicbrainz.android.api.MusicBrainz;
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.async.result.AsyncResult;
 import org.musicbrainz.mobile.async.result.LoaderStatus;
 
 import android.support.v4.content.AsyncTaskLoader;
 
-public class ReleaseGroupStubsLoader extends AsyncTaskLoader<AsyncResult<List<ReleaseStub>>> {
+public class ReleaseGroupStubsLoader extends AsyncTaskLoader<AsyncResult<List<ReleaseInfo>>> {
 
     private MusicBrainz client;
     private String mbid;
@@ -29,11 +29,11 @@ public class ReleaseGroupStubsLoader extends AsyncTaskLoader<AsyncResult<List<Re
     }
 
     @Override
-    public AsyncResult<List<ReleaseStub>> loadInBackground() {
+    public AsyncResult<List<ReleaseInfo>> loadInBackground() {
         try {
-            return new AsyncResult<List<ReleaseStub>>(LoaderStatus.SUCCESS, client.browseReleases(mbid));
+            return new AsyncResult<List<ReleaseInfo>>(LoaderStatus.SUCCESS, client.browseReleases(mbid));
         } catch (IOException e) {
-            return new AsyncResult<List<ReleaseStub>>(LoaderStatus.EXCEPTION, e);
+            return new AsyncResult<List<ReleaseInfo>>(LoaderStatus.EXCEPTION, e);
         }
     }
 

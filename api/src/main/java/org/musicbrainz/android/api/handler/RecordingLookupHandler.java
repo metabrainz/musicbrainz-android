@@ -1,6 +1,6 @@
 package org.musicbrainz.android.api.handler;
 
-import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.Recording;
 import org.musicbrainz.android.api.data.Tag;
 import org.xml.sax.Attributes;
@@ -9,7 +9,7 @@ import org.xml.sax.SAXException;
 public class RecordingLookupHandler extends MBHandler {
     
     private Recording recording = new Recording();
-    private ArtistNameMbid artist;
+    private ReleaseArtist artist;
     private Tag tag;
     
     private boolean inArtist;
@@ -29,7 +29,7 @@ public class RecordingLookupHandler extends MBHandler {
             buildString();
         } else if (localName.equals("artist")) {
             inArtist = true;
-            artist = new ArtistNameMbid();
+            artist = new ReleaseArtist();
             artist.setMbid(atts.getValue("id"));
         } else if (localName.equals("name")) {
             buildString();

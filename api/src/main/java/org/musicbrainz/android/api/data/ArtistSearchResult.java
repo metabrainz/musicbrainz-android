@@ -4,7 +4,7 @@ package org.musicbrainz.android.api.data;
  * Partial artist data to select between similar artists in a list of search
  * results.
  */
-public class ArtistSearchStub {
+public class ArtistSearchResult {
 
     private String mbid;
     private String name;

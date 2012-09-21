@@ -3,7 +3,7 @@ package org.musicbrainz.android.api.data;
 /**
  * Artist name and MBID pair for release.
  */
-public class ArtistNameMbid implements Comparable<ArtistNameMbid> {
+public class ReleaseArtist implements Comparable<ReleaseArtist> {
 
     private String mbid;
     private String name;
@@ -34,7 +34,7 @@ public class ArtistNameMbid implements Comparable<ArtistNameMbid> {
     }
 
     @Override
-    public int compareTo(ArtistNameMbid another) {
+    public int compareTo(ReleaseArtist another) {
         return getSortName().compareTo(another.getSortName());
     }
     

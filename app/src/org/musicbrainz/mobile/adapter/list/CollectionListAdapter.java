@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.adapter.list;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.EditorCollectionStub;
+import org.musicbrainz.android.api.data.UserCollectionInfo;
 import org.musicbrainz.mobile.R;
 
 import android.app.Activity;
@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class CollectionListAdapter extends ArrayAdapter<EditorCollectionStub> {
+public class CollectionListAdapter extends ArrayAdapter<UserCollectionInfo> {
 
     private Activity context;
-    private List<EditorCollectionStub> collectionStubs;
+    private List<UserCollectionInfo> collectionStubs;
     
-    public CollectionListAdapter(Activity context, List<EditorCollectionStub> collectionStubs) {
+    public CollectionListAdapter(Activity context, List<UserCollectionInfo> collectionStubs) {
         super(context, R.layout.list_collection, collectionStubs);
         this.context = context;
         this.collectionStubs = collectionStubs;
@@ -37,13 +37,13 @@ public class CollectionListAdapter extends ArrayAdapter<EditorCollectionStub> {
             holder = (CollectionStubHolder) collection.getTag();
         }
         
-        EditorCollectionStub stub = collectionStubs.get(position);
+        UserCollectionInfo stub = collectionStubs.get(position);
         holder.getTitle().setText(stub.getName());
         holder.getCount().setText(getReleasesDisplayText(stub));
         return collection;
     }
 
-    private String getReleasesDisplayText(EditorCollectionStub stub) {
+    private String getReleasesDisplayText(UserCollectionInfo stub) {
         Resources res = context.getResources();
         return res.getQuantityString(R.plurals.release_plurals, stub.getCount(), stub.getCount());
     }

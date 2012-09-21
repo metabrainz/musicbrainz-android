@@ -2,7 +2,7 @@ package org.musicbrainz.mobile.fragment;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.activity.ReleaseActivity;
@@ -56,7 +56,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     private View error;
 
     private String barcode;
-    private List<ReleaseStub> results;
+    private List<ReleaseInfo> results;
     private int selection = 0;
     
     private LoadingCallbacks loadingCallbacks;
@@ -169,15 +169,15 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
         submitDialog.show(getFragmentManager(), ConfirmBarcodeDialog.TAG);
     }
 
-    private LoaderCallbacks<AsyncResult<List<ReleaseStub>>> searchCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseStub>>>() {
+    private LoaderCallbacks<AsyncResult<List<ReleaseInfo>>> searchCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseInfo>>>() {
 
         @Override
-        public Loader<AsyncResult<List<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<List<ReleaseInfo>>> onCreateLoader(int id, Bundle args) {
             return new SearchReleaseLoader(searchBox.getText().toString());
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<List<ReleaseStub>>> loader, AsyncResult<List<ReleaseStub>> data) {
+        public void onLoadFinished(Loader<AsyncResult<List<ReleaseInfo>>> loader, AsyncResult<List<ReleaseInfo>> data) {
             instructions.setVisibility(View.INVISIBLE);
             loading.setVisibility(View.INVISIBLE);
             switch (data.getStatus()) {
@@ -190,7 +190,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<List<ReleaseStub>>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<List<ReleaseInfo>>> loader) {
             loader.reset();
         }
     };
@@ -209,7 +209,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
         });
     }
 
-    private void handleSearchResults(AsyncResult<List<ReleaseStub>> result) {
+    private void handleSearchResults(AsyncResult<List<ReleaseInfo>> result) {
         results = result.getData();
         matches.setAdapter(new ReleaseStubAdapter(getActivity(), R.layout.list_release, results));
         matches.setOnItemClickListener(this);
@@ -258,7 +258,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     }
     
     @Override
-    public ReleaseStub getCurrentSelection() {
+    public ReleaseInfo getCurrentSelection() {
         return results.get(selection);
     }
 

@@ -8,12 +8,12 @@ import java.util.LinkedList;
  * Partial release data to differentiate between similar releases (e.g. part of
  * the same release group).
  */
-public class ReleaseStub implements Comparable<ReleaseStub> {
+public class ReleaseInfo implements Comparable<ReleaseInfo> {
 
     private String releaseMbid;
 
     private String title;
-    private ArrayList<ArtistNameMbid> artists = new ArrayList<ArtistNameMbid>();
+    private ArrayList<ReleaseArtist> artists = new ArrayList<ReleaseArtist>();
     private String date;
     private int tracksNum;
     private String countryCode;
@@ -36,11 +36,11 @@ public class ReleaseStub implements Comparable<ReleaseStub> {
         this.title = title;
     }
 
-    public ArrayList<ArtistNameMbid> getArtists() {
+    public ArrayList<ReleaseArtist> getArtists() {
         return artists;
     }
 
-    public void addArtist(ArtistNameMbid artist) {
+    public void addArtist(ReleaseArtist artist) {
         artists.add(artist);
     }
 
@@ -85,7 +85,7 @@ public class ReleaseStub implements Comparable<ReleaseStub> {
     }
 
     @Override
-    public int compareTo(ReleaseStub another) {
+    public int compareTo(ReleaseInfo another) {
         int artistNameComparison = getArtists().get(0).compareTo(another.getArtists().get(0));
         if (artistNameComparison != 0) {
             return artistNameComparison;

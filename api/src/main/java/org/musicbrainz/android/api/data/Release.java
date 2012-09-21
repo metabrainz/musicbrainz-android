@@ -12,7 +12,7 @@ public class Release {
     private String releaseGroupMbid;
     private String barcode;
     private String asin;
-    private ArrayList<ArtistNameMbid> artists = new ArrayList<ArtistNameMbid>();
+    private ArrayList<ReleaseArtist> artists = new ArrayList<ReleaseArtist>();
 
     private String title;
     private String status;
@@ -57,11 +57,11 @@ public class Release {
         this.asin = asin;
     }
 
-    public ArrayList<ArtistNameMbid> getArtists() {
+    public ArrayList<ReleaseArtist> getArtists() {
         return artists;
     }
 
-    public void addArtist(ArtistNameMbid artist) {
+    public void addArtist(ReleaseArtist artist) {
         artists.add(artist);
     }
 

@@ -2,8 +2,8 @@ package org.musicbrainz.mobile.activity;
 
 import java.util.List;
 
-import org.musicbrainz.android.api.data.ArtistSearchStub;
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ArtistSearchResult;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.list.ArtistSearchAdapter;
@@ -50,8 +50,8 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     private String searchTerm;
     private View error;
 
-    private List<ArtistSearchStub> artistSearchResults;
-    private List<ReleaseGroupStub> rgSearchResults;
+    private List<ArtistSearchResult> artistSearchResults;
+    private List<ReleaseGroupInfo> rgSearchResults;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +169,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
         private void startArtistActivity(int position) {
             Intent artistIntent = new Intent(SearchActivity.this, ArtistActivity.class);
-            ArtistSearchStub stub = artistSearchResults.get(position);
+            ArtistSearchResult stub = artistSearchResults.get(position);
             artistIntent.putExtra(Extra.ARTIST_MBID, stub.getMbid());
             startActivity(artistIntent);
         }
@@ -178,7 +178,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     private class RGItemClickListener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ReleaseGroupStub rg = rgSearchResults.get(position);
+            ReleaseGroupInfo rg = rgSearchResults.get(position);
             if (rg.getNumberOfReleases() == 1) {
                 startReleaseActivity(rg.getReleaseMbids().getFirst());
             } else {

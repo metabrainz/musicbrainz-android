@@ -2,18 +2,18 @@ package org.musicbrainz.android.api.handler;
 
 import java.util.ArrayList;
 
-import org.musicbrainz.android.api.data.ReleaseGroupStub;
+import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class ReleaseGroupBrowseHandler extends MBHandler {
 
-    private ArrayList<ReleaseGroupStub> results = new ArrayList<ReleaseGroupStub>();
-    private ReleaseGroupStub stub;
+    private ArrayList<ReleaseGroupInfo> results = new ArrayList<ReleaseGroupInfo>();
+    private ReleaseGroupInfo releaseGroup;
 
     private int total = 0;
 
-    public ArrayList<ReleaseGroupStub> getResults() {
+    public ArrayList<ReleaseGroupInfo> getResults() {
         return results;
     }
 
@@ -24,10 +24,10 @@ public class ReleaseGroupBrowseHandler extends MBHandler {
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
         if (localName.equals("release-group")) {
-            stub = new ReleaseGroupStub();
+            releaseGroup = new ReleaseGroupInfo();
             String mbid = atts.getValue("id");
-            stub.setMbid(mbid);
-            stub.setType(atts.getValue("type"));
+            releaseGroup.setMbid(mbid);
+            releaseGroup.setType(atts.getValue("type"));
         } else if (localName.equals("title")) {
             buildString();
         } else if (localName.equals("first-release-date")) {
@@ -40,11 +40,11 @@ public class ReleaseGroupBrowseHandler extends MBHandler {
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 
         if (localName.equals("release-group")) {
-            results.add(stub);
+            results.add(releaseGroup);
         } else if (localName.equals("title")) {
-            stub.setTitle(getString());
+            releaseGroup.setTitle(getString());
         } else if (localName.equals("first-release-date")) {
-            stub.setFirstRelease(getString());
+            releaseGroup.setFirstRelease(getString());
         }
     }
 

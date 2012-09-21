@@ -11,13 +11,13 @@ public class Recording {
 	private String mbid;
 	private String title;
 	private int length;
-	private ArrayList<ArtistNameMbid> artists = new ArrayList<ArtistNameMbid>();
+	private ArrayList<ReleaseArtist> artists = new ArrayList<ReleaseArtist>();
 
 	private int ratingCount;
 	private float rating;
 	private LinkedList<Tag> tags = new LinkedList<Tag>();
 	
-	private ArrayList<ReleaseStub> releases = new ArrayList<ReleaseStub>();
+	private ArrayList<ReleaseInfo> releases = new ArrayList<ReleaseInfo>();
 
 	public String getMbid() {
 		return mbid;
@@ -43,11 +43,11 @@ public class Recording {
 		this.length = length;
 	}
 
-    public ArrayList<ArtistNameMbid> getArtists() {
+    public ArrayList<ReleaseArtist> getArtists() {
         return artists;
     }
 
-    public void addArtist(ArtistNameMbid artist) {
+    public void addArtist(ReleaseArtist artist) {
         artists.add(artist);
     }
 
@@ -79,11 +79,11 @@ public class Recording {
 		this.tags = tags;
 	}
 
-	public ArrayList<ReleaseStub> getReleases() {
+	public ArrayList<ReleaseInfo> getReleases() {
 		return releases;
 	}
 
-	public void setReleases(ArrayList<ReleaseStub> releases) {
+	public void setReleases(ArrayList<ReleaseInfo> releases) {
 		this.releases = releases;
 	}
 

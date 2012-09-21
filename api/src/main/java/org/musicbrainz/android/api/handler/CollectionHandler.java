@@ -1,20 +1,20 @@
 package org.musicbrainz.android.api.handler;
 
-import org.musicbrainz.android.api.data.ArtistNameMbid;
-import org.musicbrainz.android.api.data.EditorCollection;
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.UserCollection;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class CollectionHandler extends MBHandler {
 
-    private EditorCollection collection = new EditorCollection();
-    private ReleaseStub stub;
-    private ArtistNameMbid releaseArtist;
+    private UserCollection collection = new UserCollection();
+    private ReleaseInfo release;
+    private ReleaseArtist releaseArtist;
 
     private boolean inArtist;
 
-    public EditorCollection getCollection() {
+    public UserCollection getCollection() {
         return collection;
     }
 
@@ -29,8 +29,8 @@ public class CollectionHandler extends MBHandler {
         } else if (localName.equals("release-list")) {
             collection.setCount(Integer.parseInt(atts.getValue("count")));
         } else if (localName.equals("release")) {
-            stub = new ReleaseStub();
-            stub.setReleaseMbid(atts.getValue("id"));
+            release = new ReleaseInfo();
+            release.setReleaseMbid(atts.getValue("id"));
         } else if (localName.equals("title")) {
             buildString();
         } else if (localName.equals("date")) {
@@ -39,7 +39,7 @@ public class CollectionHandler extends MBHandler {
             buildString();
         } else if (localName.equals("artist")) {
             inArtist = true;
-            releaseArtist = new ArtistNameMbid();
+            releaseArtist = new ReleaseArtist();
             releaseArtist.setMbid(atts.getValue("id"));
         } else if (localName.equals("sort-name")) {
             buildString();
@@ -52,17 +52,17 @@ public class CollectionHandler extends MBHandler {
             collection.setName(getString());
         } else if (localName.equals("name")) {
             releaseArtist.setName(getString());
-            stub.addArtist(releaseArtist);
+            release.addArtist(releaseArtist);
         } else if (localName.equals("editor")) {
             collection.setEditor(getString());
         } else if (localName.equals("release")) {
-            collection.addRelease(stub);
+            collection.addRelease(release);
         } else if (localName.equals("title")) {
-            stub.setTitle(getString());
+            release.setTitle(getString());
         } else if (localName.equals("date")) {
-            stub.setDate(getString());
+            release.setDate(getString());
         } else if (localName.equals("country")) {
-            stub.setCountryCode(getString());
+            release.setCountryCode(getString());
         } else if (localName.equals("artist")) {
             inArtist = false;
         } else if (localName.equals("sort-name")) {

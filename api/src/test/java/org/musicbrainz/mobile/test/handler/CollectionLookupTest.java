@@ -9,15 +9,15 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.musicbrainz.android.api.data.ArtistNameMbid;
-import org.musicbrainz.android.api.data.EditorCollection;
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseArtist;
+import org.musicbrainz.android.api.data.UserCollection;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.android.api.webservice.ResponseParser;
 
 public class CollectionLookupTest extends BaseXmlParsingTestCase {
     
     private static final String COLLECTION_LOOKUP_FIXTURE = "collectionLookup_c6f9fb72-e233-47f4-a2f6-19f16442d93a.xml";
-    private EditorCollection collection;
+    private UserCollection collection;
     
     @Before
     public void doParsing() throws IOException {
@@ -37,7 +37,7 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testFirstRelease() throws IOException {
-        ReleaseStub first = collection.getReleases().getFirst();
+        ReleaseInfo first = collection.getReleases().getFirst();
         assertEquals("229fef25-8e57-3465-bb92-0569b3ed1b8c", first.getReleaseMbid());
         assertEquals("Boston", first.getTitle());
         assertEquals("Boston", first.getArtists().get(0).getName());
@@ -47,26 +47,26 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testReleaseWithMultipleArtists() throws IOException {
-        ReleaseStub stub = collection.getReleases().get(1);
-        assertEquals("2666b0bf-0c35-492b-97e5-c932870d9c25", stub.getReleaseMbid());
-        ArrayList<ArtistNameMbid> artists = stub.getArtists();
+        ReleaseInfo release = collection.getReleases().get(1);
+        assertEquals("2666b0bf-0c35-492b-97e5-c932870d9c25", release.getReleaseMbid());
+        ArrayList<ReleaseArtist> artists = release.getArtists();
         assertEquals("Owen", artists.get(0).getName());
         assertEquals("The Rutabega", artists.get(1).getName());
-        assertEquals("2004-06-08", stub.getDate());
-        assertEquals("US", stub.getCountryCode());
+        assertEquals("2004-06-08", release.getDate());
+        assertEquals("US", release.getCountryCode());
     }
     
     @Test
     public void testArtistSortNames() throws IOException {
-        ReleaseStub stub = collection.getReleases().get(1);
-        ArrayList<ArtistNameMbid> artists = stub.getArtists();
+        ReleaseInfo release = collection.getReleases().get(1);
+        ArrayList<ReleaseArtist> artists = release.getArtists();
         assertEquals("Owen", artists.get(0).getSortName());
         assertEquals("Rutabega, The", artists.get(1).getSortName());
     }
     
     @Test
     public void testLastRelease() throws IOException {
-        ReleaseStub last = collection.getReleases().getLast();
+        ReleaseInfo last = collection.getReleases().getLast();
         assertEquals("9f00a4d3-82b2-4084-a48b-565703b812ce", last.getReleaseMbid());
         assertEquals("New Leaves", last.getTitle());
         assertEquals("Owen", last.getArtists().get(0).getName());

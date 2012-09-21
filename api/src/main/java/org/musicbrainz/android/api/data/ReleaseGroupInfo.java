@@ -8,13 +8,13 @@ import java.util.LinkedList;
 /**
  * Partial release group data.
  */
-public class ReleaseGroupStub implements Comparable<ReleaseGroupStub> {
+public class ReleaseGroupInfo implements Comparable<ReleaseGroupInfo> {
 
     private String mbid;
     private String title;
     private String type;
     private Calendar firstRelease = Calendar.getInstance();
-    private LinkedList<ArtistNameMbid> artists = new LinkedList<ArtistNameMbid>();
+    private LinkedList<ReleaseArtist> artists = new LinkedList<ReleaseArtist>();
     private LinkedList<String> releaseMbids = new LinkedList<String>();
 
     public String getMbid() {
@@ -81,11 +81,11 @@ public class ReleaseGroupStub implements Comparable<ReleaseGroupStub> {
         }
     }
 
-    public LinkedList<ArtistNameMbid> getArtists() {
+    public LinkedList<ReleaseArtist> getArtists() {
         return artists;
     }
 
-    public void addArtist(ArtistNameMbid artist) {
+    public void addArtist(ReleaseArtist artist) {
         artists.add(artist);
     }
 
@@ -101,7 +101,7 @@ public class ReleaseGroupStub implements Comparable<ReleaseGroupStub> {
         return releaseMbids;
     }
 
-    public int compareTo(ReleaseGroupStub another) {
+    public int compareTo(ReleaseGroupInfo another) {
         if (getFirstRelease() == null && another.getFirstRelease() == null) {
             return 0;
         } else if (getFirstRelease() == null) {

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ArtistNameMbid;
+import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.Release;
-import org.musicbrainz.android.api.data.ReleaseStub;
+import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.data.UserData;
@@ -72,7 +72,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     private static final int COLLECTION_ADD_LOADER = 3;
 
     private Release release;
-    private List<ReleaseStub> stubs;
+    private List<ReleaseInfo> stubs;
     private UserData userData;
 
     private View loading;
@@ -169,11 +169,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     }
 
     private boolean isArtistUpAvailable() {
-        ArrayList<ArtistNameMbid> releaseArtists = release.getArtists();
+        ArrayList<ReleaseArtist> releaseArtists = release.getArtists();
         if (releaseArtists.size() != 1) {
             provideArtistAction = false;
         } else {
-            ArtistNameMbid singleArtist = releaseArtists.get(0);
+            ReleaseArtist singleArtist = releaseArtists.get(0);
             for (String id : Artist.SPECIAL_PURPOSE) {
                 if (singleArtist.getMbid().equals(id)) {
                     provideArtistAction = false;
@@ -283,16 +283,16 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         }
     };
 
-    private LoaderCallbacks<AsyncResult<List<ReleaseStub>>> releaseStubLoaderCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseStub>>>() {
+    private LoaderCallbacks<AsyncResult<List<ReleaseInfo>>> releaseStubLoaderCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseInfo>>>() {
 
         @Override
-        public Loader<AsyncResult<List<ReleaseStub>>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<List<ReleaseInfo>>> onCreateLoader(int id, Bundle args) {
             return new ReleaseGroupStubsLoader(releaseGroupMbid);
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<List<ReleaseStub>>> loader,
-                AsyncResult<List<ReleaseStub>> container) {
+        public void onLoadFinished(Loader<AsyncResult<List<ReleaseInfo>>> loader,
+                AsyncResult<List<ReleaseInfo>> container) {
             switch (container.getStatus()) {
             case EXCEPTION:
                 showConnectionErrorWarning();
@@ -300,7 +300,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
             case SUCCESS:
                 stubs = container.getData();
                 if (stubs.size() == 1) {
-                    ReleaseStub singleRelease = stubs.get(0);
+                    ReleaseInfo singleRelease = stubs.get(0);
                     releaseMbid = singleRelease.getReleaseMbid();
                     getSupportLoaderManager().initLoader(RELEASE_LOADER, null, releaseLoaderCallbacks);
                 } else {
@@ -310,7 +310,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<List<ReleaseStub>>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<List<ReleaseInfo>>> loader) {
             loader.reset();
         }
     };
@@ -373,7 +373,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     };
 
     @Override
-    public List<ReleaseStub> getReleaseStubs() {
+    public List<ReleaseInfo> getReleaseStubs() {
         return stubs;
     }
 
