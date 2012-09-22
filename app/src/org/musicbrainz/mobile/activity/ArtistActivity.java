@@ -75,7 +75,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         pager.setCurrentItem(1);
-        pager.setOffscreenPageLimit(2);
+        pager.setOffscreenPageLimit(3);
     }
 
     private void findViews() {
@@ -103,7 +103,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         FragmentManager fm = getSupportFragmentManager();
         ((LinksFragment) fm.findFragmentByTag(makeTag(0))).update();
         ((ArtistReleaseGroupsFragment) fm.findFragmentByTag(makeTag(1))).update();
-        ((EditFragment) fm.findFragmentByTag(makeTag(2))).update();
+        ((EditFragment) fm.findFragmentByTag(makeTag(3))).update();
     }
 
     private String makeTag(int position) {

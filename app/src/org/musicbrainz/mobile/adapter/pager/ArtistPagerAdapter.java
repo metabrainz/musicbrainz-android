@@ -3,6 +3,7 @@ package org.musicbrainz.mobile.adapter.pager;
 import org.musicbrainz.android.api.webservice.Entity;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
+import org.musicbrainz.mobile.fragment.ArtistBioFragment;
 import org.musicbrainz.mobile.fragment.ArtistReleaseGroupsFragment;
 import org.musicbrainz.mobile.fragment.EditFragment;
 import org.musicbrainz.mobile.fragment.LinksFragment;
@@ -14,7 +15,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class ArtistPagerAdapter extends FragmentPagerAdapter {
     
-    private static final int[] TITLES = {R.string.tab_links, R.string.tab_releases, R.string.tab_edits};
+    private static final int[] TITLES = {R.string.tab_links, R.string.tab_releases, R.string.tab_bio, R.string.tab_edits};
     
     public ArtistPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -28,6 +29,8 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
         case 1:
             return ArtistReleaseGroupsFragment.newInstance();
         case 2:
+            return ArtistBioFragment.newInstance();
+        case 3:
             return EditFragment.newInstance(Entity.ARTIST);
         }
         return null;
