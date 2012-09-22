@@ -73,6 +73,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     public void onLoadFinished(Loader<Artist> loader, Artist data) {
         if (data != null) {
             String bio = StringFormat.lineBreaksToHtml(data.bio.full);
+            bio = StringFormat.stripFromEnd("<br/>User-contributed", bio);
             bioText.setText(Html.fromHtml(bio));
             bioText.setMovementMethod(LinkMovementMethod.getInstance());
             

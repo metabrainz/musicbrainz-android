@@ -6,7 +6,9 @@
   android:fillViewport="true"
   android:background="@color/main_fg">
 
-  <RelativeLayout style="@style/Match">
+  <LinearLayout
+    style="@style/MatchWidth"
+    android:layout_above="@+id/lastfm_logo">
 
     <ImageView
       android:id="@+id/bio_picture"
@@ -17,23 +19,23 @@
     <TextView
       android:id="@+id/bio_text"
       style="@style/MatchWidth"
-      android:layout_below="@id/bio_picture"
-      android:layout_above="@+id/lastfm_logo"
-      android:layout_margin="@dimen/std_pad" />
+      android:layout_margin="10dp" />
 
-    <ImageView
-      android:id="@+id/lastfm_logo"
-      style="@style/Wrap"
-      android:src="@drawable/logo_lastfm"
-      android:layout_margin="10dp"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentRight="true" />
+    <RelativeLayout style="@style/MatchWidth">
+      <ImageView
+        android:id="@+id/lastfm_logo"
+        style="@style/Wrap"
+        android:src="@drawable/logo_lastfm"
+        android:padding="10dp"
+        android:layout_alignParentRight="true" />
 
-    <org.musicbrainz.mobile.view.RobotoLightTextView
-      style="@style/Wrap"
-      android:text="@string/bio_powered_by"
-      android:layout_toLeftOf="@id/lastfm_logo"
-      android:layout_alignBottom="@id/lastfm_logo" />
+      <org.musicbrainz.mobile.view.RobotoLightTextView
+        style="@style/Wrap"
+        android:text="@string/bio_powered_by"
+        android:paddingBottom="10dp"
+        android:layout_toLeftOf="@id/lastfm_logo"
+        android:layout_alignBottom="@id/lastfm_logo" />
+    </RelativeLayout>
+  </LinearLayout>
 
-  </RelativeLayout>
 </ScrollView>

@@ -44,4 +44,12 @@ public class StringFormat {
         return input.replace("\n", "<br/>");
     }
     
+    public static String stripFromEnd(String toStrip, String input) {
+        int start = input.indexOf(toStrip);
+        if (start == -1) {
+            return input;
+        }
+        return input.substring(0, start);
+    }
+    
 }
