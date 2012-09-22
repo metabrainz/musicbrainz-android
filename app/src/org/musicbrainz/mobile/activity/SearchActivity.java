@@ -79,10 +79,10 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     private void doSearch() {
         String intentType = getIntent().getStringExtra(Extra.TYPE);
         if (intentType.equals(Extra.ARTIST)) {
-            setTitle(getString(R.string.search_bar_artists) + " " + searchTerm);
+            setTitle(getString(R.string.search_bar_artists), searchTerm);
             getSupportLoaderManager().initLoader(SEARCH_ARTIST_LOADER, null, this);
         } else if (intentType.equals(Extra.RELEASE_GROUP)) {
-            setTitle(getString(R.string.search_bar_rgs) + " " + searchTerm);
+            setTitle(getString(R.string.search_bar_rgs), searchTerm);
             getSupportLoaderManager().initLoader(SEARCH_RELEASE_GROUP_LOADER, null, this);
         } else {
             setTitle(searchTerm);
@@ -92,6 +92,11 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     
     private void setTitle(String title) {
         getSupportActionBar().setTitle(title);
+    }
+    
+    private void setTitle(String title, String subtitle) {
+        setTitle(title);
+        getSupportActionBar().setSubtitle(subtitle);
     }
 
     private void enableResultTabs() {
