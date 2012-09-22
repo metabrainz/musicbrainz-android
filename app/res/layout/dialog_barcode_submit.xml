@@ -11,7 +11,8 @@
       layout="@layout/list_release"
       android:background="@color/list_bg" />
 
-    <View style="@style/Separator"
+    <View
+      style="@style/Separator"
       android:background="@color/grey" />
 
     <TextView
