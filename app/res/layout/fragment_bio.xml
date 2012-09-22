@@ -6,8 +6,20 @@
   android:fillViewport="true"
   android:background="@color/main_fg">
 
-  <RelativeLayout
-    style="@style/Match">
+  <RelativeLayout style="@style/Match">
+
+    <ImageView
+      android:id="@+id/bio_picture"
+      style="@style/MatchWidth"
+      android:scaleType="centerCrop"
+      android:maxHeight="300dp" />
+
+    <TextView
+      android:id="@+id/bio_text"
+      style="@style/MatchWidth"
+      android:layout_below="@id/bio_picture"
+      android:layout_above="@+id/lastfm_logo"
+      android:layout_margin="@dimen/std_pad" />
 
     <ImageView
       android:id="@+id/lastfm_logo"

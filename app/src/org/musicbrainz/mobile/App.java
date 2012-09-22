@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import com.bugsense.trace.BugSenseHandler;
 import com.novoda.imageloader.core.ImageManager;
 import com.novoda.imageloader.core.LoaderSettings;
+import com.novoda.imageloader.core.loader.Loader;
 
 /**
  * Application starts initialising PayPal in the background when the app is
@@ -51,8 +52,8 @@ public class App extends Application {
         robotoLight = Typeface.createFromAsset(instance.getAssets(), "Roboto-Light.ttf");
     }
     
-    public static ImageManager getImageManager() {
-        return imageManager;
+    public static Loader getImageLoader() {
+        return imageManager.getLoader();
     }
 
     public static String getUserAgent() {

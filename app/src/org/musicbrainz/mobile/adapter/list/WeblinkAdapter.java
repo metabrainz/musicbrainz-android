@@ -50,8 +50,6 @@ public class WeblinkAdapter extends ArrayAdapter<WebLink> {
 
         if (type.equalsIgnoreCase("youtube")) {
             return R.drawable.link_youtube;
-        } else if (type.equalsIgnoreCase("discogs")) {
-            return R.drawable.link_discog;
         } else if (type.equalsIgnoreCase("official homepage")) {
             return R.drawable.link_home;
         } else if (type.equalsIgnoreCase("imdb")) {
@@ -76,6 +74,8 @@ public class WeblinkAdapter extends ArrayAdapter<WebLink> {
             return R.drawable.link_twitter;
         } else if (url.contains("facebook")) {
             return R.drawable.link_facebook;
+        } else if (type.contains("discog")) {
+            return R.drawable.link_discog;
         } else if (url.contains("vimeo")) {
             return R.drawable.link_vimeo;
         }
