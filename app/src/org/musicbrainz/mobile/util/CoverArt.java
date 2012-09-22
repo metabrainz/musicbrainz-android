@@ -5,7 +5,7 @@ public class CoverArt {
     private static final String CAA = "http://coverartarchive.org";
     
     public enum Size {
-        SMALL, LARGE, FULL
+        SMALL, LARGE
     }
 
     public static String getFront(String mbid, Size size) {
@@ -17,12 +17,10 @@ public class CoverArt {
     }
     
     private static String sizePostfix(Size size) {
-        if (size == Size.SMALL) {
-            return "-250";
-        } else if (size == Size.LARGE) {
+        if (size == Size.LARGE) {
             return "-500";
         } else {
-            return "";
+            return "-250";
         }
     }
 

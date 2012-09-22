@@ -22,6 +22,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,12 +43,12 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 public class BarcodeSearchFragment extends Fragment implements OnEditorActionListener, OnClickListener,
-        OnItemClickListener, OnItemLongClickListener, ConfirmBarcodeCallbacks {
+        OnItemClickListener, OnItemLongClickListener, ConfirmBarcodeCallbacks, TextWatcher {
 
     private static final int SEARCH_RELEASE_LOADER = 0;
     private static final int SUBMIT_BARCODE_LOADER = 1;
 
-    private TextView barcodeText;
+    private EditText barcodeText;
     private EditText searchBox;
     private ImageButton searchButton;
     private TextView instructions;
@@ -86,7 +88,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
         View layout = inflater.inflate(R.layout.fragment_barcode_search, container, false);
         findViews(layout);
         setListeners();
-        barcodeText.setText(barcodeText.getText() + " " + barcode);
+        barcodeText.setText(barcode);
         return layout;
     }
 
@@ -100,7 +102,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
 
     private void findViews(View layout) {
         searchBox = (EditText) layout.findViewById(R.id.barcode_search);
-        barcodeText = (TextView) layout.findViewById(R.id.barcode_text);
+        barcodeText = (EditText) layout.findViewById(R.id.barcode);
         searchButton = (ImageButton) layout.findViewById(R.id.barcode_search_btn);
         matches = (ListView) layout.findViewById(R.id.barcode_list);
         instructions = (TextView) layout.findViewById(R.id.barcode_instructions);
@@ -112,6 +114,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     private void setListeners() {
         searchBox.setOnEditorActionListener(this);
         searchButton.setOnClickListener(this);
+        barcodeText.addTextChangedListener(this);
     }
 
     @Override
@@ -230,7 +233,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
 
         @Override
         public Loader<AsyncResult<Void>> onCreateLoader(int id, Bundle args) {
-            return new SubmitBarcodeLoader(getSelectedReleaseMbid(), barcode);
+            return new SubmitBarcodeLoader(getSelectedReleaseMbid(), barcodeText.getText().toString());
         }
 
         @Override
@@ -266,6 +269,38 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     public void confirmSubmission() {
         loadingCallbacks.startLoading();
         getLoaderManager().initLoader(SUBMIT_BARCODE_LOADER, null, submissionCallbacks);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {}
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (!isDigits(s)) {
+            barcodeText.setError(getString(R.string.barcode_invalid_chars));
+        } else if (!isBarcodeLengthValid(s)) {
+            barcodeText.setError(getString(R.string.barcode_invalid_length));
+        } else {
+            barcodeText.setError(null);
+        }
+    }
+    
+    private boolean isBarcodeLengthValid(CharSequence s) {
+        return s.length() == 12 || s.length() == 13;
+    }
+    
+    private boolean isDigits(CharSequence s) {
+        String barcode = s.toString();
+        char[] chars = barcode.toCharArray();
+        for (char c : chars) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

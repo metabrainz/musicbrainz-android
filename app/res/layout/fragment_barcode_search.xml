@@ -4,34 +4,50 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Activity">
 
-  <TextView
-    android:id="@+id/barcode_text"
-    style="@style/MatchWidth"
-    android:layout_margin="@dimen/small_pad"
-    android:text="@string/barcode_text"
-    android:textColor="@color/main_text"
-    android:textSize="@dimen/text_size_medium"
-    android:paddingTop="@dimen/small_pad"
-    android:paddingLeft="@dimen/small_pad" />
-
   <RelativeLayout
     style="@style/MatchWidth"
-    android:layout_marginLeft="@dimen/small_pad"
-    android:layout_marginRight="@dimen/small_pad"
-    android:layout_marginBottom="3dip">
+    android:layout_margin="@dimen/small_pad">
+
+    <org.musicbrainz.mobile.view.RobotoLightTextView
+      android:id="@+id/barcode_label"
+      style="@style/Wrap"
+      android:text="@string/barcode_text"
+      android:textColor="@color/main_text"
+      android:textSize="@dimen/text_size_medium"
+      android:layout_marginLeft="@dimen/std_pad"
+      android:layout_marginRight="@dimen/std_pad"
+      android:layout_alignBaseline="@+id/barcode" />
+
+    <EditText 
+      android:id="@+id/barcode"
+      style="@style/MatchWidth"
+      android:layout_toRightOf="@+id/barcode_label"
+      android:inputType="number" />
 
     <ImageButton
       android:id="@+id/barcode_search_btn"
       style="@style/SearchButton"
-      android:layout_alignParentRight="true" />
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/barcode" />
 
+    <org.musicbrainz.mobile.view.RobotoLightTextView
+      android:id="@+id/release_label"
+      style="@style/Wrap"
+      android:text="@string/barcode_release_text"
+      android:textColor="@color/main_text"
+      android:textSize="@dimen/text_size_medium"
+      android:layout_marginLeft="@dimen/std_pad"
+      android:layout_marginRight="@dimen/std_pad"
+      android:layout_alignBaseline="@+id/barcode_search" />
+    
     <EditText
       android:id="@+id/barcode_search"
       style="@style/SearchEdit"
-      android:layout_alignParentLeft="true"
-      android:layout_toLeftOf="@+id/barcode_search_btn"
+      android:layout_alignLeft="@id/barcode"
+      android:layout_toLeftOf="@id/barcode_search_btn"
       android:layout_alignBottom="@id/barcode_search_btn"
-      android:hint="@string/barcode_hint" />
+      android:hint="@string/barcode_hint"
+      android:layout_below="@id/barcode" />
   </RelativeLayout>
 
   <RelativeLayout style="@style/MatchWidth">
