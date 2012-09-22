@@ -96,9 +96,8 @@
   <string name="barcode_invalid_chars">Should only contain digits</string>
 
   <!-- ConfirmBarcodeDialog -->
-  <string name="barcode_add_header">Submit barcode</string>
-  <string name="barcode_add_body">Add barcode to this release?</string>
-  <string name="barcode_add_info">This will submit an edit for peer review. Barcode will not be added immediately.</string>
+  <string name="barcode_add_header">Submit barcode?</string>
+  <string name="barcode_add_info">This will submit an edit for peer review. The barcode will not be added immediately.</string>
   <string name="barcode_add_btn">Submit</string>
 
   <!-- DonateActivity -->
@@ -179,8 +178,8 @@
 
   <!-- BarcodeDialog -->
   <string name="barcode_header">Barcode not found!</string>
-  <string name="barcode_info_log">This barcode is not yet stored in MusicBrainz. Do you want to add it to a release?</string>
-  <string name="barcode_info_nolog">This barcode is not yet stored in MusicBrainz. Log in to add it to a release.</string>
+  <string name="barcode_info_log">This barcode is not associated with a MusicBrainz release. Would you like to add it?</string>
+  <string name="barcode_info_nolog">This barcode is not associated with a MusicBrainz release. Log in to add it.</string>
   <string name="barcode_btn">Add barcode</string>
 
   <!-- ReleaseSelectionDialog -->
