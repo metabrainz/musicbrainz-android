@@ -2,9 +2,10 @@ package org.musicbrainz.mobile.fragment;
 
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
-import org.musicbrainz.mobile.async.lastfm.Artist;
 import org.musicbrainz.mobile.async.lastfm.ArtistBioLoader;
+import org.musicbrainz.mobile.async.lastfm.Response.Artist;
 import org.musicbrainz.mobile.intent.IntentFactory;
+import org.musicbrainz.mobile.string.StringFormat;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -71,7 +72,8 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     @Override
     public void onLoadFinished(Loader<Artist> loader, Artist data) {
         if (data != null) {
-            bioText.setText(Html.fromHtml(data.bio.content));
+            String bio = StringFormat.lineBreaksToHtml(data.bio.full);
+            bioText.setText(Html.fromHtml(bio));
             bioText.setMovementMethod(LinkMovementMethod.getInstance());
             
             ImageTag tag = tagFactory.build(data.image.get(4).text);

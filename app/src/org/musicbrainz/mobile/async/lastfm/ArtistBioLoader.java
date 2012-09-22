@@ -3,6 +3,7 @@ package org.musicbrainz.mobile.async.lastfm;
 import java.io.IOException;
 
 import org.musicbrainz.mobile.App;
+import org.musicbrainz.mobile.async.lastfm.Response.Artist;
 import org.musicbrainz.mobile.util.Log;
 
 import android.support.v4.content.AsyncTaskLoader;

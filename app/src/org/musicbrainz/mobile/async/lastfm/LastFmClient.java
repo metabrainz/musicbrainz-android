@@ -10,12 +10,13 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.musicbrainz.mobile.App;
+import org.musicbrainz.mobile.async.lastfm.Response.Artist;
 import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.util.Log;
 
-import com.google.gson.Gson;
-
 import android.os.Build;
+
+import com.google.gson.Gson;
 
 public class LastFmClient {
 
@@ -27,9 +28,9 @@ public class LastFmClient {
     public Artist getArtistInfo(String mbid) throws IOException {
         URLConnection urlConnection = new URL(buildArtistInfoUrl(mbid)).openConnection();
         InputStream stream = new BufferedInputStream(urlConnection.getInputStream());
-        Artist response = parseResult(stream);
+        Response response = parseResult(stream);
         stream.close();
-        return response;
+        return response.artist;
     }
 
     private String buildArtistInfoUrl(String mbid) {
@@ -37,10 +38,9 @@ public class LastFmClient {
                 + Secrets.LASTFM_API_KEY + "&format=json";
     }
 
-    private Artist parseResult(InputStream stream) {
+    private Response parseResult(InputStream stream) {
         Reader reader = new InputStreamReader(stream);
-        Response response = new Gson().fromJson(reader, Response.class);
-        return response.artist;
+        return new Gson().fromJson(reader, Response.class);
     }
 
     private void enableHttpResponseCache() {

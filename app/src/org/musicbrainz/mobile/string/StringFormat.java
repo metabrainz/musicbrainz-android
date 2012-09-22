@@ -39,4 +39,9 @@ public class StringFormat {
         }
         return sb.substring(0, sb.length() - 2);
     }
+    
+    public static String lineBreaksToHtml(String input) {
+        return input.replace("\n", "<br/>");
+    }
+    
 }
