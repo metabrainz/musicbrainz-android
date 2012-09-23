@@ -54,7 +54,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        tagFactory = new ImageTagFactory(App.getContext(), R.drawable.progress_spinner);
+        tagFactory = new ImageTagFactory(App.getContext(), R.color.transparent);
         getLoaderManager().initLoader(BIO_LOADER, null, this);
     }
 

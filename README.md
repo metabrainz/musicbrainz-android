@@ -2,9 +2,9 @@
 
 This is the official [MusicBrainz](http://www.musicbrainz.org) Android app. It started as a Google Summer of Code project in 2010. Here is the [MusicBrainz product page](http://musicbrainz.org/doc/MusicBrainz_for_Android) for the app.
 
-### Google Play
+### Download
 
-Downloaded the latest release from [Google Play](https://market.android.com/details?id=org.musicbrainz.mobile).
+Get the latest release of the app from [Google Play](https://play.google.com/store/apps/details?id=org.musicbrainz.mobile).
 
 ## Licenses
 

@@ -35,8 +35,8 @@ public class LastFmClient {
     }
 
     private String buildArtistInfoUrl(String mbid) {
-        return "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid=" + mbid + "&api_key="
-                + Secrets.LASTFM_API_KEY + "&format=json";
+        return "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&format=json&mbid=" + mbid + "&api_key="
+                + Secrets.LASTFM_API_KEY;
     }
 
     private Response parseResult(InputStream stream) {
