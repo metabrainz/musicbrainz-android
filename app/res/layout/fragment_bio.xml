@@ -9,7 +9,7 @@
   <LinearLayout
     style="@style/MatchWidth">
 
-    <ImageView
+    <org.musicbrainz.mobile.view.FadeImageView
       android:id="@+id/bio_picture"
       style="@style/MatchWidth"
       android:scaleType="centerCrop"

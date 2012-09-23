@@ -18,7 +18,7 @@
         android:layout_centerInParent="true"
         android:text="@string/cover_art_front" />
 
-      <ImageView
+      <org.musicbrainz.mobile.view.FadeImageView
         android:id="@+id/cover_front"
         style="@style/Match"
         android:scaleType="fitXY"
@@ -33,7 +33,7 @@
         android:layout_centerInParent="true"
         android:text="@string/cover_art_back" />
 
-      <ImageView
+      <org.musicbrainz.mobile.view.FadeImageView
         android:id="@+id/cover_back"
         style="@style/Match"
         android:scaleType="fitXY"
