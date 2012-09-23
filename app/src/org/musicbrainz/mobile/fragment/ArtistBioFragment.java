@@ -79,7 +79,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<LastF
         if (!TextUtils.isEmpty(artist.getStart())) {
             years.append(artist.getStart());
         }
-        years.append(" Ñ ");
+        years.append(" \u2013 ");
         if (!TextUtils.isEmpty(artist.getEnd())) {
             years.append(artist.getEnd());
         }
