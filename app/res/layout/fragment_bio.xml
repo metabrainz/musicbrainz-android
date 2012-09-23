@@ -7,14 +7,13 @@
   android:background="@color/main_fg">
 
   <LinearLayout
-    style="@style/MatchWidth"
-    android:layout_above="@+id/lastfm_logo">
+    style="@style/MatchWidth">
 
     <ImageView
       android:id="@+id/bio_picture"
       style="@style/MatchWidth"
       android:scaleType="centerCrop"
-      android:layout_height="200dp" />
+      android:layout_height="250dp" />
 
     <TextView
       android:id="@+id/bio_text"
