@@ -9,11 +9,21 @@
   <LinearLayout
     style="@style/MatchWidth">
 
+    <FrameLayout 
+      style="@style/MatchWidth"
+      android:layout_height="250dp"
+      android:background="@color/cover_bg">
+      
+    <org.musicbrainz.mobile.view.RobotoLightTextView
+      style="@style/Match"
+      android:gravity="center"
+      android:text="@string/tab_bio" />
+      
     <org.musicbrainz.mobile.view.FadeImageView
       android:id="@+id/bio_picture"
-      style="@style/MatchWidth"
-      android:scaleType="centerCrop"
-      android:layout_height="250dp" />
+      style="@style/Match"
+      android:scaleType="centerCrop" />
+    </FrameLayout>
 
     <TextView
       android:id="@+id/bio_text"
