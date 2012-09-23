@@ -13,15 +13,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.novoda.imageloader.core.model.ImageTag;
 import com.novoda.imageloader.core.model.ImageTagFactory;
 
 public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artist>{
@@ -71,20 +70,26 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
 
     @Override
     public void onLoadFinished(Loader<Artist> loader, Artist data) {
-        if (data != null) {
-            String bio = StringFormat.lineBreaksToHtml(data.bio.full);
-            bio = StringFormat.stripFromEnd("<br/>User-contributed", bio);
-            bioText.setText(Html.fromHtml(bio));
-            bioText.setMovementMethod(LinkMovementMethod.getInstance());
-            
-            ImageTag tag = tagFactory.build(data.image.get(4).text);
-            bioPicture.setTag(tag);
-            App.getImageLoader().load(bioPicture);
+        if (data == null) {
+            bioText.setText(getString(R.string.bio_connection_fail));
         } else {
-            Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+            setBioImage(data.image.get(4).text);
+            String bio = StringFormat.lineBreaksToHtml(data.bio.full);
+            setBioText(TextUtils.isEmpty(bio) ? getString(R.string.bio_empty) : bio);
         }
     }
 
+    public void setBioImage(String url) {
+        bioPicture.setTag(tagFactory.build(url));
+        App.getImageLoader().load(bioPicture);
+    }
+
+    public void setBioText(String bio) {
+        bio = StringFormat.stripFromEnd("<br/>User-contributed", bio);
+        bioText.setText(Html.fromHtml(bio));
+        bioText.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+    
     @Override
     public void onLoaderReset(Loader<Artist> loader) {
         loader.reset();

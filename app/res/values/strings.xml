@@ -61,6 +61,8 @@
   
   <!-- BioFragment -->
   <string name="bio_powered_by">BIO POWERED BY</string>
+  <string name="bio_empty">No bio found.</string>
+  <string name="bio_connection_fail">Could not download bio.</string>
   
   <!-- CollectionsActivity -->
   <string name="collections_title">Collections</string>

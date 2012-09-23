@@ -91,6 +91,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
     }
     
     private void setTitle(String title) {
+        getSupportActionBar().setSubtitle(null);
         getSupportActionBar().setTitle(title);
     }
     
