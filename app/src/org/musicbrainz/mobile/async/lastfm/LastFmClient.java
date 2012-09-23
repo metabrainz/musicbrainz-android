@@ -26,8 +26,9 @@ public class LastFmClient {
     }
 
     public Artist getArtistInfo(String mbid) throws IOException {
-        URLConnection urlConnection = new URL(buildArtistInfoUrl(mbid)).openConnection();
-        InputStream stream = new BufferedInputStream(urlConnection.getInputStream());
+        URLConnection conn = new URL(buildArtistInfoUrl(mbid)).openConnection();
+        conn.setRequestProperty("User-Agent", App.getUserAgent());
+        InputStream stream = new BufferedInputStream(conn.getInputStream());
         Response response = parseResult(stream);
         stream.close();
         return response.artist;
