@@ -6,42 +6,49 @@
   android:fillViewport="true"
   android:background="@color/main_fg">
 
-  <LinearLayout
-    style="@style/MatchWidth">
+  <LinearLayout style="@style/MatchWidth">
 
-    <FrameLayout 
+    <FrameLayout
       style="@style/MatchWidth"
-      android:layout_height="250dp"
+      android:layout_height="@dimen/bio_image_height"
       android:background="@color/cover_bg">
-      
-    <org.musicbrainz.mobile.view.RobotoLightTextView
-      style="@style/Match"
-      android:gravity="center"
-      android:text="@string/tab_bio" />
-      
-    <org.musicbrainz.mobile.view.FadeImageView
-      android:id="@+id/bio_picture"
-      style="@style/Match"
-      android:scaleType="centerCrop" />
+
+      <org.musicbrainz.mobile.view.RobotoLightTextView
+        style="@style/Match"
+        android:gravity="center"
+        android:text="@string/tab_bio" />
+
+      <org.musicbrainz.mobile.view.FadeImageView
+        android:id="@+id/bio_picture"
+        style="@style/Match"
+        android:scaleType="centerCrop" />
     </FrameLayout>
+
+    <org.musicbrainz.mobile.view.RobotoLightTextView
+      android:id="@+id/years_active"
+      style="@style/MatchWidth"
+      android:textSize="24sp"
+      android:gravity="center"
+      android:layout_marginTop="@dimen/gutter"
+      android:visibility="gone" />
 
     <TextView
       android:id="@+id/bio_text"
       style="@style/MatchWidth"
-      android:layout_margin="10dp" />
+      android:layout_margin="@dimen/gutter" />
 
     <RelativeLayout style="@style/MatchWidth">
       <ImageView
         android:id="@+id/lastfm_logo"
         style="@style/Wrap"
         android:src="@drawable/logo_lastfm"
-        android:padding="10dp"
+        android:padding="@dimen/gutter"
         android:layout_alignParentRight="true" />
 
       <org.musicbrainz.mobile.view.RobotoLightTextView
         style="@style/Wrap"
         android:text="@string/bio_powered_by"
-        android:paddingBottom="10dp"
+        android:paddingBottom="@dimen/gutter"
         android:layout_toLeftOf="@id/lastfm_logo"
         android:layout_alignBottom="@id/lastfm_logo" />
     </RelativeLayout>

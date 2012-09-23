@@ -10,7 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.musicbrainz.mobile.App;
-import org.musicbrainz.mobile.async.lastfm.Response.Artist;
+import org.musicbrainz.mobile.async.lastfm.Response.LastFmArtist;
 import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.util.Log;
 
@@ -25,7 +25,7 @@ public class LastFmClient {
         disableConnectionReuseIfNecessary();
     }
 
-    public Artist getArtistInfo(String mbid) throws IOException {
+    public LastFmArtist getArtistInfo(String mbid) throws IOException {
         URLConnection conn = new URL(buildArtistInfoUrl(mbid)).openConnection();
         conn.setRequestProperty("User-Agent", App.getUserAgent());
         InputStream stream = new BufferedInputStream(conn.getInputStream());

@@ -8,6 +8,7 @@
   <dimen name="text_size_entity">17sp</dimen>
   <dimen name="text_size_xl">21sp</dimen>
 
+  <dimen name="gutter">10dp</dimen>
   <dimen name="gutter_large">14dp</dimen>
   <dimen name="huge_pad">20dp</dimen>
   <dimen name="super_pad">32dp</dimen>
@@ -19,6 +20,7 @@
   <dimen name="separator_thickness">1dp</dimen>
   <dimen name="progress_spinner">40dp</dimen>
   <dimen name="login_buttons">200dp</dimen>
+  <dimen name="bio_image_height">240dp</dimen>
 
   <dimen name="link_button_corners">1dp</dimen>
 </resources>

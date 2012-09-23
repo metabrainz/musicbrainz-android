@@ -1,9 +1,10 @@
 package org.musicbrainz.mobile.fragment;
 
+import org.musicbrainz.android.api.data.Artist;
 import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.async.lastfm.ArtistBioLoader;
-import org.musicbrainz.mobile.async.lastfm.Response.Artist;
+import org.musicbrainz.mobile.async.lastfm.Response.LastFmArtist;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.string.StringFormat;
 
@@ -23,13 +24,14 @@ import android.widget.TextView;
 
 import com.novoda.imageloader.core.model.ImageTagFactory;
 
-public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artist>{
+public class ArtistBioFragment extends Fragment implements LoaderCallbacks<LastFmArtist>{
     
     private static final int BIO_LOADER = 30;
 
     private ImageTagFactory tagFactory;
     
     private ImageView bioPicture;
+    private TextView yearsActive;
     private TextView bioText;
     
     private String mbid;
@@ -60,16 +62,37 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
 
     private void findViews(View layout) {
         bioPicture = (ImageView) layout.findViewById(R.id.bio_picture);
+        yearsActive = (TextView) layout.findViewById(R.id.years_active);
         bioText = (TextView) layout.findViewById(R.id.bio_text);
+    }
+    
+    public void update(Artist artist) {
+        String years = generateTimeSpan(artist);
+        if (years.length() > 3) {
+            yearsActive.setVisibility(View.VISIBLE);
+            yearsActive.setText(years);
+        }
+    }
+
+    public String generateTimeSpan(Artist artist) {
+        StringBuilder years = new StringBuilder();
+        if (!TextUtils.isEmpty(artist.getStart())) {
+            years.append(artist.getStart());
+        }
+        years.append(" - ");
+        if (!TextUtils.isEmpty(artist.getEnd())) {
+            years.append(artist.getEnd());
+        }
+        return years.toString();
     }
 
     @Override
-    public Loader<Artist> onCreateLoader(int id, Bundle args) {
+    public Loader<LastFmArtist> onCreateLoader(int id, Bundle args) {
         return new ArtistBioLoader(mbid);
     }
 
     @Override
-    public void onLoadFinished(Loader<Artist> loader, Artist data) {
+    public void onLoadFinished(Loader<LastFmArtist> loader, LastFmArtist data) {
         if (data == null) {
             bioText.setText(getString(R.string.bio_connection_fail));
         } else {
@@ -91,7 +114,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     }
     
     @Override
-    public void onLoaderReset(Loader<Artist> loader) {
+    public void onLoaderReset(Loader<LastFmArtist> loader) {
         loader.reset();
     }
 

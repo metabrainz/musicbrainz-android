@@ -12,6 +12,7 @@ import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
 import org.musicbrainz.mobile.async.ArtistLoader;
 import org.musicbrainz.mobile.async.result.AsyncEntityResult;
 import org.musicbrainz.mobile.config.Configuration;
+import org.musicbrainz.mobile.fragment.ArtistBioFragment;
 import org.musicbrainz.mobile.fragment.ArtistReleaseGroupsFragment;
 import org.musicbrainz.mobile.fragment.EditFragment;
 import org.musicbrainz.mobile.fragment.LinksFragment;
@@ -103,6 +104,7 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         FragmentManager fm = getSupportFragmentManager();
         ((LinksFragment) fm.findFragmentByTag(makeTag(0))).update();
         ((ArtistReleaseGroupsFragment) fm.findFragmentByTag(makeTag(1))).update();
+        ((ArtistBioFragment) fm.findFragmentByTag(makeTag(2))).update(artist);
         ((EditFragment) fm.findFragmentByTag(makeTag(3))).update();
     }
 

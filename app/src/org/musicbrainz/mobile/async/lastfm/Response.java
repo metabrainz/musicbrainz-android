@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Response {
 
-    public Artist artist;
+    public LastFmArtist artist;
     
-    public class Artist {
+    public class LastFmArtist {
         public String url;
         public ArrayList<Image> image;
         public Bio bio;
