@@ -97,8 +97,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<LastF
             bioText.setText(getString(R.string.bio_connection_fail));
         } else {
             setBioImage(data.image.get(4).text);
-            String bio = StringFormat.lineBreaksToHtml(data.bio.full);
-            setBioText(TextUtils.isEmpty(bio) ? getString(R.string.bio_empty) : bio);
+            setBioText(TextUtils.isEmpty(data.bio.full) ? getString(R.string.bio_empty) : data.bio.full);
         }
     }
 
@@ -108,9 +107,14 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<LastF
     }
 
     public void setBioText(String bio) {
-        bio = StringFormat.stripFromEnd("<br/>User-contributed", bio);
-        bioText.setText(Html.fromHtml(bio));
+        bioText.setText(Html.fromHtml(formatBioText(bio)));
         bioText.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    public String formatBioText(String bio) {
+        bio = StringFormat.lineBreaksToHtml(bio);
+        bio = StringFormat.stripFromEnd("<br/>User-contributed", bio);
+        return StringFormat.stripLinksAndRefs(bio);
     }
     
     @Override

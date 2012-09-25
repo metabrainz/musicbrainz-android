@@ -45,11 +45,12 @@ public class StringFormat {
     }
     
     public static String stripFromEnd(String toStrip, String input) {
-        int start = input.indexOf(toStrip);
-        if (start == -1) {
-            return input;
-        }
-        return input.substring(0, start);
+        return input.replaceFirst(toStrip + ".*", "");
+    }
+    
+    public static String stripLinksAndRefs(String input) {
+        // Removes link tags and references like [1]
+        return input.replaceAll("\\<a.*?>|</a>|\\[.*?\\]","");
     }
     
 }
