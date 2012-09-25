@@ -17,7 +17,7 @@
     style="@style/LinkDescription"
     android:layout_toRightOf="@id/link_icon" />
 
-  <TextView
+  <org.musicbrainz.mobile.view.RobotoLightTextView
     android:id="@+id/list_link"
     style="@style/Link"
     android:layout_toRightOf="@id/link_icon"

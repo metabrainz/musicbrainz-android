@@ -113,7 +113,7 @@
     project.</string>
   <string name="paypal_loading_label">Loading PayPal…</string>
   <string name="paypal_loading_timeout">Connection failure</string>
-  <string name="donate_or">OR</string>
+  <string name="donate_or">\u2014\u0020  OR  \u0020\u2014</string>
   <string name="alt_donate_text">View other options…</string>
   <string name="starting_paypal">PayPal is starting…\nPlease bear with us.</string>
 
