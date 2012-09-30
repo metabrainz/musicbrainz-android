@@ -28,7 +28,7 @@ public class StringFormat {
         }
         return sb.substring(0, sb.length() - 2);
     }
-    
+
     public static String commaSeparateTags(Collection<Tag> tags, Context context) {
         StringBuilder sb = new StringBuilder();
         if (tags.isEmpty()) {
@@ -39,18 +39,24 @@ public class StringFormat {
         }
         return sb.substring(0, sb.length() - 2);
     }
-    
+
     public static String lineBreaksToHtml(String input) {
         return input.replace("\n", "<br/>");
     }
-    
+
     public static String stripFromEnd(String toStrip, String input) {
         return input.replaceFirst(toStrip + ".*", "");
     }
-    
+
     public static String stripLinksAndRefs(String input) {
-        // Removes link tags and references like [1]
-        return input.replaceAll("\\<a.*?>|</a>|\\[.*?\\]","");
+        // Removes link tags and references like [1].
+        return input.replaceAll("\\<a.*?>|</a>|\\[.*?\\]", "");
     }
     
+    public static String fromFirstParagraph(String input) {
+        // Strip anything before first paragraph from string.
+        int firstPara = input.indexOf("<p>");
+        return input.substring(firstPara);
+    }
+
 }

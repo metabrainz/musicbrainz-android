@@ -37,20 +37,47 @@
       style="@style/MatchWidth"
       android:layout_margin="@dimen/gutter" />
 
-    <RelativeLayout style="@style/MatchWidth">
+    <RelativeLayout
+      android:id="@+id/source_lastfm"
+      style="@style/MatchWidth"
+      android:visibility="gone">
+      
       <ImageView
         android:id="@+id/lastfm_logo"
         style="@style/Wrap"
+        android:layout_width="100dp"
         android:src="@drawable/logo_lastfm"
         android:padding="@dimen/gutter"
         android:layout_alignParentRight="true" />
-
+      
       <org.musicbrainz.mobile.view.RobotoLightTextView
         style="@style/Wrap"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/lastfm_logo"
         android:text="@string/bio_powered_by"
-        android:paddingBottom="@dimen/gutter"
-        android:layout_toLeftOf="@id/lastfm_logo"
-        android:layout_alignBottom="@id/lastfm_logo" />
+        android:paddingTop="@dimen/small_pad" />
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:id="@+id/source_wikipedia"
+      style="@style/MatchWidth"
+      android:visibility="gone">
+      
+      <ImageView
+        android:id="@+id/wikipedia_logo"
+        style="@style/Wrap"
+        android:layout_width="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/gutter"
+        android:src="@drawable/logo_wikipedia" />
+      
+      <org.musicbrainz.mobile.view.RobotoLightTextView
+        style="@style/Wrap"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/wikipedia_logo"
+        android:text="@string/bio_powered_by"
+        android:paddingTop="@dimen/small_pad" />
     </RelativeLayout>
   </LinearLayout>
 

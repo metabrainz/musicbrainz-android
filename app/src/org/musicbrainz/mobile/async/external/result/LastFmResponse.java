@@ -1,10 +1,10 @@
-package org.musicbrainz.mobile.async.lastfm;
+package org.musicbrainz.mobile.async.external.result;
 
 import java.util.ArrayList;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Response {
+public class LastFmResponse {
 
     public LastFmArtist artist;
     

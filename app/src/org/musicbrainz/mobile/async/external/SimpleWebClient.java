@@ -1,49 +1,30 @@
-package org.musicbrainz.mobile.async.lastfm;
+package org.musicbrainz.mobile.async.external;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 
 import org.musicbrainz.mobile.App;
-import org.musicbrainz.mobile.async.lastfm.Response.LastFmArtist;
-import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.util.Log;
 
 import android.os.Build;
 
-import com.google.gson.Gson;
+public abstract class SimpleWebClient {
 
-public class LastFmClient {
-
-    public LastFmClient() {
+    public SimpleWebClient() {
         enableHttpResponseCache();
         disableConnectionReuseIfNecessary();
     }
-
-    public LastFmArtist getArtistInfo(String mbid) throws IOException {
-        URLConnection conn = new URL(buildArtistInfoUrl(mbid)).openConnection();
+    
+    protected InputStream getConnection(String url) throws IOException {
+        URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("User-Agent", App.getUserAgent());
-        InputStream stream = new BufferedInputStream(conn.getInputStream());
-        Response response = parseResult(stream);
-        stream.close();
-        return response.artist;
+        return new BufferedInputStream(conn.getInputStream());
     }
-
-    private String buildArtistInfoUrl(String mbid) {
-        return "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&format=json&mbid=" + mbid + "&api_key="
-                + Secrets.LASTFM_API_KEY;
-    }
-
-    private Response parseResult(InputStream stream) {
-        Reader reader = new InputStreamReader(stream);
-        return new Gson().fromJson(reader, Response.class);
-    }
-
+    
     private void enableHttpResponseCache() {
         try {
             long httpCacheSize = 10 * 1024 * 1024; // 10 MB
@@ -62,5 +43,5 @@ public class LastFmClient {
             System.setProperty("http.keepAlive", "false");
         }
     }
-
+    
 }
