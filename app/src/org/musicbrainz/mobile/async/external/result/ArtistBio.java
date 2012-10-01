@@ -45,6 +45,7 @@ public class ArtistBio {
     public String getWikipediaBio() {
         if (!TextUtils.isEmpty(wikipediaBio)) {
             String bio = StringFormat.fromFirstParagraph(wikipediaBio);
+            bio = StringFormat.stripImageTags(bio);
             return StringFormat.stripLinksAndRefs(bio);
         }
         return null;

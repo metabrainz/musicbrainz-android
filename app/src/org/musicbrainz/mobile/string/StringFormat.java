@@ -53,6 +53,10 @@ public class StringFormat {
         return input.replaceAll("\\<a.*?>|</a>|\\[.*?\\]", "");
     }
     
+    public static String stripImageTags(String input) {
+        return input.replaceAll("\\<img.*?/>", "");
+    }
+    
     public static String fromFirstParagraph(String input) {
         // Strip anything before first paragraph from string.
         int firstPara = input.indexOf("<p>");
