@@ -122,6 +122,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
             } else {
                 showLastFmBio(data);
             }
+            getView().findViewById(R.id.loading).setVisibility(View.GONE);
         }
     }
     

@@ -41,14 +41,14 @@
       android:id="@+id/source_lastfm"
       style="@style/MatchWidth"
       android:visibility="gone">
-      
+
       <ImageView
         android:id="@+id/lastfm_logo"
         style="@style/Wrap"
         android:src="@drawable/logo_lastfm"
         android:padding="@dimen/gutter"
         android:layout_alignParentRight="true" />
-      
+
       <org.musicbrainz.mobile.view.RobotoLightTextView
         style="@style/Wrap"
         android:layout_alignBottom="@id/lastfm_logo"
@@ -61,7 +61,7 @@
       android:id="@+id/source_wikipedia"
       style="@style/MatchWidth"
       android:visibility="gone">
-      
+
       <ImageView
         android:id="@+id/wikipedia_logo"
         style="@style/Wrap"
@@ -69,7 +69,7 @@
         android:layout_alignParentTop="true"
         android:padding="@dimen/gutter"
         android:src="@drawable/logo_wikipedia" />
-      
+
       <org.musicbrainz.mobile.view.RobotoLightTextView
         style="@style/Wrap"
         android:layout_centerVertical="true"
@@ -77,6 +77,13 @@
         android:text="@string/bio_powered_by"
         android:paddingTop="@dimen/small_pad" />
     </RelativeLayout>
+    
+    <include
+      android:id="@+id/loading"
+      layout="@layout/layout_loading"
+      style="@style/Match"
+      android:layout_alignParentBottom="true"
+      android:layout_below="@id/years_active" />
   </LinearLayout>
 
 </ScrollView>
