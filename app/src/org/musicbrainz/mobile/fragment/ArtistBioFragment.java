@@ -141,8 +141,12 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     }
 
     public void showLastFmBio(ArtistBio data) {
-        bioText.setText(TextUtils.isEmpty(data.getLastFmBio()) ? getString(R.string.bio_empty) : Html.fromHtml(data.getLastFmBio()));
-        showLastFmCredit();
+        if (TextUtils.isEmpty(data.getLastFmBio())) {
+            bioText.setText(getString(R.string.bio_empty));
+        } else {
+            bioText.setText(Html.fromHtml(data.getLastFmBio()));
+            showLastFmCredit();
+        }
     }
 
     public void showWikipediaCredit() {
