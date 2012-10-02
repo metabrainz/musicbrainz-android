@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.musicbrainz.mobile.async.PersistingAsyncTaskLoader;
 import org.musicbrainz.mobile.async.external.result.ArtistBio;
-import org.musicbrainz.mobile.async.external.result.LastFmResponse.LastFmArtist;
+import org.musicbrainz.mobile.async.external.result.LastFmArtist;
 import org.musicbrainz.mobile.util.Log;
 
 import android.text.TextUtils;

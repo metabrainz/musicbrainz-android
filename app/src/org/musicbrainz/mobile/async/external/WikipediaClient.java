@@ -5,9 +5,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import org.musicbrainz.mobile.async.external.result.WikipediaResponse;
+import org.musicbrainz.mobile.async.external.result.WikipediaBio;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class WikipediaClient extends SimpleWebClient {
 
@@ -24,8 +26,9 @@ public class WikipediaClient extends SimpleWebClient {
     
     private String parseResult(InputStream stream) {
         Reader reader = new InputStreamReader(stream);
-        WikipediaResponse response = new Gson().fromJson(reader, WikipediaResponse.class);
-        return response.mobileview.sections.get(0).text;
+        JsonObject obj = new JsonParser().parse(reader).getAsJsonObject();
+        WikipediaBio response = new Gson().fromJson(obj.get("mobileview"), WikipediaBio.class);
+        return response.sections.get(0).text;
     }
     
 }
