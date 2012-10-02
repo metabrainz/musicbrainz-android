@@ -45,17 +45,16 @@
       <ImageView
         android:id="@+id/lastfm_logo"
         style="@style/Wrap"
-        android:layout_width="100dp"
         android:src="@drawable/logo_lastfm"
         android:padding="@dimen/gutter"
         android:layout_alignParentRight="true" />
       
       <org.musicbrainz.mobile.view.RobotoLightTextView
         style="@style/Wrap"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/lastfm_logo"
-        android:text="@string/bio_powered_by"
-        android:paddingTop="@dimen/small_pad" />
+        android:layout_alignBottom="@id/lastfm_logo"
+        android:layout_toLeftOf="@id/lastfm_logo"
+        android:paddingBottom="@dimen/gutter"
+        android:text="@string/bio_powered_by" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -66,7 +65,6 @@
       <ImageView
         android:id="@+id/wikipedia_logo"
         style="@style/Wrap"
-        android:layout_width="100dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:padding="@dimen/gutter"
