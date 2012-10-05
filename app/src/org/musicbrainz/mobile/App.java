@@ -15,11 +15,6 @@ import com.novoda.imageloader.core.ImageManager;
 import com.novoda.imageloader.core.LoaderSettings;
 import com.novoda.imageloader.core.loader.Loader;
 
-/**
- * Application starts initialising PayPal in the background when the app is
- * created. This prevents the user from having to wait when they visit the
- * donation page for the first time.
- */
 public class App extends Application {
 
     private static App instance;
@@ -39,7 +34,7 @@ public class App extends Application {
 
     private void setupCrashLogging() {
         if (Configuration.LIVE && user.isCrashReportingEnabled()) {
-            BugSenseHandler.setup(this, Secrets.BUGSENSE_API_KEY);
+            BugSenseHandler.initAndStartSession(this, Secrets.BUGSENSE_API_KEY);
         }
     }
     

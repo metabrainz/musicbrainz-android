@@ -55,7 +55,7 @@
     <dependency>
       <groupId>com.bugsense</groupId>
       <artifactId>bugsense-trace</artifactId>
-      <version>1.9</version>
+      <version>3.0.3</version>
     </dependency>
 
     <dependency>
