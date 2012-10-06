@@ -108,7 +108,7 @@
 
   <!-- DonateActivity -->
   <string name="donate_title">Donate</string>
-  <string name="donate_header">Support the MetaBrainz Foundation with a donation!</string>
+  <string name="donate_header">Support the MetaBrainz Foundation</string>
   <string name="donate_text">You can donate via PayPal to the non-profit MetaBrainz Foundation, which operates the MusicBrainz
     project.</string>
   <string name="paypal_loading_label">Loading PayPal…</string>

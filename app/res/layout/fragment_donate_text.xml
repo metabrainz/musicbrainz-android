@@ -6,7 +6,7 @@
 
   <org.musicbrainz.mobile.view.RobotoLightTextView
     android:id="@+id/donate_title"
-    style="@style/TextHeaderPad"
+    style="@style/BigRobotoPad"
     android:text="@string/donate_header" />
 
   <TextView

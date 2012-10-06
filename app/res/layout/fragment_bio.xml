@@ -26,8 +26,7 @@
 
     <org.musicbrainz.mobile.view.RobotoLightTextView
       android:id="@+id/years_active"
-      style="@style/MatchWidth"
-      android:textSize="24sp"
+      style="@style/BigRoboto"
       android:gravity="center"
       android:layout_marginTop="@dimen/gutter"
       android:visibility="gone" />
@@ -35,7 +34,8 @@
     <TextView
       android:id="@+id/bio_text"
       style="@style/MatchWidth"
-      android:layout_margin="@dimen/gutter" />
+      android:layout_margin="@dimen/gutter"
+      android:textSize="@dimen/text_size_medium" />
 
     <RelativeLayout
       android:id="@+id/source_lastfm"
@@ -81,9 +81,7 @@
     <include
       android:id="@+id/loading"
       layout="@layout/layout_loading"
-      style="@style/Match"
-      android:layout_alignParentBottom="true"
-      android:layout_below="@id/years_active" />
+      style="@style/Match" />
   </LinearLayout>
 
 </ScrollView>

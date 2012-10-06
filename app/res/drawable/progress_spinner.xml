@@ -7,10 +7,6 @@
   android:thicknessRatio="15"
   android:useLevel="false">
 
-  <size
-    android:width="@dimen/progress_spinner"
-    android:height="@dimen/progress_spinner" />
-
   <gradient
     android:type="sweep"
     android:centerY="0.50"

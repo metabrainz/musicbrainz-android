@@ -11,16 +11,12 @@
   <!-- Theme -->
   <color name="main_bg">#eeeeee</color>
   <color name="main_fg">#ffffff</color>
-  <color name="main_text">#000000</color>
   <color name="aux_text">#666666</color>
   <color name="link_text">#3366cc</color>
   <color name="cover_bg">#dddddd</color>
 
-  <color name="tag_text">#000000</color>
-
   <color name="list_bg">#ffffff</color>
   <color name="list_head">#33dddddd</color>
-  <color name="list_text">#000000</color>
   <color name="list_divider">#eeeeee</color>
 
   <!-- Brand -->

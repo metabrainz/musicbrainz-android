@@ -22,11 +22,10 @@
 
   <org.musicbrainz.mobile.view.RobotoLightTextView
     android:id="@+id/donate_or"
-    style="@style/Wrap"
+    style="@style/BigRoboto"
+    android:gravity="center"
     android:layout_below="@id/donate_button_layout"
-    android:layout_centerHorizontal="true"
     android:layout_margin="@dimen/small_pad"
-    android:textSize="20sp"
     android:text="@string/donate_or" />
 
   <Button

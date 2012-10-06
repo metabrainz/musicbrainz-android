@@ -70,7 +70,6 @@
     name="TileText"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_large</item>
-    <item name="android:textColor">@color/main_text</item>
   </style>
 
   <!-- Entities -->
@@ -78,7 +77,6 @@
     name="EntityText"
     parent="ScrollText">
     <item name="android:textSize">@dimen/text_size_entity</item>
-    <item name="android:textColor">@color/main_text</item>
     <item name="android:textStyle">bold</item>
   </style>
 
@@ -94,8 +92,7 @@
     name="TagsText"
     parent="ScrollText">
     <item name="android:padding">@dimen/small_pad</item>
-    <item name="android:textSize">@dimen/text_size_tag</item>
-    <item name="android:textColor">@color/tag_text</item>
+    <item name="android:textSize">@dimen/text_size_small</item>
     <item name="android:text">@string/no_tags</item>
   </style>
 
@@ -112,7 +109,6 @@
   <style
     name="SearchEdit"
     parent="Edit">
-    <item name="android:textColor">@color/main_text</item>
     <item name="android:imeOptions">actionSearch</item>
   </style>
 
@@ -138,7 +134,6 @@
     parent="NoSearchResults">
     <item name="android:text">@string/no_results</item>
     <item name="android:textSize">@dimen/text_size_large</item>
-    <item name="android:textColor">@color/main_text</item>
   </style>
 
   <style
@@ -148,21 +143,20 @@
     <item name="android:background">@color/main_fg</item>
     <item name="android:gravity">center</item>
     <item name="android:textSize">@dimen/text_size_large</item>
-    <item name="android:textColor">@color/main_text</item>
     <item name="android:padding">@dimen/gutter_large</item>
   </style>
 
   <!-- Text -->
   <style
-    name="TextHeader"
+    name="BigRoboto"
     parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_xl</item>
     <item name="android:textColor">@color/aux_text</item>
   </style>
 
   <style
-    name="TextHeaderPad"
-    parent="TextHeader">
+    name="BigRobotoPad"
+    parent="BigRoboto">
     <item name="android:layout_marginBottom">@dimen/gutter_large</item>
   </style>
 
@@ -170,7 +164,6 @@
     name="TextBody"
     parent="MatchWidth">
     <item name="android:textSize">@dimen/text_size_medium</item>
-    <item name="android:textColor">@color/main_text</item>
     <item name="android:autoLink">web</item>
   </style>
 
@@ -231,14 +224,12 @@
     name="LinkDescription"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
-    <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
     name="WelcomeText"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
-    <item name="android:textColor">@color/main_text</item>
     <item name="android:layout_centerInParent">true</item>
     <item name="android:singleLine">true</item>
   </style>
@@ -257,7 +248,6 @@
     name="ListMain"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_large</item>
-    <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
@@ -284,7 +274,6 @@
     name="ListMedium"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_medium</item>
-    <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
@@ -297,7 +286,6 @@
     name="ListReleaseTitles"
     parent="Wrap">
     <item name="android:textSize">@dimen/text_size_small</item>
-    <item name="android:textColor">@color/list_text</item>
   </style>
 
   <style
@@ -341,7 +329,7 @@
   </style>
 
   <style name="LoginButton">
-    <item name="android:layout_width">@dimen/login_buttons</item>
+    <item name="android:layout_width">@dimen/login_button</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:enabled">false</item>
   </style>
@@ -351,7 +339,6 @@
     parent="MatchWidth">
     <item name="android:background">@drawable/link_button</item>
     <item name="android:padding">@dimen/small_pad</item>
-    <item name="android:minWidth">@dimen/login_buttons</item>
     <item name="android:textSize">@dimen/text_size_medium</item>
     <item name="android:layout_height">42dp</item>
   </style>
