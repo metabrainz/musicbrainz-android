@@ -3,6 +3,7 @@ package org.musicbrainz.mobile.activity;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
+import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 public class SettingsActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {
     
     private static final String CLEAR_SUGGESTIONS = "clear_suggestions";
+    private static final String SEND_CRASHLOGS = "send_crashlogs";
 
     @SuppressWarnings("deprecation")
     @Override
@@ -34,6 +36,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findPreference(CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
+        findPreference(SEND_CRASHLOGS).setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -54,6 +57,9 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().equals(CLEAR_SUGGESTIONS)) {
             clearSuggestionHistory();
+            return true;
+        } else if (preference.getKey().equals(SEND_CRASHLOGS)) {
+            App.updateCrashLogging();
             return true;
         }
         return false;

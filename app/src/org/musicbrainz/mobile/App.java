@@ -27,17 +27,27 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         user = new UserPreferences();
-        setupCrashLogging();
+        updateCrashLogging();
         setupImageManager();
         loadCustomTypefaces();
     }
-
-    private void setupCrashLogging() {
-        if (Configuration.LIVE && user.isCrashReportingEnabled()) {
-            BugSenseHandler.initAndStartSession(this, Secrets.BUGSENSE_API_KEY);
+    
+    public static void updateCrashLogging() {
+        if (user.isCrashReportingEnabled()) {
+            startCrashLogging();
+        } else {
+            stopCrashLogging();
         }
     }
-    
+
+    public static void startCrashLogging() {
+        BugSenseHandler.initAndStartSession(instance, Configuration.LIVE ? Secrets.BUGSENSE_API_KEY : "99f3740e");
+    }
+
+    public static void stopCrashLogging() {
+        BugSenseHandler.closeSession(instance);
+    }
+
     public void setupImageManager() {
         LoaderSettings settings = new LoaderSettings.SettingsBuilder().withDisconnectOnEveryCall(true).build(this);
         imageManager = new ImageManager(this, settings);
@@ -46,7 +56,7 @@ public class App extends Application {
     private void loadCustomTypefaces() {
         robotoLight = Typeface.createFromAsset(instance.getAssets(), "Roboto-Light.ttf");
     }
-    
+
     public static Loader getImageLoader() {
         return imageManager.getLoader();
     }
@@ -96,5 +106,5 @@ public class App extends Application {
         super.onLowMemory();
         imageManager.getFileManager().clean();
     }
-    
+
 }
