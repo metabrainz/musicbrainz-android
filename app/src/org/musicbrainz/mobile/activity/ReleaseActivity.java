@@ -29,6 +29,7 @@ import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCall
 import org.musicbrainz.mobile.fragment.CoverArtFragment;
 import org.musicbrainz.mobile.fragment.EditFragment;
 import org.musicbrainz.mobile.fragment.TracksFragment;
+import org.musicbrainz.mobile.fragment.contracts.EntityTab;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
@@ -149,15 +150,12 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         pager.setOffscreenPageLimit(2);
     }
 
+    @SuppressWarnings("unchecked")
     private void updateFragments() {
         FragmentManager fm = getSupportFragmentManager();
-        ((TracksFragment) fm.findFragmentByTag(makeTag(0))).update(release);
-        ((CoverArtFragment) fm.findFragmentByTag(makeTag(1))).update(release);
-        ((EditFragment) fm.findFragmentByTag(makeTag(2))).update(release);
-    }
-
-    private String makeTag(int position) {
-        return "android:switcher:" + R.id.pager + ":" + position;
+        for (int i = 0; i < pagerAdapter.getCount(); i++) {
+            ((EntityTab<Release>) fm.findFragmentByTag(pagerAdapter.makeTag(i))).update(release);
+        }
     }
 
     private void findViews() {

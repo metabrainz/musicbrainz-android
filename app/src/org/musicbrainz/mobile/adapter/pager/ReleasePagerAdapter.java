@@ -44,4 +44,8 @@ public class ReleasePagerAdapter extends FragmentPagerAdapter {
         return TITLES.length;
     }
     
+    public String makeTag(int position) {
+        return "android:switcher:" + R.id.pager + ":" + position;
+    }
+    
 }

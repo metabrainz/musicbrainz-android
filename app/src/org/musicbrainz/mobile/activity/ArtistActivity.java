@@ -10,10 +10,8 @@ import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
 import org.musicbrainz.mobile.async.ArtistLoader;
 import org.musicbrainz.mobile.async.result.AsyncEntityResult;
 import org.musicbrainz.mobile.config.Configuration;
-import org.musicbrainz.mobile.fragment.ArtistBioFragment;
-import org.musicbrainz.mobile.fragment.ArtistReleaseGroupsFragment;
 import org.musicbrainz.mobile.fragment.EditFragment;
-import org.musicbrainz.mobile.fragment.LinksFragment;
+import org.musicbrainz.mobile.fragment.contracts.EntityTab;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
 import org.musicbrainz.mobile.util.Utils;
@@ -98,16 +96,12 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         loading.setVisibility(View.GONE);
     }
 
+    @SuppressWarnings("unchecked")
     private void updateFragments() {
         FragmentManager fm = getSupportFragmentManager();
-        ((LinksFragment) fm.findFragmentByTag(makeTag(0))).update(artist);
-        ((ArtistReleaseGroupsFragment) fm.findFragmentByTag(makeTag(1))).update(artist);
-        ((ArtistBioFragment) fm.findFragmentByTag(makeTag(2))).update(artist);
-        ((EditFragment) fm.findFragmentByTag(makeTag(3))).update(artist);
-    }
-
-    private String makeTag(int position) {
-        return "android:switcher:" + R.id.pager + ":" + position;
+        for (int i = 0; i < pagerAdapter.getCount(); i++) {
+            ((EntityTab<Artist>) fm.findFragmentByTag(pagerAdapter.makeTag(i))).update(artist);
+        }
     }
 
     @Override
