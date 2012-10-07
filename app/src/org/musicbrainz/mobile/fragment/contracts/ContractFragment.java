@@ -1,9 +1,9 @@
-package org.musicbrainz.mobile.fragment;
+package org.musicbrainz.mobile.fragment.contracts;
 
 import android.app.Activity;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 
-public class ContractListFragment<T> extends ListFragment {
+public abstract class ContractFragment<T> extends Fragment {
 
     private T contract;
 

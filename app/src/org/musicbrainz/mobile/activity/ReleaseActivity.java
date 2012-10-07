@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.Release;
+import org.musicbrainz.android.api.data.ReleaseArtist;
 import org.musicbrainz.android.api.data.ReleaseInfo;
 import org.musicbrainz.android.api.data.Tag;
-import org.musicbrainz.android.api.data.Track;
 import org.musicbrainz.android.api.data.UserData;
 import org.musicbrainz.android.api.webservice.BarcodeNotFoundException;
 import org.musicbrainz.mobile.App;
@@ -64,7 +63,7 @@ import com.viewpagerindicator.TabPageIndicator;
  * release MBID or a release group MBID.
  */
 public class ReleaseActivity extends MusicBrainzActivity implements AddToCollectionCallback, ReleaseSelectionCallbacks,
-        BarcodeNotFoundCallback, TracksFragment.Callback, EditFragment.Callback {
+        BarcodeNotFoundCallback, EditFragment.Callback {
 
     private static final int RELEASE_LOADER = 0;
     private static final int RELEASE_GROUP_RELEASE_LOADER = 1;
@@ -86,7 +85,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     private RatingBar ratingBar;
 
     private boolean provideArtistAction = true;
-    
+
     private ReleasePagerAdapter pagerAdapter;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -140,7 +139,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         updateFragments();
         loading.setVisibility(View.GONE);
     }
-    
+
     private void configurePager() {
         pagerAdapter = new ReleasePagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -152,11 +151,11 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
 
     private void updateFragments() {
         FragmentManager fm = getSupportFragmentManager();
-        ((TracksFragment) fm.findFragmentByTag(makeTag(0))).update();
-        ((CoverArtFragment) fm.findFragmentByTag(makeTag(1))).update();
-        ((EditFragment) fm.findFragmentByTag(makeTag(2))).update();
+        ((TracksFragment) fm.findFragmentByTag(makeTag(0))).update(release);
+        ((CoverArtFragment) fm.findFragmentByTag(makeTag(1))).update(release);
+        ((EditFragment) fm.findFragmentByTag(makeTag(2))).update(release);
     }
-    
+
     private String makeTag(int position) {
         return "android:switcher:" + R.id.pager + ":" + position;
     }
@@ -400,7 +399,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
 
     @Override
     public void hideLoading() {
-        setSupportProgressBarIndeterminateVisibility(false);        
+        setSupportProgressBarIndeterminateVisibility(false);
     }
 
     @Override
@@ -425,11 +424,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         release.setReleaseGroupRating(rating);
         ratingBar.setRating(rating);
         getSupportLoaderManager().destroyLoader(RELEASE_LOADER);
-    }
-
-    @Override
-    public List<Track> getTracks() {
-        return release.getTrackList();
     }
 
 }

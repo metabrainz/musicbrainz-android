@@ -32,9 +32,9 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
-        addPreferencesFromResource(R.xml.preferences);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        addPreferencesFromResource(R.xml.preferences);
         findPreference(CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
         findPreference(SEND_CRASHLOGS).setOnPreferenceClickListener(this);
     }

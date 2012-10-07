@@ -3,10 +3,8 @@ package org.musicbrainz.mobile.activity;
 import java.util.List;
 
 import org.musicbrainz.android.api.data.Artist;
-import org.musicbrainz.android.api.data.ReleaseGroupInfo;
 import org.musicbrainz.android.api.data.Tag;
 import org.musicbrainz.android.api.data.UserData;
-import org.musicbrainz.android.api.data.WebLink;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.adapter.pager.ArtistPagerAdapter;
 import org.musicbrainz.mobile.async.ArtistLoader;
@@ -41,7 +39,7 @@ import com.viewpagerindicator.TabPageIndicator;
  * artist MBID.
  */
 public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>,
-        LinksFragment.Callback, ArtistReleaseGroupsFragment.Callback, EditFragment.Callback {
+        EditFragment.Callback {
 
     private static final int ARTIST_LOADER = 0;
 
@@ -102,10 +100,10 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private void updateFragments() {
         FragmentManager fm = getSupportFragmentManager();
-        ((LinksFragment) fm.findFragmentByTag(makeTag(0))).update();
-        ((ArtistReleaseGroupsFragment) fm.findFragmentByTag(makeTag(1))).update();
+        ((LinksFragment) fm.findFragmentByTag(makeTag(0))).update(artist);
+        ((ArtistReleaseGroupsFragment) fm.findFragmentByTag(makeTag(1))).update(artist);
         ((ArtistBioFragment) fm.findFragmentByTag(makeTag(2))).update(artist);
-        ((EditFragment) fm.findFragmentByTag(makeTag(3))).update();
+        ((EditFragment) fm.findFragmentByTag(makeTag(3))).update(artist);
     }
 
     private String makeTag(int position) {
@@ -193,16 +191,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         artist.setRating(rating);
         ratingBar.setRating(rating);
         getSupportLoaderManager().destroyLoader(ARTIST_LOADER);
-    }
-
-    @Override
-    public List<ReleaseGroupInfo> getReleaseGroups() {
-        return artist.getReleaseGroups();
-    }
-
-    @Override
-    public List<WebLink> getLinks() {
-        return artist.getLinks();
     }
 
 }

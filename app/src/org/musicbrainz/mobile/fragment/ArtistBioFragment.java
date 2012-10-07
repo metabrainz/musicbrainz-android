@@ -6,6 +6,7 @@ import org.musicbrainz.mobile.App;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.async.external.ArtistBioLoader;
 import org.musicbrainz.mobile.async.external.result.ArtistBio;
+import org.musicbrainz.mobile.fragment.contracts.EntityTab;
 import org.musicbrainz.mobile.intent.IntentFactory;
 
 import android.app.Activity;
@@ -23,7 +24,7 @@ import android.widget.TextView;
 
 import com.novoda.imageloader.core.model.ImageTagFactory;
 
-public class ArtistBioFragment extends Fragment implements LoaderCallbacks<ArtistBio> {
+public class ArtistBioFragment extends Fragment implements LoaderCallbacks<ArtistBio>, EntityTab<Artist> {
 
     private static final int BIO_LOADER = 30;
 
@@ -63,7 +64,8 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
         yearsActive = (TextView) layout.findViewById(R.id.years_active);
         bioText = (TextView) layout.findViewById(R.id.bio_text);
     }
-
+    
+    @Override
     public void update(Artist artist) {
         setTimeSpan(artist);
         

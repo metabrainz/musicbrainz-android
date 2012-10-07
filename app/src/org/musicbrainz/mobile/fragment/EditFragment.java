@@ -10,6 +10,8 @@ import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.async.SubmitRatingLoader;
 import org.musicbrainz.mobile.async.SubmitTagsLoader;
 import org.musicbrainz.mobile.async.result.AsyncResult;
+import org.musicbrainz.mobile.fragment.contracts.EntityTab;
+import org.musicbrainz.mobile.fragment.contracts.ContractFragment;
 import org.musicbrainz.mobile.string.StringFormat;
 
 import android.os.Bundle;
@@ -25,7 +27,7 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.Toast;
 
-public class EditFragment extends ContractFragment<EditFragment.Callback> implements OnClickListener {
+public class EditFragment extends ContractFragment<EditFragment.Callback> implements OnClickListener, EntityTab<Object> {
 
     private static final int RATING_LOADER = 10;
     private static final int TAG_LOADER = 11;
@@ -72,7 +74,8 @@ public class EditFragment extends ContractFragment<EditFragment.Callback> implem
         tagBtn.setOnClickListener(this);
     }
     
-    public void update() {
+    @Override
+    public void update(Object entity) {
         if (App.isUserLoggedIn()) {
             UserData userData = getContract().getUserData();
             tagInput.setText(StringFormat.commaSeparate(userData.getTags()));
