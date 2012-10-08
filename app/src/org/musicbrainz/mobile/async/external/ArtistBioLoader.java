@@ -28,7 +28,7 @@ public class ArtistBioLoader extends PersistingAsyncTaskLoader<ArtistBio> {
                 data = new ArtistBio(lastfm.image.get(4).text, lastfm.bio.full, wikiBio);
                 return data;
             }
-            data =  new ArtistBio(lastfm.image.get(4).text, lastfm.bio.full);
+            data = new ArtistBio(lastfm.image.get(4).text, lastfm.bio.full);
             return data;
         } catch (IOException e) {
             Log.e(e.getMessage());

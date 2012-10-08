@@ -57,10 +57,10 @@ public class StringFormat {
         return input.replaceAll("\\<img.*?/>", "");
     }
     
-    public static String fromFirstParagraph(String input) {
+    public static String fromEndOfTable(String input) {
         // Strip anything before first paragraph from string.
-        int firstPara = input.indexOf("<p>");
-        return input.substring(firstPara);
+        int textStart = input.indexOf("</table>") + 8;
+        return input.substring(textStart);
     }
 
 }

@@ -26,9 +26,7 @@ import org.musicbrainz.mobile.dialog.CollectionAddDialog;
 import org.musicbrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.musicbrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCallbacks;
-import org.musicbrainz.mobile.fragment.CoverArtFragment;
 import org.musicbrainz.mobile.fragment.EditFragment;
-import org.musicbrainz.mobile.fragment.TracksFragment;
 import org.musicbrainz.mobile.fragment.contracts.EntityTab;
 import org.musicbrainz.mobile.intent.IntentFactory.Extra;
 import org.musicbrainz.mobile.string.StringFormat;
@@ -147,7 +145,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
         pager.setAdapter(pagerAdapter);
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
-        pager.setOffscreenPageLimit(2);
+        pager.setOffscreenPageLimit(pagerAdapter.getCount() - 1);
     }
 
     @SuppressWarnings("unchecked")
