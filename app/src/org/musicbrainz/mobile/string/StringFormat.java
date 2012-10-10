@@ -59,7 +59,7 @@ public class StringFormat {
     
     public static String fromEndOfTable(String input) {
         // Strip anything before first paragraph from string.
-        int textStart = input.indexOf("</table>") + 8;
+        int textStart = input.lastIndexOf("</table>") + 8;
         return input.substring(textStart);
     }
 
