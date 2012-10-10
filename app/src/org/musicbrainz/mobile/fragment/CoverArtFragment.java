@@ -36,7 +36,7 @@ public class CoverArtFragment extends Fragment implements EntityTab<Release>{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tagFactory = new ImageTagFactory(App.getContext(), R.color.transparent);
+        tagFactory = ImageTagFactory.getInstance(App.getContext(), R.color.transparent);
         return inflater.inflate(R.layout.fragment_cover_art, container, false);
     }
     

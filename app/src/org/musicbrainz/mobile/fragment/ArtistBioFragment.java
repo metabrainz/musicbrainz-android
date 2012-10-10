@@ -56,7 +56,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        tagFactory = new ImageTagFactory(App.getContext(), R.color.transparent);
+        tagFactory = ImageTagFactory.getInstance(App.getContext(), R.color.transparent);
     }
 
     private void findViews(View layout) {
