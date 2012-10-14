@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.musicbrainz.mobile.async.PersistingAsyncTaskLoader;
 import org.musicbrainz.mobile.async.external.result.ArtistBio;
 import org.musicbrainz.mobile.async.external.result.LastFmArtist;
-import org.musicbrainz.mobile.util.Log;
 
 import android.text.TextUtils;
 
@@ -31,7 +30,8 @@ public class ArtistBioLoader extends PersistingAsyncTaskLoader<ArtistBio> {
             data = new ArtistBio(lastfm.image.get(4).text, lastfm.bio.full);
             return data;
         } catch (IOException e) {
-            Log.e(e.getMessage());
+            return null;
+        } catch (IllegalStateException ise) {
             return null;
         }
     }
