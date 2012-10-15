@@ -11,8 +11,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 
 public class ApplicationTest extends ApplicationTestCase<App> {
     
-    // Version format allows versions like 1.3 or 1.3.1
-    private static final String EXPECTED_VERSION_FORMAT = "\\d\\.\\d|\\d\\.\\d\\.\\d";
+    private static final String EXPECTED_VERSION_FORMAT = "\\d\\.\\d\\.\\d";
     private static final String EXPECTED_USER_AGENT_FORMAT = "MBAndroid/" + EXPECTED_VERSION_FORMAT;
     private static final String EXPECTED_CLIENT_ID_FORMAT = "musicbrainz.android-" + EXPECTED_VERSION_FORMAT;
     
