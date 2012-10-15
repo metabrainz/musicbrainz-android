@@ -59,8 +59,10 @@ public class StringFormat {
     
     public static String fromEndOfTable(String input) {
         // Strip anything before first paragraph from string.
-        int textStart = input.lastIndexOf("</table>") + 8;
-        return input.substring(textStart);
+        int tableEnd = input.lastIndexOf("</table>") + 8;
+        String temp = input.substring(tableEnd);
+        int divEnd = temp.lastIndexOf("</div>");
+        return divEnd == -1 ? temp : temp.substring(divEnd + 6);
     }
 
 }
