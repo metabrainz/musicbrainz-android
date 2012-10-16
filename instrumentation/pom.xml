@@ -57,7 +57,7 @@
         <extensions>true</extensions>
         <configuration>
           <sdk>
-            <platform>10</platform>
+            <platform>16</platform>
           </sdk>
           <test>
             <skip>false</skip>
