@@ -57,12 +57,9 @@ public class StringFormat {
         return input.replaceAll("\\<img.*?/>", "");
     }
     
-    public static String fromEndOfTable(String input) {
-        // Strip anything before first paragraph from string.
-        int tableEnd = input.lastIndexOf("</table>") + 8;
-        String temp = input.substring(tableEnd);
-        int divEnd = temp.lastIndexOf("</div>");
-        return divEnd == -1 ? temp : temp.substring(divEnd + 6);
+    public static String stripTablesAndDivs(String input) {
+        // Removes everything between pairs of div and table tags.
+        return input.replaceAll("(?s:\\<div.*?</div>|\\<table.*?</table>)", "");
     }
 
 }
