@@ -21,7 +21,7 @@
   <properties>
     <android.version>4.1.1.4</android.version>
     <android-test.version>4.1.1.4</android-test.version>
-    <android.sdk.platform>16</android.sdk.platform>
+    <android.sdk.platform>17</android.sdk.platform>
     <android-support.version>r7</android-support.version>
   </properties>
 

@@ -15,12 +15,13 @@ public class WebLink implements Comparable<WebLink> {
     }
 
     public String getPrettyUrl() {
-        // Remove "http://"
-        String prettyUrl = target.substring(7);
-        if (prettyUrl.endsWith("/")) {
-            prettyUrl = prettyUrl.substring(0, prettyUrl.length() - 1);
+        // Remove http:// and trailing /
+        String url = target.replace("http://", "");
+        url = url.replace("https://", "");
+        if (url.endsWith("/")) {
+            url = url.substring(0, url.length() - 1);
         }
-        return prettyUrl;
+        return url;
     }
 
     public void setUrl(String url) {

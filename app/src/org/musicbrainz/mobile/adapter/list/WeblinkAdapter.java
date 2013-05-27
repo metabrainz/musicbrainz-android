@@ -26,7 +26,7 @@ public class WeblinkAdapter extends ArrayAdapter<WebLink> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View link = convertView;
-        LinkHolder holder = null;
+        LinkHolder holder;
 
         if (link == null) {
             LayoutInflater inflater = context.getLayoutInflater();
