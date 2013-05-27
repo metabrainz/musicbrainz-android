@@ -13,6 +13,7 @@ public class ArtistLookupHandler extends MBHandler {
     private boolean inArtistRelations;
     private boolean inLabelRelations;
     private boolean inLifeSpan;
+    private boolean inUnsupported;
 
     private Artist artist = new Artist();
     private Tag tag;
@@ -53,6 +54,8 @@ public class ArtistLookupHandler extends MBHandler {
             buildString();
         } else if (localName.equals("relation-list")) {
             setRelationStatus(atts.getValue("target-type"));
+        } else if (inUnsupported(localName)) {
+            inUnsupported = true;
         }
     }
 
@@ -72,7 +75,7 @@ public class ArtistLookupHandler extends MBHandler {
             if (inTag) {
                 tag.setText(getString());
                 artist.addTag(tag);
-            } else if (!inArtistRelations && !inLabelRelations) {
+            } else if (!inArtistRelations && !inLabelRelations && !inUnsupported) {
                 artist.setName(getString());
             }
         } else if (localName.equals("rating")) {
@@ -95,7 +98,13 @@ public class ArtistLookupHandler extends MBHandler {
             inUrlRelations = false;
             inArtistRelations = false;
             inLabelRelations = false;
+        } else if (inUnsupported(localName)) {
+            inUnsupported = false;
         }
+    }
+
+    private boolean inUnsupported(String tag) {
+        return tag.equals("area") || tag.equals("begin-area") || tag.equals("end-area");
     }
 
 }

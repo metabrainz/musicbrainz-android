@@ -36,13 +36,13 @@ public class ArtistLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testArtistTags() {
-        assertEquals(34, artist.getTags().size());
+        assertEquals(40, artist.getTags().size());
     }
     
     @Test
     public void testArtistRatings() {
-        assertEquals(4.7f, artist.getRating(), 0.01);
-        assertEquals(57, artist.getRatingCount());
+        assertEquals(4.8f, artist.getRating(), 0.01);
+        assertEquals(59, artist.getRatingCount());
     }
 
 }
