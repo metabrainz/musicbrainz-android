@@ -53,6 +53,14 @@
     </dependency>
 
     <dependency>
+      <groupId>com.paypal.android</groupId>
+      <artifactId>paypal-mpl</artifactId>
+      <version>1.5.5.45</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/local/PayPal_MPL-1.5.5.45.jar</systemPath>
+    </dependency>
+
+    <dependency>
       <groupId>com.bugsense</groupId>
       <artifactId>bugsense-trace</artifactId>
       <version>3.0.3</version>
