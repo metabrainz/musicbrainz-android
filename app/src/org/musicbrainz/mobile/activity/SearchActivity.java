@@ -55,6 +55,7 @@ public class SearchActivity extends MusicBrainzActivity implements LoaderCallbac
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         configureSearch();
     }
 
