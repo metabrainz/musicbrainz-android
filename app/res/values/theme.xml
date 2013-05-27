@@ -17,6 +17,14 @@
     parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
     <item name="background">@drawable/actionbar</item>
     <item name="android:background">@drawable/actionbar</item>
+    <item name="subtitleTextStyle">@style/SubtitleText</item>
+    <item name="android:subtitleTextStyle">@style/SubtitleText</item>
+  </style>
+
+  <style
+    name="SubtitleText"
+    parent="TextAppearance.Sherlock.Widget.ActionBar.Subtitle">
+    <item name="android:textColor">@color/white</item>
   </style>
 
   <style
