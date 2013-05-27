@@ -8,14 +8,14 @@ Get the latest release of the app from [Google Play](https://play.google.com/sto
 
 ## Licenses
 
-Copyright © 2012 Jamie McDonald. Licensed under the GNU General Public License Version 3.
+Copyright © 2013 Jamie McDonald. Licensed under the GNU General Public License Version 3.
 ZXing barcode scanner integration code and miscellaneous helper classes are licensed under the Apache License, Version 2 (see headers).
 
 ## Contributing
 
-Please report issues on GitHub and submit feature requests on the [MusicBrainz issue tracker](http://tickets.musicbrainz.org/).
+Please submit issues and feature requests on GitHub.
 
-Code contributions are welcomed using [pull requests](https://help.github.com/articles/using-pull-requests). Please use the following code formatting and style guidelines:
+Code contributions are welcomed in the form of [pull requests](https://help.github.com/articles/using-pull-requests). Please use the following code formatting and style guidelines:
 
 * Tabs are 4 spaces in Java code and 2 spaces in XML
 * 120 character line width
@@ -43,6 +43,10 @@ There are two Android library projects that need to be included and specified in
 * [ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator)
   
 Clone these from the GitHub repos above, import them to your Eclipse workspace and point the app project to them in Properties > Android. Make sure that the Android support library is only included in one of these projects and the others depend on it.
+
+### IntelliJ project setup
+
+Import as existing Maven project. Just works.
 
 ### Can I skip all this Maven stuff?
 
