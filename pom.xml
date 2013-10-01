@@ -89,6 +89,7 @@
   </licenses>
 
   <modules>
+    <module>deployer</module>
     <module>api</module>
     <module>app</module>
     <module>instrumentation</module>

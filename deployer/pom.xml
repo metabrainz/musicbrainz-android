@@ -1,0 +1,40 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.musicbrainz.mobile</groupId>
+    <artifactId>aggregator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>deployer</artifactId>
+  <name>deployer</name>
+  <packaging>pom</packaging>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>paypal-mpl</id>
+            <phase>install</phase>
+            <goals><goal>install-file</goal></goals>
+            <configuration>
+              <groupId>com.paypal</groupId>
+              <artifactId>mpl</artifactId>
+              <packaging>jar</packaging>
+              <version>1.5.5.45</version>
+              <file>PayPal_MPL-1.5.5.45.jar</file>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

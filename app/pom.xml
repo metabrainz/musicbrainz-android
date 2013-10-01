@@ -44,11 +44,9 @@
     </dependency>
 
     <dependency>
-      <groupId>com.paypal.android</groupId>
-      <artifactId>paypal-mpl</artifactId>
+      <groupId>com.paypal</groupId>
+      <artifactId>mpl</artifactId>
       <version>1.5.5.45</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/local/PayPal_MPL-1.5.5.45.jar</systemPath>
     </dependency>
 
     <dependency>
