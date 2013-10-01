@@ -84,6 +84,7 @@ public class WebFragment extends SherlockFragment {
     }
 
     private void startRefresh() {
+        if (refresh == null) return;
         refresh.setVisible(false);
         callbacks.onPageStart();
     }

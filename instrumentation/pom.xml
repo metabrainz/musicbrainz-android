@@ -4,6 +4,7 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -16,10 +17,6 @@
   <packaging>apk</packaging>
   <name>instrumentation</name>
 
-  <properties>
-    <eclipse.excludeArtifactIds>android,android-support,android-test,api,app,bugsense-trace,commons-codec,commons-logging,guice,httpclient,httpcore,json,junit,opengl-api,paypal-mpl,roboguice,xmlParserAPIs,xpp3,plugin-preference,support-v4,imageloader-core,gson</eclipse.excludeArtifactIds>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>com.google.android</groupId>
@@ -30,7 +27,7 @@
     <dependency>
       <groupId>com.jayway.android.robotium</groupId>
       <artifactId>robotium-solo</artifactId>
-      <version>3.4.1</version>
+      <version>4.1</version>
     </dependency>
     <dependency>
       <groupId>org.musicbrainz.mobile</groupId>
@@ -57,19 +54,13 @@
         <extensions>true</extensions>
         <configuration>
           <sdk>
-            <platform>16</platform>
+            <platform>17</platform>
           </sdk>
           <test>
             <skip>false</skip>
             <instrumentationPackage>org.musicbrainz.mobile.test</instrumentationPackage>
             <instrumentationRunner>android.test.InstrumentationTestRunner</instrumentationRunner>
           </test>
-          <dex>
-            <jvmArguments>
-              <jvmArgument>-Xms256m</jvmArgument>
-              <jvmArgument>-Xmx512m</jvmArgument>
-            </jvmArguments>
-          </dex>
         </configuration>
       </plugin>
     </plugins>

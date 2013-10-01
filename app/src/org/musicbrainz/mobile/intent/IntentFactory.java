@@ -30,8 +30,6 @@ public class IntentFactory {
         public static final String RECORDING = "recording";
         public static final String ALL = "all";
 
-        public static final String MESSAGE = "message";
-
         public static final String TITLE = "title";
         public static final String TARGET_URL = "target_url";
     }
