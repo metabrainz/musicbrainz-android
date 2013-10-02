@@ -25,7 +25,7 @@ A code formatting configuration file is included in the repo.
 
 ### Building with Maven
 
-If you have Maven 3, the Android SDK and an ANDROID_HOME environment variable, you can simply build with:
+If you have Maven 3, the Android SDK and an ```ANDROID_HOME``` environment variable, you can simply build with:
 
     $mvn clean install
   
