@@ -17,6 +17,14 @@
   <packaging>apk</packaging>
   <name>app</name>
 
+  <repositories>
+    <repository>
+      <id>bugsense repo</id>
+      <name>The BugSense Repository</name>
+      <url>http://mvn.bugsense.com/</url>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.google.android</groupId>
@@ -50,9 +58,9 @@
     </dependency>
 
     <dependency>
-      <groupId>com.bugsense</groupId>
-      <artifactId>bugsense-trace</artifactId>
-      <version>3.0.3</version>
+      <groupId>com.bugsense.trace</groupId>
+      <artifactId>bugsense</artifactId>
+      <version>3.2.3</version>
     </dependency>
 
     <dependency>
