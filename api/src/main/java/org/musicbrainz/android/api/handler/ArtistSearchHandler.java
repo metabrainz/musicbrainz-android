@@ -13,6 +13,7 @@ public class ArtistSearchHandler extends MBHandler {
     private ArtistSearchResult result;
 
     private boolean inTag;
+    private boolean inUnsupported;
 
     public LinkedList<ArtistSearchResult> getResults() {
         return results;
@@ -23,12 +24,14 @@ public class ArtistSearchHandler extends MBHandler {
         if (localName.equals("artist")) {
             result = new ArtistSearchResult();
             result.setMbid(atts.getValue("id"));
-        } else if (localName.equals("name") && !inTag) {
+        } else if (localName.equals("name") && !inTag && !inUnsupported) {
             buildString();
         } else if (localName.equals("disambiguation")) {
             buildString();
         } else if (localName.equals("tag")) {
             inTag = true;
+        } else if (isUnsupported(localName)) {
+            inUnsupported = true;
         }
     }
 
@@ -36,13 +39,19 @@ public class ArtistSearchHandler extends MBHandler {
 
         if (localName.equals("artist")) {
             addOrIgnoreResult();
-        } else if (localName.equals("name") && !inTag) {
+        } else if (localName.equals("name") && !inTag && !inUnsupported) {
             result.setName(getString());
         } else if (localName.equals("disambiguation")) {
             result.setDisambiguation(getString());
         } else if (localName.equals("tag")) {
             inTag = false;
+        } else if (isUnsupported(localName)) {
+            inUnsupported = false;
         }
+    }
+
+    private boolean isUnsupported(String name) {
+        return name.equals("area") || name.equals("begin-area") || name.equals("end-area");
     }
 
     private void addOrIgnoreResult() {

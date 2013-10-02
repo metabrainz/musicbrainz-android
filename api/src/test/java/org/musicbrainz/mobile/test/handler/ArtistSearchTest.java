@@ -25,8 +25,18 @@ public class ArtistSearchTest extends BaseXmlParsingTestCase {
     }
 
     @Test
-    public void testArtistSearch() {
+    public void testArtistSearchSize() {
         assertEquals(25, artists.size());
+    }
+
+    @Test
+    public void testArtistSearchName() {
+        assertEquals("Owen", artists.getFirst().getName());
+    }
+
+    @Test
+    public void testArtistSearchDisambiguation() {
+        assertEquals("Mike Kinsella solo project", artists.getFirst().getDisambiguation());
     }
 
 }
