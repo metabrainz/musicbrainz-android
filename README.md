@@ -25,24 +25,11 @@ A code formatting configuration file is included in the repo.
 
 ### Building with Maven
 
-You need [this profile](https://github.com/novoda/public-mvn-repo/blob/master/poms/settings.xml) in your ~/.m2/settings.xml.
+If you have Maven 3, the Android SDK and an ANDROID_HOME environment variable, you can simply build with:
 
-The following command will setup the project and copy the necessary dependencies so that you can work in Eclipse.
-
-    $mvn clean initialize -Peclipse
+    $mvn clean install
   
-You can also do something like `mvn install`, which will build, install and run the tests (you'll need to attach an Android device for that).
-
-### Eclipse project setup
-
-Create an Android project from the 'app' directory and a plain Java project from 'api' directory. Add the API project to the app project build path and set it as exported.
-
-There are two Android library projects that need to be included and specified in the Android project properties.
-
-* [ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock)
-* [ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator)
-  
-Clone these from the GitHub repos above, import them to your Eclipse workspace and point the app project to them in Properties > Android. Make sure that the Android support library is only included in one of these projects and the others depend on it.
+This expects an Android device to be attached for running instrumentation tests. Alternatively, use the ```-DskipTests``` option.
 
 ### IntelliJ project setup
 
@@ -50,4 +37,4 @@ Import as existing Maven project. Just works.
 
 ### Can I skip all this Maven stuff?
 
-Yes. However, you will need to look at the dependencies in the POMs and go hunting for the jars yourself.
+Yes. However, you'll need to look at the dependencies in the POMs and go hunting for the dependencies yourself.
