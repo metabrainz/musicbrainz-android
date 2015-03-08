@@ -15,13 +15,4 @@
       android:title="@string/settings_clear" />
   </PreferenceCategory>
 
-  <PreferenceCategory android:title="@string/settings_other">
-    
-    <CheckBoxPreference
-      android:key="send_crashlogs"
-      android:title="@string/settings_bugsense"
-      android:summary="@string/settings_bugsense_summary"
-      android:defaultValue="true" />
-  </PreferenceCategory>
-
 </PreferenceScreen>

@@ -17,14 +17,6 @@
   <packaging>apk</packaging>
   <name>app</name>
 
-  <repositories>
-    <repository>
-      <id>bugsense repo</id>
-      <name>The BugSense Repository</name>
-      <url>http://mvn.bugsense.com/</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
       <groupId>com.google.android</groupId>
@@ -55,12 +47,6 @@
       <groupId>com.paypal</groupId>
       <artifactId>mpl</artifactId>
       <version>1.5.5.45</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.bugsense.trace</groupId>
-      <artifactId>bugsense</artifactId>
-      <version>3.2.3</version>
     </dependency>
 
     <dependency>

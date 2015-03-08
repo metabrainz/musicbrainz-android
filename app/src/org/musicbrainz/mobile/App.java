@@ -1,19 +1,16 @@
 package org.musicbrainz.mobile;
 
+import com.novoda.imageloader.core.ImageManager;
+import com.novoda.imageloader.core.LoaderSettings;
+import com.novoda.imageloader.core.loader.Loader;
 import org.musicbrainz.android.api.MusicBrainz;
 import org.musicbrainz.android.api.webservice.MusicBrainzWebClient;
 import org.musicbrainz.mobile.config.Configuration;
-import org.musicbrainz.mobile.config.Secrets;
 import org.musicbrainz.mobile.user.UserPreferences;
 
 import android.app.Application;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
-
-import com.bugsense.trace.BugSenseHandler;
-import com.novoda.imageloader.core.ImageManager;
-import com.novoda.imageloader.core.LoaderSettings;
-import com.novoda.imageloader.core.loader.Loader;
 
 public class App extends Application {
 
@@ -27,25 +24,8 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         user = new UserPreferences();
-        updateCrashLogging();
         setupImageManager();
         loadCustomTypefaces();
-    }
-    
-    public static void updateCrashLogging() {
-        if (user.isCrashReportingEnabled()) {
-            startCrashLogging();
-        } else {
-            stopCrashLogging();
-        }
-    }
-
-    public static void startCrashLogging() {
-        BugSenseHandler.initAndStartSession(instance, Configuration.LIVE ? Secrets.BUGSENSE_API_KEY : "99f3740e");
-    }
-
-    public static void stopCrashLogging() {
-        BugSenseHandler.closeSession(instance);
     }
 
     public void setupImageManager() {

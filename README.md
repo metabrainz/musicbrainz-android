@@ -1,14 +1,16 @@
 ## MusicBrainz Android
 
-This is the official [MusicBrainz](http://www.musicbrainz.org) Android app. It started as a Google Summer of Code project in 2010. Here is the [MusicBrainz product page](http://musicbrainz.org/doc/MusicBrainz_for_Android) for the app.
+This is the official [MusicBrainz](http://www.musicbrainz.org) Android app, which was created as a Google Summer of Code project in 2010. Here is the [MusicBrainz product page](http://musicbrainz.org/doc/MusicBrainz_for_Android).
+
+NOTE: This project is not actively maintained, so updates are small and infrequent. 
 
 ### Download
 
-Get the latest release of the app from [Google Play](https://play.google.com/store/apps/details?id=org.musicbrainz.mobile).
+Get the latest release from [Google Play](https://play.google.com/store/apps/details?id=org.musicbrainz.mobile).
 
 ## Licenses
 
-Copyright © 2013 Jamie McDonald. Licensed under the GNU General Public License Version 3.
+Copyright © 2010-2013 Jamie McDonald. Licensed under the GNU General Public License Version 3.
 ZXing barcode scanner integration code and miscellaneous helper classes are licensed under the Apache License, Version 2 (see headers).
 
 ## Contributing

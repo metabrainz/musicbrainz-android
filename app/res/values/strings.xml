@@ -148,8 +148,6 @@
   <string name="settings_suggestions_summary">Store and display search suggestions</string>
   <string name="settings_clear">Clear search history</string>
   <string name="settings_other">Other</string>
-  <string name="settings_bugsense">Send crash reports?</string>
-  <string name="settings_bugsense_summary">Allow anonymous error data to be sent</string>
 
   <!-- Connection errors -->
   <string name="err_text">There was a problem connecting to the server. Retry?</string>

@@ -1,16 +1,11 @@
 package org.musicbrainz.mobile.activity;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-
-import org.musicbrainz.mobile.App;
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
 import org.musicbrainz.mobile.R;
 import org.musicbrainz.mobile.intent.IntentFactory;
 import org.musicbrainz.mobile.suggestion.SuggestionProvider;
 import org.musicbrainz.mobile.util.Log;
-
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.actionbarsherlock.view.MenuItem;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,10 +17,12 @@ import android.preference.PreferenceManager;
 import android.provider.SearchRecentSuggestions;
 import android.widget.Toast;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+
 public class SettingsActivity extends SherlockPreferenceActivity implements OnPreferenceClickListener {
     
     private static final String CLEAR_SUGGESTIONS = "clear_suggestions";
-    private static final String SEND_CRASHLOGS = "send_crashlogs";
 
     @SuppressWarnings("deprecation")
     @Override
@@ -36,7 +33,6 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
 
         addPreferencesFromResource(R.xml.preferences);
         findPreference(CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
-        findPreference(SEND_CRASHLOGS).setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -57,9 +53,6 @@ public class SettingsActivity extends SherlockPreferenceActivity implements OnPr
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().equals(CLEAR_SUGGESTIONS)) {
             clearSuggestionHistory();
-            return true;
-        } else if (preference.getKey().equals(SEND_CRASHLOGS)) {
-            App.updateCrashLogging();
             return true;
         }
         return false;
