@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
+
+  <RelativeLayout
+    style="@style/Loading"
+    android:background="@color/main_fg">
+
+    <ProgressBar
+      android:id="@+id/loading"
+      style="@style/Wrap"
+      android:indeterminateDrawable="@anim/main_progress"
+      android:layout_centerInParent="true" />
+  </RelativeLayout>
+
+  <include layout="@layout/layout_search_release_groups" />
+
+  <include layout="@layout/layout_search_artists" />
+
+  <include
+    android:id="@+id/error"
+    style="@style/Match"
+    layout="@layout/layout_retry"
+    android:visibility="gone" />
+
+</RelativeLayout>

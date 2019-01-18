@@ -1,0 +1,130 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="org.metabrainz.android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="org.metabrainz.android.App"
+        android:backupAgent="org.metabrainz.android.backup.MusicBrainzBackupAgent"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/launcher"
+        android:label="@string/app_name"
+        android:theme="@style/MusicBrainzTheme">
+
+    <meta-data
+        android:name="android.app.default_searchable"
+        android:value=".activity.SearchActivity" />
+
+    <provider
+        android:name="org.metabrainz.android.suggestion.SuggestionProvider"
+        android:authorities="org.metabrainz.android.SearchSuggestionProvider" />
+
+    <meta-data
+        android:name="com.google.android.backup.api_key"
+        android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
+
+
+    <activity
+        android:name="org.metabrainz.android.activity.DashboardActivity"
+        android:label="@string/app_name"
+        android:launchMode="singleTop"
+        android:windowSoftInputMode="stateHidden">
+
+
+        <intent-filter>
+
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+
+        </intent-filter>
+
+    </activity>
+
+
+    <activity
+        android:name="org.metabrainz.android.activity.IncomingActivity"
+        android:configChanges="keyboardHidden|orientation"
+        android:label="@string/app_name">
+
+
+        <intent-filter>
+
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+
+            <data android:scheme="musicbrainz" />
+
+        </intent-filter>
+
+    </activity>
+
+    <activity
+        android:name="org.metabrainz.android.activity.LoginActivity"
+        android:label="@string/auth_title" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.AboutActivity"
+        android:label="@string/about_title" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.DonateActivity"
+        android:label="@string/donate_title" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.BarcodeSearchActivity"
+        android:label="@string/barcodesearch_title"
+        android:windowSoftInputMode="adjustResize" />
+
+
+    <activity
+        android:name="org.metabrainz.android.activity.SearchActivity"
+        android:launchMode="singleTop">
+
+
+        <intent-filter>
+
+            <action android:name="android.intent.action.SEARCH" />
+
+        </intent-filter>
+
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
+
+    </activity>
+
+    <activity
+        android:name="org.metabrainz.android.activity.ReleaseActivity"
+        android:label="@string/release_title" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.ArtistActivity"
+        android:label="@string/artist_title" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.CollectionListActivity"
+        android:label="@string/collections_title"
+        android:launchMode="singleTop" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.CollectionActivity"
+        android:label="@string/app_name" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.SettingsActivity"
+        android:label="@string/preferences_title" />
+
+    <activity
+        android:name="org.metabrainz.android.activity.WebActivity"
+        android:label="@string/app_name" />
+
+    <dist:module dist:instant="true" />
+    </application>
+</manifest>

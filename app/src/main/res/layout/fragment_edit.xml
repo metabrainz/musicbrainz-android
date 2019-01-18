@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Match"
+  android:id="@+id/edit_tab"
+  android:background="@color/main_fg">
+
+  <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Match"
+    android:orientation="vertical"
+    android:padding="@dimen/gutter_large">
+
+    <TextView
+      android:id="@+id/login_warning"
+      style="@style/Wrap"
+      android:layout_gravity="center"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="@dimen/gutter_large"
+      android:text="@string/edit_login"
+      android:textColor="@color/mb_orange_dark"
+      android:visibility="gone" />
+
+    <RatingBar
+      android:id="@+id/rating_input"
+      style="@style/RatingBar"
+      android:layout_centerHorizontal="true"
+      android:layout_below="@id/login_warning" />
+
+    <ImageButton
+      android:id="@+id/tag_btn"
+      style="@style/Wrap"
+      app:srcCompat="@drawable/btn_tag"
+      android:layout_below="@id/rating_input"
+      android:layout_alignParentRight="true" />
+
+    <EditText
+      android:id="@+id/tag_input"
+      style="@style/MatchWidth"
+      android:hint="@string/tag_hint"
+      android:imeOptions="actionDone"
+      android:inputType="textFilter"
+      android:singleLine="true"
+      android:layout_below="@id/rating_input"
+      android:layout_toLeftOf="@id/tag_btn"
+      android:layout_alignBottom="@id/tag_btn" />
+
+  </RelativeLayout>
+</ScrollView>

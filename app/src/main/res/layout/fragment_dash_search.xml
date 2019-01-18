@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/MatchWidth"
+  android:background="@color/white"
+  android:padding="@dimen/gutter_large">
+
+  <Spinner
+    android:id="@+id/search_spin"
+    style="@style/MatchWidth"
+    android:layout_alignParentTop="true" />
+
+  <ImageButton
+    android:id="@+id/search_btn"
+    style="@style/SearchButton"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/search_spin"
+    android:contentDescription="@string/description_search" />
+
+  <AutoCompleteTextView
+    android:id="@+id/query_input"
+    style="@style/SearchEdit"
+    android:layout_alignBottom="@id/search_btn"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/search_spin"
+    android:layout_toLeftOf="@+id/search_btn"
+    android:hint="@string/search_hint" />
+</RelativeLayout>

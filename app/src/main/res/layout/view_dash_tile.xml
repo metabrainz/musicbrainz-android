@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Match">
+  
+  <RelativeLayout
+    style="@style/Wrap"
+    android:layout_centerInParent="true"
+    android:duplicateParentState="true">
+
+  <ImageView
+    android:id="@+id/dash_tile_icon"
+    style="@style/Wrap"
+    android:duplicateParentState="true" />
+
+  <TextView
+    android:id="@+id/dash_tile_text"
+    style="@style/TileText"
+    android:layout_below="@id/dash_tile_icon"
+    android:layout_centerHorizontal="true"
+    android:duplicateParentState="true" />
+  </RelativeLayout>
+</merge>

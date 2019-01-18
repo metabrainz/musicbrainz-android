@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory android:title="@string/settings_search">
+
+    <CheckBoxPreference
+      android:key="search_suggestions"
+      android:title="@string/settings_suggestions"
+      android:summary="@string/settings_suggestions_summary"
+      android:defaultValue="true" />
+
+    <Preference
+      android:key="clear_suggestions"
+      android:title="@string/settings_clear" />
+  </PreferenceCategory>
+
+</PreferenceScreen>

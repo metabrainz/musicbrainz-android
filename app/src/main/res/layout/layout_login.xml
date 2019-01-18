@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <RelativeLayout
+    android:id="@+id/warning_container"
+    style="@style/MatchWidth"
+    android:gravity="center">
+
+    <TextView
+      android:id="@+id/login_failure_warning"
+      style="@style/Wrap"
+      android:visibility="gone"
+      android:text="@string/login_failure_warning" />
+
+    <TextView
+      android:id="@+id/login_connection_warning"
+      style="@style/Wrap"
+      android:visibility="gone"
+      android:text="@string/login_connection_warning" />
+  </RelativeLayout>
+
+  <EditText
+    android:id="@+id/uname_input"
+    style="@style/Username"
+    android:layout_below="@id/warning_container" />
+
+  <EditText
+    android:id="@+id/pass_input"
+    style="@style/Password"
+    android:layout_below="@+id/uname_input"
+    android:layout_marginTop="@dimen/small_pad" />
+
+  <Button
+    android:id="@+id/login_btn"
+    style="@style/LoginButton"
+    android:layout_below="@+id/pass_input"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="@dimen/small_pad"
+    android:text="@string/login" />
+</merge>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/VerticalMinPad">
+
+  <LinearLayout
+    android:id="@+id/wrapper"
+    style="@style/Match">
+    <TextView
+      android:id="@+id/search_artist_name"
+      style="@style/ListMain" />
+  </LinearLayout>
+
+  <TextView
+    android:id="@+id/search_artist_disambig"
+    style="@style/ListAux"
+    android:layout_below="@id/wrapper" />
+</RelativeLayout>

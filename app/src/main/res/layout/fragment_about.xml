@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Match"
+  android:background="@drawable/background">
+  
+  <LinearLayout
+    style="@style/MatchWidth"
+    android:padding="@dimen/gutter_large"
+    android:orientation="vertical">
+
+    <org.metabrainz.android.view.RobotoLightTextView
+      android:id="@+id/app_name_official"
+      style="@style/BigRoboto"
+      android:text="@string/app_name_official" />
+
+    <TextView
+      android:id="@+id/version_text"
+      style="@style/VersionText" />
+
+    <org.metabrainz.android.view.HtmlAssetTextView
+      android:id="@+id/about_text"
+      style="@style/TextBody"
+      android:layout_marginTop="@dimen/gutter_large" />
+
+  </LinearLayout>
+</ScrollView>

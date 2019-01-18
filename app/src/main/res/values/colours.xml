@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <!-- Base -->
+  <color name="black">#000000</color>
+  <color name="white">#ffffff</color>
+  <color name="grey">#dddddd</color>
+  <color name="transparent">#00000000</color>
+  
+  <!-- Theme -->
+  <color name="main_bg">#eeeeee</color>
+  <color name="main_fg">#ffffff</color>
+  <color name="aux_text">#666666</color>
+  <color name="link_text">#3366cc</color>
+  <color name="cover_bg">#dddddd</color>
+
+  <color name="list_bg">#ffffff</color>
+  <color name="list_head">#33dddddd</color>
+  <color name="list_divider">#eeeeee</color>
+
+  <!-- Brand -->
+  <color name="mb_purple_light">#bcaeed</color>
+  <color name="mb_purple_medium">#736dab</color>
+  <color name="mb_purple_dark">#34176b</color>
+
+  <color name="mb_orange">#ffba58</color>
+  <color name="mb_orange_dark">#cc9546</color>
+
+</resources>

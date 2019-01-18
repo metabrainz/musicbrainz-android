@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity"
+  android:padding="@dimen/gutter_large">
+
+  <fragment
+    android:id="@+id/donate_text_fragment"
+    style="@style/MatchWidth"
+    android:name="org.metabrainz.android.fragment.DonateTextFragment" />
+  
+  <fragment
+    android:id="@+id/donate_fragment"
+    style="@style/MatchWidth"
+    android:layout_below="@id/donate_text_fragment"
+    android:layout_marginTop="@dimen/huge_pad"
+    android:name="org.metabrainz.android.fragment.DonateFragment" />
+
+</RelativeLayout>

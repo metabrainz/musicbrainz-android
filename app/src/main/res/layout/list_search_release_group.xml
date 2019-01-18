@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/MatchWidth"
+  android:padding="@dimen/std_pad">
+
+  <TextView
+    android:id="@+id/search_release"
+    style="@style/ListMain"
+    android:layout_alignParentLeft="true"
+    android:layout_toLeftOf="@+id/search_release_type" />
+
+  <TextView
+    android:id="@+id/search_release_artist"
+    style="@style/ListAuxMedium"
+    android:layout_alignParentLeft="true"
+    android:layout_toLeftOf="@+id/search_release_type"
+    android:layout_below="@+id/search_release" />
+
+  <TextView
+    android:id="@+id/search_release_type"
+    style="@style/ListAuxPad"
+    android:textColor="@color/mb_orange_dark"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true" />
+</RelativeLayout>

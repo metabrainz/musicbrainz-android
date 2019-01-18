@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchWidth"
+  android:padding="@dimen/std_pad">
+  
+  <ImageView
+    android:id="@+id/link_icon"
+    style="@style/Wrap"
+    android:layout_centerVertical="true"
+    android:layout_marginRight="@dimen/std_pad"
+    app:srcCompat="@drawable/link_generic" />
+
+  <TextView
+    android:id="@+id/list_link_title"
+    style="@style/LinkDescription"
+    android:layout_toRightOf="@id/link_icon" />
+
+  <org.metabrainz.android.view.RobotoLightTextView
+    android:id="@+id/list_link"
+    style="@style/Link"
+    android:layout_toRightOf="@id/link_icon"
+    android:layout_below="@+id/list_link_title" />
+</RelativeLayout>

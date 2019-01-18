@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity"
+  android:padding="@dimen/gutter_large">
+
+  <include
+    layout="@layout/layout_login"
+    style="@style/MatchWidth" />
+
+  <Button
+    android:id="@+id/forgotpass_link"
+    style="@style/LinkButton"
+    android:layout_alignParentBottom="true"
+    android:layout_marginTop="@dimen/std_pad" 
+    android:text="@string/forgotpass_text" />
+  
+  <Button
+    android:id="@+id/register_link"
+    style="@style/LinkButton"
+    android:layout_above="@id/forgotpass_link"
+    android:text="@string/register_text" />
+
+</RelativeLayout>

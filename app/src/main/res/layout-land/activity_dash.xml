@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
+
+  <LinearLayout style="@style/HomeTileRow">
+    
+    <org.metabrainz.android.view.DashTileView
+      android:id="@+id/dash_scan"
+      style="@style/HomeTile" />
+
+    <RelativeLayout
+      android:id="@+id/search_container"
+      style="@style/Match"
+      android:layout_weight="0.5"
+      android:background="@color/white">
+
+      <fragment
+        android:id="@+id/search_fragment"
+        style="@style/MatchWidth"
+        android:layout_centerInParent="true"
+        android:name="org.metabrainz.android.fragment.SearchFragment" />
+
+      <View
+        style="@style/Separator"
+        android:layout_alignParentBottom="true" />
+      <View
+        style="@style/SeparatorVertical"
+        android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+
+  </LinearLayout>
+
+  <LinearLayout style="@style/HomeTileRow">
+
+    <org.metabrainz.android.view.DashTileView
+      android:id="@+id/dash_collections"
+      style="@style/HomeTile" />
+
+    <org.metabrainz.android.view.DashTileView
+      android:id="@+id/dash_donate"
+      style="@style/HomeTile" />
+
+    <org.metabrainz.android.view.DashTileView
+      android:id="@+id/dash_about"
+      style="@style/HomeTile" />
+  </LinearLayout>
+
+</LinearLayout>

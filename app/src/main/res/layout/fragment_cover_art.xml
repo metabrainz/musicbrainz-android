@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Match"
+  android:background="@color/main_fg">
+
+  <LinearLayout
+    style="@style/Match"
+    android:padding="@dimen/std_pad">
+
+    <org.metabrainz.android.view.WidthRelativeLayout
+      style="@style/Match"
+      android:background="@color/cover_bg"
+      android:layout_marginBottom="@dimen/std_pad">
+
+      <org.metabrainz.android.view.RobotoLightTextView
+        android:layout_centerInParent="true"
+        android:text="@string/cover_art_front" />
+
+      <org.metabrainz.android.view.FadeImageView
+        android:id="@+id/cover_front"
+        style="@style/Match"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true" />
+    </org.metabrainz.android.view.WidthRelativeLayout>
+
+    <org.metabrainz.android.view.WidthRelativeLayout
+      style="@style/Match"
+      android:background="@color/cover_bg">
+
+      <org.metabrainz.android.view.RobotoLightTextView
+        android:layout_centerInParent="true"
+        android:text="@string/cover_art_back" />
+
+      <org.metabrainz.android.view.FadeImageView
+        android:id="@+id/cover_back"
+        style="@style/Match"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true" />
+    </org.metabrainz.android.view.WidthRelativeLayout>
+
+  </LinearLayout>
+</ScrollView>

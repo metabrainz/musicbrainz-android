@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
+
+  <fragment
+    android:id="@+id/search_fragment"
+    android:name="org.metabrainz.android.fragment.SearchFragment"
+    style="@style/MatchWidth"
+    android:layout_alignParentTop="true" />
+  
+  <View
+    style="@style/Separator"
+    android:layout_below="@id/search_fragment" />
+
+  <include 
+    android:id="@+id/dash_buttons"
+    style="@style/Match"
+    layout="@layout/fragment_dash_buttons"
+    android:layout_below="@id/search_fragment" />
+
+</RelativeLayout>

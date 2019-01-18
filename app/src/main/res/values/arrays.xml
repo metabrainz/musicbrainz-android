@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  
+  <string-array name="searchType">
+    <item>@string/searchtype_artist</item>
+    <item>@string/searchtype_release</item>
+<!--     <item>@string/searchtype_label</item>
+    <item>@string/searchtype_recording</item> -->
+  </string-array>
+
+  <array name="donation">
+    <item>$5</item>
+    <item>$10</item>
+    <item>$25</item>
+    <item>$50</item>
+    <item>$100</item>
+  </array>
+  
+</resources>

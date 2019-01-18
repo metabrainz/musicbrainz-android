@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ContentDescription">
+        <ignore path="res/layout-land/activity_home.xml" />
+        <ignore path="res/layout-small-port/activity_home.xml" />
+        <ignore path="res/layout/activity_barcode.xml" />
+        <ignore path="res/layout/activity_home.xml" />
+        <ignore path="res/layout/list_link.xml" />
+    </issue>
+    <issue id="InefficientWeight">
+        <ignore path="res/layout-land/activity_home.xml" />
+    </issue>
+    <issue id="TextFields">
+        <ignore path="res/layout-land/activity_login.xml" />
+        <ignore path="res/layout/activity_login.xml" />
+    </issue>
+</lint>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/MatchHorizontal"
+  android:background="@color/main_fg"
+  android:padding="@dimen/std_pad"
+  android:gravity="center">
+
+  <org.metabrainz.android.view.HeightRelativeLayout
+    style="@style/Match"
+    android:background="@color/cover_bg"
+    android:layout_weight="1">
+
+    <org.metabrainz.android.view.RobotoLightTextView
+      android:layout_centerInParent="true"
+      android:text="@string/cover_art_front" />
+
+    <org.metabrainz.android.view.FadeImageView
+      android:id="@+id/cover_front"
+      style="@style/Match"
+      android:scaleType="fitCenter"
+      android:adjustViewBounds="true" />
+  </org.metabrainz.android.view.HeightRelativeLayout>
+
+  <View android:layout_width="@dimen/std_pad" />
+
+  <org.metabrainz.android.view.HeightRelativeLayout
+    style="@style/Match"
+    android:background="@color/cover_bg"
+    android:layout_weight="1">
+
+    <org.metabrainz.android.view.RobotoLightTextView
+      android:layout_centerInParent="true"
+      android:text="@string/cover_art_back" />
+
+    <org.metabrainz.android.view.FadeImageView
+      android:id="@+id/cover_back"
+      style="@style/Match"
+      android:scaleType="fitCenter"
+      android:adjustViewBounds="true" />
+  </org.metabrainz.android.view.HeightRelativeLayout>
+
+</LinearLayout>

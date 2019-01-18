@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Match"
+  android:fillViewport="true"
+  android:background="@color/main_fg">
+
+  <LinearLayout style="@style/MatchWidth">
+
+    <FrameLayout
+      style="@style/MatchWidth"
+      android:layout_height="@dimen/bio_image_height"
+      android:background="@color/cover_bg">
+
+      <org.metabrainz.android.view.RobotoLightTextView
+        style="@style/Match"
+        android:gravity="center"
+        android:text="@string/tab_bio" />
+
+      <org.metabrainz.android.view.FadeImageView
+        android:id="@+id/bio_picture"
+        style="@style/Match"
+        android:scaleType="centerCrop" />
+    </FrameLayout>
+
+    <org.metabrainz.android.view.RobotoLightTextView
+      android:id="@+id/years_active"
+      style="@style/BigRoboto"
+      android:gravity="center"
+      android:layout_marginTop="@dimen/gutter"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/bio_text"
+      style="@style/MatchWidth"
+      android:layout_margin="@dimen/gutter"
+      android:textSize="@dimen/text_size_medium" />
+
+    <RelativeLayout
+      android:id="@+id/source_lastfm"
+      style="@style/MatchWidth"
+      android:visibility="gone">
+
+      <ImageView
+        android:id="@+id/lastfm_logo"
+        style="@style/Wrap"
+        app:srcCompat="@drawable/logo_lastfm"
+        android:padding="@dimen/gutter"
+        android:layout_alignParentRight="true" />
+
+      <org.metabrainz.android.view.RobotoLightTextView
+        style="@style/Wrap"
+        android:layout_alignBottom="@id/lastfm_logo"
+        android:layout_toLeftOf="@id/lastfm_logo"
+        android:paddingBottom="@dimen/gutter"
+        android:text="@string/bio_powered_by" />
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:id="@+id/source_wikipedia"
+      style="@style/MatchWidth"
+      android:visibility="gone">
+
+      <ImageView
+        android:id="@+id/wikipedia_logo"
+        style="@style/Wrap"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/gutter"
+        app:srcCompat="@drawable/logo_wikipedia" />
+
+      <org.metabrainz.android.view.RobotoLightTextView
+        style="@style/Wrap"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/wikipedia_logo"
+        android:text="@string/bio_powered_by"
+        android:paddingTop="@dimen/small_pad" />
+    </RelativeLayout>
+    
+    <include
+      android:id="@+id/loading"
+      layout="@layout/layout_loading"
+      style="@style/Match" />
+  </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Match">
+
+  <Spinner
+    android:id="@+id/donate_spin"
+    style="@style/MatchWidth"
+    android:layout_marginBottom="@dimen/small_pad" />
+
+  <LinearLayout
+    android:id="@+id/donate_button_layout"
+    style="@style/MatchWidth"
+    android:layout_below="@id/donate_spin">
+
+    <TextView
+      android:id="@+id/donate_loading_text"
+      style="@style/PayPalLoadingText"
+      android:text="@string/paypal_loading_label" />
+  </LinearLayout>
+
+  <org.metabrainz.android.view.RobotoLightTextView
+    android:id="@+id/donate_or"
+    style="@style/BigRoboto"
+    android:gravity="center"
+    android:layout_below="@id/donate_button_layout"
+    android:layout_margin="@dimen/small_pad"
+    android:text="@string/donate_or" />
+
+  <Button
+    android:id="@+id/donate_options"
+    style="@style/LinkButton"
+    android:layout_below="@id/donate_or"
+    android:text="@string/alt_donate_text" />
+
+</RelativeLayout>

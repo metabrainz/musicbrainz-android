@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/MatchWidth"
+  android:padding="@dimen/std_pad">
+
+  <TextView
+    android:id="@+id/list_track_num"
+    style="@style/TrackNum"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true" />
+
+  <TextView
+    android:id="@+id/list_track_va"
+    style="@style/TrackArtist"
+    android:layout_toRightOf="@+id/list_track_num"
+    android:layout_toLeftOf="@+id/list_track_time"
+    android:layout_above="@+id/list_track_name" />
+
+  <TextView
+    android:id="@+id/list_track_name"
+    style="@style/Track"
+    android:layout_toRightOf="@+id/list_track_num"
+    android:layout_toLeftOf="@+id/list_track_time" />
+
+  <TextView
+    android:id="@+id/list_track_time"
+    style="@style/TrackTime"
+    android:layout_alignParentRight="true" />
+</RelativeLayout>

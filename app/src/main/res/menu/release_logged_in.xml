@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:id="@+id/legacy_search"
+    android:title="@string/action_search"
+    android:icon="@drawable/action_search"
+    app:showAsAction="always" />
+  
+  <item
+    android:id="@+id/action_add_collection"
+    android:title="@string/action_add_collection"
+    android:icon="@drawable/action_add_collection"
+    app:showAsAction="always" />
+  
+  <item
+    android:id="@+id/action_share"
+    android:title="@string/action_share"
+    app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
+    app:showAsAction="always" />
+
+</menu>

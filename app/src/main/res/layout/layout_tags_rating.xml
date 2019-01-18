@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/MatchWidth"
+  android:background="@drawable/tag_background">
+
+  <TextView
+    android:id="@+id/tags"
+    style="@style/TagsText"
+    android:layout_marginRight="@dimen/small_pad"
+    android:layout_marginLeft="@dimen/small_pad"
+    android:layout_toLeftOf="@+id/separator"
+    android:layout_centerVertical="true" />
+
+  <View
+    android:id="@+id/separator"
+    android:background="@color/main_bg"
+    android:layout_width="2dp"
+    android:layout_height="18dp"
+    android:layout_centerVertical="true"
+    android:layout_toLeftOf="@+id/rating" />
+
+  <RatingBar
+    android:id="@+id/rating"
+    style="?android:attr/ratingBarStyleSmall"
+    android:layout_marginRight="@dimen/std_pad"
+    android:layout_marginLeft="@dimen/std_pad"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true" />
+</RelativeLayout>
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  
+  <dimen name="text_size_small">12sp</dimen>
+  <dimen name="text_size_medium">14sp</dimen>
+  <dimen name="text_size_large">16sp</dimen>
+  <dimen name="text_size_entity">17sp</dimen>
+  <dimen name="text_size_xl">24sp</dimen>
+
+  <dimen name="gutter">10dp</dimen>
+  <dimen name="gutter_large">14dp</dimen>
+  <dimen name="huge_pad">20dp</dimen>
+  <dimen name="super_pad">32dp</dimen>
+  <dimen name="std_pad">7dp</dimen>
+  <dimen name="small_pad">5dp</dimen>
+
+  <dimen name="vertical_minspace">45dp</dimen>
+  <dimen name="button_min">47dp</dimen>
+  <dimen name="separator_thickness">1dp</dimen>
+  <dimen name="login_button">200dp</dimen>
+  <dimen name="bio_image_height">240dp</dimen>
+
+  <dimen name="link_button_corners">1dp</dimen>
+  
+</resources>

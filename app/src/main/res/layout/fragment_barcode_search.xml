@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Activity">
+
+  <RelativeLayout
+    style="@style/MatchWidth"
+    android:layout_margin="@dimen/small_pad">
+
+    <org.metabrainz.android.view.RobotoLightTextView
+      android:id="@+id/barcode_label"
+      style="@style/Wrap"
+      android:text="@string/barcode_text"
+      android:textSize="@dimen/text_size_medium"
+      android:layout_marginLeft="@dimen/std_pad"
+      android:layout_marginRight="@dimen/std_pad"
+      android:layout_alignBaseline="@+id/barcode" />
+
+    <EditText 
+      android:id="@+id/barcode"
+      style="@style/MatchWidth"
+      android:layout_toRightOf="@+id/barcode_label"
+      android:inputType="number" />
+
+    <ImageButton
+      android:id="@+id/barcode_search_btn"
+      style="@style/SearchButton"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/barcode" />
+
+    <org.metabrainz.android.view.RobotoLightTextView
+      android:id="@+id/release_label"
+      style="@style/Wrap"
+      android:text="@string/barcode_release_text"
+      android:textSize="@dimen/text_size_medium"
+      android:layout_marginLeft="@dimen/std_pad"
+      android:layout_marginRight="@dimen/std_pad"
+      android:layout_alignBaseline="@+id/barcode_search" />
+    
+    <EditText
+      android:id="@+id/barcode_search"
+      style="@style/SearchEdit"
+      android:layout_alignLeft="@id/barcode"
+      android:layout_toLeftOf="@id/barcode_search_btn"
+      android:layout_alignBottom="@id/barcode_search_btn"
+      android:hint="@string/barcode_hint"
+      android:layout_below="@id/barcode" />
+  </RelativeLayout>
+
+  <RelativeLayout style="@style/MatchWidth">
+
+    <View
+      android:id="@+id/topline"
+      style="@style/Separator"
+      android:layout_alignParentTop="true" />
+
+    <ListView
+      android:id="@+id/barcode_list"
+      style="@style/ListDefaultDivider"
+      android:layout_below="@+id/topline"
+      android:visibility="invisible" />
+
+    <TextView
+      android:id="@+id/barcode_instructions"
+      style="@style/BarcodeInstructions"
+      android:layout_below="@+id/topline"
+      android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+      android:id="@+id/loading"
+      style="@style/Loading"
+      android:visibility="invisible"
+      android:layout_below="@+id/topline">
+
+      <ProgressBar
+        style="@style/Wrap"
+        android:indeterminateDrawable="@anim/main_progress" />
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/noresults"
+      style="@style/NoResultsText"
+      android:layout_below="@+id/topline"
+      android:layout_alignParentBottom="true" />
+
+    <include
+      android:id="@+id/error"
+      style="@style/Match"
+      layout="@layout/layout_retry"
+      android:layout_below="@+id/topline"
+      android:visibility="gone" />
+  </RelativeLayout>
+</LinearLayout>

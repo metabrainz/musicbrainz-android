@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/VerticalMinPad">
+  
+  <TextView
+    android:id="@+id/list_collection_title"
+    style="@style/ListMain" />
+  
+  <TextView
+    android:id="@+id/list_collection_count"
+    style="@style/ListAux"
+    android:layout_alignParentRight="true"
+    android:layout_alignBaseline="@id/list_collection_title" />
+  
+</RelativeLayout>

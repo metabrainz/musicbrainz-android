@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/Match"
+  android:background="@color/white">
+
+  <ListView
+    android:id="@id/android:list"
+    style="@style/List"
+    android:drawSelectorOnTop="false" />
+
+  <TextView
+    android:id="@id/android:empty"
+    style="@style/Match"
+    android:gravity="center"
+    android:text="@string/no_collections" />
+
+  <include
+    android:id="@+id/loading"
+    style="@style/Match"
+    layout="@layout/layout_loading" />
+  
+  <include
+    android:id="@+id/error"
+    style="@style/Match"
+    layout="@layout/layout_retry"
+    android:visibility="gone" />
+
+</RelativeLayout>
