@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.metabrainz.android.api.data.ReleaseArtist;
 import org.metabrainz.android.api.data.UserCollection;
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.api.webservice.ResponseParser;
 
 public class CollectionLookupTest extends BaseXmlParsingTestCase {
@@ -37,7 +37,7 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testFirstRelease() throws IOException {
-        ReleaseInfo first = collection.getReleases().getFirst();
+        ReleaseSearchResult first = collection.getReleases().getFirst();
         assertEquals("229fef25-8e57-3465-bb92-0569b3ed1b8c", first.getReleaseMbid());
         assertEquals("Boston", first.getTitle());
         assertEquals("Boston", first.getArtists().get(0).getName());
@@ -47,7 +47,7 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testReleaseWithMultipleArtists() throws IOException {
-        ReleaseInfo release = collection.getReleases().get(1);
+        ReleaseSearchResult release = collection.getReleases().get(1);
         assertEquals("2666b0bf-0c35-492b-97e5-c932870d9c25", release.getReleaseMbid());
         ArrayList<ReleaseArtist> artists = release.getArtists();
         assertEquals("Owen", artists.get(0).getName());
@@ -58,7 +58,7 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testArtistSortNames() throws IOException {
-        ReleaseInfo release = collection.getReleases().get(1);
+        ReleaseSearchResult release = collection.getReleases().get(1);
         ArrayList<ReleaseArtist> artists = release.getArtists();
         assertEquals("Owen", artists.get(0).getSortName());
         assertEquals("Rutabega, The", artists.get(1).getSortName());
@@ -66,7 +66,7 @@ public class CollectionLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testLastRelease() throws IOException {
-        ReleaseInfo last = collection.getReleases().getLast();
+        ReleaseSearchResult last = collection.getReleases().getLast();
         assertEquals("9f00a4d3-82b2-4084-a48b-565703b812ce", last.getReleaseMbid());
         assertEquals("New Leaves", last.getTitle());
         assertEquals("Owen", last.getArtists().get(0).getName());

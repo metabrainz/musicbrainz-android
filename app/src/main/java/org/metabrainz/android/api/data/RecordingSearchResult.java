@@ -1,6 +1,6 @@
 package org.metabrainz.android.api.data;
 
-public class RecordingInfo {
+public class RecordingSearchResult {
 	
 	private String mbid;
 	private String title;

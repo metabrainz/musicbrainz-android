@@ -9,13 +9,13 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.metabrainz.android.api.data.UserCollectionInfo;
+import org.metabrainz.android.api.data.UserSearchResult;
 import org.metabrainz.android.api.webservice.ResponseParser;
 
 public class CollectionListLookupTest extends BaseXmlParsingTestCase {
     
     private static final String COLLECTION_LIST_FIXTURE = "collectionListLookup.xml";
-    private LinkedList<UserCollectionInfo> collections;
+    private LinkedList<UserSearchResult> collections;
     
     @Before
     public void doParsing() throws IOException {
@@ -32,7 +32,7 @@ public class CollectionListLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testFirstResult() {
-        UserCollectionInfo first = collections.get(0);
+        UserSearchResult first = collections.get(0);
         assertEquals("afc8bea7-5ffc-488d-b32f-38e71bdd9e4e", first.getMbid());
         assertEquals("Want list", first.getName());
         assertEquals("jdamcd", first.getEditor());
@@ -41,7 +41,7 @@ public class CollectionListLookupTest extends BaseXmlParsingTestCase {
     
     @Test
     public void testLastResult() {
-        UserCollectionInfo last = collections.get(1);
+        UserSearchResult last = collections.get(1);
         assertEquals("c6f9fb72-e233-47f4-a2f6-19f16442d93a", last.getMbid());
         assertEquals("My Collection", last.getName());
         assertEquals("jdamcd", last.getEditor());

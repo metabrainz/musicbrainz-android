@@ -2,23 +2,23 @@ package org.metabrainz.android.api.handler;
 
 import java.util.LinkedList;
 
-import org.metabrainz.android.api.data.UserCollectionInfo;
+import org.metabrainz.android.api.data.UserSearchResult;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class CollectionListHandler extends MBHandler {
 
-    private LinkedList<UserCollectionInfo> collections = new LinkedList<UserCollectionInfo>();
-    private UserCollectionInfo editorCollection;
+    private LinkedList<UserSearchResult> collections = new LinkedList<UserSearchResult>();
+    private UserSearchResult editorCollection;
 
-    public LinkedList<UserCollectionInfo> getResults() {
+    public LinkedList<UserSearchResult> getResults() {
         return collections;
     }
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
         if (localName.equals("collection")) {
-            editorCollection = new UserCollectionInfo();
+            editorCollection = new UserSearchResult();
             editorCollection.setMbid(atts.getValue("id"));
         } else if (localName.equals("name")) {
             buildString();

@@ -17,7 +17,7 @@ public class Recording {
 	private float rating;
 	private LinkedList<Tag> tags = new LinkedList<Tag>();
 	
-	private ArrayList<ReleaseInfo> releases = new ArrayList<ReleaseInfo>();
+	private ArrayList<ReleaseSearchResult> releases = new ArrayList<ReleaseSearchResult>();
 
 	public String getMbid() {
 		return mbid;
@@ -79,11 +79,11 @@ public class Recording {
 		this.tags = tags;
 	}
 
-	public ArrayList<ReleaseInfo> getReleases() {
+	public ArrayList<ReleaseSearchResult> getReleases() {
 		return releases;
 	}
 
-	public void setReleases(ArrayList<ReleaseInfo> releases) {
+	public void setReleases(ArrayList<ReleaseSearchResult> releases) {
 		this.releases = releases;
 	}
 

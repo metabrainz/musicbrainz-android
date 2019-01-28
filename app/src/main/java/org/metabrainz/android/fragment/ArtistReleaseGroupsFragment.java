@@ -1,7 +1,7 @@
 package org.metabrainz.android.fragment;
 
 import org.metabrainz.android.api.data.Artist;
-import org.metabrainz.android.api.data.ReleaseGroupInfo;
+import org.metabrainz.android.api.data.ReleaseGroupSearchResult;
 import org.metabrainz.android.App;
 import org.metabrainz.android.R;
 import org.metabrainz.android.activity.ReleaseActivity;
@@ -36,7 +36,7 @@ public class ArtistReleaseGroupsFragment extends ListFragment implements EntityT
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        ReleaseGroupInfo rg = (ReleaseGroupInfo) getListAdapter().getItem(position);
+        ReleaseGroupSearchResult rg = (ReleaseGroupSearchResult) getListAdapter().getItem(position);
         startReleaseActivity(rg.getMbid());
     }
 

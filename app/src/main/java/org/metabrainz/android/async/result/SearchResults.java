@@ -3,13 +3,13 @@ package org.metabrainz.android.async.result;
 import java.util.List;
 
 import org.metabrainz.android.api.data.ArtistSearchResult;
-import org.metabrainz.android.api.data.ReleaseGroupInfo;
+import org.metabrainz.android.api.data.ReleaseGroupSearchResult;
 
 public class SearchResults {
     
     private final SearchType type;
     private final List<ArtistSearchResult> artistResults;
-    private final List<ReleaseGroupInfo> releaseGroupResults;
+    private final List<ReleaseGroupSearchResult> releaseGroupResults;
     
     @SuppressWarnings("unchecked")
     public SearchResults(SearchType type, List<?> results) {
@@ -18,12 +18,12 @@ public class SearchResults {
             releaseGroupResults = null;
         } else {
             artistResults = null;
-            releaseGroupResults = (List<ReleaseGroupInfo>) results;
+            releaseGroupResults = (List<ReleaseGroupSearchResult>) results;
         }
         this.type = type;
     }
     
-    public SearchResults(List<ArtistSearchResult> artistResults, List<ReleaseGroupInfo> releaseGroupResults) {
+    public SearchResults(List<ArtistSearchResult> artistResults, List<ReleaseGroupSearchResult> releaseGroupResults) {
         this.artistResults = artistResults;
         this.releaseGroupResults = releaseGroupResults;
         this.type = SearchType.ALL;
@@ -37,7 +37,7 @@ public class SearchResults {
         return artistResults;
     }
 
-    public List<ReleaseGroupInfo> getReleaseGroupResults() {
+    public List<ReleaseGroupSearchResult> getReleaseGroupResults() {
         return releaseGroupResults;
     }
 

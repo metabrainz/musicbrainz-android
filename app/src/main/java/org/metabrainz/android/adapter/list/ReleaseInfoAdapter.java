@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import org.metabrainz.android.R;
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.string.StringFormat;
 import org.metabrainz.android.string.StringMapper;
 
@@ -17,13 +17,13 @@ import android.content.Context;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-public class ReleaseInfoAdapter extends ArrayAdapter<ReleaseInfo> {
+public class ReleaseInfoAdapter extends ArrayAdapter<ReleaseSearchResult> {
 
     private Context context;
-    private List<ReleaseInfo> releasesInfo;
+    private List<ReleaseSearchResult> releasesInfo;
     private int layoutId;
 
-    public ReleaseInfoAdapter(Context context, int layoutId, List<ReleaseInfo> releasesInfo) {
+    public ReleaseInfoAdapter(Context context, int layoutId, List<ReleaseSearchResult> releasesInfo) {
         super(context, layoutId, releasesInfo);
         this.context = context;
         this.layoutId = layoutId;
@@ -43,7 +43,7 @@ public class ReleaseInfoAdapter extends ArrayAdapter<ReleaseInfo> {
             holder = (ReleaseInfoHolder) releaseView.getTag();
         }
 
-        ReleaseInfo release = releasesInfo.get(position);
+        ReleaseSearchResult release = releasesInfo.get(position);
         holder.getTitle().setText(release.getTitle());
         holder.getArtist().setText(StringFormat.commaSeparateArtists(release.getArtists()));
         holder.getCountry().setText(release.getCountryCode());

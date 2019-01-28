@@ -1,7 +1,7 @@
 package org.metabrainz.android.fragment;
 
 import org.metabrainz.android.api.data.UserCollection;
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.R;
 import org.metabrainz.android.activity.ReleaseActivity;
 import org.metabrainz.android.adapter.list.ReleaseInfoAdapter;
@@ -188,14 +188,14 @@ public class CollectionFragment extends ListFragment {
     private final class RemoveReleasesActionMode implements ActionMode.Callback {
 
         private int selectedPosition;
-        private ReleaseInfo selectedRelease;
+        private ReleaseSearchResult selectedRelease;
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
             inflater.inflate(R.menu.context_collection, menu);
             selectedPosition = getListView().getCheckedItemPosition();
-            selectedRelease = (ReleaseInfo) getListAdapter().getItem(selectedPosition);
+            selectedRelease = (ReleaseSearchResult) getListAdapter().getItem(selectedPosition);
             mode.setTitle(selectedRelease.getTitle());
             return true;
         }

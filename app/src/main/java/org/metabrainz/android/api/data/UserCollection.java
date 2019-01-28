@@ -3,20 +3,20 @@ package org.metabrainz.android.api.data;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class UserCollection extends UserCollectionInfo {
+public class UserCollection extends UserSearchResult {
 	
-	private LinkedList<ReleaseInfo> releases = new LinkedList<ReleaseInfo>();
+	private LinkedList<ReleaseSearchResult> releases = new LinkedList<ReleaseSearchResult>();
 
-	public LinkedList<ReleaseInfo> getReleases() {
+	public LinkedList<ReleaseSearchResult> getReleases() {
 	    Collections.sort(releases);
 		return releases;
 	}
 
-	public void setReleases(LinkedList<ReleaseInfo> releases) {
+	public void setReleases(LinkedList<ReleaseSearchResult> releases) {
 		this.releases = releases;
 	}
 	
-	public void addRelease(ReleaseInfo release) {
+	public void addRelease(ReleaseSearchResult release) {
 	    releases.add(release);
 	}
 

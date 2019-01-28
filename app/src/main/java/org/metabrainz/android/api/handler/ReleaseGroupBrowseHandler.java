@@ -2,18 +2,18 @@ package org.metabrainz.android.api.handler;
 
 import java.util.ArrayList;
 
-import org.metabrainz.android.api.data.ReleaseGroupInfo;
+import org.metabrainz.android.api.data.ReleaseGroupSearchResult;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class ReleaseGroupBrowseHandler extends MBHandler {
 
-    private ArrayList<ReleaseGroupInfo> results = new ArrayList<ReleaseGroupInfo>();
-    private ReleaseGroupInfo releaseGroup;
+    private ArrayList<ReleaseGroupSearchResult> results = new ArrayList<ReleaseGroupSearchResult>();
+    private ReleaseGroupSearchResult releaseGroup;
 
     private int total = 0;
 
-    public ArrayList<ReleaseGroupInfo> getResults() {
+    public ArrayList<ReleaseGroupSearchResult> getResults() {
         return results;
     }
 
@@ -24,7 +24,7 @@ public class ReleaseGroupBrowseHandler extends MBHandler {
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
         if (localName.equals("release-group")) {
-            releaseGroup = new ReleaseGroupInfo();
+            releaseGroup = new ReleaseGroupSearchResult();
             String mbid = atts.getValue("id");
             releaseGroup.setMbid(mbid);
             releaseGroup.setType(atts.getValue("type"));

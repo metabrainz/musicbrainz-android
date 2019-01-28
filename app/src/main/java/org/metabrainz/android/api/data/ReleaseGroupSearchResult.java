@@ -8,7 +8,7 @@ import java.util.LinkedList;
 /**
  * Partial release group data.
  */
-public class ReleaseGroupInfo implements Comparable<ReleaseGroupInfo> {
+public class ReleaseGroupSearchResult implements Comparable<ReleaseGroupSearchResult> {
 
     private String mbid;
     private String title;
@@ -101,7 +101,7 @@ public class ReleaseGroupInfo implements Comparable<ReleaseGroupInfo> {
         return releaseMbids;
     }
 
-    public int compareTo(ReleaseGroupInfo another) {
+    public int compareTo(ReleaseGroupSearchResult another) {
         if (getFirstRelease() == null && another.getFirstRelease() == null) {
             return 0;
         } else if (getFirstRelease() == null) {

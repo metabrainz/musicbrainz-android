@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import org.metabrainz.android.R;
-import org.metabrainz.android.api.data.ReleaseGroupInfo;
+import org.metabrainz.android.api.data.ReleaseGroupSearchResult;
 import org.metabrainz.android.string.StringMapper;
 
 import java.util.List;
@@ -16,12 +16,12 @@ import android.content.Context;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupInfo> {
+public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupSearchResult> {
 
     private Context context;
-    private List<ReleaseGroupInfo> releaseGroups;
+    private List<ReleaseGroupSearchResult> releaseGroups;
 
-    public ArtistRGAdapter(Context context, List<ReleaseGroupInfo> releaseGroups) {
+    public ArtistRGAdapter(Context context, List<ReleaseGroupSearchResult> releaseGroups) {
         super(context, R.layout.list_release_group, releaseGroups);
         this.context = context;
         this.releaseGroups = releaseGroups;
@@ -40,7 +40,7 @@ public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupInfo> {
             holder = (ArtistReleaseGroupHolder) release.getTag();
         }
 
-        ReleaseGroupInfo rData = releaseGroups.get(position);
+        ReleaseGroupSearchResult rData = releaseGroups.get(position);
         holder.getReleaseTitle().setText(rData.getTitle());
         holder.getReleaseYear().setText(rData.getReleaseYear());
         holder.getReleaseType().setText(StringMapper.mapRGTypeString(getContext(), rData.getType()));

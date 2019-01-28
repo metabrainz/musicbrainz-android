@@ -2,14 +2,14 @@ package org.metabrainz.android.api.handler;
 
 import org.metabrainz.android.api.data.ReleaseArtist;
 import org.metabrainz.android.api.data.UserCollection;
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class CollectionHandler extends MBHandler {
 
     private UserCollection collection = new UserCollection();
-    private ReleaseInfo release;
+    private ReleaseSearchResult release;
     private ReleaseArtist releaseArtist;
 
     private boolean inArtist;
@@ -29,7 +29,7 @@ public class CollectionHandler extends MBHandler {
         } else if (localName.equals("release-list")) {
             collection.setCount(Integer.parseInt(atts.getValue("count")));
         } else if (localName.equals("release")) {
-            release = new ReleaseInfo();
+            release = new ReleaseSearchResult();
             release.setReleaseMbid(atts.getValue("id"));
         } else if (localName.equals("title")) {
             buildString();

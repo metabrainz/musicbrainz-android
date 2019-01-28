@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * Partial release data to differentiate between similar releases (e.g. part of
  * the same release group).
  */
-public class ReleaseInfo implements Comparable<ReleaseInfo> {
+public class ReleaseSearchResult implements Comparable<ReleaseSearchResult> {
 
     private String releaseMbid;
 
@@ -85,7 +85,7 @@ public class ReleaseInfo implements Comparable<ReleaseInfo> {
     }
 
     @Override
-    public int compareTo(ReleaseInfo another) {
+    public int compareTo(ReleaseSearchResult another) {
         int artistNameComparison = getArtists().get(0).compareTo(another.getArtists().get(0));
         if (artistNameComparison != 0) {
             return artistNameComparison;

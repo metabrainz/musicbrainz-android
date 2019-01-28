@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import org.metabrainz.android.R;
-import org.metabrainz.android.api.data.UserCollectionInfo;
+import org.metabrainz.android.api.data.UserSearchResult;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import android.content.Context;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-public class CollectionListAdapter extends ArrayAdapter<UserCollectionInfo> {
+public class CollectionListAdapter extends ArrayAdapter<UserSearchResult> {
 
     private Context context;
-    private List<UserCollectionInfo> userCollections;
+    private List<UserSearchResult> userCollections;
     
-    public CollectionListAdapter(Context context, List<UserCollectionInfo> userCollections) {
+    public CollectionListAdapter(Context context, List<UserSearchResult> userCollections) {
         super(context, R.layout.list_collection, userCollections);
         this.context = context;
         this.userCollections = userCollections;
@@ -40,13 +40,13 @@ public class CollectionListAdapter extends ArrayAdapter<UserCollectionInfo> {
             holder = (CollectionInfoHolder) collectionView.getTag();
         }
         
-        UserCollectionInfo collection = userCollections.get(position);
+        UserSearchResult collection = userCollections.get(position);
         holder.getTitle().setText(collection.getName());
         holder.getCount().setText(getReleasesDisplayText(collection));
         return collectionView;
     }
 
-    private String getReleasesDisplayText(UserCollectionInfo collection) {
+    private String getReleasesDisplayText(UserSearchResult collection) {
         Resources res = context.getResources();
         return res.getQuantityString(R.plurals.release_plurals, collection.getCount(), collection.getCount());
     }

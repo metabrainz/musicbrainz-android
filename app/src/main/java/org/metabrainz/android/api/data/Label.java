@@ -20,7 +20,7 @@ public class Label {
 	private LinkedList<Tag> tags = new LinkedList<Tag>();
 	private ArrayList<WebLink> links = new ArrayList<WebLink>();
 
-	private ArrayList<ReleaseInfo> releasesInfo = new ArrayList<ReleaseInfo>();
+	private ArrayList<ReleaseSearchResult> releasesInfo = new ArrayList<ReleaseSearchResult>();
 
 	public String getMbid() {
 		return mbid;
@@ -102,11 +102,11 @@ public class Label {
 		this.links = links;
 	}
 
-	public ArrayList<ReleaseInfo> getReleasesInfo() {
+	public ArrayList<ReleaseSearchResult> getReleasesInfo() {
 		return releasesInfo;
 	}
 
-	public void setReleasesInfo(ArrayList<ReleaseInfo> releasesInfo) {
+	public void setReleasesInfo(ArrayList<ReleaseSearchResult> releasesInfo) {
 		this.releasesInfo = releasesInfo;
 	}
 

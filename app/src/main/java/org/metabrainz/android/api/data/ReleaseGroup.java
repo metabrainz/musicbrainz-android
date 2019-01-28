@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class ReleaseGroup extends ReleaseGroupInfo {
+public class ReleaseGroup extends ReleaseGroupSearchResult {
     
     private int ratingCount;
     private float rating;
@@ -12,7 +12,7 @@ public class ReleaseGroup extends ReleaseGroupInfo {
     private LinkedList<Tag> tags = new LinkedList<Tag>();
     private ArrayList<WebLink> links = new ArrayList<WebLink>();
     
-    private ArrayList<ReleaseInfo> releases = new ArrayList<ReleaseInfo>();
+    private ArrayList<ReleaseSearchResult> releases = new ArrayList<ReleaseSearchResult>();
     
     public int getRatingCount() {
         return ratingCount;
@@ -56,15 +56,15 @@ public class ReleaseGroup extends ReleaseGroupInfo {
         this.links = links;
     }
 
-    public ArrayList<ReleaseInfo> getReleases() {
+    public ArrayList<ReleaseSearchResult> getReleases() {
         return releases;
     }
 
-    public void setReleases(ArrayList<ReleaseInfo> releases) {
+    public void setReleases(ArrayList<ReleaseSearchResult> releases) {
         this.releases = releases;
     }
     
-    public void addRelease(ReleaseInfo release) {
+    public void addRelease(ReleaseSearchResult release) {
         releases.add(release);
     }
 

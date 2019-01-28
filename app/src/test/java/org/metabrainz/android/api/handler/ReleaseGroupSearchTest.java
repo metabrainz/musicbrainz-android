@@ -8,13 +8,13 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.metabrainz.android.api.data.ReleaseGroupInfo;
+import org.metabrainz.android.api.data.ReleaseGroupSearchResult;
 import org.metabrainz.android.api.webservice.ResponseParser;
 
 public class ReleaseGroupSearchTest extends BaseXmlParsingTestCase {
     
     private static final String RG_SEARCH_FIXTURE = "releaseGroupSearch_songs about leaving.xml";
-    private LinkedList<ReleaseGroupInfo> releaseGroups;
+    private LinkedList<ReleaseGroupSearchResult> releaseGroups;
     
     @Before
     public void doParsing() throws IOException {

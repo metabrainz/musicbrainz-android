@@ -2,7 +2,7 @@ package org.metabrainz.android.fragment;
 
 import java.util.List;
 
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.App;
 import org.metabrainz.android.R;
 import org.metabrainz.android.activity.ReleaseActivity;
@@ -58,7 +58,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     private View error;
 
     private String barcode;
-    private List<ReleaseInfo> results;
+    private List<ReleaseSearchResult> results;
     private int selection = 0;
     
     private LoadingCallbacks loadingCallbacks;
@@ -172,15 +172,15 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
         submitDialog.show(getFragmentManager(), ConfirmBarcodeDialog.TAG);
     }
 
-    private LoaderCallbacks<AsyncResult<List<ReleaseInfo>>> searchCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseInfo>>>() {
+    private LoaderCallbacks<AsyncResult<List<ReleaseSearchResult>>> searchCallbacks = new LoaderCallbacks<AsyncResult<List<ReleaseSearchResult>>>() {
 
         @Override
-        public Loader<AsyncResult<List<ReleaseInfo>>> onCreateLoader(int id, Bundle args) {
+        public Loader<AsyncResult<List<ReleaseSearchResult>>> onCreateLoader(int id, Bundle args) {
             return new SearchReleaseLoader(searchBox.getText().toString());
         }
 
         @Override
-        public void onLoadFinished(Loader<AsyncResult<List<ReleaseInfo>>> loader, AsyncResult<List<ReleaseInfo>> data) {
+        public void onLoadFinished(Loader<AsyncResult<List<ReleaseSearchResult>>> loader, AsyncResult<List<ReleaseSearchResult>> data) {
             instructions.setVisibility(View.INVISIBLE);
             loading.setVisibility(View.INVISIBLE);
             switch (data.getStatus()) {
@@ -193,7 +193,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
         }
 
         @Override
-        public void onLoaderReset(Loader<AsyncResult<List<ReleaseInfo>>> loader) {
+        public void onLoaderReset(Loader<AsyncResult<List<ReleaseSearchResult>>> loader) {
             loader.reset();
         }
     };
@@ -212,7 +212,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
         });
     }
 
-    private void handleSearchResults(AsyncResult<List<ReleaseInfo>> result) {
+    private void handleSearchResults(AsyncResult<List<ReleaseSearchResult>> result) {
         results = result.getData();
         matches.setAdapter(new ReleaseInfoAdapter(getActivity(), R.layout.list_release, results));
         matches.setOnItemClickListener(this);
@@ -261,7 +261,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     }
     
     @Override
-    public ReleaseInfo getCurrentSelection() {
+    public ReleaseSearchResult getCurrentSelection() {
         return results.get(selection);
     }
 

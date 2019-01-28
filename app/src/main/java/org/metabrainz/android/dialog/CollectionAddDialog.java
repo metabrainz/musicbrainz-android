@@ -2,7 +2,7 @@ package org.metabrainz.android.dialog;
 
 import java.util.List;
 
-import org.metabrainz.android.api.data.UserCollectionInfo;
+import org.metabrainz.android.api.data.UserSearchResult;
 import org.metabrainz.android.R;
 import org.metabrainz.android.adapter.list.CollectionListAdapter;
 import org.metabrainz.android.async.CollectionListLoader;
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class CollectionAddDialog extends DialogFragment implements
-        LoaderCallbacks<AsyncResult<List<UserCollectionInfo>>>, OnItemClickListener {
+        LoaderCallbacks<AsyncResult<List<UserSearchResult>>>, OnItemClickListener {
 
     public static final String TAG = "collection_add";
     private static final int COLLECTIONS_LOADER = 10;
@@ -71,17 +71,17 @@ public class CollectionAddDialog extends DialogFragment implements
     }
 
     @Override
-    public Loader<AsyncResult<List<UserCollectionInfo>>> onCreateLoader(int id, Bundle args) {
+    public Loader<AsyncResult<List<UserSearchResult>>> onCreateLoader(int id, Bundle args) {
         return new CollectionListLoader();
     }
 
     @Override
-    public void onLoadFinished(Loader<AsyncResult<List<UserCollectionInfo>>> loader,
-            AsyncResult<List<UserCollectionInfo>> result) {
+    public void onLoadFinished(Loader<AsyncResult<List<UserSearchResult>>> loader,
+            AsyncResult<List<UserSearchResult>> result) {
         loading.setVisibility(View.GONE);
         switch (result.getStatus()) {
         case SUCCESS:
-            List<UserCollectionInfo> collection = result.getData();
+            List<UserSearchResult> collection = result.getData();
             try {
                 adapter = new CollectionListAdapter(getActivity(), collection);
                 if (adapter.isEmpty()) {
@@ -111,7 +111,7 @@ public class CollectionAddDialog extends DialogFragment implements
     }
 
     @Override
-    public void onLoaderReset(Loader<AsyncResult<List<UserCollectionInfo>>> loader) {
+    public void onLoaderReset(Loader<AsyncResult<List<UserSearchResult>>> loader) {
         loader.reset();
     }
 

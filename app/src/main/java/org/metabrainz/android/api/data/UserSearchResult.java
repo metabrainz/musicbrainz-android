@@ -1,6 +1,6 @@
 package org.metabrainz.android.api.data;
 
-public class UserCollectionInfo implements Comparable<UserCollectionInfo>{
+public class UserSearchResult implements Comparable<UserSearchResult>{
 	
 	private String mbid;
 	private String name;
@@ -40,7 +40,7 @@ public class UserCollectionInfo implements Comparable<UserCollectionInfo>{
 	}
 
     @Override
-    public int compareTo(UserCollectionInfo another) {
+    public int compareTo(UserSearchResult another) {
         return getName().compareTo(another.getName());
     }
 

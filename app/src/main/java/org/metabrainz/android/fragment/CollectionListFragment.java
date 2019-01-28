@@ -2,7 +2,7 @@ package org.metabrainz.android.fragment;
 
 import java.util.List;
 
-import org.metabrainz.android.api.data.UserCollectionInfo;
+import org.metabrainz.android.api.data.UserSearchResult;
 import org.metabrainz.android.R;
 import org.metabrainz.android.adapter.list.CollectionListAdapter;
 import org.metabrainz.android.async.CollectionListLoader;
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class CollectionListFragment extends ListFragment implements
-        LoaderCallbacks<AsyncResult<List<UserCollectionInfo>>> {
+        LoaderCallbacks<AsyncResult<List<UserSearchResult>>> {
 
     private static final int COLLECTIONS_LOADER = 0;
     private Context appContext;
@@ -51,21 +51,21 @@ public class CollectionListFragment extends ListFragment implements
     }
 
     @Override
-    public Loader<AsyncResult<List<UserCollectionInfo>>> onCreateLoader(int id, Bundle args) {
+    public Loader<AsyncResult<List<UserSearchResult>>> onCreateLoader(int id, Bundle args) {
         return new CollectionListLoader();
     }
 
     @Override
-    public void onLoadFinished(Loader<AsyncResult<List<UserCollectionInfo>>> loader,
-            AsyncResult<List<UserCollectionInfo>> data) {
+    public void onLoadFinished(Loader<AsyncResult<List<UserSearchResult>>> loader,
+            AsyncResult<List<UserSearchResult>> data) {
         loading.setVisibility(View.GONE);
         handleResult(data);
     }
 
-    private void handleResult(AsyncResult<List<UserCollectionInfo>> result) {
+    private void handleResult(AsyncResult<List<UserSearchResult>> result) {
         switch (result.getStatus()) {
         case SUCCESS:
-            List<UserCollectionInfo> collection = result.getData();
+            List<UserSearchResult> collection = result.getData();
             try {
                 setListAdapter(new CollectionListAdapter(getActivity(), collection));
             } catch (Exception e) {
@@ -91,7 +91,7 @@ public class CollectionListFragment extends ListFragment implements
     }
 
     @Override
-    public void onLoaderReset(Loader<AsyncResult<List<UserCollectionInfo>>> loader) {
+    public void onLoaderReset(Loader<AsyncResult<List<UserSearchResult>>> loader) {
         loader.reset();
     }
 

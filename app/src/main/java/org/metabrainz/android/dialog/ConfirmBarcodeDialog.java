@@ -1,6 +1,6 @@
 package org.metabrainz.android.dialog;
 
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.App;
 import org.metabrainz.android.R;
 import org.metabrainz.android.string.StringFormat;
@@ -31,7 +31,7 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
     private ConfirmBarcodeCallbacks callbacks;
 
     public interface ConfirmBarcodeCallbacks {
-        ReleaseInfo getCurrentSelection();
+        ReleaseSearchResult getCurrentSelection();
         void confirmSubmission();
     }
 
@@ -67,7 +67,7 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
         confirm = (Button) layout.findViewById(R.id.barcode_confirm);
     }
 
-    private void setViews(ReleaseInfo release) {
+    private void setViews(ReleaseSearchResult release) {
         title.setText(release.getTitle());
         artist.setText(StringFormat.commaSeparateArtists(release.getArtists()));
         numberOfTracks.setText(release.getTracksNum() + " " + getString(R.string.label_tracks));

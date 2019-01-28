@@ -1,11 +1,5 @@
 package org.metabrainz.android.api.webservice;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
@@ -22,18 +16,24 @@ import org.metabrainz.android.api.MusicBrainz;
 import org.metabrainz.android.api.User;
 import org.metabrainz.android.api.data.Artist;
 import org.metabrainz.android.api.data.ArtistSearchResult;
-import org.metabrainz.android.api.data.UserCollection;
-import org.metabrainz.android.api.data.UserCollectionInfo;
 import org.metabrainz.android.api.data.Label;
 import org.metabrainz.android.api.data.LabelSearchResult;
 import org.metabrainz.android.api.data.Recording;
-import org.metabrainz.android.api.data.RecordingInfo;
+import org.metabrainz.android.api.data.RecordingSearchResult;
 import org.metabrainz.android.api.data.Release;
 import org.metabrainz.android.api.data.ReleaseGroup;
-import org.metabrainz.android.api.data.ReleaseGroupInfo;
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseGroupSearchResult;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.api.data.Tag;
+import org.metabrainz.android.api.data.UserCollection;
+import org.metabrainz.android.api.data.UserSearchResult;
 import org.metabrainz.android.api.data.UserData;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  * Makes the web service available for Activity classes. Calls are blocking and
@@ -94,9 +94,9 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public LinkedList<ReleaseInfo> browseReleases(String mbid) throws IOException {
+    public LinkedList<ReleaseSearchResult> browseReleases(String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.releaseGroupReleaseBrowse(mbid));
-        LinkedList<ReleaseInfo> releases = responseParser.parseReleaseGroupReleases(entity.getContent());
+        LinkedList<ReleaseSearchResult> releases = responseParser.parseReleaseGroupReleases(entity.getContent());
         entity.consumeContent();
         Collections.sort(releases);
         return releases;
@@ -111,9 +111,9 @@ public class MusicBrainzWebClient implements MusicBrainz {
         return artist;
     }
 
-    private ArrayList<ReleaseGroupInfo> browseArtistReleaseGroups(String mbid) throws IOException {
+    private ArrayList<ReleaseGroupSearchResult> browseArtistReleaseGroups(String mbid) throws IOException {
         HttpEntity entity = get(QueryBuilder.artistReleaseGroupBrowse(mbid, 0));
-        ArrayList<ReleaseGroupInfo> releases = responseParser.parseReleaseGroupBrowse(entity.getContent());
+        ArrayList<ReleaseGroupSearchResult> releases = responseParser.parseReleaseGroupBrowse(entity.getContent());
         entity.consumeContent();
         Collections.sort(releases);
         return releases;
@@ -152,17 +152,17 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public LinkedList<ReleaseGroupInfo> searchReleaseGroup(String searchTerm) throws IOException {
+    public LinkedList<ReleaseGroupSearchResult> searchReleaseGroup(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.releaseGroupSearch(searchTerm));
-        LinkedList<ReleaseGroupInfo> releaseGroups = responseParser.parseReleaseGroupSearch(entity.getContent());
+        LinkedList<ReleaseGroupSearchResult> releaseGroups = responseParser.parseReleaseGroupSearch(entity.getContent());
         entity.consumeContent();
         return releaseGroups;
     }
 
     @Override
-    public LinkedList<ReleaseInfo> searchRelease(String searchTerm) throws IOException {
+    public LinkedList<ReleaseSearchResult> searchRelease(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.releaseSearch(searchTerm));
-        LinkedList<ReleaseInfo> releases = responseParser.parseReleaseSearch(entity.getContent());
+        LinkedList<ReleaseSearchResult> releases = responseParser.parseReleaseSearch(entity.getContent());
         entity.consumeContent();
         return releases;
     }
@@ -176,9 +176,9 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public LinkedList<RecordingInfo> searchRecording(String searchTerm) throws IOException {
+    public LinkedList<RecordingSearchResult> searchRecording(String searchTerm) throws IOException {
         HttpEntity entity = get(QueryBuilder.recordingSearch(searchTerm));
-        LinkedList<RecordingInfo> recordings = responseParser.parseRecordingSearch(entity.getContent());
+        LinkedList<RecordingSearchResult> recordings = responseParser.parseRecordingSearch(entity.getContent());
         entity.consumeContent();
         return recordings;
     }
@@ -252,9 +252,9 @@ public class MusicBrainzWebClient implements MusicBrainz {
     }
 
     @Override
-    public LinkedList<UserCollectionInfo> lookupUserCollections() throws IOException {
+    public LinkedList<UserSearchResult> lookupUserCollections() throws IOException {
         HttpEntity entity = get(QueryBuilder.collectionList());
-        LinkedList<UserCollectionInfo> collections = responseParser.parseCollectionListLookup(entity.getContent());
+        LinkedList<UserSearchResult> collections = responseParser.parseCollectionListLookup(entity.getContent());
         entity.consumeContent();
         Collections.sort(collections);
         return collections;

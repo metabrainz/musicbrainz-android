@@ -2,7 +2,7 @@ package org.metabrainz.android.dialog;
 
 import java.util.List;
 
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.R;
 import org.metabrainz.android.adapter.list.ReleaseInfoAdapter;
 
@@ -26,11 +26,11 @@ public class ReleaseSelectionDialog extends DialogFragment implements OnItemClic
     public static final String TAG = "release_selection_dialog";
     
     private ReleaseSelectionCallbacks callbacks;
-    private List<ReleaseInfo> release;
+    private List<ReleaseSearchResult> release;
     private ListView releaseList;
     
     public interface ReleaseSelectionCallbacks {
-        List<ReleaseInfo> getReleasesInfo();
+        List<ReleaseSearchResult> getReleasesInfo();
         void onReleaseSelected(String mbid);
     }
     

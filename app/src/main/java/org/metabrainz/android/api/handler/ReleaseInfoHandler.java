@@ -3,28 +3,28 @@ package org.metabrainz.android.api.handler;
 import java.util.LinkedList;
 
 import org.metabrainz.android.api.data.ReleaseArtist;
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 public class ReleaseInfoHandler extends MBHandler {
 
-    private LinkedList<ReleaseInfo> results = new LinkedList<ReleaseInfo>();
-    private ReleaseInfo release;
+    private LinkedList<ReleaseSearchResult> results = new LinkedList<ReleaseSearchResult>();
+    private ReleaseSearchResult release;
     private ReleaseArtist releaseArtist;
 
     private boolean inArtist;
     private boolean inLabel;
     private boolean inMedium;
 
-    public LinkedList<ReleaseInfo> getResults() {
+    public LinkedList<ReleaseSearchResult> getResults() {
         return results;
     }
 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
         if (localName.equals("release")) {
-            release = new ReleaseInfo();
+            release = new ReleaseSearchResult();
             release.setReleaseMbid(atts.getValue("id"));
         } else if (localName.equals("title")) {
             buildString();

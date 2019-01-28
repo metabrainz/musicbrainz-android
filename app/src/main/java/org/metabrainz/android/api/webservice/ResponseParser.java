@@ -12,15 +12,15 @@ import javax.xml.parsers.SAXParserFactory;
 import org.metabrainz.android.api.data.Artist;
 import org.metabrainz.android.api.data.ArtistSearchResult;
 import org.metabrainz.android.api.data.UserCollection;
-import org.metabrainz.android.api.data.UserCollectionInfo;
+import org.metabrainz.android.api.data.UserSearchResult;
 import org.metabrainz.android.api.data.Label;
 import org.metabrainz.android.api.data.LabelSearchResult;
 import org.metabrainz.android.api.data.Recording;
-import org.metabrainz.android.api.data.RecordingInfo;
+import org.metabrainz.android.api.data.RecordingSearchResult;
 import org.metabrainz.android.api.data.Release;
 import org.metabrainz.android.api.data.ReleaseGroup;
-import org.metabrainz.android.api.data.ReleaseGroupInfo;
-import org.metabrainz.android.api.data.ReleaseInfo;
+import org.metabrainz.android.api.data.ReleaseGroupSearchResult;
+import org.metabrainz.android.api.data.ReleaseSearchResult;
 import org.metabrainz.android.api.data.Tag;
 import org.metabrainz.android.api.data.UserData;
 import org.metabrainz.android.api.handler.ArtistLookupHandler;
@@ -70,7 +70,7 @@ public class ResponseParser {
         return handler.getResult();
     }
 
-    public LinkedList<ReleaseInfo> parseReleaseGroupReleases(InputStream stream) throws IOException {
+    public LinkedList<ReleaseSearchResult> parseReleaseGroupReleases(InputStream stream) throws IOException {
         ReleaseInfoHandler handler = new ReleaseInfoHandler();
         parse(stream, handler);
         return handler.getResults();
@@ -82,7 +82,7 @@ public class ResponseParser {
         return handler.getResult();
     }
 
-    public ArrayList<ReleaseGroupInfo> parseReleaseGroupBrowse(InputStream stream) throws IOException {
+    public ArrayList<ReleaseGroupSearchResult> parseReleaseGroupBrowse(InputStream stream) throws IOException {
         ReleaseGroupBrowseHandler handler = new ReleaseGroupBrowseHandler();
         parse(stream, handler);
         return handler.getResults();
@@ -112,13 +112,13 @@ public class ResponseParser {
         return handler.getResults();
     }
 
-    public LinkedList<ReleaseGroupInfo> parseReleaseGroupSearch(InputStream stream) throws IOException {
+    public LinkedList<ReleaseGroupSearchResult> parseReleaseGroupSearch(InputStream stream) throws IOException {
         ReleaseGroupSearchHandler handler = new ReleaseGroupSearchHandler();
         parse(stream, handler);
         return handler.getResults();
     }
 
-    public LinkedList<ReleaseInfo> parseReleaseSearch(InputStream stream) throws IOException {
+    public LinkedList<ReleaseSearchResult> parseReleaseSearch(InputStream stream) throws IOException {
         ReleaseInfoHandler handler = new ReleaseInfoHandler();
         parse(stream, handler);
         return handler.getResults();
@@ -130,7 +130,7 @@ public class ResponseParser {
         return handler.getResults();
     }
 
-    public LinkedList<RecordingInfo> parseRecordingSearch(InputStream stream) throws IOException {
+    public LinkedList<RecordingSearchResult> parseRecordingSearch(InputStream stream) throws IOException {
         RecordingSearchHandler handler = new RecordingSearchHandler();
         parse(stream, handler);
         return handler.getResults();
@@ -154,7 +154,7 @@ public class ResponseParser {
         return handler.getResult();
     }
 
-    public LinkedList<UserCollectionInfo> parseCollectionListLookup(InputStream stream) throws IOException {
+    public LinkedList<UserSearchResult> parseCollectionListLookup(InputStream stream) throws IOException {
         CollectionListHandler handler = new CollectionListHandler();
         parse(stream, handler);
         return handler.getResults();
