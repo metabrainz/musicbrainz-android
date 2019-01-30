@@ -4,4 +4,4 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/about_fragment"
   style="@style/Match"
-  android:name="org.metabrainz.android.fragment.AboutFragment" />
+  android:name="org.metabrainz.mobile.fragment.AboutFragment" />

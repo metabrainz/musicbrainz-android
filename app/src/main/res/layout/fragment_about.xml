@@ -10,7 +10,7 @@
     android:padding="@dimen/gutter_large"
     android:orientation="vertical">
 
-    <org.metabrainz.android.view.RobotoLightTextView
+    <org.metabrainz.mobile.view.RobotoLightTextView
       android:id="@+id/app_name_official"
       style="@style/BigRoboto"
       android:text="@string/app_name_official" />
@@ -19,7 +19,7 @@
       android:id="@+id/version_text"
       style="@style/VersionText" />
 
-    <org.metabrainz.android.view.HtmlAssetTextView
+    <org.metabrainz.mobile.view.HtmlAssetTextView
       android:id="@+id/about_text"
       style="@style/TextBody"
       android:layout_marginTop="@dimen/gutter_large" />

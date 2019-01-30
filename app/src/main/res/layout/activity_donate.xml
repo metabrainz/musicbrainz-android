@@ -8,13 +8,13 @@
   <fragment
     android:id="@+id/donate_text_fragment"
     style="@style/MatchWidth"
-    android:name="org.metabrainz.android.fragment.DonateTextFragment" />
+    android:name="org.metabrainz.mobile.fragment.DonateTextFragment" />
   
   <fragment
     android:id="@+id/donate_fragment"
     style="@style/MatchWidth"
     android:layout_below="@id/donate_text_fragment"
     android:layout_marginTop="@dimen/huge_pad"
-    android:name="org.metabrainz.android.fragment.DonateFragment" />
+    android:name="org.metabrainz.mobile.fragment.DonateFragment" />
 
 </RelativeLayout>

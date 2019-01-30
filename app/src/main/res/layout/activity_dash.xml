@@ -6,7 +6,7 @@
 
   <fragment
     android:id="@+id/search_fragment"
-    android:name="org.metabrainz.android.fragment.SearchFragment"
+    android:name="org.metabrainz.mobile.fragment.SearchFragment"
     style="@style/MatchWidth"
     android:layout_alignParentTop="true" />
   
@@ -16,7 +16,7 @@
 
   <fragment
     android:id="@+id/welcome_fragment"
-    android:name="org.metabrainz.android.fragment.WelcomeFragment"
+    android:name="org.metabrainz.mobile.fragment.WelcomeFragment"
     style="@style/MatchWidth"
     android:layout_alignParentBottom="true" />
 

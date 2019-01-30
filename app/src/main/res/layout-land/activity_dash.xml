@@ -6,7 +6,7 @@
 
   <LinearLayout style="@style/HomeTileRow">
     
-    <org.metabrainz.android.view.DashTileView
+    <org.metabrainz.mobile.view.DashTileView
       android:id="@+id/dash_scan"
       style="@style/HomeTile" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/search_fragment"
         style="@style/MatchWidth"
         android:layout_centerInParent="true"
-        android:name="org.metabrainz.android.fragment.SearchFragment" />
+        android:name="org.metabrainz.mobile.fragment.SearchFragment" />
 
       <View
         style="@style/Separator"
@@ -34,15 +34,15 @@
 
   <LinearLayout style="@style/HomeTileRow">
 
-    <org.metabrainz.android.view.DashTileView
+    <org.metabrainz.mobile.view.DashTileView
       android:id="@+id/dash_collections"
       style="@style/HomeTile" />
 
-    <org.metabrainz.android.view.DashTileView
+    <org.metabrainz.mobile.view.DashTileView
       android:id="@+id/dash_donate"
       style="@style/HomeTile" />
 
-    <org.metabrainz.android.view.DashTileView
+    <org.metabrainz.mobile.view.DashTileView
       android:id="@+id/dash_about"
       style="@style/HomeTile" />
   </LinearLayout>

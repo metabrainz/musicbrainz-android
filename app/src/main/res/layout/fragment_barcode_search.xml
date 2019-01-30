@@ -8,7 +8,7 @@
     style="@style/MatchWidth"
     android:layout_margin="@dimen/small_pad">
 
-    <org.metabrainz.android.view.RobotoLightTextView
+    <org.metabrainz.mobile.view.RobotoLightTextView
       android:id="@+id/barcode_label"
       style="@style/Wrap"
       android:text="@string/barcode_text"
@@ -29,7 +29,7 @@
       android:layout_alignParentRight="true"
       android:layout_below="@id/barcode" />
 
-    <org.metabrainz.android.view.RobotoLightTextView
+    <org.metabrainz.mobile.view.RobotoLightTextView
       android:id="@+id/release_label"
       style="@style/Wrap"
       android:text="@string/barcode_release_text"

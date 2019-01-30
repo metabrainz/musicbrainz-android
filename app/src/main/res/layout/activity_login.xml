@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<fragment
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/login_fragment"
-  style="@style/Match"
-  android:name="org.metabrainz.android.fragment.LoginFragment" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/login_container"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_prompt"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/login_btn"
+        android:text="@string/login"/>
+</LinearLayout>

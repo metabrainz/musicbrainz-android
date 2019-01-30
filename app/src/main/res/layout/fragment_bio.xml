@@ -14,18 +14,18 @@
       android:layout_height="@dimen/bio_image_height"
       android:background="@color/cover_bg">
 
-      <org.metabrainz.android.view.RobotoLightTextView
+      <org.metabrainz.mobile.view.RobotoLightTextView
         style="@style/Match"
         android:gravity="center"
         android:text="@string/tab_bio" />
 
-      <org.metabrainz.android.view.FadeImageView
+      <org.metabrainz.mobile.view.FadeImageView
         android:id="@+id/bio_picture"
         style="@style/Match"
         android:scaleType="centerCrop" />
     </FrameLayout>
 
-    <org.metabrainz.android.view.RobotoLightTextView
+    <org.metabrainz.mobile.view.RobotoLightTextView
       android:id="@+id/years_active"
       style="@style/BigRoboto"
       android:gravity="center"
@@ -50,7 +50,7 @@
         android:padding="@dimen/gutter"
         android:layout_alignParentRight="true" />
 
-      <org.metabrainz.android.view.RobotoLightTextView
+      <org.metabrainz.mobile.view.RobotoLightTextView
         style="@style/Wrap"
         android:layout_alignBottom="@id/lastfm_logo"
         android:layout_toLeftOf="@id/lastfm_logo"
@@ -71,7 +71,7 @@
         android:padding="@dimen/gutter"
         app:srcCompat="@drawable/logo_wikipedia" />
 
-      <org.metabrainz.android.view.RobotoLightTextView
+      <org.metabrainz.mobile.view.RobotoLightTextView
         style="@style/Wrap"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/wikipedia_logo"

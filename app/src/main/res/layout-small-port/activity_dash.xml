@@ -6,7 +6,7 @@
 
   <fragment
     android:id="@+id/search_fragment"
-    android:name="org.metabrainz.android.fragment.SearchFragment"
+    android:name="org.metabrainz.mobile.fragment.SearchFragment"
     style="@style/MatchWidth"
     android:layout_alignParentTop="true" />
   

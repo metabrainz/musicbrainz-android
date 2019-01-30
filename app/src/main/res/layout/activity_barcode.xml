@@ -4,4 +4,4 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/Match"
   android:id="@+id/barcode_search_fragment"
-  android:name="org.metabrainz.android.fragment.BarcodeSearchFragment" />
+  android:name="org.metabrainz.mobile.fragment.BarcodeSearchFragment" />
