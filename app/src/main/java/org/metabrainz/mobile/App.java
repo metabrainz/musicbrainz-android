@@ -4,10 +4,6 @@ import android.app.Application;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 
-import com.novoda.imageloader.core.ImageManager;
-import com.novoda.imageloader.core.LoaderSettings;
-import com.novoda.imageloader.core.loader.Loader;
-
 import org.metabrainz.mobile.api.MusicBrainz;
 import org.metabrainz.mobile.api.webservice.MusicBrainzWebClient;
 import org.metabrainz.mobile.config.Configuration;
@@ -16,13 +12,8 @@ import org.metabrainz.mobile.user.UserPreferences;
 public class App extends Application {
 
     private static App instance;
-    private static ImageManager imageManager;
     private static Typeface robotoLight;
     private static UserPreferences user;
-
-    public static Loader getImageLoader() {
-        return imageManager.getLoader();
-    }
 
     public static String getUserAgent() {
         return Configuration.USER_AGENT + "/" + getVersion();
@@ -69,13 +60,7 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         user = new UserPreferences();
-        setupImageManager();
         loadCustomTypefaces();
-    }
-
-    public void setupImageManager() {
-        LoaderSettings settings = new LoaderSettings.SettingsBuilder().withDisconnectOnEveryCall(true).build(this);
-        //imageManager = new ImageManager(this, settings);
     }
 
     private void loadCustomTypefaces() {
@@ -85,7 +70,6 @@ public class App extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        imageManager.getFileManager().clean();
     }
 
 }

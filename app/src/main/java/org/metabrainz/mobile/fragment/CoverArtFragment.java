@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.fragment;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,8 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
-import com.novoda.imageloader.core.model.ImageTag;
-import com.novoda.imageloader.core.model.ImageTagFactory;
+import com.squareup.picasso.Picasso;
 
-import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.api.data.Release;
 import org.metabrainz.mobile.fragment.contracts.EntityTab;
@@ -22,7 +21,6 @@ import org.metabrainz.mobile.util.CoverArt.Size;
 
 public class CoverArtFragment extends Fragment implements EntityTab<Release> {
 
-    private ImageTagFactory tagFactory;
     private String mbid;
 
     public static CoverArtFragment newInstance() {
@@ -37,7 +35,6 @@ public class CoverArtFragment extends Fragment implements EntityTab<Release> {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tagFactory = ImageTagFactory.getInstance(App.getContext(), R.color.transparent);
         return inflater.inflate(R.layout.fragment_cover_art, container, false);
     }
 
@@ -49,9 +46,7 @@ public class CoverArtFragment extends Fragment implements EntityTab<Release> {
 
     private void setCover(int imageViewId, String url) {
         ImageView view = (ImageView) getView().findViewById(imageViewId);
-        ImageTag tag = tagFactory.build(url, getActivity());
-        view.setTag(tag);
-        App.getImageLoader().load(view);
+        Picasso.get().load(Uri.parse(url)).into(view);
     }
 
 }

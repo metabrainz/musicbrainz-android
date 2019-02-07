@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.fragment;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -14,9 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
-import com.novoda.imageloader.core.model.ImageTagFactory;
+import com.squareup.picasso.Picasso;
 
-import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.api.data.Artist;
 import org.metabrainz.mobile.api.data.WebLink;
@@ -28,8 +28,6 @@ import org.metabrainz.mobile.intent.IntentFactory;
 public class ArtistBioFragment extends Fragment implements LoaderCallbacks<ArtistBio>, EntityTab<Artist> {
 
     private static final int BIO_LOADER = 30;
-
-    private ImageTagFactory tagFactory;
 
     private ImageView bioPicture;
     private TextView yearsActive;
@@ -57,7 +55,6 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        tagFactory = ImageTagFactory.getInstance(App.getContext(), R.color.transparent);
     }
 
     private void findViews(View layout) {
@@ -135,8 +132,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     }
 
     public void setBioImage(String url) {
-        bioPicture.setTag(tagFactory.build(url, getContext()));
-        App.getImageLoader().load(bioPicture);
+        Picasso.get().load(Uri.parse(url)).into(bioPicture);
     }
 
     public void showWikipediaBio(ArtistBio data) {
