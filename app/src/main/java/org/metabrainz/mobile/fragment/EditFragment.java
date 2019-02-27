@@ -122,9 +122,9 @@ public class EditFragment extends ContractFragment<EditFragment.Callback> implem
     }
 
     private void findViews(View layout) {
-        tagInput = (EditText) layout.findViewById(R.id.tag_input);
-        ratingInput = (RatingBar) layout.findViewById(R.id.rating_input);
-        tagBtn = (ImageButton) layout.findViewById(R.id.tag_btn);
+        tagInput = layout.findViewById(R.id.tag_input);
+        ratingInput = layout.findViewById(R.id.rating_input);
+        tagBtn = layout.findViewById(R.id.tag_btn);
     }
 
     private void setListeners() {

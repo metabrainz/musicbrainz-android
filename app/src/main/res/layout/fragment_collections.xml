@@ -2,7 +2,8 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Match"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
   android:background="@color/white">
 
   <ListView
@@ -12,18 +13,21 @@
 
   <TextView
     android:id="@id/android:empty"
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     android:gravity="center"
     android:text="@string/no_collections" />
 
   <include
     android:id="@+id/loading"
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     layout="@layout/layout_loading" />
   
   <include
     android:id="@+id/error"
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     layout="@layout/layout_retry"
     android:visibility="gone" />
 

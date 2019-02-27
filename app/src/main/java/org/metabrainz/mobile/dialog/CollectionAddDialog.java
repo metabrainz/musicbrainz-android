@@ -52,7 +52,7 @@ public class CollectionAddDialog extends DialogFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().setTitle(R.string.collection_dialog_title);
         View layout = inflater.inflate(R.layout.dialog_add_collection, container, false);
-        list = (ListView) layout.findViewById(android.R.id.list);
+        list = layout.findViewById(android.R.id.list);
         list.setOnItemClickListener(this);
         loading = layout.findViewById(R.id.loading);
         error = layout.findViewById(R.id.error);
@@ -96,7 +96,7 @@ public class CollectionAddDialog extends DialogFragment implements
 
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
-        Button retry = (Button) error.findViewById(R.id.retry_button);
+        Button retry = error.findViewById(R.id.retry_button);
         retry.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

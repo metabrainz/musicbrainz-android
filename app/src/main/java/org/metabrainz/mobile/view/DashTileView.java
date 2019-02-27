@@ -1,13 +1,13 @@
 package org.metabrainz.mobile.view;
 
-import org.metabrainz.mobile.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.metabrainz.mobile.R;
 
 public class DashTileView extends RelativeLayout {
 
@@ -25,8 +25,8 @@ public class DashTileView extends RelativeLayout {
         super.onFinishInflate();
         setFocusable(true);
         setBackgroundResource(R.drawable.dash_grid);
-        icon = (ImageView) findViewById(R.id.dash_tile_icon);
-        text = (TextView) findViewById(R.id.dash_tile_text);
+        icon = findViewById(R.id.dash_tile_icon);
+        text = findViewById(R.id.dash_tile_text);
     }
 
     public void setIcon(int drawableId) {

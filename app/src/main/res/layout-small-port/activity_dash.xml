@@ -7,7 +7,8 @@
   <fragment
     android:id="@+id/search_fragment"
     android:name="org.metabrainz.mobile.fragment.SearchFragment"
-    style="@style/MatchWidth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
     android:layout_alignParentTop="true" />
   
   <View
@@ -16,7 +17,8 @@
 
   <include 
     android:id="@+id/dash_buttons"
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     layout="@layout/fragment_dash_buttons"
     android:layout_below="@id/search_fragment" />
 

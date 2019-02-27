@@ -151,7 +151,7 @@ public class CollectionFragment extends ListFragment {
 
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
-        Button retry = (Button) error.findViewById(R.id.retry_button);
+        Button retry = error.findViewById(R.id.retry_button);
         retry.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,9 +177,9 @@ public class CollectionFragment extends ListFragment {
     }
 
     public interface FragmentLoadingCallbacks {
-        public void onLoadStart();
+        void onLoadStart();
 
-        public void onLoadFinish();
+        void onLoadFinish();
     }
 
     private final class RemoveReleasesActionMode implements ActionMode.Callback {

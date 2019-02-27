@@ -45,7 +45,7 @@ public class WebFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_webview, container, false);
-        webView = (WebView) layout.findViewById(R.id.webview);
+        webView = layout.findViewById(R.id.webview);
         loadWebView();
         return layout;
     }
@@ -90,9 +90,9 @@ public class WebFragment extends Fragment {
     }
 
     public interface WebFragmentCallbacks {
-        public void onPageStart();
+        void onPageStart();
 
-        public void onPageFinish();
+        void onPageFinish();
     }
 
     private class MBWebViewClient extends WebViewClient {

@@ -16,10 +16,13 @@
     <string name="welcome">Welcome to MusicBrainz!</string>
     <string name="welcome_loggedin">Logged in as</string>
 
-    <string name="searchtype_artist">Artist</string>
-    <string name="searchtype_release">Release</string>
-    <string name="searchtype_label">Label</string>
-    <string name="searchtype_recording">Recording</string>
+    <string name="search_type_artist">Artist</string>
+    <string name="search_type_release">Release</string>
+    <string name="search_type_label">Label</string>
+    <string name="search_type_recording">Recording</string>
+    <string name="search_type_release_group">Release Group</string>
+    <string name="search_type_instrument">Instrument</string>
+    <string name="search_type_event">Event</string>
 
     <!-- Searchable -->
     <string name="search_name">MusicBrainz</string>
@@ -242,4 +245,7 @@
     be prompted to login in MusicBrainz website. Follow the instructions and return to complete
     authentication.</string>
 
+    <string name="preferences">preferences</string>
+    <string name="access_token">access_token</string>
+    <string name="refresh_token">refresh_token</string>
 </resources>

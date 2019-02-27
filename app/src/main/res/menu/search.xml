@@ -3,16 +3,16 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item
-    android:id="@+id/legacy_search"
-    android:title="@string/action_search"
-    android:icon="@drawable/action_search"
-    app:showAsAction="always" />
+    <item
+        android:id="@+id/search_view"
+        android:title="@string/action_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom" />
 
-  <item
-    android:id="@+id/menu_preferences"
-    android:title="@string/action_settings"
-    android:icon="@drawable/action_settings"
-    app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_preferences"
+        android:icon="@drawable/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
 
 </menu>

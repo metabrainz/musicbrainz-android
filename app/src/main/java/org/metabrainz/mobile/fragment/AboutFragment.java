@@ -27,8 +27,8 @@ public class AboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_about, container);
-        versionLabel = (TextView) layout.findViewById(R.id.version_text);
-        HtmlAssetTextView body = (HtmlAssetTextView) layout.findViewById(R.id.about_text);
+        versionLabel = layout.findViewById(R.id.version_text);
+        HtmlAssetTextView body = layout.findViewById(R.id.about_text);
         body.setAsset("about.html");
         return layout;
     }

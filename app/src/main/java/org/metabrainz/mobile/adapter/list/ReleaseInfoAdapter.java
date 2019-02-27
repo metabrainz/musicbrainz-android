@@ -72,49 +72,49 @@ public class ReleaseInfoAdapter extends ArrayAdapter<ReleaseSearchResult> {
 
         TextView getTitle() {
             if (title == null) {
-                title = (TextView) base.findViewById(R.id.list_release_title);
+                title = base.findViewById(R.id.list_release_title);
             }
             return title;
         }
 
         TextView getArtist() {
             if (artist == null) {
-                artist = (TextView) base.findViewById(R.id.list_release_artist);
+                artist = base.findViewById(R.id.list_release_artist);
             }
             return artist;
         }
 
         TextView getTrackNum() {
             if (tracksNum == null) {
-                tracksNum = (TextView) base.findViewById(R.id.list_release_tracksnum);
+                tracksNum = base.findViewById(R.id.list_release_tracksnum);
             }
             return tracksNum;
         }
 
         TextView getFormat() {
             if (formats == null) {
-                formats = (TextView) base.findViewById(R.id.list_release_formats);
+                formats = base.findViewById(R.id.list_release_formats);
             }
             return formats;
         }
 
         TextView getLabels() {
             if (labels == null) {
-                labels = (TextView) base.findViewById(R.id.list_release_labels);
+                labels = base.findViewById(R.id.list_release_labels);
             }
             return labels;
         }
 
         TextView getCountry() {
             if (country == null) {
-                country = (TextView) base.findViewById(R.id.list_release_country);
+                country = base.findViewById(R.id.list_release_country);
             }
             return country;
         }
 
         TextView getDate() {
             if (date == null) {
-                date = (TextView) base.findViewById(R.id.list_release_date);
+                date = base.findViewById(R.id.list_release_date);
             }
             return date;
         }

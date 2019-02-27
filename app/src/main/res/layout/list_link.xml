@@ -3,7 +3,8 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/MatchWidth"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
   android:padding="@dimen/std_pad">
   
   <ImageView
@@ -11,16 +12,19 @@
     style="@style/Wrap"
     android:layout_centerVertical="true"
     android:layout_marginRight="@dimen/std_pad"
-    app:srcCompat="@drawable/link_generic" />
+      android:layout_marginEnd="@dimen/std_pad"
+      app:srcCompat="@drawable/link_generic" />
 
   <TextView
     android:id="@+id/list_link_title"
     style="@style/LinkDescription"
-    android:layout_toRightOf="@id/link_icon" />
+      android:layout_toEndOf="@id/link_icon"
+      android:layout_toRightOf="@id/link_icon" />
 
   <org.metabrainz.mobile.view.RobotoLightTextView
     android:id="@+id/list_link"
     style="@style/Link"
     android:layout_toRightOf="@id/link_icon"
-    android:layout_below="@+id/list_link_title" />
+      android:layout_below="@+id/list_link_title"
+      android:layout_toEndOf="@id/link_icon" />
 </RelativeLayout>

@@ -58,9 +58,9 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     }
 
     private void findViews(View layout) {
-        bioPicture = (ImageView) layout.findViewById(R.id.bio_picture);
-        yearsActive = (TextView) layout.findViewById(R.id.years_active);
-        bioText = (TextView) layout.findViewById(R.id.bio_text);
+        bioPicture = layout.findViewById(R.id.bio_picture);
+        yearsActive = layout.findViewById(R.id.years_active);
+        bioText = layout.findViewById(R.id.bio_text);
     }
 
     @Override

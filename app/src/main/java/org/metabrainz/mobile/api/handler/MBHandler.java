@@ -6,7 +6,7 @@ public class MBHandler extends DefaultHandler {
 
     private StringBuilder sb;
 
-    public void characters(char ch[], int start, int length) {
+    public void characters(char[] ch, int start, int length) {
 
         if (sb != null) {
             for (int i = start; i < start + length; i++) {

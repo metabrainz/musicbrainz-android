@@ -2,28 +2,34 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/MatchWidth"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
   android:padding="@dimen/std_pad">
 
   <TextView
     android:id="@+id/list_release_date"
     style="@style/ListAuxMedium"
     android:minWidth="90dp"
-    android:gravity="right"
-    android:layout_alignParentRight="true" />
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:gravity="end" />
 
   <TextView
     android:id="@+id/list_release_country"
     style="@style/ListAuxMedium"
     android:layout_alignParentRight="true"
     android:layout_below="@id/list_release_date"
-    android:layout_marginLeft="@dimen/small_pad" />
+      android:layout_alignParentEnd="true"
+      android:layout_marginStart="@dimen/small_pad"
+      android:layout_marginLeft="@dimen/small_pad" />
   
   <TextView
     android:id="@+id/list_release_title"
     style="@style/ListMedium"
     android:layout_alignParentLeft="true"
-    android:layout_toLeftOf="@id/list_release_date" />
+      android:layout_alignParentStart="true"
+      android:layout_toStartOf="@id/list_release_date"
+      android:layout_toLeftOf="@id/list_release_date" />
 
   <TextView
     android:id="@+id/list_release_artist"
@@ -31,6 +37,9 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@id/list_release_title"
     android:layout_marginRight="@dimen/small_pad"
-    android:layout_toLeftOf="@id/list_release_date" />
+      android:layout_alignParentStart="true"
+      android:layout_marginEnd="@dimen/small_pad"
+      android:layout_toStartOf="@id/list_release_date"
+      android:layout_toLeftOf="@id/list_release_date" />
   
 </RelativeLayout>

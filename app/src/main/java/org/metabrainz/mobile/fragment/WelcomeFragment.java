@@ -16,7 +16,7 @@ public class WelcomeFragment extends ContextFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_dash_welcome, container);
-        welcomeText = (TextView) layout.findViewById(R.id.welcome_text);
+        welcomeText = layout.findViewById(R.id.welcome_text);
         return layout;
     }
 

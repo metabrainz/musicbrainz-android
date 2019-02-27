@@ -2,11 +2,14 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/MatchWidth"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
   android:divider="?attr/dividerHorizontal"
   android:showDividers="middle">
 
-  <LinearLayout style="@style/MatchWidth">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <include
       layout="@layout/list_release"
       android:background="@color/list_bg" />

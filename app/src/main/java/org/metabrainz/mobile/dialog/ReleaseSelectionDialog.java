@@ -66,7 +66,7 @@ public class ReleaseSelectionDialog extends DialogFragment implements OnItemClic
     }
 
     private void setupList(View layout) {
-        releaseList = (ListView) layout.findViewById(R.id.rg_release_list);
+        releaseList = layout.findViewById(R.id.rg_release_list);
         releaseList.setOnItemClickListener(this);
     }
 

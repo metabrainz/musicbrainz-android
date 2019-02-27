@@ -8,18 +8,18 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.ArtistSearchResult;
+import org.metabrainz.mobile.api.data.search.entity.Artist;
 
 import java.util.List;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-public class ArtistSearchAdapter extends ArrayAdapter<ArtistSearchResult> {
+public class ArtistSearchAdapter extends ArrayAdapter<Artist> {
 
     private Context context;
-    private List<ArtistSearchResult> resultData;
+    private List<Artist> resultData;
 
-    public ArtistSearchAdapter(Context context, List<ArtistSearchResult> resultData) {
+    public ArtistSearchAdapter(Context context, List<Artist> resultData) {
         super(context, R.layout.list_search_artist, resultData);
         this.context = context;
         this.resultData = resultData;
@@ -38,7 +38,7 @@ public class ArtistSearchAdapter extends ArrayAdapter<ArtistSearchResult> {
             holder = (ArtistSearchHolder) artist.getTag();
         }
 
-        ArtistSearchResult artistData = resultData.get(position);
+        Artist artistData = resultData.get(position);
         holder.getArtistName().setText(artistData.getName());
 
         TextView option = holder.getDisambiguation();
@@ -64,14 +64,14 @@ public class ArtistSearchAdapter extends ArrayAdapter<ArtistSearchResult> {
 
         TextView getArtistName() {
             if (artistName == null) {
-                artistName = (TextView) base.findViewById(R.id.search_artist_name);
+                artistName = base.findViewById(R.id.search_artist_name);
             }
             return artistName;
         }
 
         TextView getDisambiguation() {
             if (disambiguation == null) {
-                disambiguation = (TextView) base.findViewById(R.id.search_artist_disambig);
+                disambiguation = base.findViewById(R.id.search_artist_disambig);
             }
             return disambiguation;
         }

@@ -9,4 +9,5 @@
   android:gravity="center_vertical"
   android:paddingLeft="@dimen/std_pad"
   android:singleLine="true"
-  android:ellipsize="marquee" />
+    android:ellipsize="marquee"
+    android:paddingStart="@dimen/std_pad" />

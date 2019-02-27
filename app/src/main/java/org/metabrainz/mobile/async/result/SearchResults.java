@@ -42,6 +42,6 @@ public class SearchResults {
     }
 
     public enum SearchType {
-        ARTIST, RELEASE_GROUP, ALL;
+        ARTIST, RELEASE_GROUP, ALL
     }
 }

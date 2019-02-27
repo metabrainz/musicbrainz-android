@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.adapter.list;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,6 @@ import org.metabrainz.mobile.api.data.ReleaseGroupSearchResult;
 import org.metabrainz.mobile.string.StringMapper;
 
 import java.util.List;
-
-import android.content.Context;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -59,21 +58,21 @@ public class ArtistRGAdapter extends ArrayAdapter<ReleaseGroupSearchResult> {
 
         TextView getReleaseTitle() {
             if (title == null) {
-                title = (TextView) base.findViewById(R.id.list_rg_title);
+                title = base.findViewById(R.id.list_rg_title);
             }
             return title;
         }
 
         TextView getReleaseYear() {
             if (year == null) {
-                year = (TextView) base.findViewById(R.id.list_rg_year);
+                year = base.findViewById(R.id.list_rg_year);
             }
             return year;
         }
 
         TextView getReleaseType() {
             if (type == null) {
-                type = (TextView) base.findViewById(R.id.list_rg_type);
+                type = base.findViewById(R.id.list_rg_type);
             }
             return type;
         }
