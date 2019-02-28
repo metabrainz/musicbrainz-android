@@ -16,7 +16,7 @@
 
 package org.metabrainz.mobile.util;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Utilities for encoding and decoding the Base64 representation of binary data.
@@ -181,12 +181,42 @@ public class Base64 {
         return temp;
     }
 
+    /**
+     * Base64-encode the given data and return a newly allocated String with the
+     * result.
+     *
+     * @param input the data to encode
+     * @param flags controls certain features of the encoded output. Passing
+     *              {@code DEFAULT} results in output that adheres to RFC 2045.
+     */
+    public static String encodeToString(byte[] input, int flags) {
+        return new String(encode(input, flags), StandardCharsets.US_ASCII);
+    }
+
+    // --------------------------------------------------------
+    // encoding
+    // --------------------------------------------------------
+
+    /**
+     * Base64-encode the given data and return a newly allocated String with the
+     * result.
+     *
+     * @param input  the data to encode
+     * @param offset the position within the input array at which to start
+     * @param len    the number of bytes of input to encode
+     * @param flags  controls certain features of the encoded output. Passing
+     *               {@code DEFAULT} results in output that adheres to RFC 2045.
+     */
+    public static String encodeToString(byte[] input, int offset, int len, int flags) {
+        return new String(encode(input, offset, len, flags), StandardCharsets.US_ASCII);
+    }
+
     /* package */static class Decoder extends Coder {
         /**
          * Lookup table for turning bytes into their position in the Base64
          * alphabet.
          */
-        private static final int DECODE[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        private static final int[] DECODE = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62,
                 -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -2, -1, -1, -1, 0, 1, 2, 3, 4, 5,
                 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26,
@@ -196,13 +226,13 @@ public class Base64 {
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                -1, -1, };
+                -1, -1,};
 
         /**
          * Decode lookup table for the "web safe" variant (RFC 3548 sec. 4)
          * where - and _ replace + and /.
          */
-        private static final int DECODE_WEBSAFE[] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        private static final int[] DECODE_WEBSAFE = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, 62, -1, -1, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -2, -1, -1, -1, 0, 1, 2, 3,
                 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, 63,
@@ -212,7 +242,7 @@ public class Base64 {
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                -1, -1, -1, -1, };
+                -1, -1, -1, -1,};
 
         /** Non-data values in the DECODE arrays. */
         private static final int SKIP = -1;
@@ -248,7 +278,7 @@ public class Base64 {
 
         /**
          * Decode another block of input data.
-         * 
+         *
          * @return true if the state machine is still healthy. false if bad
          *         base-64 data has been detected in the input stream.
          */
@@ -288,7 +318,7 @@ public class Base64 {
                 if (state == 0) {
                     while (p + 4 <= len
                             && (value = ((alphabet[input[p] & 0xff] << 18) | (alphabet[input[p + 1] & 0xff] << 12)
-                                    | (alphabet[input[p + 2] & 0xff] << 6) | (alphabet[input[p + 3] & 0xff]))) >= 0) {
+                            | (alphabet[input[p + 2] & 0xff] << 6) | (alphabet[input[p + 3] & 0xff]))) >= 0) {
                         output[op + 2] = (byte) value;
                         output[op + 1] = (byte) (value >> 8);
                         output[op] = (byte) (value >> 16);
@@ -307,78 +337,78 @@ public class Base64 {
                 int d = alphabet[input[p++] & 0xff];
 
                 switch (state) {
-                case 0:
-                    if (d >= 0) {
-                        value = d;
-                        ++state;
-                    } else if (d != SKIP) {
-                        this.state = 6;
-                        return false;
-                    }
-                    break;
+                    case 0:
+                        if (d >= 0) {
+                            value = d;
+                            ++state;
+                        } else if (d != SKIP) {
+                            this.state = 6;
+                            return false;
+                        }
+                        break;
 
-                case 1:
-                    if (d >= 0) {
-                        value = (value << 6) | d;
-                        ++state;
-                    } else if (d != SKIP) {
-                        this.state = 6;
-                        return false;
-                    }
-                    break;
+                    case 1:
+                        if (d >= 0) {
+                            value = (value << 6) | d;
+                            ++state;
+                        } else if (d != SKIP) {
+                            this.state = 6;
+                            return false;
+                        }
+                        break;
 
-                case 2:
-                    if (d >= 0) {
-                        value = (value << 6) | d;
-                        ++state;
-                    } else if (d == EQUALS) {
-                        // Emit the last (partial) output tuple;
-                        // expect exactly one more padding character.
-                        output[op++] = (byte) (value >> 4);
-                        state = 4;
-                    } else if (d != SKIP) {
-                        this.state = 6;
-                        return false;
-                    }
-                    break;
+                    case 2:
+                        if (d >= 0) {
+                            value = (value << 6) | d;
+                            ++state;
+                        } else if (d == EQUALS) {
+                            // Emit the last (partial) output tuple;
+                            // expect exactly one more padding character.
+                            output[op++] = (byte) (value >> 4);
+                            state = 4;
+                        } else if (d != SKIP) {
+                            this.state = 6;
+                            return false;
+                        }
+                        break;
 
-                case 3:
-                    if (d >= 0) {
-                        // Emit the output triple and return to state 0.
-                        value = (value << 6) | d;
-                        output[op + 2] = (byte) value;
-                        output[op + 1] = (byte) (value >> 8);
-                        output[op] = (byte) (value >> 16);
-                        op += 3;
-                        state = 0;
-                    } else if (d == EQUALS) {
-                        // Emit the last (partial) output tuple;
-                        // expect no further data or padding characters.
-                        output[op + 1] = (byte) (value >> 2);
-                        output[op] = (byte) (value >> 10);
-                        op += 2;
-                        state = 5;
-                    } else if (d != SKIP) {
-                        this.state = 6;
-                        return false;
-                    }
-                    break;
+                    case 3:
+                        if (d >= 0) {
+                            // Emit the output triple and return to state 0.
+                            value = (value << 6) | d;
+                            output[op + 2] = (byte) value;
+                            output[op + 1] = (byte) (value >> 8);
+                            output[op] = (byte) (value >> 16);
+                            op += 3;
+                            state = 0;
+                        } else if (d == EQUALS) {
+                            // Emit the last (partial) output tuple;
+                            // expect no further data or padding characters.
+                            output[op + 1] = (byte) (value >> 2);
+                            output[op] = (byte) (value >> 10);
+                            op += 2;
+                            state = 5;
+                        } else if (d != SKIP) {
+                            this.state = 6;
+                            return false;
+                        }
+                        break;
 
-                case 4:
-                    if (d == EQUALS) {
-                        ++state;
-                    } else if (d != SKIP) {
-                        this.state = 6;
-                        return false;
-                    }
-                    break;
+                    case 4:
+                        if (d == EQUALS) {
+                            ++state;
+                        } else if (d != SKIP) {
+                            this.state = 6;
+                            return false;
+                        }
+                        break;
 
-                case 5:
-                    if (d != SKIP) {
-                        this.state = 6;
-                        return false;
-                    }
-                    break;
+                    case 5:
+                        if (d != SKIP) {
+                            this.state = 6;
+                            return false;
+                        }
+                        break;
                 }
             }
 
@@ -395,84 +425,38 @@ public class Base64 {
             // the state machine and finish up.
 
             switch (state) {
-            case 0:
-                // Output length is a multiple of three. Fine.
-                break;
-            case 1:
-                // Read one extra input byte, which isn't enough to
-                // make another output byte. Illegal.
-                this.state = 6;
-                return false;
-            case 2:
-                // Read two extra input bytes, enough to emit 1 more
-                // output byte. Fine.
-                output[op++] = (byte) (value >> 4);
-                break;
-            case 3:
-                // Read three extra input bytes, enough to emit 2 more
-                // output bytes. Fine.
-                output[op++] = (byte) (value >> 10);
-                output[op++] = (byte) (value >> 2);
-                break;
-            case 4:
-                // Read one padding '=' when we expected 2. Illegal.
-                this.state = 6;
-                return false;
-            case 5:
-                // Read all the padding '='s we expected and no more.
-                // Fine.
-                break;
+                case 0:
+                    // Output length is a multiple of three. Fine.
+                    break;
+                case 1:
+                    // Read one extra input byte, which isn't enough to
+                    // make another output byte. Illegal.
+                    this.state = 6;
+                    return false;
+                case 2:
+                    // Read two extra input bytes, enough to emit 1 more
+                    // output byte. Fine.
+                    output[op++] = (byte) (value >> 4);
+                    break;
+                case 3:
+                    // Read three extra input bytes, enough to emit 2 more
+                    // output bytes. Fine.
+                    output[op++] = (byte) (value >> 10);
+                    output[op++] = (byte) (value >> 2);
+                    break;
+                case 4:
+                    // Read one padding '=' when we expected 2. Illegal.
+                    this.state = 6;
+                    return false;
+                case 5:
+                    // Read all the padding '='s we expected and no more.
+                    // Fine.
+                    break;
             }
 
             this.state = state;
             this.op = op;
             return true;
-        }
-    }
-
-    // --------------------------------------------------------
-    // encoding
-    // --------------------------------------------------------
-
-    /**
-     * Base64-encode the given data and return a newly allocated String with the
-     * result.
-     * 
-     * @param input
-     *            the data to encode
-     * @param flags
-     *            controls certain features of the encoded output. Passing
-     *            {@code DEFAULT} results in output that adheres to RFC 2045.
-     */
-    public static String encodeToString(byte[] input, int flags) {
-        try {
-            return new String(encode(input, flags), "US-ASCII");
-        } catch (UnsupportedEncodingException e) {
-            // US-ASCII is guaranteed to be available.
-            throw new AssertionError(e);
-        }
-    }
-
-    /**
-     * Base64-encode the given data and return a newly allocated String with the
-     * result.
-     * 
-     * @param input
-     *            the data to encode
-     * @param offset
-     *            the position within the input array at which to start
-     * @param len
-     *            the number of bytes of input to encode
-     * @param flags
-     *            controls certain features of the encoded output. Passing
-     *            {@code DEFAULT} results in output that adheres to RFC 2045.
-     */
-    public static String encodeToString(byte[] input, int offset, int len, int flags) {
-        try {
-            return new String(encode(input, offset, len, flags), "US-ASCII");
-        } catch (UnsupportedEncodingException e) {
-            // US-ASCII is guaranteed to be available.
-            throw new AssertionError(e);
         }
     }
 
@@ -553,22 +537,22 @@ public class Base64 {
          * Lookup table for turning Base64 alphabet positions (6 bits) into
          * output bytes.
          */
-        private static final byte ENCODE[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+        private static final byte[] ENCODE = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
                 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
                 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1',
-                '2', '3', '4', '5', '6', '7', '8', '9', '+', '/', };
+                '2', '3', '4', '5', '6', '7', '8', '9', '+', '/',};
 
         /**
          * Lookup table for turning Base64 alphabet positions (6 bits) into
          * output bytes.
          */
-        private static final byte ENCODE_WEBSAFE[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        private static final byte[] ENCODE_WEBSAFE = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
                 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0',
-                '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_', };
+                '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_',};
 
         final private byte[] tail;
-        /* package */int tailLen;
+        /* package */ int tailLen;
         private int count;
 
         final public boolean do_padding;
@@ -625,7 +609,6 @@ public class Base64 {
                     v = ((tail[0] & 0xff) << 16) | ((input[p++] & 0xff) << 8) | (input[p++] & 0xff);
                     tailLen = 0;
                 }
-                ;
                 break;
 
             case 2:

@@ -1,5 +1,8 @@
 package org.metabrainz.mobile.intent;
 
+import android.content.Context;
+import android.content.Intent;
+
 import org.metabrainz.mobile.activity.AboutActivity;
 import org.metabrainz.mobile.activity.CollectionActivity;
 import org.metabrainz.mobile.activity.CollectionListActivity;
@@ -9,29 +12,29 @@ import org.metabrainz.mobile.activity.LoginActivity;
 import org.metabrainz.mobile.activity.SettingsActivity;
 import org.metabrainz.mobile.activity.WebActivity;
 
-import android.content.Context;
-import android.content.Intent;
-
 public class IntentFactory {
 
     public interface Extra {
 
-        public static final String ARTIST_MBID = "artist_mbid";
-        public static final String RELEASE_MBID = "release_mbid";
-        public static final String RG_MBID = "rg_mbid";
-        public static final String COLLECTION_MBID = "collection_mbid";
-        public static final String BARCODE = "barcode";
+        String ARTIST_MBID = "artist_mbid";
+        String RELEASE_MBID = "release_mbid";
+        String RG_MBID = "rg_mbid";
+        String COLLECTION_MBID = "collection_mbid";
+        String BARCODE = "barcode";
 
-        public static final String TYPE = "type";
-        public static final String QUERY = "query";
-        public static final String ARTIST = "artist";
-        public static final String RELEASE_GROUP = "rg";
-        public static final String LABEL = "label";
-        public static final String RECORDING = "recording";
-        public static final String ALL = "all";
+        String TYPE = "type";
+        String QUERY = "query";
+        String ARTIST = "artist";
+        String RELEASE_GROUP = "rg";
+        String RELEASE = "release";
+        String LABEL = "label";
+        String RECORDING = "recording";
+        String INSTRUMENT = "instrument";
+        String EVENT = "event";
+        String ALL = "all";
 
-        public static final String TITLE = "title";
-        public static final String TARGET_URL = "target_url";
+        String TITLE = "title";
+        String TARGET_URL = "target_url";
     }
 
     public static Intent getDashboard(Context context) {

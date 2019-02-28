@@ -1,44 +1,35 @@
 package org.metabrainz.mobile.fragment;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
-import org.metabrainz.mobile.App;
+import androidx.appcompat.widget.SearchView;
+
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.SearchActivity;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
 import org.metabrainz.mobile.suggestion.SuggestionHelper;
 
-public class SearchFragment extends ContextFragment implements OnEditorActionListener, OnItemClickListener,
-        OnClickListener {
+public class SearchFragment extends ContextFragment implements SearchView.OnQueryTextListener {
 
-    private AutoCompleteTextView searchField;
     private Spinner searchTypeSpinner;
     private SuggestionHelper suggestionHelper;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_dash_search, container);
-        searchTypeSpinner = (Spinner) layout.findViewById(R.id.search_spin);
-        searchField = (AutoCompleteTextView) layout.findViewById(R.id.query_input);
-        searchField.setOnEditorActionListener(this);
-        layout.findViewById(R.id.search_btn).setOnClickListener(this);
+        searchTypeSpinner = layout.findViewById(R.id.search_spin);
+        searchView = layout.findViewById(R.id.search_view);
+        setupSearchView();
         return layout;
     }
 
@@ -56,7 +47,7 @@ public class SearchFragment extends ContextFragment implements OnEditorActionLis
         searchTypeSpinner.setAdapter(typeAdapter);
     }
 
-    @Override
+    /*@Override
     public void onResume() {
         super.onResume();
         if (App.getUser().isSearchSuggestionsEnabled()) {
@@ -85,15 +76,12 @@ public class SearchFragment extends ContextFragment implements OnEditorActionLis
         if (v.getId() == R.id.search_btn) {
             startSearch();
         }
-    }
+    }*/
 
     private void startSearch() {
-        String query = searchField.getText().toString();
+        String query = searchView.getQuery().toString();
 
         if (query.length() > 0) {
-            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
-
             Intent searchIntent = new Intent(context, SearchActivity.class);
             searchIntent.putExtra(Extra.TYPE, getSearchTypeFromSpinner());
             searchIntent.putExtra(Extra.QUERY, query);
@@ -101,7 +89,6 @@ public class SearchFragment extends ContextFragment implements OnEditorActionLis
         } else {
             Toast.makeText(context, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
         }
-        searchField.setText("");
     }
 
     private String getSearchTypeFromSpinner() {
@@ -110,14 +97,38 @@ public class SearchFragment extends ContextFragment implements OnEditorActionLis
             case 0:
                 return Extra.ARTIST;
             case 1:
-                return Extra.RELEASE_GROUP;
+                return Extra.RELEASE;
             case 2:
                 return Extra.LABEL;
             case 3:
                 return Extra.RECORDING;
+            case 4:
+                return Extra.RELEASE_GROUP;
+            case 5:
+                return Extra.INSTRUMENT;
+            case 6:
+                return Extra.EVENT;
             default:
                 return Extra.ALL;
         }
     }
 
+    private void setupSearchView() {
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(this);
+        //SearchSuggestionsAdapter adapter = new SearchSuggestionsAdapter(getActivity(),null,0);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        startSearch();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 }

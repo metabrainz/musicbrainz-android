@@ -57,21 +57,21 @@ public class ReleaseTrackAdapter extends ArrayAdapter<Track> {
 
         TextView getTrackNum() {
             if (number == null) {
-                number = (TextView) base.findViewById(R.id.list_track_num);
+                number = base.findViewById(R.id.list_track_num);
             }
             return number;
         }
 
         TextView getTrackName() {
             if (name == null) {
-                name = (TextView) base.findViewById(R.id.list_track_name);
+                name = base.findViewById(R.id.list_track_name);
             }
             return name;
         }
 
         TextView getTrackTime() {
             if (time == null) {
-                time = (TextView) base.findViewById(R.id.list_track_time);
+                time = base.findViewById(R.id.list_track_time);
             }
             return time;
         }

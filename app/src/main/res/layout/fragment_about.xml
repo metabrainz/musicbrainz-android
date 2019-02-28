@@ -2,11 +2,13 @@
 
 <ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Match"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
   android:background="@drawable/background">
   
   <LinearLayout
-    style="@style/MatchWidth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
     android:padding="@dimen/gutter_large"
     android:orientation="vertical">
 

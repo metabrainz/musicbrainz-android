@@ -35,7 +35,6 @@ public class QueryBuilder {
     private static final String COLLECTION = "collection/";
     private static final String COLLECTION_LIST = "/releases?inc=releases+artist-credits&limit=100";
     private static final String COLLECTION_EDIT = "/releases/";
-    ;
 
     private static final String TAG_PARAMS = "?inc=tags";
     private static final String RATING_PARAMS = "?inc=ratings";
@@ -142,7 +141,7 @@ public class QueryBuilder {
     }
 
     private static String buildQuery(String path) {
-        return new String(WEB_SERVICE + path);
+        return WEB_SERVICE + path;
     }
 
 }

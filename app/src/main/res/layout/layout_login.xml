@@ -4,7 +4,8 @@
 
   <RelativeLayout
     android:id="@+id/warning_container"
-    style="@style/MatchWidth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
     android:gravity="center">
 
     <TextView
@@ -37,6 +38,7 @@
     android:layout_below="@+id/pass_input"
     android:layout_alignParentRight="true"
     android:layout_marginTop="@dimen/small_pad"
-    android:text="@string/login" />
+      android:layout_alignParentEnd="true"
+      android:text="@string/login" />
 </merge>
 

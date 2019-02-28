@@ -2,18 +2,19 @@ package org.metabrainz.mobile.api.webservice;
 
 import org.metabrainz.mobile.api.data.AccessToken;
 import org.metabrainz.mobile.api.data.Artist;
-import org.metabrainz.mobile.api.data.ArtistSearchResult;
 import org.metabrainz.mobile.api.data.Label;
-import org.metabrainz.mobile.api.data.LabelSearchResult;
 import org.metabrainz.mobile.api.data.Recording;
-import org.metabrainz.mobile.api.data.RecordingSearchResult;
 import org.metabrainz.mobile.api.data.Release;
 import org.metabrainz.mobile.api.data.ReleaseGroup;
-import org.metabrainz.mobile.api.data.ReleaseGroupSearchResult;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
+import org.metabrainz.mobile.api.data.search.response.ArtistSearchResponse;
+import org.metabrainz.mobile.api.data.search.response.EventSearchResponse;
+import org.metabrainz.mobile.api.data.search.response.InstrumentSearchResponse;
+import org.metabrainz.mobile.api.data.search.response.LabelSearchResponse;
+import org.metabrainz.mobile.api.data.search.response.RecordingSearchResponse;
+import org.metabrainz.mobile.api.data.search.response.ReleaseGroupSearchResponse;
+import org.metabrainz.mobile.api.data.search.response.ReleaseSearchResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -26,7 +27,7 @@ import retrofit2.http.Query;
 public interface MusicBrainzService {
 
     @FormUrlEncoded
-    @POST("https://musicbrainz.org/oauth2/token")
+    @POST("https://test.musicbrainz.org/oauth2/token")
     Call<AccessToken> getAccessToken(@Field("code") String code,
                                      @Field("grant_type") String grantType,
                                      @Field("client_id") String clientId,
@@ -53,28 +54,38 @@ public interface MusicBrainzService {
     Release lookupReleaseUsingBarcode(String barcode) throws IOException;
 
     @GET("artist/")
-    Call<List<ArtistSearchResult>> searchArtist(@Query("query") String searchTerm,
-                                                @Query("limit") String limit,
-                                                @Query("offset") String offset);
+    Call<ArtistSearchResponse> searchArtist(@Query("query") String searchTerm,
+                                            @Query("limit") String limit,
+                                            @Query("offset") String offset);
 
     @GET("release/")
-    Call<List<ReleaseSearchResult>> searchRelease(@Query("query") String searchTerm,
+    Call<ReleaseSearchResponse> searchRelease(@Query("query") String searchTerm,
+                                              @Query("limit") String limit,
+                                              @Query("offset") String offset);
+
+    @GET("release-group/")
+    Call<ReleaseGroupSearchResponse> searchReleaseGroup(@Query("query") String searchTerm,
+                                                        @Query("limit") String limit,
+                                                        @Query("offset") String offset);
+
+    @GET("label/")
+    Call<LabelSearchResponse> searchLabel(@Query("query") String searchTerm,
+                                          @Query("limit") String limit,
+                                          @Query("offset") String offset);
+
+    @GET("recording/")
+    Call<RecordingSearchResponse> searchRecording(@Query("query") String searchTerm,
                                                   @Query("limit") String limit,
                                                   @Query("offset") String offset);
 
-    @GET("release-group/")
-    Call<List<ReleaseGroupSearchResult>> searchReleaseGroup(@Query("query") String searchTerm,
-                                                            @Query("limit") String limit,
-                                                            @Query("offset") String offset);
+    @GET("instrument/")
+    Call<InstrumentSearchResponse> searchInstrument(@Query("query") String searchTerm,
+                                                    @Query("limit") String limit,
+                                                    @Query("offset") String offset);
 
-    @GET("label/")
-    Call<List<LabelSearchResult>> searchLabel(@Query("query") String searchTerm,
-                                                @Query("limit") String limit,
-                                                @Query("offset") String offset);
-
-    @GET("recording/")
-    Call<List<RecordingSearchResult>> searchRecording(@Query("query") String searchTerm,
-                                                      @Query("limit") String limit,
-                                                      @Query("offset") String offset);
+    @GET("event/")
+    Call<EventSearchResponse> searchEvent(@Query("query") String searchTerm,
+                                          @Query("limit") String limit,
+                                          @Query("offset") String offset);
 
 }

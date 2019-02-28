@@ -25,8 +25,8 @@ public class Tag implements Comparable<Tag> {
     }
 
     public int compareTo(Tag another) {
-        Integer a = (Integer) getCount();
-        Integer b = (Integer) another.getCount();
+        Integer a = getCount();
+        Integer b = another.getCount();
         return a.compareTo(b) * -1;
     }
 

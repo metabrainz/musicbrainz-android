@@ -61,14 +61,14 @@ public class CollectionListAdapter extends ArrayAdapter<UserSearchResult> {
 
         TextView getTitle() {
             if (title == null) {
-                title = (TextView) base.findViewById(R.id.list_collection_title);
+                title = base.findViewById(R.id.list_collection_title);
             }
             return title;
         }
 
         TextView getCount() {
             if (count == null) {
-                count = (TextView) base.findViewById(R.id.list_collection_count);
+                count = base.findViewById(R.id.list_collection_count);
             }
             return count;
         }

@@ -12,6 +12,7 @@
     android:id="@+id/list_collection_count"
     style="@style/ListAux"
     android:layout_alignParentRight="true"
-    android:layout_alignBaseline="@id/list_collection_title" />
+      android:layout_alignBaseline="@id/list_collection_title"
+      android:layout_alignParentEnd="true" />
   
 </RelativeLayout>

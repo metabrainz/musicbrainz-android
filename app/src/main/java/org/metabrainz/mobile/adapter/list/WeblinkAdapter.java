@@ -95,21 +95,21 @@ public class WeblinkAdapter extends ArrayAdapter<WebLink> {
 
         ImageView getIcon() {
             if (icon == null) {
-                icon = (ImageView) base.findViewById(R.id.link_icon);
+                icon = base.findViewById(R.id.link_icon);
             }
             return icon;
         }
 
         TextView getLinkTitle() {
             if (linkTitle == null) {
-                linkTitle = (TextView) base.findViewById(R.id.list_link_title);
+                linkTitle = base.findViewById(R.id.list_link_title);
             }
             return linkTitle;
         }
 
         TextView getLink() {
             if (link == null) {
-                link = (TextView) base.findViewById(R.id.list_link);
+                link = base.findViewById(R.id.list_link);
             }
             return link;
         }

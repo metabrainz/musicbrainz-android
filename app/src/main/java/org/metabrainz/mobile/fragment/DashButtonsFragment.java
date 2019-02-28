@@ -25,7 +25,7 @@ public class DashButtonsFragment extends ContextFragment implements OnClickListe
     }
 
     private void setupTile(int tileId, int iconId, int stringId) {
-        DashTileView scanTile = (DashTileView) layout.findViewById(tileId);
+        DashTileView scanTile = layout.findViewById(tileId);
         scanTile.setIcon(iconId);
         scanTile.setText(stringId);
         scanTile.setOnClickListener(this);

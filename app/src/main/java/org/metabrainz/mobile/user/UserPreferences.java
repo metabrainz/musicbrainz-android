@@ -1,22 +1,22 @@
 package org.metabrainz.mobile.user;
 
-import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.config.Secrets;
-import org.metabrainz.mobile.util.SimpleEncrypt;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import org.metabrainz.mobile.App;
+import org.metabrainz.mobile.config.Secrets;
+import org.metabrainz.mobile.util.SimpleEncrypt;
 
 public class UserPreferences implements AppUser {
     
     private static final String USER_PREFERENCE_FILE = "user";
     
     private interface PreferenceName {
-        static final String USERNAME = "username";
-        static final String PASSWORD = "password";
-        static final String SUGGESTIONS = "search_suggestions";
-        static final String REPORT_CRASHES = "send_crashlogs";
+        String USERNAME = "username";
+        String PASSWORD = "password";
+        String SUGGESTIONS = "search_suggestions";
+        String REPORT_CRASHES = "send_crashlogs";
     }
 
     @Override

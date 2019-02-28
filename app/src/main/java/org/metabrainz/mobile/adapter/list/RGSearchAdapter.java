@@ -59,21 +59,21 @@ public class RGSearchAdapter extends ArrayAdapter<ReleaseGroupSearchResult> {
 
         TextView getTitle() {
             if (title == null) {
-                title = (TextView) base.findViewById(R.id.search_release);
+                title = base.findViewById(R.id.search_release);
             }
             return title;
         }
 
         TextView getArtist() {
             if (artist == null) {
-                artist = (TextView) base.findViewById(R.id.search_release_artist);
+                artist = base.findViewById(R.id.search_release_artist);
             }
             return artist;
         }
 
         TextView getType() {
             if (type == null) {
-                type = (TextView) base.findViewById(R.id.search_release_type);
+                type = base.findViewById(R.id.search_release_type);
             }
             return type;
         }

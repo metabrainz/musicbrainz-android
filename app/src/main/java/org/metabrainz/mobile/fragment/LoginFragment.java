@@ -65,9 +65,9 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     }
 
     public void findViews() {
-        usernameField = (EditText) layout.findViewById(R.id.uname_input);
-        passwordField = (EditText) layout.findViewById(R.id.pass_input);
-        loginButton = (Button) layout.findViewById(R.id.login_btn);
+        usernameField = layout.findViewById(R.id.uname_input);
+        passwordField = layout.findViewById(R.id.pass_input);
+        loginButton = layout.findViewById(R.id.login_btn);
     }
 
     public void setListeners() {
@@ -252,7 +252,7 @@ public class LoginFragment extends ContextFragment implements LoaderCallbacks<As
     }
 
     public interface LoginCallback {
-        public void onLoggedIn();
+        void onLoggedIn();
     }
 
 }

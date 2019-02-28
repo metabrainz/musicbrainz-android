@@ -45,7 +45,7 @@ public class CoverArtFragment extends Fragment implements EntityTab<Release> {
     }
 
     private void setCover(int imageViewId, String url) {
-        ImageView view = (ImageView) getView().findViewById(imageViewId);
+        ImageView view = getView().findViewById(imageViewId);
         Picasso.get().load(Uri.parse(url)).into(view);
     }
 

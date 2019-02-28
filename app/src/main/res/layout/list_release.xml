@@ -3,7 +3,8 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/release_box"
-  style="@style/MatchWidth">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
   <!-- Titles -->
   <RelativeLayout
@@ -16,13 +17,17 @@
       android:id="@+id/list_release_title"
       style="@style/ListReleaseTitles"
       android:layout_alignParentLeft="true"
-      android:layout_toLeftOf="@+id/list_release_artist" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/list_release_artist"
+        android:layout_toLeftOf="@+id/list_release_artist" />
 
     <TextView
       android:id="@+id/list_release_artist"
       style="@style/ListReleaseTitles"
       android:layout_alignParentRight="true"
-      android:layout_marginLeft="@dimen/huge_pad" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/huge_pad"
+        android:layout_marginLeft="@dimen/huge_pad" />
   </RelativeLayout>
 
   <RelativeLayout
@@ -34,7 +39,8 @@
     <TextView
       android:id="@+id/list_release_date"
       style="@style/ListAuxMedium"
-      android:layout_alignParentLeft="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
     <TextView
       android:id="@+id/list_release_labels"
@@ -42,26 +48,34 @@
       android:layout_toRightOf="@+id/list_release_tracksnum"
       android:layout_toLeftOf="@+id/list_release_country"
       android:layout_marginRight="@dimen/huge_pad"
-      android:layout_marginLeft="@dimen/super_pad" />
+        android:layout_marginStart="@dimen/super_pad"
+        android:layout_marginLeft="@dimen/super_pad"
+        android:layout_marginEnd="@dimen/huge_pad"
+        android:layout_toStartOf="@+id/list_release_country"
+        android:layout_toEndOf="@+id/list_release_tracksnum" />
 
     <TextView
       android:id="@+id/list_release_country"
       style="@style/ListAuxMedium"
-      android:layout_alignParentRight="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 
     <!-- Mediums -->
     <TextView
       android:id="@+id/list_release_tracksnum"
       style="@style/ListReleaseMedium"
       android:layout_alignParentLeft="true"
-      android:layout_below="@+id/list_release_labels" />
+        android:layout_below="@+id/list_release_labels"
+        android:layout_alignParentStart="true" />
 
     <TextView
       android:id="@+id/list_release_formats"
       style="@style/ListReleaseMedium"
       android:layout_toRightOf="@+id/list_release_tracksnum"
       android:layout_below="@+id/list_release_labels"
-      android:layout_alignLeft="@id/list_release_labels" />
+        android:layout_alignStart="@id/list_release_labels"
+        android:layout_alignLeft="@id/list_release_labels"
+        android:layout_toEndOf="@+id/list_release_tracksnum" />
   </RelativeLayout>
 
 </RelativeLayout>

@@ -2,15 +2,18 @@
 
 <ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Match"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
   android:background="@color/main_fg">
 
   <LinearLayout
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     android:padding="@dimen/std_pad">
 
     <org.metabrainz.mobile.view.WidthRelativeLayout
-      style="@style/Match"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
       android:background="@color/cover_bg"
       android:layout_marginBottom="@dimen/std_pad">
 
@@ -20,13 +23,15 @@
 
       <org.metabrainz.mobile.view.FadeImageView
         android:id="@+id/cover_front"
-        style="@style/Match"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:adjustViewBounds="true" />
     </org.metabrainz.mobile.view.WidthRelativeLayout>
 
     <org.metabrainz.mobile.view.WidthRelativeLayout
-      style="@style/Match"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
       android:background="@color/cover_bg">
 
       <org.metabrainz.mobile.view.RobotoLightTextView
@@ -35,7 +40,8 @@
 
       <org.metabrainz.mobile.view.FadeImageView
         android:id="@+id/cover_back"
-        style="@style/Match"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:adjustViewBounds="true" />
     </org.metabrainz.mobile.view.WidthRelativeLayout>

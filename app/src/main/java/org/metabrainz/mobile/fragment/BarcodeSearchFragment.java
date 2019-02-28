@@ -148,12 +148,12 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     }
 
     private void findViews(View layout) {
-        searchBox = (EditText) layout.findViewById(R.id.barcode_search);
-        barcodeText = (EditText) layout.findViewById(R.id.barcode);
-        searchButton = (ImageButton) layout.findViewById(R.id.barcode_search_btn);
-        matches = (ListView) layout.findViewById(R.id.barcode_list);
-        instructions = (TextView) layout.findViewById(R.id.barcode_instructions);
-        noResults = (TextView) layout.findViewById(R.id.noresults);
+        searchBox = layout.findViewById(R.id.barcode_search);
+        barcodeText = layout.findViewById(R.id.barcode);
+        searchButton = layout.findViewById(R.id.barcode_search_btn);
+        matches = layout.findViewById(R.id.barcode_list);
+        instructions = layout.findViewById(R.id.barcode_instructions);
+        noResults = layout.findViewById(R.id.noresults);
         loading = layout.findViewById(R.id.loading);
         error = layout.findViewById(R.id.error);
     }
@@ -222,7 +222,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     private void showConnectionErrorWarning() {
         matches.setAdapter(null);
         error.setVisibility(View.VISIBLE);
-        Button retry = (Button) error.findViewById(R.id.retry_button);
+        Button retry = error.findViewById(R.id.retry_button);
         retry.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,9 +300,9 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
     }
 
     public interface LoadingCallbacks {
-        public void startLoading();
+        void startLoading();
 
-        public void stopLoading();
+        void stopLoading();
     }
 
 }

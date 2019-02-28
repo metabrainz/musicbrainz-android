@@ -1,17 +1,5 @@
 package org.metabrainz.mobile.api.webservice;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.AbstractHttpClient;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.metabrainz.mobile.api.MusicBrainz;
 import org.metabrainz.mobile.api.User;
 import org.metabrainz.mobile.api.data.Artist;
@@ -26,13 +14,14 @@ import org.metabrainz.mobile.api.data.ReleaseGroupSearchResult;
 import org.metabrainz.mobile.api.data.ReleaseSearchResult;
 import org.metabrainz.mobile.api.data.Tag;
 import org.metabrainz.mobile.api.data.UserCollection;
-import org.metabrainz.mobile.api.data.UserSearchResult;
 import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.api.data.UserSearchResult;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -47,27 +36,28 @@ public class MusicBrainzWebClient implements MusicBrainz {
     private static final int AUTH_PORT = 80;
     private static final String AUTH_TYPE = "Digest";
 
-    private AbstractHttpClient httpClient;
+    // private AbstractHttpClient httpClient;
     private ResponseParser responseParser;
     private String clientId;
 
+    //TODO: Remove temporary default http client
     public MusicBrainzWebClient(String userAgent) {
-        httpClient = HttpClient.getClient(userAgent);
-        responseParser = new ResponseParser();
+    /*    httpClient = new DefaultHttpClient();
+        responseParser = new ResponseParser();*/
     }
 
     public MusicBrainzWebClient(User user, String userAgent, String clientId) {
-        httpClient = HttpClient.getClient(userAgent);
+        /*httpClient = new DefaultHttpClient();
         responseParser = new ResponseParser();
         setCredentials(user.getUsername(), user.getPassword());
-        this.clientId = clientId;
+        this.clientId = clientId;*/
     }
 
     @Override
     public void setCredentials(String username, String password) {
-        AuthScope authScope = new AuthScope(AUTH_SCOPE, AUTH_PORT, AUTH_REALM, AUTH_TYPE);
+        /*AuthScope authScope = new AuthScope(AUTH_SCOPE, AUTH_PORT, AUTH_REALM, AUTH_TYPE);
         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
-        httpClient.getCredentialsProvider().setCredentials(authScope, credentials);
+        httpClient.getCredentialsProvider().setCredentials(authScope, credentials);*/
     }
 
     public void setClientId(String clientId) {
@@ -76,148 +66,160 @@ public class MusicBrainzWebClient implements MusicBrainz {
 
     @Override
     public Release lookupReleaseUsingBarcode(String barcode) throws IOException {
-        HttpEntity entity = get(QueryBuilder.barcodeSearch(barcode));
+        /*HttpEntity entity = get(QueryBuilder.barcodeSearch(barcode));
         String barcodeMbid = responseParser.parseMbidFromBarcode(entity.getContent());
         entity.consumeContent();
         if (barcodeMbid == null) {
             throw new BarcodeNotFoundException(barcode);
         }
-        return lookupRelease(barcodeMbid);
+        return lookupRelease(barcodeMbid);*/
+        return new Release();
     }
 
     @Override
     public Release lookupRelease(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.releaseLookup(mbid));
+        /*HttpEntity entity = get(QueryBuilder.releaseLookup(mbid));
         Release release = responseParser.parseRelease(entity.getContent());
         entity.consumeContent();
-        return release;
+        return release;*/
+        return new Release();
     }
 
     @Override
     public LinkedList<ReleaseSearchResult> browseReleases(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.releaseGroupReleaseBrowse(mbid));
+        /*HttpEntity entity = get(QueryBuilder.releaseGroupReleaseBrowse(mbid));
         LinkedList<ReleaseSearchResult> releases = responseParser.parseReleaseGroupReleases(entity.getContent());
         entity.consumeContent();
         Collections.sort(releases);
-        return releases;
+        return releases;*/
+        return new LinkedList<>();
     }
 
     @Override
     public Artist lookupArtist(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.artistLookup(mbid));
+        /*HttpEntity entity = get(QueryBuilder.artistLookup(mbid));
         Artist artist = responseParser.parseArtist(entity.getContent());
         entity.consumeContent();
         artist.setReleaseGroups(browseArtistReleaseGroups(mbid));
-        return artist;
+        return artist;*/
+        return new Artist();
     }
 
     private ArrayList<ReleaseGroupSearchResult> browseArtistReleaseGroups(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.artistReleaseGroupBrowse(mbid, 0));
+        /*HttpEntity entity = get(QueryBuilder.artistReleaseGroupBrowse(mbid, 0));
         ArrayList<ReleaseGroupSearchResult> releases = responseParser.parseReleaseGroupBrowse(entity.getContent());
         entity.consumeContent();
         Collections.sort(releases);
-        return releases;
+        return releases;*/
+        return new ArrayList<>();
     }
 
     @Override
     public ReleaseGroup lookupReleaseGroup(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.releaseGroupLookup(mbid));
+        /*HttpEntity entity = get(QueryBuilder.releaseGroupLookup(mbid));
         ReleaseGroup rg = responseParser.parseReleaseGroupLookup(entity.getContent());
         entity.consumeContent();
-        return rg;
+        return rg;*/
+        return new ReleaseGroup();
     }
 
     @Override
     public Label lookupLabel(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.labelLookup(mbid));
+        /*HttpEntity entity = get(QueryBuilder.labelLookup(mbid));
         Label label = responseParser.parseLabel(entity.getContent());
         entity.consumeContent();
-        return label;
+        return label;*/
+        return new Label();
     }
 
     @Override
     public Recording lookupRecording(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.recordingLookup(mbid));
+        /*HttpEntity entity = get(QueryBuilder.recordingLookup(mbid));
         Recording recording = responseParser.parseRecording(entity.getContent());
         entity.consumeContent();
-        return recording;
+        return recording;*/
+        return new Recording();
     }
 
     @Override
     public LinkedList<ArtistSearchResult> searchArtist(String searchTerm) throws IOException {
-        HttpEntity entity = get(QueryBuilder.artistSearch(searchTerm));
+        /*HttpEntity entity = get(QueryBuilder.artistSearch(searchTerm));
         LinkedList<ArtistSearchResult> artists = responseParser.parseArtistSearch(entity.getContent());
         entity.consumeContent();
-        return artists;
+        return artists;*/
+        return new LinkedList<>();
     }
 
     @Override
     public LinkedList<ReleaseGroupSearchResult> searchReleaseGroup(String searchTerm) throws IOException {
-        HttpEntity entity = get(QueryBuilder.releaseGroupSearch(searchTerm));
+        /*HttpEntity entity = get(QueryBuilder.releaseGroupSearch(searchTerm));
         LinkedList<ReleaseGroupSearchResult> releaseGroups = responseParser.parseReleaseGroupSearch(entity.getContent());
         entity.consumeContent();
-        return releaseGroups;
+        return releaseGroups;*/
+        return new LinkedList<>();
     }
 
     @Override
     public LinkedList<ReleaseSearchResult> searchRelease(String searchTerm) throws IOException {
-        HttpEntity entity = get(QueryBuilder.releaseSearch(searchTerm));
+        /*HttpEntity entity = get(QueryBuilder.releaseSearch(searchTerm));
         LinkedList<ReleaseSearchResult> releases = responseParser.parseReleaseSearch(entity.getContent());
         entity.consumeContent();
-        return releases;
+        return releases;*/
+        return new LinkedList<>();
     }
 
     @Override
     public LinkedList<LabelSearchResult> searchLabel(String searchTerm) throws IOException {
-        HttpEntity entity = get(QueryBuilder.labelSearch(searchTerm));
+        /*HttpEntity entity = get(QueryBuilder.labelSearch(searchTerm));
         LinkedList<LabelSearchResult> labels = responseParser.parseLabelSearch(entity.getContent());
         entity.consumeContent();
-        return labels;
+        return labels;*/
+        return new LinkedList<>();
     }
 
     @Override
     public LinkedList<RecordingSearchResult> searchRecording(String searchTerm) throws IOException {
-        HttpEntity entity = get(QueryBuilder.recordingSearch(searchTerm));
+        /*HttpEntity entity = get(QueryBuilder.recordingSearch(searchTerm));
         LinkedList<RecordingSearchResult> recordings = responseParser.parseRecordingSearch(entity.getContent());
         entity.consumeContent();
-        return recordings;
+        return recordings;*/
+        return new LinkedList<>();
     }
 
     @Override
     public LinkedList<Tag> lookupTags(Entity type, String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.tagLookup(type, mbid));
+        /*HttpEntity entity = get(QueryBuilder.tagLookup(type, mbid));
         LinkedList<Tag> tags = responseParser.parseTagLookup(entity.getContent());
         entity.consumeContent();
         Collections.sort(tags);
-        return tags;
+        return tags;*/
+        return new LinkedList<>();
     }
 
     @Override
     public float lookupRating(Entity type, String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.ratingLookup(type, mbid));
+        /*HttpEntity entity = get(QueryBuilder.ratingLookup(type, mbid));
         float rating = responseParser.parseRatingLookup(entity.getContent());
         entity.consumeContent();
-        return rating;
+        return rating;*/
+        return 0.0f;
     }
 
     @Override
     public boolean autenticateCredentials() throws IOException {
-        HttpGet authenticationTest = new HttpGet(QueryBuilder.authenticationCheck());
-        authenticationTest.setHeader("Accept", "application/xml");
-        try {
-            httpClient.execute(authenticationTest, new BasicResponseHandler());
-        } catch (HttpResponseException e) {
-            return false;
-        }
+        URL authenticationTest = new URL(QueryBuilder.authenticationCheck());
+        HttpURLConnection urlConnection = (HttpURLConnection) authenticationTest.openConnection();
+        urlConnection.setRequestProperty("Accept", "application/xml");
         return true;
     }
 
     @Override
     public UserData lookupUserData(Entity entityType, String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.userData(entityType, mbid));
+        /*HttpEntity entity = get(QueryBuilder.userData(entityType, mbid));
         UserData userData = responseParser.parseUserData(entity.getContent());
         entity.consumeContent();
-        return userData;
+        return userData;*/
+        return new UserData();
     }
 
     @Override
@@ -253,47 +255,49 @@ public class MusicBrainzWebClient implements MusicBrainz {
 
     @Override
     public LinkedList<UserSearchResult> lookupUserCollections() throws IOException {
-        HttpEntity entity = get(QueryBuilder.collectionList());
+        /*HttpEntity entity = get(QueryBuilder.collectionList());
         LinkedList<UserSearchResult> collections = responseParser.parseCollectionListLookup(entity.getContent());
         entity.consumeContent();
         Collections.sort(collections);
-        return collections;
+        return collections;*/
+        return new LinkedList<>();
     }
 
     @Override
     public UserCollection lookupCollection(String mbid) throws IOException {
-        HttpEntity entity = get(QueryBuilder.collectionLookup(mbid));
+        /*HttpEntity entity = get(QueryBuilder.collectionLookup(mbid));
         UserCollection collection = responseParser.parseCollectionLookup(entity.getContent());
         entity.consumeContent();
-        return collection;
+        return collection;*/
+        return new UserCollection();
     }
 
-    private HttpEntity get(String url) throws IOException {
+    /*private HttpEntity get(String url) throws IOException {
         HttpGet get = new HttpGet(url);
         get.setHeader("Accept", "application/xml");
         HttpResponse response = httpClient.execute(get);
         return response.getEntity();
-    }
+    }*/
 
     private void post(String url, String content) throws IOException {
-        HttpPost post = new HttpPost(url);
+       /* HttpPost post = new HttpPost(url);
         post.addHeader("Content-Type", "application/xml; charset=UTF-8");
         StringEntity xml = new StringEntity(content, "UTF-8");
         post.setEntity(xml);
         HttpResponse response = httpClient.execute(post);
-        response.getEntity().consumeContent();
+        response.getEntity().consumeContent();*/
     }
 
     private void delete(String url) throws IOException {
-        HttpDelete delete = new HttpDelete(url);
+        /*HttpDelete delete = new HttpDelete(url);
         HttpResponse response = httpClient.execute(delete);
-        response.getEntity().consumeContent();
+        response.getEntity().consumeContent();*/
     }
 
     private void put(String url) throws IOException {
-        HttpPut put = new HttpPut(url);
+        /*URL put = new URL(url);
         HttpResponse response = httpClient.execute(put);
-        response.getEntity().consumeContent();
+        response.getEntity().consumeContent();*/
     }
 
 }

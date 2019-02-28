@@ -1,19 +1,20 @@
 package org.metabrainz.mobile.dialog;
 
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
-import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.string.StringFormat;
-import org.metabrainz.mobile.string.StringMapper;
-
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.DialogFragment;
+
+import org.metabrainz.mobile.App;
+import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.api.data.ReleaseSearchResult;
+import org.metabrainz.mobile.string.StringFormat;
+import org.metabrainz.mobile.string.StringMapper;
 
 public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListener {
 
@@ -57,14 +58,14 @@ public class ConfirmBarcodeDialog extends DialogFragment implements OnClickListe
     }
 
     private void findViews(View layout) {
-        title = (TextView) layout.findViewById(R.id.list_release_title);
-        artist = (TextView) layout.findViewById(R.id.list_release_artist);
-        numberOfTracks = (TextView) layout.findViewById(R.id.list_release_tracksnum);
-        formats = (TextView) layout.findViewById(R.id.list_release_formats);
-        labels = (TextView) layout.findViewById(R.id.list_release_labels);
-        releaseDate = (TextView) layout.findViewById(R.id.list_release_date);
-        country = (TextView) layout.findViewById(R.id.list_release_country);
-        confirm = (Button) layout.findViewById(R.id.barcode_confirm);
+        title = layout.findViewById(R.id.list_release_title);
+        artist = layout.findViewById(R.id.list_release_artist);
+        numberOfTracks = layout.findViewById(R.id.list_release_tracksnum);
+        formats = layout.findViewById(R.id.list_release_formats);
+        labels = layout.findViewById(R.id.list_release_labels);
+        releaseDate = layout.findViewById(R.id.list_release_date);
+        country = layout.findViewById(R.id.list_release_country);
+        confirm = layout.findViewById(R.id.barcode_confirm);
     }
 
     private void setViews(ReleaseSearchResult release) {

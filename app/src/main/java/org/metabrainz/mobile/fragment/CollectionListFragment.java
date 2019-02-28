@@ -80,7 +80,7 @@ public class CollectionListFragment extends ListFragment implements
 
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
-        Button retry = (Button) error.findViewById(R.id.retry_button);
+        Button retry = error.findViewById(R.id.retry_button);
         retry.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

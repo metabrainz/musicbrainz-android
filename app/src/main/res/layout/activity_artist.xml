@@ -11,29 +11,34 @@
 
   <include
     android:id="@+id/tags_rating"
-    style="@style/MatchWidth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
     android:layout_below="@id/artist_artist"
     layout="@layout/layout_tags_rating" />
 
   <com.viewpagerindicator.TabPageIndicator
     android:id="@+id/indicator"
-    style="@style/MatchWidth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_below="@id/tags_rating" />
 
   <androidx.viewpager.widget.ViewPager
     android:id="@+id/pager"
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     android:layout_below="@id/indicator" />
 
   <include
     android:id="@+id/loading"
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     layout="@layout/layout_loading" />
 
   <include
     android:id="@+id/error"
-    style="@style/Match"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
     layout="@layout/layout_retry"
     android:visibility="gone" />
 

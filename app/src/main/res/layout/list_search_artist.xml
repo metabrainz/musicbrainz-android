@@ -6,7 +6,8 @@
 
   <LinearLayout
     android:id="@+id/wrapper"
-    style="@style/Match">
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
     <TextView
       android:id="@+id/search_artist_name"
       style="@style/ListMain" />

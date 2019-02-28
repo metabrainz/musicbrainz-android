@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  
-  <string-array name="searchType">
-    <item>@string/searchtype_artist</item>
-    <item>@string/searchtype_release</item>
-<!--     <item>@string/searchtype_label</item>
-    <item>@string/searchtype_recording</item> -->
-  </string-array>
 
-  <array name="donation">
-    <item>$5</item>
-    <item>$10</item>
-    <item>$25</item>
-    <item>$50</item>
-    <item>$100</item>
-  </array>
-  
+    <string-array name="searchType">
+        <item>@string/search_type_artist</item>
+        <item>@string/search_type_release</item>
+        <item>@string/search_type_label</item>
+        <item>@string/search_type_recording</item>
+        <item>@string/search_type_release_group</item>
+        <item>@string/search_type_instrument</item>
+        <item>@string/search_type_event</item>
+    </string-array>
+
 </resources>

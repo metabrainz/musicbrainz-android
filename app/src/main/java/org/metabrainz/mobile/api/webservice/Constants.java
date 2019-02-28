@@ -11,4 +11,7 @@ public class Constants {
             "artists+tags+ratings";
     public static final String LOOKUP_RELEASE_GROUP_PARAMS =
             "artist-credits+tags+ratings+url-rels";
+
+    public static final String LIMIT = "100";
+    public static final String OFFSET = "0";
 }

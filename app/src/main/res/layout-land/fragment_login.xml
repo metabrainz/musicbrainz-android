@@ -7,10 +7,12 @@
 
   <include
     layout="@layout/layout_login"
-    style="@style/MatchWidth" />
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
 
   <RelativeLayout
-    style="@style/MatchWidth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_alignParentBottom="true">
 
@@ -24,12 +26,14 @@
       android:id="@+id/register_link"
       style="@style/LinkButton"
       android:text="@string/register_text"
-      android:layout_toLeftOf="@id/stub" />
+        android:layout_toStartOf="@id/stub"
+        android:layout_toLeftOf="@id/stub" />
 
     <Button
       android:id="@+id/forgotpass_link"
       style="@style/LinkButton"
       android:text="@string/forgotpass_text"
-      android:layout_toRightOf="@id/stub" />
+        android:layout_toEndOf="@id/stub"
+        android:layout_toRightOf="@id/stub" />
   </RelativeLayout>
 </RelativeLayout>

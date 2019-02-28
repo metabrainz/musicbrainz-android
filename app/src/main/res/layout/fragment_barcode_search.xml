@@ -5,7 +5,8 @@
   style="@style/Activity">
 
   <RelativeLayout
-    style="@style/MatchWidth"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
     android:layout_margin="@dimen/small_pad">
 
     <org.metabrainz.mobile.view.RobotoLightTextView
@@ -15,19 +16,24 @@
       android:textSize="@dimen/text_size_medium"
       android:layout_marginLeft="@dimen/std_pad"
       android:layout_marginRight="@dimen/std_pad"
-      android:layout_alignBaseline="@+id/barcode" />
+        android:layout_alignBaseline="@+id/barcode"
+        android:layout_marginStart="@dimen/std_pad"
+        android:layout_marginEnd="@dimen/std_pad" />
 
     <EditText 
       android:id="@+id/barcode"
-      style="@style/MatchWidth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
       android:layout_toRightOf="@+id/barcode_label"
-      android:inputType="number" />
+        android:layout_toEndOf="@+id/barcode_label"
+        android:inputType="number" />
 
     <ImageButton
       android:id="@+id/barcode_search_btn"
       style="@style/SearchButton"
       android:layout_alignParentRight="true"
-      android:layout_below="@id/barcode" />
+        android:layout_below="@id/barcode"
+        android:layout_alignParentEnd="true" />
 
     <org.metabrainz.mobile.view.RobotoLightTextView
       android:id="@+id/release_label"
@@ -36,7 +42,9 @@
       android:textSize="@dimen/text_size_medium"
       android:layout_marginLeft="@dimen/std_pad"
       android:layout_marginRight="@dimen/std_pad"
-      android:layout_alignBaseline="@+id/barcode_search" />
+        android:layout_alignBaseline="@+id/barcode_search"
+        android:layout_marginStart="@dimen/std_pad"
+        android:layout_marginEnd="@dimen/std_pad" />
     
     <EditText
       android:id="@+id/barcode_search"
@@ -45,10 +53,14 @@
       android:layout_toLeftOf="@id/barcode_search_btn"
       android:layout_alignBottom="@id/barcode_search_btn"
       android:hint="@string/barcode_hint"
-      android:layout_below="@id/barcode" />
+        android:layout_below="@id/barcode"
+        android:layout_alignStart="@id/barcode"
+        android:layout_toStartOf="@id/barcode_search_btn" />
   </RelativeLayout>
 
-  <RelativeLayout style="@style/MatchWidth">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <View
       android:id="@+id/topline"
@@ -86,7 +98,8 @@
 
     <include
       android:id="@+id/error"
-      style="@style/Match"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
       layout="@layout/layout_retry"
       android:layout_below="@+id/topline"
       android:visibility="gone" />

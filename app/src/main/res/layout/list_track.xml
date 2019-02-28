@@ -2,30 +2,37 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/MatchWidth"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
   android:padding="@dimen/std_pad">
 
   <TextView
     android:id="@+id/list_track_num"
     style="@style/TrackNum"
     android:layout_alignParentLeft="true"
-    android:layout_centerVertical="true" />
+      android:layout_alignParentStart="true"
+      android:layout_centerVertical="true" />
 
   <TextView
     android:id="@+id/list_track_va"
     style="@style/TrackArtist"
     android:layout_toRightOf="@+id/list_track_num"
     android:layout_toLeftOf="@+id/list_track_time"
-    android:layout_above="@+id/list_track_name" />
+      android:layout_above="@+id/list_track_name"
+      android:layout_toStartOf="@+id/list_track_time"
+      android:layout_toEndOf="@+id/list_track_num" />
 
   <TextView
     android:id="@+id/list_track_name"
     style="@style/Track"
     android:layout_toRightOf="@+id/list_track_num"
-    android:layout_toLeftOf="@+id/list_track_time" />
+      android:layout_toStartOf="@+id/list_track_time"
+      android:layout_toLeftOf="@+id/list_track_time"
+      android:layout_toEndOf="@+id/list_track_num" />
 
   <TextView
     android:id="@+id/list_track_time"
     style="@style/TrackTime"
-    android:layout_alignParentRight="true" />
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true" />
 </RelativeLayout>
