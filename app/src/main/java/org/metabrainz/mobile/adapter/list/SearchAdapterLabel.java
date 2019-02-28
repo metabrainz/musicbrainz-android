@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.adapter.EntityViewHolder;
 import org.metabrainz.mobile.api.data.search.entity.Label;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class SearchAdapterLabel extends SearchAdapter {
 
     }
 
-    private static class LabelViewHolder extends RecyclerView.ViewHolder {
+    private static class LabelViewHolder extends EntityViewHolder {
         TextView labelName, labelType, labelDisambiguation, labelArea;
 
         LabelViewHolder(@NonNull View itemView) {

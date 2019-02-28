@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.adapter.EntityViewHolder;
 import org.metabrainz.mobile.api.data.search.entity.Instrument;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class SearchAdapterInstrument extends SearchAdapter {
 
     }
 
-    private static class InstrumentViewHolder extends RecyclerView.ViewHolder {
+    private static class InstrumentViewHolder extends EntityViewHolder {
         TextView instrumentName, instrumentType, instrumentDisambiguation, instrumentDescription;
 
         InstrumentViewHolder(@NonNull View itemView) {

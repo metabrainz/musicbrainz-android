@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.adapter.EntityViewHolder;
 import org.metabrainz.mobile.api.data.search.entity.Recording;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public class SearchAdapterRecording extends SearchAdapter {
 
     }
 
-    private static class RecordingViewHolder extends RecyclerView.ViewHolder {
+    private static class RecordingViewHolder extends EntityViewHolder {
         TextView recordingName, recordingArtist, recordingDisambiguation, recordingRelease;
 
         RecordingViewHolder(@NonNull View itemView) {
