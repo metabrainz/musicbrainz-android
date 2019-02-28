@@ -3,6 +3,7 @@ package org.metabrainz.mobile.activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +35,7 @@ import org.metabrainz.mobile.api.data.search.entity.Recording;
 import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.api.data.search.entity.ReleaseGroup;
 import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.suggestion.SuggestionHelper;
 import org.metabrainz.mobile.suggestion.SuggestionProvider;
 import org.metabrainz.mobile.viewmodel.SearchViewModel;
 
@@ -59,6 +62,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private List<Instrument> instrumentSearchResults = new ArrayList<>();
     private List<Event> eventSearchResults = new ArrayList<>();
     private String query, entity;
+    private SuggestionHelper suggestionHelper;
+    private CursorAdapter suggestionAdapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,8 +136,23 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         searchView.setQuery(query, false);
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
+        suggestionHelper = new SuggestionHelper(this);
+        suggestionAdapter = suggestionHelper.getAdapter();
+        searchView.setSuggestionsAdapter(suggestionAdapter);
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                return false;
+            }
 
-        //searchView.setSuggestionsAdapter(adapter);
+            @Override
+            public boolean onSuggestionClick(int position) {
+                Cursor cursor = (Cursor) suggestionAdapter.getItem(position);
+                String query = cursor.getString(cursor.getColumnIndexOrThrow("display1"));
+                searchView.setQuery(query, false);
+                return false;
+            }
+        });
         return true;
     }
 
@@ -236,6 +256,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        suggestionAdapter.changeCursor(suggestionHelper.getMatchingEntries(newText));
         return false;
     }
 

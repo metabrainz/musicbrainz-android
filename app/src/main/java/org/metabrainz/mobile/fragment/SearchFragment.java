@@ -3,6 +3,7 @@ package org.metabrainz.mobile.fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.cursoradapter.widget.CursorAdapter;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.SearchActivity;
@@ -23,6 +25,7 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
     private Spinner searchTypeSpinner;
     private SuggestionHelper suggestionHelper;
     private SearchView searchView;
+    private CursorAdapter suggestionAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
         super.onActivityCreated(savedInstanceState);
         setupSearchTypeSpinner();
         suggestionHelper = new SuggestionHelper(getActivity());
+        suggestionAdapter = suggestionHelper.getAdapter();
+        searchView.setSuggestionsAdapter(suggestionAdapter);
     }
 
     private void setupSearchTypeSpinner() {
@@ -117,8 +122,22 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setSubmitButtonEnabled(true);
+        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
-        //SearchSuggestionsAdapter adapter = new SearchSuggestionsAdapter(getActivity(),null,0);
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionClick(int position) {
+                Cursor cursor = (Cursor) suggestionAdapter.getItem(position);
+                String query = cursor.getString(cursor.getColumnIndexOrThrow("display1"));
+                searchView.setQuery(query, false);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -129,6 +148,7 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        suggestionAdapter.changeCursor(suggestionHelper.getMatchingEntries(newText));
         return false;
     }
 }

@@ -3,11 +3,9 @@ package org.metabrainz.mobile.suggestion;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.widget.ArrayAdapter;
 import android.widget.FilterQueryProvider;
-import android.widget.SimpleCursorAdapter;
-import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.loader.content.CursorLoader;
 
 import org.metabrainz.mobile.R;
@@ -35,11 +33,7 @@ public class SuggestionHelper {
         return adapter;
     }
 
-    public ArrayAdapter<String> getEmptyAdapter() {
-        return new ArrayAdapter<String>(context, R.layout.dropdown_item, new String[]{});
-    }
-
-    private Cursor getMatchingEntries(String constraint) {
+    public Cursor getMatchingEntries(String constraint) {
         if (constraint == null) {
             return null;
         }
@@ -56,7 +50,7 @@ public class SuggestionHelper {
         return cursor;
     }
 
-    private class SuggestionCursorToString implements CursorToStringConverter {
+    private class SuggestionCursorToString implements SimpleCursorAdapter.CursorToStringConverter {
 
         @Override
         public CharSequence convertToString(Cursor cursor) {
