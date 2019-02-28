@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.adapter.SearchSuggestionsAdapter;
 import org.metabrainz.mobile.adapter.list.SearchAdapter;
 import org.metabrainz.mobile.adapter.list.SearchAdapterArtist;
 import org.metabrainz.mobile.adapter.list.SearchAdapterEvent;
@@ -130,10 +129,9 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         searchView = (SearchView) menu.findItem(R.id.search_view).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setQuery(query, false);
-        android.widget.SearchView x;
-        searchView.setSubmitButtonEnabled(false);
+        searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
-        SearchSuggestionsAdapter adapter = new SearchSuggestionsAdapter(this, null, 0);
+
         //searchView.setSuggestionsAdapter(adapter);
         return true;
     }
@@ -171,7 +169,6 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     private void doSearch(String query) {
         saveSearchSuggestion(query);
-        viewModel.setSearchQuery(query);
         switch (entity) {
             case IntentFactory.Extra.RELEASE:
                 viewModel.getReleaseSearchResponse(query).observe(this,
