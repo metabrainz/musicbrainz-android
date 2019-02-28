@@ -43,6 +43,7 @@ public class SearchAdapterRelease extends SearchAdapter {
         setViewVisibility(release.labelCatalog(), viewHolder.releaseLabel);
         setViewVisibility(release.getDisplayArtist(), viewHolder.releaseArtist);
         setViewVisibility(release.getDisambiguation(), viewHolder.releaseDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override

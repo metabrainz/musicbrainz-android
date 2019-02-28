@@ -44,6 +44,7 @@ public class SearchAdapterEvent extends SearchAdapter {
         else viewHolder.eventTimePeriod.setVisibility(View.GONE);
         setViewVisibility(event.getType(), viewHolder.eventType);
         setViewVisibility(event.getDisambiguation(), viewHolder.eventDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override

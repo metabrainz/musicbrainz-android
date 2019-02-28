@@ -44,6 +44,7 @@ public class SearchAdapterReleaseGroup extends SearchAdapter {
         setViewVisibility(releaseGroup.getType(), viewHolder.releaseType);
         setViewVisibility(releaseGroup.getDisplayArtist(), viewHolder.releaseArtist);
         setViewVisibility(releaseGroup.getDisambiguation(), viewHolder.releaseDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override

@@ -42,6 +42,7 @@ public class SearchAdapterInstrument extends SearchAdapter {
         setViewVisibility(instrument.getDescription(), viewHolder.instrumentDescription);
         setViewVisibility(instrument.getType(), viewHolder.instrumentType);
         setViewVisibility(instrument.getDisambiguation(), viewHolder.instrumentDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override

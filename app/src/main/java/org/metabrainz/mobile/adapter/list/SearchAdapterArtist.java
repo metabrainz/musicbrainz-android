@@ -45,6 +45,7 @@ public class SearchAdapterArtist extends SearchAdapter {
         setViewVisibility(artist.getCountry(), viewHolder.artistArea);
         setViewVisibility(artist.getType(), viewHolder.artistType);
         setViewVisibility(artist.getDisambiguation(), viewHolder.artistDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override

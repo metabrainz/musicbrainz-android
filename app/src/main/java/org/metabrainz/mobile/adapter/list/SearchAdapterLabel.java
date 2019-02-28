@@ -46,6 +46,7 @@ public class SearchAdapterLabel extends SearchAdapter {
             setViewVisibility(label.getArea().getName(), viewHolder.labelArea);
         else viewHolder.labelArea.setVisibility(View.GONE);
         setViewVisibility(label.getDisambiguation(), viewHolder.labelDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override

@@ -44,6 +44,7 @@ public class SearchAdapterRecording extends SearchAdapter {
         setViewVisibility(recording.getReleases().get(0).getTitle(), viewHolder.recordingRelease);
         setViewVisibility(recording.getDisplayArtist(), viewHolder.recordingArtist);
         setViewVisibility(recording.getDisambiguation(), viewHolder.recordingDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override
