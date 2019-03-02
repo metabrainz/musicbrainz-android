@@ -2,11 +2,15 @@
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
   style="@style/Activity">
 
   <TextView
     android:id="@+id/artist_artist"
     style="@style/EntityText"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
     android:layout_margin="@dimen/std_pad" />
 
   <include
@@ -16,18 +20,11 @@
     android:layout_below="@id/artist_artist"
     layout="@layout/layout_tags_rating" />
 
-  <com.viewpagerindicator.TabPageIndicator
-    android:id="@+id/indicator"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_below="@id/tags_rating" />
-
   <androidx.viewpager.widget.ViewPager
     android:id="@+id/pager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-    android:layout_below="@id/indicator" />
+    android:layout_below="@id/tags_rating" />
 
   <include
     android:id="@+id/loading"

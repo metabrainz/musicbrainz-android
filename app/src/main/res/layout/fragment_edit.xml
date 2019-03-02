@@ -18,6 +18,8 @@
     <TextView
       android:id="@+id/login_warning"
       style="@style/Wrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="@dimen/gutter_large"
@@ -28,12 +30,16 @@
     <RatingBar
       android:id="@+id/rating_input"
       style="@style/RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
       android:layout_centerHorizontal="true"
       android:layout_below="@id/login_warning" />
 
     <ImageButton
       android:id="@+id/tag_btn"
       style="@style/Wrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
       app:srcCompat="@drawable/btn_tag"
       android:layout_below="@id/rating_input"
         android:layout_alignParentEnd="true"

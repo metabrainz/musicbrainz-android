@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public abstract class SearchAdapter extends RecyclerView.Adapter implements View.OnClickListener {
+public abstract class SearchAdapter extends RecyclerView.Adapter {
     int lastPosition = -1;
 
     protected void setViewVisibility(String text, TextView view) {

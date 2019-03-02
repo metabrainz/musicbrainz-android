@@ -51,11 +51,6 @@ public class SearchAdapterRelease extends SearchAdapter {
         return data.size();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private static class ReleaseViewHolder extends EntityViewHolder {
         TextView releaseName, releaseArtist, releaseDisambiguation, releaseLabel;
 

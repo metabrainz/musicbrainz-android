@@ -9,6 +9,9 @@
   <TextView
     android:id="@+id/tags"
     style="@style/TagsText"
+
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
     android:layout_marginRight="@dimen/small_pad"
     android:layout_marginLeft="@dimen/small_pad"
     android:layout_toLeftOf="@+id/separator"
@@ -19,6 +22,7 @@
 
   <View
     android:id="@+id/separator"
+
     android:background="@color/main_bg"
     android:layout_width="2dp"
     android:layout_height="18dp"
@@ -28,6 +32,8 @@
 
   <RatingBar
     android:id="@+id/rating"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
     style="?android:attr/ratingBarStyleSmall"
     android:layout_marginRight="@dimen/std_pad"
     android:layout_marginLeft="@dimen/std_pad"
