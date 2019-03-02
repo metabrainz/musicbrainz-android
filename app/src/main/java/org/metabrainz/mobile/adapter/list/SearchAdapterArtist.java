@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.adapter.EntityViewHolder;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class SearchAdapterArtist extends SearchAdapter {
         setViewVisibility(artist.getCountry(), viewHolder.artistArea);
         setViewVisibility(artist.getType(), viewHolder.artistType);
         setViewVisibility(artist.getDisambiguation(), viewHolder.artistDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class SearchAdapterArtist extends SearchAdapter {
 
     }
 
-    private static class ArtistViewHolder extends RecyclerView.ViewHolder {
+    private static class ArtistViewHolder extends EntityViewHolder {
         TextView artistName, artistType, artistDisambiguation, artistArea;
 
         ArtistViewHolder(@NonNull View itemView) {

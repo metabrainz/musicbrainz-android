@@ -26,7 +26,7 @@ public class SearchViewModel extends ViewModel {
     private MutableLiveData<List<Instrument>> instrumentResponse;
     private String searchQuery;
     private String searchEntity;
-    private boolean queryHasChanged;
+    public boolean queryHasChanged = true;
 
     public SearchViewModel() {
     }
@@ -50,7 +50,6 @@ public class SearchViewModel extends ViewModel {
         if (artistSearchResponse == null || queryHasChanged) {
             artistSearchResponse = loadArtistSearchResponse(searchQuery);
         }
-        queryHasChanged = false;
         return artistSearchResponse;
     }
 

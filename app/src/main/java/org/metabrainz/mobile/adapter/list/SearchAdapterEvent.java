@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.adapter.EntityViewHolder;
 import org.metabrainz.mobile.api.data.search.entity.Event;
 
 import java.util.List;
@@ -43,6 +44,7 @@ public class SearchAdapterEvent extends SearchAdapter {
         else viewHolder.eventTimePeriod.setVisibility(View.GONE);
         setViewVisibility(event.getType(), viewHolder.eventType);
         setViewVisibility(event.getDisambiguation(), viewHolder.eventDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override
@@ -55,7 +57,7 @@ public class SearchAdapterEvent extends SearchAdapter {
 
     }
 
-    private static class EventViewHolder extends RecyclerView.ViewHolder {
+    private static class EventViewHolder extends EntityViewHolder {
         TextView eventName, eventType, eventDisambiguation, eventTimePeriod;
 
         EventViewHolder(@NonNull View itemView) {

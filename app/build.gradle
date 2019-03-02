@@ -6,7 +6,7 @@ android {
         applicationId "org.metabrainz.android"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 8
+        versionCode 9
         versionName "1.4"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

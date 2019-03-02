@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.adapter.EntityViewHolder;
 import org.metabrainz.mobile.api.data.search.entity.Release;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class SearchAdapterRelease extends SearchAdapter {
         setViewVisibility(release.labelCatalog(), viewHolder.releaseLabel);
         setViewVisibility(release.getDisplayArtist(), viewHolder.releaseArtist);
         setViewVisibility(release.getDisambiguation(), viewHolder.releaseDisambiguation);
+        setAnimation(viewHolder.itemView, position);
     }
 
     @Override
@@ -54,7 +56,7 @@ public class SearchAdapterRelease extends SearchAdapter {
 
     }
 
-    private static class ReleaseViewHolder extends RecyclerView.ViewHolder {
+    private static class ReleaseViewHolder extends EntityViewHolder {
         TextView releaseName, releaseArtist, releaseDisambiguation, releaseLabel;
 
         ReleaseViewHolder(@NonNull View itemView) {
