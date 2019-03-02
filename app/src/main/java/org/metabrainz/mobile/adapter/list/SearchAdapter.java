@@ -25,4 +25,8 @@ public abstract class SearchAdapter extends RecyclerView.Adapter implements View
             lastPosition = position;
         }
     }
+
+    public void resetAnimation() {
+        lastPosition = -1;
+    }
 }

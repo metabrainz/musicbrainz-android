@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
@@ -64,12 +64,19 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private String query, entity;
     private SuggestionHelper suggestionHelper;
     private CursorAdapter suggestionAdapter;
+    private ProgressBar progressBar;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_activity_search);
         recyclerView = findViewById(R.id.recycler_view);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        noRes = findViewById(R.id.no_result);
+        noRes.setVisibility(View.GONE);
+        progressBar = findViewById(R.id.progress_spinner);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.GONE);
 
         query = getIntent().getStringExtra(SearchManager.QUERY);
         entity = getIntent().getStringExtra(IntentFactory.Extra.TYPE);
@@ -77,47 +84,17 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         chooseAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setVisibility(View.GONE);
+
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
 
         viewModel.prepareSearch(query, entity);
         doSearch(query);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        noRes = findViewById(R.id.noresults);
     }
-
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
     }
-
-    /*private void displayArtistResultsView() {
-
-        artistResultsView.setAdapter(new ArtistSearchAdapter(SearchActivity.this, artistSearchResults));
-        //artistResultsView.setOnItemClickListener(new ArtistItemClickListener());
-        artistResultsView.setVisibility(View.VISIBLE);
-
-        if (artistSearchResults.isEmpty())
-            noRes.setVisibility(View.VISIBLE);
-        else {
-            noRes.setVisibility(View.GONE);
-            //saveQueryAsSuggestion();
-        }
-    }
-
-    private void displayRGResultsView() {
-        ListView rgResultsView = (ListView) findViewById(R.id.searchres_rg_list);
-        rgResultsView.setAdapter(new RGSearchAdapter(SearchActivity.this, rgSearchResults));
-        //rgResultsView.setOnItemClickListener(new RGItemClickListener());
-        rgResultsView.setVisibility(View.VISIBLE);
-
-        if (rgSearchResults.isEmpty()) {
-            noRes.setVisibility(View.VISIBLE);
-        } else {
-            noRes.setVisibility(View.GONE);
-            //saveQueryAsSuggestion();
-        }
-    }*/
 
     /* private void saveQueryAsSuggestion() {
         if (App.getUser().isSearchSuggestionsEnabled()) {
@@ -189,6 +166,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     private void doSearch(String query) {
         saveSearchSuggestion(query);
+        progressBar.setVisibility(View.VISIBLE);
+        adapter.resetAnimation();
         switch (entity) {
             case IntentFactory.Extra.RELEASE:
                 viewModel.getReleaseSearchResponse(query).observe(this,
@@ -196,6 +175,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                             releaseSearchResults.clear();
                             releaseSearchResults.addAll(releaseSearchProperties);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            checkHasResults();
                         });
                 break;
             case IntentFactory.Extra.LABEL:
@@ -204,6 +185,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                             labelSearchResults.clear();
                             labelSearchResults.addAll(labelSearchProperties);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            checkHasResults();
                         });
                 break;
             case IntentFactory.Extra.RECORDING:
@@ -212,6 +195,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                             recordingSearchResults.clear();
                             recordingSearchResults.addAll(recordingSearchProperties);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            checkHasResults();
                         });
                 break;
             case IntentFactory.Extra.EVENT:
@@ -220,6 +205,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                             eventSearchResults.clear();
                             eventSearchResults.addAll(eventSearchProperties);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            checkHasResults();
                         });
                 break;
             case IntentFactory.Extra.INSTRUMENT:
@@ -228,6 +215,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                             instrumentSearchResults.clear();
                             instrumentSearchResults.addAll(instrumentSearchProperties);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            checkHasResults();
                         });
                 break;
             case IntentFactory.Extra.RELEASE_GROUP:
@@ -236,6 +225,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                             releaseGroupSearchResults.clear();
                             releaseGroupSearchResults.addAll(releaseGroupSearchProperties);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            checkHasResults();
                         });
                 break;
             default:
@@ -244,8 +235,21 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                             artistSearchResults.clear();
                             artistSearchResults.addAll(artistSearchProperties);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            checkHasResults();
                         });
         }
+    }
+
+    private void checkHasResults() {
+        if (adapter.getItemCount() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            noRes.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            noRes.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -267,7 +271,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     }
 
-    private class ArtistItemClickListener implements AdapterView.OnItemClickListener {
+    /*private class ArtistItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             startArtistActivity(position);
@@ -280,7 +284,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
             startActivity(artistIntent);
         }
     }
-    /*
+
     private class RGItemClickListener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
