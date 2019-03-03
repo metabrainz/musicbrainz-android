@@ -17,7 +17,7 @@ import org.metabrainz.mobile.api.data.search.response.RecordingSearchResponse;
 import org.metabrainz.mobile.api.data.search.response.ReleaseGroupSearchResponse;
 import org.metabrainz.mobile.api.data.search.response.ReleaseSearchResponse;
 import org.metabrainz.mobile.api.webservice.Constants;
-import org.metabrainz.mobile.api.webservice.MusicBrainzService;
+import org.metabrainz.mobile.api.webservice.SearchService;
 import org.metabrainz.mobile.api.webservice.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.util.Log;
 
@@ -28,7 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SearchRepository {
-    private final static MusicBrainzService service = MusicBrainzServiceGenerator.createService();
+    private final static SearchService service = MusicBrainzServiceGenerator
+            .createService(SearchService.class);
     private static SearchRepository repository;
     private final MutableLiveData<List<Artist>> artistResults;
     private final MutableLiveData<List<Release>> releaseResults;

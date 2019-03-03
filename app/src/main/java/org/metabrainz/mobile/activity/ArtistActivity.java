@@ -31,7 +31,6 @@ import org.metabrainz.mobile.string.StringFormat;
 import org.metabrainz.mobile.util.Utils;
 
 import java.util.List;
-////import com.viewpagerindicator.TabPageIndicator;
 
 /**
  * Activity that retrieves and displays information about an artist given an
