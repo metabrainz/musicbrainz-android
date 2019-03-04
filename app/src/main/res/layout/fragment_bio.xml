@@ -56,27 +56,6 @@
             android:layout_margin="@dimen/gutter"
             android:textSize="@dimen/text_size_medium" />
 
-        <RelativeLayout
-            android:id="@+id/source_lastfm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/lastfm_logo"
-                style="@style/Wrap"
-                app:srcCompat="@drawable/logo_lastfm"
-                android:padding="@dimen/gutter"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
-
-            <org.metabrainz.mobile.view.RobotoLightTextView
-                style="@style/Wrap"
-                android:layout_alignBottom="@id/lastfm_logo"
-                android:layout_toLeftOf="@id/lastfm_logo"
-                android:paddingBottom="@dimen/gutter"
-                android:layout_toStartOf="@id/lastfm_logo"
-                android:text="@string/bio_powered_by" />
         </RelativeLayout>
 
         <include

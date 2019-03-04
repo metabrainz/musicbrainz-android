@@ -157,8 +157,6 @@ public class ArtistBioFragment extends Fragment {
             setBioImage(data.getLastFmImage());
             if (!TextUtils.isEmpty(data.getWikipediaBio())) {
                 showWikipediaBio(data);
-            } else {
-                showLastFmBio(data);
             }
             getView().findViewById(R.id.loading).setVisibility(View.GONE);
         }
@@ -178,21 +176,8 @@ public class ArtistBioFragment extends Fragment {
         showWikipediaCredit();
     }
 
-    public void showLastFmBio(ArtistBio data) {
-        if (TextUtils.isEmpty(data.getLastFmBio())) {
-            bioText.setText(getString(R.string.bio_empty));
-        } else {
-            bioText.setText(Html.fromHtml(data.getLastFmBio()));
-            showLastFmCredit();
-        }
-    }
-
     public void showWikipediaCredit() {
         //getView().findViewById(R.id.source_wikipedia).setVisibility(View.VISIBLE);
-    }
-
-    public void showLastFmCredit() {
-        //getView().findViewById(R.id.source_lastfm).setVisibility(View.VISIBLE);
     }
     */
 }
