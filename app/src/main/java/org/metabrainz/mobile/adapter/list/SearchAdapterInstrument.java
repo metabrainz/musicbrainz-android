@@ -50,11 +50,6 @@ public class SearchAdapterInstrument extends SearchAdapter {
         return data.size();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private static class InstrumentViewHolder extends EntityViewHolder {
         TextView instrumentName, instrumentType, instrumentDisambiguation, instrumentDescription;
 

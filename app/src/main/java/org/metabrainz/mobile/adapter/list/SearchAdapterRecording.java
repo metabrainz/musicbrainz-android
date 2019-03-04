@@ -52,11 +52,6 @@ public class SearchAdapterRecording extends SearchAdapter {
         return data.size();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private static class RecordingViewHolder extends EntityViewHolder {
         TextView recordingName, recordingArtist, recordingDisambiguation, recordingRelease;
 

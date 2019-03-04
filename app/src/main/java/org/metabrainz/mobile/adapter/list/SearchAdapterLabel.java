@@ -54,11 +54,6 @@ public class SearchAdapterLabel extends SearchAdapter {
         return data.size();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private static class LabelViewHolder extends EntityViewHolder {
         TextView labelName, labelType, labelDisambiguation, labelArea;
 

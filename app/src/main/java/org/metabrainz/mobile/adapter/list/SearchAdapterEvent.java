@@ -52,11 +52,6 @@ public class SearchAdapterEvent extends SearchAdapter {
         return data.size();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private static class EventViewHolder extends EntityViewHolder {
         TextView eventName, eventType, eventDisambiguation, eventTimePeriod;
 
