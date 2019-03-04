@@ -42,7 +42,8 @@ public class LoginActivity extends MusicBrainzActivity {
                 callbackUri.toString().startsWith(MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)) {
             String code = callbackUri.getQueryParameter("code");
             if (code != null) {
-                SearchService musicBrainzService = MusicBrainzServiceGenerator.createService();
+                SearchService musicBrainzService = MusicBrainzServiceGenerator
+                        .createService(SearchService.class);
                 Call<AccessToken> accessTokenCall = musicBrainzService
                         .getAccessToken(code,
                                 "authorization_code",

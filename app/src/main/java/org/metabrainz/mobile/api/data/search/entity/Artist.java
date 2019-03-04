@@ -2,7 +2,10 @@ package org.metabrainz.mobile.api.data.search.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Artist {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Artist implements Serializable {
 
     @SerializedName("id")
     private String mbid;
@@ -17,12 +20,24 @@ public class Artist {
     private Area beginArea;
     @SerializedName("end-area")
     private Area endArea;
+    @SerializedName("life-span")
+    private LifeSpan lifeSpan;
+    private String gender;
 
+    private ArrayList<Link> relations = new ArrayList<>();
     public Artist(String mbid, String name, String country, String disambiguation) {
         this.mbid = mbid;
         this.name = name;
         this.country = country;
         this.disambiguation = disambiguation;
+    }
+
+    public ArrayList<Link> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(ArrayList<Link> relations) {
+        this.relations = relations;
     }
 
     public String getType() {
@@ -95,6 +110,22 @@ public class Artist {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public LifeSpan getLifeSpan() {
+        return lifeSpan;
+    }
+
+    public void setLifeSpan(LifeSpan lifeSpan) {
+        this.lifeSpan = lifeSpan;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     @Override

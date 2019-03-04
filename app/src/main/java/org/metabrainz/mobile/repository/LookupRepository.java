@@ -3,6 +3,7 @@ package org.metabrainz.mobile.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.App;
+import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.api.webservice.LookupService;
@@ -17,9 +18,11 @@ public class LookupRepository {
             .createService(LookupService.class);
     private static LookupRepository repository;
     private final MutableLiveData<Artist> artistData;
+    private final MutableLiveData<ArtistWikiSummary> artistWikiSummary;
 
     private LookupRepository() {
         artistData = new MutableLiveData<>();
+        artistWikiSummary = new MutableLiveData<>();
     }
 
     public static LookupRepository getRepository() {
@@ -33,6 +36,11 @@ public class LookupRepository {
         else
             fetchArtist(MBID);
         return artistData;
+    }
+
+    public MutableLiveData<ArtistWikiSummary> getArtistWikiSummary(String title){
+        fetchArtistWiki(title);
+        return artistWikiSummary;
     }
 
     private void fetchArtistWithUserData(String MBID){
@@ -51,6 +59,20 @@ public class LookupRepository {
 
             }
         });
+    }
 
+    private void fetchArtistWiki(String title){
+        service.getWikipediaSummary(title).enqueue(new Callback<ArtistWikiSummary>() {
+            @Override
+            public void onResponse(Call<ArtistWikiSummary> call, Response<ArtistWikiSummary> response) {
+                ArtistWikiSummary wiki = response.body();
+                artistWikiSummary.postValue(wiki);
+            }
+
+            @Override
+            public void onFailure(Call<ArtistWikiSummary> call, Throwable t) {
+
+            }
+        });
     }
 }

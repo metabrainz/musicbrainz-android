@@ -1,54 +1,54 @@
 package org.metabrainz.mobile.fragment;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.Loader;
-
-import com.squareup.picasso.Picasso;
+import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.Artist;
-import org.metabrainz.mobile.api.data.WebLink;
-import org.metabrainz.mobile.async.external.ArtistBioLoader;
-import org.metabrainz.mobile.async.external.result.ArtistBio;
-import org.metabrainz.mobile.fragment.contracts.EntityTab;
+import org.metabrainz.mobile.api.data.search.entity.Artist;
+import org.metabrainz.mobile.api.data.search.entity.Link;
 import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
-public class ArtistBioFragment extends Fragment implements LoaderCallbacks<ArtistBio>, EntityTab<Artist> {
+public class ArtistBioFragment extends Fragment {
 
-    private static final int BIO_LOADER = 30;
+    private ArtistViewModel artistViewModel;
 
-    private ImageView bioPicture;
-    private TextView yearsActive;
-    private TextView bioText;
+    private TextView wikiTextView;
+    private TextView artistType, artistGender, artistArea, artistLifeSpan;
+    private Artist artist;
 
-    private String mbid;
-
-    public static ArtistBioFragment newInstance() {
-        return new ArtistBioFragment();
+    public static ArtistBioFragment newInstance(Artist artist) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(IntentFactory.Extra.ARTIST, artist);
+        ArtistBioFragment fragment = new ArtistBioFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mbid = activity.getIntent().getStringExtra(IntentFactory.Extra.ARTIST_MBID);
+        artist = (Artist) activity.getIntent().getSerializableExtra(IntentFactory.Extra.ARTIST);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
         findViews(layout);
+
+        artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
+        wikiTextView = layout.findViewById(R.id.wiki_summary);
+
+        artist = (Artist) getArguments().getSerializable(IntentFactory.Extra.ARTIST);
+        setArtistInfo();
+        getArtistWiki();
         return layout;
     }
 
@@ -58,12 +58,50 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     }
 
     private void findViews(View layout) {
-        bioPicture = layout.findViewById(R.id.bio_picture);
-        yearsActive = layout.findViewById(R.id.years_active);
-        bioText = layout.findViewById(R.id.bio_text);
+        artistType = layout.findViewById(R.id.artist_type);
+        artistGender = layout.findViewById(R.id.artist_gender);
+        artistArea = layout.findViewById(R.id.artist_area);
+        artistLifeSpan = layout.findViewById(R.id.life_span);
     }
 
-    @Override
+    private void getArtistWiki(){
+        String title = "";
+        for(Link link: artist.getRelations()){
+            if(link.getType().equals("wikipedia")) {
+                title = link.getPageTitle();
+                break;
+            }
+            if (link.getType().equals("wikidata")){
+                title = link.getPageTitle();
+                //TODO:Get Wiki url from wiki data id
+                break;
+            }
+        }
+        if (!title.isEmpty())
+            artistViewModel.getArtistWiki(title).observe(this,
+                wiki -> wikiTextView.setText(wiki.getExtract()));
+
+    }
+
+    private void setArtistInfo(){
+        String type,gender,area,lifeSpan;
+
+        type = artist.getType();
+        gender = artist.getGender();
+        area = artist.getArea().getName();
+        if(artist.getLifeSpan() != null)
+            lifeSpan = artist.getLifeSpan().getTimePeriod();
+        else lifeSpan = "";
+        if(type != null && !type.isEmpty())
+            artistType.setText(type);
+        if(gender != null && !gender.isEmpty())
+            artistGender.setText(gender);
+        if(area != null && !area.isEmpty())
+            artistArea.setText(area);
+        if(lifeSpan != null && !lifeSpan.isEmpty())
+            artistLifeSpan.setText(lifeSpan);
+    }
+    /*@Override
     public void update(Artist artist) {
         setTimeSpan(artist);
 
@@ -73,7 +111,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
         if (!TextUtils.isEmpty(wikiPage)) {
             bioArgs.putString("wikiPage", wikiPage);
         }
-        getLoaderManager().initLoader(BIO_LOADER, bioArgs, this);
+        //getLoaderManager().initLoader(BIO_LOADER, bioArgs, this);
     }
 
     public void setTimeSpan(Artist artist) {
@@ -106,7 +144,7 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
         return years.toString();
     }
 
-    @Override
+   @Override
     public Loader<ArtistBio> onCreateLoader(int id, Bundle args) {
         return new ArtistBioLoader(args.getString("mbid"), args.getString("wikiPage"));
     }
@@ -150,11 +188,11 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     }
 
     public void showWikipediaCredit() {
-        getView().findViewById(R.id.source_wikipedia).setVisibility(View.VISIBLE);
+        //getView().findViewById(R.id.source_wikipedia).setVisibility(View.VISIBLE);
     }
 
     public void showLastFmCredit() {
-        getView().findViewById(R.id.source_lastfm).setVisibility(View.VISIBLE);
+        //getView().findViewById(R.id.source_lastfm).setVisibility(View.VISIBLE);
     }
-
+    */
 }

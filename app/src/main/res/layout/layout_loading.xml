@@ -8,6 +8,9 @@
 
   <ProgressBar
     style="@style/Wrap"
+
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:indeterminateDrawable="@anim/main_progress" />
 </RelativeLayout>

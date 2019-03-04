@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.api.webservice;
 
-import org.metabrainz.mobile.api.data.AccessToken;
+import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.Label;
 import org.metabrainz.mobile.api.data.Recording;
 import org.metabrainz.mobile.api.data.Release;
@@ -10,10 +10,7 @@ import org.metabrainz.mobile.api.data.search.entity.Artist;
 import java.io.IOException;
 
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -22,6 +19,10 @@ public interface LookupService {
     @GET("artist/{MBID}")
     Call<Artist> lookupArtist(@Path("MBID") String MBID,
                               @Query("inc") String params);
+
+    @GET("https://en.wikipedia.org/api/rest_v1/page/summary/{title}")
+    Call<ArtistWikiSummary> getWikipediaSummary(@Path("title") String title);
+
     @GET("release/{MBID}")
     Call<Release> lookupRelease(@Path("MBID") String MBID,
                                 @Query("inc") String params);

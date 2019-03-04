@@ -1,48 +1,31 @@
 package org.metabrainz.mobile.activity;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.ShareActionProvider;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.Loader;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.adapter.pager.ArtistPagerAdapter;
-import org.metabrainz.mobile.api.data.Artist;
-import org.metabrainz.mobile.api.data.Tag;
+import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.api.data.UserData;
-import org.metabrainz.mobile.async.ArtistLoader;
-import org.metabrainz.mobile.async.result.AsyncEntityResult;
-import org.metabrainz.mobile.config.Configuration;
-import org.metabrainz.mobile.fragment.EditFragment;
-import org.metabrainz.mobile.fragment.contracts.EntityTab;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
-import org.metabrainz.mobile.string.StringFormat;
-import org.metabrainz.mobile.util.Utils;
-
-import java.util.List;
+import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
 /**
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
  */
-public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbacks<AsyncEntityResult<Artist>>,
-        EditFragment.Callback {
+public class ArtistActivity extends MusicBrainzActivity {
 
-    private static final int ARTIST_LOADER = 0;
+    private ArtistViewModel artistViewModel;
 
     private String mbid;
-    private Artist artist;
     private UserData userData;
 
     private View loading;
@@ -53,29 +36,45 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
 
     private ArtistPagerAdapter pagerAdapter;
 
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
     public void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
+
+        artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
 
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.activity_artist);
-        configurePager();
-        findViews();
-        setSupportProgressBarIndeterminateVisibility(false);
-        getSupportLoaderManager().initLoader(ARTIST_LOADER, savedInstanceState, this);
-    }
+        setSupportActionBar(findViewById(R.id.toolbar));
 
-    private void configurePager() {
         pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());
-        ViewPager pager = findViewById(R.id.pager);
-        pager.setAdapter(pagerAdapter);
-        //TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
-        //indicator.setViewPager(pager);
-        pager.setCurrentItem(1);
-        pager.setOffscreenPageLimit(pagerAdapter.getCount() - 1);
+
+        viewPager = findViewById(R.id.pager);
+        tabLayout = findViewById(R.id.tabs);
+
+        viewPager.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.GONE);
+
+        artistViewModel.setMBID(mbid);
+        artistViewModel.getArtistData().observe(this,
+                data -> configurePager(data));
     }
 
-    private void findViews() {
+
+    private void configurePager(Artist data) {
+        pagerAdapter.setArtist(data);
+
+        viewPager.setVisibility(View.VISIBLE);
+        tabLayout.setVisibility(View.VISIBLE);
+
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        getSupportActionBar().setTitle(data.getName());
+    }
+
+    /*private void findViews() {
         loading = findViewById(R.id.loading);
         error = findViewById(R.id.error);
         ratingBar = findViewById(R.id.rating);
@@ -186,5 +185,6 @@ public class ArtistActivity extends MusicBrainzActivity implements LoaderCallbac
         ratingBar.setRating(rating);
         getSupportLoaderManager().destroyLoader(ARTIST_LOADER);
     }
+    */
 
 }
