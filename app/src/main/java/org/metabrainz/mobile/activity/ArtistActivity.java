@@ -58,7 +58,7 @@ public class ArtistActivity extends MusicBrainzActivity {
 
         artistViewModel.setMBID(mbid);
         artistViewModel.getArtistData().observe(this,
-                data -> configurePager(data));
+                this::configurePager);
     }
 
 

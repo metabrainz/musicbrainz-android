@@ -30,14 +30,14 @@ public class ArtistViewModel extends ViewModel {
         return repository.getArtist(MBID);
     }
 
-    public MutableLiveData<ArtistWikiSummary> getArtistWiki(String title){
+    public MutableLiveData<ArtistWikiSummary> getArtistWiki(String title, int method){
         if (artistWiki == null)
-            artistWiki = loadArtistWiki(title);
+            artistWiki = loadArtistWiki(title, method);
         return artistWiki;
     }
 
-    private MutableLiveData<ArtistWikiSummary> loadArtistWiki(String title){
-        return repository.getArtistWikiSummary(title);
+    private MutableLiveData<ArtistWikiSummary> loadArtistWiki(String title, int method){
+        return repository.getArtistWikiSummary(title ,method);
     }
 
 }

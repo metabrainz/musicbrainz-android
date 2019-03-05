@@ -9,6 +9,7 @@ import org.metabrainz.mobile.api.data.search.entity.Artist;
 
 import java.io.IOException;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -22,6 +23,10 @@ public interface LookupService {
 
     @GET("https://en.wikipedia.org/api/rest_v1/page/summary/{title}")
     Call<ArtistWikiSummary> getWikipediaSummary(@Path("title") String title);
+
+    @GET("https://www.wikidata.org/w/api.php" +
+            "?action=wbgetentities&format=xml&props=sitelinks/urls&format=json")
+    Call<ResponseBody> getWikipediaLink(@Query("ids") String id);
 
     @GET("release/{MBID}")
     Call<Release> lookupRelease(@Path("MBID") String MBID,
