@@ -2,9 +2,10 @@ package org.metabrainz.mobile.api.data.search.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Area {
+public class Area implements Serializable {
 
     //TODO: ISO codes field to be added
 

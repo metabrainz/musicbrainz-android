@@ -33,7 +33,7 @@ public class ArtistViewModel extends ViewModel {
     public MutableLiveData<ArtistWikiSummary> getArtistWiki(String title, int method){
         if (artistWiki == null)
             artistWiki = loadArtistWiki(title, method);
-        return artistWiki;
+         return artistWiki;
     }
 
     private MutableLiveData<ArtistWikiSummary> loadArtistWiki(String title, int method){

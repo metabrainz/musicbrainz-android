@@ -1,6 +1,5 @@
 package org.metabrainz.mobile.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,12 +35,6 @@ public class ArtistBioFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        artist = (Artist) activity.getIntent().getSerializableExtra(IntentFactory.Extra.ARTIST);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
         findViews(layout);
@@ -53,11 +46,6 @@ public class ArtistBioFragment extends Fragment {
         setArtistInfo();
         getArtistWiki();
         return layout;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     private void findViews(View layout) {
@@ -92,8 +80,8 @@ public class ArtistBioFragment extends Fragment {
 
     private void setWiki(ArtistWikiSummary wiki){
         if (wiki != null){
-            String wikiText = wiki.getDisplayTitle();
-            if(wikiText != null && wikiText.isEmpty())
+            String wikiText = wiki.getExtract();
+            if(wikiText != null && !wikiText.isEmpty())
                 wikiTextView.setText(wikiText);
             else hideWikiCard();
         }else hideWikiCard();
@@ -106,98 +94,21 @@ public class ArtistBioFragment extends Fragment {
     private void setArtistInfo(){
         String type,gender,area,lifeSpan;
 
-        type = artist.getType();
-        gender = artist.getGender();
-        area = artist.getArea().getName();
-        if(artist.getLifeSpan() != null)
-            lifeSpan = artist.getLifeSpan().getTimePeriod();
-        else lifeSpan = "";
-        if(type != null && !type.isEmpty())
-            artistType.setText(type);
-        if(gender != null && !gender.isEmpty())
-            artistGender.setText(gender);
-        if(area != null && !area.isEmpty())
-            artistArea.setText(area);
-        if(lifeSpan != null && !lifeSpan.isEmpty())
-            artistLifeSpan.setText(lifeSpan);
-    }
-
-    /*@Override
-    public void update(Artist artist) {
-        setTimeSpan(artist);
-
-        String wikiPage = getWikipediaPageName(artist);
-        Bundle bioArgs = new Bundle();
-        bioArgs.putString("mbid", mbid);
-        if (!TextUtils.isEmpty(wikiPage)) {
-            bioArgs.putString("wikiPage", wikiPage);
+        if(artist != null) {
+            type = artist.getType();
+            gender = artist.getGender();
+            area = artist.getArea().getName();
+            if (artist.getLifeSpan() != null)
+                lifeSpan = artist.getLifeSpan().getTimePeriod();
+            else lifeSpan = "";
+            if (type != null && !type.isEmpty())
+                artistType.setText(type);
+            if (gender != null && !gender.isEmpty())
+                artistGender.setText(gender);
+            if (area != null && !area.isEmpty())
+                artistArea.setText(area);
+            if (lifeSpan != null && !lifeSpan.isEmpty())
+                artistLifeSpan.setText(lifeSpan);
         }
     }
-
-    public void setTimeSpan(Artist artist) {
-        String years = generateTimeSpan(artist);
-        if (years.length() > 3) {
-            yearsActive.setVisibility(View.VISIBLE);
-            yearsActive.setText(years);
-        }
-    }
-
-    public String getWikipediaPageName(Artist artist) {
-        for (WebLink link : artist.getLinks()) {
-            if (link.getUrl().contains("en.wikipedia")) {
-                int pageSplit = link.getUrl().lastIndexOf("/") + 1;
-                return link.getUrl().substring(pageSplit);
-            }
-        }
-        return null;
-    }
-
-    public String generateTimeSpan(Artist artist) {
-        StringBuilder years = new StringBuilder();
-        if (!TextUtils.isEmpty(artist.getStart())) {
-            years.append(artist.getStart());
-        }
-        years.append(" \u2013 ");
-        if (!TextUtils.isEmpty(artist.getEnd())) {
-            years.append(artist.getEnd());
-        }
-        return years.toString();
-    }
-
-   @Override
-    public Loader<ArtistBio> onCreateLoader(int id, Bundle args) {
-        return new ArtistBioLoader(args.getString("mbid"), args.getString("wikiPage"));
-    }
-
-    @Override
-    public void onLoadFinished(Loader<ArtistBio> loader, ArtistBio data) {
-        if (data == null) {
-            bioText.setText(getString(R.string.bio_connection_fail));
-        } else {
-            setBioImage(data.getLastFmImage());
-            if (!TextUtils.isEmpty(data.getWikipediaBio())) {
-                showWikipediaBio(data);
-            }
-            getView().findViewById(R.id.loading).setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<ArtistBio> loader) {
-        loader.reset();
-    }
-
-    public void setBioImage(String url) {
-        Picasso.get().load(Uri.parse(url)).into(bioPicture);
-    }
-
-    public void showWikipediaBio(ArtistBio data) {
-        bioText.setText(Html.fromHtml(data.getWikipediaBio()));
-        showWikipediaCredit();
-    }
-
-    public void showWikipediaCredit() {
-        //getView().findViewById(R.id.source_wikipedia).setVisibility(View.VISIBLE);
-    }
-    */
 }

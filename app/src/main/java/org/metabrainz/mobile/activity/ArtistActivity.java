@@ -47,6 +47,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.activity_artist);
         setSupportActionBar(findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());
 
