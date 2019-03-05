@@ -34,9 +34,7 @@ public class SearchAdapterArtist extends SearchAdapter {
     public ArtistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_artist, parent, false);
-        ArtistViewHolder viewHolder = new ArtistViewHolder(view);
-        int pos = viewHolder.getAdapterPosition();
-        return viewHolder;
+        return new ArtistViewHolder(view);
     }
 
     @Override
