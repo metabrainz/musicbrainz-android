@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -12,8 +13,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.adapter.pager.ArtistPagerAdapter;
-import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
 import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
@@ -23,6 +24,7 @@ import org.metabrainz.mobile.viewmodel.ArtistViewModel;
  */
 public class ArtistActivity extends MusicBrainzActivity {
 
+    public static final String LOG_TAG = "DebugArtistInfo";
     private ArtistViewModel artistViewModel;
 
     private String mbid;
@@ -44,7 +46,6 @@ public class ArtistActivity extends MusicBrainzActivity {
 
         artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
 
-        mbid = getIntent().getStringExtra(Extra.ARTIST_MBID);
         setContentView(R.layout.activity_artist);
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,31 +58,36 @@ public class ArtistActivity extends MusicBrainzActivity {
         viewPager.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
 
-        artistViewModel.setMBID(mbid);
-        artistViewModel.getArtistData().observe(this,
-                this::configurePager);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String id = getIntent().getStringExtra(Extra.ARTIST_MBID);
+        if(id != null && !id.isEmpty())
+            mbid = id;
+        artistViewModel.setMBID(mbid);
+        artistViewModel.getArtistData().observe(this, this::setArtist);
+    }
 
-    private void configurePager(Artist data) {
-        pagerAdapter.setArtist(data);
+    private void setArtist(Artist data){
+        if(data != null){
+            artistViewModel.setArtist(data);
+            Log.d(LOG_TAG,data.getName());
+            configurePager();
+        }
+    }
 
+    private void configurePager() {
         viewPager.setVisibility(View.VISIBLE);
         tabLayout.setVisibility(View.VISIBLE);
 
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-
-        getSupportActionBar().setTitle(data.getName());
+        getSupportActionBar().setTitle(artistViewModel.getArtist().getName());
     }
 
-    /*private void findViews() {
-        loading = findViewById(R.id.loading);
-        error = findViewById(R.id.error);
-        ratingBar = findViewById(R.id.rating);
-        tagView = findViewById(R.id.tags);
-    }
-
+    /*
     protected void populateLayout() {
         TextView artistText = findViewById(R.id.artist_artist);
 
@@ -113,28 +119,6 @@ public class ArtistActivity extends MusicBrainzActivity {
         return true;
     }
 
-    @Override
-    public Loader<AsyncEntityResult<Artist>> onCreateLoader(int id, Bundle args) {
-        return new ArtistLoader(mbid);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<AsyncEntityResult<Artist>> loader, AsyncEntityResult<Artist> container) {
-        handleLoadResult(container);
-    }
-
-    private void handleLoadResult(AsyncEntityResult<Artist> result) {
-        switch (result.getStatus()) {
-            case SUCCESS:
-                artist = result.getData();
-                userData = result.getUserData();
-                populateLayout();
-                break;
-            case EXCEPTION:
-                showConnectionErrorWarning();
-        }
-    }
-
     private void showConnectionErrorWarning() {
         error.setVisibility(View.VISIBLE);
         Button retry = error.findViewById(R.id.retry_button);
@@ -146,26 +130,6 @@ public class ArtistActivity extends MusicBrainzActivity {
                 getSupportLoaderManager().restartLoader(ARTIST_LOADER, null, ArtistActivity.this);
             }
         });
-    }
-
-    @Override
-    public void onLoaderReset(Loader<AsyncEntityResult<Artist>> loader) {
-        loader.reset();
-    }
-
-    @Override
-    public void showLoading() {
-        setSupportProgressBarIndeterminateVisibility(true);
-    }
-
-    @Override
-    public void hideLoading() {
-        setSupportProgressBarIndeterminateVisibility(false);
-    }
-
-    @Override
-    public String getMbid() {
-        return mbid;
     }
 
     @Override

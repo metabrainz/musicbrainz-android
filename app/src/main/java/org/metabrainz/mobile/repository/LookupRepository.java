@@ -1,7 +1,5 @@
 package org.metabrainz.mobile.repository;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,6 +12,7 @@ import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.api.webservice.LookupService;
 import org.metabrainz.mobile.api.webservice.MusicBrainzServiceGenerator;
+import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,15 +23,15 @@ public class LookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
             .createService(LookupService.class);
     private static LookupRepository repository;
-    private final MutableLiveData<Artist> artistData;
-    private final MutableLiveData<ArtistWikiSummary> artistWikiSummary;
+    private final SingleLiveEvent<Artist> artistData;
+    private final SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;
 
     public static final int METHOD_WIKIPEDIA_URL = 0;
     public static final int METHOD_WIKIDATA_ID = 1;
 
     private LookupRepository() {
-        artistData = new MutableLiveData<>();
-        artistWikiSummary = new MutableLiveData<>();
+        artistData = new SingleLiveEvent<>();
+        artistWikiSummary = new SingleLiveEvent<>();
     }
 
     public static LookupRepository getRepository() {
@@ -40,7 +39,7 @@ public class LookupRepository {
         return repository;
     }
 
-    public MutableLiveData<Artist> getArtist(String MBID){
+    public SingleLiveEvent<Artist> getArtist(String MBID){
         if(App.isUserLoggedIn())
             fetchArtistWithUserData(MBID);
         else
@@ -48,7 +47,7 @@ public class LookupRepository {
         return artistData;
     }
 
-    public MutableLiveData<ArtistWikiSummary> getArtistWikiSummary(String string, int method){
+    public SingleLiveEvent<ArtistWikiSummary> getArtistWikiSummary(String string, int method){
         if(method == METHOD_WIKIPEDIA_URL)
             fetchArtistWiki(string);
         else
@@ -65,7 +64,7 @@ public class LookupRepository {
             @Override
             public void onResponse(Call<Artist> call, Response<Artist> response) {
                     Artist artist = response.body();
-                    artistData.postValue(artist);
+                    artistData.setValue(artist);
             }
 
             @Override
@@ -80,7 +79,7 @@ public class LookupRepository {
             @Override
             public void onResponse(Call<ArtistWikiSummary> call, Response<ArtistWikiSummary> response) {
                 ArtistWikiSummary wiki = response.body();
-                artistWikiSummary.postValue(wiki);
+                artistWikiSummary.setValue(wiki);
             }
             @Override
             public void onFailure(Call<ArtistWikiSummary> call, Throwable t) {
