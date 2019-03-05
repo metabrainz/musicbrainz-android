@@ -8,20 +8,34 @@ import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.repository.LookupRepository;
 
 public class ArtistViewModel extends ViewModel {
+
     private LookupRepository repository = LookupRepository.getRepository();
     private MutableLiveData<Artist> artistData;
+    private Artist artist;
     private MutableLiveData<ArtistWikiSummary> artistWiki;
     private String MBID;
+    public boolean mbidHasChanged = true;
 
     public ArtistViewModel() {
     }
 
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
     public void setMBID(String MBID) {
-        this.MBID = MBID;
+        if(MBID != null && !MBID.isEmpty()) {
+            this.MBID = MBID;
+            mbidHasChanged = true;
+        } else mbidHasChanged = false;
     }
 
     public MutableLiveData<Artist> getArtistData(){
-        if (artistData == null)
+        if (artistData == null || mbidHasChanged)
             artistData = loadArtistData();
         return artistData;
     }
@@ -31,7 +45,7 @@ public class ArtistViewModel extends ViewModel {
     }
 
     public MutableLiveData<ArtistWikiSummary> getArtistWiki(String title, int method){
-        if (artistWiki == null)
+        if (artistWiki == null || mbidHasChanged)
             artistWiki = loadArtistWiki(title, method);
          return artistWiki;
     }

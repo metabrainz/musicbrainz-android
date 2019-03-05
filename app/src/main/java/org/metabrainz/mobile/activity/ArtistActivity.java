@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -12,8 +13,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.adapter.pager.ArtistPagerAdapter;
-import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
 import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
@@ -57,14 +58,27 @@ public class ArtistActivity extends MusicBrainzActivity {
         viewPager.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
 
-        artistViewModel.setMBID(mbid);
-        artistViewModel.getArtistData().observe(this,
-                this::configurePager);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String id = getIntent().getStringExtra(Extra.ARTIST_MBID);
+        if(id != null && !id.isEmpty())
+            mbid = id;
+        artistViewModel.setMBID(mbid);
+        artistViewModel.getArtistData().observe(this, this::setArtist);
+    }
 
-    private void configurePager(Artist data) {
-        pagerAdapter.setArtist(data);
+    private void setArtist(Artist data){
+        if(data != null){
+            artistViewModel.setArtist(data);
+            Toast.makeText(this,artistViewModel.getArtist().getName(),Toast.LENGTH_SHORT).show();
+            configurePager();
+        }
+    }
+
+    private void configurePager() {
 
         viewPager.setVisibility(View.VISIBLE);
         tabLayout.setVisibility(View.VISIBLE);
@@ -72,7 +86,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        getSupportActionBar().setTitle(data.getName());
+        getSupportActionBar().setTitle(artistViewModel.getArtist().getName());
     }
 
     /*private void findViews() {

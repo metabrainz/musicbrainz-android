@@ -8,12 +8,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.fragment.ArtistBioFragment;
 
 public class ArtistPagerAdapter extends FragmentPagerAdapter {
-
-    private Artist artist;
 
     private static final int[] TITLES = {R.string.tab_bio, R.string.tab_releases, R.string.tab_links,
             R.string.tab_edits};
@@ -26,7 +23,7 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return ArtistBioFragment.newInstance(artist);
+                return ArtistBioFragment.newInstance();
             case 1:
                 //return ArtistReleaseGroupsFragment.newInstance();
             case 2:
@@ -34,7 +31,7 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
             case 3:
                 //return EditFragment.newInstance(Entity.ARTIST);
         }
-        return ArtistBioFragment.newInstance(artist);
+        return ArtistBioFragment.newInstance();
     }
 
     @Override
@@ -48,7 +45,4 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
         return TITLES.length;
     }
 
-    public void setArtist(Artist artist){
-        this.artist = artist;
-    }
 }
