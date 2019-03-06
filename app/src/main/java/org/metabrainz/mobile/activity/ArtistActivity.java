@@ -66,7 +66,7 @@ public class ArtistActivity extends MusicBrainzActivity {
     protected void onResume() {
         super.onResume();
         String id = getIntent().getStringExtra(Extra.ARTIST_MBID);
-        if(id != null && !id.isEmpty())
+        if(id != null && !id.isEmpty()) artistViewModel.setMBID(id);
             mbid = id;
         artistViewModel.setMBID(mbid);
         artistViewModel.getArtistData().observe(this, this::setArtist);
