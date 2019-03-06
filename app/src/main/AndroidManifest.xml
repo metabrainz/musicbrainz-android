@@ -109,6 +109,7 @@
 
     <activity
         android:name="org.metabrainz.mobile.activity.ArtistActivity"
+        android:theme="@style/AppThemeCustomActionBar"
         android:label="@string/artist_title" />
 
     <activity

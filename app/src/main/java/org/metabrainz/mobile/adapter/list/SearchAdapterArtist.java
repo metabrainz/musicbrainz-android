@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.adapter.list;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.activity.ArtistActivity;
 import org.metabrainz.mobile.adapter.EntityViewHolder;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
+import org.metabrainz.mobile.intent.IntentFactory;
 
 import java.util.List;
 
@@ -31,10 +34,7 @@ public class SearchAdapterArtist extends SearchAdapter {
     public ArtistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_artist, parent, false);
-        ArtistViewHolder viewHolder = new ArtistViewHolder(view);
-        int pos = viewHolder.getAdapterPosition();
-        view.setOnClickListener(this);
-        return viewHolder;
+        return new ArtistViewHolder(view);
     }
 
     @Override
@@ -46,16 +46,18 @@ public class SearchAdapterArtist extends SearchAdapter {
         setViewVisibility(artist.getType(), viewHolder.artistType);
         setViewVisibility(artist.getDisambiguation(), viewHolder.artistDisambiguation);
         setAnimation(viewHolder.itemView, position);
+        viewHolder.itemView.setOnClickListener(v -> onClick(v,position));
+    }
+
+    private void onClick(View view, int position){
+        Intent intent = new Intent(view.getContext(), ArtistActivity.class);
+        intent.putExtra(IntentFactory.Extra.ARTIST_MBID, data.get(position).getMbid());
+        view.getContext().startActivity(intent);
     }
 
     @Override
     public int getItemCount() {
         return data.size();
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     private static class ArtistViewHolder extends EntityViewHolder {

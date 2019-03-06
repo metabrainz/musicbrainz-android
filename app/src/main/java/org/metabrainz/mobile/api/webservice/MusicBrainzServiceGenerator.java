@@ -32,11 +32,11 @@ public class MusicBrainzServiceGenerator {
 
     private static Retrofit retrofit = builder.build();
 
-    public static MusicBrainzService createService(){
+    public static <S> S createService(Class<S> service){
         addInterceptors(loggingInterceptor);
         addInterceptors(headerInterceptor);
 
-        return retrofit.create(MusicBrainzService.class);
+        return retrofit.create(service);
     }
 
     private static void addInterceptors(Interceptor interceptor) {

@@ -1,7 +1,6 @@
 package org.metabrainz.mobile.activity;
 
 import android.content.ActivityNotFoundException;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -13,13 +12,6 @@ import org.metabrainz.mobile.intent.IntentFactory;
 import org.metabrainz.mobile.util.Utils;
 
 public abstract class MusicBrainzActivity extends AppCompatActivity {
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getSupportActionBar().setHomeButtonEnabled(true);
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

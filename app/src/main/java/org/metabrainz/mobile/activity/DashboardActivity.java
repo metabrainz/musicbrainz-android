@@ -15,7 +15,6 @@ import org.metabrainz.mobile.intent.IntentFactory.Extra;
 import org.metabrainz.mobile.intent.zxing.IntentIntegrator;
 import org.metabrainz.mobile.intent.zxing.IntentResult;
 import org.metabrainz.mobile.view.DashTileView;
-//import com.paypal.android.MEP.PayPal;
 
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
 

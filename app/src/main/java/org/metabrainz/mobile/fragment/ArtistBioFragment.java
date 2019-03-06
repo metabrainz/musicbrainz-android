@@ -1,48 +1,33 @@
 package org.metabrainz.mobile.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.Loader;
-
-import com.squareup.picasso.Picasso;
+import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.Artist;
-import org.metabrainz.mobile.api.data.WebLink;
-import org.metabrainz.mobile.async.external.ArtistBioLoader;
-import org.metabrainz.mobile.async.external.result.ArtistBio;
-import org.metabrainz.mobile.fragment.contracts.EntityTab;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.api.data.ArtistWikiSummary;
+import org.metabrainz.mobile.api.data.search.entity.Artist;
+import org.metabrainz.mobile.api.data.search.entity.Link;
+import org.metabrainz.mobile.repository.LookupRepository;
+import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
-public class ArtistBioFragment extends Fragment implements LoaderCallbacks<ArtistBio>, EntityTab<Artist> {
+public class ArtistBioFragment extends Fragment {
 
-    private static final int BIO_LOADER = 30;
+    private ArtistViewModel artistViewModel;
 
-    private ImageView bioPicture;
-    private TextView yearsActive;
-    private TextView bioText;
-
-    private String mbid;
+    private TextView wikiTextView;
+    private TextView artistType, artistGender, artistArea, artistLifeSpan;
+    private View wikiCard;
+    private Artist artist;
 
     public static ArtistBioFragment newInstance() {
         return new ArtistBioFragment();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mbid = activity.getIntent().getStringExtra(IntentFactory.Extra.ARTIST_MBID);
     }
 
     @Override
@@ -53,108 +38,89 @@ public class ArtistBioFragment extends Fragment implements LoaderCallbacks<Artis
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        artist = artistViewModel.getArtist();
+        setArtistInfo();
+        getArtistWiki();
     }
 
     private void findViews(View layout) {
-        bioPicture = layout.findViewById(R.id.bio_picture);
-        yearsActive = layout.findViewById(R.id.years_active);
-        bioText = layout.findViewById(R.id.bio_text);
+        artistType = layout.findViewById(R.id.artist_type);
+        artistGender = layout.findViewById(R.id.artist_gender);
+        artistArea = layout.findViewById(R.id.artist_area);
+        artistLifeSpan = layout.findViewById(R.id.life_span);
+        wikiCard = layout.findViewById(R.id.card_artist_wiki);
+        wikiTextView = layout.findViewById(R.id.wiki_summary);
     }
 
-    @Override
-    public void update(Artist artist) {
-        setTimeSpan(artist);
-
-        String wikiPage = getWikipediaPageName(artist);
-        Bundle bioArgs = new Bundle();
-        bioArgs.putString("mbid", mbid);
-        if (!TextUtils.isEmpty(wikiPage)) {
-            bioArgs.putString("wikiPage", wikiPage);
-        }
-        getLoaderManager().initLoader(BIO_LOADER, bioArgs, this);
-    }
-
-    public void setTimeSpan(Artist artist) {
-        String years = generateTimeSpan(artist);
-        if (years.length() > 3) {
-            yearsActive.setVisibility(View.VISIBLE);
-            yearsActive.setText(years);
-        }
-    }
-
-    public String getWikipediaPageName(Artist artist) {
-        for (WebLink link : artist.getLinks()) {
-            if (link.getUrl().contains("en.wikipedia")) {
-                int pageSplit = link.getUrl().lastIndexOf("/") + 1;
-                return link.getUrl().substring(pageSplit);
+    private void getArtistWiki(){
+        String title = "";
+        int method = -1;
+        for(Link link: artist.getRelations()){
+            if(link.getType().equals("wikipedia")) {
+                title = link.getPageTitle();
+                method = LookupRepository.METHOD_WIKIPEDIA_URL;
+                break;
+            }
+            if (link.getType().equals("wikidata")){
+                title = link.getPageTitle();
+                method = LookupRepository.METHOD_WIKIDATA_ID;
+                break;
             }
         }
-        return null;
+        if (method != -1)
+            artistViewModel.getArtistWiki(title, method)
+                    .observe(this, this::setWiki );
+        else hideWikiCard();
+
     }
 
-    public String generateTimeSpan(Artist artist) {
-        StringBuilder years = new StringBuilder();
-        if (!TextUtils.isEmpty(artist.getStart())) {
-            years.append(artist.getStart());
-        }
-        years.append(" \u2013 ");
-        if (!TextUtils.isEmpty(artist.getEnd())) {
-            years.append(artist.getEnd());
-        }
-        return years.toString();
-    }
-
-    @Override
-    public Loader<ArtistBio> onCreateLoader(int id, Bundle args) {
-        return new ArtistBioLoader(args.getString("mbid"), args.getString("wikiPage"));
-    }
-
-    @Override
-    public void onLoadFinished(Loader<ArtistBio> loader, ArtistBio data) {
-        if (data == null) {
-            bioText.setText(getString(R.string.bio_connection_fail));
-        } else {
-            setBioImage(data.getLastFmImage());
-            if (!TextUtils.isEmpty(data.getWikipediaBio())) {
-                showWikipediaBio(data);
-            } else {
-                showLastFmBio(data);
+    private void setWiki(ArtistWikiSummary wiki){
+        if (wiki != null){
+            String wikiText = wiki.getExtract();
+            if(wikiText != null && !wikiText.isEmpty()) {
+                showWikiCard();
+                wikiTextView.setText(wikiText);
             }
-            getView().findViewById(R.id.loading).setVisibility(View.GONE);
+            else hideWikiCard();
+        }else hideWikiCard();
+    }
+
+    private void showWikiCard(){
+        wikiCard.setVisibility(View.VISIBLE);
+    }
+    private void hideWikiCard(){
+        wikiCard.setVisibility(View.GONE);
+    }
+
+    private void setArtistInfo(){
+        String type,gender,area,lifeSpan;
+
+        if(artist != null) {
+            type = artist.getType();
+            gender = artist.getGender();
+
+            if(artist.getArea() != null) area = artist.getArea().getName(); else area = "";
+
+            if (artist.getLifeSpan() != null)
+                lifeSpan = artist.getLifeSpan().getTimePeriod();
+            else lifeSpan = "";
+
+            if (type != null && !type.isEmpty())
+                artistType.setText(type);
+            if (gender != null && !gender.isEmpty())
+                artistGender.setText(gender);
+            if (area != null && !area.isEmpty())
+                artistArea.setText(area);
+            if (lifeSpan != null && !lifeSpan.isEmpty())
+                artistLifeSpan.setText(lifeSpan);
         }
     }
-
-    @Override
-    public void onLoaderReset(Loader<ArtistBio> loader) {
-        loader.reset();
-    }
-
-    public void setBioImage(String url) {
-        Picasso.get().load(Uri.parse(url)).into(bioPicture);
-    }
-
-    public void showWikipediaBio(ArtistBio data) {
-        bioText.setText(Html.fromHtml(data.getWikipediaBio()));
-        showWikipediaCredit();
-    }
-
-    public void showLastFmBio(ArtistBio data) {
-        if (TextUtils.isEmpty(data.getLastFmBio())) {
-            bioText.setText(getString(R.string.bio_empty));
-        } else {
-            bioText.setText(Html.fromHtml(data.getLastFmBio()));
-            showLastFmCredit();
-        }
-    }
-
-    public void showWikipediaCredit() {
-        getView().findViewById(R.id.source_wikipedia).setVisibility(View.VISIBLE);
-    }
-
-    public void showLastFmCredit() {
-        getView().findViewById(R.id.source_lastfm).setVisibility(View.VISIBLE);
-    }
-
 }

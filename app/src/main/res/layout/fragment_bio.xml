@@ -1,101 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  android:fillViewport="true"
-  android:background="@color/main_fg">
+    android:background="@color/main_fg"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-      android:layout_height="@dimen/bio_image_height"
-      android:background="@color/cover_bg">
-
-      <org.metabrainz.mobile.view.RobotoLightTextView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/tab_bio" />
-
-      <org.metabrainz.mobile.view.FadeImageView
-        android:id="@+id/bio_picture"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
-    </FrameLayout>
-
-    <org.metabrainz.mobile.view.RobotoLightTextView
-      android:id="@+id/years_active"
-      style="@style/BigRoboto"
-      android:gravity="center"
-      android:layout_marginTop="@dimen/gutter"
-      android:visibility="gone" />
-
-    <TextView
-      android:id="@+id/bio_text"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      android:layout_margin="@dimen/gutter"
-      android:textSize="@dimen/text_size_medium" />
+        android:orientation="vertical">
 
-    <RelativeLayout
-      android:id="@+id/source_lastfm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-      android:visibility="gone">
+        <include android:id="@+id/card_artist_info"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/card_artist_info"
+            android:layout_margin="4dp"/>
 
-      <ImageView
-        android:id="@+id/lastfm_logo"
-        style="@style/Wrap"
-        app:srcCompat="@drawable/logo_lastfm"
-        android:padding="@dimen/gutter"
-          android:layout_alignParentEnd="true"
-          android:layout_alignParentRight="true" />
+        <include android:id="@+id/card_artist_wiki"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/card_artist_wiki"
+            android:layout_margin="4dp"/>
 
-      <org.metabrainz.mobile.view.RobotoLightTextView
-        style="@style/Wrap"
-        android:layout_alignBottom="@id/lastfm_logo"
-        android:layout_toLeftOf="@id/lastfm_logo"
-        android:paddingBottom="@dimen/gutter"
-          android:layout_toStartOf="@id/lastfm_logo"
-          android:text="@string/bio_powered_by" />
-    </RelativeLayout>
+        <!--<FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bio_image_height"
+            android:background="@color/cover_bg">
 
-    <RelativeLayout
-      android:id="@+id/source_wikipedia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-      android:visibility="gone">
+            <org.metabrainz.mobile.view.RobotoLightTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/tab_bio" />
 
-      <ImageView
-        android:id="@+id/wikipedia_logo"
-        style="@style/Wrap"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:padding="@dimen/gutter"
-          android:layout_alignParentEnd="true"
-          app:srcCompat="@drawable/logo_wikipedia" />
+            <org.metabrainz.mobile.view.FadeImageView
+                android:id="@+id/bio_picture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </FrameLayout>
 
-      <org.metabrainz.mobile.view.RobotoLightTextView
-        style="@style/Wrap"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/wikipedia_logo"
-        android:text="@string/bio_powered_by"
-          android:layout_toStartOf="@+id/wikipedia_logo"
-          android:paddingTop="@dimen/small_pad" />
-    </RelativeLayout>
-    
-    <include
-      android:id="@+id/loading"
-      layout="@layout/layout_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-  </LinearLayout>
+        <org.metabrainz.mobile.view.RobotoLightTextView
+            android:id="@+id/years_active"
+            style="@style/BigRoboto"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/gutter"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/bio_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/gutter"
+            android:textSize="@dimen/text_size_medium" />
+
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/layout_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
+    </LinearLayout>
 
 </ScrollView>

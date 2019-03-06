@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.api.data.AccessToken;
-import org.metabrainz.mobile.api.webservice.MusicBrainzService;
+import org.metabrainz.mobile.api.webservice.SearchService;
 import org.metabrainz.mobile.api.webservice.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.util.Log;
 
@@ -42,7 +42,8 @@ public class LoginActivity extends MusicBrainzActivity {
                 callbackUri.toString().startsWith(MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)) {
             String code = callbackUri.getQueryParameter("code");
             if (code != null) {
-                MusicBrainzService musicBrainzService = MusicBrainzServiceGenerator.createService();
+                SearchService musicBrainzService = MusicBrainzServiceGenerator
+                        .createService(SearchService.class);
                 Call<AccessToken> accessTokenCall = musicBrainzService
                         .getAccessToken(code,
                                 "authorization_code",

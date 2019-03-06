@@ -1,6 +1,8 @@
 package org.metabrainz.mobile.api.data.search.entity;
 
-public class LifeSpan {
+import java.io.Serializable;
+
+public class LifeSpan implements Serializable {
     private String begin;
     private String end;
     private boolean ended;
