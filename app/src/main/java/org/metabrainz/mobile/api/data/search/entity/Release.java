@@ -2,6 +2,8 @@ package org.metabrainz.mobile.api.data.search.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.metabrainz.mobile.api.data.search.CoverArt;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -27,6 +29,15 @@ public class Release {
     private String status;
     private String disambiguation;
     private ArrayList<Media> media = new ArrayList<>();
+    private org.metabrainz.mobile.api.data.search.CoverArt coverArt;
+
+    public CoverArt getCoverArt() {
+        return coverArt;
+    }
+
+    public void setCoverArt(CoverArt coverArt) {
+        this.coverArt = coverArt;
+    }
 
     public String getMbid() {
         return mbid;

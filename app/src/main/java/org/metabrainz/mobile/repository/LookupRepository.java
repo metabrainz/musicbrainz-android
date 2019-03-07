@@ -8,11 +8,16 @@ import com.google.gson.JsonParser;
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.WikiDataResponse;
+import org.metabrainz.mobile.api.data.search.CoverArt;
+import org.metabrainz.mobile.api.data.search.Image;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
+import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.api.webservice.LookupService;
 import org.metabrainz.mobile.api.webservice.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.util.SingleLiveEvent;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -108,5 +113,28 @@ public class LookupRepository {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
+    }
+
+    public Release fetchCoverArt(Release release){
+        String url = "https://ia800302.us.archive.org/33/items/mbid-5b07fe49-39a9-47a6-" +
+                "97b3-e5005992fb2a/mbid-5b07fe49-39a9-47a6-97b3-e5005992fb2a-2270157148.jpg";
+        service.getCoverArt(release.getMbid()).enqueue(new Callback<CoverArt>() {
+            @Override
+            public void onResponse(Call<CoverArt> call, Response<CoverArt> response) {
+                CoverArt art = new CoverArt();
+                Image image = new Image();
+                image.setImage(url);
+                ArrayList<Image> images = new ArrayList<>();
+                images.add(image);
+                art.setImages(images);
+                release.setCoverArt(art);
+            }
+
+            @Override
+            public void onFailure(Call<CoverArt> call, Throwable t) {
+
+            }
+        });
+        return release;
     }
 }
