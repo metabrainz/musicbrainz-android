@@ -29,7 +29,7 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     public ArtistReleaseAdapter(List<Release> data){this.data = data;}
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
-        private final MutableLiveData<Release> releaseMutableLiveData = new MutableLiveData<>();
+        private MutableLiveData<CoverArt> coverArtMutableLiveData;
         TextView releaseName, releaseDisambiguation, releaseArtist;
         ImageView coverArtView;
         public ReleaseItemViewHolder(@NonNull View itemView) {
@@ -38,10 +38,12 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             releaseArtist = itemView.findViewById(R.id.release_artist);
             releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
             coverArtView = itemView.findViewById(R.id.cover_art);
+        }
 
-            releaseMutableLiveData.observeForever(release -> {
+        public void bind(Release release){
+            coverArtMutableLiveData = repository.fetchCoverArt(release);
+            coverArtMutableLiveData.observeForever(coverArt -> {
                 boolean flag = false;
-                CoverArt coverArt = release.getCoverArt();
                 if(coverArt != null && coverArt.getImages() != null){
                     String url = coverArt.getImages().get(0).getImage();
                     if (url != null && !url.isEmpty()) {
@@ -52,10 +54,6 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
                 }
                 if(!flag) coverArtView.setVisibility(View.GONE);
             });
-        }
-
-        public void bind(Release release){
-            releaseMutableLiveData.setValue(repository.fetchCoverArt(release));
             releaseName.setText(release.getTitle());
             setViewVisibility(release.getDisplayArtist(), releaseArtist);
             setViewVisibility(release.getDisambiguation(), releaseDisambiguation);

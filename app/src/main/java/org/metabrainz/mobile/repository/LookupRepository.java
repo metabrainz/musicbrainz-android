@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.repository;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -115,9 +117,10 @@ public class LookupRepository {
         });
     }
 
-    public Release fetchCoverArt(Release release){
+    public MutableLiveData<CoverArt> fetchCoverArt(Release release){
         String url = "https://ia800302.us.archive.org/33/items/mbid-5b07fe49-39a9-47a6-" +
                 "97b3-e5005992fb2a/mbid-5b07fe49-39a9-47a6-97b3-e5005992fb2a-2270157148.jpg";
+        MutableLiveData<CoverArt> coverArtMutableLiveData = new MutableLiveData<>();
         service.getCoverArt(release.getMbid()).enqueue(new Callback<CoverArt>() {
             @Override
             public void onResponse(Call<CoverArt> call, Response<CoverArt> response) {
@@ -127,7 +130,7 @@ public class LookupRepository {
                 ArrayList<Image> images = new ArrayList<>();
                 images.add(image);
                 art.setImages(images);
-                release.setCoverArt(art);
+                coverArtMutableLiveData.setValue(art);
             }
 
             @Override
@@ -135,6 +138,6 @@ public class LookupRepository {
 
             }
         });
-        return release;
+        return coverArtMutableLiveData;
     }
 }
