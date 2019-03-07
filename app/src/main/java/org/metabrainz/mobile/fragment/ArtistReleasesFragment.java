@@ -18,15 +18,15 @@ import org.metabrainz.mobile.api.data.ReleaseGroupSearchResult;
 import org.metabrainz.mobile.fragment.contracts.EntityTab;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
 
-public class ArtistReleaseGroupsFragment extends ListFragment implements EntityTab<Artist> {
+public class ArtistReleasesFragment extends ListFragment implements EntityTab<Artist> {
 
-    public static ArtistReleaseGroupsFragment newInstance() {
-        return new ArtistReleaseGroupsFragment();
+    public static ArtistReleasesFragment newInstance() {
+        return new ArtistReleasesFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_artist_release_groups, container, false);
+        return inflater.inflate(R.layout.fragment_artist_releases, container, false);
     }
 
     @Override

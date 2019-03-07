@@ -8,7 +8,9 @@ import com.google.gson.JsonParser;
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.WikiDataResponse;
+import org.metabrainz.mobile.api.data.search.CoverArt;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
+import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.api.webservice.LookupService;
 import org.metabrainz.mobile.api.webservice.MusicBrainzServiceGenerator;
@@ -108,5 +110,21 @@ public class LookupRepository {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
+    }
+
+    private void fetchCoverArt(Release release){
+        service.getCoverArt(release.getMbid()).enqueue(new Callback<CoverArt>() {
+            @Override
+            public void onResponse(Call<CoverArt> call, Response<CoverArt> response) {
+                CoverArt art = response.body();
+                release.setCoverArt(art);
+            }
+
+            @Override
+            public void onFailure(Call<CoverArt> call, Throwable t) {
+
+            }
+        });
+
     }
 }

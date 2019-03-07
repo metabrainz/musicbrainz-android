@@ -25,11 +25,21 @@ public class Artist implements Serializable {
     private String gender;
 
     private ArrayList<Link> relations = new ArrayList<>();
+    private ArrayList<Release> releases = new ArrayList<>();
+
     public Artist(String mbid, String name, String country, String disambiguation) {
         this.mbid = mbid;
         this.name = name;
         this.country = country;
         this.disambiguation = disambiguation;
+    }
+
+    public ArrayList<Release> getReleases() {
+        return releases;
+    }
+
+    public void setReleases(ArrayList<Release> releases) {
+        this.releases = releases;
     }
 
     public ArrayList<Link> getRelations() {
