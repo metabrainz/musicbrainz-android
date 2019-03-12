@@ -11,7 +11,6 @@ import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.WikiDataResponse;
 import org.metabrainz.mobile.api.data.search.CoverArt;
-import org.metabrainz.mobile.api.data.search.Image;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.api.webservice.Constants;
@@ -19,7 +18,7 @@ import org.metabrainz.mobile.api.webservice.LookupService;
 import org.metabrainz.mobile.api.webservice.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,6 +31,7 @@ public class LookupRepository {
     private static LookupRepository repository;
     private final SingleLiveEvent<Artist> artistData;
     private final SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;
+    private final MutableLiveData<List<Release>> coverArtMutableLiveData;
 
     public static final int METHOD_WIKIPEDIA_URL = 0;
     public static final int METHOD_WIKIDATA_ID = 1;
@@ -39,6 +39,7 @@ public class LookupRepository {
     private LookupRepository() {
         artistData = new SingleLiveEvent<>();
         artistWikiSummary = new SingleLiveEvent<>();
+        coverArtMutableLiveData  = new MutableLiveData<>();
     }
 
     public static LookupRepository getRepository() {
@@ -117,20 +118,14 @@ public class LookupRepository {
         });
     }
 
-    public MutableLiveData<CoverArt> fetchCoverArt(Release release){
-        String url = "https://ia800302.us.archive.org/33/items/mbid-5b07fe49-39a9-47a6-" +
-                "97b3-e5005992fb2a/mbid-5b07fe49-39a9-47a6-97b3-e5005992fb2a-2270157148.jpg";
-        MutableLiveData<CoverArt> coverArtMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<Release>> fetchCoverArt(List<Release> releases, int position){
+        Release release = releases.get(position);
         service.getCoverArt(release.getMbid()).enqueue(new Callback<CoverArt>() {
             @Override
             public void onResponse(Call<CoverArt> call, Response<CoverArt> response) {
-                CoverArt art = new CoverArt();
-                Image image = new Image();
-                image.setImage(url);
-                ArrayList<Image> images = new ArrayList<>();
-                images.add(image);
-                art.setImages(images);
-                coverArtMutableLiveData.setValue(art);
+                CoverArt art = response.body();
+                release.setCoverArt(art);
+                coverArtMutableLiveData.setValue(releases);
             }
 
             @Override

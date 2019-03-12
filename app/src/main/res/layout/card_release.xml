@@ -20,48 +20,31 @@
             android:layout_margin="8dp"
             android:textAppearance="?android:attr/textAppearanceListItem"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/release_disambiguation"
-            app:layout_constraintEnd_toStartOf="@+id/cover_art"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cover_art"
             tools:text="Release Name" />
+
 
         <TextView
             android:id="@+id/release_disambiguation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/release_artist"
-            app:layout_constraintEnd_toStartOf="@+id/cover_art"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/release_name"
             tools:text="Disambiguation" />
 
-        <TextView
-            android:id="@+id/release_artist"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cover_art"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/release_disambiguation"
-            tools:text="Label" />
-
         <ImageView
             android:id="@+id/cover_art"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 

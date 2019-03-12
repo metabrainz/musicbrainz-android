@@ -1,15 +1,20 @@
 package org.metabrainz.mobile.viewmodel;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
+import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.repository.LookupRepository;
 import org.metabrainz.mobile.util.SingleLiveEvent;
+
+import java.util.List;
 
 public class ArtistViewModel extends ViewModel {
 
     private LookupRepository repository = LookupRepository.getRepository();
+    private MutableLiveData<List<Release>> releasesLiveData;
     private SingleLiveEvent<Artist> artistData;
     private Artist artist;
     private SingleLiveEvent<ArtistWikiSummary> artistWiki;
@@ -52,6 +57,10 @@ public class ArtistViewModel extends ViewModel {
 
     private SingleLiveEvent<ArtistWikiSummary> loadArtistWiki(String title, int method){
         return repository.getArtistWikiSummary(title ,method);
+    }
+
+    private MutableLiveData<List<Release>> initializeListData(List<Release> releases, int position){
+        return repository.fetchCoverArt(releases,position);
     }
 
 }

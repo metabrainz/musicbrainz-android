@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.search.CoverArt;
 import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.repository.LookupRepository;
 
@@ -29,35 +28,45 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     public ArtistReleaseAdapter(List<Release> data){this.data = data;}
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
-        private MutableLiveData<CoverArt> coverArtMutableLiveData;
-        TextView releaseName, releaseDisambiguation, releaseArtist;
+        private MutableLiveData<List<Release>> coverArtMutableLiveData;
+        TextView releaseName, releaseDisambiguation;
         ImageView coverArtView;
+
         public ReleaseItemViewHolder(@NonNull View itemView) {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
-            releaseArtist = itemView.findViewById(R.id.release_artist);
             releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
             coverArtView = itemView.findViewById(R.id.cover_art);
         }
 
-        public void bind(Release release){
-            coverArtMutableLiveData = repository.fetchCoverArt(release);
-            coverArtMutableLiveData.observeForever(coverArt -> {
-                boolean flag = false;
-                if(coverArt != null && coverArt.getImages() != null){
-                    String url = coverArt.getImages().get(0).getImage();
-                    if (url != null && !url.isEmpty()) {
-                        coverArtView.setVisibility(View.VISIBLE);
-                        Picasso.get().load(Uri.parse(url)).into(coverArtView);
-                        flag = true;
-                    }
-                }
-                if(!flag) coverArtView.setVisibility(View.GONE);
-            });
+        public void bind(Release release, int position){
             releaseName.setText(release.getTitle());
-            setViewVisibility(release.getDisplayArtist(), releaseArtist);
             setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
             coverArtView.setVisibility(View.GONE);
+
+            if(release.getCoverArt() != null) setCoverArtView(release);
+            else fetchSetCoverArtView(position);
+        }
+
+        private void setCoverArtView(Release release){
+            boolean flag = false;
+            if(release != null && release.getCoverArt() != null){
+                String url = release.getCoverArt().getImages().get(0).getImage();
+                if (url != null && !url.isEmpty()) {
+                    coverArtView.setVisibility(View.VISIBLE);
+                    Picasso.get().load(Uri.parse(url)).into(coverArtView);
+                    flag = true;
+                }
+            }
+            if(!flag) coverArtView.setVisibility(View.GONE);
+        }
+        private void fetchSetCoverArtView(int position){
+            coverArtMutableLiveData = repository.fetchCoverArt(data,position);
+            coverArtMutableLiveData.observeForever(releases -> {
+                if (releases.get(position) != null)
+                    setCoverArtView(releases.get(position));
+                else coverArtView.setVisibility(View.GONE);
+            });
         }
     }
 
@@ -72,7 +81,7 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ReleaseItemViewHolder viewHolder = (ReleaseItemViewHolder) holder;
-        viewHolder.bind(data.get(position));
+        viewHolder.bind(data.get(position) , position);
     }
 
     @Override
