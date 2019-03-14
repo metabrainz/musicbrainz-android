@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.adapter.list;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.activity.ArtistActivity;
 import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.repository.LookupRepository;
+import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
 import java.util.List;
 
@@ -25,7 +30,14 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
     private List<Release> data;
     private LookupRepository repository = LookupRepository.getRepository();
-    public ArtistReleaseAdapter(List<Release> data){this.data = data;}
+    private Context context;
+    private ArtistViewModel artistViewModel;
+
+    public ArtistReleaseAdapter(Context context, List<Release> data){
+        this.context = context;
+        this.data = data;
+        artistViewModel = ViewModelProviders.of((FragmentActivity) context).get(ArtistViewModel.class);
+    }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
         private MutableLiveData<List<Release>> coverArtMutableLiveData;
@@ -45,7 +57,8 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             coverArtView.setVisibility(View.GONE);
 
             if(release.getCoverArt() != null) setCoverArtView(release);
-            else fetchSetCoverArtView(position);
+            else fetchCoverArtForRelease(release.getMbid(), position);
+            // else fetchSetCoverArtView(position);
         }
 
         private void setCoverArtView(Release release){
@@ -60,6 +73,12 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             }
             if(!flag) coverArtView.setVisibility(View.GONE);
         }
+        private void fetchCoverArtForRelease(String releaseId, int position) {
+            // Ask the viewModel to retrieve the cover art
+            // and append it to this release
+            artistViewModel.fetchCoverArtForRelease(releaseId, position);
+        }
+
         private void fetchSetCoverArtView(int position){
             coverArtMutableLiveData = repository.fetchCoverArt(data,position);
             coverArtMutableLiveData.observeForever(releases -> {

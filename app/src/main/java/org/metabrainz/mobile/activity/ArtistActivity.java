@@ -51,7 +51,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         findViews();
 
         releaseList = new ArrayList<>();
-        adapter = new ArtistReleaseAdapter(releaseList);
+        adapter = new ArtistReleaseAdapter(this, releaseList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -71,11 +71,38 @@ public class ArtistActivity extends MusicBrainzActivity {
         recyclerView = findViewById(R.id.recycler_view);
     }
 
-    private void setArtist(Artist data){
-        if(data != null){
-            artistViewModel.setArtist(data);
-            Log.d(LOG_TAG,data.getName());
-            setArtistInfo();
+    private void setArtist(Artist artist){
+        if (artist != null){
+            getSupportActionBar().setTitle(artist.getName());
+
+            String type = artist.getType();
+            if (type != null && !type.isEmpty()) {
+                artistType.setText(type);
+            }
+
+            String gender = artist.getGender();
+            if (gender != null && !gender.isEmpty()) {
+                artistGender.setText(gender);
+            }
+
+            if (artist.getArea() != null) {
+                artistArea.setText(artist.getArea().getName());
+            }
+
+            if (artist.getLifeSpan() != null) {
+                artistLifeSpan.setText(artist.getLifeSpan().getTimePeriod());
+            }
+
+            if (artist.getReleases() != null){
+                releaseList.clear();
+                releaseList.addAll(artist.getReleases());
+                adapter.notifyDataSetChanged();
+            }
+
+
+            //artistViewModel.setArtist(data);
+            //Log.d(LOG_TAG,data.getName());
+            //setArtistInfo();
         }
     }
 

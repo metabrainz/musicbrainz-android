@@ -34,7 +34,7 @@ public class ArtistReleasesFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         releaseList = new ArrayList<>();
-        adapter = new ArtistReleaseAdapter(releaseList);
+        adapter = new ArtistReleaseAdapter(getActivity(), releaseList);
     }
 
     @Override
