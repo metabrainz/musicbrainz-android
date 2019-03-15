@@ -5,12 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.adapter.list.ArtistReleaseAdapter;
 import org.metabrainz.mobile.api.data.search.entity.Release;
@@ -18,6 +12,12 @@ import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ArtistReleasesFragment extends Fragment {
 
@@ -56,6 +56,7 @@ public class ArtistReleasesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        // TODO: Observe artistData LiveData, instead of requesting the artist sync
         if(artistViewModel.getArtist() != null && artistViewModel.getArtist().getReleases() != null){
             releaseList.clear();
             releaseList.addAll(artistViewModel.getArtist().getReleases());

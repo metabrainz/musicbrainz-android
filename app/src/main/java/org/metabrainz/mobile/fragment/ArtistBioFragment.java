@@ -6,16 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.api.data.search.entity.Link;
 import org.metabrainz.mobile.repository.LookupRepository;
 import org.metabrainz.mobile.viewmodel.ArtistViewModel;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 public class ArtistBioFragment extends Fragment {
 
@@ -46,6 +46,7 @@ public class ArtistBioFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        // TODO: Observe artistData LiveData, instead of requesting the artist sync
         artist = artistViewModel.getArtist();
         setArtistInfo();
         getArtistWiki();

@@ -1,13 +1,8 @@
 package org.metabrainz.mobile.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.adapter.list.ArtistReleaseAdapter;
@@ -22,6 +17,10 @@ import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
@@ -29,16 +28,15 @@ import java.util.List;
 public class ArtistActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugArtistInfo";
+
     private ArtistViewModel artistViewModel;
-
-    private String mbid;
-
     private RecyclerView recyclerView;
     private ArtistReleaseAdapter adapter;
-    private List<Release> releaseList;
     private TextView wikiTextView, artistType, artistGender, artistArea, artistLifeSpan;
     private View wikiCard;
-    private Artist artist;
+
+    private String mbid;
+    private List<Release> releaseList;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +44,11 @@ public class ArtistActivity extends MusicBrainzActivity {
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
-
         findViews();
 
+        artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
         releaseList = new ArrayList<>();
+
         adapter = new ArtistReleaseAdapter(this, releaseList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -58,6 +56,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(IntentFactory.Extra.ARTIST_MBID);
         if(mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);
 
+        // Whenever the artist changes, redraw the information
         artistViewModel.getArtistData().observe(this, this::setArtist);
     }
 
@@ -74,6 +73,8 @@ public class ArtistActivity extends MusicBrainzActivity {
     private void setArtist(Artist artist){
         if (artist != null){
             getSupportActionBar().setTitle(artist.getName());
+
+            getArtistWiki(artist);
 
             String type = artist.getType();
             if (type != null && !type.isEmpty()) {
@@ -94,19 +95,16 @@ public class ArtistActivity extends MusicBrainzActivity {
             }
 
             if (artist.getReleases() != null){
+                // Maybe releases get updated with cover art info
+                // Notify the adapter that the info is new
                 releaseList.clear();
                 releaseList.addAll(artist.getReleases());
                 adapter.notifyDataSetChanged();
             }
-
-
-            //artistViewModel.setArtist(data);
-            //Log.d(LOG_TAG,data.getName());
-            //setArtistInfo();
         }
     }
 
-    private void getArtistWiki(){
+    private void getArtistWiki(Artist artist){
         String title = "";
         int method = -1;
         if(artist != null)
@@ -143,38 +141,6 @@ public class ArtistActivity extends MusicBrainzActivity {
     }
     private void hideWikiCard(){
         wikiCard.setVisibility(View.GONE);
-    }
-
-    private void setArtistInfo(){
-        String type,gender,area,lifeSpan;
-        artist = artistViewModel.getArtist();
-
-        if(artist != null) {
-            getSupportActionBar().setTitle(artist.getName());
-
-            type = artist.getType();
-            gender = artist.getGender();
-            if(artist.getArea() != null) area = artist.getArea().getName(); else area = "";
-            if (artist.getLifeSpan() != null)
-                lifeSpan = artist.getLifeSpan().getTimePeriod();else lifeSpan = "";
-
-            if (type != null && !type.isEmpty())
-                artistType.setText(type);
-            if (gender != null && !gender.isEmpty())
-                artistGender.setText(gender);
-            if (area != null && !area.isEmpty())
-                artistArea.setText(area);
-            if (lifeSpan != null && !lifeSpan.isEmpty())
-                artistLifeSpan.setText(lifeSpan);
-
-            if(artist.getReleases() != null){
-                releaseList.clear();
-                releaseList.addAll(artist.getReleases());
-                adapter.notifyDataSetChanged();
-            }
-
-            getArtistWiki();
-        }
     }
 
     /*
