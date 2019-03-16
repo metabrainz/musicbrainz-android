@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.adapter.list;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,28 +8,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.api.data.search.entity.Release;
-import org.metabrainz.mobile.repository.LookupRepository;
+import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.View.GONE;
 
 public class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
-    private List<Release> data;
-    private LookupRepository repository = LookupRepository.getRepository();
-    public ArtistReleaseAdapter(List<Release> data){this.data = data;}
+    private List<Release> releaseList;
+    private ArtistViewModel artistViewModel;
+
+    public ArtistReleaseAdapter(Context context, List<Release> releaseList){
+        this.releaseList = releaseList;
+
+        // Load the ViewModel to fetch cover art for each release item
+        artistViewModel = ViewModelProviders.of((FragmentActivity) context).get(ArtistViewModel.class);
+    }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
-        private MutableLiveData<List<Release>> coverArtMutableLiveData;
         TextView releaseName, releaseDisambiguation;
         ImageView coverArtView;
 
@@ -42,31 +49,24 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
         public void bind(Release release, int position){
             releaseName.setText(release.getTitle());
             setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
-            coverArtView.setVisibility(View.GONE);
 
             if(release.getCoverArt() != null) setCoverArtView(release);
-            else fetchSetCoverArtView(position);
+            else fetchCoverArtForRelease(release.getMbid(), position);
         }
 
         private void setCoverArtView(Release release){
-            boolean flag = false;
-            if(release != null && release.getCoverArt() != null){
+            if (release != null && release.getCoverArt() != null){
+                // TODO: Search for the first “FRONT” image to use it as cover
                 String url = release.getCoverArt().getImages().get(0).getImage();
                 if (url != null && !url.isEmpty()) {
-                    coverArtView.setVisibility(View.VISIBLE);
                     Picasso.get().load(Uri.parse(url)).into(coverArtView);
-                    flag = true;
                 }
             }
-            if(!flag) coverArtView.setVisibility(View.GONE);
         }
-        private void fetchSetCoverArtView(int position){
-            coverArtMutableLiveData = repository.fetchCoverArt(data,position);
-            coverArtMutableLiveData.observeForever(releases -> {
-                if (releases.get(position) != null)
-                    setCoverArtView(releases.get(position));
-                else coverArtView.setVisibility(View.GONE);
-            });
+        private void fetchCoverArtForRelease(String releaseId, int position) {
+            // Ask the viewModel to retrieve the cover art
+            // and append it to this release
+            artistViewModel.fetchCoverArtForRelease(releaseId, position);
         }
     }
 
@@ -81,12 +81,12 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ReleaseItemViewHolder viewHolder = (ReleaseItemViewHolder) holder;
-        viewHolder.bind(data.get(position) , position);
+        viewHolder.bind(releaseList.get(position) , position);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return releaseList.size();
     }
 
     private void setViewVisibility(String text, TextView view) {
