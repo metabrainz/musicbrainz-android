@@ -30,7 +30,7 @@ public class LookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
             .createService(LookupService.class);
     private static LookupRepository repository;
-    private final SingleLiveEvent<Artist> artistData;
+    private final MutableLiveData<Artist> artistData;
     private final SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;
     private MutableLiveData<List<Release>> releaseListLiveData;
 
@@ -38,7 +38,7 @@ public class LookupRepository {
     public static final int METHOD_WIKIDATA_ID = 1;
 
     private LookupRepository() {
-        artistData = new SingleLiveEvent<>();
+        artistData = new MutableLiveData<>();
         artistWikiSummary = new SingleLiveEvent<>();
         releaseListLiveData = new SingleLiveEvent<>();
     }
@@ -48,12 +48,15 @@ public class LookupRepository {
         return repository;
     }
 
-    public SingleLiveEvent<Artist> getArtist(String MBID){
+    public MutableLiveData<Artist> initializeArtistData(){
+        return artistData;
+    }
+
+    public void getArtist(String MBID){
         if(App.isUserLoggedIn())
             fetchArtistWithUserData(MBID);
         else
             fetchArtist(MBID);
-        return artistData;
     }
 
     public SingleLiveEvent<ArtistWikiSummary> getArtistWikiSummary(String string, int method){

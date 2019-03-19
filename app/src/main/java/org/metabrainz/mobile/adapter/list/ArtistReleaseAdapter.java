@@ -34,7 +34,7 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
         this.releaseList = releaseList;
         // Load the ViewModel to fetch cover art for each release item
         artistViewModel = ViewModelProviders.of((FragmentActivity) context).get(ArtistViewModel.class);
-        releaseListLiveData = artistViewModel.initializeLiveData();
+        releaseListLiveData = artistViewModel.initializeReleasesLiveData();
     }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{

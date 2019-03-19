@@ -7,48 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-  <androidx.appcompat.widget.Toolbar
-      android:layout_width="match_parent"
-      android:id="@+id/toolbar"
-      android:layout_height="?attr/actionBarSize"
-      app:titleTextColor="@color/white"
-      android:background="@color/colorPrimary"/>
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@color/white"
+        android:background="@color/colorPrimary"/>
 
-  <ScrollView
-      android:id="@+id/scrollView2"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/main_fg"
-      android:fillViewport="true">
-
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:id="@+id/tabs"
+        app:tabGravity="center" />
 
-      <include android:id="@+id/card_artist_info"
-          android:layout_height="wrap_content"
-          android:layout_width="match_parent"
-          layout="@layout/card_artist_info"
-          android:layout_margin="4dp"/>
-
-      <include android:id="@+id/card_artist_wiki"
-          android:layout_height="wrap_content"
-          android:layout_width="match_parent"
-          layout="@layout/card_artist_wiki"
-          android:layout_margin="4dp"/>
-
-      <include android:id="@+id/card_links"
-          android:layout_height="wrap_content"
-          android:layout_width="match_parent"
-          layout="@layout/card_links"
-          android:layout_margin="4dp"/>
-
-
-    <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler_view"
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </LinearLayout>
-  </ScrollView>
+        android:layout_height="wrap_content"
+        android:id="@+id/pager"/>
 
 </LinearLayout>

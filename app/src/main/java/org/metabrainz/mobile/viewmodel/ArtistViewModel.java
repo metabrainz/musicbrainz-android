@@ -24,16 +24,6 @@ public class ArtistViewModel extends ViewModel {
     public ArtistViewModel() {
     }
 
-    // TODO: Remove to use only LiveData getter
-    public Artist getArtist() {
-        return artist;
-    }
-
-    // TODO: Remove to use only LiveData getter
-    public void setArtist(Artist artist) {
-        this.artist = artist;
-    }
-
     public void setMBID(String MBID) {
         if (MBID != null && !MBID.isEmpty()) {
             this.MBID = MBID;
@@ -41,10 +31,14 @@ public class ArtistViewModel extends ViewModel {
         } else mbidHasChanged = false;
     }
 
-    public MutableLiveData<Artist> getArtistData(){
-        if (artistData == null || mbidHasChanged)
-            artistData = repository.getArtist(MBID);
+    public MutableLiveData<Artist> initializeArtistData(){
+        if (artistData == null)
+            artistData = repository.initializeArtistData();
         return artistData;
+    }
+
+    public void getArtistData(){
+        repository.getArtist(MBID);
     }
 
     public SingleLiveEvent<ArtistWikiSummary> getArtistWiki(String title, int method){
@@ -59,8 +53,9 @@ public class ArtistViewModel extends ViewModel {
         repository.fetchCoverArtForRelease(releases, position);
     }
 
-    public MutableLiveData<List<Release>> initializeLiveData(){
-        releaseListLiveData = repository.initializeLiveData();
+    public MutableLiveData<List<Release>> initializeReleasesLiveData(){
+        if (releaseListLiveData == null)
+            releaseListLiveData = repository.initializeLiveData();
         return releaseListLiveData;
     }
 
