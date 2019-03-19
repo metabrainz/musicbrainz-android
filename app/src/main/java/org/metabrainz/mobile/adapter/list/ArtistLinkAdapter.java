@@ -24,10 +24,12 @@ import java.util.List;
 public class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickListener {
     private List<Link> links;
     private Context context;
+
     public ArtistLinkAdapter(Context context, List<Link> links){
         this.links = links;
         this.context = context;
     }
+
     class LinkViewHolder extends RecyclerView.ViewHolder{
         ImageView linkImageView;
         TextView linkTextView;
@@ -37,6 +39,7 @@ public class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnCl
             linkTextView = itemView.findViewById(R.id.link_text);
         }
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

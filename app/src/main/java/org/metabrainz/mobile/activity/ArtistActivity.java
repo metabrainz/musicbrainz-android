@@ -4,7 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.adapter.list.ArtistLinkAdapter;
 import org.metabrainz.mobile.adapter.list.ArtistReleaseAdapter;
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
@@ -17,10 +23,6 @@ import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
@@ -30,13 +32,15 @@ public class ArtistActivity extends MusicBrainzActivity {
     public static final String LOG_TAG = "DebugArtistInfo";
 
     private ArtistViewModel artistViewModel;
-    private RecyclerView recyclerView;
-    private ArtistReleaseAdapter adapter;
+    private RecyclerView releasesRecyclerView, linksRecyclerView;
+    private ArtistReleaseAdapter releaseAdapter;
+    private ArtistLinkAdapter linkAdapter;
     private TextView wikiTextView, artistType, artistGender, artistArea, artistLifeSpan;
     private View wikiCard;
 
     private String mbid;
     private List<Release> releaseList;
+    private List<Link> linkList;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +52,15 @@ public class ArtistActivity extends MusicBrainzActivity {
 
         artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
         releaseList = new ArrayList<>();
+        linkList = new ArrayList<>();
 
-        adapter = new ArtistReleaseAdapter(this, releaseList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        releaseAdapter = new ArtistReleaseAdapter(this, releaseList);
+        releasesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        releasesRecyclerView.setAdapter(releaseAdapter);
+
+        linkAdapter = new ArtistLinkAdapter(this,linkList);
+        linksRecyclerView.setAdapter(linkAdapter);
+        linksRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
         mbid = getIntent().getStringExtra(IntentFactory.Extra.ARTIST_MBID);
         if(mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);
@@ -67,7 +76,8 @@ public class ArtistActivity extends MusicBrainzActivity {
         artistLifeSpan = findViewById(R.id.life_span);
         wikiCard = findViewById(R.id.card_artist_wiki);
         wikiTextView = findViewById(R.id.wiki_summary);
-        recyclerView = findViewById(R.id.recycler_view);
+        releasesRecyclerView = findViewById(R.id.recycler_view);
+        linksRecyclerView = findViewById(R.id.links_list);
     }
 
     private void setArtist(Artist artist){
@@ -96,10 +106,16 @@ public class ArtistActivity extends MusicBrainzActivity {
 
             if (artist.getReleases() != null){
                 // Maybe releases get updated with cover art info
-                // Notify the adapter that the info is new
+                // Notify the releaseAdapter that the info is new
                 releaseList.clear();
                 releaseList.addAll(artist.getReleases());
-                adapter.notifyDataSetChanged();
+                releaseAdapter.notifyDataSetChanged();
+            }
+
+            if(artist.getRelations() != null){
+                linkList.clear();
+                linkList.addAll(artist.getRelations());
+                linkAdapter.notifyDataSetChanged();
             }
         }
     }
