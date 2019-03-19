@@ -30,9 +30,12 @@
     <meta-data
         android:name="com.google.android.backup.api_key"
         android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
 
-    <activity
+        <activity
         android:name="org.metabrainz.mobile.activity.DashboardActivity"
         android:label="@string/app_name"
         android:launchMode="singleTop"
