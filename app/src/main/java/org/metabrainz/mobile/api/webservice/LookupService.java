@@ -22,7 +22,7 @@ public interface LookupService {
     Call<Artist> lookupArtist(@Path("MBID") String MBID,
                               @Query("inc") String params);
 
-    @GET("http://www.coverartarchive.org/release/{MBID}")
+    @GET("http://coverartarchive.org/release/{MBID}")
     Call<CoverArt> getCoverArt(@Path("MBID") String MBID);
 
     @GET("https://en.wikipedia.org/api/rest_v1/page/summary/{title}")

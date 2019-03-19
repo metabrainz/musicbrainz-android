@@ -1,47 +1,44 @@
 package org.metabrainz.mobile.viewmodel;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
+import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
 import org.metabrainz.mobile.repository.LookupRepository;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
+import java.util.List;
+
 public class ArtistViewModel extends ViewModel {
 
     private LookupRepository repository = LookupRepository.getRepository();
-    private SingleLiveEvent<Artist> artistData;
+    private MutableLiveData<Artist> artistData;
     private Artist artist;
     private SingleLiveEvent<ArtistWikiSummary> artistWiki;
+    private MutableLiveData<List<Release>> releaseListLiveData;
     private String MBID;
-    public boolean mbidHasChanged = true;
+    private boolean mbidHasChanged = true;
 
     public ArtistViewModel() {
     }
 
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
-    }
-
     public void setMBID(String MBID) {
-        if(MBID != null && !MBID.isEmpty()) {
+        if (MBID != null && !MBID.isEmpty()) {
             this.MBID = MBID;
             mbidHasChanged = true;
         } else mbidHasChanged = false;
     }
 
-    public SingleLiveEvent<Artist> getArtistData(){
-        if (artistData == null || mbidHasChanged)
-            artistData = loadArtistData();
+    public MutableLiveData<Artist> initializeArtistData(){
+        if (artistData == null)
+            artistData = repository.initializeArtistData();
         return artistData;
     }
 
-    private SingleLiveEvent<Artist> loadArtistData(){
-        return repository.getArtist(MBID);
+    public void getArtistData(){
+        repository.getArtist(MBID);
     }
 
     public SingleLiveEvent<ArtistWikiSummary> getArtistWiki(String title, int method){
@@ -50,8 +47,19 @@ public class ArtistViewModel extends ViewModel {
          return artistWiki;
     }
 
+    public void fetchCoverArtForRelease(List<Release> releases, int position) {
+        // Ask the repository to fetch the cover art and update ArtistData LiveData
+        // Whoever is observing that LiveData, will receive the release with the cover art
+        repository.fetchCoverArtForRelease(releases, position);
+    }
+
+    public MutableLiveData<List<Release>> initializeReleasesLiveData(){
+        if (releaseListLiveData == null)
+            releaseListLiveData = repository.initializeLiveData();
+        return releaseListLiveData;
+    }
+
     private SingleLiveEvent<ArtistWikiSummary> loadArtistWiki(String title, int method){
         return repository.getArtistWikiSummary(title ,method);
     }
-
 }

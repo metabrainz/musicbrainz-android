@@ -7,22 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-  <androidx.appcompat.widget.Toolbar
-      android:layout_width="match_parent"
-      android:id="@+id/toolbar"
-      android:layout_height="?attr/actionBarSize"
-      app:titleTextColor="@color/white"
-      android:background="@color/colorPrimary"/>
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@color/white"
+        android:background="@color/colorPrimary"/>
 
-  <com.google.android.material.tabs.TabLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/tabs"
-      app:tabGravity="center" />
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabs"
+        app:tabGravity="center" />
 
-  <androidx.viewpager.widget.ViewPager
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/pager"/>
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pager"/>
 
 </LinearLayout>

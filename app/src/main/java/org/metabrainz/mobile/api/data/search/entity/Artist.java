@@ -42,6 +42,10 @@ public class Artist implements Serializable {
         this.releases = releases;
     }
 
+    public void setRelease(Release release, int position) {
+        this.releases.set(position, release);
+    }
+
     public ArrayList<Link> getRelations() {
         return relations;
     }
