@@ -8,6 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
@@ -16,23 +22,19 @@ import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.RecyclerView;
-
 import static android.view.View.GONE;
 
 public class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
     private List<Release> releaseList;
     private ArtistViewModel artistViewModel;
+    private MutableLiveData<List<Release>> releaseListLiveData;
 
     public ArtistReleaseAdapter(Context context, List<Release> releaseList){
         this.releaseList = releaseList;
-
         // Load the ViewModel to fetch cover art for each release item
         artistViewModel = ViewModelProviders.of((FragmentActivity) context).get(ArtistViewModel.class);
+        releaseListLiveData = artistViewModel.initializeLiveData();
     }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
@@ -51,7 +53,8 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
 
             if(release.getCoverArt() != null) setCoverArtView(release);
-            else fetchCoverArtForRelease(release.getMbid(), position);
+            else fetchCoverArtForRelease(position);
+            releaseListLiveData.observeForever(releases -> setCoverArtView(releases.get(position)));
         }
 
         private void setCoverArtView(Release release){
@@ -63,10 +66,10 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
                 }
             }
         }
-        private void fetchCoverArtForRelease(String releaseId, int position) {
+        private void fetchCoverArtForRelease(int position) {
             // Ask the viewModel to retrieve the cover art
             // and append it to this release
-            artistViewModel.fetchCoverArtForRelease(releaseId, position);
+            artistViewModel.fetchCoverArtForRelease(releaseList, position);
         }
     }
 

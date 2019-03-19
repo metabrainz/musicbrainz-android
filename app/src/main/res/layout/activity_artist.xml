@@ -38,6 +38,12 @@
           layout="@layout/card_artist_wiki"
           android:layout_margin="4dp"/>
 
+      <include android:id="@+id/card_links"
+          android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+          layout="@layout/card_links"
+          android:layout_margin="4dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler_view"
         android:layout_width="match_parent"
