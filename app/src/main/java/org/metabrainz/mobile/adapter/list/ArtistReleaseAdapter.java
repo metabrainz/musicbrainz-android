@@ -65,7 +65,7 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
                 // TODO: Search for the first “FRONT” image to use it as cover
                 String url = release.getCoverArt().getImages().get(0).getImage();
                 if (url != null && !url.isEmpty()) {
-                    Picasso.get().load(Uri.parse(url)).into(coverArtView);
+                    Picasso.get().load(Uri.parse(url)).placeholder(R.drawable.link_discog).into(coverArtView);
                 }
             }
         }
