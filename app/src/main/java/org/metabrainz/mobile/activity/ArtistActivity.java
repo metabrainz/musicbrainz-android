@@ -54,6 +54,8 @@ public class ArtistActivity extends MusicBrainzActivity {
         if (artist != null) getSupportActionBar().setTitle(artist.getName());
     }
 
+
+
     /*
     protected void populateLayout() {
         TextView artistText = findViewById(R.id.artist_artist);

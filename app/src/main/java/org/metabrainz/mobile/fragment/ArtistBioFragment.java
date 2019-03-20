@@ -32,16 +32,11 @@ public class ArtistBioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
+        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
+        artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setArtistInfo);
+        artistViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);
         return layout;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(this, this::setArtistInfo);
-        artistViewModel.getArtistData();
     }
 
     private void findViews(View layout) {
@@ -51,6 +46,12 @@ public class ArtistBioFragment extends Fragment {
         artistLifeSpan = layout.findViewById(R.id.life_span);
         wikiCard = layout.findViewById(R.id.card_artist_wiki);
         wikiTextView = layout.findViewById(R.id.wiki_summary);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     private void getArtistWiki(Artist artist){
@@ -71,8 +72,7 @@ public class ArtistBioFragment extends Fragment {
             }
         }
         if (method != -1)
-            artistViewModel.getArtistWiki(title, method)
-                    .observe(this, this::setWiki );
+            artistViewModel.loadArtistWiki(title,method);
         else hideWikiCard();
 
     }

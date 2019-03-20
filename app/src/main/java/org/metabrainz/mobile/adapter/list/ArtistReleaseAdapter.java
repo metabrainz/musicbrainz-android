@@ -54,11 +54,14 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
             if(release.getCoverArt() != null) setCoverArtView(release);
             else fetchCoverArtForRelease(position);
-            releaseListLiveData.observeForever(releases -> setCoverArtView(releases.get(position)));
+            releaseListLiveData.observeForever(releases -> {
+                if (position < releases.size())
+                    setCoverArtView(releases.get(position));
+            });
         }
 
         private void setCoverArtView(Release release){
-            if (release != null && release.getCoverArt() != null){
+            if (release != null && release.getCoverArt() != null && releaseList.contains(release)){
                 // TODO: Search for the first “FRONT” image to use it as cover
                 String url = release.getCoverArt().getImages().get(0).getImage();
                 if (url != null && !url.isEmpty()) {

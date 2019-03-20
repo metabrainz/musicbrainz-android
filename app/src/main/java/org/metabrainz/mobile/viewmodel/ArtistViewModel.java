@@ -15,20 +15,15 @@ public class ArtistViewModel extends ViewModel {
 
     private LookupRepository repository = LookupRepository.getRepository();
     private MutableLiveData<Artist> artistData;
-    private Artist artist;
     private SingleLiveEvent<ArtistWikiSummary> artistWiki;
     private MutableLiveData<List<Release>> releaseListLiveData;
     private String MBID;
-    private boolean mbidHasChanged = true;
 
     public ArtistViewModel() {
     }
 
     public void setMBID(String MBID) {
-        if (MBID != null && !MBID.isEmpty()) {
-            this.MBID = MBID;
-            mbidHasChanged = true;
-        } else mbidHasChanged = false;
+        if (MBID != null && !MBID.isEmpty())this.MBID = MBID;
     }
 
     public MutableLiveData<Artist> initializeArtistData(){
@@ -39,12 +34,6 @@ public class ArtistViewModel extends ViewModel {
 
     public void getArtistData(){
         repository.getArtist(MBID);
-    }
-
-    public SingleLiveEvent<ArtistWikiSummary> getArtistWiki(String title, int method){
-        if (artistWiki == null || mbidHasChanged)
-            artistWiki = loadArtistWiki(title, method);
-         return artistWiki;
     }
 
     public void fetchCoverArtForRelease(List<Release> releases, int position) {
@@ -59,7 +48,13 @@ public class ArtistViewModel extends ViewModel {
         return releaseListLiveData;
     }
 
-    private SingleLiveEvent<ArtistWikiSummary> loadArtistWiki(String title, int method){
-        return repository.getArtistWikiSummary(title ,method);
+    public void loadArtistWiki(String title, int method){
+        repository.getArtistWikiSummary(title ,method);
+    }
+
+    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData(){
+        if (artistWiki == null)
+            artistWiki = repository.initializeWikiData();
+        return artistWiki;
     }
 }

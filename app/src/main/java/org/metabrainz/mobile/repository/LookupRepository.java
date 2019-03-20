@@ -30,27 +30,29 @@ public class LookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
             .createService(LookupService.class);
     private static LookupRepository repository;
-    private final MutableLiveData<Artist> artistData;
-    private final SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;
-    private MutableLiveData<List<Release>> releaseListLiveData;
+    private static MutableLiveData<Artist> artistData;
+    private static SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;
+    private static MutableLiveData<List<Release>> releaseListLiveData;
 
     public static final int METHOD_WIKIPEDIA_URL = 0;
     public static final int METHOD_WIKIDATA_ID = 1;
 
     private LookupRepository() {
-        artistData = new MutableLiveData<>();
-        artistWikiSummary = new SingleLiveEvent<>();
-        releaseListLiveData = new SingleLiveEvent<>();
     }
 
     public static LookupRepository getRepository() {
         if (repository == null) repository = new LookupRepository();
+        artistData = new MutableLiveData<>();
+        artistWikiSummary = new SingleLiveEvent<>();
+        releaseListLiveData = new SingleLiveEvent<>();
         return repository;
     }
 
     public MutableLiveData<Artist> initializeArtistData(){
         return artistData;
     }
+
+    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData(){ return artistWikiSummary;}
 
     public void getArtist(String MBID){
         if(App.isUserLoggedIn())
@@ -59,12 +61,11 @@ public class LookupRepository {
             fetchArtist(MBID);
     }
 
-    public SingleLiveEvent<ArtistWikiSummary> getArtistWikiSummary(String string, int method){
+    public void getArtistWikiSummary(String string, int method){
         if(method == METHOD_WIKIPEDIA_URL)
             fetchArtistWiki(string);
         else
             fetchArtistWikiData(string);
-        return artistWikiSummary;
     }
 
     //TODO: Implement artist user data fetch
@@ -133,6 +134,7 @@ public class LookupRepository {
      * @return
      */
     public void fetchCoverArtForRelease(List<Release> releases, int position){
+        Release release = releases.get(position);
         service.getCoverArt(releases.get(position).getMbid())
                 .enqueue(new Callback<CoverArt>() {
             @Override
@@ -140,11 +142,11 @@ public class LookupRepository {
                 if (response.code() == 200) {
                     // Only found cover arts (200 OK) must be used
                     CoverArt coverArt = response.body();
-                    Release release = releases.get(position);
                     // Replace cover art for this release
                     release.setCoverArt(coverArt);
                     // Resend the LiveData for any observer to get the new cover art
-                    releaseListLiveData.setValue(releases);
+                    if (releases.contains(release))
+                        releaseListLiveData.setValue(releases);
                 }
             }
             @Override
