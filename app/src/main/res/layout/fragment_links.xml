@@ -20,7 +20,7 @@
             android:textColor="@color/black"
             android:textAppearance="?android:attr/textAppearanceLarge"
             app:fontFamily="@font/roboto_medium"
-            android:text="Get The Music"/>
+            android:text="@string/links"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

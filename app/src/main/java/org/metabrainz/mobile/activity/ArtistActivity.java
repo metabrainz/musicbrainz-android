@@ -45,7 +45,19 @@ public class ArtistActivity extends MusicBrainzActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // Whenever the artist changes, redraw the information
+        /*
+         * Whenever the artist changes, redraw the information
+         * Subscribe to the empty live data and then ask the view model to update artist live data.
+         * The approach has the benefit of eliminating extra calls to update artist info when it is
+         * not required.
+         * Example: The view model is shared between the activity and fragments. The activity and each
+         * of the fragments will need to subscribe to the live data independently. In the earlier
+         * approach, the artist data was queried whenever getArtistData() was invoked, the repository
+         * performed an update on the artist data. This approach led a lot of unneeded network request.
+         * A better solution which is currently followed is that there is a separate method to subscribe
+         * to live data and another one to update the artist info. The initializeLiveData method acts
+         * like a getter method.
+         */
         artistViewModel.initializeArtistData().observe(this, this::setArtist);
         artistViewModel.getArtistData();
     }

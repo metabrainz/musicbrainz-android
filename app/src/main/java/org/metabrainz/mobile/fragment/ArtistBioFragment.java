@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -46,12 +45,6 @@ public class ArtistBioFragment extends Fragment {
         artistLifeSpan = layout.findViewById(R.id.life_span);
         wikiCard = layout.findViewById(R.id.card_artist_wiki);
         wikiTextView = layout.findViewById(R.id.wiki_summary);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 
     private void getArtistWiki(Artist artist){

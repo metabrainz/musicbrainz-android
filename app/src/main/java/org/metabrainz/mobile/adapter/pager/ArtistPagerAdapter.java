@@ -14,7 +14,7 @@ import org.metabrainz.mobile.fragment.ArtistReleasesFragment;
 
 public class ArtistPagerAdapter extends FragmentPagerAdapter {
 
-    private static final int[] TITLES = {R.string.tab_bio, R.string.tab_releases, R.string.tab_links,
+    private static final int[] TITLES = {R.string.tab_releases, R.string.tab_bio, R.string.tab_links,
             R.string.tab_edits};
 
     public ArtistPagerAdapter(FragmentManager fm) {
@@ -25,9 +25,9 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return ArtistBioFragment.newInstance();
-            case 1:
                 return ArtistReleasesFragment.newInstance();
+            case 1:
+                return ArtistBioFragment.newInstance();
             case 2:
                 return  ArtistLinksFragment.newInstance();
             case 3:
@@ -44,7 +44,7 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return TITLES.length;
+        return TITLES.length - 1;
     }
 
 }
