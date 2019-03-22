@@ -38,10 +38,10 @@ public class ArtistViewModel extends ViewModel {
         repository.getArtist(MBID);
     }
 
-    public void fetchCoverArtForRelease(List<Release> releases, int position) {
+    public void fetchCoverArtForRelease(Release release, SingleLiveEvent<Release> releaseLiveData) {
         // Ask the repository to fetch the cover art and update ArtistData LiveData
         // Whoever is observing that LiveData, will receive the release with the cover art
-        repository.fetchCoverArtForRelease(releases, position);
+        repository.fetchCoverArtForRelease(release, releaseLiveData);
     }
 
     public MutableLiveData<List<Release>> initializeReleasesLiveData(){

@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.api.data.search.entity.Release;
+import org.metabrainz.mobile.util.SingleLiveEvent;
 import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
 import java.util.List;
@@ -40,12 +41,14 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
         TextView releaseName, releaseDisambiguation;
         ImageView coverArtView;
+        SingleLiveEvent<Release> releaseMutableLiveData;
 
         public ReleaseItemViewHolder(@NonNull View itemView) {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
             releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
             coverArtView = itemView.findViewById(R.id.cover_art);
+            releaseMutableLiveData = new SingleLiveEvent<>();
         }
 
         public void bind(Release release, int position){
@@ -54,25 +57,30 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
             if(release.getCoverArt() != null) setCoverArtView(release);
             else fetchCoverArtForRelease(position);
-            releaseListLiveData.observeForever(releases -> {
-                if (position < releases.size())
-                    setCoverArtView(releases.get(position));
-            });
+            releaseMutableLiveData.observeForever(this::setCoverArtView);
         }
 
         private void setCoverArtView(Release release){
             if (release != null && release.getCoverArt() != null && releaseList.contains(release)){
                 // TODO: Search for the first “FRONT” image to use it as cover
-                String url = release.getCoverArt().getImages().get(0).getImage();
+                String url = release.getCoverArt()
+                        .getImages()
+                        .get(0)
+                        .getImage();
+
                 if (url != null && !url.isEmpty()) {
-                    Picasso.get().load(Uri.parse(url)).placeholder(R.drawable.link_discog).into(coverArtView);
+                    Picasso.get()
+                            .load(Uri.parse(url))
+                            .placeholder(R.drawable.link_discog)
+                            .into(coverArtView);
                 }
             }
         }
         private void fetchCoverArtForRelease(int position) {
             // Ask the viewModel to retrieve the cover art
             // and append it to this release
-            artistViewModel.fetchCoverArtForRelease(releaseList, position);
+            artistViewModel.fetchCoverArtForRelease(releaseList.get(position),
+                                                    releaseMutableLiveData);
         }
     }
 
@@ -87,6 +95,7 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ReleaseItemViewHolder viewHolder = (ReleaseItemViewHolder) holder;
+        viewHolder.releaseMutableLiveData.removeObserver(release -> {});
         viewHolder.bind(releaseList.get(position) , position);
     }
 
