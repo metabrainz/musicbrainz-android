@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -32,6 +33,12 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
         View layout = inflater.inflate(R.layout.fragment_dash_search, container);
         searchTypeSpinner = layout.findViewById(R.id.search_spin);
         searchView = layout.findViewById(R.id.search_view);
+
+        //Hide auto-show keyboard
+        InputMethodManager imm = (InputMethodManager)layout.getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+
         setupSearchView();
         return layout;
     }
@@ -51,37 +58,6 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchTypeSpinner.setAdapter(typeAdapter);
     }
-
-    /*@Override
-    public void onResume() {
-        super.onResume();
-        if (App.getUser().isSearchSuggestionsEnabled()) {
-            searchField.setAdapter(suggestionHelper.getAdapter());
-            searchField.setOnItemClickListener(this);
-        } else {
-            searchField.setAdapter(suggestionHelper.getEmptyAdapter());
-        }
-    }
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (v.getId() == R.id.query_input && actionId == EditorInfo.IME_NULL) {
-            startSearch();
-        }
-        return false;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startSearch();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.search_btn) {
-            startSearch();
-        }
-    }*/
 
     private void startSearch() {
         String query = searchView.getQuery().toString();
