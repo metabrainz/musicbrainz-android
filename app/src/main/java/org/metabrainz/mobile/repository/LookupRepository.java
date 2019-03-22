@@ -38,14 +38,19 @@ public class LookupRepository {
     public static final int METHOD_WIKIDATA_ID = 1;
 
     private LookupRepository() {
+
+        artistData = new MutableLiveData<>();
+        artistWikiSummary = new SingleLiveEvent<>();
+        releaseListLiveData = new SingleLiveEvent<>();
     }
 
     public static LookupRepository getRepository() {
         if (repository == null) repository = new LookupRepository();
-        artistData = new MutableLiveData<>();
-        artistWikiSummary = new SingleLiveEvent<>();
-        releaseListLiveData = new SingleLiveEvent<>();
         return repository;
+    }
+
+    public static void destroyRepository(){
+        repository = null;
     }
 
     public MutableLiveData<Artist> initializeArtistData(){
