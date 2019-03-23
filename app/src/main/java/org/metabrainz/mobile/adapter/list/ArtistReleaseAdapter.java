@@ -10,18 +10,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.api.data.search.CoverArt;
 import org.metabrainz.mobile.api.data.search.entity.Release;
-import org.metabrainz.mobile.util.SingleLiveEvent;
 import org.metabrainz.mobile.viewmodel.ArtistViewModel;
 
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
@@ -29,26 +33,25 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
     private List<Release> releaseList;
     private ArtistViewModel artistViewModel;
-    private MutableLiveData<List<Release>> releaseListLiveData;
+    private CompositeDisposable compositeDisposable;
 
     public ArtistReleaseAdapter(Context context, List<Release> releaseList){
         this.releaseList = releaseList;
         // Load the ViewModel to fetch cover art for each release item
         artistViewModel = ViewModelProviders.of((FragmentActivity) context).get(ArtistViewModel.class);
-        releaseListLiveData = artistViewModel.initializeReleasesLiveData();
+        compositeDisposable = new CompositeDisposable();
     }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
         TextView releaseName, releaseDisambiguation;
         ImageView coverArtView;
-        SingleLiveEvent<Release> releaseMutableLiveData;
+        Disposable disposable;
 
         public ReleaseItemViewHolder(@NonNull View itemView) {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
             releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
             coverArtView = itemView.findViewById(R.id.cover_art);
-            releaseMutableLiveData = new SingleLiveEvent<>();
         }
 
         public void bind(Release release, int position){
@@ -57,7 +60,6 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
             if(release.getCoverArt() != null) setCoverArtView(release);
             else fetchCoverArtForRelease(position);
-            releaseMutableLiveData.observeForever(this::setCoverArtView);
         }
 
         private void setCoverArtView(Release release){
@@ -76,11 +78,31 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
                 }
             }
         }
+
+        private void addCoverArt(CoverArt coverArt){
+            if (coverArt != null && coverArt.getImages() != null
+                    && !coverArt.getImages().isEmpty()) {
+                String coverArtRelease = coverArt.getRelease();
+                for (Release release:releaseList){
+                    if (coverArtRelease.endsWith(release.getMbid())) {
+                        release.setCoverArt(coverArt);
+                        setCoverArtView(release);
+                        break;
+                    }
+                }
+            }
+        }
+
         private void fetchCoverArtForRelease(int position) {
             // Ask the viewModel to retrieve the cover art
             // and append it to this release
-            artistViewModel.fetchCoverArtForRelease(releaseList.get(position),
-                                                    releaseMutableLiveData);
+            artistViewModel.fetchCoverArtForRelease(releaseList.get(position));
+            disposable = artistViewModel
+                            .fetchCoverArtForRelease(releaseList.get(position))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(this::addCoverArt, Throwable::printStackTrace);
+            compositeDisposable.add(disposable);
         }
     }
 
@@ -95,7 +117,8 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ReleaseItemViewHolder viewHolder = (ReleaseItemViewHolder) holder;
-        viewHolder.releaseMutableLiveData.removeObserver(release -> {});
+        if (viewHolder.disposable != null && !viewHolder.disposable.isDisposed())
+            compositeDisposable.remove(viewHolder.disposable);
         viewHolder.bind(releaseList.get(position) , position);
     }
 
@@ -109,5 +132,11 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             view.setVisibility(View.VISIBLE);
             view.setText(text);
         } else view.setVisibility(GONE);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        compositeDisposable.clear();
     }
 }
