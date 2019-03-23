@@ -54,12 +54,18 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             coverArtView = itemView.findViewById(R.id.cover_art);
         }
 
-        public void bind(Release release, int position){
+        public void bind(Release release){
             releaseName.setText(release.getTitle());
             setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
 
-            if(release.getCoverArt() != null) setCoverArtView(release);
-            else fetchCoverArtForRelease(position);
+            coverArtView.setImageDrawable(coverArtView.getContext()
+                    .getResources()
+                    .getDrawable(R.drawable.link_discog));
+
+            if(release.getCoverArt() != null)
+                setCoverArtView(release);
+            else
+                fetchCoverArtForRelease(release);
         }
 
         private void setCoverArtView(Release release){
@@ -93,12 +99,11 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             }
         }
 
-        private void fetchCoverArtForRelease(int position) {
+        private void fetchCoverArtForRelease(Release release) {
             // Ask the viewModel to retrieve the cover art
             // and append it to this release
-            artistViewModel.fetchCoverArtForRelease(releaseList.get(position));
             disposable = artistViewModel
-                            .fetchCoverArtForRelease(releaseList.get(position))
+                            .fetchCoverArtForRelease(release)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(this::addCoverArt, Throwable::printStackTrace);
@@ -119,12 +124,23 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
         ReleaseItemViewHolder viewHolder = (ReleaseItemViewHolder) holder;
         if (viewHolder.disposable != null && !viewHolder.disposable.isDisposed())
             compositeDisposable.remove(viewHolder.disposable);
-        viewHolder.bind(releaseList.get(position) , position);
+
+        viewHolder.bind(releaseList.get(position));
     }
 
     @Override
     public int getItemCount() {
         return releaseList.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     private void setViewVisibility(String text, TextView view) {
