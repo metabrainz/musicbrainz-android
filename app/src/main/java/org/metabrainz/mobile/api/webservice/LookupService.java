@@ -10,6 +10,7 @@ import org.metabrainz.mobile.api.data.search.entity.Artist;
 
 import java.io.IOException;
 
+import io.reactivex.Single;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -23,7 +24,7 @@ public interface LookupService {
                               @Query("inc") String params);
 
     @GET("http://coverartarchive.org/release/{MBID}")
-    Call<CoverArt> getCoverArt(@Path("MBID") String MBID);
+    Single<CoverArt> getCoverArt(@Path("MBID") String MBID);
 
     @GET("https://en.wikipedia.org/api/rest_v1/page/summary/{title}")
     Call<ArtistWikiSummary> getWikipediaSummary(@Path("title") String title);

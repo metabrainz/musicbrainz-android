@@ -16,11 +16,11 @@ import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.api.webservice.LookupService;
 import org.metabrainz.mobile.api.webservice.MusicBrainzServiceGenerator;
-import org.metabrainz.mobile.util.Log;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import java.util.List;
 
+import io.reactivex.Single;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,30 +134,9 @@ public class LookupRepository {
 
     /**
      * For a given release ID, fetches the cover arts and updates the release w¡th that info
-     * @param releases List of releases of the artist
-     * @param position Release item position in the artist's releases array, to update it.
-     * @return
+     * @param release Release for which the cover art is to be retrieved
      */
-    public void fetchCoverArtForRelease(List<Release> releases, int position){
-        Release release = releases.get(position);
-        service.getCoverArt(releases.get(position).getMbid())
-                .enqueue(new Callback<CoverArt>() {
-            @Override
-            public void onResponse(Call<CoverArt> call, Response<CoverArt> response) {
-                if (response.code() == 200) {
-                    // Only found cover arts (200 OK) must be used
-                    CoverArt coverArt = response.body();
-                    // Replace cover art for this release
-                    release.setCoverArt(coverArt);
-                    // Resend the LiveData for any observer to get the new cover art
-                    if (releases.contains(release))
-                        releaseListLiveData.setValue(releases);
-                }
-            }
-            @Override
-            public void onFailure(Call<CoverArt> call, Throwable t) {
-                Log.e(t.getLocalizedMessage());
-            }
-        });
+    public Single<CoverArt> fetchCoverArtForRelease(Release release){
+        return service.getCoverArt(release.getMbid());
     }
 }
