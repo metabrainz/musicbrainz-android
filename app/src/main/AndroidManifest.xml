@@ -10,7 +10,6 @@
 
     <application
         android:name="org.metabrainz.mobile.App"
-        android:backupAgent="org.metabrainz.mobile.backup.MusicBrainzBackupAgent"
         android:hardwareAccelerated="true"
         android:icon="@drawable/launcher"
         android:usesCleartextTraffic="true"

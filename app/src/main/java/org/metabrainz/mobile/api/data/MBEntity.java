@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.api.webservice;
+package org.metabrainz.mobile.api.data;
 
 import com.google.gson.annotations.SerializedName;
 
