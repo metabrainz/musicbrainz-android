@@ -1,19 +1,19 @@
 package org.metabrainz.mobile.api;
 
-import org.metabrainz.mobile.api.data.Artist;
-import org.metabrainz.mobile.api.data.ArtistSearchResult;
-import org.metabrainz.mobile.api.data.Label;
-import org.metabrainz.mobile.api.data.LabelSearchResult;
-import org.metabrainz.mobile.api.data.Recording;
-import org.metabrainz.mobile.api.data.RecordingSearchResult;
-import org.metabrainz.mobile.api.data.Release;
-import org.metabrainz.mobile.api.data.ReleaseGroup;
-import org.metabrainz.mobile.api.data.ReleaseGroupSearchResult;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
-import org.metabrainz.mobile.api.data.Tag;
-import org.metabrainz.mobile.api.data.UserCollection;
-import org.metabrainz.mobile.api.data.UserData;
-import org.metabrainz.mobile.api.data.UserSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.Artist;
+import org.metabrainz.mobile.api.data.obsolete.ArtistSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.Label;
+import org.metabrainz.mobile.api.data.obsolete.LabelSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.Recording;
+import org.metabrainz.mobile.api.data.obsolete.RecordingSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.Release;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseGroup;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseGroupSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.Tag;
+import org.metabrainz.mobile.api.data.obsolete.UserCollection;
+import org.metabrainz.mobile.api.data.obsolete.UserData;
+import org.metabrainz.mobile.api.data.obsolete.UserSearchResult;
 import org.metabrainz.mobile.api.webservice.Entity;
 
 import java.io.IOException;

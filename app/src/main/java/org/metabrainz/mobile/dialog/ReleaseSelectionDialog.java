@@ -13,8 +13,8 @@ import android.widget.ListView;
 import androidx.fragment.app.DialogFragment;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.adapter.list.ReleaseInfoAdapter;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
+import org.metabrainz.mobile.adapter.ReleaseInfoAdapter;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseSearchResult;
 
 import java.util.List;
 

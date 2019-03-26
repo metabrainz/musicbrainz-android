@@ -24,9 +24,9 @@ import androidx.loader.content.Loader;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.ReleaseActivity;
-import org.metabrainz.mobile.adapter.list.ReleaseInfoAdapter;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
-import org.metabrainz.mobile.api.data.UserCollection;
+import org.metabrainz.mobile.adapter.ReleaseInfoAdapter;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.UserCollection;
 import org.metabrainz.mobile.async.CollectionEditLoader;
 import org.metabrainz.mobile.async.CollectionLoader;
 import org.metabrainz.mobile.async.result.AsyncResult;

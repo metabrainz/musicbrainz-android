@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseSearchResult;
 import org.metabrainz.mobile.string.StringFormat;
 import org.metabrainz.mobile.string.StringMapper;
 

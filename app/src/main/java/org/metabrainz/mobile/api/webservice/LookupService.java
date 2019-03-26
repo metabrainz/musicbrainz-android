@@ -1,11 +1,11 @@
 package org.metabrainz.mobile.api.webservice;
 
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
-import org.metabrainz.mobile.api.data.Label;
-import org.metabrainz.mobile.api.data.Recording;
-import org.metabrainz.mobile.api.data.Release;
-import org.metabrainz.mobile.api.data.ReleaseGroup;
-import org.metabrainz.mobile.api.data.search.CoverArt;
+import org.metabrainz.mobile.api.data.obsolete.Label;
+import org.metabrainz.mobile.api.data.obsolete.Recording;
+import org.metabrainz.mobile.api.data.obsolete.Release;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseGroup;
+import org.metabrainz.mobile.api.data.CoverArt;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
 
 import java.io.IOException;

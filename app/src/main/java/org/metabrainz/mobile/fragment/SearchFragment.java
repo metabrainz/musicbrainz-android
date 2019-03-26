@@ -17,7 +17,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.SearchActivity;
+import org.metabrainz.mobile.search.SearchActivity;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
 import org.metabrainz.mobile.suggestion.SuggestionHelper;
 

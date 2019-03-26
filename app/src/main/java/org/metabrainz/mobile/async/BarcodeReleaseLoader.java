@@ -3,8 +3,8 @@ package org.metabrainz.mobile.async;
 import java.io.IOException;
 
 import org.metabrainz.mobile.api.MusicBrainz;
-import org.metabrainz.mobile.api.data.Release;
-import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.api.data.obsolete.Release;
+import org.metabrainz.mobile.api.data.obsolete.UserData;
 import org.metabrainz.mobile.api.webservice.Entity;
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.async.result.AsyncEntityResult;

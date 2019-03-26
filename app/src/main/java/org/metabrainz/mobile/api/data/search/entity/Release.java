@@ -2,7 +2,7 @@ package org.metabrainz.mobile.api.data.search.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.metabrainz.mobile.api.data.search.CoverArt;
+import org.metabrainz.mobile.api.data.CoverArt;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +29,7 @@ public class Release {
     private String status;
     private String disambiguation;
     private ArrayList<Media> media = new ArrayList<>();
-    private org.metabrainz.mobile.api.data.search.CoverArt coverArt;
+    private CoverArt coverArt;
 
     public CoverArt getCoverArt() {
         return coverArt;

@@ -2,8 +2,8 @@ package org.metabrainz.mobile.string;
 
 import java.util.Collection;
 
-import org.metabrainz.mobile.api.data.ReleaseArtist;
-import org.metabrainz.mobile.api.data.Tag;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseArtist;
+import org.metabrainz.mobile.api.data.obsolete.Tag;
 import org.metabrainz.mobile.R;
 
 import android.content.Context;

@@ -1,8 +1,8 @@
 package org.metabrainz.mobile.api.handler;
 
-import org.metabrainz.mobile.api.data.ReleaseArtist;
-import org.metabrainz.mobile.api.data.UserCollection;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseArtist;
+import org.metabrainz.mobile.api.data.obsolete.UserCollection;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseSearchResult;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 

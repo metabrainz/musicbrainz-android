@@ -2,7 +2,7 @@ package org.metabrainz.mobile.api.handler;
 
 import java.util.LinkedList;
 
-import org.metabrainz.mobile.api.data.Tag;
+import org.metabrainz.mobile.api.data.obsolete.Tag;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
