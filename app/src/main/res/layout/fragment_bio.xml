@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView2"
+<ScrollView android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_fg"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:layout_margin="4dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,56 +13,17 @@
         android:orientation="vertical">
 
         <include android:id="@+id/card_artist_info"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             layout="@layout/card_artist_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="4dp"/>
 
         <include android:id="@+id/card_artist_wiki"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             layout="@layout/card_artist_wiki"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="4dp"/>
 
-        <!--<FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bio_image_height"
-            android:background="@color/cover_bg">
-
-            <org.metabrainz.mobile.view.RobotoLightTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/tab_bio" />
-
-            <org.metabrainz.mobile.view.FadeImageView
-                android:id="@+id/bio_picture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-        </FrameLayout>
-
-        <org.metabrainz.mobile.view.RobotoLightTextView
-            android:id="@+id/years_active"
-            style="@style/BigRoboto"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/gutter"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/bio_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/gutter"
-            android:textSize="@dimen/text_size_medium" />
-
-        </RelativeLayout>
-
-        <include
-            android:id="@+id/loading"
-            layout="@layout/layout_loading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />-->
     </LinearLayout>
 
 </ScrollView>

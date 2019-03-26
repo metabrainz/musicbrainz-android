@@ -1,57 +1,71 @@
 package org.metabrainz.mobile.viewmodel;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.api.data.ArtistWikiSummary;
+import org.metabrainz.mobile.api.data.search.CoverArt;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
+import org.metabrainz.mobile.api.data.search.entity.Release;
 import org.metabrainz.mobile.repository.LookupRepository;
 import org.metabrainz.mobile.util.SingleLiveEvent;
+
+import java.util.List;
+
+import io.reactivex.Single;
 
 public class ArtistViewModel extends ViewModel {
 
     private LookupRepository repository = LookupRepository.getRepository();
-    private SingleLiveEvent<Artist> artistData;
-    private Artist artist;
+    private MutableLiveData<Artist> artistData;
     private SingleLiveEvent<ArtistWikiSummary> artistWiki;
+    private MutableLiveData<List<Release>> releaseListLiveData;
     private String MBID;
-    public boolean mbidHasChanged = true;
 
     public ArtistViewModel() {
     }
 
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
-    }
-
     public void setMBID(String MBID) {
-        if(MBID != null && !MBID.isEmpty()) {
-            this.MBID = MBID;
-            mbidHasChanged = true;
-        } else mbidHasChanged = false;
+        if (MBID != null && !MBID.isEmpty())this.MBID = MBID;
     }
 
-    public SingleLiveEvent<Artist> getArtistData(){
-        if (artistData == null || mbidHasChanged)
-            artistData = loadArtistData();
+    public MutableLiveData<Artist> initializeArtistData(){
+        // Obtain live data from the repository if not already present
+        if (artistData == null)
+            artistData = repository.initializeArtistData();
         return artistData;
     }
 
-    private SingleLiveEvent<Artist> loadArtistData(){
-        return repository.getArtist(MBID);
+    public void getArtistData(){
+        // Call the repository to query the database to update the artist data
+        repository.getArtist(MBID);
     }
 
-    public SingleLiveEvent<ArtistWikiSummary> getArtistWiki(String title, int method){
-        if (artistWiki == null || mbidHasChanged)
-            artistWiki = loadArtistWiki(title, method);
-         return artistWiki;
+    public Single<CoverArt> fetchCoverArtForRelease(Release release) {
+        // Ask the repository to fetch the cover art and update ArtistData LiveData
+        // Whoever is observing that LiveData, will receive the release with the cover art
+        return repository.fetchCoverArtForRelease(release);
     }
 
-    private SingleLiveEvent<ArtistWikiSummary> loadArtistWiki(String title, int method){
-        return repository.getArtistWikiSummary(title ,method);
+    public MutableLiveData<List<Release>> initializeReleasesLiveData(){
+        if (releaseListLiveData == null)
+            releaseListLiveData = repository.initializeLiveData();
+        return releaseListLiveData;
     }
 
+    public void loadArtistWiki(String title, int method){
+        repository.getArtistWikiSummary(title ,method);
+    }
+
+    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData(){
+        if (artistWiki == null)
+            artistWiki = repository.initializeWikiData();
+        return artistWiki;
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        LookupRepository.destroyRepository();
+    }
 }

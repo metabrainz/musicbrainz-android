@@ -5,10 +5,12 @@ import org.metabrainz.mobile.api.data.Label;
 import org.metabrainz.mobile.api.data.Recording;
 import org.metabrainz.mobile.api.data.Release;
 import org.metabrainz.mobile.api.data.ReleaseGroup;
+import org.metabrainz.mobile.api.data.search.CoverArt;
 import org.metabrainz.mobile.api.data.search.entity.Artist;
 
 import java.io.IOException;
 
+import io.reactivex.Single;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -20,6 +22,9 @@ public interface LookupService {
     @GET("artist/{MBID}")
     Call<Artist> lookupArtist(@Path("MBID") String MBID,
                               @Query("inc") String params);
+
+    @GET("http://coverartarchive.org/release/{MBID}")
+    Single<CoverArt> getCoverArt(@Path("MBID") String MBID);
 
     @GET("https://en.wikipedia.org/api/rest_v1/page/summary/{title}")
     Call<ArtistWikiSummary> getWikipediaSummary(@Path("title") String title);

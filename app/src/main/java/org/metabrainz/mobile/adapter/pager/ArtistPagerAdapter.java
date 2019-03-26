@@ -9,10 +9,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.fragment.ArtistBioFragment;
+import org.metabrainz.mobile.fragment.ArtistLinksFragment;
+import org.metabrainz.mobile.fragment.ArtistReleasesFragment;
 
 public class ArtistPagerAdapter extends FragmentPagerAdapter {
 
-    private static final int[] TITLES = {R.string.tab_bio, R.string.tab_releases, R.string.tab_links,
+    private static final int[] TITLES = {R.string.tab_releases, R.string.tab_bio, R.string.tab_links,
             R.string.tab_edits};
 
     public ArtistPagerAdapter(FragmentManager fm) {
@@ -23,11 +25,11 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return ArtistBioFragment.newInstance();
+                return ArtistReleasesFragment.newInstance();
             case 1:
-                //return ArtistReleaseGroupsFragment.newInstance();
+                return ArtistBioFragment.newInstance();
             case 2:
-                //return  LinksFragment.newInstance();
+                return  ArtistLinksFragment.newInstance();
             case 3:
                 //return EditFragment.newInstance(Entity.ARTIST);
         }
@@ -42,7 +44,7 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return TITLES.length;
+        return TITLES.length - 1;
     }
 
 }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,7 +23,6 @@ public class ArtistBioFragment extends Fragment {
     private TextView wikiTextView;
     private TextView artistType, artistGender, artistArea, artistLifeSpan;
     private View wikiCard;
-    private Artist artist;
 
     public static ArtistBioFragment newInstance() {
         return new ArtistBioFragment();
@@ -33,22 +31,11 @@ public class ArtistBioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
+        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
+        artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setArtistInfo);
+        artistViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);
         return layout;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        artist = artistViewModel.getArtist();
-        setArtistInfo();
-        getArtistWiki();
     }
 
     private void findViews(View layout) {
@@ -60,24 +47,25 @@ public class ArtistBioFragment extends Fragment {
         wikiTextView = layout.findViewById(R.id.wiki_summary);
     }
 
-    private void getArtistWiki(){
+    private void getArtistWiki(Artist artist){
         String title = "";
         int method = -1;
-        for(Link link: artist.getRelations()){
-            if(link.getType().equals("wikipedia")) {
-                title = link.getPageTitle();
-                method = LookupRepository.METHOD_WIKIPEDIA_URL;
-                break;
-            }
-            if (link.getType().equals("wikidata")){
-                title = link.getPageTitle();
-                method = LookupRepository.METHOD_WIKIDATA_ID;
-                break;
+        if (artist != null) {
+            for (Link link : artist.getRelations()) {
+                if (link.getType().equals("wikipedia")) {
+                    title = link.getPageTitle();
+                    method = LookupRepository.METHOD_WIKIPEDIA_URL;
+                    break;
+                }
+                if (link.getType().equals("wikidata")) {
+                    title = link.getPageTitle();
+                    method = LookupRepository.METHOD_WIKIDATA_ID;
+                    break;
+                }
             }
         }
         if (method != -1)
-            artistViewModel.getArtistWiki(title, method)
-                    .observe(this, this::setWiki );
+            artistViewModel.loadArtistWiki(title,method);
         else hideWikiCard();
 
     }
@@ -100,7 +88,7 @@ public class ArtistBioFragment extends Fragment {
         wikiCard.setVisibility(View.GONE);
     }
 
-    private void setArtistInfo(){
+    private void setArtistInfo(Artist artist){
         String type,gender,area,lifeSpan;
 
         if(artist != null) {
@@ -122,5 +110,7 @@ public class ArtistBioFragment extends Fragment {
             if (lifeSpan != null && !lifeSpan.isEmpty())
                 artistLifeSpan.setText(lifeSpan);
         }
+
+        getArtistWiki(artist);
     }
 }

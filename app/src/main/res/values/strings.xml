@@ -248,4 +248,5 @@
     <string name="preferences">preferences</string>
     <string name="access_token">access_token</string>
     <string name="refresh_token">refresh_token</string>
+    <string name="links">More Links</string>
 </resources>

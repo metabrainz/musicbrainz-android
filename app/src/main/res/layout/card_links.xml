@@ -18,9 +18,7 @@
             android:textStyle="bold"
             android:padding="@dimen/item_padding"
             android:textColor="@color/black"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            app:fontFamily="@font/roboto_medium"
-            android:text="@string/links"/>
+            tools:text="Get The Music"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
