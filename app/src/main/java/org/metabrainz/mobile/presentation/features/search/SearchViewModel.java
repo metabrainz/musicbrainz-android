@@ -10,7 +10,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-import org.metabrainz.mobile.data.sources.repository.SearchRepository;
+import org.metabrainz.mobile.data.repository.SearchRepository;
 
 import java.util.List;
 

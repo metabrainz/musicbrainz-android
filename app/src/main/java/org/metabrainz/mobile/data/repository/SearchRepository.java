@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.data.sources.repository;
+package org.metabrainz.mobile.data.repository;
 
 import androidx.lifecycle.MutableLiveData;
 

@@ -7,7 +7,7 @@ import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.data.sources.repository.ArtistLookupRepository;
+import org.metabrainz.mobile.data.repository.ArtistLookupRepository;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import java.util.List;

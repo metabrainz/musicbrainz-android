@@ -13,7 +13,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
-import org.metabrainz.mobile.data.sources.repository.ArtistLookupRepository;
+import org.metabrainz.mobile.data.repository.ArtistLookupRepository;
 
 public class ArtistBioFragment extends Fragment {
 
