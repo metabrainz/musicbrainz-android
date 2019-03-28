@@ -8,9 +8,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.detailspage.artist.ArtistActivity;
+import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
-import org.metabrainz.mobile.search.SearchActivity;
+import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 
 import java.util.List;
 

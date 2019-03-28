@@ -68,7 +68,7 @@
     </activity>
 
     <activity
-        android:name="org.metabrainz.mobile.activity.LoginActivity"
+        android:name="org.metabrainz.mobile.presentation.LoginActivity"
         android:label="@string/auth_title">
         <intent-filter>
             <action android:name="android.intent.action.VIEW" />
@@ -82,7 +82,7 @@
     </activity>
 
     <activity
-        android:name="org.metabrainz.mobile.activity.AboutActivity"
+        android:name="org.metabrainz.mobile.presentation.AboutActivity"
         android:label="@string/about_title" />
 
     <activity
@@ -96,7 +96,7 @@
 
 
     <activity
-        android:name="org.metabrainz.mobile.search.SearchActivity"
+        android:name=".presentation.features.search.SearchActivity"
         android:launchMode="singleTop">
         <intent-filter>
             <action android:name="android.intent.action.SEARCH" />
@@ -111,7 +111,7 @@
         android:label="@string/release_title" />
 
     <activity
-        android:name="org.metabrainz.mobile.detailspage.artist.ArtistActivity"
+        android:name=".presentation.features.artist.ArtistActivity"
         android:theme="@style/AppThemeCustomActionBar"
         android:label="@string/artist_title" />
 

@@ -22,7 +22,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:name="org.metabrainz.mobile.fragment.SearchFragment" />
+          android:name="org.metabrainz.mobile.presentation.SearchFragment" />
 
       <View
         style="@style/Separator"

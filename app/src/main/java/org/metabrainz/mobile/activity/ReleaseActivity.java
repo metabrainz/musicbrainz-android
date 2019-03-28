@@ -36,7 +36,7 @@ import org.metabrainz.mobile.async.CollectionEditLoader;
 import org.metabrainz.mobile.async.result.AsyncEntityResult;
 import org.metabrainz.mobile.async.result.AsyncResult;
 import org.metabrainz.mobile.config.Configuration;
-import org.metabrainz.mobile.detailspage.artist.ArtistActivity;
+import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 import org.metabrainz.mobile.dialog.BarcodeNotFoundDialog;
 import org.metabrainz.mobile.dialog.BarcodeNotFoundDialog.BarcodeNotFoundCallback;
 import org.metabrainz.mobile.dialog.CollectionAddDialog;
