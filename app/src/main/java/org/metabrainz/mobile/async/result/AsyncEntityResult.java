@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.async.result;
 
-import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.api.data.obsolete.UserData;
 
 public class AsyncEntityResult<T> extends AsyncResult<T>{
     

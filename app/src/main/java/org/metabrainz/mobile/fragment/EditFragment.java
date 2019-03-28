@@ -16,8 +16,8 @@ import androidx.loader.content.Loader;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.Tag;
-import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.api.data.obsolete.Tag;
+import org.metabrainz.mobile.api.data.obsolete.UserData;
 import org.metabrainz.mobile.api.webservice.Entity;
 import org.metabrainz.mobile.async.SubmitRatingLoader;
 import org.metabrainz.mobile.async.SubmitTagsLoader;

@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.async.result;
 
-import org.metabrainz.mobile.api.data.ArtistSearchResult;
-import org.metabrainz.mobile.api.data.ReleaseGroupSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.ArtistSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseGroupSearchResult;
 
 import java.util.List;
 

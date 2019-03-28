@@ -24,21 +24,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.adapter.pager.ReleasePagerAdapter;
-import org.metabrainz.mobile.api.data.Artist;
-import org.metabrainz.mobile.api.data.Release;
-import org.metabrainz.mobile.api.data.ReleaseArtist;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
-import org.metabrainz.mobile.api.data.Tag;
-import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.adapter.ReleasePagerAdapter;
+import org.metabrainz.mobile.api.data.obsolete.Artist;
+import org.metabrainz.mobile.api.data.obsolete.Release;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseArtist;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.Tag;
+import org.metabrainz.mobile.api.data.obsolete.UserData;
 import org.metabrainz.mobile.api.webservice.BarcodeNotFoundException;
-import org.metabrainz.mobile.async.BarcodeReleaseLoader;
 import org.metabrainz.mobile.async.CollectionEditLoader;
-import org.metabrainz.mobile.async.ReleaseGroupReleasesLoader;
-import org.metabrainz.mobile.async.ReleaseLoader;
 import org.metabrainz.mobile.async.result.AsyncEntityResult;
 import org.metabrainz.mobile.async.result.AsyncResult;
 import org.metabrainz.mobile.config.Configuration;
+import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 import org.metabrainz.mobile.dialog.BarcodeNotFoundDialog;
 import org.metabrainz.mobile.dialog.BarcodeNotFoundDialog.BarcodeNotFoundCallback;
 import org.metabrainz.mobile.dialog.CollectionAddDialog;
@@ -53,7 +51,6 @@ import org.metabrainz.mobile.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-//import com.viewpagerindicator.TabPageIndicator;
 
 /**
  * Activity which retrieves and displays information about a release.
@@ -121,46 +118,12 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
             }
         }
     };
-    private LoaderCallbacks<AsyncEntityResult<Release>> releaseLoaderCallbacks = new LoaderCallbacks<AsyncEntityResult<Release>>() {
-
-        @Override
-        public Loader<AsyncEntityResult<Release>> onCreateLoader(int id, Bundle args) {
-            switch (id) {
-                case RELEASE_LOADER:
-                    return new ReleaseLoader(releaseMbid);
-                case BARCODE_RELEASE_LOADER:
-                    return new BarcodeReleaseLoader(barcode);
-            }
-            return null;
-        }
-
-        @Override
-        public void onLoadFinished(Loader<AsyncEntityResult<Release>> loader, AsyncEntityResult<Release> container) {
-            switch (container.getStatus()) {
-                case EXCEPTION:
-                    if (container.getException() instanceof BarcodeNotFoundException) {
-                        handler.sendEmptyMessage(MESSAGE_NOT_FOUND);
-                    } else {
-                        showConnectionErrorWarning();
-                    }
-                    break;
-                case SUCCESS:
-                    release = container.getData();
-                    userData = container.getUserData();
-                    populateLayout();
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<AsyncEntityResult<Release>> loader) {
-            loader.reset();
-        }
-    };
     private LoaderCallbacks<AsyncResult<List<ReleaseSearchResult>>> releasesInfoLoader = new LoaderCallbacks<AsyncResult<List<ReleaseSearchResult>>>() {
 
         @Override
         public Loader<AsyncResult<List<ReleaseSearchResult>>> onCreateLoader(int id, Bundle args) {
-            return new ReleaseGroupReleasesLoader(releaseGroupMbid);
+            //return new ReleaseGroupReleasesLoader(releaseGroupMbid);
+            return null;
         }
 
         @Override
@@ -184,6 +147,41 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
 
         @Override
         public void onLoaderReset(Loader<AsyncResult<List<ReleaseSearchResult>>> loader) {
+            loader.reset();
+        }
+    };
+    private LoaderCallbacks<AsyncEntityResult<Release>> releaseLoaderCallbacks = new LoaderCallbacks<AsyncEntityResult<Release>>() {
+
+        @Override
+        public Loader<AsyncEntityResult<Release>> onCreateLoader(int id, Bundle args) {
+            switch (id) {
+                case RELEASE_LOADER:
+                    //return new ReleaseLoader(releaseMbid);
+                case BARCODE_RELEASE_LOADER:
+                    //return new BarcodeReleaseLoader(barcode);
+            }
+            return null;
+        }
+
+        @Override
+        public void onLoadFinished(Loader<AsyncEntityResult<Release>> loader, AsyncEntityResult<Release> container) {
+            switch (container.getStatus()) {
+                case EXCEPTION:
+                    if (container.getException() instanceof BarcodeNotFoundException) {
+                        handler.sendEmptyMessage(MESSAGE_NOT_FOUND);
+                    } else {
+                        showConnectionErrorWarning();
+                    }
+                    break;
+                case SUCCESS:
+                    release = container.getData();
+                    userData = container.getUserData();
+                    populateLayout();
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<AsyncEntityResult<Release>> loader) {
             loader.reset();
         }
     };

@@ -15,8 +15,8 @@ import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.adapter.list.CollectionListAdapter;
-import org.metabrainz.mobile.api.data.UserSearchResult;
+import org.metabrainz.mobile.adapter.CollectionListAdapter;
+import org.metabrainz.mobile.api.data.obsolete.UserSearchResult;
 import org.metabrainz.mobile.async.CollectionListLoader;
 import org.metabrainz.mobile.async.result.AsyncResult;
 import org.metabrainz.mobile.intent.IntentFactory;

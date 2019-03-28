@@ -5,7 +5,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 
 import org.metabrainz.mobile.api.MusicBrainz;
-import org.metabrainz.mobile.api.webservice.MusicBrainzWebClient;
 import org.metabrainz.mobile.config.Configuration;
 import org.metabrainz.mobile.user.UserPreferences;
 
@@ -44,11 +43,7 @@ public class App extends Application {
     }
 
     public static MusicBrainz getWebClient() {
-        if (user.isLoggedIn()) {
-            return new MusicBrainzWebClient(user, getUserAgent(), getClientId());
-        } else {
-            return new MusicBrainzWebClient(getUserAgent());
-        }
+        return null;
     }
 
     public static Typeface getRobotoLight() {

@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.api.handler;
 
-import org.metabrainz.mobile.api.data.UserData;
+import org.metabrainz.mobile.api.data.obsolete.UserData;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 

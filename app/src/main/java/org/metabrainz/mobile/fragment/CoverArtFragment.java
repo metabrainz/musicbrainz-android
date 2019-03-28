@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.api.data.Release;
+import org.metabrainz.mobile.api.data.obsolete.Release;
 import org.metabrainz.mobile.fragment.contracts.EntityTab;
 import org.metabrainz.mobile.intent.IntentFactory;
 import org.metabrainz.mobile.util.CoverArt;

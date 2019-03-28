@@ -3,7 +3,7 @@ package org.metabrainz.mobile.async;
 import java.io.IOException;
 
 import org.metabrainz.mobile.api.MusicBrainz;
-import org.metabrainz.mobile.api.data.UserCollection;
+import org.metabrainz.mobile.api.data.obsolete.UserCollection;
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.async.result.AsyncResult;
 import org.metabrainz.mobile.async.result.LoaderStatus;

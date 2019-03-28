@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import androidx.fragment.app.ListFragment;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.adapter.list.ReleaseTrackAdapter;
-import org.metabrainz.mobile.api.data.Release;
+import org.metabrainz.mobile.adapter.ReleaseTrackAdapter;
+import org.metabrainz.mobile.api.data.obsolete.Release;
 import org.metabrainz.mobile.fragment.contracts.EntityTab;
 
 public class TracksFragment extends ListFragment implements EntityTab<Release> {

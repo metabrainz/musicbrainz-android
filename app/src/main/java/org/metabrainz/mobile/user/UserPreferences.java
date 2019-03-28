@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.config.Secrets;
-import org.metabrainz.mobile.util.SimpleEncrypt;
 
 public class UserPreferences implements AppUser {
     
@@ -14,7 +12,6 @@ public class UserPreferences implements AppUser {
     
     private interface PreferenceName {
         String USERNAME = "username";
-        String PASSWORD = "password";
         String SUGGESTIONS = "search_suggestions";
         String REPORT_CRASHES = "send_crashlogs";
     }
@@ -28,19 +25,6 @@ public class UserPreferences implements AppUser {
     public void setUsername(String username) {
         SharedPreferences prefs = getUserPreferences();
         prefs.edit().putString(PreferenceName.USERNAME, username).commit();
-    }
-    
-    @Override
-    public String getPassword() {
-        String obscuredPassword = getUserPreferences().getString(PreferenceName.PASSWORD, null);
-        return SimpleEncrypt.decrypt(new Secrets().getKey(), obscuredPassword);
-    }
-    
-    @Override
-    public void setPassword(String password) {
-        SharedPreferences prefs = getUserPreferences();
-        String obscuredPassword = SimpleEncrypt.encrypt(new Secrets().getKey(), password);
-        prefs.edit().putString(PreferenceName.PASSWORD, obscuredPassword).commit();
     }
     
     @Override

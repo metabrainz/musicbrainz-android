@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.metabrainz.mobile.api.MusicBrainz;
-import org.metabrainz.mobile.api.data.ReleaseSearchResult;
+import org.metabrainz.mobile.api.data.obsolete.ReleaseSearchResult;
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.async.result.AsyncResult;
 import org.metabrainz.mobile.async.result.LoaderStatus;

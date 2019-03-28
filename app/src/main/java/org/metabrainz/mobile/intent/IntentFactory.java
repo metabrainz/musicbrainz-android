@@ -3,12 +3,12 @@ package org.metabrainz.mobile.intent;
 import android.content.Context;
 import android.content.Intent;
 
-import org.metabrainz.mobile.activity.AboutActivity;
+import org.metabrainz.mobile.presentation.AboutActivity;
 import org.metabrainz.mobile.activity.CollectionActivity;
 import org.metabrainz.mobile.activity.CollectionListActivity;
 import org.metabrainz.mobile.activity.DashboardActivity;
 import org.metabrainz.mobile.activity.DonateActivity;
-import org.metabrainz.mobile.activity.LoginActivity;
+import org.metabrainz.mobile.presentation.LoginActivity;
 import org.metabrainz.mobile.activity.SettingsActivity;
 import org.metabrainz.mobile.activity.WebActivity;
 
