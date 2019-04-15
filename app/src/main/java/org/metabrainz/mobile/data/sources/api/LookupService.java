@@ -1,12 +1,12 @@
 package org.metabrainz.mobile.data.sources.api;
 
 import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
-import org.metabrainz.mobile.api.data.obsolete.Label;
-import org.metabrainz.mobile.api.data.obsolete.Recording;
-import org.metabrainz.mobile.api.data.obsolete.Release;
-import org.metabrainz.mobile.api.data.obsolete.ReleaseGroup;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 import java.io.IOException;
 
@@ -32,6 +32,9 @@ public interface LookupService {
     @GET("https://www.wikidata.org/w/api.php" +
             "?action=wbgetentities&format=xml&props=sitelinks/urls&format=json")
     Call<ResponseBody> getWikipediaLink(@Query("ids") String id);
+
+    @GET("http://coverartarchive.org/release/{MBID}")
+    Call<CoverArt> getCoverArtAll(@Path("MBID") String MBID);
 
     @GET("release/{MBID}")
     Call<Release> lookupRelease(@Path("MBID") String MBID,

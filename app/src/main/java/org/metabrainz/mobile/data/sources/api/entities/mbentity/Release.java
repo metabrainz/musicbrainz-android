@@ -5,8 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.LabelInfo;
+import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.ReleaseEvent;
+import org.metabrainz.mobile.data.sources.api.entities.TextRepresentation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,6 +22,7 @@ public class Release {
     @SerializedName("artist-credit")
     private ArrayList<ArtistCredit> artistCredits = new ArrayList<>();
     private String date;
+    private String barcode;
     private String packaging;
     @SerializedName("release-group")
     private ReleaseGroup releaseGroup;
@@ -34,6 +37,34 @@ public class Release {
     private String disambiguation;
     private ArrayList<Media> media = new ArrayList<>();
     private CoverArt coverArt;
+    @SerializedName("text-representation")
+    private TextRepresentation textRepresentation;
+
+    private ArrayList<Link> relations = new ArrayList<>();
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public TextRepresentation getTextRepresentation() {
+        return textRepresentation;
+    }
+
+    public void setTextRepresentation(TextRepresentation textRepresentation) {
+        this.textRepresentation = textRepresentation;
+    }
+
+    public ArrayList<Link> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(ArrayList<Link> relations) {
+        this.relations = relations;
+    }
 
     public CoverArt getCoverArt() {
         return coverArt;
