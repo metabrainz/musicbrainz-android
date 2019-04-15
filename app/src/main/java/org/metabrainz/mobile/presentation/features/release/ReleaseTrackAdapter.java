@@ -38,9 +38,9 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
         TrackViewHolder viewHolder = (TrackViewHolder) holder;
         Track item = recordings.get(position);
         setViewVisibility(item.getTitle(), viewHolder.trackName);
-        //setViewVisibility(item.getMbid(), viewHolder.trackArtist);
         setViewVisibility(String.valueOf(item.getPosition()), viewHolder.trackNumber);
         setViewVisibility(item.getDuration(), viewHolder.trackDuration);
+        setViewVisibility(item.getRecording().getDisplayArtist(), viewHolder.trackArtist);
     }
 
     @Override

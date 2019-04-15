@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,9 @@ public class ReleaseTracksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tracklist, container, false);
         recyclerView = view.findViewById(R.id.track_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(adapter);
         return view;
     }
