@@ -1,87 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-    android:id="@+id/entity_info"
-    android:padding="@dimen/std_pad">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white" />
 
-    <TextView
-      android:id="@+id/release_release"
-      style="@style/EntityText"
-      android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/release_date"
-        android:layout_toLeftOf="@+id/release_date" />
+    <fragment
+        android:id="@+id/release_info_fragment"
+        class="org.metabrainz.mobile.presentation.features.release.ReleaseInfoFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        tools:layout="@layout/card_release_info" />
 
-    <TextView
-      android:id="@+id/release_artist"
-      style="@style/ScrollText"
-      android:layout_below="@+id/release_release"
-      android:layout_alignParentLeft="true"
-      android:layout_toLeftOf="@+id/release_label"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/release_label"
-        android:textSize="@dimen/text_size_entity" />
+    <fragment
+        android:id="@+id/release_tracks_fragment"
+        class="org.metabrainz.mobile.presentation.features.release.ReleaseTracksFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        tools:layout="@layout/fragment_tracklist" />
 
-    <TextView
-      android:id="@+id/release_date"
-      style="@style/Wrap"
-      android:layout_alignBaseline="@+id/release_release"
-      android:layout_alignParentRight="true"
-      android:layout_marginLeft="@dimen/small_pad"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/small_pad"
-        android:textSize="@dimen/text_size_medium" />
-
-    <TextView
-      android:id="@+id/release_label"
-      style="@style/ScrollText"
-      android:maxWidth="150dp"
-      android:layout_width="wrap_content"
-      android:layout_alignBaseline="@+id/release_artist"
-      android:layout_alignParentRight="true"
-      android:layout_marginLeft="@dimen/small_pad"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/small_pad"
-        android:textSize="@dimen/text_size_medium" />
-  </RelativeLayout>
-
-  <include
-    android:id="@+id/tags_rating"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-    android:layout_below="@id/entity_info"
-    layout="@layout/layout_tags_rating" />
-
-  <com.viewpagerindicator.TabPageIndicator
-    android:id="@+id/indicator"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_below="@id/tags_rating" />
-
-  <androidx.viewpager.widget.ViewPager
-    android:id="@+id/pager"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-    android:layout_below="@id/indicator" />
-
-  <include
-    android:id="@+id/loading"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-    layout="@layout/layout_loading" />
-
-  <include
-    android:id="@+id/error"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-    layout="@layout/layout_retry"
-    android:visibility="gone" />
-
-</RelativeLayout>
+</LinearLayout>

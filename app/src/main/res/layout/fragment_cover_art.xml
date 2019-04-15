@@ -1,50 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cover_art_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  android:background="@color/main_fg">
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-    android:padding="@dimen/std_pad">
-
-    <org.metabrainz.mobile.view.WidthRelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      android:background="@color/cover_bg"
-      android:layout_marginBottom="@dimen/std_pad">
-
-      <org.metabrainz.mobile.view.RobotoLightTextView
-        android:layout_centerInParent="true"
-        android:text="@string/cover_art_front" />
-
-      <org.metabrainz.mobile.view.FadeImageView
-        android:id="@+id/cover_front"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true" />
-    </org.metabrainz.mobile.view.WidthRelativeLayout>
-
-    <org.metabrainz.mobile.view.WidthRelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      android:background="@color/cover_bg">
-
-      <org.metabrainz.mobile.view.RobotoLightTextView
-        android:layout_centerInParent="true"
-        android:text="@string/cover_art_back" />
-
-      <org.metabrainz.mobile.view.FadeImageView
-        android:id="@+id/cover_back"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true" />
-    </org.metabrainz.mobile.view.WidthRelativeLayout>
-
-  </LinearLayout>
-</ScrollView>
+    android:layout_margin="4dp" />

@@ -9,30 +9,30 @@
       android:layout_height="wrap_content"
     android:layout_margin="@dimen/small_pad">
 
-    <org.metabrainz.mobile.view.RobotoLightTextView
-      android:id="@+id/barcode_label"
-      style="@style/Wrap"
-      android:text="@string/barcode_text"
-      android:textSize="@dimen/text_size_medium"
-      android:layout_marginLeft="@dimen/std_pad"
-      android:layout_marginRight="@dimen/std_pad"
-        android:layout_alignBaseline="@+id/barcode"
-        android:layout_marginStart="@dimen/std_pad"
-        android:layout_marginEnd="@dimen/std_pad" />
-
-    <EditText 
-      android:id="@+id/barcode"
+      <EditText
+          android:id="@+id/release_barcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
       android:layout_toRightOf="@+id/barcode_label"
         android:layout_toEndOf="@+id/barcode_label"
         android:inputType="number" />
 
-    <ImageButton
+      <EditText
+          android:id="@+id/barcode_search"
+          style="@style/SearchEdit"
+          android:layout_below="@id/release_barcode"
+          android:layout_toLeftOf="@id/barcode_search_btn"
+          android:layout_alignBottom="@id/barcode_search_btn"
+          android:hint="@string/barcode_hint"
+          android:layout_alignStart="@id/release_barcode"
+          android:layout_alignLeft="@id/release_barcode"
+          android:layout_toStartOf="@id/barcode_search_btn" />
+
+      <ImageButton
       android:id="@+id/barcode_search_btn"
       style="@style/SearchButton"
       android:layout_alignParentRight="true"
-        android:layout_below="@id/barcode"
+          android:layout_below="@id/release_barcode"
         android:layout_alignParentEnd="true" />
 
     <org.metabrainz.mobile.view.RobotoLightTextView
@@ -45,17 +45,17 @@
         android:layout_alignBaseline="@+id/barcode_search"
         android:layout_marginStart="@dimen/std_pad"
         android:layout_marginEnd="@dimen/std_pad" />
-    
-    <EditText
-      android:id="@+id/barcode_search"
-      style="@style/SearchEdit"
-      android:layout_alignLeft="@id/barcode"
-      android:layout_toLeftOf="@id/barcode_search_btn"
-      android:layout_alignBottom="@id/barcode_search_btn"
-      android:hint="@string/barcode_hint"
-        android:layout_below="@id/barcode"
-        android:layout_alignStart="@id/barcode"
-        android:layout_toStartOf="@id/barcode_search_btn" />
+
+      <org.metabrainz.mobile.view.RobotoLightTextView
+          android:id="@+id/barcode_label"
+          style="@style/Wrap"
+          android:text="@string/barcode_text"
+          android:textSize="@dimen/text_size_medium"
+          android:layout_marginLeft="@dimen/std_pad"
+          android:layout_marginRight="@dimen/std_pad"
+          android:layout_alignBaseline="@+id/release_barcode"
+          android:layout_marginStart="@dimen/std_pad"
+          android:layout_marginEnd="@dimen/std_pad" />
   </RelativeLayout>
 
     <RelativeLayout
