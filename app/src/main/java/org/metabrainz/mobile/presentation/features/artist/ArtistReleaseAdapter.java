@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.artist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.squareup.picasso.Picasso;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
 
@@ -41,6 +44,14 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
         compositeDisposable = new CompositeDisposable();
     }
 
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.card_release_item, parent, false);
+        return new ReleaseItemViewHolder(view);
+    }
+
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder{
         TextView releaseName, releaseDisambiguation;
         ImageView coverArtView;
@@ -50,7 +61,7 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
             releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
-            coverArtView = itemView.findViewById(R.id.cover_art);
+            coverArtView = itemView.findViewById(R.id.release_cover_art);
         }
 
         public void bind(Release release){
@@ -65,6 +76,12 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
                 setCoverArtView(release);
             else
                 fetchCoverArtForRelease(release);
+
+            this.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), ReleaseActivity.class);
+                intent.putExtra(IntentFactory.Extra.RELEASE_MBID, release.getMbid());
+                v.getContext().startActivity(intent);
+            });
         }
 
         private void setCoverArtView(Release release){
@@ -108,14 +125,6 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
                             .subscribe(this::addCoverArt, Throwable::printStackTrace);
             compositeDisposable.add(disposable);
         }
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_release,parent,false);
-        return new ReleaseItemViewHolder(view);
     }
 
     @Override

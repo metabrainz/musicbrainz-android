@@ -3,14 +3,12 @@ package org.metabrainz.mobile.presentation.features.artist;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import org.metabrainz.mobile.data.repository.ArtistLookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.data.repository.ArtistLookupRepository;
 import org.metabrainz.mobile.util.SingleLiveEvent;
-
-import java.util.List;
 
 import io.reactivex.Single;
 
@@ -19,7 +17,6 @@ public class ArtistViewModel extends ViewModel {
     private ArtistLookupRepository repository = ArtistLookupRepository.getRepository();
     private MutableLiveData<Artist> artistData;
     private SingleLiveEvent<ArtistWikiSummary> artistWiki;
-    private MutableLiveData<List<Release>> releaseListLiveData;
     private String MBID;
 
     public ArtistViewModel() {
@@ -45,12 +42,6 @@ public class ArtistViewModel extends ViewModel {
         // Ask the repository to fetch the cover art and update ArtistData LiveData
         // Whoever is observing that LiveData, will receive the release with the cover art
         return repository.fetchCoverArtForRelease(release);
-    }
-
-    public MutableLiveData<List<Release>> initializeReleasesLiveData(){
-        if (releaseListLiveData == null)
-            releaseListLiveData = repository.initializeLiveData();
-        return releaseListLiveData;
     }
 
     public void loadArtistWiki(String title, int method){

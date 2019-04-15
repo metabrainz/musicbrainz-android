@@ -215,9 +215,9 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
 
     private void populateLayout() {
         TextView artist = findViewById(R.id.release_artist);
-        TextView title = findViewById(R.id.release_release);
+        TextView title = findViewById(R.id.release_name);
         TextView labels = findViewById(R.id.release_label);
-        TextView releaseDate = findViewById(R.id.release_date);
+        TextView releaseDate = findViewById(R.id.release_name);
 
         if (isArtistUpAvailable()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

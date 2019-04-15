@@ -8,17 +8,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
-import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
-import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
+import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
+import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
+import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.util.SingleLiveEvent;
-
-import java.util.List;
 
 import io.reactivex.Single;
 import okhttp3.ResponseBody;
@@ -32,7 +30,6 @@ public class ArtistLookupRepository {
     private static ArtistLookupRepository repository;
     private static MutableLiveData<Artist> artistData;
     private static SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;
-    private static MutableLiveData<List<Release>> releaseListLiveData;
 
     public static final int METHOD_WIKIPEDIA_URL = 0;
     public static final int METHOD_WIKIDATA_ID = 1;
@@ -41,7 +38,6 @@ public class ArtistLookupRepository {
 
         artistData = new MutableLiveData<>();
         artistWikiSummary = new SingleLiveEvent<>();
-        releaseListLiveData = new SingleLiveEvent<>();
     }
 
     public static ArtistLookupRepository getRepository() {
@@ -90,10 +86,6 @@ public class ArtistLookupRepository {
 
             }
         });
-    }
-
-    public MutableLiveData<List<Release>> initializeLiveData(){
-        return releaseListLiveData;
     }
 
     private void fetchArtistWiki(String title){

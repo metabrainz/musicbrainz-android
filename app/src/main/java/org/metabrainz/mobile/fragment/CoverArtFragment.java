@@ -16,8 +16,6 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.api.data.obsolete.Release;
 import org.metabrainz.mobile.fragment.contracts.EntityTab;
 import org.metabrainz.mobile.intent.IntentFactory;
-import org.metabrainz.mobile.util.CoverArt;
-import org.metabrainz.mobile.util.CoverArt.Size;
 
 public class CoverArtFragment extends Fragment implements EntityTab<Release> {
 
@@ -40,8 +38,8 @@ public class CoverArtFragment extends Fragment implements EntityTab<Release> {
 
     @Override
     public void update(Release entity) {
-        setCover(R.id.cover_front, CoverArt.getFront(mbid, Size.LARGE));
-        setCover(R.id.cover_back, CoverArt.getBack(mbid, Size.LARGE));
+        //setCover(R.id.cover_front, CoverArt.getFront(mbid, Size.LARGE));
+        //setCover(R.id.cover_back, CoverArt.getBack(mbid, Size.LARGE));
     }
 
     private void setCover(int imageViewId, String url) {
