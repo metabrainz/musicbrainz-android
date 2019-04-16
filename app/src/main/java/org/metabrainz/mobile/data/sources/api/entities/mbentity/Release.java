@@ -198,12 +198,14 @@ public class Release {
             LabelInfo labelInfo = itr.next();
             String catalogNumber = labelInfo.getCatalogNumber();
             Label label = labelInfo.getLabel();
-            if (catalogNumber != null && !catalogNumber.isEmpty()) {
-                builder.append(catalogNumber).append(" (");
-                builder.append(label.getName());
-                builder.append(")");
-            } else builder.append(label.getName());
-            if (itr.hasNext()) builder.append(" , ");
+            if (label != null) {
+                if (catalogNumber != null && !catalogNumber.isEmpty()) {
+                    builder.append(catalogNumber).append(" (");
+                    builder.append(label.getName());
+                    builder.append(")");
+                } else builder.append(label.getName());
+                if (itr.hasNext()) builder.append(" , ");
+            }
         }
         return builder.toString();
     }

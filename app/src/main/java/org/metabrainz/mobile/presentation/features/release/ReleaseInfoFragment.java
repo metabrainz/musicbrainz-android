@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.release;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +87,24 @@ public class ReleaseInfoFragment extends Fragment {
             urls.clear();
             urls.addAll(coverArt.getAllImageLinks());
             slideshowAdapter.notifyDataSetChanged();
+            startAutoSlide();
         }
+    }
+
+    private void startAutoSlide() {
+        int NUM_PAGES = urls.size();
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                int position = viewPager.getCurrentItem();
+                if (position == NUM_PAGES - 1) position = 0;
+                else position++;
+                viewPager.setCurrentItem(position, true);
+                handler.postDelayed(this, 10000);
+            }
+        };
+        handler.postDelayed(runnable, 10000);
     }
 
 }
