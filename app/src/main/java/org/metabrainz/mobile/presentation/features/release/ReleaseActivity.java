@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.release;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -40,4 +41,12 @@ public class ReleaseActivity extends MusicBrainzActivity {
         if (release != null) getSupportActionBar().setTitle(release.getTitle());
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

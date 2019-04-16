@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.artist;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -65,71 +66,12 @@ public class ArtistActivity extends MusicBrainzActivity {
         if (artist != null) getSupportActionBar().setTitle(artist.getName());
     }
 
-
-
-    /*
-    protected void populateLayout() {
-        TextView artistText = findViewById(R.id.artist_artist);
-
-        artistText.setText(artist.getName());
-        ratingBar.setRating(artist.getRating());
-        tagView.setText(StringFormat.commaSeparateTags(artist.getTags(), this));
-
-        artistText.setSelected(true);
-        tagView.setSelected(true);
-
-        updateFragments();
-        loading.setVisibility(View.GONE);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void updateFragments() {
-        FragmentManager fm = getSupportFragmentManager();
-        for (int i = 0; i < pagerAdapter.getCount(); i++) {
-            ((EntityTab<Artist>) fm.findFragmentByTag(pagerAdapter.makeTag(i))).update(artist);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.artist, menu);
-        ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.action_share));
-        actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
-        actionProvider.setShareIntent(Utils.shareIntent(Configuration.ARTIST_SHARE + mbid));
-        return true;
-    }
-
-    private void showConnectionErrorWarning() {
-        error.setVisibility(View.VISIBLE);
-        Button retry = error.findViewById(R.id.retry_button);
-        retry.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loading.setVisibility(View.VISIBLE);
-                error.setVisibility(View.GONE);
-                getSupportLoaderManager().restartLoader(ARTIST_LOADER, null, ArtistActivity.this);
-            }
-        });
-    }
-
-    @Override
-    public UserData getUserData() {
-        return userData;
-    }
-
-    @Override
-    public void updateTags(List<Tag> tags) {
-        artist.setTags(tags);
-        tagView.setText(StringFormat.commaSeparateTags(tags, this));
-        getSupportLoaderManager().destroyLoader(ARTIST_LOADER);
-    }
-
-    @Override
-    public void updateRating(Float rating) {
-        artist.setRating(rating);
-        ratingBar.setRating(rating);
-        getSupportLoaderManager().destroyLoader(ARTIST_LOADER);
-    }
-    */
-
 }

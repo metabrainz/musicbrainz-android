@@ -14,25 +14,15 @@
         android:layout_height="match_parent"
         android:layout_margin="4dp">
 
-        <ImageView
-            android:id="@+id/release_cover_art"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_margin="4dp"
-            android:adjustViewBounds="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/release_title"
-            tools:srcCompat="@tools:sample/avatars" />
-
         <TextView
             android:id="@+id/release_barcode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             app:layout_constraintBottom_toTopOf="@+id/format"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/release_cover_art"
+            app:layout_constraintStart_toEndOf="@+id/slideshow"
             app:layout_constraintTop_toBottomOf="@+id/release_title"
             tools:text="Barcode:" />
 
@@ -40,11 +30,11 @@
             android:id="@+id/release_language"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             app:layout_constraintBottom_toTopOf="@+id/release_links"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/release_cover_art"
+            app:layout_constraintStart_toEndOf="@+id/slideshow"
             app:layout_constraintTop_toBottomOf="@+id/format"
             tools:text="Language" />
 
@@ -52,25 +42,33 @@
             android:id="@+id/release_links"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="See More Links"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/release_cover_art"
+            app:layout_constraintStart_toEndOf="@+id/slideshow"
             app:layout_constraintTop_toBottomOf="@+id/release_language" />
 
         <TextView
             android:id="@+id/format"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             app:layout_constraintBottom_toTopOf="@+id/release_language"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/release_cover_art"
+            app:layout_constraintStart_toEndOf="@+id/slideshow"
             app:layout_constraintTop_toBottomOf="@+id/release_barcode"
             tools:text="Format" />
+
+        <include
+            android:id="@+id/slideshow"
+            layout="@layout/cover_art_slideshow"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/release_title" />
 
         <TextView
             android:id="@+id/release_title"

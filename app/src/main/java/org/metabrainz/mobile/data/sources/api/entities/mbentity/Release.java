@@ -184,7 +184,7 @@ public class Release {
         Iterator<ArtistCredit> iterator = artistCredits.iterator();
         while (iterator.hasNext()) {
             ArtistCredit credit = iterator.next();
-            builder.append(credit.getName());
+            builder.append(credit.getArtist().getName());
             if (iterator.hasNext())
                 builder.append(credit.getJoinphrase());
         }
@@ -199,7 +199,7 @@ public class Release {
             String catalogNumber = labelInfo.getCatalogNumber();
             Label label = labelInfo.getLabel();
             if (catalogNumber != null && !catalogNumber.isEmpty()) {
-                builder.append(catalogNumber).append("(");
+                builder.append(catalogNumber).append(" (");
                 builder.append(label.getName());
                 builder.append(")");
             } else builder.append(label.getName());

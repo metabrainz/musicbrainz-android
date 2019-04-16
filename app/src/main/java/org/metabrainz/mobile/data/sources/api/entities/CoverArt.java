@@ -23,4 +23,12 @@ public class CoverArt {
         this.release = release;
     }
 
+    public ArrayList<String> getAllImageLinks() {
+        ArrayList<String> urls = new ArrayList<>();
+        for (Image image : images)
+            if (image != null && !image.getImage().isEmpty())
+                urls.add(image.getImage());
+        return urls;
+    }
+
 }

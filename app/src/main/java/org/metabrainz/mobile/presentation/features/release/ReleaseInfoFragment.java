@@ -1,29 +1,33 @@
 package org.metabrainz.mobile.presentation.features.release;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
-import com.squareup.picasso.Picasso;
+import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
+import java.util.ArrayList;
+
 public class ReleaseInfoFragment extends Fragment {
 
     private TextView releaseTitle, releaseBarcode, releaseLanguage, releaseFormat;
-    private ImageView coverArtView;
     private ReleaseViewModel viewModel;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private CoverArtSlideshowAdapter slideshowAdapter;
+    private ArrayList<String> urls = new ArrayList<>();
 
     public static ReleaseInfoFragment newInstance() {
         return new ReleaseInfoFragment();
@@ -36,7 +40,10 @@ public class ReleaseInfoFragment extends Fragment {
         viewModel = ViewModelProviders.of(getActivity()).get(ReleaseViewModel.class);
         viewModel.initializeReleaseData().observe(this, this::setData);
         viewModel.initializeCoverArtData().observe(this, this::setCoverArt);
+        slideshowAdapter = new CoverArtSlideshowAdapter(urls);
         findViews(view);
+        viewPager.setAdapter(slideshowAdapter);
+        tabLayout.setupWithViewPager(viewPager);
         return view;
     }
 
@@ -45,7 +52,8 @@ public class ReleaseInfoFragment extends Fragment {
         releaseBarcode = view.findViewById(R.id.release_barcode);
         releaseFormat = view.findViewById(R.id.format);
         releaseLanguage = view.findViewById(R.id.release_language);
-        coverArtView = view.findViewById(R.id.release_cover_art);
+        viewPager = view.findViewById(R.id.viewpager_slideshow);
+        tabLayout = view.findViewById(R.id.tab_indicator);
     }
 
     private void setData(Release release) {
@@ -75,9 +83,9 @@ public class ReleaseInfoFragment extends Fragment {
 
     private void setCoverArt(CoverArt coverArt) {
         if (coverArt != null && coverArt.getImages() != null && !coverArt.getImages().isEmpty()) {
-            String uri = coverArt.getImages().get(0).getImage();
-            if (uri != null && !uri.isEmpty())
-                Picasso.get().load(Uri.parse(uri)).into(coverArtView);
+            urls.clear();
+            urls.addAll(coverArt.getAllImageLinks());
+            slideshowAdapter.notifyDataSetChanged();
         }
     }
 
