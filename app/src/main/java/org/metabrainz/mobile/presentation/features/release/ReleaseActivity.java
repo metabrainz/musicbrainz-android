@@ -38,7 +38,7 @@ public class ReleaseActivity extends MusicBrainzActivity {
     }
 
     private void setRelease(Release release) {
-        if (release != null) getSupportActionBar().setTitle(release.getTitle());
+        //if (release != null) getSupportActionBar().setTitle(release.getTitle());
     }
 
     @Override
