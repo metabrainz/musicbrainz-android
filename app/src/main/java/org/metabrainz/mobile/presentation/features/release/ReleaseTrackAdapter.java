@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.Track;
 
 import java.util.List;
@@ -18,10 +19,36 @@ import static android.view.View.GONE;
 
 public class ReleaseTrackAdapter extends RecyclerView.Adapter {
 
-    List<Track> recordings;
+    private static final int VIEWTYPE_TRACK = 0;
+    private static final int VIEWTYPE_HEADING = 1;
+    List<Media> mediaList;
 
-    public ReleaseTrackAdapter(List<Track> data) {
-        recordings = data;
+    public ReleaseTrackAdapter(List<Media> data) {
+        mediaList = data;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        /*There are two view types to be displayed in the RecyclerView.
+         * 1) The titles of mediums in which the tracks are present.
+         * 2) The tracks itself.
+         * To find which view type, the following method is used:
+         * Check if the position is zero or equal to previous cumulative track count. This would mean
+         * the position id for the title of a medium. Repeat this till all mediums are accounted for and
+         * return the view type as a track.
+         */
+        int calculate = 0;
+        int flag = VIEWTYPE_TRACK;
+        for (Media media : mediaList) {
+            if (calculate == position) {
+                flag = VIEWTYPE_HEADING;
+                break;
+            }
+            int trackCount = media.getTrackCount();
+            calculate += trackCount;
+            ++calculate;
+        }
+        return flag;
     }
 
     @NonNull
@@ -29,23 +56,34 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.item_track, parent, false);
-        return new TrackViewHolder(view);
+        if (viewType == VIEWTYPE_TRACK) {
+            View view = layoutInflater.inflate(R.layout.item_track, parent, false);
+            return new TrackViewHolder(view);
+        } else {
+            View view = layoutInflater.inflate(R.layout.item_track_heading, parent, false);
+            return new TrackHeadingViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        TrackViewHolder viewHolder = (TrackViewHolder) holder;
-        Track item = recordings.get(position);
-        setViewVisibility(item.getTitle(), viewHolder.trackName);
-        setViewVisibility(String.valueOf(item.getPosition()), viewHolder.trackNumber);
-        setViewVisibility(item.getDuration(), viewHolder.trackDuration);
-        setViewVisibility(item.getRecording().getDisplayArtist(), viewHolder.trackArtist);
+        if (getItemViewType(position) == 0)
+            ((TrackViewHolder) holder).bind(position);
+        else
+            ((TrackHeadingViewHolder) holder).bind(position);
     }
 
     @Override
     public int getItemCount() {
-        return recordings.size();
+        /*
+         * Total count of items in recycler view is equal to cumulative track count of the media and
+         * number of media because the titles of media of also make up one item each.*/
+        int count = 0;
+        if (mediaList != null) {
+            for (Media medium : mediaList) count += medium.getTrackCount();
+            count += mediaList.size();
+        }
+        return count;
     }
 
     private void setViewVisibility(String text, TextView view) {
@@ -53,6 +91,35 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
             view.setVisibility(View.VISIBLE);
             view.setText(text);
         } else view.setVisibility(GONE);
+    }
+
+    private String getMediumTitle(int position) {
+        /*
+         * Deduct the track count of each media from the cumulative count. Reduce one from the count
+         * for the already displayed medium's title. When the count becomes zero, the next media is
+         * the one whose title has to be displayed.
+         * */
+        for (Media media : mediaList) {
+            if (position == 0)
+                return media.getTitle();
+            position = position - media.getTrackCount();
+            --position;
+        }
+        return "";
+    }
+
+    private Track getTrack(int position) {
+        /*
+         * To calculate track position, deduct the track count of all previous media that is till the
+         * track count is positive. This way we get the track position in the required media and
+         * then return it.*/
+        for (Media media : mediaList) {
+            --position;
+            if (position < media.getTrackCount())
+                return media.getTracks().get(position);
+            position = position - media.getTrackCount();
+        }
+        return new Track();
     }
 
     class TrackViewHolder extends RecyclerView.ViewHolder {
@@ -64,6 +131,27 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
             trackArtist = itemView.findViewById(R.id.track_artist);
             trackName = itemView.findViewById(R.id.track_name);
             trackDuration = itemView.findViewById(R.id.track_time);
+        }
+
+        public void bind(int position) {
+            Track item = getTrack(position);
+            setViewVisibility(item.getTitle(), trackName);
+            setViewVisibility(String.valueOf(item.getPosition()), trackNumber);
+            setViewVisibility(item.getDuration(), trackDuration);
+            setViewVisibility(item.getRecording().getDisplayArtist(), trackArtist);
+        }
+    }
+
+    class TrackHeadingViewHolder extends RecyclerView.ViewHolder {
+        TextView mediumTitle;
+
+        public TrackHeadingViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mediumTitle = itemView.findViewById(R.id.medium_title);
+        }
+
+        public void bind(int position) {
+            setViewVisibility(getMediumTitle(position), mediumTitle);
         }
     }
 }

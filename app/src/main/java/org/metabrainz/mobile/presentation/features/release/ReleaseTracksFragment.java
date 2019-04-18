@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.Track;
+import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class ReleaseTracksFragment extends Fragment {
     private RecyclerView recyclerView;
     private ReleaseViewModel viewModel;
     private ReleaseTrackAdapter adapter;
-    private List<Track> tracks;
+    private List<Media> mediaList;
 
     public static ReleaseTracksFragment newInstance() {
         return new ReleaseTracksFragment();
@@ -34,8 +34,8 @@ public class ReleaseTracksFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tracks = new ArrayList<>();
-        adapter = new ReleaseTrackAdapter(tracks);
+        mediaList = new ArrayList<>();
+        adapter = new ReleaseTrackAdapter(mediaList);
     }
 
     @Nullable
@@ -59,11 +59,9 @@ public class ReleaseTracksFragment extends Fragment {
     }
 
     private void setTracks(Release release) {
-        if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()
-                && release.getMedia().get(0).getTracks() != null &&
-                !release.getMedia().get(0).getTracks().isEmpty()) {
-            tracks.clear();
-            tracks.addAll(release.getMedia().get(0).getTracks());
+        if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()) {
+            mediaList.clear();
+            mediaList.addAll(release.getMedia());
             adapter.notifyDataSetChanged();
         }
     }
