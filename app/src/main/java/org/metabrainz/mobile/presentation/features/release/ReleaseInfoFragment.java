@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ReleaseInfoFragment extends Fragment {
 
-    private TextView releaseTitle, releaseBarcode, releaseLanguage, releaseFormat;
+    private TextView releaseTitle, releaseBarcode, releaseLanguage, releaseStatus;
     private ReleaseViewModel viewModel;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -51,27 +51,27 @@ public class ReleaseInfoFragment extends Fragment {
     private void findViews(View view) {
         releaseTitle = view.findViewById(R.id.release_title);
         releaseBarcode = view.findViewById(R.id.release_barcode);
-        releaseFormat = view.findViewById(R.id.format);
+        releaseStatus = view.findViewById(R.id.release_status);
         releaseLanguage = view.findViewById(R.id.release_language);
         viewPager = view.findViewById(R.id.viewpager_slideshow);
         tabLayout = view.findViewById(R.id.tab_indicator);
     }
 
     private void setData(Release release) {
-        String title, barcode, format = "", language = "";
+        String title, barcode, status = "", language = "";
         if (release != null) {
             title = release.getTitle();
 
             barcode = release.getBarcode();
             if (release.getMedia() != null && !release.getMedia().isEmpty())
-                format = release.getMedia().get(0).getFormat();
+                status = release.getStatus();
 
             if (release.getTextRepresentation() != null)
                 language = release.getTextRepresentation().getLanguage();
 
             if (title != null && !title.isEmpty()) releaseTitle.setText(title);
             if (barcode != null && !barcode.isEmpty()) releaseBarcode.setText(barcode);
-            if (format != null && !format.isEmpty()) releaseFormat.setText(format);
+            if (status != null && !status.isEmpty()) releaseStatus.setText(status);
             if (language != null && !language.isEmpty()) releaseLanguage.setText(language);
 
             fetchCoverArt();
@@ -85,7 +85,7 @@ public class ReleaseInfoFragment extends Fragment {
     private void setCoverArt(CoverArt coverArt) {
         if (coverArt != null && coverArt.getImages() != null && !coverArt.getImages().isEmpty()) {
             urls.clear();
-            urls.addAll(coverArt.getAllImageLinks());
+            urls.addAll(coverArt.getAllThumbnailsLinks());
             slideshowAdapter.notifyDataSetChanged();
             startAutoSlide();
         }

@@ -31,4 +31,12 @@ public class CoverArt {
         return urls;
     }
 
+    public ArrayList<String> getAllThumbnailsLinks() {
+        ArrayList<String> urls = new ArrayList<>();
+        for (Image image : images)
+            if (image != null && image.getThumbnails() != null)
+                urls.add(image.getThumbnails().getSmall());
+        return urls;
+    }
+
 }

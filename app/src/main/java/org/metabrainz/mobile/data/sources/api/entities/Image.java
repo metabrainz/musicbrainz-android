@@ -6,6 +6,7 @@ public class Image {
     private ArrayList<String> types= new ArrayList<>();
     private boolean front,back;
     private String image;
+    private Thumbnail thumbnails;
 
     public ArrayList<String> getTypes() {
         return types;
@@ -37,5 +38,34 @@ public class Image {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Thumbnail getThumbnails() {
+        return thumbnails;
+    }
+
+    public void setThumbnails(Thumbnail thumbnails) {
+        this.thumbnails = thumbnails;
+    }
+
+    public class Thumbnail {
+        String small;
+        String large;
+
+        public String getSmall() {
+            return small;
+        }
+
+        public void setSmall(String small) {
+            this.small = small;
+        }
+
+        public String getLarge() {
+            return large;
+        }
+
+        public void setLarge(String large) {
+            this.large = large;
+        }
     }
 }

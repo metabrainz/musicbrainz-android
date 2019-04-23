@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/format"
+            app:layout_constraintBottom_toTopOf="@id/release_status"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slideshow"
             app:layout_constraintTop_toBottomOf="@+id/release_title"
@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toTopOf="@+id/release_links"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slideshow"
-            app:layout_constraintTop_toBottomOf="@+id/format"
+            app:layout_constraintTop_toBottomOf="@id/release_status"
             tools:text="Language" />
 
         <TextView
@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/release_language" />
 
         <TextView
-            android:id="@+id/format"
+            android:id="@+id/release_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -61,13 +61,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slideshow"
             app:layout_constraintTop_toBottomOf="@+id/release_barcode"
-            tools:text="Format" />
+            tools:text="Status" />
 
         <include
             android:id="@+id/slideshow"
             layout="@layout/cover_art_slideshow"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/release_title" />
 

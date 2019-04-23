@@ -100,8 +100,12 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
          * the one whose title has to be displayed.
          * */
         for (Media media : mediaList) {
-            if (position == 0)
-                return media.getTitle();
+            if (position == 0) {
+                String format = media.getFormat();
+                if (format == null || format.equalsIgnoreCase("null"))
+                    format = "Medium";
+                return format + "  " + media.getPosition() + " : " + media.getTitle();
+            }
             position = position - media.getTrackCount();
             --position;
         }
