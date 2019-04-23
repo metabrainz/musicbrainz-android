@@ -270,7 +270,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         }
 
         private void startArtistActivity(int position) {
-            Intent artistIntent = new Intent(SearchActivity.this, ArtistActivity.class);
+            Intent artistIntent = new Intent(SearchActivity.this, ReleaseActivity.class);
             Artist artist = artistSearchResults.get(position);
             artistIntent.putExtra(IntentFactory.Extra.ARTIST_MBID, artist.getMbid());
             startActivity(artistIntent);

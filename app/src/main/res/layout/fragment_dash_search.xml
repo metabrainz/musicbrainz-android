@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
+    android:id="@+id/clear_focus_view"
+    android:focusableInTouchMode="true"
     android:padding="@dimen/gutter_large">
 
     <Spinner

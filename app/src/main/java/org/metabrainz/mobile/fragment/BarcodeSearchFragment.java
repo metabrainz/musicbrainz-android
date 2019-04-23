@@ -149,7 +149,7 @@ public class BarcodeSearchFragment extends Fragment implements OnEditorActionLis
 
     private void findViews(View layout) {
         searchBox = layout.findViewById(R.id.barcode_search);
-        barcodeText = layout.findViewById(R.id.barcode);
+        barcodeText = layout.findViewById(R.id.release_barcode);
         searchButton = layout.findViewById(R.id.barcode_search_btn);
         matches = layout.findViewById(R.id.barcode_list);
         instructions = layout.findViewById(R.id.barcode_instructions);

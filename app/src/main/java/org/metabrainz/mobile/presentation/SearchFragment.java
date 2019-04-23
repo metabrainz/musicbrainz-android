@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,8 +17,8 @@ import androidx.cursoradapter.widget.CursorAdapter;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.fragment.ContextFragment;
-import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
+import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.suggestion.SuggestionHelper;
 
 public class SearchFragment extends ContextFragment implements SearchView.OnQueryTextListener {
@@ -28,6 +27,7 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
     private SuggestionHelper suggestionHelper;
     private SearchView searchView;
     private CursorAdapter suggestionAdapter;
+    private View clearFocusView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,10 +35,9 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
         searchTypeSpinner = layout.findViewById(R.id.search_spin);
         searchView = layout.findViewById(R.id.search_view);
 
-        //Hide auto-show keyboard
-        InputMethodManager imm = (InputMethodManager)layout.getContext()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+        //Work around to prevent keyboard from auto showing
+        clearFocusView = layout.findViewById(R.id.clear_focus_view);
+        clearFocusView.requestFocus();
 
         setupSearchView();
         return layout;
@@ -115,6 +114,7 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
                 return false;
             }
         });
+
     }
 
     @Override

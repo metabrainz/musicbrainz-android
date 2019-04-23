@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.search;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
 
@@ -38,6 +41,12 @@ public class SearchAdapterRelease extends SearchAdapter {
         SearchAdapterRelease.ReleaseViewHolder viewHolder = (SearchAdapterRelease.ReleaseViewHolder) holder;
         Release release = data.get(position);
         viewHolder.releaseName.setText(release.getTitle());
+
+        viewHolder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ReleaseActivity.class);
+            intent.putExtra(IntentFactory.Extra.RELEASE_MBID, release.getMbid());
+            v.getContext().startActivity(intent);
+        });
 
         setViewVisibility(release.labelCatalog(), viewHolder.releaseLabel);
         setViewVisibility(release.getDisplayArtist(), viewHolder.releaseArtist);

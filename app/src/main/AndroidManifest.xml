@@ -107,7 +107,8 @@
     </activity>
 
     <activity
-        android:name="org.metabrainz.mobile.activity.ReleaseActivity"
+        android:name=".presentation.features.release.ReleaseActivity"
+        android:theme="@style/AppThemeCustomActionBar"
         android:label="@string/release_title" />
 
     <activity
