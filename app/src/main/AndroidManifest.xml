@@ -1,138 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="org.metabrainz.mobile">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:name=".App"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".presentation.features.label.LabelActivity"
+            android:theme="@style/AppThemeCustomActionBar" />
+
+        <activity
+            android:name=".activity.DashboardActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
+        <activity
+            android:name=".activity.IncomingActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".presentation.LoginActivity"
+            android:label="@string/auth_title">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="org.metabrainz.mobile" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.AboutActivity"
+            android:label="@string/about_title" />
+
+        <activity
+            android:name=".activity.DonateActivity"
+            android:label="@string/donate_title" />
+        <activity
+            android:name=".activity.BarcodeSearchActivity"
+            android:label="@string/barcodesearch_title"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.features.search.SearchActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".presentation.features.release.ReleaseActivity"
+            android:label="@string/release_title"
+            android:theme="@style/AppThemeCustomActionBar" />
+        <activity
+            android:name=".presentation.features.artist.ArtistActivity"
+            android:label="@string/artist_title"
+            android:theme="@style/AppThemeCustomActionBar" />
+        <activity
+            android:name=".activity.CollectionListActivity"
+            android:label="@string/collections_title"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.CollectionActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/preferences_title" />
+        <activity
+            android:name=".activity.WebActivity"
+            android:label="@string/app_name" />
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".activity.SearchActivity" />
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name=".suggestion.SuggestionProvider"
+            android:authorities="org.metabrainz.mobile.SearchSuggestionProvider"
+            android:exported="false" />
+
+        <dist:module dist:instant="true" />
+    </application>
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <application
-        android:name="org.metabrainz.mobile.App"
-        android:hardwareAccelerated="true"
-        android:icon="@drawable/launcher"
-        android:usesCleartextTraffic="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <meta-data
-        android:name="android.app.default_searchable"
-        android:value=".activity.SearchActivity" />
-
-    <provider
-        android:name="org.metabrainz.mobile.suggestion.SuggestionProvider"
-        android:authorities="org.metabrainz.mobile.SearchSuggestionProvider"
-        android:exported="false" />
-
-    <meta-data
-        android:name="com.google.android.backup.api_key"
-        android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
-
-        <activity
-        android:name="org.metabrainz.mobile.activity.DashboardActivity"
-        android:label="@string/app_name"
-        android:launchMode="singleTop"
-        android:windowSoftInputMode="stateHidden">
-
-
-        <intent-filter>
-
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-
-        </intent-filter>
-
-        <meta-data
-            android:name="android.app.searchable"
-            android:resource="@xml/searchable" />
-
-    </activity>
-
-
-    <activity
-        android:name="org.metabrainz.mobile.activity.IncomingActivity"
-        android:configChanges="keyboardHidden|orientation"
-        android:label="@string/app_name">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-
-    </activity>
-
-    <activity
-        android:name="org.metabrainz.mobile.presentation.LoginActivity"
-        android:label="@string/auth_title">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-
-            <data
-                android:host="oauth"
-                android:scheme="org.metabrainz.mobile" />
-        </intent-filter>
-    </activity>
-
-    <activity
-        android:name="org.metabrainz.mobile.presentation.AboutActivity"
-        android:label="@string/about_title" />
-
-    <activity
-        android:name="org.metabrainz.mobile.activity.DonateActivity"
-        android:label="@string/donate_title" />
-
-    <activity
-        android:name="org.metabrainz.mobile.activity.BarcodeSearchActivity"
-        android:label="@string/barcodesearch_title"
-        android:windowSoftInputMode="adjustResize" />
-
-
-    <activity
-        android:name=".presentation.features.search.SearchActivity"
-        android:launchMode="singleTop">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        <meta-data
-            android:name="android.app.searchable"
-            android:resource="@xml/searchable" />
-    </activity>
-
-    <activity
-        android:name=".presentation.features.release.ReleaseActivity"
-        android:theme="@style/AppThemeCustomActionBar"
-        android:label="@string/release_title" />
-
-    <activity
-        android:name=".presentation.features.artist.ArtistActivity"
-        android:theme="@style/AppThemeCustomActionBar"
-        android:label="@string/artist_title" />
-
-    <activity
-        android:name="org.metabrainz.mobile.activity.CollectionListActivity"
-        android:label="@string/collections_title"
-        android:launchMode="singleTop" />
-
-    <activity
-        android:name="org.metabrainz.mobile.activity.CollectionActivity"
-        android:label="@string/app_name" />
-
-    <activity
-        android:name="org.metabrainz.mobile.activity.SettingsActivity"
-        android:label="@string/preferences_title" />
-
-    <activity
-        android:name="org.metabrainz.mobile.activity.WebActivity"
-        android:label="@string/app_name" />
-
-    <dist:module dist:instant="true" />
-    </application>
 </manifest>

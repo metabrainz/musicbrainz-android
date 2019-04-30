@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.search;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.features.label.LabelActivity;
 
 import java.util.List;
 
@@ -46,8 +49,14 @@ public class SearchAdapterLabel extends SearchAdapter {
         else viewHolder.labelArea.setVisibility(View.GONE);
         setViewVisibility(label.getDisambiguation(), viewHolder.labelDisambiguation);
         setAnimation(viewHolder.itemView, position);
+        viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
     }
 
+    private void onClick(View view, int position) {
+        Intent intent = new Intent(view.getContext(), LabelActivity.class);
+        intent.putExtra(IntentFactory.Extra.LABEL, data.get(position).getMbid());
+        view.getContext().startActivity(intent);
+    }
     @Override
     public int getItemCount() {
         return data.size();

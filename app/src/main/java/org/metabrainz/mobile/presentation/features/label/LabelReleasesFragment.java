@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.artist;
+package org.metabrainz.mobile.presentation.features.label;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,33 +13,33 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistReleasesFragment extends Fragment {
+public class LabelReleasesFragment extends Fragment {
 
     private RecyclerView releasesRecyclerView;
-    private ArtistReleaseAdapter adapter;
+    private LabelReleaseAdapter adapter;
     private List<Release> releaseList;
-    private ArtistViewModel artistViewModel;
+    private LabelViewModel labelViewModel;
 
-    public static ArtistReleasesFragment newInstance() {
-        return new ArtistReleasesFragment();
+    public static LabelReleasesFragment newInstance() {
+        return new LabelReleasesFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         releaseList = new ArrayList<>();
-        adapter = new ArtistReleaseAdapter(getActivity(), releaseList);
+        adapter = new LabelReleaseAdapter(getActivity(), releaseList);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_artist_releases, container, false);
+        View view = inflater.inflate(R.layout.fragment_label_releases, container, false);
         releasesRecyclerView = view.findViewById(R.id.recycler_view);
         releasesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         releasesRecyclerView.setAdapter(adapter);
@@ -52,16 +52,16 @@ public class ArtistReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(this, this::setReleases);
+        labelViewModel = ViewModelProviders.of(getActivity()).get(LabelViewModel.class);
+        labelViewModel.initializeLabelData().observe(this, this::setReleases);
     }
 
-    private void setReleases(Artist artist){
-        // TODO: Observe artistData LiveData, instead of requesting the artist sync
+    private void setReleases(Label label) {
+        // TODO: Observe labelData LiveData, instead of requesting the label sync
         // TODO: Use DiffUtil to avoid overheads
-        if(artist != null && artist.getReleases() != null){
+        if (label != null && label.getReleases() != null) {
             releaseList.clear();
-            releaseList.addAll(artist.getReleases());
+            releaseList.addAll(label.getReleases());
             adapter.notifyDataSetChanged();
         }
     }

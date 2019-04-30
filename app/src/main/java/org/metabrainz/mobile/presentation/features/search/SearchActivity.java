@@ -2,13 +2,11 @@ package org.metabrainz.mobile.presentation.features.search;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,7 +42,6 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private RecyclerView recyclerView;
     private SearchView searchView;
     private SearchAdapter adapter;
-    private View error;
     private TextView noRes;
     private List<Artist> artistSearchResults = new ArrayList<>();
     private List<Release> releaseSearchResults = new ArrayList<>();
@@ -83,18 +80,6 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         viewModel.prepareSearch(query, entity);
         doSearch(query);
     }
-    @Override
-    protected void onNewIntent(Intent intent) {
-        setIntent(intent);
-    }
-
-    /* private void saveQueryAsSuggestion() {
-        if (App.getUser().isSearchSuggestionsEnabled()) {
-            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY,
-                    SuggestionProvider.MODE);
-            suggestions.saveRecentQuery(searchTerm, null);
-        }
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,16 +104,10 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
                 Cursor cursor = (Cursor) suggestionAdapter.getItem(position);
                 String query = cursor.getString(cursor.getColumnIndexOrThrow("display1"));
                 searchView.setQuery(query, false);
-                return false;
+                return true;
             }
         });
         return true;
-    }
-
-    private void showConnectionWarning() {
-        error.setVisibility(View.VISIBLE);
-        Button retry = error.findViewById(R.id.retry_button);
-        retry.setOnClickListener(view -> error.setVisibility(View.GONE));
     }
 
     private void chooseAdapter() {
@@ -241,7 +220,6 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
             recyclerView.setVisibility(View.VISIBLE);
             noRes.setVisibility(View.GONE);
         }
-
     }
 
     @Override
@@ -260,45 +238,6 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
                 SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
         suggestions.saveRecentQuery(query, null);
-
     }
-
-    /*private class ArtistItemClickListener implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            startArtistActivity(position);
-        }
-
-        private void startArtistActivity(int position) {
-            Intent artistIntent = new Intent(SearchActivity.this, ReleaseActivity.class);
-            Artist artist = artistSearchResults.get(position);
-            artistIntent.putExtra(IntentFactory.Extra.ARTIST_MBID, artist.getMbid());
-            startActivity(artistIntent);
-        }
-    }
-
-    private class RGItemClickListener implements OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ReleaseGroupSearchResult rg = rgSearchResults.get(position);
-            if (rg.getNumberOfReleases() == 1) {
-                startReleaseActivity(rg.getReleaseMbids().getFirst());
-            } else {
-                startReleaseGroupActivity(rg.getMbid());
-            }
-        }
-
-        private void startReleaseGroupActivity(String mbid) {
-            Intent releaseIntent = new Intent(SearchActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra(Extra.RG_MBID, mbid);
-            startActivity(releaseIntent);
-        }
-
-        private void startReleaseActivity(String mbid) {
-            Intent releaseIntent = new Intent(SearchActivity.this, ReleaseActivity.class);
-            releaseIntent.putExtra(Extra.RELEASE_MBID, mbid);
-            startActivity(releaseIntent);
-        }
-    }*/
 
 }
