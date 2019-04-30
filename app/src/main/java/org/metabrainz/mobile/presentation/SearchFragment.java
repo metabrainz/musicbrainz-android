@@ -111,7 +111,7 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
                 Cursor cursor = (Cursor) suggestionAdapter.getItem(position);
                 String query = cursor.getString(cursor.getColumnIndexOrThrow("display1"));
                 searchView.setQuery(query, false);
-                return false;
+                return true;
             }
         });
 
