@@ -29,7 +29,8 @@ public class Label {
     }
 
     public String getCode() {
-        return "LC " + code;
+        if (code != null) return "LC " + code;
+        return "";
     }
 
     public void setCode(String code) {
