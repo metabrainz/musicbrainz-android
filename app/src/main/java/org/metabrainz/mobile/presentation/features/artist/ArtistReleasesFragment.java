@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +43,9 @@ public class ArtistReleasesFragment extends Fragment {
         releasesRecyclerView = view.findViewById(R.id.recycler_view);
         releasesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         releasesRecyclerView.setAdapter(adapter);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(releasesRecyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        releasesRecyclerView.addItemDecoration(itemDecoration);
         return view;
     }
 

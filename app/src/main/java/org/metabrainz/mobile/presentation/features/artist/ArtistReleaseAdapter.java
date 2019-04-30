@@ -90,7 +90,8 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
                 String url = release.getCoverArt()
                         .getImages()
                         .get(0)
-                        .getImage();
+                        .getThumbnails()
+                        .getSmall();
 
                 if (url != null && !url.isEmpty()) {
                     Picasso.get()
