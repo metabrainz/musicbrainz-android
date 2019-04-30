@@ -4,16 +4,37 @@ import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 
+import java.util.ArrayList;
+
 public class Label {
     @SerializedName("id")
     private String mbid;
     private String name;
     private String disambiguation;
     private String type;
+    @SerializedName("label-code")
+    private String code;
     @SerializedName("life-span")
     private LifeSpan lifeSpan;
     private String country;
     private Area area;
+    private ArrayList<Release> releases = new ArrayList<>();
+
+    public ArrayList<Release> getReleases() {
+        return releases;
+    }
+
+    public void setReleases(ArrayList<Release> releases) {
+        this.releases = releases;
+    }
+
+    public String getCode() {
+        return "LC " + code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getDisambiguation() {
         return disambiguation;
@@ -58,14 +79,6 @@ public class Label {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getdisambiguation() {
-        return disambiguation;
-    }
-
-    public void setdisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 
     public LifeSpan getLifeSpan() {

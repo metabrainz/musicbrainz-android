@@ -2,9 +2,15 @@
 
 <resources>
 
-    <string name="app_name">MusicBrainz</string>
+    <plurals name="release_plurals">
+        <item quantity="zero">No releases</item>
+        <item quantity="one">%d release</item>
+        <item quantity="other">%d releases</item>
+    </plurals>
 
+    <string name="releases">Releases</string>
     <!-- DashboardActivity -->
+    <string name="app_name">MusicBrainz</string>
     <string name="search_hint">Search MusicBrainz</string>
     <string name="description_search">Search</string>
     <string name="dash_scan">Scan</string>
@@ -14,21 +20,21 @@
     <string name="login">Log In</string>
     <string name="logout">Log Out</string>
     <string name="welcome">Welcome to MusicBrainz!</string>
-    <string name="welcome_loggedin">Logged in as</string>
 
+    <string name="welcome_loggedin">Logged in as</string>
     <string name="search_type_artist">Artist</string>
     <string name="search_type_release">Release</string>
     <string name="search_type_label">Label</string>
     <string name="search_type_recording">Recording</string>
     <string name="search_type_release_group">Release Group</string>
     <string name="search_type_instrument">Instrument</string>
-    <string name="search_type_event">Event</string>
 
     <!-- Searchable -->
+    <string name="search_type_event">Event</string>
     <string name="search_name">MusicBrainz</string>
-    <string name="search_description">Artists and releases</string>
 
     <!-- LoginActivity -->
+    <string name="search_description">Artists and releases</string>
     <string name="auth_title">Log In</string>
     <string name="uname_hint">Username</string>
     <string name="pass_hint">Password</string>
@@ -37,46 +43,41 @@
     <string name="pd_authenticating">Authenticating…</string>
     <string name="login_failure_warning">Invalid username or password.</string>
     <string name="login_connection_warning">Connection failure.</string>
-    <string name="description_web">Web link</string>
 
     <!-- SearchResultsActivity -->
+    <string name="description_web">Web link</string>
     <string name="no_results">No results found</string>
     <string name="search_bar_artists">Artists</string>
-    <string name="search_bar_rgs">Releases</string>
 
     <!-- ReleaseActivity -->
+    <string name="search_bar_rgs">Releases</string>
     <string name="release_title">Release</string>
     <string name="label_tracks">tracks</string>
     <string name="no_tags">No tags found</string>
-    <string name="edit_login">You must log in before you can edit!</string>
 
+    <string name="edit_login">You must log in before you can edit!</string>
     <string name="collection_add_fail">Failed adding release to collection</string>
     <string name="collection_add_success">Added to collection</string>
-    <string name="collection_dialog_title">Add to collection</string>
 
+    <string name="collection_dialog_title">Add to collection</string>
     <string name="cover_art_front">FRONT</string>
-    <string name="cover_art_back">BACK</string>
 
     <!-- ReleaseActivity -->
+    <string name="cover_art_back">BACK</string>
     <string name="artist_title">Artist</string>
     <string name="noreleases">No releases found</string>
-    <string name="no_links">No links found</string>
 
     <!-- BioFragment -->
+    <string name="no_links">No links found</string>
     <string name="bio_powered_by">BIO POWERED BY</string>
     <string name="bio_empty">No bio found.</string>
-    <string name="bio_connection_fail">Could not download bio.</string>
 
     <!-- CollectionsActivity -->
+    <string name="bio_connection_fail">Could not download bio.</string>
     <string name="collections_title">Collections</string>
     <string name="plural">\'s</string>
-    <string name="collections">collections</string>
 
-    <plurals name="release_plurals">
-        <item quantity="zero">No releases</item>
-        <item quantity="one">%d release</item>
-        <item quantity="other">%d releases</item>
-    </plurals>
+    <string name="collections">collections</string>
 
     <string name="no_collections">You don\'t have any collections.\nAdd collections at musicbrainz.org</string>
     <string name="no_collection_releases">No releases in this collection.\nSearch for releases to add them.</string>
