@@ -32,7 +32,7 @@ public class Release {
     private ArrayList<LabelInfo> labels = new ArrayList<>();
     @SerializedName("track-count")
     private int trackCount;
-    private String countryCode;
+    private String country;
     private String status;
     private String disambiguation;
     private ArrayList<Media> media = new ArrayList<>();
@@ -139,6 +139,11 @@ public class Release {
     }
 
     public int getTrackCount() {
+        if (trackCount == 0 && media != null && media.size() != 0) {
+            int count = 0;
+            for (Media medium : media) count += medium.getTrackCount();
+            return count;
+        }
         return trackCount;
     }
 
@@ -146,12 +151,12 @@ public class Release {
         this.trackCount = trackCount;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountry(String countryCode) {
+        this.country = countryCode;
     }
 
     public String getStatus() {

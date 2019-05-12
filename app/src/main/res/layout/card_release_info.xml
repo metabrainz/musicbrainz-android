@@ -75,7 +75,6 @@
             android:id="@+id/release_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             app:layout_constraintEnd_toEndOf="parent"
