@@ -17,6 +17,10 @@
             android:theme="@style/AppThemeCustomActionBar" />
 
         <activity
+            android:name=".presentation.features.release_group.ReleaseGroupActivity"
+            android:theme="@style/AppThemeCustomActionBar" />
+
+        <activity
             android:name=".activity.DashboardActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"

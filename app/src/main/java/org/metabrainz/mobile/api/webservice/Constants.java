@@ -10,7 +10,7 @@ public class Constants {
     public static final String LOOKUP_RECORDING_PARAMS =
             "artists+tags+ratings";
     public static final String LOOKUP_RELEASE_GROUP_PARAMS =
-            "artist-credits+tags+ratings+url-rels";
+            "releases+artist-credits+url-rels+release-rels+media";
 
     public static final String LIMIT = "100";
     public static final String OFFSET = "0";
