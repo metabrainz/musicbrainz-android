@@ -45,7 +45,8 @@ public interface LookupService {
     @GET("recording/{MBID}")
     Call<Recording> lookupRecording(@Path("MBID") String MBID,
                                     @Query("inc") String params);
-    @GET("release/{MBID}")
+
+    @GET("release-group/{MBID}")
     Call<ReleaseGroup> lookupReleaseGroup(@Path("MBID") String MBID,
                                           @Query("inc") String params);
 

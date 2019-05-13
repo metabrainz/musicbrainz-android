@@ -3,6 +3,7 @@ package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
+import org.metabrainz.mobile.data.sources.api.entities.Link;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,12 +14,23 @@ public class ReleaseGroup {
     private String title;
     private String disambiguation;
     @SerializedName("primary-type")
-    private String type;
+    private String primaryType;
+    @SerializedName("secondary-types")
+    private ArrayList<String> secoondaryTypes = new ArrayList<>();
     private int count;
     //TODO: Implement correct wrapper JSON
     @SerializedName("artist-credit")
     private ArrayList<ArtistCredit> artistCredits = new ArrayList<>();
+    private ArrayList<Link> relations = new ArrayList<>();
     private ArrayList<Release> releases = new ArrayList<>();
+
+    public ArrayList<Link> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(ArrayList<Link> relations) {
+        this.relations = relations;
+    }
 
     public String getMbid() {
         return mbid;
@@ -44,12 +56,12 @@ public class ReleaseGroup {
         this.disambiguation = disambiguation;
     }
 
-    public String getType() {
-        return type;
+    public String getPrimaryType() {
+        return primaryType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPrimaryType(String primaryType) {
+        this.primaryType = primaryType;
     }
 
     public int getCount() {
@@ -74,6 +86,22 @@ public class ReleaseGroup {
 
     public void setReleases(ArrayList<Release> releases) {
         this.releases = releases;
+    }
+
+    public ArrayList<String> getSecoondaryTypes() {
+        return secoondaryTypes;
+    }
+
+    public void setSecoondaryTypes(ArrayList<String> secoondaryTypes) {
+        this.secoondaryTypes = secoondaryTypes;
+    }
+
+    public String getFullType() {
+        if (secoondaryTypes.size() != 0) {
+            String type = primaryType;
+            for (String string : secoondaryTypes) type = type.concat(" + ").concat(string);
+            return type;
+        } else return primaryType;
     }
 
     public String getDisplayArtist() {
