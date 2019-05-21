@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.release;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.Track;
+import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
 
 import java.util.List;
 
@@ -143,6 +146,12 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
             setViewVisibility(String.valueOf(item.getPosition()), trackNumber);
             setViewVisibility(item.getDuration(), trackDuration);
             setViewVisibility(item.getRecording().getDisplayArtist(), trackArtist);
+
+            this.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), RecordingActivity.class);
+                intent.putExtra(IntentFactory.Extra.RECORDING, item.getMbid());
+                v.getContext().startActivity(intent);
+            });
         }
     }
 

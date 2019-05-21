@@ -13,6 +13,10 @@
         android:usesCleartextTraffic="true">
 
         <activity
+            android:name=".presentation.features.recording.RecordingActivity"
+            android:theme="@style/AppThemeCustomActionBar" />
+
+        <activity
             android:name=".presentation.features.label.LabelActivity"
             android:theme="@style/AppThemeCustomActionBar" />
 

@@ -144,4 +144,15 @@ public class Recording {
     public void setDisambiguation(String disambiguation) {
         this.disambiguation = disambiguation;
     }
+
+    public String getDuration() {
+        StringBuilder builder = new StringBuilder();
+        long seconds = length / 1000;
+        long minutes = seconds / 60;
+        seconds = seconds % 60;
+        builder.append(minutes).append(':');
+        if (seconds < 10) builder.append('0');
+        builder.append(seconds);
+        return builder.toString();
+    }
 }

@@ -9,6 +9,7 @@
     </plurals>
 
     <string name="releases">Releases</string>
+    <string name="recording_releases">Appears On Releases</string>
     <!-- DashboardActivity -->
     <string name="app_name">MusicBrainz</string>
     <string name="search_hint">Search MusicBrainz</string>
