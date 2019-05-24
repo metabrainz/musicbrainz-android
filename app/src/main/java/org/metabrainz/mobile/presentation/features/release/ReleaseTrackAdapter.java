@@ -149,7 +149,7 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
 
             this.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), RecordingActivity.class);
-                intent.putExtra(IntentFactory.Extra.RECORDING, item.getMbid());
+                intent.putExtra(IntentFactory.Extra.RECORDING, item.getRecording().getMbid());
                 v.getContext().startActivity(intent);
             });
         }
