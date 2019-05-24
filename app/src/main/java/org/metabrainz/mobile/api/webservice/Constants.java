@@ -8,7 +8,7 @@ public class Constants {
     public static final String LOOKUP_LABEL_PARAMS =
             "releases+url-rels";
     public static final String LOOKUP_RECORDING_PARAMS =
-            "artists+tags+ratings";
+            "releases+media+artists+artist-credits";
     public static final String LOOKUP_RELEASE_GROUP_PARAMS =
             "releases+artist-credits+url-rels+release-rels+media";
 
