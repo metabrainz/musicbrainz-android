@@ -8,6 +8,7 @@ import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.presentation.LoginSharedPreferences;
 
 import io.reactivex.Single;
 import retrofit2.Call;
@@ -16,7 +17,8 @@ import retrofit2.Response;
 
 public class LabelLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class);
+            .createService(LookupService.class, LoginSharedPreferences.getPreferences(),
+                    true);
     private static LabelLookupRepository repository;
     private static MutableLiveData<Label> labelData;
 

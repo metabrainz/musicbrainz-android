@@ -16,6 +16,7 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.presentation.LoginSharedPreferences;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import io.reactivex.Single;
@@ -28,7 +29,8 @@ public class ReleaseGroupLookupRepository {
     public static final int METHOD_WIKIPEDIA_URL = 0;
     public static final int METHOD_WIKIDATA_ID = 1;
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class);
+            .createService(LookupService.class, LoginSharedPreferences.getPreferences(),
+                    true);
     private static ReleaseGroupLookupRepository repository;
     private static MutableLiveData<ReleaseGroup> releaseGroupData;
     private static SingleLiveEvent<ArtistWikiSummary> wikiSummary;

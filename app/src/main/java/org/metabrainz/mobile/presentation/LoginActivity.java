@@ -1,16 +1,15 @@
 package org.metabrainz.mobile.presentation;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.MusicBrainzActivity;
-import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.data.sources.api.SearchService;
+import org.metabrainz.mobile.data.sources.api.LoginService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
+import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.util.Log;
 
 import retrofit2.Call;
@@ -43,8 +42,10 @@ public class LoginActivity extends MusicBrainzActivity {
                 callbackUri.toString().startsWith(MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)) {
             String code = callbackUri.getQueryParameter("code");
             if (code != null) {
-                SearchService musicBrainzService = MusicBrainzServiceGenerator
-                        .createService(SearchService.class);
+                LoginService musicBrainzService = MusicBrainzServiceGenerator
+                        .createService(LoginService.class,
+                                LoginSharedPreferences.getPreferences(), false);
+
                 Call<AccessToken> accessTokenCall = musicBrainzService
                         .getAccessToken(code,
                                 "authorization_code",
@@ -61,11 +62,7 @@ public class LoginActivity extends MusicBrainzActivity {
                             Toast.makeText(getApplicationContext(),
                                     "Access Token: " + accessToken.getAccessToken(),
                                     Toast.LENGTH_LONG).show();
-                            SharedPreferences preferences =
-                                    getSharedPreferences(getString(R.string.preferences), MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString(getString(R.string.access_token), accessToken.getAccessToken());
-                            editor.commit();
+                            saveOAuthToken(accessToken);
 
                         } else {
                             Toast.makeText(getApplicationContext(),
@@ -85,5 +82,9 @@ public class LoginActivity extends MusicBrainzActivity {
             }
         }
         super.onResume();
+    }
+
+    private void saveOAuthToken(AccessToken accessToken) {
+        LoginSharedPreferences.saveOAuthToken(LoginSharedPreferences.getPreferences(), accessToken);
     }
 }

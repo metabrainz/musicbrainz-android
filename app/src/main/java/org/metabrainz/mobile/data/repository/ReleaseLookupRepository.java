@@ -7,6 +7,7 @@ import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.presentation.LoginSharedPreferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +15,8 @@ import retrofit2.Response;
 
 public class ReleaseLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class);
+            .createService(LookupService.class, LoginSharedPreferences.getPreferences(),
+                    true);
     private static ReleaseLookupRepository repository;
     private MutableLiveData<Release> releaseLiveData;
     private MutableLiveData<CoverArt> coverArtData;

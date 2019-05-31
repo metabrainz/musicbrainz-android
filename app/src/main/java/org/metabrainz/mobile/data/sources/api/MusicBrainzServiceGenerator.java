@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api;
 
+import android.content.SharedPreferences;
+
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -18,10 +20,11 @@ public class MusicBrainzServiceGenerator {
     public static final String OAUTH_REDIRECT_URI = "org.metabrainz.mobile://oauth";
 
     private static final int TIMEOUT = 20000;
+    private static OAuthAuthenticator authenticator;
 
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
-    private static HeaderInterceptor headerInterceptor = new HeaderInterceptor();
+    private static HeaderInterceptor headerInterceptor;
 
     private static OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder()
             .callTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
@@ -35,11 +38,20 @@ public class MusicBrainzServiceGenerator {
 
     private static Retrofit retrofit = builder.build();
 
-    public static <S> S createService(Class<S> service){
-        addInterceptors(loggingInterceptor);
+    public static <S> S createService(Class<S> service, SharedPreferences preferences,
+                                      boolean requiresAuthenticator) {
+        headerInterceptor = new HeaderInterceptor(preferences);
         addInterceptors(headerInterceptor);
-
+        if (requiresAuthenticator) addAuthenticator(preferences);
+        addInterceptors(loggingInterceptor);
         return retrofit.create(service);
+    }
+
+    private static void addAuthenticator(SharedPreferences preferences) {
+        authenticator = new OAuthAuthenticator(preferences);
+        httpClientBuilder.authenticator(authenticator);
+        builder.client(httpClientBuilder.build());
+        retrofit = builder.build();
     }
 
     private static void addInterceptors(Interceptor interceptor) {

@@ -19,6 +19,7 @@ import org.metabrainz.mobile.data.sources.api.entities.response.ReleaseSearchRes
 import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.data.sources.api.SearchService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
+import org.metabrainz.mobile.presentation.LoginSharedPreferences;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.List;
@@ -29,7 +30,8 @@ import retrofit2.Response;
 
 public class SearchRepository {
     private final static SearchService service = MusicBrainzServiceGenerator
-            .createService(SearchService.class);
+            .createService(SearchService.class, LoginSharedPreferences.getPreferences(),
+                    true);
     private static SearchRepository repository;
     private final MutableLiveData<List<Artist>> artistResults;
     private final MutableLiveData<List<Release>> releaseResults;
