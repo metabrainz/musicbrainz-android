@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.Nullable;
 
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.presentation.LoginSharedPreferences;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.io.IOException;
 

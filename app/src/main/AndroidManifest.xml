@@ -52,7 +52,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.LoginActivity"
+            android:name=".presentation.features.login.LoginActivity"
             android:label="@string/auth_title">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

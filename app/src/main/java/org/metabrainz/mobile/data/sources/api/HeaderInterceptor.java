@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.data.sources.api;
 
-import org.metabrainz.mobile.presentation.LoginSharedPreferences;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.io.IOException;
 

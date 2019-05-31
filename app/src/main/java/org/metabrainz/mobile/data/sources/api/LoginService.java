@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 public interface LoginService {
 
     @FormUrlEncoded
-    @POST("https://test.musicbrainz.org/oauth2/token")
+    @POST("https://musicbrainz.org/oauth2/token")
     Call<AccessToken> getAccessToken(@Field("code") String code,
                                      @Field("grant_type") String grantType,
                                      @Field("client_id") String clientId,
@@ -18,7 +18,7 @@ public interface LoginService {
                                      @Field("redirect_uri") String redirectUri);
 
     @FormUrlEncoded
-    @POST("https://test.musicbrainz.org/oauth2/token")
+    @POST("https://musicbrainz.org/oauth2/token")
     Call<AccessToken> refreshAccessToken(@Field("refresh_token") String refreshToken,
                                          @Field("grant_type") String grantType,
                                          @Field("client_id") String clientId,
