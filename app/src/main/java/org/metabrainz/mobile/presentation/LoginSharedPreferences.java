@@ -17,24 +17,24 @@ public class LoginSharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(App.getContext());
     }
 
-    public static void saveOAuthToken(SharedPreferences preferences, AccessToken token) {
-        SharedPreferences.Editor editor = preferences.edit();
+    public static void saveOAuthToken(AccessToken token) {
+        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
         editor.putString(ACCESS_TOKEN, token.getAccessToken());
         editor.putString(REFRESH_TOKEN, token.getRefreshToken());
         editor.apply();
     }
 
-    public static int getLoginStatus(SharedPreferences preferences) {
-        String accessToken = preferences.getString(ACCESS_TOKEN, "");
+    public static int getLoginStatus() {
+        String accessToken = LoginSharedPreferences.getPreferences().getString(ACCESS_TOKEN, "");
         if (accessToken != null && !accessToken.isEmpty()) return STATUS_LOGGED_IN;
         else return STATUS_LOGGED_OUT;
     }
 
-    public static String getAccessToken(SharedPreferences preferences) {
-        return preferences.getString(ACCESS_TOKEN, "");
+    public static String getAccessToken() {
+        return LoginSharedPreferences.getPreferences().getString(ACCESS_TOKEN, "");
     }
 
-    public static String getRefreshToken(SharedPreferences preferences) {
-        return preferences.getString(REFRESH_TOKEN, "");
+    public static String getRefreshToken() {
+        return LoginSharedPreferences.getPreferences().getString(REFRESH_TOKEN, "");
     }
 }
