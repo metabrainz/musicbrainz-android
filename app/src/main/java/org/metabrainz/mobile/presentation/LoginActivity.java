@@ -42,11 +42,10 @@ public class LoginActivity extends MusicBrainzActivity {
                 callbackUri.toString().startsWith(MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)) {
             String code = callbackUri.getQueryParameter("code");
             if (code != null) {
-                LoginService musicBrainzService = MusicBrainzServiceGenerator
-                        .createService(LoginService.class,
-                                LoginSharedPreferences.getPreferences(), false);
+                LoginService loginService = MusicBrainzServiceGenerator
+                        .createService(LoginService.class, false);
 
-                Call<AccessToken> accessTokenCall = musicBrainzService
+                Call<AccessToken> accessTokenCall = loginService
                         .getAccessToken(code,
                                 "authorization_code",
                                 MusicBrainzServiceGenerator.CLIENT_ID,
@@ -85,6 +84,6 @@ public class LoginActivity extends MusicBrainzActivity {
     }
 
     private void saveOAuthToken(AccessToken accessToken) {
-        LoginSharedPreferences.saveOAuthToken(LoginSharedPreferences.getPreferences(), accessToken);
+        LoginSharedPreferences.saveOAuthToken(accessToken);
     }
 }

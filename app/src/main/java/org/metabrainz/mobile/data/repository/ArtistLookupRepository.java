@@ -16,7 +16,6 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.presentation.LoginSharedPreferences;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import io.reactivex.Single;
@@ -27,8 +26,7 @@ import retrofit2.Response;
 
 public class ArtistLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class, LoginSharedPreferences.getPreferences(),
-                    true);
+            .createService(LookupService.class, true);
     private static ArtistLookupRepository repository;
     private static MutableLiveData<Artist> artistData;
     private static SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;

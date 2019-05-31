@@ -1,7 +1,5 @@
 package org.metabrainz.mobile.data.sources.api;
 
-import android.content.SharedPreferences;
-
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -38,17 +36,20 @@ public class MusicBrainzServiceGenerator {
 
     private static Retrofit retrofit = builder.build();
 
-    public static <S> S createService(Class<S> service, SharedPreferences preferences,
-                                      boolean requiresAuthenticator) {
-        headerInterceptor = new HeaderInterceptor(preferences);
+    public static <S> S createService(Class<S> service, boolean requiresAuthenticator) {
+
+        headerInterceptor = new HeaderInterceptor();
         addInterceptors(headerInterceptor);
-        if (requiresAuthenticator) addAuthenticator(preferences);
+
+        // Authenticator should not be added for requests to refresh token and gaining access token
+        if (requiresAuthenticator) addAuthenticator();
+
         addInterceptors(loggingInterceptor);
         return retrofit.create(service);
     }
 
-    private static void addAuthenticator(SharedPreferences preferences) {
-        authenticator = new OAuthAuthenticator(preferences);
+    private static void addAuthenticator() {
+        authenticator = new OAuthAuthenticator();
         httpClientBuilder.authenticator(authenticator);
         builder.client(httpClientBuilder.build());
         retrofit = builder.build();

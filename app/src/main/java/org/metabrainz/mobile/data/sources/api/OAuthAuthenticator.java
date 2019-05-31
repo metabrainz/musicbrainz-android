@@ -17,33 +17,32 @@ import retrofit2.Call;
 
 public class OAuthAuthenticator implements Authenticator {
 
-    private SharedPreferences preferences;
-
-    public OAuthAuthenticator(SharedPreferences preferences) {
-        this.preferences = preferences;
-    }
-
     @Nullable
     @Override
     public Request authenticate(@Nullable Route route, Response response) throws IOException {
+
         LoginService service = MusicBrainzServiceGenerator.createService(LoginService.class,
-                preferences, false);
-        String refreshToken = preferences.getString(LoginSharedPreferences.REFRESH_TOKEN, "");
+                false);
+
+        String refreshToken = LoginSharedPreferences.getRefreshToken();
+
         Call<AccessToken> call = service.refreshAccessToken(refreshToken,
                 "refresh_token",
                 MusicBrainzServiceGenerator.CLIENT_ID,
                 MusicBrainzServiceGenerator.CLIENT_SECRET);
+
         retrofit2.Response<AccessToken> newResponse = call.execute();
+
         AccessToken token = newResponse.body();
-        SharedPreferences.Editor editor = preferences.edit();
+
+        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
         editor.putString(LoginSharedPreferences.REFRESH_TOKEN, token.getRefreshToken());
         editor.putString(LoginSharedPreferences.ACCESS_TOKEN, token.getAccessToken());
         editor.apply();
+
         return response.request()
                 .newBuilder()
                 .header("Authorization", "Bearer " + token.getAccessToken())
                 .build();
     }
-
-
 }

@@ -6,7 +6,6 @@ import org.metabrainz.mobile.api.webservice.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
-import org.metabrainz.mobile.presentation.LoginSharedPreferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,8 +13,7 @@ import retrofit2.Response;
 
 public class RecordingLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class, LoginSharedPreferences.getPreferences(),
-                    true);
+            .createService(LookupService.class, true);
     private static RecordingLookupRepository repository;
     private static MutableLiveData<Recording> recordingData;
 
