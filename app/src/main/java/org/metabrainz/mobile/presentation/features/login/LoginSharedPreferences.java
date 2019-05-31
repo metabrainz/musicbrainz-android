@@ -5,13 +5,11 @@ import android.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.data.sources.api.entities.UserInfo;
 
 public class LoginSharedPreferences {
 
     public static final String ACCESS_TOKEN = "access_token";
     public static final String REFRESH_TOKEN = "refresh_token";
-    public static final String USERNAME = "username";
     public static final int STATUS_LOGGED_IN = 1;
     public static final int STATUS_LOGGED_OUT = 0;
 
@@ -26,12 +24,6 @@ public class LoginSharedPreferences {
         editor.apply();
     }
 
-    public static void saveUserInfo(UserInfo userInfo) {
-        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
-        editor.putString(USERNAME, userInfo.getUsername());
-        editor.apply();
-    }
-
     public static int getLoginStatus() {
         String accessToken = LoginSharedPreferences.getPreferences().getString(ACCESS_TOKEN, "");
         if (accessToken != null && !accessToken.isEmpty()) return STATUS_LOGGED_IN;
@@ -40,10 +32,6 @@ public class LoginSharedPreferences {
 
     public static String getAccessToken() {
         return LoginSharedPreferences.getPreferences().getString(ACCESS_TOKEN, "");
-    }
-
-    public static String getUsername() {
-        return LoginSharedPreferences.getPreferences().getString(USERNAME, "");
     }
 
     public static String getRefreshToken() {
