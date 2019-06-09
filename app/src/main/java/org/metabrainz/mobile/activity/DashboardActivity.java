@@ -109,7 +109,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                 startActivity(barcodeResult);
             }
         } else if (requestCode == COLLECTION_LOGIN_REQUEST && App.isUserLoggedIn()) {
-            startActivity(IntentFactory.getCollectionList(getApplicationContext()));
+            //startActivity(IntentFactory.getCollectionList(getApplicationContext()));
         }
     }
 

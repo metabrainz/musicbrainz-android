@@ -3,14 +3,11 @@ package org.metabrainz.mobile.intent;
 import android.content.Context;
 import android.content.Intent;
 
-import org.metabrainz.mobile.presentation.AboutActivity;
-import org.metabrainz.mobile.activity.CollectionActivity;
-import org.metabrainz.mobile.activity.CollectionListActivity;
 import org.metabrainz.mobile.activity.DashboardActivity;
 import org.metabrainz.mobile.activity.DonateActivity;
-import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.activity.SettingsActivity;
-import org.metabrainz.mobile.activity.WebActivity;
+import org.metabrainz.mobile.presentation.AboutActivity;
+import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 
 public class IntentFactory {
 
@@ -33,8 +30,6 @@ public class IntentFactory {
         String EVENT = "event";
         String ALL = "all";
 
-        String TITLE = "title";
-        String TARGET_URL = "target_url";
     }
 
     public static Intent getDashboard(Context context) {
@@ -43,26 +38,6 @@ public class IntentFactory {
         return intent;
     }
 
-    public static Intent getWebView(Context context, int titleId, String url) {
-        Intent intent = new Intent(context, WebActivity.class);
-        intent.putExtra(Extra.TITLE, titleId);
-        intent.putExtra(Extra.TARGET_URL, url);
-        return intent;
-    }
-
-    public static Intent getCollectionList(Context context) {
-        Intent intent = new Intent(context, CollectionListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        return intent;
-    }
-
-    public static Intent getCollection(Context context, String title, String mbid) {
-        Intent intent = new Intent(context, CollectionActivity.class);
-        intent.putExtra(Extra.TITLE, title);
-        intent.putExtra(Extra.COLLECTION_MBID, mbid);
-        return intent;
-    }
-    
     public static Intent getLogin(Context context) {
         return new Intent(context, LoginActivity.class);
     }

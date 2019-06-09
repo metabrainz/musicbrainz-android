@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,6 @@ public class CollectionActivity extends MusicBrainzActivity {
             adapter.notifyDataSetChanged();
         });
 
-        viewModel.fetchCollections("amCap1712", true);
+        viewModel.fetchCollections(LoginSharedPreferences.getUsername(), true);
     }
 }
