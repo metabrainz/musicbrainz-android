@@ -11,6 +11,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
+import org.metabrainz.mobile.data.sources.api.entities.UserInfo;
 import org.metabrainz.mobile.util.Log;
 
 public class LoginActivity extends MusicBrainzActivity {
@@ -22,6 +23,7 @@ public class LoginActivity extends MusicBrainzActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         loginViewModel.getAccessTokenLiveData().observe(this, this::saveOAuthToken);
+        loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
 
         findViewById(R.id.login_btn).setOnClickListener(view -> startLogin());
     }
@@ -54,18 +56,23 @@ public class LoginActivity extends MusicBrainzActivity {
 
     private void saveOAuthToken(AccessToken accessToken) {
         if (accessToken != null) {
-
             Log.d(accessToken.getAccessToken());
-            Toast.makeText(getApplicationContext(),
-                    "Access Token: " + accessToken.getAccessToken(),
-                    Toast.LENGTH_LONG).show();
-
             LoginSharedPreferences.saveOAuthToken(accessToken);
-
+            loginViewModel.fetchUserInfo();
         } else {
             Toast.makeText(getApplicationContext(),
                     "Failed to obtain access token ",
                     Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void saveUserInfo(UserInfo userInfo) {
+        if (userInfo != null) {
+            LoginSharedPreferences.saveUserInfo(userInfo);
+            Toast.makeText(getApplicationContext(),
+                    userInfo.getUsername() + " is logged in.",
+                    Toast.LENGTH_LONG).show();
+            Log.d(userInfo.getUsername());
         }
     }
 }

@@ -16,7 +16,7 @@ public class HeaderInterceptor implements Interceptor {
         Request request;
 
         // Do not add Authorization Header if request is sent to OAuth endpoint
-        if (original.url().encodedPath().contains("oauth"))
+        if (original.url().encodedPath().contains("oauth2/token"))
             return chain.proceed(original);
         else if (checkLoginStatus()) {
             request = original.newBuilder()
