@@ -1,10 +1,10 @@
-package org.metabrainz.mobile.data.sources.api.entities.response;
+package org.metabrainz.mobile.data.sources.api.entities.response.search;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 
 import java.util.List;
 
-public class ArtistSearchResponse extends JSONResponse {
+public class ArtistSearchResponse extends JSONSearchResponse {
 
     private List<Artist> artists;
 

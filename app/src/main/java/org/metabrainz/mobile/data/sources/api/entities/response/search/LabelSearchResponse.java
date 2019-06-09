@@ -1,10 +1,10 @@
-package org.metabrainz.mobile.data.sources.api.entities.response;
+package org.metabrainz.mobile.data.sources.api.entities.response.search;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 
 import java.util.List;
 
-public class LabelSearchResponse extends JSONResponse {
+public class LabelSearchResponse extends JSONSearchResponse {
 
     private List<Label> labels;
 
