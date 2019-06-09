@@ -14,7 +14,7 @@ import retrofit2.Response;
 
 public class ReleaseLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class);
+            .createService(LookupService.class, true);
     private static ReleaseLookupRepository repository;
     private MutableLiveData<Release> releaseLiveData;
     private MutableLiveData<CoverArt> coverArtData;

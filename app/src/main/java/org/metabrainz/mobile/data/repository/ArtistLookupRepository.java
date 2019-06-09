@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 public class ArtistLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class);
+            .createService(LookupService.class, true);
     private static ArtistLookupRepository repository;
     private static MutableLiveData<Artist> artistData;
     private static SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;

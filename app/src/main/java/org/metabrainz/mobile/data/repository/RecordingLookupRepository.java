@@ -13,7 +13,7 @@ import retrofit2.Response;
 
 public class RecordingLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class);
+            .createService(LookupService.class, true);
     private static RecordingLookupRepository repository;
     private static MutableLiveData<Recording> recordingData;
 
