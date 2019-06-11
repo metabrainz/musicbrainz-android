@@ -14,7 +14,13 @@
 
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:parentActivityName=".presentation.features.collection.CollectionActivity"
+            android:theme="@style/AppThemeCustomActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.features.collection.CollectionActivity" />
+        </activity>
 
         <activity
             android:name=".presentation.features.collection.CollectionActivity"

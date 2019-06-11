@@ -113,6 +113,6 @@ public class CollectionViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        repository = null;
+        CollectionRepository.destroyRepository();
     }
 }

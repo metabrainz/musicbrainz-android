@@ -46,6 +46,9 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_details);
+        setSupportActionBar(findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = findViewById(R.id.recycler_view);
 
         noRes = findViewById(R.id.no_result);

@@ -17,6 +17,10 @@ import java.util.Set;
 
 public class CollectionUtils {
 
+    /*
+     * The response from ws/2/collections has a field for count in all collections. Depending on the
+     * entity, the name of the field can be artist-count, release-count etc. This method finds the
+     * correct field name and assigns the value to count field in each collection. */
     public static void setGenericCountParameter(List<Collection> collections, String jsonResponse) {
         Map<String, String> countList = new HashMap<>();
         CollectionListResponse response = new Gson().fromJson(jsonResponse, CollectionListResponse.class);
@@ -39,6 +43,18 @@ public class CollectionUtils {
         for (Collection collection : collections) {
             String id = collection.getMbid();
             collection.setCount(Integer.valueOf(countList.get(id)));
+        }
+    }
+
+    public static void removeCollections(List<Collection> collections) {
+        for (Collection collection : collections) {
+            String entity = collection.getEntityType();
+            if (entity.equalsIgnoreCase("artist") || entity.equalsIgnoreCase("release")
+                    || entity.equalsIgnoreCase("label") || entity.equalsIgnoreCase("event")
+                    || entity.equalsIgnoreCase("instrument") || entity.equalsIgnoreCase("recording")
+                    || entity.equalsIgnoreCase("release-group"))
+                continue;
+            collections.remove(collection);
         }
     }
 }

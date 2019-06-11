@@ -61,6 +61,10 @@ public class CollectionRepository {
         return repository;
     }
 
+    public static void destroyRepository() {
+        repository = null;
+    }
+
     public MutableLiveData<List<Collection>> getCollectionData() {
         return collectionData;
     }
