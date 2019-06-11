@@ -84,7 +84,7 @@
             android:label="@string/about_title" />
 
         <activity
-            android:name=".activity.DonateActivity"
+            android:name=".presentation.DonateActivity"
             android:label="@string/donate_title" />
         <activity
             android:name=".activity.BarcodeSearchActivity"

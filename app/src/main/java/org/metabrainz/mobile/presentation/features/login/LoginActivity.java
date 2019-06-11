@@ -25,7 +25,8 @@ public class LoginActivity extends MusicBrainzActivity {
         loginViewModel.getAccessTokenLiveData().observe(this, this::saveOAuthToken);
         loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
 
-        findViewById(R.id.login_btn).setOnClickListener(view -> startLogin());
+        findViewById(R.id.login_btn).setOnClickListener(v -> startLogin());
+        findViewById(R.id.logout_btn).setOnClickListener(v -> logoutUser());
     }
 
     @Override
@@ -54,6 +55,14 @@ public class LoginActivity extends MusicBrainzActivity {
         } else Toast.makeText(this, "You are already logged in", Toast.LENGTH_SHORT).show();
     }
 
+    private void logoutUser() {
+        LoginSharedPreferences.logoutUser();
+        Toast.makeText(getApplicationContext(),
+                "User has successfully logged out.",
+                Toast.LENGTH_LONG).show();
+        finish();
+    }
+
     private void saveOAuthToken(AccessToken accessToken) {
         if (accessToken != null) {
             Log.d(accessToken.getAccessToken());
@@ -67,12 +76,14 @@ public class LoginActivity extends MusicBrainzActivity {
     }
 
     private void saveUserInfo(UserInfo userInfo) {
-        if (userInfo != null) {
+        if (userInfo != null &&
+                LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT) {
             LoginSharedPreferences.saveUserInfo(userInfo);
             Toast.makeText(getApplicationContext(),
-                    userInfo.getUsername() + " is logged in.",
+                    "Login successful. " + userInfo.getUsername() + " is now logged in.",
                     Toast.LENGTH_LONG).show();
             Log.d(userInfo.getUsername());
+            finish();
         }
     }
 }
