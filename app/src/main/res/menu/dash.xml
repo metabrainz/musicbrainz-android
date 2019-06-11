@@ -7,11 +7,6 @@
     android:id="@+id/menu_login"
     android:title="@string/action_login"
     app:showAsAction="never" />
-  
-  <item
-    android:id="@+id/menu_logout"
-    android:title="@string/action_logout"
-    app:showAsAction="never" />
 
   <item
     android:id="@+id/menu_preferences"

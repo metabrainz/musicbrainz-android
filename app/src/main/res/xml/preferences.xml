@@ -4,15 +4,32 @@
 
   <PreferenceCategory android:title="@string/settings_search">
 
-    <CheckBoxPreference
+    <SwitchPreference
       android:key="search_suggestions"
       android:title="@string/settings_suggestions"
       android:summary="@string/settings_suggestions_summary"
-      android:defaultValue="true" />
+        android:defaultValue="true" />
 
     <Preference
       android:key="clear_suggestions"
       android:title="@string/settings_clear" />
+
   </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/settings_user_data">
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="private_collections"
+        android:summary="@string/settings_private_collections_summary"
+        android:title="@string/settings_private_collections" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="ratings_tags"
+        android:summary="@string/settings_ratings_tags_summary"
+        android:title="@string/settings_ratings_tags" />
+
+  </PreferenceCategory>
+
 
 </PreferenceScreen>

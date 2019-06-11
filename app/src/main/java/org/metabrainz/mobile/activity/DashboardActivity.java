@@ -3,7 +3,6 @@ package org.metabrainz.mobile.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -53,19 +52,9 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean isLoggedIn = App.isUserLoggedIn();
         menu.findItem(R.id.menu_login).setVisible(!isLoggedIn);
-        menu.findItem(R.id.menu_logout).setVisible(isLoggedIn);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_logout) {
-            //logOut();
-            updateWelcomeText();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void updateWelcomeText() {
         try {

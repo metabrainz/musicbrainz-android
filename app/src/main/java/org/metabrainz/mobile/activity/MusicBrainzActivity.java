@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.activity;
 
 import android.content.ActivityNotFoundException;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -12,6 +13,12 @@ import org.metabrainz.mobile.intent.IntentFactory;
 import org.metabrainz.mobile.util.Utils;
 
 public abstract class MusicBrainzActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dash, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -34,6 +41,7 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     private void sendFeedback() {
         try {
