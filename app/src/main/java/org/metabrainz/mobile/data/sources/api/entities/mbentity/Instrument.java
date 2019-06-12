@@ -1,27 +1,14 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
-import com.google.gson.annotations.SerializedName;
-
 import org.metabrainz.mobile.data.sources.api.entities.Alias;
 
 import java.util.ArrayList;
 
-public class Instrument {
-    @SerializedName("id")
-    private String mbid;
+public class Instrument extends MBEntity {
     private String type;
     private String name;
-    private String disambiguation;
     private String description;
     private ArrayList<Alias> aliases = new ArrayList<>();
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
-    }
 
     @Override
     public String toString() {

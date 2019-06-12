@@ -8,25 +8,22 @@ import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Area implements Serializable {
+public class Area extends MBEntity implements Serializable {
 
     //TODO: ISO codes field to be added
 
-    @SerializedName("id")
-    private String id;
     private String type;
     private String name;
     @SerializedName("sort-name")
     private String sortName;
     private ArrayList<Alias> aliases = new ArrayList<>();
-    private String disambiguation;
     @SerializedName("life-span")
     private LifeSpan lifeSpan;
 
     @Override
     public String toString() {
         return "Area{" +
-                "id='" + id + '\'' +
+                "id='" + mbid + '\'' +
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", sortName='" + sortName + '\'' +
@@ -42,14 +39,6 @@ public class Area implements Serializable {
 
     public void setLifeSpan(LifeSpan lifeSpan) {
         this.lifeSpan = lifeSpan;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getType() {
@@ -82,13 +71,5 @@ public class Area implements Serializable {
 
     public void setAliases(ArrayList<Alias> aliases) {
         this.aliases = aliases;
-    }
-
-    public String getdisambiguation() {
-        return disambiguation;
-    }
-
-    public void setdisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 }
