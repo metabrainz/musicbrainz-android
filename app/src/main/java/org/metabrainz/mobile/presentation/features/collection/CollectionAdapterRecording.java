@@ -46,7 +46,8 @@ public class CollectionAdapterRecording extends CollectionAdapter {
         Recording recording = data.get(position);
         viewHolder.recordingName.setText(recording.getTitle());
 
-        setViewVisibility(recording.getReleases().get(0).getTitle(), viewHolder.recordingRelease);
+        if (recording.getReleases().size() != 0)
+            setViewVisibility(recording.getReleases().get(0).getTitle(), viewHolder.recordingRelease);
         Log.d(recording.getDisplayArtist());
         setViewVisibility(recording.getDisplayArtist(), viewHolder.recordingArtist);
         setViewVisibility(recording.getDisambiguation(), viewHolder.recordingDisambiguation);

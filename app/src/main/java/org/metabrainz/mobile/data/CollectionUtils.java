@@ -47,14 +47,15 @@ public class CollectionUtils {
     }
 
     public static void removeCollections(List<Collection> collections) {
-        for (Collection collection : collections) {
-            String entity = collection.getEntityType();
+        Iterator<Collection> itr = collections.iterator();
+        while (itr.hasNext()) {
+            String entity = itr.next().getEntityType();
             if (entity.equalsIgnoreCase("artist") || entity.equalsIgnoreCase("release")
                     || entity.equalsIgnoreCase("label") || entity.equalsIgnoreCase("event")
                     || entity.equalsIgnoreCase("instrument") || entity.equalsIgnoreCase("recording")
                     || entity.equalsIgnoreCase("release-group"))
                 continue;
-            collections.remove(collection);
+            itr.remove();
         }
     }
 }
