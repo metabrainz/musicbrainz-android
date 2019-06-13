@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.data.sources.api.entities.userdata.Collection;
 import org.metabrainz.mobile.intent.IntentFactory;
 
 import java.util.List;

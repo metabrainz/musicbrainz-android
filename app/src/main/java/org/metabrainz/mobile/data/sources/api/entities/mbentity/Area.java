@@ -5,10 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import org.metabrainz.mobile.data.sources.api.entities.Alias;
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Area extends MBEntity implements Serializable {
+public class Area extends MBEntity {
 
     //TODO: ISO codes field to be added
 

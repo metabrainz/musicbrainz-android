@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.CollectionUtils;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.data.sources.api.entities.userdata.Collection;
 import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 

@@ -5,10 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Artist extends MBEntity implements Serializable {
+public class Artist extends MBEntity {
 
     private String name;
     private String country;

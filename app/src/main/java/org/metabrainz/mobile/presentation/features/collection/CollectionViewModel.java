@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.data.repository.CollectionRepository;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.data.sources.api.entities.userdata.Collection;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
