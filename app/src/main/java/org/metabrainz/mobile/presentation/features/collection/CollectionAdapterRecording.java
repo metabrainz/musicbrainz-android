@@ -13,8 +13,6 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.intent.IntentFactory;
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
-import org.metabrainz.mobile.presentation.features.collection.EntityViewHolder;
-import org.metabrainz.mobile.presentation.features.collection.CollectionAdapter;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.List;
@@ -46,7 +44,8 @@ public class CollectionAdapterRecording extends CollectionAdapter {
         Recording recording = data.get(position);
         viewHolder.recordingName.setText(recording.getTitle());
 
-        setViewVisibility(recording.getReleases().get(0).getTitle(), viewHolder.recordingRelease);
+        if (recording.getReleases().size() != 0)
+            setViewVisibility(recording.getReleases().get(0).getTitle(), viewHolder.recordingRelease);
         Log.d(recording.getDisplayArtist());
         setViewVisibility(recording.getDisplayArtist(), viewHolder.recordingArtist);
         setViewVisibility(recording.getDisambiguation(), viewHolder.recordingDisambiguation);
