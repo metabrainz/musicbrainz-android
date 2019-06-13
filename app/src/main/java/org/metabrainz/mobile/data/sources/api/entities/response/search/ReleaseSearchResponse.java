@@ -1,10 +1,10 @@
-package org.metabrainz.mobile.data.sources.api.entities.response;
+package org.metabrainz.mobile.data.sources.api.entities.response.search;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.List;
 
-public class ReleaseSearchResponse extends JSONResponse {
+public class ReleaseSearchResponse extends JSONSearchResponse {
 
     private List<Release> releases;
 

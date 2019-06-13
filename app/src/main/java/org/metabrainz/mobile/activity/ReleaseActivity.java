@@ -39,8 +39,6 @@ import org.metabrainz.mobile.config.Configuration;
 import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 import org.metabrainz.mobile.dialog.BarcodeNotFoundDialog;
 import org.metabrainz.mobile.dialog.BarcodeNotFoundDialog.BarcodeNotFoundCallback;
-import org.metabrainz.mobile.dialog.CollectionAddDialog;
-import org.metabrainz.mobile.dialog.CollectionAddDialog.AddToCollectionCallback;
 import org.metabrainz.mobile.dialog.ReleaseSelectionDialog;
 import org.metabrainz.mobile.dialog.ReleaseSelectionDialog.ReleaseSelectionCallbacks;
 import org.metabrainz.mobile.fragment.EditFragment;
@@ -59,7 +57,7 @@ import java.util.List;
  * display of release information. The intent must contain either a barcode, a
  * release MBID or a release group MBID.
  */
-public class ReleaseActivity extends MusicBrainzActivity implements AddToCollectionCallback, ReleaseSelectionCallbacks,
+public class ReleaseActivity extends MusicBrainzActivity implements ReleaseSelectionCallbacks,
         BarcodeNotFoundCallback, EditFragment.Callback {
 
     public static final int MESSAGE_NOT_FOUND = 0;
@@ -300,8 +298,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
                 }
                 return true;
             case R.id.action_add_collection:
-                DialogFragment collectionDialog = new CollectionAddDialog();
-                collectionDialog.show(getSupportFragmentManager(), CollectionAddDialog.TAG);
                 return true;
         }
         return false;
@@ -344,15 +340,6 @@ public class ReleaseActivity extends MusicBrainzActivity implements AddToCollect
     private void showReleaseSelectionDialog() {
         DialogFragment releaseSelection = new ReleaseSelectionDialog();
         releaseSelection.show(getSupportFragmentManager(), ReleaseSelectionDialog.TAG);
-    }
-
-    @Override
-    public void addReleaseToCollection(String collectionMbid) {
-        Bundle args = new Bundle();
-        args.putString("collectionMbid", collectionMbid);
-        args.putString("releaseMbid", release.getMbid());
-        getSupportLoaderManager().initLoader(COLLECTION_ADD_LOADER, args, collectionAddCallbacks);
-        setSupportProgressBarIndeterminateVisibility(true);
     }
 
     @Override

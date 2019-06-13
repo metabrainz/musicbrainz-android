@@ -14,6 +14,7 @@ import org.metabrainz.mobile.intent.IntentFactory;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
 import org.metabrainz.mobile.intent.zxing.IntentIntegrator;
 import org.metabrainz.mobile.intent.zxing.IntentResult;
+import org.metabrainz.mobile.presentation.features.collection.CollectionActivity;
 import org.metabrainz.mobile.view.DashTileView;
 
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
@@ -87,11 +88,8 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                         getString(R.string.zx_pos), getString(R.string.zx_neg), IntentIntegrator.PRODUCT_CODE_TYPES);
                 break;
             case R.id.dash_collections:
-                if (App.isUserLoggedIn()) {
-                    startActivity(IntentFactory.getCollectionList(getApplicationContext()));
-                } else {
-                    startActivityForResult(IntentFactory.getLogin(getApplicationContext()), COLLECTION_LOGIN_REQUEST);
-                }
+                Intent intent = new Intent(this, CollectionActivity.class);
+                startActivity(intent);
                 break;
             case R.id.dash_donate:
                 startActivity(IntentFactory.getDonate(getApplicationContext()));
@@ -111,7 +109,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                 startActivity(barcodeResult);
             }
         } else if (requestCode == COLLECTION_LOGIN_REQUEST && App.isUserLoggedIn()) {
-            startActivity(IntentFactory.getCollectionList(getApplicationContext()));
+            //startActivity(IntentFactory.getCollectionList(getApplicationContext()));
         }
     }
 

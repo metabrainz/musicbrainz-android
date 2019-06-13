@@ -1,12 +1,12 @@
 package org.metabrainz.mobile.data.sources.api;
 
-import org.metabrainz.mobile.data.sources.api.entities.response.ArtistSearchResponse;
-import org.metabrainz.mobile.data.sources.api.entities.response.EventSearchResponse;
-import org.metabrainz.mobile.data.sources.api.entities.response.InstrumentSearchResponse;
-import org.metabrainz.mobile.data.sources.api.entities.response.LabelSearchResponse;
-import org.metabrainz.mobile.data.sources.api.entities.response.RecordingSearchResponse;
-import org.metabrainz.mobile.data.sources.api.entities.response.ReleaseGroupSearchResponse;
-import org.metabrainz.mobile.data.sources.api.entities.response.ReleaseSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.search.ArtistSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.search.EventSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.search.InstrumentSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.search.LabelSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.search.RecordingSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.search.ReleaseGroupSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.search.ReleaseSearchResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

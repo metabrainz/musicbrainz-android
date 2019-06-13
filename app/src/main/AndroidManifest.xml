@@ -13,6 +13,20 @@
         android:usesCleartextTraffic="true">
 
         <activity
+            android:name=".presentation.features.collection.CollectionDetailsActivity"
+            android:parentActivityName=".presentation.features.collection.CollectionActivity"
+            android:theme="@style/AppThemeCustomActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.features.collection.CollectionActivity" />
+        </activity>
+
+        <activity
+            android:name=".presentation.features.collection.CollectionActivity"
+            android:theme="@style/AppThemeCustomActionBar" />
+
+        <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:theme="@style/AppThemeCustomActionBar" />
 
@@ -95,19 +109,10 @@
             android:name=".presentation.features.artist.ArtistActivity"
             android:label="@string/artist_title"
             android:theme="@style/AppThemeCustomActionBar" />
-        <activity
-            android:name=".activity.CollectionListActivity"
-            android:label="@string/collections_title"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".activity.CollectionActivity"
-            android:label="@string/app_name" />
+
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/preferences_title" />
-        <activity
-            android:name=".activity.WebActivity"
-            android:label="@string/app_name" />
 
         <meta-data
             android:name="android.app.default_searchable"
