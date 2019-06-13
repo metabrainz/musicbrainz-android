@@ -257,7 +257,7 @@ public class ReleaseActivity extends MusicBrainzActivity implements ReleaseSelec
         loading = findViewById(R.id.loading);
         error = findViewById(R.id.error);
         ratingBar = findViewById(R.id.rating);
-        tagView = findViewById(R.id.tags);
+        // tagView = findViewById(R.id.tags);
     }
 
     private boolean isArtistUpAvailable() {

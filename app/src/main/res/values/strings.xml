@@ -256,4 +256,13 @@
     <string name="access_token">access_token</string>
     <string name="refresh_token">refresh_token</string>
     <string name="links">More Links</string>
+
+    <string name="ratings">Ratings</string>
+    <string name="user_ratings">Your Ratings</string>
+    <string name="tags">Tags</string>
+    <string name="user_tags">Your Tags</string>
+    <string name="genres">Genres</string>
+    <string name="user_genres">Your Genres</string>
+    <string name="rating_summary">This rating is the average of cumulative ratings given by all users.</string>
+    <string name="user_rating_summary">This is the rating you have given to the entity.</string>
 </resources>
