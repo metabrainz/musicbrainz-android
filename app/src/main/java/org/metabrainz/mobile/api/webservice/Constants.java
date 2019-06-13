@@ -2,7 +2,7 @@ package org.metabrainz.mobile.api.webservice;
 
 public class Constants {
     public static final String LOOKUP_ARTIST_PARAMS =
-            "url-rels+releases";
+            "url-rels+releases+ratings+tags";
     public static final String LOOKUP_RELEASE_PARAMS =
             "recordings+url-rels+artist-credits";
     public static final String LOOKUP_LABEL_PARAMS =
