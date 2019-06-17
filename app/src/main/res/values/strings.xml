@@ -252,6 +252,8 @@
     be prompted to login in MusicBrainz website. Follow the instructions and return to complete
     authentication.</string>
 
+    <string name="login_required">You need to login in order to view your collections.</string>
+
     <string name="preferences">preferences</string>
     <string name="access_token">access_token</string>
     <string name="refresh_token">refresh_token</string>
