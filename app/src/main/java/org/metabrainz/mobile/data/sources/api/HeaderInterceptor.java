@@ -15,18 +15,27 @@ public class HeaderInterceptor implements Interceptor {
         Request original = chain.request();
         Request request;
 
-        // Do not add Authorization Header if request is sent to OAuth endpoint
-        if (original.url().encodedPath().contains("oauth2/token"))
-            return chain.proceed(original);
-        else if (checkLoginStatus()) {
-            request = original.newBuilder()
-                    .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
-                    .addHeader("Accept", "application/json")
-                    .header("Authorization", " Bearer " + getAccessToken()).build();
-        } else {
-            request = original.newBuilder()
-                    .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
-                    .addHeader("Accept", "application/json").build();
+        // Do not add Authorization Header if request is sent to OAuth endpoint except to fetch userinfo
+        if (original.url().encodedPath().contains("oauth2")) {
+            if (original.url().encodedPath().contains("userinfo"))
+                request = original.newBuilder()
+                        .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
+                        .addHeader("Accept", "application/json")
+                        .header("Authorization", " Bearer " + getAccessToken()).build();
+            else return chain.proceed(original);
+        }
+        // Check if user is logged in and add authorization header accordingly
+        else {
+            if (checkLoginStatus()) {
+                request = original.newBuilder()
+                        .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
+                        .addHeader("Accept", "application/json")
+                        .header("Authorization", " Bearer " + getAccessToken()).build();
+            } else {
+                request = original.newBuilder()
+                        .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
+                        .addHeader("Accept", "application/json").build();
+            }
         }
 
         return chain.proceed(request);

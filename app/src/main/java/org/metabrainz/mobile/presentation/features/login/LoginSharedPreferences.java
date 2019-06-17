@@ -32,9 +32,21 @@ public class LoginSharedPreferences {
         editor.apply();
     }
 
+    public static void logoutUser() {
+        if (getLoginStatus() == STATUS_LOGGED_IN) {
+            SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
+            editor.remove(ACCESS_TOKEN);
+            editor.remove(REFRESH_TOKEN);
+            editor.remove(USERNAME);
+            editor.apply();
+        }
+    }
+
     public static int getLoginStatus() {
-        String accessToken = LoginSharedPreferences.getPreferences().getString(ACCESS_TOKEN, "");
-        if (accessToken != null && !accessToken.isEmpty()) return STATUS_LOGGED_IN;
+        String accessToken = LoginSharedPreferences.getAccessToken();
+        String username = LoginSharedPreferences.getUsername();
+        if (accessToken != null && !accessToken.isEmpty() && username != null &&
+                !username.isEmpty()) return STATUS_LOGGED_IN;
         else return STATUS_LOGGED_OUT;
     }
 

@@ -34,15 +34,16 @@ public class OAuthAuthenticator implements Authenticator {
         retrofit2.Response<AccessToken> newResponse = call.execute();
 
         AccessToken token = newResponse.body();
-
-        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
-        editor.putString(LoginSharedPreferences.REFRESH_TOKEN, token.getRefreshToken());
-        editor.putString(LoginSharedPreferences.ACCESS_TOKEN, token.getAccessToken());
-        editor.apply();
+        if (token != null) {
+            SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
+            editor.putString(LoginSharedPreferences.REFRESH_TOKEN, token.getRefreshToken());
+            editor.putString(LoginSharedPreferences.ACCESS_TOKEN, token.getAccessToken());
+            editor.apply();
+        }
 
         return response.request()
                 .newBuilder()
-                .header("Authorization", "Bearer " + token.getAccessToken())
+                .header("Authorization", "Bearer " + LoginSharedPreferences.getAccessToken())
                 .build();
     }
 }

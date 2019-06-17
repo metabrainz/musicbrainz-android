@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import org.metabrainz.mobile.activity.DashboardActivity;
-import org.metabrainz.mobile.activity.DonateActivity;
+import org.metabrainz.mobile.presentation.DonateActivity;
 import org.metabrainz.mobile.activity.SettingsActivity;
 import org.metabrainz.mobile.presentation.AboutActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
