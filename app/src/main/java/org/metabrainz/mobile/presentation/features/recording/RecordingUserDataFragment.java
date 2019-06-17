@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.artist;
+package org.metabrainz.mobile.presentation.features.recording;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,18 +11,18 @@ import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
 
-public class ArtistUserDataFragment extends UserDataFragment {
+public class RecordingUserDataFragment extends UserDataFragment {
 
-    private ArtistViewModel artistViewModel;
+    private RecordingViewModel recordingViewModel;
 
-    public static ArtistUserDataFragment newInstance() {
-        return new ArtistUserDataFragment();
+    public static RecordingUserDataFragment newInstance() {
+        return new RecordingUserDataFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::updateData);
+        recordingViewModel = ViewModelProviders.of(getActivity()).get(RecordingViewModel.class);
+        recordingViewModel.initializeRecordingData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

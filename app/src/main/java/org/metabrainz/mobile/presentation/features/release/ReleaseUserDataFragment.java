@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.artist;
+package org.metabrainz.mobile.presentation.features.release;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,18 +11,18 @@ import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
 
-public class ArtistUserDataFragment extends UserDataFragment {
+public class ReleaseUserDataFragment extends UserDataFragment {
 
-    private ArtistViewModel artistViewModel;
+    private ReleaseViewModel releaseViewModel;
 
-    public static ArtistUserDataFragment newInstance() {
-        return new ArtistUserDataFragment();
+    public static ReleaseUserDataFragment newInstance() {
+        return new ReleaseUserDataFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::updateData);
+        releaseViewModel = ViewModelProviders.of(getActivity()).get(ReleaseViewModel.class);
+        releaseViewModel.initializeReleaseData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
