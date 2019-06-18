@@ -111,8 +111,9 @@
             android:theme="@style/AppThemeCustomActionBar" />
 
         <activity
-            android:name=".activity.SettingsActivity"
-            android:label="@string/preferences_title" />
+            android:name=".presentation.features.settings.SettingsActivity"
+            android:label="@string/preferences_title"
+            android:theme="@style/AppThemeCustomActionBar" />
 
         <meta-data
             android:name="android.app.default_searchable"

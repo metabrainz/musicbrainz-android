@@ -151,7 +151,12 @@
     <string name="settings_search">Search</string>
     <string name="settings_suggestions">Suggestions</string>
     <string name="settings_suggestions_summary">Store and display search suggestions</string>
+    <string name="settings_private_collections">Private Collections</string>
+    <string name="settings_private_collections_summary">Fetch private collections also when the user is logged in.</string>
     <string name="settings_clear">Clear search history</string>
+    <string name="settings_user_data">User Data</string>
+    <string name="settings_ratings_tags">Ratings and Tags</string>
+    <string name="settings_ratings_tags_summary">Fetch ratings and tags of entities when the user is logged in.</string>
     <string name="settings_other">Other</string>
 
     <!-- Connection errors -->

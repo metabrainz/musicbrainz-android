@@ -15,7 +15,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.CollectionUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
-import org.metabrainz.mobile.presentation.features.UserPreferences;
+import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.ArrayList;
@@ -92,7 +92,6 @@ public class CollectionActivity extends MusicBrainzActivity {
         boolean getPrivateCollections =
                 LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
                         && UserPreferences.getPrivateCollectionsPreference();
-        getPrivateCollections = true;
         viewModel.fetchCollections(LoginSharedPreferences.getUsername(), getPrivateCollections);
     }
 

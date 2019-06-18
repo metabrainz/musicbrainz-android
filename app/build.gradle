@@ -51,4 +51,5 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation "io.reactivex.rxjava2:rxjava:2.1.8"
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation 'androidx.preference:preference:1.1.0-beta01'
 }
