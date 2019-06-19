@@ -14,14 +14,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.fragment.app.Fragment;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.fragment.ContextFragment;
 import org.metabrainz.mobile.intent.IntentFactory.Extra;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
-import org.metabrainz.mobile.suggestion.SuggestionHelper;
+import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 
-public class SearchFragment extends ContextFragment implements SearchView.OnQueryTextListener {
+public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     private Spinner searchTypeSpinner;
     private SuggestionHelper suggestionHelper;
@@ -63,12 +63,12 @@ public class SearchFragment extends ContextFragment implements SearchView.OnQuer
         String query = searchView.getQuery().toString();
 
         if (query.length() > 0) {
-            Intent searchIntent = new Intent(context, SearchActivity.class);
+            Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
             searchIntent.putExtra(Extra.TYPE, getSearchTypeFromSpinner());
             searchIntent.putExtra(Extra.QUERY, query);
             startActivity(searchIntent);
         } else {
-            Toast.makeText(context, R.string.toast_search_err, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.toast_search_err, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -7,8 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.api.webservice.Constants;
+import org.metabrainz.mobile.data.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
@@ -56,10 +55,8 @@ public class ArtistLookupRepository {
     public SingleLiveEvent<ArtistWikiSummary> initializeWikiData(){ return artistWikiSummary;}
 
     public void getArtist(String MBID){
-        if(App.isUserLoggedIn())
-            fetchArtistWithUserData(MBID);
-        else
-            fetchArtist(MBID);
+        // TODO: Implement fetch private user data
+        fetchArtist(MBID);
     }
 
     public void getArtistWikiSummary(String string, int method){

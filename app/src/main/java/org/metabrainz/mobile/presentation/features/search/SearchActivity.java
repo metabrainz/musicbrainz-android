@@ -26,8 +26,8 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.intent.IntentFactory;
-import org.metabrainz.mobile.suggestion.SuggestionHelper;
-import org.metabrainz.mobile.suggestion.SuggestionProvider;
+import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
+import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
 import java.util.ArrayList;
 import java.util.List;

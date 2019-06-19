@@ -9,7 +9,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.intent.IntentFactory;
-import org.metabrainz.mobile.suggestion.SuggestionProvider;
+import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements androidx.preference.Preference.OnPreferenceClickListener {
 

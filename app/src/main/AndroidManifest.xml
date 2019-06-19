@@ -55,17 +55,6 @@
         </activity>
 
         <activity
-            android:name=".activity.IncomingActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".presentation.features.login.LoginActivity"
             android:label="@string/auth_title">
             <intent-filter>
@@ -86,10 +75,7 @@
         <activity
             android:name=".presentation.DonateActivity"
             android:label="@string/donate_title" />
-        <activity
-            android:name=".activity.BarcodeSearchActivity"
-            android:label="@string/barcodesearch_title"
-            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".presentation.features.search.SearchActivity"
             android:launchMode="singleTop">
@@ -126,7 +112,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:name=".suggestion.SuggestionProvider"
+            android:name=".presentation.features.suggestion.SuggestionProvider"
             android:authorities="org.metabrainz.mobile.SearchSuggestionProvider"
             android:exported="false" />
 

@@ -2,7 +2,7 @@ package org.metabrainz.mobile.data.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
-import org.metabrainz.mobile.api.webservice.Constants;
+import org.metabrainz.mobile.data.Constants;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.SearchService;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;

@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.suggestion;
+package org.metabrainz.mobile.presentation.features.suggestion;
 
 import android.content.Context;
 import android.database.Cursor;

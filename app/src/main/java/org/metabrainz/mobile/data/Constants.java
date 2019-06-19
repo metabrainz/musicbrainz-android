@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.api.webservice;
+package org.metabrainz.mobile.data;
 
 public class Constants {
     public static final String LOOKUP_ARTIST_PARAMS =

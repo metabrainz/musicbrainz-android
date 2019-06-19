@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.R;
+import androidx.fragment.app.Fragment;
 
-public class WelcomeFragment extends ContextFragment {
+import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+
+public class WelcomeFragment extends Fragment {
 
     private TextView welcomeText;
 
@@ -27,8 +29,8 @@ public class WelcomeFragment extends ContextFragment {
     }
 
     public void updateText() {
-        if (App.isUserLoggedIn()) {
-            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + App.getUser().getUsername());
+        if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
+            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + LoginSharedPreferences.getUsername());
         } else {
             welcomeText.setText(R.string.welcome);
         }

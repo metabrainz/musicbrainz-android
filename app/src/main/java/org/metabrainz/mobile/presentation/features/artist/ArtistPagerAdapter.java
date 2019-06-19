@@ -28,7 +28,6 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 return  ArtistLinksFragment.newInstance();
             case 3:
-                //return EditFragment.newInstance(Entity.ARTIST);
         }
         return ArtistBioFragment.newInstance();
     }
