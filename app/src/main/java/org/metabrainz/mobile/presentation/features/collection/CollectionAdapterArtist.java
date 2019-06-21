@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 
 import java.util.List;

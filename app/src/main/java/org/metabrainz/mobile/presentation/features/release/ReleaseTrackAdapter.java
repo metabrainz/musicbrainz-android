@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.Track;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
 
 import java.util.List;

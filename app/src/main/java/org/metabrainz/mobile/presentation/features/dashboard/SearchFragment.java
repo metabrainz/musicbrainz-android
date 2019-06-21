@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation;
+package org.metabrainz.mobile.presentation.features.dashboard;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -17,7 +17,7 @@ import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.fragment.app.Fragment;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.intent.IntentFactory.Extra;
+import org.metabrainz.mobile.presentation.IntentFactory.Extra;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 

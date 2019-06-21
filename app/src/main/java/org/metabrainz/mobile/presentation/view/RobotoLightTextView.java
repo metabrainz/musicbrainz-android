@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.view;
+package org.metabrainz.mobile.presentation.view;
 
 import android.content.Context;
 import android.graphics.Typeface;

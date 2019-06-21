@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
 
 public class ReleaseGroupActivity extends AppCompatActivity {
 

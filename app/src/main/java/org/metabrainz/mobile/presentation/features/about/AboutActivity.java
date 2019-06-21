@@ -1,10 +1,10 @@
-package org.metabrainz.mobile.presentation;
+package org.metabrainz.mobile.presentation.features.about;
 
 import android.os.Bundle;
 import android.view.Menu;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 public class AboutActivity extends MusicBrainzActivity {
 

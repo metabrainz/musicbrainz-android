@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.activity;
+package org.metabrainz.mobile.presentation.features.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity;
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity;
-import org.metabrainz.mobile.view.DashTileView;
+import org.metabrainz.mobile.presentation.view.DashTileView;
 
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
 

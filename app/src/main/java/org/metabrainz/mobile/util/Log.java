@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.util;
 
-import org.metabrainz.mobile.config.Configuration;
+import org.metabrainz.mobile.presentation.Configuration;
 
 public class Log {
 

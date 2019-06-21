@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 
-import org.metabrainz.mobile.config.Configuration;
+import org.metabrainz.mobile.presentation.Configuration;
 
 public class App extends Application {
 

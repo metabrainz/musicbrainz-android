@@ -9,9 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
 
 /**
  * Activity that retrieves and displays information about an artist given an

@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation;
+package org.metabrainz.mobile.presentation.features.about;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.view.HtmlAssetTextView;
+import org.metabrainz.mobile.presentation.view.HtmlAssetTextView;
 
 public class AboutFragment extends Fragment {
 

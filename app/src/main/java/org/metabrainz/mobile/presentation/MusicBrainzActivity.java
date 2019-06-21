@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.activity;
+package org.metabrainz.mobile.presentation;
 
 import android.content.ActivityNotFoundException;
 import android.view.Menu;
@@ -8,8 +8,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.config.Configuration;
-import org.metabrainz.mobile.intent.IntentFactory;
 import org.metabrainz.mobile.util.Utils;
 
 public abstract class MusicBrainzActivity extends AppCompatActivity {

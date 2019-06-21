@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
@@ -18,7 +18,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
 
 import java.util.ArrayList;
 import java.util.List;

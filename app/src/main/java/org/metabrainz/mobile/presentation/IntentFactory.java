@@ -1,13 +1,13 @@
-package org.metabrainz.mobile.intent;
+package org.metabrainz.mobile.presentation;
 
 import android.content.Context;
 import android.content.Intent;
 
-import org.metabrainz.mobile.activity.DashboardActivity;
-import org.metabrainz.mobile.presentation.DonateActivity;
-import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
-import org.metabrainz.mobile.presentation.AboutActivity;
+import org.metabrainz.mobile.presentation.features.about.AboutActivity;
+import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
+import org.metabrainz.mobile.presentation.features.dashboard.DonateActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
+import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 
 public class IntentFactory {
 

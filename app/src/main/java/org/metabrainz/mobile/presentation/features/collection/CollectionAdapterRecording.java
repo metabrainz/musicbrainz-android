@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
-import org.metabrainz.mobile.presentation.features.collection.EntityViewHolder;
-import org.metabrainz.mobile.presentation.features.collection.CollectionAdapter;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.List;

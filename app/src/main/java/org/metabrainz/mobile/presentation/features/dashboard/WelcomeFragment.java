@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.fragment;
+package org.metabrainz.mobile.presentation.features.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
