@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.label.LabelActivity;
 
 import java.util.List;
@@ -57,6 +57,7 @@ public class SearchAdapterLabel extends SearchAdapter {
         intent.putExtra(IntentFactory.Extra.LABEL, data.get(position).getMbid());
         view.getContext().startActivity(intent);
     }
+
     @Override
     public int getItemCount() {
         return data.size();

@@ -3,6 +3,14 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="org.metabrainz.mobile">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".App"
         android:hardwareAccelerated="true"
@@ -27,6 +35,14 @@
             android:theme="@style/AppThemeCustomActionBar" />
 
         <activity
+            android:name=".presentation.features.barcode.BarcodeActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".presentation.features.barcode.BarcodeResultActivity"
+            android:theme="@style/AppThemeCustomActionBar" />
+
+        <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:theme="@style/AppThemeCustomActionBar" />
 
@@ -39,7 +55,7 @@
             android:theme="@style/AppThemeCustomActionBar" />
 
         <activity
-            android:name=".activity.DashboardActivity"
+            android:name=".presentation.features.dashboard.DashboardActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden">
@@ -52,17 +68,6 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
-        </activity>
-
-        <activity
-            android:name=".activity.IncomingActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -80,16 +85,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.AboutActivity"
+            android:name=".presentation.features.about.AboutActivity"
             android:label="@string/about_title" />
 
         <activity
-            android:name=".presentation.DonateActivity"
+            android:name=".presentation.features.dashboard.DonateActivity"
             android:label="@string/donate_title" />
-        <activity
-            android:name=".activity.BarcodeSearchActivity"
-            android:label="@string/barcodesearch_title"
-            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".presentation.features.search.SearchActivity"
             android:launchMode="singleTop">
@@ -126,18 +128,11 @@
             android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:name=".suggestion.SuggestionProvider"
+            android:name=".presentation.features.suggestion.SuggestionProvider"
             android:authorities="org.metabrainz.mobile.SearchSuggestionProvider"
             android:exported="false" />
 
         <dist:module dist:instant="true" />
     </application>
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

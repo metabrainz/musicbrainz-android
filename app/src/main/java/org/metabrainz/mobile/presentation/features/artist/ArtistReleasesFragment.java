@@ -56,10 +56,10 @@ public class ArtistReleasesFragment extends Fragment {
         artistViewModel.initializeArtistData().observe(this, this::setReleases);
     }
 
-    private void setReleases(Artist artist){
+    private void setReleases(Artist artist) {
         // TODO: Observe artistData LiveData, instead of requesting the artist sync
         // TODO: Use DiffUtil to avoid overheads
-        if(artist != null && artist.getReleases() != null){
+        if (artist != null && artist.getReleases() != null) {
             releaseList.clear();
             releaseList.addAll(artist.getReleases());
             adapter.notifyDataSetChanged();

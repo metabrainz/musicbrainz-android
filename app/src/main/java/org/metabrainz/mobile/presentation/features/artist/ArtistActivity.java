@@ -9,9 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 /**
  * Activity that retrieves and displays information about an artist given an
@@ -37,7 +37,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
 
         mbid = getIntent().getStringExtra(IntentFactory.Extra.ARTIST_MBID);
-        if(mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);
+        if (mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);
 
         pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.pager);
@@ -62,7 +62,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         artistViewModel.getArtistData();
     }
 
-    private void setArtist(Artist artist){
+    private void setArtist(Artist artist) {
         if (artist != null) getSupportActionBar().setTitle(artist.getName());
     }
 

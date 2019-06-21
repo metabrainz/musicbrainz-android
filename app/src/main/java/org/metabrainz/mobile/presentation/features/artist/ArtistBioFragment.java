@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.repository.ArtistLookupRepository;
+import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
+import org.metabrainz.mobile.data.sources.api.entities.Link;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 
 public class ArtistBioFragment extends Fragment {
 
@@ -46,7 +46,7 @@ public class ArtistBioFragment extends Fragment {
         wikiTextView = layout.findViewById(R.id.wiki_summary);
     }
 
-    private void getArtistWiki(Artist artist){
+    private void getArtistWiki(Artist artist) {
         String title = "";
         int method = -1;
         if (artist != null) {
@@ -64,37 +64,38 @@ public class ArtistBioFragment extends Fragment {
             }
         }
         if (method != -1)
-            artistViewModel.loadArtistWiki(title,method);
+            artistViewModel.loadArtistWiki(title, method);
         else hideWikiCard();
 
     }
 
-    private void setWiki(ArtistWikiSummary wiki){
-        if (wiki != null){
+    private void setWiki(ArtistWikiSummary wiki) {
+        if (wiki != null) {
             String wikiText = wiki.getExtract();
-            if(wikiText != null && !wikiText.isEmpty()) {
+            if (wikiText != null && !wikiText.isEmpty()) {
                 showWikiCard();
                 wikiTextView.setText(wikiText);
-            }
-            else hideWikiCard();
-        }else hideWikiCard();
+            } else hideWikiCard();
+        } else hideWikiCard();
     }
 
-    private void showWikiCard(){
+    private void showWikiCard() {
         wikiCard.setVisibility(View.VISIBLE);
     }
-    private void hideWikiCard(){
+
+    private void hideWikiCard() {
         wikiCard.setVisibility(View.GONE);
     }
 
-    private void setArtistInfo(Artist artist){
-        String type,gender,area,lifeSpan;
+    private void setArtistInfo(Artist artist) {
+        String type, gender, area, lifeSpan;
 
-        if(artist != null) {
+        if (artist != null) {
             type = artist.getType();
             gender = artist.getGender();
 
-            if(artist.getArea() != null) area = artist.getArea().getName(); else area = "";
+            if (artist.getArea() != null) area = artist.getArea().getName();
+            else area = "";
 
             if (artist.getLifeSpan() != null)
                 lifeSpan = artist.getLifeSpan().getTimePeriod();
