@@ -14,10 +14,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class Release {
+public class Release extends MBEntity {
 
-    @SerializedName("id")
-    private String mbid;
     private String title;
     @SerializedName("artist-credit")
     private ArrayList<ArtistCredit> artistCredits = new ArrayList<>();
@@ -34,7 +32,6 @@ public class Release {
     private int trackCount;
     private String country;
     private String status;
-    private String disambiguation;
     private ArrayList<Media> media = new ArrayList<>();
     private CoverArt coverArt;
     @SerializedName("text-representation")
@@ -72,14 +69,6 @@ public class Release {
 
     public void setCoverArt(CoverArt coverArt) {
         this.coverArt = coverArt;
-    }
-
-    public String getMbid() {
-        return mbid;
-    }
-
-    public void setMbid(String mbid) {
-        this.mbid = mbid;
     }
 
     public String getTitle() {
@@ -173,14 +162,6 @@ public class Release {
 
     public void setMedia(ArrayList<Media> media) {
         this.media = media;
-    }
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 
     //TODO: Implement Text Representation

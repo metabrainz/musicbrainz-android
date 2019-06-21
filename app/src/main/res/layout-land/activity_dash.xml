@@ -5,8 +5,8 @@
   style="@style/Activity">
 
   <LinearLayout style="@style/HomeTileRow">
-    
-    <org.metabrainz.mobile.presentation.view.DashTileView
+
+      <org.metabrainz.mobile.presentation.view.DashTileView
       android:id="@+id/dash_scan"
       style="@style/HomeTile" />
 
@@ -37,15 +37,15 @@
 
   <LinearLayout style="@style/HomeTileRow">
 
-    <org.metabrainz.mobile.presentation.view.DashTileView
+      <org.metabrainz.mobile.presentation.view.DashTileView
       android:id="@+id/dash_collections"
       style="@style/HomeTile" />
 
-    <org.metabrainz.mobile.presentation.view.DashTileView
+      <org.metabrainz.mobile.presentation.view.DashTileView
       android:id="@+id/dash_donate"
       style="@style/HomeTile" />
 
-    <org.metabrainz.mobile.presentation.view.DashTileView
+      <org.metabrainz.mobile.presentation.view.DashTileView
       android:id="@+id/dash_about"
       style="@style/HomeTile" />
   </LinearLayout>

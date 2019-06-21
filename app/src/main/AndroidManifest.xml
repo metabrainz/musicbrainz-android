@@ -35,14 +35,6 @@
             android:theme="@style/AppThemeCustomActionBar" />
 
         <activity
-            android:name=".presentation.features.barcode.BarcodeActivity"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".presentation.features.barcode.BarcodeResultActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
-
-        <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:theme="@style/AppThemeCustomActionBar" />
 

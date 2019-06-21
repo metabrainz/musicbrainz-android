@@ -4,14 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 
-public class Event {
+public class Event extends MBEntity {
 
     //TODO: Add Relations Field
 
-    @SerializedName("id")
-    private String mbid;
     private String name;
-    private String disambiguation;
     @SerializedName("life-span")
     private LifeSpan lifeSpan;
     private String type;
@@ -34,14 +31,6 @@ public class Event {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 
     public LifeSpan getLifeSpan() {

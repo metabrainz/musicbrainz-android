@@ -9,11 +9,8 @@ import org.metabrainz.mobile.data.sources.api.entities.ReleaseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Recording {
-    @SerializedName("id")
-    private String mbid;
+public class Recording extends MBEntity {
     private String title;
-    private String disambiguation;
     private long length;
 
     //TODO: Implement correct wrapper JSON
@@ -45,28 +42,12 @@ public class Recording {
                 '}';
     }
 
-    public String getMbid() {
-        return mbid;
-    }
-
-    public void setMbid(String mbid) {
-        this.mbid = mbid;
-    }
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getdisambiguation() {
-        return disambiguation;
-    }
-
-    public void setdisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 
     public long getLength() {
@@ -135,14 +116,6 @@ public class Recording {
                 builder.append(credit.getJoinphrase());
         }
         return builder.toString();
-    }
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 
     public String getDuration() {

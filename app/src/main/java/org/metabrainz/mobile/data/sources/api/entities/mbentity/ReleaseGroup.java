@@ -8,11 +8,8 @@ import org.metabrainz.mobile.data.sources.api.entities.Link;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ReleaseGroup {
-    @SerializedName("id")
-    private String mbid;
+public class ReleaseGroup extends MBEntity {
     private String title;
-    private String disambiguation;
     @SerializedName("primary-type")
     private String primaryType;
     @SerializedName("secondary-types")
@@ -32,28 +29,12 @@ public class ReleaseGroup {
         this.relations = relations;
     }
 
-    public String getMbid() {
-        return mbid;
-    }
-
-    public void setMbid(String mbid) {
-        this.mbid = mbid;
-    }
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 
     public String getPrimaryType() {

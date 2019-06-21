@@ -5,16 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Artist implements Serializable {
+public class Artist extends MBEntity {
 
-    @SerializedName("id")
-    private String mbid;
     private String name;
     private String country;
-    private String disambiguation;
     private String type;
     @SerializedName("sort-name")
     private String sortName;
@@ -97,28 +93,12 @@ public class Artist implements Serializable {
         this.endArea = endArea;
     }
 
-    public String getMbid() {
-        return mbid;
-    }
-
-    public void setMbid(String mbid) {
-        this.mbid = mbid;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
     }
 
     public String getCountry() {

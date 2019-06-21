@@ -6,11 +6,8 @@ import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 
 import java.util.ArrayList;
 
-public class Label {
-    @SerializedName("id")
-    private String mbid;
+public class Label extends MBEntity {
     private String name;
-    private String disambiguation;
     private String type;
     @SerializedName("label-code")
     private String code;
@@ -37,14 +34,6 @@ public class Label {
         this.code = code;
     }
 
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
-    }
-
     @Override
     public String toString() {
         return "Label{" +
@@ -64,14 +53,6 @@ public class Label {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getMbid() {
-        return mbid;
-    }
-
-    public void setMbid(String mbid) {
-        this.mbid = mbid;
     }
 
     public String getName() {

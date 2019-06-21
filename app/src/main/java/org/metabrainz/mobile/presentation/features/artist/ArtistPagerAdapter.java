@@ -28,6 +28,7 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 return ArtistLinksFragment.newInstance();
             case 3:
+                return ArtistUserDataFragment.newInstance();
         }
         return ArtistBioFragment.newInstance();
     }
@@ -40,7 +41,7 @@ public class ArtistPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return TITLES.length - 1;
+        return TITLES.length;
     }
 
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import org.metabrainz.mobile.data.sources.api.LoginService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.data.sources.api.entities.UserInfo;
+import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;

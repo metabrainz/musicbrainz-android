@@ -43,19 +43,11 @@
     <!-- BioFragment -->
     <string name="bio_powered_by">BIO POWERED BY</string>
 
-    <!-- CollectionsActivity -->
-
     <!-- Pager tabs -->
     <string name="tab_links">MORE</string>
     <string name="tab_releases">RELEASES</string>
     <string name="tab_bio">BIO</string>
     <string name="tab_edits">TAG &amp; RATE</string>
-
-    <!-- Edit tabs -->
-
-    <!-- BarcodeSearchActivity -->
-
-    <!-- ConfirmBarcodeDialog -->
 
     <!-- DonateActivity -->
     <string name="donate_title">Donate</string>
@@ -64,10 +56,6 @@
     <string name="about_title">About</string>
     <string name="app_name_official">MusicBrainz Android</string>
     <string name="version_text">Version</string>
-
-    <!-- WebView Activity titles -->
-
-    <!-- IntentError -->
 
     <!-- Actions -->
     <string name="action_search">Search</string>
@@ -88,24 +76,10 @@
     <string name="settings_ratings_tags">Ratings and Tags</string>
     <string name="settings_ratings_tags_summary">Fetch ratings and tags of entities when the user is logged in.</string>
 
-    <!-- Connection errors -->
-
     <!-- Toasts -->
     <string name="toast_search_err">Add some text to search</string>
     <string name="toast_feedback_fail">No email client found</string>
     <string name="toast_search_cleared">Search history deleted</string>
-
-    <!-- ZXing integration -->
-
-    <!-- BarcodeDialog -->
-
-    <!-- ReleaseSelectionDialog -->
-
-    <!-- Release group types -->
-
-    <!-- Release formats -->
-
-    <!-- TODO: Remove or change this placeholder text -->
 
     <string name="login_prompt">To Login, connect your MusicBrainz account with our app. You will
     be prompted to login in MusicBrainz website. Follow the instructions and return to complete
@@ -114,4 +88,13 @@
     <string name="login_required">You need to login in order to view your collections.</string>
 
     <string name="links">More Links</string>
+
+    <string name="ratings">Ratings</string>
+    <string name="user_ratings">Your Ratings</string>
+    <string name="tags">Tags</string>
+    <string name="user_tags">Your Tags</string>
+    <string name="genres">Genres</string>
+    <string name="user_genres">Your Genres</string>
+    <string name="rating_summary">This rating is the average of cumulative ratings given by all users.</string>
+    <string name="user_rating_summary">This is the rating you have given to the entity.</string>
 </resources>

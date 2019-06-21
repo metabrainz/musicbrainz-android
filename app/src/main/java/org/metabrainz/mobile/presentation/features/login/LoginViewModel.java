@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.data.repository.LoginRepository;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.data.sources.api.entities.UserInfo;
+import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 
 public class LoginViewModel extends ViewModel {
 

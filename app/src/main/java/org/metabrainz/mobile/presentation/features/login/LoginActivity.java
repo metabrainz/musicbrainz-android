@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.data.sources.api.entities.UserInfo;
+import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.util.Log;
 

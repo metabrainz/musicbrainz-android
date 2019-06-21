@@ -5,7 +5,7 @@ import android.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.data.sources.api.entities.UserInfo;
+import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 
 public class LoginSharedPreferences {
 
