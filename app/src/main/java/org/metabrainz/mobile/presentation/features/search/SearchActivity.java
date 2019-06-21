@@ -57,7 +57,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_activity_search);
+        setContentView(R.layout.activity_search);
         recyclerView = findViewById(R.id.recycler_view);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
