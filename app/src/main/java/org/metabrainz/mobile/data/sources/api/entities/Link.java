@@ -29,7 +29,7 @@ public class Link {
         this.ended = ended;
     }
 
-    public String getPageTitle(){
+    public String getPageTitle() {
         String resource = url.getResource().trim();
         return resource.substring(resource.lastIndexOf("/") + 1);
     }

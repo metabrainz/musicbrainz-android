@@ -43,17 +43,23 @@ public class LinksClassifier {
     public static final String MISC = "misc";
     public static final String GET_THE_MUSIC = "get the music";
 
-    public static String classifyToDisplayText(Link link){
+    public static String classifyToDisplayText(Link link) {
         String type = link.getType();
         String url = link.getUrl().getResource();
         if (type != null && !type.isEmpty() && url != null && !url.isEmpty()) {
             switch (type) {
-                case STREAMING_MUSIC: return "<a href=\""+url+"\"> Stream Music </a>";
-                case PURCHASE_FOR_DOWNLOAD: return "&lt;a href=http://www.google.co.in&gt;Google&lt;/a&gt;";
-                case PURCHASE_FOR_MAIL_ORDER: return "<a href=\""+url+"\"> Purchase for mail-order </a>";
-                case DOWNLOAD_FOR_FREE: return "<a href=\""+url+"\"> Download for free </a>";
-                case YOUTUBE: return "<a href=\""+url+"\"> Stream Music </a>";
-                case GET_THE_MUSIC: return "<a href=\""+url+"\"> Get the Music </a>";
+                case STREAMING_MUSIC:
+                    return "<a href=\"" + url + "\"> Stream Music </a>";
+                case PURCHASE_FOR_DOWNLOAD:
+                    return "&lt;a href=http://www.google.co.in&gt;Google&lt;/a&gt;";
+                case PURCHASE_FOR_MAIL_ORDER:
+                    return "<a href=\"" + url + "\"> Purchase for mail-order </a>";
+                case DOWNLOAD_FOR_FREE:
+                    return "<a href=\"" + url + "\"> Download for free </a>";
+                case YOUTUBE:
+                    return "<a href=\"" + url + "\"> Stream Music </a>";
+                case GET_THE_MUSIC:
+                    return "<a href=\"" + url + "\"> Get the Music </a>";
                 case IMAGE:
                 case BIOGRAPHY:
                 case WIKIDATA:
@@ -62,7 +68,8 @@ public class LinksClassifier {
                 case FANPAGE:
                 case LAST_FM:
                 case INFO:
-                default: return url;
+                default:
+                    return url;
             }
         } else return MISC;
     }
@@ -76,7 +83,8 @@ public class LinksClassifier {
                 case PURCHASE_FOR_MAIL_ORDER:
                 case DOWNLOAD_FOR_FREE:
                 case YOUTUBE:
-                case GET_THE_MUSIC: return GET_THE_MUSIC;
+                case GET_THE_MUSIC:
+                    return GET_THE_MUSIC;
                 case IMAGE:
                 case BIOGRAPHY:
                 case WIKIDATA:
@@ -84,8 +92,10 @@ public class LinksClassifier {
                 case OFFICIAL_HOMEPAGE:
                 case FANPAGE:
                 case LAST_FM:
-                case INFO: return INFO;
-                default: return MISC;
+                case INFO:
+                    return INFO;
+                default:
+                    return MISC;
             }
         } else return MISC;
     }

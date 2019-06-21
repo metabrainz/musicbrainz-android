@@ -3,8 +3,8 @@ package org.metabrainz.mobile.data.sources.api.entities;
 import java.util.ArrayList;
 
 public class Image {
-    private ArrayList<String> types= new ArrayList<>();
-    private boolean front,back;
+    private ArrayList<String> types = new ArrayList<>();
+    private boolean front, back;
     private String image;
     private Thumbnail thumbnails;
 

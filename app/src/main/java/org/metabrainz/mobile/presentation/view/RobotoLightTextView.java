@@ -2,8 +2,9 @@ package org.metabrainz.mobile.presentation.view;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 import org.metabrainz.mobile.App;
 

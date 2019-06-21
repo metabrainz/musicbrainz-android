@@ -57,6 +57,7 @@ public class SearchAdapterLabel extends SearchAdapter {
         intent.putExtra(IntentFactory.Extra.LABEL, data.get(position).getMbid());
         view.getContext().startActivity(intent);
     }
+
     @Override
     public int getItemCount() {
         return data.size();

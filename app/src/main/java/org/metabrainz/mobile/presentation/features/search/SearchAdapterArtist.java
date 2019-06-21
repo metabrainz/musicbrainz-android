@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 
 import java.util.List;
 
@@ -45,10 +45,10 @@ public class SearchAdapterArtist extends SearchAdapter {
         setViewVisibility(artist.getType(), viewHolder.artistType);
         setViewVisibility(artist.getDisambiguation(), viewHolder.artistDisambiguation);
         setAnimation(viewHolder.itemView, position);
-        viewHolder.itemView.setOnClickListener(v -> onClick(v,position));
+        viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
     }
 
-    private void onClick(View view, int position){
+    private void onClick(View view, int position) {
         Intent intent = new Intent(view.getContext(), ArtistActivity.class);
         intent.putExtra(IntentFactory.Extra.ARTIST_MBID, data.get(position).getMbid());
         view.getContext().startActivity(intent);

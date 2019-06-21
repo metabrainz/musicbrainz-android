@@ -24,14 +24,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ArtistLookupRepository {
+    public static final int METHOD_WIKIPEDIA_URL = 0;
+    public static final int METHOD_WIKIDATA_ID = 1;
     private final static LookupService service = MusicBrainzServiceGenerator
             .createService(LookupService.class, true);
     private static ArtistLookupRepository repository;
     private static MutableLiveData<Artist> artistData;
     private static SingleLiveEvent<ArtistWikiSummary> artistWikiSummary;
-
-    public static final int METHOD_WIKIPEDIA_URL = 0;
-    public static final int METHOD_WIKIDATA_ID = 1;
 
     private ArtistLookupRepository() {
 
@@ -44,38 +43,40 @@ public class ArtistLookupRepository {
         return repository;
     }
 
-    public static void destroyRepository(){
+    public static void destroyRepository() {
         repository = null;
     }
 
-    public MutableLiveData<Artist> initializeArtistData(){
+    public MutableLiveData<Artist> initializeArtistData() {
         return artistData;
     }
 
-    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData(){ return artistWikiSummary;}
+    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData() {
+        return artistWikiSummary;
+    }
 
-    public void getArtist(String MBID){
+    public void getArtist(String MBID) {
         // TODO: Implement fetch private user data
         fetchArtist(MBID);
     }
 
-    public void getArtistWikiSummary(String string, int method){
-        if(method == METHOD_WIKIPEDIA_URL)
+    public void getArtistWikiSummary(String string, int method) {
+        if (method == METHOD_WIKIPEDIA_URL)
             fetchArtistWiki(string);
         else
             fetchArtistWikiData(string);
     }
 
     //TODO: Implement artist user data fetch
-    private void fetchArtistWithUserData(String MBID){
+    private void fetchArtistWithUserData(String MBID) {
     }
 
-    private void fetchArtist(String MBID){
+    private void fetchArtist(String MBID) {
         service.lookupArtist(MBID, Constants.LOOKUP_ARTIST_PARAMS).enqueue(new Callback<Artist>() {
             @Override
             public void onResponse(Call<Artist> call, Response<Artist> response) {
-                    Artist artist = response.body();
-                    artistData.setValue(artist);
+                Artist artist = response.body();
+                artistData.setValue(artist);
             }
 
             @Override
@@ -85,13 +86,14 @@ public class ArtistLookupRepository {
         });
     }
 
-    private void fetchArtistWiki(String title){
+    private void fetchArtistWiki(String title) {
         service.getWikipediaSummary(title).enqueue(new Callback<ArtistWikiSummary>() {
             @Override
             public void onResponse(Call<ArtistWikiSummary> call, Response<ArtistWikiSummary> response) {
                 ArtistWikiSummary wiki = response.body();
                 artistWikiSummary.setValue(wiki);
             }
+
             @Override
             public void onFailure(Call<ArtistWikiSummary> call, Throwable t) {
 
@@ -99,11 +101,11 @@ public class ArtistLookupRepository {
         });
     }
 
-    private void fetchArtistWikiData(String id){
+    private void fetchArtistWikiData(String id) {
         service.getWikipediaLink(id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                String title="";
+                String title = "";
                 try {
                     String jsonResponse = response.body().string();
                     JsonElement element = new JsonParser().parse(jsonResponse);
@@ -111,7 +113,9 @@ public class ArtistLookupRepository {
                             .getAsJsonObject("entities").getAsJsonObject(id);
                     WikiDataResponse wikiDataResponse = new Gson().fromJson(result, WikiDataResponse.class);
                     title = wikiDataResponse.getSitelinks().get("enwiki").getTitle();
-                }catch (Exception e){e.printStackTrace();}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 fetchArtistWiki(title);
             }
 
@@ -123,9 +127,10 @@ public class ArtistLookupRepository {
 
     /**
      * For a given release ID, fetches the cover arts and updates the release w¡th that info
+     *
      * @param release Release for which the cover art is to be retrieved
      */
-    public Single<CoverArt> fetchCoverArtForRelease(Release release){
+    public Single<CoverArt> fetchCoverArtForRelease(Release release) {
         return service.getCoverArt(release.getMbid());
     }
 }
