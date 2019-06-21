@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.intent.IntentFactory;
-import org.metabrainz.mobile.intent.zxing.IntentIntegrator;
+import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity;
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity;
 import org.metabrainz.mobile.view.DashTileView;
 
@@ -46,12 +46,10 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dash_scan:
-                IntentIntegrator.initiateScan(this, getString(R.string.zx_title), getString(R.string.zx_message),
-                        getString(R.string.zx_pos), getString(R.string.zx_neg), IntentIntegrator.PRODUCT_CODE_TYPES);
+                startActivity(new Intent(this, BarcodeActivity.class));
                 break;
             case R.id.dash_collections:
-                Intent intent = new Intent(this, CollectionActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(this, CollectionActivity.class));
                 break;
             case R.id.dash_donate:
                 startActivity(IntentFactory.getDonate(getApplicationContext()));

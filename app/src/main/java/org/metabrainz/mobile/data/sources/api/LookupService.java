@@ -7,8 +7,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-
-import java.io.IOException;
+import org.metabrainz.mobile.data.sources.api.entities.response.BarcodeReleaseResponse;
 
 import io.reactivex.Single;
 import okhttp3.ResponseBody;
@@ -50,6 +49,6 @@ public interface LookupService {
     Call<ReleaseGroup> lookupReleaseGroup(@Path("MBID") String MBID,
                                           @Query("inc") String params);
 
-    // TODO: Implement Barcode LookUp
-    Release lookupReleaseUsingBarcode(String barcode) throws IOException;
+    @GET("release/")
+    Call<BarcodeReleaseResponse> lookupReleaseWithBarcode(@Query("query") String barcode);
 }

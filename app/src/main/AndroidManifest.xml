@@ -3,6 +3,14 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="org.metabrainz.mobile">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".App"
         android:hardwareAccelerated="true"
@@ -24,6 +32,14 @@
 
         <activity
             android:name=".presentation.features.collection.CollectionActivity"
+            android:theme="@style/AppThemeCustomActionBar" />
+
+        <activity
+            android:name=".presentation.features.barcode.BarcodeActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".presentation.features.barcode.BarcodeResultActivity"
             android:theme="@style/AppThemeCustomActionBar" />
 
         <activity
@@ -118,12 +134,5 @@
 
         <dist:module dist:instant="true" />
     </application>
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
