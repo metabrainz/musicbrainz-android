@@ -2,24 +2,16 @@
 
 <resources>
 
-    <plurals name="release_plurals">
-        <item quantity="zero">No releases</item>
-        <item quantity="one">%d release</item>
-        <item quantity="other">%d releases</item>
-    </plurals>
-
     <string name="releases">Releases</string>
     <string name="recording_releases">Appears On Releases</string>
     <!-- DashboardActivity -->
     <string name="app_name">MusicBrainz</string>
     <string name="search_hint">Search MusicBrainz</string>
-    <string name="description_search">Search</string>
     <string name="dash_scan">Scan</string>
     <string name="dash_collections">Collections</string>
     <string name="dash_donate">Donate</string>
     <string name="dash_about">About</string>
     <string name="login">Log In</string>
-    <string name="logout">Log Out</string>
     <string name="welcome">Welcome to MusicBrainz!</string>
 
     <string name="welcome_loggedin">Logged in as</string>
@@ -35,92 +27,38 @@
     <string name="search_name">MusicBrainz</string>
 
     <!-- LoginActivity -->
-    <string name="search_description">Artists and releases</string>
     <string name="auth_title">Log In</string>
-    <string name="uname_hint">Username</string>
-    <string name="pass_hint">Password</string>
-    <string name="register_text">Need to register?</string>
-    <string name="forgotpass_text">Forgot password?</string>
-    <string name="pd_authenticating">Authenticating…</string>
-    <string name="login_failure_warning">Invalid username or password.</string>
-    <string name="login_connection_warning">Connection failure.</string>
 
     <!-- SearchResultsActivity -->
-    <string name="description_web">Web link</string>
     <string name="no_results">No results found</string>
-    <string name="search_bar_artists">Artists</string>
 
     <!-- ReleaseActivity -->
-    <string name="search_bar_rgs">Releases</string>
     <string name="release_title">Release</string>
-    <string name="label_tracks">tracks</string>
-    <string name="no_tags">No tags found</string>
 
-    <string name="edit_login">You must log in before you can edit!</string>
-    <string name="collection_add_fail">Failed adding release to collection</string>
-    <string name="collection_add_success">Added to collection</string>
-
-    <string name="collection_dialog_title">Add to collection</string>
     <string name="cover_art_front">FRONT</string>
 
     <!-- ReleaseActivity -->
-    <string name="cover_art_back">BACK</string>
     <string name="artist_title">Artist</string>
-    <string name="noreleases">No releases found</string>
 
     <!-- BioFragment -->
-    <string name="no_links">No links found</string>
     <string name="bio_powered_by">BIO POWERED BY</string>
-    <string name="bio_empty">No bio found.</string>
 
     <!-- CollectionsActivity -->
-    <string name="bio_connection_fail">Could not download bio.</string>
-    <string name="collections_title">Collections</string>
-    <string name="plural">\'s</string>
-
-    <string name="collections">collections</string>
-
-    <string name="no_collections">You don\'t have any collections.\nAdd collections at musicbrainz.org</string>
-    <string name="no_collection_releases">No releases in this collection.\nSearch for releases to add them.</string>
-    <string name="collection_remove_fail">Failed to remove release</string>
 
     <!-- Pager tabs -->
     <string name="tab_links">MORE</string>
     <string name="tab_releases">RELEASES</string>
     <string name="tab_bio">BIO</string>
     <string name="tab_edits">TAG &amp; RATE</string>
-    <string name="tab_tracks">TRACKS</string>
-    <string name="tab_cover_art">COVER ART</string>
-    <string name="results_artists">ARTISTS</string>
-    <string name="results_releases">RELEASES</string>
 
     <!-- Edit tabs -->
-    <string name="tag_hint">Tag</string>
 
     <!-- BarcodeSearchActivity -->
-    <string name="barcodesearch_title">Submit Barcode</string>
-    <string name="barcode_text">BARCODE</string>
-    <string name="barcode_release_text">RELEASE</string>
-    <string name="barcode_hint">Search release</string>
-    <string name="barcode_instructions">Search for release to add barcode.</string>
-    <string name="barcode_invalid_length">Expected 12 digits for UPC or 13 digits for EAN</string>
-    <string name="barcode_invalid_chars">Should only contain digits</string>
 
     <!-- ConfirmBarcodeDialog -->
-    <string name="barcode_add_header">Submit barcode?</string>
-    <string name="barcode_add_info">This will submit an edit for peer review. The barcode will not be added immediately.</string>
-    <string name="barcode_add_btn">Submit</string>
 
     <!-- DonateActivity -->
     <string name="donate_title">Donate</string>
-    <string name="donate_header">Support the MetaBrainz Foundation</string>
-    <string name="donate_text">You can donate via PayPal to the non-profit MetaBrainz Foundation, which operates the MusicBrainz
-    project.</string>
-    <string name="paypal_loading_label">Loading PayPal…</string>
-    <string name="paypal_loading_timeout">Connection failure</string>
-    <string name="donate_or">\u2014\u0020  OR  \u0020\u2014</string>
-    <string name="alt_donate_text">View other options…</string>
-    <string name="starting_paypal">PayPal is starting…\nPlease bear with us.</string>
 
     <!-- AboutActivity -->
     <string name="about_title">About</string>
@@ -128,19 +66,11 @@
     <string name="version_text">Version</string>
 
     <!-- WebView Activity titles -->
-    <string name="web_forgot_pass">Forgot Password</string>
-    <string name="web_register">Register</string>
-    <string name="web_donate">Donation Options</string>
 
     <!-- IntentError -->
-    <string name="intent_error">Invalid URI for MusicBrainz Intent</string>
 
     <!-- Actions -->
-    <string name="action_share">Share</string>
-    <string name="action_refresh">Refresh</string>
     <string name="action_search">Search</string>
-    <string name="action_add_collection">Add to collection</string>
-    <string name="action_remove_collection">Remove from collection</string>
     <string name="action_feedback">Feedback</string>
     <string name="action_settings">Settings</string>
     <string name="action_login">Log In</string>
@@ -157,96 +87,25 @@
     <string name="settings_user_data">User Data</string>
     <string name="settings_ratings_tags">Ratings and Tags</string>
     <string name="settings_ratings_tags_summary">Fetch ratings and tags of entities when the user is logged in.</string>
-    <string name="settings_other">Other</string>
 
     <!-- Connection errors -->
-    <string name="err_text">There was a problem connecting to the server. Retry?</string>
-    <string name="err_pos">Yes</string>
-    <string name="err_neg">No</string>
-
-    <string name="connection_error">Could not connect to server…</string>
-    <string name="connection_error_retry">Retry</string>
 
     <!-- Toasts -->
-    <string name="toast_tag">Tags submitted</string>
-    <string name="toast_tag_fail">Tag submission failed</string>
-    <string name="toast_rate">Rating submitted</string>
-    <string name="toast_rate_fail">Rating submission failed</string>
-    <string name="toast_barcode">Barcode submitted</string>
-    <string name="toast_barcode_fail">Barcode submission failed</string>
     <string name="toast_search_err">Add some text to search</string>
-    <string name="toast_tag_err">Add some text to tag</string>
-    <string name="toast_auth_err">Username or password missing</string>
-    <string name="toast_logged_in">Logged in</string>
-    <string name="toast_logged_out">Logged out</string>
     <string name="toast_feedback_fail">No email client found</string>
-    <string name="toast_donate_success">Thanks you for supporting MusicBrainz!</string>
-    <string name="toast_donate_canceled">Donation canceled</string>
     <string name="toast_search_cleared">Search history deleted</string>
 
     <!-- ZXing integration -->
-    <string name="zx_title">Install Barcode Scanner?</string>
-    <string name="zx_message">This action requires Barcode Scanner. Would you like to install it?</string>
-    <string name="zx_pos">Install</string>
-    <string name="zx_neg">Cancel</string>
 
     <!-- BarcodeDialog -->
-    <string name="barcode_header">Barcode not found!</string>
-    <string name="barcode_info_log">This barcode is not associated with a MusicBrainz release. Would you like to add it?</string>
-    <string name="barcode_info_nolog">This barcode is not associated with a MusicBrainz release. Log in to add it.</string>
-    <string name="barcode_btn">Add barcode</string>
 
     <!-- ReleaseSelectionDialog -->
-    <string name="rg_title">Select a release</string>
-    <string name="rg_text">This has been released more than once. Choose a release from the list.</string>
 
     <!-- Release group types -->
-    <string name="rt_album">Album</string>
-    <string name="rt_single">Single</string>
-    <string name="rt_ep">EP</string>
-    <string name="rt_compilation">Compilation</string>
-    <string name="rt_nat">NAT</string>
-    <string name="rt_soundtrack">Soundtrack</string>
-    <string name="rt_spokenword">Spoken word</string>
-    <string name="rt_interview">Interview</string>
-    <string name="rt_audiobook">Audio book</string>
-    <string name="rt_live">Live</string>
-    <string name="rt_remix">Remix</string>
-    <string name="rt_other">Other</string>
-    <string name="rt_unknown">Unknown</string>
 
     <!-- Release formats -->
-    <string name="fm_cd">CD</string>
-    <string name="fm_dvd">DVD</string>
-    <string name="fm_sacd">SACD</string>
-    <string name="fm_dd">DualDisc</string>
-    <string name="fm_ld">LaserDisc</string>
-    <string name="fm_md">MiniDisc</string>
-    <string name="fm_vinyl">Vinyl</string>
-    <string name="fm_cassette">Cassette</string>
-    <string name="fm_cartridge">Cartridge</string>
-    <string name="fm_rtr">Reel-to-reel</string>
-    <string name="fm_dat">DAT</string>
-    <string name="fm_dm">Digital Media</string>
-    <string name="fm_other">Other</string>
-    <string name="fm_wax">Wax Cylinder</string>
-    <string name="fm_pr">Piano Roll</string>
-    <string name="fm_dcc">Digital Compact Cassette</string>
-    <string name="fm_vhs">VHS</string>
-    <string name="fm_vcd">Video-CD</string>
-    <string name="fm_svcd">Super Video-CD</string>
-    <string name="fm_bm">Betamax</string>
-    <string name="fm_hdcd">HD Compatible Digital</string>
-    <string name="fm_usb">USB Flash Drive</string>
-    <string name="fm_sm">SlotMusic</string>
-    <string name="fm_umd">Universal Media Disc</string>
-    <string name="fm_hddvd">HD-DVD</string>
-    <string name="fm_dvda">DVD-Audio</string>
-    <string name="fm_dvdv">DVD-Video</string>
-    <string name="fm_br">Blu-ray</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="login_prompt">To Login, connect your MusicBrainz account with our app. You will
     be prompted to login in MusicBrainz website. Follow the instructions and return to complete
@@ -254,8 +113,5 @@
 
     <string name="login_required">You need to login in order to view your collections.</string>
 
-    <string name="preferences">preferences</string>
-    <string name="access_token">access_token</string>
-    <string name="refresh_token">refresh_token</string>
     <string name="links">More Links</string>
 </resources>

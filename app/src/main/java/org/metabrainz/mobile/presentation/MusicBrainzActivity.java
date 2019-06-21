@@ -30,9 +30,6 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
             case R.id.menu_feedback:
                 sendFeedback();
                 return true;
-            case R.id.legacy_search:
-                onSearchRequested();
-                return true;
             case R.id.menu_login:
                 startActivity(IntentFactory.getLogin(getApplicationContext()));
                 return true;

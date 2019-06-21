@@ -16,19 +16,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="MatchHeight" parent="Match">
-        <item name="android:layout_width">wrap_content</item>
-    </style>
-
     <style name="MatchWidth" parent="Match">
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="MatchHorizontal" parent="Match">
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="MatchWidthHorizontal" parent="MatchWidth">
         <item name="android:orientation">horizontal</item>
     </style>
 
