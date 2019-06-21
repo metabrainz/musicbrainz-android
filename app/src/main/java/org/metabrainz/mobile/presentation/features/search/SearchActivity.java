@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
@@ -25,9 +24,10 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-import org.metabrainz.mobile.intent.IntentFactory;
-import org.metabrainz.mobile.suggestion.SuggestionHelper;
-import org.metabrainz.mobile.suggestion.SuggestionProvider;
+import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
+import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_activity_search);
+        setContentView(R.layout.activity_search);
         recyclerView = findViewById(R.id.recycler_view);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

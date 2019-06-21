@@ -3,6 +3,7 @@ package org.metabrainz.mobile.presentation.features.search;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import org.metabrainz.mobile.data.repository.SearchRepository;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
@@ -10,13 +11,13 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-import org.metabrainz.mobile.data.repository.SearchRepository;
 
 import java.util.List;
 
 public class SearchViewModel extends ViewModel {
 
     private static SearchRepository repository = SearchRepository.getRepository();
+    public boolean queryHasChanged = true;
     private MutableLiveData<List<Artist>> artistSearchResponse;
     private MutableLiveData<List<Release>> releaseSearchResponse;
     private MutableLiveData<List<Recording>> recordingResponse;
@@ -26,7 +27,6 @@ public class SearchViewModel extends ViewModel {
     private MutableLiveData<List<Instrument>> instrumentResponse;
     private String searchQuery;
     private String searchEntity;
-    public boolean queryHasChanged = true;
 
     public SearchViewModel() {
     }

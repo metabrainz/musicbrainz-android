@@ -5,4 +5,4 @@
     android:id="@+id/about_fragment"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:name="org.metabrainz.mobile.presentation.AboutFragment" />
+    android:name="org.metabrainz.mobile.presentation.features.about.AboutFragment" />

@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.LinksClassifier;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
+import org.metabrainz.mobile.data.sources.api.entities.LinksClassifier;
 import org.metabrainz.mobile.data.sources.api.entities.Url;
 
 import java.util.List;
@@ -25,19 +25,9 @@ public class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnCl
     private List<Link> links;
     private Context context;
 
-    public ArtistLinkAdapter(Context context, List<Link> links){
+    public ArtistLinkAdapter(Context context, List<Link> links) {
         this.links = links;
         this.context = context;
-    }
-
-    class LinkViewHolder extends RecyclerView.ViewHolder{
-        ImageView linkImageView;
-        TextView linkTextView;
-        LinkViewHolder(@NonNull View itemView) {
-            super(itemView);
-            linkImageView = itemView.findViewById(R.id.link_image);
-            linkTextView = itemView.findViewById(R.id.link_text);
-        }
     }
 
     @NonNull
@@ -57,13 +47,13 @@ public class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnCl
         if (drawable != null) {
             linkViewHolder.linkTextView.setVisibility(View.GONE);
             linkViewHolder.linkImageView.setImageDrawable(drawable);
-        }else {
+        } else {
             linkViewHolder.linkTextView.setVisibility(View.VISIBLE);
             linkViewHolder.linkTextView.setText(type.toUpperCase());
             drawable = getGenericLinkIcon(type);
             linkViewHolder.linkImageView.setImageDrawable(drawable);
         }
-        linkViewHolder.itemView.setTag(R.id.link_image,links.get(position).getUrl());
+        linkViewHolder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
         linkViewHolder.itemView.setOnClickListener(this);
     }
 
@@ -81,23 +71,42 @@ public class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnCl
         context.startActivity(intent);
     }
 
-    private Drawable getLinkImage(String type){
+    private Drawable getLinkImage(String type) {
         Resources resources = context.getResources();
-        switch (type){
-            case LinksClassifier.YOUTUBE: return resources.getDrawable(R.drawable.youtube_logo);
-            case LinksClassifier.BANDCAMP: return resources.getDrawable(R.drawable.bandcamp_logo);
-            case LinksClassifier.DISCOGS: return resources.getDrawable(R.drawable.discogs_logo);
-            case LinksClassifier.IMDB: return resources.getDrawable(R.drawable.imdb_logo);
-            case LinksClassifier.VIAF: return resources.getDrawable(R.drawable.viaf_logo);
-            case LinksClassifier.MYSPACE: return resources.getDrawable(R.drawable.myspace_logo);
-            default: return null;
+        switch (type) {
+            case LinksClassifier.YOUTUBE:
+                return resources.getDrawable(R.drawable.youtube_logo);
+            case LinksClassifier.BANDCAMP:
+                return resources.getDrawable(R.drawable.bandcamp_logo);
+            case LinksClassifier.DISCOGS:
+                return resources.getDrawable(R.drawable.discogs_logo);
+            case LinksClassifier.IMDB:
+                return resources.getDrawable(R.drawable.imdb_logo);
+            case LinksClassifier.VIAF:
+                return resources.getDrawable(R.drawable.viaf_logo);
+            case LinksClassifier.MYSPACE:
+                return resources.getDrawable(R.drawable.myspace_logo);
+            default:
+                return null;
         }
     }
 
-    private Drawable getGenericLinkIcon(String type){
+    private Drawable getGenericLinkIcon(String type) {
         Resources resources = context.getResources();
-        switch (type){
-            default: return resources.getDrawable(R.drawable.link_generic);
+        switch (type) {
+            default:
+                return resources.getDrawable(R.drawable.link_generic);
+        }
+    }
+
+    class LinkViewHolder extends RecyclerView.ViewHolder {
+        ImageView linkImageView;
+        TextView linkTextView;
+
+        LinkViewHolder(@NonNull View itemView) {
+            super(itemView);
+            linkImageView = itemView.findViewById(R.id.link_image);
+            linkTextView = itemView.findViewById(R.id.link_text);
         }
     }
 }

@@ -6,9 +6,9 @@ import android.view.MenuItem;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.intent.IntentFactory;
+import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 /**
  * Activity that retrieves and displays information about an artist given an

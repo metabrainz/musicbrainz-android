@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel;
 import org.metabrainz.mobile.data.repository.ReleaseGroupLookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import io.reactivex.Single;

@@ -43,9 +43,9 @@ public class ArtistWikiSummary {
         this.extract = extract;
     }
 
-    private class OriginalImage{
+    private class OriginalImage {
         private String source;
-        private int width,height;
+        private int width, height;
 
         public String getSource() {
             return source;

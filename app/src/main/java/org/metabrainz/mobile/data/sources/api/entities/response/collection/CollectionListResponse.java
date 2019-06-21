@@ -2,7 +2,7 @@ package org.metabrainz.mobile.data.sources.api.entities.response.collection;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.metabrainz.mobile.data.sources.api.entities.userdata.Collection;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 
 import java.util.ArrayList;
 import java.util.List;

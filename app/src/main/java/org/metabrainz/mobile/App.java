@@ -4,15 +4,12 @@ import android.app.Application;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 
-import org.metabrainz.mobile.api.MusicBrainz;
-import org.metabrainz.mobile.config.Configuration;
-import org.metabrainz.mobile.user.UserPreferences;
+import org.metabrainz.mobile.presentation.Configuration;
 
 public class App extends Application {
 
     private static App instance;
     private static Typeface robotoLight;
-    private static UserPreferences user;
 
     public static String getUserAgent() {
         return Configuration.USER_AGENT + "/" + getVersion();
@@ -34,18 +31,6 @@ public class App extends Application {
         return instance;
     }
 
-    public static UserPreferences getUser() {
-        return user;
-    }
-
-    public static boolean isUserLoggedIn() {
-        return user.isLoggedIn();
-    }
-
-    public static MusicBrainz getWebClient() {
-        return null;
-    }
-
     public static Typeface getRobotoLight() {
         return robotoLight;
     }
@@ -54,7 +39,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        user = new UserPreferences();
         loadCustomTypefaces();
     }
 

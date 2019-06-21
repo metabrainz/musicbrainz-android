@@ -23,17 +23,17 @@ public class ArtistViewModel extends ViewModel {
     }
 
     public void setMBID(String MBID) {
-        if (MBID != null && !MBID.isEmpty())this.MBID = MBID;
+        if (MBID != null && !MBID.isEmpty()) this.MBID = MBID;
     }
 
-    public MutableLiveData<Artist> initializeArtistData(){
+    public MutableLiveData<Artist> initializeArtistData() {
         // Obtain live data from the repository if not already present
         if (artistData == null)
             artistData = repository.initializeArtistData();
         return artistData;
     }
 
-    public void getArtistData(){
+    public void getArtistData() {
         // Call the repository to query the database to update the artist data
         repository.getArtist(MBID);
     }
@@ -44,11 +44,11 @@ public class ArtistViewModel extends ViewModel {
         return repository.fetchCoverArtForRelease(release);
     }
 
-    public void loadArtistWiki(String title, int method){
-        repository.getArtistWikiSummary(title ,method);
+    public void loadArtistWiki(String title, int method) {
+        repository.getArtistWikiSummary(title, method);
     }
 
-    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData(){
+    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData() {
         if (artistWiki == null)
             artistWiki = repository.initializeWikiData();
         return artistWiki;

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.activity.MusicBrainzActivity;
 import org.metabrainz.mobile.data.CollectionUtils;
-import org.metabrainz.mobile.data.sources.api.entities.userdata.Collection;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
@@ -30,6 +30,7 @@ public class CollectionActivity extends MusicBrainzActivity {
 
     private TextView noRes;
     private ProgressBar progressBar;
+    private TextView loginRequiredView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,29 +43,48 @@ public class CollectionActivity extends MusicBrainzActivity {
         collections = new ArrayList<>();
 
         noRes = findViewById(R.id.no_result);
-        noRes.setVisibility(View.GONE);
         progressBar = findViewById(R.id.progress_spinner);
-        progressBar.setIndeterminate(true);
-        progressBar.setVisibility(View.GONE);
-
         adapter = new CollectionListAdapter(collections);
         recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(itemDecoration);
+        loginRequiredView = findViewById(R.id.login_required);
 
-        viewModel.getCollectionData().observe(this, data -> {
-            CollectionUtils.removeCollections(data);
+        if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
+            loginRequiredView.setVisibility(View.GONE);
+            noRes.setVisibility(View.GONE);
+            progressBar.setIndeterminate(true);
+            progressBar.setVisibility(View.GONE);
+
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                    DividerItemDecoration.VERTICAL);
+            recyclerView.addItemDecoration(itemDecoration);
+
+            viewModel.getCollectionData().observe(this, data -> {
+                CollectionUtils.removeCollections(data);
+                collections.clear();
+                collections.addAll(data);
+                adapter.notifyDataSetChanged();
+
+                checkHasResults();
+            });
+
+            fetchCollections();
+        } else {
+            noRes.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT) {
             collections.clear();
-            collections.addAll(data);
-            adapter.notifyDataSetChanged();
-
             checkHasResults();
-        });
-
-        fetchCollections();
+            noRes.setVisibility(View.GONE);
+        }
     }
 
     private void fetchCollections() {

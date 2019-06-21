@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class ArtistLinksFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         linkList = new ArrayList<>();
-        linkAdapter = new ArtistLinkAdapter(getActivity(),linkList);
+        linkAdapter = new ArtistLinkAdapter(getActivity(), linkList);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ArtistLinksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_links, container, false);
         linksRecyclerView = view.findViewById(R.id.links_list);
         linksRecyclerView.setAdapter(linkAdapter);
-        linksRecyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+        linksRecyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
         return view;
     }
 
@@ -52,8 +52,8 @@ public class ArtistLinksFragment extends Fragment {
         artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setLinks);
     }
 
-    private void setLinks(Artist artist){
-        if (artist != null && artist.getRelations() != null){
+    private void setLinks(Artist artist) {
+        if (artist != null && artist.getRelations() != null) {
             linkList.clear();
             linkList.addAll(artist.getRelations());
             linkAdapter.notifyDataSetChanged();
