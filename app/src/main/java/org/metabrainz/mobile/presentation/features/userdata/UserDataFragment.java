@@ -95,6 +95,7 @@ public class UserDataFragment extends Fragment {
             tags.clear();
             tags.addAll(entity.getTags());
             tagsAdapter.notifyDataSetChanged();
+
             if (tags.size() == 0) {
                 noTag.setVisibility(View.VISIBLE);
                 tagsList.setVisibility(View.GONE);
@@ -105,6 +106,7 @@ public class UserDataFragment extends Fragment {
             userTags.clear();
             userTags.addAll(entity.getUserTags());
             userTagsAdapter.notifyDataSetChanged();
+
             if (userTags.size() == 0) {
                 noUserTag.setVisibility(View.VISIBLE);
                 userTagsList.setVisibility(View.GONE);
