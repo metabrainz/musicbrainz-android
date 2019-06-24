@@ -10,12 +10,12 @@ import java.util.List;
 public class LabelCollectionResponse {
 
     @SerializedName("label-count")
-    public int count;
+    private int count;
 
     @SerializedName("label-offset")
-    public int offset;
+    private int offset;
 
-    public List<Label> labels = new ArrayList<>();
+    private List<Label> labels = new ArrayList<>();
 
     public int getCount() {
         return count;

@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
+import androidx.annotation.NonNull;
+
 import org.metabrainz.mobile.data.sources.api.entities.Alias;
 
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ public class Instrument extends MBEntity {
     private String description;
     private ArrayList<Alias> aliases = new ArrayList<>();
 
+    @NonNull
     @Override
     public String toString() {
         return "Instrument{" +

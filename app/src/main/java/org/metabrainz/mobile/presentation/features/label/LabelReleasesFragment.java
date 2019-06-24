@@ -19,6 +19,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LabelReleasesFragment extends Fragment {
 
@@ -54,7 +55,7 @@ public class LabelReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        labelViewModel = ViewModelProviders.of(getActivity()).get(LabelViewModel.class);
+        labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
         labelViewModel.initializeLabelData().observe(this, this::setReleases);
     }
 

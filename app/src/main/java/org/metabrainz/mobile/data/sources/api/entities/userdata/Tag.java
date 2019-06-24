@@ -1,8 +1,8 @@
 package org.metabrainz.mobile.data.sources.api.entities.userdata;
 
 public class Tag {
-    int count;
-    String name;
+    private int count;
+    private String name;
 
     public int getCount() {
         return count;

@@ -9,6 +9,7 @@ import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 import org.metabrainz.mobile.util.Log;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.Authenticator;
 import okhttp3.Request;
@@ -16,7 +17,7 @@ import okhttp3.Response;
 import okhttp3.Route;
 import retrofit2.Call;
 
-public class OAuthAuthenticator implements Authenticator {
+class OAuthAuthenticator implements Authenticator {
 
     @Nullable
     @Override
@@ -24,7 +25,7 @@ public class OAuthAuthenticator implements Authenticator {
 
         LoginService service = MusicBrainzServiceGenerator.createService(LoginService.class,
                 false);
-        Log.d("OkHttp : " + response.body().string());
+        Log.d("OkHttp : " + Objects.requireNonNull(response.body()).string());
 
         String refreshToken = LoginSharedPreferences.getRefreshToken();
 

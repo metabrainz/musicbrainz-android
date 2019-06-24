@@ -17,7 +17,7 @@ import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
 import java.util.List;
 
 public class SearchAdapterArtist extends SearchAdapter {
-    private List<Artist> data;
+    private final List<Artist> data;
 
     public SearchAdapterArtist(List<Artist> data) {
         this.data = data;
@@ -60,7 +60,10 @@ public class SearchAdapterArtist extends SearchAdapter {
     }
 
     private static class ArtistViewHolder extends EntityViewHolder {
-        TextView artistName, artistType, artistDisambiguation, artistArea;
+        final TextView artistName;
+        final TextView artistType;
+        final TextView artistDisambiguation;
+        final TextView artistArea;
 
         ArtistViewHolder(@NonNull View itemView) {
             super(itemView);

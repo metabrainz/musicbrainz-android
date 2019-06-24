@@ -31,6 +31,7 @@ import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Activity to display a list of search results to the user and support intents
@@ -43,13 +44,13 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private SearchView searchView;
     private SearchAdapter adapter;
     private TextView noRes;
-    private List<Artist> artistSearchResults = new ArrayList<>();
-    private List<Release> releaseSearchResults = new ArrayList<>();
-    private List<Label> labelSearchResults = new ArrayList<>();
-    private List<Recording> recordingSearchResults = new ArrayList<>();
-    private List<ReleaseGroup> releaseGroupSearchResults = new ArrayList<>();
-    private List<Instrument> instrumentSearchResults = new ArrayList<>();
-    private List<Event> eventSearchResults = new ArrayList<>();
+    private final List<Artist> artistSearchResults = new ArrayList<>();
+    private final List<Release> releaseSearchResults = new ArrayList<>();
+    private final List<Label> labelSearchResults = new ArrayList<>();
+    private final List<Recording> recordingSearchResults = new ArrayList<>();
+    private final List<ReleaseGroup> releaseGroupSearchResults = new ArrayList<>();
+    private final List<Instrument> instrumentSearchResults = new ArrayList<>();
+    private final List<Event> eventSearchResults = new ArrayList<>();
     private String query, entity;
     private SuggestionHelper suggestionHelper;
     private CursorAdapter suggestionAdapter;
@@ -60,7 +61,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         setContentView(R.layout.activity_search);
         recyclerView = findViewById(R.id.recycler_view);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         noRes = findViewById(R.id.no_result);
         noRes.setVisibility(View.GONE);
         progressBar = findViewById(R.id.progress_spinner);

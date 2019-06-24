@@ -10,6 +10,8 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
+import java.util.Objects;
+
 /**
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
@@ -26,7 +28,7 @@ public class ReleaseActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         releaseViewModel = ViewModelProviders.of(this).get(ReleaseViewModel.class);
 

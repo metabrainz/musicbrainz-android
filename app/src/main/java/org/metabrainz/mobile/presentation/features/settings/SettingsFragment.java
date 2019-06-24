@@ -5,13 +5,14 @@ import android.provider.SearchRecentSuggestions;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragmentCompat;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
-public class SettingsFragment extends PreferenceFragmentCompat implements androidx.preference.Preference.OnPreferenceClickListener {
+class SettingsFragment extends PreferenceFragmentCompat implements androidx.preference.Preference.OnPreferenceClickListener {
 
     private static final String CLEAR_SUGGESTIONS = "clear_suggestions";
 
@@ -39,7 +40,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {

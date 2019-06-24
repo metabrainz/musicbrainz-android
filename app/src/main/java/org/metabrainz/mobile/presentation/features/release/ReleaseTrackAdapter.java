@@ -20,11 +20,11 @@ import java.util.List;
 
 import static android.view.View.GONE;
 
-public class ReleaseTrackAdapter extends RecyclerView.Adapter {
+class ReleaseTrackAdapter extends RecyclerView.Adapter {
 
     private static final int VIEWTYPE_TRACK = 0;
     private static final int VIEWTYPE_HEADING = 1;
-    List<Media> mediaList;
+    private final List<Media> mediaList;
 
     public ReleaseTrackAdapter(List<Media> data) {
         mediaList = data;
@@ -130,9 +130,12 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
     }
 
     class TrackViewHolder extends RecyclerView.ViewHolder {
-        TextView trackNumber, trackName, trackArtist, trackDuration;
+        final TextView trackNumber;
+        final TextView trackName;
+        final TextView trackArtist;
+        final TextView trackDuration;
 
-        public TrackViewHolder(@NonNull View itemView) {
+        TrackViewHolder(@NonNull View itemView) {
             super(itemView);
             trackNumber = itemView.findViewById(R.id.track_number);
             trackArtist = itemView.findViewById(R.id.track_artist);
@@ -140,7 +143,7 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
             trackDuration = itemView.findViewById(R.id.track_time);
         }
 
-        public void bind(int position) {
+        void bind(int position) {
             Track item = getTrack(position);
             setViewVisibility(item.getTitle(), trackName);
             setViewVisibility(String.valueOf(item.getPosition()), trackNumber);
@@ -156,14 +159,14 @@ public class ReleaseTrackAdapter extends RecyclerView.Adapter {
     }
 
     class TrackHeadingViewHolder extends RecyclerView.ViewHolder {
-        TextView mediumTitle;
+        final TextView mediumTitle;
 
-        public TrackHeadingViewHolder(@NonNull View itemView) {
+        TrackHeadingViewHolder(@NonNull View itemView) {
             super(itemView);
             mediumTitle = itemView.findViewById(R.id.medium_title);
         }
 
-        public void bind(int position) {
+        void bind(int position) {
             setViewVisibility(getMediumTitle(position), mediumTitle);
         }
     }

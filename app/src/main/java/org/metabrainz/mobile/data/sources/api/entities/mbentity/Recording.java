@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
@@ -26,6 +28,7 @@ public class Recording extends MBEntity {
     private ArrayList<ReleaseEvent> releaseEvents = new ArrayList<>();
 
 
+    @NonNull
     @Override
     public String toString() {
         return "Recording{" +

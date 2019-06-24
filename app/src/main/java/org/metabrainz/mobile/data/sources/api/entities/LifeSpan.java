@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class LifeSpan implements Serializable {
@@ -7,6 +9,7 @@ public class LifeSpan implements Serializable {
     private String end;
     private boolean ended;
 
+    @NonNull
     @Override
     public String toString() {
         return "LifeSpan{" +

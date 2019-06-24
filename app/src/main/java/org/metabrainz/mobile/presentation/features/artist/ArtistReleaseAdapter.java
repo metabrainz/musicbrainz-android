@@ -31,11 +31,11 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
-public class ArtistReleaseAdapter extends RecyclerView.Adapter {
+class ArtistReleaseAdapter extends RecyclerView.Adapter {
 
-    private List<Release> releaseList;
-    private ArtistViewModel artistViewModel;
-    private CompositeDisposable compositeDisposable;
+    private final List<Release> releaseList;
+    private final ArtistViewModel artistViewModel;
+    private final CompositeDisposable compositeDisposable;
 
     public ArtistReleaseAdapter(Context context, List<Release> releaseList) {
         this.releaseList = releaseList;
@@ -90,18 +90,19 @@ public class ArtistReleaseAdapter extends RecyclerView.Adapter {
     }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
-        TextView releaseName, releaseDisambiguation;
-        ImageView coverArtView;
+        final TextView releaseName;
+        final TextView releaseDisambiguation;
+        final ImageView coverArtView;
         Disposable disposable;
 
-        public ReleaseItemViewHolder(@NonNull View itemView) {
+        ReleaseItemViewHolder(@NonNull View itemView) {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
             releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
             coverArtView = itemView.findViewById(R.id.release_cover_art);
         }
 
-        public void bind(Release release) {
+        void bind(Release release) {
             releaseName.setText(release.getTitle());
             setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
 

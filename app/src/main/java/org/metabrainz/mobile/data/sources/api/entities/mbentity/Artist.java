@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
@@ -125,6 +127,7 @@ public class Artist extends MBEntity {
         this.gender = gender;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Artist{" +

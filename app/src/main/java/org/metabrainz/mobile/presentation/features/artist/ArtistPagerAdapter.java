@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.artist;
 
 import android.content.res.Resources;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -9,15 +10,16 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
 
-public class ArtistPagerAdapter extends FragmentPagerAdapter {
+class ArtistPagerAdapter extends FragmentPagerAdapter {
 
     private static final int[] TITLES = {R.string.tab_releases, R.string.tab_bio, R.string.tab_links,
             R.string.tab_edits};
 
-    public ArtistPagerAdapter(FragmentManager fm) {
-        super(fm);
+    ArtistPagerAdapter(@NonNull FragmentManager fm) {
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         switch (position) {

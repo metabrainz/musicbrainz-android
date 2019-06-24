@@ -18,9 +18,9 @@ import java.util.List;
 
 import static android.view.View.GONE;
 
-public class RecordingReleaseAdapter extends RecyclerView.Adapter {
+class RecordingReleaseAdapter extends RecyclerView.Adapter {
 
-    private List<Release> releaseList;
+    private final List<Release> releaseList;
 
     public RecordingReleaseAdapter(List<Release> releaseList) {
         this.releaseList = releaseList;
@@ -70,10 +70,14 @@ public class RecordingReleaseAdapter extends RecyclerView.Adapter {
     }
 
     private class ReleaseViewHolder extends RecyclerView.ViewHolder {
-        TextView releaseName, releaseArtist, releaseCountry, releaseDate,
-                recordingDuration, recordingPosition;
+        final TextView releaseName;
+        final TextView releaseArtist;
+        final TextView releaseCountry;
+        final TextView releaseDate;
+        final TextView recordingDuration;
+        final TextView recordingPosition;
 
-        public ReleaseViewHolder(@NonNull View itemView) {
+        ReleaseViewHolder(@NonNull View itemView) {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
             releaseArtist = itemView.findViewById(R.id.release_artist);
@@ -83,7 +87,7 @@ public class RecordingReleaseAdapter extends RecyclerView.Adapter {
             releaseDate = itemView.findViewById(R.id.release_date);
         }
 
-        public void bind(int position) {
+        void bind(int position) {
             Release item = releaseList.get(position);
             setViewVisibility(item.getTitle(), releaseName);
             setViewVisibility(item.getDisplayArtist(), releaseArtist);

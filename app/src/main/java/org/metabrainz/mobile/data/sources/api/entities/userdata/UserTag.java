@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities.userdata;
 
 public class UserTag {
-    String name;
+    private String name;
 
     public String getName() {
         return name;

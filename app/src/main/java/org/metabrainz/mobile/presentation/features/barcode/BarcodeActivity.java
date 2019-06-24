@@ -23,7 +23,7 @@ public class BarcodeActivity extends Activity implements ZBarScannerView.ResultH
 
     private ZBarScannerView scannerView;
     private boolean cameraPermission;
-    private int CAMERA_PERMISSION = 0;
+    private final int CAMERA_PERMISSION = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

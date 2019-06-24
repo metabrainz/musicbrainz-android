@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.metabrainz.mobile.R;
 
+import java.util.Objects;
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -14,7 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         getSupportFragmentManager()
                 .beginTransaction()

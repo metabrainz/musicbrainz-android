@@ -21,6 +21,7 @@ import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserDataFragment extends Fragment {
 
@@ -29,8 +30,8 @@ public class UserDataFragment extends Fragment {
     private RatingBar ratingBar, userRatingBar;
     private TagAdapter tagsAdapter;
     private UserTagAdapter userTagsAdapter;
-    private List<Tag> tags = new ArrayList<>();
-    private List<UserTag> userTags = new ArrayList<>();
+    private final List<Tag> tags = new ArrayList<>();
+    private final List<UserTag> userTags = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class UserDataFragment extends Fragment {
         userTagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         userTagsList.setAdapter(userTagsAdapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()), DividerItemDecoration.VERTICAL);
         tagsList.addItemDecoration(dividerItemDecoration);
         userTagsList.addItemDecoration(dividerItemDecoration);
 

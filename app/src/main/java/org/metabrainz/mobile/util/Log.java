@@ -4,7 +4,7 @@ import org.metabrainz.mobile.presentation.Configuration;
 
 public class Log {
 
-    public static final String TAG = Configuration.TAG;
+    private static final String TAG = Configuration.TAG;
 
     public static void e(String message) {
         android.util.Log.e(TAG, message);

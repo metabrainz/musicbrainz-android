@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Area;
@@ -15,6 +17,7 @@ public class Place {
     private LifeSpan lifeSpan;
     private Coordinates coordinates;
 
+    @NonNull
     @Override
     public String toString() {
         return "Place{" +
@@ -88,6 +91,7 @@ public class Place {
         private String latitude;
         private String longitude;
 
+        @NonNull
         @Override
         public String toString() {
             return "Coordinates{" +

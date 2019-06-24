@@ -13,6 +13,8 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
+import java.util.Objects;
+
 /**
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
@@ -32,7 +34,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
 
@@ -63,7 +65,8 @@ public class ArtistActivity extends MusicBrainzActivity {
     }
 
     private void setArtist(Artist artist) {
-        if (artist != null) getSupportActionBar().setTitle(artist.getName());
+        if (artist != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
     }
 
     @Override

@@ -7,17 +7,17 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public abstract class CollectionAdapter extends RecyclerView.Adapter {
-    int lastPosition = -1;
+abstract class CollectionAdapter extends RecyclerView.Adapter {
+    private int lastPosition = -1;
 
-    protected void setViewVisibility(String text, TextView view) {
+    void setViewVisibility(String text, TextView view) {
         if (text != null && !text.isEmpty() && !text.equalsIgnoreCase("null")) {
             view.setVisibility(View.VISIBLE);
             view.setText(text);
         } else view.setVisibility(View.GONE);
     }
 
-    protected void setAnimation(View viewToAnimate, int position) {
+    void setAnimation(View viewToAnimate, int position) {
         if (position > lastPosition) {
             Animation animation = AnimationUtils
                     .loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);

@@ -17,9 +17,9 @@ import org.metabrainz.mobile.R;
 
 import java.util.List;
 
-public class CoverArtSlideshowAdapter extends PagerAdapter {
+class CoverArtSlideshowAdapter extends PagerAdapter {
 
-    private List<String> data;
+    private final List<String> data;
 
     public CoverArtSlideshowAdapter(List<String> data) {
         this.data = data;

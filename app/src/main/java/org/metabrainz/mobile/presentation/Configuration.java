@@ -11,7 +11,7 @@ public class Configuration {
     public static final String USER_AGENT = "MusicBrainzAndroid";
     public static final String CLIENT_NAME = "org.metabrainz.mobile";
 
-    public static final String WEBSITE = "http://metabrainz.org/";
+    private static final String WEBSITE = "http://metabrainz.org/";
 
     public static final String URL_DONATE = "http://metabrainz.org/donate";
 

@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
@@ -16,6 +17,8 @@ import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.util.SingleLiveEvent;
+
+import java.util.Objects;
 
 import io.reactivex.Single;
 import okhttp3.ResponseBody;
@@ -74,13 +77,13 @@ public class ReleaseGroupLookupRepository {
     private void fetchReleaseGroup(String MBID) {
         service.lookupReleaseGroup(MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS).enqueue(new Callback<ReleaseGroup>() {
             @Override
-            public void onResponse(Call<ReleaseGroup> call, Response<ReleaseGroup> response) {
+            public void onResponse(@NonNull Call<ReleaseGroup> call, @NonNull Response<ReleaseGroup> response) {
                 ReleaseGroup releaseGroup = response.body();
                 releaseGroupData.setValue(releaseGroup);
             }
 
             @Override
-            public void onFailure(Call<ReleaseGroup> call, Throwable t) {
+            public void onFailure(@NonNull Call<ReleaseGroup> call, @NonNull Throwable t) {
 
             }
         });
@@ -89,13 +92,13 @@ public class ReleaseGroupLookupRepository {
     private void fetchReleaseGroupWiki(String title) {
         service.getWikipediaSummary(title).enqueue(new Callback<ArtistWikiSummary>() {
             @Override
-            public void onResponse(Call<ArtistWikiSummary> call, Response<ArtistWikiSummary> response) {
+            public void onResponse(@NonNull Call<ArtistWikiSummary> call, @NonNull Response<ArtistWikiSummary> response) {
                 ArtistWikiSummary wiki = response.body();
                 wikiSummary.setValue(wiki);
             }
 
             @Override
-            public void onFailure(Call<ArtistWikiSummary> call, Throwable t) {
+            public void onFailure(@NonNull Call<ArtistWikiSummary> call, @NonNull Throwable t) {
 
             }
         });
@@ -104,15 +107,15 @@ public class ReleaseGroupLookupRepository {
     private void fetchReleaseGroupWikiData(String id) {
         service.getWikipediaLink(id).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 String title = "";
                 try {
-                    String jsonResponse = response.body().string();
+                    String jsonResponse = Objects.requireNonNull(response.body()).string();
                     JsonElement element = new JsonParser().parse(jsonResponse);
                     JsonObject result = element.getAsJsonObject()
                             .getAsJsonObject("entities").getAsJsonObject(id);
                     WikiDataResponse wikiDataResponse = new Gson().fromJson(result, WikiDataResponse.class);
-                    title = wikiDataResponse.getSitelinks().get("enwiki").getTitle();
+                    title = Objects.requireNonNull(wikiDataResponse.getSitelinks().get("enwiki")).getTitle();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -120,7 +123,7 @@ public class ReleaseGroupLookupRepository {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
             }
         });
     }

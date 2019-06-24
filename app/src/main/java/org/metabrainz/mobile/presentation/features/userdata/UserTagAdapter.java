@@ -14,9 +14,9 @@ import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag;
 
 import java.util.List;
 
-public class UserTagAdapter extends RecyclerView.Adapter {
+class UserTagAdapter extends RecyclerView.Adapter {
 
-    private List<UserTag> list;
+    private final List<UserTag> list;
 
     public UserTagAdapter(List<UserTag> list) {
         this.list = list;
@@ -41,7 +41,7 @@ public class UserTagAdapter extends RecyclerView.Adapter {
     }
 
     class TagViewHolder extends RecyclerView.ViewHolder {
-        TextView tagView;
+        final TextView tagView;
 
         TagViewHolder(View itemView) {
             super(itemView);

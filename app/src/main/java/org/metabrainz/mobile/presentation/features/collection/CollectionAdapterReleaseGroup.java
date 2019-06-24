@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CollectionAdapterReleaseGroup extends CollectionAdapter {
 
-    private List<ReleaseGroup> data;
+    private final List<ReleaseGroup> data;
 
     public CollectionAdapterReleaseGroup(List<ReleaseGroup> data) {
         this.data = data;
@@ -61,7 +61,10 @@ public class CollectionAdapterReleaseGroup extends CollectionAdapter {
     }
 
     private static class ReleaseGroupViewHolder extends EntityViewHolder {
-        TextView releaseName, releaseArtist, releaseDisambiguation, releaseType;
+        final TextView releaseName;
+        final TextView releaseArtist;
+        final TextView releaseDisambiguation;
+        final TextView releaseType;
 
         ReleaseGroupViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -20,6 +20,7 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ReleaseInfoFragment extends Fragment {
 
@@ -28,7 +29,7 @@ public class ReleaseInfoFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private CoverArtSlideshowAdapter slideshowAdapter;
-    private ArrayList<String> urls = new ArrayList<>();
+    private final ArrayList<String> urls = new ArrayList<>();
 
     public static ReleaseInfoFragment newInstance() {
         return new ReleaseInfoFragment();
@@ -38,7 +39,7 @@ public class ReleaseInfoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_release_info, container, false);
-        viewModel = ViewModelProviders.of(getActivity()).get(ReleaseViewModel.class);
+        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
         viewModel.initializeReleaseData().observe(this, this::setData);
         viewModel.initializeCoverArtData().observe(this, this::setCoverArt);
         slideshowAdapter = new CoverArtSlideshowAdapter(urls);

@@ -10,12 +10,12 @@ import java.util.List;
 public class RecordingCollectionResponse {
 
     @SerializedName("recording-count")
-    public int count;
+    private int count;
 
     @SerializedName("recording-offset")
-    public int offset;
+    private int offset;
 
-    public List<Recording> recordings = new ArrayList<>();
+    private List<Recording> recordings = new ArrayList<>();
 
     public int getCount() {
         return count;

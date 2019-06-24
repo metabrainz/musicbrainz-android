@@ -18,6 +18,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReleaseGroupReleasesFragment extends Fragment {
 
@@ -50,7 +51,7 @@ public class ReleaseGroupReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        releaseGroupViewModel = ViewModelProviders.of(getActivity()).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
         releaseGroupViewModel.initializeReleaseGroupData().observe(this, this::setReleases);
     }
 

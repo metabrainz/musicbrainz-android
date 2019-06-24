@@ -10,6 +10,8 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.presentation.IntentFactory;
 
+import java.util.Objects;
+
 public class RecordingActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "DebugRecordingInfo";
@@ -23,7 +25,7 @@ public class RecordingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         recordingViewModel = ViewModelProviders.of(this).get(RecordingViewModel.class);
 

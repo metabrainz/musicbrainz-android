@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SearchAdapterRecording extends SearchAdapter {
 
-    private List<Recording> data;
+    private final List<Recording> data;
 
     public SearchAdapterRecording(List<Recording> data) {
         this.data = data;
@@ -62,7 +62,10 @@ public class SearchAdapterRecording extends SearchAdapter {
     }
 
     private static class RecordingViewHolder extends EntityViewHolder {
-        TextView recordingName, recordingArtist, recordingDisambiguation, recordingRelease;
+        final TextView recordingName;
+        final TextView recordingArtist;
+        final TextView recordingDisambiguation;
+        final TextView recordingRelease;
 
         RecordingViewHolder(@NonNull View itemView) {
             super(itemView);

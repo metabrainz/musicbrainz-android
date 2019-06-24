@@ -17,7 +17,7 @@ import java.util.List;
 public class SearchViewModel extends ViewModel {
 
     private static SearchRepository repository = SearchRepository.getRepository();
-    public boolean queryHasChanged = true;
+    private boolean queryHasChanged = true;
     private MutableLiveData<List<Artist>> artistSearchResponse;
     private MutableLiveData<List<Release>> releaseSearchResponse;
     private MutableLiveData<List<Recording>> recordingResponse;
@@ -31,7 +31,7 @@ public class SearchViewModel extends ViewModel {
     public SearchViewModel() {
     }
 
-    public void setSearchQuery(String searchTerm) {
+    private void setSearchQuery(String searchTerm) {
         if (searchTerm != null && !searchTerm.isEmpty() &&
                 (searchQuery == null || searchQuery.isEmpty() || !searchQuery.equals(searchTerm))) {
             searchQuery = searchTerm;

@@ -4,9 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Rating {
     @SerializedName("votes-count")
+    private
     int count;
 
-    float value;
+    private float value;
 
     public int getCount() {
         return count;

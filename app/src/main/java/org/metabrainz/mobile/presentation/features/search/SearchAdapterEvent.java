@@ -14,7 +14,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import java.util.List;
 
 public class SearchAdapterEvent extends SearchAdapter {
-    private List<Event> data;
+    private final List<Event> data;
 
     public SearchAdapterEvent(List<Event> data) {
         this.data = data;
@@ -52,7 +52,10 @@ public class SearchAdapterEvent extends SearchAdapter {
     }
 
     private static class EventViewHolder extends EntityViewHolder {
-        TextView eventName, eventType, eventDisambiguation, eventTimePeriod;
+        final TextView eventName;
+        final TextView eventType;
+        final TextView eventDisambiguation;
+        final TextView eventTimePeriod;
 
         EventViewHolder(@NonNull View itemView) {
             super(itemView);

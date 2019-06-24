@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import org.metabrainz.mobile.App;
@@ -36,11 +37,12 @@ public class AboutFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        versionLabel.setText(getText(R.string.version_text) + " " + App.getVersion());
+        String version = getText(R.string.version_text) + " " + App.getVersion();
+        versionLabel.setText(version);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_about, menu);
     }
 

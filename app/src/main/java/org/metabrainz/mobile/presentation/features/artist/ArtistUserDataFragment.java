@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
 
+import java.util.Objects;
+
 public class ArtistUserDataFragment extends UserDataFragment {
 
     private ArtistViewModel artistViewModel;
@@ -21,7 +23,7 @@ public class ArtistUserDataFragment extends UserDataFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
+        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
         artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }

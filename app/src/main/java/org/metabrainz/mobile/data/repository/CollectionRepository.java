@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.CollectionUtils;
@@ -23,6 +24,7 @@ import org.metabrainz.mobile.data.sources.api.entities.response.collection.Relea
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -101,10 +103,10 @@ public class CollectionRepository {
 
         listResponseCallback = new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 try {
                     List<Collection> collections = new ArrayList<>();
-                    CollectionUtils.setGenericCountParameter(collections, response.body().string());
+                    CollectionUtils.setGenericCountParameter(collections, Objects.requireNonNull(response.body()).string());
                     collectionData.setValue(collections);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -112,7 +114,7 @@ public class CollectionRepository {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
             }
         };
 
@@ -125,13 +127,13 @@ public class CollectionRepository {
     public void fetchArtistCollectionDetails(String id) {
         service.getArtistCollectionContents(id).enqueue(new Callback<ArtistCollectionResponse>() {
             @Override
-            public void onResponse(Call<ArtistCollectionResponse> call, Response<ArtistCollectionResponse> response) {
+            public void onResponse(@NonNull Call<ArtistCollectionResponse> call, @NonNull Response<ArtistCollectionResponse> response) {
                 ArtistCollectionResponse collectionResponse = response.body();
-                artistCollectionData.setValue(collectionResponse.getArtists());
+                artistCollectionData.setValue(Objects.requireNonNull(collectionResponse).getArtists());
             }
 
             @Override
-            public void onFailure(Call<ArtistCollectionResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ArtistCollectionResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -140,13 +142,13 @@ public class CollectionRepository {
     public void fetchReleaseCollectionDetails(String id) {
         service.getReleaseCollectionContents(id).enqueue(new Callback<ReleaseCollectionResponse>() {
             @Override
-            public void onResponse(Call<ReleaseCollectionResponse> call, Response<ReleaseCollectionResponse> response) {
+            public void onResponse(@NonNull Call<ReleaseCollectionResponse> call, @NonNull Response<ReleaseCollectionResponse> response) {
                 ReleaseCollectionResponse collectionResponse = response.body();
-                releaseCollectionData.setValue(collectionResponse.getReleases());
+                releaseCollectionData.setValue(Objects.requireNonNull(collectionResponse).getReleases());
             }
 
             @Override
-            public void onFailure(Call<ReleaseCollectionResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ReleaseCollectionResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -155,13 +157,13 @@ public class CollectionRepository {
     public void fetchReleaseGroupCollectionDetails(String id) {
         service.getReleaseGroupCollectionContents(id).enqueue(new Callback<ReleaseGroupCollectionResponse>() {
             @Override
-            public void onResponse(Call<ReleaseGroupCollectionResponse> call, Response<ReleaseGroupCollectionResponse> response) {
+            public void onResponse(@NonNull Call<ReleaseGroupCollectionResponse> call, @NonNull Response<ReleaseGroupCollectionResponse> response) {
                 ReleaseGroupCollectionResponse collectionResponse = response.body();
-                releaseGroupCollectionData.setValue(collectionResponse.getReleaseGroups());
+                releaseGroupCollectionData.setValue(Objects.requireNonNull(collectionResponse).getReleaseGroups());
             }
 
             @Override
-            public void onFailure(Call<ReleaseGroupCollectionResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ReleaseGroupCollectionResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -170,13 +172,13 @@ public class CollectionRepository {
     public void fetchLabelCollectionDetails(String id) {
         service.getLabelCollectionContents(id).enqueue(new Callback<LabelCollectionResponse>() {
             @Override
-            public void onResponse(Call<LabelCollectionResponse> call, Response<LabelCollectionResponse> response) {
+            public void onResponse(@NonNull Call<LabelCollectionResponse> call, @NonNull Response<LabelCollectionResponse> response) {
                 LabelCollectionResponse collectionResponse = response.body();
-                labelCollectionData.setValue(collectionResponse.getLabels());
+                labelCollectionData.setValue(Objects.requireNonNull(collectionResponse).getLabels());
             }
 
             @Override
-            public void onFailure(Call<LabelCollectionResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<LabelCollectionResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -185,13 +187,13 @@ public class CollectionRepository {
     public void fetchEventCollectionDetails(String id) {
         service.getEventCollectionContents(id).enqueue(new Callback<EventCollectionResponse>() {
             @Override
-            public void onResponse(Call<EventCollectionResponse> call, Response<EventCollectionResponse> response) {
+            public void onResponse(@NonNull Call<EventCollectionResponse> call, @NonNull Response<EventCollectionResponse> response) {
                 EventCollectionResponse collectionResponse = response.body();
-                eventCollectionData.setValue(collectionResponse.getEvents());
+                eventCollectionData.setValue(Objects.requireNonNull(collectionResponse).getEvents());
             }
 
             @Override
-            public void onFailure(Call<EventCollectionResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<EventCollectionResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -200,13 +202,13 @@ public class CollectionRepository {
     public void fetchInstrumentCollectionDetails(String id) {
         service.getInstrumentCollectionContents(id).enqueue(new Callback<InstrumentCollectionResponse>() {
             @Override
-            public void onResponse(Call<InstrumentCollectionResponse> call, Response<InstrumentCollectionResponse> response) {
+            public void onResponse(@NonNull Call<InstrumentCollectionResponse> call, @NonNull Response<InstrumentCollectionResponse> response) {
                 InstrumentCollectionResponse collectionResponse = response.body();
-                instrumentCollectionData.setValue(collectionResponse.getInstruments());
+                instrumentCollectionData.setValue(Objects.requireNonNull(collectionResponse).getInstruments());
             }
 
             @Override
-            public void onFailure(Call<InstrumentCollectionResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<InstrumentCollectionResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -215,13 +217,13 @@ public class CollectionRepository {
     public void fetchRecordingCollectionDetails(String id) {
         service.getRecordingCollectionContents(id).enqueue(new Callback<RecordingCollectionResponse>() {
             @Override
-            public void onResponse(Call<RecordingCollectionResponse> call, Response<RecordingCollectionResponse> response) {
+            public void onResponse(@NonNull Call<RecordingCollectionResponse> call, @NonNull Response<RecordingCollectionResponse> response) {
                 RecordingCollectionResponse collectionResponse = response.body();
-                recordingCollectionData.setValue(collectionResponse.getRecordings());
+                recordingCollectionData.setValue(Objects.requireNonNull(collectionResponse).getRecordings());
             }
 
             @Override
-            public void onFailure(Call<RecordingCollectionResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RecordingCollectionResponse> call, @NonNull Throwable t) {
 
             }
         });

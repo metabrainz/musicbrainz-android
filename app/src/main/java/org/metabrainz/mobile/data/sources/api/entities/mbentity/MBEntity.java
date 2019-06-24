@@ -14,18 +14,18 @@ import java.util.List;
 public class MBEntity implements Serializable {
 
     @SerializedName("id")
-    public String mbid;
-    public String disambiguation;
+    String mbid;
+    String disambiguation;
 
     @SerializedName("user-rating")
-    public UserRating userRating;
-    public Rating rating;
+    private UserRating userRating;
+    private Rating rating;
     @SerializedName("user-tags")
-    public List<UserTag> userTags = new ArrayList<>();
-    public List<Tag> tags = new ArrayList<>();
+    private List<UserTag> userTags = new ArrayList<>();
+    private List<Tag> tags = new ArrayList<>();
     @SerializedName("user-genres")
-    public List<UserTag> userGenres = new ArrayList<>();
-    public List<Tag> genres = new ArrayList<>();
+    private List<UserTag> userGenres = new ArrayList<>();
+    private List<Tag> genres = new ArrayList<>();
 
     public UserRating getUserRating() {
         return userRating;

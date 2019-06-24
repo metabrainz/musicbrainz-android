@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.Alias;
@@ -19,6 +21,7 @@ public class Area extends MBEntity {
     @SerializedName("life-span")
     private LifeSpan lifeSpan;
 
+    @NonNull
     @Override
     public String toString() {
         return "Area{" +

@@ -31,11 +31,11 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
-public class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
+class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
 
-    private List<Release> releaseList;
-    private ReleaseGroupViewModel releaseGroupViewModel;
-    private CompositeDisposable compositeDisposable;
+    private final List<Release> releaseList;
+    private final ReleaseGroupViewModel releaseGroupViewModel;
+    private final CompositeDisposable compositeDisposable;
 
     public ReleaseGroupReleaseAdapter(Context context, List<Release> releaseList) {
         this.releaseList = releaseList;
@@ -90,12 +90,16 @@ public class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
     }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
-        TextView releaseName, releaseLabel, releaseCountry, releaseBarcode, releaseTracks,
-                releaseDate;
-        ImageView coverArtView;
+        final TextView releaseName;
+        final TextView releaseLabel;
+        final TextView releaseCountry;
+        final TextView releaseBarcode;
+        final TextView releaseTracks;
+        final TextView releaseDate;
+        final ImageView coverArtView;
         Disposable disposable;
 
-        public ReleaseItemViewHolder(@NonNull View itemView) {
+        ReleaseItemViewHolder(@NonNull View itemView) {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
             releaseLabel = itemView.findViewById(R.id.release_label);
@@ -106,7 +110,7 @@ public class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
             coverArtView = itemView.findViewById(R.id.release_cover_art);
         }
 
-        public void bind(Release release) {
+        void bind(Release release) {
             releaseName.setText(release.getTitle());
             setViewVisibility(release.labelCatalog(), releaseLabel);
             setViewVisibility(release.getBarcode(), releaseBarcode);

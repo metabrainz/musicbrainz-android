@@ -7,10 +7,10 @@ import java.util.List;
 
 public class BarcodeReleaseResponse {
 
-    String created;
-    int count;
-    int offset;
-    List<Release> releases = new ArrayList<>();
+    private String created;
+    private int count;
+    private int offset;
+    private List<Release> releases = new ArrayList<>();
 
     public String getCreated() {
         return created;

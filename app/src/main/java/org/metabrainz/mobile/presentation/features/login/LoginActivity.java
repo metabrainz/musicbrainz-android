@@ -14,13 +14,15 @@ import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.util.Log;
 
+import java.util.Objects;
+
 public class LoginActivity extends MusicBrainzActivity {
     private LoginViewModel loginViewModel;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         loginViewModel.getAccessTokenLiveData().observe(this, this::saveOAuthToken);
         loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
