@@ -2,11 +2,11 @@ package org.metabrainz.mobile.data;
 
 public class Constants {
     public static final String LOOKUP_ARTIST_PARAMS =
-            "url-rels+releases+ratings+tags";
+            "url-rels+releases+ratings+tags+user-tags";
     public static final String LOOKUP_RELEASE_PARAMS =
-            "recordings+url-rels+artist-credits";
+            "recordings+url-rels+artist-credits+user-tags";
     public static final String LOOKUP_LABEL_PARAMS =
-            "releases+url-rels";
+            "releases+url-rels+user-tags";
     public static final String LOOKUP_RECORDING_PARAMS =
             "releases+media+artists+artist-credits";
     public static final String LOOKUP_RELEASE_GROUP_PARAMS =
