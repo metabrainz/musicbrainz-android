@@ -82,7 +82,7 @@ public class UserDataFragment extends Fragment {
         }
 
 
-        if (entity != null && entity.getUserRating() != null)
+        if (entity != null && entity.getUserRating() != null && entity.getUserRating().getValue() != 0)
             userRatingBar.setRating(entity.getUserRating().getValue());
         else {
             noUserRating.setVisibility(View.VISIBLE);
