@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Faixas</string>
+    <string name="dash_scan">Escanear</string>
+    <string name="dash_collections">Coleções</string>
+    <string name="search_type_artist">Artista</string>
+    <string name="search_type_release">Álbum</string>
+    <string name="search_type_label">Gravadora</string>
+    <string name="search_type_recording">Gravação</string>
+    <!-- Searchable -->
+    <string name="search_type_event">Evento</string>
+    <!-- ReleaseActivity -->
+    <string name="release_title">Álbum</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Artista</string>
+
+    <!-- Actions -->
+    <string name="action_search">Pesquisar</string>
+    <string name="settings_search">Pesquisar</string>
+    <string name="ratings">Classificação</string>
+    <string name="tags">Tags</string>
+</resources>

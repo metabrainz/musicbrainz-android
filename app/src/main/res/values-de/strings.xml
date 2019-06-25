@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Titel</string>
+    <string name="dash_scan">Analysieren</string>
+    <string name="dash_collections">Sammlungen</string>
+    <string name="welcome">Willkommen bei MusicBrainz!</string>
+
+    <string name="search_type_artist">Künstler</string>
+    <string name="search_type_release">Veröffentlichung</string>
+    <string name="search_type_label">Label</string>
+    <string name="search_type_recording">Aufnahme</string>
+    <string name="search_type_instrument">Instrument</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">Veranstaltung</string>
+    <!-- SearchResultsActivity -->
+    <string name="no_results">Keine Ergebnisse gefunden</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">Veröffentlichung</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Künstler</string>
+
+</resources>

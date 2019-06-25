@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">רצועות</string>
+    <string name="releases">הוצאות</string>
+    <string name="dash_scan">סריקה</string>
+    <string name="dash_collections">אוספים</string>
+    <string name="dash_donate">תרומה</string>
+    <string name="login">התחברות למערכת</string>
+    <string name="search_type_artist">אמן</string>
+    <string name="search_type_release">הוצאה</string>
+    <string name="search_type_label">חברת תקליטים</string>
+    <string name="search_type_recording">הקלטה</string>
+    <string name="search_type_release_group">‮קבוצת הוצאה</string>
+    <string name="search_type_instrument">כלי נגינה</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">ארוע</string>
+    <!-- LoginActivity -->
+    <string name="auth_title">התחברות למערכת</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">הוצאה</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">אמן</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">תרומה</string>
+
+    <string name="version_text">גרסה</string>
+
+    <!-- Actions -->
+    <string name="action_search">חיפוש</string>
+    <string name="action_login">התחברות למערכת</string>
+    <string name="action_logout">התנתק מהמערכת</string>
+
+    <string name="settings_search">חיפוש</string>
+    <string name="settings_ratings_tags">דֵּרוּגים ותגים</string>
+    <string name="ratings">דֵּרוּג</string>
+    <string name="tags">תגים</string>
+</resources>

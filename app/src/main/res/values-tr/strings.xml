@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Parçalar</string>
+    <string name="dash_collections">Koleksiyonlar</string>
+    <string name="search_type_artist">Sanatçı</string>
+    <string name="search_type_label">Etiket</string>
+    <string name="search_type_recording">Kayıt</string>
+    <string name="search_type_instrument">Çalgı</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Sanatçı</string>
+
+    <string name="ratings">Derecelendirme</string>
+</resources>

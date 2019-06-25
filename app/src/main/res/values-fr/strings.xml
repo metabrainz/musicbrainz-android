@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Pistes</string>
+    <string name="dash_scan">Analyser</string>
+    <string name="dash_collections">Collections</string>
+    <string name="dash_donate">Faites un don</string>
+    <string name="welcome">Bienvenue à MusicBrainz !</string>
+
+    <string name="search_type_artist">Artiste</string>
+    <string name="search_type_release">Parution</string>
+    <string name="search_type_label">Label</string>
+    <string name="search_type_recording">Enregistrement</string>
+    <string name="search_type_instrument">Instrument</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">Événement</string>
+    <!-- SearchResultsActivity -->
+    <string name="no_results">Aucun résultat de trouvé</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">Parution</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Artiste</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">Faites un don</string>
+
+    <string name="tags">Tags</string>
+</resources>
