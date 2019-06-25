@@ -58,9 +58,9 @@ public class ArtistLookupRepository {
         return artistWikiSummary;
     }
 
-    public void getArtist(String MBID) {
-        // TODO: Implement fetch private user data
-        fetchArtist(MBID);
+    public void getArtist(String MBID, boolean isLoggedIn) {
+        if (isLoggedIn) fetchArtistWithUserData(MBID);
+        else fetchArtist(MBID);
     }
 
     public void getArtistWikiSummary(String string, int method) {
@@ -70,8 +70,20 @@ public class ArtistLookupRepository {
             fetchArtistWikiData(string);
     }
 
-    //TODO: Implement artist user data fetch
     private void fetchArtistWithUserData(String MBID) {
+        service.lookupArtist(MBID, Constants.LOOKUP_ARTIST_PARAMS + Constants.USER_DATA_PARAMS)
+                .enqueue(new Callback<Artist>() {
+                    @Override
+                    public void onResponse(Call<Artist> call, Response<Artist> response) {
+                        Artist artist = response.body();
+                        artistData.setValue(artist);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Artist> call, Throwable t) {
+
+                    }
+                });
     }
 
     private void fetchArtist(String MBID) {

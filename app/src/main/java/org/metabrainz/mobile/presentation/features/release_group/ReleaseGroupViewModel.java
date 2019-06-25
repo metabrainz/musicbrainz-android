@@ -33,9 +33,9 @@ public class ReleaseGroupViewModel extends ViewModel {
         return releaseGroupData;
     }
 
-    public void getReleaseGroupData() {
+    public void getReleaseGroupData(boolean isLoggedIn) {
         // Call the repository to query the database to update the releaseGroup data
-        repository.getReleaseGroup(MBID);
+        repository.getReleaseGroup(MBID, isLoggedIn);
     }
 
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {

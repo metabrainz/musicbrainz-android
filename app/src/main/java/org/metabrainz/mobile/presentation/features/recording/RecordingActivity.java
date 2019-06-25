@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.Objects;
 
@@ -33,7 +34,8 @@ public class RecordingActivity extends AppCompatActivity {
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);
 
         recordingViewModel.initializeRecordingData().observe(this, this::setRecording);
-        recordingViewModel.getRecordingData();
+        recordingViewModel.getRecordingData(LoginSharedPreferences.getLoginStatus()
+                == LoginSharedPreferences.STATUS_LOGGED_IN);
     }
 
     @Override

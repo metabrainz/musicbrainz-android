@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.Objects;
 
@@ -33,7 +34,8 @@ public class LabelActivity extends AppCompatActivity {
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);
 
         labelViewModel.initializeLabelData().observe(this, this::setLabel);
-        labelViewModel.getLabelData();
+        labelViewModel.getLabelData(LoginSharedPreferences.getLoginStatus()
+                == LoginSharedPreferences.STATUS_LOGGED_IN);
     }
 
     @Override

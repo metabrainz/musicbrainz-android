@@ -26,9 +26,9 @@ public class RecordingViewModel extends ViewModel {
         return recordingData;
     }
 
-    public void getRecordingData() {
+    public void getRecordingData(boolean isLoggedIn) {
         // Call the repository to query the database to update the recording data
-        repository.getRecording(MBID);
+        repository.getRecording(MBID, isLoggedIn);
     }
 
     @Override

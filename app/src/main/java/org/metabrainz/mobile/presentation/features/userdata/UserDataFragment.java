@@ -47,7 +47,7 @@ public class UserDataFragment extends Fragment {
         return view;
     }
 
-    private void bindViews(View view) {
+    protected void bindViews(View view) {
         tagsList = view.findViewById(R.id.tags_list);
         tagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         tagsList.setAdapter(tagsAdapter);
@@ -81,8 +81,7 @@ public class UserDataFragment extends Fragment {
             noRating.setVisibility(View.VISIBLE);
             ratingBar.setVisibility(View.GONE);
         }
-
-
+      
         if (entity != null && entity.getUserRating() != null && entity.getUserRating().getValue() != 0)
             userRatingBar.setRating(entity.getUserRating().getValue());
         else {
@@ -101,6 +100,10 @@ public class UserDataFragment extends Fragment {
                 noTag.setVisibility(View.VISIBLE);
                 tagsList.setVisibility(View.GONE);
             }
+
+        } else {
+            noTag.setVisibility(View.VISIBLE);
+            tagsList.setVisibility(View.GONE);
         }
 
         if (entity != null && entity.getUserTags() != null) {
@@ -112,6 +115,9 @@ public class UserDataFragment extends Fragment {
                 noUserTag.setVisibility(View.VISIBLE);
                 userTagsList.setVisibility(View.GONE);
             }
+        } else {
+            noUserTag.setVisibility(View.VISIBLE);
+            userTagsList.setVisibility(View.GONE);
         }
     }
 

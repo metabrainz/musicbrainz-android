@@ -33,9 +33,9 @@ public class ArtistViewModel extends ViewModel {
         return artistData;
     }
 
-    public void getArtistData() {
+    public void getArtistData(boolean isLoggedIn) {
         // Call the repository to query the database to update the artist data
-        repository.getArtist(MBID);
+        repository.getArtist(MBID, isLoggedIn);
     }
 
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {

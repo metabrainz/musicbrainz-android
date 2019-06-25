@@ -34,9 +34,9 @@ public class ReleaseGroupLookupRepository {
     private static ReleaseGroupLookupRepository repository;
     private static MutableLiveData<ReleaseGroup> releaseGroupData;
     private static SingleLiveEvent<ArtistWikiSummary> wikiSummary;
+    private Callback<ReleaseGroup> releaseGroupCallback;
 
     private ReleaseGroupLookupRepository() {
-
         releaseGroupData = new MutableLiveData<>();
         wikiSummary = new SingleLiveEvent<>();
     }
@@ -58,9 +58,22 @@ public class ReleaseGroupLookupRepository {
         return wikiSummary;
     }
 
-    public void getReleaseGroup(String MBID) {
-        // TODO: Implement fetch private user data
-        fetchReleaseGroup(MBID);
+    public void getReleaseGroup(String MBID, boolean isLoggedIn) {
+        releaseGroupCallback = new Callback<ReleaseGroup>() {
+            @Override
+            public void onResponse(Call<ReleaseGroup> call, Response<ReleaseGroup> response) {
+                ReleaseGroup releaseGroup = response.body();
+                releaseGroupData.setValue(releaseGroup);
+            }
+
+            @Override
+            public void onFailure(Call<ReleaseGroup> call, Throwable t) {
+
+            }
+        };
+
+        if (isLoggedIn) fetchReleaseGroupWithUserData(MBID);
+        else fetchReleaseGroup(MBID);
     }
 
     public void getWikiSummary(String string, int method) {
@@ -70,23 +83,13 @@ public class ReleaseGroupLookupRepository {
             fetchReleaseGroupWikiData(string);
     }
 
-    //TODO: Implement releaseGroup user data fetch
     private void fetchReleaseGroupWithUserData(String MBID) {
+        service.lookupReleaseGroup(MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS + Constants.USER_DATA_PARAMS)
+                .enqueue(releaseGroupCallback);
     }
 
     private void fetchReleaseGroup(String MBID) {
-        service.lookupReleaseGroup(MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS).enqueue(new Callback<ReleaseGroup>() {
-            @Override
-            public void onResponse(@NonNull Call<ReleaseGroup> call, @NonNull Response<ReleaseGroup> response) {
-                ReleaseGroup releaseGroup = response.body();
-                releaseGroupData.setValue(releaseGroup);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ReleaseGroup> call, @NonNull Throwable t) {
-
-            }
-        });
+        service.lookupReleaseGroup(MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS).enqueue(releaseGroupCallback);
     }
 
     private void fetchReleaseGroupWiki(String title) {
