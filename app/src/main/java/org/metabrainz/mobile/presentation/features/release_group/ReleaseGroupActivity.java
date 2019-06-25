@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 public class ReleaseGroupActivity extends AppCompatActivity {
 
@@ -31,7 +32,8 @@ public class ReleaseGroupActivity extends AppCompatActivity {
         if (mbid != null && !mbid.isEmpty()) releaseGroupViewModel.setMBID(mbid);
 
         releaseGroupViewModel.initializeReleaseGroupData().observe(this, this::setReleaseGroup);
-        releaseGroupViewModel.getReleaseGroupData();
+        releaseGroupViewModel.getReleaseGroupData(LoginSharedPreferences.getLoginStatus()
+                == LoginSharedPreferences.STATUS_LOGGED_IN);
     }
 
     @Override

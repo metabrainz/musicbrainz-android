@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,6 +43,7 @@ public class ReleaseGroupReleasesFragment extends Fragment {
         releasesRecyclerView = view.findViewById(R.id.recycler_view);
         releasesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         releasesRecyclerView.setAdapter(adapter);
+        ViewCompat.setNestedScrollingEnabled(releasesRecyclerView, false);
         return view;
     }
 

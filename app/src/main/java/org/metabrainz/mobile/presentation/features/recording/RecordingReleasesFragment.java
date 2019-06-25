@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -46,6 +47,7 @@ public class RecordingReleasesFragment extends Fragment {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(releasesRecyclerView.getContext(),
                 DividerItemDecoration.VERTICAL);
         releasesRecyclerView.addItemDecoration(itemDecoration);
+        ViewCompat.setNestedScrollingEnabled(releasesRecyclerView, false);
         return view;
     }
 

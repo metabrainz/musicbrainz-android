@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class UserDataFragment extends Fragment {
 
+    private TextView noRating, noUserRating, noTag, noUserTag;
     private RecyclerView tagsList, userTagsList;
     private RatingBar ratingBar, userRatingBar;
     private TagAdapter tagsAdapter;
@@ -39,12 +41,12 @@ public class UserDataFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.user_data_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_data, container, false);
         bindViews(view);
         return view;
     }
 
-    private void bindViews(View view) {
+    protected void bindViews(View view) {
         tagsList = view.findViewById(R.id.tags_list);
         tagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         tagsList.setAdapter(tagsAdapter);
@@ -59,14 +61,33 @@ public class UserDataFragment extends Fragment {
 
         ratingBar = view.findViewById(R.id.rating);
         userRatingBar = view.findViewById(R.id.user_rating);
+
+        noRating = view.findViewById(R.id.no_rating);
+        noUserRating = view.findViewById(R.id.no_user_rating);
+        noTag = view.findViewById(R.id.no_tag);
+        noUserTag = view.findViewById(R.id.no_user_tag);
+
+        noRating.setVisibility(View.GONE);
+        noUserRating.setVisibility(View.GONE);
+        noUserTag.setVisibility(View.GONE);
+        noTag.setVisibility(View.GONE);
     }
 
     private void displayRating(MBEntity entity) {
-        if (entity != null && entity.getRating() != null)
+        if (entity != null && entity.getRating() != null && entity.getRating().getValue() != 0)
             ratingBar.setRating(entity.getRating().getValue());
+        else {
+            noRating.setVisibility(View.VISIBLE);
+            ratingBar.setVisibility(View.GONE);
+        }
 
-        if (entity != null && entity.getUserRating() != null)
+
+        if (entity != null && entity.getUserRating() != null && entity.getUserRating().getValue() != 0)
             userRatingBar.setRating(entity.getUserRating().getValue());
+        else {
+            noUserRating.setVisibility(View.VISIBLE);
+            userRatingBar.setVisibility(View.GONE);
+        }
     }
 
     private void addTags(MBEntity entity) {
@@ -74,12 +95,27 @@ public class UserDataFragment extends Fragment {
             tags.clear();
             tags.addAll(entity.getTags());
             tagsAdapter.notifyDataSetChanged();
+            if (tags.size() == 0) {
+                noTag.setVisibility(View.VISIBLE);
+                tagsList.setVisibility(View.GONE);
+            }
+        } else {
+            noTag.setVisibility(View.VISIBLE);
+            tagsList.setVisibility(View.GONE);
         }
 
         if (entity != null && entity.getUserTags() != null) {
             userTags.clear();
             userTags.addAll(entity.getUserTags());
             userTagsAdapter.notifyDataSetChanged();
+
+            if (userTags.size() == 0) {
+                noUserTag.setVisibility(View.VISIBLE);
+                userTagsList.setVisibility(View.GONE);
+            }
+        } else {
+            noUserTag.setVisibility(View.VISIBLE);
+            userTagsList.setVisibility(View.GONE);
         }
     }
 

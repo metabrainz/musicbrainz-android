@@ -14,28 +14,40 @@
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/white" />
 
-    <fragment
-        android:id="@+id/recording_info_fragment"
-        class="org.metabrainz.mobile.presentation.features.recording.RecordingInfoFragment"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        tools:layout="@layout/fragment_recording_info" />
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
-    <fragment
-        android:id="@+id/recording_releases_fragment"
-        class="org.metabrainz.mobile.presentation.features.recording.RecordingReleasesFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        tools:layout="@layout/fragment_recording_releases" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/user_data_fragment"
-        class="org.metabrainz.mobile.presentation.features.recording.RecordingUserDataFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        tools:layout="@layout/user_data_fragment" />
+            <fragment
+                android:id="@+id/recording_info_fragment"
+                class="org.metabrainz.mobile.presentation.features.recording.RecordingInfoFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_recording_info" />
 
+            <fragment
+                android:id="@+id/recording_releases_fragment"
+                class="org.metabrainz.mobile.presentation.features.recording.RecordingReleasesFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_recording_releases" />
+
+            <fragment
+                android:id="@+id/user_data_fragment"
+                class="org.metabrainz.mobile.presentation.features.recording.RecordingUserDataFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_user_data" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

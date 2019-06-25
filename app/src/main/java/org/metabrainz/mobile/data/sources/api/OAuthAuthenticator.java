@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+import org.metabrainz.mobile.util.Log;
 
 import java.io.IOException;
 
@@ -23,6 +24,7 @@ public class OAuthAuthenticator implements Authenticator {
 
         LoginService service = MusicBrainzServiceGenerator.createService(LoginService.class,
                 false);
+        Log.d("OkHttp : " + response.body().string());
 
         String refreshToken = LoginSharedPreferences.getRefreshToken();
 
@@ -41,9 +43,11 @@ public class OAuthAuthenticator implements Authenticator {
             editor.apply();
         }
 
-        return response.request()
-                .newBuilder()
-                .header("Authorization", "Bearer " + LoginSharedPreferences.getAccessToken())
-                .build();
+        if (token != null && token.getAccessToken() != null)
+            return response.request()
+                    .newBuilder()
+                    .header("Authorization", "Bearer " + token.getAccessToken())
+                    .build();
+        else return null;
     }
 }

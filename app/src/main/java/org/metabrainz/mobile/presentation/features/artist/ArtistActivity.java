@@ -12,6 +12,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 /**
  * Activity that retrieves and displays information about an artist given an
@@ -59,7 +60,8 @@ public class ArtistActivity extends MusicBrainzActivity {
          * like a getter method.
          */
         artistViewModel.initializeArtistData().observe(this, this::setArtist);
-        artistViewModel.getArtistData();
+        artistViewModel.getArtistData(LoginSharedPreferences.getLoginStatus()
+                == LoginSharedPreferences.STATUS_LOGGED_IN);
     }
 
     private void setArtist(Artist artist) {

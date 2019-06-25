@@ -50,7 +50,7 @@ public class LoginActivity extends MusicBrainzActivity {
                             + "?response_type=code"
                             + "&client_id=" + MusicBrainzServiceGenerator.CLIENT_ID
                             + "&redirect_uri=" + MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI
-                            + "&scope=profile%20collection"));
+                            + "&scope=profile%20collection%20tag%20rating"));
             startActivity(intent);
         } else Toast.makeText(this, "You are already logged in", Toast.LENGTH_SHORT).show();
     }

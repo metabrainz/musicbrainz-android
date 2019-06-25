@@ -89,12 +89,18 @@
 
     <string name="links">More Links</string>
 
-    <string name="ratings">Ratings</string>
-    <string name="user_ratings">Your Ratings</string>
+    <string name="ratings">Rating</string>
+    <string name="user_ratings">Your Rating</string>
     <string name="tags">Tags</string>
     <string name="user_tags">Your Tags</string>
     <string name="genres">Genres</string>
     <string name="user_genres">Your Genres</string>
-    <string name="rating_summary">This rating is the average of cumulative ratings given by all users.</string>
-    <string name="user_rating_summary">This is the rating you have given to the entity.</string>
+
+    <string name="no_user_tag">Either you have not added any tag to this entity yet
+        or you are not logged in.</string>
+    <string name="no_tag">No tag found</string>
+    <string name="no_user_rating">Either you have not rated this entity yet
+        or you are not logged in.</string>
+    <string name="no_rating">No rating found</string>
+
 </resources>

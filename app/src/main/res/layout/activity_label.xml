@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,28 +15,40 @@
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/white" />
 
-    <fragment
-        android:id="@+id/label_info_fragment"
-        class="org.metabrainz.mobile.presentation.features.label.LabelInfoFragment"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        tools:layout="@layout/fragment_label_info" />
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
-    <fragment
-        android:id="@+id/label_release_fragment"
-        class="org.metabrainz.mobile.presentation.features.label.LabelReleasesFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        tools:layout="@layout/fragment_label_releases" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/user_data_fragment"
-        class="org.metabrainz.mobile.presentation.features.label.LabelUserDataFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        tools:layout="@layout/user_data_fragment" />
+            <fragment
+                android:id="@+id/label_info_fragment"
+                class="org.metabrainz.mobile.presentation.features.label.LabelInfoFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_label_info" />
 
+            <fragment
+                android:id="@+id/label_release_fragment"
+                class="org.metabrainz.mobile.presentation.features.label.LabelReleasesFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_label_releases" />
+
+            <fragment
+                android:id="@+id/user_data_fragment"
+                class="org.metabrainz.mobile.presentation.features.label.LabelUserDataFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_user_data" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
