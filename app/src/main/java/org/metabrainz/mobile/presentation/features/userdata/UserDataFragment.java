@@ -46,7 +46,7 @@ public class UserDataFragment extends Fragment {
         return view;
     }
 
-    private void bindViews(View view) {
+    protected void bindViews(View view) {
         tagsList = view.findViewById(R.id.tags_list);
         tagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         tagsList.setAdapter(tagsAdapter);
@@ -95,11 +95,13 @@ public class UserDataFragment extends Fragment {
             tags.clear();
             tags.addAll(entity.getTags());
             tagsAdapter.notifyDataSetChanged();
-
             if (tags.size() == 0) {
                 noTag.setVisibility(View.VISIBLE);
                 tagsList.setVisibility(View.GONE);
             }
+        } else {
+            noTag.setVisibility(View.VISIBLE);
+            tagsList.setVisibility(View.GONE);
         }
 
         if (entity != null && entity.getUserTags() != null) {
@@ -111,6 +113,9 @@ public class UserDataFragment extends Fragment {
                 noUserTag.setVisibility(View.VISIBLE);
                 userTagsList.setVisibility(View.GONE);
             }
+        } else {
+            noUserTag.setVisibility(View.VISIBLE);
+            userTagsList.setVisibility(View.GONE);
         }
     }
 
