@@ -19,6 +19,7 @@ public class LabelLookupRepository {
             .createService(LookupService.class, true);
     private static LabelLookupRepository repository;
     private static MutableLiveData<Label> labelData;
+    private Callback<Label> labelCallback;
 
     private LabelLookupRepository() {
 
@@ -38,8 +39,8 @@ public class LabelLookupRepository {
         return labelData;
     }
 
-    public void getLabel(String MBID) {
-        service.lookupLabel(MBID, Constants.LOOKUP_LABEL_PARAMS).enqueue(new Callback<Label>() {
+    public void getLabel(String MBID, boolean isLoggedIn) {
+        labelCallback = new Callback<Label>() {
             @Override
             public void onResponse(Call<Label> call, Response<Label> response) {
                 Label Label = response.body();
@@ -50,7 +51,19 @@ public class LabelLookupRepository {
             public void onFailure(Call<Label> call, Throwable t) {
 
             }
-        });
+        };
+        if (isLoggedIn) fetchLabelWithUserData(MBID);
+        else fetchLabel(MBID);
+
+    }
+
+    private void fetchLabel(String MBID) {
+        service.lookupLabel(MBID, Constants.LOOKUP_LABEL_PARAMS).enqueue(labelCallback);
+    }
+
+    private void fetchLabelWithUserData(String MBID) {
+        service.lookupLabel(MBID, Constants.LOOKUP_LABEL_PARAMS + Constants.USER_DATA_PARAMS)
+                .enqueue(labelCallback);
     }
 
     /**

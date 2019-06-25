@@ -96,9 +96,11 @@
     <string name="genres">Genres</string>
     <string name="user_genres">Your Genres</string>
 
-    <string name="no_user_tag">You have not added any tag to this entity yet.</string>
+    <string name="no_user_tag">Either you have not added any tag to this entity yet
+        or you are not logged in.</string>
     <string name="no_tag">No tag found</string>
-    <string name="no_user_rating">You have not rated this entity yet.</string>
+    <string name="no_user_rating">Either you have not rated this entity yet
+        or you are not logged in.</string>
     <string name="no_rating">No rating found</string>
 
 </resources>

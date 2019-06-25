@@ -30,9 +30,9 @@ public class LabelViewModel extends ViewModel {
         return labelData;
     }
 
-    public void getLabelData() {
+    public void getLabelData(boolean isLoggedIn) {
         // Call the repository to query the database to update the label data
-        repository.getLabel(MBID);
+        repository.getLabel(MBID, isLoggedIn);
     }
 
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {

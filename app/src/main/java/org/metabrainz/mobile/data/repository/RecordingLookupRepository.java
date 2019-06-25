@@ -16,6 +16,7 @@ public class RecordingLookupRepository {
             .createService(LookupService.class, true);
     private static RecordingLookupRepository repository;
     private static MutableLiveData<Recording> recordingData;
+    private Callback<Recording> recordingCallback;
 
     private RecordingLookupRepository() {
 
@@ -35,8 +36,8 @@ public class RecordingLookupRepository {
         return recordingData;
     }
 
-    public void getRecording(String MBID) {
-        service.lookupRecording(MBID, Constants.LOOKUP_RECORDING_PARAMS).enqueue(new Callback<Recording>() {
+    public void getRecording(String MBID, boolean isLoggedIn) {
+        recordingCallback = new Callback<Recording>() {
             @Override
             public void onResponse(Call<Recording> call, Response<Recording> response) {
                 Recording Recording = response.body();
@@ -47,6 +48,18 @@ public class RecordingLookupRepository {
             public void onFailure(Call<Recording> call, Throwable t) {
 
             }
-        });
+        };
+
+        if (isLoggedIn) fetchRecordingWithUserData(MBID);
+        else fetchRecording(MBID);
+    }
+
+    private void fetchRecording(String MBID) {
+        service.lookupRecording(MBID, Constants.LOOKUP_RECORDING_PARAMS).enqueue(recordingCallback);
+    }
+
+    private void fetchRecordingWithUserData(String MBID) {
+        service.lookupRecording(MBID, Constants.LOOKUP_RECORDING_PARAMS + Constants.USER_DATA_PARAMS)
+                .enqueue(recordingCallback);
     }
 }
