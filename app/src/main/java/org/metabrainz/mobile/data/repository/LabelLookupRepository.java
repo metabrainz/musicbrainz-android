@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.Constants;
@@ -42,13 +43,13 @@ public class LabelLookupRepository {
     public void getLabel(String MBID, boolean isLoggedIn) {
         labelCallback = new Callback<Label>() {
             @Override
-            public void onResponse(Call<Label> call, Response<Label> response) {
+            public void onResponse(@NonNull Call<Label> call, @NonNull Response<Label> response) {
                 Label Label = response.body();
                 labelData.setValue(Label);
             }
 
             @Override
-            public void onFailure(Call<Label> call, Throwable t) {
+            public void onFailure(@NonNull Call<Label> call, @NonNull Throwable t) {
 
             }
         };

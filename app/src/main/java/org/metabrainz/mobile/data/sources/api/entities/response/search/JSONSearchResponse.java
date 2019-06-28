@@ -2,7 +2,7 @@ package org.metabrainz.mobile.data.sources.api.entities.response.search;
 
 import com.google.gson.annotations.SerializedName;
 
-public class JSONSearchResponse {
+class JSONSearchResponse {
     @SerializedName("created")
     private String timestamp;
     private int count;

@@ -10,12 +10,12 @@ import java.util.List;
 public class EventCollectionResponse {
 
     @SerializedName("event-count")
-    public int count;
+    private int count;
 
     @SerializedName("event-offset")
-    public int offset;
+    private int offset;
 
-    public List<Event> events = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
 
     public int getCount() {
         return count;

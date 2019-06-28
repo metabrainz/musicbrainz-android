@@ -21,9 +21,9 @@ import org.metabrainz.mobile.data.sources.api.entities.Url;
 
 import java.util.List;
 
-public class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickListener {
-    private List<Link> links;
-    private Context context;
+class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickListener {
+    private final List<Link> links;
+    private final Context context;
 
     public ArtistLinkAdapter(Context context, List<Link> links) {
         this.links = links;
@@ -100,8 +100,8 @@ public class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnCl
     }
 
     class LinkViewHolder extends RecyclerView.ViewHolder {
-        ImageView linkImageView;
-        TextView linkTextView;
+        final ImageView linkImageView;
+        final TextView linkTextView;
 
         LinkViewHolder(@NonNull View itemView) {
             super(itemView);

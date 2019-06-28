@@ -13,13 +13,15 @@ import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity;
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity;
 import org.metabrainz.mobile.presentation.view.DashTileView;
 
+import java.util.Objects;
+
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash);
-        getSupportActionBar().setHomeButtonEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(false);
         setupTiles();
     }
 

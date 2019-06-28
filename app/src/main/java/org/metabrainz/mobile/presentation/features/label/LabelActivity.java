@@ -11,6 +11,8 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
+import java.util.Objects;
+
 public class LabelActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "DebugLabelInfo";
@@ -24,7 +26,7 @@ public class LabelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_label);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         labelViewModel = ViewModelProviders.of(this).get(LabelViewModel.class);
 
@@ -46,6 +48,6 @@ public class LabelActivity extends AppCompatActivity {
     }
 
     private void setLabel(Label label) {
-        if (label != null) getSupportActionBar().setTitle(label.getName());
+        if (label != null) Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
     }
 }

@@ -5,13 +5,15 @@ import com.google.gson.annotations.SerializedName;
 public class Collection {
 
     @SerializedName("id")
+    private
     String mbid;
-    String type;
-    String editor;
-    String name;
+    private String type;
+    private String editor;
+    private String name;
     @SerializedName("entity-type")
+    private
     String entityType;
-    int count;
+    private int count;
 
     public String getMbid() {
         return mbid;

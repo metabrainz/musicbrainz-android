@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 
+import java.util.Objects;
+
 public class RecordingInfoFragment extends Fragment {
 
     private RecordingViewModel recordingViewModel;
@@ -24,7 +26,7 @@ public class RecordingInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_recording_info, container, false);
-        recordingViewModel = ViewModelProviders.of(getActivity()).get(RecordingViewModel.class);
+        recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
         recordingViewModel.initializeRecordingData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
         findViews(layout);
         return layout;

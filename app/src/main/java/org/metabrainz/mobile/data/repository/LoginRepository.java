@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.sources.api.LoginService;
@@ -45,13 +46,13 @@ public class LoginRepository {
                 MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)
                 .enqueue(new Callback<AccessToken>() {
                     @Override
-                    public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                    public void onResponse(@NonNull Call<AccessToken> call, @NonNull Response<AccessToken> response) {
                         AccessToken token = response.body();
                         accessTokenLiveData.setValue(token);
                     }
 
                     @Override
-                    public void onFailure(Call<AccessToken> call, Throwable t) {
+                    public void onFailure(@NonNull Call<AccessToken> call, @NonNull Throwable t) {
                         t.printStackTrace();
                     }
                 });
@@ -60,13 +61,13 @@ public class LoginRepository {
     public void fetchUserInfo() {
         service.getUserInfo().enqueue(new Callback<UserInfo>() {
             @Override
-            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+            public void onResponse(@NonNull Call<UserInfo> call, @NonNull Response<UserInfo> response) {
                 UserInfo info = response.body();
                 userInfoLiveData.postValue(info);
             }
 
             @Override
-            public void onFailure(Call<UserInfo> call, Throwable t) {
+            public void onFailure(@NonNull Call<UserInfo> call, @NonNull Throwable t) {
 
             }
         });

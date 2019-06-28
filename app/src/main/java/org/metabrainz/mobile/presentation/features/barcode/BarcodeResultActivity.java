@@ -22,10 +22,11 @@ import org.metabrainz.mobile.presentation.features.search.SearchAdapterRelease;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BarcodeResultActivity extends MusicBrainzActivity {
 
-    private List<Release> releases = new ArrayList<>();
+    private final List<Release> releases = new ArrayList<>();
     private BarcodeViewModel viewModel;
     private TextView noResultView;
     private ProgressBar progressBar;
@@ -37,7 +38,7 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_result);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         adapter = new SearchAdapterRelease(releases);
         recyclerView = findViewById(R.id.recycler_view);

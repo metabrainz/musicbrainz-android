@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
-public class Work extends MBEntity {
+class Work extends MBEntity {
     private String title;
     //TODO: Implement Relations
 

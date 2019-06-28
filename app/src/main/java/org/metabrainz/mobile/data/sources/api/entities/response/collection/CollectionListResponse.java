@@ -10,12 +10,14 @@ import java.util.List;
 public class CollectionListResponse {
 
     @SerializedName("collection-offset")
+    private
     String offset;
 
     @SerializedName("collection-limit")
+    private
     String limit;
 
-    List<Collection> collections = new ArrayList<>();
+    private List<Collection> collections = new ArrayList<>();
 
     public String getOffset() {
         return offset;

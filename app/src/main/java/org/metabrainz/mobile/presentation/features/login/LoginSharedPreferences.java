@@ -11,7 +11,7 @@ public class LoginSharedPreferences {
 
     public static final String ACCESS_TOKEN = "access_token";
     public static final String REFRESH_TOKEN = "refresh_token";
-    public static final String USERNAME = "username";
+    private static final String USERNAME = "username";
     public static final int STATUS_LOGGED_IN = 1;
     public static final int STATUS_LOGGED_OUT = 0;
 

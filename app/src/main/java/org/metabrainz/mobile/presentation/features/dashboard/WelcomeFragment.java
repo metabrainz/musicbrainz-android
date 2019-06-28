@@ -28,9 +28,10 @@ public class WelcomeFragment extends Fragment {
         updateText();
     }
 
-    public void updateText() {
+    private void updateText() {
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
-            welcomeText.setText(getString(R.string.welcome_loggedin) + " " + LoginSharedPreferences.getUsername());
+            String message = getString(R.string.welcome_loggedin) + " " + LoginSharedPreferences.getUsername();
+            welcomeText.setText(message);
         } else {
             welcomeText.setText(R.string.welcome);
         }

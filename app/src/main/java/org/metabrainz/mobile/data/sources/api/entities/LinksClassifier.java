@@ -1,13 +1,13 @@
 package org.metabrainz.mobile.data.sources.api.entities;
 
 public class LinksClassifier {
-    public static final String OFFICIAL_HOMEPAGE = "official homepage";
+    private static final String OFFICIAL_HOMEPAGE = "official homepage";
     public static final String DISCOGRAPHY = "discography";
-    public static final String FANPAGE = "fanpage";
-    public static final String BIOGRAPHY = "biography";
+    private static final String FANPAGE = "fanpage";
+    private static final String BIOGRAPHY = "biography";
     public static final String BBC_MUSIC_PAGE = "BBC Music Page";
     public static final String INTERVIEW = "interview";
-    public static final String IMAGE = "image";
+    private static final String IMAGE = "image";
     public static final String LYRICS = "lyrics";
     public static final String ONLINE_DATA = "online_data";
     public static final String SOCIAL_NETWORK = "social network";
@@ -20,10 +20,10 @@ public class LinksClassifier {
     public static final String BLOG = "blog";
     public static final String CROWDFUNDING = "crowdfunding";
     public static final String PATRONAGE = "patronage";
-    public static final String PURCHASE_FOR_MAIL_ORDER = "purchase for mail-order";
-    public static final String PURCHASE_FOR_DOWNLOAD = "purchase for download";
-    public static final String DOWNLOAD_FOR_FREE = "download for free";
-    public static final String STREAMING_MUSIC = "streaming music";
+    private static final String PURCHASE_FOR_MAIL_ORDER = "purchase for mail-order";
+    private static final String PURCHASE_FOR_DOWNLOAD = "purchase for download";
+    private static final String DOWNLOAD_FOR_FREE = "download for free";
+    private static final String STREAMING_MUSIC = "streaming music";
     public static final String BANDCAMP = "bandcamp";
     public static final String OTHER_DATABASES = "other databases";
     public static final String ALLMUSIC = "allmusic";
@@ -31,17 +31,17 @@ public class LinksClassifier {
     public static final String DISCOGS = "discogs";
     public static final String IMDB = "IMDb";
     public static final String IMSLP = "IMSLP";
-    public static final String LAST_FM = "last.fm";
+    private static final String LAST_FM = "last.fm";
     public static final String SECOND_HAND_SONGS = "secondhandsongs";
     public static final String SET_LIST_FM = "setlistfm";
     public static final String SONGKICK = "songkick";
     public static final String VGMDB = "vgmdb";
     public static final String VIAF = "VIAF";
-    public static final String WIKIDATA = "wikidata";
-    public static final String WIKIPEDIA = "wikipedia";
-    public static final String INFO = "info";
-    public static final String MISC = "misc";
-    public static final String GET_THE_MUSIC = "get the music";
+    private static final String WIKIDATA = "wikidata";
+    private static final String WIKIPEDIA = "wikipedia";
+    private static final String INFO = "info";
+    private static final String MISC = "misc";
+    private static final String GET_THE_MUSIC = "get the music";
 
     public static String classifyToDisplayText(Link link) {
         String type = link.getType();

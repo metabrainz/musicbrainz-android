@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Nummers</string>
+    <string name="dash_scan">Scannen</string>
+    <string name="dash_collections">Collecties</string>
+    <string name="dash_donate">Doneren</string>
+    <string name="dash_about">Over</string>
+    <string name="welcome">Welkom bij MusicBrainz!</string>
+
+    <string name="search_type_artist">Artiest</string>
+    <string name="search_type_release">Uitgave</string>
+    <string name="search_type_label">Platenmaatschappij</string>
+    <string name="search_type_recording">Opnames</string>
+    <string name="search_type_instrument">Instrument</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">Evenement</string>
+    <!-- SearchResultsActivity -->
+    <string name="no_results">Geen resultaten gevonden</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">Uitgave</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Artiest</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">Doneren</string>
+
+    <!-- AboutActivity -->
+    <string name="about_title">Over</string>
+    <!-- Actions -->
+    <string name="action_search">Zoeken</string>
+    <string name="settings_search">Zoeken</string>
+    <string name="tags">Tags</string>
+</resources>

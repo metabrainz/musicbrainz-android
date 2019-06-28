@@ -20,6 +20,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReleaseTracksFragment extends Fragment {
 
@@ -56,7 +57,7 @@ public class ReleaseTracksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(ReleaseViewModel.class);
+        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
         viewModel.initializeReleaseData().observe(this, this::setTracks);
     }
 

@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Alias {
@@ -15,6 +17,7 @@ public class Alias {
     @SerializedName("end-date")
     private String endDate;
 
+    @NonNull
     @Override
     public String toString() {
         return "Alias{" +

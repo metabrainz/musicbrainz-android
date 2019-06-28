@@ -14,7 +14,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
 import java.util.List;
 
 public class SearchAdapterInstrument extends SearchAdapter {
-    private List<Instrument> data;
+    private final List<Instrument> data;
 
     public SearchAdapterInstrument(List<Instrument> data) {
         this.data = data;
@@ -50,7 +50,10 @@ public class SearchAdapterInstrument extends SearchAdapter {
     }
 
     private static class InstrumentViewHolder extends EntityViewHolder {
-        TextView instrumentName, instrumentType, instrumentDisambiguation, instrumentDescription;
+        final TextView instrumentName;
+        final TextView instrumentType;
+        final TextView instrumentDisambiguation;
+        final TextView instrumentDescription;
 
         InstrumentViewHolder(@NonNull View itemView) {
             super(itemView);

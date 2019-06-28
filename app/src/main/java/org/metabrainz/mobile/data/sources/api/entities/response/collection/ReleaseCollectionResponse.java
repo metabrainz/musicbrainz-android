@@ -10,12 +10,12 @@ import java.util.List;
 public class ReleaseCollectionResponse {
 
     @SerializedName("release-count")
-    public int count;
+    private int count;
 
     @SerializedName("release-offset")
-    public int offset;
+    private int offset;
 
-    public List<Release> releases = new ArrayList<>();
+    private List<Release> releases = new ArrayList<>();
 
     public int getCount() {
         return count;

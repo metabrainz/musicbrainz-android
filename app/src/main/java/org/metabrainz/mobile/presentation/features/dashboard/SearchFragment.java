@@ -21,6 +21,8 @@ import org.metabrainz.mobile.presentation.IntentFactory.Extra;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 
+import java.util.Objects;
+
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     private Spinner searchTypeSpinner;
@@ -53,7 +55,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     private void setupSearchTypeSpinner() {
-        ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.searchType,
+        ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.searchType,
                 android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchTypeSpinner.setAdapter(typeAdapter);
@@ -95,7 +97,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     private void setupSearchView() {
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setIconifiedByDefault(false);

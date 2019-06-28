@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Треки</string>
+    <string name="dash_scan">Сканировать</string>
+    <string name="dash_collections">Коллекции</string>
+    <string name="dash_donate">Пожертвовать</string>
+    <string name="dash_about">О</string>
+    <string name="welcome">Добро пожаловать на MusicBrainz!</string>
+
+    <string name="search_type_artist">Исполнитель</string>
+    <string name="search_type_release">Релиз</string>
+    <string name="search_type_label">Лейбл</string>
+    <string name="search_type_recording">Запись</string>
+    <string name="search_type_instrument">Инструмент</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">Мероприятие</string>
+    <!-- SearchResultsActivity -->
+    <string name="no_results">Не найдено</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">Релиз</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Исполнитель</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">Пожертвовать</string>
+
+    <!-- AboutActivity -->
+    <string name="about_title">О</string>
+    <string name="action_logout">Выйти</string>
+
+    <string name="ratings">Рейтинг</string>
+    <string name="tags">Теги</string>
+</resources>

@@ -16,9 +16,9 @@ import org.metabrainz.mobile.presentation.IntentFactory;
 
 import java.util.List;
 
-public class CollectionListAdapter extends RecyclerView.Adapter {
+class CollectionListAdapter extends RecyclerView.Adapter {
 
-    private List<Collection> collections;
+    private final List<Collection> collections;
 
     public CollectionListAdapter(List<Collection> collections) {
         this.collections = collections;
@@ -44,12 +44,14 @@ public class CollectionListAdapter extends RecyclerView.Adapter {
     }
 
     private static class CollectionViewHolder extends RecyclerView.ViewHolder {
-        private TextView collectionNameView, collectionTypeView,
-                collectionCountView, collectionEntityView;
+        private final TextView collectionNameView;
+        private final TextView collectionTypeView;
+        private final TextView collectionCountView;
+        private final TextView collectionEntityView;
 
-        private View view;
+        private final View view;
 
-        public CollectionViewHolder(@NonNull View itemView) {
+        CollectionViewHolder(@NonNull View itemView) {
             super(itemView);
             this.view = itemView;
             collectionCountView = itemView.findViewById(R.id.collection_count);
@@ -58,7 +60,7 @@ public class CollectionListAdapter extends RecyclerView.Adapter {
             collectionTypeView = itemView.findViewById(R.id.collection_type);
         }
 
-        public void bind(Collection collection) {
+        void bind(Collection collection) {
             collectionNameView.setText(collection.getName());
             collectionTypeView.setText(collection.getType());
             collectionEntityView.setText(collection.getEntityType());

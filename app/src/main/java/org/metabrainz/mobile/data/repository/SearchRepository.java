@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.Constants;
@@ -22,6 +23,7 @@ import org.metabrainz.mobile.data.sources.api.entities.response.search.ReleaseSe
 import org.metabrainz.mobile.util.Log;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,13 +95,13 @@ public class SearchRepository {
         service.searchArtist(searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<ArtistSearchResponse>() {
                     @Override
-                    public void onResponse(Call<ArtistSearchResponse> call, Response<ArtistSearchResponse> response) {
+                    public void onResponse(@NonNull Call<ArtistSearchResponse> call, @NonNull Response<ArtistSearchResponse> response) {
                         ArtistSearchResponse searchResponse = response.body();
-                        artistResults.postValue(searchResponse.getArtists());
+                        artistResults.postValue(Objects.requireNonNull(searchResponse).getArtists());
                     }
 
                     @Override
-                    public void onFailure(Call<ArtistSearchResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ArtistSearchResponse> call, @NonNull Throwable t) {
                     }
                 });
     }
@@ -108,13 +110,13 @@ public class SearchRepository {
         service.searchRelease(searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<ReleaseSearchResponse>() {
                     @Override
-                    public void onResponse(Call<ReleaseSearchResponse> call, Response<ReleaseSearchResponse> response) {
+                    public void onResponse(@NonNull Call<ReleaseSearchResponse> call, @NonNull Response<ReleaseSearchResponse> response) {
                         ReleaseSearchResponse searchResponse = response.body();
-                        releaseResults.postValue(searchResponse.getReleases());
+                        releaseResults.postValue(Objects.requireNonNull(searchResponse).getReleases());
                     }
 
                     @Override
-                    public void onFailure(Call<ReleaseSearchResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ReleaseSearchResponse> call, @NonNull Throwable t) {
 
                     }
                 });
@@ -124,15 +126,15 @@ public class SearchRepository {
         service.searchLabel(searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<LabelSearchResponse>() {
                     @Override
-                    public void onResponse(Call<LabelSearchResponse> call, Response<LabelSearchResponse> response) {
+                    public void onResponse(@NonNull Call<LabelSearchResponse> call, @NonNull Response<LabelSearchResponse> response) {
                         LabelSearchResponse labelSearchResponse = response.body();
-                        labelResults.postValue(labelSearchResponse.getLabels());
+                        labelResults.postValue(Objects.requireNonNull(labelSearchResponse).getLabels());
                         for (Label label : labelSearchResponse.getLabels())
                             Log.d(label.toString());
                     }
 
                     @Override
-                    public void onFailure(Call<LabelSearchResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<LabelSearchResponse> call, @NonNull Throwable t) {
 
                     }
                 });
@@ -142,13 +144,13 @@ public class SearchRepository {
         service.searchReleaseGroup(searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<ReleaseGroupSearchResponse>() {
                     @Override
-                    public void onResponse(Call<ReleaseGroupSearchResponse> call, Response<ReleaseGroupSearchResponse> response) {
+                    public void onResponse(@NonNull Call<ReleaseGroupSearchResponse> call, @NonNull Response<ReleaseGroupSearchResponse> response) {
                         ReleaseGroupSearchResponse releaseGroupSearchResponse = response.body();
-                        releaseGroupResults.postValue(releaseGroupSearchResponse.getReleaseGroups());
+                        releaseGroupResults.postValue(Objects.requireNonNull(releaseGroupSearchResponse).getReleaseGroups());
                     }
 
                     @Override
-                    public void onFailure(Call<ReleaseGroupSearchResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ReleaseGroupSearchResponse> call, @NonNull Throwable t) {
 
                     }
                 });
@@ -158,15 +160,15 @@ public class SearchRepository {
         service.searchRecording(searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<RecordingSearchResponse>() {
                     @Override
-                    public void onResponse(Call<RecordingSearchResponse> call, Response<RecordingSearchResponse> response) {
+                    public void onResponse(@NonNull Call<RecordingSearchResponse> call, @NonNull Response<RecordingSearchResponse> response) {
                         RecordingSearchResponse recordingSearchResponse = response.body();
-                        recordingResults.postValue(recordingSearchResponse.getRecordings());
+                        recordingResults.postValue(Objects.requireNonNull(recordingSearchResponse).getRecordings());
                         for (Recording recording : recordingSearchResponse.getRecordings())
                             Log.d(recording.toString());
                     }
 
                     @Override
-                    public void onFailure(Call<RecordingSearchResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<RecordingSearchResponse> call, @NonNull Throwable t) {
 
                     }
                 });
@@ -176,13 +178,13 @@ public class SearchRepository {
         service.searchInstrument(searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<InstrumentSearchResponse>() {
                     @Override
-                    public void onResponse(Call<InstrumentSearchResponse> call, Response<InstrumentSearchResponse> response) {
+                    public void onResponse(@NonNull Call<InstrumentSearchResponse> call, @NonNull Response<InstrumentSearchResponse> response) {
                         InstrumentSearchResponse instrumentSearchResponse = response.body();
-                        instrumentResults.postValue(instrumentSearchResponse.getInstruments());
+                        instrumentResults.postValue(Objects.requireNonNull(instrumentSearchResponse).getInstruments());
                     }
 
                     @Override
-                    public void onFailure(Call<InstrumentSearchResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<InstrumentSearchResponse> call, @NonNull Throwable t) {
 
                     }
                 });
@@ -192,13 +194,13 @@ public class SearchRepository {
         service.searchEvent(searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<EventSearchResponse>() {
                     @Override
-                    public void onResponse(Call<EventSearchResponse> call, Response<EventSearchResponse> response) {
+                    public void onResponse(@NonNull Call<EventSearchResponse> call, @NonNull Response<EventSearchResponse> response) {
                         EventSearchResponse eventSearchResponse = response.body();
-                        eventResults.postValue(eventSearchResponse.getEvents());
+                        eventResults.postValue(Objects.requireNonNull(eventSearchResponse).getEvents());
                     }
 
                     @Override
-                    public void onFailure(Call<EventSearchResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<EventSearchResponse> call, @NonNull Throwable t) {
 
                     }
                 });

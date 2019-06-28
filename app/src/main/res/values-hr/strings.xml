@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="search_type_artist">Umjetnik</string>
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Umjetnik</string>
+
+</resources>

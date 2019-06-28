@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities.userdata;
 
 public class UserRating {
-    float value;
+    private float value;
 
     public float getValue() {
         return value;

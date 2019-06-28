@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.Constants;
@@ -16,8 +17,8 @@ public class ReleaseLookupRepository {
     private final static LookupService service = MusicBrainzServiceGenerator
             .createService(LookupService.class, true);
     private static ReleaseLookupRepository repository;
-    private MutableLiveData<Release> releaseLiveData;
-    private MutableLiveData<CoverArt> coverArtData;
+    private final MutableLiveData<Release> releaseLiveData;
+    private final MutableLiveData<CoverArt> coverArtData;
 
     private ReleaseLookupRepository() {
         releaseLiveData = new MutableLiveData<>();
@@ -41,13 +42,13 @@ public class ReleaseLookupRepository {
         service.lookupRelease(MBID, Constants.LOOKUP_RELEASE_PARAMS)
                 .enqueue(new Callback<Release>() {
                     @Override
-                    public void onResponse(Call<Release> call, Response<Release> response) {
+                    public void onResponse(@NonNull Call<Release> call, @NonNull Response<Release> response) {
                         Release release = response.body();
                         releaseLiveData.setValue(release);
                     }
 
                     @Override
-                    public void onFailure(Call<Release> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Release> call, @NonNull Throwable t) {
 
                     }
                 });
@@ -60,13 +61,13 @@ public class ReleaseLookupRepository {
     public void getCoverArt(String MBID) {
         service.getCoverArtAll(MBID).enqueue(new Callback<CoverArt>() {
             @Override
-            public void onResponse(Call<CoverArt> call, Response<CoverArt> response) {
+            public void onResponse(@NonNull Call<CoverArt> call, @NonNull Response<CoverArt> response) {
                 CoverArt coverArt = response.body();
                 coverArtData.setValue(coverArt);
             }
 
             @Override
-            public void onFailure(Call<CoverArt> call, Throwable t) {
+            public void onFailure(@NonNull Call<CoverArt> call, @NonNull Throwable t) {
 
             }
         });

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Spår</string>
+    <string name="releases">Utgivningar</string>
+    <string name="dash_scan">Läs in</string>
+    <string name="dash_collections">Samlingar</string>
+    <string name="dash_donate">Donera</string>
+    <string name="login">Logga in</string>
+    <string name="welcome">Välkommen till MusicBrainz!</string>
+
+    <string name="search_type_release">Utgivning</string>
+    <string name="search_type_label">Skivbolag</string>
+    <string name="search_type_recording">Inspelning</string>
+    <string name="search_type_instrument">Instrument</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">Händelse</string>
+    <!-- LoginActivity -->
+    <string name="auth_title">Logga in</string>
+
+    <!-- SearchResultsActivity -->
+    <string name="no_results">Inga resultat hittades</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">Utgivning</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">Donera</string>
+
+    <!-- Actions -->
+    <string name="action_search">Sök</string>
+    <string name="action_login">Logga in</string>
+    <string name="action_logout">Logga ut</string>
+
+    <string name="settings_search">Sök</string>
+    <string name="settings_ratings_tags">Betyg och taggar</string>
+    <string name="ratings">Betyg</string>
+    <string name="tags">Taggar</string>
+</resources>

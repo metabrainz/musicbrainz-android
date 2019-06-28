@@ -2,6 +2,8 @@
 
 <resources>
 
+    <string name="icon_button">Icon Button</string>
+    <string name="title_tracks">Tracks</string>
     <string name="releases">Releases</string>
     <string name="recording_releases">Appears On Releases</string>
     <!-- DashboardActivity -->
@@ -93,6 +95,7 @@
     <string name="user_ratings">Your Rating</string>
     <string name="tags">Tags</string>
     <string name="user_tags">Your Tags</string>
+
     <string name="genres">Genres</string>
     <string name="user_genres">Your Genres</string>
 

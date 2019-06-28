@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Треки</string>
+    <string name="dash_scan">Сканувати</string>
+    <string name="dash_collections">Колекції</string>
+    <string name="search_type_label">Ярлик</string>
+    <string name="ratings">Рейтинг</string>
+</resources>

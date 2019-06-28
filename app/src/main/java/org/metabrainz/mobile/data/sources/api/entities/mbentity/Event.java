@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
@@ -14,6 +16,7 @@ public class Event extends MBEntity {
     private String type;
     private String time;
 
+    @NonNull
     @Override
     public String toString() {
         return "Event{" +

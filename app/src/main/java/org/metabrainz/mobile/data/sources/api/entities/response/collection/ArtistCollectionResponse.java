@@ -10,12 +10,12 @@ import java.util.List;
 public class ArtistCollectionResponse {
 
     @SerializedName("artist-count")
-    public int count;
+    private int count;
 
     @SerializedName("artist-offset")
-    public int offset;
+    private int offset;
 
-    public List<Artist> artists = new ArrayList<>();
+    private List<Artist> artists = new ArrayList<>();
 
     public int getCount() {
         return count;

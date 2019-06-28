@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">المقطوعات</string>
+    <string name="dash_collections">التجميعات</string>
+    <string name="dash_about">ع</string>
+    <string name="search_type_artist">الفنّان</string>
+    <string name="search_type_release">الإصدار</string>
+    <!-- ReleaseActivity -->
+    <string name="release_title">الإصدار</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">الفنّان</string>
+
+    <!-- AboutActivity -->
+    <string name="about_title">ع</string>
+    <string name="version_text">الإصدارة</string>
+
+    <string name="ratings">التقييم</string>
+    <string name="tags">الوسوم</string>
+</resources>

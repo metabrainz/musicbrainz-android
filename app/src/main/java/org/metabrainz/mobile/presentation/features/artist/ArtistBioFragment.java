@@ -15,6 +15,8 @@ import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 
+import java.util.Objects;
+
 public class ArtistBioFragment extends Fragment {
 
     private ArtistViewModel artistViewModel;
@@ -30,7 +32,7 @@ public class ArtistBioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
+        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
         artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setArtistInfo);
         artistViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);

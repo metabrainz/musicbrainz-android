@@ -22,6 +22,7 @@ import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Activity to display a list of collection results to the user and support intents
@@ -34,20 +35,20 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     private CollectionAdapter adapter;
     private TextView noRes;
     private String entity, id;
-    private List<Artist> artistCollectionResults = new ArrayList<>();
-    private List<Release> releaseCollectionResults = new ArrayList<>();
-    private List<Label> labelCollectionResults = new ArrayList<>();
-    private List<Recording> recordingCollectionResults = new ArrayList<>();
-    private List<ReleaseGroup> releaseGroupCollectionResults = new ArrayList<>();
-    private List<Instrument> instrumentCollectionResults = new ArrayList<>();
-    private List<Event> eventCollectionResults = new ArrayList<>();
+    private final List<Artist> artistCollectionResults = new ArrayList<>();
+    private final List<Release> releaseCollectionResults = new ArrayList<>();
+    private final List<Label> labelCollectionResults = new ArrayList<>();
+    private final List<Recording> recordingCollectionResults = new ArrayList<>();
+    private final List<ReleaseGroup> releaseGroupCollectionResults = new ArrayList<>();
+    private final List<Instrument> instrumentCollectionResults = new ArrayList<>();
+    private final List<Event> eventCollectionResults = new ArrayList<>();
     private ProgressBar progressBar;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_details);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recycler_view);
 

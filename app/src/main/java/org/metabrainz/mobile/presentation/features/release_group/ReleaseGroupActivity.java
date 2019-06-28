@@ -11,6 +11,8 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
+import java.util.Objects;
+
 public class ReleaseGroupActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "DebugReleaseGroupInfo";
@@ -24,7 +26,7 @@ public class ReleaseGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release_group);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         releaseGroupViewModel = ViewModelProviders.of(this).get(ReleaseGroupViewModel.class);
 

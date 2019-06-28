@@ -18,6 +18,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ArtistReleasesFragment extends Fragment {
 
@@ -52,7 +53,7 @@ public class ArtistReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
+        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
         artistViewModel.initializeArtistData().observe(this, this::setReleases);
     }
 

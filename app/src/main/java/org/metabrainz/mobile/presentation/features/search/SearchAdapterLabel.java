@@ -17,7 +17,7 @@ import org.metabrainz.mobile.presentation.features.label.LabelActivity;
 import java.util.List;
 
 public class SearchAdapterLabel extends SearchAdapter {
-    private List<Label> data;
+    private final List<Label> data;
 
     public SearchAdapterLabel(List<Label> data) {
         this.data = data;
@@ -64,7 +64,10 @@ public class SearchAdapterLabel extends SearchAdapter {
     }
 
     private static class LabelViewHolder extends EntityViewHolder {
-        TextView labelName, labelType, labelDisambiguation, labelArea;
+        final TextView labelName;
+        final TextView labelType;
+        final TextView labelDisambiguation;
+        final TextView labelArea;
 
         LabelViewHolder(@NonNull View itemView) {
             super(itemView);

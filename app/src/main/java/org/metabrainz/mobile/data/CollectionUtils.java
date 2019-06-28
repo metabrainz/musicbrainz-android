@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class CollectionUtils {
@@ -27,10 +28,8 @@ public class CollectionUtils {
         collections.addAll(response.getCollections());
         JsonElement jsonElement = new JsonParser().parse(jsonResponse);
         JsonArray result = jsonElement.getAsJsonObject().getAsJsonArray("collections");
-        Iterator<JsonElement> iterator = result.iterator();
 
-        while (iterator.hasNext()) {
-            JsonElement element = iterator.next();
+        for (JsonElement element : result) {
             Set<Map.Entry<String, JsonElement>> entries = element.getAsJsonObject().entrySet();
             String count = "", id = "";
             for (Map.Entry<String, JsonElement> entry : entries) {
@@ -42,7 +41,7 @@ public class CollectionUtils {
         }
         for (Collection collection : collections) {
             String id = collection.getMbid();
-            collection.setCount(Integer.valueOf(countList.get(id)));
+            collection.setCount(Integer.valueOf(Objects.requireNonNull(countList.get(id))));
         }
     }
 

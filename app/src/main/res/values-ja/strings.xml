@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">トラック</string>
+    <string name="releases">リリース</string>
+    <string name="dash_scan">スキャン</string>
+    <string name="dash_collections">コレクション</string>
+    <string name="welcome">MusicBrainzへようこそ！</string>
+
+    <string name="search_type_artist">アーティスト</string>
+    <string name="search_type_release">リリース</string>
+    <string name="search_type_label">レーベル</string>
+    <string name="search_type_recording">レコーディング</string>
+    <string name="search_type_instrument">楽器</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">イベント</string>
+    <!-- SearchResultsActivity -->
+    <string name="no_results">結果が見つかりません</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">リリース</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">アーティスト</string>
+
+    <string name="settings_ratings_tags">レーティングとタグ</string>
+    <string name="tags">タグ</string>
+</resources>

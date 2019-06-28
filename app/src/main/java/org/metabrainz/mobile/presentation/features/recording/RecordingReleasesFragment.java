@@ -19,6 +19,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RecordingReleasesFragment extends Fragment {
 
@@ -54,7 +55,7 @@ public class RecordingReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recordingViewModel = ViewModelProviders.of(getActivity()).get(RecordingViewModel.class);
+        recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
         recordingViewModel.initializeRecordingData().observe(this, this::setReleases);
     }
 

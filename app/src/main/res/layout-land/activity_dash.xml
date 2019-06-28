@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Activity">
 
-  <LinearLayout style="@style/HomeTileRow">
+    <LinearLayout style="@style/HomeTileRow">
 
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_scan"
-      style="@style/HomeTile" />
+        <org.metabrainz.mobile.presentation.view.DashTileView
+            android:id="@+id/dash_scan"
+            style="@style/HomeTile" />
 
-    <RelativeLayout
-      android:id="@+id/search_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      android:layout_weight="0.5"
-      android:background="@color/white">
+        <RelativeLayout
+            android:id="@+id/search_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/white">
 
-      <fragment
-        android:id="@+id/search_fragment"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-          android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment" />
+            <fragment
+                android:id="@+id/search_fragment"
+                android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
 
-      <View
-        style="@style/Separator"
-        android:layout_alignParentBottom="true" />
-      <View
-        style="@style/SeparatorVertical"
-          android:layout_alignParentStart="true"
-          android:layout_alignParentLeft="true" />
-    </RelativeLayout>
+            <View
+                style="@style/Separator"
+                android:layout_alignParentBottom="true" />
 
-  </LinearLayout>
+            <View
+                style="@style/SeparatorVertical"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true" />
+        </RelativeLayout>
 
-  <LinearLayout style="@style/HomeTileRow">
+    </LinearLayout>
 
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_collections"
-      style="@style/HomeTile" />
+    <LinearLayout style="@style/HomeTileRow">
 
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_donate"
-      style="@style/HomeTile" />
+        <org.metabrainz.mobile.presentation.view.DashTileView
+            android:id="@+id/dash_collections"
+            style="@style/HomeTile" />
 
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_about"
-      style="@style/HomeTile" />
-  </LinearLayout>
+        <org.metabrainz.mobile.presentation.view.DashTileView
+            android:id="@+id/dash_donate"
+            style="@style/HomeTile" />
+
+        <org.metabrainz.mobile.presentation.view.DashTileView
+            android:id="@+id/dash_about"
+            style="@style/HomeTile" />
+    </LinearLayout>
 
 </LinearLayout>

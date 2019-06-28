@@ -10,12 +10,12 @@ import java.util.List;
 public class InstrumentCollectionResponse {
 
     @SerializedName("instrument-count")
-    public int count;
+    private int count;
 
     @SerializedName("instrument-offset")
-    public int offset;
+    private int offset;
 
-    public List<Instrument> instruments = new ArrayList<>();
+    private List<Instrument> instruments = new ArrayList<>();
 
     public int getCount() {
         return count;

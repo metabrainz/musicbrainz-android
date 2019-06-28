@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Κομμάτια</string>
+    <string name="dash_collections">Συλλογές</string>
+    <string name="welcome">Καλώς ήρθατε στο MusicBrainz!</string>
+
+    <string name="search_type_label">Δισκογραφική εταιρεία</string>
+    <!-- SearchResultsActivity -->
+    <string name="no_results">Δε βρέθηκαν αποτελέσματα</string>
+
+</resources>

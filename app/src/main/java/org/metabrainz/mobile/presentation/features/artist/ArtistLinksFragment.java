@@ -17,6 +17,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ArtistLinksFragment extends Fragment {
 
@@ -48,7 +49,7 @@ public class ArtistLinksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        artistViewModel = ViewModelProviders.of(getActivity()).get(ArtistViewModel.class);
+        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
         artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setLinks);
     }
 

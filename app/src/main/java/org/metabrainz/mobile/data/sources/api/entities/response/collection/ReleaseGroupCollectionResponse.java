@@ -10,13 +10,13 @@ import java.util.List;
 public class ReleaseGroupCollectionResponse {
 
     @SerializedName("release-group-count")
-    public int count;
+    private int count;
 
     @SerializedName("release-group-offset")
-    public int offset;
+    private int offset;
 
     @SerializedName("release-groups")
-    public List<ReleaseGroup> releaseGroups = new ArrayList<>();
+    private List<ReleaseGroup> releaseGroups = new ArrayList<>();
 
     public int getCount() {
         return count;

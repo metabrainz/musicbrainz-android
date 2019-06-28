@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CollectionAdapterRecording extends CollectionAdapter {
 
-    private List<Recording> data;
+    private final List<Recording> data;
 
     public CollectionAdapterRecording(List<Recording> data) {
         this.data = data;
@@ -64,7 +64,10 @@ public class CollectionAdapterRecording extends CollectionAdapter {
     }
 
     private static class RecordingViewHolder extends EntityViewHolder {
-        TextView recordingName, recordingArtist, recordingDisambiguation, recordingRelease;
+        final TextView recordingName;
+        final TextView recordingArtist;
+        final TextView recordingDisambiguation;
+        final TextView recordingRelease;
 
         RecordingViewHolder(@NonNull View itemView) {
             super(itemView);

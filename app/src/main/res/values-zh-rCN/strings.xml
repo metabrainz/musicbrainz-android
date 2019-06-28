@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">音轨</string>
+    <string name="dash_scan">扫描</string>
+    <string name="dash_collections">歌曲集</string>
+    <string name="search_type_artist">艺术家</string>
+    <string name="search_type_release">发布</string>
+    <string name="search_type_label">标签</string>
+    <string name="search_type_recording">录制</string>
+    <string name="search_type_instrument">乐器</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">事件</string>
+    <!-- ReleaseActivity -->
+    <string name="release_title">发布</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">艺术家</string>
+
+    <string name="ratings">评分</string>
+</resources>

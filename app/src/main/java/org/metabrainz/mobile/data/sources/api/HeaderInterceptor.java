@@ -1,5 +1,7 @@
 package org.metabrainz.mobile.data.sources.api;
 
+import androidx.annotation.NonNull;
+
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.io.IOException;
@@ -8,8 +10,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class HeaderInterceptor implements Interceptor {
+class HeaderInterceptor implements Interceptor {
 
+    @NonNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();

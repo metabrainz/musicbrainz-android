@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">Utwory</string>
+    <string name="dash_scan">Przeszukaj</string>
+    <string name="search_type_artist">Artysta</string>
+    <string name="search_type_release">Wydanie</string>
+    <string name="search_type_label">Wytwórnia</string>
+    <string name="search_type_recording">Nagranie</string>
+    <string name="search_type_instrument">Instrument</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">Wydarzenie</string>
+    <!-- ReleaseActivity -->
+    <string name="release_title">Wydanie</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">Artysta</string>
+
+</resources>

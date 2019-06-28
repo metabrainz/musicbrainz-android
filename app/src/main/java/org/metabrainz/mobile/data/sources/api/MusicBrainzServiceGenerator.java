@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MusicBrainzServiceGenerator {
-    public static final String API_BASE_URL = "https://musicbrainz.org/ws/2/";
+    private static final String API_BASE_URL = "https://musicbrainz.org/ws/2/";
     public static final String AUTH_URL = "https://musicbrainz.org/oauth2/authorize";
     public static final String CLIENT_ID = "BZn9PT8PXtzoUvR1ZIaXFw";
     public static final String CLIENT_SECRET = "WN6o5cjehjPAP4dib0zOmQ";

@@ -17,7 +17,7 @@ import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 import java.util.List;
 
 public class SearchAdapterRelease extends SearchAdapter {
-    private List<Release> data;
+    private final List<Release> data;
 
     public SearchAdapterRelease(List<Release> data) {
         this.data = data;
@@ -60,7 +60,10 @@ public class SearchAdapterRelease extends SearchAdapter {
     }
 
     private static class ReleaseViewHolder extends EntityViewHolder {
-        TextView releaseName, releaseArtist, releaseDisambiguation, releaseLabel;
+        final TextView releaseName;
+        final TextView releaseArtist;
+        final TextView releaseDisambiguation;
+        final TextView releaseLabel;
 
         ReleaseViewHolder(@NonNull View itemView) {
             super(itemView);

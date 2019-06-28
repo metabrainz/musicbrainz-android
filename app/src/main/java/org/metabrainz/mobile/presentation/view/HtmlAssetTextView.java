@@ -10,7 +10,7 @@ import org.metabrainz.mobile.util.Utils;
 
 public class HtmlAssetTextView extends AppCompatTextView {
 
-    private Context context;
+    private final Context context;
 
     public HtmlAssetTextView(Context context, AttributeSet attrs) {
         super(context, attrs);

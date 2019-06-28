@@ -46,9 +46,4 @@ public class App extends Application {
         robotoLight = Typeface.createFromAsset(instance.getAssets(), "Roboto-Light.ttf");
     }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-    }
-
 }

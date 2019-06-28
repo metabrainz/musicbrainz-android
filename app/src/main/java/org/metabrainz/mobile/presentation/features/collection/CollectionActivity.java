@@ -20,6 +20,7 @@ import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CollectionActivity extends MusicBrainzActivity {
 
@@ -37,7 +38,7 @@ public class CollectionActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         viewModel = ViewModelProviders.of(this).get(CollectionViewModel.class);
         collections = new ArrayList<>();

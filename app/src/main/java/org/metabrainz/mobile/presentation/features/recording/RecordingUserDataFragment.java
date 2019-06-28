@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
 
+import java.util.Objects;
+
 public class RecordingUserDataFragment extends UserDataFragment {
 
     private RecordingViewModel recordingViewModel;
@@ -21,7 +23,7 @@ public class RecordingUserDataFragment extends UserDataFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        recordingViewModel = ViewModelProviders.of(getActivity()).get(RecordingViewModel.class);
+        recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
         recordingViewModel.initializeRecordingData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }

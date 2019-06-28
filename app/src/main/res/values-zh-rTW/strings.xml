@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="title_tracks">音軌</string>
+    <string name="releases">發行品</string>
+    <string name="dash_scan">掃描</string>
+    <string name="dash_collections">收藏</string>
+    <string name="dash_donate">捐獻</string>
+    <string name="dash_about">關於</string>
+    <string name="login">登入</string>
+    <string name="welcome">歡迎來到MusicBrainz！</string>
+
+    <string name="search_type_artist">創作者</string>
+    <string name="search_type_release">發行品</string>
+    <string name="search_type_label">商標</string>
+    <string name="search_type_recording">錄音</string>
+    <string name="search_type_release_group">發行組</string>
+    <string name="search_type_instrument">樂器</string>
+
+    <!-- Searchable -->
+    <string name="search_type_event">活動</string>
+    <!-- LoginActivity -->
+    <string name="auth_title">登入</string>
+
+    <!-- SearchResultsActivity -->
+    <string name="no_results">找不到結果</string>
+
+    <!-- ReleaseActivity -->
+    <string name="release_title">發行品</string>
+
+    <!-- ReleaseActivity -->
+    <string name="artist_title">創作者</string>
+
+    <!-- DonateActivity -->
+    <string name="donate_title">捐獻</string>
+
+    <!-- AboutActivity -->
+    <string name="about_title">關於</string>
+    <string name="version_text">版本</string>
+
+    <!-- Actions -->
+    <string name="action_search">搜尋</string>
+    <string name="action_login">登入</string>
+    <string name="action_logout">登出</string>
+
+    <string name="settings_search">搜尋</string>
+    <string name="settings_ratings_tags">評分與標籤</string>
+    <string name="ratings">評分</string>
+    <string name="tags">標籤</string>
+</resources>
