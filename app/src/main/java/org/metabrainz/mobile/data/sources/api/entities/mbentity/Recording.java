@@ -27,6 +27,8 @@ public class Recording extends MBEntity {
     @SerializedName("release-events")
     private ArrayList<ReleaseEvent> releaseEvents = new ArrayList<>();
 
+    int score;
+
 
     @NonNull
     @Override
@@ -43,6 +45,14 @@ public class Recording extends MBEntity {
                 ", releaseGroups=" + releaseGroups +
                 ", releaseEvents=" + releaseEvents +
                 '}';
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getTitle() {
