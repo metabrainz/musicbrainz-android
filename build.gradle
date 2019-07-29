@@ -7,7 +7,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0-beta05'
+        classpath 'com.android.tools.build:gradle:3.5.0-rc01'
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -19,6 +19,7 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven {url "https://jitpack.io"}
     }
 }
 

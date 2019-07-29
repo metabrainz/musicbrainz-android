@@ -8,7 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.metabrainz.mobile.data.Constants;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;

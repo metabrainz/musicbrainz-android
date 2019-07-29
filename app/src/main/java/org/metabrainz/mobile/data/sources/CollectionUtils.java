@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.data;
+package org.metabrainz.mobile.data.sources;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
