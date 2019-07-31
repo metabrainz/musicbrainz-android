@@ -13,9 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MusicBrainzServiceGenerator {
     private static final String API_BASE_URL = "https://musicbrainz.org/ws/2/";
     public static final String AUTH_URL = "https://musicbrainz.org/oauth2/authorize";
+    public static final String ACOUST_ID_BASE_URL = "https://api.acoustid.org/v2/lookup";
     public static final String CLIENT_ID = "BZn9PT8PXtzoUvR1ZIaXFw";
     public static final String CLIENT_SECRET = "WN6o5cjehjPAP4dib0zOmQ";
     public static final String OAUTH_REDIRECT_URI = "org.metabrainz.mobile://oauth";
+    public static final String ACOUST_ID_KEY = "5mgEECwRkp";
 
     private static final int TIMEOUT = 20000;
     private static OAuthAuthenticator authenticator;
