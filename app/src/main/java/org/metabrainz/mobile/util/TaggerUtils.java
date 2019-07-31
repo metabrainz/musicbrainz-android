@@ -2,8 +2,15 @@ package org.metabrainz.mobile.util;
 
 import android.util.Pair;
 
+import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
+import org.metabrainz.mobile.data.sources.api.entities.Media;
+import org.metabrainz.mobile.data.sources.api.entities.Track;
+import org.metabrainz.mobile.data.sources.api.entities.acoustid.Medium;
+import org.metabrainz.mobile.data.sources.api.entities.acoustid.Result;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,42 +53,44 @@ public class TaggerUtils {
 
     // Calculate similarity of multi word strings
     public static double calculateMultiWordSimilarity(String first, String second) {
+        if (first != null && second != null) {
+            String[] firstList = first.toLowerCase().split("\\W+");
+            List<String> secondList = new ArrayList<>(Arrays.asList(second.toLowerCase().split("\\W+")));
+            double total = 0.0, totalScore = 0.0;
 
-        String[] firstList = first.toLowerCase().split("\\W+");
-        List<String> secondList = Arrays.asList(second.toLowerCase().split("\\W+"));
-        double total = 0.0, totalScore = 0.0;
+            for (String firstWord : firstList) {
+                double max = 0.0, currentScore = 0.0;
+                int pos = -1;
 
-        for (String firstWord : firstList) {
-            double max = 0, currentScore = 0;
-            int pos = -1;
+                for (String secondWord : secondList) {
+                    currentScore = calculateSimilarity(firstWord, secondWord);
 
-            for (String secondWord : secondList) {
-                currentScore = calculateSimilarity(firstWord, secondWord);
-
-                if (currentScore > max) {
-                    max = currentScore;
-                    pos = secondList.indexOf(secondWord);
+                    if (currentScore > max) {
+                        max = currentScore;
+                        pos = secondList.indexOf(secondWord);
+                    }
                 }
+
+                if (pos != -1) {
+                    totalScore += currentScore;
+                    if (currentScore > THRESHOLD)
+                        secondList.remove(pos);
+                }
+                total++;
             }
 
-            if (pos != -1) {
-                totalScore += currentScore;
-                if (currentScore > THRESHOLD)
-                    secondList.remove(pos);
-            }
-            total++;
-        }
+            total += secondList.size() * UNMATCHED_WORDS_WEIGHT;
 
-        total += secondList.size() * UNMATCHED_WORDS_WEIGHT;
-
-        if (total > 0)
-            return totalScore / total;
-        else
-            return 0.0;
+            if (total > 0)
+                return totalScore / total;
+            else
+                return 0.0;
+        } else return 0.0;
     }
 
-    public static double compareTracks(Recording localTrack, Recording searchedTrack) {
+    public static ComparisionResult compareTracks(Recording localTrack, Recording searchedTrack) {
         List<Pair<Double, Integer>> scoreList = new ArrayList<>();
+        String releaseMbid = "";
         double score = 0.0;
         if (localTrack != null) {
             if (localTrack.getTitle() != null && !localTrack.getTitle().isEmpty())
@@ -106,18 +115,26 @@ public class TaggerUtils {
             else localRelease = null;
 
             if (localRelease != null) {
-                double releaseScore, max = 0.0;
+                double max = 0.0;
+
+                // Base case if no suitable release found
+                if (!searchedTrack.getReleases().isEmpty())
+                    releaseMbid = searchedTrack.getReleases().get(0).getMbid();
                 for (Release searchedRelease : searchedTrack.getReleases()) {
-                    releaseScore = compareReleaseParts(localRelease, searchedRelease);
-                    if (releaseScore > max)
+                    double releaseScore = compareReleaseParts(localRelease, searchedRelease);
+                    if (releaseScore > max) {
                         max = releaseScore;
+                        releaseMbid = searchedRelease.getMbid();
+                    }
                 }
-                if (searchedTrack.getScore() != 0)
-                    score *= searchedTrack.getScore() / 100;
             }
 
+            if (searchedTrack.getScore() != 0)
+                score *= searchedTrack.getScore() / 100.0;
+
         }
-        return score;
+        Log.d(searchedTrack.getTitle() + " score: " + score);
+        return new ComparisionResult(score, releaseMbid, searchedTrack.getMbid());
     }
 
     public static double lengthScore(long firstLength, long secondLength) {
@@ -144,7 +161,7 @@ public class TaggerUtils {
             if (localRelease.getTrackCount() > 0 && searchedRelease.getTrackCount() > 0) {
                 int localTrackCount = localRelease.getTrackCount();
                 int searchedTrackCount = searchedRelease.getTrackCount();
-                double trackCountScore = 0.0;
+                double trackCountScore;
                 if (localTrackCount > searchedTrackCount)
                     trackCountScore = 0.0;
                 else if (localTrackCount < searchedTrackCount)
@@ -154,6 +171,7 @@ public class TaggerUtils {
                 scoreList.add(new Pair<>(trackCountScore, WEIGHTS.get(TOTAL_TRACKS)));
             }
 
+            // TODO : Add release formats, countries and types
         }
         return linearCombinationOfWeights(scoreList);
     }
@@ -163,5 +181,99 @@ public class TaggerUtils {
         for (Pair<Double, Integer> weight : weightList)
             weightSum += weight.first * weight.second;
         return weightSum;
+    }
+
+    public static List<Recording> parseResults(List<Result> results) {
+        List<Recording> recordings = new ArrayList<>();
+        if (results != null && !results.isEmpty()) {
+
+            for (Result result : results) {
+
+                int maxSources = 1;
+                for (org.metabrainz.mobile.data.sources.api.entities.acoustid.Recording
+                        responseRecording : result.getRecordings()) {
+
+                    if (responseRecording.getSources() > maxSources)
+                        maxSources = responseRecording.getSources();
+
+                    Recording recording = new Recording();
+
+                    ArrayList<Release> releases = recording.getReleases();
+
+                    for (org.metabrainz.mobile.data.sources.api.entities.acoustid.ReleaseGroup
+                            responseReleaseGroup : responseRecording.getReleaseGroups()) {
+
+                        for (org.metabrainz.mobile.data.sources.api.entities.acoustid.Release
+                                responseRelease : responseReleaseGroup.getReleases()) {
+
+                            Release release = new Release();
+
+                            release.setMbid(responseRelease.getId());
+
+                            ReleaseGroup releaseGroup = new ReleaseGroup();
+                            releaseGroup.setMbid(responseReleaseGroup.getId());
+                            release.setReleaseGroup(releaseGroup);
+
+                            if (responseRelease.getTitle() != null && !responseRelease.getTitle().isEmpty())
+                                release.setTitle(releaseGroup.getTitle());
+
+                            if (responseRelease.getCountry() != null && !responseRelease.getCountry().isEmpty())
+                                release.setCountry(responseRelease.getCountry());
+
+                            if (responseRelease.getMediums() != null) {
+                                for (Medium medium : responseRelease.getMediums()) {
+                                    Media media = new Media();
+
+                                    if (medium.getFormat() != null && !medium.getFormat().isEmpty())
+                                        media.setFormat(medium.getFormat());
+
+                                    Track track = new Track();
+
+                                    media.setTrackCount(medium.getTrackCount());
+
+                                    release.getMedia().add(media);
+                                }
+                            }
+                            releases.add(release);
+                        }
+                    }
+
+                    ArrayList<ArtistCredit> artistCredits = recording.getArtistCredits();
+
+                    for (org.metabrainz.mobile.data.sources.api.entities.acoustid.Artist
+                            responseArtist : responseRecording.getArtists()) {
+
+                        ArtistCredit artistCredit = new ArtistCredit();
+                        Artist artist = new Artist();
+
+                        artist.setMbid(responseArtist.getId());
+
+                        if (responseArtist.getName() != null && !responseArtist.getName().isEmpty()) {
+                            artistCredit.setName(responseArtist.getName());
+                            artist.setName(responseArtist.getName());
+                            artist.setSortName(responseArtist.getName());
+                        }
+
+                        if (responseArtist.getJoinphrase() != null && !responseArtist.getJoinphrase().isEmpty())
+                            artistCredit.setJoinphrase(responseArtist.getJoinphrase());
+
+                        artistCredit.setArtist(artist);
+
+                        artistCredits.add(artistCredit);
+                    }
+
+                    recording.setMbid(responseRecording.getId());
+
+                    if (responseRecording.getTitle() != null && !responseRecording.getTitle().isEmpty())
+                        recording.setTitle(responseRecording.getTitle());
+
+                    recording.setLength(responseRecording.getDuration() * 1000);
+
+                    recording.setScore(responseRecording.getSources() / maxSources * 100);
+                    recordings.add(recording);
+                }
+            }
+        }
+        return recordings;
     }
 }
