@@ -11,6 +11,7 @@ import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity;
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity;
+import org.metabrainz.mobile.presentation.features.tagger.TaggerActivity;
 import org.metabrainz.mobile.presentation.view.DashTileView;
 
 import java.util.Objects;
@@ -58,7 +59,8 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                 startActivity(IntentFactory.getDonate(getApplicationContext()));
                 break;
             case R.id.dash_about:
-                startActivity(IntentFactory.getAbout(getApplicationContext()));
+                Intent intent = new Intent(this, TaggerActivity.class);
+                startActivity(intent);
         }
     }
 

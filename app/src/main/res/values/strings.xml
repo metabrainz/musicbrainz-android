@@ -106,4 +106,9 @@
         or you are not logged in.</string>
     <string name="no_rating">No rating found</string>
 
+    <string name="lookup_metadata">Metadata</string>
+    <string name="lookup_fingerprint">Fingerprint</string>
+    <string name="lookup_label">Lookup using</string>
+    <string name="file_select">Select a file</string>
+
 </resources>
