@@ -1,12 +1,8 @@
 package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
-import org.metabrainz.mobile.data.sources.api.entities.Media;
-import org.metabrainz.mobile.data.sources.api.entities.ReleaseEvent;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,37 +11,12 @@ public class Recording extends MBEntity {
     private String title;
     private long length;
 
-    //TODO: Implement correct wrapper JSON
     @SerializedName("artist-credit")
     private ArrayList<ArtistCredit> artistCredits = new ArrayList<>();
     private ArrayList<Release> releases = new ArrayList<>();
     @SerializedName("track-count")
     private int trackCount;
-    private ArrayList<Media> media = new ArrayList<>();
-    @SerializedName("release-group")
-    private ArrayList<ReleaseGroup> releaseGroups = new ArrayList<>();
-    @SerializedName("release-events")
-    private ArrayList<ReleaseEvent> releaseEvents = new ArrayList<>();
-
-    int score;
-
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "Recording{" +
-                "mbid='" + mbid + '\'' +
-                ", name='" + title + '\'' +
-                ", disambiguation='" + disambiguation + '\'' +
-                ", length=" + length +
-                ", artistCredits=" + artistCredits +
-                ", releases=" + releases +
-                ", trackCount=" + trackCount +
-                ", media=" + media +
-                ", releaseGroups=" + releaseGroups +
-                ", releaseEvents=" + releaseEvents +
-                '}';
-    }
+    private int score;
 
     public int getScore() {
         return score;
@@ -95,36 +66,18 @@ public class Recording extends MBEntity {
         this.trackCount = trackCount;
     }
 
-    public ArrayList<Media> getMedia() {
-        return media;
-    }
-
-    public void setMedia(ArrayList<Media> media) {
-        this.media = media;
-    }
-
-    public ArrayList<ReleaseGroup> getReleaseGroups() {
-        return releaseGroups;
-    }
-
-    public void setReleaseGroups(ArrayList<ReleaseGroup> releaseGroups) {
-        this.releaseGroups = releaseGroups;
-    }
-
-    public ArrayList<ReleaseEvent> getReleaseEvents() {
-        return releaseEvents;
-    }
-
-    public void setReleaseEvents(ArrayList<ReleaseEvent> releaseEvents) {
-        this.releaseEvents = releaseEvents;
-    }
-
     public String getDisplayArtist() {
         StringBuilder builder = new StringBuilder();
         Iterator<ArtistCredit> iterator = artistCredits.iterator();
         while (iterator.hasNext()) {
             ArtistCredit credit = iterator.next();
-            builder.append(credit.getName());
+            String name = "";
+            if (credit.getName() != null && !credit.getName().isEmpty())
+                name = credit.getName();
+            else if (credit.getArtist() != null && credit.getArtist().getName() != null
+                    && !credit.getArtist().getName().isEmpty())
+                name = credit.getArtist().getName();
+            builder.append(name);
             if (iterator.hasNext())
                 builder.append(credit.getJoinphrase());
         }
