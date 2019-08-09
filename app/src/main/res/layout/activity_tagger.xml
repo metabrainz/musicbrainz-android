@@ -16,6 +16,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/selected_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/no_file_selected"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/choose_button" />
+
+    <TextView
         android:id="@+id/lookup_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,14 +35,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/choose_button" />
+        app:layout_constraintTop_toBottomOf="@id/selected_file_name" />
 
     <Button
         android:id="@+id/lookup_metadata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lookup_metadata"
-        app:layout_constraintBottom_toTopOf="@+id/local_track"
         app:layout_constraintEnd_toStartOf="@+id/lookup_fingerprint"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,42 +52,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lookup_fingerprint"
-        app:layout_constraintBottom_toTopOf="@+id/local_track"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/lookup_metadata"
         app:layout_constraintTop_toBottomOf="@id/lookup_label" />
 
-    <include
-        android:id="@+id/local_track"
-        layout="@layout/item_recording"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/searched_track"
+        android:layout_margin="4dp"
+        android:text="@string/save_button"
+        android:textAppearance="?android:attr/textAppearanceButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lookup_metadata" />
-
-    <include
-        android:id="@+id/searched_track"
-        layout="@layout/item_recording"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/local_track" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searched_track" />
+        app:layout_constraintTop_toBottomOf="@+id/save_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

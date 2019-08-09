@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.util.ComparisionResult;
 import org.metabrainz.mobile.util.Log;
 import org.metabrainz.mobile.util.Metadata;
+import org.metabrainz.mobile.util.MetadataChange;
 import org.metabrainz.mobile.util.PathUtils;
 import org.metabrainz.mobile.util.TaggerUtils;
 
@@ -43,17 +45,21 @@ import java.util.List;
 public class TaggerActivity extends AppCompatActivity {
 
     public static final int AUDIO_FILE_REQUEST_CODE = 0;
-    private final int READ_STORAGE_PERMISSION = 1;
-    private final int WRITE_STORAGE_PERMISSION = 2;
-    private boolean readStoragePermission;
+    private final int STORAGE_PERMISSION = 1;
+    private boolean readStoragePermission, writeStoragePermission, storagePermission;
     private TaggerViewModel viewModel;
     private RecyclerView recyclerView;
     private TaggerAdapter adapter;
+    private MetadataChangesAdapter metadataChangesAdapter;
+    private List<MetadataChange> changes;
     private List<Recording> recordings;
     private AudioFile audioFile;
     private Recording localTrack;
-    private Button buttonMetadata, buttonFingerprint;
+    private TextView fileNameTextView;
+    private Button buttonMetadata, buttonFingerprint, buttonSave;
     private ComparisionResult comparisionResult;
+    private Track track;
+    private Release release;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +68,19 @@ public class TaggerActivity extends AppCompatActivity {
 
         buttonMetadata = findViewById(R.id.lookup_metadata);
         buttonFingerprint = findViewById(R.id.lookup_fingerprint);
+        buttonSave = findViewById(R.id.save_button);
         buttonMetadata.setEnabled(false);
         buttonMetadata.setOnClickListener(v -> lookupTrackWithMetadata());
         buttonFingerprint.setEnabled(false);
         buttonFingerprint.setOnClickListener(v -> lookupTrackWithFingerprint());
+        buttonSave.setEnabled(false);
+        buttonSave.setOnClickListener(v -> writeTagsToFile());
+
+        fileNameTextView = findViewById(R.id.selected_file_name);
 
         recordings = new ArrayList<>();
+        changes = new ArrayList<>();
+        metadataChangesAdapter = new MetadataChangesAdapter(changes);
         viewModel = ViewModelProviders.of(this).get(TaggerViewModel.class);
         viewModel.getRecordingData().observe(this, this::processResults);
         viewModel.getMatchedReleaseData().observe(this, this::displayMatchedRelease);
@@ -75,14 +88,27 @@ public class TaggerActivity extends AppCompatActivity {
         adapter = new TaggerAdapter(recordings);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(metadataChangesAdapter);
 
         findViewById(R.id.choose_button).setOnClickListener(v -> {
+
             readStoragePermission = ContextCompat.checkSelfPermission(this,
                     Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+            writeStoragePermission = ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+
+            ArrayList<String> permissionsList = new ArrayList<>();
             if (!readStoragePermission)
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_STORAGE_PERMISSION);
+                permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            if (!writeStoragePermission)
+                permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+            String[] permissions = new String[permissionsList.size()];
+            permissions = permissionsList.toArray(permissions);
+            if (!permissionsList.isEmpty()) ActivityCompat.requestPermissions(this,
+                    permissions, STORAGE_PERMISSION);
             else chooseAudioFile();
         });
 
@@ -91,9 +117,10 @@ public class TaggerActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        readStoragePermission = requestCode == READ_STORAGE_PERMISSION && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED;
-        if (readStoragePermission)
+        storagePermission = requestCode == STORAGE_PERMISSION && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                grantResults[1] == PackageManager.PERMISSION_GRANTED;
+        if (storagePermission)
             chooseAudioFile();
         else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -116,13 +143,13 @@ public class TaggerActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        Log.d("Activity Result received");
         if (requestCode == AUDIO_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
             Log.d("File selected correctly");
             try {
                 Uri uri = data.getData();
                 String path = PathUtils.getRealPathFromURI(getApplicationContext(), uri);
                 audioFile = AudioFileIO.read(new File(path));
+                fileNameTextView.setText(audioFile.getFile().getName());
                 enableLookup();
             } catch (Exception e) {
                 Log.e(e.getMessage());
@@ -158,92 +185,103 @@ public class TaggerActivity extends AppCompatActivity {
         recordings.addAll(data);
         adapter.notifyDataSetChanged();
 
-        localTrack = Metadata.getRecordingFromFile(audioFile);
+        if (recordings.isEmpty()) {
+            Toast.makeText(this, "No result found", Toast.LENGTH_LONG).show();
+        } else {
+            localTrack = Metadata.getRecordingFromFile(audioFile);
 
-        double maxScore = 0.0;
-        for (Recording searchResult : recordings) {
-            ComparisionResult result = TaggerUtils.compareTracks(localTrack, searchResult);
-            if (result.getScore() > maxScore) {
-                maxScore = result.getScore();
-                comparisionResult = result;
+            double maxScore = 0.0;
+            for (Recording searchResult : recordings) {
+                ComparisionResult result = TaggerUtils.compareTracks(localTrack, searchResult);
+                if (result.getScore() > maxScore) {
+                    maxScore = result.getScore();
+                    comparisionResult = result;
+                }
             }
-        }
 
-        if (comparisionResult != null && comparisionResult.getReleaseMbid() != null
-                && !comparisionResult.getReleaseMbid().isEmpty())
-            viewModel.fetchMatchedRelease(comparisionResult.getReleaseMbid());
+            if (comparisionResult != null && comparisionResult.getReleaseMbid() != null
+                    && !comparisionResult.getReleaseMbid().isEmpty())
+                viewModel.fetchMatchedRelease(comparisionResult.getReleaseMbid());
+        }
     }
 
     private void displayMatchedRelease(Release release) {
-        Track track = null;
+        track = null;
+        this.release = release;
         if (release != null && release.getMedia() != null && !release.getMedia().isEmpty())
             for (Media media : release.getMedia())
                 for (Track search : media.getTracks())
                     if (search.getRecording().getMbid().equalsIgnoreCase(comparisionResult.getTrackMbid()))
                         track = search;
 
-        Recording recording = null;
-        if (track != null) recording = track.getRecording();
+        if (track != null && track.getRecording() != null) {
+            showDifferenceInMetadata();
+            buttonSave.setEnabled(true);
+        } else
+            Toast.makeText(this, "No result found", Toast.LENGTH_LONG).show();
+    }
 
-        if (localTrack != null) {
-            View itemView = findViewById(R.id.local_track);
-            TextView localRecordingName = itemView.findViewById(R.id.recording_name);
-            TextView localRecordingRelease = itemView.findViewById(R.id.recording_release);
-            TextView localRecordingDisambiguation = itemView.findViewById(R.id.recording_disambiguation);
-            TextView localRecordingArtist = itemView.findViewById(R.id.recording_artist);
-            localRecordingName.setText(localTrack.getTitle());
+    private void showDifferenceInMetadata() {
+        if (track != null && release != null) {
 
-            if (localTrack.getReleases() != null && !localTrack.getReleases().isEmpty())
-                setViewVisibility(localTrack.getReleases().get(0).getTitle(), localRecordingRelease);
-            setViewVisibility(localTrack.getDisplayArtist(), localRecordingArtist);
-            setViewVisibility(localTrack.getDisambiguation(), localRecordingDisambiguation);
-        }
-        if (recording != null) {
-            View itemView2 = findViewById(R.id.searched_track);
-            TextView searchedRecordingName = itemView2.findViewById(R.id.recording_name);
-            TextView searchedRecordingRelease = itemView2.findViewById(R.id.recording_release);
-            TextView searchedRecordingDisambiguation = itemView2.findViewById(R.id.recording_disambiguation);
-            TextView searchedRecordingArtist = itemView2.findViewById(R.id.recording_artist);
-            searchedRecordingName.setText(recording.getTitle());
+            changes.clear();
 
-            if (recording.getReleases() != null && !recording.getReleases().isEmpty())
-                setViewVisibility(recording.getReleases().get(0).getTitle(), searchedRecordingRelease);
-            setViewVisibility(recording.getDisplayArtist(), searchedRecordingArtist);
-            setViewVisibility(recording.getDisambiguation(), searchedRecordingDisambiguation);
+            Tag tag = audioFile.getTag();
 
-            writeTagsToFile(track, release);
+            changes.add(createChange(tag, FieldKey.MUSICBRAINZ_TRACK_ID, track.getRecording().getMbid()));
+            changes.add(createChange(tag, FieldKey.MUSICBRAINZ_RELEASE_TRACK_ID, track.getRecording().getMbid()));
+
+            String artist = track.getRecording().getDisplayArtist();
+            changes.add(createChange(tag, FieldKey.ARTIST, artist));
+            changes.add(createChange(tag, FieldKey.ARTIST_SORT, artist));
+            changes.add(createChange(tag, FieldKey.ALBUM_ARTIST, artist));
+            changes.add(createChange(tag, FieldKey.ALBUM_ARTIST_SORT, artist));
+            changes.add(createChange(tag, FieldKey.ALBUM, release.getTitle()));
+            changes.add(createChange(tag, FieldKey.ORIGINAL_YEAR, release.getDate()));
+            changes.add(createChange(tag, FieldKey.TRACK, String.valueOf(track.getPosition())));
+            changes.add(createChange(tag, FieldKey.TRACK_TOTAL, String.valueOf(release.getTrackCount())));
+            changes.add(createChange(tag, FieldKey.BARCODE, release.getBarcode()));
+            changes.add(createChange(tag, FieldKey.COUNTRY, release.getCountry()));
+            changes.add(createChange(tag, FieldKey.MUSICBRAINZ_RELEASE_STATUS, release.getStatus()));
+            changes.add(createChange(tag, FieldKey.MUSICBRAINZ_RELEASE_GROUP_ID, release.getReleaseGroup().getMbid()));
+            changes.add(createChange(tag, FieldKey.MUSICBRAINZ_RELEASEID, release.getMbid()));
+
+            metadataChangesAdapter.notifyDataSetChanged();
         }
     }
 
-    private void writeTagsToFile(Track track, Release release) {
-        try {
-            Tag tag = audioFile.getTag();
-            tag.setField(FieldKey.MUSICBRAINZ_TRACK_ID, track.getRecording().getMbid());
-            tag.setField(FieldKey.MUSICBRAINZ_RELEASE_TRACK_ID, track.getMbid());
+    private void writeTagsToFile() {
+        if (track != null && release != null) {
+            try {
+                Tag tag = audioFile.getTag();
+                tag.setField(FieldKey.MUSICBRAINZ_TRACK_ID, track.getRecording().getMbid());
+                tag.setField(FieldKey.MUSICBRAINZ_RELEASE_TRACK_ID, track.getMbid());
 
-            String artist = track.getRecording().getDisplayArtist();
-            tag.setField(FieldKey.ARTIST, artist);
-            tag.setField(FieldKey.ARTIST_SORT, artist);
-            tag.setField(FieldKey.ALBUM_ARTIST, artist);
-            tag.setField(FieldKey.ALBUM_ARTIST_SORT, artist);
+                String artist = track.getRecording().getDisplayArtist();
+                tag.setField(FieldKey.ARTIST, artist);
+                tag.setField(FieldKey.ARTIST_SORT, artist);
+                tag.setField(FieldKey.ALBUM_ARTIST, artist);
+                tag.setField(FieldKey.ALBUM_ARTIST_SORT, artist);
 
-            tag.setField(FieldKey.ALBUM, release.getTitle());
-            tag.setField(FieldKey.ORIGINAL_YEAR, release.getDate());
-            tag.setField(FieldKey.TRACK, String.valueOf(track.getPosition()));
-            tag.setField(FieldKey.TRACK_TOTAL, String.valueOf(release.getTrackCount()));
-            tag.setField(FieldKey.BARCODE, release.getBarcode());
-            tag.setField(FieldKey.COUNTRY, release.getCountry());
-            tag.setField(FieldKey.MUSICBRAINZ_RELEASE_STATUS, release.getStatus());
-            tag.setField(FieldKey.MUSICBRAINZ_RELEASE_GROUP_ID, release.getReleaseGroup().getMbid());
-            tag.setField(FieldKey.MUSICBRAINZ_RELEASEID, release.getMbid());
+                tag.setField(FieldKey.ALBUM, release.getTitle());
+                tag.setField(FieldKey.ORIGINAL_YEAR, release.getDate());
+                tag.setField(FieldKey.TRACK, String.valueOf(track.getPosition()));
+                tag.setField(FieldKey.TRACK_TOTAL, String.valueOf(release.getTrackCount()));
+                tag.setField(FieldKey.BARCODE, release.getBarcode());
+                tag.setField(FieldKey.COUNTRY, release.getCountry());
+                tag.setField(FieldKey.MUSICBRAINZ_RELEASE_STATUS, release.getStatus());
+                tag.setField(FieldKey.MUSICBRAINZ_RELEASE_GROUP_ID, release.getReleaseGroup().getMbid());
+                tag.setField(FieldKey.MUSICBRAINZ_RELEASEID, release.getMbid());
 
-            audioFile.setTag(tag);
-            audioFile.commit();
+                audioFile.setTag(tag);
+                audioFile.commit();
+                metadataChangesAdapter.notifyDataSetChanged();
 
-            Log.d(audioFile.getFile().getAbsolutePath());
+                Toast.makeText(this, "Changes saved.", Toast.LENGTH_SHORT).show();
 
-        } catch (Exception e) {
-            Log.e(e.getMessage());
+            } catch (Exception e) {
+                Log.e(e.getMessage());
+            }
         }
     }
 
@@ -252,6 +290,10 @@ public class TaggerActivity extends AppCompatActivity {
             view.setVisibility(View.VISIBLE);
             view.setText(text);
         } else view.setVisibility(View.GONE);
+    }
+
+    private MetadataChange createChange(Tag tag, FieldKey fieldKey, String newValue) {
+        return new MetadataChange(fieldKey, tag.getFirst(fieldKey), newValue);
     }
 
 }
