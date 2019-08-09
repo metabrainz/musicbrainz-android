@@ -5,9 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.webkit.MimeTypeMap;
 
 import androidx.loader.content.CursorLoader;
 
@@ -84,7 +86,27 @@ public class PathUtils {
         returnCursor.moveToFirst();
         String name = (returnCursor.getString(nameIndex));
         String size = (Long.toString(returnCursor.getLong(sizeIndex)));
-        File file = new File(context.getFilesDir(), name);
+        File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+        String extension = MimeTypeMap.getFileExtensionFromUrl(contentUri.toString());
+        String fullFileName = name;
+        boolean hasExtension = true;
+        if (!fullFileName.substring(fullFileName.lastIndexOf('.') + 1).equalsIgnoreCase(extension)) {
+            if (extension.isEmpty()) {
+                extension = ".mp3";
+                hasExtension = false;
+            }
+            fullFileName += extension;
+        }
+        File file = new File(directory.toString(), fullFileName);
+        int index = 1;
+        while (file.exists()) {
+            String newPath;
+            if (hasExtension)
+                newPath = name.substring(0, name.lastIndexOf('.')) + " (" + index + ")." + extension;
+            else newPath = name + " (" + index + ")." + extension;
+            file = new File(directory.toString(), newPath);
+            index++;
+        }
         try {
             InputStream inputStream = context.getContentResolver().openInputStream(contentUri);
             FileOutputStream outputStream = new FileOutputStream(file);
@@ -92,13 +114,13 @@ public class PathUtils {
             int maxBufferSize = 1 * 1024 * 1024;
             int bytesAvailable = inputStream.available();
 
-            //int bufferSize = 1024;
             int bufferSize = Math.min(bytesAvailable, maxBufferSize);
 
             final byte[] buffers = new byte[bufferSize];
             while ((read = inputStream.read(buffers)) != -1) {
                 outputStream.write(buffers, 0, read);
             }
+            Log.e("Original File Path   " + contentUri.getEncodedPath() + "    \n   " + contentUri.getPath());
             Log.e("File Size" + file.length());
             inputStream.close();
             outputStream.close();
