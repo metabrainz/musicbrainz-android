@@ -2,6 +2,9 @@ package org.metabrainz.mobile.presentation.features.tagger;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,20 +14,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.util.FileEntry;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.metabrainz.mobile.App.EXTRA_FILE_PATH;
-import static org.metabrainz.mobile.App.TAGGER_ROOT_DIRECTORY;
-
 public class FileSelectActivity extends AppCompatActivity {
+
+
+    public static final String EXTRA_FILE_PATH = "file_path";
+    public static final int ACTION_SELECT_AUDIO_FILE = 1;
+    public static final int ACTION_SELECT_DIRECTORY = 2;
+    public static final String FILE_SELECT_TYPE = "select_type";
+    private static final String ROOT_DIRECTORY = Environment.getExternalStorageDirectory().toString();
 
     private List<FileEntry> fileEntries;
     private FileSelectAdapter adapter;
     private RecyclerView recyclerView;
+    private Button buttonSelect, buttonUp;
+    private String currentPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +42,39 @@ public class FileSelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_file_select);
 
         fileEntries = new ArrayList<>();
-        adapter = new FileSelectAdapter(fileEntries, this::selectFile);
+        adapter = new FileSelectAdapter(fileEntries);
+
+        buttonSelect = findViewById(R.id.button_select);
+        buttonUp = findViewById(R.id.button_up);
+
         recyclerView = findViewById(R.id.file_list);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
-        displayFileList();
-        ((TextView) (findViewById(R.id.directory_path))).setText("/Internal Storage/Picard");
+
+        int requestType = getIntent().getIntExtra(FILE_SELECT_TYPE, ACTION_SELECT_AUDIO_FILE);
+        if (requestType == ACTION_SELECT_AUDIO_FILE) {
+            buttonSelect.setVisibility(View.GONE);
+            buttonUp.setVisibility(View.GONE);
+            adapter.setFileClickAction(this::selectFile);
+        } else if (requestType == ACTION_SELECT_DIRECTORY) {
+            buttonSelect.setOnClickListener(v -> selectDirectory());
+            buttonUp.setOnClickListener(v -> goToParentDirectory());
+            adapter.setFileClickAction(this::chooseDirectory);
+        }
+
+        recyclerView.setAdapter(adapter);
+        displayFileList(UserPreferences.getTaggerDirectoryPreference());
     }
 
-    private void displayFileList() {
-        File file = new File(TAGGER_ROOT_DIRECTORY);
+    private void displayFileList(String path) {
+        File file = new File(path);
         if (!file.exists()) file.mkdir();
+
+        fileEntries.clear();
+        currentPath = path;
+        ((TextView) (findViewById(R.id.directory_path))).setText(path);
+
         File[] files = file.listFiles();
         if (files != null) {
             for (File f : files) {
@@ -55,34 +85,6 @@ public class FileSelectActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
         }
-        /*
-        Uri uri = Uri.fromFile(file);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ContentResolver contentResolver = getContentResolver();
-            Uri docUri = DocumentsContract.buildDocumentUriUsingTree(uri,
-                    DocumentsContract.getTreeDocumentId(uri));
-            Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(uri,
-                    DocumentsContract.getTreeDocumentId(uri));
-
-            Cursor childCursor = contentResolver.query(childrenUri, new String[]{
-                    DocumentsContract.Document.COLUMN_DISPLAY_NAME, DocumentsContract.Document.COLUMN_MIME_TYPE},
-                    null, null, null);
-
-            try {
-                fileEntries.clear();
-                while (childCursor.moveToNext()){
-                    FileEntry entry = new FileEntry();
-                    entry.setName(childCursor.getString(0));
-                    fileEntries.add(entry);
-                }
-                adapter.notifyDataSetChanged();
-            }catch (Exception e){
-                Log.e(e.getMessage());
-            }finally {
-                childCursor.close();
-            }
-        */
-
     }
 
     private void selectFile(FileEntry fileEntry) {
@@ -91,5 +93,27 @@ public class FileSelectActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_FILE_PATH, fileEntry.getPath());
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private void selectDirectory() {
+        FileEntry entry = new FileEntry();
+        entry.setName(new File(currentPath).getName());
+        entry.setPath(currentPath);
+        selectFile(entry);
+    }
+
+    private void goToParentDirectory() {
+        File file = new File(currentPath);
+        if (file.isDirectory() && file.getParentFile() != null) {
+            buttonUp.setEnabled(true);
+            displayFileList(file.getParentFile().getAbsolutePath());
+            if (file.getParentFile().getAbsolutePath().equalsIgnoreCase(ROOT_DIRECTORY))
+                buttonUp.setEnabled(false);
+        }
+    }
+
+    private void chooseDirectory(FileEntry fileEntry) {
+        File file = new File(fileEntry.getPath());
+        if (file.isDirectory()) displayFileList(fileEntry.getPath());
     }
 }

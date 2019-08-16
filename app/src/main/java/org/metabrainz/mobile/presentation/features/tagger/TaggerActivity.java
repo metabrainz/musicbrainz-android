@@ -39,8 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.metabrainz.mobile.App.AUDIO_FILE_REQUEST_CODE;
-import static org.metabrainz.mobile.App.EXTRA_FILE_PATH;
 import static org.metabrainz.mobile.App.STORAGE_PERMISSION_REQUEST_CODE;
+import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.EXTRA_FILE_PATH;
 
 public class TaggerActivity extends AppCompatActivity {
 

@@ -14,7 +14,6 @@ public class App extends Application {
     public static final int DIRECTORY_SELECT_REQUEST_CODE = 0;
     public static final int AUDIO_FILE_REQUEST_CODE = 1;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 2;
-    public static final String EXTRA_FILE_PATH = "file_path";
     public static final String TAGGER_ROOT_DIRECTORY = Environment.getExternalStorageDirectory() + "/Picard/";
 
     public static String getUserAgent() {

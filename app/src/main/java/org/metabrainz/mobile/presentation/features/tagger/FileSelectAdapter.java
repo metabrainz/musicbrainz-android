@@ -18,9 +18,8 @@ public class FileSelectAdapter extends RecyclerView.Adapter<FileSelectAdapter.Fi
     private List<FileEntry> fileEntries;
     private OnFileClickAction fileClickAction;
 
-    public FileSelectAdapter(List<FileEntry> fileEntries, OnFileClickAction fileClickAction) {
+    public FileSelectAdapter(List<FileEntry> fileEntries) {
         this.fileEntries = fileEntries;
-        this.fileClickAction = fileClickAction;
     }
 
     @NonNull
@@ -38,6 +37,10 @@ public class FileSelectAdapter extends RecyclerView.Adapter<FileSelectAdapter.Fi
     @Override
     public int getItemCount() {
         return fileEntries.size();
+    }
+
+    public void setFileClickAction(OnFileClickAction fileClickAction) {
+        this.fileClickAction = fileClickAction;
     }
 
     interface OnFileClickAction {

@@ -1,11 +1,7 @@
 package org.metabrainz.mobile.presentation.features.settings;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.SearchRecentSuggestions;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -13,35 +9,43 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
+import org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity;
 import org.metabrainz.mobile.util.Utils;
 
 import static android.app.Activity.RESULT_OK;
 import static org.metabrainz.mobile.App.DIRECTORY_SELECT_REQUEST_CODE;
 import static org.metabrainz.mobile.App.STORAGE_PERMISSION_REQUEST_CODE;
+import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_CLEAR_SUGGESTIONS;
+import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_TAGGER_DIRECTORY;
+import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.ACTION_SELECT_DIRECTORY;
+import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.EXTRA_FILE_PATH;
+import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.FILE_SELECT_TYPE;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements androidx.preference.Preference.OnPreferenceClickListener {
 
-    private static final String CLEAR_SUGGESTIONS = "clear_suggestions";
-    private static final String TAGGER_DIRECTORY = "tagger_directory";
+    private Preference taggerDirectoryPreference;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
-        findPreference(CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
-        findPreference(TAGGER_DIRECTORY).setOnPreferenceClickListener(this);
+        findPreference(PREFERENCE_CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
+        taggerDirectoryPreference = findPreference(PREFERENCE_TAGGER_DIRECTORY);
+        taggerDirectoryPreference.setOnPreferenceClickListener(this);
     }
 
     @Override
     public boolean onPreferenceClick(androidx.preference.Preference preference) {
-        if (preference.getKey().equals(CLEAR_SUGGESTIONS)) {
+        if (preference.getKey().equals(PREFERENCE_CLEAR_SUGGESTIONS)) {
             clearSuggestionHistory();
             return true;
-        } else if (preference.getKey().equals(TAGGER_DIRECTORY)) {
+        } else if (preference.getKey().equals(PREFERENCE_TAGGER_DIRECTORY)) {
             String[] permissions = Utils.getPermissionsList(getContext());
             if (permissions.length > 0) ActivityCompat.requestPermissions(getActivity(),
                     permissions, STORAGE_PERMISSION_REQUEST_CODE);
@@ -59,12 +63,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
     }
 
     private void chooseDirectory() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String path = Environment.getExternalStorageDirectory().getPath().concat("/Picard/");
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-            intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.parse(path));
+        Intent intent = new Intent(getActivity(), FileSelectActivity.class);
+        intent.putExtra(FILE_SELECT_TYPE, ACTION_SELECT_DIRECTORY);
             startActivityForResult(intent, DIRECTORY_SELECT_REQUEST_CODE);
-        }
     }
 
     @Override
@@ -83,7 +84,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == DIRECTORY_SELECT_REQUEST_CODE && resultCode == RESULT_OK) {
-            //TODO: Implement option to let users select the tagger directory
+            String path = data.getExtras().getString(EXTRA_FILE_PATH);
+            if (path != null)
+                UserPreferences.setPreferenceTaggerDirectory(path);
         }
     }
 }
