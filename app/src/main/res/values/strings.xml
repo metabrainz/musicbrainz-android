@@ -70,6 +70,9 @@
     <string name="preferences_title">Settings</string>
     <string name="settings_search">Search</string>
     <string name="settings_suggestions">Suggestions</string>
+    <string name="settings_tagger">Tagger</string>
+    <string name="settings_tagger_directory">Files directory</string>
+    <string name="settings_tagger_directory_summary">Choose the directory where Picard can find your files</string>
     <string name="settings_suggestions_summary">Store and display search suggestions</string>
     <string name="settings_private_collections">Private Collections</string>
     <string name="settings_private_collections_summary">Fetch private collections also when the user is logged in.</string>
@@ -113,5 +116,7 @@
     <string name="save_button">Save changes</string>
     <string name="no_file_selected">No file selected</string>
     <string name="dash_tag">Tag</string>
+    <string name="save_checkbox">Save</string>
+    <string name="directory_path_label">Directory Path</string>
 
 </resources>

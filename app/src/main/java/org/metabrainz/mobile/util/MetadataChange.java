@@ -6,11 +6,21 @@ public class MetadataChange {
     private FieldKey tagName;
     private String originalValue;
     private String newValue;
+    private boolean discardChange;
 
     public MetadataChange(FieldKey tagName, String originalValue, String newValue) {
         this.tagName = tagName;
         this.originalValue = originalValue;
         this.newValue = newValue;
+        this.discardChange = false;
+    }
+
+    public boolean isDiscardChange() {
+        return discardChange;
+    }
+
+    public void setDiscardChange(boolean discardChange) {
+        this.discardChange = discardChange;
     }
 
     public FieldKey getTagName() {
