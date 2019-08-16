@@ -1,11 +1,8 @@
 package org.metabrainz.mobile.presentation.features.tagger;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,18 +31,19 @@ import org.metabrainz.mobile.util.ComparisionResult;
 import org.metabrainz.mobile.util.Log;
 import org.metabrainz.mobile.util.Metadata;
 import org.metabrainz.mobile.util.MetadataChange;
-import org.metabrainz.mobile.util.PathUtils;
 import org.metabrainz.mobile.util.TaggerUtils;
+import org.metabrainz.mobile.util.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.metabrainz.mobile.App.AUDIO_FILE_REQUEST_CODE;
+import static org.metabrainz.mobile.App.EXTRA_FILE_PATH;
+import static org.metabrainz.mobile.App.STORAGE_PERMISSION_REQUEST_CODE;
+
 public class TaggerActivity extends AppCompatActivity {
 
-    public static final int AUDIO_FILE_REQUEST_CODE = 0;
-    private final int STORAGE_PERMISSION = 1;
-    private boolean readStoragePermission, writeStoragePermission, storagePermission;
     private TaggerViewModel viewModel;
     private RecyclerView recyclerView;
     private TaggerAdapter adapter;
@@ -93,23 +90,13 @@ public class TaggerActivity extends AppCompatActivity {
         recyclerView.setAdapter(metadataChangesAdapter);
 
         findViewById(R.id.choose_button).setOnClickListener(v -> {
-
-            readStoragePermission = ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-            writeStoragePermission = ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-
-            ArrayList<String> permissionsList = new ArrayList<>();
-            if (!readStoragePermission)
-                permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-            if (!writeStoragePermission)
-                permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-            String[] permissions = new String[permissionsList.size()];
-            permissions = permissionsList.toArray(permissions);
-            if (!permissionsList.isEmpty()) ActivityCompat.requestPermissions(this,
-                    permissions, STORAGE_PERMISSION);
-            else chooseAudioFile();
+            String[] permissions = Utils.getPermissionsList(getApplicationContext());
+            if (permissions.length > 0) ActivityCompat.requestPermissions(this,
+                    permissions, STORAGE_PERMISSION_REQUEST_CODE);
+            else {
+                Intent intent = new Intent(this, FileSelectActivity.class);
+                startActivityForResult(intent, AUDIO_FILE_REQUEST_CODE);
+            }
         });
 
     }
@@ -117,8 +104,8 @@ public class TaggerActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        storagePermission = requestCode == STORAGE_PERMISSION && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+        boolean storagePermission = requestCode == STORAGE_PERMISSION_REQUEST_CODE &&
+                grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
                 grantResults[1] == PackageManager.PERMISSION_GRANTED;
         if (storagePermission)
             chooseAudioFile();
@@ -146,9 +133,8 @@ public class TaggerActivity extends AppCompatActivity {
         if (requestCode == AUDIO_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
             Log.d("File selected correctly");
             try {
-                Uri uri = data.getData();
-                String path = PathUtils.getRealPathFromURI(getApplicationContext(), uri);
-                audioFile = AudioFileIO.read(new File(path));
+                String filePath = data.getExtras().getString(EXTRA_FILE_PATH);
+                audioFile = AudioFileIO.read(new File(filePath));
                 fileNameTextView.setText(audioFile.getFile().getName());
                 enableLookup();
             } catch (Exception e) {
@@ -254,27 +240,14 @@ public class TaggerActivity extends AppCompatActivity {
         if (track != null && release != null) {
             try {
                 Tag tag = audioFile.getTag();
-                tag.setField(FieldKey.MUSICBRAINZ_TRACK_ID, track.getRecording().getMbid());
-                tag.setField(FieldKey.MUSICBRAINZ_RELEASE_TRACK_ID, track.getMbid());
-
-                String artist = track.getRecording().getDisplayArtist();
-                tag.setField(FieldKey.ARTIST, artist);
-                tag.setField(FieldKey.ARTIST_SORT, artist);
-                tag.setField(FieldKey.ALBUM_ARTIST, artist);
-                tag.setField(FieldKey.ALBUM_ARTIST_SORT, artist);
-
-                tag.setField(FieldKey.ALBUM, release.getTitle());
-                tag.setField(FieldKey.ORIGINAL_YEAR, release.getDate());
-                tag.setField(FieldKey.TRACK, String.valueOf(track.getPosition()));
-                tag.setField(FieldKey.TRACK_TOTAL, String.valueOf(release.getTrackCount()));
-                tag.setField(FieldKey.BARCODE, release.getBarcode());
-                tag.setField(FieldKey.COUNTRY, release.getCountry());
-                tag.setField(FieldKey.MUSICBRAINZ_RELEASE_STATUS, release.getStatus());
-                tag.setField(FieldKey.MUSICBRAINZ_RELEASE_GROUP_ID, release.getReleaseGroup().getMbid());
-                tag.setField(FieldKey.MUSICBRAINZ_RELEASEID, release.getMbid());
+                for (MetadataChange change : changes) {
+                    if (!change.isDiscardChange())
+                        tag.setField(change.getTagName(), change.getNewValue());
+                }
 
                 audioFile.setTag(tag);
                 audioFile.commit();
+                resetTagger();
                 metadataChangesAdapter.notifyDataSetChanged();
 
                 Toast.makeText(this, "Changes saved.", Toast.LENGTH_SHORT).show();
@@ -285,15 +258,16 @@ public class TaggerActivity extends AppCompatActivity {
         }
     }
 
-    private void setViewVisibility(String text, TextView view) {
-        if (text != null && !text.isEmpty() && !text.equalsIgnoreCase("null")) {
-            view.setVisibility(View.VISIBLE);
-            view.setText(text);
-        } else view.setVisibility(View.GONE);
-    }
-
     private MetadataChange createChange(Tag tag, FieldKey fieldKey, String newValue) {
         return new MetadataChange(fieldKey, tag.getFirst(fieldKey), newValue);
+    }
+
+    private void resetTagger() {
+        buttonSave.setEnabled(false);
+        buttonFingerprint.setEnabled(false);
+        buttonMetadata.setEnabled(false);
+        fileNameTextView.setText(getString(R.string.no_file_selected));
+
     }
 
 }

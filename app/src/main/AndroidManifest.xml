@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".presentation.features.tagger.FileSelectActivity"></activity>
         <activity android:name=".presentation.features.tagger.TaggerActivity" />
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"

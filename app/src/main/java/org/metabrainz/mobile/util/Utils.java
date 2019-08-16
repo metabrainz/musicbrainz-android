@@ -1,12 +1,17 @@
 package org.metabrainz.mobile.util;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+
+import androidx.core.content.ContextCompat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * A set of fairly general Android utility methods.
@@ -45,4 +50,20 @@ public class Utils {
         }
     }
 
+    public static String[] getPermissionsList(Context context) {
+        boolean readStoragePermission, writeStoragePermission;
+        readStoragePermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        writeStoragePermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+
+        ArrayList<String> permissionsList = new ArrayList<>();
+        if (!readStoragePermission)
+            permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (!writeStoragePermission)
+            permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        String[] permissions = new String[permissionsList.size()];
+        permissions = permissionsList.toArray(permissions);
+        return permissions;
+    }
 }
