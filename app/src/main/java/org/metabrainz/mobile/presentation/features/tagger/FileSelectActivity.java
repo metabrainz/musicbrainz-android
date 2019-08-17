@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class FileSelectActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button buttonSelect, buttonUp;
     private String currentPath;
+    private boolean filterFiles = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class FileSelectActivity extends AppCompatActivity {
         if (requestType == ACTION_SELECT_AUDIO_FILE) {
             buttonSelect.setVisibility(View.GONE);
             buttonUp.setVisibility(View.GONE);
+            filterFiles = true;
             adapter.setFileClickAction(this::selectFile);
         } else if (requestType == ACTION_SELECT_DIRECTORY) {
             buttonSelect.setOnClickListener(v -> selectDirectory());
@@ -78,6 +81,13 @@ public class FileSelectActivity extends AppCompatActivity {
         File[] files = file.listFiles();
         if (files != null) {
             for (File f : files) {
+                if (filterFiles) {
+                    int index = f.getAbsolutePath().lastIndexOf('.');
+                    String extension = f.getAbsolutePath().substring(index + 1);
+                    String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+                    if (mimeType == null || !mimeType.startsWith("audio"))
+                        continue;
+                }
                 FileEntry entry = new FileEntry();
                 entry.setName(f.getName());
                 entry.setPath(f.getAbsolutePath());
