@@ -3,17 +3,17 @@ package org.metabrainz.mobile.presentation.features.recording;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.Objects;
 
-public class RecordingActivity extends AppCompatActivity {
+public class RecordingActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugRecordingInfo";
 

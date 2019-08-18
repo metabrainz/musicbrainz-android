@@ -1,17 +1,17 @@
 package org.metabrainz.mobile.util;
 
-import android.Manifest;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
-
-import androidx.core.content.ContextCompat;
+import android.os.Build;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A set of fairly general Android utility methods.
@@ -50,20 +50,32 @@ public class Utils {
         }
     }
 
-    public static String[] getPermissionsList(Context context) {
-        boolean readStoragePermission, writeStoragePermission;
-        readStoragePermission = ContextCompat.checkSelfPermission(context,
-                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-        writeStoragePermission = ContextCompat.checkSelfPermission(context,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    public static ContextWrapper changeLanguage(Context context, String lang_code) {
+        Locale sysLocale;
 
-        ArrayList<String> permissionsList = new ArrayList<>();
-        if (!readStoragePermission)
-            permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (!writeStoragePermission)
-            permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        String[] permissions = new String[permissionsList.size()];
-        permissions = permissionsList.toArray(permissions);
-        return permissions;
+        Resources rs = context.getResources();
+        Configuration config = rs.getConfiguration();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            sysLocale = config.getLocales().get(0);
+        } else {
+            sysLocale = config.locale;
+        }
+        if (!lang_code.equals("") && !sysLocale.getLanguage().equals(lang_code)) {
+            Locale locale = new Locale(lang_code);
+            Locale.setDefault(locale);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                config.setLocale(locale);
+            } else {
+                config.locale = locale;
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                context = context.createConfigurationContext(config);
+            } else {
+                context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+            }
+        }
+
+        return new ContextWrapper(context);
     }
 }

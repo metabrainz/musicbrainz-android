@@ -17,7 +17,7 @@ import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 import org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity;
-import org.metabrainz.mobile.util.Utils;
+import org.metabrainz.mobile.util.TaggerUtils;
 
 import static android.app.Activity.RESULT_OK;
 import static org.metabrainz.mobile.App.DIRECTORY_SELECT_REQUEST_CODE;
@@ -46,7 +46,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
             clearSuggestionHistory();
             return true;
         } else if (preference.getKey().equals(PREFERENCE_TAGGER_DIRECTORY)) {
-            String[] permissions = Utils.getPermissionsList(getContext());
+            String[] permissions = TaggerUtils.getPermissionsList(getContext());
             if (permissions.length > 0) ActivityCompat.requestPermissions(getActivity(),
                     permissions, STORAGE_PERMISSION_REQUEST_CODE);
             else chooseDirectory();

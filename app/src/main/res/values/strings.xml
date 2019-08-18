@@ -120,5 +120,9 @@
     <string name="directory_path_label">Directory Path</string>
     <string name="select_button">Select</string>
     <string name="up_button">Up</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_use_language">Use English only</string>
+    <string name="settings_use_language_summary">This option overrides the user specified system language and
+    displays all the user interface in English only.</string>
 
 </resources>

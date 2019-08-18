@@ -13,6 +13,7 @@ public class UserPreferences {
     public static final String PREFERENCE_TAGGER_DIRECTORY = "tagger_directory";
     public static final String PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections";
     public static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
+    public static final String PREFERENCE_SYSTEM_LANGUAGE = "use_english";
 
     private static SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(App.getContext());
@@ -28,6 +29,10 @@ public class UserPreferences {
 
     public static String getTaggerDirectoryPreference() {
         return UserPreferences.getPreferences().getString(PREFERENCE_TAGGER_DIRECTORY, TAGGER_ROOT_DIRECTORY);
+    }
+
+    public static boolean getSystemLanguagePreference() {
+        return UserPreferences.getPreferences().getBoolean(PREFERENCE_SYSTEM_LANGUAGE, false);
     }
 
     public static void setPreferenceTaggerDirectory(String path) {
