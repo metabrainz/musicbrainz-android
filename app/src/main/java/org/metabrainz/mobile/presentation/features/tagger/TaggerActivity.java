@@ -32,7 +32,6 @@ import org.metabrainz.mobile.util.Log;
 import org.metabrainz.mobile.util.Metadata;
 import org.metabrainz.mobile.util.MetadataChange;
 import org.metabrainz.mobile.util.TaggerUtils;
-import org.metabrainz.mobile.util.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -90,7 +89,7 @@ public class TaggerActivity extends AppCompatActivity {
         recyclerView.setAdapter(metadataChangesAdapter);
 
         findViewById(R.id.choose_button).setOnClickListener(v -> {
-            String[] permissions = Utils.getPermissionsList(getApplicationContext());
+            String[] permissions = TaggerUtils.getPermissionsList(getApplicationContext());
             if (permissions.length > 0) ActivityCompat.requestPermissions(this,
                     permissions, STORAGE_PERMISSION_REQUEST_CODE);
             else {

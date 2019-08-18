@@ -29,19 +29,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/file_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="4dp"
         app:layout_constraintBottom_toTopOf="@+id/button_select"
         app:layout_constraintTop_toBottomOf="@+id/directory_path"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="4dp"
         tools:listitem="@layout/item_file" />
 
     <Button
         android:id="@+id/button_up"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:text="@string/up_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_select"
@@ -52,7 +50,6 @@
         android:id="@+id/button_select"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:text="@string/select_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
