@@ -36,6 +36,7 @@ import org.metabrainz.mobile.util.TaggerUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.metabrainz.mobile.App.AUDIO_FILE_REQUEST_CODE;
 import static org.metabrainz.mobile.App.STORAGE_PERMISSION_REQUEST_CODE;
@@ -61,6 +62,8 @@ public class TaggerActivity extends MusicBrainzActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tagger);
+        setSupportActionBar(findViewById(R.id.toolbar));
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         buttonMetadata = findViewById(R.id.lookup_metadata);
         buttonFingerprint = findViewById(R.id.lookup_fingerprint);

@@ -6,7 +6,7 @@ android {
         applicationId "org.metabrainz.android"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 26
+        versionCode 27
 
         versionName "2.4"
         multiDexEnabled true
