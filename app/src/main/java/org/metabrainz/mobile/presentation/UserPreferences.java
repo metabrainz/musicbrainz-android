@@ -5,19 +5,18 @@ import android.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
 
+import static org.metabrainz.mobile.App.TAGGER_ROOT_DIRECTORY;
+
 public class UserPreferences {
 
-    private static final String PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections";
-    private static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
+    public static final String PREFERENCE_CLEAR_SUGGESTIONS = "clear_suggestions";
+    public static final String PREFERENCE_TAGGER_DIRECTORY = "tagger_directory";
+    public static final String PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections";
+    public static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
+    public static final String PREFERENCE_SYSTEM_LANGUAGE = "use_english";
 
     private static SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(App.getContext());
-    }
-
-    public static void setPreferenceGetPrivateCollections(boolean choice) {
-        SharedPreferences.Editor editor = UserPreferences.getPreferences().edit();
-        editor.putBoolean(PREFERENCE_GET_PRIVATE_COLLECTIONS, choice);
-        editor.apply();
     }
 
     public static boolean getPrivateCollectionsPreference() {
@@ -28,9 +27,17 @@ public class UserPreferences {
         return UserPreferences.getPreferences().getBoolean(PREFERENCE_RATINGS_TAGS, false);
     }
 
-    public static void setPreferenceRatingsTags(boolean choice) {
+    public static String getTaggerDirectoryPreference() {
+        return UserPreferences.getPreferences().getString(PREFERENCE_TAGGER_DIRECTORY, TAGGER_ROOT_DIRECTORY);
+    }
+
+    public static boolean getSystemLanguagePreference() {
+        return UserPreferences.getPreferences().getBoolean(PREFERENCE_SYSTEM_LANGUAGE, false);
+    }
+
+    public static void setPreferenceTaggerDirectory(String path) {
         SharedPreferences.Editor editor = UserPreferences.getPreferences().edit();
-        editor.putBoolean(PREFERENCE_RATINGS_TAGS, choice);
+        editor.putString(PREFERENCE_TAGGER_DIRECTORY, path);
         editor.apply();
     }
 

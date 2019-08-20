@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -37,6 +38,13 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        if (UserPreferences.getSystemLanguagePreference()) {
+            Context context = Utils.changeLanguage(newBase, "en");
+            super.attachBaseContext(context);
+        } else super.attachBaseContext(newBase);
+    }
 
     private void sendFeedback() {
         try {

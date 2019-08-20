@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/Activity">
 
-    <fragment
-        android:id="@+id/search_fragment"
-        android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:orientation="vertical">
 
-    <View
-        style="@style/Separator"
-        android:layout_below="@id/search_fragment" />
+        <fragment
+            android:id="@+id/search_fragment"
+            android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <fragment
-        android:id="@+id/welcome_fragment"
-        android:name="org.metabrainz.mobile.presentation.features.dashboard.WelcomeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        <View style="@style/Separator" />
 
-    <View
-        android:id="@+id/separator"
-        style="@style/Separator"
-        android:layout_above="@id/welcome_fragment" />
+        <include
+            android:id="@+id/dash_buttons"
+            layout="@layout/fragment_dash_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <include
-        android:id="@+id/dash_buttons"
-        layout="@layout/fragment_dash_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/separator"
-        android:layout_below="@id/search_fragment" />
+        <View style="@style/Separator" />
 
-</RelativeLayout>
+        <fragment
+            android:id="@+id/welcome_fragment"
+            android:name="org.metabrainz.mobile.presentation.features.dashboard.WelcomeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

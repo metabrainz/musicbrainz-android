@@ -6,6 +6,8 @@
     <!-- Base -->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#00ff00</color>
 
     <!-- Theme -->
     <color name="main_bg">#eeeeee</color>

@@ -3,17 +3,18 @@ package org.metabrainz.mobile.presentation.features.release_group;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.Objects;
 
-public class ReleaseGroupActivity extends AppCompatActivity {
+public class ReleaseGroupActivity extends MusicBrainzActivity {
+
 
     public static final String LOG_TAG = "DebugReleaseGroupInfo";
 

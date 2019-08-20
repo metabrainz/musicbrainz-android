@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.CollectionUtils;
+import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.UserPreferences;

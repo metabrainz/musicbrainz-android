@@ -70,6 +70,9 @@
     <string name="preferences_title">Settings</string>
     <string name="settings_search">Search</string>
     <string name="settings_suggestions">Suggestions</string>
+    <string name="settings_tagger">Tagger</string>
+    <string name="settings_tagger_directory">Files directory</string>
+    <string name="settings_tagger_directory_summary">Choose the directory where Picard can find your files</string>
     <string name="settings_suggestions_summary">Store and display search suggestions</string>
     <string name="settings_private_collections">Private Collections</string>
     <string name="settings_private_collections_summary">Fetch private collections also when the user is logged in.</string>
@@ -105,5 +108,21 @@
     <string name="no_user_rating">Either you have not rated this entity yet
         or you are not logged in.</string>
     <string name="no_rating">No rating found</string>
+
+    <string name="lookup_metadata">Metadata</string>
+    <string name="lookup_fingerprint">Fingerprint</string>
+    <string name="lookup_label">Lookup using</string>
+    <string name="file_select">Select a file</string>
+    <string name="save_button">Save changes</string>
+    <string name="no_file_selected">No file selected</string>
+    <string name="dash_tag">Tag</string>
+    <string name="save_checkbox">Save</string>
+    <string name="directory_path_label">Directory Path</string>
+    <string name="select_button">Select</string>
+    <string name="up_button">Up</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_use_language">Use English only</string>
+    <string name="settings_use_language_summary">This option overrides the user specified system language and
+    displays all the user interface in English only.</string>
 
 </resources>

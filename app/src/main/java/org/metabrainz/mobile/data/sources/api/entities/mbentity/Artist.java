@@ -28,13 +28,6 @@ public class Artist extends MBEntity {
     private ArrayList<Link> relations = new ArrayList<>();
     private ArrayList<Release> releases = new ArrayList<>();
 
-    public Artist(String mbid, String name, String country, String disambiguation) {
-        this.mbid = mbid;
-        this.name = name;
-        this.country = country;
-        this.disambiguation = disambiguation;
-    }
-
     public ArrayList<Release> getReleases() {
         return releases;
     }

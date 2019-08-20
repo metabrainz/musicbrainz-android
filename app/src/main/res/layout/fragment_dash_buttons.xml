@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-  <LinearLayout style="@style/HomeTileRow">
+    <org.metabrainz.mobile.presentation.view.DashTileView
+        android:id="@+id/dash_scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_scan"
-      style="@style/HomeTile" />
+    <org.metabrainz.mobile.presentation.view.DashTileView
+        android:id="@+id/dash_collections"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_collections"
-      style="@style/HomeTile" />
-  </LinearLayout>
+    <org.metabrainz.mobile.presentation.view.DashTileView
+        android:id="@+id/dash_donate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-  <LinearLayout style="@style/HomeTileRow">
+    <org.metabrainz.mobile.presentation.view.DashTileView
+        android:id="@+id/dash_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_donate"
-      style="@style/HomeTile" />
-
-      <org.metabrainz.mobile.presentation.view.DashTileView
-      android:id="@+id/dash_about"
-      style="@style/HomeTile" />
-  </LinearLayout>
+    <org.metabrainz.mobile.presentation.view.DashTileView
+        android:id="@+id/dash_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

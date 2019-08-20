@@ -9,8 +9,10 @@ import android.view.View.OnClickListener;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.about.AboutActivity;
 import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity;
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity;
+import org.metabrainz.mobile.presentation.features.tagger.TaggerActivity;
 import org.metabrainz.mobile.presentation.view.DashTileView;
 
 import java.util.Objects;
@@ -30,6 +32,7 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
         setupTile(R.id.dash_collections, R.drawable.dash_collections, R.string.dash_collections);
         setupTile(R.id.dash_donate, R.drawable.dash_donate, R.string.dash_donate);
         setupTile(R.id.dash_about, R.drawable.dash_about, R.string.dash_about);
+        setupTile(R.id.dash_tag, R.drawable.dash_tag, R.string.dash_tag);
     }
 
     private void setupTile(int tileId, int iconId, int stringId) {
@@ -58,7 +61,10 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
                 startActivity(IntentFactory.getDonate(getApplicationContext()));
                 break;
             case R.id.dash_about:
-                startActivity(IntentFactory.getAbout(getApplicationContext()));
+                startActivity(new Intent(this, AboutActivity.class));
+                break;
+            case R.id.dash_tag:
+                startActivity(new Intent(this, TaggerActivity.class));
         }
     }
 

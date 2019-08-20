@@ -2,34 +2,50 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <PreferenceCategory android:title="@string/settings_search">
+    <PreferenceCategory android:title="@string/settings_search">
 
-    <SwitchPreference
-      android:key="search_suggestions"
-      android:title="@string/settings_suggestions"
-      android:summary="@string/settings_suggestions_summary"
-        android:defaultValue="true" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="search_suggestions"
+            android:summary="@string/settings_suggestions_summary"
+            android:title="@string/settings_suggestions" />
 
-    <Preference
-      android:key="clear_suggestions"
-      android:title="@string/settings_clear" />
+        <Preference
+            android:key="clear_suggestions"
+            android:title="@string/settings_clear" />
 
-  </PreferenceCategory>
+    </PreferenceCategory>
 
-  <PreferenceCategory android:title="@string/settings_user_data">
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="private_collections"
-        android:summary="@string/settings_private_collections_summary"
-        android:title="@string/settings_private_collections" />
+    <PreferenceCategory android:title="@string/settings_user_data">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="private_collections"
+            android:summary="@string/settings_private_collections_summary"
+            android:title="@string/settings_private_collections" />
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="ratings_tags"
-        android:summary="@string/settings_ratings_tags_summary"
-        android:title="@string/settings_ratings_tags" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="ratings_tags"
+            android:summary="@string/settings_ratings_tags_summary"
+            android:title="@string/settings_ratings_tags" />
 
-  </PreferenceCategory>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_tagger">
+        <Preference
+            android:key="tagger_directory"
+            android:summary="@string/settings_tagger_directory_summary"
+            android:title="@string/settings_tagger_directory" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_language">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="use_english"
+            android:summary="@string/settings_use_language_summary"
+            android:title="@string/settings_use_language" />
+
+    </PreferenceCategory>
 
 
 </PreferenceScreen>
