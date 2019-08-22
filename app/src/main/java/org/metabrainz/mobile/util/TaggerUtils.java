@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat;
 
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
-import org.metabrainz.mobile.data.sources.api.entities.Track;
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.Medium;
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.Result;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
@@ -232,7 +231,7 @@ public class TaggerUtils {
                                     if (medium.getFormat() != null && !medium.getFormat().isEmpty())
                                         media.setFormat(medium.getFormat());
 
-                                    Track track = new Track();
+                                    //Track track = new Track();
 
                                     media.setTrackCount(medium.getTrackCount());
 
