@@ -25,7 +25,6 @@ public class Metadata {
         addTagToList(tags, "release", FieldKey.ALBUM, audioFile);
         addTagToList(tags, "tnum", FieldKey.TRACK, audioFile);
         addTagToList(tags, "tracks", FieldKey.TRACK_TOTAL, audioFile);
-        // TODO: Calculate duration of audio file
         return tags;
     }
 

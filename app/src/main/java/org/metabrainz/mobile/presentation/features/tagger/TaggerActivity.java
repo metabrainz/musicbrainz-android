@@ -3,6 +3,7 @@ package org.metabrainz.mobile.presentation.features.tagger;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Pair;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -153,7 +154,10 @@ public class TaggerActivity extends MusicBrainzActivity {
 
     private void lookupTrackWithMetadata() {
         if (audioFile != null) {
-            String queryArguments = QueryUtils.getQuery(Metadata.getDefaultTagList(audioFile));
+            List<Pair<String,String>> tags = Metadata.getDefaultTagList(audioFile);
+            // Add quantized duration separately because there is no direct duration tag field
+            tags.add(new Pair<>("qdur", String.valueOf(Metadata.getDuration(audioFile.getFile()) / 2000)));
+            String queryArguments = QueryUtils.getQuery(tags);
             Toast.makeText(this, "JAudioTagger " + queryArguments,
                     Toast.LENGTH_LONG).show();
             viewModel.fetchRecordings(queryArguments);
@@ -178,6 +182,7 @@ public class TaggerActivity extends MusicBrainzActivity {
         } else {
             localTrack = Metadata.getRecordingFromFile(audioFile);
 
+            // Find the result with highest similarity score
             double maxScore = 0.0;
             for (Recording searchResult : recordings) {
                 ComparisionResult result = TaggerUtils.compareTracks(localTrack, searchResult);
@@ -188,20 +193,23 @@ public class TaggerActivity extends MusicBrainzActivity {
             }
 
             if (comparisionResult != null && comparisionResult.getReleaseMbid() != null
-                    && !comparisionResult.getReleaseMbid().isEmpty())
+                    && !comparisionResult.getReleaseMbid().isEmpty()
+                    && comparisionResult.getScore() > TaggerUtils.THRESHOLD)
                 viewModel.fetchMatchedRelease(comparisionResult.getReleaseMbid());
+            else Toast.makeText(this, "No result found", Toast.LENGTH_LONG).show();
         }
     }
 
     private void displayMatchedRelease(Release release) {
         track = null;
         this.release = release;
+        // Find the matching track with highest similarity score
         if (release != null && release.getMedia() != null && !release.getMedia().isEmpty())
             for (Media media : release.getMedia())
                 for (Track search : media.getTracks())
                     if (search.getRecording().getMbid().equalsIgnoreCase(comparisionResult.getTrackMbid()))
                         track = search;
-
+        // Display changes in metadata
         if (track != null && track.getRecording() != null) {
             showDifferenceInMetadata();
             buttonSave.setEnabled(true);

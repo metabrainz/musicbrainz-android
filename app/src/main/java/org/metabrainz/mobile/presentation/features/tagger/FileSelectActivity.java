@@ -127,6 +127,7 @@ public class FileSelectActivity extends AppCompatActivity {
         File file = new File(checkPath);
         if (file.isDirectory() && file.getParentFile() != null) {
             String path = file.getParentFile().getAbsolutePath();
+            // Restrict app to go to external storage at most
             if (!path.equalsIgnoreCase(ROOT_PATH)) return true;
             buttonUp.setEnabled(false);
         }
