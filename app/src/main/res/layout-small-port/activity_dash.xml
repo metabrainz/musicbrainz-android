@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/Activity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Activity">
 
-  <fragment
-    android:id="@+id/search_fragment"
-      android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-    android:layout_alignParentTop="true" />
-  
-  <View
-    style="@style/Separator"
-    android:layout_below="@id/search_fragment" />
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
-  <include 
-    android:id="@+id/dash_buttons"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-    layout="@layout/fragment_dash_buttons"
-    android:layout_below="@id/search_fragment" />
+    <View
+        style="@style/Separator"
+        android:layout_below="@id/search_fragment" />
+
+    <include
+        android:id="@+id/dash_buttons"
+        layout="@layout/fragment_dash_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_fragment" />
 
 </RelativeLayout>

@@ -10,14 +10,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_prompt"/>
+        android:text="@string/login_prompt" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/login_btn"
-        android:text="@string/login"/>
+        android:text="@string/login" />
 
     <Button
         android:id="@+id/logout_btn"

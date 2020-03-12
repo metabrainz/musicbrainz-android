@@ -11,17 +11,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include android:id="@+id/card_artist_info"
+        <include
+            android:id="@+id/card_artist_info"
             layout="@layout/card_artist_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp" />
 
-        <include android:id="@+id/card_artist_wiki"
+        <include
+            android:id="@+id/card_artist_wiki"
             layout="@layout/card_artist_wiki"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp" />
 
     </LinearLayout>
 

@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
             android:textColor="@color/black"
             android:textAppearance="?android:attr/textAppearanceLarge"
             app:fontFamily="@font/roboto_medium"
-            android:text="@string/links"/>
+            android:text="@string/links" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

@@ -3,14 +3,14 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item
-    android:id="@+id/menu_login"
-    android:title="@string/action_login"
-    app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_login"
+        android:title="@string/action_login"
+        app:showAsAction="never" />
 
-  <item
-    android:id="@+id/menu_preferences"
-    android:title="@string/action_settings"
-    app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_preferences"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 
 </menu>

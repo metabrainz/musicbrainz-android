@@ -6,48 +6,48 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/item_padding">
 
-        <ImageView
-            android:id="@+id/release_cover_art"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:contentDescription="@string/cover_art_front"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/link_discog"
-            tools:srcCompat="@tools:sample/avatars" />
+    <ImageView
+        android:id="@+id/release_cover_art"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:contentDescription="@string/cover_art_front"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/link_discog"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/release_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceListItem"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/release_disambiguation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/release_cover_art"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Release Name" />
+    <TextView
+        android:id="@+id/release_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/release_disambiguation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/release_cover_art"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Release Name" />
 
-        <TextView
-            android:id="@+id/release_disambiguation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/release_cover_art"
-            app:layout_constraintTop_toBottomOf="@+id/release_name"
-            tools:text="Disambiguation" />
+    <TextView
+        android:id="@+id/release_disambiguation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/release_cover_art"
+        app:layout_constraintTop_toBottomOf="@+id/release_name"
+        tools:text="Disambiguation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
