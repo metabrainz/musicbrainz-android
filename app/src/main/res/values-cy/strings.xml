@@ -19,4 +19,6 @@
     <string name="settings_search">Chwilio</string>
     <string name="ratings">Gradd</string>
     <string name="tags">Tagiau</string>
+    <string name="save_checkbox">Cadw</string>
+    <string name="settings_language">Iaith</string>
 </resources>

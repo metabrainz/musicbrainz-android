@@ -15,4 +15,8 @@
     <string name="artist_title">아티스트</string>
 
     <string name="ratings">등급</string>
+    <string name="lookup_metadata">메타데이터</string>
+    <string name="dash_tag">태그</string>
+    <string name="save_checkbox">저장</string>
+    <string name="settings_language">언어</string>
 </resources>

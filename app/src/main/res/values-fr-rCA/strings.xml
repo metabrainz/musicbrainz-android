@@ -42,6 +42,11 @@
     <string name="action_logout">Se déconnecter</string>
 
     <string name="settings_search">Recherche</string>
+    <string name="settings_tagger">Baliseur</string>
     <string name="ratings">Évaluation</string>
     <string name="tags">Balises</string>
+    <string name="dash_tag">Balise</string>
+    <string name="save_checkbox">Enregistrer</string>
+    <string name="select_button">Choisir</string>
+    <string name="settings_language">Langue</string>
 </resources>

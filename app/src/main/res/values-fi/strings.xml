@@ -95,9 +95,7 @@
     <string name="tags">Luokittelut</string>
     <string name="user_tags">Luokittelusi</string>
 
-    <string name="no_user_tag">Et ole vielä luokitellut tätä entiteettiä.</string>
     <string name="no_tag">Luokituksia ei löytynyt</string>
-    <string name="no_user_rating">Et ole vielä arvostellut tätä entiteettiä.</string>
     <string name="no_rating">Arvosteluja ei löytynyt</string>
 
 </resources>

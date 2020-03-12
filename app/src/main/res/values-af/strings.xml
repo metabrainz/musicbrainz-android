@@ -2,4 +2,5 @@
 
 <resources>
 
+    <string name="settings_language">Taal</string>
 </resources>

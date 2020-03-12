@@ -45,7 +45,13 @@
     <string name="action_logout">登出</string>
 
     <string name="settings_search">搜尋</string>
+    <string name="settings_tagger">貼標籤者</string>
     <string name="settings_ratings_tags">評分與標籤</string>
     <string name="ratings">評分</string>
     <string name="tags">標籤</string>
+    <string name="genres">種類</string>
+    <string name="lookup_metadata">後設資料</string>
+    <string name="dash_tag">標籤</string>
+    <string name="save_checkbox">儲存</string>
+    <string name="settings_language">語言</string>
 </resources>

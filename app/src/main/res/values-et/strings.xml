@@ -23,4 +23,11 @@
     <!-- Actions -->
     <string name="action_search">Otsing</string>
     <string name="settings_search">Otsing</string>
+    <string name="settings_tagger">Sildistaja</string>
+    <string name="genres">Muusikastiilid</string>
+    <string name="lookup_metadata">Metaandmed</string>
+    <string name="dash_tag">Sildista</string>
+    <string name="save_checkbox">Salvesta</string>
+    <string name="select_button">Vali</string>
+    <string name="settings_language">Keel</string>
 </resources>

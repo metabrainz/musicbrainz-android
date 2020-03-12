@@ -22,4 +22,10 @@
     <string name="settings_search">Pesquisar</string>
     <string name="ratings">Classificação</string>
     <string name="tags">Tags</string>
+    <string name="genres">Gêneros</string>
+    <string name="lookup_metadata">Metadados</string>
+    <string name="dash_tag">Etiqueta</string>
+    <string name="save_checkbox">Salvar</string>
+    <string name="select_button">Selecionar</string>
+    <string name="settings_language">Idioma</string>
 </resources>

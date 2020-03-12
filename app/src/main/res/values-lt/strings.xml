@@ -6,4 +6,5 @@
     <!-- ReleaseActivity -->
     <string name="artist_title">Artistas</string>
 
+    <string name="settings_language">Kalba</string>
 </resources>

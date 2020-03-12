@@ -5,4 +5,5 @@
     <string name="title_tracks">Tracks</string>
     <string name="dash_collections">Collections</string>
     <string name="search_type_label">Label</string>
+    <string name="dash_tag">Tag</string>
 </resources>

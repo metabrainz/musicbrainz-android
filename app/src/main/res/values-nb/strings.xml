@@ -21,4 +21,9 @@
 
     <string name="ratings">Vurdering</string>
     <string name="tags">Tagger</string>
+    <string name="genres">Sjangre</string>
+    <string name="lookup_metadata">Metadata</string>
+    <string name="dash_tag">Tagger</string>
+    <string name="save_checkbox">Lagre</string>
+    <string name="settings_language">Språk</string>
 </resources>

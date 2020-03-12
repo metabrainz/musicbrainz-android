@@ -3,4 +3,6 @@
 <resources>
 
     <string name="search_type_label">Label</string>
+    <string name="lookup_metadata">Metadata</string>
+    <string name="settings_language">Bahasa</string>
 </resources>

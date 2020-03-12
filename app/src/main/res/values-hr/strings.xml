@@ -6,4 +6,5 @@
     <!-- ReleaseActivity -->
     <string name="artist_title">Umjetnik</string>
 
+    <string name="settings_language">Jezik</string>
 </resources>
