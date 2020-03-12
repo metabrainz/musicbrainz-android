@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +20,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReleaseTracksFragment extends Fragment {
 
@@ -56,15 +57,15 @@ public class ReleaseTracksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
-        viewModel.getData().observe(getViewLifecycleOwner(), this::setTracks);
+        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
+        viewModel.initializeReleaseData().observe(getViewLifecycleOwner(), this::setTracks);
     }
 
     private void setTracks(Release release) {
         if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()) {
-                mediaList.clear();
-                mediaList.addAll(release.getMedia());
-                adapter.notifyDataSetChanged();
+            mediaList.clear();
+            mediaList.addAll(release.getMedia());
+            adapter.notifyDataSetChanged();
         }
     }
 }
