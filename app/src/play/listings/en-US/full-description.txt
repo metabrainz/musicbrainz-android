@@ -1,0 +1,1 @@
+MusicBrainz for Android is a mobile app for viewing MusicBrainz data on the Android platform. It allows you to view release information by scanning a barcode, search for information about artists, releases, release groups,labels, recordings, instruments, and events, view collections, tag audio files and donate to the MetaBrainz Foundation via PayPal.

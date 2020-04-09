@@ -1,0 +1,3 @@
+Add feature to tag audio files and option to disable localization.
+Add rating and tags. Integrate barcode scanner.
+Add OAuth2 login, collections and preferences.
