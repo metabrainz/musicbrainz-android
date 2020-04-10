@@ -53,6 +53,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
     implementation 'com.github.QuickLyric:fpcalc-android:1.0.1'
-    implementation files('libs/jaudiotagger-2.2.6-SNAPSHOT.jar')
-    implementation files('libs/java-string-similarity-1.2.1.jar')
+    implementation 'org.bitbucket.ijabz:jaudiotagger:android-SNAPSHOT'
+    implementation 'info.debatty:java-string-similarity:1.2.1'
 }
