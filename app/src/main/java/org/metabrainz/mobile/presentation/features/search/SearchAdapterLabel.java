@@ -1,6 +1,5 @@
 package org.metabrainz.mobile.presentation.features.search;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.presentation.IntentFactory;
-import org.metabrainz.mobile.presentation.features.label.LabelActivity;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 
 import java.util.List;
 
 public class SearchAdapterLabel extends SearchAdapter {
-    private final List<Label> data;
 
-    public SearchAdapterLabel(List<Label> data) {
-        this.data = data;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+    SearchAdapterLabel(List<Label> data) {
+        super(data, MBEntities.LABEL);
     }
 
     @NonNull
@@ -39,7 +31,7 @@ public class SearchAdapterLabel extends SearchAdapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SearchAdapterLabel.LabelViewHolder viewHolder = (SearchAdapterLabel.LabelViewHolder) holder;
-        Label label = data.get(position);
+        Label label = (Label) data.get(position);
         viewHolder.labelName.setText(label.getName());
 
         setViewVisibility(label.getType(), viewHolder.labelType);
@@ -50,17 +42,6 @@ public class SearchAdapterLabel extends SearchAdapter {
         setViewVisibility(label.getDisambiguation(), viewHolder.labelDisambiguation);
         setAnimation(viewHolder.itemView, position);
         viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
-    }
-
-    private void onClick(View view, int position) {
-        Intent intent = new Intent(view.getContext(), LabelActivity.class);
-        intent.putExtra(IntentFactory.Extra.LABEL, data.get(position).getMbid());
-        view.getContext().startActivity(intent);
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
     }
 
     private static class LabelViewHolder extends EntityViewHolder {
