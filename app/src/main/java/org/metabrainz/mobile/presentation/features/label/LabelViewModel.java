@@ -20,7 +20,7 @@ public class LabelViewModel extends LookupViewModel {
                 data -> new Gson().fromJson(data, Label.class));
     }
 
-    public Single<CoverArt> fetchCoverArtForRelease(Release release) {
+    Single<CoverArt> fetchCoverArtForRelease(Release release) {
         // Ask the repository to fetch the cover art and update LabelData LiveData
         // Whoever is observing that LiveData, will receive the release with the cover art
         return repository.fetchCoverArtForRelease(release);

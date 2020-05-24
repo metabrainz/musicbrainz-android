@@ -3,7 +3,7 @@ package org.metabrainz.mobile.presentation.features.recording;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
@@ -28,7 +28,7 @@ public class RecordingActivity extends MusicBrainzActivity {
         setSupportActionBar(findViewById(R.id.toolbar));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        recordingViewModel = ViewModelProviders.of(this).get(RecordingViewModel.class);
+        recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);
 
         mbid = getIntent().getStringExtra(IntentFactory.Extra.RECORDING);
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);

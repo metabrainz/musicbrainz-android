@@ -3,7 +3,7 @@ package org.metabrainz.mobile.presentation.features.release;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
@@ -31,7 +31,7 @@ public class ReleaseActivity extends MusicBrainzActivity {
         setSupportActionBar(findViewById(R.id.toolbar));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        releaseViewModel = ViewModelProviders.of(this).get(ReleaseViewModel.class);
+        releaseViewModel = new ViewModelProvider(this).get(ReleaseViewModel.class);
 
         mbid = getIntent().getStringExtra(IntentFactory.Extra.RELEASE_MBID);
         if (mbid != null && !mbid.isEmpty()) releaseViewModel.setMBID(mbid);
