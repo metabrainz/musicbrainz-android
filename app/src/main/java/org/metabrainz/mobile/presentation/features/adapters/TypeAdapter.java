@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.search;
+package org.metabrainz.mobile.presentation.features.adapters;
 
 import android.content.Intent;
 import android.view.View;
@@ -14,12 +14,12 @@ import org.metabrainz.mobile.presentation.features.label.LabelActivity;
 
 import java.util.List;
 
-abstract class SearchAdapter extends RecyclerView.Adapter {
+public abstract class TypeAdapter extends RecyclerView.Adapter {
     protected List<? extends MBEntity> data;
     protected MBEntities entity;
     private int lastPosition = -1;
 
-    SearchAdapter(List<? extends MBEntity> data, MBEntities entity) {
+    TypeAdapter(List<? extends MBEntity> data, MBEntities entity) {
         this.data = data;
         this.entity = entity;
     }
@@ -45,7 +45,7 @@ abstract class SearchAdapter extends RecyclerView.Adapter {
         return data.size();
     }
 
-    void resetAnimation() {
+    public void resetAnimation() {
         lastPosition = -1;
     }
 

@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.search;
+package org.metabrainz.mobile.presentation.features.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +14,23 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.List;
 
-public class SearchAdapterRelease extends SearchAdapter {
+public class ReleaseAdapter extends TypeAdapter {
 
-    SearchAdapterRelease(List<Release> data) {
+    public ReleaseAdapter(List<Release> data) {
         super(data, MBEntities.RELEASE);
     }
 
     @NonNull
     @Override
-    public SearchAdapterRelease.ReleaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReleaseAdapter.ReleaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_release, parent, false);
-        return new SearchAdapterRelease.ReleaseViewHolder(view);
+        return new ReleaseAdapter.ReleaseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        SearchAdapterRelease.ReleaseViewHolder viewHolder = (SearchAdapterRelease.ReleaseViewHolder) holder;
+        ReleaseAdapter.ReleaseViewHolder viewHolder = (ReleaseAdapter.ReleaseViewHolder) holder;
         Release release = (Release) data.get(position);
         viewHolder.releaseName.setText(release.getTitle());
 

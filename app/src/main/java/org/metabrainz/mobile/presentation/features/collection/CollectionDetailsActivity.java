@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +19,14 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.adapters.ArtistAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.EventAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.InstrumentAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.LabelAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.RecordingAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ReleaseGroupAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.TypeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +40,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 
     private static CollectionViewModel viewModel;
     private RecyclerView recyclerView;
-    private CollectionAdapter adapter;
+    private TypeAdapter adapter;
     private TextView noRes;
     private String entity, id;
     private final List<Artist> artistCollectionResults = new ArrayList<>();
@@ -61,7 +69,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         entity = getIntent().getStringExtra(IntentFactory.Extra.TYPE);
         id = getIntent().getStringExtra(IntentFactory.Extra.COLLECTION_MBID);
 
-        viewModel = ViewModelProviders.of(this).get(CollectionViewModel.class);
+        viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
         initializeCollectionData();
 
         recyclerView.setAdapter(adapter);
@@ -80,7 +88,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                             releaseCollectionResults.addAll(releaseCollectionProperties);
                             refresh();
                         });
-                adapter = new CollectionAdapterRelease(releaseCollectionResults);
+                adapter = new ReleaseAdapter(releaseCollectionResults);
                 break;
             case IntentFactory.Extra.LABEL:
                 viewModel.getLabelCollectionData().observe(this,
@@ -89,7 +97,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                             labelCollectionResults.addAll(labelCollectionProperties);
                             refresh();
                         });
-                adapter = new CollectionAdapterLabel(labelCollectionResults);
+                adapter = new LabelAdapter(labelCollectionResults);
                 break;
             case IntentFactory.Extra.RECORDING:
                 viewModel.getRecordingCollectionData().observe(this,
@@ -98,7 +106,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                             recordingCollectionResults.addAll(recordingCollectionProperties);
                             refresh();
                         });
-                adapter = new CollectionAdapterRecording(recordingCollectionResults);
+                adapter = new RecordingAdapter(recordingCollectionResults);
                 break;
             case IntentFactory.Extra.RELEASE_GROUP:
                 viewModel.getReleaseGroupCollectionData().observe(this,
@@ -107,7 +115,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                             releaseGroupCollectionResults.addAll(releaseGroupCollectionProperties);
                             refresh();
                         });
-                adapter = new CollectionAdapterReleaseGroup(releaseGroupCollectionResults);
+                adapter = new ReleaseGroupAdapter(releaseGroupCollectionResults);
                 break;
             case IntentFactory.Extra.EVENT:
                 viewModel.getEventCollectionData().observe(this,
@@ -116,7 +124,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                             eventCollectionResults.addAll(eventCollectionProperties);
                             refresh();
                         });
-                adapter = new CollectionAdapterEvent(eventCollectionResults);
+                adapter = new EventAdapter(eventCollectionResults);
                 break;
             case IntentFactory.Extra.INSTRUMENT:
                 viewModel.getInstrumentCollectionData().observe(this,
@@ -125,7 +133,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                             instrumentCollectionResults.addAll(instrumentCollectionProperties);
                             refresh();
                         });
-                adapter = new CollectionAdapterInstrument(instrumentCollectionResults);
+                adapter = new InstrumentAdapter(instrumentCollectionResults);
                 break;
             default:
                 viewModel.getArtistCollectionData().observe(this,
@@ -134,7 +142,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                             artistCollectionResults.addAll(artistCollectionProperties);
                             refresh();
                         });
-                adapter = new CollectionAdapterArtist(artistCollectionResults);
+                adapter = new ArtistAdapter(artistCollectionResults);
         }
     }
 

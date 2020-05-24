@@ -26,6 +26,14 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.adapters.ArtistAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.EventAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.InstrumentAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.LabelAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.RecordingAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ReleaseGroupAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.TypeAdapter;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
@@ -42,7 +50,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private static SearchViewModel viewModel;
     private RecyclerView recyclerView;
     private SearchView searchView;
-    private SearchAdapter adapter;
+    private TypeAdapter adapter;
     private TextView noRes;
     private final List<Artist> artistSearchResults = new ArrayList<>();
     private final List<Release> releaseSearchResults = new ArrayList<>();
@@ -114,25 +122,25 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private void chooseAdapter() {
         switch (entity) {
             case IntentFactory.Extra.RELEASE:
-                adapter = new SearchAdapterRelease(releaseSearchResults);
+                adapter = new ReleaseAdapter(releaseSearchResults);
                 break;
             case IntentFactory.Extra.LABEL:
-                adapter = new SearchAdapterLabel(labelSearchResults);
+                adapter = new LabelAdapter(labelSearchResults);
                 break;
             case IntentFactory.Extra.RECORDING:
-                adapter = new SearchAdapterRecording(recordingSearchResults);
+                adapter = new RecordingAdapter(recordingSearchResults);
                 break;
             case IntentFactory.Extra.RELEASE_GROUP:
-                adapter = new SearchAdapterReleaseGroup(releaseGroupSearchResults);
+                adapter = new ReleaseGroupAdapter(releaseGroupSearchResults);
                 break;
             case IntentFactory.Extra.EVENT:
-                adapter = new SearchAdapterEvent(eventSearchResults);
+                adapter = new EventAdapter(eventSearchResults);
                 break;
             case IntentFactory.Extra.INSTRUMENT:
-                adapter = new SearchAdapterInstrument(instrumentSearchResults);
+                adapter = new InstrumentAdapter(instrumentSearchResults);
                 break;
             default:
-                adapter = new SearchAdapterArtist(artistSearchResults);
+                adapter = new ArtistAdapter(artistSearchResults);
         }
     }
 
