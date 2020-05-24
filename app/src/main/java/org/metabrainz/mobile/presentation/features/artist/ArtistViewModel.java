@@ -72,18 +72,18 @@ public class ArtistViewModel extends LookupViewModel {
                 data -> new Gson().fromJson(data, Artist.class));
     }
 
-    public Single<CoverArt> fetchCoverArtForRelease(Release release) {
+    Single<CoverArt> fetchCoverArtForRelease(Release release) {
         // Ask the repository to fetch the cover art and update ArtistData LiveData
         // Whoever is observing that L
         // iveData, will receive the release with the cover art
         return repository.fetchCoverArtForRelease(release);
     }
 
-    public void loadArtistWiki(String title, int method) {
+    void loadArtistWiki(String title, int method) {
         repository.getWikiSummary(title, method);
     }
 
-    public SingleLiveEvent<WikiSummary> initializeWikiData() {
+    SingleLiveEvent<WikiSummary> initializeWikiData() {
         if (artistWiki == null)
             artistWiki = repository.initializeWikiData();
         return artistWiki;
