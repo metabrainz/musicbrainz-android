@@ -27,7 +27,7 @@ public class LabelInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_label_info, container, false);
         labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
-        labelViewModel.initializeLabelData().observe(getViewLifecycleOwner(), this::setLabelInfo);
+        labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLabelInfo);
         findViews(layout);
         return layout;
     }

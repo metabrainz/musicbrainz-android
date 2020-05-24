@@ -58,7 +58,7 @@ public class ReleaseTracksFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
-        viewModel.initializeReleaseData().observe(this, this::setTracks);
+        viewModel.initializeData().observe(getViewLifecycleOwner(), this::setTracks);
     }
 
     private void setTracks(Release release) {

@@ -56,7 +56,7 @@ public class LabelReleasesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
-        labelViewModel.initializeLabelData().observe(this, this::setReleases);
+        labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
     private void setReleases(Label label) {

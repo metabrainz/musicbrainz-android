@@ -1,49 +1,39 @@
 package org.metabrainz.mobile.presentation.features.label;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 
-import org.metabrainz.mobile.data.repository.LabelLookupRepository;
+import com.google.gson.Gson;
+
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 import io.reactivex.Single;
 
-public class LabelViewModel extends ViewModel {
+public class LabelViewModel extends LookupViewModel {
 
-    private LabelLookupRepository repository = LabelLookupRepository.getRepository();
-    private MutableLiveData<Label> labelData;
-    private String MBID;
+    private LiveData<Label> labelData = Transformations.map(repository.initializeData(),
+            data -> new Gson().fromJson(data, Label.class));
 
     public LabelViewModel() {
     }
 
-    public void setMBID(String MBID) {
-        if (MBID != null && !MBID.isEmpty()) this.MBID = MBID;
-    }
-
-    public MutableLiveData<Label> initializeLabelData() {
-        // Obtain live data from the repository if not already present
-        if (labelData == null)
-            labelData = repository.initializeLabelData();
+    @Override
+    public LiveData<Label> initializeData() {
         return labelData;
     }
 
-    public void getLabelData(boolean isLoggedIn) {
-        // Call the repository to query the database to update the label data
-        repository.getLabel(MBID, isLoggedIn);
+    @Override
+    public void fetchData() {
+        repository.fetchData("label", MBID, Constants.LOOKUP_LABEL_PARAMS);
     }
 
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {
         // Ask the repository to fetch the cover art and update LabelData LiveData
         // Whoever is observing that LiveData, will receive the release with the cover art
         return repository.fetchCoverArtForRelease(release);
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        LabelLookupRepository.destroyRepository();
     }
 }

@@ -40,8 +40,8 @@ public class ReleaseInfoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_release_info, container, false);
         viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
-        viewModel.initializeReleaseData().observe(this, this::setData);
-        viewModel.initializeCoverArtData().observe(this, this::setCoverArt);
+        viewModel.initializeData().observe(getViewLifecycleOwner(), this::setData);
+        viewModel.initializeCoverArtData().observe(getViewLifecycleOwner(), this::setCoverArt);
         slideshowAdapter = new CoverArtSlideshowAdapter(urls);
         findViews(view);
         viewPager.setAdapter(slideshowAdapter);
