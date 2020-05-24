@@ -52,7 +52,11 @@ public class ReleaseGroupReleasesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
+<<<<<<< HEAD
         releaseGroupViewModel.initializeReleaseGroupData().observe(getViewLifecycleOwner(), this::setReleases);
+=======
+        releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setReleases(ReleaseGroup releaseGroup) {

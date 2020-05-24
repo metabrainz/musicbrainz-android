@@ -38,10 +38,17 @@ public class ReleaseInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+<<<<<<< HEAD
         binding = CardReleaseInfoBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
         viewModel.getData().observe(getViewLifecycleOwner(), this::setData);
         viewModel.fetchCoverArt().observe(getViewLifecycleOwner(), this::setCoverArt);
+=======
+        View view = inflater.inflate(R.layout.card_release_info, container, false);
+        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
+        viewModel.initializeData().observe(getViewLifecycleOwner(), this::setData);
+        viewModel.initializeCoverArtData().observe(getViewLifecycleOwner(), this::setCoverArt);
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
         slideshowAdapter = new CoverArtSlideshowAdapter(urls);
         binding.slideshow.viewpagerSlideshow.setAdapter(slideshowAdapter);
         binding.slideshow.tabIndicator.setupWithViewPager(binding.slideshow.viewpagerSlideshow);

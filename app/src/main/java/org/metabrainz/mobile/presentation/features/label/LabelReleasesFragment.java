@@ -56,7 +56,11 @@ public class LabelReleasesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
+<<<<<<< HEAD
         labelViewModel.initializeLabelData().observe(getViewLifecycleOwner(), this::setReleases);
+=======
+        labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setReleases(Label label) {

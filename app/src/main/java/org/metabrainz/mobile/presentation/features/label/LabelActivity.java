@@ -9,7 +9,10 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.databinding.ActivityLabelBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+<<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+=======
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
 
 import java.util.Objects;
 
@@ -38,7 +41,12 @@ public class LabelActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);
 
+<<<<<<< HEAD
         labelViewModel.getData().observe(this, this::setLabel);
+=======
+        labelViewModel.initializeData().observe(this, this::setLabel);
+        labelViewModel.fetchData();
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     @Override

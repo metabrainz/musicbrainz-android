@@ -53,8 +53,13 @@ public class ArtistLinksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+<<<<<<< HEAD
         artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
         artistViewModel.getData().observe(getViewLifecycleOwner(), this::setLinks);
+=======
+        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
+        artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLinks);
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setLinks(Artist artist) {

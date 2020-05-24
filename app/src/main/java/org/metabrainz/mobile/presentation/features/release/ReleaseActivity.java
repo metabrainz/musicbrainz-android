@@ -41,7 +41,12 @@ public class ReleaseActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) releaseViewModel.setMBID(mbid);
 
+<<<<<<< HEAD
         releaseViewModel.getData().observe(this, this::setRelease);
+=======
+        releaseViewModel.initializeData().observe(this, this::setRelease);
+        releaseViewModel.fetchData();
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setRelease(Release release) {

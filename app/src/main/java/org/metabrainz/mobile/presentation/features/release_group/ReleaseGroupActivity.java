@@ -9,7 +9,10 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.databinding.ActivityReleaseGroupBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+<<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+=======
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
 
 import java.util.Objects;
 
@@ -39,7 +42,12 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) releaseGroupViewModel.setMBID(mbid);
 
+<<<<<<< HEAD
         releaseGroupViewModel.getData().observe(this, this::setReleaseGroup);
+=======
+        releaseGroupViewModel.initializeData().observe(this, this::setReleaseGroup);
+        releaseGroupViewModel.fetchData();
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     @Override

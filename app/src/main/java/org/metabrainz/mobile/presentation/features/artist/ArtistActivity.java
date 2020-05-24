@@ -9,8 +9,11 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.ActivityArtistBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+<<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.release_list.CoverArtViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+=======
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
 
 import java.util.Objects;
 
@@ -60,10 +63,18 @@ public class ArtistActivity extends MusicBrainzActivity {
          * approach, the artist data was queried whenever fetchData() was invoked, the repository
          * performed an update on the artist data. This approach led a lot of unneeded network request.
          * A better solution which is currently followed is that there is a separate method to subscribe
+<<<<<<< HEAD
          * to live data and another one to update the artist info. The getData method acts
          * like a getter method.
          */
         artistViewModel.getData().observe(this, this::setArtist);
+=======
+         * to live data and another one to update the artist info. The initializeData method acts
+         * like a getter method.
+         */
+        artistViewModel.initializeData().observe(this, this::setArtist);
+        artistViewModel.fetchData();
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setArtist(Artist artist) {

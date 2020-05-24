@@ -9,6 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+<<<<<<< HEAD
+=======
+import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.repository.LookupRepository;
+import org.metabrainz.mobile.data.sources.api.entities.Link;
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.FragmentBioBinding;
@@ -23,6 +29,7 @@ public class ArtistBioFragment extends Fragment {
     }
 
     @Override
+<<<<<<< HEAD
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentBioBinding.inflate(inflater, container, false);
         artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
@@ -35,6 +42,47 @@ public class ArtistBioFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+=======
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View layout = inflater.inflate(R.layout.fragment_bio, container, false);
+        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
+        artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setArtistInfo);
+        artistViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
+        findViews(layout);
+        return layout;
+    }
+
+    private void findViews(View layout) {
+        artistType = layout.findViewById(R.id.artist_type);
+        artistGender = layout.findViewById(R.id.artist_gender);
+        artistArea = layout.findViewById(R.id.artist_area);
+        artistLifeSpan = layout.findViewById(R.id.life_span);
+        wikiCard = layout.findViewById(R.id.card_artist_wiki);
+        wikiTextView = layout.findViewById(R.id.wiki_summary);
+    }
+
+    private void getArtistWiki(Artist artist) {
+        String title = "";
+        int method = -1;
+        if (artist != null) {
+            for (Link link : artist.getRelations()) {
+                if (link.getType().equals("wikipedia")) {
+                    title = link.getPageTitle();
+                    method = LookupRepository.METHOD_WIKIPEDIA_URL;
+                    break;
+                }
+                if (link.getType().equals("wikidata")) {
+                    title = link.getPageTitle();
+                    method = LookupRepository.METHOD_WIKIDATA_ID;
+                    break;
+                }
+            }
+        }
+        if (method != -1)
+            artistViewModel.loadArtistWiki(title, method);
+        else hideWikiCard();
+
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setWiki(WikiSummary wiki) {

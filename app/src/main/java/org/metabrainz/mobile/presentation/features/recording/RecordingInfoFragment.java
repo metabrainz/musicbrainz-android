@@ -23,11 +23,20 @@ public class RecordingInfoFragment extends Fragment {
     }
 
     @Override
+<<<<<<< HEAD
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRecordingInfoBinding.inflate(inflater, container, false);
         recordingViewModel = new ViewModelProvider(requireActivity()).get(RecordingViewModel.class);
         recordingViewModel.getData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
         return binding.getRoot();
+=======
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View layout = inflater.inflate(R.layout.fragment_recording_info, container, false);
+        recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
+        recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
+        findViews(layout);
+        return layout;
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     @Override

@@ -56,6 +56,7 @@ public class ReleaseTracksFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
+<<<<<<< HEAD
         viewModel.initializeReleaseData().observe(getViewLifecycleOwner(), this::setTracks);
     }
 
@@ -63,6 +64,9 @@ public class ReleaseTracksFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+=======
+        viewModel.initializeData().observe(getViewLifecycleOwner(), this::setTracks);
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setTracks(Release release) {

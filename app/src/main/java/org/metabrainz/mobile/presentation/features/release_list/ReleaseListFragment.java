@@ -58,7 +58,11 @@ public class ArtistReleasesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
+<<<<<<< HEAD:app/src/main/java/org/metabrainz/mobile/presentation/features/release_list/ReleaseListFragment.java
         artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setReleases);
+=======
+        artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.:app/src/main/java/org/metabrainz/mobile/presentation/features/artist/ArtistReleasesFragment.java
     }
 
     @Override

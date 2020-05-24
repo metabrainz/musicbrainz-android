@@ -56,7 +56,11 @@ public class RecordingReleasesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
+<<<<<<< HEAD
         recordingViewModel.initializeRecordingData().observe(getViewLifecycleOwner(), this::setReleases);
+=======
+        recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     private void setReleases(Recording recording) {

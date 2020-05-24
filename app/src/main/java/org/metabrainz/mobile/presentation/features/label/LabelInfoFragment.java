@@ -22,11 +22,20 @@ public class LabelInfoFragment extends Fragment {
     }
 
     @Override
+<<<<<<< HEAD
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLabelInfoBinding.inflate(inflater, container, false);
         labelViewModel = new ViewModelProvider(requireActivity()).get(LabelViewModel.class);
         labelViewModel.getData().observe(getViewLifecycleOwner(), this::setLabelInfo);
         return binding.getRoot();
+=======
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View layout = inflater.inflate(R.layout.fragment_label_info, container, false);
+        labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
+        labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLabelInfo);
+        findViews(layout);
+        return layout;
+>>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
     @Override
