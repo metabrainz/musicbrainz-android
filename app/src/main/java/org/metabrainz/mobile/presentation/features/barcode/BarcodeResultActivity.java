@@ -14,6 +14,7 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.ActivityBarcodeResultBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.ArrayList;
@@ -25,7 +26,14 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
     private ActivityBarcodeResultBinding binding;
     private final List<Release> releases = new ArrayList<>();
     private BarcodeViewModel viewModel;
+<<<<<<< HEAD
     // private ReleaseAdapter adapter;
+=======
+    private TextView noResultView;
+    private ProgressBar progressBar;
+    private RecyclerView recyclerView;
+    private ReleaseAdapter adapter;
+>>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,8 +43,14 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+<<<<<<< HEAD
         // adapter = new ReleaseAdapter(releases);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+=======
+        adapter = new ReleaseAdapter(releases);
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+>>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL);
         binding.recyclerView.addItemDecoration(itemDecoration);
@@ -67,7 +81,11 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         binding.progressSpinner.setVisibility(View.GONE);
 
         if (releases.size() == 0)
+<<<<<<< HEAD
             binding.noResult.setVisibility(View.VISIBLE);
+=======
+            noResultView.setVisibility(View.VISIBLE);
+>>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
         else if (releases.size() == 1) {
             Intent intent = new Intent(this, ReleaseActivity.class);
             intent.putExtra(Constants.MBID, releases.get(0).getMbid());

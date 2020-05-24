@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.search;
+package org.metabrainz.mobile.presentation.features.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +14,9 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 
 import java.util.List;
 
-public class SearchAdapterArtist extends SearchAdapter {
+public class ArtistAdapter extends TypeAdapter {
 
-    SearchAdapterArtist(List<Artist> data) {
+    public ArtistAdapter(List<Artist> data) {
         super(data, MBEntities.ARTIST);
     }
 

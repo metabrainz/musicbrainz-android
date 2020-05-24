@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.search;
+package org.metabrainz.mobile.presentation.features.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +14,23 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 
 import java.util.List;
 
-public class SearchAdapterLabel extends SearchAdapter {
+public class LabelAdapter extends TypeAdapter {
 
-    SearchAdapterLabel(List<Label> data) {
+    public LabelAdapter(List<Label> data) {
         super(data, MBEntities.LABEL);
     }
 
     @NonNull
     @Override
-    public SearchAdapterLabel.LabelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LabelAdapter.LabelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_label, parent, false);
-        return new SearchAdapterLabel.LabelViewHolder(view);
+        return new LabelAdapter.LabelViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        SearchAdapterLabel.LabelViewHolder viewHolder = (SearchAdapterLabel.LabelViewHolder) holder;
+        LabelAdapter.LabelViewHolder viewHolder = (LabelAdapter.LabelViewHolder) holder;
         Label label = (Label) data.get(position);
         viewHolder.labelName.setText(label.getName());
 

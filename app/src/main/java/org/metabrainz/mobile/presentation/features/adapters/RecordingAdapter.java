@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.search;
+package org.metabrainz.mobile.presentation.features.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +14,23 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 
 import java.util.List;
 
-public class SearchAdapterRecording extends SearchAdapter {
+public class RecordingAdapter extends TypeAdapter {
 
-    SearchAdapterRecording(List<Recording> data) {
+    public RecordingAdapter(List<Recording> data) {
         super(data, MBEntities.RECORDING);
     }
 
     @NonNull
     @Override
-    public SearchAdapterRecording.RecordingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecordingAdapter.RecordingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recording, parent, false);
-        return new SearchAdapterRecording.RecordingViewHolder(view);
+        return new RecordingAdapter.RecordingViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        SearchAdapterRecording.RecordingViewHolder viewHolder = (SearchAdapterRecording.RecordingViewHolder) holder;
+        RecordingAdapter.RecordingViewHolder viewHolder = (RecordingAdapter.RecordingViewHolder) holder;
         Recording recording = (Recording) data.get(position);
         viewHolder.recordingName.setText(recording.getTitle());
 

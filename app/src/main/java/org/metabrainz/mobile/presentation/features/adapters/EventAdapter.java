@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.search;
+package org.metabrainz.mobile.presentation.features.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +14,9 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 
 import java.util.List;
 
-public class SearchAdapterEvent extends SearchAdapter {
+public class EventAdapter extends TypeAdapter {
 
-    SearchAdapterEvent(List<Event> data) {
+    public EventAdapter(List<Event> data) {
         super(data, MBEntities.EVENT);
     }
 

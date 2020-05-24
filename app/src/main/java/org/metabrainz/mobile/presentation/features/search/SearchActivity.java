@@ -18,8 +18,19 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivitySearchBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+<<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+=======
+import org.metabrainz.mobile.presentation.features.adapters.ArtistAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.EventAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.InstrumentAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.LabelAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.RecordingAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ReleaseGroupAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.TypeAdapter;
+>>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
@@ -36,10 +47,23 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private ActivitySearchBinding binding;
     private SearchViewModel viewModel;
     private SearchView searchView;
+<<<<<<< HEAD
     private ResultAdapter adapter;
     private List<ResultItem> results;
     private String query;
     private MBEntityType entity;
+=======
+    private TypeAdapter adapter;
+    private TextView noRes;
+    private final List<Artist> artistSearchResults = new ArrayList<>();
+    private final List<Release> releaseSearchResults = new ArrayList<>();
+    private final List<Label> labelSearchResults = new ArrayList<>();
+    private final List<Recording> recordingSearchResults = new ArrayList<>();
+    private final List<ReleaseGroup> releaseGroupSearchResults = new ArrayList<>();
+    private final List<Instrument> instrumentSearchResults = new ArrayList<>();
+    private final List<Event> eventSearchResults = new ArrayList<>();
+    private String query, entity;
+>>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
     private SuggestionHelper suggestionHelper;
     private CursorAdapter suggestionAdapter;
 
@@ -109,6 +133,34 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    private void chooseAdapter() {
+        switch (entity) {
+            case IntentFactory.Extra.RELEASE:
+                adapter = new ReleaseAdapter(releaseSearchResults);
+                break;
+            case IntentFactory.Extra.LABEL:
+                adapter = new LabelAdapter(labelSearchResults);
+                break;
+            case IntentFactory.Extra.RECORDING:
+                adapter = new RecordingAdapter(recordingSearchResults);
+                break;
+            case IntentFactory.Extra.RELEASE_GROUP:
+                adapter = new ReleaseGroupAdapter(releaseGroupSearchResults);
+                break;
+            case IntentFactory.Extra.EVENT:
+                adapter = new EventAdapter(eventSearchResults);
+                break;
+            case IntentFactory.Extra.INSTRUMENT:
+                adapter = new InstrumentAdapter(instrumentSearchResults);
+                break;
+            default:
+                adapter = new ArtistAdapter(artistSearchResults);
+        }
+    }
+
+>>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
     private void doSearch(String query) {
         saveSearchSuggestion(query);
         binding.progressSpinner.setVisibility(View.VISIBLE);
