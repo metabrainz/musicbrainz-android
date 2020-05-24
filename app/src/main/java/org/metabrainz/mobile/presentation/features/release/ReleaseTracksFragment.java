@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.metabrainz.mobile.data.sources.api.entities.Media;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.FragmentTracklistBinding;
 
@@ -69,11 +70,14 @@ public class ReleaseTracksFragment extends Fragment {
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
-    private void setTracks(Release release) {
-        if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()) {
-            mediaList.clear();
-            mediaList.addAll(release.getMedia());
-            adapter.notifyDataSetChanged();
+    private void setTracks(MBEntity entity) {
+        if (entity instanceof Release) {
+            Release release = (Release) entity;
+            if (release.getMedia() != null && !release.getMedia().isEmpty()) {
+                mediaList.clear();
+                mediaList.addAll(release.getMedia());
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 }
