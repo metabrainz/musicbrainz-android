@@ -21,8 +21,8 @@ public class LabelUserDataFragment extends UserDataFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
-        labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::updateData);
+        labelViewModel = new ViewModelProvider(requireActivity()).get(LabelViewModel.class);
+        labelViewModel.getData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

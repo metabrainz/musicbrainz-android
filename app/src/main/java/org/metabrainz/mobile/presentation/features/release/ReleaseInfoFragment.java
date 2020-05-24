@@ -17,7 +17,6 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
@@ -39,9 +38,9 @@ public class ReleaseInfoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_release_info, container, false);
-        viewModel = new ViewModelProvider(this).get(ReleaseViewModel.class);
-        viewModel.initializeData().observe(getViewLifecycleOwner(), this::setData);
-        viewModel.initializeCoverArtData().observe(getViewLifecycleOwner(), this::setCoverArt);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
+        viewModel.getData().observe(getViewLifecycleOwner(), this::setData);
+        viewModel.fetchCoverArt().observe(getViewLifecycleOwner(), this::setCoverArt);
         slideshowAdapter = new CoverArtSlideshowAdapter(urls);
         findViews(view);
         viewPager.setAdapter(slideshowAdapter);
@@ -58,9 +57,8 @@ public class ReleaseInfoFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_indicator);
     }
 
-    private void setData(MBEntity entity) {
-        if (entity instanceof Release) {
-            Release release = (Release) entity;
+    private void setData(Release release) {
+        if (release != null) {
             String title, barcode, status = "", language = "";
             title = release.getTitle();
 
@@ -76,12 +74,7 @@ public class ReleaseInfoFragment extends Fragment {
             if (status != null && !status.isEmpty()) releaseStatus.setText(status);
             if (language != null && !language.isEmpty()) releaseLanguage.setText(language);
 
-            fetchCoverArt();
         }
-    }
-
-    private void fetchCoverArt() {
-        viewModel.getCoverArtData();
     }
 
     private void setCoverArt(CoverArt coverArt) {

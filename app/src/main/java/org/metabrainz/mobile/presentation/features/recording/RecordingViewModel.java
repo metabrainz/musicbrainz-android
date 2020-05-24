@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.recording;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
@@ -10,10 +11,15 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 public class RecordingViewModel extends LookupViewModel {
 
+    private LiveData<Recording> liveData;
+
     public RecordingViewModel() {
         entity = MBEntities.RECORDING;
-        liveData = Transformations.map(repository.initializeData(),
-                data -> new Gson().fromJson(data, Recording.class));
+        liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Recording.class));
     }
 
+    @Override
+    public LiveData<Recording> getData() {
+        return liveData;
+    }
 }

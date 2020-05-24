@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
@@ -55,21 +54,20 @@ public class LabelReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
-        labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
+        labelViewModel = new ViewModelProvider(requireActivity()).get(LabelViewModel.class);
+        labelViewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
-    private void setReleases(MBEntity entity) {
+    private void setReleases(Label label) {
         // TODO: Observe labelData LiveData, instead of requesting the label sync
         // TODO: Use DiffUtil to avoid overheads
-        if (entity instanceof Label) {
-            Label label = (Label) entity;
-            if (label.getReleases() != null) {
+
+        if (label != null && label.getReleases() != null) {
                 releaseList.clear();
                 releaseList.addAll(label.getReleases());
                 adapter.notifyDataSetChanged();
             }
-        }
+
     }
 
 }

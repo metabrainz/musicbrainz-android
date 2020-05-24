@@ -10,7 +10,6 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
@@ -58,18 +57,15 @@ public class ArtistActivity extends MusicBrainzActivity {
          * approach, the artist data was queried whenever fetchData() was invoked, the repository
          * performed an update on the artist data. This approach led a lot of unneeded network request.
          * A better solution which is currently followed is that there is a separate method to subscribe
-         * to live data and another one to update the artist info. The initializeData method acts
+         * to live data and another one to update the artist info. The getData method acts
          * like a getter method.
          */
-        artistViewModel.initializeData().observe(this, this::setArtist);
-        artistViewModel.fetchData();
+        artistViewModel.getData().observe(this, this::setArtist);
     }
 
-    private void setArtist(MBEntity entity) {
-        if (entity instanceof Artist) {
-            Artist artist = (Artist) entity;
+    private void setArtist(Artist artist) {
+        if (artist != null)
             Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
-        }
     }
 
     @Override

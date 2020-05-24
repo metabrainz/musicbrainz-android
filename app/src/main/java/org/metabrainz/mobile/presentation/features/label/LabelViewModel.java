@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.label;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
@@ -14,10 +15,16 @@ import io.reactivex.Single;
 
 public class LabelViewModel extends LookupViewModel {
 
+    private LiveData<Label> liveData;
+
     public LabelViewModel() {
         entity = MBEntities.LABEL;
-        liveData = Transformations.map(repository.initializeData(),
-                data -> new Gson().fromJson(data, Label.class));
+        liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Label.class));
+    }
+
+    @Override
+    public LiveData<Label> getData() {
+        return liveData;
     }
 
     Single<CoverArt> fetchCoverArtForRelease(Release release) {

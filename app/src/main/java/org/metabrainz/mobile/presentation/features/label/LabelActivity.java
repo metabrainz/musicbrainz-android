@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
@@ -33,8 +32,7 @@ public class LabelActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(IntentFactory.Extra.LABEL);
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);
 
-        labelViewModel.initializeData().observe(this, this::setLabel);
-        labelViewModel.fetchData();
+        labelViewModel.getData().observe(this, this::setLabel);
     }
 
     @Override
@@ -46,10 +44,8 @@ public class LabelActivity extends MusicBrainzActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setLabel(MBEntity entity) {
-        if (entity instanceof Label) {
-            Label label = (Label) entity;
+    private void setLabel(Label label) {
+        if (label != null)
             Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
-        }
     }
 }
