@@ -1,6 +1,5 @@
-package org.metabrainz.mobile.presentation.features.collection;
+package org.metabrainz.mobile.presentation.features.adapters;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,57 +9,38 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
-import org.metabrainz.mobile.presentation.IntentFactory;
-import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
-import org.metabrainz.mobile.util.Log;
 
 import java.util.List;
 
-public class CollectionAdapterRecording extends CollectionAdapter {
+public class RecordingAdapter extends TypeAdapter {
 
-    private final List<Recording> data;
-
-    public CollectionAdapterRecording(List<Recording> data) {
-        this.data = data;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+    public RecordingAdapter(List<Recording> data) {
+        super(data, MBEntities.RECORDING);
     }
 
     @NonNull
     @Override
-    public CollectionAdapterRecording.RecordingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecordingAdapter.RecordingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recording, parent, false);
-        return new CollectionAdapterRecording.RecordingViewHolder(view);
+        return new RecordingAdapter.RecordingViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        CollectionAdapterRecording.RecordingViewHolder viewHolder = (CollectionAdapterRecording.RecordingViewHolder) holder;
-        Recording recording = data.get(position);
+        RecordingAdapter.RecordingViewHolder viewHolder = (RecordingAdapter.RecordingViewHolder) holder;
+        Recording recording = (Recording) data.get(position);
         viewHolder.recordingName.setText(recording.getTitle());
 
-        if (recording.getReleases().size() != 0)
+        if (recording.getReleases() != null && recording.getReleases().size() != 0)
             setViewVisibility(recording.getReleases().get(0).getTitle(), viewHolder.recordingRelease);
-        Log.d(recording.getDisplayArtist());
         setViewVisibility(recording.getDisplayArtist(), viewHolder.recordingArtist);
         setViewVisibility(recording.getDisambiguation(), viewHolder.recordingDisambiguation);
         setAnimation(viewHolder.itemView, position);
 
-        viewHolder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), RecordingActivity.class);
-            intent.putExtra(IntentFactory.Extra.RECORDING, recording.getMbid());
-            v.getContext().startActivity(intent);
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
+        viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
     }
 
     private static class RecordingViewHolder extends EntityViewHolder {

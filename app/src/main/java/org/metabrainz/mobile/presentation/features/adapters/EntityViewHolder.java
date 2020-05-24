@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.collection;
+package org.metabrainz.mobile.presentation.features.adapters;
 
 import android.view.View;
 
