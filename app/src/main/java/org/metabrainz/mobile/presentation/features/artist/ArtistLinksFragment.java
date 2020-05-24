@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +53,14 @@ public class ArtistLinksFragment extends Fragment {
         artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLinks);
     }
 
-    private void setLinks(Artist artist) {
-        if (artist != null && artist.getRelations() != null) {
-            linkList.clear();
-            linkList.addAll(artist.getRelations());
-            linkAdapter.notifyDataSetChanged();
+    private void setLinks(MBEntity entity) {
+        if (entity instanceof Artist) {
+            Artist artist = (Artist) entity;
+            if (artist.getRelations() != null) {
+                linkList.clear();
+                linkList.addAll(artist.getRelations());
+                linkAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

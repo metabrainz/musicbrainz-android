@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
@@ -56,13 +57,16 @@ public class ArtistReleasesFragment extends Fragment {
         artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
-    private void setReleases(Artist artist) {
-        // TODO: Observe artistData LiveData, instead of requesting the artist sync
-        // TODO: Use DiffUtil to avoid overheads
-        if (artist != null && artist.getReleases() != null) {
-            releaseList.clear();
-            releaseList.addAll(artist.getReleases());
-            adapter.notifyDataSetChanged();
+    private void setReleases(MBEntity entity) {
+        if (entity instanceof Artist) {
+            Artist artist = (Artist) entity;
+            // TODO: Observe artistData LiveData, instead of requesting the artist sync
+            // TODO: Use DiffUtil to avoid overheads
+            if (artist.getReleases() != null) {
+                releaseList.clear();
+                releaseList.addAll(artist.getReleases());
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 

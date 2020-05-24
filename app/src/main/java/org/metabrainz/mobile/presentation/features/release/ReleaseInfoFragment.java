@@ -17,6 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
@@ -57,24 +58,27 @@ public class ReleaseInfoFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_indicator);
     }
 
-    private void setData(Release release) {
-        String title, barcode, status = "", language = "";
-        if (release != null) {
-            title = release.getTitle();
+    private void setData(MBEntity entity) {
+        if (entity instanceof Release) {
+            Release release = (Release) entity;
+            String title, barcode, status = "", language = "";
+            if (release != null) {
+                title = release.getTitle();
 
-            barcode = release.getBarcode();
-            if (release.getMedia() != null && !release.getMedia().isEmpty())
-                status = release.getStatus();
+                barcode = release.getBarcode();
+                if (release.getMedia() != null && !release.getMedia().isEmpty())
+                    status = release.getStatus();
 
-            if (release.getTextRepresentation() != null)
-                language = release.getTextRepresentation().getLanguage();
+                if (release.getTextRepresentation() != null)
+                    language = release.getTextRepresentation().getLanguage();
 
-            if (title != null && !title.isEmpty()) releaseTitle.setText(title);
-            if (barcode != null && !barcode.isEmpty()) releaseBarcode.setText(barcode);
-            if (status != null && !status.isEmpty()) releaseStatus.setText(status);
-            if (language != null && !language.isEmpty()) releaseLanguage.setText(language);
+                if (title != null && !title.isEmpty()) releaseTitle.setText(title);
+                if (barcode != null && !barcode.isEmpty()) releaseBarcode.setText(barcode);
+                if (status != null && !status.isEmpty()) releaseStatus.setText(status);
+                if (language != null && !language.isEmpty()) releaseLanguage.setText(language);
 
-            fetchCoverArt();
+                fetchCoverArt();
+            }
         }
     }
 

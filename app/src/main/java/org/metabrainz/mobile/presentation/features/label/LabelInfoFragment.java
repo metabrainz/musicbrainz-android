@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 
 public class LabelInfoFragment extends Fragment {
 
@@ -37,28 +38,31 @@ public class LabelInfoFragment extends Fragment {
         labelCode = layout.findViewById(R.id.label_code);
     }
 
-    private void setLabelInfo(Label label) {
-        String type, founded, area, code;
+    private void setLabelInfo(MBEntity entity) {
+        if (entity instanceof Label) {
+            Label label = (Label) entity;
+            String type, founded, area, code;
 
-        if (label != null) {
-            type = label.getType();
-            code = label.getCode();
+            if (label != null) {
+                type = label.getType();
+                code = label.getCode();
 
-            if (label.getLifeSpan() != null && label.getLifeSpan().getBegin() != null &&
-                    !label.getLifeSpan().getBegin().isEmpty())
-                founded = label.getLifeSpan().getBegin();
-            else founded = "";
-            if (label.getArea() != null) area = label.getArea().getName();
-            else area = "";
+                if (label.getLifeSpan() != null && label.getLifeSpan().getBegin() != null &&
+                        !label.getLifeSpan().getBegin().isEmpty())
+                    founded = label.getLifeSpan().getBegin();
+                else founded = "";
+                if (label.getArea() != null) area = label.getArea().getName();
+                else area = "";
 
-            if (type != null && !type.isEmpty())
-                labelType.setText(type);
-            if (founded != null && !founded.isEmpty())
-                labelFounded.setText(founded);
-            if (area != null && !area.isEmpty())
-                labelArea.setText(area);
-            if (code != null && !code.isEmpty())
-                labelCode.setText(code);
+                if (type != null && !type.isEmpty())
+                    labelType.setText(type);
+                if (founded != null && !founded.isEmpty())
+                    labelFounded.setText(founded);
+                if (area != null && !area.isEmpty())
+                    labelArea.setText(area);
+                if (code != null && !code.isEmpty())
+                    labelCode.setText(code);
+            }
         }
     }
 }

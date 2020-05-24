@@ -13,6 +13,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 public class ReleaseGroupInfoFragment extends Fragment {
@@ -60,16 +61,19 @@ public class ReleaseGroupInfoFragment extends Fragment {
         wikiCard.setVisibility(View.GONE);
     }
 
-    private void setReleaseGroupInfo(ReleaseGroup releaseGroup) {
-        String title, artist;
-        title = releaseGroup.getTitle();
-        artist = releaseGroup.getDisplayArtist();
-        releaseGroupTitle.setText(title);
-        if (artist != null && !artist.isEmpty())
-            releaseGroupArtist.setText("( ".concat(artist).concat(" )"));
-        else
-            releaseGroupArtist.setVisibility(View.GONE);
-        getWikiSummary(releaseGroup);
+    private void setReleaseGroupInfo(MBEntity entity) {
+        if (entity instanceof ReleaseGroup) {
+            ReleaseGroup releaseGroup = (ReleaseGroup) entity;
+            String title, artist;
+            title = releaseGroup.getTitle();
+            artist = releaseGroup.getDisplayArtist();
+            releaseGroupTitle.setText(title);
+            if (artist != null && !artist.isEmpty())
+                releaseGroupArtist.setText("( ".concat(artist).concat(" )"));
+            else
+                releaseGroupArtist.setVisibility(View.GONE);
+            getWikiSummary(releaseGroup);
+        }
     }
 
     private void getWikiSummary(ReleaseGroup releaseGroup) {

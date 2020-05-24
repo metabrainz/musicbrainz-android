@@ -14,6 +14,7 @@ import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 
 public class ArtistBioFragment extends Fragment {
 
@@ -87,30 +88,33 @@ public class ArtistBioFragment extends Fragment {
         wikiCard.setVisibility(View.GONE);
     }
 
-    private void setArtistInfo(Artist artist) {
-        String type, gender, area, lifeSpan;
+    private void setArtistInfo(MBEntity entity) {
+        if (entity instanceof Artist) {
+            Artist artist = (Artist) entity;
+            String type, gender, area, lifeSpan;
 
-        if (artist != null) {
-            type = artist.getType();
-            gender = artist.getGender();
+            if (artist != null) {
+                type = artist.getType();
+                gender = artist.getGender();
 
-            if (artist.getArea() != null) area = artist.getArea().getName();
-            else area = "";
+                if (artist.getArea() != null) area = artist.getArea().getName();
+                else area = "";
 
-            if (artist.getLifeSpan() != null)
-                lifeSpan = artist.getLifeSpan().getTimePeriod();
-            else lifeSpan = "";
+                if (artist.getLifeSpan() != null)
+                    lifeSpan = artist.getLifeSpan().getTimePeriod();
+                else lifeSpan = "";
 
-            if (type != null && !type.isEmpty())
-                artistType.setText(type);
-            if (gender != null && !gender.isEmpty())
-                artistGender.setText(gender);
-            if (area != null && !area.isEmpty())
-                artistArea.setText(area);
-            if (lifeSpan != null && !lifeSpan.isEmpty())
-                artistLifeSpan.setText(lifeSpan);
+                if (type != null && !type.isEmpty())
+                    artistType.setText(type);
+                if (gender != null && !gender.isEmpty())
+                    artistGender.setText(gender);
+                if (area != null && !area.isEmpty())
+                    artistArea.setText(area);
+                if (lifeSpan != null && !lifeSpan.isEmpty())
+                    artistLifeSpan.setText(lifeSpan);
+            }
+
+            getArtistWiki(artist);
         }
-
-        getArtistWiki(artist);
     }
 }

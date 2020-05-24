@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
@@ -58,13 +59,16 @@ public class RecordingReleasesFragment extends Fragment {
         recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
-    private void setReleases(Recording recording) {
+    private void setReleases(MBEntity entity) {
         // TODO: Observe recordingData LiveData, instead of requesting the recording sync
         // TODO: Use DiffUtil to avoid overheads
-        if (recording != null && recording.getReleases() != null) {
-            releaseList.clear();
-            releaseList.addAll(recording.getReleases());
-            adapter.notifyDataSetChanged();
+        if (entity instanceof Recording) {
+            Recording recording = (Recording) entity;
+            if (recording.getReleases() != null) {
+                releaseList.clear();
+                releaseList.addAll(recording.getReleases());
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
