@@ -58,6 +58,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
         results = new ArrayList<>();
 
+<<<<<<< HEAD
         adapter = new ResultAdapter(results, entity);
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -72,6 +73,9 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
             binding.progressSpinner.setVisibility(View.GONE);
             checkHasResults();
         });
+=======
+        viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+>>>>>>> 90e6cee... Extract common code out of type adapters to base search adapter.
 
         doSearch(query);
     }
