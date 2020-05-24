@@ -19,14 +19,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
-import org.metabrainz.mobile.presentation.features.adapters.ArtistAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.EventAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.InstrumentAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.LabelAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.RecordingAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.ReleaseGroupAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.TypeAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +33,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 
     private static CollectionViewModel viewModel;
     private RecyclerView recyclerView;
-    private TypeAdapter adapter;
+    private ResultAdapter adapter;
     private TextView noRes;
     private String entity, id;
     private final List<Artist> artistCollectionResults = new ArrayList<>();
@@ -70,7 +63,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         id = getIntent().getStringExtra(IntentFactory.Extra.COLLECTION_MBID);
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
-        initializeCollectionData();
+        // initializeCollectionData();
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -79,72 +72,72 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         getCollectionDetails(id);
     }
 
-    private void initializeCollectionData() {
-        switch (entity) {
-            case IntentFactory.Extra.RELEASE:
-                viewModel.getReleaseCollectionData().observe(this,
-                        (List<Release> releaseCollectionProperties) -> {
-                            releaseCollectionResults.clear();
-                            releaseCollectionResults.addAll(releaseCollectionProperties);
-                            refresh();
-                        });
-                adapter = new ReleaseAdapter(releaseCollectionResults);
-                break;
-            case IntentFactory.Extra.LABEL:
-                viewModel.getLabelCollectionData().observe(this,
-                        (List<Label> labelCollectionProperties) -> {
-                            labelCollectionResults.clear();
-                            labelCollectionResults.addAll(labelCollectionProperties);
-                            refresh();
-                        });
-                adapter = new LabelAdapter(labelCollectionResults);
-                break;
-            case IntentFactory.Extra.RECORDING:
-                viewModel.getRecordingCollectionData().observe(this,
-                        (List<Recording> recordingCollectionProperties) -> {
-                            recordingCollectionResults.clear();
-                            recordingCollectionResults.addAll(recordingCollectionProperties);
-                            refresh();
-                        });
-                adapter = new RecordingAdapter(recordingCollectionResults);
-                break;
-            case IntentFactory.Extra.RELEASE_GROUP:
-                viewModel.getReleaseGroupCollectionData().observe(this,
-                        (List<ReleaseGroup> releaseGroupCollectionProperties) -> {
-                            releaseGroupCollectionResults.clear();
-                            releaseGroupCollectionResults.addAll(releaseGroupCollectionProperties);
-                            refresh();
-                        });
-                adapter = new ReleaseGroupAdapter(releaseGroupCollectionResults);
-                break;
-            case IntentFactory.Extra.EVENT:
-                viewModel.getEventCollectionData().observe(this,
-                        (List<Event> eventCollectionProperties) -> {
-                            eventCollectionResults.clear();
-                            eventCollectionResults.addAll(eventCollectionProperties);
-                            refresh();
-                        });
-                adapter = new EventAdapter(eventCollectionResults);
-                break;
-            case IntentFactory.Extra.INSTRUMENT:
-                viewModel.getInstrumentCollectionData().observe(this,
-                        (List<Instrument> instrumentCollectionProperties) -> {
-                            instrumentCollectionResults.clear();
-                            instrumentCollectionResults.addAll(instrumentCollectionProperties);
-                            refresh();
-                        });
-                adapter = new InstrumentAdapter(instrumentCollectionResults);
-                break;
-            default:
-                viewModel.getArtistCollectionData().observe(this,
-                        (List<Artist> artistCollectionProperties) -> {
-                            artistCollectionResults.clear();
-                            artistCollectionResults.addAll(artistCollectionProperties);
-                            refresh();
-                        });
-                adapter = new ArtistAdapter(artistCollectionResults);
-        }
-    }
+//    private void initializeCollectionData() {
+//        switch (entity) {
+//            case IntentFactory.Extra.RELEASE:
+//                viewModel.getReleaseCollectionData().observe(this,
+//                        (List<Release> releaseCollectionProperties) -> {
+//                            releaseCollectionResults.clear();
+//                            releaseCollectionResults.addAll(releaseCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new ReleaseAdapter(releaseCollectionResults);
+//                break;
+//            case IntentFactory.Extra.LABEL:
+//                viewModel.getLabelCollectionData().observe(this,
+//                        (List<Label> labelCollectionProperties) -> {
+//                            labelCollectionResults.clear();
+//                            labelCollectionResults.addAll(labelCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new LabelAdapter(labelCollectionResults);
+//                break;
+//            case IntentFactory.Extra.RECORDING:
+//                viewModel.getRecordingCollectionData().observe(this,
+//                        (List<Recording> recordingCollectionProperties) -> {
+//                            recordingCollectionResults.clear();
+//                            recordingCollectionResults.addAll(recordingCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new RecordingAdapter(recordingCollectionResults);
+//                break;
+//            case IntentFactory.Extra.RELEASE_GROUP:
+//                viewModel.getReleaseGroupCollectionData().observe(this,
+//                        (List<ReleaseGroup> releaseGroupCollectionProperties) -> {
+//                            releaseGroupCollectionResults.clear();
+//                            releaseGroupCollectionResults.addAll(releaseGroupCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new ReleaseGroupAdapter(releaseGroupCollectionResults);
+//                break;
+//            case IntentFactory.Extra.EVENT:
+//                viewModel.getEventCollectionData().observe(this,
+//                        (List<Event> eventCollectionProperties) -> {
+//                            eventCollectionResults.clear();
+//                            eventCollectionResults.addAll(eventCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new EventAdapter(eventCollectionResults);
+//                break;
+//            case IntentFactory.Extra.INSTRUMENT:
+//                viewModel.getInstrumentCollectionData().observe(this,
+//                        (List<Instrument> instrumentCollectionProperties) -> {
+//                            instrumentCollectionResults.clear();
+//                            instrumentCollectionResults.addAll(instrumentCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new InstrumentAdapter(instrumentCollectionResults);
+//                break;
+//            default:
+//                viewModel.getArtistCollectionData().observe(this,
+//                        (List<Artist> artistCollectionProperties) -> {
+//                            artistCollectionResults.clear();
+//                            artistCollectionResults.addAll(artistCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new ArtistAdapter(artistCollectionResults);
+//        }
+//    }
 
     private void refresh() {
         adapter.notifyDataSetChanged();

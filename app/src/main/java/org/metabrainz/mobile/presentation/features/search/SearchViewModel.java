@@ -1,131 +1,75 @@
 package org.metabrainz.mobile.presentation.features.search;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import org.metabrainz.mobile.data.repository.SearchRepository;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
+import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchViewModel extends ViewModel {
 
     private static SearchRepository repository = SearchRepository.getRepository();
-    private boolean queryHasChanged = true;
-    private MutableLiveData<List<Artist>> artistSearchResponse;
-    private MutableLiveData<List<Release>> releaseSearchResponse;
-    private MutableLiveData<List<Recording>> recordingResponse;
-    private MutableLiveData<List<Label>> labelResponse;
-    private MutableLiveData<List<ReleaseGroup>> releaseGroupResponse;
-    private MutableLiveData<List<Event>> eventResponse;
-    private MutableLiveData<List<Instrument>> instrumentResponse;
-    private String searchQuery;
-    private String searchEntity;
+    private MutableLiveData<String> searchQueryLiveData = new MutableLiveData<>();
 
     public SearchViewModel() {
     }
 
-    private void setSearchQuery(String searchTerm) {
-        if (searchTerm != null && !searchTerm.isEmpty() &&
-                (searchQuery == null || searchQuery.isEmpty() || !searchQuery.equals(searchTerm))) {
-            searchQuery = searchTerm;
-            queryHasChanged = true;
-        } else queryHasChanged = false;
+    void search(String searchTerm) {
+        if (searchTerm != null && !searchTerm.isEmpty())
+            searchQueryLiveData.setValue(searchTerm);
     }
 
-    public void prepareSearch(String searchTerm, String entity) {
-        setSearchQuery(searchTerm);
-        if (entity != null && !entity.isEmpty())
-            searchEntity = entity;
+    LiveData<List<ResultItem>> getResultData(String entity) {
+        return Transformations.map(
+                Transformations.switchMap(searchQueryLiveData,
+                        searchTerm -> repository.getResults(entity, searchTerm)),
+                response -> {
+                    List<? extends MBEntity> list = new Gson().fromJson(
+                            new JsonParser().parse(response)
+                                    .getAsJsonObject()
+                                    .get(entity + "s"), getTypeToken(entity));
+                    List<ResultItem> items = new ArrayList<>();
+                    for (MBEntity e : list) items.add(ResultItemUtils.getEntityAsResultItem(e));
+                    return items;
+                });
     }
 
-    public MutableLiveData<List<Artist>> getArtistSearchResponse(String searchTerm) {
-        setSearchQuery(searchTerm);
-        if (artistSearchResponse == null || queryHasChanged) {
-            artistSearchResponse = loadArtistSearchResponse(searchQuery);
-        }
-        return artistSearchResponse;
+    private Type getTypeToken(String entity) {
+        if (entity.equalsIgnoreCase(IntentFactory.Extra.ARTIST))
+            return TypeToken.getParameterized(List.class, Artist.class).getType();
+        else if (entity.equalsIgnoreCase(IntentFactory.Extra.RELEASE))
+            return TypeToken.getParameterized(List.class, Release.class).getType();
+        else if (entity.equalsIgnoreCase(IntentFactory.Extra.LABEL))
+            return TypeToken.getParameterized(List.class, Label.class).getType();
+        else if (entity.equalsIgnoreCase(IntentFactory.Extra.RECORDING))
+            return TypeToken.getParameterized(List.class, Recording.class).getType();
+        else if (entity.equalsIgnoreCase(IntentFactory.Extra.EVENT))
+            return TypeToken.getParameterized(List.class, Event.class).getType();
+        else if (entity.equalsIgnoreCase(IntentFactory.Extra.INSTRUMENT))
+            return TypeToken.getParameterized(List.class, Instrument.class).getType();
+        else if (entity.equalsIgnoreCase(IntentFactory.Extra.RELEASE_GROUP))
+            return TypeToken.getParameterized(List.class, ReleaseGroup.class).getType();
+        else return null;
     }
 
-    public MutableLiveData<List<Release>> getReleaseSearchResponse(String searchTerm) {
-        setSearchQuery(searchTerm);
-        if (releaseSearchResponse == null || queryHasChanged) {
-            releaseSearchResponse = loadReleaseSearchResponse(searchQuery);
-        }
-        return releaseSearchResponse;
-    }
-
-    public MutableLiveData<List<Label>> getLabelSearchResponse(String searchTerm) {
-        setSearchQuery(searchTerm);
-        if (labelResponse == null || queryHasChanged) {
-            labelResponse = loadLabelSearchResponse(searchQuery);
-        }
-        return labelResponse;
-    }
-
-    public MutableLiveData<List<Recording>> getRecordingSearchResponse(String searchTerm) {
-        setSearchQuery(searchTerm);
-        if (recordingResponse == null || queryHasChanged) {
-            recordingResponse = loadRecordingSearchResponse(searchQuery);
-        }
-        return recordingResponse;
-    }
-
-    public MutableLiveData<List<ReleaseGroup>> getReleaseGroupSearchResponse(String searchTerm) {
-        setSearchQuery(searchTerm);
-        if (releaseGroupResponse == null || queryHasChanged) {
-            releaseGroupResponse = loadReleaseGroupSearchResponse(searchQuery);
-        }
-        return releaseGroupResponse;
-    }
-
-    public MutableLiveData<List<Event>> getEventSearchResponse(String searchTerm) {
-        setSearchQuery(searchTerm);
-        if (eventResponse == null || queryHasChanged) {
-            eventResponse = loadEventSearchResponse(searchQuery);
-        }
-        return eventResponse;
-    }
-
-    public MutableLiveData<List<Instrument>> getInstrumentSearchResponse(String searchTerm) {
-        setSearchQuery(searchTerm);
-        if (instrumentResponse == null || queryHasChanged) {
-            instrumentResponse = loadInstrumentSearchResponse(searchQuery);
-        }
-        return instrumentResponse;
-    }
-
-    private MutableLiveData<List<Artist>> loadArtistSearchResponse(String searchTerm) {
-        return repository.getArtistResults(searchTerm);
-    }
-
-    private MutableLiveData<List<Release>> loadReleaseSearchResponse(String searchTerm) {
-        return repository.getReleaseResults(searchTerm);
-    }
-
-    private MutableLiveData<List<Label>> loadLabelSearchResponse(String searchTerm) {
-        return repository.getLabelResults(searchTerm);
-    }
-
-    private MutableLiveData<List<Recording>> loadRecordingSearchResponse(String searchTerm) {
-        return repository.getRecordingResults(searchTerm);
-    }
-
-    private MutableLiveData<List<ReleaseGroup>> loadReleaseGroupSearchResponse(String searchTerm) {
-        return repository.getReleaseGroupResults(searchTerm);
-    }
-
-    private MutableLiveData<List<Event>> loadEventSearchResponse(String searchTerm) {
-        return repository.getEventResults(searchTerm);
-    }
-
-    private MutableLiveData<List<Instrument>> loadInstrumentSearchResponse(String searchTerm) {
-        return repository.getInstrumentResults(searchTerm);
-    }
 }

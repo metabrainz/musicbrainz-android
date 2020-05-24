@@ -4,7 +4,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.List;
 
-public class ReleaseSearchResponse extends JSONSearchResponse {
+public class ReleaseSearchResponse extends SearchResponse {
 
     private List<Release> releases;
 

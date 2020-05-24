@@ -44,7 +44,7 @@ public class IntentFactory {
         String TYPE = "type";
         String QUERY = "query";
         String ARTIST = "artist";
-        String RELEASE_GROUP = "rg";
+        String RELEASE_GROUP = "release-group";
         String RELEASE = "release";
         String LABEL = "label";
         String RECORDING = "recording";
