@@ -7,7 +7,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+<<<<<<< HEAD
 import org.metabrainz.mobile.databinding.ActivityLabelBinding;
+=======
+import org.metabrainz.mobile.presentation.IntentFactory;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 <<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
@@ -42,11 +46,15 @@ public class LabelActivity extends MusicBrainzActivity {
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         labelViewModel.getData().observe(this, this::setLabel);
 =======
         labelViewModel.initializeData().observe(this, this::setLabel);
         labelViewModel.fetchData();
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        labelViewModel.getData().observe(this, this::setLabel);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
     @Override
@@ -59,9 +67,14 @@ public class LabelActivity extends MusicBrainzActivity {
     }
 
     private void setLabel(Label label) {
+<<<<<<< HEAD
         if (label != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
             userViewModel.setUserData(label);
         }
+=======
+        if (label != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 }

@@ -2,12 +2,15 @@ package org.metabrainz.mobile.presentation.features.release;
 
 import androidx.lifecycle.LiveData;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
 
 =======
 import androidx.lifecycle.MutableLiveData;
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
@@ -21,6 +24,7 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 public class ReleaseViewModel extends LookupViewModel {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     private LiveData<CoverArt> coverArtData;
     private LiveData<Release> liveData;
@@ -59,6 +63,24 @@ public class ReleaseViewModel extends LookupViewModel {
 =======
     public void getCoverArtData() {
         repository.getCoverArt(MBID);
+=======
+    private LiveData<CoverArt> coverArtData;
+    private LiveData<Release> liveData;
+
+    public ReleaseViewModel() {
+        entity = MBEntities.RELEASE;
+        liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Release.class));
+        coverArtData = Transformations.switchMap(MBID, id -> repository.fetchCoverArt(id));
+    }
+
+    @Override
+    public LiveData<Release> getData() {
+        return liveData;
+    }
+
+    LiveData<CoverArt> fetchCoverArt() {
+        return coverArtData;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.

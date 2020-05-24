@@ -2,6 +2,9 @@ package org.metabrainz.mobile.presentation.features;
 
 import androidx.lifecycle.LiveData;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
@@ -21,8 +24,13 @@ public abstract class LookupViewModel extends ViewModel {
 
     protected LookupRepository repository = LookupRepository.getRepository();
 <<<<<<< HEAD
+<<<<<<< HEAD
     protected MutableLiveData<String> MBID;
     protected MBEntityType entity;
+=======
+    protected MutableLiveData<String> MBID;
+    protected MBEntities entity;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     protected LiveData<String> jsonLiveData;
 
     protected LookupViewModel() {
@@ -37,6 +45,7 @@ public abstract class LookupViewModel extends ViewModel {
     }
 
     public abstract LiveData<? extends MBEntity> getData();
+<<<<<<< HEAD
 =======
     protected String MBID;
     protected String entity;
@@ -47,6 +56,8 @@ public abstract class LookupViewModel extends ViewModel {
     public void setMBID(String MBID) {
         if (MBID != null && !MBID.isEmpty()) this.MBID = MBID;
     }
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 
     public abstract LiveData<? extends MBEntity> initializeData();
 

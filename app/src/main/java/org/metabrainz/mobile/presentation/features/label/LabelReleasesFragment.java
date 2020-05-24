@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
@@ -56,25 +55,29 @@ public class LabelReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+<<<<<<< HEAD
         labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
 <<<<<<< HEAD
         labelViewModel.initializeLabelData().observe(getViewLifecycleOwner(), this::setReleases);
 =======
         labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        labelViewModel = new ViewModelProvider(requireActivity()).get(LabelViewModel.class);
+        labelViewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
-    private void setReleases(MBEntity entity) {
+    private void setReleases(Label label) {
         // TODO: Observe labelData LiveData, instead of requesting the label sync
         // TODO: Use DiffUtil to avoid overheads
-        if (entity instanceof Label) {
-            Label label = (Label) entity;
-            if (label.getReleases() != null) {
+
+        if (label != null && label.getReleases() != null) {
                 releaseList.clear();
                 releaseList.addAll(label.getReleases());
                 adapter.notifyDataSetChanged();
             }
-        }
+
     }
 
 }

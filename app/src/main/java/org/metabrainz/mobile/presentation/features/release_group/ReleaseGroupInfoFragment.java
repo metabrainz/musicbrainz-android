@@ -12,9 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 <<<<<<< HEAD
 =======
 import org.metabrainz.mobile.R;
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.databinding.CardReleaseGroupInfoBinding;
@@ -41,9 +44,15 @@ public class ReleaseGroupInfoFragment extends Fragment {
 =======
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.card_release_group_info, container, false);
+<<<<<<< HEAD
         releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
         releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleaseGroupInfo);
         releaseGroupViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
+=======
+        releaseGroupViewModel = new ViewModelProvider(requireActivity()).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel.getData().observe(getViewLifecycleOwner(), this::setReleaseGroupInfo);
+        releaseGroupViewModel.getWikiData().observe(getViewLifecycleOwner(), this::setWiki);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         findViews(layout);
         return layout;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
@@ -76,6 +85,9 @@ public class ReleaseGroupInfoFragment extends Fragment {
     private void setReleaseGroupInfo(ReleaseGroup releaseGroup) {
         if (releaseGroup != null) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
             String title, artist;
             title = releaseGroup.getTitle();
             artist = releaseGroup.getDisplayArtist();
@@ -83,6 +95,7 @@ public class ReleaseGroupInfoFragment extends Fragment {
             if (artist != null && !artist.isEmpty())
                 binding.releaseGroupArtist.setText("( ".concat(artist).concat(" )"));
             else
+<<<<<<< HEAD
                 binding.releaseGroupArtist.setVisibility(View.GONE);
 =======
             for (Link link : releaseGroup.getRelations()) {
@@ -98,6 +111,9 @@ public class ReleaseGroupInfoFragment extends Fragment {
                 }
             }
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+                releaseGroupArtist.setVisibility(View.GONE);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         }
     }
 }

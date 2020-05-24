@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+<<<<<<< HEAD
 import org.metabrainz.mobile.databinding.FragmentLinksBinding;
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +57,17 @@ public class ArtistLinksFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 <<<<<<< HEAD
+<<<<<<< HEAD
         artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
         artistViewModel.getData().observe(getViewLifecycleOwner(), this::setLinks);
 =======
         artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
         artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLinks);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
+        artistViewModel.getData().observe(getViewLifecycleOwner(), this::setLinks);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
     private void setLinks(Artist artist) {

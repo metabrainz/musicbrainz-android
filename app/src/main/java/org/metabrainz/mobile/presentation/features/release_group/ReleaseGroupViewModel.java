@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations;
 import com.google.gson.Gson;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
@@ -16,18 +17,26 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
 =======
 import org.metabrainz.mobile.data.sources.Constants;
+=======
+import org.metabrainz.mobile.data.repository.LookupRepository;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
+import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
+<<<<<<< HEAD
 import org.metabrainz.mobile.util.SingleLiveEvent;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 
 import io.reactivex.Single;
 
 public class ReleaseGroupViewModel extends LookupViewModel {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     private LiveData<WikiSummary> wikiSummary;
     private LiveData<ReleaseGroup> liveData;
@@ -39,18 +48,29 @@ public class ReleaseGroupViewModel extends LookupViewModel {
 
     public ReleaseGroupViewModel() {
         entity = MBEntityType.RELEASE_GROUP;
+=======
+    private LiveData<WikiSummary> wikiSummary;
+    private LiveData<ReleaseGroup> liveData;
+
+    public ReleaseGroupViewModel() {
+        entity = MBEntities.RELEASE_GROUP;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, ReleaseGroup.class));
         wikiSummary = Transformations.switchMap(liveData, this::fetchWikiSummary);
     }
 
     @Override
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     public LiveData<ReleaseGroup> getData() {
         return liveData;
     }
 
     LiveData<WikiSummary> getWikiData() {
         return wikiSummary;
+<<<<<<< HEAD
 =======
     public LiveData<ReleaseGroup> initializeData() {
         return releaseGroupData;
@@ -60,6 +80,8 @@ public class ReleaseGroupViewModel extends LookupViewModel {
     public void fetchData() {
         repository.fetchData("release-group", MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
     Single<CoverArt> fetchCoverArtForRelease(Release release) {
@@ -69,6 +91,9 @@ public class ReleaseGroupViewModel extends LookupViewModel {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     private LiveData<WikiSummary> fetchWikiSummary(ReleaseGroup releaseGroup) {
         String title = "";
         int method = -1;
@@ -87,6 +112,7 @@ public class ReleaseGroupViewModel extends LookupViewModel {
             }
         }
         return repository.fetchWikiSummary(title, method);
+<<<<<<< HEAD
 =======
     public void getWikiSummary(String title, int method) {
         repository.getWikiSummary(title, method);
@@ -97,5 +123,7 @@ public class ReleaseGroupViewModel extends LookupViewModel {
             wikiSummary = repository.initializeWikiData();
         return wikiSummary;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 }

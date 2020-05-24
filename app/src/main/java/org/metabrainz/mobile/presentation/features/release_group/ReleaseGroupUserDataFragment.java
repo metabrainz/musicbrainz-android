@@ -21,8 +21,8 @@ public class ReleaseGroupUserDataFragment extends UserDataFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
-        releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::updateData);
+        releaseGroupViewModel = new ViewModelProvider(requireActivity()).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel.getData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

@@ -16,6 +16,7 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 public class RecordingViewModel extends LookupViewModel {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private LiveData<Recording> liveData;
 
     public RecordingViewModel() {
@@ -42,5 +43,17 @@ public class RecordingViewModel extends LookupViewModel {
     public void fetchData() {
         repository.fetchData("recording", MBID, Constants.LOOKUP_RECORDING_PARAMS);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+    private LiveData<Recording> liveData;
+
+    public RecordingViewModel() {
+        entity = MBEntities.RECORDING;
+        liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Recording.class));
+    }
+
+    @Override
+    public LiveData<Recording> getData() {
+        return liveData;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 }

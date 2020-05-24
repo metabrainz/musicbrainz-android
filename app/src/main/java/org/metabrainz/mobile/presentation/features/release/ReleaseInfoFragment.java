@@ -45,10 +45,16 @@ public class ReleaseInfoFragment extends Fragment {
         viewModel.fetchCoverArt().observe(getViewLifecycleOwner(), this::setCoverArt);
 =======
         View view = inflater.inflate(R.layout.card_release_info, container, false);
+<<<<<<< HEAD
         viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
         viewModel.initializeData().observe(getViewLifecycleOwner(), this::setData);
         viewModel.initializeCoverArtData().observe(getViewLifecycleOwner(), this::setCoverArt);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
+        viewModel.getData().observe(getViewLifecycleOwner(), this::setData);
+        viewModel.fetchCoverArt().observe(getViewLifecycleOwner(), this::setCoverArt);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         slideshowAdapter = new CoverArtSlideshowAdapter(urls);
         binding.slideshow.viewpagerSlideshow.setAdapter(slideshowAdapter);
         binding.slideshow.tabIndicator.setupWithViewPager(binding.slideshow.viewpagerSlideshow);
@@ -62,8 +68,13 @@ public class ReleaseInfoFragment extends Fragment {
     }
 
     private void setData(Release release) {
+<<<<<<< HEAD
         String title, barcode, status = "", language = "";
         if (release != null) {
+=======
+        if (release != null) {
+            String title, barcode, status = "", language = "";
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
             title = release.getTitle();
 
             barcode = release.getBarcode();
@@ -78,12 +89,7 @@ public class ReleaseInfoFragment extends Fragment {
             if (status != null && !status.isEmpty()) binding.releaseStatus.setText(status);
             if (language != null && !language.isEmpty()) binding.releaseLanguage.setText(language);
 
-            fetchCoverArt();
         }
-    }
-
-    private void fetchCoverArt() {
-        viewModel.getCoverArtData();
     }
 
     private void setCoverArt(CoverArt coverArt) {

@@ -5,7 +5,11 @@ import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
+=======
+import org.metabrainz.mobile.R;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.ActivityReleaseBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
@@ -42,6 +46,7 @@ public class ReleaseActivity extends MusicBrainzActivity {
         if (mbid != null && !mbid.isEmpty()) releaseViewModel.setMBID(mbid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         releaseViewModel.getData().observe(this, this::setRelease);
 =======
         releaseViewModel.initializeData().observe(this, this::setRelease);
@@ -54,6 +59,14 @@ public class ReleaseActivity extends MusicBrainzActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(release.getTitle());
             userViewModel.setUserData(release);
         }
+=======
+        releaseViewModel.getData().observe(this, this::setRelease);
+    }
+
+    private void setRelease(Release release) {
+        if (release != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(release.getTitle());
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
     @Override

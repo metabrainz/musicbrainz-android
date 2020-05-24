@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
@@ -56,24 +55,27 @@ public class RecordingReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+<<<<<<< HEAD
         recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
 <<<<<<< HEAD
         recordingViewModel.initializeRecordingData().observe(getViewLifecycleOwner(), this::setReleases);
 =======
         recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        recordingViewModel = new ViewModelProvider(requireActivity()).get(RecordingViewModel.class);
+        recordingViewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
-    private void setReleases(MBEntity entity) {
+    private void setReleases(Recording recording) {
         // TODO: Observe recordingData LiveData, instead of requesting the recording sync
         // TODO: Use DiffUtil to avoid overheads
-        if (entity instanceof Recording) {
-            Recording recording = (Recording) entity;
-            if (recording.getReleases() != null) {
+
+        if (recording != null && recording.getReleases() != null) {
                 releaseList.clear();
                 releaseList.addAll(recording.getReleases());
                 adapter.notifyDataSetChanged();
-            }
         }
     }
 

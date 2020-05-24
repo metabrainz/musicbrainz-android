@@ -23,6 +23,7 @@ import io.reactivex.Single;
 public class LabelViewModel extends LookupViewModel {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private LiveData<Label> liveData;
 =======
     private LiveData<Label> labelData = Transformations.map(repository.initializeData(),
@@ -31,10 +32,17 @@ public class LabelViewModel extends LookupViewModel {
 
     public LabelViewModel() {
         entity = MBEntityType.LABEL;
+=======
+    private LiveData<Label> liveData;
+
+    public LabelViewModel() {
+        entity = MBEntities.LABEL;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Label.class));
     }
 
     @Override
+<<<<<<< HEAD
 <<<<<<< HEAD
     public LiveData<Label> getData() {
         return liveData;
@@ -47,6 +55,10 @@ public class LabelViewModel extends LookupViewModel {
     public void fetchData() {
         repository.fetchData("label", MBID, Constants.LOOKUP_LABEL_PARAMS);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+    public LiveData<Label> getData() {
+        return liveData;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
     Single<CoverArt> fetchCoverArtForRelease(Release release) {

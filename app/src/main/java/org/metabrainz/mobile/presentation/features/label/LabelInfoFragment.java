@@ -10,7 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+<<<<<<< HEAD
 import org.metabrainz.mobile.databinding.FragmentLabelInfoBinding;
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 
 public class LabelInfoFragment extends Fragment {
 
@@ -31,8 +34,13 @@ public class LabelInfoFragment extends Fragment {
 =======
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_label_info, container, false);
+<<<<<<< HEAD
         labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
         labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLabelInfo);
+=======
+        labelViewModel = new ViewModelProvider(requireActivity()).get(LabelViewModel.class);
+        labelViewModel.getData().observe(getViewLifecycleOwner(), this::setLabelInfo);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         findViews(layout);
         return layout;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.

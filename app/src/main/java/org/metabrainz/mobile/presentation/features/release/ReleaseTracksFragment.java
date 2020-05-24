@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.metabrainz.mobile.data.sources.api.entities.Media;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.FragmentTracklistBinding;
 
@@ -56,6 +55,7 @@ public class ReleaseTracksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+<<<<<<< HEAD
         viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
 <<<<<<< HEAD
         viewModel.initializeReleaseData().observe(getViewLifecycleOwner(), this::setTracks);
@@ -68,16 +68,17 @@ public class ReleaseTracksFragment extends Fragment {
 =======
         viewModel.initializeData().observe(getViewLifecycleOwner(), this::setTracks);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
+        viewModel.getData().observe(getViewLifecycleOwner(), this::setTracks);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
-    private void setTracks(MBEntity entity) {
-        if (entity instanceof Release) {
-            Release release = (Release) entity;
-            if (release.getMedia() != null && !release.getMedia().isEmpty()) {
+    private void setTracks(Release release) {
+        if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()) {
                 mediaList.clear();
                 mediaList.addAll(release.getMedia());
                 adapter.notifyDataSetChanged();
-            }
         }
     }
 }

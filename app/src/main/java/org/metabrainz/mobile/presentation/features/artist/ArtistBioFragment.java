@@ -12,12 +12,17 @@ import androidx.lifecycle.ViewModelProvider;
 <<<<<<< HEAD
 =======
 import org.metabrainz.mobile.R;
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.FragmentBioBinding;
+=======
+import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 
 public class ArtistBioFragment extends Fragment {
 
@@ -45,9 +50,15 @@ public class ArtistBioFragment extends Fragment {
 =======
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
+<<<<<<< HEAD
         artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
         artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setArtistInfo);
         artistViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
+=======
+        artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
+        artistViewModel.getData().observe(getViewLifecycleOwner(), this::setArtistInfo);
+        artistViewModel.getWikiData().observe(getViewLifecycleOwner(), this::setWiki);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         findViews(layout);
         return layout;
     }
@@ -61,6 +72,7 @@ public class ArtistBioFragment extends Fragment {
         wikiTextView = layout.findViewById(R.id.wiki_summary);
     }
 
+<<<<<<< HEAD
     private void getArtistWiki(Artist artist) {
         String title = "";
         int method = -1;
@@ -85,6 +97,8 @@ public class ArtistBioFragment extends Fragment {
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
     }
 
+=======
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     private void setWiki(WikiSummary wiki) {
         if (wiki != null) {
             String wikiText = wiki.getExtract();
@@ -124,7 +138,11 @@ public class ArtistBioFragment extends Fragment {
             if (area != null && !area.isEmpty())
                 binding.cardArtistInfo.artistArea.setText(area);
             if (lifeSpan != null && !lifeSpan.isEmpty())
+<<<<<<< HEAD
                 binding.cardArtistInfo.lifeSpan.setText(lifeSpan);
+=======
+                artistLifeSpan.setText(lifeSpan);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         }
     }
 }

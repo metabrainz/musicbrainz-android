@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
@@ -52,25 +51,27 @@ public class ReleaseGroupReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+<<<<<<< HEAD
         releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
 <<<<<<< HEAD
         releaseGroupViewModel.initializeReleaseGroupData().observe(getViewLifecycleOwner(), this::setReleases);
 =======
         releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        releaseGroupViewModel = new ViewModelProvider(requireActivity()).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
-    private void setReleases(MBEntity entity) {
+    private void setReleases(ReleaseGroup releaseGroup) {
         // TODO: Observe releaseGroupData LiveData, instead of requesting the releaseGroup sync
         // TODO: Use DiffUtil to avoid overheads
-        if (entity instanceof ReleaseGroup) {
-            ReleaseGroup releaseGroup = (ReleaseGroup) entity;
-            if (releaseGroup.getReleases() != null) {
+        if (releaseGroup != null && releaseGroup.getReleases() != null) {
                 releaseList.clear();
                 releaseList.addAll(releaseGroup.getReleases());
                 adapter.notifyDataSetChanged();
             }
         }
-    }
 
 }

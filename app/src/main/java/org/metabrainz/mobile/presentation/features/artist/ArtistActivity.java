@@ -7,7 +7,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+<<<<<<< HEAD
 import org.metabrainz.mobile.databinding.ActivityArtistBinding;
+=======
+import org.metabrainz.mobile.presentation.IntentFactory;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 <<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.release_list.CoverArtViewModel;
@@ -64,6 +68,7 @@ public class ArtistActivity extends MusicBrainzActivity {
          * performed an update on the artist data. This approach led a lot of unneeded network request.
          * A better solution which is currently followed is that there is a separate method to subscribe
 <<<<<<< HEAD
+<<<<<<< HEAD
          * to live data and another one to update the artist info. The getData method acts
          * like a getter method.
          */
@@ -84,6 +89,17 @@ public class ArtistActivity extends MusicBrainzActivity {
             if (artist.getReleases() != null)
                 coverArtViewModel.setData(artist.getReleases());
         }
+=======
+         * to live data and another one to update the artist info. The getData method acts
+         * like a getter method.
+         */
+        artistViewModel.getData().observe(this, this::setArtist);
+    }
+
+    private void setArtist(Artist artist) {
+        if (artist != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
     @Override

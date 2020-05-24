@@ -5,7 +5,11 @@ import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
+=======
+import org.metabrainz.mobile.R;
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.databinding.ActivityRecordingBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
@@ -42,11 +46,15 @@ public class RecordingActivity extends MusicBrainzActivity {
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         recordingViewModel.getData().observe(this, this::setRecording);
 =======
         recordingViewModel.initializeData().observe(this, this::setRecording);
         recordingViewModel.fetchData();
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+        recordingViewModel.getData().observe(this, this::setRecording);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
     @Override
@@ -59,9 +67,14 @@ public class RecordingActivity extends MusicBrainzActivity {
     }
 
     private void setRecording(Recording recording) {
+<<<<<<< HEAD
         if (recording != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
             userViewModel.setUserData(recording);
         }
+=======
+        if (recording != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 }

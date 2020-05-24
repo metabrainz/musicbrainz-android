@@ -32,8 +32,13 @@ public class RecordingInfoFragment extends Fragment {
 =======
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_recording_info, container, false);
+<<<<<<< HEAD
         recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
         recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
+=======
+        recordingViewModel = new ViewModelProvider(requireActivity()).get(RecordingViewModel.class);
+        recordingViewModel.getData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
+>>>>>>> b793e03... Improve usage of live data and reactive patterns.
         findViews(layout);
         return layout;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
