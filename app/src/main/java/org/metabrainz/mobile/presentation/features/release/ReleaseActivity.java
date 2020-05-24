@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
@@ -36,15 +35,12 @@ public class ReleaseActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(IntentFactory.Extra.RELEASE_MBID);
         if (mbid != null && !mbid.isEmpty()) releaseViewModel.setMBID(mbid);
 
-        releaseViewModel.initializeData().observe(this, this::setRelease);
-        releaseViewModel.fetchData();
+        releaseViewModel.getData().observe(this, this::setRelease);
     }
 
-    private void setRelease(MBEntity entity) {
-        if (entity instanceof Release) {
-            Release release = (Release) entity;
-            //if (release != null) getSupportActionBar().setTitle(release.getTitle());
-        }
+    private void setRelease(Release release) {
+        if (release != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(release.getTitle());
     }
 
     @Override

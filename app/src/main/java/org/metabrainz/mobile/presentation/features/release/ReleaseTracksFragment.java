@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
@@ -57,18 +56,15 @@ public class ReleaseTracksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ReleaseViewModel.class);
-        viewModel.initializeData().observe(getViewLifecycleOwner(), this::setTracks);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
+        viewModel.getData().observe(getViewLifecycleOwner(), this::setTracks);
     }
 
-    private void setTracks(MBEntity entity) {
-        if (entity instanceof Release) {
-            Release release = (Release) entity;
-            if (release.getMedia() != null && !release.getMedia().isEmpty()) {
+    private void setTracks(Release release) {
+        if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()) {
                 mediaList.clear();
                 mediaList.addAll(release.getMedia());
                 adapter.notifyDataSetChanged();
-            }
         }
     }
 }

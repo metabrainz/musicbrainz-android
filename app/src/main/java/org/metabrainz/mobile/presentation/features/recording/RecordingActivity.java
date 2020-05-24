@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
@@ -33,8 +32,7 @@ public class RecordingActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(IntentFactory.Extra.RECORDING);
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);
 
-        recordingViewModel.initializeData().observe(this, this::setRecording);
-        recordingViewModel.fetchData();
+        recordingViewModel.getData().observe(this, this::setRecording);
     }
 
     @Override
@@ -46,10 +44,8 @@ public class RecordingActivity extends MusicBrainzActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setRecording(MBEntity entity) {
-        if (entity instanceof Recording) {
-            Recording recording = (Recording) entity;
-            //if (recording != null) getSupportActionBar().setTitle(recording.getTitle());
-        }
+    private void setRecording(Recording recording) {
+        if (recording != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
     }
 }

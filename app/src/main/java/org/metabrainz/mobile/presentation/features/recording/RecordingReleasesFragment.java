@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
@@ -55,20 +54,18 @@ public class RecordingReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);
-        recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
+        recordingViewModel = new ViewModelProvider(requireActivity()).get(RecordingViewModel.class);
+        recordingViewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
-    private void setReleases(MBEntity entity) {
+    private void setReleases(Recording recording) {
         // TODO: Observe recordingData LiveData, instead of requesting the recording sync
         // TODO: Use DiffUtil to avoid overheads
-        if (entity instanceof Recording) {
-            Recording recording = (Recording) entity;
-            if (recording.getReleases() != null) {
+
+        if (recording != null && recording.getReleases() != null) {
                 releaseList.clear();
                 releaseList.addAll(recording.getReleases());
                 adapter.notifyDataSetChanged();
-            }
         }
     }
 

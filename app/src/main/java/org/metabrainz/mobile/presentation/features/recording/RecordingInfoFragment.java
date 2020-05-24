@@ -25,8 +25,8 @@ public class RecordingInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_recording_info, container, false);
-        recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);
-        recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
+        recordingViewModel = new ViewModelProvider(requireActivity()).get(RecordingViewModel.class);
+        recordingViewModel.getData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
         findViews(layout);
         return layout;
     }

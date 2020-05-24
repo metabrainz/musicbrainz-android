@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 
 public class LabelInfoFragment extends Fragment {
 
@@ -25,8 +24,8 @@ public class LabelInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_label_info, container, false);
-        labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
-        labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLabelInfo);
+        labelViewModel = new ViewModelProvider(requireActivity()).get(LabelViewModel.class);
+        labelViewModel.getData().observe(getViewLifecycleOwner(), this::setLabelInfo);
         findViews(layout);
         return layout;
     }
@@ -38,9 +37,8 @@ public class LabelInfoFragment extends Fragment {
         labelCode = layout.findViewById(R.id.label_code);
     }
 
-    private void setLabelInfo(MBEntity entity) {
-        if (entity instanceof Label) {
-            Label label = (Label) entity;
+    private void setLabelInfo(Label label) {
+        if (label != null) {
             String type, founded, area, code;
 
             type = label.getType();
@@ -63,4 +61,5 @@ public class LabelInfoFragment extends Fragment {
                 labelCode.setText(code);
         }
     }
+
 }

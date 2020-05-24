@@ -22,8 +22,8 @@ public class ArtistUserDataFragment extends UserDataFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
-        artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::updateData);
+        artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
+        artistViewModel.getData().observe(getViewLifecycleOwner(), this::updateData);
         View view = inflater.inflate(R.layout.fragment_artist_user_data, container, false);
         bindViews(view);
         return view;

@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.presentation.features.release;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
@@ -12,22 +12,22 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 public class ReleaseViewModel extends LookupViewModel {
 
-    private MutableLiveData<CoverArt> coverArtData;
+    private LiveData<CoverArt> coverArtData;
+    private LiveData<Release> liveData;
 
     public ReleaseViewModel() {
         entity = MBEntities.RELEASE;
-        liveData = Transformations.map(repository.initializeData(),
-                data -> new Gson().fromJson(data, Release.class));
+        liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Release.class));
+        coverArtData = Transformations.switchMap(MBID, id -> repository.fetchCoverArt(id));
     }
 
-    MutableLiveData<CoverArt> initializeCoverArtData() {
-        if (coverArtData == null)
-            coverArtData = repository.initializeCoverArtData();
+    @Override
+    public LiveData<Release> getData() {
+        return liveData;
+    }
+
+    LiveData<CoverArt> fetchCoverArt() {
         return coverArtData;
-    }
-
-    void getCoverArtData() {
-        repository.getCoverArt(MBID);
     }
 
 }

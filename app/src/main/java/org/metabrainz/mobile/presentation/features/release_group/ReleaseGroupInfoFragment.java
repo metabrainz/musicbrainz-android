@@ -10,10 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.repository.LookupRepository;
-import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 public class ReleaseGroupInfoFragment extends Fragment {
@@ -29,9 +26,9 @@ public class ReleaseGroupInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.card_release_group_info, container, false);
-        releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
-        releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleaseGroupInfo);
-        releaseGroupViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
+        releaseGroupViewModel = new ViewModelProvider(requireActivity()).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel.getData().observe(getViewLifecycleOwner(), this::setReleaseGroupInfo);
+        releaseGroupViewModel.getWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);
         return layout;
     }
@@ -61,9 +58,8 @@ public class ReleaseGroupInfoFragment extends Fragment {
         wikiCard.setVisibility(View.GONE);
     }
 
-    private void setReleaseGroupInfo(MBEntity entity) {
-        if (entity instanceof ReleaseGroup) {
-            ReleaseGroup releaseGroup = (ReleaseGroup) entity;
+    private void setReleaseGroupInfo(ReleaseGroup releaseGroup) {
+        if (releaseGroup != null) {
             String title, artist;
             title = releaseGroup.getTitle();
             artist = releaseGroup.getDisplayArtist();
@@ -72,30 +68,6 @@ public class ReleaseGroupInfoFragment extends Fragment {
                 releaseGroupArtist.setText("( ".concat(artist).concat(" )"));
             else
                 releaseGroupArtist.setVisibility(View.GONE);
-            getWikiSummary(releaseGroup);
         }
-    }
-
-    private void getWikiSummary(ReleaseGroup releaseGroup) {
-        String title = "";
-        int method = -1;
-        if (releaseGroup != null) {
-            for (Link link : releaseGroup.getRelations()) {
-                if (link.getType().equals("wikipedia")) {
-                    title = link.getPageTitle();
-                    method = LookupRepository.METHOD_WIKIPEDIA_URL;
-                    break;
-                }
-                if (link.getType().equals("wikidata")) {
-                    title = link.getPageTitle();
-                    method = LookupRepository.METHOD_WIKIDATA_ID;
-                    break;
-                }
-            }
-        }
-        if (method != -1)
-            releaseGroupViewModel.getWikiSummary(title, method);
-        else hideWikiCard();
-
     }
 }
