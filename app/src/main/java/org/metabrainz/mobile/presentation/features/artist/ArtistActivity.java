@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
@@ -64,9 +65,11 @@ public class ArtistActivity extends MusicBrainzActivity {
         artistViewModel.fetchData();
     }
 
-    private void setArtist(Artist artist) {
-        if (artist != null)
+    private void setArtist(MBEntity entity) {
+        if (entity instanceof Artist) {
+            Artist artist = (Artist) entity;
             Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
+        }
     }
 
     @Override

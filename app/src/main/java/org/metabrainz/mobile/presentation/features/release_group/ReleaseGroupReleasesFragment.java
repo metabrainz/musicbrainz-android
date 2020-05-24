@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
@@ -54,13 +55,16 @@ public class ReleaseGroupReleasesFragment extends Fragment {
         releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
-    private void setReleases(ReleaseGroup releaseGroup) {
+    private void setReleases(MBEntity entity) {
         // TODO: Observe releaseGroupData LiveData, instead of requesting the releaseGroup sync
         // TODO: Use DiffUtil to avoid overheads
-        if (releaseGroup != null && releaseGroup.getReleases() != null) {
-            releaseList.clear();
-            releaseList.addAll(releaseGroup.getReleases());
-            adapter.notifyDataSetChanged();
+        if (entity instanceof ReleaseGroup) {
+            ReleaseGroup releaseGroup = (ReleaseGroup) entity;
+            if (releaseGroup.getReleases() != null) {
+                releaseList.clear();
+                releaseList.addAll(releaseGroup.getReleases());
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 

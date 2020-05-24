@@ -1,6 +1,8 @@
 package org.metabrainz.mobile.data.sources;
 
-public class Constants {
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
+
+public final class Constants {
     public static final String LOOKUP_ARTIST_PARAMS =
             "url-rels+releases+ratings+tags";
     public static final String LOOKUP_RELEASE_PARAMS =
@@ -21,4 +23,21 @@ public class Constants {
 
     public static final String LIMIT = "100";
     public static final String OFFSET = "0";
+
+    public static String getDefaultParams(MBEntities entity) {
+        switch (entity) {
+            case ARTIST:
+                return LOOKUP_ARTIST_PARAMS;
+            case LABEL:
+                return LOOKUP_LABEL_PARAMS;
+            case RELEASE:
+                return LOOKUP_RELEASE_PARAMS;
+            case RECORDING:
+                return LOOKUP_RECORDING_PARAMS;
+            case RELEASE_GROUP:
+                return LOOKUP_RELEASE_GROUP_PARAMS;
+            default:
+                return null;
+        }
+    }
 }

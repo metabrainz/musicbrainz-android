@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 
 public class RecordingInfoFragment extends Fragment {
@@ -36,12 +37,15 @@ public class RecordingInfoFragment extends Fragment {
         recordingTitle = layout.findViewById(R.id.recording_title);
     }
 
-    private void setRecordingInfo(Recording recording) {
-        String duration, artist;
-        recordingTitle.setText(recording.getTitle());
-        duration = recording.getDuration();
-        artist = recording.getDisplayArtist();
-        if (duration != null) recordingDuration.setText(duration);
-        if (artist != null) recordingArtist.setText(artist);
+    private void setRecordingInfo(MBEntity entity) {
+        if (entity instanceof Recording) {
+            Recording recording = (Recording) entity;
+            String duration, artist;
+            recordingTitle.setText(recording.getTitle());
+            duration = recording.getDuration();
+            artist = recording.getDisplayArtist();
+            if (duration != null) recordingDuration.setText(duration);
+            if (artist != null) recordingArtist.setText(artist);
+        }
     }
 }

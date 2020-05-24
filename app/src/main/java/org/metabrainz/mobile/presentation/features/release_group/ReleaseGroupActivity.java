@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
@@ -46,7 +47,10 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setReleaseGroup(ReleaseGroup releaseGroup) {
-        // if (releaseGroup != null) getSupportActionBar().setTitle(releaseGroup.getName());
+    private void setReleaseGroup(MBEntity entity) {
+        if (entity instanceof ReleaseGroup) {
+            ReleaseGroup releaseGroup = (ReleaseGroup) entity;
+            // if (releaseGroup != null) getSupportActionBar().setTitle(releaseGroup.getName());
+        }
     }
 }
