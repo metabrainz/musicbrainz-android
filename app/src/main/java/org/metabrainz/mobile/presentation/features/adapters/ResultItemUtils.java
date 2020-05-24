@@ -1,19 +1,26 @@
 package org.metabrainz.mobile.presentation.features.adapters;
 
+<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+=======
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+=======
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
+<<<<<<< HEAD
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +28,11 @@ import java.util.List;
 public class ResultItemUtils {
 
     private static ResultItem getEntityAsResultItem(MBEntity entity) {
+=======
+public class ResultItemUtils {
+
+    public static ResultItem getEntityAsResultItem(MBEntity entity) {
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
         ResultItem item;
         if (entity instanceof Artist) {
             Artist artist = (Artist) entity;
@@ -61,6 +73,7 @@ public class ResultItemUtils {
         } else item = null;
         return item;
     }
+<<<<<<< HEAD
 
     private static Type getTypeToken(MBEntityType entity) {
         if (entity == MBEntityType.ARTIST)
@@ -89,4 +102,6 @@ public class ResultItemUtils {
         for (MBEntity e : list) items.add(ResultItemUtils.getEntityAsResultItem(e));
         return items;
     }
+=======
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 }

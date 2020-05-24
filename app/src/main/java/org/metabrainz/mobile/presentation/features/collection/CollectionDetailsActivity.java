@@ -11,6 +11,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
 =======
@@ -23,6 +24,9 @@ import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ReleaseGroupAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.TypeAdapter;
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
+=======
+import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +49,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 =======
     private static CollectionViewModel viewModel;
     private RecyclerView recyclerView;
-    private TypeAdapter adapter;
+    private ResultAdapter adapter;
     private TextView noRes;
     private String entity, id;
     private final List<Artist> artistCollectionResults = new ArrayList<>();
@@ -74,6 +78,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
 <<<<<<< HEAD
+<<<<<<< HEAD
         collectionResults = new ArrayList<>();
         adapter = new ResultAdapter(collectionResults, entity);
         adapter.resetAnimation();
@@ -91,6 +96,9 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
                 });
 =======
         initializeCollectionData();
+=======
+        // initializeCollectionData();
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -99,6 +107,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         getCollectionDetails(id);
     }
 
+<<<<<<< HEAD
     private void initializeCollectionData() {
         switch (entity) {
             case IntentFactory.Extra.RELEASE:
@@ -166,6 +175,74 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         }
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
     }
+=======
+//    private void initializeCollectionData() {
+//        switch (entity) {
+//            case IntentFactory.Extra.RELEASE:
+//                viewModel.getReleaseCollectionData().observe(this,
+//                        (List<Release> releaseCollectionProperties) -> {
+//                            releaseCollectionResults.clear();
+//                            releaseCollectionResults.addAll(releaseCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new ReleaseAdapter(releaseCollectionResults);
+//                break;
+//            case IntentFactory.Extra.LABEL:
+//                viewModel.getLabelCollectionData().observe(this,
+//                        (List<Label> labelCollectionProperties) -> {
+//                            labelCollectionResults.clear();
+//                            labelCollectionResults.addAll(labelCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new LabelAdapter(labelCollectionResults);
+//                break;
+//            case IntentFactory.Extra.RECORDING:
+//                viewModel.getRecordingCollectionData().observe(this,
+//                        (List<Recording> recordingCollectionProperties) -> {
+//                            recordingCollectionResults.clear();
+//                            recordingCollectionResults.addAll(recordingCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new RecordingAdapter(recordingCollectionResults);
+//                break;
+//            case IntentFactory.Extra.RELEASE_GROUP:
+//                viewModel.getReleaseGroupCollectionData().observe(this,
+//                        (List<ReleaseGroup> releaseGroupCollectionProperties) -> {
+//                            releaseGroupCollectionResults.clear();
+//                            releaseGroupCollectionResults.addAll(releaseGroupCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new ReleaseGroupAdapter(releaseGroupCollectionResults);
+//                break;
+//            case IntentFactory.Extra.EVENT:
+//                viewModel.getEventCollectionData().observe(this,
+//                        (List<Event> eventCollectionProperties) -> {
+//                            eventCollectionResults.clear();
+//                            eventCollectionResults.addAll(eventCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new EventAdapter(eventCollectionResults);
+//                break;
+//            case IntentFactory.Extra.INSTRUMENT:
+//                viewModel.getInstrumentCollectionData().observe(this,
+//                        (List<Instrument> instrumentCollectionProperties) -> {
+//                            instrumentCollectionResults.clear();
+//                            instrumentCollectionResults.addAll(instrumentCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new InstrumentAdapter(instrumentCollectionResults);
+//                break;
+//            default:
+//                viewModel.getArtistCollectionData().observe(this,
+//                        (List<Artist> artistCollectionProperties) -> {
+//                            artistCollectionResults.clear();
+//                            artistCollectionResults.addAll(artistCollectionProperties);
+//                            refresh();
+//                        });
+//                adapter = new ArtistAdapter(artistCollectionResults);
+//        }
+//    }
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 
     private void refresh() {
         adapter.notifyDataSetChanged();

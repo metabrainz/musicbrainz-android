@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.metabrainz.mobile.R;
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivitySearchBinding;
@@ -31,6 +32,12 @@ import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ReleaseGroupAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.TypeAdapter;
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
+=======
+import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
@@ -48,20 +55,18 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private SearchViewModel viewModel;
     private SearchView searchView;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private ResultAdapter adapter;
     private List<ResultItem> results;
     private String query;
     private MBEntityType entity;
 =======
     private TypeAdapter adapter;
+=======
+    private ResultAdapter adapter;
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
     private TextView noRes;
-    private final List<Artist> artistSearchResults = new ArrayList<>();
-    private final List<Release> releaseSearchResults = new ArrayList<>();
-    private final List<Label> labelSearchResults = new ArrayList<>();
-    private final List<Recording> recordingSearchResults = new ArrayList<>();
-    private final List<ReleaseGroup> releaseGroupSearchResults = new ArrayList<>();
-    private final List<Instrument> instrumentSearchResults = new ArrayList<>();
-    private final List<Event> eventSearchResults = new ArrayList<>();
+    private List<ResultItem> results;
     private String query, entity;
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
     private SuggestionHelper suggestionHelper;
@@ -83,10 +88,17 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         results = new ArrayList<>();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         adapter = new ResultAdapter(results, entity);
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setVisibility(View.GONE);
+=======
+        adapter = new ResultAdapter(results, entity);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setVisibility(View.GONE);
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
@@ -94,12 +106,18 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
             results.clear();
             results.addAll(items);
             adapter.notifyDataSetChanged();
+<<<<<<< HEAD
             binding.progressSpinner.setVisibility(View.GONE);
             checkHasResults();
         });
 =======
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 >>>>>>> 90e6cee... Extract common code out of type adapters to base search adapter.
+=======
+            progressBar.setVisibility(View.GONE);
+            checkHasResults();
+        });
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 
         doSearch(query);
     }
@@ -134,6 +152,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private void chooseAdapter() {
         switch (entity) {
@@ -161,6 +180,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     }
 
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
+=======
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
     private void doSearch(String query) {
         saveSearchSuggestion(query);
         binding.progressSpinner.setVisibility(View.VISIBLE);

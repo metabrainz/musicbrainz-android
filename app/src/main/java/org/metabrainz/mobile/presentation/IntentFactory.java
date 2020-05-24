@@ -32,4 +32,29 @@ public class IntentFactory {
     public static Intent getSettings(Context context) {
         return new Intent(context, SettingsActivity.class);
     }
+<<<<<<< HEAD
+=======
+
+    public interface Extra {
+
+        String ARTIST_MBID = "artist_mbid";
+        String RELEASE_MBID = "release_mbid";
+        String RG_MBID = "rg_mbid";
+        String COLLECTION_MBID = "collection_mbid";
+        String BARCODE = "barcode";
+
+        String TYPE = "type";
+        String QUERY = "query";
+        String ARTIST = "artist";
+        String RELEASE_GROUP = "release-group";
+        String RELEASE = "release";
+        String LABEL = "label";
+        String RECORDING = "recording";
+        String INSTRUMENT = "instrument";
+        String EVENT = "event";
+        String ALL = "all";
+
+    }
+
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 }

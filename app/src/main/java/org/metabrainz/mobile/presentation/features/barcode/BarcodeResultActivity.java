@@ -14,7 +14,6 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.ActivityBarcodeResultBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
-import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.ArrayList;
@@ -32,8 +31,12 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
     private TextView noResultView;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
+<<<<<<< HEAD
     private ReleaseAdapter adapter;
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
+=======
+    // private ReleaseAdapter adapter;
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,18 +47,28 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         // adapter = new ReleaseAdapter(releases);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 =======
         adapter = new ReleaseAdapter(releases);
+=======
+        // adapter = new ReleaseAdapter(releases);
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL);
+<<<<<<< HEAD
         binding.recyclerView.addItemDecoration(itemDecoration);
         // recyclerView.setAdapter(adapter);
         binding.recyclerView.setVisibility(View.GONE);
+=======
+        recyclerView.addItemDecoration(itemDecoration);
+        // recyclerView.setAdapter(adapter);
+        recyclerView.setVisibility(View.GONE);
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 
         binding.noResult.setVisibility(View.GONE);
 
@@ -97,6 +110,10 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
 
     private void showMultipleReleases() {
         // adapter.notifyDataSetChanged();
+<<<<<<< HEAD
         binding.recyclerView.setVisibility(View.VISIBLE);
+=======
+        recyclerView.setVisibility(View.VISIBLE);
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
     }
 }

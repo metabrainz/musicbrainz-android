@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 
@@ -22,6 +23,18 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultViewHolder> {
     private int lastPosition = -1;
 
     public ResultAdapter(List<ResultItem> data, MBEntityType entity) {
+=======
+import org.metabrainz.mobile.presentation.features.label.LabelActivity;
+
+import java.util.List;
+
+public class ResultAdapter extends RecyclerView.Adapter {
+    protected List<ResultItem> data;
+    protected String entity;
+    private int lastPosition = -1;
+
+    public ResultAdapter(List<ResultItem> data, String entity) {
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
         this.data = data;
         this.entity = entity;
     }
@@ -40,6 +53,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultViewHolder> {
     }
 
     @Override
+<<<<<<< HEAD
     public void onBindViewHolder(@NonNull ResultViewHolder holder, int position) {
         holder.bind(data.get(position));
         setAnimation(holder.itemView, position);
@@ -47,6 +61,16 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultViewHolder> {
     }
 
     private void setAnimation(View viewToAnimate, int position) {
+=======
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ResultViewHolder viewHolder = (ResultViewHolder) holder;
+        viewHolder.bind(data.get(position));
+        setAnimation(viewHolder.itemView, position);
+        viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
+    }
+
+    void setAnimation(View viewToAnimate, int position) {
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
         if (position > lastPosition) {
             Animation animation = AnimationUtils
                     .loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);
@@ -59,10 +83,18 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultViewHolder> {
         lastPosition = -1;
     }
 
+<<<<<<< HEAD
     private void onClick(View view, int position) {
         Intent intent = new Intent(view.getContext(), entity.typeActivityClass);
         intent.putExtra(Constants.MBID, data.get(position).getMBID());
         view.getContext().startActivity(intent);
     }
 
+=======
+    void onClick(View view, int position) {
+        Intent intent = new Intent(view.getContext(), LabelActivity.class);
+        intent.putExtra(entity, data.get(position).getMBID());
+        view.getContext().startActivity(intent);
+    }
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.
 }

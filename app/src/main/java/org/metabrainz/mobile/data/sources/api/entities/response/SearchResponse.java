@@ -6,7 +6,11 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 
 import java.util.List;
 
+<<<<<<< HEAD:app/src/main/java/org/metabrainz/mobile/data/sources/api/entities/response/SearchResponse.java
 public class SearchResponse<T extends MBEntity> {
+=======
+class SearchResponse<T extends MBEntity> {
+>>>>>>> cdaf05d... Remove redundancy in search module using generics.:app/src/main/java/org/metabrainz/mobile/data/sources/api/entities/response/search/JSONSearchResponse.java
     @SerializedName("created")
     private String timestamp;
     private int count;
