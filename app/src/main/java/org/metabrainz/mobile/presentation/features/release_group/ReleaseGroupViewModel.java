@@ -1,41 +1,37 @@
 package org.metabrainz.mobile.presentation.features.release_group;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 
-import org.metabrainz.mobile.data.repository.ReleaseGroupLookupRepository;
-import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
+import com.google.gson.Gson;
+
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
+import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
+import org.metabrainz.mobile.presentation.features.LookupViewModel;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import io.reactivex.Single;
 
-public class ReleaseGroupViewModel extends ViewModel {
+public class ReleaseGroupViewModel extends LookupViewModel {
 
-    private ReleaseGroupLookupRepository repository = ReleaseGroupLookupRepository.getRepository();
-    private MutableLiveData<ReleaseGroup> releaseGroupData;
-    private SingleLiveEvent<ArtistWikiSummary> wikiSummary;
-    private String MBID;
+    private LiveData<ReleaseGroup> releaseGroupData = Transformations.map(repository.initializeData(),
+            data -> new Gson().fromJson(data, ReleaseGroup.class));
+    private SingleLiveEvent<WikiSummary> wikiSummary;
 
     public ReleaseGroupViewModel() {
     }
 
-    public void setMBID(String MBID) {
-        if (MBID != null && !MBID.isEmpty()) this.MBID = MBID;
-    }
-
-    public MutableLiveData<ReleaseGroup> initializeReleaseGroupData() {
-        // Obtain live data from the repository if not already present
-        if (releaseGroupData == null)
-            releaseGroupData = repository.initializeReleaseGroupData();
+    @Override
+    public LiveData<ReleaseGroup> initializeData() {
         return releaseGroupData;
     }
 
-    public void getReleaseGroupData(boolean isLoggedIn) {
-        // Call the repository to query the database to update the releaseGroup data
-        repository.getReleaseGroup(MBID, isLoggedIn);
+    @Override
+    public void fetchData() {
+        repository.fetchData("release-group", MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS);
     }
 
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {
@@ -48,15 +44,9 @@ public class ReleaseGroupViewModel extends ViewModel {
         repository.getWikiSummary(title, method);
     }
 
-    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData() {
+    public SingleLiveEvent<WikiSummary> initializeWikiData() {
         if (wikiSummary == null)
             wikiSummary = repository.initializeWikiData();
         return wikiSummary;
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        ReleaseGroupLookupRepository.destroyRepository();
     }
 }

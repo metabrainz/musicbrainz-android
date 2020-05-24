@@ -12,7 +12,6 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
-import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.Objects;
 
@@ -55,15 +54,14 @@ public class ArtistActivity extends MusicBrainzActivity {
          * not required.
          * Example: The view model is shared between the activity and fragments. The activity and each
          * of the fragments will need to subscribe to the live data independently. In the earlier
-         * approach, the artist data was queried whenever getArtistData() was invoked, the repository
+         * approach, the artist data was queried whenever fetchData() was invoked, the repository
          * performed an update on the artist data. This approach led a lot of unneeded network request.
          * A better solution which is currently followed is that there is a separate method to subscribe
-         * to live data and another one to update the artist info. The initializeLiveData method acts
+         * to live data and another one to update the artist info. The initializeData method acts
          * like a getter method.
          */
-        artistViewModel.initializeArtistData().observe(this, this::setArtist);
-        artistViewModel.getArtistData(LoginSharedPreferences.getLoginStatus()
-                == LoginSharedPreferences.STATUS_LOGGED_IN);
+        artistViewModel.initializeData().observe(this, this::setArtist);
+        artistViewModel.fetchData();
     }
 
     private void setArtist(Artist artist) {

@@ -24,7 +24,7 @@ public class RecordingUserDataFragment extends UserDataFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         recordingViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(RecordingViewModel.class);
-        recordingViewModel.initializeRecordingData().observe(getViewLifecycleOwner(), this::updateData);
+        recordingViewModel.initializeData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

@@ -1,36 +1,33 @@
 package org.metabrainz.mobile.presentation.features.release;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Transformations;
 
-import org.metabrainz.mobile.data.repository.ReleaseLookupRepository;
+import com.google.gson.Gson;
+
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
-public class ReleaseViewModel extends ViewModel {
+public class ReleaseViewModel extends LookupViewModel {
 
-    private ReleaseLookupRepository repository = ReleaseLookupRepository.getRepository();
-    private MutableLiveData<Release> releaseData;
+    private LiveData<Release> releaseData = Transformations.map(repository.initializeData(),
+            data -> new Gson().fromJson(data, Release.class));
     private MutableLiveData<CoverArt> coverArtData;
-    private String MBID;
 
     public ReleaseViewModel() {
     }
 
-    public void setMBID(String MBID) {
-        if (MBID != null && !MBID.isEmpty()) this.MBID = MBID;
-    }
-
-    public MutableLiveData<Release> initializeReleaseData() {
-        // Obtain live data from the repository if not already present
-        if (releaseData == null)
-            releaseData = repository.initializeReleaseLiveData();
+    @Override
+    public LiveData<Release> initializeData() {
         return releaseData;
     }
 
-    public void getReleaseData() {
-        // Call the repository to query the database to update the release data
-        repository.getRelease(MBID);
+    @Override
+    public void fetchData() {
+        repository.fetchData("release", MBID, Constants.LOOKUP_RELEASE_PARAMS);
     }
 
     public MutableLiveData<CoverArt> initializeCoverArtData() {
@@ -43,9 +40,4 @@ public class ReleaseViewModel extends ViewModel {
         repository.getCoverArt(MBID);
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        ReleaseLookupRepository.destroyRepository();
-    }
 }

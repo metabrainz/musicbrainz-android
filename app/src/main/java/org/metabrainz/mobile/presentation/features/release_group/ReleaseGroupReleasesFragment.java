@@ -52,7 +52,7 @@ public class ReleaseGroupReleasesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
-        releaseGroupViewModel.initializeReleaseGroupData().observe(this, this::setReleases);
+        releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
     private void setReleases(ReleaseGroup releaseGroup) {

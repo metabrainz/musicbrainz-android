@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.repository.ArtistLookupRepository;
-import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
+import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
+import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class ArtistBioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
         artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setArtistInfo);
+        artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setArtistInfo);
         artistViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);
         return layout;
@@ -55,12 +55,12 @@ public class ArtistBioFragment extends Fragment {
             for (Link link : artist.getRelations()) {
                 if (link.getType().equals("wikipedia")) {
                     title = link.getPageTitle();
-                    method = ArtistLookupRepository.METHOD_WIKIPEDIA_URL;
+                    method = LookupRepository.METHOD_WIKIPEDIA_URL;
                     break;
                 }
                 if (link.getType().equals("wikidata")) {
                     title = link.getPageTitle();
-                    method = ArtistLookupRepository.METHOD_WIKIDATA_ID;
+                    method = LookupRepository.METHOD_WIKIDATA_ID;
                     break;
                 }
             }
@@ -71,7 +71,7 @@ public class ArtistBioFragment extends Fragment {
 
     }
 
-    private void setWiki(ArtistWikiSummary wiki) {
+    private void setWiki(WikiSummary wiki) {
         if (wiki != null) {
             String wikiText = wiki.getExtract();
             if (wikiText != null && !wikiText.isEmpty()) {

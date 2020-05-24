@@ -8,16 +8,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
-import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
+import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import io.reactivex.Single;
@@ -26,23 +25,43 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ReleaseGroupLookupRepository {
+public class LookupRepository {
+
     public static final int METHOD_WIKIPEDIA_URL = 0;
     public static final int METHOD_WIKIDATA_ID = 1;
-    private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class, true);
-    private static ReleaseGroupLookupRepository repository;
-    private static MutableLiveData<ReleaseGroup> releaseGroupData;
-    private static SingleLiveEvent<ArtistWikiSummary> wikiSummary;
-    private Callback<ReleaseGroup> releaseGroupCallback;
 
-    private ReleaseGroupLookupRepository() {
-        releaseGroupData = new MutableLiveData<>();
+    private final static LookupService service =
+            MusicBrainzServiceGenerator.createService(LookupService.class, true);
+    private static LookupRepository repository;
+
+    private final MutableLiveData<String> entityLiveData;
+    private final Callback<ResponseBody> lookupCallback;
+    private final SingleLiveEvent<WikiSummary> wikiSummary;
+    private final MutableLiveData<CoverArt> coverArtData;
+
+    private LookupRepository() {
+        entityLiveData = new MutableLiveData<>();
         wikiSummary = new SingleLiveEvent<>();
+        coverArtData = new MutableLiveData<>();
+        lookupCallback = new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call,
+                                   @NonNull Response<ResponseBody> response) {
+                try {
+                    entityLiveData.setValue(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+            }
+        };
     }
 
-    public static ReleaseGroupLookupRepository getRepository() {
-        if (repository == null) repository = new ReleaseGroupLookupRepository();
+    public static LookupRepository getRepository() {
+        if (repository == null) repository = new LookupRepository();
         return repository;
     }
 
@@ -50,64 +69,45 @@ public class ReleaseGroupLookupRepository {
         repository = null;
     }
 
-    public MutableLiveData<ReleaseGroup> initializeReleaseGroupData() {
-        return releaseGroupData;
+    public MutableLiveData<String> initializeData() {
+        return entityLiveData;
     }
 
-    public SingleLiveEvent<ArtistWikiSummary> initializeWikiData() {
+    public SingleLiveEvent<WikiSummary> initializeWikiData() {
         return wikiSummary;
     }
 
-    public void getReleaseGroup(String MBID, boolean isLoggedIn) {
-        releaseGroupCallback = new Callback<ReleaseGroup>() {
-            @Override
-            public void onResponse(Call<ReleaseGroup> call, Response<ReleaseGroup> response) {
-                ReleaseGroup releaseGroup = response.body();
-                releaseGroupData.setValue(releaseGroup);
-            }
+    public MutableLiveData<CoverArt> initializeCoverArtData() {
+        return coverArtData;
+    }
 
-            @Override
-            public void onFailure(Call<ReleaseGroup> call, Throwable t) {
-
-            }
-        };
-
-        if (isLoggedIn) fetchReleaseGroupWithUserData(MBID);
-        else fetchReleaseGroup(MBID);
+    public void fetchData(String entity, String MBID, String params) {
+        service.lookupEntityData(entity, MBID, params).enqueue(lookupCallback);
     }
 
     public void getWikiSummary(String string, int method) {
         if (method == METHOD_WIKIPEDIA_URL)
-            fetchReleaseGroupWiki(string);
+            fetchWiki(string);
         else
-            fetchReleaseGroupWikiData(string);
+            fetchWikiData(string);
     }
 
-    private void fetchReleaseGroupWithUserData(String MBID) {
-        service.lookupReleaseGroup(MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS + Constants.USER_DATA_PARAMS)
-                .enqueue(releaseGroupCallback);
-    }
-
-    private void fetchReleaseGroup(String MBID) {
-        service.lookupReleaseGroup(MBID, Constants.LOOKUP_RELEASE_GROUP_PARAMS).enqueue(releaseGroupCallback);
-    }
-
-    private void fetchReleaseGroupWiki(String title) {
-        service.getWikipediaSummary(title).enqueue(new Callback<ArtistWikiSummary>() {
+    private void fetchWiki(String title) {
+        service.getWikipediaSummary(title).enqueue(new Callback<WikiSummary>() {
             @Override
-            public void onResponse(@NonNull Call<ArtistWikiSummary> call, @NonNull Response<ArtistWikiSummary> response) {
-                ArtistWikiSummary wiki = response.body();
+            public void onResponse(@NonNull Call<WikiSummary> call, @NonNull Response<WikiSummary> response) {
+                WikiSummary wiki = response.body();
                 wikiSummary.setValue(wiki);
             }
 
             @Override
-            public void onFailure(@NonNull Call<ArtistWikiSummary> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<WikiSummary> call, @NonNull Throwable t) {
 
             }
         });
     }
 
-    private void fetchReleaseGroupWikiData(String id) {
+    private void fetchWikiData(String id) {
         service.getWikipediaLink(id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -122,7 +122,7 @@ public class ReleaseGroupLookupRepository {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                fetchReleaseGroupWiki(title);
+                fetchWiki(title);
             }
 
             @Override
@@ -138,5 +138,20 @@ public class ReleaseGroupLookupRepository {
      */
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {
         return service.getCoverArt(release.getMbid());
+    }
+
+    public void getCoverArt(String MBID) {
+        service.getCoverArtAll(MBID).enqueue(new Callback<CoverArt>() {
+            @Override
+            public void onResponse(@NonNull Call<CoverArt> call, @NonNull Response<CoverArt> response) {
+                CoverArt coverArt = response.body();
+                coverArtData.setValue(coverArt);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CoverArt> call, @NonNull Throwable t) {
+
+            }
+        });
     }
 }

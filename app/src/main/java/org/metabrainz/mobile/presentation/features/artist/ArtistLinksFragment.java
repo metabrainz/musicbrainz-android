@@ -50,7 +50,7 @@ public class ArtistLinksFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setLinks);
+        artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLinks);
     }
 
     private void setLinks(Artist artist) {

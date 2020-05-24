@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.data.repository.ReleaseGroupLookupRepository;
-import org.metabrainz.mobile.data.sources.api.entities.ArtistWikiSummary;
+import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
+import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 import java.util.Objects;
@@ -31,7 +31,7 @@ public class ReleaseGroupInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.card_release_group_info, container, false);
         releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
-        releaseGroupViewModel.initializeReleaseGroupData().observe(getViewLifecycleOwner(), this::setReleaseGroupInfo);
+        releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleaseGroupInfo);
         releaseGroupViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);
         return layout;
@@ -44,7 +44,7 @@ public class ReleaseGroupInfoFragment extends Fragment {
         wikiTextView = layout.findViewById(R.id.wiki_summary);
     }
 
-    private void setWiki(ArtistWikiSummary wiki) {
+    private void setWiki(WikiSummary wiki) {
         if (wiki != null) {
             String wikiText = wiki.getExtract();
             if (wikiText != null && !wikiText.isEmpty()) {
@@ -81,12 +81,12 @@ public class ReleaseGroupInfoFragment extends Fragment {
             for (Link link : releaseGroup.getRelations()) {
                 if (link.getType().equals("wikipedia")) {
                     title = link.getPageTitle();
-                    method = ReleaseGroupLookupRepository.METHOD_WIKIPEDIA_URL;
+                    method = LookupRepository.METHOD_WIKIPEDIA_URL;
                     break;
                 }
                 if (link.getType().equals("wikidata")) {
                     title = link.getPageTitle();
-                    method = ReleaseGroupLookupRepository.METHOD_WIKIDATA_ID;
+                    method = LookupRepository.METHOD_WIKIDATA_ID;
                     break;
                 }
             }

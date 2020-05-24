@@ -2,7 +2,7 @@ package org.metabrainz.mobile.data.sources.api.entities;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ArtistWikiSummary {
+public class WikiSummary {
 
     @SerializedName("displaytitle")
     private String displayTitle;

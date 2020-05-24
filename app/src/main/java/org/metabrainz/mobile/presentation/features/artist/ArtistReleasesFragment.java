@@ -54,7 +54,7 @@ public class ArtistReleasesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(this, this::setReleases);
+        artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
     private void setReleases(Artist artist) {
