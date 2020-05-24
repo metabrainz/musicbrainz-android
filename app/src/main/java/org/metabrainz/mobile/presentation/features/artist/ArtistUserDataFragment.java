@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
-
-import java.util.Objects;
 
 public class ArtistUserDataFragment extends UserDataFragment {
 
@@ -24,7 +22,7 @@ public class ArtistUserDataFragment extends UserDataFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
+        artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
         artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::updateData);
         View view = inflater.inflate(R.layout.fragment_artist_user_data, container, false);
         bindViews(view);
