@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
-
-import java.util.Objects;
 
 public class ReleaseGroupUserDataFragment extends UserDataFragment {
 
@@ -23,7 +21,7 @@ public class ReleaseGroupUserDataFragment extends UserDataFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
         releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::updateData);
         return super.onCreateView(inflater, container, savedInstanceState);
     }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -20,7 +20,6 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ReleaseInfoFragment extends Fragment {
 
@@ -39,7 +38,7 @@ public class ReleaseInfoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_release_info, container, false);
-        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ReleaseViewModel.class);
         viewModel.initializeData().observe(getViewLifecycleOwner(), this::setData);
         viewModel.initializeCoverArtData().observe(getViewLifecycleOwner(), this::setCoverArt);
         slideshowAdapter = new CoverArtSlideshowAdapter(urls);

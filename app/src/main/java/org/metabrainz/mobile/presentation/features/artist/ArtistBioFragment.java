@@ -7,15 +7,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-
-import java.util.Objects;
 
 public class ArtistBioFragment extends Fragment {
 
@@ -32,7 +30,7 @@ public class ArtistBioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_bio, container, false);
-        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
+        artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
         artistViewModel.initializeData().observe(getViewLifecycleOwner(), this::setArtistInfo);
         artistViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);

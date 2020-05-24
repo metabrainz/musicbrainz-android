@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +19,6 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class LabelReleasesFragment extends Fragment {
 
@@ -55,7 +54,7 @@ public class LabelReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
+        labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
         labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 

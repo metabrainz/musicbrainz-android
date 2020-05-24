@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +18,6 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ReleaseGroupReleasesFragment extends Fragment {
 
@@ -51,7 +50,7 @@ public class ReleaseGroupReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
         releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
