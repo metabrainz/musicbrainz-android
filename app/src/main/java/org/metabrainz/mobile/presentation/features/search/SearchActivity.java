@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,7 +76,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setVisibility(View.GONE);
 
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
         viewModel.prepareSearch(query, entity);
         doSearch(query);

@@ -10,19 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 
 import java.util.List;
 
 public class SearchAdapterEvent extends SearchAdapter {
-    private final List<Event> data;
 
-    public SearchAdapterEvent(List<Event> data) {
-        this.data = data;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+    SearchAdapterEvent(List<Event> data) {
+        super(data, MBEntities.EVENT);
     }
 
     @NonNull
@@ -36,7 +31,7 @@ public class SearchAdapterEvent extends SearchAdapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         EventViewHolder viewHolder = (EventViewHolder) holder;
-        Event event = data.get(position);
+        Event event = (Event) data.get(position);
         viewHolder.eventName.setText(event.getName());
         if (event.getLifeSpan() != null && event.getLifeSpan().getTimePeriod() != null)
             setViewVisibility(event.getLifeSpan().getTimePeriod(), viewHolder.eventTimePeriod);
@@ -44,11 +39,6 @@ public class SearchAdapterEvent extends SearchAdapter {
         setViewVisibility(event.getType(), viewHolder.eventType);
         setViewVisibility(event.getDisambiguation(), viewHolder.eventDisambiguation);
         setAnimation(viewHolder.itemView, position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
     }
 
     private static class EventViewHolder extends EntityViewHolder {

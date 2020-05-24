@@ -1,6 +1,5 @@
 package org.metabrainz.mobile.presentation.features.search;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.presentation.IntentFactory;
-import org.metabrainz.mobile.presentation.features.artist.ArtistActivity;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 
 import java.util.List;
 
 public class SearchAdapterArtist extends SearchAdapter {
-    private final List<Artist> data;
 
-    public SearchAdapterArtist(List<Artist> data) {
-        this.data = data;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+    SearchAdapterArtist(List<Artist> data) {
+        super(data, MBEntities.ARTIST);
     }
 
     @NonNull
@@ -39,24 +31,13 @@ public class SearchAdapterArtist extends SearchAdapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ArtistViewHolder viewHolder = (ArtistViewHolder) holder;
-        Artist artist = data.get(position);
+        Artist artist = (Artist) data.get(position);
         viewHolder.artistName.setText(artist.getName());
         setViewVisibility(artist.getCountry(), viewHolder.artistArea);
         setViewVisibility(artist.getType(), viewHolder.artistType);
         setViewVisibility(artist.getDisambiguation(), viewHolder.artistDisambiguation);
         setAnimation(viewHolder.itemView, position);
         viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
-    }
-
-    private void onClick(View view, int position) {
-        Intent intent = new Intent(view.getContext(), ArtistActivity.class);
-        intent.putExtra(IntentFactory.Extra.ARTIST_MBID, data.get(position).getMbid());
-        view.getContext().startActivity(intent);
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
     }
 
     private static class ArtistViewHolder extends EntityViewHolder {

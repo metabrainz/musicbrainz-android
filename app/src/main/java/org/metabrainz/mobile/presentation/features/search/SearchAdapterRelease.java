@@ -1,6 +1,5 @@
 package org.metabrainz.mobile.presentation.features.search;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.presentation.IntentFactory;
-import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
 
 public class SearchAdapterRelease extends SearchAdapter {
-    private final List<Release> data;
 
-    public SearchAdapterRelease(List<Release> data) {
-        this.data = data;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+    SearchAdapterRelease(List<Release> data) {
+        super(data, MBEntities.RELEASE);
     }
 
     @NonNull
@@ -39,24 +31,15 @@ public class SearchAdapterRelease extends SearchAdapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SearchAdapterRelease.ReleaseViewHolder viewHolder = (SearchAdapterRelease.ReleaseViewHolder) holder;
-        Release release = data.get(position);
+        Release release = (Release) data.get(position);
         viewHolder.releaseName.setText(release.getTitle());
 
-        viewHolder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), ReleaseActivity.class);
-            intent.putExtra(IntentFactory.Extra.RELEASE_MBID, release.getMbid());
-            v.getContext().startActivity(intent);
-        });
+        viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
 
         setViewVisibility(release.labelCatalog(), viewHolder.releaseLabel);
         setViewVisibility(release.getDisplayArtist(), viewHolder.releaseArtist);
         setViewVisibility(release.getDisambiguation(), viewHolder.releaseDisambiguation);
         setAnimation(viewHolder.itemView, position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
     }
 
     private static class ReleaseViewHolder extends EntityViewHolder {

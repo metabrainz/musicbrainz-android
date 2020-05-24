@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
@@ -23,7 +23,7 @@ public class LoginActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getAccessTokenLiveData().observe(this, this::saveOAuthToken);
         loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
 

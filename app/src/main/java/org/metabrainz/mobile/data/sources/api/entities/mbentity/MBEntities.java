@@ -5,7 +5,9 @@ public enum MBEntities {
     RELEASE("release"),
     LABEL("label"),
     RELEASE_GROUP("release-group"),
-    RECORDING("recording");
+    RECORDING("recording"),
+    EVENT("event"),
+    INSTRUMENT("instrument");
 
     public final String name;
 

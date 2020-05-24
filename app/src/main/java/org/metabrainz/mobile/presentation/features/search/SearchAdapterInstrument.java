@@ -10,19 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 
 import java.util.List;
 
 public class SearchAdapterInstrument extends SearchAdapter {
-    private final List<Instrument> data;
 
-    public SearchAdapterInstrument(List<Instrument> data) {
-        this.data = data;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+    SearchAdapterInstrument(List<Instrument> data) {
+        super(data, MBEntities.INSTRUMENT);
     }
 
     @NonNull
@@ -36,17 +31,12 @@ public class SearchAdapterInstrument extends SearchAdapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         InstrumentViewHolder viewHolder = (InstrumentViewHolder) holder;
-        Instrument instrument = data.get(position);
+        Instrument instrument = (Instrument) data.get(position);
         viewHolder.instrumentName.setText(instrument.getName());
         setViewVisibility(instrument.getDescription(), viewHolder.instrumentDescription);
         setViewVisibility(instrument.getType(), viewHolder.instrumentType);
         setViewVisibility(instrument.getDisambiguation(), viewHolder.instrumentDisambiguation);
         setAnimation(viewHolder.itemView, position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
     }
 
     private static class InstrumentViewHolder extends EntityViewHolder {
