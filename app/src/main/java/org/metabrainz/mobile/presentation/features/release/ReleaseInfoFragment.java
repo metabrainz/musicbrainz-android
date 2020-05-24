@@ -62,23 +62,21 @@ public class ReleaseInfoFragment extends Fragment {
         if (entity instanceof Release) {
             Release release = (Release) entity;
             String title, barcode, status = "", language = "";
-            if (release != null) {
-                title = release.getTitle();
+            title = release.getTitle();
 
-                barcode = release.getBarcode();
-                if (release.getMedia() != null && !release.getMedia().isEmpty())
-                    status = release.getStatus();
+            barcode = release.getBarcode();
+            if (release.getMedia() != null && !release.getMedia().isEmpty())
+                status = release.getStatus();
 
-                if (release.getTextRepresentation() != null)
-                    language = release.getTextRepresentation().getLanguage();
+            if (release.getTextRepresentation() != null)
+                language = release.getTextRepresentation().getLanguage();
 
-                if (title != null && !title.isEmpty()) releaseTitle.setText(title);
-                if (barcode != null && !barcode.isEmpty()) releaseBarcode.setText(barcode);
-                if (status != null && !status.isEmpty()) releaseStatus.setText(status);
-                if (language != null && !language.isEmpty()) releaseLanguage.setText(language);
+            if (title != null && !title.isEmpty()) releaseTitle.setText(title);
+            if (barcode != null && !barcode.isEmpty()) releaseBarcode.setText(barcode);
+            if (status != null && !status.isEmpty()) releaseStatus.setText(status);
+            if (language != null && !language.isEmpty()) releaseLanguage.setText(language);
 
-                fetchCoverArt();
-            }
+            fetchCoverArt();
         }
     }
 

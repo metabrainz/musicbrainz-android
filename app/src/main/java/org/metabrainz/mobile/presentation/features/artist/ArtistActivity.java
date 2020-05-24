@@ -3,7 +3,7 @@ package org.metabrainz.mobile.presentation.features.artist;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -37,7 +37,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         setSupportActionBar(findViewById(R.id.toolbar));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        artistViewModel = ViewModelProviders.of(this).get(ArtistViewModel.class);
+        artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
 
         mbid = getIntent().getStringExtra(IntentFactory.Extra.ARTIST_MBID);
         if (mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);

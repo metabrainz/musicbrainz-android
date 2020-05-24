@@ -20,13 +20,13 @@ public class ReleaseViewModel extends LookupViewModel {
                 data -> new Gson().fromJson(data, Release.class));
     }
 
-    public MutableLiveData<CoverArt> initializeCoverArtData() {
+    MutableLiveData<CoverArt> initializeCoverArtData() {
         if (coverArtData == null)
             coverArtData = repository.initializeCoverArtData();
         return coverArtData;
     }
 
-    public void getCoverArtData() {
+    void getCoverArtData() {
         repository.getCoverArt(MBID);
     }
 

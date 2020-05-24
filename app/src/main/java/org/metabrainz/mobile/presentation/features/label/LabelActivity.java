@@ -3,7 +3,7 @@ package org.metabrainz.mobile.presentation.features.label;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
@@ -28,7 +28,7 @@ public class LabelActivity extends MusicBrainzActivity {
         setSupportActionBar(findViewById(R.id.toolbar));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        labelViewModel = ViewModelProviders.of(this).get(LabelViewModel.class);
+        labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
 
         mbid = getIntent().getStringExtra(IntentFactory.Extra.LABEL);
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);

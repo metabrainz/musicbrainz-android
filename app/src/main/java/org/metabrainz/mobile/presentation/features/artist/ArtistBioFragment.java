@@ -93,26 +93,24 @@ public class ArtistBioFragment extends Fragment {
             Artist artist = (Artist) entity;
             String type, gender, area, lifeSpan;
 
-            if (artist != null) {
-                type = artist.getType();
-                gender = artist.getGender();
+            type = artist.getType();
+            gender = artist.getGender();
 
-                if (artist.getArea() != null) area = artist.getArea().getName();
-                else area = "";
+            if (artist.getArea() != null) area = artist.getArea().getName();
+            else area = "";
 
-                if (artist.getLifeSpan() != null)
-                    lifeSpan = artist.getLifeSpan().getTimePeriod();
-                else lifeSpan = "";
+            if (artist.getLifeSpan() != null)
+                lifeSpan = artist.getLifeSpan().getTimePeriod();
+            else lifeSpan = "";
 
-                if (type != null && !type.isEmpty())
-                    artistType.setText(type);
-                if (gender != null && !gender.isEmpty())
-                    artistGender.setText(gender);
-                if (area != null && !area.isEmpty())
-                    artistArea.setText(area);
-                if (lifeSpan != null && !lifeSpan.isEmpty())
-                    artistLifeSpan.setText(lifeSpan);
-            }
+            if (type != null && !type.isEmpty())
+                artistType.setText(type);
+            if (gender != null && !gender.isEmpty())
+                artistGender.setText(gender);
+            if (area != null && !area.isEmpty())
+                artistArea.setText(area);
+            if (lifeSpan != null && !lifeSpan.isEmpty())
+                artistLifeSpan.setText(lifeSpan);
 
             getArtistWiki(artist);
         }

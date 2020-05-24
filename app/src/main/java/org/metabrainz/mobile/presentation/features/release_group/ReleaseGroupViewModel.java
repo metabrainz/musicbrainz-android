@@ -24,17 +24,17 @@ public class ReleaseGroupViewModel extends LookupViewModel {
                 data -> new Gson().fromJson(data, ReleaseGroup.class));
     }
 
-    public Single<CoverArt> fetchCoverArtForRelease(Release release) {
+    Single<CoverArt> fetchCoverArtForRelease(Release release) {
         // Ask the repository to fetch the cover art and update ReleaseGroupData LiveData
         // Whoever is observing that LiveData, will receive the release with the cover art
         return repository.fetchCoverArtForRelease(release);
     }
 
-    public void getWikiSummary(String title, int method) {
+    void getWikiSummary(String title, int method) {
         repository.getWikiSummary(title, method);
     }
 
-    public SingleLiveEvent<WikiSummary> initializeWikiData() {
+    SingleLiveEvent<WikiSummary> initializeWikiData() {
         if (wikiSummary == null)
             wikiSummary = repository.initializeWikiData();
         return wikiSummary;
