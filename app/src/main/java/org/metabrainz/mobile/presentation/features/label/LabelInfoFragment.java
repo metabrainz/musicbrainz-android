@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-
-import java.util.Objects;
 
 public class LabelInfoFragment extends Fragment {
 
@@ -26,7 +24,7 @@ public class LabelInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_label_info, container, false);
-        labelViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(LabelViewModel.class);
+        labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
         labelViewModel.initializeData().observe(getViewLifecycleOwner(), this::setLabelInfo);
         findViews(layout);
         return layout;

@@ -7,15 +7,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-
-import java.util.Objects;
 
 public class ReleaseGroupInfoFragment extends Fragment {
 
@@ -30,7 +28,7 @@ public class ReleaseGroupInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.card_release_group_info, container, false);
-        releaseGroupViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseGroupViewModel.class);
+        releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
         releaseGroupViewModel.initializeData().observe(getViewLifecycleOwner(), this::setReleaseGroupInfo);
         releaseGroupViewModel.initializeWikiData().observe(getViewLifecycleOwner(), this::setWiki);
         findViews(layout);
