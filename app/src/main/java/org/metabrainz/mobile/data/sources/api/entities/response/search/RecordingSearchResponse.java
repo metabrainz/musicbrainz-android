@@ -4,7 +4,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 
 import java.util.List;
 
-public class RecordingSearchResponse extends JSONSearchResponse {
+public class RecordingSearchResponse extends SearchResponse {
 
     private List<Recording> recordings;
 

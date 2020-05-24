@@ -17,7 +17,6 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
-import org.metabrainz.mobile.presentation.features.adapters.ReleaseAdapter;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
     private TextView noResultView;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    private ReleaseAdapter adapter;
+    // private ReleaseAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,13 +39,13 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         setSupportActionBar(findViewById(R.id.toolbar));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        adapter = new ReleaseAdapter(releases);
+        // adapter = new ReleaseAdapter(releases);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(adapter);
+        // recyclerView.setAdapter(adapter);
         recyclerView.setVisibility(View.GONE);
 
         progressBar = findViewById(R.id.progress_spinner);
@@ -86,7 +85,7 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
     }
 
     private void showMultipleReleases() {
-        adapter.notifyDataSetChanged();
+        // adapter.notifyDataSetChanged();
         recyclerView.setVisibility(View.VISIBLE);
     }
 }
