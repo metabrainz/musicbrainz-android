@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.data.repository.CollectionRepository;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils;
 
@@ -22,8 +23,8 @@ public class CollectionViewModel extends ViewModel {
         return repository.fetchCollections(editor, fetchPrivate);
     }
 
-    LiveData<List<ResultItem>> fetchCollectionDetails(String entity, String id) {
-        return Transformations.map(repository.fetchCollectionDetails(entity, id),
+    LiveData<List<ResultItem>> fetchCollectionDetails(MBEntityType entity, String id) {
+        return Transformations.map(repository.fetchCollectionDetails(entity.name, id),
                 response -> ResultItemUtils.getJSONResponseAsResultItemList(response, entity));
     }
 

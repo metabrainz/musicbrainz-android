@@ -1,6 +1,6 @@
 package org.metabrainz.mobile.data.sources;
 
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 
 public final class Constants {
     public static final String LOOKUP_ARTIST_PARAMS =
@@ -24,7 +24,10 @@ public final class Constants {
     public static final String LIMIT = "100";
     public static final String OFFSET = "0";
 
-    public static String getDefaultParams(MBEntities entity) {
+    public static final String MBID = "mbid";
+    public static final String TYPE = "type";
+
+    public static String getDefaultParams(MBEntityType entity) {
         switch (entity) {
             case ARTIST:
                 return LOOKUP_ARTIST_PARAMS;

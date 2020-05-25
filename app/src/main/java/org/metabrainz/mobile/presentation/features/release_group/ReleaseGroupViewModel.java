@@ -9,7 +9,7 @@ import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
@@ -22,7 +22,7 @@ public class ReleaseGroupViewModel extends LookupViewModel {
     private LiveData<ReleaseGroup> liveData;
 
     public ReleaseGroupViewModel() {
-        entity = MBEntities.RELEASE_GROUP;
+        entity = MBEntityType.RELEASE_GROUP;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, ReleaseGroup.class));
         wikiSummary = Transformations.switchMap(liveData, this::fetchWikiSummary);
     }

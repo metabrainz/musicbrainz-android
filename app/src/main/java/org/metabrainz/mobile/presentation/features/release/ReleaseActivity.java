@@ -6,8 +6,8 @@ import android.view.MenuItem;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 import java.util.Objects;
@@ -32,7 +32,7 @@ public class ReleaseActivity extends MusicBrainzActivity {
 
         releaseViewModel = new ViewModelProvider(this).get(ReleaseViewModel.class);
 
-        mbid = getIntent().getStringExtra(IntentFactory.Extra.RELEASE_MBID);
+        mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) releaseViewModel.setMBID(mbid);
 
         releaseViewModel.getData().observe(this, this::setRelease);

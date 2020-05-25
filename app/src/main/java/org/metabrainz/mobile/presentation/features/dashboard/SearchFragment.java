@@ -17,7 +17,8 @@ import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.fragment.app.Fragment;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.presentation.IntentFactory.Extra;
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 
@@ -66,33 +67,33 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
 
         if (query.length() > 0) {
             Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
-            searchIntent.putExtra(Extra.TYPE, getSearchTypeFromSpinner());
-            searchIntent.putExtra(Extra.QUERY, query);
+            searchIntent.putExtra(SearchManager.QUERY, query);
+            searchIntent.putExtra(Constants.TYPE, getSearchTypeFromSpinner());
             startActivity(searchIntent);
         } else {
             Toast.makeText(getActivity(), R.string.toast_search_err, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private String getSearchTypeFromSpinner() {
+    private MBEntityType getSearchTypeFromSpinner() {
         int spinnerPosition = searchTypeSpinner.getSelectedItemPosition();
         switch (spinnerPosition) {
             case 0:
-                return Extra.ARTIST;
+                return MBEntityType.ARTIST;
             case 1:
-                return Extra.RELEASE;
+                return MBEntityType.RELEASE;
             case 2:
-                return Extra.LABEL;
+                return MBEntityType.LABEL;
             case 3:
-                return Extra.RECORDING;
+                return MBEntityType.RECORDING;
             case 4:
-                return Extra.RELEASE_GROUP;
+                return MBEntityType.RELEASE_GROUP;
             case 5:
-                return Extra.INSTRUMENT;
+                return MBEntityType.INSTRUMENT;
             case 6:
-                return Extra.EVENT;
+                return MBEntityType.EVENT;
             default:
-                return Extra.ALL;
+                return null;
         }
     }
 

@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
@@ -108,7 +108,7 @@ class RecordingReleaseAdapter extends RecyclerView.Adapter {
 
             this.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), ReleaseActivity.class);
-                intent.putExtra(IntentFactory.Extra.RELEASE_MBID, item.getMbid());
+                intent.putExtra(Constants.MBID, item.getMbid());
                 v.getContext().startActivity(intent);
             });
         }

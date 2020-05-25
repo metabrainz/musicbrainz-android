@@ -9,10 +9,10 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-import org.metabrainz.mobile.presentation.IntentFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -62,29 +62,29 @@ public class ResultItemUtils {
         return item;
     }
 
-    private static Type getTypeToken(String entity) {
-        if (entity.equalsIgnoreCase(IntentFactory.Extra.ARTIST))
+    private static Type getTypeToken(MBEntityType entity) {
+        if (entity == MBEntityType.ARTIST)
             return TypeToken.getParameterized(List.class, Artist.class).getType();
-        else if (entity.equalsIgnoreCase(IntentFactory.Extra.RELEASE))
+        else if (entity == MBEntityType.RELEASE)
             return TypeToken.getParameterized(List.class, Release.class).getType();
-        else if (entity.equalsIgnoreCase(IntentFactory.Extra.LABEL))
+        else if (entity == MBEntityType.LABEL)
             return TypeToken.getParameterized(List.class, Label.class).getType();
-        else if (entity.equalsIgnoreCase(IntentFactory.Extra.RECORDING))
+        else if (entity == MBEntityType.RECORDING)
             return TypeToken.getParameterized(List.class, Recording.class).getType();
-        else if (entity.equalsIgnoreCase(IntentFactory.Extra.EVENT))
+        else if (entity == MBEntityType.EVENT)
             return TypeToken.getParameterized(List.class, Event.class).getType();
-        else if (entity.equalsIgnoreCase(IntentFactory.Extra.INSTRUMENT))
+        else if (entity == MBEntityType.INSTRUMENT)
             return TypeToken.getParameterized(List.class, Instrument.class).getType();
-        else if (entity.equalsIgnoreCase(IntentFactory.Extra.RELEASE_GROUP))
+        else if (entity == MBEntityType.RELEASE_GROUP)
             return TypeToken.getParameterized(List.class, ReleaseGroup.class).getType();
         else return null;
     }
 
-    public static List<ResultItem> getJSONResponseAsResultItemList(String response, String entity) {
+    public static List<ResultItem> getJSONResponseAsResultItemList(String response, MBEntityType entity) {
         List<? extends MBEntity> list = new Gson().fromJson(
                 JsonParser.parseString(response)
                         .getAsJsonObject()
-                        .get(entity + "s"), ResultItemUtils.getTypeToken(entity));
+                        .get(entity.name + "s"), ResultItemUtils.getTypeToken(entity));
         List<ResultItem> items = new ArrayList<>();
         for (MBEntity e : list) items.add(ResultItemUtils.getEntityAsResultItem(e));
         return items;

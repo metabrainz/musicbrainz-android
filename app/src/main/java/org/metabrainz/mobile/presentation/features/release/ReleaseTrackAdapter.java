@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.Track;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
 
 import java.util.List;
@@ -152,7 +152,7 @@ class ReleaseTrackAdapter extends RecyclerView.Adapter {
 
             this.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), RecordingActivity.class);
-                intent.putExtra(IntentFactory.Extra.RECORDING, item.getRecording().getMbid());
+                intent.putExtra(Constants.MBID, item.getRecording().getMbid());
                 v.getContext().startActivity(intent);
             });
         }

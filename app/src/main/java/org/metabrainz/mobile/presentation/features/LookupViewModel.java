@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.Constants;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 
 public abstract class LookupViewModel extends ViewModel {
 
     protected LookupRepository repository = LookupRepository.getRepository();
     protected MutableLiveData<String> MBID;
-    protected MBEntities entity;
+    protected MBEntityType entity;
     protected LiveData<String> jsonLiveData;
 
     protected LookupViewModel() {

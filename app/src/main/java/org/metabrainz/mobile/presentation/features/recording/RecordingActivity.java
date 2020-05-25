@@ -6,8 +6,8 @@ import android.view.MenuItem;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 import java.util.Objects;
@@ -29,7 +29,7 @@ public class RecordingActivity extends MusicBrainzActivity {
 
         recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);
 
-        mbid = getIntent().getStringExtra(IntentFactory.Extra.RECORDING);
+        mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);
 
         recordingViewModel.getData().observe(this, this::setRecording);

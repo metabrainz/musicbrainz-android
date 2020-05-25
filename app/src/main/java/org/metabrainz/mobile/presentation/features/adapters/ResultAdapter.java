@@ -11,16 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.presentation.features.label.LabelActivity;
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter {
     private List<ResultItem> data;
-    private String entity;
+    private MBEntityType entity;
     private int lastPosition = -1;
 
-    public ResultAdapter(List<ResultItem> data, String entity) {
+    public ResultAdapter(List<ResultItem> data, MBEntityType entity) {
         this.data = data;
         this.entity = entity;
     }
@@ -60,8 +61,9 @@ public class ResultAdapter extends RecyclerView.Adapter {
     }
 
     private void onClick(View view, int position) {
-        Intent intent = new Intent(view.getContext(), LabelActivity.class);
-        intent.putExtra(entity, data.get(position).getMBID());
+        Intent intent = new Intent(view.getContext(), entity.typeActivityClass);
+        intent.putExtra(Constants.MBID, data.get(position).getMBID());
         view.getContext().startActivity(intent);
     }
+
 }

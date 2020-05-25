@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.data.repository.SearchRepository;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils;
 
@@ -24,10 +25,10 @@ public class SearchViewModel extends ViewModel {
             searchQueryLiveData.setValue(searchTerm);
     }
 
-    LiveData<List<ResultItem>> getResultData(String entity) {
+    LiveData<List<ResultItem>> getResultData(MBEntityType entity) {
         return Transformations.map(
                 Transformations.switchMap(searchQueryLiveData,
-                        searchTerm -> repository.getResults(entity, searchTerm)),
+                        searchTerm -> repository.getResults(entity.name, searchTerm)),
                 response -> ResultItemUtils.getJSONResponseAsResultItemList(response, entity));
     }
 

@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -40,7 +41,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private ResultAdapter adapter;
     private TextView noRes;
     private List<ResultItem> results;
-    private String query, entity;
+    private String query;
+    private MBEntityType entity;
     private SuggestionHelper suggestionHelper;
     private CursorAdapter suggestionAdapter;
     private ProgressBar progressBar;
@@ -58,7 +60,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         progressBar.setVisibility(View.GONE);
 
         query = getIntent().getStringExtra(SearchManager.QUERY);
-        entity = getIntent().getStringExtra(IntentFactory.Extra.TYPE);
+        entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);
 
         results = new ArrayList<>();
 

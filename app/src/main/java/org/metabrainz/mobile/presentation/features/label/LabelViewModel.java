@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
@@ -18,7 +18,7 @@ public class LabelViewModel extends LookupViewModel {
     private LiveData<Label> liveData;
 
     public LabelViewModel() {
-        entity = MBEntities.LABEL;
+        entity = MBEntityType.LABEL;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Label.class));
     }
 
