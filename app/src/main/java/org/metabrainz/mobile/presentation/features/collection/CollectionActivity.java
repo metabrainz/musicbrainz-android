@@ -61,16 +61,19 @@ public class CollectionActivity extends MusicBrainzActivity {
                     DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(itemDecoration);
 
-            viewModel.getCollectionData().observe(this, data -> {
+            progressBar.setVisibility(View.VISIBLE);
+            boolean getPrivateCollections =
+                    LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
+                            && UserPreferences.getPrivateCollectionsPreference();
+            viewModel.fetchCollectionData(LoginSharedPreferences.getUsername(),
+                    getPrivateCollections).observe(this, data -> {
                 CollectionUtils.removeCollections(data);
                 collections.clear();
                 collections.addAll(data);
                 adapter.notifyDataSetChanged();
-
                 checkHasResults();
             });
 
-            fetchCollections();
         } else {
             noRes.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);
@@ -86,14 +89,6 @@ public class CollectionActivity extends MusicBrainzActivity {
             checkHasResults();
             noRes.setVisibility(View.GONE);
         }
-    }
-
-    private void fetchCollections() {
-        progressBar.setVisibility(View.VISIBLE);
-        boolean getPrivateCollections =
-                LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
-                        && UserPreferences.getPrivateCollectionsPreference();
-        viewModel.fetchCollections(LoginSharedPreferences.getUsername(), getPrivateCollections);
     }
 
     private void checkHasResults() {
