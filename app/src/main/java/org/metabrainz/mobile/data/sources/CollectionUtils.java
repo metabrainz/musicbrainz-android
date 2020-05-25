@@ -26,7 +26,7 @@ public class CollectionUtils {
         Map<String, String> countList = new HashMap<>();
         CollectionListResponse response = new Gson().fromJson(jsonResponse, CollectionListResponse.class);
         collections.addAll(response.getCollections());
-        JsonElement jsonElement = new JsonParser().parse(jsonResponse);
+        JsonElement jsonElement = JsonParser.parseString(jsonResponse);
         JsonArray result = jsonElement.getAsJsonObject().getAsJsonArray("collections");
 
         for (JsonElement element : result) {
@@ -41,7 +41,7 @@ public class CollectionUtils {
         }
         for (Collection collection : collections) {
             String id = collection.getMbid();
-            collection.setCount(Integer.valueOf(Objects.requireNonNull(countList.get(id))));
+            collection.setCount(Integer.parseInt(Objects.requireNonNull(countList.get(id))));
         }
     }
 
