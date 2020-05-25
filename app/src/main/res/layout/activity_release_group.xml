@@ -34,7 +34,7 @@
 
             <fragment
                 android:id="@+id/releases_fragment"
-                class="org.metabrainz.mobile.presentation.features.release_group.ReleaseGroupReleasesFragment"
+                class="org.metabrainz.mobile.presentation.features.release_list.ReleaseListFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
