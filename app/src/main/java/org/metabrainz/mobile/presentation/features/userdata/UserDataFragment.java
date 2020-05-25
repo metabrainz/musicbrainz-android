@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,11 @@ public class UserDataFragment extends Fragment {
     private UserTagAdapter userTagsAdapter;
     private final List<Tag> tags = new ArrayList<>();
     private final List<UserTag> userTags = new ArrayList<>();
+    private UserViewModel viewModel;
+
+    public static UserDataFragment newInstance() {
+        return new UserDataFragment();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,14 +46,17 @@ public class UserDataFragment extends Fragment {
         userTagsAdapter = new UserTagAdapter(userTags);
     }
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_data, container, false);
+        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        viewModel.getUserData().observe(getViewLifecycleOwner(), this::updateData);
         bindViews(view);
         return view;
     }
 
-    protected void bindViews(View view) {
+    private void bindViews(View view) {
         tagsList = view.findViewById(R.id.tags_list);
         tagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         tagsList.setAdapter(tagsAdapter);
@@ -121,7 +130,7 @@ public class UserDataFragment extends Fragment {
         }
     }
 
-    protected void updateData(MBEntity entity) {
+    void updateData(MBEntity entity) {
         addTags(entity);
         displayRating(entity);
     }
