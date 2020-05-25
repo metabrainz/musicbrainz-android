@@ -9,8 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 import java.util.Objects;
@@ -38,7 +38,7 @@ public class ArtistActivity extends MusicBrainzActivity {
 
         artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
 
-        mbid = getIntent().getStringExtra(IntentFactory.Extra.ARTIST_MBID);
+        mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);
 
         pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());

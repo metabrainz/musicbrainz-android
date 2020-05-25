@@ -11,8 +11,7 @@ public class Collection {
     private String editor;
     private String name;
     @SerializedName("entity-type")
-    private
-    String entityType;
+    private String entityType;
     private int count;
 
     public String getMbid() {

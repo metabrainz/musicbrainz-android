@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class TaggerAdapter extends RecyclerView.Adapter<TaggerAdapter.TaggerView
 
         viewHolder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), RecordingActivity.class);
-            intent.putExtra(IntentFactory.Extra.RECORDING, recording.getMbid());
+            intent.putExtra(Constants.MBID, recording.getMbid());
             v.getContext().startActivity(intent);
         });
     }

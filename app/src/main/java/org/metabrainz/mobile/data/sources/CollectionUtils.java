@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.response.CollectionListResponse;
 import org.metabrainz.mobile.util.Log;
 
@@ -56,5 +57,12 @@ public class CollectionUtils {
                 continue;
             itr.remove();
         }
+    }
+
+    public static MBEntityType getCollectionEntityType(Collection collection) {
+        return MBEntityType.valueOf(collection
+                .getEntityType()
+                .replace('-', '_')
+                .toUpperCase());
     }
 }

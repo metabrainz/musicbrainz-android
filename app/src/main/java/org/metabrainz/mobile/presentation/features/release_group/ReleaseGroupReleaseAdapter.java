@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
@@ -129,7 +129,7 @@ class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
 
             this.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), ReleaseActivity.class);
-                intent.putExtra(IntentFactory.Extra.RELEASE_MBID, release.getMbid());
+                intent.putExtra(Constants.MBID, release.getMbid());
                 v.getContext().startActivity(intent);
             });
         }

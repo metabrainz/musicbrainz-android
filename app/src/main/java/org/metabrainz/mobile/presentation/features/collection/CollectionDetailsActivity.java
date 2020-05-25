@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -29,7 +30,8 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     private RecyclerView recyclerView;
     private ResultAdapter adapter;
     private TextView noRes;
-    private String entity, id;
+    private String id;
+    private MBEntityType entity;
     private List<ResultItem> collectionResults;
     private ProgressBar progressBar;
 
@@ -47,8 +49,8 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.GONE);
 
-        entity = getIntent().getStringExtra(IntentFactory.Extra.TYPE);
-        id = getIntent().getStringExtra(IntentFactory.Extra.COLLECTION_MBID);
+        entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);
+        id = getIntent().getStringExtra(Constants.MBID);
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
         collectionResults = new ArrayList<>();

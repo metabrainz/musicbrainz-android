@@ -11,8 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.CollectionUtils;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
-import org.metabrainz.mobile.presentation.IntentFactory;
 
 import java.util.List;
 
@@ -68,8 +69,8 @@ class CollectionListAdapter extends RecyclerView.Adapter {
 
             view.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), CollectionDetailsActivity.class);
-                intent.putExtra(IntentFactory.Extra.COLLECTION_MBID, collection.getMbid());
-                intent.putExtra(IntentFactory.Extra.TYPE, collection.getEntityType());
+                intent.putExtra(Constants.MBID, collection.getMbid());
+                intent.putExtra(Constants.TYPE, CollectionUtils.getCollectionEntityType(collection));
                 v.getContext().startActivity(intent);
             });
 

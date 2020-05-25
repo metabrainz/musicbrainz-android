@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
@@ -77,7 +77,7 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
             noResultView.setVisibility(View.VISIBLE);
         else if (releases.size() == 1) {
             Intent intent = new Intent(this, ReleaseActivity.class);
-            intent.putExtra(IntentFactory.Extra.RELEASE_MBID, releases.get(0).getMbid());
+            intent.putExtra(Constants.MBID, releases.get(0).getMbid());
             startActivity(intent);
             finish();
         } else
