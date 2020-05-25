@@ -10,11 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.Track;
 import org.metabrainz.mobile.databinding.ItemTrackBinding;
 import org.metabrainz.mobile.databinding.ItemTrackHeadingBinding;
+=======
+import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.Media;
+import org.metabrainz.mobile.data.sources.api.entities.Track;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
 
 import java.util.List;

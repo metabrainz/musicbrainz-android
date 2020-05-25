@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 
@@ -25,16 +26,28 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultViewHolder> {
     public ResultAdapter(List<ResultItem> data, MBEntityType entity) {
 =======
 import org.metabrainz.mobile.presentation.features.label.LabelActivity;
+=======
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter {
+<<<<<<< HEAD
     protected List<ResultItem> data;
     protected String entity;
     private int lastPosition = -1;
 
     public ResultAdapter(List<ResultItem> data, String entity) {
 >>>>>>> cdaf05d... Remove redundancy in search module using generics.
+=======
+    private List<ResultItem> data;
+    private MBEntityType entity;
+    private int lastPosition = -1;
+
+    public ResultAdapter(List<ResultItem> data, MBEntityType entity) {
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
         this.data = data;
         this.entity = entity;
     }
@@ -87,6 +100,7 @@ public class ResultAdapter extends RecyclerView.Adapter {
     private void onClick(View view, int position) {
         Intent intent = new Intent(view.getContext(), entity.typeActivityClass);
         intent.putExtra(Constants.MBID, data.get(position).getMBID());
+<<<<<<< HEAD
         view.getContext().startActivity(intent);
     }
 
@@ -97,4 +111,9 @@ public class ResultAdapter extends RecyclerView.Adapter {
         view.getContext().startActivity(intent);
     }
 >>>>>>> cdaf05d... Remove redundancy in search module using generics.
+=======
+        view.getContext().startActivity(intent);
+    }
+
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 }

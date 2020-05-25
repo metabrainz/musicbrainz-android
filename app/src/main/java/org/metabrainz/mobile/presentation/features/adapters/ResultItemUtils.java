@@ -13,9 +13,13 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 =======
 >>>>>>> cdaf05d... Remove redundancy in search module using generics.
+=======
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;

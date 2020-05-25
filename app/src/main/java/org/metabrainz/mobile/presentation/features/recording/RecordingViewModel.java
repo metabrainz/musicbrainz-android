@@ -6,10 +6,14 @@ import androidx.lifecycle.Transformations;
 import com.google.gson.Gson;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 =======
 import org.metabrainz.mobile.data.sources.Constants;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
@@ -47,7 +51,7 @@ public class RecordingViewModel extends LookupViewModel {
     private LiveData<Recording> liveData;
 
     public RecordingViewModel() {
-        entity = MBEntities.RECORDING;
+        entity = MBEntityType.RECORDING;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Recording.class));
     }
 

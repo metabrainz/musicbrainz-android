@@ -53,8 +53,12 @@ public class ReleaseGroupViewModel extends LookupViewModel {
     private LiveData<ReleaseGroup> liveData;
 
     public ReleaseGroupViewModel() {
+<<<<<<< HEAD
         entity = MBEntities.RELEASE_GROUP;
 >>>>>>> b793e03... Improve usage of live data and reactive patterns.
+=======
+        entity = MBEntityType.RELEASE_GROUP;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, ReleaseGroup.class));
         wikiSummary = Transformations.switchMap(liveData, this::fetchWikiSummary);
     }

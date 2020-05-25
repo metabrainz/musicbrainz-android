@@ -33,6 +33,7 @@ public class IntentFactory {
         return new Intent(context, SettingsActivity.class);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
     public interface Extra {
@@ -57,4 +58,6 @@ public class IntentFactory {
     }
 
 >>>>>>> cdaf05d... Remove redundancy in search module using generics.
+=======
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 }

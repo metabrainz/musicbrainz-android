@@ -68,7 +68,7 @@ public class ReleaseViewModel extends LookupViewModel {
     private LiveData<Release> liveData;
 
     public ReleaseViewModel() {
-        entity = MBEntities.RELEASE;
+        entity = MBEntityType.RELEASE;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Release.class));
         coverArtData = Transformations.switchMap(MBID, id -> repository.fetchCoverArt(id));
     }

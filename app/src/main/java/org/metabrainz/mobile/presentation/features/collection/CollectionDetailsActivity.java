@@ -6,9 +6,15 @@ import android.view.View;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
+=======
+import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -51,6 +57,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     private RecyclerView recyclerView;
     private ResultAdapter adapter;
     private TextView noRes;
+<<<<<<< HEAD
     private String entity, id;
     private final List<Artist> artistCollectionResults = new ArrayList<>();
     private final List<Release> releaseCollectionResults = new ArrayList<>();
@@ -59,6 +66,11 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     private final List<ReleaseGroup> releaseGroupCollectionResults = new ArrayList<>();
     private final List<Instrument> instrumentCollectionResults = new ArrayList<>();
     private final List<Event> eventCollectionResults = new ArrayList<>();
+=======
+    private String id;
+    private MBEntityType entity;
+    private List<ResultItem> collectionResults;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
     private ProgressBar progressBar;
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
 
@@ -73,6 +85,15 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         binding.progressSpinner.setIndeterminate(true);
         binding.progressSpinner.setVisibility(View.GONE);
 
+<<<<<<< HEAD
+=======
+        noRes = findViewById(R.id.no_result);
+        noRes.setVisibility(View.GONE);
+        progressBar = findViewById(R.id.progress_spinner);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.GONE);
+
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
         entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);
         id = getIntent().getStringExtra(Constants.MBID);
 

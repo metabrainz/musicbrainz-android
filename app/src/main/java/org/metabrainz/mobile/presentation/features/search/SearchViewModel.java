@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.metabrainz.mobile.data.repository.SearchRepository;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 =======
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
@@ -23,6 +24,9 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.IntentFactory;
 >>>>>>> cdaf05d... Remove redundancy in search module using generics.
+=======
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils;
 
@@ -43,6 +47,7 @@ public class SearchViewModel extends ViewModel {
             searchQueryLiveData.setValue(searchTerm);
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     LiveData<List<ResultItem>> getResultData(MBEntityType entity) {
         return Transformations.map(
@@ -82,6 +87,13 @@ public class SearchViewModel extends ViewModel {
             return TypeToken.getParameterized(List.class, ReleaseGroup.class).getType();
         else return null;
 >>>>>>> cdaf05d... Remove redundancy in search module using generics.
+=======
+    LiveData<List<ResultItem>> getResultData(MBEntityType entity) {
+        return Transformations.map(
+                Transformations.switchMap(searchQueryLiveData,
+                        searchTerm -> repository.getResults(entity.name, searchTerm)),
+                response -> ResultItemUtils.getJSONResponseAsResultItemList(response, entity));
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
     }
 
 }

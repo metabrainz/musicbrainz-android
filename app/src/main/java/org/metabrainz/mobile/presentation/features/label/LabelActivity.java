@@ -5,6 +5,7 @@ import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 <<<<<<< HEAD
@@ -12,6 +13,11 @@ import org.metabrainz.mobile.databinding.ActivityLabelBinding;
 =======
 import org.metabrainz.mobile.presentation.IntentFactory;
 >>>>>>> b793e03... Improve usage of live data and reactive patterns.
+=======
+import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 <<<<<<< HEAD
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;

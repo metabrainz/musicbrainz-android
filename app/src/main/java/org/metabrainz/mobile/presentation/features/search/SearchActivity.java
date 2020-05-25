@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.metabrainz.mobile.R;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivitySearchBinding;
@@ -34,6 +35,10 @@ import org.metabrainz.mobile.presentation.features.adapters.TypeAdapter;
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
 =======
 import org.metabrainz.mobile.presentation.IntentFactory;
+=======
+import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -67,8 +72,13 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 >>>>>>> cdaf05d... Remove redundancy in search module using generics.
     private TextView noRes;
     private List<ResultItem> results;
+<<<<<<< HEAD
     private String query, entity;
 >>>>>>> 54c0fbe... Use common adapters for collections and search activity results.
+=======
+    private String query;
+    private MBEntityType entity;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
     private SuggestionHelper suggestionHelper;
     private CursorAdapter suggestionAdapter;
 

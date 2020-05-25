@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.release_list;
+package org.metabrainz.mobile.presentation.features.release_group;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,11 +6,12 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -19,10 +20,6 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-<<<<<<< HEAD:app/src/main/java/org/metabrainz/mobile/presentation/features/release_list/ReleaseListAdapter.java
-import org.metabrainz.mobile.databinding.CardReleaseItemBinding;
-=======
->>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).:app/src/main/java/org/metabrainz/mobile/presentation/features/label/LabelReleaseAdapter.java
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
@@ -34,33 +31,34 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
-class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.ReleaseItemViewHolder> {
+class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
 
     private final List<Release> releaseList;
-    private final CoverArtViewModel viewModel;
+    private final ReleaseGroupViewModel releaseGroupViewModel;
     private final CompositeDisposable compositeDisposable;
 
-    ReleaseListAdapter(Context context, List<Release> releaseList) {
+    public ReleaseGroupReleaseAdapter(Context context, List<Release> releaseList) {
         this.releaseList = releaseList;
         // Load the ViewModel to fetch cover art for each release item
-        viewModel = new ViewModelProvider((FragmentActivity) context).get(CoverArtViewModel.class);
+        releaseGroupViewModel = ViewModelProviders.of((FragmentActivity) context).get(ReleaseGroupViewModel.class);
         compositeDisposable = new CompositeDisposable();
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) parent.getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new ReleaseItemViewHolder(CardReleaseItemBinding.inflate(inflater, parent, false));
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.card_release_group_item, parent, false);
+        return new ReleaseItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReleaseListAdapter.ReleaseItemViewHolder holder, int position) {
-        if (holder.disposable != null && !holder.disposable.isDisposed())
-            compositeDisposable.remove(holder.disposable);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ReleaseItemViewHolder viewHolder = (ReleaseItemViewHolder) holder;
+        if (viewHolder.disposable != null && !viewHolder.disposable.isDisposed())
+            compositeDisposable.remove(viewHolder.disposable);
 
-        holder.bind(releaseList.get(position));
+        viewHolder.bind(releaseList.get(position));
     }
 
     @Override
@@ -92,19 +90,35 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
     }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
-        CardReleaseItemBinding binding;
+        final TextView releaseName;
+        final TextView releaseLabel;
+        final TextView releaseCountry;
+        final TextView releaseBarcode;
+        final TextView releaseTracks;
+        final TextView releaseDate;
+        final ImageView coverArtView;
         Disposable disposable;
 
-        ReleaseItemViewHolder(@NonNull CardReleaseItemBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        ReleaseItemViewHolder(@NonNull View itemView) {
+            super(itemView);
+            releaseName = itemView.findViewById(R.id.release_name);
+            releaseLabel = itemView.findViewById(R.id.release_label);
+            releaseBarcode = itemView.findViewById(R.id.release_barcode);
+            releaseCountry = itemView.findViewById(R.id.release_country);
+            releaseDate = itemView.findViewById(R.id.release_date);
+            releaseTracks = itemView.findViewById(R.id.release_tracks);
+            coverArtView = itemView.findViewById(R.id.release_cover_art);
         }
 
         void bind(Release release) {
-            binding.releaseName.setText(release.getTitle());
-            setViewVisibility(release.getDisambiguation(), binding.releaseDisambiguation);
+            releaseName.setText(release.getTitle());
+            setViewVisibility(release.labelCatalog(), releaseLabel);
+            setViewVisibility(release.getBarcode(), releaseBarcode);
+            setViewVisibility(release.getDate(), releaseDate);
+            setViewVisibility(release.getCountry(), releaseCountry);
+            setViewVisibility(String.valueOf(release.getTrackCount()), releaseTracks);
 
-            binding.releaseCoverArt.setImageDrawable(binding.getRoot().getContext()
+            coverArtView.setImageDrawable(coverArtView.getContext()
                     .getResources()
                     .getDrawable(R.drawable.link_discog));
 
@@ -133,7 +147,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
                     Picasso.get()
                             .load(Uri.parse(url))
                             .placeholder(R.drawable.link_discog)
-                            .into(binding.releaseCoverArt);
+                            .into(coverArtView);
                 }
             }
         }
@@ -155,7 +169,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
         private void fetchCoverArtForRelease(Release release) {
             // Ask the viewModel to retrieve the cover art
             // and append it to this release
-            disposable = viewModel
+            disposable = releaseGroupViewModel
                     .fetchCoverArtForRelease(release)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

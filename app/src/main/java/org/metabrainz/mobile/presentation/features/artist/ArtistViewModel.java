@@ -12,7 +12,7 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntities;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
 <<<<<<< HEAD
@@ -78,7 +78,7 @@ public class ArtistViewModel extends LookupViewModel {
 >>>>>>> b793e03... Improve usage of live data and reactive patterns.
 
     public ArtistViewModel() {
-        entity = MBEntities.ARTIST;
+        entity = MBEntityType.ARTIST;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Artist.class));
         wikiSummary = Transformations.switchMap(liveData, this::fetchWikiSummary);
     }

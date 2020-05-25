@@ -13,12 +13,15 @@ import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+<<<<<<< HEAD
 =======
 import androidx.lifecycle.ViewModel;
 
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 >>>>>>> de8f646... Refactor lookup repositories to remove redundancy.
+=======
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
 
 public abstract class LookupViewModel extends ViewModel {
 
@@ -29,8 +32,12 @@ public abstract class LookupViewModel extends ViewModel {
     protected MBEntityType entity;
 =======
     protected MutableLiveData<String> MBID;
+<<<<<<< HEAD
     protected MBEntities entity;
 >>>>>>> b793e03... Improve usage of live data and reactive patterns.
+=======
+    protected MBEntityType entity;
+>>>>>>> 70d3b15... Pass MBIDs through Intents using Constants.MBID key only. Delete unneeded IntentFactory.Extra and replace its usage with MBEntities (refactored to MBEntityType to avoid confusion).
     protected LiveData<String> jsonLiveData;
 
     protected LookupViewModel() {
