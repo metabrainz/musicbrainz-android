@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.data.sources.api.entities.response.collection;
+package org.metabrainz.mobile.data.sources.api.entities.response;
 
 import com.google.gson.annotations.SerializedName;
 

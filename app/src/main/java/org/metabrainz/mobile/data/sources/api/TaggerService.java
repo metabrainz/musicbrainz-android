@@ -2,7 +2,7 @@ package org.metabrainz.mobile.data.sources.api;
 
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.AcoustIDResponse;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.data.sources.api.entities.response.search.RecordingSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.RecordingSearchResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

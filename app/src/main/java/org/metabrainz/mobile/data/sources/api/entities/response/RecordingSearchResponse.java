@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.data.sources.api.entities.response.search;
+package org.metabrainz.mobile.data.sources.api.entities.response;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 

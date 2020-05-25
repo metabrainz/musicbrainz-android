@@ -14,7 +14,7 @@ public class Result {
     private String id;
     @SerializedName("recordings")
     @Expose
-    private List<Recording> recordings = new ArrayList<Recording>();
+    private List<Recording> recordings = new ArrayList<>();
     @SerializedName("score")
     @Expose
     private double score;

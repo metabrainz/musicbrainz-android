@@ -23,10 +23,10 @@ public class Release {
     private int mediumCount;
     @SerializedName("mediums")
     @Expose
-    private List<Medium> mediums = new ArrayList<Medium>();
+    private List<Medium> mediums = new ArrayList<>();
     @SerializedName("releaseEvents")
     @Expose
-    private List<ReleaseEvent> releaseEvents = new ArrayList<ReleaseEvent>();
+    private List<ReleaseEvent> releaseEvents = new ArrayList<>();
     @SerializedName("title")
     @Expose
     private String title;

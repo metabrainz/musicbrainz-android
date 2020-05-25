@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -30,7 +31,7 @@ public class SearchRepository {
         service.searchEntity(entity, searchTerm, Constants.LIMIT, Constants.OFFSET)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         try {
                             resultsLiveData.setValue(response.body().string());
                         } catch (Exception e) {
@@ -39,7 +40,7 @@ public class SearchRepository {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
 
                     }
                 });
