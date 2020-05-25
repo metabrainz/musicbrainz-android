@@ -1,0 +1,194 @@
+{
+  "abi": "X86_64",
+  "abiPlatformVersion": 21,
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "cmake": {
+    "cmakeArtifactsBaseFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64",
+    "cmakeServerLogFile": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64/cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cxx/release/x86_64",
+    "effectiveConfiguration": {
+      "name": "traditional-android-studio-cmake-environment",
+      "description": "Composite reified CMakeSettings configuration",
+      "generator": "Ninja",
+      "inheritEnvironments": [
+        "ndk"
+      ],
+      "buildRoot": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64",
+      "cmakeToolchain": "/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+      "cmakeExecutable": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/cmake",
+      "variables": [
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Release"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake"
+        },
+        {
+          "name": "ANDROID_ABI",
+          "value": "x86_64"
+        },
+        {
+          "name": "ANDROID_NDK",
+          "value": "/home/somal/Android/Sdk/ndk/20.0.5594570"
+        },
+        {
+          "name": "ANDROID_PLATFORM",
+          "value": "android-21"
+        },
+        {
+          "name": "CMAKE_ANDROID_ARCH_ABI",
+          "value": "x86_64"
+        },
+        {
+          "name": "CMAKE_ANDROID_NDK",
+          "value": "/home/somal/Android/Sdk/ndk/20.0.5594570"
+        },
+        {
+          "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
+          "value": "ON"
+        },
+        {
+          "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
+          "value": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/release/obj/x86_64"
+        },
+        {
+          "name": "CMAKE_MAKE_PROGRAM",
+          "value": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja"
+        },
+        {
+          "name": "CMAKE_SYSTEM_NAME",
+          "value": "Android"
+        },
+        {
+          "name": "CMAKE_SYSTEM_VERSION",
+          "value": "21"
+        }
+      ]
+    }
+  },
+  "cxxBuildFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64",
+  "info": {
+    "abi": "X86_64",
+    "bitness": 64,
+    "deprecated": false,
+    "default": true
+  },
+  "originalCxxBuildFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64",
+  "variant": {
+    "buildSystemArgumentList": [],
+    "buildTargetSet": [],
+    "cFlagsList": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "cppFlagsList": [],
+    "isDebuggableEnabled": false,
+    "module": {
+      "buildSystem": "CMAKE",
+      "cmake": {
+        "cmakeExe": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/cmake",
+        "minimumCmakeVersion": "3.10.2",
+        "ninjaExe": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja"
+      },
+      "cmakeToolchainFile": "/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+      "cxxFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx",
+      "gradleModulePathName": ":ktaglib",
+      "intermediatesFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates",
+      "makeFile": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt",
+      "moduleBuildFile": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build.gradle",
+      "moduleRootFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib",
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkFolder": "/home/somal/Android/Sdk/ndk/20.0.5594570",
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "ndkMetaPlatforms": {
+        "min": 16,
+        "max": 29,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29
+        }
+      },
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkVersion": "20.0.5594570",
+      "project": {
+        "compilerSettingsCacheFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/.cxx",
+        "cxxFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/.cxx",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isNativeCompilerSettingsCacheEnabled": false,
+        "rootBuildGradleFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android",
+        "sdkFolder": "/home/somal/Android/Sdk"
+      },
+      "splitsAbiFilterSet": [],
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/libc++_shared.so",
+          "ARM64_V8A": "/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so",
+          "X86": "/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/libc++_shared.so",
+          "X86_64": "/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      }
+    },
+    "objFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/release/obj",
+    "variantName": "release",
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ]
+  }
+}

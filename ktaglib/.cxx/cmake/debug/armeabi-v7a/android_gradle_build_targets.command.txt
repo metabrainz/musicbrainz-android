@@ -1,0 +1,8 @@
+Executable : /home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/armeabi-v7a
+ktaglib
+tag
+jvmArgs : 
+

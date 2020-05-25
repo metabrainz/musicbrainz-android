@@ -1,0 +1,32 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 21 min SDK version: x86",
+    "file": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Trying to locate CMake in local SDK repository.",
+    "file": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- CMake found in SDK at \u0027/home/somal/Android/Sdk/cmake/3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
+    "file": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON \u0027/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/x86/android_gradle_build.json\u0027 was up-to-date",
+    "file": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed without problems",
+    "file": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  }
+]

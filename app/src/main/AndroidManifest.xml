@@ -34,7 +34,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.features.collection.CollectionActivity" />
         </activity>
-
+        <activity android:name=".presentation.features.tagger.TaglibtestActivity"/>
         <activity
             android:name=".presentation.features.collection.CollectionActivity"
             android:theme="@style/AppThemeCustomActionBar" />

@@ -1,0 +1,1102 @@
+{
+  "stringTable": {
+    "0": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dktaglib_EXPORTS -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/taglib -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/taglib/toolkit -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/3rdparty -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC",
+    "2": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DMAKE_TAGLIB_LIB -Itaglib -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/flac -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpc -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4 -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/vorbis -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/speex -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/opus -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2 -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v1 -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/wavpack -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/trueaudio -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/aiff -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/s3m -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/it -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/xm -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/matroska -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsf -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/3rdparty -I/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/3rdparty -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC",
+    "3": "null"
+  },
+  "buildFiles": [
+    "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/CMakeLists.txt",
+    "/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/platforms.cmake",
+    "/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+    "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "tag-Debug-armeabi-v7a": {
+      "buildCommand": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/armeabi-v7a\" tag",
+      "buildType": "debug",
+      "toolchain": "1095814700",
+      "abi": "armeabi-v7a",
+      "artifactName": "tag",
+      "files": [
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tlist.tcc",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tmap.tcc",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/mpegfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/mpegproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/mpegheader.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/xingheader.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v1/id3v1tag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v1/id3v1genres.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2framefactory.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2synchdata.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2tag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2header.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2frame.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2footer.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2extendedheader.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/attachedpictureframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/commentsframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/eventtimingcodesframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/ownershipframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/popularimeterframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/privateframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/relativevolumeframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/synchronizedlyricsframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/textidentificationframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/uniquefileidentifierframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/unknownframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/urllinkframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/chapterframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/tableofcontentsframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/podcastframe.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/oggfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/oggpage.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/oggpageheader.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/xiphcomment.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/vorbis/vorbisfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/vorbis/vorbisproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/flac/oggflacfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpc/mpcfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpc/mpcproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apetag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apefooter.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apeitem.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apefile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apeproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/taglib.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tstring.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tstringlist.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tstringhandler.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tbytevector.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tbytevectorlist.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tbytevectorstream.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tiostream.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tfilestream.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tdebug.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tpicture.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tpicturemap.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tpropertymap.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/trefcounter.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tdebuglistener.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tzlib.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacpicture.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacmetadatablock.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacunknownmetadatablock.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/wavpack/wavpackfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/wavpack/wavpackproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/speex/speexfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/speex/speexproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/trueaudio/trueaudiofile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/trueaudio/trueaudioproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/rifffile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/aiff/aifffile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/aiff/aiffproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav/wavfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav/wavproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav/infotag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asftag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asffile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asfproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asfattribute.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asfpicture.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4file.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4atom.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4tag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4item.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4properties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4coverart.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modfilebase.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modtag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/s3m/s3mfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/s3m/s3mproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/it/itfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/it/itproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/xm/xmfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/xm/xmproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/opus/opusfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/opus/opusproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/ebmlfile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/ebmlelement.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/matroska/ebmlmatroskafile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/matroska/ebmlmatroskaaudio.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsf/dsffile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsf/dsfproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff/dsdifffile.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff/dsdiffproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff/dsdiffdiintag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/tag.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/tagunion.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/fileref.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/audioproperties.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/tagutils.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/tag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/fileref.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/audioproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/taglib_export.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/taglib.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tstring.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tlist.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tstringlist.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tstringhandler.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tbytevector.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tbytevectorlist.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tbytevectorstream.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tiostream.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tfilestream.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tmap.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tpicture.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tpicturemap.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tpropertymap.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/trefcounter.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit/tdebuglistener.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/mpegfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/mpegproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/mpegheader.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/xingheader.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v1/id3v1tag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v1/id3v1genres.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2extendedheader.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2frame.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2header.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2synchdata.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2footer.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2framefactory.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/id3v2tag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/attachedpictureframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/commentsframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/eventtimingcodesframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/ownershipframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/popularimeterframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/privateframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/relativevolumeframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/synchronizedlyricsframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/textidentificationframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/uniquefileidentifierframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/unknownframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/urllinkframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/chapterframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/tableofcontentsframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames/podcastframe.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/oggfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/oggpage.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/oggpageheader.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/xiphcomment.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/vorbis/vorbisfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/vorbis/vorbisproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/flac/oggflacfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/speex/speexfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/speex/speexproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/opus/opusfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/opus/opusproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacpicture.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac/flacmetadatablock.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apefile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apeproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apetag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apefooter.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape/apeitem.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpc/mpcfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpc/mpcproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/wavpack/wavpackfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/wavpack/wavpackproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/trueaudio/trueaudiofile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/trueaudio/trueaudioproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/rifffile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/aiff/aifffile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/aiff/aiffproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav/wavfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav/wavproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav/infotag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asffile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asfproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asftag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asfattribute.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf/asfpicture.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4file.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4atom.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4tag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4item.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4properties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4/mp4coverart.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modfilebase.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modtag.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod/modproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/it/itfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/it/itproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/s3m/s3mfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/s3m/s3mproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/xm/xmfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/xm/xmproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/ebmlfile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/ebmlelement.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/ebmlconstants.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/matroska/ebmlmatroskafile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/matroska/ebmlmatroskaconstants.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/matroska/ebmlmatroskaaudio.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsf/dsffile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsf/dsfproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff/dsdifffile.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff/dsdiffproperties.h",
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "header": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff/dsdiffdiintag.h",
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "output": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/debug/obj/armeabi-v7a/libtag.so"
+    },
+    "ktaglib-Debug-armeabi-v7a": {
+      "buildCommand": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/armeabi-v7a\" ktaglib",
+      "buildType": "debug",
+      "toolchain": "1095814700",
+      "abi": "armeabi-v7a",
+      "artifactName": "ktaglib",
+      "files": [
+        {
+          "src": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/ktaglib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/debug/obj/armeabi-v7a/libktaglib.so"
+    }
+  },
+  "toolchains": {
+    "1095814700": {
+      "cppCompilerExecutable": "/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "buildFiles": [
+    "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/CMakeLists.txt",
+    "/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/platforms.cmake",
+    "/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+    "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a\" clean"
+  ],
+  "buildTargetsCommand": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "ktaglib-Debug-arm64-v8a": {
+      "artifactName": "ktaglib",
+      "buildCommand": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a\" ktaglib",
+      "abi": "arm64-v8a",
+      "output": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/debug/obj/arm64-v8a/libktaglib.so"
+    },
+    "tag-Debug-arm64-v8a": {
+      "artifactName": "tag",
+      "buildCommand": "/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a\" tag",
+      "abi": "arm64-v8a",
+      "output": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/debug/obj/arm64-v8a/libtag.so"
+    }
+  }
+}

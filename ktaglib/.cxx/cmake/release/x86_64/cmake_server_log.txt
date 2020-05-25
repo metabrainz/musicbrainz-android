@@ -1,0 +1,373 @@
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"supportedProtocolVersions":[{"isExperimental":true,"major":1,"minor":1}],"type":"hello"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {
+  "type": "handshake",
+  "cookie": "gradle-cmake-cookie",
+  "protocolVersion": {
+    "isExperimental": true,
+    "major": 1,
+    "minor": 1
+  },
+  "sourceDirectory": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp",
+  "buildDirectory": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64",
+  "generator": "Ninja"
+}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"gradle-cmake-cookie","inReplyTo":"handshake","type":"reply"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {
+  "type": "configure",
+  "cacheArguments": [
+    "",
+    "-DCMAKE_BUILD_TYPE\u003dRelease",
+    "-DCMAKE_TOOLCHAIN_FILE\u003d/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+    "-DANDROID_ABI\u003dx86_64",
+    "-DANDROID_NDK\u003d/home/somal/Android/Sdk/ndk/20.0.5594570",
+    "-DANDROID_PLATFORM\u003dandroid-21",
+    "-DCMAKE_ANDROID_ARCH_ABI\u003dx86_64",
+    "-DCMAKE_ANDROID_NDK\u003d/home/somal/Android/Sdk/ndk/20.0.5594570",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON",
+    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/release/obj/x86_64",
+    "-DCMAKE_MAKE_PROGRAM\u003d/home/somal/Android/Sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-DCMAKE_SYSTEM_NAME\u003dAndroid",
+    "-DCMAKE_SYSTEM_VERSION\u003d21"
+  ]
+}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Check for working C compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Check for working C compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang
+CMAKE SERVER: Check for working C compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":33,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Check for working C compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -- works","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Check for working C compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -- works
+CMAKE SERVER: Check for working C compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -- works
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting C compiler ABI info","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting C compiler ABI info
+CMAKE SERVER: Detecting C compiler ABI info
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":65,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting C compiler ABI info - done","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting C compiler ABI info - done
+CMAKE SERVER: Detecting C compiler ABI info - done
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting C compile features","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting C compile features
+CMAKE SERVER: Detecting C compile features
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":96,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":126,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":155,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting C compile features - done","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting C compile features - done
+CMAKE SERVER: Detecting C compile features - done
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Check for working CXX compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Check for working CXX compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++
+CMAKE SERVER: Check for working CXX compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":184,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Check for working CXX compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -- works","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Check for working CXX compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -- works
+CMAKE SERVER: Check for working CXX compiler: /home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -- works
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting CXX compiler ABI info","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting CXX compiler ABI info
+CMAKE SERVER: Detecting CXX compiler ABI info
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":211,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting CXX compiler ABI info - done","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting CXX compiler ABI info - done
+CMAKE SERVER: Detecting CXX compiler ABI info - done
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting CXX compile features","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting CXX compile features
+CMAKE SERVER: Detecting CXX compile features
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":237,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":262,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":287,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":311,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Detecting CXX compile features - done","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Detecting CXX compile features - done
+CMAKE SERVER: Detecting CXX compile features - done
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":334,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":950,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","progressCurrent":1000,"progressMaximum":1000,"progressMessage":"Configuring","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","message":"Configuring done","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Configuring done
+CMAKE SERVER: Configuring done
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"configure","type":"reply"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"type":"compute"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"compute","progressCurrent":500,"progressMaximum":1000,"progressMessage":"Generating","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"compute","progressCurrent":1000,"progressMaximum":1000,"progressMessage":"Generating","progressMinimum":0,"type":"progress"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"compute","message":"Generating done","type":"message"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: Generating done
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"cookie":"","inReplyTo":"compute","type":"reply"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"type":"cmakeInputs"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"buildFiles":[{"isCMake":true,"isTemporary":false,"sources":["/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineSystem.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Determine.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeSystem.cmake.in","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Initialize.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCCompiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Determine-C.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android/Determine-Compiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeFindBinUtils.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-FindBinUtils.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCCompiler.cmake.in","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCXXCompiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Determine-CXX.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android/Determine-Compiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeFindBinUtils.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-FindBinUtils.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXCompiler.cmake.in","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeGenericSystem.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Linux.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/UnixPaths.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCInformation.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/GNU.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang-C.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCCompiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCompilerCommon.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompilerABI.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeParseImplicitLinkInfo.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCCompilerABI.c","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompileFeatures.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Internal/FeatureTesting.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C-FeatureTests.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C-FeatureTests.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C-FeatureTests.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCCompiler.cmake.in","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXInformation.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang-CXX.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCXXCompiler.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCompilerCommon.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompilerABI.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeParseImplicitLinkInfo.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompileFeatures.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Internal/FeatureTesting.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake","/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXCompiler.cmake.in"]},{"isCMake":false,"isTemporary":false,"sources":["CMakeLists.txt","/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake","/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/platforms.cmake","/home/somal/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake","../../../../taglib/taglib/CMakeLists.txt"]},{"isCMake":false,"isTemporary":true,"sources":["../../../.cxx/cmake/release/x86_64/CMakeFiles/3.10.2/CMakeSystem.cmake","../../../.cxx/cmake/release/x86_64/CMakeFiles/3.10.2/CMakeCCompiler.cmake","../../../.cxx/cmake/release/x86_64/CMakeFiles/3.10.2/CMakeCXXCompiler.cmake","../../../.cxx/cmake/release/x86_64/CMakeFiles/feature_tests.c","../../../.cxx/cmake/release/x86_64/CMakeFiles/feature_tests.c","../../../.cxx/cmake/release/x86_64/CMakeFiles/feature_tests.c","../../../.cxx/cmake/release/x86_64/CMakeFiles/3.10.2/CMakeCCompiler.cmake","../../../.cxx/cmake/release/x86_64/CMakeFiles/feature_tests.cxx","../../../.cxx/cmake/release/x86_64/CMakeFiles/feature_tests.cxx","../../../.cxx/cmake/release/x86_64/CMakeFiles/feature_tests.cxx","../../../.cxx/cmake/release/x86_64/CMakeFiles/feature_tests.cxx","../../../.cxx/cmake/release/x86_64/CMakeFiles/3.10.2/CMakeCXXCompiler.cmake"]}],"cmakeRootDirectory":"/home/somal/Android/Sdk/cmake/3.10.2.4988404/share/cmake-3.10","cookie":"","inReplyTo":"cmakeInputs","sourceDirectory":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp","type":"reply"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"type":"codemodel"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
+CMAKE SERVER: 
+
+CMAKE SERVER: [== "CMake Server" ==[
+
+CMAKE SERVER: {"configurations":[{"name":"Release","projects":[{"buildDirectory":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64","name":"ktaglib","sourceDirectory":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp","targets":[{"artifacts":["/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/release/obj/x86_64/libktaglib.so"],"buildDirectory":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64","fileGroups":[{"compileFlags":"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security   -O2 -DNDEBUG  -fPIC  ","defines":["ktaglib_EXPORTS"],"includePath":[{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/taglib"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/taglib/toolkit"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/3rdparty"}],"isGenerated":false,"language":"CXX","sources":["ktaglib.cpp"]}],"fullName":"libktaglib.so","linkFlags":"-Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,-z,noexecstack","linkLibraries":"/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/21/liblog.so /home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/release/obj/x86_64/libtag.so -latomic -lm","linkerLanguage":"CXX","name":"ktaglib","sourceDirectory":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp","sysroot":"/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot","type":"SHARED_LIBRARY"},{"artifacts":["/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/release/obj/x86_64/libtag.so"],"buildDirectory":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64/taglib","fileGroups":[{"isGenerated":false,"sources":["tag.h","fileref.h","audioproperties.h","taglib_export.h","toolkit/taglib.h","toolkit/tstring.h","toolkit/tlist.h","toolkit/tlist.tcc","toolkit/tstringlist.h","toolkit/tstringhandler.h","toolkit/tbytevector.h","toolkit/tbytevectorlist.h","toolkit/tbytevectorstream.h","toolkit/tiostream.h","toolkit/tfile.h","toolkit/tfilestream.h","toolkit/tmap.h","toolkit/tmap.tcc","toolkit/tpicture.h","toolkit/tpicturemap.h","toolkit/tpropertymap.h","toolkit/trefcounter.h","toolkit/tdebuglistener.h","mpeg/mpegfile.h","mpeg/mpegproperties.h","mpeg/mpegheader.h","mpeg/xingheader.h","mpeg/id3v1/id3v1tag.h","mpeg/id3v1/id3v1genres.h","mpeg/id3v2/id3v2extendedheader.h","mpeg/id3v2/id3v2frame.h","mpeg/id3v2/id3v2header.h","mpeg/id3v2/id3v2synchdata.h","mpeg/id3v2/id3v2footer.h","mpeg/id3v2/id3v2framefactory.h","mpeg/id3v2/id3v2tag.h","mpeg/id3v2/frames/attachedpictureframe.h","mpeg/id3v2/frames/commentsframe.h","mpeg/id3v2/frames/eventtimingcodesframe.h","mpeg/id3v2/frames/generalencapsulatedobjectframe.h","mpeg/id3v2/frames/ownershipframe.h","mpeg/id3v2/frames/popularimeterframe.h","mpeg/id3v2/frames/privateframe.h","mpeg/id3v2/frames/relativevolumeframe.h","mpeg/id3v2/frames/synchronizedlyricsframe.h","mpeg/id3v2/frames/textidentificationframe.h","mpeg/id3v2/frames/uniquefileidentifierframe.h","mpeg/id3v2/frames/unknownframe.h","mpeg/id3v2/frames/unsynchronizedlyricsframe.h","mpeg/id3v2/frames/urllinkframe.h","mpeg/id3v2/frames/chapterframe.h","mpeg/id3v2/frames/tableofcontentsframe.h","mpeg/id3v2/frames/podcastframe.h","ogg/oggfile.h","ogg/oggpage.h","ogg/oggpageheader.h","ogg/xiphcomment.h","ogg/vorbis/vorbisfile.h","ogg/vorbis/vorbisproperties.h","ogg/flac/oggflacfile.h","ogg/speex/speexfile.h","ogg/speex/speexproperties.h","ogg/opus/opusfile.h","ogg/opus/opusproperties.h","flac/flacfile.h","flac/flacpicture.h","flac/flacproperties.h","flac/flacmetadatablock.h","ape/apefile.h","ape/apeproperties.h","ape/apetag.h","ape/apefooter.h","ape/apeitem.h","mpc/mpcfile.h","mpc/mpcproperties.h","wavpack/wavpackfile.h","wavpack/wavpackproperties.h","trueaudio/trueaudiofile.h","trueaudio/trueaudioproperties.h","riff/rifffile.h","riff/aiff/aifffile.h","riff/aiff/aiffproperties.h","riff/wav/wavfile.h","riff/wav/wavproperties.h","riff/wav/infotag.h","asf/asffile.h","asf/asfproperties.h","asf/asftag.h","asf/asfattribute.h","asf/asfpicture.h","mp4/mp4file.h","mp4/mp4atom.h","mp4/mp4tag.h","mp4/mp4item.h","mp4/mp4properties.h","mp4/mp4coverart.h","mod/modfilebase.h","mod/modfile.h","mod/modtag.h","mod/modproperties.h","it/itfile.h","it/itproperties.h","s3m/s3mfile.h","s3m/s3mproperties.h","xm/xmfile.h","xm/xmproperties.h","ebml/ebmlfile.h","ebml/ebmlelement.h","ebml/ebmlconstants.h","ebml/matroska/ebmlmatroskafile.h","ebml/matroska/ebmlmatroskaconstants.h","ebml/matroska/ebmlmatroskaaudio.h","dsf/dsffile.h","dsf/dsfproperties.h","dsdiff/dsdifffile.h","dsdiff/dsdiffproperties.h","dsdiff/dsdiffdiintag.h"]},{"compileFlags":"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security   -O2 -DNDEBUG  -fPIC  ","defines":["MAKE_TAGLIB_LIB"],"includePath":[{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/release/x86_64/taglib"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/toolkit"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/asf"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/flac"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/flac"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpc"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mp4"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/vorbis"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/speex"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ogg/opus"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v2/frames"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mpeg/id3v1"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ape"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/wavpack"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/trueaudio"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/aiff"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/riff/wav"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/mod"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/s3m"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/it"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/xm"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/ebml/matroska"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsf"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib/dsdiff"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/3rdparty"},{"path":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/src/main/cpp/../../../../taglib/3rdparty"}],"isGenerated":false,"language":"CXX","sources":["mpeg/mpegfile.cpp","mpeg/mpegproperties.cpp","mpeg/mpegheader.cpp","mpeg/xingheader.cpp","mpeg/id3v1/id3v1tag.cpp","mpeg/id3v1/id3v1genres.cpp","mpeg/id3v2/id3v2framefactory.cpp","mpeg/id3v2/id3v2synchdata.cpp","mpeg/id3v2/id3v2tag.cpp","mpeg/id3v2/id3v2header.cpp","mpeg/id3v2/id3v2frame.cpp","mpeg/id3v2/id3v2footer.cpp","mpeg/id3v2/id3v2extendedheader.cpp","mpeg/id3v2/frames/attachedpictureframe.cpp","mpeg/id3v2/frames/commentsframe.cpp","mpeg/id3v2/frames/eventtimingcodesframe.cpp","mpeg/id3v2/frames/generalencapsulatedobjectframe.cpp","mpeg/id3v2/frames/ownershipframe.cpp","mpeg/id3v2/frames/popularimeterframe.cpp","mpeg/id3v2/frames/privateframe.cpp","mpeg/id3v2/frames/relativevolumeframe.cpp","mpeg/id3v2/frames/synchronizedlyricsframe.cpp","mpeg/id3v2/frames/textidentificationframe.cpp","mpeg/id3v2/frames/uniquefileidentifierframe.cpp","mpeg/id3v2/frames/unknownframe.cpp","mpeg/id3v2/frames/unsynchronizedlyricsframe.cpp","mpeg/id3v2/frames/urllinkframe.cpp","mpeg/id3v2/frames/chapterframe.cpp","mpeg/id3v2/frames/tableofcontentsframe.cpp","mpeg/id3v2/frames/podcastframe.cpp","ogg/oggfile.cpp","ogg/oggpage.cpp","ogg/oggpageheader.cpp","ogg/xiphcomment.cpp","ogg/vorbis/vorbisfile.cpp","ogg/vorbis/vorbisproperties.cpp","ogg/flac/oggflacfile.cpp","mpc/mpcfile.cpp","mpc/mpcproperties.cpp","ape/apetag.cpp","ape/apefooter.cpp","ape/apeitem.cpp","ape/apefile.cpp","ape/apeproperties.cpp","toolkit/taglib.cpp","toolkit/tstring.cpp","toolkit/tstringlist.cpp","toolkit/tstringhandler.cpp","toolkit/tbytevector.cpp","toolkit/tbytevectorlist.cpp","toolkit/tbytevectorstream.cpp","toolkit/tiostream.cpp","toolkit/tfile.cpp","toolkit/tfilestream.cpp","toolkit/tdebug.cpp","toolkit/tpicture.cpp","toolkit/tpicturemap.cpp","toolkit/tpropertymap.cpp","toolkit/trefcounter.cpp","toolkit/tdebuglistener.cpp","toolkit/tzlib.cpp","flac/flacfile.cpp","flac/flacpicture.cpp","flac/flacproperties.cpp","flac/flacmetadatablock.cpp","flac/flacunknownmetadatablock.cpp","wavpack/wavpackfile.cpp","wavpack/wavpackproperties.cpp","ogg/speex/speexfile.cpp","ogg/speex/speexproperties.cpp","trueaudio/trueaudiofile.cpp","trueaudio/trueaudioproperties.cpp","riff/rifffile.cpp","riff/aiff/aifffile.cpp","riff/aiff/aiffproperties.cpp","riff/wav/wavfile.cpp","riff/wav/wavproperties.cpp","riff/wav/infotag.cpp","asf/asftag.cpp","asf/asffile.cpp","asf/asfproperties.cpp","asf/asfattribute.cpp","asf/asfpicture.cpp","mp4/mp4file.cpp","mp4/mp4atom.cpp","mp4/mp4tag.cpp","mp4/mp4item.cpp","mp4/mp4properties.cpp","mp4/mp4coverart.cpp","mod/modfilebase.cpp","mod/modfile.cpp","mod/modtag.cpp","mod/modproperties.cpp","s3m/s3mfile.cpp","s3m/s3mproperties.cpp","it/itfile.cpp","it/itproperties.cpp","xm/xmfile.cpp","xm/xmproperties.cpp","ogg/opus/opusfile.cpp","ogg/opus/opusproperties.cpp","ebml/ebmlfile.cpp","ebml/ebmlelement.cpp","ebml/matroska/ebmlmatroskafile.cpp","ebml/matroska/ebmlmatroskaaudio.cpp","dsf/dsffile.cpp","dsf/dsfproperties.cpp","dsdiff/dsdifffile.cpp","dsdiff/dsdiffproperties.cpp","dsdiff/dsdiffdiintag.cpp","tag.cpp","tagunion.cpp","fileref.cpp","audioproperties.cpp","tagutils.cpp"]}],"fullName":"libtag.so","linkFlags":"-Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,-z,noexecstack","linkLibraries":"-latomic -lm","linkerLanguage":"CXX","name":"tag","sourceDirectory":"/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/taglib/taglib","sysroot":"/home/somal/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot","type":"SHARED_LIBRARY"}]}]}],"cookie":"","inReplyTo":"codemodel","type":"reply"}
+
+CMAKE SERVER: ]== "CMake Server" ==]
+
