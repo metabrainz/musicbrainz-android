@@ -11,7 +11,7 @@ public class Track {
 
     @SerializedName("artists")
     @Expose
-    private List<Artist> artists = new ArrayList<Artist>();
+    private List<Artist> artists = new ArrayList<>();
     @SerializedName("id")
     @Expose
     private String id;

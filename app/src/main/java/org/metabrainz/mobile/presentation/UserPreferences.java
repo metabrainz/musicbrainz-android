@@ -11,9 +11,9 @@ public class UserPreferences {
 
     public static final String PREFERENCE_CLEAR_SUGGESTIONS = "clear_suggestions";
     public static final String PREFERENCE_TAGGER_DIRECTORY = "tagger_directory";
-    public static final String PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections";
-    public static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
-    public static final String PREFERENCE_SYSTEM_LANGUAGE = "use_english";
+    private static final String PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections";
+    private static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
+    private static final String PREFERENCE_SYSTEM_LANGUAGE = "use_english";
 
     private static SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(App.getContext());

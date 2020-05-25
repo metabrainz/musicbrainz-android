@@ -97,7 +97,7 @@ public class LookupRepository {
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 try {
                     String jsonResponse = Objects.requireNonNull(response.body()).string();
-                    JsonElement element = new JsonParser().parse(jsonResponse);
+                    JsonElement element = JsonParser.parseString(jsonResponse);
                     JsonObject result = element.getAsJsonObject()
                             .getAsJsonObject("entities").getAsJsonObject(id);
                     WikiDataResponse wikiDataResponse = new Gson().fromJson(result, WikiDataResponse.class);

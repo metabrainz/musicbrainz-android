@@ -40,7 +40,6 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.3.0-alpha01'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -55,4 +54,5 @@ dependencies {
     implementation 'com.github.QuickLyric:fpcalc-android:1.0.1'
     implementation 'org.bitbucket.ijabz:jaudiotagger:android-SNAPSHOT'
     implementation 'info.debatty:java-string-similarity:1.2.1'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.0-alpha03'
 }

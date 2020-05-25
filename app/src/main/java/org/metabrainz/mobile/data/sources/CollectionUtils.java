@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
-import org.metabrainz.mobile.data.sources.api.entities.response.collection.CollectionListResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.CollectionListResponse;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.HashMap;

@@ -11,7 +11,7 @@ public class Recording {
 
     @SerializedName("artists")
     @Expose
-    private List<Artist> artists = new ArrayList<Artist>();
+    private List<Artist> artists = new ArrayList<>();
     @SerializedName("duration")
     @Expose
     private int duration;
@@ -20,7 +20,7 @@ public class Recording {
     private String id;
     @SerializedName("releasegroups")
     @Expose
-    private List<ReleaseGroup> releaseGroups = new ArrayList<ReleaseGroup>();
+    private List<ReleaseGroup> releaseGroups = new ArrayList<>();
     @SerializedName("title")
     @Expose
     private String title;

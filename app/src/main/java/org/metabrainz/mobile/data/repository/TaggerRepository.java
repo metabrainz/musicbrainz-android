@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.sources.Constants;
@@ -9,7 +10,7 @@ import org.metabrainz.mobile.data.sources.api.entities.acoustid.AcoustIDResponse
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.Result;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.data.sources.api.entities.response.search.RecordingSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.response.RecordingSearchResponse;
 import org.metabrainz.mobile.util.TaggerUtils;
 
 import java.util.List;
@@ -45,13 +46,13 @@ public class TaggerRepository {
     public void fetchRecordings(String query) {
         service.searchRecording(query, Constants.LIMIT).enqueue(new Callback<RecordingSearchResponse>() {
             @Override
-            public void onResponse(Call<RecordingSearchResponse> call, Response<RecordingSearchResponse> response) {
+            public void onResponse(@NonNull Call<RecordingSearchResponse> call, @NonNull Response<RecordingSearchResponse> response) {
                 RecordingSearchResponse data = response.body();
                 recordingResponseData.setValue(data.getRecordings());
             }
 
             @Override
-            public void onFailure(Call<RecordingSearchResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RecordingSearchResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -65,13 +66,13 @@ public class TaggerRepository {
         service.lookupRecording(MBID, Constants.TAGGER_RELEASE_PARAMS)
                 .enqueue(new Callback<Release>() {
                     @Override
-                    public void onResponse(Call<Release> call, Response<Release> response) {
+                    public void onResponse(@NonNull Call<Release> call, @NonNull Response<Release> response) {
                         Release release = response.body();
                         matchedReleaseData.setValue(release);
                     }
 
                     @Override
-                    public void onFailure(Call<Release> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Release> call, @NonNull Throwable t) {
 
                     }
                 });
@@ -81,13 +82,13 @@ public class TaggerRepository {
         service.lookupFingerprint(ACOUST_ID_KEY, Constants.ACOUST_ID_RESPONSE_PARAMS, duration, fingerprint)
                 .enqueue(new Callback<AcoustIDResponse>() {
                     @Override
-                    public void onResponse(Call<AcoustIDResponse> call, Response<AcoustIDResponse> response) {
+                    public void onResponse(@NonNull Call<AcoustIDResponse> call, @NonNull Response<AcoustIDResponse> response) {
                         List<Result> result = response.body().getResults();
                         recordingResponseData.setValue(TaggerUtils.parseResults(result));
                     }
 
                     @Override
-                    public void onFailure(Call<AcoustIDResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<AcoustIDResponse> call, @NonNull Throwable t) {
 
                     }
                 });

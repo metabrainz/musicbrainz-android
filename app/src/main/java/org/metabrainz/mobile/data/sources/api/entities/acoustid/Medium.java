@@ -20,7 +20,7 @@ public class Medium {
     private int trackCount;
     @SerializedName("tracks")
     @Expose
-    private List<Track> tracks = new ArrayList<Track>();
+    private List<Track> tracks = new ArrayList<>();
 
     public String getFormat() {
         return format;

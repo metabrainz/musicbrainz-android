@@ -11,7 +11,7 @@ public class AcoustIDResponse {
 
     @SerializedName("results")
     @Expose
-    private List<Result> results = new ArrayList<Result>();
+    private List<Result> results = new ArrayList<>();
     @SerializedName("status")
     @Expose
     private String status;

@@ -42,7 +42,7 @@ public class CollectionRepository {
         MutableLiveData<String> liveData = new MutableLiveData<>();
         service.getCollectionContents(entity, id).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 try {
                     liveData.setValue(response.body().string());
                 } catch (Exception e) {
@@ -51,7 +51,7 @@ public class CollectionRepository {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
 
             }
         });

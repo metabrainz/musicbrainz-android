@@ -11,16 +11,16 @@ public class ReleaseGroup {
 
     @SerializedName("artists")
     @Expose
-    private List<Artist> artists = new ArrayList<Artist>();
+    private List<Artist> artists = new ArrayList<>();
     @SerializedName("id")
     @Expose
     private String id;
     @SerializedName("releases")
     @Expose
-    private List<Release> releases = new ArrayList<Release>();
+    private List<Release> releases = new ArrayList<>();
     @SerializedName("secondarytypes")
     @Expose
-    private List<String> secondarytypes = new ArrayList<String>();
+    private List<String> secondarytypes = new ArrayList<>();
     @SerializedName("title")
     @Expose
     private String title;

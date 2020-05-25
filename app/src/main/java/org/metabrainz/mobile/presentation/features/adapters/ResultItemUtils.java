@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ResultItemUtils {
 
-    public static ResultItem getEntityAsResultItem(MBEntity entity) {
+    private static ResultItem getEntityAsResultItem(MBEntity entity) {
         ResultItem item;
         if (entity instanceof Artist) {
             Artist artist = (Artist) entity;
@@ -62,7 +62,7 @@ public class ResultItemUtils {
         return item;
     }
 
-    public static Type getTypeToken(String entity) {
+    private static Type getTypeToken(String entity) {
         if (entity.equalsIgnoreCase(IntentFactory.Extra.ARTIST))
             return TypeToken.getParameterized(List.class, Artist.class).getType();
         else if (entity.equalsIgnoreCase(IntentFactory.Extra.RELEASE))

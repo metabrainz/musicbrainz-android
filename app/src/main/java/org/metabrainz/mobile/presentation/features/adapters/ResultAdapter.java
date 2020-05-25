@@ -16,8 +16,8 @@ import org.metabrainz.mobile.presentation.features.label.LabelActivity;
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter {
-    protected List<ResultItem> data;
-    protected String entity;
+    private List<ResultItem> data;
+    private String entity;
     private int lastPosition = -1;
 
     public ResultAdapter(List<ResultItem> data, String entity) {
@@ -46,7 +46,7 @@ public class ResultAdapter extends RecyclerView.Adapter {
         viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
     }
 
-    void setAnimation(View viewToAnimate, int position) {
+    private void setAnimation(View viewToAnimate, int position) {
         if (position > lastPosition) {
             Animation animation = AnimationUtils
                     .loadAnimation(viewToAnimate.getContext(), android.R.anim.slide_in_left);
@@ -59,7 +59,7 @@ public class ResultAdapter extends RecyclerView.Adapter {
         lastPosition = -1;
     }
 
-    void onClick(View view, int position) {
+    private void onClick(View view, int position) {
         Intent intent = new Intent(view.getContext(), LabelActivity.class);
         intent.putExtra(entity, data.get(position).getMBID());
         view.getContext().startActivity(intent);

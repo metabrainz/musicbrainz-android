@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.data.sources.api.entities.response.search;
+package org.metabrainz.mobile.data.sources.api.entities.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,7 +6,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 
 import java.util.List;
 
-class SearchResponse<T extends MBEntity> {
+public class SearchResponse<T extends MBEntity> {
     @SerializedName("created")
     private String timestamp;
     private int count;
