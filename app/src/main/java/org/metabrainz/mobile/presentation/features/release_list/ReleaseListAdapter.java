@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.release_group;
+package org.metabrainz.mobile.presentation.features.release_list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -31,16 +31,16 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
-class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
+class ReleaseListAdapter extends RecyclerView.Adapter {
 
     private final List<Release> releaseList;
-    private final ReleaseGroupViewModel releaseGroupViewModel;
+    private final CoverArtViewModel viewModel;
     private final CompositeDisposable compositeDisposable;
 
-    public ReleaseGroupReleaseAdapter(Context context, List<Release> releaseList) {
+    public ReleaseListAdapter(Context context, List<Release> releaseList) {
         this.releaseList = releaseList;
         // Load the ViewModel to fetch cover art for each release item
-        releaseGroupViewModel = ViewModelProviders.of((FragmentActivity) context).get(ReleaseGroupViewModel.class);
+        viewModel = new ViewModelProvider((FragmentActivity) context).get(CoverArtViewModel.class);
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -48,7 +48,7 @@ class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_release_group_item, parent, false);
+                .inflate(R.layout.card_release_item, parent, false);
         return new ReleaseItemViewHolder(view);
     }
 
@@ -91,32 +91,20 @@ class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
         final TextView releaseName;
-        final TextView releaseLabel;
-        final TextView releaseCountry;
-        final TextView releaseBarcode;
-        final TextView releaseTracks;
-        final TextView releaseDate;
+        final TextView releaseDisambiguation;
         final ImageView coverArtView;
         Disposable disposable;
 
         ReleaseItemViewHolder(@NonNull View itemView) {
             super(itemView);
             releaseName = itemView.findViewById(R.id.release_name);
-            releaseLabel = itemView.findViewById(R.id.release_label);
-            releaseBarcode = itemView.findViewById(R.id.release_barcode);
-            releaseCountry = itemView.findViewById(R.id.release_country);
-            releaseDate = itemView.findViewById(R.id.release_date);
-            releaseTracks = itemView.findViewById(R.id.release_tracks);
+            releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
             coverArtView = itemView.findViewById(R.id.release_cover_art);
         }
 
         void bind(Release release) {
             releaseName.setText(release.getTitle());
-            setViewVisibility(release.labelCatalog(), releaseLabel);
-            setViewVisibility(release.getBarcode(), releaseBarcode);
-            setViewVisibility(release.getDate(), releaseDate);
-            setViewVisibility(release.getCountry(), releaseCountry);
-            setViewVisibility(String.valueOf(release.getTrackCount()), releaseTracks);
+            setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
 
             coverArtView.setImageDrawable(coverArtView.getContext()
                     .getResources()
@@ -169,7 +157,7 @@ class ReleaseGroupReleaseAdapter extends RecyclerView.Adapter {
         private void fetchCoverArtForRelease(Release release) {
             // Ask the viewModel to retrieve the cover art
             // and append it to this release
-            disposable = releaseGroupViewModel
+            disposable = viewModel
                     .fetchCoverArtForRelease(release)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

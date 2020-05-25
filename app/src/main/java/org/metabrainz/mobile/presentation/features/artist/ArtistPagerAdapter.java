@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.presentation.features.release_list.ReleaseListFragment;
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
 
 class ArtistPagerAdapter extends FragmentPagerAdapter {
@@ -25,7 +26,7 @@ class ArtistPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return ArtistReleasesFragment.newInstance();
+                return ReleaseListFragment.newInstance();
             case 1:
                 return ArtistBioFragment.newInstance();
             case 2:
