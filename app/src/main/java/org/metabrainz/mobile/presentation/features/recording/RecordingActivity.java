@@ -9,6 +9,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class RecordingActivity extends MusicBrainzActivity {
     public static final String LOG_TAG = "DebugRecordingInfo";
 
     private RecordingViewModel recordingViewModel;
+    private UserViewModel userViewModel;
 
     private String mbid;
 
@@ -28,6 +30,7 @@ public class RecordingActivity extends MusicBrainzActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);
@@ -45,7 +48,9 @@ public class RecordingActivity extends MusicBrainzActivity {
     }
 
     private void setRecording(Recording recording) {
-        if (recording != null)
+        if (recording != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
+            userViewModel.setUserData(recording);
+        }
     }
 }

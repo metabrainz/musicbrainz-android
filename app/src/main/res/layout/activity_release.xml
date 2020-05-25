@@ -35,7 +35,7 @@
 
             <fragment
                 android:id="@+id/release_tracks_fragment"
-                class="org.metabrainz.mobile.presentation.features.release.ReleaseTracksFragment"
+                class="org.metabrainz.mobile.presentation.features.userdata.UserDataFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"

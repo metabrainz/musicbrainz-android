@@ -12,6 +12,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
 
@@ -24,6 +25,8 @@ public class ArtistActivity extends MusicBrainzActivity {
     public static final String LOG_TAG = "DebugArtistInfo";
 
     private ArtistViewModel artistViewModel;
+    private UserViewModel userViewModel;
+
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ArtistPagerAdapter pagerAdapter;
@@ -37,6 +40,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);
@@ -64,8 +68,10 @@ public class ArtistActivity extends MusicBrainzActivity {
     }
 
     private void setArtist(Artist artist) {
-        if (artist != null)
+        if (artist != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
+            userViewModel.setUserData(artist);
+        }
     }
 
     @Override

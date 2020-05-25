@@ -9,6 +9,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
 
@@ -21,6 +22,7 @@ public class ReleaseActivity extends MusicBrainzActivity {
     public static final String LOG_TAG = "DebugReleaseInfo";
 
     private ReleaseViewModel releaseViewModel;
+    private UserViewModel userViewModel;
 
     private String mbid;
 
@@ -31,6 +33,7 @@ public class ReleaseActivity extends MusicBrainzActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         releaseViewModel = new ViewModelProvider(this).get(ReleaseViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) releaseViewModel.setMBID(mbid);
@@ -39,8 +42,10 @@ public class ReleaseActivity extends MusicBrainzActivity {
     }
 
     private void setRelease(Release release) {
-        if (release != null)
+        if (release != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(release.getTitle());
+            userViewModel.setUserData(release);
+        }
     }
 
     @Override
