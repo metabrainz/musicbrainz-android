@@ -4,18 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+import org.metabrainz.mobile.databinding.FragmentLabelInfoBinding;
 
 public class LabelInfoFragment extends Fragment {
 
+    private FragmentLabelInfoBinding binding;
     private LabelViewModel labelViewModel;
-    private TextView labelType, labelFounded, labelArea, labelCode;
 
     public static LabelInfoFragment newInstance() {
         return new LabelInfoFragment();
@@ -23,18 +22,16 @@ public class LabelInfoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_label_info, container, false);
+        binding = FragmentLabelInfoBinding.inflate(inflater, container, false);
         labelViewModel = new ViewModelProvider(requireActivity()).get(LabelViewModel.class);
         labelViewModel.getData().observe(getViewLifecycleOwner(), this::setLabelInfo);
-        findViews(layout);
-        return layout;
+        return binding.getRoot();
     }
 
-    private void findViews(View layout) {
-        labelType = layout.findViewById(R.id.label_type);
-        labelFounded = layout.findViewById(R.id.label_founded);
-        labelArea = layout.findViewById(R.id.label_area);
-        labelCode = layout.findViewById(R.id.label_code);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private void setLabelInfo(Label label) {
@@ -52,13 +49,13 @@ public class LabelInfoFragment extends Fragment {
             else area = "";
 
             if (type != null && !type.isEmpty())
-                labelType.setText(type);
+                binding.labelType.setText(type);
             if (founded != null && !founded.isEmpty())
-                labelFounded.setText(founded);
+                binding.labelFounded.setText(founded);
             if (area != null && !area.isEmpty())
-                labelArea.setText(area);
+                binding.labelArea.setText(area);
             if (code != null && !code.isEmpty())
-                labelCode.setText(code);
+                binding.labelCode.setText(code);
         }
     }
 

@@ -4,16 +4,19 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.databinding.ActivityAboutBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 import java.util.Objects;
 
 public class AboutActivity extends MusicBrainzActivity {
 
+    private ActivityAboutBinding binding;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        binding = ActivityAboutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 

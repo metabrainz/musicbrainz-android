@@ -7,28 +7,31 @@ import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
+import org.metabrainz.mobile.databinding.ActivityLoginBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.Objects;
 
 public class LoginActivity extends MusicBrainzActivity {
+
+    private ActivityLoginBinding binding;
     private LoginViewModel loginViewModel;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getAccessTokenLiveData().observe(this, this::saveOAuthToken);
         loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
 
-        findViewById(R.id.login_btn).setOnClickListener(v -> startLogin());
-        findViewById(R.id.logout_btn).setOnClickListener(v -> logoutUser());
+        binding.loginBtn.setOnClickListener(v -> startLogin());
+        binding.logoutBtn.setOnClickListener(v -> logoutUser());
     }
 
     @Override
