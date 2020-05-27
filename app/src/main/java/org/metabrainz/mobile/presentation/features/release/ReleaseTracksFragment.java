@@ -74,6 +74,12 @@ public class ReleaseTracksFragment extends Fragment {
 >>>>>>> b793e03... Improve usage of live data and reactive patterns.
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
     private void setTracks(Release release) {
         if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()) {
                 mediaList.clear();
