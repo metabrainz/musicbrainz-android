@@ -1,6 +1,0 @@
-/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a/CMakeFiles/rebuild_cache.dir
-/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a/CMakeFiles/edit_cache.dir
-/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a/CMakeFiles/ktaglib.dir
-/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a/taglib/CMakeFiles/rebuild_cache.dir
-/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a/taglib/CMakeFiles/edit_cache.dir
-/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/arm64-v8a/taglib/CMakeFiles/tag.dir
