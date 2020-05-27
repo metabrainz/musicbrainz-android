@@ -5,9 +5,9 @@ import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+import org.metabrainz.mobile.databinding.ActivityLabelBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
@@ -17,6 +17,8 @@ public class LabelActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugLabelInfo";
 
+    private ActivityLabelBinding binding;
+
     private LabelViewModel labelViewModel;
     private UserViewModel userViewModel;
 
@@ -25,8 +27,9 @@ public class LabelActivity extends MusicBrainzActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_label);
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = ActivityLabelBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);

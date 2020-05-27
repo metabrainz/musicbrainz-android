@@ -2,18 +2,15 @@ package org.metabrainz.mobile.presentation.features.collection;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
@@ -24,44 +21,38 @@ import java.util.Objects;
 
 public class CollectionActivity extends MusicBrainzActivity {
 
+
+    private ActivityCollectionBinding binding;
     private static CollectionViewModel viewModel;
-    private RecyclerView recyclerView;
+
     private CollectionListAdapter adapter;
     private List<Collection> collections;
-
-    private TextView noRes;
-    private ProgressBar progressBar;
-    private TextView loginRequiredView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection);
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = ActivityCollectionBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
         collections = new ArrayList<>();
 
-        noRes = findViewById(R.id.no_result);
-        progressBar = findViewById(R.id.progress_spinner);
         adapter = new CollectionListAdapter(collections);
-        recyclerView = findViewById(R.id.recycler_view);
-        loginRequiredView = findViewById(R.id.login_required);
-
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
-            loginRequiredView.setVisibility(View.GONE);
-            noRes.setVisibility(View.GONE);
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.GONE);
+            binding.loginRequired.setVisibility(View.GONE);
+            binding.noResult.setVisibility(View.GONE);
+            binding.progressSpinner.setIndeterminate(true);
+            binding.progressSpinner.setVisibility(View.GONE);
 
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                    DividerItemDecoration.VERTICAL);
-            recyclerView.addItemDecoration(itemDecoration);
+            binding.recyclerView.setAdapter(adapter);
+            binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            DividerItemDecoration itemDecoration = new DividerItemDecoration(
+                    binding.recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+            binding.recyclerView.addItemDecoration(itemDecoration);
 
-            progressBar.setVisibility(View.VISIBLE);
+            binding.progressSpinner.setVisibility(View.VISIBLE);
             boolean getPrivateCollections =
                     LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
                             && UserPreferences.getPrivateCollectionsPreference();
@@ -75,9 +66,9 @@ public class CollectionActivity extends MusicBrainzActivity {
             });
 
         } else {
-            noRes.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.GONE);
-            progressBar.setVisibility(View.GONE);
+            binding.noResult.setVisibility(View.GONE);
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.progressSpinner.setVisibility(View.GONE);
         }
     }
 
@@ -87,18 +78,18 @@ public class CollectionActivity extends MusicBrainzActivity {
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT) {
             collections.clear();
             checkHasResults();
-            noRes.setVisibility(View.GONE);
+            binding.noResult.setVisibility(View.GONE);
         }
     }
 
     private void checkHasResults() {
-        progressBar.setVisibility(View.GONE);
+        binding.progressSpinner.setVisibility(View.GONE);
         if (adapter.getItemCount() == 0) {
-            recyclerView.setVisibility(View.GONE);
-            noRes.setVisibility(View.VISIBLE);
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noResult.setVisibility(View.VISIBLE);
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            noRes.setVisibility(View.GONE);
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noResult.setVisibility(View.GONE);
         }
     }
 }

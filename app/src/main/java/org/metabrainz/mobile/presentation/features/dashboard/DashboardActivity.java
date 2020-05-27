@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.databinding.ActivityDashBinding;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.about.AboutActivity;
@@ -19,24 +20,26 @@ import java.util.Objects;
 
 public class DashboardActivity extends MusicBrainzActivity implements OnClickListener {
 
+    private ActivityDashBinding binding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dash);
+        binding = ActivityDashBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(false);
         setupTiles();
     }
 
     private void setupTiles() {
-        setupTile(R.id.dash_scan, R.drawable.dash_scan, R.string.dash_scan);
-        setupTile(R.id.dash_collections, R.drawable.dash_collections, R.string.dash_collections);
-        setupTile(R.id.dash_donate, R.drawable.dash_donate, R.string.dash_donate);
-        setupTile(R.id.dash_about, R.drawable.dash_about, R.string.dash_about);
-        setupTile(R.id.dash_tag, R.drawable.dash_tag, R.string.dash_tag);
+        setupTile(binding.dashButtons.dashScan, R.drawable.dash_scan, R.string.dash_scan);
+        setupTile(binding.dashButtons.dashCollections, R.drawable.dash_collections, R.string.dash_collections);
+        setupTile(binding.dashButtons.dashDonate, R.drawable.dash_donate, R.string.dash_donate);
+        setupTile(binding.dashButtons.dashAbout, R.drawable.dash_about, R.string.dash_about);
+        setupTile(binding.dashButtons.dashTag, R.drawable.dash_tag, R.string.dash_tag);
     }
 
-    private void setupTile(int tileId, int iconId, int stringId) {
-        DashTileView scanTile = findViewById(tileId);
+    private void setupTile(DashTileView scanTile, int iconId, int stringId) {
         scanTile.setIcon(iconId);
         scanTile.setText(stringId);
         scanTile.setOnClickListener(this);

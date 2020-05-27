@@ -10,17 +10,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.databinding.FragmentArtistReleasesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReleaseListFragment extends Fragment {
 
-    private RecyclerView releasesRecyclerView;
+    private FragmentArtistReleasesBinding binding;
     private ReleaseListAdapter adapter;
     private List<Release> releaseList;
     private CoverArtViewModel viewModel;
@@ -38,14 +37,13 @@ public class ReleaseListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_artist_releases, container, false);
-        releasesRecyclerView = view.findViewById(R.id.recycler_view);
-        releasesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        releasesRecyclerView.setAdapter(adapter);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(releasesRecyclerView.getContext(),
+        binding = FragmentArtistReleasesBinding.inflate(inflater, container, false);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+        binding.recyclerView.setAdapter(adapter);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(binding.getRoot().getContext(),
                 DividerItemDecoration.VERTICAL);
-        releasesRecyclerView.addItemDecoration(itemDecoration);
-        return view;
+        binding.recyclerView.addItemDecoration(itemDecoration);
+        return binding.getRoot();
     }
 
     @Override
@@ -53,6 +51,12 @@ public class ReleaseListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(CoverArtViewModel.class);
         viewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private void setReleases(List<Release> releases) {

@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +19,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.databinding.CardReleaseItemBinding;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
@@ -90,23 +90,19 @@ class ReleaseListAdapter extends RecyclerView.Adapter {
     }
 
     private class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
-        final TextView releaseName;
-        final TextView releaseDisambiguation;
-        final ImageView coverArtView;
+        CardReleaseItemBinding binding;
         Disposable disposable;
 
         ReleaseItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            releaseName = itemView.findViewById(R.id.release_name);
-            releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
-            coverArtView = itemView.findViewById(R.id.release_cover_art);
+            binding = CardReleaseItemBinding.bind(itemView);
         }
 
         void bind(Release release) {
-            releaseName.setText(release.getTitle());
-            setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
+            binding.releaseName.setText(release.getTitle());
+            setViewVisibility(release.getDisambiguation(), binding.releaseDisambiguation);
 
-            coverArtView.setImageDrawable(coverArtView.getContext()
+            binding.releaseCoverArt.setImageDrawable(binding.getRoot().getContext()
                     .getResources()
                     .getDrawable(R.drawable.link_discog));
 
@@ -135,7 +131,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter {
                     Picasso.get()
                             .load(Uri.parse(url))
                             .placeholder(R.drawable.link_discog)
-                            .into(coverArtView);
+                            .into(binding.releaseCoverArt);
                 }
             }
         }

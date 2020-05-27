@@ -4,22 +4,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.databinding.FragmentDashWelcomeBinding;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 public class WelcomeFragment extends Fragment {
 
-    private TextView welcomeText;
+    private FragmentDashWelcomeBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_dash_welcome, container);
-        welcomeText = layout.findViewById(R.id.welcome_text);
-        return layout;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentDashWelcomeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override
@@ -31,9 +37,9 @@ public class WelcomeFragment extends Fragment {
     private void updateText() {
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
             String message = getString(R.string.welcome_loggedin) + " " + LoginSharedPreferences.getUsername();
-            welcomeText.setText(message);
+            binding.welcomeText.setText(message);
         } else {
-            welcomeText.setText(R.string.welcome);
+            binding.welcomeText.setText(R.string.welcome);
         }
     }
 

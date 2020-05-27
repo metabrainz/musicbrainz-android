@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +16,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.LinksClassifier;
 import org.metabrainz.mobile.data.sources.api.entities.Url;
+import org.metabrainz.mobile.databinding.ItemLinkBinding;
 
 import java.util.List;
 
@@ -45,13 +44,13 @@ class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickList
         LinkViewHolder linkViewHolder = (LinkViewHolder) holder;
 
         if (drawable != null) {
-            linkViewHolder.linkTextView.setVisibility(View.GONE);
-            linkViewHolder.linkImageView.setImageDrawable(drawable);
+            linkViewHolder.binding.linkText.setVisibility(View.GONE);
+            linkViewHolder.binding.linkImage.setImageDrawable(drawable);
         } else {
-            linkViewHolder.linkTextView.setVisibility(View.VISIBLE);
-            linkViewHolder.linkTextView.setText(type.toUpperCase());
+            linkViewHolder.binding.linkText.setVisibility(View.VISIBLE);
+            linkViewHolder.binding.linkText.setText(type.toUpperCase());
             drawable = getGenericLinkIcon(type);
-            linkViewHolder.linkImageView.setImageDrawable(drawable);
+            linkViewHolder.binding.linkImage.setImageDrawable(drawable);
         }
         linkViewHolder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
         linkViewHolder.itemView.setOnClickListener(this);
@@ -100,13 +99,11 @@ class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickList
     }
 
     class LinkViewHolder extends RecyclerView.ViewHolder {
-        final ImageView linkImageView;
-        final TextView linkTextView;
+        ItemLinkBinding binding;
 
         LinkViewHolder(@NonNull View itemView) {
             super(itemView);
-            linkImageView = itemView.findViewById(R.id.link_image);
-            linkTextView = itemView.findViewById(R.id.link_text);
+            binding = ItemLinkBinding.bind(itemView);
         }
     }
 }

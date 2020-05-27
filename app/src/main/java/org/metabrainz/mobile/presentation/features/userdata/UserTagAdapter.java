@@ -4,13 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag;
+import org.metabrainz.mobile.databinding.LayoutTagBinding;
 
 import java.util.List;
 
@@ -41,15 +41,15 @@ class UserTagAdapter extends RecyclerView.Adapter {
     }
 
     class TagViewHolder extends RecyclerView.ViewHolder {
-        final TextView tagView;
+        LayoutTagBinding binding;
 
         TagViewHolder(View itemView) {
             super(itemView);
-            tagView = itemView.findViewById(R.id.tag_name);
+            binding = LayoutTagBinding.bind(itemView);
         }
 
         void bindView(UserTag tag) {
-            tagView.setText(tag.getName());
+            binding.tagName.setText(tag.getName());
         }
     }
 }
