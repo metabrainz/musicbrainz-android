@@ -1,2 +1,3 @@
 ninja: Entering directory `/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/.cxx/cmake/debug/armeabi-v7a'
-ninja: no work to do.
+[1/2] Building CXX object CMakeFiles/ktaglib.dir/ktaglib.cpp.o
+[2/2] Linking CXX shared library /home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/debug/obj/armeabi-v7a/libktaglib.so
