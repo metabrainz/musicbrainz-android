@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.fragment.app.Fragment;
@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+import org.metabrainz.mobile.databinding.FragmentDashSearchBinding;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 
@@ -26,24 +27,26 @@ import java.util.Objects;
 
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
-    private Spinner searchTypeSpinner;
+    private FragmentDashSearchBinding binding;
     private SuggestionHelper suggestionHelper;
-    private SearchView searchView;
     private CursorAdapter suggestionAdapter;
     private View clearFocusView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_dash_search, container);
-        searchTypeSpinner = layout.findViewById(R.id.search_spin);
-        searchView = layout.findViewById(R.id.search_view);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentDashSearchBinding.inflate(inflater, container, false);
 
         //Work around to prevent keyboard from auto showing
-        clearFocusView = layout.findViewById(R.id.clear_focus_view);
-        clearFocusView.requestFocus();
+        binding.clearFocusView.requestFocus();
 
         setupSearchView();
-        return layout;
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override
@@ -52,18 +55,18 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
         setupSearchTypeSpinner();
         suggestionHelper = new SuggestionHelper(getActivity());
         suggestionAdapter = suggestionHelper.getAdapter();
-        searchView.setSuggestionsAdapter(suggestionAdapter);
+        binding.searchView.setSuggestionsAdapter(suggestionAdapter);
     }
 
     private void setupSearchTypeSpinner() {
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.searchType,
                 android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        searchTypeSpinner.setAdapter(typeAdapter);
+        binding.searchSpin.setAdapter(typeAdapter);
     }
 
     private void startSearch() {
-        String query = searchView.getQuery().toString();
+        String query = binding.searchView.getQuery().toString();
 
         if (query.length() > 0) {
             Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
@@ -76,7 +79,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     private MBEntityType getSearchTypeFromSpinner() {
-        int spinnerPosition = searchTypeSpinner.getSelectedItemPosition();
+        int spinnerPosition = binding.searchSpin.getSelectedItemPosition();
         switch (spinnerPosition) {
             case 0:
                 return MBEntityType.ARTIST;
@@ -99,11 +102,11 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
 
     private void setupSearchView() {
         SearchManager searchManager = (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+        binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        binding.searchView.setSubmitButtonEnabled(true);
+        binding.searchView.setIconifiedByDefault(false);
+        binding.searchView.setOnQueryTextListener(this);
+        binding.searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionSelect(int position) {
                 return false;
@@ -113,7 +116,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
             public boolean onSuggestionClick(int position) {
                 Cursor cursor = (Cursor) suggestionAdapter.getItem(position);
                 String query = cursor.getString(cursor.getColumnIndexOrThrow("display1"));
-                searchView.setQuery(query, false);
+                binding.searchView.setQuery(query, false);
                 return true;
             }
         });

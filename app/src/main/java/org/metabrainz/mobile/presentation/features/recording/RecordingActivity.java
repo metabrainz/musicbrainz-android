@@ -5,9 +5,9 @@ import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
+import org.metabrainz.mobile.databinding.ActivityRecordingBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
@@ -17,6 +17,8 @@ public class RecordingActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugRecordingInfo";
 
+    private ActivityRecordingBinding binding;
+
     private RecordingViewModel recordingViewModel;
     private UserViewModel userViewModel;
 
@@ -25,8 +27,9 @@ public class RecordingActivity extends MusicBrainzActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recording);
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = ActivityRecordingBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);

@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
-
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.databinding.ActivityArtistBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.release_list.CoverArtViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
@@ -25,20 +22,21 @@ public class ArtistActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugArtistInfo";
 
+    private ActivityArtistBinding binding;
+
     private ArtistViewModel artistViewModel;
     private CoverArtViewModel coverArtViewModel;
     private UserViewModel userViewModel;
 
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
     private ArtistPagerAdapter pagerAdapter;
 
     private String mbid;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artist);
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = ActivityArtistBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
@@ -49,10 +47,8 @@ public class ArtistActivity extends MusicBrainzActivity {
         if (mbid != null && !mbid.isEmpty()) artistViewModel.setMBID(mbid);
 
         pagerAdapter = new ArtistPagerAdapter(getSupportFragmentManager());
-        viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        binding.pager.setAdapter(pagerAdapter);
+        binding.tabs.setupWithViewPager(binding.pager);
 
         /*
          * Whenever the artist changes, redraw the information
