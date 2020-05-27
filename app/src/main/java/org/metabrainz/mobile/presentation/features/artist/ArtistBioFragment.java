@@ -4,44 +4,37 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.databinding.FragmentBioBinding;
 
 public class ArtistBioFragment extends Fragment {
 
+    private FragmentBioBinding binding;
     private ArtistViewModel artistViewModel;
-
-    private TextView wikiTextView;
-    private TextView artistType, artistGender, artistArea, artistLifeSpan;
-    private View wikiCard;
 
     public static ArtistBioFragment newInstance() {
         return new ArtistBioFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_bio, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentBioBinding.inflate(inflater, container, false);
         artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
         artistViewModel.getData().observe(getViewLifecycleOwner(), this::setArtistInfo);
         artistViewModel.getWikiData().observe(getViewLifecycleOwner(), this::setWiki);
-        findViews(layout);
-        return layout;
+        return binding.getRoot();
     }
 
-    private void findViews(View layout) {
-        artistType = layout.findViewById(R.id.artist_type);
-        artistGender = layout.findViewById(R.id.artist_gender);
-        artistArea = layout.findViewById(R.id.artist_area);
-        artistLifeSpan = layout.findViewById(R.id.life_span);
-        wikiCard = layout.findViewById(R.id.card_artist_wiki);
-        wikiTextView = layout.findViewById(R.id.wiki_summary);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private void setWiki(WikiSummary wiki) {
@@ -49,17 +42,17 @@ public class ArtistBioFragment extends Fragment {
             String wikiText = wiki.getExtract();
             if (wikiText != null && !wikiText.isEmpty()) {
                 showWikiCard();
-                wikiTextView.setText(wikiText);
+                binding.cardArtistWiki.wikiSummary.setText(wikiText);
             } else hideWikiCard();
         } else hideWikiCard();
     }
 
     private void showWikiCard() {
-        wikiCard.setVisibility(View.VISIBLE);
+        binding.cardArtistWiki.cardView.setVisibility(View.VISIBLE);
     }
 
     private void hideWikiCard() {
-        wikiCard.setVisibility(View.GONE);
+        binding.cardArtistWiki.cardView.setVisibility(View.GONE);
     }
 
     private void setArtistInfo(Artist artist) {
@@ -77,13 +70,13 @@ public class ArtistBioFragment extends Fragment {
             else lifeSpan = "";
 
             if (type != null && !type.isEmpty())
-                artistType.setText(type);
+                binding.cardArtistInfo.artistType.setText(type);
             if (gender != null && !gender.isEmpty())
-                artistGender.setText(gender);
+                binding.cardArtistInfo.artistGender.setText(gender);
             if (area != null && !area.isEmpty())
-                artistArea.setText(area);
+                binding.cardArtistInfo.artistArea.setText(area);
             if (lifeSpan != null && !lifeSpan.isEmpty())
-                artistLifeSpan.setText(lifeSpan);
+                binding.cardArtistInfo.lifeSpan.setText(lifeSpan);
         }
     }
 }

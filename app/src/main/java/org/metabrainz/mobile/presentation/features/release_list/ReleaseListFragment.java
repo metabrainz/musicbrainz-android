@@ -10,11 +10,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+<<<<<<< HEAD
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+=======
+>>>>>>> Use view binding in place of findViewById.
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.databinding.FragmentArtistReleasesBinding;
+import org.metabrainz.mobile.presentation.features.release_list.ReleaseListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +26,8 @@ import java.util.Objects;
 
 public class ArtistReleasesFragment extends Fragment {
 
-    private RecyclerView releasesRecyclerView;
-    private ArtistReleaseAdapter adapter;
+    private FragmentArtistReleasesBinding binding;
+    private ReleaseListAdapter adapter;
     private List<Release> releaseList;
     private ArtistViewModel artistViewModel;
 
@@ -40,14 +44,13 @@ public class ArtistReleasesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_artist_releases, container, false);
-        releasesRecyclerView = view.findViewById(R.id.recycler_view);
-        releasesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        releasesRecyclerView.setAdapter(adapter);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(releasesRecyclerView.getContext(),
+        binding = FragmentArtistReleasesBinding.inflate(inflater, container, false);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+        binding.recyclerView.setAdapter(adapter);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(binding.getRoot().getContext(),
                 DividerItemDecoration.VERTICAL);
-        releasesRecyclerView.addItemDecoration(itemDecoration);
-        return view;
+        binding.recyclerView.addItemDecoration(itemDecoration);
+        return binding.getRoot();
     }
 
     @Override
@@ -57,7 +60,13 @@ public class ArtistReleasesFragment extends Fragment {
         artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
-    private void setReleases(Artist artist) {
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    private void setReleases(List<Release> releases) {
         // TODO: Observe artistData LiveData, instead of requesting the artist sync
         // TODO: Use DiffUtil to avoid overheads
         if (artist != null && artist.getReleases() != null) {

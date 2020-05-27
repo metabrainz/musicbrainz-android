@@ -18,6 +18,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.LinksClassifier;
 import org.metabrainz.mobile.data.sources.api.entities.Url;
+import org.metabrainz.mobile.databinding.ItemLinkBinding;
 
 import java.util.List;
 
@@ -44,13 +45,13 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
         Drawable drawable = getLinkImage(type);
 
         if (drawable != null) {
-            holder.linkTextView.setVisibility(View.GONE);
-            holder.linkImageView.setImageDrawable(drawable);
+            linkViewHolder.binding.linkText.setVisibility(View.GONE);
+            linkViewHolder.binding.linkImage.setImageDrawable(drawable);
         } else {
-            holder.linkTextView.setVisibility(View.VISIBLE);
-            holder.linkTextView.setText(type.toUpperCase());
+            linkViewHolder.binding.linkText.setVisibility(View.VISIBLE);
+            linkViewHolder.binding.linkText.setText(type.toUpperCase());
             drawable = getGenericLinkIcon(type);
-            holder.linkImageView.setImageDrawable(drawable);
+            linkViewHolder.binding.linkImage.setImageDrawable(drawable);
         }
         holder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
         holder.itemView.setOnClickListener(this);
@@ -98,14 +99,18 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
         }
     }
 
+<<<<<<< HEAD
     static class LinkViewHolder extends RecyclerView.ViewHolder {
         final ImageView linkImageView;
         final TextView linkTextView;
+=======
+    class LinkViewHolder extends RecyclerView.ViewHolder {
+        ItemLinkBinding binding;
+>>>>>>> Use view binding in place of findViewById.
 
         LinkViewHolder(@NonNull View itemView) {
             super(itemView);
-            linkImageView = itemView.findViewById(R.id.link_image);
-            linkTextView = itemView.findViewById(R.id.link_text);
+            binding = ItemLinkBinding.bind(itemView);
         }
     }
 }
