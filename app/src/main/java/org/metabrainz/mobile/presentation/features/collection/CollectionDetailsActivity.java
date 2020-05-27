@@ -25,7 +25,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 
     private ActivityCollectionBinding binding;
 
-    private static CollectionViewModel viewModel;
+    private CollectionViewModel viewModel;
     private ResultAdapter adapter;
     private String id;
     private MBEntityType entity;

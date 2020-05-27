@@ -47,9 +47,9 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
     @NonNull
     @Override
     public ReleaseListAdapter.ReleaseItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_release_item, parent, false);
-        return new ReleaseItemViewHolder(view);
+        LayoutInflater inflater = (LayoutInflater) parent.getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return new ReleaseItemViewHolder(CardReleaseItemBinding.inflate(inflater, parent, false));
     }
 
     @Override
@@ -92,9 +92,9 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
         CardReleaseItemBinding binding;
         Disposable disposable;
 
-        ReleaseItemViewHolder(@NonNull View itemView) {
-            super(itemView);
-            binding = CardReleaseItemBinding.bind(itemView);
+        ReleaseItemViewHolder(@NonNull CardReleaseItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bind(Release release) {

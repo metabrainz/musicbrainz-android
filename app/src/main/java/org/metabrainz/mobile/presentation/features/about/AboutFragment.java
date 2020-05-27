@@ -25,7 +25,7 @@ public class AboutFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAboutBinding.inflate(inflater, container, false);
         binding.aboutText.setAsset("about.html");
         return binding.getRoot();
