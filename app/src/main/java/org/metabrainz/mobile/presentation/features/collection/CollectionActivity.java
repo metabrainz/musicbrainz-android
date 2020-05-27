@@ -23,7 +23,7 @@ public class CollectionActivity extends MusicBrainzActivity {
 
 
     private ActivityCollectionBinding binding;
-    private static CollectionViewModel viewModel;
+    private CollectionViewModel viewModel;
 
     private CollectionListAdapter adapter;
     private List<Collection> collections;

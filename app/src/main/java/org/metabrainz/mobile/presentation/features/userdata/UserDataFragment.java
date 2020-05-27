@@ -122,7 +122,7 @@ public class UserDataFragment extends Fragment {
         }
     }
 
-    void updateData(MBEntity entity) {
+    private void updateData(MBEntity entity) {
         addTags(entity);
         displayRating(entity);
     }

@@ -22,39 +22,34 @@ import org.metabrainz.mobile.databinding.ItemLinkBinding;
 
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
 class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewHolder> implements View.OnClickListener {
     private final List<Link> links;
     private final Context context;
 
-    public ArtistLinkAdapter(Context context, List<Link> links) {
+    ArtistLinkAdapter(Context context, List<Link> links) {
         this.links = links;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ArtistLinkAdapter.LinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_link, parent, false);
-        return new LinkViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = (LayoutInflater) parent.getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return new LinkViewHolder(ItemLinkBinding.inflate(layoutInflater, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ArtistLinkAdapter.LinkViewHolder holder, int position) {
         String type = links.get(position).getType();
-        Drawable drawable = getLinkImage(type);
+        LinkViewHolder linkViewHolder = (LinkViewHolder) holder;
 
-        if (drawable != null) {
-            linkViewHolder.binding.linkText.setVisibility(View.GONE);
-            linkViewHolder.binding.linkImage.setImageDrawable(drawable);
-        } else {
-            linkViewHolder.binding.linkText.setVisibility(View.VISIBLE);
-            linkViewHolder.binding.linkText.setText(type.toUpperCase());
-            drawable = getGenericLinkIcon(type);
-            linkViewHolder.binding.linkImage.setImageDrawable(drawable);
-        }
-        holder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
-        holder.itemView.setOnClickListener(this);
+        Drawable drawable = getLinkImage(linkViewHolder.itemView.getContext(), type);
+        linkViewHolder.bind(drawable, type);
+        linkViewHolder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
+        linkViewHolder.itemView.setOnClickListener(this);
     }
 
     @Override
@@ -71,7 +66,7 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
         context.startActivity(intent);
     }
 
-    private Drawable getLinkImage(String type) {
+    private Drawable getLinkImage(Context context, String type) {
         Resources resources = context.getResources();
         switch (type) {
             case LinksClassifier.YOUTUBE:
@@ -87,26 +82,12 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
             case LinksClassifier.MYSPACE:
                 return resources.getDrawable(R.drawable.myspace_logo);
             default:
-                return null;
-        }
-    }
-
-    private Drawable getGenericLinkIcon(String type) {
-        Resources resources = context.getResources();
-        switch (type) {
-            default:
                 return resources.getDrawable(R.drawable.link_generic);
         }
     }
 
-<<<<<<< HEAD
-    static class LinkViewHolder extends RecyclerView.ViewHolder {
-        final ImageView linkImageView;
-        final TextView linkTextView;
-=======
     class LinkViewHolder extends RecyclerView.ViewHolder {
         ItemLinkBinding binding;
->>>>>>> Use view binding in place of findViewById.
 
         LinkViewHolder(@NonNull View itemView) {
             super(itemView);

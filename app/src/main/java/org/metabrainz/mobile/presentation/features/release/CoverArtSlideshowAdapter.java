@@ -20,7 +20,7 @@ class CoverArtSlideshowAdapter extends PagerAdapter {
 
     private final List<String> data;
 
-    public CoverArtSlideshowAdapter(List<String> data) {
+    CoverArtSlideshowAdapter(List<String> data) {
         this.data = data;
     }
 

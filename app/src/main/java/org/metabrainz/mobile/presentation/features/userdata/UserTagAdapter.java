@@ -2,7 +2,6 @@ package org.metabrainz.mobile.presentation.features.userdata;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,15 +17,16 @@ class UserTagAdapter extends RecyclerView.Adapter<UserTagAdapter.TagViewHolder> 
 
     private final List<UserTag> list;
 
-    public UserTagAdapter(List<UserTag> list) {
+    UserTagAdapter(List<UserTag> list) {
         this.list = list;
     }
 
     @NonNull
     @Override
-    public UserTagAdapter.TagViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new TagViewHolder(inflater.inflate(R.layout.layout_tag, parent, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = (LayoutInflater) parent.getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return new TagViewHolder(LayoutTagBinding.inflate(inflater, parent, false));
     }
 
     @Override
@@ -35,17 +35,18 @@ class UserTagAdapter extends RecyclerView.Adapter<UserTagAdapter.TagViewHolder> 
         holder.bindView(tag);
     }
 
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    class TagViewHolder extends RecyclerView.ViewHolder {
+    static class TagViewHolder extends RecyclerView.ViewHolder {
         LayoutTagBinding binding;
 
-        TagViewHolder(View itemView) {
-            super(itemView);
-            binding = LayoutTagBinding.bind(itemView);
+        TagViewHolder(LayoutTagBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bindView(UserTag tag) {

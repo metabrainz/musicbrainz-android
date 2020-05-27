@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,7 +23,7 @@ public class RecordingInfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRecordingInfoBinding.inflate(inflater, container, false);
         recordingViewModel = new ViewModelProvider(requireActivity()).get(RecordingViewModel.class);
         recordingViewModel.getData().observe(getViewLifecycleOwner(), this::setRecordingInfo);
