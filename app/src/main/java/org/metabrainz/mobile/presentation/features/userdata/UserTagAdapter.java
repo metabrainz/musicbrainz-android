@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag;
 import org.metabrainz.mobile.databinding.LayoutTagBinding;
 

@@ -86,12 +86,4 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
         }
     }
 
-    class LinkViewHolder extends RecyclerView.ViewHolder {
-        ItemLinkBinding binding;
-
-        LinkViewHolder(@NonNull View itemView) {
-            super(itemView);
-            binding = ItemLinkBinding.bind(itemView);
-        }
-    }
 }
