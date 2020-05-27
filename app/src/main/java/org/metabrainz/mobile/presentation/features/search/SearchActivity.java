@@ -34,7 +34,7 @@ import java.util.Objects;
 public class SearchActivity extends MusicBrainzActivity implements SearchView.OnQueryTextListener {
 
     private ActivitySearchBinding binding;
-    private static SearchViewModel viewModel;
+    private SearchViewModel viewModel;
     private SearchView searchView;
     private ResultAdapter adapter;
     private List<ResultItem> results;

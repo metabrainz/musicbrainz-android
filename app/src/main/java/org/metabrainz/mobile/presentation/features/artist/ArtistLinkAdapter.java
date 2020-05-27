@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,20 +32,20 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
     @NonNull
     @Override
     public ArtistLinkAdapter.LinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_link, parent, false);
-        return new LinkViewHolder(view);
+        LayoutInflater layoutInflater = (LayoutInflater) parent.getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return new LinkViewHolder(ItemLinkBinding.inflate(layoutInflater, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ArtistLinkAdapter.LinkViewHolder holder, int position) {
         String type = links.get(position).getType();
-        Drawable drawable = getLinkImage(type);
+        LinkViewHolder linkViewHolder = (LinkViewHolder) holder;
 
-        holder.binding.linkImage.setImageDrawable(drawable);
-        holder.binding.linkText.setText(type.toUpperCase());
-        holder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
-        holder.itemView.setOnClickListener(this);
+        Drawable drawable = getLinkImage(linkViewHolder.itemView.getContext(), type);
+        linkViewHolder.bind(drawable, type);
+        linkViewHolder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
+        linkViewHolder.itemView.setOnClickListener(this);
     }
 
     @Override
@@ -64,7 +62,7 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
         context.startActivity(intent);
     }
 
-    private Drawable getLinkImage(String type) {
+    private Drawable getLinkImage(Context context, String type) {
         Resources resources = context.getResources();
         switch (type) {
             case LinksClassifier.YOUTUBE:
@@ -79,14 +77,6 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
                 return resources.getDrawable(R.drawable.viaf_logo);
             case LinksClassifier.MYSPACE:
                 return resources.getDrawable(R.drawable.myspace_logo);
-            default:
-                return null;
-        }
-    }
-
-    private Drawable getGenericLinkIcon(String type) {
-        Resources resources = context.getResources();
-        switch (type) {
             default:
                 return resources.getDrawable(R.drawable.link_generic);
         }

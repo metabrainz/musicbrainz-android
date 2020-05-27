@@ -25,8 +25,9 @@ class UserTagAdapter extends RecyclerView.Adapter<UserTagAdapter.TagViewHolder> 
     @NonNull
     @Override
     public UserTagAdapter.TagViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new TagViewHolder(inflater.inflate(R.layout.layout_tag, parent, false));
+        LayoutInflater inflater = (LayoutInflater) parent.getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return new TagViewHolder(LayoutTagBinding.inflate(inflater, parent, false));
     }
 
     @Override
@@ -43,9 +44,9 @@ class UserTagAdapter extends RecyclerView.Adapter<UserTagAdapter.TagViewHolder> 
     static class TagViewHolder extends RecyclerView.ViewHolder {
         LayoutTagBinding binding;
 
-        TagViewHolder(View itemView) {
-            super(itemView);
-            binding = LayoutTagBinding.bind(itemView);
+        TagViewHolder(LayoutTagBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bindView(UserTag tag) {
