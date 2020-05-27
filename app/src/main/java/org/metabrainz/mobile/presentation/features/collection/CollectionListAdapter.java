@@ -3,13 +3,11 @@ package org.metabrainz.mobile.presentation.features.collection;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
@@ -21,7 +19,7 @@ class CollectionListAdapter extends RecyclerView.Adapter {
 
     private final List<Collection> collections;
 
-    public CollectionListAdapter(List<Collection> collections) {
+    CollectionListAdapter(List<Collection> collections) {
         this.collections = collections;
     }
 
@@ -30,7 +28,7 @@ class CollectionListAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new CollectionViewHolder(inflater.inflate(R.layout.item_collection, parent, false));
+        return new CollectionViewHolder(ItemCollectionBinding.inflate(inflater, parent, false));
     }
 
     @Override
@@ -47,12 +45,10 @@ class CollectionListAdapter extends RecyclerView.Adapter {
     private static class CollectionViewHolder extends RecyclerView.ViewHolder {
 
         private ItemCollectionBinding binding;
-        private final View view;
 
-        CollectionViewHolder(@NonNull View itemView) {
-            super(itemView);
-            binding = ItemCollectionBinding.bind(itemView);
-            this.view = itemView;
+        CollectionViewHolder(ItemCollectionBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bind(Collection collection) {
@@ -61,7 +57,7 @@ class CollectionListAdapter extends RecyclerView.Adapter {
             binding.collectionEntity.setText(collection.getEntityType());
             binding.collectionCount.setText(String.valueOf(collection.getCount()));
 
-            view.setOnClickListener(v -> {
+            itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), CollectionDetailsActivity.class);
                 intent.putExtra(Constants.MBID, collection.getMbid());
                 intent.putExtra(Constants.TYPE, CollectionUtils.getCollectionEntityType(collection));
