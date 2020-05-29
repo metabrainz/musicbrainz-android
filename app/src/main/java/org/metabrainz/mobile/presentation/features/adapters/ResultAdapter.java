@@ -16,9 +16,9 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 
 import java.util.List;
 
-public class ResultAdapter extends RecyclerView.Adapter {
-    private List<ResultItem> data;
-    private MBEntityType entity;
+public class ResultAdapter extends RecyclerView.Adapter<ResultViewHolder> {
+    private final List<ResultItem> data;
+    private final MBEntityType entity;
     private int lastPosition = -1;
 
     public ResultAdapter(List<ResultItem> data, MBEntityType entity) {
@@ -40,11 +40,10 @@ public class ResultAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ResultViewHolder viewHolder = (ResultViewHolder) holder;
-        viewHolder.bind(data.get(position));
-        setAnimation(viewHolder.itemView, position);
-        viewHolder.itemView.setOnClickListener(v -> onClick(v, position));
+    public void onBindViewHolder(@NonNull ResultViewHolder holder, int position) {
+        holder.bind(data.get(position));
+        setAnimation(holder.itemView, position);
+        holder.itemView.setOnClickListener(v -> onClick(v, position));
     }
 
     private void setAnimation(View viewToAnimate, int position) {

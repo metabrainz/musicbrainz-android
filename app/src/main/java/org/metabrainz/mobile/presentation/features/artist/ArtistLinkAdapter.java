@@ -21,7 +21,7 @@ import org.metabrainz.mobile.data.sources.api.entities.Url;
 
 import java.util.List;
 
-class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickListener {
+class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewHolder> implements View.OnClickListener {
     private final List<Link> links;
     private final Context context;
 
@@ -32,29 +32,28 @@ class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickList
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArtistLinkAdapter.LinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_link, parent, false);
         return new LinkViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArtistLinkAdapter.LinkViewHolder holder, int position) {
         String type = links.get(position).getType();
         Drawable drawable = getLinkImage(type);
-        LinkViewHolder linkViewHolder = (LinkViewHolder) holder;
 
         if (drawable != null) {
-            linkViewHolder.linkTextView.setVisibility(View.GONE);
-            linkViewHolder.linkImageView.setImageDrawable(drawable);
+            holder.linkTextView.setVisibility(View.GONE);
+            holder.linkImageView.setImageDrawable(drawable);
         } else {
-            linkViewHolder.linkTextView.setVisibility(View.VISIBLE);
-            linkViewHolder.linkTextView.setText(type.toUpperCase());
+            holder.linkTextView.setVisibility(View.VISIBLE);
+            holder.linkTextView.setText(type.toUpperCase());
             drawable = getGenericLinkIcon(type);
-            linkViewHolder.linkImageView.setImageDrawable(drawable);
+            holder.linkImageView.setImageDrawable(drawable);
         }
-        linkViewHolder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
-        linkViewHolder.itemView.setOnClickListener(this);
+        holder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override
@@ -99,7 +98,7 @@ class ArtistLinkAdapter extends RecyclerView.Adapter implements View.OnClickList
         }
     }
 
-    class LinkViewHolder extends RecyclerView.ViewHolder {
+    static class LinkViewHolder extends RecyclerView.ViewHolder {
         final ImageView linkImageView;
         final TextView linkTextView;
 

@@ -17,7 +17,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 
 import java.util.List;
 
-class CollectionListAdapter extends RecyclerView.Adapter {
+class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.CollectionViewHolder> {
 
     private final List<Collection> collections;
 
@@ -27,16 +27,16 @@ class CollectionListAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CollectionListAdapter.CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return new CollectionViewHolder(inflater.inflate(R.layout.item_collection, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CollectionListAdapter.CollectionViewHolder holder, int position) {
         Collection collection = collections.get(position);
-        ((CollectionViewHolder) holder).bind(collection);
+        holder.bind(collection);
     }
 
     @Override
@@ -44,7 +44,7 @@ class CollectionListAdapter extends RecyclerView.Adapter {
         return collections.size();
     }
 
-    private static class CollectionViewHolder extends RecyclerView.ViewHolder {
+    static class CollectionViewHolder extends RecyclerView.ViewHolder {
         private final TextView collectionNameView;
         private final TextView collectionTypeView;
         private final TextView collectionCountView;
