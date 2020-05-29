@@ -31,7 +31,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
-class ReleaseListAdapter extends RecyclerView.Adapter {
+class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.ReleaseItemViewHolder> {
 
     private final List<Release> releaseList;
     private final CoverArtViewModel viewModel;
@@ -46,19 +46,18 @@ class ReleaseListAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReleaseListAdapter.ReleaseItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_release_item, parent, false);
         return new ReleaseItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ReleaseItemViewHolder viewHolder = (ReleaseItemViewHolder) holder;
-        if (viewHolder.disposable != null && !viewHolder.disposable.isDisposed())
-            compositeDisposable.remove(viewHolder.disposable);
+    public void onBindViewHolder(@NonNull ReleaseListAdapter.ReleaseItemViewHolder holder, int position) {
+        if (holder.disposable != null && !holder.disposable.isDisposed())
+            compositeDisposable.remove(holder.disposable);
 
-        viewHolder.bind(releaseList.get(position));
+        holder.bind(releaseList.get(position));
     }
 
     @Override
@@ -89,7 +88,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter {
         compositeDisposable.clear();
     }
 
-    private class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
+    class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
         final TextView releaseName;
         final TextView releaseDisambiguation;
         final ImageView coverArtView;

@@ -20,7 +20,7 @@ import java.util.List;
 
 import static android.view.View.GONE;
 
-class ReleaseTrackAdapter extends RecyclerView.Adapter {
+class ReleaseTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEWTYPE_TRACK = 0;
     private static final int VIEWTYPE_HEADING = 1;

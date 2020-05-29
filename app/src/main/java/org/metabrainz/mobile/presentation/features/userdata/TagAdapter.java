@@ -14,7 +14,7 @@ import org.metabrainz.mobile.data.sources.api.entities.userdata.Tag;
 
 import java.util.List;
 
-class TagAdapter extends RecyclerView.Adapter {
+class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagViewHolder> {
 
     private final List<Tag> list;
 
@@ -24,15 +24,15 @@ class TagAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TagAdapter.TagViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return new TagViewHolder(inflater.inflate(R.layout.layout_tag, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TagAdapter.TagViewHolder holder, int position) {
         Tag tag = list.get(position);
-        ((TagViewHolder) holder).bindView(tag);
+        holder.bindView(tag);
     }
 
     @Override
@@ -40,7 +40,7 @@ class TagAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-    class TagViewHolder extends RecyclerView.ViewHolder {
+    static class TagViewHolder extends RecyclerView.ViewHolder {
         final TextView tagView;
 
         TagViewHolder(View itemView) {
