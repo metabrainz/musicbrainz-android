@@ -27,7 +27,7 @@ extern "C" JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     songInit = env->GetMethodID(
             globalSongClass,
             "<init>",
-            "(Ljava/lang/String;JJLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;)V"
+            "(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;)V"
     );
 
     jclass intClass = env->FindClass("java/lang/Integer");
@@ -145,46 +145,46 @@ Java_com_musicbrainz_ktaglib_KTagLib_getAudioFile(JNIEnv *env, jobject thiz, jin
     }
     return nullptr;
 }
-extern "C"
-JNIEXPORT jbyteArray JNICALL
-Java_com_musicbrainz_ktaglib_KTagLib_getArtwork(JNIEnv *env, jobject thiz, jint fd_) {
-
-    int fd = (int) fd_;
-
-    TagLib::IOStream *stream = new TagLib::FileStream(fd, true);
-    TagLib::FileRef fileRef(stream);
-
-    if (!fileRef.isNull()) {
-        TagLib::Tag *tag = fileRef.tag();
-
-        TagLib::PictureMap pictureMap = tag->pictures();
-
-        TagLib::Picture picture;
-
-        // Finds the largest picture by byte size
-        size_t picSize = 0;
-        for (auto const &x: pictureMap) {
-            for (auto const &y: x.second) {
-                size_t size = y.data().size();
-                if (size > picSize) {
-                    picture = y;
-                }
-            }
-        }
-
-        TagLib::ByteVector byteVector = picture.data();
-        size_t len = byteVector.size();
-        if (len > 0) {
-            jbyteArray arr = env->NewByteArray(len);
-            char *data = byteVector.data();
-            env->SetByteArrayRegion(arr, 0, len, reinterpret_cast<jbyte *>(data));
-            return arr;
-        }
-    }
-
-    return nullptr;
-
-}
+//extern "C"
+//JNIEXPORT jbyteArray JNICALL
+//Java_com_musicbrainz_ktaglib_KTagLib_getArtwork(JNIEnv *env, jobject thiz, jint fd_) {
+//
+//    int fd = (int) fd_;
+//
+//    TagLib::IOStream *stream = new TagLib::FileStream(fd, true);
+//    TagLib::FileRef fileRef(stream);
+//
+//    if (!fileRef.isNull()) {
+//        TagLib::Tag *tag = fileRef.tag();
+//
+//        TagLib::PictureMap pictureMap = tag->pictures();
+//
+//        TagLib::Picture picture;
+//
+//        // Finds the largest picture by byte size
+//        size_t picSize = 0;
+//        for (auto const &x: pictureMap) {
+//            for (auto const &y: x.second) {
+//                size_t size = y.data().size();
+//                if (size > picSize) {
+//                    picture = y;
+//                }
+//            }
+//        }
+//
+//        TagLib::ByteVector byteVector = picture.data();
+//        size_t len = byteVector.size();
+//        if (len > 0) {
+//            jbyteArray arr = env->NewByteArray(len);
+//            char *data = byteVector.data();
+//            env->SetByteArrayRegion(arr, 0, len, reinterpret_cast<jbyte *>(data));
+//            return arr;
+//        }
+//    }
+//
+//    return nullptr;
+//
+//}
 
 extern "C"
 JNIEXPORT jboolean JNICALL

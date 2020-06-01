@@ -39,7 +39,7 @@ class KTagLib {
      *
      * @param fd File descriptor
      */
-    external fun getArtwork(fd: Int): ByteArray?
+    //external fun getArtwork(fd: Int): ByteArray?
 
 
     companion object {

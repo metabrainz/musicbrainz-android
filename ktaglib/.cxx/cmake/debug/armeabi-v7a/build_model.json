@@ -163,7 +163,6 @@
       "project": {
         "compilerSettingsCacheFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/.cxx",
         "cxxFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/.cxx",
-        "ideBuildTargetAbi": "armeabi-v7a,armeabi",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
@@ -186,7 +185,10 @@
     "objFolder": "/home/somal/GSoCProgress/MuBandroidnewtry/musicbrainz-android/ktaglib/build/intermediates/cmake/debug/obj",
     "variantName": "debug",
     "validAbiList": [
-      "ARMEABI_V7A"
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
     ]
   }
 }

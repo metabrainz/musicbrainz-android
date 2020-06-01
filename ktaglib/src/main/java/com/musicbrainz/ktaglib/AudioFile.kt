@@ -1,18 +1,18 @@
 package com.musicbrainz.ktaglib
 
 data class AudioFile(
-    val path: String,
-    var size: Long,
-    var lastModified: Long,
-    val title: String?,
-    val albumArtist: String?,
-    val artist: String?,
-    val album: String?,
-    val track: Int?,
-    val trackTotal: Int?,
-    val disc: Int?,
-    val discTotal: Int?,
-    val duration: Int?,
-    val year: Int?,
-    var genre: String?
+    var path: String?="",
+    var size: Int?=0,
+    var lastModified: Int?=0,
+    var title: String?="",
+    var albumArtist: String?="",
+    var artist: String?="",
+    var album: String?="",
+    var track: Int?=0,
+    var trackTotal: Int?=0,
+    var disc: Int?=0,
+    var discTotal: Int?=0,
+    var duration: Int?=0,
+    var year: Int?=0,
+    var genre: String?=""
 )
