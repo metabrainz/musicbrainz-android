@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -13,7 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.squareup.picasso.Picasso;
 
-import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.databinding.CoverArtSlideshowItemBinding;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ class CoverArtSlideshowAdapter extends PagerAdapter {
 
     private final List<String> data;
 
-    public CoverArtSlideshowAdapter(List<String> data) {
+    CoverArtSlideshowAdapter(List<String> data) {
         this.data = data;
     }
 
@@ -30,12 +29,11 @@ class CoverArtSlideshowAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater inflater = (LayoutInflater) container.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.cover_art_slideshow_item, container, false);
-        ImageView imageView = view.findViewById(R.id.release_cover_art);
+        CoverArtSlideshowItemBinding binding = CoverArtSlideshowItemBinding.inflate(inflater, container, false);
         Picasso.get().setLoggingEnabled(true);
-        Picasso.get().load(Uri.parse(data.get(position))).into(imageView);
-        container.addView(view);
-        return view;
+        Picasso.get().load(Uri.parse(data.get(position))).into(binding.releaseCoverArt);
+        container.addView(binding.releaseCoverArt);
+        return binding.getRoot();
     }
 
     @Override

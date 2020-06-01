@@ -2,16 +2,14 @@ package org.metabrainz.mobile.presentation.features.collection;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
+
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -26,28 +24,24 @@ import java.util.Objects;
  */
 public class CollectionDetailsActivity extends MusicBrainzActivity {
 
-    private static CollectionViewModel viewModel;
-    private RecyclerView recyclerView;
+    private ActivityCollectionBinding binding;
+
+    private CollectionViewModel viewModel;
     private ResultAdapter adapter;
-    private TextView noRes;
     private String id;
     private MBEntityType entity;
     private List<ResultItem> collectionResults;
-    private ProgressBar progressBar;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection_details);
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = ActivityCollectionBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        recyclerView = findViewById(R.id.recycler_view);
-
-        noRes = findViewById(R.id.no_result);
-        noRes.setVisibility(View.GONE);
-        progressBar = findViewById(R.id.progress_spinner);
-        progressBar.setIndeterminate(true);
-        progressBar.setVisibility(View.GONE);
+        binding.noResult.setVisibility(View.GONE);
+        binding.progressSpinner.setIndeterminate(true);
+        binding.progressSpinner.setVisibility(View.GONE);
 
         entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);
         id = getIntent().getStringExtra(Constants.MBID);
@@ -57,11 +51,12 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         adapter = new ResultAdapter(collectionResults, entity);
         adapter.resetAnimation();
 
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setVisibility(View.GONE);
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setVisibility(View.GONE);
 
-        progressBar.setVisibility(View.VISIBLE);
+        binding.progressSpinner.setVisibility(View.VISIBLE);
+
         viewModel.fetchCollectionDetails(entity, id).observe(this,
                 results -> {
                     collectionResults.clear();
@@ -72,18 +67,18 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 
     private void refresh() {
         adapter.notifyDataSetChanged();
-        progressBar.setVisibility(View.GONE);
+        binding.progressSpinner.setVisibility(View.GONE);
         checkHasResults();
     }
 
 
     private void checkHasResults() {
         if (adapter.getItemCount() == 0) {
-            recyclerView.setVisibility(View.GONE);
-            noRes.setVisibility(View.VISIBLE);
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noResult.setVisibility(View.VISIBLE);
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            noRes.setVisibility(View.GONE);
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noResult.setVisibility(View.GONE);
         }
     }
 }

@@ -5,22 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.databinding.FragmentLinksBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistLinksFragment extends Fragment {
 
-    private RecyclerView linksRecyclerView;
+    private FragmentLinksBinding binding;
     private ArtistLinkAdapter linkAdapter;
     private List<Link> linkList;
     private ArtistViewModel artistViewModel;
@@ -37,12 +37,17 @@ public class ArtistLinksFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_links, container, false);
-        linksRecyclerView = view.findViewById(R.id.links_list);
-        linksRecyclerView.setAdapter(linkAdapter);
-        linksRecyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
-        return view;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentLinksBinding.inflate(inflater, container, false);
+        binding.linksList.setAdapter(linkAdapter);
+        binding.linksList.setLayoutManager(new GridLayoutManager(binding.getRoot().getContext(), 2));
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override

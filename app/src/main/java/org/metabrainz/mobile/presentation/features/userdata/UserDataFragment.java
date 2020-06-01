@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,22 +11,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.Tag;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag;
+import org.metabrainz.mobile.databinding.FragmentUserDataBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.http.HEAD;
+
 public class UserDataFragment extends Fragment {
 
-    private TextView noRating, noUserRating, noTag, noUserTag;
-    private RecyclerView tagsList, userTagsList;
-    private RatingBar ratingBar, userRatingBar;
+    private FragmentUserDataBinding binding;
+
     private TagAdapter tagsAdapter;
     private UserTagAdapter userTagsAdapter;
     private final List<Tag> tags = new ArrayList<>();
@@ -49,53 +47,49 @@ public class UserDataFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_data, container, false);
+        binding = FragmentUserDataBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         viewModel.getUserData().observe(getViewLifecycleOwner(), this::updateData);
-        bindViews(view);
-        return view;
+        bindViews();
+        return binding.getRoot();
     }
 
-    private void bindViews(View view) {
-        tagsList = view.findViewById(R.id.tags_list);
-        tagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        tagsList.setAdapter(tagsAdapter);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 
-        userTagsList = view.findViewById(R.id.user_tags_list);
-        userTagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        userTagsList.setAdapter(userTagsAdapter);
+    private void bindViews() {
+        binding.tagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.tagsList.setAdapter(tagsAdapter);
+
+        binding.userTagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.userTagsList.setAdapter(userTagsAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()), DividerItemDecoration.VERTICAL);
-        tagsList.addItemDecoration(dividerItemDecoration);
-        userTagsList.addItemDecoration(dividerItemDecoration);
+        binding.tagsList.addItemDecoration(dividerItemDecoration);
+        binding.userTagsList.addItemDecoration(dividerItemDecoration);
 
-        ratingBar = view.findViewById(R.id.rating);
-        userRatingBar = view.findViewById(R.id.user_rating);
-
-        noRating = view.findViewById(R.id.no_rating);
-        noUserRating = view.findViewById(R.id.no_user_rating);
-        noTag = view.findViewById(R.id.no_tag);
-        noUserTag = view.findViewById(R.id.no_user_tag);
-
-        noRating.setVisibility(View.GONE);
-        noUserRating.setVisibility(View.GONE);
-        noUserTag.setVisibility(View.GONE);
-        noTag.setVisibility(View.GONE);
+        binding.noRating.setVisibility(View.GONE);
+        binding.noUserRating.setVisibility(View.GONE);
+        binding.noUserTag.setVisibility(View.GONE);
+        binding.noTag.setVisibility(View.GONE);
     }
 
     private void displayRating(MBEntity entity) {
         if (entity != null && entity.getRating() != null && entity.getRating().getValue() != 0)
-            ratingBar.setRating(entity.getRating().getValue());
+            binding.rating.setRating(entity.getRating().getValue());
         else {
-            noRating.setVisibility(View.VISIBLE);
-            ratingBar.setVisibility(View.GONE);
+            binding.noRating.setVisibility(View.VISIBLE);
+            binding.rating.setVisibility(View.GONE);
         }
       
         if (entity != null && entity.getUserRating() != null && entity.getUserRating().getValue() != 0)
-            userRatingBar.setRating(entity.getUserRating().getValue());
+            binding.userRating.setRating(entity.getUserRating().getValue());
         else {
-            noUserRating.setVisibility(View.VISIBLE);
-            userRatingBar.setVisibility(View.GONE);
+            binding.noUserRating.setVisibility(View.VISIBLE);
+            binding.userRating.setVisibility(View.GONE);
         }
     }
 
@@ -106,13 +100,13 @@ public class UserDataFragment extends Fragment {
             tagsAdapter.notifyDataSetChanged();
 
             if (tags.size() == 0) {
-                noTag.setVisibility(View.VISIBLE);
-                tagsList.setVisibility(View.GONE);
+                binding.noTag.setVisibility(View.VISIBLE);
+                binding.tagsList.setVisibility(View.GONE);
             }
 
         } else {
-            noTag.setVisibility(View.VISIBLE);
-            tagsList.setVisibility(View.GONE);
+            binding.noTag.setVisibility(View.VISIBLE);
+            binding.tagsList.setVisibility(View.GONE);
         }
 
         if (entity != null && entity.getUserTags() != null) {
@@ -121,16 +115,16 @@ public class UserDataFragment extends Fragment {
             userTagsAdapter.notifyDataSetChanged();
 
             if (userTags.size() == 0) {
-                noUserTag.setVisibility(View.VISIBLE);
-                userTagsList.setVisibility(View.GONE);
+                binding.noUserTag.setVisibility(View.VISIBLE);
+                binding.userTagsList.setVisibility(View.GONE);
             }
         } else {
-            noUserTag.setVisibility(View.VISIBLE);
-            userTagsList.setVisibility(View.GONE);
+            binding.noUserTag.setVisibility(View.VISIBLE);
+            binding.userTagsList.setVisibility(View.GONE);
         }
     }
 
-    void updateData(MBEntity entity) {
+    private void updateData(MBEntity entity) {
         addTags(entity);
         displayRating(entity);
     }

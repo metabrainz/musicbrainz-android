@@ -20,6 +20,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.databinding.CardReleaseItemBinding;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
 import java.util.List;
@@ -37,6 +38,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
     private final CoverArtViewModel viewModel;
     private final CompositeDisposable compositeDisposable;
 
+
     public ReleaseListAdapter(Context context, List<Release> releaseList) {
         this.releaseList = releaseList;
         // Load the ViewModel to fetch cover art for each release item
@@ -47,9 +49,9 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
     @NonNull
     @Override
     public ReleaseListAdapter.ReleaseItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_release_item, parent, false);
-        return new ReleaseItemViewHolder(view);
+        LayoutInflater inflater = (LayoutInflater) parent.getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return new ReleaseItemViewHolder(CardReleaseItemBinding.inflate(inflater, parent, false));
     }
 
     @Override
@@ -89,23 +91,19 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
     }
 
     class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
-        final TextView releaseName;
-        final TextView releaseDisambiguation;
-        final ImageView coverArtView;
+        CardReleaseItemBinding binding;
         Disposable disposable;
 
-        ReleaseItemViewHolder(@NonNull View itemView) {
-            super(itemView);
-            releaseName = itemView.findViewById(R.id.release_name);
-            releaseDisambiguation = itemView.findViewById(R.id.release_disambiguation);
-            coverArtView = itemView.findViewById(R.id.release_cover_art);
+        ReleaseItemViewHolder(@NonNull CardReleaseItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bind(Release release) {
-            releaseName.setText(release.getTitle());
-            setViewVisibility(release.getDisambiguation(), releaseDisambiguation);
+            binding.releaseName.setText(release.getTitle());
+            setViewVisibility(release.getDisambiguation(), binding.releaseDisambiguation);
 
-            coverArtView.setImageDrawable(coverArtView.getContext()
+            binding.releaseCoverArt.setImageDrawable(binding.getRoot().getContext()
                     .getResources()
                     .getDrawable(R.drawable.link_discog));
 
@@ -134,7 +132,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
                     Picasso.get()
                             .load(Uri.parse(url))
                             .placeholder(R.drawable.link_discog)
-                            .into(coverArtView);
+                            .into(binding.releaseCoverArt);
                 }
             }
         }

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.databinding.ActivityBarcodeResultBinding;
+
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 
@@ -23,34 +25,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.http.HEAD;
+
 public class BarcodeResultActivity extends MusicBrainzActivity {
 
+    private ActivityBarcodeResultBinding binding;
     private final List<Release> releases = new ArrayList<>();
     private BarcodeViewModel viewModel;
-    private TextView noResultView;
-    private ProgressBar progressBar;
-    private RecyclerView recyclerView;
     // private ReleaseAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_barcode_result);
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = ActivityBarcodeResultBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         // adapter = new ReleaseAdapter(releases);
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(itemDecoration);
+        binding.recyclerView.addItemDecoration(itemDecoration);
         // recyclerView.setAdapter(adapter);
-        recyclerView.setVisibility(View.GONE);
+        binding.recyclerView.setVisibility(View.GONE);
 
-        progressBar = findViewById(R.id.progress_spinner);
-        noResultView = findViewById(R.id.no_result);
-        noResultView.setVisibility(View.GONE);
+        binding.noResult.setVisibility(View.GONE);
 
         viewModel = new ViewModelProvider(this).get(BarcodeViewModel.class);
         viewModel.getBarcodeLiveData().observe(this, this::handleResult);
@@ -58,9 +58,9 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         String barcode = getIntent().getStringExtra("barcode");
         if (barcode != null && !barcode.isEmpty()) {
             viewModel.fetchReleasesWithBarcode(barcode);
-            progressBar.setVisibility(View.VISIBLE);
+            binding.progressSpinner.setVisibility(View.VISIBLE);
         } else {
-            progressBar.setVisibility(View.GONE);
+            binding.progressSpinner.setVisibility(View.GONE);
             Toast.makeText(this, "Unknown barcode error", Toast.LENGTH_LONG).show();
             finish();
         }
@@ -71,10 +71,10 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         releases.clear();
         releases.addAll(data);
 
-        progressBar.setVisibility(View.GONE);
+        binding.progressSpinner.setVisibility(View.GONE);
 
         if (releases.size() == 0)
-            noResultView.setVisibility(View.VISIBLE);
+            binding.noResult.setVisibility(View.VISIBLE);
         else if (releases.size() == 1) {
             Intent intent = new Intent(this, ReleaseActivity.class);
             intent.putExtra(Constants.MBID, releases.get(0).getMbid());
@@ -86,6 +86,6 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
 
     private void showMultipleReleases() {
         // adapter.notifyDataSetChanged();
-        recyclerView.setVisibility(View.VISIBLE);
+        binding.recyclerView.setVisibility(View.VISIBLE);
     }
 }

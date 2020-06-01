@@ -10,10 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.databinding.ItemCollectionBinding;
+import org.metabrainz.mobile.R;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.C
 
     private final List<Collection> collections;
 
-    public CollectionListAdapter(List<Collection> collections) {
+    CollectionListAdapter(List<Collection> collections) {
         this.collections = collections;
     }
 
@@ -30,7 +31,7 @@ class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.C
     public CollectionListAdapter.CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new CollectionViewHolder(inflater.inflate(R.layout.item_collection, parent, false));
+        return new CollectionViewHolder(ItemCollectionBinding.inflate(inflater, parent, false));
     }
 
     @Override
@@ -45,29 +46,21 @@ class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.C
     }
 
     static class CollectionViewHolder extends RecyclerView.ViewHolder {
-        private final TextView collectionNameView;
-        private final TextView collectionTypeView;
-        private final TextView collectionCountView;
-        private final TextView collectionEntityView;
 
-        private final View view;
+        private ItemCollectionBinding binding;
 
-        CollectionViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.view = itemView;
-            collectionCountView = itemView.findViewById(R.id.collection_count);
-            collectionEntityView = itemView.findViewById(R.id.collection_entity);
-            collectionNameView = itemView.findViewById(R.id.collection_name);
-            collectionTypeView = itemView.findViewById(R.id.collection_type);
+        CollectionViewHolder(ItemCollectionBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bind(Collection collection) {
-            collectionNameView.setText(collection.getName());
-            collectionTypeView.setText(collection.getType());
-            collectionEntityView.setText(collection.getEntityType());
-            collectionCountView.setText(String.valueOf(collection.getCount()));
+            binding.collectionName.setText(collection.getName());
+            binding.collectionType.setText(collection.getType());
+            binding.collectionEntity.setText(collection.getEntityType());
+            binding.collectionCount.setText(String.valueOf(collection.getCount()));
 
-            view.setOnClickListener(v -> {
+            itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), CollectionDetailsActivity.class);
                 intent.putExtra(Constants.MBID, collection.getMbid());
                 intent.putExtra(Constants.TYPE, CollectionUtils.getCollectionEntityType(collection));

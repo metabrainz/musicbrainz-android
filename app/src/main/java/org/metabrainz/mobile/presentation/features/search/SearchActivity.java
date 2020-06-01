@@ -7,18 +7,18 @@ import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+import org.metabrainz.mobile.databinding.ActivitySearchBinding;
+
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -29,35 +29,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.http.HEAD;
+
 /**
  * Activity to display a list of search results to the user and support intents
  * to info Activity types based on the selection.
  */
 public class SearchActivity extends MusicBrainzActivity implements SearchView.OnQueryTextListener {
 
-    private static SearchViewModel viewModel;
-    private RecyclerView recyclerView;
+    private ActivitySearchBinding binding;
+    private SearchViewModel viewModel;
     private SearchView searchView;
     private ResultAdapter adapter;
-    private TextView noRes;
+
     private List<ResultItem> results;
     private String query;
     private MBEntityType entity;
     private SuggestionHelper suggestionHelper;
     private CursorAdapter suggestionAdapter;
-    private ProgressBar progressBar;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        recyclerView = findViewById(R.id.recycler_view);
+        binding = ActivitySearchBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        noRes = findViewById(R.id.no_result);
-        noRes.setVisibility(View.GONE);
-        progressBar = findViewById(R.id.progress_spinner);
-        progressBar.setIndeterminate(true);
-        progressBar.setVisibility(View.GONE);
+        binding.noResult.setVisibility(View.GONE);
+        binding.progressSpinner.setIndeterminate(true);
+        binding.progressSpinner.setVisibility(View.GONE);
 
         query = getIntent().getStringExtra(SearchManager.QUERY);
         entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);
@@ -65,9 +64,9 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         results = new ArrayList<>();
 
         adapter = new ResultAdapter(results, entity);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setVisibility(View.GONE);
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setVisibility(View.GONE);
 
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
@@ -75,7 +74,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
             results.clear();
             results.addAll(items);
             adapter.notifyDataSetChanged();
-            progressBar.setVisibility(View.GONE);
+            binding.progressSpinner.setVisibility(View.GONE);
             checkHasResults();
         });
 
@@ -113,18 +112,18 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     private void doSearch(String query) {
         saveSearchSuggestion(query);
-        progressBar.setVisibility(View.VISIBLE);
+        binding.progressSpinner.setVisibility(View.VISIBLE);
         adapter.resetAnimation();
         viewModel.search(query);
     }
 
     private void checkHasResults() {
         if (adapter.getItemCount() == 0) {
-            recyclerView.setVisibility(View.GONE);
-            noRes.setVisibility(View.VISIBLE);
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noResult.setVisibility(View.VISIBLE);
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            noRes.setVisibility(View.GONE);
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noResult.setVisibility(View.GONE);
         }
     }
 

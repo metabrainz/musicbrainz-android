@@ -10,10 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.Track;
+import org.metabrainz.mobile.databinding.ItemTrackBinding;
+import org.metabrainz.mobile.databinding.ItemTrackHeadingBinding;
+
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
 
 import java.util.List;
@@ -26,7 +28,7 @@ class ReleaseTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int VIEWTYPE_HEADING = 1;
     private final List<Media> mediaList;
 
-    public ReleaseTrackAdapter(List<Media> data) {
+    ReleaseTrackAdapter(List<Media> data) {
         mediaList = data;
     }
 
@@ -59,21 +61,18 @@ class ReleaseTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (viewType == VIEWTYPE_TRACK) {
-            View view = layoutInflater.inflate(R.layout.item_track, parent, false);
-            return new TrackViewHolder(view);
-        } else {
-            View view = layoutInflater.inflate(R.layout.item_track_heading, parent, false);
-            return new TrackHeadingViewHolder(view);
-        }
+        if (viewType == VIEWTYPE_TRACK)
+            return new TrackViewHolder(ItemTrackBinding.inflate(layoutInflater, parent, false));
+        else
+            return new TrackHeadingViewHolder(ItemTrackHeadingBinding.inflate(layoutInflater, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == 0)
-            ((TrackViewHolder) holder).bind(position);
+            ((TrackViewHolder) holder).bind(getTrack(position));
         else
-            ((TrackHeadingViewHolder) holder).bind(position);
+            ((TrackHeadingViewHolder) holder).bind(getMediumTitle(position));
     }
 
     @Override
@@ -130,25 +129,18 @@ class ReleaseTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     class TrackViewHolder extends RecyclerView.ViewHolder {
-        final TextView trackNumber;
-        final TextView trackName;
-        final TextView trackArtist;
-        final TextView trackDuration;
+        ItemTrackBinding binding;
 
-        TrackViewHolder(@NonNull View itemView) {
-            super(itemView);
-            trackNumber = itemView.findViewById(R.id.track_number);
-            trackArtist = itemView.findViewById(R.id.track_artist);
-            trackName = itemView.findViewById(R.id.track_name);
-            trackDuration = itemView.findViewById(R.id.track_time);
+        TrackViewHolder(@NonNull ItemTrackBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        void bind(int position) {
-            Track item = getTrack(position);
-            setViewVisibility(item.getTitle(), trackName);
-            setViewVisibility(String.valueOf(item.getPosition()), trackNumber);
-            setViewVisibility(item.getDuration(), trackDuration);
-            setViewVisibility(item.getRecording().getDisplayArtist(), trackArtist);
+        void bind(Track item) {
+            setViewVisibility(item.getTitle(), binding.trackName);
+            setViewVisibility(String.valueOf(item.getPosition()), binding.trackNumber);
+            setViewVisibility(item.getDuration(), binding.trackTime);
+            setViewVisibility(item.getRecording().getDisplayArtist(), binding.trackArtist);
 
             this.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), RecordingActivity.class);
@@ -159,15 +151,15 @@ class ReleaseTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     class TrackHeadingViewHolder extends RecyclerView.ViewHolder {
-        final TextView mediumTitle;
+        ItemTrackHeadingBinding binding;
 
-        TrackHeadingViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mediumTitle = itemView.findViewById(R.id.medium_title);
+        TrackHeadingViewHolder(@NonNull ItemTrackHeadingBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        void bind(int position) {
-            setViewVisibility(getMediumTitle(position), mediumTitle);
+        void bind(String title) {
+            setViewVisibility(title, binding.mediumTitle);
         }
     }
 }
