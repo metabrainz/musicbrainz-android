@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -20,6 +20,7 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ReleaseInfoFragment extends Fragment {
 
@@ -38,9 +39,9 @@ public class ReleaseInfoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_release_info, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
-        viewModel.getData().observe(getViewLifecycleOwner(), this::setData);
-        viewModel.fetchCoverArt().observe(getViewLifecycleOwner(), this::setCoverArt);
+        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
+        viewModel.initializeReleaseData().observe(getViewLifecycleOwner(), this::setData);
+        viewModel.initializeCoverArtData().observe(getViewLifecycleOwner(), this::setCoverArt);
         slideshowAdapter = new CoverArtSlideshowAdapter(urls);
         findViews(view);
         viewPager.setAdapter(slideshowAdapter);
@@ -58,8 +59,8 @@ public class ReleaseInfoFragment extends Fragment {
     }
 
     private void setData(Release release) {
+        String title, barcode, status = "", language = "";
         if (release != null) {
-            String title, barcode, status = "", language = "";
             title = release.getTitle();
 
             barcode = release.getBarcode();
@@ -74,7 +75,12 @@ public class ReleaseInfoFragment extends Fragment {
             if (status != null && !status.isEmpty()) releaseStatus.setText(status);
             if (language != null && !language.isEmpty()) releaseLanguage.setText(language);
 
+            fetchCoverArt();
         }
+    }
+
+    private void fetchCoverArt() {
+        viewModel.getCoverArtData();
     }
 
     private void setCoverArt(CoverArt coverArt) {

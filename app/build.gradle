@@ -6,9 +6,9 @@ android {
         applicationId "org.metabrainz.android"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 27
+        versionCode 28
 
-        versionName "2.4"
+        versionName "2.5"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -17,6 +17,10 @@ android {
             minifyEnabled false
             // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions{
+        disable 'InvalidPackage'
+        disable 'MissingTranslation'
     }
     compileOptions {
         sourceCompatibility = '1.8'
