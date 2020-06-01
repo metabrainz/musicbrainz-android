@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.http.HEAD;
+
 public class CollectionActivity extends MusicBrainzActivity {
 
 
@@ -53,6 +55,7 @@ public class CollectionActivity extends MusicBrainzActivity {
             binding.recyclerView.addItemDecoration(itemDecoration);
 
             binding.progressSpinner.setVisibility(View.VISIBLE);
+
             boolean getPrivateCollections =
                     LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
                             && UserPreferences.getPrivateCollectionsPreference();

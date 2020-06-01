@@ -20,10 +20,13 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.FragmentDashSearchBinding;
+
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 
 import java.util.Objects;
+
+import retrofit2.http.HEAD;
 
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
@@ -80,6 +83,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
 
     private MBEntityType getSearchTypeFromSpinner() {
         int spinnerPosition = binding.searchSpin.getSelectedItemPosition();
+
         switch (spinnerPosition) {
             case 0:
                 return MBEntityType.ARTIST;

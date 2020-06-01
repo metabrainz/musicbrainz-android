@@ -8,6 +8,10 @@ import androidx.lifecycle.ViewModelProvider;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.ActivityArtistBinding;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.release_list.CoverArtViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;

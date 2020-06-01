@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.Tag;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag;
@@ -20,6 +21,8 @@ import org.metabrainz.mobile.databinding.FragmentUserDataBinding;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import retrofit2.http.HEAD;
 
 public class UserDataFragment extends Fragment {
 

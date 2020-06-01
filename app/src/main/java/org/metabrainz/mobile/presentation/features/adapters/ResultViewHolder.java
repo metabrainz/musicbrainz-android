@@ -6,11 +6,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.databinding.ItemResultBinding;
+
+import retrofit2.http.HEAD;
 
 class ResultViewHolder extends RecyclerView.ViewHolder {
     public final View itemView;
     private ItemResultBinding binding;
+
 
     ResultViewHolder(@NonNull View itemView) {
         super(itemView);

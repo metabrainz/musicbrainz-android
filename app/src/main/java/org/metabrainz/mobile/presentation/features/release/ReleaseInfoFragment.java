@@ -9,19 +9,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-<<<<<<< HEAD
-import androidx.lifecycle.ViewModelProviders;
-import androidx.viewpager.widget.ViewPager;
-=======
 import androidx.lifecycle.ViewModelProvider;
->>>>>>> Use view binding in place of findViewById.
 
+import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.CardReleaseInfoBinding;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ReleaseInfoFragment extends Fragment {
 
@@ -55,8 +50,8 @@ public class ReleaseInfoFragment extends Fragment {
     }
 
     private void setData(Release release) {
-        String title, barcode, status = "", language = "";
         if (release != null) {
+            String title, barcode, status = "", language = "";
             title = release.getTitle();
 
             barcode = release.getBarcode();
@@ -71,12 +66,7 @@ public class ReleaseInfoFragment extends Fragment {
             if (status != null && !status.isEmpty()) binding.releaseStatus.setText(status);
             if (language != null && !language.isEmpty()) binding.releaseLanguage.setText(language);
 
-            fetchCoverArt();
         }
-    }
-
-    private void fetchCoverArt() {
-        viewModel.getCoverArtData();
     }
 
     private void setCoverArt(CoverArt coverArt) {

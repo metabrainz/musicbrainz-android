@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,8 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
     private final CoverArtViewModel viewModel;
     private final CompositeDisposable compositeDisposable;
 
-    ReleaseListAdapter(Context context, List<Release> releaseList) {
+
+    public ReleaseListAdapter(Context context, List<Release> releaseList) {
         this.releaseList = releaseList;
         // Load the ViewModel to fetch cover art for each release item
         viewModel = new ViewModelProvider((FragmentActivity) context).get(CoverArtViewModel.class);
@@ -46,7 +48,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReleaseListAdapter.ReleaseItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return new ReleaseItemViewHolder(CardReleaseItemBinding.inflate(inflater, parent, false));
@@ -88,7 +90,7 @@ class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.Release
         compositeDisposable.clear();
     }
 
-    private class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
+    class ReleaseItemViewHolder extends RecyclerView.ViewHolder {
         CardReleaseItemBinding binding;
         Disposable disposable;
 

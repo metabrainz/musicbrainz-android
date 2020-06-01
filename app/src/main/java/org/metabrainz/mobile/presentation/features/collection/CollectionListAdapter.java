@@ -3,7 +3,9 @@ package org.metabrainz.mobile.presentation.features.collection;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,7 @@ import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 import org.metabrainz.mobile.databinding.ItemCollectionBinding;
+import org.metabrainz.mobile.R;
 
 import java.util.List;
 
@@ -42,8 +45,7 @@ class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.C
         return collections.size();
     }
 
-
-    private static class CollectionViewHolder extends RecyclerView.ViewHolder {
+    static class CollectionViewHolder extends RecyclerView.ViewHolder {
 
         private ItemCollectionBinding binding;
 

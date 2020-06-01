@@ -22,8 +22,6 @@ import org.metabrainz.mobile.databinding.ItemLinkBinding;
 
 import java.util.List;
 
-import retrofit2.http.HEAD;
-
 class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewHolder> implements View.OnClickListener {
     private final List<Link> links;
     private final Context context;
@@ -35,7 +33,7 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArtistLinkAdapter.LinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return new LinkViewHolder(ItemLinkBinding.inflate(layoutInflater, parent, false));
@@ -44,12 +42,11 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
     @Override
     public void onBindViewHolder(@NonNull ArtistLinkAdapter.LinkViewHolder holder, int position) {
         String type = links.get(position).getType();
-        LinkViewHolder linkViewHolder = (LinkViewHolder) holder;
 
-        Drawable drawable = getLinkImage(linkViewHolder.itemView.getContext(), type);
-        linkViewHolder.bind(drawable, type);
-        linkViewHolder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
-        linkViewHolder.itemView.setOnClickListener(this);
+        Drawable drawable = getLinkImage(holder.itemView.getContext(), type);
+        holder.bind(drawable, type);
+        holder.itemView.setTag(R.id.link_image, links.get(position).getUrl());
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override
@@ -86,12 +83,17 @@ class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewH
         }
     }
 
-    class LinkViewHolder extends RecyclerView.ViewHolder {
+    static class LinkViewHolder extends RecyclerView.ViewHolder {
         ItemLinkBinding binding;
 
-        LinkViewHolder(@NonNull View itemView) {
-            super(itemView);
-            binding = ItemLinkBinding.bind(itemView);
+        LinkViewHolder(@NonNull ItemLinkBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        void bind(Drawable drawable, String type) {
+            binding.linkImage.setImageDrawable(drawable);
+            binding.linkText.setText(type);
         }
     }
 }

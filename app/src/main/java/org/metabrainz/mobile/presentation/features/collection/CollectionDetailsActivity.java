@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
+
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -55,6 +56,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         binding.recyclerView.setVisibility(View.GONE);
 
         binding.progressSpinner.setVisibility(View.VISIBLE);
+
         viewModel.fetchCollectionDetails(entity, id).observe(this,
                 results -> {
                     collectionResults.clear();

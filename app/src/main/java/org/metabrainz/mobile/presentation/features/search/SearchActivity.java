@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
@@ -17,6 +18,7 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivitySearchBinding;
+
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -26,6 +28,8 @@ import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import retrofit2.http.HEAD;
 
 /**
  * Activity to display a list of search results to the user and support intents
@@ -37,6 +41,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private SearchViewModel viewModel;
     private SearchView searchView;
     private ResultAdapter adapter;
+
     private List<ResultItem> results;
     private String query;
     private MBEntityType entity;

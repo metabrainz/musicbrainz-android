@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.artist;
+package org.metabrainz.mobile.presentation.features.release_list;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,39 +8,39 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-<<<<<<< HEAD
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-=======
->>>>>>> Use view binding in place of findViewById.
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.FragmentArtistReleasesBinding;
+import org.metabrainz.mobile.presentation.features.artist.ArtistViewModel;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ArtistReleasesFragment extends Fragment {
+public class ReleaseListFragment extends Fragment {
 
     private FragmentArtistReleasesBinding binding;
     private ReleaseListAdapter adapter;
     private List<Release> releaseList;
-    private ArtistViewModel artistViewModel;
+    private CoverArtViewModel viewModel;
 
-    public static ArtistReleasesFragment newInstance() {
-        return new ArtistReleasesFragment();
+    public static ReleaseListFragment newInstance() {
+        return new ReleaseListFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         releaseList = new ArrayList<>();
-        adapter = new ArtistReleaseAdapter(getActivity(), releaseList);
+        adapter = new ReleaseListAdapter(getActivity(), releaseList);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class ArtistReleasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        artistViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ArtistViewModel.class);
-        artistViewModel.initializeArtistData().observe(getViewLifecycleOwner(), this::setReleases);
+        viewModel = new ViewModelProvider(requireActivity()).get(CoverArtViewModel.class);
+        viewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
     @Override
@@ -70,11 +70,12 @@ public class ArtistReleasesFragment extends Fragment {
     private void setReleases(List<Release> releases) {
         // TODO: Observe artistData LiveData, instead of requesting the artist sync
         // TODO: Use DiffUtil to avoid overheads
-        if (artist != null && artist.getReleases() != null) {
+        if (releases != null) {
             releaseList.clear();
-            releaseList.addAll(artist.getReleases());
+            releaseList.addAll(releases);
             adapter.notifyDataSetChanged();
         }
     }
+
 
 }

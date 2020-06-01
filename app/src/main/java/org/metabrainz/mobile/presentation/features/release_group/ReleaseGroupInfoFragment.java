@@ -12,6 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.databinding.CardReleaseGroupInfoBinding;
+import org.metabrainz.mobile.R;
+
+import retrofit2.http.HEAD;
 
 public class ReleaseGroupInfoFragment extends Fragment {
 
