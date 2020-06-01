@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.http.HEAD;
+
 public class UserDataFragment extends Fragment {
 
     private FragmentUserDataBinding binding;
