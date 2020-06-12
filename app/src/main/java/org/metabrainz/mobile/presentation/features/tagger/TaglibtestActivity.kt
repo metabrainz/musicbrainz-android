@@ -14,9 +14,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.io.FileNotFoundException
 import java.util.*
-import com.musicbrainz.ktaglib.AudioFile
-import com.musicbrainz.ktaglib.KTagLib
 import org.metabrainz.mobile.R
+import org.musicbrainz.ktaglib.AudioFile
+import org.musicbrainz.ktaglib.KTagLib
 
 class TaglibtestActivity : AppCompatActivity() {
     var titleValue: TextView? = null
@@ -57,7 +57,7 @@ class TaglibtestActivity : AppCompatActivity() {
                 Log.i("Taglib", "Fetching metadata")
                 metadata = fd_?.let { ktaglib.getAudioFile(it,file_path,file_name) }
                 Log.i("Taglib", "metadata fetched")
-                titleValue!!.text = metadata?.genre ?: "No artist found"
+                titleValue!!.text = metadata?.title ?: "No title found"
             } catch (e: FileNotFoundException) {
                 Log.i("Taglib", "Metadata extraction failed")
                 e.printStackTrace()

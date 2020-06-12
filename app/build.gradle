@@ -1,10 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "org.metabrainz.android"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 28
 
@@ -62,5 +64,10 @@ dependencies {
     implementation 'org.bitbucket.ijabz:jaudiotagger:android-SNAPSHOT'
     implementation 'info.debatty:java-string-similarity:1.2.1'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.0-alpha03'
-    implementation 'com.github.SomalRudra:musicbrainz-android-library:1.0'
+
+    //Taglib
+    implementation 'com.github.SomalRudra:musicbrainz-android-library:1.1'
+
+    //Kotlin Implementation
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
