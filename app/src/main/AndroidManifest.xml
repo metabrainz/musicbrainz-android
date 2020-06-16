@@ -9,7 +9,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.Manifest.permission.MEDIA_CONTENT_CONTROL" />
     <application
         android:name=".App"
         android:allowBackup="false"
@@ -20,12 +21,20 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".presentation.features.tagger.FileSelectActivity" />
+        <service
+            android:name=".ListenService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
 
+        <activity android:name=".presentation.features.tagger.FileSelectActivity" />
         <activity
             android:name=".presentation.features.tagger.TaggerActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"
             android:parentActivityName=".presentation.features.collection.CollectionActivity"
@@ -34,23 +43,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.features.collection.CollectionActivity" />
         </activity>
-
         <activity
             android:name=".presentation.features.collection.CollectionActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.label.LabelActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.release_group.ReleaseGroupActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
             android:label="@string/app_name"
@@ -66,7 +70,6 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
         <activity
             android:name=".presentation.features.login.LoginActivity"
             android:label="@string/auth_title">
@@ -81,15 +84,12 @@
                     android:scheme="org.metabrainz.mobile" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".presentation.features.about.AboutActivity"
             android:label="@string/about_title" />
-
         <activity
             android:name=".presentation.features.dashboard.DonateActivity"
             android:label="@string/donate_title" />
-
         <activity
             android:name=".presentation.features.search.SearchActivity"
             android:launchMode="singleTop">
@@ -101,26 +101,21 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
         <activity
             android:name=".presentation.features.release.ReleaseActivity"
             android:label="@string/release_title"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.artist.ArtistActivity"
             android:label="@string/artist_title"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.barcode.BarcodeActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-
         <activity
             android:name=".presentation.features.barcode.BarcodeResultActivity"
             android:theme="@style/AppThemeCustomActionBar" />
