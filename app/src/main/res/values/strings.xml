@@ -127,4 +127,9 @@
 
     <string name="open_on_website">Open on website</string>
 
+    <string name="settings_listens">Listens</string>
+    <string name="settings_listenbrainz_token">ListenBrainz User Token</string>
+    <string name="settings_listenbrainz_token_summary">Enter the ListenBrainz User Token available
+        at https://listenbrainz.org/profile/</string>
+    <string name="settings_listenbrainz_enabled">Enable Listens Service</string>
 </resources>

@@ -1,17 +1,23 @@
 package org.metabrainz.mobile.presentation.features.settings;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.presentation.IntentFactory;
 import org.metabrainz.mobile.presentation.UserPreferences;
@@ -23,6 +29,8 @@ import static android.app.Activity.RESULT_OK;
 import static org.metabrainz.mobile.App.DIRECTORY_SELECT_REQUEST_CODE;
 import static org.metabrainz.mobile.App.STORAGE_PERMISSION_REQUEST_CODE;
 import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_CLEAR_SUGGESTIONS;
+import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_LISTENBRAINZ_TOKEN;
+import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED;
 import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_TAGGER_DIRECTORY;
 import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.ACTION_SELECT_DIRECTORY;
 import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.EXTRA_FILE_PATH;
@@ -31,6 +39,11 @@ import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActiv
 public class SettingsFragment extends PreferenceFragmentCompat implements androidx.preference.Preference.OnPreferenceClickListener {
 
     private Preference taggerDirectoryPreference;
+    private Preference.OnPreferenceChangeListener preferenceChangeListener;
+
+    public void setPreferenceChangeListener(Preference.OnPreferenceChangeListener preferenceChangeListener) {
+        this.preferenceChangeListener = preferenceChangeListener;
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -38,6 +51,18 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
         findPreference(PREFERENCE_CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
         taggerDirectoryPreference = findPreference(PREFERENCE_TAGGER_DIRECTORY);
         taggerDirectoryPreference.setOnPreferenceClickListener(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            findPreference("listen_settings").setVisible(true);
+            if (!App.isNotificationServiceAllowed()) {
+                ((SwitchPreference) findPreference(PREFERENCE_LISTENING_ENABLED)).setChecked(false);
+                UserPreferences.setPreferenceListeningEnabled(false);
+            }
+            findPreference(PREFERENCE_LISTENING_ENABLED)
+                    .setOnPreferenceChangeListener(preferenceChangeListener);
+        } else
+            findPreference("listen_settings").setVisible(false);
+
     }
 
     @Override
@@ -89,4 +114,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
                 UserPreferences.setPreferenceTaggerDirectory(path);
         }
     }
+
+
 }

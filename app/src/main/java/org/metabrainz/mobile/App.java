@@ -1,11 +1,19 @@
 package org.metabrainz.mobile;
 
+import android.Manifest;
 import android.app.Application;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Environment;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+
 import org.metabrainz.mobile.presentation.Configuration;
+import org.metabrainz.mobile.presentation.UserPreferences;
 
 public class App extends Application {
 
@@ -37,6 +45,8 @@ public class App extends Application {
         return instance;
     }
 
+    public static App getInstance() {return instance;}
+
     public static Typeface getRobotoLight() {
         return robotoLight;
     }
@@ -46,10 +56,23 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         loadCustomTypefaces();
+        if (UserPreferences.getPreferenceListeningEnabled() && Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+            startListenService();
     }
 
     private void loadCustomTypefaces() {
         robotoLight = Typeface.createFromAsset(instance.getAssets(), "Roboto-Light.ttf");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void startListenService() {
+        Intent intent = new Intent(this.getApplicationContext(), ListenService.class);
+        startService(intent);
+    }
+
+    public static boolean isNotificationServiceAllowed() {
+        return ContextCompat.checkSelfPermission(App.getInstance(),
+                Manifest.permission.MEDIA_CONTENT_CONTROL) != PackageManager.PERMISSION_GRANTED;
     }
 
 }

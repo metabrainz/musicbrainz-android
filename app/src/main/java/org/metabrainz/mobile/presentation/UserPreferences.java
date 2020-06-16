@@ -11,6 +11,8 @@ public class UserPreferences {
 
     public static final String PREFERENCE_CLEAR_SUGGESTIONS = "clear_suggestions";
     public static final String PREFERENCE_TAGGER_DIRECTORY = "tagger_directory";
+    public static final String PREFERENCE_LISTENBRAINZ_TOKEN = "listenbrainz_user_token";
+    public static final String PREFERENCE_LISTENING_ENABLED = "listening_enabled";
     private static final String PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections";
     private static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
     private static final String PREFERENCE_SYSTEM_LANGUAGE = "use_english";
@@ -39,6 +41,20 @@ public class UserPreferences {
         SharedPreferences.Editor editor = UserPreferences.getPreferences().edit();
         editor.putString(PREFERENCE_TAGGER_DIRECTORY, path);
         editor.apply();
+    }
+
+    public static String getPreferenceListenBrainzToken() {
+        return UserPreferences.getPreferences().getString(PREFERENCE_LISTENBRAINZ_TOKEN, null);
+    }
+
+    public static void setPreferenceListeningEnabled(boolean value) {
+        SharedPreferences.Editor editor = UserPreferences.getPreferences().edit();
+        editor.putBoolean(PREFERENCE_LISTENING_ENABLED, value);
+        editor.apply();
+    }
+
+    public static boolean getPreferenceListeningEnabled() {
+        return UserPreferences.getPreferences().getBoolean(PREFERENCE_LISTENING_ENABLED, false);
     }
 
 }

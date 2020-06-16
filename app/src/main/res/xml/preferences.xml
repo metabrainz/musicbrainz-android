@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="@string/settings_search">
 
@@ -44,6 +45,24 @@
             android:key="use_english"
             android:summary="@string/settings_use_language_summary"
             android:title="@string/settings_use_language" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="listen_settings"
+        android:title="@string/settings_listens">
+
+        <EditTextPreference
+            android:key="listenbrainz_user_token"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/settings_listenbrainz_token_summary"
+            android:title="@string/settings_listenbrainz_token" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="listening_enabled"
+            android:title="@string/settings_listenbrainz_enabled" />
 
     </PreferenceCategory>
 
