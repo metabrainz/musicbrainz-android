@@ -1,19 +1,14 @@
 package org.metabrainz.mobile.presentation.features.settings;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.audiofx.Equalizer;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -24,7 +19,6 @@ import org.metabrainz.mobile.presentation.UserPreferences;
 
 import java.util.Objects;
 
-import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_LISTENBRAINZ_TOKEN;
 import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -44,10 +38,10 @@ public class SettingsActivity extends AppCompatActivity {
                 .commit();
 
         preferenceChangeListener = (preference, newValue) -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                    preference.getKey().equals(PREFERENCE_LISTENING_ENABLED)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (preference.getKey().equals(PREFERENCE_LISTENING_ENABLED)) {
                     Boolean enabled = (Boolean) newValue;
-                    if (enabled && App.isNotificationServiceAllowed()) {
+                    if (enabled && !App.getInstance().isNotificationServiceAllowed()) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.setTitle("Grant Media Control Permissions");
                         builder.setMessage("The listen service requires the special Notification " +
@@ -61,9 +55,11 @@ public class SettingsActivity extends AppCompatActivity {
                             ((SwitchPreference) preference).setChecked(false);
                         }));
                         builder.create().show();
-                    }
+                    } else if (!enabled)
+                        App.getInstance().stopListenService();
                     return true;
                 }
+            }
             return false;
         };
     }

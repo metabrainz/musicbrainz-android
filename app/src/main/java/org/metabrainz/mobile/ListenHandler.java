@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -12,6 +13,7 @@ import org.metabrainz.mobile.data.sources.api.ListenSubmitService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.ListenSubmitBody;
 import org.metabrainz.mobile.data.sources.api.entities.ListenTrackMetadata;
+import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.util.Log;
 
 import okhttp3.ResponseBody;
@@ -26,13 +28,17 @@ public class ListenHandler extends Handler {
 
     private final int DELAY = 30000;
     private final String TIMESTAMP = "timestamp";
-    private final String AUTH_TOKEN = "auth_token";
 
     @Override
     public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
 
-        String token = msg.getData().getString(AUTH_TOKEN);
+        String token = UserPreferences.getPreferenceListenBrainzToken();
+        if (token == null || token.isEmpty()) {
+            Toast.makeText(App.getInstance(), "User token has not been set!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         ListenSubmitService service = MusicBrainzServiceGenerator
                 .createService(ListenSubmitService.class, false);
 
@@ -59,10 +65,9 @@ public class ListenHandler extends Handler {
                 });
     }
 
-    public void submitListen(String token, String artist, String title, long timestamp) {
+    public void submitListen(String artist, String title, long timestamp) {
         Message message = obtainMessage();
         Bundle data = new Bundle();
-        data.putString(AUTH_TOKEN, token);
         data.putString(METADATA_KEY_ARTIST, artist);
         data.putString(METADATA_KEY_TITLE, title);
         data.putLong(TIMESTAMP, timestamp);

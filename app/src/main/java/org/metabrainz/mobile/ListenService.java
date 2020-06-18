@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -16,11 +17,11 @@ import org.metabrainz.mobile.util.Log;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class ListenService extends NotificationListenerService {
-    MediaSessionManager sessionManager;
-    ListenHandler handler;
-    ListenSessionListener sessionListener;
-    ComponentName listenServiceComponent;
-    private String token;
+
+    private MediaSessionManager sessionManager;
+    private ListenHandler handler;
+    private ListenSessionListener sessionListener;
+    private ComponentName listenServiceComponent;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -40,17 +41,23 @@ public class ListenService extends NotificationListenerService {
     public void initialize() {
         Log.d("Initializing Listener Service");
 
-        token = UserPreferences.getPreferenceListenBrainzToken();
-        if (token == null || token.isEmpty()) {
-            Log.d("Abort initialization. User token not set.");
-        }
+        String token = UserPreferences.getPreferenceListenBrainzToken();
+        if (token == null || token.isEmpty())
+            Toast.makeText(this, "User token has not been set!", Toast.LENGTH_LONG).show();
 
         handler = new ListenHandler();
         sessionManager = (MediaSessionManager) getApplicationContext()
                 .getSystemService(MEDIA_SESSION_SERVICE);
-        sessionListener = new ListenSessionListener(handler, token);
+        sessionListener = new ListenSessionListener(handler);
         listenServiceComponent = new ComponentName(this, this.getClass());
         sessionManager.addOnActiveSessionsChangedListener(sessionListener, listenServiceComponent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        sessionManager.removeOnActiveSessionsChangedListener(sessionListener);
+        sessionListener.clearSessions();
     }
 
     @Override

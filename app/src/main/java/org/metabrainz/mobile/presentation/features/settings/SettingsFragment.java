@@ -5,15 +5,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
@@ -29,7 +26,6 @@ import static android.app.Activity.RESULT_OK;
 import static org.metabrainz.mobile.App.DIRECTORY_SELECT_REQUEST_CODE;
 import static org.metabrainz.mobile.App.STORAGE_PERMISSION_REQUEST_CODE;
 import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_CLEAR_SUGGESTIONS;
-import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_LISTENBRAINZ_TOKEN;
 import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED;
 import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_TAGGER_DIRECTORY;
 import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.ACTION_SELECT_DIRECTORY;
@@ -54,7 +50,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             findPreference("listen_settings").setVisible(true);
-            if (!App.isNotificationServiceAllowed()) {
+            if (!App.getInstance().isNotificationServiceAllowed()) {
                 ((SwitchPreference) findPreference(PREFERENCE_LISTENING_ENABLED)).setChecked(false);
                 UserPreferences.setPreferenceListeningEnabled(false);
             }
@@ -63,6 +59,16 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
         } else
             findPreference("listen_settings").setVisible(false);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                !App.getInstance().isNotificationServiceAllowed()) {
+            ((SwitchPreference) findPreference(PREFERENCE_LISTENING_ENABLED)).setChecked(false);
+            UserPreferences.setPreferenceListeningEnabled(false);
+        }
     }
 
     @Override
@@ -90,7 +96,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
     private void chooseDirectory() {
         Intent intent = new Intent(getActivity(), FileSelectActivity.class);
         intent.putExtra(FILE_SELECT_TYPE, ACTION_SELECT_DIRECTORY);
-            startActivityForResult(intent, DIRECTORY_SELECT_REQUEST_CODE);
+        startActivityForResult(intent, DIRECTORY_SELECT_REQUEST_CODE);
     }
 
     @Override
