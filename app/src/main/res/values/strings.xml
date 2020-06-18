@@ -132,4 +132,9 @@
     <string name="settings_listenbrainz_token_summary">Enter the ListenBrainz User Token available
         at https://listenbrainz.org/profile/</string>
     <string name="settings_listenbrainz_enabled">Enable Listens Service</string>
+    <string name="settings_listenbrainz_spotify">Enable submitting listens from Spotify</string>
+    <string name="settings_listenbrainz_spotify_summary">Submit listens from Spotify. By default,
+        listens from Spotify are not submitted to ListenBrainz from this app. This is to avoid
+        duplicate listens. If you have not linked Spotify to ListenBrainz, you can enable submitting
+    listens from Spotify on this device to ListenBrainz through this option.</string>
 </resources>

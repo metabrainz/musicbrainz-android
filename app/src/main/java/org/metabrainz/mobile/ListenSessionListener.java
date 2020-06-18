@@ -31,8 +31,14 @@ public class ListenSessionListener implements MediaSessionManager.OnActiveSessio
             return;
         this.controllers.clear();
         this.controllers.addAll(controllers);
-        for (MediaController controller : controllers)
-            controller.registerCallback(new ListenCallback());
+
+        for (MediaController controller : controllers) {
+            if (UserPreferences.getPreferenceListeningSpotifyEnabled() &&
+                    controller.getPackageName().equals(SPOTIFY_PACKAGE_NAME))
+                continue;
+            ListenCallback callback = new ListenCallback();
+            controller.registerCallback(callback);
+        }
     }
 
     private class ListenCallback extends MediaController.Callback {
