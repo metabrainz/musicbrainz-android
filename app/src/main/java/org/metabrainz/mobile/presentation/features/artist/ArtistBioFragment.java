@@ -48,11 +48,11 @@ public class ArtistBioFragment extends Fragment {
     }
 
     private void showWikiCard() {
-        binding.cardArtistWiki.cardView.setVisibility(View.VISIBLE);
+        binding.cardArtistWiki.getRoot().setVisibility(View.VISIBLE);
     }
 
     private void hideWikiCard() {
-        binding.cardArtistWiki.cardView.setVisibility(View.GONE);
+        binding.cardArtistWiki.getRoot().setVisibility(View.GONE);
     }
 
     private void setArtistInfo(Artist artist) {
