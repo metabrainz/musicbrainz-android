@@ -1,10 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "org.metabrainz.android"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 28
 
@@ -29,6 +31,9 @@ android {
     viewBinding {
         enabled = true
     }
+    dataBinding {
+        enabled = true
+    }
     ndkVersion '21.2.6472646'
 }
 
@@ -38,29 +43,49 @@ dependencies {
     implementation 'android.arch.navigation:navigation-ui:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-runtime:2.3.0-alpha01'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.0-alpha03'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //webservice Setup
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
     implementation 'androidx.browser:browser:1.0.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+
+    //Image downloading and Caching library
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Kotlin setup
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    //Fragment Setup For Kotlin
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+
+    //Test Setup
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
-    implementation 'com.google.android.material:material:1.2.0-alpha05'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.17'
-    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    implementation 'androidx.preference:preference:1.1.0'
-    implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+
+    //Tagger & Metadata Setup
     implementation 'com.github.QuickLyric:fpcalc-android:1.0.1'
     implementation 'org.bitbucket.ijabz:jaudiotagger:android-SNAPSHOT'
     implementation 'info.debatty:java-string-similarity:1.2.1'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.0-alpha03'
+
+    //Design Setup
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+    implementation "com.google.android.material:material:$supportlibVersion"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.17'
+    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }
