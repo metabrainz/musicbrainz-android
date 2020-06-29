@@ -32,7 +32,7 @@ class CoverArtSlideshowAdapter extends PagerAdapter {
         CoverArtSlideshowItemBinding binding = CoverArtSlideshowItemBinding.inflate(inflater, container, false);
         Picasso.get().setLoggingEnabled(true);
         Picasso.get().load(Uri.parse(data.get(position))).into(binding.releaseCoverArt);
-        container.addView(binding.releaseCoverArt);
+        container.addView(binding.getRoot());
         return binding.getRoot();
     }
 

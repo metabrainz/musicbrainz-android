@@ -83,11 +83,13 @@ public class ReleaseInfoFragment extends Fragment {
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                int position = binding.slideshow.viewpagerSlideshow.getCurrentItem();
-                if (position == NUM_PAGES - 1) position = 0;
-                else position++;
-                binding.slideshow.viewpagerSlideshow.setCurrentItem(position, true);
-                handler.postDelayed(this, 10000);
+                if (binding != null) {
+                    int position = binding.slideshow.viewpagerSlideshow.getCurrentItem();
+                    if (position == NUM_PAGES - 1) position = 0;
+                    else position++;
+                    binding.slideshow.viewpagerSlideshow.setCurrentItem(position, true);
+                    handler.postDelayed(this, 10000);
+                }
             }
         };
         handler.postDelayed(runnable, 10000);
