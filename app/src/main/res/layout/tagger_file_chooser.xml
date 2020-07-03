@@ -25,6 +25,8 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/button_background"
+        android:text="Pick a File"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -36,15 +38,17 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:gravity="center_horizontal"
         android:text="@string/tagger_file_chooser_MascotDialogue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         android:textAlignment="center"
-        android:textColor="#737373"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:layout_editor_absoluteY="584dp"
-        android:gravity="center_horizontal" />
+        android:textColor="#737373"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_file_path_pick" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
