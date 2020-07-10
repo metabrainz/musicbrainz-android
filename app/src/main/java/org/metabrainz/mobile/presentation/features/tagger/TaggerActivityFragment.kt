@@ -15,6 +15,9 @@ class TaggerActivityFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentTaggerActivityBinding>(inflater,
                 R.layout.fragment_tagger_activity,container,false)
+
+
+
         return binding.root
     }
 }
