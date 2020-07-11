@@ -1,10 +1,12 @@
 package org.metabrainz.mobile.presentation.features.release_group;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.databinding.ActivityReleaseGroupBinding;
@@ -56,5 +58,10 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(releaseGroup.getTitle());
             userViewModel.setUserData(releaseGroup);
         }
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.parse(App.WEBSITE_BASE_URL + "release-group/" + mbid);
     }
 }

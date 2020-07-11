@@ -1,10 +1,12 @@
 package org.metabrainz.mobile.presentation.features.release;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.ActivityReleaseBinding;
@@ -58,5 +60,10 @@ public class ReleaseActivity extends MusicBrainzActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.parse(App.WEBSITE_BASE_URL + "release/" + mbid);
     }
 }

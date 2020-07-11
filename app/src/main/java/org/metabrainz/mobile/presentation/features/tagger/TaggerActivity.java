@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -43,7 +44,7 @@ import static org.metabrainz.mobile.App.AUDIO_FILE_REQUEST_CODE;
 import static org.metabrainz.mobile.App.STORAGE_PERMISSION_REQUEST_CODE;
 import static org.metabrainz.mobile.presentation.features.tagger.FileSelectActivity.EXTRA_FILE_PATH;
 
-public class TaggerActivity extends MusicBrainzActivity {
+public class TaggerActivity extends AppCompatActivity {
 
     private TaggerViewModel viewModel;
     private RecyclerView recyclerView;

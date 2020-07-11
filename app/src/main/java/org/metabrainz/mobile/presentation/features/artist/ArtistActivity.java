@@ -1,10 +1,12 @@
 package org.metabrainz.mobile.presentation.features.artist;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.ActivityArtistBinding;
@@ -82,5 +84,10 @@ public class ArtistActivity extends MusicBrainzActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.parse(App.WEBSITE_BASE_URL + "artist/" + mbid);
     }
 }

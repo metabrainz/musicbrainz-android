@@ -1,10 +1,12 @@
 package org.metabrainz.mobile.presentation.features.label;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.databinding.ActivityLabelBinding;
@@ -55,5 +57,10 @@ public class LabelActivity extends MusicBrainzActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
             userViewModel.setUserData(label);
         }
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.parse(App.WEBSITE_BASE_URL + "label/" + mbid);
     }
 }

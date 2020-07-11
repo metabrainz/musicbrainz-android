@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.dashboard;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -46,8 +47,14 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
     }
 
     @Override
+    protected Uri getBrowserURI() {
+        return Uri.EMPTY;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dash, menu);
+        menu.findItem(R.id.menu_open_website).setVisible(false);
         return true;
     }
 

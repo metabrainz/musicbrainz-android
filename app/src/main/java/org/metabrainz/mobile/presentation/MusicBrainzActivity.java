@@ -2,6 +2,8 @@ package org.metabrainz.mobile.presentation;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,21 +21,27 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
         return true;
     }
 
+    protected abstract Uri getBrowserURI();
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                startActivity(IntentFactory.getDashboard(getApplicationContext()));
-                return true;
-            case R.id.menu_preferences:
-                startActivity(IntentFactory.getSettings(getApplicationContext()));
-                return true;
-            case R.id.menu_feedback:
-                sendFeedback();
-                return true;
-            case R.id.menu_login:
-                startActivity(IntentFactory.getLogin(getApplicationContext()));
-                return true;
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            startActivity(IntentFactory.getDashboard(getApplicationContext()));
+            return true;
+        } else if (itemId == R.id.menu_preferences) {
+            startActivity(IntentFactory.getSettings(getApplicationContext()));
+            return true;
+        } else if (itemId == R.id.menu_feedback) {
+            sendFeedback();
+            return true;
+        } else if (itemId == R.id.menu_login) {
+            startActivity(IntentFactory.getLogin(getApplicationContext()));
+            return true;
+        } else if (itemId == R.id.menu_open_website) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(getBrowserURI());
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

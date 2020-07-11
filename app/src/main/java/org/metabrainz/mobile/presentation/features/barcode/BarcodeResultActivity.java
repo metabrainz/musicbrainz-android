@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.barcode;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -10,11 +11,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.ActivityBarcodeResultBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
+import org.metabrainz.mobile.presentation.features.release_list.ReleaseListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,8 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
     private ActivityBarcodeResultBinding binding;
     private final List<Release> releases = new ArrayList<>();
     private BarcodeViewModel viewModel;
-    // private ReleaseAdapter adapter;
+    private ReleaseListAdapter adapter;
+    private String barcode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,12 +39,12 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        // adapter = new ReleaseAdapter(releases);
+        adapter = new ReleaseListAdapter(this, releases);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL);
         binding.recyclerView.addItemDecoration(itemDecoration);
-        // recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setVisibility(View.GONE);
 
         binding.noResult.setVisibility(View.GONE);
@@ -48,7 +52,7 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         viewModel = new ViewModelProvider(this).get(BarcodeViewModel.class);
         viewModel.getBarcodeLiveData().observe(this, this::handleResult);
 
-        String barcode = getIntent().getStringExtra("barcode");
+        barcode = getIntent().getStringExtra("barcode");
         if (barcode != null && !barcode.isEmpty()) {
             viewModel.fetchReleasesWithBarcode(barcode);
             binding.progressSpinner.setVisibility(View.VISIBLE);
@@ -78,7 +82,12 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
     }
 
     private void showMultipleReleases() {
-        // adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
         binding.recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.parse(App.WEBSITE_BASE_URL + "search?type=release&advanced=1&query=barcode:" + barcode);
     }
 }

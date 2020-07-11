@@ -12,6 +12,13 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    buildFeatures {
+        viewBinding {
+            enabled = true
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,9 +32,6 @@ android {
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
-    }
-    viewBinding {
-        enabled = true
     }
     ndkVersion '21.2.6472646'
 }

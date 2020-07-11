@@ -1,7 +1,10 @@
 package org.metabrainz.mobile.presentation.features.about;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.databinding.ActivityAboutBinding;
@@ -26,4 +29,8 @@ public class AboutActivity extends MusicBrainzActivity {
         return true;
     }
 
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.EMPTY;
+    }
 }

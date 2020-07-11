@@ -3,10 +3,12 @@ package org.metabrainz.mobile.presentation.features.login;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
@@ -90,5 +92,17 @@ public class LoginActivity extends MusicBrainzActivity {
             Log.d(userInfo.getUsername());
             finish();
         }
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.EMPTY;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.findItem(R.id.menu_open_website).setVisible(false);
+        return true;
     }
 }

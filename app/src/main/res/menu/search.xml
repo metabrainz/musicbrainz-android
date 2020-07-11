@@ -15,4 +15,10 @@
         android:title="@string/action_settings"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/menu_open_website"
+        android:title="@string/open_on_website"
+        android:icon="@drawable/ic_baseline_open_in_browser_24"
+        app:showAsAction="never" />
+
 </menu>

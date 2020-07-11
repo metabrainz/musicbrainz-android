@@ -1,6 +1,8 @@
 package org.metabrainz.mobile.presentation.features.collection;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -8,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
@@ -91,5 +94,17 @@ public class CollectionActivity extends MusicBrainzActivity {
             binding.recyclerView.setVisibility(View.VISIBLE);
             binding.noResult.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.findItem(R.id.menu_open_website).setVisible(false);
+        return true;
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.EMPTY;
     }
 }

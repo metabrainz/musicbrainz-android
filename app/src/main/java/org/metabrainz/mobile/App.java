@@ -15,6 +15,7 @@ public class App extends Application {
     public static final int AUDIO_FILE_REQUEST_CODE = 1;
     public static final int STORAGE_PERMISSION_REQUEST_CODE = 2;
     public static final String TAGGER_ROOT_DIRECTORY = Environment.getExternalStorageDirectory() + "/Picard/";
+    public static final String WEBSITE_BASE_URL = "https://musicbrainz.org/";
 
     public static String getUserAgent() {
         return Configuration.USER_AGENT + "/" + getVersion();

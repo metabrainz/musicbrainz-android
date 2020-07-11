@@ -31,7 +31,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 
-class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.ReleaseItemViewHolder> {
+public class ReleaseListAdapter extends RecyclerView.Adapter<ReleaseListAdapter.ReleaseItemViewHolder> {
 
     private final List<Release> releaseList;
     private final CoverArtViewModel viewModel;

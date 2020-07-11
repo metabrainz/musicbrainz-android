@@ -4,6 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_open_website"
+        android:title="@string/open_on_website"
+        android:icon="@drawable/ic_baseline_open_in_browser_24"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_login"
         android:title="@string/action_login"
         app:showAsAction="never" />

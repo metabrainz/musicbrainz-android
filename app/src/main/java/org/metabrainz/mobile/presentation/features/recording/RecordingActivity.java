@@ -1,10 +1,12 @@
 package org.metabrainz.mobile.presentation.features.recording;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.databinding.ActivityRecordingBinding;
@@ -55,5 +57,10 @@ public class RecordingActivity extends MusicBrainzActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
             userViewModel.setUserData(recording);
         }
+    }
+
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.parse(App.WEBSITE_BASE_URL + "recording/" + mbid);
     }
 }

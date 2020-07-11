@@ -3,6 +3,7 @@ package org.metabrainz.mobile.presentation.features.search;
 import android.app.SearchManager;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
@@ -140,4 +142,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         suggestions.saveRecentQuery(query, null);
     }
 
+    @Override
+    protected Uri getBrowserURI() {
+        return Uri.parse(App.WEBSITE_BASE_URL + "search?type=" + entity.name + "&query=" + query);
+    }
 }
