@@ -35,11 +35,19 @@
 
             <fragment
                 android:id="@+id/release_tracks_fragment"
-                class="org.metabrainz.mobile.presentation.features.userdata.UserDataFragment"
+                class="org.metabrainz.mobile.presentation.features.release.ReleaseTracksFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 tools:layout="@layout/fragment_tracklist" />
+
+            <fragment
+                android:id="@+id/user_data_fragment"
+                class="org.metabrainz.mobile.presentation.features.userdata.UserDataFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_user_data" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

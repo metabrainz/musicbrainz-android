@@ -11,6 +11,7 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.databinding.ActivityReleaseGroupBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.release_list.ReleaseListViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
@@ -24,6 +25,7 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
 
     private ReleaseGroupViewModel releaseGroupViewModel;
     private UserViewModel userViewModel;
+    private ReleaseListViewModel releaseListViewModel;
 
     private String mbid;
 
@@ -37,6 +39,7 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
 
         releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        releaseListViewModel = new ViewModelProvider(this).get(ReleaseListViewModel.class);
 
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) releaseGroupViewModel.setMBID(mbid);
@@ -57,6 +60,8 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
         if (releaseGroup != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(releaseGroup.getTitle());
             userViewModel.setUserData(releaseGroup);
+            if (releaseGroup.getReleases() != null)
+                releaseListViewModel.setData(releaseGroup.getReleases());
         }
     }
 

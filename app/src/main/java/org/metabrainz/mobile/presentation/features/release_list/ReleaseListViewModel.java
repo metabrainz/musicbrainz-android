@@ -12,12 +12,12 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-public class CoverArtViewModel extends ViewModel {
+public class ReleaseListViewModel extends ViewModel {
 
-    private LookupRepository repository = LookupRepository.getRepository();
-    private MutableLiveData<List<Release>> releasesLiveData = new MutableLiveData<>();
+    private final LookupRepository repository = LookupRepository.getRepository();
+    private final MutableLiveData<List<Release>> releasesLiveData = new MutableLiveData<>();
 
-    public CoverArtViewModel() {
+    public ReleaseListViewModel() {
     }
 
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {

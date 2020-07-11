@@ -23,7 +23,7 @@ public class ReleaseListFragment extends Fragment {
     private FragmentArtistReleasesBinding binding;
     private ReleaseListAdapter adapter;
     private List<Release> releaseList;
-    private CoverArtViewModel viewModel;
+    private ReleaseListViewModel viewModel;
 
     public static ReleaseListFragment newInstance() {
         return new ReleaseListFragment();
@@ -50,7 +50,7 @@ public class ReleaseListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(CoverArtViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseListViewModel.class);
         viewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
     }
 

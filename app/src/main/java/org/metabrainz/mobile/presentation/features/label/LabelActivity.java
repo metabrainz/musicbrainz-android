@@ -11,6 +11,7 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.databinding.ActivityLabelBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.release_list.ReleaseListViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class LabelActivity extends MusicBrainzActivity {
 
     private LabelViewModel labelViewModel;
     private UserViewModel userViewModel;
+    private ReleaseListViewModel releaseListViewModel;
 
     private String mbid;
 
@@ -36,6 +38,7 @@ public class LabelActivity extends MusicBrainzActivity {
 
         labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        releaseListViewModel = new ViewModelProvider(this).get(ReleaseListViewModel.class);
 
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);
@@ -56,6 +59,8 @@ public class LabelActivity extends MusicBrainzActivity {
         if (label != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
             userViewModel.setUserData(label);
+            if (label.getReleases() != null)
+                releaseListViewModel.setData(label.getReleases());
         }
     }
 
