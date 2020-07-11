@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.tagger
+package org.metabrainz.mobile.presentation.features.taggerkotlin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,9 +15,6 @@ class TaggerActivityFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentTaggerActivityBinding>(inflater,
                 R.layout.fragment_tagger_activity,container,false)
-
-
-
         return binding.root
     }
 }

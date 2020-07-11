@@ -4,12 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <fragment
-        android:id="@+id/TaggerActivityFragment"
-        android:name="org.metabrainz.mobile.presentation.features.tagger.TaggerActivityFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

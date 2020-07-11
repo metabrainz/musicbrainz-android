@@ -76,7 +76,7 @@ public class TaggerActivity extends MusicBrainzActivity {
         buttonSave.setEnabled(false);
         buttonSave.setOnClickListener(v -> writeTagsToFile());
 
-        fileNameTextView = findViewById(R.id.selected_file_name);
+       fileNameTextView = findViewById(R.id.selected_file_name);
 
         recordings = new ArrayList<>();
         changes = new ArrayList<>();

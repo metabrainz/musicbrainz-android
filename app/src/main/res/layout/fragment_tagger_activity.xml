@@ -3,12 +3,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.features.tagger.TaggerActivityFragment">
+    tools:context=".presentation.features.taggerkotlin.TaggerActivityFragment">
 
     <data>
         <variable
             name="taggeractivity"
-            type="org.metabrainz.mobile.presentation.features.tagger.TaggerActivityFragment" />
+            type="org.metabrainz.mobile.presentation.features.taggerkotlin.TaggerActivityFragment" />
     </data>
 
     <RelativeLayout
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
-        tools:context=".presentation.features.tagger.TaggerActivityFragment">
+        tools:context=".presentation.features.taggerkotlin.TaggerActivityFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
