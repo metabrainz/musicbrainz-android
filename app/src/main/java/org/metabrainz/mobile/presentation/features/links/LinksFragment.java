@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.artist;
+package org.metabrainz.mobile.presentation.features.links;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,28 +12,27 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import org.metabrainz.mobile.data.sources.api.entities.Link;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.FragmentLinksBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistLinksFragment extends Fragment {
+public class LinksFragment extends Fragment {
 
     private FragmentLinksBinding binding;
-    private ArtistLinkAdapter linkAdapter;
+    private LinksAdapter linkAdapter;
     private List<Link> linkList;
-    private ArtistViewModel artistViewModel;
+    private LinksViewModel linksViewModel;
 
-    public static ArtistLinksFragment newInstance() {
-        return new ArtistLinksFragment();
+    public static LinksFragment newInstance() {
+        return new LinksFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         linkList = new ArrayList<>();
-        linkAdapter = new ArtistLinkAdapter(getActivity(), linkList);
+        linkAdapter = new LinksAdapter(getActivity(), linkList);
     }
 
     @Override
@@ -53,14 +52,14 @@ public class ArtistLinksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
-        artistViewModel.getData().observe(getViewLifecycleOwner(), this::setLinks);
+        linksViewModel = new ViewModelProvider(requireActivity()).get(LinksViewModel.class);
+        linksViewModel.getData().observe(getViewLifecycleOwner(), this::setLinks);
     }
 
-    private void setLinks(Artist artist) {
-        if (artist != null && artist.getRelations() != null) {
+    private void setLinks(List<Link> links) {
+        if (links != null) {
             linkList.clear();
-            linkList.addAll(artist.getRelations());
+            linkList.addAll(links);
             linkAdapter.notifyDataSetChanged();
         }
     }

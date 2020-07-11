@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.presentation.features.links.LinksFragment;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListFragment;
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment;
 
@@ -30,7 +31,7 @@ class ArtistPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return ArtistBioFragment.newInstance();
             case 2:
-                return ArtistLinksFragment.newInstance();
+                return LinksFragment.newInstance();
             case 3:
                 return UserDataFragment.newInstance();
         }

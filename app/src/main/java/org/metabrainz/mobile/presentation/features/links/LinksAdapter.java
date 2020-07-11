@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.artist;
+package org.metabrainz.mobile.presentation.features.links;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,25 +20,25 @@ import org.metabrainz.mobile.databinding.ItemLinkBinding;
 
 import java.util.List;
 
-class ArtistLinkAdapter extends RecyclerView.Adapter<ArtistLinkAdapter.LinkViewHolder> implements View.OnClickListener {
+class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.LinkViewHolder> implements View.OnClickListener {
     private final List<Link> links;
     private final Context context;
 
-    public ArtistLinkAdapter(Context context, List<Link> links) {
+    public LinksAdapter(Context context, List<Link> links) {
         this.links = links;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ArtistLinkAdapter.LinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LinksAdapter.LinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) parent.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return new LinkViewHolder(ItemLinkBinding.inflate(layoutInflater, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ArtistLinkAdapter.LinkViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LinksAdapter.LinkViewHolder holder, int position) {
         String type = links.get(position).getType();
 
         Drawable drawable = getLinkImage(holder.itemView.getContext(), type);

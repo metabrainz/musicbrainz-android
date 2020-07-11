@@ -11,6 +11,7 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.ActivityArtistBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.links.LinksViewModel;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
@@ -28,6 +29,7 @@ public class ArtistActivity extends MusicBrainzActivity {
 
     private ArtistViewModel artistViewModel;
     private ReleaseListViewModel releaseListViewModel;
+    private LinksViewModel linksViewModel;
     private UserViewModel userViewModel;
 
     private ArtistPagerAdapter pagerAdapter;
@@ -43,6 +45,7 @@ public class ArtistActivity extends MusicBrainzActivity {
 
         artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
         releaseListViewModel = new ViewModelProvider(this).get(ReleaseListViewModel.class);
+        linksViewModel = new ViewModelProvider(this).get(LinksViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         mbid = getIntent().getStringExtra(Constants.MBID);
@@ -74,6 +77,7 @@ public class ArtistActivity extends MusicBrainzActivity {
             userViewModel.setUserData(artist);
             if (artist.getReleases() != null)
                 releaseListViewModel.setData(artist.getReleases());
+            linksViewModel.setData(artist.getRelations());
         }
     }
 
