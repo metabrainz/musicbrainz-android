@@ -3,9 +3,11 @@ package org.metabrainz.mobile.data.sources.api.entities.mbentity;
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
+import org.metabrainz.mobile.data.sources.api.entities.Link;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Recording extends MBEntity {
     private String title;
@@ -17,6 +19,8 @@ public class Recording extends MBEntity {
     @SerializedName("track-count")
     private int trackCount;
     private int score;
+
+    private List<Link> relations = new ArrayList<>();
 
     public int getScore() {
         return score;
@@ -64,6 +68,15 @@ public class Recording extends MBEntity {
 
     public void setTrackCount(int trackCount) {
         this.trackCount = trackCount;
+    }
+
+
+    public List<Link> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(List<Link> relations) {
+        this.relations = relations;
     }
 
     public String getDisplayArtist() {

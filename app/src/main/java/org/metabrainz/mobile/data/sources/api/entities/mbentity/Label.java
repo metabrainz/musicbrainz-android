@@ -5,8 +5,10 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
+import org.metabrainz.mobile.data.sources.api.entities.Link;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Label extends MBEntity {
     private String name;
@@ -18,6 +20,8 @@ public class Label extends MBEntity {
     private String country;
     private Area area;
     private ArrayList<Release> releases = new ArrayList<>();
+    private List<Link> relations = new ArrayList<>();
+
 
     public ArrayList<Release> getReleases() {
         return releases;
@@ -88,5 +92,13 @@ public class Label extends MBEntity {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    public List<Link> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(List<Link> relations) {
+        this.relations = relations;
     }
 }

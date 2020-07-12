@@ -75,8 +75,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         if (artist != null) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
             userViewModel.setUserData(artist);
-            if (artist.getReleases() != null)
-                releaseListViewModel.setData(artist.getReleases());
+            releaseListViewModel.setData(artist.getReleases());
             linksViewModel.setData(artist.getRelations());
         }
     }

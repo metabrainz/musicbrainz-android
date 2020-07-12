@@ -41,6 +41,14 @@
                 tools:layout="@layout/fragment_tracklist" />
 
             <fragment
+                android:id="@+id/links_fragment"
+                class="org.metabrainz.mobile.presentation.features.links.LinksFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                tools:layout="@layout/fragment_links" />
+
+            <fragment
                 android:id="@+id/user_data_fragment"
                 class="org.metabrainz.mobile.presentation.features.userdata.UserDataFragment"
                 android:layout_width="match_parent"
