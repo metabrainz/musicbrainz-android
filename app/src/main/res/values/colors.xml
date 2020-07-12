@@ -18,4 +18,7 @@
     <color name="mb_purple_medium">#736dab</color>
     <color name="mb_purple_dark">#34176b</color>
 
+    <color name="dark_gray">#262626</color>
+    <color name="light_gray">#737373</color>
+
 </resources>
