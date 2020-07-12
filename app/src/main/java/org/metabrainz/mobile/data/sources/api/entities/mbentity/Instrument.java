@@ -5,12 +5,13 @@ import androidx.annotation.NonNull;
 import org.metabrainz.mobile.data.sources.api.entities.Alias;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Instrument extends MBEntity {
     private String type;
     private String name;
     private String description;
-    private ArrayList<Alias> aliases = new ArrayList<>();
+    private final List<Alias> aliases = new ArrayList<>();
 
     @NonNull
     @Override
@@ -56,11 +57,11 @@ public class Instrument extends MBEntity {
         this.description = description;
     }
 
-    public ArrayList<Alias> getAliases() {
+    public List<Alias> getAliases() {
         return aliases;
     }
 
-    public void setAliases(ArrayList<Alias> aliases) {
-        this.aliases = aliases;
+    public void setAliases(List<Alias> aliases) {
+        this.aliases.addAll(aliases);
     }
 }

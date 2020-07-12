@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.databinding.FragmentRecordingInfoBinding;
@@ -42,7 +43,7 @@ public class RecordingInfoFragment extends Fragment {
             String duration, artist;
             binding.recordingTitle.setText(recording.getTitle());
             duration = recording.getDuration();
-            artist = recording.getDisplayArtist();
+            artist = EntityUtils.getDisplayArtist(recording.getArtistCredits());
             if (duration != null) binding.recordingDuration.setText(duration);
             if (artist != null) binding.recordingArtist.setText(artist);
         }

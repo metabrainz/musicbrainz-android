@@ -8,6 +8,7 @@ import org.metabrainz.mobile.data.sources.api.entities.Alias;
 import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Area extends MBEntity {
 
@@ -17,7 +18,7 @@ public class Area extends MBEntity {
     private String name;
     @SerializedName("sort-name")
     private String sortName;
-    private ArrayList<Alias> aliases = new ArrayList<>();
+    private final List<Alias> aliases = new ArrayList<>();
     @SerializedName("life-span")
     private LifeSpan lifeSpan;
 
@@ -67,11 +68,11 @@ public class Area extends MBEntity {
         this.sortName = sortName;
     }
 
-    public ArrayList<Alias> getAliases() {
+    public List<Alias> getAliases() {
         return aliases;
     }
 
-    public void setAliases(ArrayList<Alias> aliases) {
-        this.aliases = aliases;
+    public void setAliases(List<Alias> aliases) {
+        this.aliases.addAll(aliases);
     }
 }

@@ -8,6 +8,7 @@ import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Artist extends MBEntity {
 
@@ -25,27 +26,27 @@ public class Artist extends MBEntity {
     private LifeSpan lifeSpan;
     private String gender;
 
-    private ArrayList<Link> relations = new ArrayList<>();
-    private ArrayList<Release> releases = new ArrayList<>();
+    private final List<Link> relations = new ArrayList<>();
+    private final List<Release> releases = new ArrayList<>();
 
-    public ArrayList<Release> getReleases() {
+    public List<Release> getReleases() {
         return releases;
     }
 
-    public void setReleases(ArrayList<Release> releases) {
-        this.releases = releases;
+    public void setReleases(List<Release> releases) {
+        this.releases.addAll(releases);
     }
 
     public void setRelease(Release release, int position) {
         this.releases.set(position, release);
     }
 
-    public ArrayList<Link> getRelations() {
+    public List<Link> getRelations() {
         return relations;
     }
 
-    public void setRelations(ArrayList<Link> relations) {
-        this.relations = relations;
+    public void setRelations(List<Link> relations) {
+        this.relations.addAll(relations);
     }
 
     public String getType() {

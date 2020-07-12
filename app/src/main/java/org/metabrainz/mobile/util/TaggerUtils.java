@@ -8,6 +8,7 @@ import android.util.Pair;
 import androidx.core.content.ContextCompat;
 
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.Medium;
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.Result;
@@ -37,7 +38,7 @@ public class TaggerUtils {
     public static final String TRACK_NUMBER = "tracknumber";
     public static final double THRESHOLD = 0.6;
     public static final double UNMATCHED_WORDS_WEIGHT = 0.4;
-    private static Levenshtein levenshtein = new Levenshtein();
+    private static final Levenshtein levenshtein = new Levenshtein();
     public static final Map<String, Integer> WEIGHTS = initializeWeights();
 
     public static Map<String, Integer> initializeWeights() {
@@ -106,9 +107,12 @@ public class TaggerUtils {
                     lengthScore(localTrack.getLength(), searchedTrack.getLength()),
                     WEIGHTS.get(TRACK_LENGTH)));
 
-            if (!localTrack.getDisplayArtist().isEmpty() && !searchedTrack.getDisplayArtist().isEmpty())
+            if (!EntityUtils.getDisplayArtist(localTrack.getArtistCredits()).isEmpty() &&
+                    !EntityUtils.getDisplayArtist(localTrack.getArtistCredits()).isEmpty())
                 scoreList.add(new Pair<>(
-                        calculateMultiWordSimilarity(localTrack.getDisplayArtist(), searchedTrack.getDisplayArtist()),
+                        calculateMultiWordSimilarity(
+                                EntityUtils.getDisplayArtist(localTrack.getArtistCredits()),
+                                EntityUtils.getDisplayArtist(localTrack.getArtistCredits())),
                         WEIGHTS.get(ARTIST)));
 
             score = linearCombinationOfWeights(scoreList);
@@ -154,11 +158,12 @@ public class TaggerUtils {
                         calculateMultiWordSimilarity(localRelease.getTitle(), searchedRelease.getTitle()),
                         WEIGHTS.get(ALBUM)));
 
-            if (localRelease.getDisplayArtist() != null && !localRelease.getDisplayArtist().isEmpty()
-                    && searchedRelease.getDisplayArtist() != null && !searchedRelease.getDisplayArtist().isEmpty())
+            if (EntityUtils.getDisplayArtist(localRelease.getArtistCredits()) != null && !EntityUtils.getDisplayArtist(localRelease.getArtistCredits()).isEmpty()
+                    && EntityUtils.getDisplayArtist(searchedRelease.getArtistCredits()) != null && !EntityUtils.getDisplayArtist(searchedRelease.getArtistCredits()).isEmpty())
                 scoreList.add(new Pair<>(
                         calculateMultiWordSimilarity(
-                                localRelease.getDisplayArtist(), searchedRelease.getDisplayArtist()),
+                                EntityUtils.getDisplayArtist(localRelease.getArtistCredits()),
+                                EntityUtils.getDisplayArtist(searchedRelease.getArtistCredits())),
                         WEIGHTS.get(ARTIST)
                 ));
 
@@ -202,7 +207,7 @@ public class TaggerUtils {
 
                     Recording recording = new Recording();
 
-                    ArrayList<Release> releases = recording.getReleases();
+                    List<Release> releases = recording.getReleases();
 
                     for (org.metabrainz.mobile.data.sources.api.entities.acoustid.ReleaseGroup
                             responseReleaseGroup : responseRecording.getReleaseGroups()) {
@@ -242,7 +247,7 @@ public class TaggerUtils {
                         }
                     }
 
-                    ArrayList<ArtistCredit> artistCredits = recording.getArtistCredits();
+                    List<ArtistCredit> artistCredits = recording.getArtistCredits();
 
                     for (org.metabrainz.mobile.data.sources.api.entities.acoustid.Artist
                             responseArtist : responseRecording.getArtists()) {

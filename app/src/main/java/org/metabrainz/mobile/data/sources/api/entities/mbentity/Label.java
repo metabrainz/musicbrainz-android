@@ -19,16 +19,24 @@ public class Label extends MBEntity {
     private LifeSpan lifeSpan;
     private String country;
     private Area area;
-    private ArrayList<Release> releases = new ArrayList<>();
-    private List<Link> relations = new ArrayList<>();
 
+    private final List<Link> relations = new ArrayList<>();
+    private final List<Release> releases = new ArrayList<>();
 
-    public ArrayList<Release> getReleases() {
+    public List<Release> getReleases() {
         return releases;
     }
 
-    public void setReleases(ArrayList<Release> releases) {
-        this.releases = releases;
+    public void setReleases(List<Release> releases) {
+        this.releases.addAll(releases);
+    }
+
+    public List<Link> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(List<Link> relations) {
+        this.relations.addAll(relations);
     }
 
     public String getCode() {
@@ -92,13 +100,5 @@ public class Label extends MBEntity {
 
     public void setArea(Area area) {
         this.area = area;
-    }
-
-    public List<Link> getRelations() {
-        return relations;
-    }
-
-    public void setRelations(List<Link> relations) {
-        this.relations = relations;
     }
 }

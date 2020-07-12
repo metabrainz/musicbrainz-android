@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Event;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Instrument;
@@ -46,18 +47,18 @@ public class ResultItemUtils {
             Recording recording = (Recording) entity;
             if (recording.getReleases() != null && recording.getReleases().size() > 0)
                 item = new ResultItem(recording.getMbid(), recording.getTitle(), recording.getDisambiguation(),
-                        recording.getReleases().get(0).getTitle(), recording.getDisplayArtist());
+                        recording.getReleases().get(0).getTitle(), EntityUtils.getDisplayArtist(recording.getArtistCredits()));
             else
                 item = new ResultItem(recording.getMbid(), recording.getTitle(), recording.getDisambiguation(),
-                        "", recording.getDisplayArtist());
+                        "", EntityUtils.getDisplayArtist(recording.getArtistCredits()));
         } else if (entity instanceof Release) {
             Release release = (Release) entity;
             item = new ResultItem(release.getMbid(), release.getTitle(), release.getDisambiguation(),
-                    release.getDisplayArtist(), release.labelCatalog());
+                    EntityUtils.getDisplayArtist(release.getArtistCredits()), release.labelCatalog());
         } else if (entity instanceof ReleaseGroup) {
             ReleaseGroup releaseGroup = (ReleaseGroup) entity;
             item = new ResultItem(releaseGroup.getMbid(), releaseGroup.getTitle(), releaseGroup.getDisambiguation(),
-                    releaseGroup.getDisplayArtist(), releaseGroup.getFullType());
+                    EntityUtils.getDisplayArtist(releaseGroup.getArtistCredits()), releaseGroup.getFullType());
         } else item = null;
         return item;
     }

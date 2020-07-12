@@ -6,27 +6,36 @@ import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 public class ReleaseGroup extends MBEntity {
     private String title;
     @SerializedName("primary-type")
     private String primaryType;
     @SerializedName("secondary-types")
-    private ArrayList<String> secoondaryTypes = new ArrayList<>();
+    private final List<String> secondaryTypes = new ArrayList<>();
     private int count;
     //TODO: Implement correct wrapper JSON
     @SerializedName("artist-credit")
-    private ArrayList<ArtistCredit> artistCredits = new ArrayList<>();
-    private ArrayList<Link> relations = new ArrayList<>();
-    private ArrayList<Release> releases = new ArrayList<>();
+    private final List<ArtistCredit> artistCredits = new ArrayList<>();
 
-    public ArrayList<Link> getRelations() {
+    private final List<Link> relations = new ArrayList<>();
+    private final List<Release> releases = new ArrayList<>();
+
+    public List<Release> getReleases() {
+        return releases;
+    }
+
+    public void setReleases(List<Release> releases) {
+        this.releases.addAll(releases);
+    }
+
+    public List<Link> getRelations() {
         return relations;
     }
 
-    public void setRelations(ArrayList<Link> relations) {
-        this.relations = relations;
+    public void setRelations(List<Link> relations) {
+        this.relations.addAll(relations);
     }
 
     public String getTitle() {
@@ -53,49 +62,27 @@ public class ReleaseGroup extends MBEntity {
         this.count = count;
     }
 
-    public ArrayList<ArtistCredit> getArtistCredits() {
+    public List<ArtistCredit> getArtistCredits() {
         return artistCredits;
     }
 
-    public void setArtistCredits(ArrayList<ArtistCredit> artistCredits) {
-        this.artistCredits = artistCredits;
+    public void setArtistCredits(List<ArtistCredit> artistCredits) {
+        this.artistCredits.addAll(artistCredits);
     }
 
-    public ArrayList<Release> getReleases() {
-        return releases;
+    public List<String> getSecondaryTypes() {
+        return secondaryTypes;
     }
 
-    public void setReleases(ArrayList<Release> releases) {
-        this.releases = releases;
-    }
-
-    public ArrayList<String> getSecoondaryTypes() {
-        return secoondaryTypes;
-    }
-
-    public void setSecoondaryTypes(ArrayList<String> secoondaryTypes) {
-        this.secoondaryTypes = secoondaryTypes;
+    public void setSecondaryTypes(List<String> secondaryTypes) {
+        this.secondaryTypes.addAll(secondaryTypes);
     }
 
     public String getFullType() {
-        if (secoondaryTypes.size() != 0) {
+        if (secondaryTypes.size() != 0) {
             String type = primaryType;
-            for (String string : secoondaryTypes) type = type.concat(" + ").concat(string);
+            for (String string : secondaryTypes) type = type.concat(" + ").concat(string);
             return type;
         } else return primaryType;
-    }
-
-    public String getDisplayArtist() {
-        StringBuilder builder = new StringBuilder();
-        Iterator<ArtistCredit> iterator = artistCredits.iterator();
-        while (iterator.hasNext()) {
-            ArtistCredit credit = iterator.next();
-            if (credit != null && credit.getName() != null && !credit.getName().equalsIgnoreCase("null")) {
-                builder.append(credit.getName());
-                if (iterator.hasNext())
-                    builder.append(credit.getJoinphrase());
-            }
-        }
-        return builder.toString();
     }
 }

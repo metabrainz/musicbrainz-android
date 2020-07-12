@@ -12,32 +12,33 @@ import org.metabrainz.mobile.data.sources.api.entities.TextRepresentation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class Release extends MBEntity {
 
     private String title;
     @SerializedName("artist-credit")
-    private ArrayList<ArtistCredit> artistCredits = new ArrayList<>();
+    private final List<ArtistCredit> artistCredits = new ArrayList<>();
     private String date;
     private String barcode;
     private String packaging;
     @SerializedName("release-group")
     private ReleaseGroup releaseGroup;
     @SerializedName("release-events")
-    private ArrayList<ReleaseEvent> releaseEvents = new ArrayList<>();
+    private final List<ReleaseEvent> releaseEvents = new ArrayList<>();
     @SerializedName("label-info")
-    private ArrayList<LabelInfo> labels = new ArrayList<>();
+    private final List<LabelInfo> labels = new ArrayList<>();
     @SerializedName("track-count")
     private int trackCount;
     private String country;
     private String status;
-    private ArrayList<Media> media = new ArrayList<>();
+    private final List<Media> media = new ArrayList<>();
     private CoverArt coverArt;
     @SerializedName("text-representation")
     private TextRepresentation textRepresentation;
 
-    private ArrayList<Link> relations = new ArrayList<>();
+    private final List<Link> relations = new ArrayList<>();
 
     public String getBarcode() {
         return barcode;
@@ -55,12 +56,12 @@ public class Release extends MBEntity {
         this.textRepresentation = textRepresentation;
     }
 
-    public ArrayList<Link> getRelations() {
+    public List<Link> getRelations() {
         return relations;
     }
 
-    public void setRelations(ArrayList<Link> relations) {
-        this.relations = relations;
+    public void setRelations(List<Link> relations) {
+        this.relations.addAll(relations);
     }
 
     public CoverArt getCoverArt() {
@@ -79,12 +80,12 @@ public class Release extends MBEntity {
         this.title = title;
     }
 
-    public ArrayList<ArtistCredit> getArtistCredits() {
+    public List<ArtistCredit> getArtistCredits() {
         return artistCredits;
     }
 
-    public void setArtistCredits(ArrayList<ArtistCredit> artistCredits) {
-        this.artistCredits = artistCredits;
+    public void setArtistCredits(List<ArtistCredit> artistCredits) {
+        this.artistCredits.addAll(artistCredits);
     }
 
     public String getDate() {
@@ -111,20 +112,20 @@ public class Release extends MBEntity {
         this.releaseGroup = releaseGroup;
     }
 
-    public ArrayList<ReleaseEvent> getReleaseEvents() {
+    public List<ReleaseEvent> getReleaseEvents() {
         return releaseEvents;
     }
 
-    public void setReleaseEvents(ArrayList<ReleaseEvent> releaseEvents) {
-        this.releaseEvents = releaseEvents;
+    public void setReleaseEvents(List<ReleaseEvent> releaseEvents) {
+        this.releaseEvents.addAll(releaseEvents);
     }
 
-    public ArrayList<LabelInfo> getLabels() {
+    public List<LabelInfo> getLabels() {
         return labels;
     }
 
-    public void setLabels(ArrayList<LabelInfo> labels) {
-        this.labels = labels;
+    public void setLabels(List<LabelInfo> labels) {
+        this.labels.addAll(labels);
     }
 
     public int getTrackCount() {
@@ -156,26 +157,15 @@ public class Release extends MBEntity {
         this.status = status;
     }
 
-    public ArrayList<Media> getMedia() {
+    public List<Media> getMedia() {
         return media;
     }
 
-    public void setMedia(ArrayList<Media> media) {
-        this.media = media;
+    public void setMedia(List<Media> media) {
+        this.media.addAll(media);
     }
 
     //TODO: Implement Text Representation
-    public String getDisplayArtist() {
-        StringBuilder builder = new StringBuilder();
-        Iterator<ArtistCredit> iterator = artistCredits.iterator();
-        while (iterator.hasNext()) {
-            ArtistCredit credit = iterator.next();
-            builder.append(credit.getArtist().getName());
-            if (iterator.hasNext())
-                builder.append(credit.getJoinphrase());
-        }
-        return builder.toString();
-    }
 
     public String labelCatalog() {
         Iterator<LabelInfo> itr = labels.iterator();

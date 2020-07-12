@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity;
 
@@ -38,7 +39,7 @@ public class TaggerAdapter extends RecyclerView.Adapter<TaggerAdapter.TaggerView
 
         if (recording.getReleases() != null && recording.getReleases().size() != 0)
             setViewVisibility(recording.getReleases().get(0).getTitle(), viewHolder.recordingRelease);
-        setViewVisibility(recording.getDisplayArtist(), viewHolder.recordingArtist);
+        setViewVisibility(EntityUtils.getDisplayArtist(recording.getArtistCredits()), viewHolder.recordingArtist);
         setViewVisibility(recording.getDisambiguation(), viewHolder.recordingDisambiguation);
 
         viewHolder.itemView.setOnClickListener(v -> {

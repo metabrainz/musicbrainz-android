@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.databinding.CardReleaseGroupInfoBinding;
@@ -61,7 +62,7 @@ public class ReleaseGroupInfoFragment extends Fragment {
         if (releaseGroup != null) {
             String title, artist;
             title = releaseGroup.getTitle();
-            artist = releaseGroup.getDisplayArtist();
+            artist = EntityUtils.getDisplayArtist(releaseGroup.getArtistCredits());
             binding.releaseGroupTitle.setText(title);
             if (artist != null && !artist.isEmpty())
                 binding.releaseGroupArtist.setText("( ".concat(artist).concat(" )"));

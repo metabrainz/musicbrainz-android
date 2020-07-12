@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.metabrainz.mobile.data.sources.Constants;
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.Track;
 import org.metabrainz.mobile.databinding.ItemTrackBinding;
@@ -139,7 +140,8 @@ class ReleaseTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             setViewVisibility(item.getTitle(), binding.trackName);
             setViewVisibility(String.valueOf(item.getPosition()), binding.trackNumber);
             setViewVisibility(item.getDuration(), binding.trackTime);
-            setViewVisibility(item.getRecording().getDisplayArtist(), binding.trackArtist);
+            setViewVisibility(EntityUtils.getDisplayArtist(item.getRecording().getArtistCredits()),
+                    binding.trackArtist);
 
             this.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), RecordingActivity.class);
