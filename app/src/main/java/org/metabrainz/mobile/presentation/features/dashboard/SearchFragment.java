@@ -23,8 +23,6 @@ import org.metabrainz.mobile.databinding.FragmentDashSearchBinding;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 
-import java.util.Objects;
-
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     private FragmentDashSearchBinding binding;
@@ -59,8 +57,8 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     private void setupSearchTypeSpinner() {
-        ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.searchType,
-                android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(requireActivity(),
+                R.array.searchType, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.searchSpin.setAdapter(typeAdapter);
     }
@@ -101,7 +99,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     private void setupSearchView() {
-        SearchManager searchManager = (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) requireActivity().getSystemService(Context.SEARCH_SERVICE);
         binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         binding.searchView.setSubmitButtonEnabled(true);
         binding.searchView.setIconifiedByDefault(false);

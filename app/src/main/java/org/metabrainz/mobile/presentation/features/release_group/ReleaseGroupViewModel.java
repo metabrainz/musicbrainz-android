@@ -18,8 +18,8 @@ import io.reactivex.Single;
 
 public class ReleaseGroupViewModel extends LookupViewModel {
 
-    private LiveData<WikiSummary> wikiSummary;
-    private LiveData<ReleaseGroup> liveData;
+    private final LiveData<WikiSummary> wikiSummary;
+    private final LiveData<ReleaseGroup> liveData;
 
     public ReleaseGroupViewModel() {
         entity = MBEntityType.RELEASE_GROUP;

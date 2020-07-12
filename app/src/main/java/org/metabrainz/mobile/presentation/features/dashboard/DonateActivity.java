@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 
 import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 
 public class DonateActivity extends AppCompatActivity {
 

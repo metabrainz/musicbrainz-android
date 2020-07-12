@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import org.jetbrains.annotations.NotNull;
 import org.metabrainz.mobile.data.sources.api.ListenSubmitService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.ListenSubmitBody;
@@ -54,12 +55,12 @@ public class ListenHandler extends Handler {
         service.submitListen("Token " + token, body)
                 .enqueue(new retrofit2.Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                         Log.d(response.message());
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
 
                     }
                 });

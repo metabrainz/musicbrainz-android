@@ -19,7 +19,6 @@ import org.metabrainz.mobile.databinding.FragmentUserDataBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class UserDataFragment extends Fragment {
 
@@ -65,7 +64,8 @@ public class UserDataFragment extends Fragment {
         binding.userTagsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.userTagsList.setAdapter(userTagsAdapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()), DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireActivity(),
+                DividerItemDecoration.VERTICAL);
         binding.tagsList.addItemDecoration(dividerItemDecoration);
         binding.userTagsList.addItemDecoration(dividerItemDecoration);
 

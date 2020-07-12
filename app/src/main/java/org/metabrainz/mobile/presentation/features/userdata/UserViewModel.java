@@ -8,7 +8,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity;
 
 public class UserViewModel extends ViewModel {
 
-    private MutableLiveData<MBEntity> entityData = new MutableLiveData<>();
+    private final MutableLiveData<MBEntity> entityData = new MutableLiveData<>();
 
     public UserViewModel() {
     }

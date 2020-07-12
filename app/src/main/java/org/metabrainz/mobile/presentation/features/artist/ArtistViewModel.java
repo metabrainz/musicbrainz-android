@@ -14,8 +14,8 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 public class ArtistViewModel extends LookupViewModel {
 
-    private LiveData<WikiSummary> wikiSummary;
-    private LiveData<Artist> liveData;
+    private final LiveData<WikiSummary> wikiSummary;
+    private final LiveData<Artist> liveData;
 
     public ArtistViewModel() {
         entity = MBEntityType.ARTIST;

@@ -1,7 +1,5 @@
 package org.metabrainz.mobile.data.sources.api.entities;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

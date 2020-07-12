@@ -2,13 +2,11 @@ package org.metabrainz.mobile.presentation.features.userdata;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag;
 import org.metabrainz.mobile.databinding.LayoutTagBinding;
 

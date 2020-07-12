@@ -4,8 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.databinding.ActivityAboutBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;

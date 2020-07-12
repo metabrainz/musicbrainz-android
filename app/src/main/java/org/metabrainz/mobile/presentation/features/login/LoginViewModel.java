@@ -9,7 +9,7 @@ import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 
 public class LoginViewModel extends ViewModel {
 
-    private LoginRepository repository = LoginRepository.getRepository();
+    private final LoginRepository repository = LoginRepository.getRepository();
     private MutableLiveData<AccessToken> accessTokenLiveData;
     private MutableLiveData<UserInfo> userInfoLiveData;
 

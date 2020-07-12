@@ -11,7 +11,7 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 public class RecordingViewModel extends LookupViewModel {
 
-    private LiveData<Recording> liveData;
+    private final LiveData<Recording> liveData;
 
     public RecordingViewModel() {
         entity = MBEntityType.RECORDING;

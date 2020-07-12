@@ -12,8 +12,8 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 public class ReleaseViewModel extends LookupViewModel {
 
-    private LiveData<CoverArt> coverArtData;
-    private LiveData<Release> liveData;
+    private final LiveData<CoverArt> coverArtData;
+    private final LiveData<Release> liveData;
 
     public ReleaseViewModel() {
         entity = MBEntityType.RELEASE;

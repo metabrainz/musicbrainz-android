@@ -10,7 +10,7 @@ import org.metabrainz.mobile.databinding.ItemResultBinding;
 
 class ResultViewHolder extends RecyclerView.ViewHolder {
     public final View itemView;
-    private ItemResultBinding binding;
+    private final ItemResultBinding binding;
 
     ResultViewHolder(@NonNull View itemView) {
         super(itemView);

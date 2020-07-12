@@ -60,21 +60,17 @@ public class DashboardActivity extends MusicBrainzActivity implements OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.dash_scan:
-                startActivity(new Intent(this, BarcodeActivity.class));
-                break;
-            case R.id.dash_collections:
-                startActivity(new Intent(this, CollectionActivity.class));
-                break;
-            case R.id.dash_donate:
-                startActivity(IntentFactory.getDonate(getApplicationContext()));
-                break;
-            case R.id.dash_about:
-                startActivity(new Intent(this, AboutActivity.class));
-                break;
-            case R.id.dash_tag:
-                startActivity(new Intent(this, TaggerActivity.class));
+        int id = v.getId();
+        if (id == R.id.dash_scan) {
+            startActivity(new Intent(this, BarcodeActivity.class));
+        } else if (id == R.id.dash_collections) {
+            startActivity(new Intent(this, CollectionActivity.class));
+        } else if (id == R.id.dash_donate) {
+            startActivity(IntentFactory.getDonate(getApplicationContext()));
+        } else if (id == R.id.dash_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+        } else if (id == R.id.dash_tag) {
+            startActivity(new Intent(this, TaggerActivity.class));
         }
     }
 

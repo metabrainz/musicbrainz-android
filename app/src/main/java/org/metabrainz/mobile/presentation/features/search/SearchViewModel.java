@@ -14,8 +14,8 @@ import java.util.List;
 
 public class SearchViewModel extends ViewModel {
 
-    private static SearchRepository repository = SearchRepository.getRepository();
-    private MutableLiveData<String> searchQueryLiveData = new MutableLiveData<>();
+    private static final SearchRepository repository = SearchRepository.getRepository();
+    private final MutableLiveData<String> searchQueryLiveData = new MutableLiveData<>();
 
     public SearchViewModel() {
     }

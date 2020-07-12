@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CollectionViewModel extends ViewModel {
 
-    private static CollectionRepository repository = CollectionRepository.getRepository();
+    private static final CollectionRepository repository = CollectionRepository.getRepository();
 
     public CollectionViewModel() {
     }

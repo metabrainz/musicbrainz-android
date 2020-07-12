@@ -42,11 +42,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:drawableEnd="@drawable/logo_wikipedia"
-                android:drawableRight="@drawable/logo_wikipedia"
                 android:text="@string/bio_powered_by"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:drawableEndCompat="@drawable/logo_wikipedia"
+                app:drawableRightCompat="@drawable/logo_wikipedia"
                 app:layout_constraintTop_toBottomOf="@+id/wiki_summary" />
 
             <TextView

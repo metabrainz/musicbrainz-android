@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,7 +44,7 @@ class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.C
 
     static class CollectionViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemCollectionBinding binding;
+        private final ItemCollectionBinding binding;
 
         CollectionViewHolder(ItemCollectionBinding binding) {
             super(binding.getRoot());

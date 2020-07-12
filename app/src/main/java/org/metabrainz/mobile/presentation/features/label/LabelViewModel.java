@@ -15,7 +15,7 @@ import io.reactivex.Single;
 
 public class LabelViewModel extends LookupViewModel {
 
-    private LiveData<Label> liveData;
+    private final LiveData<Label> liveData;
 
     public LabelViewModel() {
         entity = MBEntityType.LABEL;

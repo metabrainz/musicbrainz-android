@@ -24,6 +24,8 @@ import static org.metabrainz.mobile.presentation.UserPreferences.PREFERENCE_LIST
 public class SettingsActivity extends AppCompatActivity {
 
     Preference.OnPreferenceChangeListener preferenceChangeListener;
+    private static String ACTION_NOTIFICATION_LISTENER_SETTINGS =
+            "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(R.id.settings_container, new SettingsFragment())
                 .commit();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1)
+            ACTION_NOTIFICATION_LISTENER_SETTINGS = Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;
+
         preferenceChangeListener = (preference, newValue) -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 if (preference.getKey().equals(PREFERENCE_LISTENING_ENABLED)) {
@@ -47,9 +52,8 @@ public class SettingsActivity extends AppCompatActivity {
                         builder.setMessage("The listen service requires the special Notification " +
                                 "Listener Service Permission to run. Please grant this permission to" +
                                 " MusicBrainz for Android if you want to use the service.");
-                        builder.setPositiveButton("Proceed", (dialog, which) -> {
-                            startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                        });
+                        builder.setPositiveButton("Proceed", (dialog, which) ->
+                                startActivity(new Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS)));
                         builder.setNegativeButton("Cancel", ((dialog, which) -> {
                             UserPreferences.setPreferenceListeningEnabled(false);
                             ((SwitchPreference) preference).setChecked(false);

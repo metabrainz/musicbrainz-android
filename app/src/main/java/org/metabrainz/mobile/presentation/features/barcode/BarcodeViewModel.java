@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BarcodeViewModel extends ViewModel {
 
-    private BarcodeLookupRepository barcodeLookupRepository = BarcodeLookupRepository.getRepository();
+    private final BarcodeLookupRepository barcodeLookupRepository = BarcodeLookupRepository.getRepository();
     private MutableLiveData<List<Release>> barcodeLiveData;
 
     public BarcodeViewModel() {

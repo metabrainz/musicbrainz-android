@@ -22,15 +22,15 @@ public class MusicBrainzServiceGenerator {
     private static final int TIMEOUT = 20000;
     private static OAuthAuthenticator authenticator;
 
-    private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
+    private static final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
     private static HeaderInterceptor headerInterceptor;
 
-    private static OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder()
+    private static final OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder()
             .callTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS);
 
-    private static Retrofit.Builder builder =
+    private static final Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -19,7 +19,6 @@ import org.metabrainz.mobile.databinding.FragmentTracklistBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ReleaseTracksFragment extends Fragment {
 
@@ -55,7 +54,7 @@ public class ReleaseTracksFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(ReleaseViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReleaseViewModel.class);
         viewModel.getData().observe(getViewLifecycleOwner(), this::setTracks);
     }
 

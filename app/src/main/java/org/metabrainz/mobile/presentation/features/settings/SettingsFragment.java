@@ -103,10 +103,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements androi
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                startActivity(IntentFactory.getDashboard(getActivity()));
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(IntentFactory.getDashboard(getActivity()));
+            return true;
         }
         return false;
     }
