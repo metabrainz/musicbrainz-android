@@ -20,11 +20,13 @@ public enum MBEntityType {
     INSTRUMENT("instrument", ArtistActivity.class, ArtistViewModel.class);
 
     public final String name;
+    public final String display;
     public final Class typeActivityClass;
     public final Class typeViewModelClass;
 
     MBEntityType(String entity, Class typeActivityClass, Class typeViewModelClass) {
         this.name = entity;
+        this.display = name;
         this.typeActivityClass = typeActivityClass;
         this.typeViewModelClass = typeViewModelClass;
     }

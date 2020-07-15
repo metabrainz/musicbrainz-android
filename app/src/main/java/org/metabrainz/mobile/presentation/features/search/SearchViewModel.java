@@ -2,20 +2,21 @@ package org.metabrainz.mobile.presentation.features.search;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelKt;
+import androidx.paging.Pager;
+import androidx.paging.PagingConfig;
+import androidx.paging.PagingData;
+import androidx.paging.PagingLiveData;
 
-import org.metabrainz.mobile.data.repository.SearchRepository;
+import org.metabrainz.mobile.data.repository.SearchPagingSource;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
-import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils;
-
-import java.util.List;
 
 public class SearchViewModel extends ViewModel {
 
-    private static final SearchRepository repository = SearchRepository.getRepository();
     private final MutableLiveData<String> searchQueryLiveData = new MutableLiveData<>();
+    private final PagingConfig pagingConfig = new PagingConfig(20, 20, false);
 
     public SearchViewModel() {
     }
@@ -25,11 +26,11 @@ public class SearchViewModel extends ViewModel {
             searchQueryLiveData.setValue(searchTerm);
     }
 
-    LiveData<List<ResultItem>> getResultData(MBEntityType entity) {
-        return Transformations.map(
-                Transformations.switchMap(searchQueryLiveData,
-                        searchTerm -> repository.getResults(entity.name, searchTerm)),
-                response -> ResultItemUtils.getJSONResponseAsResultItemList(response, entity));
+    LiveData<PagingData<ResultItem>> getResultData(MBEntityType entity) {
+        Pager<Integer, ResultItem> pager = new Pager<>(pagingConfig, () ->
+                new SearchPagingSource(entity, searchQueryLiveData.getValue()));
+        return PagingLiveData.cachedIn(PagingLiveData.getLiveData(pager),
+                ViewModelKt.getViewModelScope(this));
     }
 
 }

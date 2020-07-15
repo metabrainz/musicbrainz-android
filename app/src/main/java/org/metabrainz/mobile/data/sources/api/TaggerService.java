@@ -14,7 +14,7 @@ public interface TaggerService {
 
     @GET("recording/")
     Call<RecordingSearchResponse> searchRecording(@Query("query") String searchQuery,
-                                                  @Query("limit") String limit);
+                                                  @Query("limit") int limit);
 
     @GET("release/{MBID}")
     Call<Release> lookupRecording(@Path("MBID") String MBID,

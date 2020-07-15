@@ -20,13 +20,11 @@ import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivitySearchBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
-import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
-import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+import org.metabrainz.mobile.presentation.features.adapters.ResultItemComparator;
+import org.metabrainz.mobile.presentation.features.adapters.ResultPagingAdapter;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -38,8 +36,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private ActivitySearchBinding binding;
     private SearchViewModel viewModel;
     private SearchView searchView;
-    private ResultAdapter adapter;
-    private List<ResultItem> results;
+    private ResultPagingAdapter adapter;
     private String query;
     private MBEntityType entity;
     private SuggestionHelper suggestionHelper;
@@ -57,23 +54,14 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
         query = getIntent().getStringExtra(SearchManager.QUERY);
         entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);
-
-        results = new ArrayList<>();
-
-        adapter = new ResultAdapter(results, entity);
+        adapter = new ResultPagingAdapter(new ResultItemComparator(), entity);
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setVisibility(View.GONE);
 
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
-        viewModel.getResultData(entity).observe(this, items -> {
-            results.clear();
-            results.addAll(items);
-            adapter.notifyDataSetChanged();
-            binding.progressSpinner.setVisibility(View.GONE);
-            checkHasResults();
-        });
+        viewModel.getResultData(entity).observe(this, pagingData ->
+                adapter.submitData(getLifecycle(), pagingData));
 
         doSearch(query);
     }
@@ -109,19 +97,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     private void doSearch(String query) {
         saveSearchSuggestion(query);
-        binding.progressSpinner.setVisibility(View.VISIBLE);
         adapter.resetAnimation();
         viewModel.search(query);
-    }
-
-    private void checkHasResults() {
-        if (adapter.getItemCount() == 0) {
-            binding.recyclerView.setVisibility(View.GONE);
-            binding.noResult.setVisibility(View.VISIBLE);
-        } else {
-            binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.noResult.setVisibility(View.GONE);
-        }
     }
 
     @Override
