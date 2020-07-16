@@ -90,4 +90,17 @@ public class MBEntity implements Serializable {
     public void setDisambiguation(String disambiguation) {
         this.disambiguation = disambiguation;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MBEntity)) return false;
+        MBEntity mbEntity = (MBEntity) o;
+        return getMbid().equals(mbEntity.getMbid());
+    }
+
+    @Override
+    public int hashCode() {
+        return getMbid().hashCode();
+    }
 }

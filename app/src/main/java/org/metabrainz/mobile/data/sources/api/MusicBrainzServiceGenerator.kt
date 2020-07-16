@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.Cache
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -74,6 +75,12 @@ object MusicBrainzServiceGenerator {
         if (requiresAuthenticator) addAuthenticator()
         addInterceptors(loggingInterceptor)
         return retrofit.create(service)
+    }
+
+    @JvmStatic
+    fun <S> createTestService(service: Class<S>, testUrl: HttpUrl): S {
+        val testRetrofit = builder.baseUrl(testUrl).build()
+        return testRetrofit.create(service)
     }
 
     private fun addAuthenticator() {

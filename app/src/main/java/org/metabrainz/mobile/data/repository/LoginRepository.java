@@ -38,7 +38,8 @@ public class LoginRepository {
     }
 
     public void fetchAccessToken(String code) {
-        service.getAccessToken(code,
+        service.getAccessToken(MusicBrainzServiceGenerator.AUTH_BASE_URL + "token",
+                code,
                 "authorization_code",
                 MusicBrainzServiceGenerator.CLIENT_ID,
                 MusicBrainzServiceGenerator.CLIENT_SECRET,
