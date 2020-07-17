@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import org.metabrainz.mobile.R
+import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -26,18 +27,17 @@ class SplashActivity : AppCompatActivity() {
         var splashImage:ImageView = findViewById(R.id.splash_image)
         var splashText:TextView = findViewById(R.id.splash_text)
 
-        var ImageAnimation = AnimationUtils.loadAnimation(this,R.anim.splashscreen_middle_animation)
         var TextAnimation = AnimationUtils.loadAnimation(this, R.anim.splashscreen_bottom_animation)
 
-        splashImage.animation = ImageAnimation
+        //splashImage.animate().rotation(360f).setDuration(2000);
         splashText.animation = TextAnimation
         //4second splash time
         Handler().postDelayed({
             //start main activity
-            startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+            startActivity(Intent(this@SplashActivity, KotlinDashboardActivity::class.java))
+            //startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
             //finish this activity
             finish()
-        },4000)
-
+        },3000)
     }
 }

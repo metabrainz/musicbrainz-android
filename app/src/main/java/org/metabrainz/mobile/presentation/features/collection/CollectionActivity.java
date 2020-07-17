@@ -1,9 +1,13 @@
 package org.metabrainz.mobile.presentation.features.collection;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,11 +17,16 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.UserPreferences;
+import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
+import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+import org.metabrainz.mobile.presentation.features.taggerkotlin.KotlinTaggerAcitivty;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+//
+//import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CollectionActivity extends MusicBrainzActivity {
 
@@ -69,6 +78,8 @@ public class CollectionActivity extends MusicBrainzActivity {
             binding.noResult.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.GONE);
             binding.progressSpinner.setVisibility(View.GONE);
+            binding.loginRequired.setVisibility(View.GONE);
+            callAlert();
         }
     }
 
@@ -92,4 +103,27 @@ public class CollectionActivity extends MusicBrainzActivity {
             binding.noResult.setVisibility(View.GONE);
         }
     }
+
+    public void callAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Login Required");
+        builder.setMessage("You need to log in to see your collections");
+        builder.setPositiveButton("Login",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(CollectionActivity.this, LoginActivity.class));
+                    }
+                });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(CollectionActivity.this,KotlinDashboardActivity.class));
+            }
+        });
+        builder.setCancelable(false);
+//        builder.setIcon(R.drawable.)
+        builder.show();
+    }
+
+
+
 }
