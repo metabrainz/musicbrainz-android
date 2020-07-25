@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.release_group;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
@@ -21,7 +22,9 @@ public class ReleaseGroupViewModel extends LookupViewModel {
     private final LiveData<WikiSummary> wikiSummary;
     private final LiveData<ReleaseGroup> liveData;
 
-    public ReleaseGroupViewModel() {
+    @ViewModelInject
+    public ReleaseGroupViewModel(LookupRepository repository) {
+        super(repository);
         entity = MBEntityType.RELEASE_GROUP;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, ReleaseGroup.class));
         wikiSummary = Transformations.switchMap(liveData, this::fetchWikiSummary);

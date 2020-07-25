@@ -17,8 +17,10 @@ import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
 
-public class ReleaseGroupActivity extends MusicBrainzActivity {
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
+public class ReleaseGroupActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugReleaseGroupInfo";
 

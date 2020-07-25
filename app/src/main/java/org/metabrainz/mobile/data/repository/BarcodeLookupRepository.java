@@ -11,28 +11,23 @@ import org.metabrainz.mobile.data.sources.api.entities.response.BarcodeReleaseRe
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class BarcodeLookupRepository {
 
     private final static LookupService service = MusicBrainzServiceGenerator
             .createService(LookupService.class, false);
-    private static BarcodeLookupRepository repository;
     private static MutableLiveData<List<Release>> releaseListData;
 
-    private BarcodeLookupRepository() {
+    @Inject
+    public BarcodeLookupRepository() {
         releaseListData = new MutableLiveData<>();
-    }
-
-    public static BarcodeLookupRepository getRepository() {
-        if (repository == null) repository = new BarcodeLookupRepository();
-        return repository;
-    }
-
-    public static void destroyRepository() {
-        repository = null;
     }
 
     public MutableLiveData<List<Release>> getReleaseListData() {

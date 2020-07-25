@@ -13,29 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class CollectionRepository {
 
     private final static CollectionService service = MusicBrainzServiceGenerator
             .createService(CollectionService.class, true);
-    private static CollectionRepository repository;
     private Callback<ResponseBody> listResponseCallback;
 
-    private CollectionRepository() {
-    }
-
-    public static CollectionRepository getRepository() {
-        if (repository == null)
-            repository = new CollectionRepository();
-        return repository;
-    }
-
-    public static void destroyRepository() {
-        repository = null;
+    @Inject
+    public CollectionRepository() {
     }
 
     public LiveData<String> fetchCollectionDetails(String entity, String id) {

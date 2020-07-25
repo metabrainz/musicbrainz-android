@@ -8,26 +8,25 @@ import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class LoginRepository {
 
     private static final LoginService service = MusicBrainzServiceGenerator
             .createService(LoginService.class, false);
-    private static LoginRepository repository;
     private final MutableLiveData<AccessToken> accessTokenLiveData;
     private final MutableLiveData<UserInfo> userInfoLiveData;
 
-    private LoginRepository() {
+    @Inject
+    public LoginRepository() {
         accessTokenLiveData = new MutableLiveData<>();
         userInfoLiveData = new MutableLiveData<>();
-    }
-
-    public static LoginRepository getRepository() {
-        if (repository == null) repository = new LoginRepository();
-        return repository;
     }
 
     public MutableLiveData<AccessToken> getAccessTokenLiveData() {

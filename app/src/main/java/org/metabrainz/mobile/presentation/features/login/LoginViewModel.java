@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.login;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -9,11 +10,13 @@ import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 
 public class LoginViewModel extends ViewModel {
 
-    private final LoginRepository repository = LoginRepository.getRepository();
+    private LoginRepository repository;
     private MutableLiveData<AccessToken> accessTokenLiveData;
     private MutableLiveData<UserInfo> userInfoLiveData;
 
-    public LoginViewModel() {
+    @ViewModelInject
+    public LoginViewModel(LoginRepository repository) {
+        this.repository = repository;
     }
 
     public MutableLiveData<AccessToken> getAccessTokenLiveData() {
@@ -32,5 +35,11 @@ public class LoginViewModel extends ViewModel {
 
     public void fetchUserInfo() {
         repository.fetchUserInfo();
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        repository = null;
     }
 }

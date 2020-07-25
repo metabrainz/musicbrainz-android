@@ -18,6 +18,9 @@ import org.metabrainz.mobile.util.Log;
 
 import java.util.Objects;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class LoginActivity extends MusicBrainzActivity {
 
     private ActivityLoginBinding binding;

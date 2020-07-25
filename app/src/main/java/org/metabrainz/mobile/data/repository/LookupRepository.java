@@ -19,12 +19,16 @@ import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Single;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class LookupRepository {
 
     public static final int METHOD_WIKIPEDIA_URL = 0;
@@ -32,38 +36,28 @@ public class LookupRepository {
 
     private final static LookupService service =
             MusicBrainzServiceGenerator.createService(LookupService.class, true);
-    private static LookupRepository repository;
 
-
-    private LookupRepository() {
-    }
-
-    public static LookupRepository getRepository() {
-        if (repository == null) repository = new LookupRepository();
-        return repository;
-    }
-
-    public static void destroyRepository() {
-        repository = null;
+    @Inject
+    public LookupRepository() {
     }
 
     public LiveData<String> fetchData(String entity, String MBID, String params) {
         MutableLiveData<String> entityLiveData = new MutableLiveData<>();
         service.lookupEntityData(entity, MBID, params)
                 .enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call,
-                                   @NonNull Response<ResponseBody> response) {
-                try {
-                    entityLiveData.setValue(response.body().string());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseBody> call,
+                                           @NonNull Response<ResponseBody> response) {
+                        try {
+                            entityLiveData.setValue(response.body().string());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-            @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-            }
+                    @Override
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                    }
                 });
         return entityLiveData;
     }

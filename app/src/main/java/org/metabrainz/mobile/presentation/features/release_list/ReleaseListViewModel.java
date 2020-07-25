@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.release_list;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -14,10 +15,12 @@ import io.reactivex.Single;
 
 public class ReleaseListViewModel extends ViewModel {
 
-    private final LookupRepository repository = LookupRepository.getRepository();
+    private LookupRepository repository;
     private final MutableLiveData<List<Release>> releasesLiveData = new MutableLiveData<>();
 
-    public ReleaseListViewModel() {
+    @ViewModelInject
+    public ReleaseListViewModel(LookupRepository repository) {
+        this.repository = repository;
     }
 
     public Single<CoverArt> fetchCoverArtForRelease(Release release) {
@@ -37,6 +40,6 @@ public class ReleaseListViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        LookupRepository.destroyRepository();
+        repository = null;
     }
 }

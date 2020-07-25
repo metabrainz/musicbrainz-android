@@ -12,12 +12,13 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 
 public abstract class LookupViewModel extends ViewModel {
 
-    protected LookupRepository repository = LookupRepository.getRepository();
+    protected LookupRepository repository;
     protected MutableLiveData<String> MBID;
     protected MBEntityType entity;
     protected LiveData<String> jsonLiveData;
 
-    protected LookupViewModel() {
+    protected LookupViewModel(LookupRepository repository) {
+        this.repository = repository;
         MBID = new MutableLiveData<>();
         jsonLiveData = Transformations.switchMap(MBID,
                 id -> repository.fetchData(entity.name, id, Constants.getDefaultParams(entity)));
@@ -33,6 +34,6 @@ public abstract class LookupViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        LookupRepository.destroyRepository();
+        this.repository = null;
     }
 }

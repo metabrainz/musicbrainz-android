@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.artist;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
@@ -17,7 +18,9 @@ public class ArtistViewModel extends LookupViewModel {
     private final LiveData<WikiSummary> wikiSummary;
     private final LiveData<Artist> liveData;
 
-    public ArtistViewModel() {
+    @ViewModelInject
+    public ArtistViewModel(LookupRepository repository) {
+        super(repository);
         entity = MBEntityType.ARTIST;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Artist.class));
         wikiSummary = Transformations.switchMap(liveData, this::fetchWikiSummary);

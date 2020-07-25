@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.barcode;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,11 +11,12 @@ import java.util.List;
 
 public class BarcodeViewModel extends ViewModel {
 
-    private final BarcodeLookupRepository barcodeLookupRepository = BarcodeLookupRepository.getRepository();
+    private BarcodeLookupRepository barcodeLookupRepository;
     private MutableLiveData<List<Release>> barcodeLiveData;
 
-    public BarcodeViewModel() {
-        super();
+    @ViewModelInject
+    public BarcodeViewModel(BarcodeLookupRepository repository) {
+        this.barcodeLookupRepository = repository;
     }
 
     public MutableLiveData<List<Release>> getBarcodeLiveData() {
@@ -29,6 +31,6 @@ public class BarcodeViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        BarcodeLookupRepository.destroyRepository();
+        this.barcodeLookupRepository = null;
     }
 }

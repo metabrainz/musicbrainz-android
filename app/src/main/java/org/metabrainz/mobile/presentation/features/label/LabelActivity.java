@@ -17,6 +17,9 @@ import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class LabelActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugLabelInfo";

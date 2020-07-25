@@ -1,10 +1,12 @@
 package org.metabrainz.mobile.presentation.features.label;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
 
+import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
@@ -17,7 +19,9 @@ public class LabelViewModel extends LookupViewModel {
 
     private final LiveData<Label> liveData;
 
-    public LabelViewModel() {
+    @ViewModelInject
+    public LabelViewModel(LookupRepository repository) {
+        super(repository);
         entity = MBEntityType.LABEL;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Label.class));
     }

@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.collection;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class CollectionViewModel extends ViewModel {
 
-    private static final CollectionRepository repository = CollectionRepository.getRepository();
+    private CollectionRepository repository;
 
-    public CollectionViewModel() {
+    @ViewModelInject
+    public CollectionViewModel(CollectionRepository repository) {
+        this.repository = repository;
     }
 
     LiveData<List<Collection>> fetchCollectionData(String editor, boolean fetchPrivate) {
@@ -31,6 +34,6 @@ public class CollectionViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        CollectionRepository.destroyRepository();
+        repository = null;
     }
 }

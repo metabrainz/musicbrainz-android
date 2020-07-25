@@ -16,10 +16,13 @@ import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
 
 import java.util.Objects;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
 /**
  * Activity that retrieves and displays information about an artist given an
  * artist MBID.
  */
+@AndroidEntryPoint
 public class ReleaseActivity extends MusicBrainzActivity {
 
     public static final String LOG_TAG = "DebugReleaseInfo";

@@ -13,6 +13,9 @@ import androidx.annotation.RequiresApi;
 import org.metabrainz.mobile.presentation.Configuration;
 import org.metabrainz.mobile.presentation.UserPreferences;
 
+import dagger.hilt.android.HiltAndroidApp;
+
+@HiltAndroidApp
 public class App extends Application {
 
     public static final int DIRECTORY_SELECT_REQUEST_CODE = 0;

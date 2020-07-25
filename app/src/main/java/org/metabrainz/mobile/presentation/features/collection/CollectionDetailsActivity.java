@@ -20,10 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
 /**
  * Activity to display a list of collection results to the user and support intents
  * to info Activity types based on the selection.
  */
+@AndroidEntryPoint
 public class CollectionDetailsActivity extends MusicBrainzActivity {
 
     private ActivityCollectionBinding binding;

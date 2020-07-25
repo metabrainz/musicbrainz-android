@@ -21,7 +21,7 @@ public final class Constants {
     public static final String USER_DATA_PARAMS =
             "+user-tags+user-ratings";
 
-    public static final int LIMIT = 100;
+    public static final int LIMIT = 10;
     public static final int OFFSET = 0;
 
     public static final String MBID = "mbid";
