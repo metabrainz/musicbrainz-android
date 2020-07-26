@@ -95,16 +95,8 @@ public class LookupTest {
 
     @Test
     public void testReleaseLookup() {
-        final String MBID = "94ad3a58-a1cc-46a3-acf4-9cb6c1d6f032";
-        Release testRelease = new Release();
-        testRelease.setMbid(MBID);
-        testRelease.setTitle("+");
-        testRelease.setBarcode("5052498646524");
-        testRelease.setStatus("Official");
-        testRelease.setCountry("XE");
-        testRelease.setDisambiguation("");
-        testRelease.setDate("2011-09-09");
-
+        String MBID = getTestReleaseMBID();
+        Release testRelease = getTestRelease();
         try {
             Response<ResponseBody> response = service.lookupEntityData(
                     MBEntityType.RELEASE.name, MBID, Constants.LOOKUP_RELEASE_PARAMS).execute();
