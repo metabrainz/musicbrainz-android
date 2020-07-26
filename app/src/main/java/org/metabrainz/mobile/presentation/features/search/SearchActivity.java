@@ -60,10 +60,7 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
-        viewModel.getResultData(entity).observe(this, pagingData ->
-                adapter.submitData(getLifecycle(), pagingData));
-
-        doSearch(query);
+        doSearch();
     }
 
     @Override
@@ -95,15 +92,20 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
         return true;
     }
 
-    private void doSearch(String query) {
+    private void doSearch() {
         saveSearchSuggestion(query);
         adapter.resetAnimation();
-        viewModel.search(query);
+        viewModel.search(entity, query).observe(this, pagingData -> {
+            adapter.submitData(getLifecycle(), pagingData);
+        });
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        doSearch(searchView.getQuery().toString());
+        if (!this.query.equalsIgnoreCase(query)) {
+            this.query = query;
+            doSearch();
+        }
         return false;
     }
 
