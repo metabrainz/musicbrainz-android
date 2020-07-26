@@ -1,10 +1,14 @@
 package org.metabrainz.mobile;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
@@ -13,24 +17,32 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import okhttp3.ResponseBody;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.metabrainz.mobile.AssertionUtils.checkArtistAssertions;
+import static org.metabrainz.mobile.AssertionUtils.checkReleaseAssertions;
+import static org.metabrainz.mobile.EntityUtils.getTestArtist;
+import static org.metabrainz.mobile.EntityUtils.getTestRelease;
+import static org.metabrainz.mobile.EntityUtils.getTestReleaseMBID;
+import static org.metabrainz.mobile.EntityUtils.loadResourceAsString;
+
 
 public class LookupTest {
     MockWebServer webServer;
     LookupService service;
+
+    @Rule
+    public InstantTaskExecutorRule executorRule = new InstantTaskExecutorRule();
 
     @Before
     public void setup() {
@@ -57,36 +69,31 @@ public class LookupTest {
         }
     }
 
-    private String loadResourceAsString(String resource) {
-        StringBuilder builder = new StringBuilder();
-        try (InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream(resource);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = reader.readLine()) != null)
-                builder.append(line);
-        } catch (IOException e) {
-            e.printStackTrace();
-            fail();
-        }
-        return builder.toString();
-    }
-
     @Test
     public void testArtistLookup() {
-        final String MBID = "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6";
-        Artist testArtist = new Artist();
-        testArtist.setMbid(MBID);
-        testArtist.setCountry("GB");
-        testArtist.setDisambiguation("famous UK singer-songwriter");
-        testArtist.setName("Ed Sheeran");
-        testArtist.setSortName("Sheeran, Ed");
-        testArtist.setGender("Male");
+        Artist testArtist = getTestArtist();
+        MutableLiveData<Artist> testArtistData = new MutableLiveData<>();
+
+        service.lookupEntityData(MBEntityType.ARTIST.name, testArtist.getMbid(),
+                Constants.LOOKUP_ARTIST_PARAMS).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    Artist artist = new Gson().fromJson(response.body().string(), Artist.class);
+                    testArtistData.setValue(artist);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    fail();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
 
         try {
-            Response<ResponseBody> response = service.lookupEntityData(
-                    MBEntityType.ARTIST.name, MBID, Constants.LOOKUP_ARTIST_PARAMS).execute();
-            Artist artist = new Gson().fromJson(response.body().string(), Artist.class);
-            checkArtistAssertions(testArtist, artist);
+            checkArtistAssertions(testArtist, LiveDataTestUtil.getOrAwaitValue(testArtistData));
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -106,25 +113,6 @@ public class LookupTest {
             e.printStackTrace();
             fail();
         }
-    }
-
-    private void checkReleaseAssertions(Release testRelease, Release release) {
-        assertEquals(testRelease, release);
-        assertEquals(testRelease.getTitle(), release.getTitle());
-        assertEquals(testRelease.getBarcode(), release.getBarcode());
-        assertEquals(testRelease.getStatus(), release.getStatus());
-        assertEquals(testRelease.getCountry(), release.getCountry());
-        assertEquals(testRelease.getDisambiguation(), release.getDisambiguation());
-        assertEquals(testRelease.getDate(), release.getDate());
-    }
-
-    private void checkArtistAssertions(Artist testArtist, Artist artist) {
-        assertEquals(artist, testArtist);
-        assertEquals(testArtist.getCountry(), artist.getCountry());
-        assertEquals(testArtist.getDisambiguation(), artist.getDisambiguation());
-        assertEquals(testArtist.getName(), artist.getName());
-        assertEquals(testArtist.getSortName(), artist.getSortName());
-        assertEquals(testArtist.getGender(), artist.getGender());
     }
 
     @After
