@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/app_bg">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/slide_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="50dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/dots"
+        android:layout_width="50dp"
+        android:background="@color/app_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-1dp"
+        android:orientation="horizontal">/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/nextB"
+        android:layout_width="73dp"
+        android:layout_height="33dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_bg"
+        android:text="Next"
+        android:textSize="12dp"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/prevB"
+        android:layout_width="69dp"
+        android:layout_height="33dp"
+        android:textSize="12dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_bg"
+        android:text="Prev"
+        android:textColor="#ffffff" />
+</RelativeLayout>

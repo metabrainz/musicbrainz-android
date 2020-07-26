@@ -8,14 +8,9 @@
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/app_bg"
-        app:titleTextColor="@color/colorPrimary" />
 
     <ProgressBar
+        android:paddingTop="50dp"
         android:id="@+id/progress_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

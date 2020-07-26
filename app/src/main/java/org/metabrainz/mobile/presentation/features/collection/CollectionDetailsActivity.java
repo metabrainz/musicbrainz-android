@@ -35,7 +35,6 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCollectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         binding.noResult.setVisibility(View.GONE);

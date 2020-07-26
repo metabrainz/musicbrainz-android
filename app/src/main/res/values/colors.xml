@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#EB743B</color>
+    <color name="colorPrimaryLight">#FFCC80</color>
     <color name="colorPrimaryDark">#771b85</color>
     <color name="colorAccent">#D81B60</color>
     <!-- Base -->
@@ -23,5 +24,6 @@
 
 <!--    Background-->
     <color name="app_bg">#263238</color>
+    <color name="app_bg_light">#90A4AE</color>
 
 </resources>

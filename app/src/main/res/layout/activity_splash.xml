@@ -2,23 +2,25 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/app_bg">
 
     <ImageView
         android:id="@+id/splash_image"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/collapsible_logo"></ImageView>
+        android:src="@drawable/splashscreen_logo2"></ImageView>
 
-    <TextView
-        android:id="@+id/splash_text"
-        android:text="@string/splashscreen_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"
-        android:textStyle="bold"
-        android:layout_below="@+id/splash_image"/>
+<!--    <TextView-->
+<!--        android:id="@+id/splash_text"-->
+<!--        android:text="@string/splashscreen_text"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="20sp"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/app_bg_light"-->
+<!--        android:layout_below="@+id/splash_image"/>-->
 </RelativeLayout
    >

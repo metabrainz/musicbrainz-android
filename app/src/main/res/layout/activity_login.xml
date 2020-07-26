@@ -4,25 +4,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/login_container"
-    android:layout_margin="8dp"
     android:orientation="vertical">
 
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_prompt" />
+        android:layout_height="match_parent"
+        >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/login_btn"
-        android:text="@string/login" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/app_bg">
 
-    <Button
-        android:id="@+id/logout_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/action_logout" />
+                <TextView
+                    android:id="@+id/login_prompt_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/white"
+                    android:layout_above="@id/login_btn_linearlayout"
+                    android:paddingBottom="30dp"
+                    android:text="@string/login_prompt" />
+            <RelativeLayout
+                android:id="@+id/login_btn_linearlayout"
+                android:layout_width="wrap_content"
+                android:layout_margin="30dp"
+                android:layout_centerInParent="true"
+                android:background="@color/white"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/login_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:background="@color/app_bg"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:text="@string/login" />
+
+            </RelativeLayout>
+
+<!--                <Button-->
+<!--                    android:id="@+id/logout_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="@string/action_logout"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_below="@+id/login_btn"/>-->
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>

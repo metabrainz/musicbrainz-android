@@ -14,7 +14,6 @@
     <string name="dash_collections">Collections</string>
     <string name="dash_donate">Donate</string>
     <string name="dash_about">About</string>
-    <string name="login">Log In</string>
     <string name="welcome">Welcome to MusicBrainz!</string>
 
     <string name="welcome_loggedin">Logged in as</string>
@@ -30,7 +29,7 @@
     <string name="search_name">MusicBrainz</string>
 
     <!-- LoginActivity -->
-    <string name="auth_title">Log In</string>
+    <string name="auth_title">Authentication</string>
 
     <!-- SearchResultsActivity -->
     <string name="no_results">No results found</string>
@@ -87,9 +86,6 @@
     <string name="toast_feedback_fail">No email client found</string>
     <string name="toast_search_cleared">Search history deleted</string>
 
-    <string name="login_prompt">To Login, connect your MusicBrainz account with our app. You will
-    be prompted to login in MusicBrainz website. Follow the instructions and return to complete
-    authentication.</string>
 
     <string name="login_required">You need to login in order to view your collections.</string>
 
@@ -98,7 +94,7 @@
     <string name="ratings">Rating</string>
     <string name="user_ratings">Your Rating</string>
 
-<!--    Tags-->
+    <!--    Tags-->
     <string name="tags">Tags</string>
     <string name="user_tags">Your Tags</string>
     <string name="tagger_file_chooser_pickAfile">Pick a File</string>
@@ -133,5 +129,27 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="splashscreen_text">The Next Generation Music Tagger</string>
+
+    <!--    loginScreen texts-->
+    <string name="logout">Logout</string>
+    <string name="logout_prompt">Hey! You are logged in already </string>
+    <string name="login">Login</string>
+    <string name="login_prompt">To Login, connect your MusicBrainz account with our app. You will
+    be prompted to login in MusicBrainz website. Follow the instructions and return to complete
+    authentication.</string>
+
+<!--    Onboarding-->
+    <string name="Onboarding_landing_page">Welcome to MusicBrainz! \n Allow me to take you Through the basics!</string>
+    <string name="lets_go">Lets Go!</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="finish">Finish</string>
+
+<!--    onboarding adapter description-->
+    <string name="explain_fetch_metadata">Fix your Audio Metadata</string>
+    <string name="explain_search_feature"> Search Artist,Release,Label,Event</string>
+    <string name="explain_collection">Save your collection</string>
+    <string name="explain_scan">Scan Barcode of Label</string>
 
 </resources>

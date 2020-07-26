@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GettingStarted"
+    android:background="@color/app_bg">
+
+<!--    <com.mikhaellopez.circularimageview.CircularImageView-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:id="@+id/icon_id"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/rsz_search_icon"-->
+<!--        app:civ_shadow="true"-->
+<!--        app:civ_border_color_start="#60338D"-->
+<!--        app:civ_border_color_end="#ffffff"-->
+<!--        app:civ_shadow_color="#ffffff"-->
+<!--        app:civ_shadow_gravity="bottom"-->
+<!--        app:civ_shadow_radius="25dp"-->
+<!--        android:background="@color/app_bg"-->
+
+<!--        />-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/black">
+        <ImageView
+            android:id="@+id/icon_id"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:layout_margin="5dp"
+            android:src="@drawable/search_icon"
+            ></ImageView>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/instruction_id"
+        android:layout_width="195dp"
+        android:layout_height="168dp"
+        android:layout_below="@+id/icon_id"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="29dp"
+        android:layout_marginRight="0dp"
+        android:fontFamily="sans-serif-thin"
+        android:paddingTop="20dp"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="ok ok ok ok ok ok "
+        android:textColor="@color/white">
+    </TextView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_id"
+        android:layout_width="171dp"
+        android:layout_height="360dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:foregroundGravity="bottom"
+        app:lottie_rawRes="@raw/celebration_music" />
+</RelativeLayout>

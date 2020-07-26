@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
@@ -20,6 +21,7 @@ import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+import org.metabrainz.mobile.presentation.features.login.LogoutActivity;
 import org.metabrainz.mobile.presentation.features.taggerkotlin.KotlinTaggerAcitivty;
 
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class CollectionActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCollectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
+//        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
@@ -105,13 +107,13 @@ public class CollectionActivity extends MusicBrainzActivity {
     }
 
     public void callAlert() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.loginrequiredDialog);
         builder.setTitle("Login Required");
         builder.setMessage("You need to log in to see your collections");
         builder.setPositiveButton("Login",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(CollectionActivity.this, LoginActivity.class));
+                        startActivity(new Intent(CollectionActivity.this, LogoutActivity.class));
                     }
                 });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -120,7 +122,6 @@ public class CollectionActivity extends MusicBrainzActivity {
             }
         });
         builder.setCancelable(false);
-//        builder.setIcon(R.drawable.)
         builder.show();
     }
 

@@ -12,7 +12,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="#263238"
+            android:background="@color/app_bg"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -21,19 +21,17 @@
                 app:contentScrim="?attr/colorAccent"
                 app:expandedTitleMarginEnd="48dp"
                 app:expandedTitleMarginStart="20dp"
-                app:layout_scrollFlags="exitUntilCollapsed|scroll"
-                app:expandedTitleTextAppearance="@style/Toolbar.ExpandedTitleText"
-                app:collapsedTitleTextAppearance="@style/Toolbar.CollapsedTitleText"
+                app:layout_scrollFlags="snap|scroll"
                 app:title="MusicBrainz"
                 >
 
-                <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:titleTextColor="@color/colorPrimary"
-                    android:background="@color/app_bg">
-                </androidx.appcompat.widget.Toolbar>
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    app:layout_collapseMode="pin"-->
+<!--                    app:titleTextColor="@color/colorPrimary"-->
+<!--                    android:background="@color/app_bg">-->
+<!--                </androidx.appcompat.widget.Toolbar>-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -272,7 +270,7 @@
                                 android:layout_height="64dp"
                                 android:background="#ffffff"
                                 android:padding="5dp"
-                                android:src="@drawable/barcoder"></ImageView>
+                                android:src="@drawable/scan_icon"></ImageView>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -328,7 +326,7 @@
                                 android:layout_height="64dp"
                                 android:background="#ffffff"
                                 android:padding="10dp"
-                                android:src="@drawable/donate_icon" />
+                                android:src="@drawable/donation_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -375,7 +373,7 @@
                                 android:layout_height="64dp"
                                 android:background="#ffffff"
                                 android:padding="10dp"
-                                android:src="@drawable/about"></ImageView>
+                                android:src="@drawable/about_icon"></ImageView>
 
                             <TextView
                                 android:layout_width="wrap_content"
