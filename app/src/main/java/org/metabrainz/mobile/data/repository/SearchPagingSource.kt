@@ -25,8 +25,9 @@ class SearchPagingSource(
                 val responseObject = JsonParser.parseString(response)
                 count = responseObject.asJsonObject.get("count").asInt
             }
-            val itemsAfter = if (count == LoadResult.Page.COUNT_UNDEFINED)
-                count else count - offset - pageSize
+            val itemsAfter = if (count == LoadResult.Page.COUNT_UNDEFINED) count
+            else (count - offset - pageSize).coerceAtLeast(0)
+            // itemsAfter is required to be at least otherwise the current page will be not loaded
 
             LoadResult.Page(
                     data = ResultItemUtils.getJSONResponseAsResultItemList(response, entity),
