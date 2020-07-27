@@ -2,6 +2,7 @@ package org.metabrainz.mobile;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.MutableLiveData;
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
 import com.google.gson.Gson;
 
@@ -10,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
@@ -36,7 +38,7 @@ import static org.metabrainz.mobile.EntityUtils.getTestRelease;
 import static org.metabrainz.mobile.EntityUtils.getTestReleaseMBID;
 import static org.metabrainz.mobile.EntityUtils.loadResourceAsString;
 
-
+@RunWith(AndroidJUnit4ClassRunner.class)
 public class LookupTest {
     MockWebServer webServer;
     LookupService service;

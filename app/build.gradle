@@ -28,6 +28,22 @@ android {
             // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        String sharedTestDir = 'src/sharedTest/java'
+        String sharedTestResourcesDir = 'src/sharedTest/resources'
+
+        test {
+            java.srcDirs += [sharedTestDir]
+            resources.srcDirs += [sharedTestResourcesDir]
+        }
+
+        androidTest {
+            java.srcDirs += [sharedTestDir]
+            resources.srcDirs += [sharedTestResourcesDir]
+        }
+    }
+    
     lintOptions{
         disable 'InvalidPackage'
         disable 'MissingTranslation'
@@ -84,8 +100,10 @@ dependencies {
     testImplementation  'androidx.arch.core:core-testing:2.1.0'
 
     androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.8.0'
 
     //Tagger & Metadata Setup
     implementation 'com.github.QuickLyric:fpcalc-android:1.0.1'
