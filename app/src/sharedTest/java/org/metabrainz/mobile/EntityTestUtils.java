@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 
 import static org.junit.Assert.fail;
 
-public class EntityUtils {
+public class EntityTestUtils {
 
     public static String loadResourceAsString(String resource) {
         StringBuilder builder = new StringBuilder();

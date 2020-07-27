@@ -9,7 +9,7 @@ import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
-import static org.metabrainz.mobile.EntityUtils.loadResourceAsString;
+import static org.metabrainz.mobile.EntityTestUtils.loadResourceAsString;
 
 public class MockLookupRepository extends LookupRepository {
 

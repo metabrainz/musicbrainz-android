@@ -33,10 +33,10 @@ import retrofit2.Response;
 import static org.junit.Assert.fail;
 import static org.metabrainz.mobile.AssertionUtils.checkArtistAssertions;
 import static org.metabrainz.mobile.AssertionUtils.checkReleaseAssertions;
-import static org.metabrainz.mobile.EntityUtils.getTestArtist;
-import static org.metabrainz.mobile.EntityUtils.getTestRelease;
-import static org.metabrainz.mobile.EntityUtils.getTestReleaseMBID;
-import static org.metabrainz.mobile.EntityUtils.loadResourceAsString;
+import static org.metabrainz.mobile.EntityTestUtils.getTestArtist;
+import static org.metabrainz.mobile.EntityTestUtils.getTestRelease;
+import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseMBID;
+import static org.metabrainz.mobile.EntityTestUtils.loadResourceAsString;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
 public class LookupTest {

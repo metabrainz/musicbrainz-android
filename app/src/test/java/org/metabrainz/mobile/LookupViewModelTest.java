@@ -23,17 +23,17 @@ import static org.metabrainz.mobile.AssertionUtils.checkRecordingAssertions;
 import static org.metabrainz.mobile.AssertionUtils.checkReleaseAssertions;
 import static org.metabrainz.mobile.AssertionUtils.checkReleaseGroupAssertions;
 import static org.metabrainz.mobile.AssertionUtils.checkWikiAssertions;
-import static org.metabrainz.mobile.EntityUtils.getTestArtist;
-import static org.metabrainz.mobile.EntityUtils.getTestArtistMBID;
-import static org.metabrainz.mobile.EntityUtils.getTestArtistWiki;
-import static org.metabrainz.mobile.EntityUtils.getTestLabel;
+import static org.metabrainz.mobile.EntityTestUtils.getTestArtist;
+import static org.metabrainz.mobile.EntityTestUtils.getTestArtistMBID;
+import static org.metabrainz.mobile.EntityTestUtils.getTestArtistWiki;
+import static org.metabrainz.mobile.EntityTestUtils.getTestLabel;
 import static org.metabrainz.mobile.EntityTestUtils.getTestLabelMBID;
-import static org.metabrainz.mobile.EntityUtils.getTestRecording;
+import static org.metabrainz.mobile.EntityTestUtils.getTestRecording;
 import static org.metabrainz.mobile.EntityTestUtils.getTestRecordingMBID;
-import static org.metabrainz.mobile.EntityUtils.getTestRelease;
-import static org.metabrainz.mobile.EntityUtils.getTestReleaseGroup;
+import static org.metabrainz.mobile.EntityTestUtils.getTestRelease;
+import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseGroup;
 import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseGroupMBID;
-import static org.metabrainz.mobile.EntityUtils.getTestReleaseMBID;
+import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseMBID;
 import static org.metabrainz.mobile.LiveDataTestUtil.getOrAwaitValue;
 
 public class LookupViewModelTest {
