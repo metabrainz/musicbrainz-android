@@ -2,7 +2,10 @@ package org.metabrainz.mobile;
 
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -69,5 +72,50 @@ public class EntityUtils {
         testRelease.setDisambiguation("");
         testRelease.setDate("2011-09-09");
         return testRelease;
+    }
+
+    public static String getTestReleaseGroupMBID() {
+        return "05ce100c-eddf-4967-8d7e-33fc0883fe39";
+    }
+
+    public static ReleaseGroup getTestReleaseGroup() {
+        String MBID = getTestReleaseGroupMBID();
+        ReleaseGroup testReleaseGroup = new ReleaseGroup();
+        testReleaseGroup.setMbid(MBID);
+        testReleaseGroup.setCount(1);
+        testReleaseGroup.setTitle("+");
+        testReleaseGroup.setPrimaryType("Album");
+        testReleaseGroup.setDisambiguation("plus");
+        return testReleaseGroup;
+    }
+
+    public static String getTestLabelMBID() {
+        return "015a28ab-1eb8-45a0-b2c6-601e410548af";
+    }
+
+    public static Label getTestLabel() {
+        String MBID = getTestLabelMBID();
+        Label testLabel = new Label();
+        testLabel.setMbid(MBID);
+        testLabel.setName("Speed Records");
+        testLabel.setCode("SPREC");
+        testLabel.setCountry("IN");
+        testLabel.setDisambiguation("India");
+        testLabel.setType("Original Production");
+        return testLabel;
+    }
+
+    public static String getTestRecordingMBID() {
+        return "11f3c37d-839f-4f65-87c1-d55cb416d0c5";
+    }
+
+    public static Recording getTestRecording() {
+        String MBID = getTestRecordingMBID();
+        Recording testRecording = new Recording();
+        testRecording.setMbid(MBID);
+        testRecording.setLength(125400);
+        testRecording.setTitle("Plus Plus");
+        testRecording.setDisambiguation("no disambiguation");
+        return testRecording;
     }
 }
