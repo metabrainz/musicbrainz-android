@@ -16,6 +16,8 @@ import static org.junit.Assert.fail;
 
 public class EntityTestUtils {
 
+    // TODO: Add artist-credits to tests
+
     public static String loadResourceAsString(String resource) {
         StringBuilder builder = new StringBuilder();
         try (InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream(resource);
@@ -49,6 +51,7 @@ public class EntityTestUtils {
         String MBID = getTestArtistMBID();
         Artist testArtist = new Artist();
         testArtist.setMbid(MBID);
+        testArtist.setType("Person");
         testArtist.setCountry("GB");
         testArtist.setDisambiguation("UK singer-songwriter");
         testArtist.setName("Ed Sheeran");

@@ -6,6 +6,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,6 +34,7 @@ AssertionUtils {
         assertEquals(testArtist.getName(), artist.getName());
         assertEquals(testArtist.getSortName(), artist.getSortName());
         assertEquals(testArtist.getGender(), artist.getGender());
+        assertEquals(testArtist.getType(), artist.getType());
     }
 
     public static void checkReleaseGroupAssertions(ReleaseGroup testReleaseGroup, ReleaseGroup releaseGroup) {
@@ -58,6 +60,14 @@ AssertionUtils {
         assertEquals(testRecording.getLength(), recording.getLength());
         assertEquals(testRecording.getTrackCount(), recording.getTrackCount());
         assertEquals(testRecording.getDisambiguation(), recording.getDisambiguation());
+    }
+
+    public static void checkResultItemAssertions(ResultItem testItem, ResultItem item) {
+        assertEquals(testItem.getMBID(), item.getMBID());
+        assertEquals(testItem.getDisambiguation(), item.getDisambiguation());
+        assertEquals(testItem.getName(), item.getName());
+        assertEquals(testItem.getPrimary(), item.getPrimary());
+        assertEquals(testItem.getSecondary(), item.getSecondary());
     }
 
 }
