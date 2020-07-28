@@ -61,4 +61,16 @@ public class Collection {
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "Collection{" +
+                "mbid='" + mbid + '\'' +
+                ", type='" + type + '\'' +
+                ", editor='" + editor + '\'' +
+                ", name='" + name + '\'' +
+                ", entityType='" + entityType + '\'' +
+                ", count=" + count +
+                '}';
+    }
 }

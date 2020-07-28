@@ -187,4 +187,26 @@ public class Release extends MBEntity {
         return builder.toString();
     }
 
+    @Override
+    public String toString() {
+        return "Release{" +
+                "title='" + title + '\'' +
+                ", artistCredits=" + artistCredits +
+                ", date='" + date + '\'' +
+                ", barcode='" + barcode + '\'' +
+                ", packaging='" + packaging + '\'' +
+                ", releaseGroup=" + releaseGroup +
+                ", releaseEvents=" + releaseEvents +
+                ", labels=" + labels +
+                ", trackCount=" + trackCount +
+                ", country='" + country + '\'' +
+                ", status='" + status + '\'' +
+                ", media=" + media +
+                ", coverArt=" + coverArt +
+                ", textRepresentation=" + textRepresentation +
+                ", relations=" + relations +
+                ", mbid='" + mbid + '\'' +
+                ", disambiguation='" + disambiguation + '\'' +
+                '}';
+    }
 }
