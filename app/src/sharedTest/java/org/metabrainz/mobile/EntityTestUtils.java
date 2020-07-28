@@ -1,5 +1,6 @@
 package org.metabrainz.mobile;
 
+import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
@@ -11,12 +12,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.fail;
 
 public class EntityTestUtils {
-
-    // TODO: Add artist-credits to tests
 
     public static String loadResourceAsString(String resource) {
         StringBuilder builder = new StringBuilder();
@@ -57,6 +58,50 @@ public class EntityTestUtils {
         testArtist.setName("Ed Sheeran");
         testArtist.setSortName("Sheeran, Ed");
         testArtist.setGender("Male");
+
+        List<Release> testReleases = new ArrayList<>();
+        Release testRelease = new Release();
+        testRelease.setMbid("8b6d9a7e-2f94-4cca-b2e3-d35116b1a49c");
+        testRelease.setDate("2005");
+        testRelease.setDisambiguation("");
+        testRelease.setTitle("The Orange Room EP");
+        testRelease.setStatus("Official");
+        testRelease.setCountry("XW");
+        testRelease.setBarcode("8791423234");
+        testReleases.add(testRelease);
+
+        testRelease = new Release();
+        testRelease.setMbid("71c07e92-4b71-43d3-a041-5fd67d8343af");
+        testRelease.setDate("2006-03-22");
+        testRelease.setDisambiguation("");
+        testRelease.setTitle("Ed Sheeran");
+        testRelease.setStatus("Official");
+        testRelease.setCountry("GB");
+        testRelease.setBarcode("12223213211");
+        testReleases.add(testRelease);
+
+        testRelease = new Release();
+        testRelease.setMbid("fe2c71cf-52e3-4abd-a0ed-45ab3770d965");
+        testRelease.setDate("2006-03-22");
+        testRelease.setDisambiguation("");
+        testRelease.setTitle("Ed Sheeran (EP)");
+        testRelease.setStatus("Official");
+        testRelease.setCountry("GB");
+        testRelease.setBarcode("1221421");
+        testReleases.add(testRelease);
+
+        testRelease = new Release();
+        testRelease.setMbid("3c8473d3-202c-44c8-a37b-8e259fe12c39");
+        testRelease.setDate("2007-05-01");
+        testRelease.setDisambiguation("");
+        testRelease.setTitle("Want Some?");
+        testRelease.setStatus("Official");
+        testRelease.setCountry("GB");
+        testRelease.setBarcode("8791423234");
+        testReleases.add(testRelease);
+
+        testArtist.setReleases(testReleases);
+
         return testArtist;
     }
 
@@ -74,6 +119,16 @@ public class EntityTestUtils {
         testRelease.setCountry("XE");
         testRelease.setDisambiguation("");
         testRelease.setDate("2011-09-09");
+
+        List<ArtistCredit> testArtistCredits = new ArrayList<>();
+        ArtistCredit testArtistCredit = new ArtistCredit();
+        testArtistCredit.setJoinphrase("");
+        testArtistCredit.setName("Ed Sheeran");
+        Artist testArtist = new Artist();
+        testArtist.setMbid("b8a7c51f-362c-4dcb-a259-bc6e0095f0a6");
+        testArtistCredit.setArtist(testArtist);
+        testRelease.setArtistCredits(testArtistCredits);
+
         return testRelease;
     }
 
@@ -89,6 +144,16 @@ public class EntityTestUtils {
         testReleaseGroup.setTitle("+");
         testReleaseGroup.setPrimaryType("Album");
         testReleaseGroup.setDisambiguation("plus");
+
+        List<ArtistCredit> testArtistCredits = new ArrayList<>();
+        ArtistCredit testArtistCredit = new ArtistCredit();
+        testArtistCredit.setJoinphrase("");
+        testArtistCredit.setName("Ed Sheeran");
+        Artist testArtist = new Artist();
+        testArtist.setMbid("b8a7c51f-362c-4dcb-a259-bc6e0095f0a6");
+        testArtistCredit.setArtist(testArtist);
+        testReleaseGroup.setArtistCredits(testArtistCredits);
+
         return testReleaseGroup;
     }
 
@@ -119,6 +184,16 @@ public class EntityTestUtils {
         testRecording.setLength(125400);
         testRecording.setTitle("Plus Plus");
         testRecording.setDisambiguation("no disambiguation");
+
+        List<ArtistCredit> testArtistCredits = new ArrayList<>();
+        ArtistCredit testArtistCredit = new ArtistCredit();
+        testArtistCredit.setJoinphrase("");
+        testArtistCredit.setName("Like a Tim");
+        Artist testArtist = new Artist();
+        testArtist.setMbid("90568a1e-ef8d-4d22-93fa-faadc819d576");
+        testArtistCredit.setArtist(testArtist);
+        testRecording.setArtistCredits(testArtistCredits);
+
         return testRecording;
     }
 }
