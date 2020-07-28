@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.coroutineContext
 
 object MusicBrainzServiceGenerator {
+
     private const val API_BASE_URL = "https://musicbrainz.org/ws/2/"
     const val AUTH_URL = "https://musicbrainz.org/oauth2/authorize"
     const val ACOUST_ID_BASE_URL = "https://api.acoustid.org/v2/lookup"
@@ -24,8 +25,9 @@ object MusicBrainzServiceGenerator {
     const val CLIENT_SECRET = "WN6o5cjehjPAP4dib0zOmQ"
     const val OAUTH_REDIRECT_URI = "org.metabrainz.mobile://oauth"
     const val ACOUST_ID_KEY = "5mgEECwRkp"
-    private const val cacheSize = (5 * 1024 * 1024).toLong()
 
+    
+    private const val cacheSize = (5 * 1024 * 1024).toLong()
     private val  myCache = Cache(App.getContext().cacheDir, cacheSize)
 
     private const val TIMEOUT = 20000
