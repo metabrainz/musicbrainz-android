@@ -13,6 +13,10 @@ import static org.metabrainz.mobile.EntityTestUtils.loadResourceAsString;
 
 public class MockLookupRepository extends LookupRepository {
 
+    public MockLookupRepository() {
+        super(null);
+    }
+
     @Override
     public LiveData<String> fetchData(String entity, String MBID, String params) {
         MutableLiveData<String> data = new MutableLiveData<>();
