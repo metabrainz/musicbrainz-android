@@ -10,7 +10,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.metabrainz.mobile.data.sources.api.LookupService;
-import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
@@ -34,11 +33,11 @@ public class LookupRepository {
     public static final int METHOD_WIKIPEDIA_URL = 0;
     public static final int METHOD_WIKIDATA_ID = 1;
 
-    private final static LookupService service =
-            MusicBrainzServiceGenerator.createService(LookupService.class, true);
+    private final LookupService service;
 
     @Inject
-    public LookupRepository() {
+    public LookupRepository(LookupService service) {
+        this.service = service;
     }
 
     public LiveData<String> fetchData(String entity, String MBID, String params) {

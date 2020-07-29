@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.api.CollectionService;
-import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 
 import java.util.ArrayList;
@@ -24,12 +23,12 @@ import retrofit2.Response;
 @Singleton
 public class CollectionRepository {
 
-    private final static CollectionService service = MusicBrainzServiceGenerator
-            .createService(CollectionService.class, true);
+    private final CollectionService service;
     private Callback<ResponseBody> listResponseCallback;
 
     @Inject
-    public CollectionRepository() {
+    public CollectionRepository(CollectionService service) {
+        this.service = service;
     }
 
     public LiveData<String> fetchCollectionDetails(String entity, String id) {

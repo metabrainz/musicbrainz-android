@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import org.metabrainz.mobile.data.sources.api.LookupService;
-import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.response.BarcodeReleaseResponse;
 
@@ -21,12 +20,12 @@ import retrofit2.Response;
 @Singleton
 public class BarcodeLookupRepository {
 
-    private final static LookupService service = MusicBrainzServiceGenerator
-            .createService(LookupService.class, false);
+    private final LookupService service;
     private static MutableLiveData<List<Release>> releaseListData;
 
     @Inject
-    public BarcodeLookupRepository() {
+    public BarcodeLookupRepository(LookupService service) {
+        this.service = service;
         releaseListData = new MutableLiveData<>();
     }
 

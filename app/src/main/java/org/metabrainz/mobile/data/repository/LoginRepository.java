@@ -18,13 +18,13 @@ import retrofit2.Response;
 @Singleton
 public class LoginRepository {
 
-    private static final LoginService service = MusicBrainzServiceGenerator
-            .createService(LoginService.class, false);
+    private final LoginService service;
     private final MutableLiveData<AccessToken> accessTokenLiveData;
     private final MutableLiveData<UserInfo> userInfoLiveData;
 
     @Inject
-    public LoginRepository() {
+    public LoginRepository(LoginService service) {
+        this.service = service;
         accessTokenLiveData = new MutableLiveData<>();
         userInfoLiveData = new MutableLiveData<>();
     }
