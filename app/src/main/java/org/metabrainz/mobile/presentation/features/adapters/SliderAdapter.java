@@ -31,9 +31,9 @@ public class SliderAdapter extends PagerAdapter {
 
     public String[] slide_desc={
             "Fix your Audio Metadata",
-            "Explore Artist,Release,Label,Event",
-            "Save your collection",
-            "Scan Barcode of Label"
+            "Explore MusicBrainz Data",
+            "Explore your MusicBrainz Collection",
+            "Scan using Barcodes"
     };
 
     @Override

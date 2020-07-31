@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/no_results"
+        android:textColor="@color/white"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

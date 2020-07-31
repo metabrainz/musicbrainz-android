@@ -3,6 +3,8 @@ package org.metabrainz.mobile.presentation.features.login;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +17,7 @@ import org.metabrainz.mobile.databinding.ActivityLoginBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
+import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.Objects;
@@ -28,13 +31,16 @@ public class LoginActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getAccessTokenLiveData().observe(this, this::saveOAuthToken);
         loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
 
-        if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN)
+        if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN){
+
             startActivity(new Intent(this,LogoutActivity.class));
+            finish();
+        }
         else
             binding.loginBtn.setOnClickListener(v -> startLogin());
     }
@@ -86,6 +92,22 @@ public class LoginActivity extends MusicBrainzActivity {
             startActivity(new Intent(this, KotlinDashboardActivity.class));
             Log.d(userInfo.getUsername());
             finish();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.about, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_preferences:  startActivity(new Intent(this, SettingsActivity.class));
+                                         return true;
+            default:   return super.onOptionsItemSelected(item);
+
         }
     }
 }

@@ -43,7 +43,6 @@
         android:id="@+id/instruction_id"
         android:layout_width="195dp"
         android:layout_height="168dp"
-        android:layout_below="@+id/icon_id"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="29dp"

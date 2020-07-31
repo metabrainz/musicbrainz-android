@@ -22,6 +22,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.FragmentDashSearchBinding;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
+import org.metabrainz.mobile.util.Log;
 
 import java.util.Objects;
 
@@ -40,6 +41,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
         binding.clearFocusView.requestFocus();
 
         setupSearchView();
+        binding.searchView.setBackgroundResource(R.drawable.searchview_bg);
         return binding.getRoot();
     }
 
@@ -60,7 +62,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
 
     private void setupSearchTypeSpinner() {
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.searchType,
-                android.R.layout.simple_spinner_item);
+                R.layout.spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.searchSpin.setAdapter(typeAdapter);
     }

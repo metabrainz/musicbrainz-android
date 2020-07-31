@@ -25,5 +25,6 @@
 <!--    Background-->
     <color name="app_bg">#263238</color>
     <color name="app_bg_light">#90A4AE</color>
+    <color name="app_bg_light2">#ECEFF1</color>
 
 </resources>

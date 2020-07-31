@@ -9,29 +9,22 @@
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/toolbar"
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="@color/app_bg"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/colToolbar_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="?attr/colorAccent"
+                app:contentScrim="@color/app_bg"
                 app:expandedTitleMarginEnd="48dp"
                 app:expandedTitleMarginStart="20dp"
-                app:layout_scrollFlags="snap|scroll"
-                app:title="MusicBrainz"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 >
 
-<!--                <androidx.appcompat.widget.Toolbar-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="?attr/actionBarSize"-->
-<!--                    app:layout_collapseMode="pin"-->
-<!--                    app:titleTextColor="@color/colorPrimary"-->
-<!--                    android:background="@color/app_bg">-->
-<!--                </androidx.appcompat.widget.Toolbar>-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -70,6 +63,17 @@
 
                     </LinearLayout>
                 </LinearLayout>
+
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:titleTextColor="@color/app_bg"
+                    android:background="@color/app_bg">
+                </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -187,7 +191,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:padding="5dp"
-                                android:text="Search Artist | Release | Label | event"
+                                android:text="@string/explain_search_feature"
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>
@@ -243,7 +247,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:padding="5dp"
-                                android:text="Explore your Collection"
+                                android:text="@string/explain_collection"
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>
@@ -290,7 +294,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:padding="5dp"
-                                android:text="Scan Barcode of Label"
+                                android:text="@string/explain_scan"
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>

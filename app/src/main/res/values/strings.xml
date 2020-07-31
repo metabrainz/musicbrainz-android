@@ -63,6 +63,7 @@
     <string name="action_search">Search</string>
     <string name="action_feedback">Feedback</string>
     <string name="action_settings">Settings</string>
+    <string name="action_authentication">Authentication</string>
     <string name="action_login">Log In</string>
     <string name="action_logout">Log Out</string>
 
@@ -148,8 +149,8 @@
 
 <!--    onboarding adapter description-->
     <string name="explain_fetch_metadata">Fix your Audio Metadata</string>
-    <string name="explain_search_feature"> Search Artist,Release,Label,Event</string>
-    <string name="explain_collection">Save your collection</string>
-    <string name="explain_scan">Scan Barcode of Label</string>
+    <string name="explain_search_feature"> Explore MusicBrainz Data</string>
+    <string name="explain_collection">Explore your Musicbrainz Collection</string>
+    <string name="explain_scan">Search using Barcodes</string>
 
 </resources>

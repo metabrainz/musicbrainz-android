@@ -8,12 +8,12 @@
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/app_bg"
-        app:titleTextColor="@color/colorPrimary"  />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@color/app_bg"-->
+<!--        app:titleTextColor="@color/colorPrimary"  />-->
 
     <FrameLayout
         android:id="@+id/settings_container"

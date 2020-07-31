@@ -3,6 +3,8 @@ package org.metabrainz.mobile.presentation.features.collection;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboa
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 import org.metabrainz.mobile.presentation.features.login.LogoutActivity;
+import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 import org.metabrainz.mobile.presentation.features.taggerkotlin.KotlinTaggerAcitivty;
 
 import java.util.ArrayList;
@@ -82,6 +85,7 @@ public class CollectionActivity extends MusicBrainzActivity {
             binding.progressSpinner.setVisibility(View.GONE);
             binding.loginRequired.setVisibility(View.GONE);
             callAlert();
+
         }
     }
 
@@ -113,18 +117,40 @@ public class CollectionActivity extends MusicBrainzActivity {
         builder.setPositiveButton("Login",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(CollectionActivity.this, LogoutActivity.class));
+                        startActivity(new Intent(CollectionActivity.this, LoginActivity.class));
+                        finish();
                     }
                 });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 startActivity(new Intent(CollectionActivity.this,KotlinDashboardActivity.class));
+                finish();
             }
         });
         builder.setCancelable(false);
         builder.show();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dash, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_login: {
+                if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
+                    startActivity(new Intent(this,LoginActivity.class));
+                else
+                    startActivity(new Intent(this,LogoutActivity.class));
+                return true;
+            }
+            case R.id.menu_preferences:  startActivity(new Intent(this, SettingsActivity.class));
+                                        return true;
+            default:     return super.onOptionsItemSelected(item);
 
+        }
+    }
 
 }

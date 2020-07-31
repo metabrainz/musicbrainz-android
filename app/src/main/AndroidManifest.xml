@@ -35,6 +35,16 @@
                   android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
 
+
+        <!--        <activity android:name=".presentation.features.dashboard.DashboardActivity">-->
+        <!--                        <meta-data-->
+        <!--                            android:name="android.app.searchable"-->
+        <!--                            android:resource="@xml/searchable" />-->
+        <!--        </activity>-->
+        <activity android:name=".presentation.features.KotlinDashboard.KotlinDashboardActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            />
+
         <activity android:name=".presentation.features.tagger.FileSelectActivity" />
 
         <activity
@@ -70,6 +80,8 @@
 
         <activity android:name=".presentation.features.search.kotlinSearchActivity"
                   android:label="@string/settings_search"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden"
                     >
             <meta-data
                 android:name="android.app.searchable"
@@ -148,7 +160,7 @@
         <activity
             android:name=".presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:theme="@style/AppThemeForSettings" />
 
         <activity
             android:name=".presentation.features.barcode.BarcodeActivity"

@@ -44,6 +44,7 @@ public class GettingStarted extends AppCompatActivity {
                 if(currentpage==nDots.length-1){
                     Intent intent=new Intent(GettingStarted.this, KotlinDashboardActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
                 else viewPager.setCurrentItem(currentpage+1);
@@ -64,7 +65,7 @@ public class GettingStarted extends AppCompatActivity {
         for(int i=0; i<4; i++){
             nDots[i]=new TextView(this);
             nDots[i].setText(Html.fromHtml("&#8226"));
-            nDots[i].setTextColor(getResources().getColor(R.color.white));
+            nDots[i].setTextColor(getResources().getColor(R.color.app_bg_light));
             nDots[i].setTextSize(35);
             linearLayout.addView(nDots[i]);
         }
