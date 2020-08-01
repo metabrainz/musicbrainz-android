@@ -3,7 +3,6 @@ package org.metabrainz.mobile.data.sources.api
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Build
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.Cache
@@ -14,7 +13,6 @@ import org.metabrainz.mobile.App
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import kotlin.coroutines.coroutineContext
 
 object MusicBrainzServiceGenerator {
 
@@ -35,9 +33,6 @@ object MusicBrainzServiceGenerator {
     private val loggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
     private var headerInterceptor: HeaderInterceptor? = null
-//    private val httpClientBuilder = OkHttpClient.Builder()
-//            .callTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-//            .connectTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
 
     private val httpClientBuilder = OkHttpClient.Builder()
             .cache(myCache)
@@ -78,7 +73,7 @@ object MusicBrainzServiceGenerator {
     }
 
     @JvmStatic
-    fun <S> createService(service: Class<S>?, requiresAuthenticator: Boolean): S {
+    fun <S> createService(service: Class<S>, requiresAuthenticator: Boolean): S {
         headerInterceptor = HeaderInterceptor()
         addInterceptors(headerInterceptor)
 
