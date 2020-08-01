@@ -111,7 +111,4 @@ class KotlinDashboardActivity: AppCompatActivity(){
         }
         return super.onOptionsItemSelected(item)
     }
-
-
-
 }
