@@ -22,6 +22,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.FragmentDashSearchBinding;
 import org.metabrainz.mobile.presentation.features.search.SearchActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
+import org.metabrainz.mobile.util.Log;
 
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
@@ -38,6 +39,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
         binding.clearFocusView.requestFocus();
 
         setupSearchView();
+        binding.searchView.setBackgroundResource(R.drawable.searchview_bg);
         return binding.getRoot();
     }
 

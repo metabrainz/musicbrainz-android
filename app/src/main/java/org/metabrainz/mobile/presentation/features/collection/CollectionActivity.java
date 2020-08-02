@@ -3,9 +3,14 @@ package org.metabrainz.mobile.presentation.features.collection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +21,12 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.UserPreferences;
+import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
+import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+import org.metabrainz.mobile.presentation.features.login.LogoutActivity;
+import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
+import org.metabrainz.mobile.presentation.features.taggerkotlin.KotlinTaggerAcitivty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +49,6 @@ public class CollectionActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCollectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
@@ -75,6 +84,9 @@ public class CollectionActivity extends MusicBrainzActivity {
             binding.noResult.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.GONE);
             binding.progressSpinner.setVisibility(View.GONE);
+            binding.loginRequired.setVisibility(View.GONE);
+            callAlert();
+
         }
     }
 
@@ -99,9 +111,29 @@ public class CollectionActivity extends MusicBrainzActivity {
         }
     }
 
+    public void callAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.loginrequiredDialog);
+        builder.setTitle("Login Required");
+        builder.setMessage("You need to log in to see your collections");
+        builder.setPositiveButton("Login",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(CollectionActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(CollectionActivity.this,KotlinDashboardActivity.class));
+                finish();
+            }
+        });
+        builder.setCancelable(false);
+        builder.show();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.dash, menu);
         menu.findItem(R.id.menu_open_website).setVisible(false);
         return true;
     }
@@ -109,5 +141,19 @@ public class CollectionActivity extends MusicBrainzActivity {
     @Override
     protected Uri getBrowserURI() {
         return Uri.EMPTY;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_login:
+                if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
+                    startActivity(new Intent(this,LoginActivity.class));
+                else
+                    startActivity(new Intent(this,LogoutActivity.class));
+                return true;
+            case R.id.menu_preferences:  startActivity(new Intent(this, SettingsActivity.class));
+                                        return true;
+            default:     return super.onOptionsItemSelected(item);
+        }
     }
 }

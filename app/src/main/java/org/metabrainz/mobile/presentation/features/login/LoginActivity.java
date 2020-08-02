@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +15,8 @@ import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 import org.metabrainz.mobile.databinding.ActivityLoginBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
+import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.Objects;
@@ -35,8 +38,13 @@ public class LoginActivity extends MusicBrainzActivity {
         loginViewModel.getAccessTokenLiveData().observe(this, this::saveOAuthToken);
         loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
 
-        binding.loginBtn.setOnClickListener(v -> startLogin());
-        binding.logoutBtn.setOnClickListener(v -> logoutUser());
+        if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN){
+
+            startActivity(new Intent(this,LogoutActivity.class));
+            finish();
+        }
+        else
+            binding.loginBtn.setOnClickListener(v -> startLogin());
     }
 
     @Override
@@ -53,7 +61,6 @@ public class LoginActivity extends MusicBrainzActivity {
     }
 
     private void startLogin() {
-        if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT) {
             Intent intent = new Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse(MusicBrainzServiceGenerator.AUTH_URL
@@ -62,16 +69,8 @@ public class LoginActivity extends MusicBrainzActivity {
                             + "&redirect_uri=" + MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI
                             + "&scope=profile%20collection%20tag%20rating"));
             startActivity(intent);
-        } else Toast.makeText(this, "You are already logged in", Toast.LENGTH_SHORT).show();
     }
 
-    private void logoutUser() {
-        LoginSharedPreferences.logoutUser();
-        Toast.makeText(getApplicationContext(),
-                "User has successfully logged out.",
-                Toast.LENGTH_LONG).show();
-        finish();
-    }
 
     private void saveOAuthToken(AccessToken accessToken) {
         if (accessToken != null) {
@@ -92,6 +91,7 @@ public class LoginActivity extends MusicBrainzActivity {
             Toast.makeText(getApplicationContext(),
                     "Login successful. " + userInfo.getUsername() + " is now logged in.",
                     Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, KotlinDashboardActivity.class));
             Log.d(userInfo.getUsername());
             finish();
         }
@@ -106,6 +106,16 @@ public class LoginActivity extends MusicBrainzActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.menu_open_website).setVisible(false);
+        getMenuInflater().inflate(R.menu.about, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_preferences: startActivity(new Intent(this, SettingsActivity.class));
+                                         return true;
+            default:   return super.onOptionsItemSelected(item);
+        }
     }
 }

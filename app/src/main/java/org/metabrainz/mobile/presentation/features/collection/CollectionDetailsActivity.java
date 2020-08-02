@@ -3,6 +3,8 @@ package org.metabrainz.mobile.presentation.features.collection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.content.Intent;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +17,10 @@ import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+import org.metabrainz.mobile.presentation.features.login.LoginActivity;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+import org.metabrainz.mobile.presentation.features.login.LogoutActivity;
+import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +47,6 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCollectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         binding.noResult.setVisibility(View.GONE);
@@ -90,11 +95,27 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.menu_open_website).setVisible(false);
+        getMenuInflater().inflate(R.menu.dash, menu);
         return true;
     }
 
     @Override
     protected Uri getBrowserURI() {
         return Uri.EMPTY;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_login:
+                if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
+                    startActivity(new Intent(this, LoginActivity.class));
+                else
+                    startActivity(new Intent(this, LogoutActivity.class));
+                return true;
+            case R.id.menu_preferences:  startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            default:     return super.onOptionsItemSelected(item);
+
+        }
     }
 }
