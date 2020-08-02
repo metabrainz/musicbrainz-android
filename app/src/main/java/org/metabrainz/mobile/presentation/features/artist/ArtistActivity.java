@@ -43,8 +43,8 @@ public class ArtistActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityArtistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        setupToolbar(binding);
 
         artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
         releaseListViewModel = new ViewModelProvider(this).get(ReleaseListViewModel.class);

@@ -7,13 +7,7 @@
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:id="@+id/toolbar"
-        android:layout_height="?attr/actionBarSize"
-        app:titleTextColor="@color/colorPrimary"
-        android:background="@color/app_bg"
-       />
+    <include layout="@layout/layout_toolbar" />
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"

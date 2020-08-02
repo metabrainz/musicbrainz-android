@@ -9,9 +9,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewbinding.ViewBinding;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.databinding.LayoutToolbarBinding;
 import org.metabrainz.mobile.util.Utils;
+
+import java.util.Objects;
 
 public abstract class MusicBrainzActivity extends AppCompatActivity {
 
@@ -22,6 +26,12 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
     }
 
     protected abstract Uri getBrowserURI();
+
+    protected void setupToolbar(ViewBinding binding) {
+        LayoutToolbarBinding toolbarBinding = LayoutToolbarBinding.bind(binding.getRoot());
+        setSupportActionBar(toolbarBinding.toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

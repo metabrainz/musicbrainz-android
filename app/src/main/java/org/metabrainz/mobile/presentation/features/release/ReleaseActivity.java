@@ -39,8 +39,8 @@ public class ReleaseActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityReleaseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        setupToolbar(binding);
 
         releaseViewModel = new ViewModelProvider(this).get(ReleaseViewModel.class);
         linksViewModel = new ViewModelProvider(this).get(LinksViewModel.class);

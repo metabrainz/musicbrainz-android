@@ -38,8 +38,8 @@ public class RecordingActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRecordingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        setupToolbar(binding);
 
         recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);

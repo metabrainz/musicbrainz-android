@@ -21,7 +21,6 @@ import org.metabrainz.mobile.presentation.features.release_list.ReleaseListAdapt
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -39,8 +38,8 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityBarcodeResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        setupToolbar(binding);
 
         adapter = new ReleaseListAdapter(this, releases);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));

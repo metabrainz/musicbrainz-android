@@ -38,8 +38,8 @@ public class LabelActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLabelBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        setupToolbar(binding);
 
         labelViewModel = new ViewModelProvider(this).get(LabelViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);

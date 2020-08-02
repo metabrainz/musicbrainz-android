@@ -38,8 +38,8 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityReleaseGroupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        setupToolbar(binding);
 
         releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
