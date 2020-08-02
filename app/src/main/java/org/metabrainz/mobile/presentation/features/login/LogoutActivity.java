@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.databinding.ActivityLoginBinding;
@@ -17,28 +16,27 @@ import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 
 import java.util.Objects;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class LogoutActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setContentView(binding.getRoot());
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         binding.loginPromptId.setText(R.string.logout_prompt);
         binding.loginBtn.setText(R.string.logout);
         if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
             startActivity(new Intent(this,LoginActivity.class));
         else
-            binding.loginBtn.setOnClickListener( v -> logoutUser());
-
-        super.onCreate(savedInstanceState);
+            binding.loginBtn.setOnClickListener(v -> logoutUser());
     }
 
     private void logoutUser() {
@@ -60,7 +58,7 @@ public class LogoutActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.menu_preferences:  {startActivity(new Intent(this, SettingsActivity.class));
-                                        return true; }
+                return true; }
             case android.R.id.home : {
                 this.finish();
                 return true;
