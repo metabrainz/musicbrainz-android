@@ -25,7 +25,9 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
         return true;
     }
 
-    protected abstract Uri getBrowserURI();
+    protected Uri getBrowserURI() {
+        return Uri.EMPTY;
+    }
 
     protected void setupToolbar(ViewBinding binding) {
         LayoutToolbarBinding toolbarBinding = LayoutToolbarBinding.bind(binding.getRoot());
@@ -37,7 +39,7 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == android.R.id.home) {
-            startActivity(IntentFactory.getDashboard(getApplicationContext()));
+            onBackPressed();
             return true;
         } else if (itemId == R.id.menu_preferences) {
             startActivity(IntentFactory.getSettings(getApplicationContext()));
@@ -52,6 +54,7 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(getBrowserURI());
             startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

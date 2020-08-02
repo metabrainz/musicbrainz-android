@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.google.android.material.appbar.AppBarLayout
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.KotlinDashboardLayoutBinding
@@ -17,7 +16,6 @@ import org.metabrainz.mobile.presentation.features.dashboard.DonateActivity
 import org.metabrainz.mobile.presentation.features.login.LoginActivity
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences
 import org.metabrainz.mobile.presentation.features.login.LogoutActivity
-import org.metabrainz.mobile.presentation.features.search.SearchActivity
 import org.metabrainz.mobile.presentation.features.search.kotlinSearchActivity
 import org.metabrainz.mobile.presentation.features.settings.SettingsActivity
 import org.metabrainz.mobile.presentation.features.taggerkotlin.KotlinTaggerAcitivty
@@ -88,6 +86,7 @@ class KotlinDashboardActivity: AppCompatActivity(){
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.dash, menu)
+        menu?.findItem(R.id.menu_open_website)?.isVisible = false
         return true
     }
 

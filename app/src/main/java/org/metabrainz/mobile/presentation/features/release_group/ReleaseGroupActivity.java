@@ -2,7 +2,6 @@ package org.metabrainz.mobile.presentation.features.release_group;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -50,15 +49,6 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
         if (mbid != null && !mbid.isEmpty()) releaseGroupViewModel.setMBID(mbid);
 
         releaseGroupViewModel.getData().observe(this, this::setReleaseGroup);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setReleaseGroup(ReleaseGroup releaseGroup) {

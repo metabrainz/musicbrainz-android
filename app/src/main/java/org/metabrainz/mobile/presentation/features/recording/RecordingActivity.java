@@ -2,7 +2,6 @@ package org.metabrainz.mobile.presentation.features.recording;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -50,15 +49,6 @@ public class RecordingActivity extends MusicBrainzActivity {
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);
 
         recordingViewModel.getData().observe(this, this::setRecording);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setRecording(Recording recording) {

@@ -2,7 +2,6 @@ package org.metabrainz.mobile.presentation.features.label;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -50,15 +49,6 @@ public class LabelActivity extends MusicBrainzActivity {
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);
 
         labelViewModel.getData().observe(this, this::setLabel);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setLabel(Label label) {

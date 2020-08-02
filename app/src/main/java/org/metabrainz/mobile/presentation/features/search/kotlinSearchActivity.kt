@@ -11,7 +11,6 @@ import org.metabrainz.mobile.presentation.features.login.LoginActivity
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences
 import org.metabrainz.mobile.presentation.features.login.LogoutActivity
 import org.metabrainz.mobile.presentation.features.settings.SettingsActivity
-import java.util.*
 
 class kotlinSearchActivity : AppCompatActivity() {
 
@@ -19,12 +18,13 @@ class kotlinSearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = KotlinSearchActivityBinding.inflate(layoutInflater)
-        Objects.requireNonNull(supportActionBar)!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setContentView(binding.root)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.dash, menu)
+        menu?.findItem(R.id.menu_open_website)?.isVisible = false
         return true
     }
 

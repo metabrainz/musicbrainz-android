@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -16,7 +15,6 @@ import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 import org.metabrainz.mobile.databinding.ActivityLoginBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
-import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.Objects;
@@ -98,24 +96,11 @@ public class LoginActivity extends MusicBrainzActivity {
     }
 
     @Override
-    protected Uri getBrowserURI() {
-        return Uri.EMPTY;
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.menu_open_website).setVisible(false);
-        getMenuInflater().inflate(R.menu.about, menu);
+        menu.findItem(R.id.menu_login).setVisible(false);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.menu_preferences: startActivity(new Intent(this, SettingsActivity.class));
-                                         return true;
-            default:   return super.onOptionsItemSelected(item);
-        }
-    }
 }

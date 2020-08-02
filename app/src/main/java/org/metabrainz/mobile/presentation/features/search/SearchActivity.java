@@ -96,9 +96,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
     private void doSearch() {
         saveSearchSuggestion(query);
         adapter.resetAnimation();
-        viewModel.search(entity, query).observe(this, pagingData -> {
-            adapter.submitData(getLifecycle(), pagingData);
-        });
+        viewModel.search(entity, query)
+                .observe(this, pagingData -> adapter.submitData(getLifecycle(), pagingData));
     }
 
     @Override

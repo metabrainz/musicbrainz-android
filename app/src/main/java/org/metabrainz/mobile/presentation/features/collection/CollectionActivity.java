@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -22,8 +21,6 @@ import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
-import org.metabrainz.mobile.presentation.features.login.LogoutActivity;
-import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,18 +130,4 @@ public class CollectionActivity extends MusicBrainzActivity {
         return Uri.EMPTY;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_login) {
-            if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
-                startActivity(new Intent(this, LoginActivity.class));
-            else
-                startActivity(new Intent(this, LogoutActivity.class));
-            return true;
-        } else if (id == R.id.menu_preferences) {
-            startActivity(new Intent(this, SettingsActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

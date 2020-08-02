@@ -2,7 +2,6 @@ package org.metabrainz.mobile.presentation.features.artist;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -81,15 +80,6 @@ public class ArtistActivity extends MusicBrainzActivity {
             releaseListViewModel.setData(artist.getReleases());
             linksViewModel.setData(artist.getRelations());
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
