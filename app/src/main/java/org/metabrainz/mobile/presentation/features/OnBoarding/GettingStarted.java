@@ -9,10 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
 import org.metabrainz.mobile.presentation.features.adapters.SliderAdapter;
 
@@ -33,8 +33,8 @@ public class GettingStarted extends AppCompatActivity {
         nextB=findViewById(R.id.nextB);
         viewPager=findViewById(R.id.slide_id);
         linearLayout=findViewById(R.id.dots);
-        adapter=  new SliderAdapter(GettingStarted.this);
-        viewPager.setAdapter((PagerAdapter) adapter);
+        adapter = new SliderAdapter(GettingStarted.this);
+        viewPager.setAdapter(adapter);
         prevB.setVisibility(View.INVISIBLE);
         addDotsView(0);
         viewPager.addOnPageChangeListener(viewListener);
@@ -42,6 +42,7 @@ public class GettingStarted extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(currentpage==nDots.length-1){
+                    UserPreferences.setOnBoardingCompleted();
                     Intent intent=new Intent(GettingStarted.this, KotlinDashboardActivity.class);
                     startActivity(intent);
                     finish();

@@ -14,21 +14,11 @@ public class LoginSharedPreferences {
     private static final String USERNAME = "username";
     public static final int STATUS_LOGGED_IN = 1;
     public static final int STATUS_LOGGED_OUT = 0;
-    public static final boolean ONBOARDING_SKIP_PRESSED = false;
 
     public static SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(App.getContext());
     }
 
-    public static void saveSkipState(){
-        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
-        editor.putBoolean(String.valueOf(ONBOARDING_SKIP_PRESSED),true);
-        editor.apply();
-    }
-
-    public static boolean getSkipState(){
-        return ONBOARDING_SKIP_PRESSED;
-    }
     public static void saveOAuthToken(AccessToken token) {
         SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
         editor.putString(ACCESS_TOKEN, token.getAccessToken());

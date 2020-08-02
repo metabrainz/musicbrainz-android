@@ -12,9 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.metabrainz.mobile.R
+import org.metabrainz.mobile.presentation.UserPreferences
 import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity
 import org.metabrainz.mobile.presentation.features.OnBoarding.AllowMe
-import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(3000)
-            if (LoginSharedPreferences.getSkipState())
+            if (UserPreferences.getOnBoardingStatus())
                 startActivity(Intent(this@SplashActivity, KotlinDashboardActivity::class.java))
             else
                 startActivity(Intent(this@SplashActivity, AllowMe::class.java))

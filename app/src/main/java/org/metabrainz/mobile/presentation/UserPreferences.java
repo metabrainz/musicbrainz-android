@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
+import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import static org.metabrainz.mobile.App.TAGGER_ROOT_DIRECTORY;
 
@@ -17,9 +18,20 @@ public class UserPreferences {
     private static final String PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections";
     private static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
     private static final String PREFERENCE_SYSTEM_LANGUAGE = "use_english";
+    private static final String PREFERENCE_ONBOARDING = "show_onboarding";
 
     private static SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(App.getContext());
+    }
+
+    public static void setOnBoardingCompleted() {
+        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
+        editor.putBoolean(PREFERENCE_ONBOARDING, true);
+        editor.apply();
+    }
+
+    public static boolean getOnBoardingStatus() {
+        return UserPreferences.getPreferences().getBoolean(PREFERENCE_ONBOARDING, false);
     }
 
     public static boolean getPrivateCollectionsPreference() {
