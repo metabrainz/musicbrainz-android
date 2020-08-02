@@ -5,14 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:gravity="center|top"
+    android:background="@color/app_bg"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:titleTextColor="@color/white" />
+        android:background="@color/app_bg"
+        app:titleTextColor="@color/colorPrimary"  />
 
     <ProgressBar
         android:id="@+id/progress_spinner"

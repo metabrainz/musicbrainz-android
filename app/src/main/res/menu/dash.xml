@@ -11,12 +11,14 @@
 
     <item
         android:id="@+id/menu_login"
-        android:title="@string/action_login"
-        app:showAsAction="never" />
+        android:title="@string/action_authentication"
+        android:icon="@drawable/user"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_preferences"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:icon="@drawable/action_settings"
+        app:showAsAction="ifRoom" />
 
 </menu>

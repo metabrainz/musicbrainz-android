@@ -5,18 +5,22 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/clear_focus_view"
+    android:layout_gravity="center"
     android:focusableInTouchMode="true"
     android:padding="8dp">
 
     <Spinner
         android:id="@+id/search_spin"
+        style="@style/SpinnerTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:iconifiedByDefault="false"
+        android:layout_marginTop="10dp"
+        android:background="@color/app_bg_light2"
         android:queryHint="@string/search_hint" />
 </LinearLayout>
