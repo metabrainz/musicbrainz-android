@@ -12,7 +12,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.metabrainz.mobile.App
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 object MusicBrainzServiceGenerator {
 
@@ -24,11 +23,9 @@ object MusicBrainzServiceGenerator {
     const val OAUTH_REDIRECT_URI = "org.metabrainz.mobile://oauth"
     const val ACOUST_ID_KEY = "5mgEECwRkp"
 
-    
     private const val cacheSize = (5 * 1024 * 1024).toLong()
     private val  myCache = Cache(App.getContext().cacheDir, cacheSize)
 
-    private const val TIMEOUT = 20000
     private var authenticator: OAuthAuthenticator? = null
     private val loggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -36,8 +33,6 @@ object MusicBrainzServiceGenerator {
 
     private val httpClientBuilder = OkHttpClient.Builder()
             .cache(myCache)
-            .callTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-            .connectTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
             .addInterceptor { chain ->
                 var request = chain.request()
                 request = if (hasNetwork(App.getContext())!!)
@@ -47,19 +42,17 @@ object MusicBrainzServiceGenerator {
                 chain.proceed(request)
             }
 
-
     private val builder = Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
-
     private var retrofit = builder.build()
 
-    fun hasNetwork(context: Context): Boolean? {
+    private fun hasNetwork(context: Context): Boolean? {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val nw      = connectivityManager.activeNetwork ?: return false
+            val nw = connectivityManager.activeNetwork ?: return false
             val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
             return when {
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
@@ -97,4 +90,5 @@ object MusicBrainzServiceGenerator {
             retrofit = builder.build()
         }
     }
+
 }
