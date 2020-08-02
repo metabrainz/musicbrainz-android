@@ -1,9 +1,9 @@
 package org.metabrainz.mobile.presentation.features.collection;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -47,6 +47,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCollectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         binding.noResult.setVisibility(View.GONE);
@@ -66,12 +67,11 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         binding.recyclerView.setVisibility(View.GONE);
 
         binding.progressSpinner.setVisibility(View.VISIBLE);
-        viewModel.fetchCollectionDetails(entity, id).observe(this,
-                results -> {
-                    collectionResults.clear();
-                    collectionResults.addAll(results);
-                    refresh();
-                });
+        viewModel.fetchCollectionDetails(entity, id).observe(this, results -> {
+            collectionResults.clear();
+            collectionResults.addAll(results);
+            refresh();
+        });
     }
 
     private void refresh() {
@@ -79,7 +79,6 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         binding.progressSpinner.setVisibility(View.GONE);
         checkHasResults();
     }
-
 
     private void checkHasResults() {
         if (adapter.getItemCount() == 0) {
@@ -105,17 +104,17 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.menu_login:
-                if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
-                    startActivity(new Intent(this, LoginActivity.class));
-                else
-                    startActivity(new Intent(this, LogoutActivity.class));
-                return true;
-            case R.id.menu_preferences:  startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-            default:     return super.onOptionsItemSelected(item);
-
+        int id = item.getItemId();
+        if (id == R.id.menu_login) {
+            if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
+                startActivity(new Intent(this, LoginActivity.class));
+            else
+                startActivity(new Intent(this, LogoutActivity.class));
+            return true;
+        } else if (id == R.id.menu_preferences) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }
