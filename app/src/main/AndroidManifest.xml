@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.metabrainz.mobile">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -11,6 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.Manifest.permission.MEDIA_CONTENT_CONTROL" />
+
     <application
         android:name=".App"
         android:allowBackup="false"
@@ -19,7 +21,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:autoRevokePermissions="allowed"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="30">
+
         <service
             android:name=".ListenService"
             android:enabled="true"
@@ -30,7 +35,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".presentation.features.SplashActivity.SplashActivity"
+        <activity
+            android:name=".presentation.features.splash_screen.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

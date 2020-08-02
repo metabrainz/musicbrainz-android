@@ -9,18 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/splashscreen_logo2"></ImageView>
+        android:src="@drawable/splashscreen_logo2" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/splash_text"-->
-<!--        android:text="@string/splashscreen_text"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textSize="20sp"-->
-<!--        android:layout_marginTop="25dp"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColor="@color/app_bg_light"-->
-<!--        android:layout_below="@+id/splash_image"/>-->
-</RelativeLayout
-   >
+</RelativeLayout>
