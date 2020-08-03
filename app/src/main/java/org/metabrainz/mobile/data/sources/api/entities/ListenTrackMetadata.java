@@ -2,6 +2,8 @@ package org.metabrainz.mobile.data.sources.api.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ListenTrackMetadata {
 
     @SerializedName("artist_name")
@@ -37,6 +39,7 @@ public class ListenTrackMetadata {
             this.release = release;
         }
 
+    @NotNull
     @Override
     public String toString() {
         return "ListenTrackMetadata{" +

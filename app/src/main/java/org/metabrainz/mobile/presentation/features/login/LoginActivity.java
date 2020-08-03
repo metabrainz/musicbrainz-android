@@ -14,7 +14,7 @@ import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 import org.metabrainz.mobile.databinding.ActivityLoginBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
-import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
+import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
 import org.metabrainz.mobile.util.Log;
 
 import java.util.Objects;
@@ -89,7 +89,7 @@ public class LoginActivity extends MusicBrainzActivity {
             Toast.makeText(getApplicationContext(),
                     "Login successful. " + userInfo.getUsername() + " is now logged in.",
                     Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, KotlinDashboardActivity.class));
+            startActivity(new Intent(this, DashboardActivity.class));
             Log.d(userInfo.getUsername());
             finish();
         }

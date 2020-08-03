@@ -87,7 +87,7 @@ public class Place {
         this.coordinates = coordinates;
     }
 
-    public class Coordinates {
+    public static class Coordinates {
         private String latitude;
         private String longitude;
 

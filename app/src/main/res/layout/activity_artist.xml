@@ -10,14 +10,14 @@
     <include layout="@layout/layout_toolbar" />
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabs"
         app:tabGravity="center" />
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pager" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

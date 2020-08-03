@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -22,8 +22,7 @@
                 app:contentScrim="@color/app_bg"
                 app:expandedTitleMarginEnd="48dp"
                 app:expandedTitleMarginStart="20dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                >
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -31,21 +30,21 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:src="@drawable/splashscreen_logo2">
-                    </ImageView>
+                        android:src="@drawable/splashscreen_logo2"></ImageView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -57,9 +56,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="40dp"
+                            android:text="Brainz"
                             android:textColor="#EB743B"
-                            android:text="Brainz" />
+                            android:textSize="40dp" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -69,11 +68,10 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    android:background="@color/app_bg"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:titleTextColor="@color/app_bg"
-                    android:background="@color/app_bg">
-                </androidx.appcompat.widget.Toolbar>
+                    app:titleTextColor="@color/app_bg"></androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -88,10 +86,10 @@
                 android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#263238"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:background="#263238"
                 tools:context="com.example.MainActivity">
 
                 <LinearLayout
@@ -107,10 +105,9 @@
                         android:layout_height="190dp"
                         android:layout_margin="10dp"
                         android:clickable="true"
-                        android:onClick="tagClicked"
                         android:elevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        android:foreground="?android:attr/selectableItemBackground">
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -157,8 +154,8 @@
                         android:layout_margin="10dp"
                         android:clickable="true"
                         android:elevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        android:foreground="?android:attr/selectableItemBackground">
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -213,8 +210,8 @@
                         android:layout_margin="10dp"
                         android:clickable="true"
                         android:elevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        android:foreground="?android:attr/selectableItemBackground">
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -260,8 +257,8 @@
                         android:layout_margin="10dp"
                         android:clickable="true"
                         android:elevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        android:foreground="?android:attr/selectableItemBackground">
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -274,7 +271,7 @@
                                 android:layout_height="64dp"
                                 android:background="#ffffff"
                                 android:padding="5dp"
-                                android:src="@drawable/scan_icon"></ImageView>
+                                android:src="@drawable/scan_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -316,8 +313,8 @@
                         android:layout_margin="10dp"
                         android:clickable="true"
                         android:elevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        android:foreground="?android:attr/selectableItemBackground">
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -363,8 +360,8 @@
                         android:layout_margin="10dp"
                         android:clickable="true"
                         android:elevation="10dp"
-                        app:cardCornerRadius="10dp"
-                        android:foreground="?android:attr/selectableItemBackground">
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -377,7 +374,7 @@
                                 android:layout_height="64dp"
                                 android:background="#ffffff"
                                 android:padding="10dp"
-                                android:src="@drawable/about_icon"></ImageView>
+                                android:src="@drawable/about_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"

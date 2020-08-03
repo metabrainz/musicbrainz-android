@@ -2,41 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/app_bg"
-    android:orientation="vertical">
-<!--    android:layout_gravity="center"-->
-<!--    android:gravity="center"-->
+    android:background="@color/app_bg">
 
-    <TextView
-        android:id="@+id/no_result"
-        android:textColor="@color/white"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/no_results"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="center_horizontal" />
-    <ProgressBar
-        android:id="@+id/progress_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center" />
+        android:layout_marginTop="100dp"
+        android:background="@color/app_bg">
+
+        <fragment
+            android:id="@+id/search_fragment"
+            android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-<!--    <fragment-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/fab_icons"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:name="org.metabrainz.mobile.presentation.features.userdata.FAButility"></fragment>-->
 </RelativeLayout>

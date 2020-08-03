@@ -20,9 +20,8 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.FragmentDashSearchBinding;
-import org.metabrainz.mobile.presentation.features.search.SearchActivity;
+import org.metabrainz.mobile.presentation.features.search.SearchResultsActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
-import org.metabrainz.mobile.util.Log;
 
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
@@ -69,7 +68,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
         String query = binding.searchView.getQuery().toString();
 
         if (query.length() > 0) {
-            Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
+            Intent searchIntent = new Intent(getActivity(), SearchResultsActivity.class);
             searchIntent.putExtra(SearchManager.QUERY, query);
             searchIntent.putExtra(Constants.TYPE, getSearchTypeFromSpinner());
             startActivity(searchIntent);

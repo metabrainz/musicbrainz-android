@@ -48,7 +48,7 @@ public class Image {
         this.thumbnails = thumbnails;
     }
 
-    public class Thumbnail {
+    public static class Thumbnail {
         String small;
         String large;
 

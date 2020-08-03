@@ -50,7 +50,7 @@ public class SuggestionHelper {
         return cursor;
     }
 
-    private class SuggestionCursorToString implements SimpleCursorAdapter.CursorToStringConverter {
+    private static class SuggestionCursorToString implements SimpleCursorAdapter.CursorToStringConverter {
 
         @Override
         public CharSequence convertToString(Cursor cursor) {

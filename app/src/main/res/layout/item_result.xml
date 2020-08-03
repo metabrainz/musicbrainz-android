@@ -14,22 +14,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/app_bg_light"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/app_bg_light">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/app_bg"
             android:layout_margin="2dp"
+            android:background="@color/app_bg"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
                 android:gravity="center|start"
+                android:padding="3dp"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:textColor="@color/white"
                 tools:text="Artist Name" />
@@ -37,9 +37,9 @@
             <TextView
                 android:id="@+id/item_disambiguation"
                 android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:padding="3dp"
                 android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textColor="@color/white"
                 tools:text="Disambiguation" />
 
             <LinearLayout
@@ -58,12 +58,12 @@
 
                 <TextView
                     android:id="@+id/item_secondary"
-                    android:textColor="@color/white"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:gravity="end"
                     android:paddingRight="10dp"
+                    android:textColor="@color/white"
                     tools:text="Area" />
 
             </LinearLayout>

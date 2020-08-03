@@ -43,7 +43,7 @@ public class WikiSummary {
         this.extract = extract;
     }
 
-    private class OriginalImage {
+    private static class OriginalImage {
         private String source;
         private int width, height;
 

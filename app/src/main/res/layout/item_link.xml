@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
     android:layout_height="42dp"
+    android:adjustViewBounds="true"
     android:gravity="center"
-    android:adjustViewBounds="true">
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/link_image"
         android:layout_width="wrap_content"
-        android:maxWidth="96dp"
-        android:adjustViewBounds="true"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/tab_links"
+        android:maxWidth="96dp"
         android:scaleType="centerInside"
         tools:src="@drawable/youtube_logo" />
 
@@ -23,8 +23,8 @@
         android:id="@+id/link_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fontFamily="@font/roboto_medium"
         android:textColor="@color/black"
+        app:fontFamily="@font/roboto_medium"
         tools:text="Online Community" />
 
 </LinearLayout>

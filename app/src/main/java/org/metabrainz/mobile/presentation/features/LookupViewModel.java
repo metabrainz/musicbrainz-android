@@ -13,9 +13,9 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 public abstract class LookupViewModel extends ViewModel {
 
     protected LookupRepository repository;
-    protected MutableLiveData<String> MBID;
+    protected final MutableLiveData<String> MBID;
     protected MBEntityType entity;
-    protected LiveData<String> jsonLiveData;
+    protected final LiveData<String> jsonLiveData;
 
     protected LookupViewModel(LookupRepository repository) {
         this.repository = repository;

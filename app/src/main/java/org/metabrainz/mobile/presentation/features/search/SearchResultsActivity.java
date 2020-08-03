@@ -18,7 +18,7 @@ import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
-import org.metabrainz.mobile.databinding.ActivitySearchBinding;
+import org.metabrainz.mobile.databinding.ActivitySearchResultsBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItemComparator;
 import org.metabrainz.mobile.presentation.features.adapters.ResultPagingAdapter;
@@ -31,9 +31,9 @@ import java.util.Objects;
  * Activity to display a list of search results to the user and support intents
  * to info Activity types based on the selection.
  */
-public class SearchActivity extends MusicBrainzActivity implements SearchView.OnQueryTextListener {
+public class SearchResultsActivity extends MusicBrainzActivity implements SearchView.OnQueryTextListener {
 
-    private ActivitySearchBinding binding;
+    private ActivitySearchResultsBinding binding;
     private SearchViewModel viewModel;
     private SearchView searchView;
     private ResultPagingAdapter adapter;
@@ -44,9 +44,8 @@ public class SearchActivity extends MusicBrainzActivity implements SearchView.On
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySearchBinding.inflate(getLayoutInflater());
+        binding = ActivitySearchResultsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         binding.noResult.setVisibility(View.GONE);

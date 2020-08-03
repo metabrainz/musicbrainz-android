@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
-import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
+import org.metabrainz.mobile.databinding.ActivityCollectionDetailsBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class CollectionDetailsActivity extends MusicBrainzActivity {
 
-    private ActivityCollectionBinding binding;
+    private ActivityCollectionDetailsBinding binding;
 
     private CollectionViewModel viewModel;
     private ResultAdapter adapter;
@@ -38,7 +38,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCollectionBinding.inflate(getLayoutInflater());
+        binding = ActivityCollectionDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setupToolbar(binding);

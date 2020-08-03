@@ -15,11 +15,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/releases"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
-            android:textColor="@color/black"
+            android:text="@string/releases"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
             android:textStyle="normal" />
 
         <androidx.recyclerview.widget.RecyclerView

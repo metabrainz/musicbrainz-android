@@ -27,11 +27,6 @@ public class ResultPagingAdapter extends PagingDataAdapter<ResultItem, ResultVie
         this.entity = entity;
     }
 
-    @Override
-    public int getItemCount() {
-        return super.getItemCount();
-    }
-
     @NonNull
     @Override
     public ResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

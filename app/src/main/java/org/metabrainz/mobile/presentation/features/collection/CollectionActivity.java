@@ -18,7 +18,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
 import org.metabrainz.mobile.databinding.ActivityCollectionBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.UserPreferences;
-import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
+import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
@@ -111,7 +111,7 @@ public class CollectionActivity extends MusicBrainzActivity {
             finish();
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> {
-            startActivity(new Intent(CollectionActivity.this, KotlinDashboardActivity.class));
+            startActivity(new Intent(CollectionActivity.this, DashboardActivity.class));
             finish();
         });
         builder.setCancelable(false);

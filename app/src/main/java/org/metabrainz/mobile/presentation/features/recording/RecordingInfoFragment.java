@@ -45,7 +45,7 @@ public class RecordingInfoFragment extends Fragment {
             duration = recording.getDuration();
             artist = EntityUtils.getDisplayArtist(recording.getArtistCredits());
             if (duration != null) binding.recordingDuration.setText(duration);
-            if (artist != null) binding.recordingArtist.setText(artist);
+            binding.recordingArtist.setText(artist);
         }
     }
 }

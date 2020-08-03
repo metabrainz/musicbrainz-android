@@ -53,8 +53,8 @@ public class Metadata {
             Release tempRelease = new Release();
             tempRelease.setTitle(release);
             if (!totalTracks.isEmpty()) {
-                tempRelease.setTrackCount(Integer.valueOf(totalTracks));
-                recording.setTrackCount(Integer.valueOf(totalTracks));
+                tempRelease.setTrackCount(Integer.parseInt(totalTracks));
+                recording.setTrackCount(Integer.parseInt(totalTracks));
             }
             recording.getReleases().add(tempRelease);
             recording.setLength(getDuration(file.getFile()));

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/card_view_radius"
-    android:layout_margin="@dimen/item_padding"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/item_padding"
+    app:cardCornerRadius="@dimen/card_view_radius">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,20 +12,20 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/title"
-            android:textStyle="bold"
             android:padding="@dimen/item_padding"
-            android:textColor="@color/black"
+            android:text="@string/links"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            app:fontFamily="@font/roboto_medium"
-            android:text="@string/links" />
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:fontFamily="@font/roboto_medium" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/links_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/links_list" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,29 +8,28 @@
         android:id="@+id/expandable_list_child_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/key_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:gravity="left"
             android:fontFamily="@font/roboto_medium"
-            android:text="Title : "/>
+            android:gravity="left"
+            android:text="Title : " />
 
         <TextView
             android:id="@+id/value_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/roboto_medium"
-            android:text=" Place the title of the song here and this can "/>
+            android:gravity="center_horizontal"
+            android:text=" Place the title of the song here and this can "
+            android:textAlignment="center" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>

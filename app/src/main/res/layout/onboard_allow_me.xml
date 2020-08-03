@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg">
+    android:background="@color/app_bg"
+    android:orientation="vertical">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/mascot_id"
@@ -38,20 +38,20 @@
         android:id="@+id/lets_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lets_go"
         android:layout_alignParentBottom="true"
-        android:background="@color/app_bg"
-        android:textColor="@color/white"
         android:layout_toLeftOf="@id/skip_btn"
-        />
+        android:background="@color/app_bg"
+        android:text="@string/lets_go"
+        android:textColor="@color/white" />
+
     <Button
         android:id="@+id/skip_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/skip"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:background="@color/app_bg"
-        android:textColor="@color/white"
-        android:layout_alignParentRight="true"/>
+        android:text="@string/skip"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

@@ -7,34 +7,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.metabrainz.mobile.R;
-
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import org.metabrainz.mobile.R;
+
 public class SliderAdapter extends PagerAdapter {
 
-    Context context;
-    LayoutInflater layoutInflater;
-
-    public SliderAdapter(Context context){
-        this.context=context;
-    }
-
-    public int[] slide_images={
+    public final int[] slide_images = {
             R.drawable.tag_icon,
-        R.drawable.search_icon,
-        R.drawable.collection_icon,
+            R.drawable.search_icon,
+            R.drawable.collection_icon,
             R.drawable.scan_icon
     };
+    LayoutInflater layoutInflater;
 
+    public SliderAdapter(Context context) {
+        this.context = context;
+    }
 
-    public String[] slide_desc={
+    public final String[] slide_desc = {
             "Fix your Audio Metadata",
             "Explore MusicBrainz Data",
             "Explore your MusicBrainz Collection",
             "Scan using Barcodes"
     };
+    final Context context;
 
     @Override
     public int getCount() {
@@ -49,7 +47,7 @@ public class SliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view=layoutInflater.inflate(R.layout.onbaord_instance_page,container,false);
 
         ImageView imageView=view.findViewById(R.id.icon_id);

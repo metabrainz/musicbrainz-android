@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.databinding.ActivityLoginBinding;
-import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity;
+import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
 
 import java.util.Objects;
 
@@ -42,7 +42,7 @@ public class LogoutActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),
                 "User has successfully logged out.",
                 Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, KotlinDashboardActivity.class));
+        startActivity(new Intent(this, DashboardActivity.class));
         finish();
     }
 

@@ -22,7 +22,7 @@ public class ReleaseViewModel extends LookupViewModel {
         super(repository);
         entity = MBEntityType.RELEASE;
         liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Release.class));
-        coverArtData = Transformations.switchMap(MBID, id -> repository.fetchCoverArt(id));
+        coverArtData = Transformations.switchMap(MBID, repository::fetchCoverArt);
     }
 
     @Override

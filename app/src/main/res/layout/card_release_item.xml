@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/app_bg"
-    android:layout_margin="@dimen/item_padding">
+    android:layout_margin="@dimen/item_padding"
+    android:background="@color/app_bg">
 
     <ImageView
         android:id="@+id/release_cover_art"

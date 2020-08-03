@@ -2,6 +2,8 @@ package org.metabrainz.mobile.data.sources.api.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class ListenSubmitBody {
         this.payload.add(new Payload(timestamp, metadata));
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "ListenSubmitBody{" +
@@ -73,6 +76,7 @@ public class ListenSubmitBody {
             this.metadata = metadata;
         }
 
+        @NotNull
         @Override
         public String toString() {
             return "Payload{" +

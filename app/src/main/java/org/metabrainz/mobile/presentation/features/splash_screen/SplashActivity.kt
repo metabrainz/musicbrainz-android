@@ -13,8 +13,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.presentation.UserPreferences
-import org.metabrainz.mobile.presentation.features.KotlinDashboard.KotlinDashboardActivity
-import org.metabrainz.mobile.presentation.features.OnBoarding.AllowMe
+import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity
+import org.metabrainz.mobile.presentation.features.onboarding.AllowMe
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             delay(3000)
             if (UserPreferences.getOnBoardingStatus())
-                startActivity(Intent(this@SplashActivity, KotlinDashboardActivity::class.java))
+                startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
             else
                 startActivity(Intent(this@SplashActivity, AllowMe::class.java))
             finish()
