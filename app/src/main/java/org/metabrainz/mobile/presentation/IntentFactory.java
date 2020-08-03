@@ -7,8 +7,6 @@ import org.metabrainz.mobile.presentation.features.about.AboutActivity;
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
 import org.metabrainz.mobile.presentation.features.dashboard.DonateActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
-import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
-import org.metabrainz.mobile.presentation.features.login.LogoutActivity;
 import org.metabrainz.mobile.presentation.features.settings.SettingsActivity;
 
 public class IntentFactory {
@@ -20,10 +18,7 @@ public class IntentFactory {
     }
 
     public static Intent getLogin(Context context) {
-        if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT)
-            return new Intent(context, LoginActivity.class);
-        else
-            return new Intent(context, LogoutActivity.class);
+        return new Intent(context, LoginActivity.class);
     }
 
     public static Intent getDonate(Context context) {

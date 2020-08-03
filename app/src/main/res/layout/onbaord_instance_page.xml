@@ -37,7 +37,7 @@
         android:paddingTop="20dp"
         android:text="ok ok ok ok ok ok "
         android:textColor="@color/white"
-        android:textSize="30dp"></TextView>
+        android:textSize="30dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_id"

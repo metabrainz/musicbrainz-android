@@ -45,10 +45,10 @@
         </activity>
         <activity
             android:name=".presentation.features.onboarding.AllowMe"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".presentation.features.onboarding.GettingStarted"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
             android:theme="@style/AppThemeNoActionBar" />
@@ -95,9 +95,6 @@
                     android:scheme="org.metabrainz.mobile" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.features.login.LogoutActivity"
-            android:label="@string/auth_title" />
         <activity
             android:name=".presentation.features.about.AboutActivity"
             android:label="@string/about_title" />

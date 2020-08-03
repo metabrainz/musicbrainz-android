@@ -37,9 +37,9 @@ public class LoginActivity extends MusicBrainzActivity {
         loginViewModel.getUserInfoLiveData().observe(this, this::saveUserInfo);
 
         if(LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN){
-
-            startActivity(new Intent(this,LogoutActivity.class));
-            finish();
+            binding.loginPromptId.setText(R.string.logout_prompt);
+            binding.loginBtn.setText(R.string.logout);
+            binding.loginBtn.setOnClickListener(v -> logoutUser());
         }
         else
             binding.loginBtn.setOnClickListener(v -> startLogin());
@@ -93,6 +93,15 @@ public class LoginActivity extends MusicBrainzActivity {
             Log.d(userInfo.getUsername());
             finish();
         }
+    }
+
+    private void logoutUser() {
+        LoginSharedPreferences.logoutUser();
+        Toast.makeText(getApplicationContext(),
+                "User has successfully logged out.",
+                Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, DashboardActivity.class));
+        finish();
     }
 
     @Override
