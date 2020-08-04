@@ -2,11 +2,11 @@ package org.metabrainz.mobile.presentation.features.artist;
 
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
 
+import org.metabrainz.mobile.data.Resource;
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
@@ -16,7 +16,7 @@ import org.metabrainz.mobile.presentation.features.LookupViewModel;
 
 public class ArtistViewModel extends LookupViewModel {
 
-    private final LiveData<WikiSummary> wikiSummary;
+    private final LiveData<Resource<WikiSummary>> wikiSummary;
     private final LiveData<Artist> liveData;
 
     @ViewModelInject
@@ -32,11 +32,11 @@ public class ArtistViewModel extends LookupViewModel {
         return liveData;
     }
 
-    LiveData<WikiSummary> getWikiData() {
+    LiveData<Resource<WikiSummary>> getWikiData() {
         return wikiSummary;
     }
 
-    private LiveData<WikiSummary> fetchWikiSummary(Artist artist) {
+    private LiveData<Resource<WikiSummary>> fetchWikiSummary(Artist artist) {
         String title = "";
         int method = -1;
         if (artist != null) {
@@ -53,10 +53,6 @@ public class ArtistViewModel extends LookupViewModel {
                 }
             }
         }
-
-        // FIXME: Temporary hotfix to avoid application crash if no wikidata or wikipedia link is found
-        if (title.isEmpty())
-            return new MutableLiveData<>();
 
         return repository.fetchWikiSummary(title, method);
     }

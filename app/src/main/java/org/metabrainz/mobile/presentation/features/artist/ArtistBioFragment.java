@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.metabrainz.mobile.data.Resource;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.FragmentBioBinding;
@@ -37,8 +38,9 @@ public class ArtistBioFragment extends Fragment {
         binding = null;
     }
 
-    private void setWiki(WikiSummary wiki) {
-        if (wiki != null) {
+    private void setWiki(Resource<WikiSummary> wikiSummaryResource) {
+        if (wikiSummaryResource != null && wikiSummaryResource.getStatus() == Resource.Status.SUCCESS) {
+            WikiSummary wiki = wikiSummaryResource.getData();
             String wikiText = wiki.getExtract();
             if (wikiText != null && !wikiText.isEmpty()) {
                 showWikiCard();
