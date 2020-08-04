@@ -9,6 +9,10 @@ public class Resource<T> {
         this.data = data;
     }
 
+    public static <S> Resource<S> getFailure(Class<S> tClass) {
+        return new Resource<>(Status.FAILED, null);
+    }
+
     public Status getStatus() {
         return status;
     }

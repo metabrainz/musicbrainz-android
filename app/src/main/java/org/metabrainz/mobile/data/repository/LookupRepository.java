@@ -80,7 +80,7 @@ public class LookupRepository {
                     WikiSummary data = response.body();
                     resource = new Resource<>(Resource.Status.SUCCESS, data);
                 } catch (Exception e) {
-                    resource = new Resource<>(Resource.Status.FAILED, null);
+                    resource = Resource.getFailure(WikiSummary.class);
                 }
                 wikiSummary.setValue(resource);
             }
@@ -107,15 +107,13 @@ public class LookupRepository {
                     fetchWiki(title, wikiSummary);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Resource<WikiSummary> resource = new Resource<>(Resource.Status.FAILED, null);
-                    wikiSummary.setValue(resource);
+                    wikiSummary.setValue(Resource.getFailure(WikiSummary.class));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                Resource<WikiSummary> resource = new Resource<>(Resource.Status.FAILED, null);
-                wikiSummary.setValue(resource);
+                wikiSummary.setValue(Resource.getFailure(WikiSummary.class));
             }
         });
     }

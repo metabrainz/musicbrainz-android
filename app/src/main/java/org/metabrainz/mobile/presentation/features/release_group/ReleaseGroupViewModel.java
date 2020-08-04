@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.release_group;
 
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
@@ -62,6 +63,12 @@ public class ReleaseGroupViewModel extends LookupViewModel {
                     break;
                 }
             }
+        }
+
+        if (title.isEmpty()) {
+            MutableLiveData<Resource<WikiSummary>> liveData = new MutableLiveData<>();
+            liveData.setValue(Resource.getFailure(WikiSummary.class));
+            return liveData;
         }
 
         return repository.fetchWikiSummary(title, method);
