@@ -38,7 +38,7 @@ public class RecordingActivity extends MusicBrainzActivity {
         binding = ActivityRecordingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupToolbar(binding);
+//        setupToolbar(binding);
 
         recordingViewModel = new ViewModelProvider(this).get(RecordingViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);

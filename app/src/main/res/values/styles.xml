@@ -35,5 +35,8 @@
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner</item>
     </style>
-
+    <style name="SettingsSwitchTheme" parent="@style/Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:colorForeground">#f57f17</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+    </style>
 </resources>

@@ -6,7 +6,7 @@
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar" />
+<!-- //   <include layout="@layout/layout_toolbar" />-->
 
     <ProgressBar
         android:id="@+id/progress_spinner"

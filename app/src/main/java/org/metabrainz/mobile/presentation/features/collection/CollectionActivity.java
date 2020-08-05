@@ -24,6 +24,7 @@ import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -42,7 +43,8 @@ public class CollectionActivity extends MusicBrainzActivity {
         binding = ActivityCollectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupToolbar(binding);
+//        setupToolbar(binding);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
         collections = new ArrayList<>();
