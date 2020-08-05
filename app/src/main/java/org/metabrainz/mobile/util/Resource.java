@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.data;
+package org.metabrainz.mobile.util;
 
 public class Resource<T> {
     private final Status status;

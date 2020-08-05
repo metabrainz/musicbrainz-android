@@ -12,6 +12,7 @@ import org.metabrainz.mobile.databinding.ActivityReleaseBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.links.LinksViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.Objects;
 
@@ -51,8 +52,9 @@ public class ReleaseActivity extends MusicBrainzActivity {
         releaseViewModel.getData().observe(this, this::setRelease);
     }
 
-    private void setRelease(Release release) {
-        if (release != null) {
+    private void setRelease(Resource<Release> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            Release release = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(release.getTitle());
             userViewModel.setUserData(release);
             linksViewModel.setData(release.getRelations());

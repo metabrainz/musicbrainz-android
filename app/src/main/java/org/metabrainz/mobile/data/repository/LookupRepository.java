@@ -9,12 +9,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.metabrainz.mobile.data.Resource;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.util.Resource;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import java.util.Objects;
@@ -41,22 +41,27 @@ public class LookupRepository {
         this.service = service;
     }
 
-    public LiveData<String> fetchData(String entity, String MBID, String params) {
-        MutableLiveData<String> entityLiveData = new MutableLiveData<>();
+    public LiveData<Resource<String>> fetchData(String entity, String MBID, String params) {
+        MutableLiveData<Resource<String>> entityLiveData = new MutableLiveData<>();
         service.lookupEntityData(entity, MBID, params)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call,
                                            @NonNull Response<ResponseBody> response) {
+                        Resource<String> resource;
                         try {
-                            entityLiveData.setValue(response.body().string());
+                            String data = response.body().string();
+                            resource = new Resource<>(Resource.Status.SUCCESS, data);
                         } catch (Exception e) {
                             e.printStackTrace();
+                            resource = Resource.getFailure(String.class);
                         }
+                        entityLiveData.setValue(resource);
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                        entityLiveData.setValue(Resource.getFailure(String.class));
                     }
                 });
         return entityLiveData;
@@ -87,8 +92,7 @@ public class LookupRepository {
 
             @Override
             public void onFailure(@NonNull Call<WikiSummary> call, @NonNull Throwable t) {
-                Resource<WikiSummary> resource = new Resource<>(Resource.Status.FAILED, null);
-                wikiSummary.setValue(resource);
+                wikiSummary.setValue(Resource.getFailure(WikiSummary.class));
             }
         });
     }

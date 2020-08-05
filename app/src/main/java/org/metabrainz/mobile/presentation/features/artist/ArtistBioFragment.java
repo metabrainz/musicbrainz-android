@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.metabrainz.mobile.data.Resource;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.databinding.FragmentBioBinding;
+import org.metabrainz.mobile.util.Resource;
 
 public class ArtistBioFragment extends Fragment {
 
@@ -57,8 +57,9 @@ public class ArtistBioFragment extends Fragment {
         binding.cardArtistWiki.getRoot().setVisibility(View.GONE);
     }
 
-    private void setArtistInfo(Artist artist) {
-        if (artist != null) {
+    private void setArtistInfo(Resource<Artist> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            Artist artist = resource.getData();
             String type, gender, area, lifeSpan;
 
             type = artist.getType();

@@ -13,6 +13,7 @@ import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.links.LinksViewModel;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.Objects;
 
@@ -51,8 +52,9 @@ public class LabelActivity extends MusicBrainzActivity {
         labelViewModel.getData().observe(this, this::setLabel);
     }
 
-    private void setLabel(Label label) {
-        if (label != null) {
+    private void setLabel(Resource<Label> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            Label label = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
             userViewModel.setUserData(label);
             linksViewModel.setData(label.getRelations());

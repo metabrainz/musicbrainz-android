@@ -15,6 +15,7 @@ import org.metabrainz.mobile.databinding.ActivityCollectionDetailsBinding;
 import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultAdapter;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,11 +61,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         binding.recyclerView.setVisibility(View.GONE);
 
         binding.progressSpinner.setVisibility(View.VISIBLE);
-        viewModel.fetchCollectionDetails(entity, id).observe(this, results -> {
-            collectionResults.clear();
-            collectionResults.addAll(results);
-            refresh();
-        });
+        viewModel.fetchCollectionDetails(entity, id).observe(this, this::setResults);
     }
 
     private void refresh() {
@@ -96,4 +93,11 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         return Uri.EMPTY;
     }
 
+    private void setResults(Resource<List<ResultItem>> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            collectionResults.clear();
+            collectionResults.addAll(resource.getData());
+            refresh();
+        }
+    }
 }

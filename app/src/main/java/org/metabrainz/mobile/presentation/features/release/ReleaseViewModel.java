@@ -11,22 +11,38 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
+import org.metabrainz.mobile.util.Resource;
 
 public class ReleaseViewModel extends LookupViewModel {
 
     private final LiveData<CoverArt> coverArtData;
-    private final LiveData<Release> liveData;
+    private final LiveData<Resource<Release>> liveData;
 
     @ViewModelInject
     public ReleaseViewModel(LookupRepository repository) {
         super(repository);
         entity = MBEntityType.RELEASE;
-        liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, Release.class));
+        liveData = Transformations.map(jsonLiveData, ReleaseViewModel::toRelease);
         coverArtData = Transformations.switchMap(MBID, repository::fetchCoverArt);
     }
 
+    private static Resource<Release> toRelease(Resource<String> data) {
+        Resource<Release> resource;
+        try {
+            if (data != null && data.getStatus() == Resource.Status.SUCCESS) {
+                Release release = new Gson().fromJson(data.getData(), Release.class);
+                resource = new Resource<>(Resource.Status.SUCCESS, release);
+            } else
+                resource = Resource.getFailure(Release.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resource = Resource.getFailure(Release.class);
+        }
+        return resource;
+    }
+
     @Override
-    public LiveData<Release> getData() {
+    public LiveData<Resource<Release>> getData() {
         return liveData;
     }
 

@@ -21,6 +21,7 @@ import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,13 +66,7 @@ public class CollectionActivity extends MusicBrainzActivity {
                     LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
                             && UserPreferences.getPrivateCollectionsPreference();
             viewModel.fetchCollectionData(LoginSharedPreferences.getUsername(),
-                    getPrivateCollections).observe(this, data -> {
-                CollectionUtils.removeCollections(data);
-                collections.clear();
-                collections.addAll(data);
-                adapter.notifyDataSetChanged();
-                checkHasResults();
-            });
+                    getPrivateCollections).observe(this, this::setCollections);
         } else {
             binding.noResult.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.GONE);
@@ -130,4 +125,14 @@ public class CollectionActivity extends MusicBrainzActivity {
         return Uri.EMPTY;
     }
 
+    private void setCollections(Resource<List<Collection>> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            List<Collection> data = resource.getData();
+            CollectionUtils.removeCollections(data);
+            collections.clear();
+            collections.addAll(data);
+            adapter.notifyDataSetChanged();
+            checkHasResults();
+        }
+    }
 }

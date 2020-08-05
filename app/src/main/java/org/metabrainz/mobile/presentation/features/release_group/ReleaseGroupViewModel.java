@@ -7,33 +7,44 @@ import androidx.lifecycle.Transformations;
 
 import com.google.gson.Gson;
 
-import org.metabrainz.mobile.data.Resource;
 import org.metabrainz.mobile.data.repository.LookupRepository;
-import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.Link;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.presentation.features.LookupViewModel;
-
-import io.reactivex.Single;
+import org.metabrainz.mobile.util.Resource;
 
 public class ReleaseGroupViewModel extends LookupViewModel {
 
     private final LiveData<Resource<WikiSummary>> wikiSummary;
-    private final LiveData<ReleaseGroup> liveData;
+    private final LiveData<Resource<ReleaseGroup>> liveData;
 
     @ViewModelInject
     public ReleaseGroupViewModel(LookupRepository repository) {
         super(repository);
         entity = MBEntityType.RELEASE_GROUP;
-        liveData = Transformations.map(jsonLiveData, data -> new Gson().fromJson(data, ReleaseGroup.class));
+        liveData = Transformations.map(jsonLiveData, ReleaseGroupViewModel::toReleaseGroup);
         wikiSummary = Transformations.switchMap(liveData, this::fetchWikiSummary);
     }
 
+    private static Resource<ReleaseGroup> toReleaseGroup(Resource<String> data) {
+        Resource<ReleaseGroup> resource;
+        try {
+            if (data != null && data.getStatus() == Resource.Status.SUCCESS) {
+                ReleaseGroup releaseGroup = new Gson().fromJson(data.getData(), ReleaseGroup.class);
+                resource = new Resource<>(Resource.Status.SUCCESS, releaseGroup);
+            } else
+                resource = Resource.getFailure(ReleaseGroup.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resource = Resource.getFailure(ReleaseGroup.class);
+        }
+        return resource;
+    }
+
     @Override
-    public LiveData<ReleaseGroup> getData() {
+    public LiveData<Resource<ReleaseGroup>> getData() {
         return liveData;
     }
 
@@ -41,16 +52,11 @@ public class ReleaseGroupViewModel extends LookupViewModel {
         return wikiSummary;
     }
 
-    Single<CoverArt> fetchCoverArtForRelease(Release release) {
-        // Ask the repository to fetch the cover art and update ReleaseGroupData LiveData
-        // Whoever is observing that LiveData, will receive the release with the cover art
-        return repository.fetchCoverArtForRelease(release);
-    }
-
-    private LiveData<Resource<WikiSummary>> fetchWikiSummary(ReleaseGroup releaseGroup) {
+    private LiveData<Resource<WikiSummary>> fetchWikiSummary(Resource<ReleaseGroup> resource) {
         String title = "";
         int method = -1;
-        if (releaseGroup != null) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            ReleaseGroup releaseGroup = resource.getData();
             for (Link link : releaseGroup.getRelations()) {
                 if (link.getType().equals("wikipedia")) {
                     title = link.getPageTitle();

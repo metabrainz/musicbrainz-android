@@ -13,6 +13,7 @@ import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.links.LinksViewModel;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.Objects;
 
@@ -51,8 +52,9 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
         releaseGroupViewModel.getData().observe(this, this::setReleaseGroup);
     }
 
-    private void setReleaseGroup(ReleaseGroup releaseGroup) {
-        if (releaseGroup != null) {
+    private void setReleaseGroup(Resource<ReleaseGroup> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            ReleaseGroup releaseGroup = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(releaseGroup.getTitle());
             userViewModel.setUserData(releaseGroup);
             linksViewModel.setData(releaseGroup.getRelations());
