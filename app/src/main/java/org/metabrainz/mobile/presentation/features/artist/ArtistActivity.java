@@ -44,7 +44,7 @@ public class ArtistActivity extends MusicBrainzActivity {
         binding = ActivityArtistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        setupToolbar(binding);
+        setupToolbar(binding);
 
         artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
         releaseListViewModel = new ViewModelProvider(this).get(ReleaseListViewModel.class);

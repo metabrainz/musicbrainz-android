@@ -109,7 +109,8 @@
             android:label="@string/donate_title" />
         <activity
             android:name=".presentation.features.search.SearchResultsActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AppThemeGrayScale">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -128,8 +129,9 @@
             android:theme="@style/AppThemeForSettings" />
         <activity android:name=".presentation.features.barcode.BarcodeActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-        <activity android:name=".presentation.features.barcode.BarcodeResultActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+        <activity
+            android:name=".presentation.features.barcode.BarcodeResultActivity"
+            android:theme="@style/AppThemeGrayScale" />
 
         <meta-data
             android:name="android.app.default_searchable"

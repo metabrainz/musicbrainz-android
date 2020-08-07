@@ -82,7 +82,6 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.menu_open_website).setVisible(false);
-        getMenuInflater().inflate(R.menu.dash, menu);
         return true;
     }
 
@@ -95,7 +94,7 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
             collectionResults.clear();
             collectionResults.addAll(resource.getData());
-            refresh();
         }
+        refresh();
     }
 }

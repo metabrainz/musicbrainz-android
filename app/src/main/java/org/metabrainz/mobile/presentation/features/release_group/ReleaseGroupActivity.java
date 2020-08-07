@@ -39,7 +39,7 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
         binding = ActivityReleaseGroupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        setupToolbar(binding);
+        setupToolbar(binding);
 
         releaseGroupViewModel = new ViewModelProvider(this).get(ReleaseGroupViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);

@@ -131,7 +131,7 @@ public class CollectionActivity extends MusicBrainzActivity {
             collections.clear();
             collections.addAll(data);
             adapter.notifyDataSetChanged();
-            checkHasResults();
         }
+        checkHasResults();
     }
 }
