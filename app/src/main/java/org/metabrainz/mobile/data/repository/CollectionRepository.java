@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import org.metabrainz.mobile.data.sources.CollectionUtils;
 import org.metabrainz.mobile.data.sources.api.CollectionService;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,42 +32,50 @@ public class CollectionRepository {
         this.service = service;
     }
 
-    public LiveData<String> fetchCollectionDetails(String entity, String id) {
-        MutableLiveData<String> liveData = new MutableLiveData<>();
+    public LiveData<Resource<String>> fetchCollectionDetails(String entity, String id) {
+        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
         service.getCollectionContents(entity, id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                Resource<String> resource;
                 try {
-                    liveData.setValue(response.body().string());
+                    String data = response.body().string();
+                    resource = new Resource<>(Resource.Status.SUCCESS, data);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    resource = Resource.getFailure(String.class);
                 }
+                liveData.setValue(resource);
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-
+                liveData.setValue(Resource.getFailure(String.class));
             }
         });
         return liveData;
     }
 
-    public LiveData<List<Collection>> fetchCollections(String editor, boolean fetchPrivate) {
-        MutableLiveData<List<Collection>> collectionData = new MutableLiveData<>();
+    public LiveData<Resource<List<Collection>>> fetchCollections(String editor, boolean fetchPrivate) {
+        MutableLiveData<Resource<List<Collection>>> collectionData = new MutableLiveData<>();
         listResponseCallback = new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                Resource<List<Collection>> resource;
                 try {
                     List<Collection> collections = new ArrayList<>();
                     CollectionUtils.setGenericCountParameter(collections, Objects.requireNonNull(response.body()).string());
-                    collectionData.setValue(collections);
+                    resource = new Resource<>(Resource.Status.SUCCESS, collections);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    resource = new Resource<>(Resource.Status.FAILED, null);
                 }
+                collectionData.setValue(resource);
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                collectionData.setValue(new Resource<>(Resource.Status.FAILED, null));
             }
         };
 

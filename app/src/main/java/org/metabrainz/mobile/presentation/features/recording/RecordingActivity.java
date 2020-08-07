@@ -13,6 +13,7 @@ import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.links.LinksViewModel;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.Objects;
 
@@ -51,8 +52,9 @@ public class RecordingActivity extends MusicBrainzActivity {
         recordingViewModel.getData().observe(this, this::setRecording);
     }
 
-    private void setRecording(Recording recording) {
-        if (recording != null) {
+    private void setRecording(Resource<Recording> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            Recording recording = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
             userViewModel.setUserData(recording);
             linksViewModel.setData(recording.getRelations());

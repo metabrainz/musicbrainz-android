@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import org.metabrainz.mobile.data.sources.api.entities.Media;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.FragmentTracklistBinding;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +65,14 @@ public class ReleaseTracksFragment extends Fragment {
         binding = null;
     }
 
-    private void setTracks(Release release) {
-        if (release != null && release.getMedia() != null && !release.getMedia().isEmpty()) {
-            mediaList.clear();
-            mediaList.addAll(release.getMedia());
-            adapter.notifyDataSetChanged();
+    private void setTracks(Resource<Release> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            Release release = resource.getData();
+            if (release.getMedia() != null && !release.getMedia().isEmpty()) {
+                mediaList.clear();
+                mediaList.addAll(release.getMedia());
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 }

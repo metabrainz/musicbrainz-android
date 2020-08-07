@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.databinding.FragmentLabelInfoBinding;
+import org.metabrainz.mobile.util.Resource;
 
 public class LabelInfoFragment extends Fragment {
 
@@ -35,8 +36,9 @@ public class LabelInfoFragment extends Fragment {
         binding = null;
     }
 
-    private void setLabelInfo(Label label) {
-        if (label != null) {
+    private void setLabelInfo(Resource<Label> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            Label label = resource.getData();
             String type, founded, area, code;
 
             type = label.getType();

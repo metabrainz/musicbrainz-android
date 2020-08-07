@@ -14,6 +14,7 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
+import org.metabrainz.mobile.util.Resource;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
 import java.util.Objects;
@@ -40,29 +41,34 @@ public class LookupRepository {
         this.service = service;
     }
 
-    public LiveData<String> fetchData(String entity, String MBID, String params) {
-        MutableLiveData<String> entityLiveData = new MutableLiveData<>();
+    public LiveData<Resource<String>> fetchData(String entity, String MBID, String params) {
+        MutableLiveData<Resource<String>> entityLiveData = new MutableLiveData<>();
         service.lookupEntityData(entity, MBID, params)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call,
                                            @NonNull Response<ResponseBody> response) {
+                        Resource<String> resource;
                         try {
-                            entityLiveData.setValue(response.body().string());
+                            String data = response.body().string();
+                            resource = new Resource<>(Resource.Status.SUCCESS, data);
                         } catch (Exception e) {
                             e.printStackTrace();
+                            resource = Resource.getFailure(String.class);
                         }
+                        entityLiveData.setValue(resource);
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                        entityLiveData.setValue(Resource.getFailure(String.class));
                     }
                 });
         return entityLiveData;
     }
 
-    public SingleLiveEvent<WikiSummary> fetchWikiSummary(String string, int method) {
-        SingleLiveEvent<WikiSummary> wikiSummary = new SingleLiveEvent<>();
+    public SingleLiveEvent<Resource<WikiSummary>> fetchWikiSummary(String string, int method) {
+        SingleLiveEvent<Resource<WikiSummary>> wikiSummary = new SingleLiveEvent<>();
         if (method == METHOD_WIKIPEDIA_URL)
             fetchWiki(string, wikiSummary);
         else
@@ -70,21 +76,28 @@ public class LookupRepository {
         return wikiSummary;
     }
 
-    private void fetchWiki(String title, SingleLiveEvent<WikiSummary> wikiSummary) {
+    private void fetchWiki(String title, SingleLiveEvent<Resource<WikiSummary>> wikiSummary) {
         service.getWikipediaSummary(title).enqueue(new Callback<WikiSummary>() {
             @Override
             public void onResponse(@NonNull Call<WikiSummary> call, @NonNull Response<WikiSummary> response) {
-                wikiSummary.setValue(response.body());
+                Resource<WikiSummary> resource;
+                try {
+                    WikiSummary data = response.body();
+                    resource = new Resource<>(Resource.Status.SUCCESS, data);
+                } catch (Exception e) {
+                    resource = Resource.getFailure(WikiSummary.class);
+                }
+                wikiSummary.setValue(resource);
             }
 
             @Override
             public void onFailure(@NonNull Call<WikiSummary> call, @NonNull Throwable t) {
-
+                wikiSummary.setValue(Resource.getFailure(WikiSummary.class));
             }
         });
     }
 
-    private void fetchWikiData(String id, SingleLiveEvent<WikiSummary> wikiSummary) {
+    private void fetchWikiData(String id, SingleLiveEvent<Resource<WikiSummary>> wikiSummary) {
         service.getWikipediaLink(id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -98,11 +111,13 @@ public class LookupRepository {
                     fetchWiki(title, wikiSummary);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    wikiSummary.setValue(Resource.getFailure(WikiSummary.class));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                wikiSummary.setValue(Resource.getFailure(WikiSummary.class));
             }
         });
     }

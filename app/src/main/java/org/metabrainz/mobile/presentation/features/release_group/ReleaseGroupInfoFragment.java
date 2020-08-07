@@ -13,6 +13,7 @@ import org.metabrainz.mobile.data.sources.api.entities.EntityUtils;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
 import org.metabrainz.mobile.databinding.CardReleaseGroupInfoBinding;
+import org.metabrainz.mobile.util.Resource;
 
 public class ReleaseGroupInfoFragment extends Fragment {
 
@@ -40,8 +41,9 @@ public class ReleaseGroupInfoFragment extends Fragment {
         binding = null;
     }
 
-    private void setWiki(WikiSummary wiki) {
-        if (wiki != null) {
+    private void setWiki(Resource<WikiSummary> wikiSummaryResource) {
+        if (wikiSummaryResource != null && wikiSummaryResource.getStatus() == Resource.Status.SUCCESS) {
+            WikiSummary wiki = wikiSummaryResource.getData();
             String wikiText = wiki.getExtract();
             if (wikiText != null && !wikiText.isEmpty()) {
                 showWikiCard();
@@ -58,13 +60,14 @@ public class ReleaseGroupInfoFragment extends Fragment {
         binding.cardView.setVisibility(View.GONE);
     }
 
-    private void setReleaseGroupInfo(ReleaseGroup releaseGroup) {
-        if (releaseGroup != null) {
+    private void setReleaseGroupInfo(Resource<ReleaseGroup> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            ReleaseGroup releaseGroup = resource.getData();
             String title, artist;
             title = releaseGroup.getTitle();
             artist = EntityUtils.getDisplayArtist(releaseGroup.getArtistCredits());
             binding.releaseGroupTitle.setText(title);
-            if (artist != null && !artist.isEmpty())
+            if (!artist.isEmpty())
                 binding.releaseGroupArtist.setText("( ".concat(artist).concat(" )"));
             else
                 binding.releaseGroupArtist.setVisibility(View.GONE);
