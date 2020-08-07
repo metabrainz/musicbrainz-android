@@ -48,9 +48,9 @@ public class SearchResultsActivity extends MusicBrainzActivity implements Search
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        binding.noResult.setVisibility(View.GONE);
-        binding.progressSpinner.setIndeterminate(true);
-        binding.progressSpinner.setVisibility(View.GONE);
+        binding.noResult.getRoot().setVisibility(View.GONE);
+        //binding.progressSpinner.getRoot().setIndeterminate(true);
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
 
         query = getIntent().getStringExtra(SearchManager.QUERY);
         entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);

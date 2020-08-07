@@ -29,8 +29,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ratings"
+
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <RatingBar
                     android:id="@+id/rating"
@@ -73,7 +74,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/user_ratings"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/no_user_rating"
@@ -115,7 +116,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/tags"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/no_tag"
@@ -126,6 +127,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tags_list"
+                    android:background="@color/app_bg_light"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -152,7 +154,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/user_tags"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/no_user_tag"
@@ -163,6 +165,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/user_tags_list"
+                    android:background="@color/app_bg_light"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

@@ -62,16 +62,20 @@
                 android:value=".presentation.features.collection.CollectionActivity" />
         </activity>
         <activity android:name=".presentation.features.collection.CollectionActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:label="@string/dash_collections"
+            android:theme="@style/AppThemeGrayScale" />
         <activity
             android:name=".presentation.features.tagger.TaggerAcitivty"
             android:label="@string/settings_tagger" />
         <activity android:name=".presentation.features.recording.RecordingActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:label="@string/search_type_recording"
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.label.LabelActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:label="@string/search_type_label"
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.release_group.ReleaseGroupActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:label="@string/search_type_release_group"
+            android:theme="@style/AppThemeGrayScale" />
         <activity
             android:name=".presentation.features.search.SearchActivity"
             android:label="@string/settings_search"
@@ -113,10 +117,10 @@
         </activity>
         <activity android:name=".presentation.features.release.ReleaseActivity"
             android:label="@string/release_title"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.artist.ArtistActivity"
             android:label="@string/artist_title"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title"
             android:theme="@style/AppThemeForSettings" />

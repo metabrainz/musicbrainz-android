@@ -5,21 +5,33 @@
     android:orientation="vertical">
 
     <include layout="@layout/layout_toolbar" />
-
-    <ProgressBar
-        android:id="@+id/progress_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
-    <TextView
+    <include
         android:id="@+id/no_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        layout="@layout/error_no_result"
         android:layout_gravity="center"
-        android:text="@string/no_results"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress_spinner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center" />-->
+    <include
+        android:id="@+id/progress_spinner"
+        android:layout_gravity="center"
+        layout="@layout/loading"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <!--    <TextView-->
+<!--        android:id="@+id/no_result"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="@string/no_results"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textAppearance="?android:attr/textAppearanceLarge" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
