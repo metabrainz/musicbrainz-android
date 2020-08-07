@@ -52,17 +52,16 @@ public class CollectionActivity extends MusicBrainzActivity {
         adapter = new CollectionListAdapter(collections);
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
             binding.loginRequired.setVisibility(View.GONE);
-            binding.noResult.setVisibility(View.GONE);
-            binding.progressSpinner.setIndeterminate(true);
-            binding.progressSpinner.setVisibility(View.GONE);
-
+            binding.noResult.getRoot().setVisibility(View.GONE);
+            //binding.progressSpinner.setIndeterminate(true);
+            binding.progressSpinner.getRoot().setVisibility(View.GONE);
             binding.recyclerView.setAdapter(adapter);
             binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
             DividerItemDecoration itemDecoration = new DividerItemDecoration(
                     binding.recyclerView.getContext(), DividerItemDecoration.VERTICAL);
             binding.recyclerView.addItemDecoration(itemDecoration);
 
-            binding.progressSpinner.setVisibility(View.VISIBLE);
+            binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
             boolean getPrivateCollections =
                     LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
                             && UserPreferences.getPrivateCollectionsPreference();
@@ -75,9 +74,9 @@ public class CollectionActivity extends MusicBrainzActivity {
                 checkHasResults();
             });
         } else {
-            binding.noResult.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.GONE);
-            binding.progressSpinner.setVisibility(View.GONE);
+            binding.progressSpinner.getRoot().setVisibility(View.GONE);
             binding.loginRequired.setVisibility(View.GONE);
             callAlert();
         }
@@ -89,18 +88,18 @@ public class CollectionActivity extends MusicBrainzActivity {
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT) {
             collections.clear();
             checkHasResults();
-            binding.noResult.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
         }
     }
 
     private void checkHasResults() {
-        binding.progressSpinner.setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
         if (adapter.getItemCount() == 0) {
             binding.recyclerView.setVisibility(View.GONE);
-            binding.noResult.setVisibility(View.VISIBLE);
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
         } else {
             binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.noResult.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
         }
     }
 

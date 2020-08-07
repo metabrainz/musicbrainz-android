@@ -49,7 +49,7 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setVisibility(View.GONE);
 
-        binding.noResult.setVisibility(View.GONE);
+        binding.noResult.getRoot().setVisibility(View.GONE);
 
         viewModel = new ViewModelProvider(this).get(BarcodeViewModel.class);
         viewModel.getBarcodeLiveData().observe(this, this::handleResult);
@@ -57,9 +57,9 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         barcode = getIntent().getStringExtra("barcode");
         if (barcode != null && !barcode.isEmpty()) {
             viewModel.fetchReleasesWithBarcode(barcode);
-            binding.progressSpinner.setVisibility(View.VISIBLE);
+            binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
         } else {
-            binding.progressSpinner.setVisibility(View.GONE);
+            binding.progressSpinner.getRoot().setVisibility(View.GONE);
             Toast.makeText(this, "Unknown barcode error", Toast.LENGTH_LONG).show();
             finish();
         }
@@ -70,10 +70,10 @@ public class BarcodeResultActivity extends MusicBrainzActivity {
         releases.clear();
         releases.addAll(data);
 
-        binding.progressSpinner.setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
 
         if (releases.size() == 0)
-            binding.noResult.setVisibility(View.VISIBLE);
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
         else if (releases.size() == 1) {
             Intent intent = new Intent(this, ReleaseActivity.class);
             intent.putExtra(Constants.MBID, releases.get(0).getMbid());

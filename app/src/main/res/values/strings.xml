@@ -66,6 +66,8 @@
     <string name="action_authentication">Authentication</string>
     <string name="action_login">Log In</string>
     <string name="action_logout">Log Out</string>
+    <string name="loading">Loading...</string>
+    <string name="noresult">No Result Found</string>
 
     <!-- Preferences -->
     <string name="preferences_title">Settings</string>

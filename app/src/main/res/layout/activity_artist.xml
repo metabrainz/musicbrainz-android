@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         app:tabSelectedTextColor="@color/app_bg_light2"
         app:tabGravity="center" />
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
