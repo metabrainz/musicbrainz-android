@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.label;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -49,17 +50,25 @@ public class LabelActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) labelViewModel.setMBID(mbid);
 
+        binding.noResult.getRoot().setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
+        binding.dataFragments.setVisibility(View.GONE);
         labelViewModel.getData().observe(this, this::setLabel);
     }
 
     private void setLabel(Resource<Label> resource) {
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
         if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            binding.noResult.getRoot().setVisibility(View.GONE);
+            binding.dataFragments.setVisibility(View.VISIBLE);
+
             Label label = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
             userViewModel.setUserData(label);
             linksViewModel.setData(label.getRelations());
             releaseListViewModel.setData(label.getReleases());
-        }
+        } else
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override

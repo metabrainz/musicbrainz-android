@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.recording;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -49,17 +50,25 @@ public class RecordingActivity extends MusicBrainzActivity {
         mbid = getIntent().getStringExtra(Constants.MBID);
         if (mbid != null && !mbid.isEmpty()) recordingViewModel.setMBID(mbid);
 
+        binding.noResult.getRoot().setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
+        binding.dataFragments.setVisibility(View.GONE);
         recordingViewModel.getData().observe(this, this::setRecording);
     }
 
     private void setRecording(Resource<Recording> resource) {
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
         if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            binding.noResult.getRoot().setVisibility(View.GONE);
+            binding.dataFragments.setVisibility(View.VISIBLE);
+
             Recording recording = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
             userViewModel.setUserData(recording);
             linksViewModel.setData(recording.getRelations());
             releaseListViewModel.setData(recording.getReleases());
-        }
+        } else
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override

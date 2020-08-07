@@ -9,12 +9,21 @@
 
     <include layout="@layout/layout_toolbar" />
 
+    <include
+        android:id="@+id/no_result"
+        layout="@layout/error_no_result" />
+
+    <include
+        android:id="@+id/progress_spinner"
+        layout="@layout/loading" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabSelectedTextColor="@color/app_bg_light2"
         app:tabGravity="center" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"

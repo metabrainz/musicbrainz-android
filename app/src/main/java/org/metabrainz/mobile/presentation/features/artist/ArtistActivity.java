@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.artist;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -58,6 +59,11 @@ public class ArtistActivity extends MusicBrainzActivity {
         binding.pager.setAdapter(pagerAdapter);
         binding.tabs.setupWithViewPager(binding.pager);
 
+        binding.noResult.getRoot().setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
+        binding.tabs.setVisibility(View.GONE);
+        binding.pager.setVisibility(View.GONE);
+
         /*
          * Whenever the artist changes, redraw the information
          * Subscribe to the empty live data and then ask the view model to update artist live data.
@@ -75,13 +81,19 @@ public class ArtistActivity extends MusicBrainzActivity {
     }
 
     private void setArtist(Resource<Artist> resource) {
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
         if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            binding.noResult.getRoot().setVisibility(View.GONE);
+            binding.tabs.setVisibility(View.VISIBLE);
+            binding.pager.setVisibility(View.VISIBLE);
+
             Artist artist = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
             userViewModel.setUserData(artist);
             releaseListViewModel.setData(artist.getReleases());
             linksViewModel.setData(artist.getRelations());
-        }
+        } else
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override
