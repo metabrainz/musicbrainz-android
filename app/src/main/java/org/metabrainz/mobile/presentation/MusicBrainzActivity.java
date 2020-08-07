@@ -31,7 +31,7 @@ public abstract class MusicBrainzActivity extends AppCompatActivity {
 
     protected void setupToolbar(ViewBinding binding) {
         LayoutToolbarBinding toolbarBinding = LayoutToolbarBinding.bind(binding.getRoot());
-//        setSupportActionBar(toolbarBinding.toolbar);
+        setSupportActionBar(toolbarBinding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 

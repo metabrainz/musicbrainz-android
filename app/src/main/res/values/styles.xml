@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="AppThemeGrayScale" parent="Base.Theme.MaterialComponents">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/app_bg</item>
         <item name="colorAccent">@color/app_bg_light2</item>
     </style>
@@ -17,13 +19,7 @@
         <item name="colorAccent">@color/app_bg_light2</item>
         <item name="colorPrimaryDark">@color/app_bg</item>
     </style>
-<!--    <style name="Toolbar.ExpandedTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
-<!--        <item name="android:textColor">#263238</item>-->
-<!--    </style>-->
-<!--    <style name="Toolbar.CollapsedTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
-<!--        <item name="android:textColor">@color/colorPrimary</item>-->
-<!--        <item name="android:background">@color/app_bg</item>-->
-<!--    </style>-->
+
     <style name="AppThemeCustomActionBar" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>

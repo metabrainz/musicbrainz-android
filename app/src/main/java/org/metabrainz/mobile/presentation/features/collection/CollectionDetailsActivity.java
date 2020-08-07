@@ -44,9 +44,8 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
 
         setupToolbar(binding);
 
-        binding.noResult.setVisibility(View.GONE);
-        binding.progressSpinner.setIndeterminate(true);
-        binding.progressSpinner.setVisibility(View.GONE);
+        binding.noResult.getRoot().setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
 
         entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);
         id = getIntent().getStringExtra(Constants.MBID);
@@ -60,23 +59,22 @@ public class CollectionDetailsActivity extends MusicBrainzActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setVisibility(View.GONE);
 
-        binding.progressSpinner.setVisibility(View.VISIBLE);
         viewModel.fetchCollectionDetails(entity, id).observe(this, this::setResults);
     }
 
     private void refresh() {
         adapter.notifyDataSetChanged();
-        binding.progressSpinner.setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
         checkHasResults();
     }
 
     private void checkHasResults() {
         if (adapter.getItemCount() == 0) {
             binding.recyclerView.setVisibility(View.GONE);
-            binding.noResult.setVisibility(View.VISIBLE);
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
         } else {
             binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.noResult.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
         }
     }
 

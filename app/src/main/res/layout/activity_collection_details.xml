@@ -4,25 +4,17 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@color/app_bg"
-    android:gravity="center|top"
     android:orientation="vertical">
 
     <include layout="@layout/layout_toolbar" />
 
-    <ProgressBar
-        android:id="@+id/progress_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
-    <TextView
+    <include
         android:id="@+id/no_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/no_results"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        layout="@layout/error_no_result" />
+
+    <include
+        android:id="@+id/progress_spinner"
+        layout="@layout/loading" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

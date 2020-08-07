@@ -49,7 +49,6 @@ public class SearchResultsActivity extends MusicBrainzActivity implements Search
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         binding.noResult.getRoot().setVisibility(View.GONE);
-        //binding.progressSpinner.getRoot().setIndeterminate(true);
         binding.progressSpinner.getRoot().setVisibility(View.GONE);
 
         query = getIntent().getStringExtra(SearchManager.QUERY);

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:layout_gravity="center"
     android:orientation="vertical"
     android:background="@color/app_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -15,6 +16,7 @@
         app:lottie_loop="true"
         android:layout_gravity="center"
         />
+
     <TextView
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
@@ -22,6 +24,5 @@
         android:text="@string/loading"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/white"
-        ></TextView>
+        android:textColor="@color/white" />
 </LinearLayout>

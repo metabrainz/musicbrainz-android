@@ -34,12 +34,11 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:src="@drawable/splashscreen_logo2"></ImageView>
+                        android:src="@drawable/splashscreen_logo2" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -51,14 +50,14 @@
                             android:layout_height="wrap_content"
                             android:text="Music"
                             android:textColor="#BA478F"
-                            android:textSize="40dp" />
+                            android:textSize="40sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Brainz"
                             android:textColor="#EB743B"
-                            android:textSize="40dp" />
+                            android:textSize="40sp" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -71,7 +70,7 @@
                     android:background="@color/app_bg"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:titleTextColor="@color/app_bg"></androidx.appcompat.widget.Toolbar>
+                    app:titleTextColor="@color/app_bg" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -120,7 +119,7 @@
                                 android:layout_height="64dp"
                                 android:background="#ffffff"
                                 android:padding="10dp"
-                                android:src="@drawable/tag_icon" />
+                                android:src="@drawable/ic_baseline_audiotrack_24" />
 
                             <TextView
                                 android:layout_width="wrap_content"

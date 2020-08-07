@@ -25,7 +25,6 @@ import org.metabrainz.mobile.util.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -44,8 +43,7 @@ public class CollectionActivity extends MusicBrainzActivity {
         binding = ActivityCollectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        setupToolbar(binding);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setupToolbar(binding);
 
         viewModel = new ViewModelProvider(this).get(CollectionViewModel.class);
         collections = new ArrayList<>();
@@ -54,15 +52,15 @@ public class CollectionActivity extends MusicBrainzActivity {
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
             binding.loginRequired.setVisibility(View.GONE);
             binding.noResult.getRoot().setVisibility(View.GONE);
-            //binding.progressSpinner.setIndeterminate(true);
-            binding.progressSpinner.getRoot().setVisibility(View.GONE);
+            binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
+
             binding.recyclerView.setAdapter(adapter);
             binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
             DividerItemDecoration itemDecoration = new DividerItemDecoration(
                     binding.recyclerView.getContext(), DividerItemDecoration.VERTICAL);
             binding.recyclerView.addItemDecoration(itemDecoration);
+            binding.recyclerView.setVisibility(View.GONE);
 
-            binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
             boolean getPrivateCollections =
                     LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
                             && UserPreferences.getPrivateCollectionsPreference();
