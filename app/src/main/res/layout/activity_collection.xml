@@ -2,28 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar" />
+<!-- //   <include layout="@layout/layout_toolbar" />-->
 
-    <ProgressBar
-        android:id="@+id/progress_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="50dp" />
 
-    <TextView
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress_spinner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:paddingTop="50dp" />-->
+    <include
         android:id="@+id/no_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        layout="@layout/error_no_result"
         android:layout_gravity="center"
-        android:text="@string/no_results"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+<!--    <TextView-->
+<!--        android:id="@+id/no_result"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="@string/no_results"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textAppearance="?android:attr/textAppearanceLarge"-->
+<!--        android:textColor="@color/white" />-->
+
+    <include
+        android:id="@+id/progress_spinner"
+        android:layout_gravity="center"
+        layout="@layout/loading"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

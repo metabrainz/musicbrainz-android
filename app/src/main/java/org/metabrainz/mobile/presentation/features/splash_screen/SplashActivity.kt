@@ -32,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
                 R.anim.splashscreen_middle_animation)
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(3000)
+            delay(2000)
             if (UserPreferences.getOnBoardingStatus())
                 startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
             else

@@ -47,7 +47,7 @@
 
     <!-- Pager tabs -->
     <string name="tab_links">MORE</string>
-    <string name="tab_releases">RELEASES</string>
+    <string name="tab_releases">RELEASE</string>
     <string name="tab_bio">BIO</string>
     <string name="tab_edits">TAG &amp; RATE</string>
 
@@ -66,6 +66,8 @@
     <string name="action_authentication">Authentication</string>
     <string name="action_login">Log In</string>
     <string name="action_logout">Log Out</string>
+    <string name="loading">Loading...</string>
+    <string name="noresult">No Result Found</string>
 
     <!-- Preferences -->
     <string name="preferences_title">Settings</string>

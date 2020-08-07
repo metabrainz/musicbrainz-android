@@ -23,7 +23,7 @@
         android:id="@+id/link_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:fontFamily="@font/roboto_medium"
         tools:text="Online Community" />
 
