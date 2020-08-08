@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,46 +7,45 @@
     android:background="@color/app_bg"
     tools:context=".presentation.features.onboarding.GettingStarted">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@color/black">
-
-        <ImageView
-            android:id="@+id/icon_id"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:background="@color/white"
-            android:src="@drawable/search_icon" />
-    </RelativeLayout>
+    <ImageView
+        android:id="@+id/icon_id"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:src="@drawable/search_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/instruction_id"
-        android:layout_width="195dp"
-        android:layout_height="168dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="29dp"
-        android:layout_marginRight="0dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fontFamily="sans-serif-thin"
         android:gravity="center"
         android:paddingTop="20dp"
-        android:text="ok ok ok ok ok ok "
+        android:textSize="30sp"
         android:textColor="@color/white"
-        android:textSize="30dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/animation_id"
+        app:layout_constraintTop_toBottomOf="@id/icon_id"
+        tools:text="ok ok ok ok ok ok " />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_id"
-        android:layout_width="171dp"
+        android:layout_width="180dp"
         android:layout_height="360dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:foregroundGravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/celebration_music" />
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

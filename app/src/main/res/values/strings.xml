@@ -141,15 +141,16 @@
     be prompted to login in MusicBrainz website. Follow the instructions and return to complete
     authentication.</string>
 
-<!--    Onboarding-->
-    <string name="Onboarding_landing_page">Welcome to MusicBrainz! \n Allow me to take you Through the basics!</string>
+    <!--    Onboarding-->
+    <string name="Onboarding_landing_page">Welcome to MusicBrainz!
+        Allow me to take you Through the basics!</string>
     <string name="lets_go">Lets Go!</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="finish">Finish</string>
 
-<!--    onboarding adapter description-->
+    <!--    onboarding adapter description-->
     <string name="explain_fetch_metadata">Fix your Audio Metadata</string>
     <string name="explain_search_feature"> Explore MusicBrainz Data</string>
     <string name="explain_collection">Explore your Musicbrainz Collection</string>
