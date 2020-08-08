@@ -15,6 +15,8 @@ import androidx.preference.SwitchPreference;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.R;
+import org.metabrainz.mobile.databinding.ActivityPreferencesBinding;
+import org.metabrainz.mobile.databinding.LayoutToolbarBinding;
 import org.metabrainz.mobile.presentation.UserPreferences;
 
 import java.util.Objects;
@@ -30,8 +32,11 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preferences);
-//        setSupportActionBar(findViewById(R.id.toolbar));
+        ActivityPreferencesBinding binding = ActivityPreferencesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        LayoutToolbarBinding toolbarBinding = LayoutToolbarBinding.bind(binding.getRoot());
+        setSupportActionBar(toolbarBinding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         getSupportFragmentManager()

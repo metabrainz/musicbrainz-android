@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/app_bg</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppThemeGrayScale" parent="Base.Theme.MaterialComponents">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -14,10 +15,13 @@
         <item name="colorAccent">@color/app_bg_light2</item>
     </style>
 
-    <style name="AppThemeForSettings" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/app_bg_light</item>
+    <style name="AppThemeForSettings" parent="Base.Theme.MaterialComponents">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/app_bg</item>
         <item name="colorAccent">@color/app_bg_light2</item>
         <item name="colorPrimaryDark">@color/app_bg</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
     <style name="AppThemeCustomActionBar" parent="AppTheme">
@@ -25,8 +29,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="loginrequiredDialog" parent="@android:style/Theme.Dialog">
+
+    <style name="loginrequiredDialog" parent="Base.Theme.MaterialComponents.Dialog.Alert">
         <item name="android:windowAnimationStyle">@style/loginrequiredDialogAnimation</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
     </style>
     <style name="loginrequiredDialogAnimation">
         <item name="android:windowEnterAnimation">@anim/alertdialog_popin</item>
