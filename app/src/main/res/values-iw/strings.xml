@@ -70,6 +70,7 @@
     <string name="preferences_title">הגדרות</string>
     <string name="settings_search">חיפוש</string>
     <string name="settings_suggestions">הצעות</string>
+    <string name="settings_tagger">מתייג</string>
     <string name="settings_suggestions_summary">שמירת והצגת תוצאות החיפוש</string>
     <string name="settings_private_collections">אוספים פרטיים</string>
     <string name="settings_private_collections_summary">אחזור אוספים פרטיים גם כאשר המשתמש מחובר.</string>
@@ -83,7 +84,7 @@
     <string name="toast_feedback_fail">לא נמצא לקוח דוא\"ל</string>
     <string name="toast_search_cleared">היסטורית חיפושים נמחקה</string>
 
-    <string name="login_prompt">להתחברות, נא לקשר את חשבון המוזיקבריינז עם האפליקציה שלנו. אתם 
+    <string name="login_prompt">להתחברות, נא לקשר את חשבון המוזיקבריינז עם האפליקציה שלנו. אתם
 תתבקשו להתחבר לאתר מוסיקה. נא לעקוב אחר ההוראות ולאחר מכן לחזור להשלמת
 האימות.</string>
 
@@ -96,7 +97,12 @@
     <string name="tags">תגים</string>
     <string name="user_tags">התגים שלי</string>
 
+    <string name="genres">סוגה</string>
     <string name="no_tag">לא נמצא תג</string>
     <string name="no_rating">לא נמצא דרוג</string>
 
+    <string name="lookup_metadata">מטה-נתונים</string>
+    <string name="dash_tag">תג</string>
+    <string name="save_checkbox">שמירה</string>
+    <string name="settings_language">שפה</string>
 </resources>
