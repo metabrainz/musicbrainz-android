@@ -15,23 +15,6 @@
         <item name="android:padding">@dimen/std_pad</item>
     </style>
 
-    <!-- Home -->
-    <style name="HomeTileRow" parent="MatchHorizontal">
-        <item name="android:layout_weight">1</item>
-    </style>
-
-    <style name="HomeTile" parent="Match">
-        <item name="android:layout_weight">1</item>
-    </style>
-
-    <style name="TileText" parent="Wrap">
-        <item name="android:textSize">@dimen/text_size_large</item>
-    </style>
-
-    <!-- Entities -->
-
-    <!-- Searches -->
-
     <!-- Text -->
     <style name="BigRoboto" parent="MatchWidth">
         <item name="android:textSize">@dimen/text_size_xl</item>
@@ -53,8 +36,6 @@
         <item name="android:layout_centerInParent">true</item>
         <item name="android:singleLine">true</item>
     </style>
-
-    <!-- List items -->
 
     <!-- Misc -->
     <style name="Separator">

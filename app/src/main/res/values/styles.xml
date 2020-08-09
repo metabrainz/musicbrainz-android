@@ -22,26 +22,32 @@
         <item name="colorAccent">@color/app_bg_light2</item>
         <item name="colorPrimaryDark">@color/app_bg</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="alertDialogTheme">@style/settingsDialog</item>
     </style>
 
     <style name="AppThemeCustomActionBar" parent="AppTheme">
-        <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="loginrequiredDialog" parent="Base.Theme.MaterialComponents.Dialog.Alert">
-        <item name="android:windowAnimationStyle">@style/loginrequiredDialogAnimation</item>
+    <style name="settingsDialog" parent="Base.Theme.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
+
     <style name="loginrequiredDialogAnimation">
         <item name="android:windowEnterAnimation">@anim/alertdialog_popin</item>
     </style>
-    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+
+    <style name="loginrequiredDialog" parent="@style/settingsDialog">
+        <item name="android:windowAnimationStyle">@style/loginrequiredDialogAnimation</item>
     </style>
+
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar"></style>
+
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner</item>
     </style>
+
     <style name="SettingsSwitchTheme" parent="@style/Widget.AppCompat.CompoundButton.Switch">
         <item name="android:colorForeground">#f57f17</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>

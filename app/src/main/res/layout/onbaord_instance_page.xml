@@ -7,19 +7,28 @@
     android:background="@color/app_bg"
     tools:context=".presentation.features.onboarding.GettingStarted">
 
-    <ImageView
-        android:id="@+id/icon_id"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerVertical="true"
-        android:layout_margin="5dp"
-        android:background="@color/white"
-        android:src="@drawable/search_icon"
+    <RelativeLayout
+        android:id="@+id/image_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/icon_id"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:padding="2dp"
+            android:src="@drawable/search_icon" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/instruction_id"
@@ -33,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/animation_id"
-        app:layout_constraintTop_toBottomOf="@id/icon_id"
+        app:layout_constraintTop_toBottomOf="@id/image_border"
         tools:text="ok ok ok ok ok ok " />
 
     <com.airbnb.lottie.LottieAnimationView
