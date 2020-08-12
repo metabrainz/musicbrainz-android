@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import org.metabrainz.mobile.data.repository.LookupRepository;
+import org.metabrainz.mobile.data.repository.LookupRepositoryImpl;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 
@@ -15,11 +15,11 @@ import io.reactivex.Single;
 
 public class ReleaseListViewModel extends ViewModel {
 
-    private LookupRepository repository;
+    private LookupRepositoryImpl repository;
     private final MutableLiveData<List<Release>> releasesLiveData = new MutableLiveData<>();
 
     @ViewModelInject
-    public ReleaseListViewModel(LookupRepository repository) {
+    public ReleaseListViewModel(LookupRepositoryImpl repository) {
         this.repository = repository;
     }
 

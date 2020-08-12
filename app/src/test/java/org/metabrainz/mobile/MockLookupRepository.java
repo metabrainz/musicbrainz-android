@@ -6,16 +6,19 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.Gson;
 
 import org.metabrainz.mobile.data.repository.LookupRepository;
+import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.util.Resource;
 import org.metabrainz.mobile.util.SingleLiveEvent;
 
+import io.reactivex.Single;
+
 import static org.metabrainz.mobile.EntityTestUtils.loadResourceAsString;
 
-public class MockLookupRepository extends LookupRepository {
+public class MockLookupRepository implements LookupRepository {
 
     public MockLookupRepository() {
-        super(null);
     }
 
     @Override
@@ -35,5 +38,15 @@ public class MockLookupRepository extends LookupRepository {
         Resource<WikiSummary> resource = new Resource<>(Resource.Status.SUCCESS, summary);
         wiki.setValue(resource);
         return wiki;
+    }
+
+    @Override
+    public Single<CoverArt> fetchCoverArtForRelease(Release release) {
+        return null;
+    }
+
+    @Override
+    public LiveData<CoverArt> fetchCoverArt(String MBID) {
+        return null;
     }
 }
