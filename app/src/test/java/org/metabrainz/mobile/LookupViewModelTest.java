@@ -15,7 +15,9 @@ import org.metabrainz.mobile.presentation.features.label.LabelViewModel;
 import org.metabrainz.mobile.presentation.features.recording.RecordingViewModel;
 import org.metabrainz.mobile.presentation.features.release.ReleaseViewModel;
 import org.metabrainz.mobile.presentation.features.release_group.ReleaseGroupViewModel;
+import org.metabrainz.mobile.util.Resource;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.metabrainz.mobile.AssertionUtils.checkArtistAssertions;
 import static org.metabrainz.mobile.AssertionUtils.checkLabelAssertions;
@@ -48,8 +50,13 @@ public class LookupViewModelTest {
         ArtistViewModel viewModel = new ArtistViewModel(new MockLookupRepository());
         viewModel.setMBID(getTestArtistMBID());
         try {
-            checkArtistAssertions(testArtist, getOrAwaitValue(viewModel.getData()));
-            checkWikiAssertions(testWiki, getOrAwaitValue(viewModel.getWikiData()));
+            Resource<Artist> resource = getOrAwaitValue(viewModel.getData());
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            checkArtistAssertions(testArtist, resource.getData());
+
+            Resource<WikiSummary> wikiResource = getOrAwaitValue(viewModel.getWikiData());
+            assertEquals(Resource.Status.SUCCESS, wikiResource.getStatus());
+            checkWikiAssertions(testWiki, wikiResource.getData());
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -62,7 +69,9 @@ public class LookupViewModelTest {
         ReleaseViewModel viewModel = new ReleaseViewModel(new MockLookupRepository());
         viewModel.setMBID(getTestReleaseMBID());
         try {
-            checkReleaseAssertions(testRelease, getOrAwaitValue(viewModel.getData()));
+            Resource<Release> resource = getOrAwaitValue(viewModel.getData());
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            checkReleaseAssertions(testRelease, resource.getData());
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -75,7 +84,9 @@ public class LookupViewModelTest {
         ReleaseGroupViewModel viewModel = new ReleaseGroupViewModel(new MockLookupRepository());
         viewModel.setMBID(getTestReleaseGroupMBID());
         try {
-            checkReleaseGroupAssertions(testReleaseGroup, getOrAwaitValue(viewModel.getData()));
+            Resource<ReleaseGroup> resource = getOrAwaitValue(viewModel.getData());
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            checkReleaseGroupAssertions(testReleaseGroup, resource.getData());
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -88,7 +99,9 @@ public class LookupViewModelTest {
         LabelViewModel viewModel = new LabelViewModel(new MockLookupRepository());
         viewModel.setMBID(getTestLabelMBID());
         try {
-            checkLabelAssertions(testLabel, getOrAwaitValue(viewModel.getData()));
+            Resource<Label> resource = getOrAwaitValue(viewModel.getData());
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            checkLabelAssertions(testLabel, resource.getData());
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -101,7 +114,9 @@ public class LookupViewModelTest {
         RecordingViewModel viewModel = new RecordingViewModel(new MockLookupRepository());
         viewModel.setMBID(getTestRecordingMBID());
         try {
-            checkRecordingAssertions(testRecording, getOrAwaitValue(viewModel.getData()));
+            Resource<Recording> resource = getOrAwaitValue(viewModel.getData());
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            checkRecordingAssertions(testRecording, resource.getData());
         } catch (Exception e) {
             e.printStackTrace();
             fail();

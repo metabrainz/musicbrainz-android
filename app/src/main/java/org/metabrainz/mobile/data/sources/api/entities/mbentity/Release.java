@@ -194,7 +194,7 @@ public class Release extends MBEntity {
                 ", artistCredits=" + artistCredits +
                 ", date='" + date + '\'' +
                 ", barcode='" + barcode + '\'' +
-                ", packaging='" + packaging + '\'' +
+//                ", packaging='" + packaging + '\'' +
                 ", releaseGroup=" + releaseGroup +
                 ", releaseEvents=" + releaseEvents +
                 ", labels=" + labels +

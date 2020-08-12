@@ -13,19 +13,20 @@ import org.junit.Test;
 import org.metabrainz.mobile.data.repository.LookupRepository;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
-import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
+import org.metabrainz.mobile.util.Resource;
 
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.metabrainz.mobile.AssertionUtils.checkArtistAssertions;
 import static org.metabrainz.mobile.AssertionUtils.checkLabelAssertions;
@@ -43,6 +44,8 @@ import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseGroup;
 import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseGroupMBID;
 import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseMBID;
 import static org.metabrainz.mobile.EntityTestUtils.loadResourceAsString;
+import static org.metabrainz.mobile.LiveDataTestUtil.getOrAwaitValue;
+import static org.metabrainz.mobile.RetrofitUtils.createTestService;
 
 public class LookupRepositoryTest {
 
@@ -68,8 +71,7 @@ public class LookupRepositoryTest {
                 }
             });
             webServer.start();
-            LookupService service = MusicBrainzServiceGenerator.createTestService(
-                    LookupService.class, webServer.url("/"));
+            LookupService service = createTestService(LookupService.class, webServer.url("/"));
             repository = new LookupRepository(service);
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,10 +82,12 @@ public class LookupRepositoryTest {
     @Test
     public void testArtistLookup() {
         Artist testArtist = getTestArtist();
-        LiveData<String> testArtistData = repository.fetchData(MBEntityType.ARTIST.name,
+        LiveData<Resource<String>> testArtistData = repository.fetchData(MBEntityType.ARTIST.name,
                 getTestArtistMBID(), Constants.LOOKUP_ARTIST_PARAMS);
         try {
-            String response = LiveDataTestUtil.getOrAwaitValue(testArtistData);
+            Resource<String> resource = getOrAwaitValue(testArtistData);
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            String response = resource.getData();
             Artist artist = new Gson().fromJson(response, Artist.class);
             checkArtistAssertions(testArtist, artist);
         } catch (Exception e) {
@@ -95,10 +99,12 @@ public class LookupRepositoryTest {
     @Test
     public void testReleaseLookup() {
         Release testRelease = getTestRelease();
-        LiveData<String> testReleaseData = repository.fetchData(MBEntityType.RELEASE.name,
+        LiveData<Resource<String>> testReleaseData = repository.fetchData(MBEntityType.RELEASE.name,
                 getTestReleaseMBID(), Constants.LOOKUP_RELEASE_PARAMS);
         try {
-            String response = LiveDataTestUtil.getOrAwaitValue(testReleaseData);
+            Resource<String> resource = getOrAwaitValue(testReleaseData);
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            String response = resource.getData();
             Release release = new Gson().fromJson(response, Release.class);
             checkReleaseAssertions(testRelease, release);
         } catch (Exception e) {
@@ -110,10 +116,12 @@ public class LookupRepositoryTest {
     @Test
     public void testReleaseGroupLookup() {
         ReleaseGroup testReleaseGroup = getTestReleaseGroup();
-        LiveData<String> testReleaseGroupData = repository.fetchData(MBEntityType.RELEASE_GROUP.name,
+        LiveData<Resource<String>> testReleaseGroupData = repository.fetchData(MBEntityType.RELEASE_GROUP.name,
                 getTestReleaseGroupMBID(), Constants.LOOKUP_RELEASE_GROUP_PARAMS);
         try {
-            String response = LiveDataTestUtil.getOrAwaitValue(testReleaseGroupData);
+            Resource<String> resource = getOrAwaitValue(testReleaseGroupData);
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            String response = resource.getData();
             ReleaseGroup releaseGroup = new Gson().fromJson(response, ReleaseGroup.class);
             checkReleaseGroupAssertions(testReleaseGroup, releaseGroup);
         } catch (Exception e) {
@@ -125,10 +133,12 @@ public class LookupRepositoryTest {
     @Test
     public void testLabelLookup() {
         Label testLabel = getTestLabel();
-        LiveData<String> testLabelData = repository.fetchData(MBEntityType.LABEL.name,
+        LiveData<Resource<String>> testLabelData = repository.fetchData(MBEntityType.LABEL.name,
                 getTestLabelMBID(), Constants.LOOKUP_LABEL_PARAMS);
         try {
-            String response = LiveDataTestUtil.getOrAwaitValue(testLabelData);
+            Resource<String> resource = getOrAwaitValue(testLabelData);
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            String response = resource.getData();
             Label label = new Gson().fromJson(response, Label.class);
             checkLabelAssertions(testLabel, label);
         } catch (Exception e) {
@@ -140,10 +150,12 @@ public class LookupRepositoryTest {
     @Test
     public void testRecordingLookup() {
         Recording testRecording = getTestRecording();
-        LiveData<String> testRecordingData = repository.fetchData(MBEntityType.RECORDING.name,
+        LiveData<Resource<String>> testRecordingData = repository.fetchData(MBEntityType.RECORDING.name,
                 getTestRecordingMBID(), Constants.LOOKUP_RECORDING_PARAMS);
         try {
-            String response = LiveDataTestUtil.getOrAwaitValue(testRecordingData);
+            Resource<String> resource = getOrAwaitValue(testRecordingData);
+            assertEquals(Resource.Status.SUCCESS, resource.getStatus());
+            String response = resource.getData();
             Recording recording = new Gson().fromJson(response, Recording.class);
             checkRecordingAssertions(testRecording, recording);
         } catch (Exception e) {

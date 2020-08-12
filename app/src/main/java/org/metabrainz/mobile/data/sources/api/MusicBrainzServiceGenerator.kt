@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.Cache
-import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object MusicBrainzServiceGenerator {
 
     private const val API_BASE_URL = "https://musicbrainz.org/ws/2/"
-    const val AUTH_URL = "https://musicbrainz.org/oauth2/authorize"
+    const val AUTH_BASE_URL = "https://musicbrainz.org/oauth2/authorize"
     const val ACOUST_ID_BASE_URL = "https://api.acoustid.org/v2/lookup"
     const val CLIENT_ID = "BZn9PT8PXtzoUvR1ZIaXFw"
     const val CLIENT_SECRET = "WN6o5cjehjPAP4dib0zOmQ"
@@ -75,12 +74,6 @@ object MusicBrainzServiceGenerator {
         if (requiresAuthenticator) addAuthenticator()
         addInterceptors(loggingInterceptor)
         return retrofit.create(service)
-    }
-
-    @JvmStatic
-    fun <S> createTestService(service: Class<S>, testUrl: HttpUrl): S {
-        val testRetrofit = builder.baseUrl(testUrl).build()
-        return testRetrofit.create(service)
     }
 
     private fun addAuthenticator() {

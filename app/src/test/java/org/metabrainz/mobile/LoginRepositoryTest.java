@@ -18,6 +18,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
 import static org.junit.Assert.assertEquals;
+import static org.metabrainz.mobile.RetrofitUtils.createTestService;
 
 public class LoginRepositoryTest {
 
@@ -96,8 +97,7 @@ public class LoginRepositoryTest {
 
     @Test
     public void fetchAccessToken() throws IOException {
-        LoginService service = MusicBrainzServiceGenerator.createTestService(LoginService.class,
-                webServer.url("/"));
+        LoginService service = createTestService(LoginService.class, webServer.url("/"));
 
         AccessToken accessToken = service
                 .getAccessToken(webServer.url("/oauth2/") + "token",
