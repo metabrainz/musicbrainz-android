@@ -30,4 +30,15 @@ public class ArtistCredit {
     public void setArtist(Artist artist) {
         this.artist = artist;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ArtistCredit)) return false;
+        ArtistCredit that = (ArtistCredit) o;
+        return getName().equals(that.getName()) &&
+                getJoinphrase().equals(that.getJoinphrase()) &&
+                getArtist().equals(that.getArtist());
+    }
+
 }
