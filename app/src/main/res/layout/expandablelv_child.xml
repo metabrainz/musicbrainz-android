@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/app_bg_light"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tag_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/artist_title"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/tag_value"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:padding="5dp"
+        android:text="@string/artist_title"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@id/tag_key"
+        />
+
+
+</RelativeLayout>

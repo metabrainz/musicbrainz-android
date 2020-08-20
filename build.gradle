@@ -8,6 +8,7 @@ buildscript {
         gradleVersion = '3.3.1'
         supportlibVersion = '1.1.0'
         lottieVersion = "3.4.0"
+
         dataBindingCompilerVersion = gradleVersion
     }
     repositories {

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/app_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:padding="10dp"
+            android:background="@color/app_bg"
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/instruction_for_tag_fix"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tagger_file_chooser_Instructions"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/chooseDirectoryButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingBottom="20dp"
+            android:paddingRight="3dp"
+            android:paddingLeft="3dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+
+        <Button
+            android:id="@+id/chooseDirectoryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@color/app_bg_light"
+            android:padding="10dp"
+            android:text="@string/tagger_file_chooser_pickDirectory"
+            android:textAllCaps="false"
+            android:textColor="@color/app_bg"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
