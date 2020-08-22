@@ -8,7 +8,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "org.metabrainz.android"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 34
 
@@ -87,6 +87,7 @@ dependencies {
     implementation 'com.github.QuickLyric:fpcalc-android:1.0.1'
     implementation 'org.bitbucket.ijabz:jaudiotagger:android-SNAPSHOT'
     implementation 'info.debatty:java-string-similarity:1.2.1'
+    implementation 'com.github.SomalRudra:KTagLib:0.4'
 
     //Design Setup
     implementation 'androidx.browser:browser:1.2.0'

@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.presentation.IntentFactory
 
 class TaggerAcitivty : AppCompatActivity() {
+
+    private lateinit var viewModel: KotlinTaggerViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tagger)
 
+        viewModel = ViewModelProvider(this).get(KotlinTaggerViewModel::class.java)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

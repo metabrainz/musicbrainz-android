@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/app_bg"
+<androidx.constraintlayout.widget.ConstraintLayout android:background="@color/app_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:padding="10dp"
-            android:background="@color/app_bg"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
             android:clipToPadding="false"
+            android:padding="16dp"
+            android:background="@color/app_bg"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
             app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="5"
+            tools:listitem="@layout/list_item_document"
             />
 
         <TextView
