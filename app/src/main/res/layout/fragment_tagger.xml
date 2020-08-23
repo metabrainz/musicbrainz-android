@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.features.tagger.TaggerFragment"
     android:layout_width="match_parent"
-    android:background="@color/app_bg_light"
+    android:background="@color/app_bg"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/album_art"
-        android:layout_width="167dp"
+        android:layout_width="match_parent"
         android:layout_height="182dp"
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
@@ -22,21 +22,23 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_bg"
-        android:layout_below="@+id/album_art">
+        android:layout_margin="10dp"
+        android:layout_below="@+id/save_tags_button_id">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CardView.Light"
                 android:layout_marginTop="8dp"
                 android:background="@color/app_bg_light"
+                android:layout_gravity="left"
+                android:layout_weight="0.5"
                 android:layout_below="@id/album_art"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,11 +94,12 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CardView.Light"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/cardView1"
+                android:layout_gravity="right"
+                android:layout_weight="0.5"
                 android:background="@color/app_bg_light"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +143,7 @@
                     <!--        dropdown-->
                     <include
                         android:id="@+id/dropdownItems2"
-                        layout="@layout/list_item_document"
+                        layout="@layout/accoustid_editable_tags"
                         android:layout_width="match_parent"
                         android:visibility="gone"
                         android:layout_height="wrap_content"
@@ -153,18 +156,17 @@
 
 
         </LinearLayout>
-
-
     </ScrollView>
 
     <Button
         android:id="@+id/save_tags_button_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/album_art"
         android:layout_centerHorizontal="true"
         android:text="@string/tagger_file_save"
-        android:layout_marginBottom="3dp"
+        android:textAllCaps="false"
+        android:layout_margin="3dp"
         />
 
     </RelativeLayout>
