@@ -99,11 +99,11 @@
     <string name="tags">Tags</string>
     <string name="user_tags">Your Tags</string>
     <string name="tagger_file_chooser_pickAfile">Pick a File</string>
-    <string name="tagger_file_chooser_SeeTags">Show My AudioTags</string>
-    <string name="tagger_file_chooser_ShowCorrectags">Show Correct Tags</string>
+    <string name="tagger_file_chooser_SeeTags">Original Tags</string>
+    <string name="tagger_file_chooser_ShowCorrectags">New Tags</string>
     <string name="tagger_file_chooser_pickDirectory">Choose Directory</string>
     <string name="tagger_file_chooser_Instructions">Select An Audio File to Fix Tags</string>
-    <string name="tagger_file_save">Save</string>
+    <string name="tagger_file_save">Overwrite Tags</string>
     <string name="instruction">Pick the directory where your audio files reside \nChoose the Audio file in that directory</string>
 
     <string name="genres">Genres</string>
