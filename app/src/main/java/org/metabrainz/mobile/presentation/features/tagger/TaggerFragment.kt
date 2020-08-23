@@ -8,14 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.simplecityapps.ktaglib.AudioFile
 import kotlinx.android.synthetic.main.fragment_tagger.*
 import kotlinx.android.synthetic.main.list_item_document.*
+import kotlinx.android.synthetic.main.list_item_document.view.*
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentTaggerBinding
 
@@ -74,8 +77,20 @@ class TaggerFragment : Fragment() {
 //        }
 
         viewmodel.TaglibFetchedMetadata.observe(viewLifecycleOwner, Observer { TFM ->
-            Toast.makeText(requireContext(), "${TFM?.title} received in TaggerFragment", Toast.LENGTH_SHORT).show()
+            setTags(TFM)
         })
         return binding.root
+    }
+    fun setTags(metadata:AudioFile?){
+        var size = if(metadata?.size==null) "null" else "${"%.2f".format((metadata?.size / 1024f / 1024f))}MB"
+        binding.root.findViewById<TextView>(R.id.title).text = metadata?.title
+        binding.root.findViewById<TextView>(R.id.track).text = metadata?.track.toString()
+        binding.root.findViewById<TextView>(R.id.disc).text = metadata?.disc.toString()
+        binding.root.findViewById<TextView>(R.id.duration).text = metadata?.duration.toString()
+        binding.root.findViewById<TextView>(R.id.artist).text = metadata?.artist.toString()
+        binding.root.findViewById<TextView>(R.id.album).text = metadata?.disc.toString()
+        binding.root.findViewById<TextView>(R.id.year).text = metadata?.date.toString()
+        binding.root.findViewById<TextView>(R.id.disc).text = metadata?.disc.toString()
+        binding.root.findViewById<TextView>(R.id.size).text = size
     }
 }
