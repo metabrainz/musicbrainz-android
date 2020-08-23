@@ -55,21 +55,36 @@ class TaggerFragment : Fragment() {
             }
         }
 
-        viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner, { setTags(it, binding.dropdownItems1) })
-        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner, { setTags(it, binding.dropdownItems2) })
+        viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner, this::setTaglibTags)
+        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner, this::setServerTags)
         return binding.root
     }
 
-    private fun setTags(metadata: AudioFile?, detailsViewBinding : ListItemDocumentBinding) {
-        val size = if (metadata?.size == null) "null" else "${"%.2f".format((metadata.size / 1024f / 1024f))}MB"
-        detailsViewBinding.title.text = metadata?.title
-        detailsViewBinding.track.text = metadata?.track.toString()
-        detailsViewBinding.disc.text = metadata?.disc.toString()
-        detailsViewBinding.duration.text = metadata?.duration.toString()
-        detailsViewBinding.artist.text = metadata?.artist.toString()
-        detailsViewBinding.album.text = metadata?.disc.toString()
-        detailsViewBinding.year.text = metadata?.date.toString()
-        detailsViewBinding.disc.text = metadata?.disc.toString()
-        detailsViewBinding.size.text = size
+    private fun setTaglibTags(metadata: AudioFile?) {
+        if (metadata == null)
+            return
+        val size = "${"%.2f".format((metadata.size / 1024f / 1024f))} MB"
+        binding.dropdownItems1.title.text = metadata.title
+        binding.dropdownItems1.track.text = metadata.track.toString()
+        binding.dropdownItems1.disc.text = metadata.disc.toString()
+        binding.dropdownItems1.duration.text = metadata.duration.toString()
+        binding.dropdownItems1.artist.text = metadata.artist.toString()
+        binding.dropdownItems1.album.text = metadata.disc.toString()
+        binding.dropdownItems1.year.text = metadata.date.toString()
+        binding.dropdownItems1.disc.text = metadata.disc.toString()
+        binding.dropdownItems1.size.text = size
+    }
+
+    private fun setServerTags(metadata: AudioFile?){
+        if (metadata == null)
+            return
+        binding.dropdownItems2.title.setText(metadata.title)
+        binding.dropdownItems2.track.setText(metadata.track.toString())
+        binding.dropdownItems2.disc.setText(metadata.disc.toString())
+        binding.dropdownItems2.duration.setText(metadata.duration.toString())
+        binding.dropdownItems2.artist.setText(metadata.artist.toString())
+        binding.dropdownItems2.album.setText(metadata.disc.toString())
+        binding.dropdownItems2.year.setText(metadata.date.toString())
+        binding.dropdownItems2.disc.setText(metadata.disc.toString())
     }
 }
