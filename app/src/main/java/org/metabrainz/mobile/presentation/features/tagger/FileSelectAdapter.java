@@ -15,7 +15,7 @@ import java.util.List;
 
 public class FileSelectAdapter extends RecyclerView.Adapter<FileSelectAdapter.FileViewHolder> {
 
-    private List<FileEntry> fileEntries;
+    private final List<FileEntry> fileEntries;
     private OnFileClickAction fileClickAction;
 
     public FileSelectAdapter(List<FileEntry> fileEntries) {
@@ -48,7 +48,7 @@ public class FileSelectAdapter extends RecyclerView.Adapter<FileSelectAdapter.Fi
     }
 
     static class FileViewHolder extends RecyclerView.ViewHolder {
-        private TextView fileNameView;
+        private final TextView fileNameView;
         private FileEntry file;
 
         public FileViewHolder(@NonNull View itemView) {

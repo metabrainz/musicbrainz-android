@@ -1,37 +1,34 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import org.metabrainz.mobile.R
-import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
-
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.DocumentsContract
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.simplecityapps.ktaglib.AudioFile
 import com.simplecityapps.ktaglib.KTagLib
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import org.metabrainz.mobile.R
+import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
 
-class DirectoryPicker : Fragment(),OnItemCLickListener{
-
+@AndroidEntryPoint
+class DirectoryPicker : Fragment(), OnItemCLickListener {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("MainActivity", "Coroutine failed: ${throwable.localizedMessage}")
@@ -45,16 +42,12 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
     private val kTagLib = KTagLib()
     private lateinit var documentAdapter: DocumentAdapter
 
-    private lateinit var viewmodel:KotlinTaggerViewModel
+    private val viewmodel: KotlinTaggerViewModel by activityViewModels()
     private lateinit var binding: FragmentDirectoryPickerBinding
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentDirectoryPickerBinding.inflate(inflater)
-        viewmodel = activity?.run{
-            ViewModelProvider(this).get(KotlinTaggerViewModel::class.java)
-        }!!
         documentAdapter = DocumentAdapter(this)
 
         val recyclerView = binding.recyclerView
@@ -69,14 +62,14 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
             if (packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_DOCUMENT)
             } else {
-                Toast.makeText(context,"Dcument provider not found",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Dcument provider not found", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root
     }
 
     override fun onItemClicked(metadata: AudioFile?) {
-        Toast.makeText(requireContext(),"${metadata?.title} in DP",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "${metadata?.title} in DP", Toast.LENGTH_SHORT).show()
         viewmodel.setTaglibFetchedMetadata(metadata)
         findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment)
     }
@@ -87,9 +80,7 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
         if (requestCode == REQUEST_CODE_OPEN_DOCUMENT && resultCode == Activity.RESULT_OK) {
             data?.let { intent ->
                 intent.data?.let { uri ->
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    }
+                    contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     scope.launch {
                         documentAdapter.clear()
                         val documents = parseUri(uri)

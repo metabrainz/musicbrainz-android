@@ -21,7 +21,7 @@ import java.util.List;
 public class MetadataChangesAdapter extends RecyclerView.Adapter
         <MetadataChangesAdapter.MetadataChangeViewHolder> {
 
-    private List<MetadataChange> changes;
+    private final List<MetadataChange> changes;
 
     public MetadataChangesAdapter(List<MetadataChange> changes) {
         this.changes = changes;
@@ -58,9 +58,10 @@ public class MetadataChangesAdapter extends RecyclerView.Adapter
     }
 
     class MetadataChangeViewHolder extends RecyclerView.ViewHolder {
-        private TextView tagNameView, originalValueView;
-        private EditText newValueView;
-        private CheckBox saveCheckBox;
+        private final TextView tagNameView;
+        private final TextView originalValueView;
+        private final EditText newValueView;
+        private final CheckBox saveCheckBox;
         private TextWatcher watcher;
 
         public MetadataChangeViewHolder(@NonNull View itemView) {

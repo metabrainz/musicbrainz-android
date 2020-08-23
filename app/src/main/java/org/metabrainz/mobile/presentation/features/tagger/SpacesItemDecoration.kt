@@ -12,7 +12,8 @@ class SpacesItemDecoration(space: Int, val skipFirst: Boolean = false) : Recycle
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
 
-        val orientation = (parent.layoutManager as? LinearLayoutManager)?.orientation ?: LinearLayoutManager.VERTICAL
+        val orientation = (parent.layoutManager as? LinearLayoutManager)?.orientation
+                ?: LinearLayoutManager.VERTICAL
 
         if (orientation == LinearLayoutManager.HORIZONTAL) {
             if (skipFirst && parent.getChildLayoutPosition(view) == 0) {
