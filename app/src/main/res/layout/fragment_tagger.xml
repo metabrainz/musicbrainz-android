@@ -1,68 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
     tools:context=".presentation.features.tagger.TaggerFragment">
 
-    <data>
-
-        <variable
-            name="taggeractivity"
-            type="org.metabrainz.mobile.presentation.features.tagger.TaggerFragment" />
-    </data>
-
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/save_tags"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_metadata_change" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/coordinator_colaps_id"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/app_bar_height"
-            android:fitsSystemWindows="true"
-            tools:context=".presentation.features.tagger.TaggerFragment">
+    <Button
+        android:id="@+id/save_tags"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:background="@color/app_bg_light"
+        android:text="@string/tagger_file_save"
+        android:textAllCaps="false"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/app_bar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/app_bar_height"
-                android:backgroundTint="#01b4b0"
-                android:fitsSystemWindows="true"
-                android:theme="@style/AppTheme.AppBarOverlay">
-
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/toolbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    app:contentScrim="#01b4b0"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:toolbarId="@+id/toolbar">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        android:backgroundTint="#01b4b0"
-                        app:layout_collapseMode="pin"
-                        app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
-            </com.google.android.material.appbar.AppBarLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <org.metabrainz.mobile.presentation.features.tagger.NonScrollExpandableListView
-            android:id="@+id/expandable_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/coordinator_colaps_id" />
-
-    </RelativeLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,11 +3,17 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.presentation.IntentFactory
 
-class TaggerAcitivty : AppCompatActivity() {
+@AndroidEntryPoint
+class TaggerActivity : AppCompatActivity() {
+
+    private val viewModel: TaggerViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tagger)

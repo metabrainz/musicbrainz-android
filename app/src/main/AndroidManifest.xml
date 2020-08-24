@@ -52,7 +52,6 @@
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".presentation.features.tagger.FileSelectActivity" />
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"
             android:parentActivityName=".presentation.features.collection.CollectionActivity"
@@ -67,7 +66,7 @@
             android:label="@string/dash_collections"
             android:theme="@style/AppThemeGrayScale" />
         <activity
-            android:name=".presentation.features.tagger.TaggerAcitivty"
+            android:name=".presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger" />
         <activity android:name=".presentation.features.recording.RecordingActivity"
             android:label="@string/search_type_recording"

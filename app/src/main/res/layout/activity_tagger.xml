@@ -1,45 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg">
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/underconstruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/under_construction" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/underconstruction"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:text="Under Development"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-</RelativeLayout>
-
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:orientation="vertical">-->
-    <!--        <fragment-->
-    <!--            android:id="@+id/FilepickFragment"-->
-    <!--            android:name="org.metabrainz.mobile.presentation.features.taggerkotlin.TaggerActivityFragment"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            />-->
-    <!--    </LinearLayout>-->
-
-    <!--</layout>-->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <fragment
+            android:id="@+id/TaggerNavhostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:navGraph="@navigation/taggernavigation"
+            app:defaultNavHost="true"
+            />
+    </LinearLayout>

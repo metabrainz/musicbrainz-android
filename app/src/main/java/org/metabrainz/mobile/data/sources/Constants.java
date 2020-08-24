@@ -21,6 +21,15 @@ public final class Constants {
     public static final String USER_DATA_PARAMS =
             "+user-tags+user-ratings";
 
+//    urls for adding in the database
+    public static  final String ADD_ARTIST = "https://musicbrainz.org/artist/create?edit-artist";
+    public static final String ADD_RELEASE = "https://musicbrainz.org/release/add";
+    public static final String ADD_EVENT = "https://musicbrainz.org/event/create?edit-event";
+    public static final String ADD_RELEASEGROUP = "https://musicbrainz.org/release-group/create?edit-release-group";
+    public static final String ADD_LABEL =  "https://musicbrainz.org/label/create?edit-label";
+    public static final String ADD_RECORDING = "https://musicbrainz.org/recording/create?edit-recording";
+
+
     public static final int LIMIT = 10;
     public static final int OFFSET = 0;
 

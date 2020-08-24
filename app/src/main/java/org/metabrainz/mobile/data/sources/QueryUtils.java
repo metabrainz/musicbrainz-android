@@ -1,17 +1,16 @@
 package org.metabrainz.mobile.data.sources;
 
-import android.util.Pair;
-
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QueryUtils {
 
-    public static String getQuery(List<Pair<String, String>> arguments) {
+    public static String getQuery(HashMap<String, String> arguments) {
         StringBuilder queryBuilder = new StringBuilder();
-        for (Pair<String, String> argument : arguments)
-            if (argument.second != null && !argument.second.isEmpty())
-                queryBuilder.append("(").append(argument.first).append(":")
-                        .append(argument.second).append(")");
+        for (Map.Entry<String, String> argument : arguments.entrySet())
+            if (argument.getKey() != null && !argument.getValue().isEmpty())
+                queryBuilder.append("(").append(argument.getKey()).append(":")
+                        .append(argument.getValue()).append(")");
 
         return queryBuilder.toString();
 

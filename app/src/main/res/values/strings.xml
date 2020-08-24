@@ -101,8 +101,12 @@
     <string name="tags">Tags</string>
     <string name="user_tags">Your Tags</string>
     <string name="tagger_file_chooser_pickAfile">Pick a File</string>
-    <string name="tagger_file_chooser_SeeTags">Show Tags</string>
-    <string name="tagger_file_chooser_MascotDialogue">Pick Your Audio! I will do the cleanup for you</string>
+    <string name="tagger_file_chooser_SeeTags">Original Tags</string>
+    <string name="tagger_file_chooser_ShowCorrectags">New Tags</string>
+    <string name="tagger_file_chooser_pickDirectory">Choose Directory</string>
+    <string name="tagger_file_chooser_Instructions">Select An Audio File to Fix Tags</string>
+    <string name="tagger_file_save">Overwrite Tags</string>
+    <string name="instruction">Pick the directory where your audio files reside \nChoose the Audio file in that directory</string>
 
     <string name="genres">Genres</string>
     <string name="user_genres">Your Genres</string>
@@ -149,6 +153,15 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="finish">Finish</string>
+
+<!--    add to database-->
+    <string name="instruction_to_add">Add if you can not find it</string>
+    <string name="artistadd">Add Artist</string>
+    <string name="releaseadd">Add Release</string>
+    <string name="eventadd">Add Event</string>
+    <string name="releasegroupadd">Add ReleaseGroup</string>
+    <string name="labeladd">Add Label</string>
+    <string name="recordingadd">Add Recording</string>
 
     <!--    onboarding adapter description-->
     <string name="explain_fetch_metadata">Fix your Audio Metadata</string>

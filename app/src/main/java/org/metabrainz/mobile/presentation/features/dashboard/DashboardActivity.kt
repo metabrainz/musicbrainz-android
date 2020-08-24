@@ -14,7 +14,7 @@ import org.metabrainz.mobile.presentation.features.about.AboutActivity
 import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity
 import org.metabrainz.mobile.presentation.features.search.SearchActivity
-import org.metabrainz.mobile.presentation.features.tagger.TaggerAcitivty
+import org.metabrainz.mobile.presentation.features.tagger.TaggerActivity
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -44,7 +44,7 @@ class DashboardActivity : AppCompatActivity() {
 
         //navigation
         binding.dashboardTagId.setOnClickListener {
-            startActivity(Intent(this, TaggerAcitivty::class.java))
+            startActivity(Intent(this, TaggerActivity::class.java))
         }
         binding.dashboardAboutId.setOnClickListener {
             startActivity(Intent(this, AboutActivity::class.java))
