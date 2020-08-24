@@ -11,11 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.simplecityapps.ktaglib.AudioFile
 import com.simplecityapps.ktaglib.KTagLib
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -33,12 +31,11 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         Log.e("MainActivity", "Coroutine failed: ${throwable.localizedMessage}")
     }
 
-    val Fragment.packageManager get() = activity?.packageManager
-    val Fragment.contentResolver get() = activity?.contentResolver
+    private val Fragment.packageManager get() = activity?.packageManager
+    private val Fragment.contentResolver get() = activity?.contentResolver
 
     private val scope = CoroutineScope(Dispatchers.Main + exceptionHandler)
 
-    private val kTagLib = KTagLib()
     private lateinit var documentAdapter: DocumentAdapter
 
     private val viewmodel: TaggerViewModel by activityViewModels()
@@ -61,15 +58,15 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
             if (packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_DOCUMENT)
             } else {
-                Toast.makeText(context, "Dcument provider not found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Document provider not found", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root
     }
 
     override fun onItemClicked(metadata: AudioFile?) {
-        Toast.makeText(requireContext(), "${metadata?.title} in DP", Toast.LENGTH_SHORT).show()
-        viewmodel.setTaglibFetchedMetadata(metadata)
+        Toast.makeText(requireContext(), metadata?.title, Toast.LENGTH_SHORT).show()
+        metadata?.allProperties?.let { viewmodel.setTaglibFetchedMetadata(it) }
         findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment)
     }
 
@@ -79,7 +76,8 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         if (requestCode == REQUEST_CODE_OPEN_DOCUMENT && resultCode == Activity.RESULT_OK) {
             data?.let { intent ->
                 intent.data?.let { uri ->
-                    contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    contentResolver?.takePersistableUriPermission(uri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     scope.launch {
                         documentAdapter.clear()
                         val documents = parseUri(uri)
@@ -97,10 +95,6 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         super.onDestroy()
     }
 
-
-    // Private
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private suspend fun parseUri(uri: Uri): List<Document> {
         return withContext(Dispatchers.IO) {
             val childDocumentsUri = DocumentsContract.buildChildDocumentsUriUsingTree(uri, DocumentsContract.getTreeDocumentId(uri))
@@ -108,7 +102,6 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun traverse(treeUri: Uri, documentUri: Uri, documents: MutableList<Document> = mutableListOf()): List<Document> {
         contentResolver?.query(
                 documentUri,
@@ -151,17 +144,16 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
             documents.forEach { document ->
                 contentResolver?.openFileDescriptor(document.uri, "r")?.use { pfd ->
                     try {
-                        emit(Pair(kTagLib.getAudioFile(pfd.fd, document.uri.toString(), document.displayName.substringBeforeLast(".")), document))
+                        val metadata = KTagLib.getMetadata(pfd.detachFd())
+                        emit(Pair(AudioFile.getAudioFileFromHashMap(
+                                document.uri.toString(), metadata), document))
                     } catch (e: IllegalStateException) {
-                        Log.e("MainActivity", "Failed to get audio file: ", e)
+                        Log.e(TAG, "Failed to get audio file: ", e)
                     }
                 }
             }
         }.flowOn(Dispatchers.IO)
     }
-
-
-    // Static
 
     companion object {
         const val TAG = "MainActivity"

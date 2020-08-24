@@ -85,9 +85,8 @@ dependencies {
 
     //Tagger & Metadata Setup
     implementation 'com.github.QuickLyric:fpcalc-android:1.0.1'
-    implementation 'org.bitbucket.ijabz:jaudiotagger:android-SNAPSHOT'
     implementation 'info.debatty:java-string-similarity:1.2.1'
-    implementation 'com.github.SomalRudra:KTagLib:0.4'
+    implementation 'com.github.amcap1712:KTaglib:release-SNAPSHOT'
 
     //Design Setup
     implementation 'androidx.browser:browser:1.2.0'

@@ -1,14 +1,11 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
-import android.R.attr.track
-import android.widget.Toast
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
-import com.simplecityapps.ktaglib.AudioFile
 import org.metabrainz.mobile.data.repository.TaggerRepository
 import org.metabrainz.mobile.data.sources.QueryUtils
 import org.metabrainz.mobile.data.sources.api.entities.Track
@@ -18,22 +15,22 @@ import org.metabrainz.mobile.util.ComparisionResult
 import org.metabrainz.mobile.util.Log
 import org.metabrainz.mobile.util.Metadata
 import org.metabrainz.mobile.util.TaggerUtils
-import javax.inject.Inject
 
 
-class TaggerViewModel
-@ViewModelInject constructor(val repository: TaggerRepository) : ViewModel() {
+class TaggerViewModel @ViewModelInject constructor(val repository: TaggerRepository) : ViewModel() {
 
-    val taglibFetchedMetadata = MutableLiveData<AudioFile>()
-    val serverFetchedMetadata: LiveData<AudioFile>
+    val taglibFetchedMetadata = MutableLiveData<HashMap<String, String>>()
+    val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
 
-    fun setTaglibFetchedMetadata(metadata: AudioFile?) {
+    fun setTaglibFetchedMetadata(metadata: HashMap<String, String>) {
         taglibFetchedMetadata.value = metadata
     }
 
     private fun chooseRecordingFromList(recordings: List<Recording?>): ComparisionResult? {
-        val recording = Metadata.getRecordingFromFile(taglibFetchedMetadata.value)
+        if (taglibFetchedMetadata.value == null)
+            return null
+        val recording = Metadata.createRecordingFromHashMap(taglibFetchedMetadata.value!!)
         var maxScore = 0.0
         var comparisionResult = ComparisionResult(0.0, null, null)
         for (searchResult in recordings) {
@@ -53,14 +50,14 @@ class TaggerViewModel
         return null
     }
 
-    private fun displayMatchedRelease(release: Release?) : AudioFile {
-        var track : Track? = null
+    private fun displayMatchedRelease(release: Release?): List<TagField> {
+        var track: Track? = null
         if (release?.media != null && release.media.isNotEmpty())
             for (media in release.media)
                 for (search in media.tracks)
                     if (search.recording.mbid.equals(matchedResult.value?.trackMbid, true))
                         track = search
-        return Metadata.getAudioFileFromTrack(track)
+        return Metadata.createTagFields(taglibFetchedMetadata.value, track)
     }
 
     init {
