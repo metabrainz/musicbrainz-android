@@ -5,6 +5,7 @@
     android:background="@color/app_bg">
 
     <FrameLayout
+        android:id="@+id/search_fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -16,6 +17,115 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/add_instruc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_fragment_layout"
+        android:textColor="@color/white"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/instruction_to_add"/>
+
+    <LinearLayout
+        android:id="@+id/add_artist_release"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_instruc"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/artistadd"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:textAllCaps="false"
+            />
+        <Button
+            android:id="@+id/add_release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/releaseadd"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:textAllCaps="false"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/add_event_releasegroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_artist_release"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eventadd"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:layout_weight="0.7"
+            android:textAllCaps="false"
+            />
+        <Button
+            android:id="@+id/add_release_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/releasegroupadd"
+            android:gravity="center"
+            android:layout_weight="0.3"
+            android:textAllCaps="false"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/add_label_recording"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_event_releasegroup"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labeladd"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:layout_weight="0.6"
+            android:textAllCaps="false"
+            />
+        <Button
+            android:id="@+id/add_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recordingadd"
+            android:gravity="center"
+            android:layout_weight="0.4"
+            android:textAllCaps="false"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>

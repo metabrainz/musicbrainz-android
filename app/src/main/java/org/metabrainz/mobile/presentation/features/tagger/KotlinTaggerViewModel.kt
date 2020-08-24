@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.provider.DocumentsContract
@@ -22,11 +23,19 @@ class KotlinTaggerViewModel : ViewModel() {
     val ServerFetchedMetadata: LiveData<AudioFile>
         get() = _ServerFetchedMetadata
 
+    private val _bitmap = MutableLiveData<Bitmap>()
+    val bitmap: LiveData<Bitmap>
+        get() = _bitmap
+
     fun setTaglibFetchedMetadata(metadata:AudioFile?){
         _TaglibFetchedMetadata.value = metadata
     }
     fun setServerFetchedMetadata(metadata: AudioFile?){
         _ServerFetchedMetadata.value = metadata
+    }
+
+    fun setBitmap(bitmap:Bitmap?){
+        _bitmap.value = bitmap
     }
 
     init {

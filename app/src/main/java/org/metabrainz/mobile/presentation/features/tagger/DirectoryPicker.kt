@@ -1,25 +1,20 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.DocumentsContract
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import org.metabrainz.mobile.R
-import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
-
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.provider.DocumentsContract
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.simplecityapps.ktaglib.AudioFile
@@ -29,6 +24,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import org.metabrainz.mobile.R
+import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
+
 
 class DirectoryPicker : Fragment(),OnItemCLickListener{
 
@@ -76,7 +74,6 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
     }
 
     override fun onItemClicked(metadata: AudioFile?) {
-        Toast.makeText(requireContext(),"${metadata?.title} in DP",Toast.LENGTH_SHORT).show()
         viewmodel.setTaglibFetchedMetadata(metadata)
         findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment)
     }
@@ -168,6 +165,11 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
                 }
             }
         }.flowOn(Dispatchers.IO)
+    }
+
+    private fun setBitmapForAlbumArt(byteArray: ByteArray):Bitmap{
+        val bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+        return bmp
     }
 
 

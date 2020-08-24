@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.list_item_document.*
 import kotlinx.android.synthetic.main.list_item_document.view.*
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentTaggerBinding
+import java.util.concurrent.TimeUnit
 
 class TaggerFragment : Fragment() {
 
@@ -76,9 +79,13 @@ class TaggerFragment : Fragment() {
 //            expandableListView!!.setOnGroupCollapseListener { groupPosition -> Toast.makeText(requireContext(), (titleList as ArrayList<String>)[groupPosition] + " List Collapsed.", Toast.LENGTH_SHORT).show() }
 //        }
 
-        viewmodel.TaglibFetchedMetadata.observe(viewLifecycleOwner, Observer { TFM ->
-            setTags(TFM)
+        viewmodel.TaglibFetchedMetadata.observe(viewLifecycleOwner, Observer {
+            TFM ->  setTags(TFM)
         })
+
+        viewmodel.bitmap.observe(viewLifecycleOwner, Observer{
+            bitmapforalbum -> setAlbumArt(bitmapforalbum)
+        } )
         return binding.root
     }
     fun setTags(metadata:AudioFile?){
@@ -86,11 +93,34 @@ class TaggerFragment : Fragment() {
         binding.root.findViewById<TextView>(R.id.title).text = metadata?.title
         binding.root.findViewById<TextView>(R.id.track).text = metadata?.track.toString()
         binding.root.findViewById<TextView>(R.id.disc).text = metadata?.disc.toString()
-        binding.root.findViewById<TextView>(R.id.duration).text = metadata?.duration.toString()
+        binding.root.findViewById<TextView>(R.id.duration).text = metadata?.duration?.toHms()
         binding.root.findViewById<TextView>(R.id.artist).text = metadata?.artist.toString()
         binding.root.findViewById<TextView>(R.id.album).text = metadata?.disc.toString()
         binding.root.findViewById<TextView>(R.id.year).text = metadata?.date.toString()
         binding.root.findViewById<TextView>(R.id.disc).text = metadata?.disc.toString()
         binding.root.findViewById<TextView>(R.id.size).text = size
     }
+
+    fun setAlbumArt(bitmap: Bitmap){
+        var image = binding.root.findViewById<ImageView>(R.id.album_art)
+        image.setImageBitmap(Bitmap.createScaledBitmap(bitmap, image.getWidth(),
+                image.getHeight(), false));
+    }
+
+    fun Int.toHms(defaultValue: String?= null):String {
+        if(this==0 && defaultValue!=null)
+            return defaultValue
+        val hours = TimeUnit.MILLISECONDS.toHours(this.toLong())
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(this.toLong())% TimeUnit.HOURS.toMinutes(1)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(this.toLong())% TimeUnit.MINUTES.toSeconds(1)
+
+        return if (hours == 0L) {
+            String.format("%2d:%02d", minutes, seconds)
+        } else {
+            String.format("%2d:%02d:%02d", hours, minutes, seconds)
+        }
+    }
+
+
+
 }
