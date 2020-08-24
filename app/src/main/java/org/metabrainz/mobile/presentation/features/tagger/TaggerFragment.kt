@@ -3,29 +3,23 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.simplecityapps.ktaglib.AudioFile
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentTaggerBinding
-import org.metabrainz.mobile.databinding.ListItemDocumentBinding
 
 @AndroidEntryPoint
 class TaggerFragment : Fragment() {
 
     internal var adapter: ExpandableListAdapter? = null
     private lateinit var binding: FragmentTaggerBinding
-    private val viewModel : KotlinTaggerViewModel by activityViewModels()
+    private val viewModel : TaggerViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

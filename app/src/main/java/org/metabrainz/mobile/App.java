@@ -18,9 +18,6 @@ import dagger.hilt.android.HiltAndroidApp;
 @HiltAndroidApp
 public class App extends Application {
 
-    public static final int DIRECTORY_SELECT_REQUEST_CODE = 0;
-    public static final int AUDIO_FILE_REQUEST_CODE = 1;
-    public static final int STORAGE_PERMISSION_REQUEST_CODE = 2;
     public static final String TAGGER_ROOT_DIRECTORY = Environment.getExternalStorageDirectory() + "/Picard/";
     public static final String WEBSITE_BASE_URL = "https://musicbrainz.org/";
     private static App instance;
@@ -67,19 +64,16 @@ public class App extends Application {
         robotoLight = Typeface.createFromAsset(instance.getAssets(), "Roboto-Light.ttf");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startListenService() {
         Intent intent = new Intent(this.getApplicationContext(), ListenService.class);
         startService(intent);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void stopListenService() {
         Intent intent = new Intent(this.getApplicationContext(), ListenService.class);
         stopService(intent);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public boolean isNotificationServiceAllowed() {
         String listeners = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
         return listeners != null && listeners.contains(getPackageName());

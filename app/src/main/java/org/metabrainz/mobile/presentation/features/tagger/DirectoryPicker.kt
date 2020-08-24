@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.simplecityapps.ktaglib.AudioFile
 import com.simplecityapps.ktaglib.KTagLib
@@ -42,7 +41,7 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
     private val kTagLib = KTagLib()
     private lateinit var documentAdapter: DocumentAdapter
 
-    private val viewmodel: KotlinTaggerViewModel by activityViewModels()
+    private val viewmodel: TaggerViewModel by activityViewModels()
     private lateinit var binding: FragmentDirectoryPickerBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

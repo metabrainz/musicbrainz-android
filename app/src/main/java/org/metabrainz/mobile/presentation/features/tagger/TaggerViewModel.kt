@@ -21,7 +21,7 @@ import org.metabrainz.mobile.util.TaggerUtils
 import javax.inject.Inject
 
 
-class KotlinTaggerViewModel
+class TaggerViewModel
 @ViewModelInject constructor(val repository: TaggerRepository) : ViewModel() {
 
     val taglibFetchedMetadata = MutableLiveData<AudioFile>()

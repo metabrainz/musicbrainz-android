@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.presentation.IntentFactory
@@ -13,7 +12,7 @@ import org.metabrainz.mobile.presentation.IntentFactory
 @AndroidEntryPoint
 class TaggerActivity : AppCompatActivity() {
 
-    private val viewModel: KotlinTaggerViewModel by viewModels()
+    private val viewModel: TaggerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
