@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
-import kotlinx.android.synthetic.main.expandablelv_child.view.*
 import org.metabrainz.mobile.R
 
 class ExpandableListAdapter internal constructor(
         private val context: Context,
         private val titleList: List<String>,
-        private val dataList: HashMap<String, ArrayList<Pair<String,String>>>?
+        private val dataList: HashMap<String, ArrayList<Pair<String, String>>>?
 ) : BaseExpandableListAdapter() {
 
     override fun getGroup(p0: Int): Any? {
@@ -22,7 +21,7 @@ class ExpandableListAdapter internal constructor(
 
 
     override fun hasStableIds(): Boolean {
-        return false;
+        return false
     }
 
     override fun getGroupId(p0: Int): Long {
@@ -32,40 +31,41 @@ class ExpandableListAdapter internal constructor(
     override fun getGroupView(p0: Int, p1: Boolean, p2: View?, p3: ViewGroup?): View {
         var convertView = p2
         val listTitle = getGroup(p0) as String
-        if(convertView==null){
+        if (convertView == null) {
             val layoutInflater = this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.expandablelv_group,null)
+            convertView = layoutInflater.inflate(R.layout.expandablelv_group, null)
         }
         val listTitleTextView = convertView!!.findViewById<TextView>(R.id.expandable_group_title)
         listTitleTextView.setTypeface(null, Typeface.BOLD)
         listTitleTextView.text = listTitle
         return convertView
     }
+
     override fun isChildSelectable(p0: Int, p1: Int): Boolean {
-        return true;
+        return true
     }
 
     override fun getChildrenCount(p0: Int): Int {
         return this.titleList.size
     }
 
-    override fun getChild(p0: Int, p1: Int): Pair<String,String>?{
+    override fun getChild(p0: Int, p1: Int): Pair<String, String>? {
         return this.dataList?.get(this.titleList[p0])!![p1]
     }
 
 
     override fun getChildView(p0: Int, p1: Int, p2: Boolean, p3: View?, p4: ViewGroup?): View {
-        val expandedListText = getChild(p0,p1) as Pair<String, String>
+        val expandedListText = getChild(p0, p1) as Pair<String, String>
         var covertView = p3
-        if(covertView==null){
+        if (covertView == null) {
             val layoutInflater = this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            covertView = layoutInflater.inflate(R.layout.expandablelv_child,null)
+            covertView = layoutInflater.inflate(R.layout.expandablelv_child, null)
         }
         val TagKeyTextview = covertView!!.findViewById<TextView>(R.id.tag_key)
-        val TagValueTextview = covertView!!.findViewById<TextView>(R.id.tag_value)
+        val TagValueTextview = covertView.findViewById<TextView>(R.id.tag_value)
         TagKeyTextview.text = expandedListText.first
         TagValueTextview.text = expandedListText.second
-        return covertView;
+        return covertView
     }
 
     override fun getChildId(p0: Int, p1: Int): Long {

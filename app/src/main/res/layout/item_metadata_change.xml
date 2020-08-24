@@ -6,48 +6,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="@android:color/background_light">
+    android:background="@color/app_bg">
 
     <TextView
         android:id="@+id/tag_name"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/save_change"
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textSize="24sp"
+        android:layout_margin="4dp"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="Artist:" />
+        tools:text="Artist" />
 
     <TextView
         android:id="@+id/original_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/red"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/new_value"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/save_change"
+        app:layout_constraintTop_toBottomOf="@id/tag_name"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="2dp"
         tools:text="TextView" />
 
     <EditText
         android:id="@+id/new_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/green"
         android:inputType="text"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/original_value"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/original_value"
+        app:layout_constraintTop_toBottomOf="@+id/tag_name"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="4dp"
         tools:text="TextView" />
-
-    <CheckBox
-        android:id="@+id/save_change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/save_checkbox"
-        app:layout_constraintBottom_toBottomOf="@+id/tag_name"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

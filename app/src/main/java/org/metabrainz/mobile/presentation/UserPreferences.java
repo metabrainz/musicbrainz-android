@@ -50,12 +50,6 @@ public class UserPreferences {
         return UserPreferences.getPreferences().getBoolean(PREFERENCE_SYSTEM_LANGUAGE, false);
     }
 
-    public static void setPreferenceTaggerDirectory(String path) {
-        SharedPreferences.Editor editor = UserPreferences.getPreferences().edit();
-        editor.putString(PREFERENCE_TAGGER_DIRECTORY, path);
-        editor.apply();
-    }
-
     public static String getPreferenceListenBrainzToken() {
         return UserPreferences.getPreferences().getString(PREFERENCE_LISTENBRAINZ_TOKEN, null);
     }

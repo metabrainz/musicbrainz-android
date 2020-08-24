@@ -29,5 +29,11 @@ public class ServiceModule {
         return MusicBrainzServiceGenerator.createService(LoginService.class, false);
     }
 
+    @Singleton
+    @Provides
+    public TaggerService getTaggerService() {
+        return MusicBrainzServiceGenerator.createService(TaggerService.class, false);
+    }
+
 
 }

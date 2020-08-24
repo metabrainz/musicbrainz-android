@@ -9,7 +9,7 @@ import com.simplecityapps.ktaglib.AudioFile
 import org.metabrainz.mobile.R
 import java.util.concurrent.TimeUnit
 
-class DocumentAdapter(val itemClickListener:OnItemCLickListener) : RecyclerView.Adapter<DocumentAdapter.ViewHolder>() {
+class DocumentAdapter(private val itemClickListener: OnItemCLickListener) : RecyclerView.Adapter<DocumentAdapter.ViewHolder>() {
     val data: MutableList<Pair<AudioFile, Document>> = mutableListOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,28 +24,26 @@ class DocumentAdapter(val itemClickListener:OnItemCLickListener) : RecyclerView.
         val mimeTypeTextView: TextView = itemView.findViewById(R.id.mimeType)
         val sizeTextView: TextView = itemView.findViewById(R.id.size)
 
-        fun bind(metadata:Pair<AudioFile, Document>,cLickListener: OnItemCLickListener){
-            //titleTextView.text = metadata.first.title.toString()
-
-            itemView.setOnClickListener{
+        fun bind(metadata: Pair<AudioFile, Document>, cLickListener: OnItemCLickListener) {
+            itemView.setOnClickListener {
                 cLickListener.onItemClicked(metadata.first)
             }
         }
 
     }
 
-    fun clear(){
+    fun clear() {
         data.clear()
         notifyDataSetChanged()
     }
 
-    fun addItem(item: Pair<AudioFile, Document>){
+    fun addItem(item: Pair<AudioFile, Document>) {
         data.add(item)
         notifyItemChanged(data.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_document,parent,false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_document, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -65,16 +63,16 @@ class DocumentAdapter(val itemClickListener:OnItemCLickListener) : RecyclerView.
         holder.mimeTypeTextView.text = document.mimeType
         holder.sizeTextView.text = "${"%.2f".format((audioFile.size / 1024f / 1024f))}MB"
 
-        val currentItem = data.get(position);
-        holder.bind(currentItem,itemClickListener)
+        val currentItem = data[position]
+        holder.bind(currentItem, itemClickListener)
     }
 
-    fun Int.toHms(defaultValue: String?= null):String {
-        if(this==0 && defaultValue!=null)
+    fun Int.toHms(defaultValue: String? = null): String {
+        if (this == 0 && defaultValue != null)
             return defaultValue
         val hours = TimeUnit.MILLISECONDS.toHours(this.toLong())
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(this.toLong())%TimeUnit.HOURS.toMinutes(1)
-        val seconds = TimeUnit.MILLISECONDS.toSeconds(this.toLong())%TimeUnit.MINUTES.toSeconds(1)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(this.toLong()) % TimeUnit.HOURS.toMinutes(1)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(this.toLong()) % TimeUnit.MINUTES.toSeconds(1)
 
         return if (hours == 0L) {
             String.format("%2d:%02d", minutes, seconds)
@@ -82,7 +80,6 @@ class DocumentAdapter(val itemClickListener:OnItemCLickListener) : RecyclerView.
             String.format("%2d:%02d:%02d", hours, minutes, seconds)
         }
     }
-
 
 
 }

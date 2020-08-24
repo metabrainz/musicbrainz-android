@@ -2,8 +2,6 @@ package org.metabrainz.mobile.presentation.features.tagger
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,10 +13,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.simplecityapps.ktaglib.AudioFile
 import com.simplecityapps.ktaglib.KTagLib
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -27,9 +26,8 @@ import kotlinx.coroutines.flow.flowOn
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
 
-
-class DirectoryPicker : Fragment(),OnItemCLickListener{
-
+@AndroidEntryPoint
+class DirectoryPicker : Fragment(), OnItemCLickListener {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("MainActivity", "Coroutine failed: ${throwable.localizedMessage}")
@@ -43,16 +41,12 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
     private val kTagLib = KTagLib()
     private lateinit var documentAdapter: DocumentAdapter
 
-    private lateinit var viewmodel:KotlinTaggerViewModel
+    private val viewmodel: TaggerViewModel by activityViewModels()
     private lateinit var binding: FragmentDirectoryPickerBinding
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentDirectoryPickerBinding.inflate(inflater)
-        viewmodel = activity?.run{
-            ViewModelProvider(this).get(KotlinTaggerViewModel::class.java)
-        }!!
         documentAdapter = DocumentAdapter(this)
 
         val recyclerView = binding.recyclerView
@@ -67,13 +61,14 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
             if (packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_DOCUMENT)
             } else {
-                Toast.makeText(context,"Dcument provider not found",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Dcument provider not found", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root
     }
 
     override fun onItemClicked(metadata: AudioFile?) {
+        Toast.makeText(requireContext(), "${metadata?.title} in DP", Toast.LENGTH_SHORT).show()
         viewmodel.setTaglibFetchedMetadata(metadata)
         findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment)
     }
@@ -84,9 +79,7 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
         if (requestCode == REQUEST_CODE_OPEN_DOCUMENT && resultCode == Activity.RESULT_OK) {
             data?.let { intent ->
                 intent.data?.let { uri ->
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    }
+                    contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     scope.launch {
                         documentAdapter.clear()
                         val documents = parseUri(uri)
@@ -165,11 +158,6 @@ class DirectoryPicker : Fragment(),OnItemCLickListener{
                 }
             }
         }.flowOn(Dispatchers.IO)
-    }
-
-    private fun setBitmapForAlbumArt(byteArray: ByteArray):Bitmap{
-        val bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-        return bmp
     }
 
 

@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/noalbumart"
+        android:src="@drawable/dash_about"
         app:layout_anchorGravity="center" />
 
   <!--      design for each card having user expandable metadata list-->
