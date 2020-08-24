@@ -151,6 +151,15 @@
     <string name="previous">Previous</string>
     <string name="finish">Finish</string>
 
+<!--    add to database-->
+    <string name="instruction_to_add">Add if you can not find it</string>
+    <string name="artistadd">Add Artist</string>
+    <string name="releaseadd">Add Release</string>
+    <string name="eventadd">Add Event</string>
+    <string name="releasegroupadd">Add ReleaseGroup</string>
+    <string name="labeladd">Add Label</string>
+    <string name="recordingadd">Add Recording</string>
+
     <!--    onboarding adapter description-->
     <string name="explain_fetch_metadata">Fix your Audio Metadata</string>
     <string name="explain_search_feature"> Explore MusicBrainz Data</string>
