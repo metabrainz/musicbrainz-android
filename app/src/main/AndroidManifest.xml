@@ -52,25 +52,31 @@
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".presentation.features.collection.CollectionDetailsActivity"
+        <activity
+            android:name=".presentation.features.collection.CollectionDetailsActivity"
             android:parentActivityName=".presentation.features.collection.CollectionActivity"
             android:label="Collection"
-            android:theme="@style/AppThemeCustomActionBar">
+            android:theme="@style/AppThemeGrayScale">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.features.collection.CollectionActivity" />
         </activity>
-        <activity android:name=".presentation.features.collection.CollectionActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+        <activity
+            android:name=".presentation.features.collection.CollectionActivity"
+            android:label="@string/dash_collections"
+            android:theme="@style/AppThemeGrayScale" />
         <activity
             android:name=".presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger" />
         <activity android:name=".presentation.features.recording.RecordingActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:label="@string/search_type_recording"
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.label.LabelActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:label="@string/search_type_label"
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.release_group.ReleaseGroupActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:label="@string/search_type_release_group"
+            android:theme="@style/AppThemeGrayScale" />
         <activity
             android:name=".presentation.features.search.SearchActivity"
             android:label="@string/settings_search"
@@ -102,7 +108,8 @@
             android:label="@string/donate_title" />
         <activity
             android:name=".presentation.features.search.SearchResultsActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AppThemeGrayScale">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -112,17 +119,18 @@
         </activity>
         <activity android:name=".presentation.features.release.ReleaseActivity"
             android:label="@string/release_title"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.artist.ArtistActivity"
             android:label="@string/artist_title"
-            android:theme="@style/AppThemeCustomActionBar" />
+            android:theme="@style/AppThemeGrayScale" />
         <activity android:name=".presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title"
             android:theme="@style/AppThemeForSettings" />
         <activity android:name=".presentation.features.barcode.BarcodeActivity"
             android:theme="@style/AppThemeCustomActionBar" />
-        <activity android:name=".presentation.features.barcode.BarcodeResultActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+        <activity
+            android:name=".presentation.features.barcode.BarcodeResultActivity"
+            android:theme="@style/AppThemeGrayScale" />
 
         <meta-data
             android:name="android.app.default_searchable"

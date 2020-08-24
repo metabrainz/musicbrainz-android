@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
-import android.view.View;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
@@ -24,8 +23,6 @@ import org.metabrainz.mobile.presentation.features.adapters.ResultItemComparator
 import org.metabrainz.mobile.presentation.features.adapters.ResultPagingAdapter;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
-
-import java.util.Objects;
 
 /**
  * Activity to display a list of search results to the user and support intents
@@ -46,11 +43,8 @@ public class SearchResultsActivity extends MusicBrainzActivity implements Search
         super.onCreate(savedInstanceState);
         binding = ActivitySearchResultsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        binding.noResult.setVisibility(View.GONE);
-        binding.progressSpinner.setIndeterminate(true);
-        binding.progressSpinner.setVisibility(View.GONE);
+        setupToolbar(binding);
 
         query = getIntent().getStringExtra(SearchManager.QUERY);
         entity = (MBEntityType) getIntent().getSerializableExtra(Constants.TYPE);

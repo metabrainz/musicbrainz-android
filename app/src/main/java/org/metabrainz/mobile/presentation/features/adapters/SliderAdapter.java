@@ -15,7 +15,7 @@ import org.metabrainz.mobile.R;
 public class SliderAdapter extends PagerAdapter {
 
     public final int[] slide_images = {
-            R.drawable.tag_icon,
+            R.drawable.ic_baseline_audiotrack_24,
             R.drawable.search_icon,
             R.drawable.collection_icon,
             R.drawable.scan_icon

@@ -22,7 +22,8 @@ public class Release extends MBEntity {
     private final List<ArtistCredit> artistCredits = new ArrayList<>();
     private String date;
     private String barcode;
-    private String packaging;
+    // FIXME: Temporary fix due to mismatch with API response until issue is resolved
+//    private String packaging;
     @SerializedName("release-group")
     private ReleaseGroup releaseGroup;
     @SerializedName("release-events")
@@ -96,13 +97,13 @@ public class Release extends MBEntity {
         this.date = date;
     }
 
-    public String getPackaging() {
-        return packaging;
-    }
-
-    public void setPackaging(String packaging) {
-        this.packaging = packaging;
-    }
+//    public String getPackaging() {
+//        return packaging;
+//    }
+//
+//    public void setPackaging(String packaging) {
+//        this.packaging = packaging;
+//    }
 
     public ReleaseGroup getReleaseGroup() {
         return releaseGroup;
@@ -186,4 +187,26 @@ public class Release extends MBEntity {
         return builder.toString();
     }
 
+    @Override
+    public String toString() {
+        return "Release{" +
+                "title='" + title + '\'' +
+                ", artistCredits=" + artistCredits +
+                ", date='" + date + '\'' +
+                ", barcode='" + barcode + '\'' +
+//                ", packaging='" + packaging + '\'' +
+                ", releaseGroup=" + releaseGroup +
+                ", releaseEvents=" + releaseEvents +
+                ", labels=" + labels +
+                ", trackCount=" + trackCount +
+                ", country='" + country + '\'' +
+                ", status='" + status + '\'' +
+                ", media=" + media +
+                ", coverArt=" + coverArt +
+                ", textRepresentation=" + textRepresentation +
+                ", relations=" + relations +
+                ", mbid='" + mbid + '\'' +
+                ", disambiguation='" + disambiguation + '\'' +
+                '}';
+    }
 }

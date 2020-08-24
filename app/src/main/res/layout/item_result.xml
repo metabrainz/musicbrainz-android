@@ -30,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center|start"
                 android:padding="3dp"
-                android:textAppearance="?android:attr/textAppearanceListItem"
                 android:textColor="@color/white"
                 tools:text="Artist Name" />
 

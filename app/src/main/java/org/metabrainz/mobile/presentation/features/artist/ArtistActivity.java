@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.artist;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,6 +14,7 @@ import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.links.LinksViewModel;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListViewModel;
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.Objects;
 
@@ -57,6 +59,11 @@ public class ArtistActivity extends MusicBrainzActivity {
         binding.pager.setAdapter(pagerAdapter);
         binding.tabs.setupWithViewPager(binding.pager);
 
+        binding.noResult.getRoot().setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
+        binding.tabs.setVisibility(View.GONE);
+        binding.pager.setVisibility(View.GONE);
+
         /*
          * Whenever the artist changes, redraw the information
          * Subscribe to the empty live data and then ask the view model to update artist live data.
@@ -73,13 +80,20 @@ public class ArtistActivity extends MusicBrainzActivity {
         artistViewModel.getData().observe(this, this::setArtist);
     }
 
-    private void setArtist(Artist artist) {
-        if (artist != null) {
+    private void setArtist(Resource<Artist> resource) {
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            binding.noResult.getRoot().setVisibility(View.GONE);
+            binding.tabs.setVisibility(View.VISIBLE);
+            binding.pager.setVisibility(View.VISIBLE);
+
+            Artist artist = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
             userViewModel.setUserData(artist);
             releaseListViewModel.setData(artist.getReleases());
             linksViewModel.setData(artist.getRelations());
-        }
+        } else
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override

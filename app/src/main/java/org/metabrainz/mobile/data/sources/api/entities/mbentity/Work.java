@@ -11,4 +11,13 @@ class Work extends MBEntity {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return "Work{" +
+                "title='" + title + '\'' +
+                ", mbid='" + mbid + '\'' +
+                ", disambiguation='" + disambiguation + '\'' +
+                '}';
+    }
 }

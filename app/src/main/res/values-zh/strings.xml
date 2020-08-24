@@ -96,7 +96,12 @@
     <string name="tags">标签</string>
     <string name="user_tags">您的标签</string>
 
+    <string name="genres">流派</string>
     <string name="no_tag">未找到标签</string>
     <string name="no_rating">未找到评分</string>
 
+    <string name="lookup_metadata">元数据</string>
+    <string name="dash_tag">标签</string>
+    <string name="save_checkbox">保存</string>
+    <string name="settings_language">语言</string>
 </resources>

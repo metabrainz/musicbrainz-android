@@ -27,7 +27,6 @@
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/collection_count"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

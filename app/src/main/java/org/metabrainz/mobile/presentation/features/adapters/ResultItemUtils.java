@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ResultItemUtils {
 
-    private static ResultItem getEntityAsResultItem(MBEntity entity) {
+    public static ResultItem getEntityAsResultItem(MBEntity entity) {
         ResultItem item;
         if (entity instanceof Artist) {
             Artist artist = (Artist) entity;

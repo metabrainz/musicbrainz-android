@@ -19,7 +19,7 @@
     <string name="welcome_loggedin">登录为</string>
     <string name="search_type_artist">艺术家</string>
     <string name="search_type_release">专辑</string>
-    <string name="search_type_label">厂牌</string>
+    <string name="search_type_label">唱片公司</string>
     <string name="search_type_recording">录音</string>
     <string name="search_type_release_group">专辑组</string>
     <string name="search_type_instrument">乐器</string>
@@ -70,6 +70,9 @@
     <string name="preferences_title">设置</string>
     <string name="settings_search">搜索</string>
     <string name="settings_suggestions">搜索建议</string>
+    <string name="settings_tagger">分类者</string>
+    <string name="settings_tagger_directory">文件目录</string>
+    <string name="settings_tagger_directory_summary">为Picard选择文件目录</string>
     <string name="settings_suggestions_summary">储存并显示搜索建议</string>
     <string name="settings_private_collections">私有收藏集</string>
     <string name="settings_private_collections_summary">当用户处于登录状态时，同时装取私有收藏集。</string>
@@ -97,11 +100,26 @@
     <string name="user_tags">您的标签</string>
 
     <string name="genres">流派</string>
+    <string name="user_genres">自定义流派</string>
+
+    <string name="no_user_tag">尚未给项目添加任何标签或者未登录</string>
     <string name="no_tag">未找到标签</string>
+    <string name="no_user_rating">尚未给项目评分或者未登录</string>
     <string name="no_rating">未找到评分</string>
 
     <string name="lookup_metadata">元数据</string>
+    <string name="lookup_fingerprint">指纹</string>
+    <string name="lookup_label">查找使用</string>
+    <string name="file_select">选择一个文件</string>
+    <string name="save_button">保存更改</string>
+    <string name="no_file_selected">没有选择文件</string>
     <string name="dash_tag">标签</string>
     <string name="save_checkbox">保存</string>
+    <string name="directory_path_label">文件夹路径</string>
+    <string name="select_button">选择</string>
+    <string name="up_button">向上</string>
     <string name="settings_language">语言</string>
+    <string name="settings_use_language">只使用英语</string>
+    <string name="settings_use_language_summary">本选项将忽略系统语言配置，并仅以英文显示所有用户界面。</string>
+
 </resources>

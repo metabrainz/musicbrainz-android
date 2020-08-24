@@ -85,4 +85,19 @@ public class ReleaseGroup extends MBEntity {
             return type;
         } else return primaryType;
     }
+
+    @Override
+    public String toString() {
+        return "ReleaseGroup{" +
+                "title='" + title + '\'' +
+                ", primaryType='" + primaryType + '\'' +
+                ", secondaryTypes=" + secondaryTypes +
+                ", count=" + count +
+                ", artistCredits=" + artistCredits +
+                ", relations=" + relations +
+                ", releases=" + releases +
+                ", mbid='" + mbid + '\'' +
+                ", disambiguation='" + disambiguation + '\'' +
+                '}';
+    }
 }

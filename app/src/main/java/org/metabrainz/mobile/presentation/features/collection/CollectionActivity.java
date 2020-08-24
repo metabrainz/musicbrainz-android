@@ -21,6 +21,7 @@ import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginActivity;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,32 +51,25 @@ public class CollectionActivity extends MusicBrainzActivity {
         adapter = new CollectionListAdapter(collections);
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN) {
             binding.loginRequired.setVisibility(View.GONE);
-            binding.noResult.setVisibility(View.GONE);
-            binding.progressSpinner.setIndeterminate(true);
-            binding.progressSpinner.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
+            binding.progressSpinner.getRoot().setVisibility(View.VISIBLE);
 
             binding.recyclerView.setAdapter(adapter);
             binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
             DividerItemDecoration itemDecoration = new DividerItemDecoration(
                     binding.recyclerView.getContext(), DividerItemDecoration.VERTICAL);
             binding.recyclerView.addItemDecoration(itemDecoration);
+            binding.recyclerView.setVisibility(View.GONE);
 
-            binding.progressSpinner.setVisibility(View.VISIBLE);
             boolean getPrivateCollections =
                     LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_IN
                             && UserPreferences.getPrivateCollectionsPreference();
             viewModel.fetchCollectionData(LoginSharedPreferences.getUsername(),
-                    getPrivateCollections).observe(this, data -> {
-                CollectionUtils.removeCollections(data);
-                collections.clear();
-                collections.addAll(data);
-                adapter.notifyDataSetChanged();
-                checkHasResults();
-            });
+                    getPrivateCollections).observe(this, this::setCollections);
         } else {
-            binding.noResult.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.GONE);
-            binding.progressSpinner.setVisibility(View.GONE);
+            binding.progressSpinner.getRoot().setVisibility(View.GONE);
             binding.loginRequired.setVisibility(View.GONE);
             callAlert();
         }
@@ -87,18 +81,18 @@ public class CollectionActivity extends MusicBrainzActivity {
         if (LoginSharedPreferences.getLoginStatus() == LoginSharedPreferences.STATUS_LOGGED_OUT) {
             collections.clear();
             checkHasResults();
-            binding.noResult.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
         }
     }
 
     private void checkHasResults() {
-        binding.progressSpinner.setVisibility(View.GONE);
+        binding.progressSpinner.getRoot().setVisibility(View.GONE);
         if (adapter.getItemCount() == 0) {
             binding.recyclerView.setVisibility(View.GONE);
-            binding.noResult.setVisibility(View.VISIBLE);
+            binding.noResult.getRoot().setVisibility(View.VISIBLE);
         } else {
             binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.noResult.setVisibility(View.GONE);
+            binding.noResult.getRoot().setVisibility(View.GONE);
         }
     }
 
@@ -130,4 +124,14 @@ public class CollectionActivity extends MusicBrainzActivity {
         return Uri.EMPTY;
     }
 
+    private void setCollections(Resource<List<Collection>> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            List<Collection> data = resource.getData();
+            CollectionUtils.removeCollections(data);
+            collections.clear();
+            collections.addAll(data);
+            adapter.notifyDataSetChanged();
+        }
+        checkHasResults();
+    }
 }

@@ -18,6 +18,10 @@ class HeaderInterceptor implements Interceptor {
         Request original = chain.request();
         Request request;
 
+        // Do not add any headers if fetching data from wiki
+        if (original.url().host().contains("wiki"))
+            return chain.proceed(original);
+
         // Do not add Authorization Header if request is sent to OAuth endpoint except to fetch userinfo
         if (original.url().encodedPath().contains("oauth2")) {
             if (original.url().encodedPath().contains("userinfo"))

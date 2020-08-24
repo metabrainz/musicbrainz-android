@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.CardReleaseInfoBinding;
+import org.metabrainz.mobile.util.Resource;
 
 import java.util.ArrayList;
 
@@ -48,8 +49,9 @@ public class ReleaseInfoFragment extends Fragment {
         binding = null;
     }
 
-    private void setData(Release release) {
-        if (release != null) {
+    private void setData(Resource<Release> resource) {
+        if (resource != null && resource.getStatus() == Resource.Status.SUCCESS) {
+            Release release = resource.getData();
             String title, barcode, status = "", language = "";
             title = release.getTitle();
 

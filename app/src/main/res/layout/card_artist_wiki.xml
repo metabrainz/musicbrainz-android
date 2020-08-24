@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@string/bio_powered_by"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:drawableEndCompat="@drawable/logo_wikipedia"
             app:drawableRightCompat="@drawable/logo_wikipedia"
             app:layout_constraintEnd_toEndOf="parent"
