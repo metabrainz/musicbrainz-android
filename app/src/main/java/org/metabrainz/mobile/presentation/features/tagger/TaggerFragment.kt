@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.databinding.FragmentTaggerBinding
@@ -24,11 +25,11 @@ class TaggerFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.adapter = tagFieldsAdapter
 
-        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {
+        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner, Observer {
             tagsList.clear()
             tagsList.addAll(it)
             tagFieldsAdapter.notifyDataSetChanged()
-        }
+        })
         return binding.root
     }
 

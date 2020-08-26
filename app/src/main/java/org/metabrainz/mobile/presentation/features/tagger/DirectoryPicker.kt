@@ -65,9 +65,9 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
     }
 
     override fun onItemClicked(metadata: AudioFile?) {
-        Toast.makeText(requireContext(), metadata?.title, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(), metadata?.title, Toast.LENGTH_SHORT).show()
         metadata?.allProperties?.let { viewmodel.setTaglibFetchedMetadata(it) }
-        findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment)
+        findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment2)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
