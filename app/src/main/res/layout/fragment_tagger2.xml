@@ -1,95 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_bg">
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/overwrite_tags_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/app_bg_light"
+        android:padding="8dp"
+        android:textColor="@color/app_bg_light2"
         android:text="@string/tagger_file_save"
         android:textAllCaps="false"
-        android:padding="15dp"
-        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/loadingAnimation"
+        layout="@layout/loading"
         android:visibility="gone"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:id="@+id/loading_animation"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
-        <include
-            layout="@layout/loading"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/tag_diff"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/original_value"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:visibility="gone"
-        android:layout_below="@id/overwrite_tags_button"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/original_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_above="@id/scroll_view"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:layout_weight="0.5"
-            android:paddingStart="15dp"
-            android:text="Original Value">
-        </TextView>
-        <TextView
-            android:id="@+id/new_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="left"
-            android:paddingRight="15dp"
-            android:textSize="18sp"
-            android:layout_weight="0.5"
-            android:textColor="@color/white"
-            android:text="New Value">
-        </TextView>
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:text="Original Value"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/new_value"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overwrite_tags_button" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/new_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:text="New Value"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/original_value"
+        app:layout_constraintTop_toBottomOf="@+id/overwrite_tags_button" />
 
-    <ScrollView
-        android:id="@+id/scroll_view"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/tag_diff"
-        android:layout_height="match_parent">
+    <include
+        android:id="@+id/taglibFetched"
+        layout="@layout/fragment_tagger_local_tags"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/serverFetched"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/original_value" />
 
-        <LinearLayout
-            android:id="@+id/tags_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:orientation="horizontal">
 
-            <include
-                android:id="@+id/taglibfetched"
-                layout="@layout/fragment_tagger_taglibitem_extendedtags"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="0.5"
-                />
-            <include
-                android:id="@+id/serverfetched"
-                layout="@layout/fragment_tagger_servertagitem_extendedtags"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="0.5" />
-        </LinearLayout>
-    </ScrollView>
+    <include
+        android:id="@+id/serverFetched"
+        layout="@layout/fragment_tagger_server_tags"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/taglibFetched"
+        app:layout_constraintTop_toBottomOf="@+id/new_value" />
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

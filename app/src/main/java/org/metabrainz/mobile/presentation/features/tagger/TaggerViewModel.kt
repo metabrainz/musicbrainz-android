@@ -1,11 +1,14 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
+import android.app.Application
+import android.net.Uri
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
-import androidx.lifecycle.ViewModel
+import com.simplecityapps.ktaglib.KTagLib
 import org.metabrainz.mobile.data.repository.TaggerRepository
 import org.metabrainz.mobile.data.sources.QueryUtils
 import org.metabrainz.mobile.data.sources.api.entities.Track
@@ -17,10 +20,11 @@ import org.metabrainz.mobile.util.Metadata
 import org.metabrainz.mobile.util.TaggerUtils
 
 
-class TaggerViewModel @ViewModelInject constructor(val repository: TaggerRepository) : ViewModel() {
+class TaggerViewModel @ViewModelInject constructor(
+        val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
 
     val _taglibFetchedMetadata = MutableLiveData<HashMap<String, String>>()
-    val taglibFetchedMetadata : LiveData<HashMap<String, String>>
+    val taglibFetchedMetadata: LiveData<HashMap<String, String>>
         get() = _taglibFetchedMetadata
 
     val serverFetchedMetadata: LiveData<List<TagField>>
@@ -61,6 +65,15 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
                     if (search.recording.mbid.equals(matchedResult.value?.trackMbid, true))
                         track = search
         return Metadata.createTagFields(taglibFetchedMetadata.value, track)
+    }
+
+    private fun saveMetadataTags(tags: HashMap<String, String>): Boolean {
+        val filePath = _taglibFetchedMetadata.value?.get("filePath") ?: return false
+        var result = false
+        context.contentResolver?.openFileDescriptor(Uri.parse(filePath), "rw")?.use {
+            result = KTagLib.writeMetadata(it.detachFd(), tags)
+        }
+        return result
     }
 
     init {

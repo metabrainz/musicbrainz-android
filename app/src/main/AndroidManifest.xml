@@ -16,12 +16,12 @@
     <application
         android:name=".App"
         android:allowBackup="false"
+        android:autoRevokePermissions="allowed"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:autoRevokePermissions="allowed"
         android:usesCleartextTraffic="true"
         tools:targetApi="30">
 
@@ -37,9 +37,10 @@
 
         <activity
             android:name=".presentation.features.splash_screen.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,8 +55,8 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"
-            android:parentActivityName=".presentation.features.collection.CollectionActivity"
             android:label="Collection"
+            android:parentActivityName=".presentation.features.collection.CollectionActivity"
             android:theme="@style/AppThemeGrayScale">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -67,14 +68,18 @@
             android:theme="@style/AppThemeGrayScale" />
         <activity
             android:name=".presentation.features.tagger.TaggerActivity"
-            android:label="@string/settings_tagger" />
-        <activity android:name=".presentation.features.recording.RecordingActivity"
+            android:label="@string/settings_tagger"
+            android:theme="@style/AppThemeGrayScale" />
+        <activity
+            android:name=".presentation.features.recording.RecordingActivity"
             android:label="@string/search_type_recording"
             android:theme="@style/AppThemeGrayScale" />
-        <activity android:name=".presentation.features.label.LabelActivity"
+        <activity
+            android:name=".presentation.features.label.LabelActivity"
             android:label="@string/search_type_label"
             android:theme="@style/AppThemeGrayScale" />
-        <activity android:name=".presentation.features.release_group.ReleaseGroupActivity"
+        <activity
+            android:name=".presentation.features.release_group.ReleaseGroupActivity"
             android:label="@string/search_type_release_group"
             android:theme="@style/AppThemeGrayScale" />
         <activity
@@ -110,23 +115,29 @@
             android:name=".presentation.features.search.SearchResultsActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppThemeGrayScale">
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".presentation.features.release.ReleaseActivity"
+        <activity
+            android:name=".presentation.features.release.ReleaseActivity"
             android:label="@string/release_title"
             android:theme="@style/AppThemeGrayScale" />
-        <activity android:name=".presentation.features.artist.ArtistActivity"
+        <activity
+            android:name=".presentation.features.artist.ArtistActivity"
             android:label="@string/artist_title"
             android:theme="@style/AppThemeGrayScale" />
-        <activity android:name=".presentation.features.settings.SettingsActivity"
+        <activity
+            android:name=".presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title"
             android:theme="@style/AppThemeForSettings" />
-        <activity android:name=".presentation.features.barcode.BarcodeActivity"
+        <activity
+            android:name=".presentation.features.barcode.BarcodeActivity"
             android:theme="@style/AppThemeCustomActionBar" />
         <activity
             android:name=".presentation.features.barcode.BarcodeResultActivity"

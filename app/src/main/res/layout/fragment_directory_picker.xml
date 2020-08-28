@@ -19,24 +19,24 @@
             app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="5"
-            tools:listitem="@layout/list_item_document"
-            />
-    <RelativeLayout
-        android:id="@+id/instruction"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/app_bg">
+            tools:listitem="@layout/list_item_document" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/instruction"
-            android:textColor="@color/white"
-            android:padding="20dp"
-            android:textSize="20sp"
-            />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/instruction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/app_bg"
+        android:gravity="start|center_vertical"
+        android:padding="20dp"
+        android:text="@string/instruction"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/instruction_for_tag_fix"
@@ -46,9 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/chooseDirectoryButton"
             app:layout_constraintStart_toStartOf="parent"
-            android:paddingBottom="20dp"
-            android:paddingRight="3dp"
-            android:paddingLeft="3dp"
+            android:padding="10dp"
             android:textSize="15sp"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/recyclerView" />
@@ -63,7 +61,7 @@
             android:padding="10dp"
             android:text="@string/tagger_file_chooser_pickDirectory"
             android:textAllCaps="false"
-            android:textColor="@color/app_bg"
+            android:textColor="@color/app_bg_light2"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

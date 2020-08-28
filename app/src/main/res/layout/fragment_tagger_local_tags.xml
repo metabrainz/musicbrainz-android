@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/app_bg_light"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical"
+    android:padding="8dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/app_bg"
-        android:layout_marginStart="3dp"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/documentName"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:textColor="@color/white"
             android:textSize="15sp"
             tools:text="/storage/music/tool/lateralus/the_patient.opus" />
@@ -28,22 +26,18 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/documentName"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:text="Title"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/title2"
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titleHeading"
             android:layout_marginStart="12dp"
             android:textColor="@color/white"
-            android:hint="Enter Title here"
-            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="The Patient" />
 
@@ -52,23 +46,19 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title2"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="25dp"
             android:text="Artist"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/artist2"
+        <TextView
+            android:id="@+id/artist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/artistHeading"
             android:layout_marginStart="12dp"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:hint="Enter Artist Here"
-            android:textColorHint="@color/light_gray"
             tools:text="TOOL" />
 
         <TextView
@@ -76,23 +66,19 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/artist2"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="30dp"
             android:text="Album"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/album2"
+        <TextView
+            android:id="@+id/album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/albumHeading"
             android:layout_marginStart="12dp"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:hint="Enter Album Here"
-            android:textColorHint="@color/light_gray"
             tools:text="Lateralus" />
 
 
@@ -101,23 +87,19 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/album2"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="33dp"
             android:text="Track"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/track2"
+        <TextView
+            android:id="@+id/track"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/trackHeading"
             android:layout_marginStart="12dp"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:hint="Enter Track Here"
-            android:textColorHint="@color/light_gray"
             tools:text="3" />
 
         <TextView
@@ -125,22 +107,19 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/track2"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
             android:text="Disc"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/disc2"
+        <TextView
+            android:id="@+id/disc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/discHeading"
-            android:textColor="@color/white"
             android:layout_marginStart="12dp"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:hint="Enter Disc Here"
-            android:textColorHint="@color/light_gray"
             tools:text="1" />
 
         <TextView
@@ -148,23 +127,19 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/disc2"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="30dp"
             android:text="Duration"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/duration2"
+        <TextView
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/durationHeading"
             android:layout_marginStart="12dp"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:hint="Enter Duration"
-            android:textColorHint="@color/light_gray"
             tools:text="7:14" />
 
 
@@ -173,74 +148,20 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/duration2"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="28dp"
             android:text="Year"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/year2"
+        <TextView
+            android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/yearHeading"
             android:layout_marginStart="12dp"
-            android:textSize="18sp"
             android:textColor="@color/white"
-            android:hint="Enter Year Here"
-            android:textColorHint="@color/light_gray"
+            android:textSize="18sp"
             tools:text="2001" />
 
-        <TextView
-            android:id="@+id/MBIDHeading"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/year2"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="MusicBrainz ID"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/MBID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/MBIDHeading"
-            android:layout_marginStart="12dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
-            tools:text="2001" />
-
-        <TextView
-            android:id="@+id/AcusoticIDHeading"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/MBID"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="15dp"
-            android:text="Acoustic ID"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/AccuosticID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/AcusoticIDHeading"
-            android:layout_marginStart="12dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="3dp"
-            tools:text="2001" />
-
-
-
-
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

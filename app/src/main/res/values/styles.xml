@@ -42,7 +42,7 @@
         <item name="android:windowAnimationStyle">@style/loginrequiredDialogAnimation</item>
     </style>
 
-    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar"></style>
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner</item>

@@ -106,7 +106,9 @@
     <string name="tagger_file_chooser_pickDirectory">Choose Directory</string>
     <string name="tagger_file_chooser_Instructions">Select An Audio File to Fix Tags</string>
     <string name="tagger_file_save">Overwrite Tags</string>
-    <string name="instruction">Choose the directory where your audio files reside \nAfter the Audios are listed here,Click on the Audio File from the list and overwrite Tags \nIncase,you find the list empty here,that means there is no Audio in the Directory,Choose another directory</string>
+    <string name="instruction">Choose the directory where your audio files reside.\n\n
+        After the audio files are listed, click on the desired file from the list and overwrite the tags.\n\n
+        In case the list is empty, no audio file could be detected in the chosen directory. Try choosing another directory.</string>
 
     <string name="genres">Genres</string>
     <string name="user_genres">Your Genres</string>
@@ -181,4 +183,7 @@
         listens from Spotify are not submitted to ListenBrainz from this app. This is to avoid
         duplicate listens. If you have not linked Spotify to ListenBrainz, you can enable submitting
     listens from Spotify on this device to ListenBrainz through this option.</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
