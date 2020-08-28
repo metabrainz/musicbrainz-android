@@ -19,12 +19,15 @@ import org.metabrainz.mobile.util.TaggerUtils
 
 class TaggerViewModel @ViewModelInject constructor(val repository: TaggerRepository) : ViewModel() {
 
-    val taglibFetchedMetadata = MutableLiveData<HashMap<String, String>>()
+    val _taglibFetchedMetadata = MutableLiveData<HashMap<String, String>>()
+    val taglibFetchedMetadata : LiveData<HashMap<String, String>>
+        get() = _taglibFetchedMetadata
+
     val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
 
     fun setTaglibFetchedMetadata(metadata: HashMap<String, String>) {
-        taglibFetchedMetadata.value = metadata
+        _taglibFetchedMetadata.value = metadata
     }
 
     private fun chooseRecordingFromList(recordings: List<Recording?>): ComparisionResult? {

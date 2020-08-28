@@ -106,7 +106,7 @@
     <string name="tagger_file_chooser_pickDirectory">Choose Directory</string>
     <string name="tagger_file_chooser_Instructions">Select An Audio File to Fix Tags</string>
     <string name="tagger_file_save">Overwrite Tags</string>
-    <string name="instruction">Pick the directory where your audio files reside \nChoose the Audio file in that directory</string>
+    <string name="instruction">Choose the directory where your audio files reside \nAfter the Audios are listed here,Click on the Audio File from the list and overwrite Tags \nIncase,you find the list empty here,that means there is no Audio in the Directory,Choose another directory</string>
 
     <string name="genres">Genres</string>
     <string name="user_genres">Your Genres</string>

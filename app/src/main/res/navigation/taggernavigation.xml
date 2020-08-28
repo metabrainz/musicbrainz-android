@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_directoryPicker_to_taggerFragment"
             app:destination="@id/taggerFragment" />
+        <action
+            android:id="@+id/action_directoryPicker_to_taggerFragment2"
+            app:destination="@id/taggerFragment2" />
     </fragment>
     <fragment
         android:id="@+id/taggerFragment"
         android:name="org.metabrainz.mobile.presentation.features.tagger.TaggerFragment"
         android:label="fragment_tagger"
         tools:layout="@layout/fragment_tagger" />
+    <fragment
+        android:id="@+id/taggerFragment2"
+        android:name="org.metabrainz.mobile.presentation.features.tagger.TaggerFragment2"
+        android:label="TaggerFragment2" />
 </navigation>
