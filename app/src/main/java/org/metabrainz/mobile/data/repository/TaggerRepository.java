@@ -40,7 +40,11 @@ public class TaggerRepository {
             @Override
             public void onResponse(@NonNull Call<RecordingSearchResponse> call, @NonNull Response<RecordingSearchResponse> response) {
                 RecordingSearchResponse data = response.body();
-                recordingResponseData.setValue(data.getRecordings());
+                try {
+                    recordingResponseData.setValue(data.getRecordings());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override

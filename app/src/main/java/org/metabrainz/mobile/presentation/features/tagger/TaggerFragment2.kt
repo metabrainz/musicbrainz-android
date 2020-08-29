@@ -35,6 +35,15 @@ class TaggerFragment2 : Fragment() {
     }
 
     private fun setTaglibFetchedMetadata(metadata: HashMap<String, String>) {
+        binding.loadingAnimation.root.visibility = View.VISIBLE
+        binding.originalValue.visibility = View.GONE
+        binding.newValue.visibility = View.GONE
+        binding.overwriteTagsButton.visibility = View.GONE
+        binding.serverFetched.root.visibility = View.GONE
+        binding.taglibFetched.root.visibility = View.GONE
+
+        reset()
+
         binding.taglibFetched.title.text = metadata["TITLE"]
         binding.serverFetched.title.setText(metadata["TITLE"])
 
@@ -55,6 +64,7 @@ class TaggerFragment2 : Fragment() {
 
         binding.taglibFetched.year.text = metadata["DATE"]
         binding.serverFetched.year.setText(metadata["DATE"])
+
     }
 
     private fun setServerFetchedMetadata(tagsList: List<TagField>) {
@@ -64,11 +74,13 @@ class TaggerFragment2 : Fragment() {
         binding.overwriteTagsButton.visibility = View.VISIBLE
         binding.serverFetched.root.visibility = View.VISIBLE
         binding.taglibFetched.root.visibility = View.VISIBLE
+        var countofEmptyOccurances = 0
 
         for (tags in tagsList) {
-            if (tags.newValue.isEmpty())
+            if (tags.newValue.isEmpty()){
+                countofEmptyOccurances++
                 continue
-
+            }
             when (tags.tagName) {
                 "TITLE" -> binding.serverFetched.title.setText(tags.newValue)
                 "ARTIST" -> binding.serverFetched.artist.setText(tags.newValue)
@@ -80,9 +92,31 @@ class TaggerFragment2 : Fragment() {
                 //"acoustid_id" -> binding.serverFetched.AccousticID.text = tags.newValue
             }
         }
-
     }
 
+    fun reset(){
+        binding.taglibFetched.title.text = ""
+        binding.serverFetched.title.setText("")
+
+        binding.taglibFetched.track.text = ""
+        binding.serverFetched.track.setText("")
+
+        binding.taglibFetched.disc.text = ""
+        binding.serverFetched.disc.setText("")
+
+        binding.taglibFetched.duration.text = ""
+        binding.serverFetched.duration.setText("")
+
+        binding.taglibFetched.artist.text = ""
+        binding.serverFetched.artist.setText("")
+
+        binding.taglibFetched.album.text = ""
+        binding.serverFetched.album.setText("")
+
+        binding.taglibFetched.year.text = ""
+        binding.serverFetched.year.setText("")
+
+    }
     private fun Int.toHms(defaultValue: String? = null): String {
         if (this == 0 && defaultValue != null)
             return defaultValue

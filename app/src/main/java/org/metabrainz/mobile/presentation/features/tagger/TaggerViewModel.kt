@@ -30,9 +30,10 @@ class TaggerViewModel @ViewModelInject constructor(
     val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
 
-    fun setTaglibFetchedMetadata(metadata: HashMap<String, String>) {
+    fun setTaglibFetchedMetadata(metadata: HashMap<String, String>?) {
         _taglibFetchedMetadata.value = metadata
     }
+
 
     private fun chooseRecordingFromList(recordings: List<Recording?>): ComparisionResult? {
         if (taglibFetchedMetadata.value == null)
