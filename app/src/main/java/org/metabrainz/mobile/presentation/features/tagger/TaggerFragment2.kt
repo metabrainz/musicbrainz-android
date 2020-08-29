@@ -27,9 +27,9 @@ class TaggerFragment2 : Fragment() {
             setTaglibFetchedMetadata(it)
         }
 
-        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {
-            setServerFetchedMetadata(it)
-        }
+//        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {
+//            setServerFetchedMetadata(it)
+//        }
 
         return binding.root
     }

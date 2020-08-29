@@ -127,7 +127,10 @@ public class LookupRepository {
         service.getCoverArtAll(MBID).enqueue(new Callback<CoverArt>() {
             @Override
             public void onResponse(@NonNull Call<CoverArt> call, @NonNull Response<CoverArt> response) {
-                coverArtData.setValue(response.body());
+                try{coverArtData.setValue(response.body());}
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override

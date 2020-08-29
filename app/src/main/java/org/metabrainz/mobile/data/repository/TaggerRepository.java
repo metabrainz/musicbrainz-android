@@ -60,7 +60,11 @@ public class TaggerRepository {
             @Override
             public void onResponse(@NonNull Call<Release> call, @NonNull Response<Release> response) {
                 Release release = response.body();
-                matchedReleaseData.setValue(release);
+                try{
+                    matchedReleaseData.setValue(release);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -76,7 +80,11 @@ public class TaggerRepository {
                 @Override
                 public void onResponse(@NonNull Call<AcoustIDResponse> call, @NonNull Response<AcoustIDResponse> response) {
                     List<Result> result = response.body().getResults();
-                    recordingResponseData.setValue(TaggerUtils.parseResults(result));
+                    try{
+                        recordingResponseData.setValue(TaggerUtils.parseResults(result));
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
