@@ -68,7 +68,7 @@ class TaggerViewModel @ViewModelInject constructor(
         return Metadata.createTagFields(taglibFetchedMetadata.value, track)
     }
 
-    private fun saveMetadataTags(tags: HashMap<String, String>): Boolean {
+    fun saveMetadataTags(tags: HashMap<String, String>): Boolean {
         val filePath = _taglibFetchedMetadata.value?.get("filePath") ?: return false
         var result = false
         context.contentResolver?.openFileDescriptor(Uri.parse(filePath), "rw")?.use {

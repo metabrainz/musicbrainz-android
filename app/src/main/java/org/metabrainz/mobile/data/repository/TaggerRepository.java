@@ -27,7 +27,7 @@ import static org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator
 @Singleton
 public class TaggerRepository {
 
-    private TaggerService service;
+    private final TaggerService service;
 
     @Inject
     public TaggerRepository(TaggerService service) {
@@ -39,10 +39,10 @@ public class TaggerRepository {
         service.searchRecording(query, Constants.LIMIT).enqueue(new Callback<RecordingSearchResponse>() {
             @Override
             public void onResponse(@NonNull Call<RecordingSearchResponse> call, @NonNull Response<RecordingSearchResponse> response) {
-                RecordingSearchResponse data = response.body();
                 try {
+                    RecordingSearchResponse data = response.body();
                     recordingResponseData.setValue(data.getRecordings());
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -59,10 +59,10 @@ public class TaggerRepository {
         service.lookupRecording(MBID, Constants.TAGGER_RELEASE_PARAMS).enqueue(new Callback<Release>() {
             @Override
             public void onResponse(@NonNull Call<Release> call, @NonNull Response<Release> response) {
-                Release release = response.body();
-                try{
+                try {
+                    Release release = response.body();
                     matchedReleaseData.setValue(release);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -79,8 +79,8 @@ public class TaggerRepository {
             .enqueue(new Callback<AcoustIDResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<AcoustIDResponse> call, @NonNull Response<AcoustIDResponse> response) {
-                    List<Result> result = response.body().getResults();
                     try{
+                        List<Result> result = response.body().getResults();
                         recordingResponseData.setValue(TaggerUtils.parseResults(result));
                     }catch(Exception e){
                         e.printStackTrace();

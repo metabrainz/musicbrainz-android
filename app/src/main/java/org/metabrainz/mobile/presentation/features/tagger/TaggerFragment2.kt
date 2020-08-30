@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import org.metabrainz.mobile.databinding.FragmentTagger2Binding
@@ -23,13 +25,15 @@ class TaggerFragment2 : Fragment() {
         binding.serverFetched.root.visibility = View.VISIBLE
         binding.taglibFetched.root.visibility = View.VISIBLE
 
+        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {
+            setServerFetchedMetadata(it)
+        }
+
         viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner) {
             setTaglibFetchedMetadata(it)
         }
 
-//        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {
-//            setServerFetchedMetadata(it)
-//        }
+        binding.overwriteTagsButton.setOnClickListener { saveMetadata() }
 
         return binding.root
     }
@@ -74,13 +78,15 @@ class TaggerFragment2 : Fragment() {
         binding.overwriteTagsButton.visibility = View.VISIBLE
         binding.serverFetched.root.visibility = View.VISIBLE
         binding.taglibFetched.root.visibility = View.VISIBLE
-        var countofEmptyOccurances = 0
+        
+        var countOfEmptyOccurrences = 0
 
         for (tags in tagsList) {
-            if (tags.newValue.isEmpty()){
-                countofEmptyOccurances++
+            if (tags.newValue.isEmpty()) {
+                countOfEmptyOccurrences++
                 continue
             }
+
             when (tags.tagName) {
                 "TITLE" -> binding.serverFetched.title.setText(tags.newValue)
                 "ARTIST" -> binding.serverFetched.artist.setText(tags.newValue)
@@ -117,6 +123,33 @@ class TaggerFragment2 : Fragment() {
         binding.serverFetched.year.setText("")
 
     }
+
+    private fun saveMetadata() {
+        val newMetadata = HashMap<String, String>()
+        if (binding.serverFetched.title.text.toString().isNotEmpty())
+            newMetadata["TITLE"] = binding.serverFetched.title.text.toString()
+
+        if (binding.serverFetched.track.text.toString().isNotEmpty())
+            newMetadata["TRACK"] = binding.serverFetched.track.text.toString()
+
+        if (binding.serverFetched.disc.text.toString().isNotEmpty())
+            newMetadata["DISC"] = binding.serverFetched.disc.text.toString()
+
+        if (binding.serverFetched.album.text.toString().isNotEmpty())
+            newMetadata["ALBUM"] = binding.serverFetched.album.text.toString()
+
+        if (binding.serverFetched.artist.text.toString().isNotEmpty())
+            newMetadata["ARTIST"] = binding.serverFetched.artist.text.toString()
+
+        if (binding.serverFetched.MBID.text.toString().isNotEmpty())
+            newMetadata["MBID"] = binding.serverFetched.MBID.text.toString()
+
+        if (viewModel.saveMetadataTags(newMetadata))
+            Toast.makeText(activity, "Saved Tags Successfully!", LENGTH_SHORT).show()
+        else
+            Toast.makeText(activity, "Saving Tags Failed!", LENGTH_SHORT).show()
+    }
+
     private fun Int.toHms(defaultValue: String? = null): String {
         if (this == 0 && defaultValue != null)
             return defaultValue
