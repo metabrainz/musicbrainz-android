@@ -25,7 +25,7 @@ class DocumentAdapter(private val itemClickListener: OnItemCLickListener) : Recy
 
         fun bind(metadata: Pair<AudioFile, Document>, cLickListener: OnItemCLickListener) {
             itemView.setOnClickListener {
-                cLickListener.onItemClicked(metadata.first)
+                cLickListener.onItemClicked(metadata.first,metadata.second.uri)
             }
         }
 

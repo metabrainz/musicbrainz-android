@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
+import org.metabrainz.mobile.App
 
 @AndroidEntryPoint
 class DirectoryPicker : Fragment(), OnItemCLickListener {
@@ -64,10 +65,15 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         return binding.root
     }
 
-    override fun onItemClicked(metadata: AudioFile?) {
+    override fun onItemClicked(metadata: AudioFile?,uri: Uri?) {
         //Toast.makeText(requireContext(), metadata?.title, Toast.LENGTH_SHORT).show()
         metadata?.allProperties?.let { viewmodel.setTaglibFetchedMetadata(it) }
-        findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment2)
+        uri?.let { viewmodel.setURI(it) }
+        if(App.getInstance().isOnline)
+            findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment2)
+        else{
+            Toast.makeText(requireContext(),"Connect to Internet and Try Again",Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

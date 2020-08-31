@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.tagger
 
 import android.app.Application
 import android.net.Uri
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -15,9 +16,9 @@ import org.metabrainz.mobile.data.sources.api.entities.Track
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.util.ComparisionResult
-import org.metabrainz.mobile.util.Log
 import org.metabrainz.mobile.util.Metadata
 import org.metabrainz.mobile.util.TaggerUtils
+import java.net.URI
 
 
 class TaggerViewModel @ViewModelInject constructor(
@@ -27,6 +28,10 @@ class TaggerViewModel @ViewModelInject constructor(
     val taglibFetchedMetadata: LiveData<HashMap<String, String>>
         get() = _taglibFetchedMetadata
 
+    val _uri = MutableLiveData<Uri>()
+    val uri:LiveData<Uri>
+        get() = _uri
+
     val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
 
@@ -34,6 +39,9 @@ class TaggerViewModel @ViewModelInject constructor(
         _taglibFetchedMetadata.value = metadata
     }
 
+    fun setURI(uri:Uri){
+        _uri.value = uri
+    }
 
     private fun chooseRecordingFromList(recordings: List<Recording?>): ComparisionResult? {
         if (taglibFetchedMetadata.value == null)
@@ -49,7 +57,7 @@ class TaggerViewModel @ViewModelInject constructor(
             }
         }
 
-        Log.d(recordings.toString())
+        //Log.d(recordings.toString())
 
         if (comparisionResult.releaseMbid != null
                 && comparisionResult.releaseMbid.isNotEmpty()
@@ -69,10 +77,13 @@ class TaggerViewModel @ViewModelInject constructor(
     }
 
     fun saveMetadataTags(tags: HashMap<String, String>): Boolean {
-        val filePath = _taglibFetchedMetadata.value?.get("filePath") ?: return false
+//        val filePath = _taglibFetchedMetadata.value?.get("filePath")
+        Log.i("filepath",_uri.value.toString())
         var result = false
-        context.contentResolver?.openFileDescriptor(Uri.parse(filePath), "rw")?.use {
+        context.contentResolver?.openFileDescriptor(Uri.parse(_uri.value.toString()), "rw")?.use {
             result = KTagLib.writeMetadata(it.detachFd(), tags)
+
+            Log.i("resulttag",result.toString())
         }
         return result
     }

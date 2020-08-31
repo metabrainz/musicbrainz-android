@@ -1,12 +1,16 @@
 package org.metabrainz.mobile;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -77,6 +81,16 @@ public class App extends Application {
     public boolean isNotificationServiceAllowed() {
         String listeners = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
         return listeners != null && listeners.contains(getPackageName());
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            return false;
+        }
+        return true;
     }
 
 }

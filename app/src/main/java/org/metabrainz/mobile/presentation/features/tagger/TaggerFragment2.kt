@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import org.metabrainz.mobile.databinding.FragmentTagger2Binding
 import java.util.concurrent.TimeUnit
+
 
 class TaggerFragment2 : Fragment() {
 
@@ -32,6 +34,7 @@ class TaggerFragment2 : Fragment() {
         viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner) {
             setTaglibFetchedMetadata(it)
         }
+
 
         binding.overwriteTagsButton.setOnClickListener { saveMetadata() }
 
@@ -163,5 +166,8 @@ class TaggerFragment2 : Fragment() {
             String.format("%2d:%02d:%02d", hours, minutes, seconds)
         }
     }
+
+
+
 
 }
