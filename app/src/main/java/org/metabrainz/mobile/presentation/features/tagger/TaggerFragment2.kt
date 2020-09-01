@@ -1,6 +1,5 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -166,8 +165,5 @@ class TaggerFragment2 : Fragment() {
             String.format("%2d:%02d:%02d", hours, minutes, seconds)
         }
     }
-
-
-
 
 }

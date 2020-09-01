@@ -10,9 +10,9 @@ android {
         applicationId "org.metabrainz.android"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 36
+        versionCode 37
 
-        versionName "4.2"
+        versionName "4.3"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
