@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.metabrainz.mobile.data.repository.LookupRepository;
+import org.metabrainz.mobile.data.repository.LookupRepositoryImpl;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.LookupService;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
@@ -72,7 +73,7 @@ public class LookupRepositoryTest {
             });
             webServer.start();
             LookupService service = createTestService(LookupService.class, webServer.url("/"));
-            repository = new LookupRepository(service);
+            repository = new LookupRepositoryImpl(service);
         } catch (Exception e) {
             e.printStackTrace();
             fail();
