@@ -66,7 +66,7 @@ public class RecordingActivity extends MusicBrainzActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(recording.getTitle());
             userViewModel.setUserData(recording);
             linksViewModel.setData(recording.getRelations());
-            releaseListViewModel.setData(recording.getReleases());
+            releaseListViewModel.setReleases(recording.getReleases());
         } else
             binding.noResult.getRoot().setVisibility(View.VISIBLE);
     }
