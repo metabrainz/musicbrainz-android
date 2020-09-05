@@ -66,7 +66,7 @@ public class ReleaseGroupActivity extends MusicBrainzActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(releaseGroup.getTitle());
             userViewModel.setUserData(releaseGroup);
             linksViewModel.setData(releaseGroup.getRelations());
-            releaseListViewModel.setData(releaseGroup.getReleases());
+            releaseListViewModel.setReleases(releaseGroup.getReleases());
         } else
             binding.noResult.getRoot().setVisibility(View.VISIBLE);
     }

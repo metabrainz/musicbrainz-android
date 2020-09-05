@@ -66,7 +66,7 @@ public class LabelActivity extends MusicBrainzActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(label.getName());
             userViewModel.setUserData(label);
             linksViewModel.setData(label.getRelations());
-            releaseListViewModel.setData(label.getReleases());
+            releaseListViewModel.setReleases(label.getReleases());
         } else
             binding.noResult.getRoot().setVisibility(View.VISIBLE);
     }

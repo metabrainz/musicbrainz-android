@@ -51,7 +51,7 @@ public class ReleaseListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(ReleaseListViewModel.class);
-        viewModel.getData().observe(getViewLifecycleOwner(), this::setReleases);
+        viewModel.getReleaseList().observe(getViewLifecycleOwner(), this::setReleases);
     }
 
     @Override

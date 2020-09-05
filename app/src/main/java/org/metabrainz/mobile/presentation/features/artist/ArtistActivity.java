@@ -64,19 +64,6 @@ public class ArtistActivity extends MusicBrainzActivity {
         binding.tabs.setVisibility(View.GONE);
         binding.pager.setVisibility(View.GONE);
 
-        /*
-         * Whenever the artist changes, redraw the information
-         * Subscribe to the empty live data and then ask the view model to update artist live data.
-         * The approach has the benefit of eliminating extra calls to update artist info when it is
-         * not required.
-         * Example: The view model is shared between the activity and fragments. The activity and each
-         * of the fragments will need to subscribe to the live data independently. In the earlier
-         * approach, the artist data was queried whenever fetchData() was invoked, the repository
-         * performed an update on the artist data. This approach led a lot of unneeded network request.
-         * A better solution which is currently followed is that there is a separate method to subscribe
-         * to live data and another one to update the artist info. The getData method acts
-         * like a getter method.
-         */
         artistViewModel.getData().observe(this, this::setArtist);
     }
 
@@ -90,7 +77,7 @@ public class ArtistActivity extends MusicBrainzActivity {
             Artist artist = resource.getData();
             Objects.requireNonNull(getSupportActionBar()).setTitle(artist.getName());
             userViewModel.setUserData(artist);
-            releaseListViewModel.setData(artist.getReleases());
+            releaseListViewModel.setReleases(artist.getReleases());
             linksViewModel.setData(artist.getRelations());
         } else
             binding.noResult.getRoot().setVisibility(View.VISIBLE);
