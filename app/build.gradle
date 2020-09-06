@@ -110,7 +110,6 @@ dependencies {
 
 
     //Tagger & Metadata Setup
-    implementation 'com.github.QuickLyric:fpcalc-android:1.0.1'
     implementation 'info.debatty:java-string-similarity:1.2.1'
     implementation 'com.github.amcap1712:KTaglib:release-SNAPSHOT'
 

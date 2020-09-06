@@ -1,6 +1,5 @@
 package org.metabrainz.mobile.util
 
-import com.geecko.fpcalc.FpCalc
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit
 import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
 import org.metabrainz.mobile.data.sources.api.entities.Media
@@ -9,7 +8,6 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.presentation.features.tagger.AudioFile
 import org.metabrainz.mobile.presentation.features.tagger.TagField
-import java.io.File
 
 object Metadata {
     fun getDefaultTagList(metadata: HashMap<String, String>): HashMap<String, String> {
@@ -21,13 +19,6 @@ object Metadata {
         defaultTagMap["tracks"] = metadata["TRACKTOTAL"] ?: ""
         Log.d(defaultTagMap.toString())
         return defaultTagMap
-    }
-
-    fun getAudioFingerprint(file: File): String {
-        val args = arrayOf("-length", "120", "-plain", file.absolutePath)
-        val fingerprint = FpCalc.fpCalc(args).trim { it <= ' ' }
-        Log.d(fingerprint)
-        return fingerprint
     }
 
     fun getAudioFileFromTrack(track: Track?): AudioFile {
