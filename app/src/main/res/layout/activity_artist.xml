@@ -24,9 +24,9 @@
         app:tabSelectedTextColor="@color/app_bg_light2"
         app:tabGravity="center" />
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

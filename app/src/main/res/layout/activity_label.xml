@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                tools:layout="@layout/fragment_label_releases" />
+                tools:layout="@layout/fragment_release_list" />
 
             <fragment
                 android:id="@+id/links_fragment"
