@@ -6,25 +6,28 @@
     android:layout_height="match_parent"
     android:background="@color/app_bg">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/slide_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/dots"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tabs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/dots"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@color/app_bg"
-        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/nextB"
+        app:tabBackground="@drawable/indicator_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp" />
 
     <Button
         android:id="@+id/nextB"
@@ -36,6 +39,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/next"
         tools:text="Next" />
 
     <Button
@@ -46,6 +50,7 @@
         android:layout_margin="8dp"
         android:textColor="@color/white"
         android:textSize="18sp"
+        android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:text="Prev" />

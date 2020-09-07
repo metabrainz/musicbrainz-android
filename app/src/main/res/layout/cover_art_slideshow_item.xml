@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="125dp"
-    android:layout_height="125dp">
-
-    <ImageView
-        android:id="@+id/release_cover_art"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/cover_art_front"
-        tools:srcCompat="@tools:sample/avatars" />
-</LinearLayout>
+    android:id="@+id/release_cover_art"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:adjustViewBounds="true"
+    android:contentDescription="@string/cover_art_front"
+    tools:srcCompat="@tools:sample/avatars" />

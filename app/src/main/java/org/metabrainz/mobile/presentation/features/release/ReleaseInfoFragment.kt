@@ -29,7 +29,7 @@ class ReleaseInfoFragment : Fragment() {
         slideshowAdapter = CoverArtSlideshowAdapter(urls)
 
         binding!!.slideshow.viewpagerSlideshow.adapter = slideshowAdapter
-        TabLayoutMediator(binding!!.slideshow.tabIndicator, binding!!.slideshow.viewpagerSlideshow) { tab, position -> }.attach()
+        TabLayoutMediator(binding!!.slideshow.tabIndicator, binding!!.slideshow.viewpagerSlideshow) { _, _ -> }.attach()
         return binding!!.root
     }
 

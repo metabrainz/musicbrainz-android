@@ -12,20 +12,14 @@ class CoverArtSlideshowAdapter(private val data: List<String>)
     : RecyclerView.Adapter<CoverArtSlideshowAdapter.CoverArtViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoverArtViewHolder {
-        val inflater = parent.context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val binding = CoverArtSlideshowItemBinding.inflate(inflater, parent, false)
-        binding.root.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         return CoverArtViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CoverArtViewHolder, position: Int) {
-        holder.bind(data[position])
-    }
+    override fun onBindViewHolder(holder: CoverArtViewHolder, position: Int) = holder.bind(data[position])
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    override fun getItemCount(): Int = data.size
 
     class CoverArtViewHolder(private val binding: CoverArtSlideshowItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
