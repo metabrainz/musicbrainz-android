@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">更多</string>
     <string name="tab_releases">专辑</string>
-    <string name="tab_bio">简介</string>
+    <string name="tab_info">简介</string>
     <string name="tab_edits">标签 &amp; 评分</string>
 
     <!-- DonateActivity -->

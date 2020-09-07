@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">MEER</string>
     <string name="tab_releases">UITGAVES</string>
-    <string name="tab_bio">BIOGRAFIE</string>
+    <string name="tab_info">BIOGRAFIE</string>
     <string name="tab_edits">TAGGEN &amp; WAARDEREN</string>
 
     <!-- DonateActivity -->

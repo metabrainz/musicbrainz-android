@@ -1,11 +1,10 @@
-package org.metabrainz.mobile.presentation.features.artist
+package org.metabrainz.mobile.presentation.features.fragments
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
 
-class ArtistPagerAdapter(activity: FragmentActivity, private val fragments: List<MusicBrainzFragment>)
+class ViewPagerAdapter(activity: FragmentActivity, private val fragments: List<MusicBrainzFragment>)
     : FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int = fragments.size

@@ -46,7 +46,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">MË TEPËR</string>
     <string name="tab_releases">HEDHJE NË QARKULLIM</string>
-    <string name="tab_bio">JETËSHKRIM</string>
+    <string name="tab_info">JETËSHKRIM</string>
     <string name="tab_edits">ETIKETOJENI &amp; VLERËSOJENI</string>
 
     <!-- DonateActivity -->

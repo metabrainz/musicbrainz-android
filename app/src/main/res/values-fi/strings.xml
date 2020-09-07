@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">LISÄÄ</string>
     <string name="tab_releases">JULKAISUT</string>
-    <string name="tab_bio">BIO</string>
+    <string name="tab_info">BIO</string>
     <string name="tab_edits">LUOKITTELE &amp; ARVOSTELE</string>
 
     <!-- DonateActivity -->

@@ -46,7 +46,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">БІЛЬШЕ</string>
     <string name="tab_releases">ВИПУСК</string>
-    <string name="tab_bio">БИОГРАФИЯ</string>
+    <string name="tab_info">БИОГРАФИЯ</string>
     <!-- DonateActivity -->
     <string name="donate_title">Пожертва</string>
 

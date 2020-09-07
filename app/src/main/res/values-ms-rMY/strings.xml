@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">LANJUTAN</string>
     <string name="tab_releases">KELUARAN</string>
-    <string name="tab_bio">RIWAYAT HIDUP</string>
+    <string name="tab_info">RIWAYAT HIDUP</string>
     <string name="tab_edits">TANDA &amp; TARAFKAN</string>
 
     <!-- DonateActivity -->

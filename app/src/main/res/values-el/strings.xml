@@ -50,7 +50,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">Περισσότερα</string>
     <string name="tab_releases">Κυκλοφορίες</string>
-    <string name="tab_bio">Βιογραφία </string>
+    <string name="tab_info">Βιογραφία </string>
     <string name="tab_edits">ΕΤΙΚΈΤΑ &amp; ΠΟΣΟΣΤΌ</string>
 
     <!-- DonateActivity -->
