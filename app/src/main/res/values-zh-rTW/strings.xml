@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">更多</string>
     <string name="tab_releases">發行品</string>
-    <string name="tab_bio">個人簡介</string>
+    <string name="tab_info">個人簡介</string>
     <string name="tab_edits">標籤 &amp; 評分</string>
 
     <!-- DonateActivity -->

@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">עוד</string>
     <string name="tab_releases">הוצאות</string>
-    <string name="tab_bio">ביו</string>
+    <string name="tab_info">ביו</string>
     <string name="tab_edits">תיוג &amp; דרוג</string>
 
     <!-- DonateActivity -->

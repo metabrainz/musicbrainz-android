@@ -31,7 +31,7 @@
     <!-- ReleaseActivity -->
     <string name="artist_title">Исполнитель</string>
 
-    <string name="tab_bio">БИОГРАФИЯ</string>
+    <string name="tab_info">БИОГРАФИЯ</string>
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
 

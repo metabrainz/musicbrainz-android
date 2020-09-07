@@ -22,7 +22,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             app:layout_constraintBottom_toTopOf="@id/release_status"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slideshow"
@@ -35,34 +34,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/release_links"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/slideshow"
             app:layout_constraintTop_toBottomOf="@id/release_status"
             tools:text="Language" />
 
         <TextView
-            android:id="@+id/release_links"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="@string/links"
-            android:visibility="gone"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/slideshow"
-            app:layout_constraintTop_toBottomOf="@+id/release_language" />
-
-        <TextView
             android:id="@+id/release_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/release_language"
             app:layout_constraintEnd_toEndOf="parent"

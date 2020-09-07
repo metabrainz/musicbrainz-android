@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">PLUS</string>
     <string name="tab_releases">PARUTIONS</string>
-    <string name="tab_bio">BIO</string>
+    <string name="tab_info">BIO</string>
     <!-- DonateActivity -->
     <string name="donate_title">Faites un don</string>
 

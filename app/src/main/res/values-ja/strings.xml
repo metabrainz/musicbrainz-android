@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">さらに表示</string>
     <string name="tab_releases">リリース</string>
-    <string name="tab_bio">BIO</string>
+    <string name="tab_info">BIO</string>
     <string name="tab_edits">タグ &amp; レート</string>
 
     <!-- DonateActivity -->

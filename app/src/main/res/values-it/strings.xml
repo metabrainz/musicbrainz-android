@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">Di più</string>
     <string name="tab_releases">Pubblicazioni</string>
-    <string name="tab_bio">Bio</string>
+    <string name="tab_info">Bio</string>
     <string name="tab_edits">Tagga &amp; valuta</string>
 
     <!-- DonateActivity -->

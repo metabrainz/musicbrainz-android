@@ -48,7 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">MÁS</string>
     <string name="tab_releases">LANZAMIENTOS</string>
-    <string name="tab_bio">INFO</string>
+    <string name="tab_info">INFO</string>
     <string name="tab_edits">ETIQUETAR &amp; CALIFICAR</string>
 
     <!-- DonateActivity -->
