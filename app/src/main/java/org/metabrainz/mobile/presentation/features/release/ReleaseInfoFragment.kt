@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.tabs.TabLayoutMediator
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.databinding.CardReleaseInfoBinding
@@ -26,8 +27,9 @@ class ReleaseInfoFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) { setData(it) }
         viewModel.fetchCoverArt().observe(viewLifecycleOwner) { setCoverArt(it) }
         slideshowAdapter = CoverArtSlideshowAdapter(urls)
+
         binding!!.slideshow.viewpagerSlideshow.adapter = slideshowAdapter
-        binding!!.slideshow.tabIndicator.setupWithViewPager(binding!!.slideshow.viewpagerSlideshow)
+        TabLayoutMediator(binding!!.slideshow.tabIndicator, binding!!.slideshow.viewpagerSlideshow) { tab, position -> }.attach()
         return binding!!.root
     }
 
@@ -36,8 +38,8 @@ class ReleaseInfoFragment : Fragment() {
         binding = null
     }
 
-    private fun setData(resource: Resource<Release>?) {
-        if (resource != null && resource.status == Resource.Status.SUCCESS) {
+    private fun setData(resource: Resource<Release>) {
+        if (resource.status == Resource.Status.SUCCESS) {
             val release = resource.data
             if (release.title != null && release.title.isNotEmpty())
                 binding!!.releaseTitle.text = release.title
