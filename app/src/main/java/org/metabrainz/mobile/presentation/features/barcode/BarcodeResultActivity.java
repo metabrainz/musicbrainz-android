@@ -15,7 +15,7 @@ import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
 import org.metabrainz.mobile.databinding.ActivityBarcodeResultBinding;
-import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity;
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListAdapter;
 import org.metabrainz.mobile.util.Resource;

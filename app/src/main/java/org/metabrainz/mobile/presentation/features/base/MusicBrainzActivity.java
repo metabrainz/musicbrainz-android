@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation;
+package org.metabrainz.mobile.presentation.features.base;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -13,6 +13,9 @@ import androidx.viewbinding.ViewBinding;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.databinding.LayoutToolbarBinding;
+import org.metabrainz.mobile.presentation.Configuration;
+import org.metabrainz.mobile.presentation.IntentFactory;
+import org.metabrainz.mobile.presentation.UserPreferences;
 import org.metabrainz.mobile.util.Utils;
 
 import java.util.Objects;

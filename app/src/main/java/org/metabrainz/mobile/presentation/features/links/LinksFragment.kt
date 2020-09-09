@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import org.metabrainz.mobile.data.sources.api.entities.Link
 import org.metabrainz.mobile.databinding.FragmentLinksBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import java.util.*
 
 class LinksFragment : Fragment() {

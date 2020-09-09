@@ -13,7 +13,7 @@ import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
 import org.metabrainz.mobile.databinding.ActivityLoginBinding;
-import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity;
 import org.metabrainz.mobile.util.Log;
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.databinding.FragmentReleaseListBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import java.util.*
 
 class ReleaseListFragment : Fragment() {

@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist
 import org.metabrainz.mobile.databinding.FragmentBioBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.mobile.util.Resource
 
 class ArtistBioFragment : Fragment() {

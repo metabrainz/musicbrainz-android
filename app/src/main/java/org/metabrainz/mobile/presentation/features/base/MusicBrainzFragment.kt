@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.fragments
+package org.metabrainz.mobile.presentation.features.base
 
 import androidx.fragment.app.Fragment
 
