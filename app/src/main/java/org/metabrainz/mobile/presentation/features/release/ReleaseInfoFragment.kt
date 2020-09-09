@@ -25,7 +25,7 @@ class ReleaseInfoFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = CardReleaseInfoBinding.inflate(inflater, container, false)
         viewModel.data.observe(viewLifecycleOwner) { setData(it) }
-        viewModel.fetchCoverArt().observe(viewLifecycleOwner) { setCoverArt(it) }
+        viewModel.coverArtData.observe(viewLifecycleOwner) { setCoverArt(it) }
         slideshowAdapter = CoverArtSlideshowAdapter(urls)
 
         binding!!.slideshow.viewpagerSlideshow.adapter = slideshowAdapter

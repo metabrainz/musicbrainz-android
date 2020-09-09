@@ -48,6 +48,7 @@
     <!-- Pager tabs -->
     <string name="tab_links">MORE</string>
     <string name="tab_releases">RELEASE</string>
+    <string name="tab_mediums">MEDIUMS</string>
     <string name="tab_info">INFO</string>
     <string name="tab_edits">TAG &amp; RATE</string>
 
