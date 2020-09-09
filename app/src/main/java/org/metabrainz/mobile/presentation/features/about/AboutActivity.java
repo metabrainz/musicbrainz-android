@@ -6,7 +6,7 @@ import android.view.Menu;
 
 import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.databinding.ActivityAboutBinding;
-import org.metabrainz.mobile.presentation.MusicBrainzActivity;
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzActivity;
 
 import java.util.Objects;
 

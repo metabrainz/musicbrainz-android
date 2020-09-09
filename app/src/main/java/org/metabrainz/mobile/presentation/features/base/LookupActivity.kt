@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features
+package org.metabrainz.mobile.presentation.features.base
 
 import android.os.Bundle
 import android.view.View
@@ -7,9 +7,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity
 import org.metabrainz.mobile.databinding.ActivityLookupBinding
-import org.metabrainz.mobile.presentation.MusicBrainzActivity
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
-import org.metabrainz.mobile.presentation.features.fragments.ViewPagerAdapter
 import org.metabrainz.mobile.util.Resource
 
 abstract class LookupActivity<T : MBEntity> : MusicBrainzActivity() {

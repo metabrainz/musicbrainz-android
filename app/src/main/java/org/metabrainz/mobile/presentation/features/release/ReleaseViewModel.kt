@@ -7,7 +7,7 @@ import org.metabrainz.mobile.data.repository.LookupRepository
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
-import org.metabrainz.mobile.presentation.features.LookupViewModel
+import org.metabrainz.mobile.presentation.features.base.LookupViewModel
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 

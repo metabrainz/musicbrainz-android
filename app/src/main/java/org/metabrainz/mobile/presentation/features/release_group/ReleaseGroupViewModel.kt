@@ -7,7 +7,7 @@ import org.metabrainz.mobile.data.repository.LookupRepository
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup
-import org.metabrainz.mobile.presentation.features.LookupViewModel
+import org.metabrainz.mobile.presentation.features.base.LookupViewModel
 import org.metabrainz.mobile.util.Resource
 
 class ReleaseGroupViewModel @ViewModelInject constructor(repository: LookupRepository) :

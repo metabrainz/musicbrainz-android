@@ -18,9 +18,9 @@ import org.metabrainz.mobile.R;
 import org.metabrainz.mobile.data.sources.Constants;
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
 import org.metabrainz.mobile.databinding.ActivitySearchResultsBinding;
-import org.metabrainz.mobile.presentation.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.adapters.ResultItemComparator;
 import org.metabrainz.mobile.presentation.features.adapters.ResultPagingAdapter;
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzActivity;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper;
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider;
 

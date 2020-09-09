@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.databinding.CardReleaseInfoBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.mobile.util.Resource
 import java.util.*
 

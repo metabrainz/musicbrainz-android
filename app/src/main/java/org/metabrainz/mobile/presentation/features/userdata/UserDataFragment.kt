@@ -12,7 +12,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity
 import org.metabrainz.mobile.data.sources.api.entities.userdata.Tag
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserTag
 import org.metabrainz.mobile.databinding.FragmentUserDataBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import java.util.*
 
 class UserDataFragment : Fragment() {

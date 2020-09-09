@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.metabrainz.mobile.data.sources.api.entities.Media
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.databinding.FragmentTracklistBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.mobile.util.Resource
 import java.util.*
 

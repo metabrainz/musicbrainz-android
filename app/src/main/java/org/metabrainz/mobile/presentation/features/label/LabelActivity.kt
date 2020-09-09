@@ -7,8 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.App
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label
-import org.metabrainz.mobile.presentation.features.LookupActivity
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.LookupActivity
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.mobile.presentation.features.links.LinksFragment
 import org.metabrainz.mobile.presentation.features.links.LinksViewModel
 import org.metabrainz.mobile.presentation.features.release_list.ReleaseListFragment

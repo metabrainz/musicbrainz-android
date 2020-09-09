@@ -10,7 +10,7 @@ import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup
 import org.metabrainz.mobile.databinding.CardReleaseGroupInfoBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.mobile.util.Resource
 
 class ReleaseGroupInfoFragment : Fragment() {

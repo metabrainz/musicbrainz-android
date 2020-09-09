@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label
 import org.metabrainz.mobile.databinding.FragmentLabelInfoBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.mobile.util.Resource
 
 class LabelInfoFragment : Fragment() {

@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.databinding.FragmentRecordingInfoBinding
-import org.metabrainz.mobile.presentation.features.fragments.MusicBrainzFragment
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.mobile.util.Resource
 
 class RecordingInfoFragment : Fragment() {

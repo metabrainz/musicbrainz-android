@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features
+package org.metabrainz.mobile.presentation.features.base
 
 import androidx.lifecycle.*
 import com.google.gson.Gson

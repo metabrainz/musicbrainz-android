@@ -5,7 +5,7 @@ import android.view.Menu
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.ActivityTaggerBinding
-import org.metabrainz.mobile.presentation.MusicBrainzActivity
+import org.metabrainz.mobile.presentation.features.base.MusicBrainzActivity
 
 @AndroidEntryPoint
 class TaggerActivity : MusicBrainzActivity() {
