@@ -43,22 +43,22 @@
 
             <Button
                 android:id="@+id/add_artist"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/artistadd"
                 android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/add_release"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/releaseadd"
                 android:textAllCaps="false" />
@@ -75,22 +75,22 @@
 
             <Button
                 android:id="@+id/add_event"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/eventadd"
                 android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/add_release_group"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_weight="0.3"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/releasegroupadd"
                 android:textAllCaps="false" />
@@ -107,22 +107,22 @@
 
             <Button
                 android:id="@+id/add_label"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_weight="0.6"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/labeladd"
                 android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/add_recording"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_weight="0.4"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/recordingadd"
                 android:textAllCaps="false" />
