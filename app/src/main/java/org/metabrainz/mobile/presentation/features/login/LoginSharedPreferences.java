@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.presentation.features.login;
 
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
@@ -14,9 +14,10 @@ public class LoginSharedPreferences {
     private static final String USERNAME = "username";
     public static final int STATUS_LOGGED_IN = 1;
     public static final int STATUS_LOGGED_OUT = 0;
+    private static final String SHARED_PREF_FILE = "shared_pref_file";
 
     public static SharedPreferences getPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(App.getContext());
+        return App.getContext().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE);
     }
 
     public static void saveOAuthToken(AccessToken token) {

@@ -10,9 +10,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
-import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 
 import org.metabrainz.mobile.presentation.Configuration;
 import org.metabrainz.mobile.presentation.UserPreferences;
@@ -22,7 +19,7 @@ import dagger.hilt.android.HiltAndroidApp;
 @HiltAndroidApp
 public class App extends Application {
 
-    public static final String TAGGER_ROOT_DIRECTORY = Environment.getExternalStorageDirectory() + "/Picard/";
+    public static final String TAGGER_ROOT_DIRECTORY = Environment.getRootDirectory() + "/Picard/";
     public static final String WEBSITE_BASE_URL = "https://musicbrainz.org/";
     private static App instance;
     private static Typeface robotoLight;
@@ -87,10 +84,7 @@ public class App extends Application {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
-        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
-            return false;
-        }
-        return true;
+        return netInfo != null && netInfo.isConnected() && netInfo.isAvailable();
     }
 
 }

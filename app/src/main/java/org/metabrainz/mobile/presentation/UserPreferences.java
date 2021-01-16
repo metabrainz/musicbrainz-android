@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.presentation;
 
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
@@ -19,9 +19,10 @@ public class UserPreferences {
     private static final String PREFERENCE_RATINGS_TAGS = "ratings_tags";
     private static final String PREFERENCE_SYSTEM_LANGUAGE = "use_english";
     private static final String PREFERENCE_ONBOARDING = "show_onboarding";
+    private static final String SHARED_PREF_FILE = "shared_pref_file";
 
     private static SharedPreferences getPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(App.getContext());
+        return App.getContext().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE);
     }
 
     public static void setOnBoardingCompleted() {
