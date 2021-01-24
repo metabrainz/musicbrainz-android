@@ -1,7 +1,8 @@
 package org.metabrainz.mobile.presentation;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 import org.metabrainz.mobile.App;
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences;
