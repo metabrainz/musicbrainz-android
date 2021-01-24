@@ -1,131 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg">
 
-    <FrameLayout
-        android:id="@+id/search_fragment_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="@color/app_bg">
+        android:layout_height="wrap_content">
 
-        <fragment
-            android:id="@+id/search_fragment"
-            android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/search_fragment_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="98dp"
+            android:background="@color/app_bg"
+            app:layout_constraintBottom_toTopOf="@+id/add_artist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/add_instruc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/search_fragment_layout"
-        android:textColor="@color/white"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/instruction_to_add"/>
+            <fragment
+                android:id="@+id/search_fragment"
+                android:name="org.metabrainz.mobile.presentation.features.dashboard.SearchFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/add_artist_release"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/add_instruc"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/add_instruc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/instruction_to_add"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/add_artist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
         <Button
             android:id="@+id/add_artist"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/artistadd"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="30dp"
             android:gravity="center"
-            android:layout_weight="0.5"
+            android:text="@string/artistadd"
             android:textAllCaps="false"
-            />
+            app:layout_constraintBaseline_toBaselineOf="@+id/add_release"
+            app:layout_constraintEnd_toStartOf="@+id/add_release"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/add_release"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/releaseadd"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:layout_weight="0.5"
+            android:text="@string/releaseadd"
             android:textAllCaps="false"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
+            app:layout_constraintBottom_toTopOf="@+id/add_release_group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add_artist" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/add_event_releasegroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/add_artist_release"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/add_event"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/eventadd"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="30dp"
             android:gravity="center"
-            android:layout_weight="0.7"
+            android:text="@string/eventadd"
             android:textAllCaps="false"
-            />
+            app:layout_constraintBaseline_toBaselineOf="@+id/add_release_group"
+            app:layout_constraintEnd_toStartOf="@+id/add_release_group"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/add_release_group"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/releasegroupadd"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:layout_weight="0.3"
+            android:text="@string/releasegroupadd"
             android:textAllCaps="false"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
+            app:layout_constraintBottom_toTopOf="@+id/add_recording"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add_event" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/add_label_recording"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/add_event_releasegroup"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
 
         <Button
             android:id="@+id/add_label"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/labeladd"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="30dp"
             android:gravity="center"
-            android:layout_weight="0.6"
+            android:text="@string/labeladd"
             android:textAllCaps="false"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_recording"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/add_recording"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/recordingadd"
+            android:layout_marginEnd="14dp"
             android:gravity="center"
-            android:layout_weight="0.4"
+            android:text="@string/recordingadd"
             android:textAllCaps="false"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            />
-
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add_label" />
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>
+
+</ScrollView>
