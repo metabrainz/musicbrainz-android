@@ -1,21 +1,21 @@
-package org.metabrainz.mobile.util;
+package org.metabrainz.mobile.util
 
-import org.metabrainz.mobile.presentation.Configuration;
+import android.util.Log
+import org.metabrainz.mobile.presentation.Configuration
 
-public class Log {
-
-    private static final String TAG = Configuration.TAG;
-
-    public static void e(String message) {
-        android.util.Log.e(TAG, message);
+object Log {
+    private const val TAG = Configuration.TAG
+    @JvmStatic
+    fun e(message: String?) {
+        Log.e(TAG, message!!)
     }
 
-    public static void d(String message) {
-        android.util.Log.d(TAG, message);
+    @JvmStatic
+    fun d(message: String?) {
+        Log.d(TAG, message!!)
     }
 
-    public static void v(String message) {
-        android.util.Log.v(TAG, message);
+    fun v(message: String?) {
+        Log.v(TAG, message!!)
     }
-
 }

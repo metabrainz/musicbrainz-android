@@ -1,24 +1,13 @@
-package org.metabrainz.mobile.presentation.view;
+package org.metabrainz.mobile.presentation.view
 
-import android.content.Context;
-import android.text.Html;
-import android.util.AttributeSet;
+import android.content.Context
+import android.text.Html
+import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
+import org.metabrainz.mobile.util.Utils
 
-import androidx.appcompat.widget.AppCompatTextView;
-
-import org.metabrainz.mobile.util.Utils;
-
-public class HtmlAssetTextView extends AppCompatTextView {
-
-    private final Context context;
-
-    public HtmlAssetTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.context = context;
+class HtmlAssetTextView(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
+    fun setAsset(asset: String?) {
+        text = Html.fromHtml(Utils.stringFromAsset(context, asset))
     }
-
-    public void setAsset(String asset) {
-        setText(Html.fromHtml(Utils.stringFromAsset(context, asset)));
-    }
-
 }

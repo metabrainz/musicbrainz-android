@@ -1,34 +1,21 @@
-package org.metabrainz.mobile.presentation.view;
+package org.metabrainz.mobile.presentation.view
 
-import android.content.Context;
-import android.graphics.Typeface;
-import android.util.AttributeSet;
+import android.content.Context
+import android.graphics.Typeface
+import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
+import org.metabrainz.mobile.App
 
-import androidx.appcompat.widget.AppCompatTextView;
+class RobotoLightTextView : AppCompatTextView {
+    constructor(context: Context?) : super(context!!)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs)
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context!!, attrs, defStyle)
 
-import org.metabrainz.mobile.App;
-
-public class RobotoLightTextView extends AppCompatTextView {
-
-    public RobotoLightTextView(Context context) {
-        super(context);
-    }
-
-    public RobotoLightTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public RobotoLightTextView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
-    @Override
-    public void setTypeface(Typeface tf) {
-        if (isInEditMode()) {
-            super.setTypeface(tf);
+    override fun setTypeface(tf: Typeface?) {
+        if (isInEditMode) {
+            super.setTypeface(tf)
         } else {
-            super.setTypeface(App.getRobotoLight());
+            super.setTypeface(App.getRobotoLight())
         }
     }
-
 }

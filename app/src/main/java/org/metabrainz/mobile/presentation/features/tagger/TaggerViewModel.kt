@@ -18,7 +18,6 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.util.ComparisionResult
 import org.metabrainz.mobile.util.Metadata
 import org.metabrainz.mobile.util.TaggerUtils
-import java.net.URI
 
 
 class TaggerViewModel @ViewModelInject constructor(
@@ -60,7 +59,7 @@ class TaggerViewModel @ViewModelInject constructor(
         //Log.d(recordings.toString())
 
         if (comparisionResult.releaseMbid != null
-                && comparisionResult.releaseMbid.isNotEmpty()
+                && comparisionResult.releaseMbid!!.isNotEmpty()
                 && comparisionResult.score > TaggerUtils.THRESHOLD)
             return comparisionResult
         return null

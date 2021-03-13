@@ -1,21 +1,14 @@
-package org.metabrainz.mobile.presentation;
+package org.metabrainz.mobile.presentation
 
-public class Configuration {
-
-    public static final boolean LIVE = false;
-    public static final String TAG = "MusicBrainz";
-
-    public static final String FEEDBACK_EMAIL = "support@metabrainz.org";
-    public static final String FEEDBACK_SUBJECT = "[MBAndroid] Feedback";
-
-    public static final String USER_AGENT = "MusicBrainzAndroid";
-    public static final String CLIENT_NAME = "org.metabrainz.mobile";
-
-    private static final String WEBSITE = "http://metabrainz.org/";
-
-    public static final String URL_DONATE = "http://metabrainz.org/donate";
-
-    public static final String ARTIST_SHARE = WEBSITE + "artist/";
-    public static final String RELEASE_SHARE = WEBSITE + "release/";
-
+object Configuration {
+    const val LIVE = false
+    const val TAG = "MusicBrainz"
+    const val FEEDBACK_EMAIL = "support@metabrainz.org"
+    const val FEEDBACK_SUBJECT = "[MBAndroid] Feedback"
+    const val USER_AGENT = "MusicBrainzAndroid"
+    const val CLIENT_NAME = "org.metabrainz.mobile"
+    private const val WEBSITE = "http://metabrainz.org/"
+    const val URL_DONATE = "http://metabrainz.org/donate"
+    const val ARTIST_SHARE = WEBSITE + "artist/"
+    const val RELEASE_SHARE = WEBSITE + "release/"
 }

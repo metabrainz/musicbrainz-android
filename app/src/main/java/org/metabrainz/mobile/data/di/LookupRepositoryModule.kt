@@ -1,16 +1,15 @@
-package org.metabrainz.mobile.data.di;
+package org.metabrainz.mobile.data.di
 
-import org.metabrainz.mobile.data.repository.LookupRepository;
-import org.metabrainz.mobile.data.repository.LookupRepositoryImpl;
-
-import dagger.Binds;
-import dagger.Module;
-import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ActivityRetainedComponent;
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.Binds
+import dagger.Module
+import org.metabrainz.mobile.data.repository.LookupRepositoryImpl
+import org.metabrainz.mobile.data.repository.LookupRepository
 
 @Module
-@InstallIn(ActivityRetainedComponent.class)
-public abstract class LookupRepositoryModule {
+@InstallIn(ActivityRetainedComponent::class)
+abstract class LookupRepositoryModule {
     @Binds
-    public abstract LookupRepository bindsLookupRepository(LookupRepositoryImpl repository);
+    abstract fun bindsLookupRepository(repository: LookupRepositoryImpl?): LookupRepository?
 }
