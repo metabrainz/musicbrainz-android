@@ -1,59 +1,51 @@
-package org.metabrainz.mobile;
+package org.metabrainz.mobile
 
-import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem
+import org.metabrainz.mobile.EntityTestUtils.testArtistMBID
+import org.metabrainz.mobile.EntityTestUtils.testLabelMBID
+import org.metabrainz.mobile.EntityTestUtils.testRecordingMBID
+import org.metabrainz.mobile.EntityTestUtils.testReleaseGroupMBID
+import org.metabrainz.mobile.EntityTestUtils.testReleaseMBID
 
-import static org.metabrainz.mobile.EntityTestUtils.getTestArtistMBID;
-import static org.metabrainz.mobile.EntityTestUtils.getTestLabelMBID;
-import static org.metabrainz.mobile.EntityTestUtils.getTestRecordingMBID;
-import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseGroupMBID;
-import static org.metabrainz.mobile.EntityTestUtils.getTestReleaseMBID;
-
-public class ResultItemTestUtils {
-
-    public static ResultItem getTestArtistResultItem() {
-        return new ResultItem(
-                getTestArtistMBID(),
-                "Ed Sheeran",
-                "UK singer-songwriter",
-                "Person",
-                "GB");
-    }
-
-    public static ResultItem getTestReleaseResultItem() {
-        return new ResultItem(
-                getTestReleaseMBID(),
-                "+",
-                "",
-                "",
-                "");
-    }
-
-    public static ResultItem getTestLabelResultItem() {
-        return new ResultItem(
-                getTestLabelMBID(),
-                "Speed Records",
-                "India",
-                "Original Production",
-                "IN");
-    }
-
-    public static ResultItem getTestReleaseGroupResultItem() {
-        return new ResultItem(
-                getTestReleaseGroupMBID(),
-                "+",
-                "plus",
-                "",
-                "Album");
-    }
-
-    public static ResultItem getTestRecordingResultItem() {
-        return new ResultItem(
-                getTestRecordingMBID(),
-                "Plus Plus",
-                "no disambiguation",
-                "",
-                ""
-        );
-    }
-
+object ResultItemTestUtils {
+    val testArtistResultItem: ResultItem
+        get() = ResultItem(
+            testArtistMBID,
+            "Ed Sheeran",
+            "UK singer-songwriter",
+            "Person",
+            "GB"
+        )
+    val testReleaseResultItem: ResultItem
+        get() = ResultItem(
+            testReleaseMBID,
+            "+",
+            "",
+            "",
+            ""
+        )
+    val testLabelResultItem: ResultItem
+        get() = ResultItem(
+            testLabelMBID,
+            "Speed Records",
+            "India",
+            "Original Production",
+            "IN"
+        )
+    val testReleaseGroupResultItem: ResultItem
+        get() = ResultItem(
+            testReleaseGroupMBID,
+            "+",
+            "plus",
+            "",
+            "Album"
+        )
+    val testRecordingResultItem: ResultItem
+        get() = ResultItem(
+            testRecordingMBID,
+            "Plus Plus",
+            "no disambiguation",
+            "",
+            ""
+        )
 }

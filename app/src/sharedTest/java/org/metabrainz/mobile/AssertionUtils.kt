@@ -1,86 +1,83 @@
-package org.metabrainz.mobile;
+package org.metabrainz.mobile
 
-import org.metabrainz.mobile.data.sources.api.entities.WikiSummary;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Label;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup;
-import org.metabrainz.mobile.presentation.features.adapters.ResultItem;
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Assert.assertEquals
+import org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder
+import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.*
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
-import static org.junit.Assert.assertEquals;
-
-public class AssertionUtils {
-
-    public static void checkWikiAssertions(WikiSummary testSummary, WikiSummary summary) {
-        assertEquals(testSummary.getExtract(), summary.getExtract());
+object AssertionUtils {
+    fun checkWikiAssertions(testSummary: WikiSummary, summary: WikiSummary) {
+        assertEquals(testSummary.extract, summary.extract)
     }
 
-    public static void checkReleaseAssertions(Release testRelease, Release release) {
-        assertEquals(testRelease, release);
-        assertEquals(testRelease.getTitle(), release.getTitle());
-        assertEquals(testRelease.getBarcode(), release.getBarcode());
-        assertEquals(testRelease.getStatus(), release.getStatus());
-        assertEquals(testRelease.getCountry(), release.getCountry());
-        assertEquals(testRelease.getDisambiguation(), release.getDisambiguation());
-        assertEquals(testRelease.getDate(), release.getDate());
-
-        if (testRelease.getArtistCredits().size() != 0)
-            assertThat(testRelease.getArtistCredits(), containsInAnyOrder(release.getArtistCredits().toArray()));
+    fun checkReleaseAssertions(testRelease: Release, release: Release) {
+        assertEquals(testRelease, release)
+        assertEquals(testRelease.title, release.title)
+        assertEquals(testRelease.barcode, release.barcode)
+        assertEquals(testRelease.status, release.status)
+        assertEquals(testRelease.country, release.country)
+        assertEquals(testRelease.disambiguation, release.disambiguation)
+        assertEquals(testRelease.date, release.date)
+        if (testRelease.artistCredits.size != 0) assertThat(
+            testRelease.artistCredits,
+            containsInAnyOrder(release.artistCredits.toTypedArray())
+        )
     }
 
-    public static void checkArtistAssertions(Artist testArtist, Artist artist) {
-        assertEquals(testArtist, artist);
-        assertEquals(testArtist.getCountry(), artist.getCountry());
-        assertEquals(testArtist.getDisambiguation(), artist.getDisambiguation());
-        assertEquals(testArtist.getName(), artist.getName());
-        assertEquals(testArtist.getSortName(), artist.getSortName());
-        assertEquals(testArtist.getGender(), artist.getGender());
-        assertEquals(testArtist.getType(), artist.getType());
-
-        if (testArtist.getReleases().size() != 0)
-            assertThat(testArtist.getReleases(), containsInAnyOrder(artist.getReleases().toArray()));
+    fun checkArtistAssertions(testArtist: Artist, artist: Artist) {
+        assertEquals(testArtist, artist)
+        assertEquals(testArtist.country, artist.country)
+        assertEquals(testArtist.disambiguation, artist.disambiguation)
+        assertEquals(testArtist.name, artist.name)
+        assertEquals(testArtist.sortName, artist.sortName)
+        assertEquals(testArtist.gender, artist.gender)
+        assertEquals(testArtist.type, artist.type)
+        if (testArtist.getReleases().size != 0) assertThat(
+            testArtist.getReleases(),
+            containsInAnyOrder(artist.getReleases().toTypedArray())
+        )
     }
 
-    public static void checkReleaseGroupAssertions(ReleaseGroup testReleaseGroup, ReleaseGroup releaseGroup) {
-        assertEquals(testReleaseGroup, releaseGroup);
-        assertEquals(testReleaseGroup.getTitle(), releaseGroup.getTitle());
-        assertEquals(testReleaseGroup.getCount(), releaseGroup.getCount());
-        assertEquals(testReleaseGroup.getPrimaryType(), releaseGroup.getPrimaryType());
-        assertEquals(testReleaseGroup.getFullType(), releaseGroup.getFullType());
-        assertEquals(testReleaseGroup.getDisambiguation(), releaseGroup.getDisambiguation());
-
-        if (testReleaseGroup.getArtistCredits().size() != 0)
-            assertThat(testReleaseGroup.getArtistCredits(), containsInAnyOrder(releaseGroup.getArtistCredits().toArray()));
+    fun checkReleaseGroupAssertions(testReleaseGroup: ReleaseGroup, releaseGroup: ReleaseGroup) {
+        assertEquals(testReleaseGroup, releaseGroup)
+        assertEquals(testReleaseGroup.title, releaseGroup.title)
+        assertEquals(testReleaseGroup.count, releaseGroup.count)
+        assertEquals(testReleaseGroup.primaryType, releaseGroup.primaryType)
+        assertEquals(testReleaseGroup.fullType, releaseGroup.fullType)
+        assertEquals(testReleaseGroup.disambiguation, releaseGroup.disambiguation)
+        if (testReleaseGroup.artistCredits.size != 0) assertThat(
+            testReleaseGroup.artistCredits,
+            containsInAnyOrder(releaseGroup.artistCredits.toTypedArray())
+        )
     }
 
-    public static void checkLabelAssertions(Label testLabel, Label label) {
-        assertEquals(testLabel, label);
-        assertEquals(testLabel.getCode(), label.getCode());
-        assertEquals(testLabel.getType(), label.getType());
-        assertEquals(testLabel.getCountry(), label.getCountry());
+    fun checkLabelAssertions(testLabel: Label, label: Label) {
+        assertEquals(testLabel, label)
+        assertEquals(testLabel.code, label.code)
+        assertEquals(testLabel.type, label.type)
+        assertEquals(testLabel.country, label.country)
     }
 
-    public static void checkRecordingAssertions(Recording testRecording, Recording recording) {
-        assertEquals(testRecording, recording);
-        assertEquals(testRecording.getTitle(), testRecording.getTitle());
-        assertEquals(testRecording.getDuration(), recording.getDuration());
-        assertEquals(testRecording.getLength(), recording.getLength());
-        assertEquals(testRecording.getTrackCount(), recording.getTrackCount());
-        assertEquals(testRecording.getDisambiguation(), recording.getDisambiguation());
-
-        if (testRecording.getArtistCredits().size() != 0)
-            assertThat(testRecording.getArtistCredits(), containsInAnyOrder(recording.getArtistCredits().toArray()));
+    fun checkRecordingAssertions(testRecording: Recording, recording: Recording) {
+        assertEquals(testRecording, recording)
+        assertEquals(testRecording.title, testRecording.title)
+        assertEquals(testRecording.duration, recording.duration)
+        assertEquals(testRecording.length, recording.length)
+        assertEquals(testRecording.trackCount, recording.trackCount)
+        assertEquals(testRecording.disambiguation, recording.disambiguation)
+        if (testRecording.artistCredits.size != 0) assertThat(
+            testRecording.artistCredits,
+            containsInAnyOrder(recording.artistCredits.toTypedArray())
+        )
     }
 
-    public static void checkResultItemAssertions(ResultItem testItem, ResultItem item) {
-        assertEquals(testItem.getMBID(), item.getMBID());
-        assertEquals(testItem.getDisambiguation(), item.getDisambiguation());
-        assertEquals(testItem.getName(), item.getName());
-        assertEquals(testItem.getPrimary(), item.getPrimary());
-        assertEquals(testItem.getSecondary(), item.getSecondary());
+    fun checkResultItemAssertions(testItem: ResultItem, item: ResultItem) {
+        assertEquals(testItem.mBID, item.mBID)
+        assertEquals(testItem.disambiguation, item.disambiguation)
+        assertEquals(testItem.name, item.name)
+        assertEquals(testItem.primary, item.primary)
+        assertEquals(testItem.secondary, item.secondary)
     }
-
 }
