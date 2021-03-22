@@ -1,23 +1,13 @@
-package org.metabrainz.mobile.data.sources.api.entities.mbentity;
+package org.metabrainz.mobile.data.sources.api.entities.mbentity
 
-class Work extends MBEntity {
-    private String title;
+internal class Work : MBEntity() {
     //TODO: Implement Relations
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public String toString() {
+    var title: String? = null
+    override fun toString(): String {
         return "Work{" +
                 "title='" + title + '\'' +
                 ", mbid='" + mbid + '\'' +
                 ", disambiguation='" + disambiguation + '\'' +
-                '}';
+                '}'
     }
 }

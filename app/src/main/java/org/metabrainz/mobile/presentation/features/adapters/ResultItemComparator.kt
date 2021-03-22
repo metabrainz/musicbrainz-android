@@ -1,16 +1,13 @@
-package org.metabrainz.mobile.presentation.features.adapters;
+package org.metabrainz.mobile.presentation.features.adapters
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.DiffUtil
 
-public class ResultItemComparator extends DiffUtil.ItemCallback<ResultItem> {
-    @Override
-    public boolean areItemsTheSame(@NonNull ResultItem oldItem, @NonNull ResultItem newItem) {
-        return oldItem == newItem;
+class ResultItemComparator : DiffUtil.ItemCallback<ResultItem>() {
+    override fun areItemsTheSame(oldItem: ResultItem, newItem: ResultItem): Boolean {
+        return oldItem === newItem
     }
 
-    @Override
-    public boolean areContentsTheSame(@NonNull ResultItem oldItem, @NonNull ResultItem newItem) {
-        return oldItem.getMBID().equalsIgnoreCase(newItem.getMBID());
+    override fun areContentsTheSame(oldItem: ResultItem, newItem: ResultItem): Boolean {
+        return oldItem.mBID.equals(newItem.mBID, ignoreCase = true)
     }
 }

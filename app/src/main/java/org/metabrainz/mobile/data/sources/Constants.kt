@@ -1,55 +1,39 @@
-package org.metabrainz.mobile.data.sources;
+package org.metabrainz.mobile.data.sources
 
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 
-public final class Constants {
-    public static final String LOOKUP_ARTIST_PARAMS =
-            "url-rels+releases+ratings+tags";
-    public static final String LOOKUP_RELEASE_PARAMS =
-            "recordings+url-rels+artist-credits";
-    public static final String LOOKUP_LABEL_PARAMS =
-            "releases+url-rels+ratings+tags";
-    public static final String LOOKUP_RECORDING_PARAMS =
-            "releases+media+url-rels+artists+artist-credits+ratings+tags";
-    public static final String LOOKUP_RELEASE_GROUP_PARAMS =
-            "releases+artist-credits+url-rels+release-rels+media+ratings+tags";
-    public static final String TAGGER_RELEASE_PARAMS = "release-groups+media+recordings+" +
+object Constants {
+    const val LOOKUP_ARTIST_PARAMS = "url-rels+releases+ratings+tags"
+    const val LOOKUP_RELEASE_PARAMS = "recordings+url-rels+artist-credits"
+    const val LOOKUP_LABEL_PARAMS = "releases+url-rels+ratings+tags"
+    const val LOOKUP_RECORDING_PARAMS = "releases+media+url-rels+artists+artist-credits+ratings+tags"
+    const val LOOKUP_RELEASE_GROUP_PARAMS = "releases+artist-credits+url-rels+release-rels+media+ratings+tags"
+    const val TAGGER_RELEASE_PARAMS = "release-groups+media+recordings+" +
             "artist-credits+artists+aliases+labels+isrcs+collections+artist-rels+release-rels+" +
-            "url-rels+recording-rels+work-rels";
-    public static final String ACOUST_ID_RESPONSE_PARAMS = "recordings releasegroups releases " +
-            "tracks compress sources";
-    public static final String USER_DATA_PARAMS =
-            "+user-tags+user-ratings";
+            "url-rels+recording-rels+work-rels"
+    const val ACOUST_ID_RESPONSE_PARAMS = "recordings releasegroups releases " +
+            "tracks compress sources"
+    const val USER_DATA_PARAMS = "+user-tags+user-ratings"
 
-//    urls for adding in the database
-    public static  final String ADD_ARTIST = "https://musicbrainz.org/artist/create?edit-artist";
-    public static final String ADD_RELEASE = "https://musicbrainz.org/release/add";
-    public static final String ADD_EVENT = "https://musicbrainz.org/event/create?edit-event";
-    public static final String ADD_RELEASEGROUP = "https://musicbrainz.org/release-group/create?edit-release-group";
-    public static final String ADD_LABEL =  "https://musicbrainz.org/label/create?edit-label";
-    public static final String ADD_RECORDING = "https://musicbrainz.org/recording/create?edit-recording";
-
-
-    public static final int LIMIT = 10;
-    public static final int OFFSET = 0;
-
-    public static final String MBID = "mbid";
-    public static final String TYPE = "type";
-
-    public static String getDefaultParams(MBEntityType entity) {
-        switch (entity) {
-            case ARTIST:
-                return LOOKUP_ARTIST_PARAMS;
-            case LABEL:
-                return LOOKUP_LABEL_PARAMS;
-            case RELEASE:
-                return LOOKUP_RELEASE_PARAMS;
-            case RECORDING:
-                return LOOKUP_RECORDING_PARAMS;
-            case RELEASE_GROUP:
-                return LOOKUP_RELEASE_GROUP_PARAMS;
-            default:
-                return null;
+    //    urls for adding in the database
+    const val ADD_ARTIST = "https://musicbrainz.org/artist/create?edit-artist"
+    const val ADD_RELEASE = "https://musicbrainz.org/release/add"
+    const val ADD_EVENT = "https://musicbrainz.org/event/create?edit-event"
+    const val ADD_RELEASEGROUP = "https://musicbrainz.org/release-group/create?edit-release-group"
+    const val ADD_LABEL = "https://musicbrainz.org/label/create?edit-label"
+    const val ADD_RECORDING = "https://musicbrainz.org/recording/create?edit-recording"
+    const val LIMIT = 10
+    const val OFFSET = 0
+    const val MBID = "mbid"
+    const val TYPE = "type"
+    fun getDefaultParams(entity: MBEntityType?): String? {
+        return when (entity) {
+            MBEntityType.ARTIST -> LOOKUP_ARTIST_PARAMS
+            MBEntityType.LABEL -> LOOKUP_LABEL_PARAMS
+            MBEntityType.RELEASE -> LOOKUP_RELEASE_PARAMS
+            MBEntityType.RECORDING -> LOOKUP_RECORDING_PARAMS
+            MBEntityType.RELEASE_GROUP -> LOOKUP_RELEASE_GROUP_PARAMS
+            else -> null
         }
     }
 }

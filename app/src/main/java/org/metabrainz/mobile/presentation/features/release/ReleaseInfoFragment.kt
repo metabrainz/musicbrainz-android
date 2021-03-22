@@ -41,21 +41,21 @@ class ReleaseInfoFragment : Fragment() {
     private fun setData(resource: Resource<Release>) {
         if (resource.status == Resource.Status.SUCCESS) {
             val release = resource.data
-            if (release.title != null && release.title.isNotEmpty())
+            if (release!!.title != null && release.title!!.isNotEmpty())
                 binding!!.releaseTitle.text = release.title
-            if (release.barcode != null && release.barcode.isNotEmpty())
+            if (release.barcode != null && release.barcode!!.isNotEmpty())
                 binding!!.releaseBarcode.text = release.barcode
-            if (release.status != null && release.status.isNotEmpty())
+            if (release.status != null && release.status!!.isNotEmpty())
                 binding!!.releaseStatus.text = release.status
-            if (release.textRepresentation != null && release.textRepresentation.language != null)
-                binding!!.releaseLanguage.text = release.textRepresentation.language
+            if (release.textRepresentation != null && release.textRepresentation!!.language != null)
+                binding!!.releaseLanguage.text = release.textRepresentation!!.language
         }
     }
 
     private fun setCoverArt(coverArt: CoverArt?) {
-        if (coverArt != null && coverArt.images != null && coverArt.images.isNotEmpty()) {
+        if (coverArt != null && coverArt.images.isNotEmpty()) {
             urls.clear()
-            urls.addAll(coverArt.allThumbnailsLinks)
+            urls.addAll(coverArt.allThumbnailsLinks as Collection<String>)
             slideshowAdapter.notifyDataSetChanged()
             startAutoSlide()
         }

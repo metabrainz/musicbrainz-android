@@ -30,10 +30,9 @@ class RecordingInfoFragment : Fragment() {
     private fun setRecordingInfo(resource: Resource<Recording>) {
         if (resource.status == Resource.Status.SUCCESS) {
             val recording = resource.data
-            binding!!.recordingTitle.text = recording.title
-            if (recording.duration != null) binding!!.recordingDuration.text = recording.duration
-            if (recording.artistCredits != null)
-                binding!!.recordingArtist.text = EntityUtils.getDisplayArtist(recording.artistCredits)
+            binding!!.recordingTitle.text = recording!!.title
+            binding!!.recordingDuration.text = recording.duration
+            binding!!.recordingArtist.text = EntityUtils.getDisplayArtist(recording.artistCredits)
         }
     }
 

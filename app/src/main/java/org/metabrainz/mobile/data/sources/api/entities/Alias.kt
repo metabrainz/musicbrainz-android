@@ -1,89 +1,29 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-import androidx.annotation.NonNull;
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
-
-public class Alias {
-
+class Alias {
     @SerializedName("sort-name")
-    private String sortName;
-    private String name;
-    private String locale;
-    private String type;
-    private boolean primary;
-    @SerializedName("begin-date")
-    private String beginDate;
-    @SerializedName("end-date")
-    private String endDate;
+    var sortName: String? = null
+    var name: String? = null
+    var locale: String? = null
+    var type: String? = null
+    var isPrimary = false
 
-    @NonNull
-    @Override
-    public String toString() {
+    @SerializedName("begin-date")
+    var beginDate: String? = null
+
+    @SerializedName("end-date")
+    var endDate: String? = null
+    override fun toString(): String {
         return "Alias{" +
                 "sortName='" + sortName + '\'' +
                 ", name='" + name + '\'' +
                 ", locale='" + locale + '\'' +
                 ", type='" + type + '\'' +
-                ", primary=" + primary +
+                ", primary=" + isPrimary +
                 ", beginDate='" + beginDate + '\'' +
                 ", endDate='" + endDate + '\'' +
-                '}';
-    }
-
-    public String getSortName() {
-        return sortName;
-    }
-
-    public void setSortName(String sortName) {
-        this.sortName = sortName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLocale() {
-        return locale;
-    }
-
-    public void setLocale(String locale) {
-        this.locale = locale;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean isPrimary() {
-        return primary;
-    }
-
-    public void setPrimary(boolean primary) {
-        this.primary = primary;
-    }
-
-    public String getBeginDate() {
-        return beginDate;
-    }
-
-    public void setBeginDate(String beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+                '}'
     }
 }

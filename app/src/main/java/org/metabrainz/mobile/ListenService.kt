@@ -1,72 +1,57 @@
-package org.metabrainz.mobile;
+package org.metabrainz.mobile
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.media.session.MediaSessionManager;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.service.notification.NotificationListenerService;
-import android.service.notification.StatusBarNotification;
-import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
-
-import org.metabrainz.mobile.presentation.UserPreferences;
-import org.metabrainz.mobile.util.Log;
+import android.content.ComponentName
+import android.content.Intent
+import android.media.session.MediaSessionManager
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.service.notification.NotificationListenerService
+import android.service.notification.StatusBarNotification
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import org.metabrainz.mobile.presentation.UserPreferences.preferenceListenBrainzToken
+import org.metabrainz.mobile.util.Log.d
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class ListenService extends NotificationListenerService {
-
-    private MediaSessionManager sessionManager;
-    private ListenHandler handler;
-    private ListenSessionListener sessionListener;
-    private ComponentName listenServiceComponent;
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("Listen Service Started");
-        return START_STICKY;
+class ListenService : NotificationListenerService() {
+    private var sessionManager: MediaSessionManager? = null
+    private var handler: ListenHandler? = null
+    private var sessionListener: ListenSessionListener? = null
+    private var listenServiceComponent: ComponentName? = null
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        d("Listen Service Started")
+        return START_STICKY
     }
 
-    @Override
-    public void onListenerConnected() {
-        super.onListenerConnected();
-        if (Looper.myLooper() == null)
-            new Handler(Looper.getMainLooper()).post(this::initialize);
-        else
-            initialize();
+    override fun onListenerConnected() {
+        super.onListenerConnected()
+        if (Looper.myLooper() == null) Handler(Looper.getMainLooper()).post { initialize() } else initialize()
     }
 
-    public void initialize() {
-        Log.d("Initializing Listener Service");
-
-        String token = UserPreferences.getPreferenceListenBrainzToken();
-        if (token == null || token.isEmpty())
-            Toast.makeText(this, "User token has not been set!", Toast.LENGTH_LONG).show();
-
-        handler = new ListenHandler();
-        sessionManager = (MediaSessionManager) getApplicationContext()
-                .getSystemService(MEDIA_SESSION_SERVICE);
-        sessionListener = new ListenSessionListener(handler);
-        listenServiceComponent = new ComponentName(this, this.getClass());
-        sessionManager.addOnActiveSessionsChangedListener(sessionListener, listenServiceComponent);
+    fun initialize() {
+        d("Initializing Listener Service")
+        val token = preferenceListenBrainzToken
+        if (token == null || token.isEmpty()) Toast.makeText(this, "User token has not been set!", Toast.LENGTH_LONG).show()
+        handler = ListenHandler()
+        sessionManager = applicationContext
+                .getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
+        sessionListener = ListenSessionListener(handler!!)
+        listenServiceComponent = ComponentName(this, this.javaClass)
+        sessionManager!!.addOnActiveSessionsChangedListener(sessionListener!!, listenServiceComponent)
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        sessionManager.removeOnActiveSessionsChangedListener(sessionListener);
-        sessionListener.clearSessions();
+    override fun onDestroy() {
+        super.onDestroy()
+        sessionManager!!.removeOnActiveSessionsChangedListener(sessionListener!!)
+        sessionListener!!.clearSessions()
     }
 
-    @Override
-    public void onNotificationPosted(StatusBarNotification sbn) {
-        super.onNotificationPosted(sbn);
+    override fun onNotificationPosted(sbn: StatusBarNotification) {
+        super.onNotificationPosted(sbn)
     }
 
-    @Override
-    public void onNotificationRemoved(StatusBarNotification sbn) {
-        super.onNotificationRemoved(sbn);
+    override fun onNotificationRemoved(sbn: StatusBarNotification) {
+        super.onNotificationRemoved(sbn)
     }
 }

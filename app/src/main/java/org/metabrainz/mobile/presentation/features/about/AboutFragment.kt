@@ -1,46 +1,32 @@
-package org.metabrainz.mobile.presentation.features.about;
+package org.metabrainz.mobile.presentation.features.about
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle
+import android.view.*
+import androidx.fragment.app.Fragment
+import org.metabrainz.mobile.App
+import org.metabrainz.mobile.R
+import org.metabrainz.mobile.databinding.FragmentAboutBinding
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.R;
-import org.metabrainz.mobile.databinding.FragmentAboutBinding;
-
-public class AboutFragment extends Fragment {
-
-    private FragmentAboutBinding binding;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+class AboutFragment : Fragment() {
+    private var binding: FragmentAboutBinding? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentAboutBinding.inflate(inflater, container, false);
-        binding.aboutText.setAsset("about.html");
-        return binding.getRoot();
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentAboutBinding.inflate(inflater, container, false)
+        binding!!.aboutText.setAsset("about.html")
+        return binding!!.root
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        String version = getText(R.string.version_text) + " " + App.getVersion();
-        binding.versionText.setText(version);
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val version = getText(R.string.version_text).toString() + " " + App.version
+        binding!!.versionText.text = version
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_about, menu);
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_about, menu)
     }
-
 }

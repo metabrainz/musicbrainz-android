@@ -17,7 +17,7 @@ import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 
 class CollectionViewModel @ViewModelInject constructor(val repository: CollectionRepository) : ViewModel() {
 
-    fun fetchCollectionData(editor: String, fetchPrivate: Boolean): LiveData<Resource<List<Collection>>> {
+    fun fetchCollectionData(editor: String, fetchPrivate: Boolean): LiveData<Resource<MutableList<Collection>>> {
         return liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(repository.fetchCollections(editor, fetchPrivate))
         }

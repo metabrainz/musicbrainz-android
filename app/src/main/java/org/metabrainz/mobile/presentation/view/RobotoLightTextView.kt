@@ -15,7 +15,7 @@ class RobotoLightTextView : AppCompatTextView {
         if (isInEditMode) {
             super.setTypeface(tf)
         } else {
-            super.setTypeface(App.getRobotoLight())
+            super.setTypeface(App.robotoLight)
         }
     }
 }

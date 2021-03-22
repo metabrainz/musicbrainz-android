@@ -1,93 +1,68 @@
-package org.metabrainz.mobile.data.sources.api.entities.mbentity;
+package org.metabrainz.mobile.data.sources.api.entities.mbentity
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
+import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit
+import org.metabrainz.mobile.data.sources.api.entities.Link
+import java.util.*
 
-import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
-import org.metabrainz.mobile.data.sources.api.entities.Link;
+class ReleaseGroup : MBEntity() {
+    var title: String? = null
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ReleaseGroup extends MBEntity {
-    private String title;
     @SerializedName("primary-type")
-    private String primaryType;
+    var primaryType: String? = null
+
     @SerializedName("secondary-types")
-    private final List<String> secondaryTypes = new ArrayList<>();
-    private int count;
+    private val secondaryTypes: MutableList<String> = ArrayList()
+    var count = 0
+
     //TODO: Implement correct wrapper JSON
     @SerializedName("artist-credit")
-    private final List<ArtistCredit> artistCredits = new ArrayList<>();
-
-    private final List<Link> relations = new ArrayList<>();
-    private final List<Release> releases = new ArrayList<>();
-
-    public List<Release> getReleases() {
-        return releases;
+    val artistCredits: MutableList<ArtistCredit> = ArrayList()
+    @JvmField
+    val relations: MutableList<Link> = ArrayList()
+    @JvmField
+    val releases: MutableList<Release> = ArrayList()
+    fun getReleases(): List<Release> {
+        return releases
     }
 
-    public void setReleases(List<Release> releases) {
-        this.releases.addAll(releases);
+    fun setReleases(releases: List<Release>?) {
+        this.releases.addAll(releases!!)
     }
 
-    public List<Link> getRelations() {
-        return relations;
+    fun getRelations(): List<Link> {
+        return relations
     }
 
-    public void setRelations(List<Link> relations) {
-        this.relations.addAll(relations);
+    fun setRelations(relations: List<Link>?) {
+        this.relations.addAll(relations!!)
     }
 
-    public String getTitle() {
-        return title;
+    @JvmName("getArtistCredits1")
+    fun getArtistCredits(): MutableList<ArtistCredit> {
+        return artistCredits
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    fun setArtistCredits(artistCredits: List<ArtistCredit>?) {
+        this.artistCredits.addAll(artistCredits!!)
     }
 
-    public String getPrimaryType() {
-        return primaryType;
+    fun getSecondaryTypes(): List<String> {
+        return secondaryTypes
     }
 
-    public void setPrimaryType(String primaryType) {
-        this.primaryType = primaryType;
+    fun setSecondaryTypes(secondaryTypes: List<String>?) {
+        this.secondaryTypes.addAll(secondaryTypes!!)
     }
 
-    public int getCount() {
-        return count;
-    }
+    val fullType: String?
+        get() = if (secondaryTypes.size != 0) {
+            var type = primaryType
+            for (string in secondaryTypes) type = "$type + $string"
+            type
+        } else primaryType
 
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public List<ArtistCredit> getArtistCredits() {
-        return artistCredits;
-    }
-
-    public void setArtistCredits(List<ArtistCredit> artistCredits) {
-        this.artistCredits.addAll(artistCredits);
-    }
-
-    public List<String> getSecondaryTypes() {
-        return secondaryTypes;
-    }
-
-    public void setSecondaryTypes(List<String> secondaryTypes) {
-        this.secondaryTypes.addAll(secondaryTypes);
-    }
-
-    public String getFullType() {
-        if (secondaryTypes.size() != 0) {
-            String type = primaryType;
-            for (String string : secondaryTypes) type = type.concat(" + ").concat(string);
-            return type;
-        } else return primaryType;
-    }
-
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "ReleaseGroup{" +
                 "title='" + title + '\'' +
                 ", primaryType='" + primaryType + '\'' +
@@ -98,6 +73,6 @@ public class ReleaseGroup extends MBEntity {
                 ", releases=" + releases +
                 ", mbid='" + mbid + '\'' +
                 ", disambiguation='" + disambiguation + '\'' +
-                '}';
+                '}'
     }
 }

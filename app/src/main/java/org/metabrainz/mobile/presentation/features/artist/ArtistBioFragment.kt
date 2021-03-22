@@ -32,7 +32,7 @@ class ArtistBioFragment : Fragment() {
     private fun setWiki(wikiSummaryResource: Resource<WikiSummary>?) {
         if (wikiSummaryResource != null && wikiSummaryResource.status == Resource.Status.SUCCESS) {
             val wiki = wikiSummaryResource.data
-            val wikiText = wiki.extract
+            val wikiText = wiki!!.extract
             if (wikiText != null && wikiText.isNotEmpty()) {
                 showWikiCard()
                 binding!!.cardArtistWiki.wikiSummary.text = wikiText
@@ -52,14 +52,14 @@ class ArtistBioFragment : Fragment() {
         if (resource.status == Resource.Status.SUCCESS) {
             val artist = resource.data
 
-            if (artist.type != null && artist.type.isNotEmpty())
+            if (artist!!.type != null && artist.type!!.isNotEmpty())
                 binding!!.cardArtistInfo.artistType.text = artist.type
-            if (artist.gender != null && artist.gender.isNotEmpty())
+            if (artist.gender != null && artist.gender!!.isNotEmpty())
                 binding!!.cardArtistInfo.artistGender.text = artist.gender
-            if (artist.area != null && artist.area.name != null)
-                binding!!.cardArtistInfo.artistArea.text = artist.area.name
-            if (artist.lifeSpan != null && artist.lifeSpan.timePeriod != null)
-                binding!!.cardArtistInfo.lifeSpan.text = artist.lifeSpan.timePeriod
+            if (artist.area != null && artist.area!!.name != null)
+                binding!!.cardArtistInfo.artistArea.text = artist.area!!.name
+            if (artist.lifeSpan != null)
+                binding!!.cardArtistInfo.lifeSpan.text = artist.lifeSpan!!.timePeriod
         }
     }
 

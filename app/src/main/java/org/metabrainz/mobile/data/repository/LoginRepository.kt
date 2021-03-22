@@ -21,8 +21,7 @@ class LoginRepository @Inject constructor(private val service: LoginService) {
                 "authorization_code",
                 MusicBrainzServiceGenerator.CLIENT_ID,
                 MusicBrainzServiceGenerator.CLIENT_SECRET,
-                MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)
-                .enqueue(object : Callback<AccessToken?> {
+                MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)!!.enqueue(object : Callback<AccessToken?> {
                     override fun onResponse(call: Call<AccessToken?>, response: Response<AccessToken?>) {
                         val token = response.body()
                         accessTokenLiveData.value = token
@@ -35,7 +34,7 @@ class LoginRepository @Inject constructor(private val service: LoginService) {
     }
 
     fun fetchUserInfo() {
-        service.userInfo.enqueue(object : Callback<UserInfo?> {
+        service.userInfo!!.enqueue(object : Callback<UserInfo?> {
             override fun onResponse(call: Call<UserInfo?>, response: Response<UserInfo?>) {
                 val info = response.body()
                 userInfoLiveData.postValue(info)

@@ -50,9 +50,9 @@ class ReleaseTracksFragment : Fragment() {
     private fun setTracks(resource: Resource<Release>) {
         if (resource.status == Resource.Status.SUCCESS) {
             val release = resource.data
-            if (release.media != null && release.media.isNotEmpty()) {
+            if (release!!.media != null && release.media!!.isNotEmpty()) {
                 mediaList.clear()
-                mediaList.addAll(release.media)
+                mediaList.addAll(release.media!!)
                 adapter.notifyDataSetChanged()
             }
         }

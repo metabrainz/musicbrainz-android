@@ -1,24 +1,18 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-import java.util.Iterator;
-import java.util.List;
-
-
-public class EntityUtils {
-
-    public static String getDisplayArtist(List<ArtistCredit> artistCredits) {
-        StringBuilder builder = new StringBuilder();
-        Iterator<ArtistCredit> iterator = artistCredits.iterator();
+object EntityUtils {
+    @JvmStatic
+    fun getDisplayArtist(artistCredits: MutableList<ArtistCredit>?): String {
+        val builder = StringBuilder()
+        val iterator = artistCredits!!.iterator()
         while (iterator.hasNext()) {
-            ArtistCredit credit = iterator.next();
-            if (credit != null && credit.getName() != null &&
-                    !credit.getName().equalsIgnoreCase("null")) {
-                builder.append(credit.getName());
-                if (iterator.hasNext())
-                    builder.append(credit.getJoinphrase());
+            val credit = iterator.next()
+            if (credit.name != null &&
+                    !credit.name.equals("null", ignoreCase = true)) {
+                builder.append(credit.name)
+                if (iterator.hasNext()) builder.append(credit.joinphrase)
             }
         }
-        return builder.toString();
+        return builder.toString()
     }
-
 }

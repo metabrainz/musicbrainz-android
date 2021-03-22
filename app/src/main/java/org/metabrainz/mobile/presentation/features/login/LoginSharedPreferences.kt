@@ -1,64 +1,54 @@
-package org.metabrainz.mobile.presentation.features.login;
+package org.metabrainz.mobile.presentation.features.login
 
-import android.content.SharedPreferences;
+import android.content.Context
+import android.content.SharedPreferences
+import org.metabrainz.mobile.App
+import org.metabrainz.mobile.data.sources.api.entities.AccessToken
+import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo
 
-import androidx.preference.PreferenceManager;
+object LoginSharedPreferences {
+    const val ACCESS_TOKEN = "access_token"
+    const val REFRESH_TOKEN = "refresh_token"
+    private const val USERNAME = "username"
+    const val STATUS_LOGGED_IN = 1
+    const val STATUS_LOGGED_OUT = 0
+    private const val SHARED_PREF_FILE = "shared_pref_file"
+    val preferences: SharedPreferences
+        get() = App.context!!.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
 
-import org.metabrainz.mobile.App;
-import org.metabrainz.mobile.data.sources.api.entities.AccessToken;
-import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo;
-
-public class LoginSharedPreferences {
-
-    public static final String ACCESS_TOKEN = "access_token";
-    public static final String REFRESH_TOKEN = "refresh_token";
-    private static final String USERNAME = "username";
-    public static final int STATUS_LOGGED_IN = 1;
-    public static final int STATUS_LOGGED_OUT = 0;
-
-    public static SharedPreferences getPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(App.getContext());
+    fun saveOAuthToken(token: AccessToken) {
+        val editor = preferences.edit()
+        editor.putString(ACCESS_TOKEN, token.accessToken)
+        editor.putString(REFRESH_TOKEN, token.refreshToken)
+        editor.apply()
     }
 
-    public static void saveOAuthToken(AccessToken token) {
-        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
-        editor.putString(ACCESS_TOKEN, token.getAccessToken());
-        editor.putString(REFRESH_TOKEN, token.getRefreshToken());
-        editor.apply();
+    fun saveUserInfo(userInfo: UserInfo) {
+        val editor = preferences.edit()
+        editor.putString(USERNAME, userInfo.username)
+        editor.apply()
     }
 
-    public static void saveUserInfo(UserInfo userInfo) {
-        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
-        editor.putString(USERNAME, userInfo.getUsername());
-        editor.apply();
+    fun logoutUser() {
+        val editor = preferences.edit()
+        editor.remove(ACCESS_TOKEN)
+        editor.remove(REFRESH_TOKEN)
+        editor.remove(USERNAME)
+        editor.apply()
     }
 
-    public static void logoutUser() {
-        SharedPreferences.Editor editor = LoginSharedPreferences.getPreferences().edit();
-        editor.remove(ACCESS_TOKEN);
-        editor.remove(REFRESH_TOKEN);
-        editor.remove(USERNAME);
-        editor.apply();
-    }
-
-    public static int getLoginStatus() {
-        String accessToken = LoginSharedPreferences.getAccessToken();
-        String username = LoginSharedPreferences.getUsername();
-        if (!accessToken.isEmpty() && !username.isEmpty())
-            return STATUS_LOGGED_IN;
-        else
-            return STATUS_LOGGED_OUT;
-    }
-
-    public static String getAccessToken() {
-        return LoginSharedPreferences.getPreferences().getString(ACCESS_TOKEN, "");
-    }
-
-    public static String getUsername() {
-        return LoginSharedPreferences.getPreferences().getString(USERNAME, "");
-    }
-
-    public static String getRefreshToken() {
-        return LoginSharedPreferences.getPreferences().getString(REFRESH_TOKEN, "");
-    }
+    @JvmStatic
+    val loginStatus: Int
+        get() {
+            val accessToken = accessToken
+            val username = username
+            return if (accessToken!!.isNotEmpty() && username!!.isNotEmpty()) STATUS_LOGGED_IN else STATUS_LOGGED_OUT
+        }
+    val accessToken: String?
+        get() = preferences.getString(ACCESS_TOKEN, "")
+    @JvmStatic
+    val username: String?
+        get() = preferences.getString(USERNAME, "")
+    val refreshToken: String?
+        get() = preferences.getString(REFRESH_TOKEN, "")
 }

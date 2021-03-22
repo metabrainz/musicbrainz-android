@@ -1,200 +1,131 @@
-package org.metabrainz.mobile.data.sources.api.entities.mbentity;
+package org.metabrainz.mobile.data.sources.api.entities.mbentity
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
+import org.metabrainz.mobile.data.sources.api.entities.*
+import java.util.*
 
-import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit;
-import org.metabrainz.mobile.data.sources.api.entities.CoverArt;
-import org.metabrainz.mobile.data.sources.api.entities.LabelInfo;
-import org.metabrainz.mobile.data.sources.api.entities.Link;
-import org.metabrainz.mobile.data.sources.api.entities.Media;
-import org.metabrainz.mobile.data.sources.api.entities.ReleaseEvent;
-import org.metabrainz.mobile.data.sources.api.entities.TextRepresentation;
+class Release : MBEntity() {
+    var title: String? = null
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-
-public class Release extends MBEntity {
-
-    private String title;
     @SerializedName("artist-credit")
-    private final List<ArtistCredit> artistCredits = new ArrayList<>();
-    private String date;
-    private String barcode;
+    var artistCredits: MutableList<ArtistCredit> = ArrayList()
+    var date: String? = null
+    var barcode: String? = null
+
+    //    public String getPackaging() {
+    //        return packaging;
+    //    }
+    //
+    //    public void setPackaging(String packaging) {
+    //        this.packaging = packaging;
+    //    }
     // FIXME: Temporary fix due to mismatch with API response until issue is resolved
-//    private String packaging;
+    //    private String packaging;
     @SerializedName("release-group")
-    private ReleaseGroup releaseGroup;
+    var releaseGroup: ReleaseGroup? = null
+
     @SerializedName("release-events")
-    private final List<ReleaseEvent> releaseEvents = new ArrayList<>();
+    private val releaseEvents: MutableList<ReleaseEvent> = ArrayList()
+
     @SerializedName("label-info")
-    private final List<LabelInfo> labels = new ArrayList<>();
+    private val labels: MutableList<LabelInfo> = ArrayList()
+
     @SerializedName("track-count")
-    private int trackCount;
-    private String country;
-    private String status;
-    private final List<Media> media = new ArrayList<>();
-    private CoverArt coverArt;
+    var trackCount = 0
+    var country: String? = null
+    var status: String? = null
+    var media: MutableList<Media>? = ArrayList()
+    var coverArt: CoverArt? = null
+
     @SerializedName("text-representation")
-    private TextRepresentation textRepresentation;
-
-    private final List<Link> relations = new ArrayList<>();
-
-    public String getBarcode() {
-        return barcode;
+    var textRepresentation: TextRepresentation? = null
+    @JvmField
+    val relations: MutableList<Link> = ArrayList()
+    fun getRelations(): List<Link> {
+        return relations
     }
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
+    fun setRelations(relations: List<Link>?) {
+        this.relations.addAll(relations!!)
     }
 
-    public TextRepresentation getTextRepresentation() {
-        return textRepresentation;
+    @JvmName("getArtistCredits1")
+    fun getArtistCredits(): MutableList<ArtistCredit> {
+        return artistCredits
     }
 
-    public void setTextRepresentation(TextRepresentation textRepresentation) {
-        this.textRepresentation = textRepresentation;
+    @JvmName("setArtistCredits1")
+    fun setArtistCredits(artistCredits: List<ArtistCredit>?) {
+        this.artistCredits.addAll(artistCredits!!)
     }
 
-    public List<Link> getRelations() {
-        return relations;
+    fun getReleaseEvents(): List<ReleaseEvent> {
+        return releaseEvents
     }
 
-    public void setRelations(List<Link> relations) {
-        this.relations.addAll(relations);
+    fun setReleaseEvents(releaseEvents: List<ReleaseEvent>?) {
+        this.releaseEvents.addAll(releaseEvents!!)
     }
 
-    public CoverArt getCoverArt() {
-        return coverArt;
+    fun getLabels(): List<LabelInfo> {
+        return labels
     }
 
-    public void setCoverArt(CoverArt coverArt) {
-        this.coverArt = coverArt;
+    fun setLabels(labels: List<LabelInfo>?) {
+        this.labels.addAll(labels!!)
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<ArtistCredit> getArtistCredits() {
-        return artistCredits;
-    }
-
-    public void setArtistCredits(List<ArtistCredit> artistCredits) {
-        this.artistCredits.addAll(artistCredits);
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-//    public String getPackaging() {
-//        return packaging;
-//    }
-//
-//    public void setPackaging(String packaging) {
-//        this.packaging = packaging;
-//    }
-
-    public ReleaseGroup getReleaseGroup() {
-        return releaseGroup;
-    }
-
-    public void setReleaseGroup(ReleaseGroup releaseGroup) {
-        this.releaseGroup = releaseGroup;
-    }
-
-    public List<ReleaseEvent> getReleaseEvents() {
-        return releaseEvents;
-    }
-
-    public void setReleaseEvents(List<ReleaseEvent> releaseEvents) {
-        this.releaseEvents.addAll(releaseEvents);
-    }
-
-    public List<LabelInfo> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<LabelInfo> labels) {
-        this.labels.addAll(labels);
-    }
-
-    public int getTrackCount() {
-        if (trackCount == 0 && media != null && media.size() != 0) {
-            int count = 0;
-            for (Media medium : media) count += medium.getTrackCount();
-            return count;
+    @JvmName("getTrackCount1")
+    fun getTrackCount(): Int {
+        if (trackCount == 0 && media != null && media!!.size != 0) {
+            var count = 0
+            for (medium in media!!) count += medium.trackCount
+            return count
         }
-        return trackCount;
+        return trackCount
     }
 
-    public void setTrackCount(int trackCount) {
-        this.trackCount = trackCount;
+    @JvmName("setTrackCount1")
+    fun setTrackCount(trackCount: Int) {
+        this.trackCount = trackCount
     }
 
-    public String getCountry() {
-        return country;
+    @JvmName("getMedia1")
+    fun getMedia(): List<Media>? {
+        return media
     }
 
-    public void setCountry(String countryCode) {
-        this.country = countryCode;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public List<Media> getMedia() {
-        return media;
-    }
-
-    public void setMedia(List<Media> media) {
-        this.media.addAll(media);
+    @JvmName("setMedia1")
+    fun setMedia(media: List<Media>?) {
+        this.media!!.addAll(media!!)
     }
 
     //TODO: Implement Text Representation
-
-    public String labelCatalog() {
-        Iterator<LabelInfo> itr = labels.iterator();
-        StringBuilder builder = new StringBuilder();
+    fun labelCatalog(): String {
+        val itr: Iterator<LabelInfo> = labels.iterator()
+        val builder = StringBuilder()
         while (itr.hasNext()) {
-            LabelInfo labelInfo = itr.next();
-            String catalogNumber = labelInfo.getCatalogNumber();
-            Label label = labelInfo.getLabel();
+            val labelInfo = itr.next()
+            val catalogNumber = labelInfo.catalogNumber
+            val label = labelInfo.label
             if (label != null) {
                 if (catalogNumber != null && !catalogNumber.isEmpty()) {
-                    builder.append(catalogNumber).append(" (");
-                    builder.append(label.getName());
-                    builder.append(")");
-                } else builder.append(label.getName());
-                if (itr.hasNext()) builder.append(" , ");
+                    builder.append(catalogNumber).append(" (")
+                    builder.append(label.name)
+                    builder.append(")")
+                } else builder.append(label.name)
+                if (itr.hasNext()) builder.append(" , ")
             }
         }
-        return builder.toString();
+        return builder.toString()
     }
 
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "Release{" +
                 "title='" + title + '\'' +
                 ", artistCredits=" + artistCredits +
                 ", date='" + date + '\'' +
-                ", barcode='" + barcode + '\'' +
-//                ", packaging='" + packaging + '\'' +
+                ", barcode='" + barcode + '\'' +  //                ", packaging='" + packaging + '\'' +
                 ", releaseGroup=" + releaseGroup +
                 ", releaseEvents=" + releaseEvents +
                 ", labels=" + labels +
@@ -207,6 +138,6 @@ public class Release extends MBEntity {
                 ", relations=" + relations +
                 ", mbid='" + mbid + '\'' +
                 ", disambiguation='" + disambiguation + '\'' +
-                '}';
+                '}'
     }
 }

@@ -1,14 +1,14 @@
-package org.metabrainz.mobile.presentation.features.suggestion;
+package org.metabrainz.mobile.presentation.features.suggestion
 
-import android.content.SearchRecentSuggestionsProvider;
+import android.content.SearchRecentSuggestionsProvider
 
-public class SuggestionProvider extends SearchRecentSuggestionsProvider {
-
-    public final static String AUTHORITY = "org.metabrainz.mobile.SearchSuggestionProvider";
-    public final static int MODE = DATABASE_MODE_QUERIES;
-
-    public SuggestionProvider() {
-        setupSuggestions(AUTHORITY, MODE);
+class SuggestionProvider : SearchRecentSuggestionsProvider() {
+    companion object {
+        const val AUTHORITY = "org.metabrainz.mobile.SearchSuggestionProvider"
+        const val MODE = DATABASE_MODE_QUERIES
     }
 
+    init {
+        setupSuggestions(AUTHORITY, MODE)
+    }
 }

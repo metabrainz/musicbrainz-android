@@ -1,4 +1,3 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-public class ReleaseEvent {
-}
+class ReleaseEvent 

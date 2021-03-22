@@ -1,18 +1,12 @@
-package org.metabrainz.mobile.data.sources;
+package org.metabrainz.mobile.data.sources
 
-import java.util.HashMap;
-import java.util.Map;
+import kotlin.collections.HashMap
 
-public class QueryUtils {
-
-    public static String getQuery(HashMap<String, String> arguments) {
-        StringBuilder queryBuilder = new StringBuilder();
-        for (Map.Entry<String, String> argument : arguments.entrySet())
-            if (argument.getKey() != null && !argument.getValue().isEmpty())
-                queryBuilder.append("(").append(argument.getKey()).append(":")
-                        .append(argument.getValue()).append(")");
-
-        return queryBuilder.toString();
-
+object QueryUtils {
+    fun getQuery(arguments: HashMap<String, String>): String {
+        val queryBuilder = StringBuilder()
+        for ((key, value) in arguments) if (key != null && value.isNotEmpty()) queryBuilder.append("(").append(key).append(":")
+                .append(value).append(")")
+        return queryBuilder.toString()
     }
 }

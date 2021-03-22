@@ -21,10 +21,10 @@ class LinksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         linkList = ArrayList()
-        linkAdapter = LinksAdapter(activity, linkList)
+        linkAdapter = LinksAdapter(requireActivity(), linkList)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLinksBinding.inflate(inflater, container, false)
         binding!!.linksList.adapter = linkAdapter
         binding!!.linksList.layoutManager = GridLayoutManager(binding!!.root.context, 2)

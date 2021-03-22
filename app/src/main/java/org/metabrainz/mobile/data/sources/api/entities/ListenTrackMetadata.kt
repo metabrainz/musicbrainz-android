@@ -1,52 +1,21 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
-import org.jetbrains.annotations.NotNull;
-
-public class ListenTrackMetadata {
-
+class ListenTrackMetadata {
     @SerializedName("artist_name")
-    String artist;
+    var artist: String? = null
 
     @SerializedName("track_name")
-    String track;
+    var track: String? = null
 
     @SerializedName("release_name")
-    String release;
-
-    public String getArtist() {
-            return artist;
-        }
-
-    public void setArtist(String artist) {
-            this.artist = artist;
-        }
-
-    public String getTrack() {
-            return track;
-        }
-
-    public void setTrack(String track) {
-            this.track = track;
-        }
-
-    public String getRelease() {
-            return release;
-        }
-
-    public void setRelease(String release) {
-            this.release = release;
-        }
-
-    @NotNull
-    @Override
-    public String toString() {
+    var release: String? = null
+    override fun toString(): String {
         return "ListenTrackMetadata{" +
                 "artist='" + artist + '\'' +
                 ", track='" + track + '\'' +
                 ", release='" + release + '\'' +
-                '}';
+                '}'
     }
 }
-

@@ -112,11 +112,11 @@ class ReleaseTrackAdapter(private val mediaList: List<Media>?) : RecyclerView.Ad
             setViewVisibility(item.title, binding.trackName)
             setViewVisibility(item.position.toString(), binding.trackNumber)
             setViewVisibility(item.duration, binding.trackTime)
-            setViewVisibility(EntityUtils.getDisplayArtist(item.recording.artistCredits),
+            setViewVisibility(EntityUtils.getDisplayArtist(item.recording!!.artistCredits),
                     binding.trackArtist)
             itemView.setOnClickListener { v: View ->
                 val intent = Intent(v.context, RecordingActivity::class.java)
-                intent.putExtra(Constants.MBID, item.recording.mbid)
+                intent.putExtra(Constants.MBID, item.recording!!.mbid)
                 v.context.startActivity(intent)
             }
         }

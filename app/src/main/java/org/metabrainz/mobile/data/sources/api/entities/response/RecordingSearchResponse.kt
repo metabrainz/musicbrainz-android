@@ -1,18 +1,8 @@
-package org.metabrainz.mobile.data.sources.api.entities.response;
+package org.metabrainz.mobile.data.sources.api.entities.response
 
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording;
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntity
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 
-import java.util.List;
-
-public class RecordingSearchResponse extends SearchResponse {
-
-    private List<Recording> recordings;
-
-    public List<Recording> getRecordings() {
-        return recordings;
-    }
-
-    public void setRecordings(List<Recording> recordings) {
-        this.recordings = recordings;
-    }
+class RecordingSearchResponse : SearchResponse<MBEntity?>() {
+    var recordings: List<Recording>? = null
 }

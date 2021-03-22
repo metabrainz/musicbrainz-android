@@ -1,102 +1,72 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-public class LinksClassifier {
-    private static final String OFFICIAL_HOMEPAGE = "official homepage";
-    public static final String DISCOGRAPHY = "discography";
-    private static final String FANPAGE = "fanpage";
-    private static final String BIOGRAPHY = "biography";
-    public static final String BBC_MUSIC_PAGE = "BBC Music Page";
-    public static final String INTERVIEW = "interview";
-    private static final String IMAGE = "image";
-    public static final String LYRICS = "lyrics";
-    public static final String ONLINE_DATA = "online_data";
-    public static final String SOCIAL_NETWORK = "social network";
-    public static final String MYSPACE = "myspace";
-    public static final String PUREVOLUME = "purevolume";
-    public static final String SOUNDCLOUD = "soundcloud";
-    public static final String VIDEO_CHANNEL = "video channel";
-    public static final String YOUTUBE = "youtube";
-    public static final String ONLINE_COMMUNITY = "online community";
-    public static final String BLOG = "blog";
-    public static final String CROWDFUNDING = "crowdfunding";
-    public static final String PATRONAGE = "patronage";
-    private static final String PURCHASE_FOR_MAIL_ORDER = "purchase for mail-order";
-    private static final String PURCHASE_FOR_DOWNLOAD = "purchase for download";
-    private static final String DOWNLOAD_FOR_FREE = "download for free";
-    private static final String STREAMING_MUSIC = "streaming music";
-    public static final String BANDCAMP = "bandcamp";
-    public static final String OTHER_DATABASES = "other databases";
-    public static final String ALLMUSIC = "allmusic";
-    public static final String BOOKBRAINZ = "bookbrainz";
-    public static final String DISCOGS = "discogs";
-    public static final String IMDB = "IMDb";
-    public static final String IMSLP = "IMSLP";
-    private static final String LAST_FM = "last.fm";
-    public static final String SECOND_HAND_SONGS = "secondhandsongs";
-    public static final String SET_LIST_FM = "setlistfm";
-    public static final String SONGKICK = "songkick";
-    public static final String VGMDB = "vgmdb";
-    public static final String VIAF = "VIAF";
-    private static final String WIKIDATA = "wikidata";
-    private static final String WIKIPEDIA = "wikipedia";
-    private static final String INFO = "info";
-    private static final String MISC = "misc";
-    private static final String GET_THE_MUSIC = "get the music";
-
-    public static String classifyToDisplayText(Link link) {
-        String type = link.getType();
-        String url = link.getUrl().getResource();
-        if (type != null && !type.isEmpty() && url != null && !url.isEmpty()) {
-            switch (type) {
-                case STREAMING_MUSIC:
-                    return "<a href=\"" + url + "\"> Stream Music </a>";
-                case PURCHASE_FOR_DOWNLOAD:
-                    return "&lt;a href=http://www.google.co.in&gt;Google&lt;/a&gt;";
-                case PURCHASE_FOR_MAIL_ORDER:
-                    return "<a href=\"" + url + "\"> Purchase for mail-order </a>";
-                case DOWNLOAD_FOR_FREE:
-                    return "<a href=\"" + url + "\"> Download for free </a>";
-                case YOUTUBE:
-                    return "<a href=\"" + url + "\"> Stream Music </a>";
-                case GET_THE_MUSIC:
-                    return "<a href=\"" + url + "\"> Get the Music </a>";
-                case IMAGE:
-                case BIOGRAPHY:
-                case WIKIDATA:
-                case WIKIPEDIA:
-                case OFFICIAL_HOMEPAGE:
-                case FANPAGE:
-                case LAST_FM:
-                case INFO:
-                default:
-                    return url;
+object LinksClassifier {
+    private const val OFFICIAL_HOMEPAGE = "official homepage"
+    const val DISCOGRAPHY = "discography"
+    private const val FANPAGE = "fanpage"
+    private const val BIOGRAPHY = "biography"
+    const val BBC_MUSIC_PAGE = "BBC Music Page"
+    const val INTERVIEW = "interview"
+    private const val IMAGE = "image"
+    const val LYRICS = "lyrics"
+    const val ONLINE_DATA = "online_data"
+    const val SOCIAL_NETWORK = "social network"
+    const val MYSPACE = "myspace"
+    const val PUREVOLUME = "purevolume"
+    const val SOUNDCLOUD = "soundcloud"
+    const val VIDEO_CHANNEL = "video channel"
+    const val YOUTUBE = "youtube"
+    const val ONLINE_COMMUNITY = "online community"
+    const val BLOG = "blog"
+    const val CROWDFUNDING = "crowdfunding"
+    const val PATRONAGE = "patronage"
+    private const val PURCHASE_FOR_MAIL_ORDER = "purchase for mail-order"
+    private const val PURCHASE_FOR_DOWNLOAD = "purchase for download"
+    private const val DOWNLOAD_FOR_FREE = "download for free"
+    private const val STREAMING_MUSIC = "streaming music"
+    const val BANDCAMP = "bandcamp"
+    const val OTHER_DATABASES = "other databases"
+    const val ALLMUSIC = "allmusic"
+    const val BOOKBRAINZ = "bookbrainz"
+    const val DISCOGS = "discogs"
+    const val IMDB = "IMDb"
+    const val IMSLP = "IMSLP"
+    private const val LAST_FM = "last.fm"
+    const val SECOND_HAND_SONGS = "secondhandsongs"
+    const val SET_LIST_FM = "setlistfm"
+    const val SONGKICK = "songkick"
+    const val VGMDB = "vgmdb"
+    const val VIAF = "VIAF"
+    private const val WIKIDATA = "wikidata"
+    private const val WIKIPEDIA = "wikipedia"
+    private const val INFO = "info"
+    private const val MISC = "misc"
+    private const val GET_THE_MUSIC = "get the music"
+    fun classifyToDisplayText(link: Link): String {
+        val type = link.type
+        val url = link.url!!.resource
+        return if (type != null && !type.isEmpty() && url != null && !url.isEmpty()) {
+            when (type) {
+                STREAMING_MUSIC -> "<a href=\"$url\"> Stream Music </a>"
+                PURCHASE_FOR_DOWNLOAD -> "&lt;a href=http://www.google.co.in&gt;Google&lt;/a&gt;"
+                PURCHASE_FOR_MAIL_ORDER -> "<a href=\"$url\"> Purchase for mail-order </a>"
+                DOWNLOAD_FOR_FREE -> "<a href=\"$url\"> Download for free </a>"
+                YOUTUBE -> "<a href=\"$url\"> Stream Music </a>"
+                GET_THE_MUSIC -> "<a href=\"$url\"> Get the Music </a>"
+                IMAGE, BIOGRAPHY, WIKIDATA, WIKIPEDIA, OFFICIAL_HOMEPAGE, FANPAGE, LAST_FM, INFO -> url
+                else -> url
             }
-        } else return MISC;
+        } else MISC
     }
 
-    public static String classifyCategory(Link link) {
-        String type = link.getType();
-        if (type != null && !type.isEmpty()) {
-            switch (type) {
-                case STREAMING_MUSIC:
-                case PURCHASE_FOR_DOWNLOAD:
-                case PURCHASE_FOR_MAIL_ORDER:
-                case DOWNLOAD_FOR_FREE:
-                case YOUTUBE:
-                case GET_THE_MUSIC:
-                    return GET_THE_MUSIC;
-                case IMAGE:
-                case BIOGRAPHY:
-                case WIKIDATA:
-                case WIKIPEDIA:
-                case OFFICIAL_HOMEPAGE:
-                case FANPAGE:
-                case LAST_FM:
-                case INFO:
-                    return INFO;
-                default:
-                    return MISC;
+    fun classifyCategory(link: Link): String {
+        val type = link.type
+        return if (type != null && !type.isEmpty()) {
+            when (type) {
+                STREAMING_MUSIC, PURCHASE_FOR_DOWNLOAD, PURCHASE_FOR_MAIL_ORDER, DOWNLOAD_FOR_FREE, YOUTUBE, GET_THE_MUSIC -> GET_THE_MUSIC
+                IMAGE, BIOGRAPHY, WIKIDATA, WIKIPEDIA, OFFICIAL_HOMEPAGE, FANPAGE, LAST_FM, INFO -> INFO
+                else -> MISC
             }
-        } else return MISC;
+        } else MISC
     }
 }

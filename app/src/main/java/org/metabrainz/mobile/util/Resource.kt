@@ -1,27 +1,16 @@
-package org.metabrainz.mobile.util;
+package org.metabrainz.mobile.util
 
-public class Resource<T> {
-    private final Status status;
-    private final T data;
+import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 
-    public Resource(Status status, T data) {
-        this.status = status;
-        this.data = data;
-    }
+class Resource<T>(val status: Status, val data: T?) {
 
-    public static <S> Resource<S> getFailure(Class<S> tClass) {
-        return new Resource<>(Status.FAILED, null);
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public enum Status {
+    enum class Status {
         LOADING, FAILED, SUCCESS
+    }
+
+    companion object {
+        fun <S> getFailure(tClass: Class<S>?): Resource<S> {
+            return Resource(Status.FAILED, null)
+        }
     }
 }

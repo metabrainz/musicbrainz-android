@@ -1,88 +1,43 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
+import java.util.*
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class ListenSubmitBody {
-
+class ListenSubmitBody {
     @SerializedName("listen_type")
-    String listenType;
-
-    List<Payload> payload = new ArrayList<>();
-
-    public String getListenType() {
-        return listenType;
+    var listenType: String? = null
+    @JvmField
+    var payload: MutableList<Payload> = ArrayList()
+    fun getPayload(): List<Payload> {
+        return payload
     }
 
-    public void setListenType(String listenType) {
-        this.listenType = listenType;
+    fun setPayload(payload: MutableList<Payload>) {
+        this.payload = payload
     }
 
-    public List<Payload> getPayload() {
-        return payload;
+    fun addListen(payload: Payload) {
+        this.payload.add(payload)
     }
 
-    public void setPayload(List<Payload> payload) {
-        this.payload = payload;
+    fun addListen(timestamp: Long, metadata: ListenTrackMetadata) {
+        payload.add(Payload(timestamp, metadata))
     }
 
-    public void addListen(Payload payload) {
-        this.payload.add(payload);
-    }
-
-    public void addListen(long timestamp, ListenTrackMetadata metadata) {
-        this.payload.add(new Payload(timestamp, metadata));
-    }
-
-    @NotNull
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "ListenSubmitBody{" +
                 "listenType='" + listenType + '\'' +
                 ", payload=" + payload +
-                '}';
+                '}'
     }
 
-    public static class Payload {
-        @SerializedName("listened_at")
-        long timestamp;
+    class Payload(@field:SerializedName("listened_at") var timestamp: Long, @field:SerializedName("track_metadata") var metadata: ListenTrackMetadata) {
 
-        @SerializedName("track_metadata")
-        ListenTrackMetadata metadata;
-
-
-        public Payload(long timestamp, ListenTrackMetadata metadata) {
-            this.timestamp = timestamp;
-            this.metadata = metadata;
-        }
-
-        public long getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(long timestamp) {
-            this.timestamp = timestamp;
-        }
-
-        public ListenTrackMetadata getMetadata() {
-            return metadata;
-        }
-
-        public void setMetadata(ListenTrackMetadata metadata) {
-            this.metadata = metadata;
-        }
-
-        @NotNull
-        @Override
-        public String toString() {
+        override fun toString(): String {
             return "Payload{" +
                     "timestamp=" + timestamp +
                     ", metadata=" + metadata +
-                    '}';
+                    '}'
         }
     }
 }

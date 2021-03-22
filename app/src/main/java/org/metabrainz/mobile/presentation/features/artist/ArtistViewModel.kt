@@ -22,7 +22,7 @@ class ArtistViewModel @ViewModelInject constructor(repository: LookupRepository)
         if (resource.status == SUCCESS) {
             var title = ""
             var method = -1
-            for (link in resource.data.relations) {
+            for (link in resource.data!!.relations) {
                 if (link.type == "wikipedia") {
                     title = link.pageTitle
                     method = LookupRepository.METHOD_WIKIPEDIA_URL

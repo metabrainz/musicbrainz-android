@@ -1,30 +1,22 @@
-package org.metabrainz.mobile.data.sources.api.entities.mbentity;
+package org.metabrainz.mobile.data.sources.api.entities.mbentity
 
-import androidx.annotation.NonNull;
+import com.google.gson.annotations.SerializedName
+import org.metabrainz.mobile.data.sources.api.entities.Alias
+import org.metabrainz.mobile.data.sources.api.entities.LifeSpan
+import java.util.*
 
-import com.google.gson.annotations.SerializedName;
-
-import org.metabrainz.mobile.data.sources.api.entities.Alias;
-import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Area extends MBEntity {
-
+class Area : MBEntity() {
     //TODO: ISO codes field to be added
+    var type: String? = null
+    var name: String? = null
 
-    private String type;
-    private String name;
     @SerializedName("sort-name")
-    private String sortName;
-    private final List<Alias> aliases = new ArrayList<>();
-    @SerializedName("life-span")
-    private LifeSpan lifeSpan;
+    var sortName: String? = null
+    private val aliases: MutableList<Alias> = ArrayList()
 
-    @NonNull
-    @Override
-    public String toString() {
+    @SerializedName("life-span")
+    var lifeSpan: LifeSpan? = null
+    override fun toString(): String {
         return "Area{" +
                 "id='" + mbid + '\'' +
                 ", type='" + type + '\'' +
@@ -33,46 +25,14 @@ public class Area extends MBEntity {
                 ", aliases=" + aliases +
                 ", disambiguation='" + disambiguation + '\'' +
                 ", lifeSpan=" + lifeSpan +
-                '}';
+                '}'
     }
 
-    public LifeSpan getLifeSpan() {
-        return lifeSpan;
+    fun getAliases(): List<Alias> {
+        return aliases
     }
 
-    public void setLifeSpan(LifeSpan lifeSpan) {
-        this.lifeSpan = lifeSpan;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSortName() {
-        return sortName;
-    }
-
-    public void setSortName(String sortName) {
-        this.sortName = sortName;
-    }
-
-    public List<Alias> getAliases() {
-        return aliases;
-    }
-
-    public void setAliases(List<Alias> aliases) {
-        this.aliases.addAll(aliases);
+    fun setAliases(aliases: List<Alias>?) {
+        this.aliases.addAll(aliases!!)
     }
 }

@@ -1,50 +1,17 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
-public class AccessToken {
-
+class AccessToken {
     @SerializedName("access_token")
-    private String accessToken;
+    var accessToken: String? = null
 
     @SerializedName("expires_in")
-    private long expiresIn;
+    var expiresIn: Long = 0
 
     @SerializedName("refresh_token")
-    private String refreshToken;
+    var refreshToken: String? = null
 
     @SerializedName("token_type")
-    private String tokenType;
-
-    public long getExpiresIn() {
-        return expiresIn;
-    }
-
-    public void setExpiresIn(long expiresIn) {
-        this.expiresIn = expiresIn;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getTokenType() {
-        return tokenType;
-    }
-
-    public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
-    }
+    var tokenType: String? = null
 }

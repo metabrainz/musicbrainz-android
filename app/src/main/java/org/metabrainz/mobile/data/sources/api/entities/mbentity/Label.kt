@@ -1,56 +1,32 @@
-package org.metabrainz.mobile.data.sources.api.entities.mbentity;
+package org.metabrainz.mobile.data.sources.api.entities.mbentity
 
-import androidx.annotation.NonNull;
+import com.google.gson.annotations.SerializedName
+import org.metabrainz.mobile.data.sources.api.entities.LifeSpan
+import org.metabrainz.mobile.data.sources.api.entities.Link
+import java.util.*
 
-import com.google.gson.annotations.SerializedName;
+class Label : MBEntity() {
+    var name: String? = null
+    var type: String? = null
 
-import org.metabrainz.mobile.data.sources.api.entities.LifeSpan;
-import org.metabrainz.mobile.data.sources.api.entities.Link;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Label extends MBEntity {
-    private String name;
-    private String type;
     @SerializedName("label-code")
-    private String code;
+    var code: String? = null
+        get() = if (field != null) "LC $field" else ""
+
     @SerializedName("life-span")
-    private LifeSpan lifeSpan;
-    private String country;
-    private Area area;
+    var lifeSpan: LifeSpan? = null
+    var country: String? = null
+    var area: Area? = null
+    var relations: MutableList<Link> = ArrayList()
+        set(relations) {
+            this.relations.addAll(relations)
+        }
+    var releases: MutableList<Release> = ArrayList()
+        set(releases) {
+            this.releases.addAll(releases)
+        }
 
-    private final List<Link> relations = new ArrayList<>();
-    private final List<Release> releases = new ArrayList<>();
-
-    public List<Release> getReleases() {
-        return releases;
-    }
-
-    public void setReleases(List<Release> releases) {
-        this.releases.addAll(releases);
-    }
-
-    public List<Link> getRelations() {
-        return relations;
-    }
-
-    public void setRelations(List<Link> relations) {
-        this.relations.addAll(relations);
-    }
-
-    public String getCode() {
-        if (code != null) return "LC " + code;
-        return "";
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "Label{" +
                 "mbid='" + mbid + '\'' +
                 ", name='" + name + '\'' +
@@ -59,46 +35,6 @@ public class Label extends MBEntity {
                 ", type='" + type + '\'' +
                 ", country='" + country + '\'' +
                 ", area=" + area +
-                '}';
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LifeSpan getLifeSpan() {
-        return lifeSpan;
-    }
-
-    public void setLifeSpan(LifeSpan lifeSpan) {
-        this.lifeSpan = lifeSpan;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
+                '}'
     }
 }

@@ -32,7 +32,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         setPreferencesFromResource(R.xml.preferences, rootKey);
         findPreference(PREFERENCE_CLEAR_SUGGESTIONS).setOnPreferenceClickListener(this);
 
-        if (!App.getInstance().isNotificationServiceAllowed()) {
+        if (!App.Companion.getContext().isNotificationServiceAllowed()) {
             ((SwitchPreference) findPreference(PREFERENCE_LISTENING_ENABLED)).setChecked(false);
             UserPreferences.setPreferenceListeningEnabled(false);
         }
@@ -43,7 +43,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     @Override
     public void onResume() {
         super.onResume();
-        if (!App.getInstance().isNotificationServiceAllowed()) {
+        if (!App.Companion.getContext().isNotificationServiceAllowed()) {
             ((SwitchPreference) findPreference(PREFERENCE_LISTENING_ENABLED)).setChecked(false);
             UserPreferences.setPreferenceListeningEnabled(false);
         }

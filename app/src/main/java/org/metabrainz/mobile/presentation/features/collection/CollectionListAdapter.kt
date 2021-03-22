@@ -1,69 +1,46 @@
-package org.metabrainz.mobile.presentation.features.collection;
+package org.metabrainz.mobile.presentation.features.collection
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.content.Context
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import org.metabrainz.mobile.data.sources.CollectionUtils.getCollectionEntityType
+import org.metabrainz.mobile.data.sources.Constants
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection
+import org.metabrainz.mobile.databinding.ItemCollectionBinding
+import org.metabrainz.mobile.presentation.features.collection.CollectionListAdapter.CollectionViewHolder
+import java.lang.String
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.metabrainz.mobile.data.sources.CollectionUtils;
-import org.metabrainz.mobile.data.sources.Constants;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection;
-import org.metabrainz.mobile.databinding.ItemCollectionBinding;
-
-import java.util.List;
-
-class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.CollectionViewHolder> {
-
-    private final List<Collection> collections;
-
-    CollectionListAdapter(List<Collection> collections) {
-        this.collections = collections;
+internal class CollectionListAdapter(private val collections: List<Collection>) : RecyclerView.Adapter<CollectionViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionViewHolder {
+        val inflater = parent.context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        return CollectionViewHolder(ItemCollectionBinding.inflate(inflater, parent, false))
     }
 
-    @NonNull
-    @Override
-    public CollectionListAdapter.CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) parent.getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new CollectionViewHolder(ItemCollectionBinding.inflate(inflater, parent, false));
+    override fun onBindViewHolder(holder: CollectionViewHolder, position: Int) {
+        val collection = collections[position]
+        holder.bind(collection)
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull CollectionListAdapter.CollectionViewHolder holder, int position) {
-        Collection collection = collections.get(position);
-        holder.bind(collection);
+    override fun getItemCount(): Int {
+        return collections.size
     }
 
-    @Override
-    public int getItemCount() {
-        return collections.size();
-    }
-
-    static class CollectionViewHolder extends RecyclerView.ViewHolder {
-
-        private final ItemCollectionBinding binding;
-
-        CollectionViewHolder(ItemCollectionBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        void bind(Collection collection) {
-            binding.collectionName.setText(collection.getName());
-            binding.collectionType.setText(collection.getType());
-            binding.collectionEntity.setText(collection.getEntityType());
-            binding.collectionCount.setText(String.valueOf(collection.getCount()));
-
-            itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(v.getContext(), CollectionDetailsActivity.class);
-                intent.putExtra(Constants.MBID, collection.getMbid());
-                intent.putExtra(Constants.TYPE, CollectionUtils.getCollectionEntityType(collection));
-                v.getContext().startActivity(intent);
-            });
-
+    internal class CollectionViewHolder(private val binding: ItemCollectionBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(collection: Collection) {
+            binding.collectionName.text = collection.name
+            binding.collectionType.text = collection.type
+            binding.collectionEntity.text = collection.entityType
+            binding.collectionCount.text = String.valueOf(collection.count)
+            itemView.setOnClickListener { v: View ->
+                val intent = Intent(v.context, CollectionDetailsActivity::class.java)
+                intent.putExtra(Constants.MBID, collection.mbid)
+                intent.putExtra(Constants.TYPE, getCollectionEntityType(collection))
+                v.context.startActivity(intent)
+            }
         }
     }
 }

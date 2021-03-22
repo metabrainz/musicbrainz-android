@@ -24,7 +24,7 @@ object MusicBrainzServiceGenerator {
     const val ACOUST_ID_KEY = "5mgEECwRkp"
 
     private const val cacheSize = (5 * 1024 * 1024).toLong()
-    private val  myCache = Cache(App.getContext().cacheDir, cacheSize)
+    private val  myCache = Cache(App.context!!!!.cacheDir, cacheSize)
 
     private var authenticator: OAuthAuthenticator? = null
     private val loggingInterceptor = HttpLoggingInterceptor()
@@ -35,7 +35,7 @@ object MusicBrainzServiceGenerator {
             .cache(myCache)
             .addInterceptor { chain ->
                 var request = chain.request()
-                request = if (hasNetwork(App.getContext())!!)
+                request = if (hasNetwork(App.context!!)!!)
                     request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
                 else
                     request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()

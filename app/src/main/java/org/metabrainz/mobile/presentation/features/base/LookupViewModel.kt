@@ -15,7 +15,14 @@ abstract class LookupViewModel<T : MBEntity> protected constructor(
 
     val mbid: MutableLiveData<String> = MutableLiveData()
 
-    protected val jsonLiveData: LiveData<Resource<String>>
+    protected val jsonLiveData: LiveData<Resource<String>> = mbid.switchMap {
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+            if (it == null)
+                emit(Resource.getFailure(String::class.java))
+            else
+                emit(repository.fetchData(entity.name, it, Constants.getDefaultParams(entity) ))
+        }
+    }
 
     abstract val data: LiveData<out Resource<T>>
 
@@ -31,14 +38,4 @@ abstract class LookupViewModel<T : MBEntity> protected constructor(
         }
     }
 
-    init {
-        jsonLiveData = mbid.switchMap {
-            liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-                if (it == null)
-                    emit(Resource.getFailure(String::class.java))
-                else
-                    emit(repository.fetchData(entity.name, it, Constants.getDefaultParams(entity)))
-            }
-        }
-    }
 }

@@ -1,25 +1,20 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-import androidx.annotation.NonNull;
+import com.google.gson.annotations.SerializedName
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Area
 
-import com.google.gson.annotations.SerializedName;
-
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Area;
-
-public class Place {
+class Place {
     @SerializedName("id")
-    private String mbid;
-    private String name;
-    private String disambiguation;
-    private String type;
-    private Area area;
-    @SerializedName("life-span")
-    private LifeSpan lifeSpan;
-    private Coordinates coordinates;
+    var mbid: String? = null
+    var name: String? = null
+    private var disambiguation: String? = null
+    var type: String? = null
+    var area: Area? = null
 
-    @NonNull
-    @Override
-    public String toString() {
+    @SerializedName("life-span")
+    var lifeSpan: LifeSpan? = null
+    var coordinates: Coordinates? = null
+    override fun toString(): String {
         return "Place{" +
                 "mbid='" + mbid + '\'' +
                 ", name='" + name + '\'' +
@@ -28,92 +23,25 @@ public class Place {
                 ", area=" + area +
                 ", lifeSpan=" + lifeSpan +
                 ", coordinates=" + coordinates +
-                '}';
+                '}'
     }
 
-    public String getMbid() {
-        return mbid;
+    fun getdisambiguation(): String? {
+        return disambiguation
     }
 
-    public void setMbid(String mbid) {
-        this.mbid = mbid;
+    fun setdisambiguation(disambiguation: String?) {
+        this.disambiguation = disambiguation
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getdisambiguation() {
-        return disambiguation;
-    }
-
-    public void setdisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
-
-    public LifeSpan getLifeSpan() {
-        return lifeSpan;
-    }
-
-    public void setLifeSpan(LifeSpan lifeSpan) {
-        this.lifeSpan = lifeSpan;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public static class Coordinates {
-        private String latitude;
-        private String longitude;
-
-        @NonNull
-        @Override
-        public String toString() {
+    class Coordinates {
+        var latitude: String? = null
+        var longitude: String? = null
+        override fun toString(): String {
             return "Coordinates{" +
                     "latitude='" + latitude + '\'' +
                     ", longitude='" + longitude + '\'' +
-                    '}';
-        }
-
-        public String getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(String latitude) {
-            this.latitude = latitude;
-        }
-
-        public String getLongitude() {
-            return longitude;
-        }
-
-        public void setLongitude(String longitude) {
-            this.longitude = longitude;
+                    '}'
         }
     }
 }

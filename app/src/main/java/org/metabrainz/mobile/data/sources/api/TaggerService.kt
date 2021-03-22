@@ -1,28 +1,26 @@
-package org.metabrainz.mobile.data.sources.api;
+package org.metabrainz.mobile.data.sources.api
 
-import org.metabrainz.mobile.data.sources.api.entities.acoustid.AcoustIDResponse;
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release;
-import org.metabrainz.mobile.data.sources.api.entities.response.RecordingSearchResponse;
+import org.metabrainz.mobile.data.sources.api.entities.acoustid.AcoustIDResponse
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
+import org.metabrainz.mobile.data.sources.api.entities.response.RecordingSearchResponse
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
-
-public interface TaggerService {
-
+interface TaggerService {
     @GET("recording/")
-    Call<RecordingSearchResponse> searchRecording(@Query("query") String searchQuery,
-                                                  @Query("limit") int limit);
+    fun searchRecording(@Query("query") searchQuery: String?,
+                        @Query("limit") limit: Int): Call<RecordingSearchResponse?>?
 
     @GET("release/{MBID}")
-    Call<Release> lookupRecording(@Path("MBID") String MBID,
-                                  @Query("inc") String params);
+    fun lookupRecording(@Path("MBID") MBID: String?,
+                        @Query("inc") params: String?): Call<Release?>?
 
     @POST("https://api.acoustid.org/v2/lookup")
-    Call<AcoustIDResponse> lookupFingerprint(@Query("client") String client,
-                                             @Query("meta") String metadata,
-                                             @Query("duration") long duration,
-                                             @Query("fingerprint") String fingerprint);
+    fun lookupFingerprint(@Query("client") client: String?,
+                          @Query("meta") metadata: String?,
+                          @Query("duration") duration: Long,
+                          @Query("fingerprint") fingerprint: String?): Call<AcoustIDResponse?>?
 }

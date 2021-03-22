@@ -1,42 +1,20 @@
-package org.metabrainz.mobile.data.sources.api.entities;
+package org.metabrainz.mobile.data.sources.api.entities
 
-import java.util.ArrayList;
+import java.util.*
 
-public class CoverArt {
-
-    private ArrayList<Image> images = new ArrayList<>();
-    private String release;
-
-    public ArrayList<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(ArrayList<Image> images) {
-        this.images = images;
-    }
-
-    public String getRelease() {
-        return release;
-    }
-
-    public void setRelease(String release) {
-        this.release = release;
-    }
-
-    public ArrayList<String> getAllImageLinks() {
-        ArrayList<String> urls = new ArrayList<>();
-        for (Image image : images)
-            if (image != null && !image.getImage().isEmpty())
-                urls.add(image.getImage());
-        return urls;
-    }
-
-    public ArrayList<String> getAllThumbnailsLinks() {
-        ArrayList<String> urls = new ArrayList<>();
-        for (Image image : images)
-            if (image != null && image.getThumbnails() != null)
-                urls.add(image.getThumbnails().getSmall());
-        return urls;
-    }
-
+class CoverArt {
+    var images = ArrayList<Image>()
+    var release: String? = null
+    val allImageLinks: ArrayList<String?>
+        get() {
+            val urls = ArrayList<String?>()
+            for (image in images) if (image != null && !image.image!!.isEmpty()) urls.add(image.image)
+            return urls
+        }
+    val allThumbnailsLinks: ArrayList<String?>
+        get() {
+            val urls = ArrayList<String?>()
+            for (image in images) if (image != null && image.thumbnails != null) urls.add(image.thumbnails!!.small)
+            return urls
+        }
 }

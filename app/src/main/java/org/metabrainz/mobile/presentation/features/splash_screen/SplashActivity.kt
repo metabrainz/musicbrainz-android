@@ -33,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
-            if (UserPreferences.getOnBoardingStatus())
+            if (UserPreferences.onBoardingStatus)
                 startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
             else
                 startActivity(Intent(this@SplashActivity, AllowMe::class.java))

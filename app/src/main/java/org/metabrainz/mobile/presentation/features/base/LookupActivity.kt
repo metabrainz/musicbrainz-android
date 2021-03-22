@@ -47,7 +47,7 @@ abstract class LookupActivity<T : MBEntity> : MusicBrainzActivity() {
             binding.noResult.root.visibility = View.GONE
             binding.tabs.visibility = View.VISIBLE
             binding.pager.visibility = View.VISIBLE
-            setData(resource.data)
+            setData(resource.data!!)
         } else
             binding.noResult.root.visibility = View.VISIBLE
     }
