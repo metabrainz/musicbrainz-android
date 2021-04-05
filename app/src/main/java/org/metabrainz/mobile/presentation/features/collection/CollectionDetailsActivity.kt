@@ -23,7 +23,7 @@ import java.util.*
  */
 @AndroidEntryPoint
 class CollectionDetailsActivity : MusicBrainzActivity() {
-    private var binding: ActivityCollectionDetailsBinding? = null
+    private lateinit var binding: ActivityCollectionDetailsBinding
     private var viewModel: CollectionViewModel? = null
     private var adapter: ResultAdapter? = null
     private var id: String? = null
@@ -32,35 +32,35 @@ class CollectionDetailsActivity : MusicBrainzActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCollectionDetailsBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
         setupToolbar(binding)
-        binding!!.noResult.root.visibility = View.GONE
-        binding!!.progressSpinner.root.visibility = View.VISIBLE
+        binding.noResult.root.visibility = View.GONE
+        binding.progressSpinner.root.visibility = View.VISIBLE
         entity = intent.getSerializableExtra(Constants.TYPE) as MBEntityType?
         id = intent.getStringExtra(Constants.MBID)
         viewModel = ViewModelProvider(this).get(CollectionViewModel::class.java)
         collectionResults = ArrayList()
         adapter = ResultAdapter(collectionResults!!, entity!!)
         adapter!!.resetAnimation()
-        binding!!.recyclerView.adapter = adapter
-        binding!!.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding!!.recyclerView.visibility = View.GONE
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.visibility = View.GONE
         viewModel!!.fetchCollectionDetails(entity!!, id!!).observe(this, { resource: Resource<List<ResultItem>>? -> setResults(resource) })
     }
 
     private fun refresh() {
         adapter!!.notifyDataSetChanged()
-        binding!!.progressSpinner.root.visibility = View.GONE
+        binding.progressSpinner.root.visibility = View.GONE
         checkHasResults()
     }
 
     private fun checkHasResults() {
         if (adapter!!.itemCount == 0) {
-            binding!!.recyclerView.visibility = View.GONE
-            binding!!.noResult.root.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+            binding.noResult.root.visibility = View.VISIBLE
         } else {
-            binding!!.recyclerView.visibility = View.VISIBLE
-            binding!!.noResult.root.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.noResult.root.visibility = View.GONE
         }
     }
 

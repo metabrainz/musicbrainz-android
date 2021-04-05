@@ -21,7 +21,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class BarcodeResultActivity : MusicBrainzActivity() {
-    private var binding: ActivityBarcodeResultBinding? = null
+    private lateinit var binding: ActivityBarcodeResultBinding
     private val releases: MutableList<Release> = ArrayList()
     private var viewModel: BarcodeViewModel? = null
     private var adapter: ReleaseListAdapter? = null
@@ -29,23 +29,23 @@ class BarcodeResultActivity : MusicBrainzActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBarcodeResultBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
         setupToolbar(binding)
         adapter = ReleaseListAdapter(this, releases)
-        binding!!.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val itemDecoration = DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL)
-        binding!!.recyclerView.addItemDecoration(itemDecoration)
-        binding!!.recyclerView.adapter = adapter
-        binding!!.recyclerView.visibility = View.GONE
-        binding!!.noResult.root.visibility = View.GONE
+        binding.recyclerView.addItemDecoration(itemDecoration)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.visibility = View.GONE
+        binding.noResult.root.visibility = View.GONE
         viewModel = ViewModelProvider(this).get(BarcodeViewModel::class.java)
         barcode = intent.getStringExtra("barcode")
         if (barcode != null && !barcode!!.isEmpty()) {
             viewModel!!.fetchReleasesWithBarcode(barcode!!).observe(this, { resource: Resource<List<Release>> -> handleResult(resource) })
-            binding!!.progressSpinner.root.visibility = View.VISIBLE
+            binding.progressSpinner.root.visibility = View.VISIBLE
         } else {
-            binding!!.progressSpinner.root.visibility = View.GONE
+            binding.progressSpinner.root.visibility = View.GONE
             Toast.makeText(this, "Unknown barcode error", Toast.LENGTH_LONG).show()
             finish()
         }
@@ -53,10 +53,10 @@ class BarcodeResultActivity : MusicBrainzActivity() {
 
     private fun handleResult(resource: Resource<List<Release>>) {
         releases.clear()
-        binding!!.progressSpinner.root.visibility = View.GONE
+        binding.progressSpinner.root.visibility = View.GONE
         if (resource.status === Resource.Status.SUCCESS) {
             releases.addAll(resource.data!!)
-            if (releases.size == 0) binding!!.noResult.root.visibility = View.VISIBLE else if (releases.size == 1) {
+            if (releases.size == 0) binding.noResult.root.visibility = View.VISIBLE else if (releases.size == 1) {
                 val intent = Intent(this, ReleaseActivity::class.java)
                 intent.putExtra(Constants.MBID, releases[0].mbid)
                 startActivity(intent)
@@ -67,7 +67,7 @@ class BarcodeResultActivity : MusicBrainzActivity() {
 
     private fun showMultipleReleases() {
         adapter!!.notifyDataSetChanged()
-        binding!!.recyclerView.visibility = View.VISIBLE
+        binding.recyclerView.visibility = View.VISIBLE
     }
 
     override fun getBrowserURI(): Uri {

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +15,6 @@ import org.metabrainz.mobile.databinding.ActivityLoginBinding
 import org.metabrainz.mobile.presentation.features.base.MusicBrainzActivity
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.mobile.util.Log.d
-import java.util.*
 
 @AndroidEntryPoint
 class LoginActivity : MusicBrainzActivity() {
@@ -26,15 +24,15 @@ class LoginActivity : MusicBrainzActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-        Objects.requireNonNull(supportActionBar)!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         loginViewModel!!.accessTokenLiveData!!.observe(this, { accessToken: AccessToken? -> saveOAuthToken(accessToken) })
         loginViewModel!!.userInfoLiveData!!.observe(this, { userInfo: UserInfo? -> saveUserInfo(userInfo) })
         if (LoginSharedPreferences.loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN) {
             binding!!.loginPromptId.setText(R.string.logout_prompt)
             binding!!.loginBtn.setText(R.string.logout)
-            binding!!.loginBtn.setOnClickListener { v: View? -> logoutUser() }
-        } else binding!!.loginBtn.setOnClickListener { v: View? -> startLogin() }
+            binding!!.loginBtn.setOnClickListener { logoutUser() }
+        } else binding!!.loginBtn.setOnClickListener { startLogin() }
     }
 
     override fun onResume() {

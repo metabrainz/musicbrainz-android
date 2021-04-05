@@ -28,7 +28,7 @@ import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider
  * to info Activity types based on the selection.
  */
 class SearchResultsActivity : MusicBrainzActivity(), SearchView.OnQueryTextListener {
-    private var binding: ActivitySearchResultsBinding? = null
+    private lateinit var binding: ActivitySearchResultsBinding
     private var viewModel: SearchViewModel? = null
     private var searchView: SearchView? = null
     private var adapter: ResultPagingAdapter? = null
@@ -39,13 +39,13 @@ class SearchResultsActivity : MusicBrainzActivity(), SearchView.OnQueryTextListe
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchResultsBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
         setupToolbar(binding)
         query = intent.getStringExtra(SearchManager.QUERY)
         entity = intent.getSerializableExtra(Constants.TYPE) as MBEntityType?
         adapter = ResultPagingAdapter(ResultItemComparator(), entity!!)
-        binding!!.recyclerView.adapter = adapter
-        binding!!.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         doSearch()
     }

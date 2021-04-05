@@ -24,7 +24,7 @@ object MusicBrainzServiceGenerator {
     const val ACOUST_ID_KEY = "5mgEECwRkp"
 
     private const val cacheSize = (5 * 1024 * 1024).toLong()
-    private val  myCache = Cache(App.context!!!!.cacheDir, cacheSize)
+    private val  myCache = Cache(App.context!!.cacheDir, cacheSize)
 
     private var authenticator: OAuthAuthenticator? = null
     private val loggingInterceptor = HttpLoggingInterceptor()

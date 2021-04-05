@@ -27,37 +27,37 @@ import java.util.*
 
 @AndroidEntryPoint
 class CollectionActivity : MusicBrainzActivity() {
-    private var binding: ActivityCollectionBinding? = null
+    private lateinit var binding: ActivityCollectionBinding
     private var viewModel: CollectionViewModel? = null
     private var adapter: CollectionListAdapter? = null
     private var collections: MutableList<Collection>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCollectionBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
         setupToolbar(binding)
         viewModel = ViewModelProvider(this).get(CollectionViewModel::class.java)
         collections = ArrayList()
         adapter = CollectionListAdapter(collections!!)
         if (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN) {
-            binding!!.loginRequired.visibility = View.GONE
-            binding!!.noResult.root.visibility = View.GONE
-            binding!!.progressSpinner.root.visibility = View.VISIBLE
-            binding!!.recyclerView.adapter = adapter
-            binding!!.recyclerView.layoutManager = LinearLayoutManager(this)
+            binding.loginRequired.visibility = View.GONE
+            binding.noResult.root.visibility = View.GONE
+            binding.progressSpinner.root.visibility = View.VISIBLE
+            binding.recyclerView.adapter = adapter
+            binding.recyclerView.layoutManager = LinearLayoutManager(this)
             val itemDecoration = DividerItemDecoration(
-                    binding!!.recyclerView.context, DividerItemDecoration.VERTICAL)
-            binding!!.recyclerView.addItemDecoration(itemDecoration)
-            binding!!.recyclerView.visibility = View.GONE
+                    binding.recyclerView.context, DividerItemDecoration.VERTICAL)
+            binding.recyclerView.addItemDecoration(itemDecoration)
+            binding.recyclerView.visibility = View.GONE
             val getPrivateCollections = (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN
                     && privateCollectionsPreference)
             viewModel!!.fetchCollectionData(username!!,
                     getPrivateCollections).observe(this, { resource: Resource<MutableList<Collection>>? -> setCollections(resource) })
         } else {
-            binding!!.noResult.root.visibility = View.GONE
-            binding!!.recyclerView.visibility = View.GONE
-            binding!!.progressSpinner.root.visibility = View.GONE
-            binding!!.loginRequired.visibility = View.GONE
+            binding.noResult.root.visibility = View.GONE
+            binding.recyclerView.visibility = View.GONE
+            binding.progressSpinner.root.visibility = View.GONE
+            binding.loginRequired.visibility = View.GONE
             callAlert()
         }
     }
@@ -67,18 +67,18 @@ class CollectionActivity : MusicBrainzActivity() {
         if (loginStatus == LoginSharedPreferences.STATUS_LOGGED_OUT) {
             collections!!.clear()
             checkHasResults()
-            binding!!.noResult.root.visibility = View.GONE
+            binding.noResult.root.visibility = View.GONE
         }
     }
 
     private fun checkHasResults() {
-        binding!!.progressSpinner.root.visibility = View.GONE
+        binding.progressSpinner.root.visibility = View.GONE
         if (adapter!!.itemCount == 0) {
-            binding!!.recyclerView.visibility = View.GONE
-            binding!!.noResult.root.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+            binding.noResult.root.visibility = View.VISIBLE
         } else {
-            binding!!.recyclerView.visibility = View.VISIBLE
-            binding!!.noResult.root.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.noResult.root.visibility = View.GONE
         }
     }
 

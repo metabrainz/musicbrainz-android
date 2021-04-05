@@ -19,7 +19,7 @@ class TaggerActivity : MusicBrainzActivity() {
         setupToolbar(binding)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.about, menu)
         return true
     }
