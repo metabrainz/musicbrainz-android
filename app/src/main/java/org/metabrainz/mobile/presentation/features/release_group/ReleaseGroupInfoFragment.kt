@@ -32,7 +32,7 @@ class ReleaseGroupInfoFragment : Fragment() {
     private fun setWiki(wikiSummaryResource: Resource<WikiSummary>?) {
         if (wikiSummaryResource != null && wikiSummaryResource.status == Resource.Status.SUCCESS) {
             val wiki = wikiSummaryResource.data
-            val wikiText = wiki.extract
+            val wikiText = wiki!!.extract
             if (wikiText != null && !wikiText.isEmpty()) {
                 showWikiCard()
                 binding!!.wikiSummary.text = wikiText
@@ -51,10 +51,8 @@ class ReleaseGroupInfoFragment : Fragment() {
     private fun setReleaseGroupInfo(resource: Resource<ReleaseGroup>?) {
         if (resource != null && resource.status == Resource.Status.SUCCESS) {
             val releaseGroup = resource.data
-            binding!!.releaseGroupTitle.text = releaseGroup.title
-            if (releaseGroup.artistCredits != null)
-                binding!!.releaseGroupArtist.text = EntityUtils.getDisplayArtist(releaseGroup.artistCredits)
-            else binding!!.releaseGroupArtist.visibility = View.GONE
+            binding!!.releaseGroupTitle.text = releaseGroup!!.title
+            binding!!.releaseGroupArtist.text = EntityUtils.getDisplayArtist(releaseGroup.artistCredits)
         }
     }
 

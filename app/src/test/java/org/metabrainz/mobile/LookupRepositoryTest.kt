@@ -11,12 +11,25 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.metabrainz.mobile.AssertionUtils.*
-import org.metabrainz.mobile.EntityTestUtils.*
+import org.metabrainz.mobile.AssertionUtils.checkArtistAssertions
+import org.metabrainz.mobile.AssertionUtils.checkLabelAssertions
+import org.metabrainz.mobile.AssertionUtils.checkRecordingAssertions
+import org.metabrainz.mobile.AssertionUtils.checkReleaseAssertions
+import org.metabrainz.mobile.AssertionUtils.checkReleaseGroupAssertions
+import org.metabrainz.mobile.EntityTestUtils.loadResourceAsString
+import org.metabrainz.mobile.EntityTestUtils.testArtist
+import org.metabrainz.mobile.EntityTestUtils.testLabel
+import org.metabrainz.mobile.EntityTestUtils.testRecording
+import org.metabrainz.mobile.EntityTestUtils.testRelease
+import org.metabrainz.mobile.EntityTestUtils.testReleaseGroup
 import org.metabrainz.mobile.RetrofitUtils.createTestService
 import org.metabrainz.mobile.data.repository.LookupRepository
 import org.metabrainz.mobile.data.repository.LookupRepositoryImpl
-import org.metabrainz.mobile.data.sources.Constants.*
+import org.metabrainz.mobile.data.sources.Constants.LOOKUP_ARTIST_PARAMS
+import org.metabrainz.mobile.data.sources.Constants.LOOKUP_LABEL_PARAMS
+import org.metabrainz.mobile.data.sources.Constants.LOOKUP_RECORDING_PARAMS
+import org.metabrainz.mobile.data.sources.Constants.LOOKUP_RELEASE_GROUP_PARAMS
+import org.metabrainz.mobile.data.sources.Constants.LOOKUP_RELEASE_PARAMS
 import org.metabrainz.mobile.data.sources.api.LookupService
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.*
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
@@ -47,8 +60,8 @@ class LookupRepositoryTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testArtistLookup() = runBlockingTest {
-        val expected = getTestArtist()
-        val resource = repository.fetchData(MBEntityType.ARTIST.name, expected.mbid, LOOKUP_ARTIST_PARAMS)
+        val expected = testArtist
+        val resource = repository.fetchData(MBEntityType.ARTIST.name, expected.mbid!!, LOOKUP_ARTIST_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val actual = Gson().fromJson(resource.data, Artist::class.java)
         checkArtistAssertions(expected, actual)
@@ -57,8 +70,8 @@ class LookupRepositoryTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testReleaseLookup() = runBlockingTest {
-        val expected = getTestRelease()
-        val resource = repository.fetchData(MBEntityType.RELEASE.name, expected.mbid, LOOKUP_RELEASE_PARAMS)
+        val expected = testRelease
+        val resource = repository.fetchData(MBEntityType.RELEASE.name, expected.mbid!!, LOOKUP_RELEASE_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val actual = Gson().fromJson(resource.data, Release::class.java)
         checkReleaseAssertions(expected, actual)
@@ -67,8 +80,8 @@ class LookupRepositoryTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testReleaseGroupLookup() = runBlockingTest {
-        val expected = getTestReleaseGroup()
-        val resource = repository.fetchData(MBEntityType.RELEASE_GROUP.name, expected.mbid, LOOKUP_RELEASE_GROUP_PARAMS)
+        val expected = testReleaseGroup
+        val resource = repository.fetchData(MBEntityType.RELEASE_GROUP.name, expected.mbid!!, LOOKUP_RELEASE_GROUP_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val actual = Gson().fromJson(resource.data, ReleaseGroup::class.java)
         checkReleaseGroupAssertions(expected, actual)
@@ -77,8 +90,8 @@ class LookupRepositoryTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testLabelLookup() = runBlockingTest {
-        val expected = getTestLabel()
-        val resource = repository.fetchData(MBEntityType.LABEL.name, expected.mbid, LOOKUP_LABEL_PARAMS)
+        val expected = testLabel
+        val resource = repository.fetchData(MBEntityType.LABEL.name, expected.mbid!!, LOOKUP_LABEL_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val label = Gson().fromJson(resource.data, Label::class.java)
         checkLabelAssertions(expected, label)
@@ -87,8 +100,8 @@ class LookupRepositoryTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testRecordingLookup() = runBlockingTest {
-        val expected = getTestRecording()
-        val resource = repository.fetchData(MBEntityType.RECORDING.name, expected.mbid, LOOKUP_RECORDING_PARAMS)
+        val expected = testRecording
+        val resource = repository.fetchData(MBEntityType.RECORDING.name, expected.mbid!!, LOOKUP_RECORDING_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val recording = Gson().fromJson(resource.data, Recording::class.java)
         checkRecordingAssertions(expected, recording)

@@ -32,9 +32,9 @@ object Metadata {
         val recording = track?.recording
         if (recording != null) {
             trackTotal = recording.trackCount
-            if (recording.releases != null && recording.releases.size > 0) {
-                if (recording.releases[0].artistCredits != null) artist = EntityUtils.getDisplayArtist(recording.releases[0].artistCredits)
-                album = recording.releases[0].title
+            if (recording.releases.size > 0) {
+                artist = EntityUtils.getDisplayArtist(recording.releases[0].artistCredits)
+                album = recording.releases[0].title!!
             }
         }
         return AudioFile("", 0, 0, title, albumArtist, artist, album,
@@ -43,10 +43,10 @@ object Metadata {
 
     fun createRecordingFromHashMap(metadata: HashMap<String, String>): Recording {
         val recording = Recording()
-        recording.releases = listOf(Release())
-        recording.artistCredits = listOf(ArtistCredit())
-        recording.releases[0].artistCredits = listOf(ArtistCredit())
-        recording.releases[0].media = listOf(Media())
+        recording.releases = mutableListOf(Release())
+        recording.artistCredits = mutableListOf(ArtistCredit())
+        recording.releases[0].artistCredits = mutableListOf(ArtistCredit())
+        recording.releases[0].media = mutableListOf(Media())
 
         recording.title = metadata["TITLE"]
         recording.releases[0].title = metadata["ALBUM"]
@@ -54,7 +54,7 @@ object Metadata {
         recording.artistCredits[0].joinphrase = ""
         recording.releases[0].artistCredits[0].name = metadata["ALBUMARTIST"]
         recording.releases[0].artistCredits[0].joinphrase = ""
-        recording.releases[0].media[0].trackCount = metadata["TRACKTOTAL"]?.toInt() ?: 0
+        recording.releases[0].media!![0].trackCount = metadata["TRACKTOTAL"]?.toInt() ?: 0
         return recording
     }
 

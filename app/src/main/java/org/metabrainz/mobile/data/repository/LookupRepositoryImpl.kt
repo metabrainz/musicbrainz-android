@@ -16,9 +16,9 @@ import javax.inject.Singleton
 class LookupRepositoryImpl @Inject constructor(private val service: LookupService) : LookupRepository {
 
     @WorkerThread
-    override suspend fun fetchData(entity: String, MBID: String, params: String): Resource<String> {
+    override suspend fun fetchData(entity: String, MBID: String, params: String?): Resource<String> {
         return try {
-            val data = service.lookupEntityData(entity, MBID, params)
+            val data = service.lookupEntityData(entity, MBID, params!!)
             Resource(SUCCESS, data.string())
         } catch (e: Exception) {
             e.printStackTrace()
@@ -52,7 +52,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             val result = JsonParser.parseString(jsonResponse).asJsonObject
                     .getAsJsonObject("entities").getAsJsonObject(id)
             val wikiDataResponse = Gson().fromJson(result, WikiDataResponse::class.java)
-            val title = wikiDataResponse.sitelinks["enwiki"]?.title
+            val title = wikiDataResponse.sitelinks!!["enwiki"]?.title
             if (title != null)
                 fetchWiki(title)
             else

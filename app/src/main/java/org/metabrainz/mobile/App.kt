@@ -1,0 +1,67 @@
+package org.metabrainz.mobile
+
+import android.app.Application
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Typeface
+import android.net.ConnectivityManager
+import android.os.Build
+import android.os.Environment
+import android.provider.Settings
+import dagger.hilt.android.HiltAndroidApp
+import org.metabrainz.mobile.presentation.Configuration
+import org.metabrainz.mobile.presentation.UserPreferences.preferenceListeningEnabled
+
+@HiltAndroidApp
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        context = this
+        loadCustomTypefaces()
+        if (preferenceListeningEnabled && Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) startListenService()
+    }
+
+    private fun loadCustomTypefaces() {
+        robotoLight = Typeface.createFromAsset(context!!.assets, "Roboto-Light.ttf")
+    }
+
+    fun startListenService() {
+        val intent = Intent(this.applicationContext, ListenService::class.java)
+        startService(intent)
+    }
+
+    fun stopListenService() {
+        val intent = Intent(this.applicationContext, ListenService::class.java)
+        stopService(intent)
+    }
+
+    val isNotificationServiceAllowed: Boolean
+        get() {
+            val listeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
+            return listeners != null && listeners.contains(packageName)
+        }
+    val isOnline: Boolean
+        get() {
+            val conMgr = applicationContext.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+            val netInfo = conMgr.activeNetworkInfo
+            return netInfo != null && netInfo.isConnected && netInfo.isAvailable
+        }
+
+    companion object {
+        val TAGGER_ROOT_DIRECTORY = Environment.getRootDirectory().toString() + "/Picard/"
+        const val WEBSITE_BASE_URL = "https://musicbrainz.org/"
+        var context: App? = null
+        var robotoLight: Typeface? = null
+            private set
+        val userAgent: String
+            get() = Configuration.USER_AGENT + "/" + version
+        val clientId: String
+            get() = Configuration.CLIENT_NAME + "-" + version
+        val version: String
+            get() = try {
+                context!!.packageManager.getPackageInfo(context!!.packageName, 0).versionName
+            } catch (e: PackageManager.NameNotFoundException) {
+                "unknown"
+            }
+    }
+}

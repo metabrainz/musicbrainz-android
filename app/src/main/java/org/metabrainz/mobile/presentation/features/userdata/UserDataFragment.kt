@@ -32,7 +32,7 @@ class UserDataFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         binding = FragmentUserDataBinding.inflate(inflater, container, false)
         viewModel.userData.observe(viewLifecycleOwner, { entity: MBEntity -> updateData(entity) })
         bindViews()
@@ -60,18 +60,18 @@ class UserDataFragment : Fragment() {
     }
 
     private fun displayRating(entity: MBEntity?) {
-        if (entity != null && entity.rating != null && entity.rating.value != 0f) binding!!.rating.rating = entity.rating.value else {
+        if (entity?.rating != null && entity.rating!!.value != 0f) binding!!.rating.rating = entity.rating!!.value else {
             binding!!.noRating.visibility = View.VISIBLE
             binding!!.rating.visibility = View.GONE
         }
-        if (entity != null && entity.userRating != null && entity.userRating.value != 0f) binding!!.userRating.rating = entity.userRating.value else {
+        if (entity?.userRating != null && entity.userRating!!.value != 0f) binding!!.userRating.rating = entity.userRating!!.value else {
             binding!!.noUserRating.visibility = View.VISIBLE
             binding!!.userRating.visibility = View.GONE
         }
     }
 
     private fun addTags(entity: MBEntity?) {
-        if (entity != null && entity.tags != null) {
+        if (entity?.tags != null) {
             tags.clear()
             tags.addAll(entity.tags)
             tagsAdapter.notifyDataSetChanged()
@@ -83,7 +83,7 @@ class UserDataFragment : Fragment() {
             binding!!.noTag.visibility = View.VISIBLE
             binding!!.tagsList.visibility = View.GONE
         }
-        if (entity != null && entity.userTags != null) {
+        if (entity != null) {
             userTags.clear()
             userTags.addAll(entity.userTags)
             userTagsAdapter.notifyDataSetChanged()

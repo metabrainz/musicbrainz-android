@@ -43,7 +43,7 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
     private lateinit var binding: FragmentDirectoryPickerBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         binding = FragmentDirectoryPickerBinding.inflate(inflater)
         documentAdapter = DocumentAdapter(this)
 
@@ -69,7 +69,7 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         //Toast.makeText(requireContext(), metadata?.title, Toast.LENGTH_SHORT).show()
         metadata?.allProperties?.let { viewmodel.setTaglibFetchedMetadata(it) }
         uri?.let { viewmodel.setURI(it) }
-        if(App.getInstance().isOnline)
+        if(App.context!!.isOnline)
             findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment2)
         else{
             Toast.makeText(requireContext(),"Connect to Internet and Try Again",Toast.LENGTH_LONG).show()

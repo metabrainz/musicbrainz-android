@@ -22,7 +22,7 @@ class CollectionRepository @Inject constructor(val service: CollectionService) {
         }
     }
 
-    suspend fun fetchCollections(editor: String, fetchPrivate: Boolean): Resource<List<Collection>> {
+    suspend fun fetchCollections(editor: String, fetchPrivate: Boolean): Resource<MutableList<Collection>> {
         return try {
             val response =
                     if (fetchPrivate)

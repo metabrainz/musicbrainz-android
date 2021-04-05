@@ -71,11 +71,11 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
         }
 
         private fun setCoverArtView(release: Release?) {
-            if (release != null && release.coverArt != null && releaseList.contains(release)) {
+            if (release?.coverArt != null && releaseList.contains(release)) {
                 // TODO: Search for the first “FRONT” image to use it as cover
-                val url = release.coverArt
+                val url = release.coverArt!!
                         .images[0]
-                        .thumbnails
+                        .thumbnails!!
                         .small
                 if (url != null && !url.isEmpty()) {
                     Picasso.get()
@@ -87,10 +87,10 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
         }
 
         private fun addCoverArt(coverArt: CoverArt?) {
-            if (coverArt != null && coverArt.images != null && !coverArt.images.isEmpty()) {
+            if (coverArt?.images != null && !coverArt.images.isEmpty()) {
                 val coverArtRelease = coverArt.release
                 for (release in releaseList) {
-                    if (coverArtRelease.endsWith(release.mbid)) {
+                    if (coverArtRelease!!.endsWith(release.mbid!!)) {
                         release.coverArt = coverArt
                         setCoverArtView(release)
                         break

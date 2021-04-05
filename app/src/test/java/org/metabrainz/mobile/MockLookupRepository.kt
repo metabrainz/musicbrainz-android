@@ -10,7 +10,7 @@ import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 
 class MockLookupRepository : LookupRepository {
 
-    override suspend fun fetchData(entity: String, MBID: String, params: String): Resource<String> {
+    override suspend fun fetchData(entity: String, MBID: String, params: String?): Resource<String> {
         return Resource(SUCCESS, loadResourceAsString(entity + "_lookup.json"))
     }
 

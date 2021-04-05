@@ -15,17 +15,14 @@ import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 class ReleaseViewModel @ViewModelInject constructor(repository: LookupRepository) :
         LookupViewModel<Release>(repository, MBEntityType.RELEASE) {
 
-    val coverArtData: LiveData<CoverArt>
+    val coverArtData: LiveData<CoverArt?> = mbid.switchMap {
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+            val result = repository.fetchCoverArt(it)
+            if (result.status == SUCCESS)
+                emit(result.data)
+        }
+    }
 
     override val data: LiveData<Resource<Release>> = jsonLiveData.map { parseData(it) }
 
-    init {
-        coverArtData = mbid.switchMap {
-            liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-                val result = repository.fetchCoverArt(it)
-                if (result.status == SUCCESS)
-                    emit(result.data)
-            }
-        }
-    }
 }

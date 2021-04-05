@@ -29,13 +29,13 @@ class LabelInfoFragment : Fragment() {
     private fun setLabelInfo(resource: Resource<Label>) {
         if (resource.status == Resource.Status.SUCCESS) {
             val label = resource.data
-            if (label.type != null && label.type.isNotEmpty())
+            if (label!!.type != null && label.type!!.isNotEmpty())
                 binding!!.labelType.text = label.type
-            if (label.lifeSpan != null && label.lifeSpan.begin.isNotEmpty())
-                binding!!.labelFounded.text = label.lifeSpan.begin
-            if (label.area != null && label.area.name.isNotEmpty())
-                binding!!.labelArea.text = label.area.name
-            if (label.code != null && label.code.isNotEmpty())
+            if (label.lifeSpan != null && label.lifeSpan!!.begin!!.isNotEmpty())
+                binding!!.labelFounded.text = label.lifeSpan!!.begin
+            if (label.area != null && label.area!!.name!!.isNotEmpty())
+                binding!!.labelArea.text = label.area!!.name
+            if (label.code != null && label.code!!.isNotEmpty())
                 binding!!.labelCode.text = label.code
         }
     }

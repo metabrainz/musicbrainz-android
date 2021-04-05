@@ -6,7 +6,7 @@ import org.metabrainz.mobile.util.Resource
 
 interface LookupRepository {
 
-    suspend fun fetchData(entity: String, MBID: String, params: String): Resource<String>
+    suspend fun fetchData(entity: String, MBID: String, params: String?): Resource<String>
 
     suspend fun fetchWikiSummary(string: String, method: Int): Resource<WikiSummary>
 

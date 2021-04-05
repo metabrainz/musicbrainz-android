@@ -12,9 +12,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.metabrainz.mobile.AssertionUtils.*
-import org.metabrainz.mobile.EntityTestUtils.getTestArtist
-import org.metabrainz.mobile.EntityTestUtils.getTestArtistWiki
+import org.metabrainz.mobile.AssertionUtils.checkArtistAssertions
+import org.metabrainz.mobile.AssertionUtils.checkLabelAssertions
+import org.metabrainz.mobile.AssertionUtils.checkRecordingAssertions
+import org.metabrainz.mobile.AssertionUtils.checkReleaseAssertions
+import org.metabrainz.mobile.AssertionUtils.checkReleaseGroupAssertions
+import org.metabrainz.mobile.AssertionUtils.checkWikiAssertions
+import org.metabrainz.mobile.EntityTestUtils.testArtist
 import org.metabrainz.mobile.LiveDataTestUtil.getOrAwaitValue
 import org.metabrainz.mobile.presentation.features.artist.ArtistViewModel
 import org.metabrainz.mobile.presentation.features.label.LabelViewModel
@@ -22,6 +26,7 @@ import org.metabrainz.mobile.presentation.features.recording.RecordingViewModel
 import org.metabrainz.mobile.presentation.features.release.ReleaseViewModel
 import org.metabrainz.mobile.presentation.features.release_group.ReleaseGroupViewModel
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
+import org.metabrainz.mobile.EntityTestUtils.testArtistWiki as testArtistWiki
 
 class LookupViewModelTest {
 
@@ -43,60 +48,60 @@ class LookupViewModelTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testArtistViewModel() = testDispatcher.runBlockingTest {
-        val testArtist = getTestArtist()
-        val testWiki = getTestArtistWiki()
+        val testArtist = testArtist
+        val testWiki = testArtistWiki
         val viewModel = ArtistViewModel(MockLookupRepository())
-        viewModel.setMBID(EntityTestUtils.getTestArtistMBID())
+        viewModel.mbid.value = EntityTestUtils.testArtistMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource.status)
-        checkArtistAssertions(testArtist, resource.data)
+        assertEquals(SUCCESS, resource?.status)
+        checkArtistAssertions(testArtist, resource?.data!!)
         val wikiResource = getOrAwaitValue(viewModel.wikiData)
-        assertEquals(SUCCESS, wikiResource.status)
-        checkWikiAssertions(testWiki, wikiResource.data)
+        assertEquals(SUCCESS, wikiResource?.status)
+        checkWikiAssertions(testWiki, wikiResource?.data!!)
     }
 
     @ExperimentalCoroutinesApi
     @Test
     fun testReleaseViewModel() = testDispatcher.runBlockingTest {
-        val testRelease = EntityTestUtils.getTestRelease()
+        val testRelease = EntityTestUtils.testRelease
         val viewModel = ReleaseViewModel(MockLookupRepository())
-        viewModel.setMBID(EntityTestUtils.getTestReleaseMBID())
+        viewModel.mbid.value = EntityTestUtils.testReleaseMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource.status)
-        checkReleaseAssertions(testRelease, resource.data)
+        assertEquals(SUCCESS, resource?.status)
+        checkReleaseAssertions(testRelease, resource?.data!!)
     }
 
     @ExperimentalCoroutinesApi
     @Test
     fun testReleaseGroupViewModel() = testDispatcher.runBlockingTest {
-        val testReleaseGroup = EntityTestUtils.getTestReleaseGroup()
+        val testReleaseGroup = EntityTestUtils.testReleaseGroup
         val viewModel = ReleaseGroupViewModel(MockLookupRepository())
-        viewModel.setMBID(EntityTestUtils.getTestReleaseGroupMBID())
+        viewModel.mbid.value = EntityTestUtils.testReleaseGroupMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource.status)
-        checkReleaseGroupAssertions(testReleaseGroup, resource.data)
+        assertEquals(SUCCESS, resource?.status!!)
+        checkReleaseGroupAssertions(testReleaseGroup, resource.data!!)
     }
 
     @ExperimentalCoroutinesApi
     @Test
     fun testLabelViewModel() = testDispatcher.runBlockingTest {
-        val testLabel = EntityTestUtils.getTestLabel()
+        val testLabel = EntityTestUtils.testLabel
         val viewModel = LabelViewModel(MockLookupRepository())
-        viewModel.setMBID(EntityTestUtils.getTestLabelMBID())
+        viewModel.mbid.value = EntityTestUtils.testLabelMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource.status)
-        checkLabelAssertions(testLabel, resource.data)
+        assertEquals(SUCCESS, resource?.status)
+        checkLabelAssertions(testLabel, resource?.data!!)
     }
 
     @ExperimentalCoroutinesApi
     @Test
     fun testRecordingViewModel() = testDispatcher.runBlockingTest {
-        val testRecording = EntityTestUtils.getTestRecording()
+        val testRecording = EntityTestUtils.testRecording
         val viewModel = RecordingViewModel(MockLookupRepository())
-        viewModel.setMBID(EntityTestUtils.getTestRecordingMBID())
+        viewModel.mbid.value = EntityTestUtils.testRecordingMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource.status)
-        checkRecordingAssertions(testRecording, resource.data)
+        assertEquals(SUCCESS, resource?.status!!)
+        checkRecordingAssertions(testRecording, resource.data!!)
     }
 
     @ExperimentalCoroutinesApi
