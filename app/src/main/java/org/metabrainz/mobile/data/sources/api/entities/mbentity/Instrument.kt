@@ -18,12 +18,6 @@ class Instrument : MBEntity() {
                 '}'
     }
 
-    override var mbid: String?
-        get() = mbid
-        set(mbid) {
-            this.mbid = mbid
-        }
-
     fun getAliases(): List<Alias> {
         return aliases
     }

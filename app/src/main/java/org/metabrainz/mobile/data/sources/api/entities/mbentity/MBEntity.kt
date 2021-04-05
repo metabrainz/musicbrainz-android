@@ -10,7 +10,7 @@ import java.util.*
 
 open class MBEntity : Serializable {
     @SerializedName("id")
-    open var mbid: String? = null
+    var mbid: String? = null
     var disambiguation: String? = null
 
     @SerializedName("user-rating")
@@ -24,10 +24,10 @@ open class MBEntity : Serializable {
     @SerializedName("user-genres")
     var userGenres: List<UserTag> = ArrayList()
     var genres: List<Tag> = ArrayList()
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o !is MBEntity) return false
-        return mbid == o.mbid
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is MBEntity) return false
+        return mbid == other.mbid
     }
 
     override fun hashCode(): Int {
