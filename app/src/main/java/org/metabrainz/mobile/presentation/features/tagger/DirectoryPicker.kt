@@ -42,8 +42,7 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
     private val viewmodel: TaggerViewModel by activityViewModels()
     private lateinit var binding: FragmentDirectoryPickerBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDirectoryPickerBinding.inflate(inflater)
         documentAdapter = DocumentAdapter(this)
 
@@ -56,6 +55,7 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
             binding.instructionForTagFix.visibility = View.VISIBLE
             binding.instruction.visibility = View.GONE
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+
             if (packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_DOCUMENT)
             } else {

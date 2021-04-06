@@ -12,6 +12,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.Manifest.permission.MEDIA_CONTENT_CONTROL" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".App"
         android:allowBackup="false"
@@ -158,6 +164,7 @@
             android:exported="false" />
 
         <dist:module dist:instant="true" />
+
     </application>
 
 </manifest>
