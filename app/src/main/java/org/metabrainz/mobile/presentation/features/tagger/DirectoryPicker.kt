@@ -55,11 +55,11 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
             binding.instructionForTagFix.visibility = View.VISIBLE
             binding.instruction.visibility = View.GONE
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-
-            if (packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
+            try {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_DOCUMENT)
-            } else {
-                Toast.makeText(context, "Document provider not found", Toast.LENGTH_SHORT).show()
+            }
+            catch (ex: Exception){
+                Log.e("TaggerDirectoryPicker",ex.message.toString())
             }
         }
         return binding.root
