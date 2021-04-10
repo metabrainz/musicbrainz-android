@@ -11,7 +11,6 @@ import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection
 import org.metabrainz.mobile.databinding.ItemCollectionBinding
 import org.metabrainz.mobile.presentation.features.collection.CollectionListAdapter.CollectionViewHolder
-import java.lang.String
 
 internal class CollectionListAdapter(private val collections: List<Collection>) : RecyclerView.Adapter<CollectionViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionViewHolder {
@@ -34,7 +33,7 @@ internal class CollectionListAdapter(private val collections: List<Collection>) 
             binding.collectionName.text = collection.name
             binding.collectionType.text = collection.type
             binding.collectionEntity.text = collection.entityType
-            binding.collectionCount.text = String.valueOf(collection.count)
+            binding.collectionCount.text = collection.count.toString()
             itemView.setOnClickListener { v: View ->
                 val intent = Intent(v.context, CollectionDetailsActivity::class.java)
                 intent.putExtra(Constants.MBID, collection.mbid)
