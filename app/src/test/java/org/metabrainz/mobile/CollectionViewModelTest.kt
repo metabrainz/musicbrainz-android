@@ -5,10 +5,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
+import org.junit.*
+import org.metabrainz.mobile.presentation.features.recording.RecordingViewModel
+import org.metabrainz.mobile.util.Resource
 
 class CollectionViewModelTest {
 
@@ -25,6 +26,18 @@ class CollectionViewModelTest {
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun testCollectionDetailsViewModel() = testDispatcher.runBlockingTest {
+       TODO()
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun testCollectionViewModel() = testDispatcher.runBlockingTest {
+        TODO()
     }
 
     @ExperimentalCoroutinesApi
