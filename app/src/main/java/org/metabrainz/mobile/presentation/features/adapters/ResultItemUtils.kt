@@ -48,7 +48,7 @@ object ResultItemUtils {
     fun getJSONResponseAsResultItemList(response: String?, entity: MBEntityType): List<ResultItem> {
         val list = Gson().fromJson<List<MBEntity>>(
                 JsonParser.parseString(response)
-                        .asJsonObject[entity.name + "s"], getTypeToken(entity))
+                        .asJsonObject[entity.nameHere + "s"], getTypeToken(entity))
         val items: MutableList<ResultItem> = ArrayList()
         for (e in list) items.add(getEntityAsResultItem(e))
         return items
