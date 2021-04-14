@@ -7,9 +7,10 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import org.junit.*
-import org.metabrainz.mobile.presentation.features.recording.RecordingViewModel
-import org.metabrainz.mobile.util.Resource
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 
 class CollectionViewModelTest {
 
@@ -31,13 +32,19 @@ class CollectionViewModelTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testCollectionDetailsViewModel() = testDispatcher.runBlockingTest {
-       TODO()
+        TODO()
     }
 
+    // Still working on this
     @ExperimentalCoroutinesApi
     @Test
     fun testCollectionViewModel() = testDispatcher.runBlockingTest {
-        TODO()
+        val testCollection = EntityTestUtils.testCollection
+//        val viewModel = CollectionViewModel(MockCollectionRepository())
+//        viewModel.mbid.value = EntityTestUtils.testCollectionMBID
+//        val resource = LiveDataTestUtil.getOrAwaitValue(viewModel.data)
+//        Assert.assertEquals(Resource.Status.SUCCESS, resource?.status)
+//        AssertionUtils.checkCollectionAssertions(testCollection, resource?.data!!)
     }
 
     @ExperimentalCoroutinesApi

@@ -12,10 +12,11 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection
 import org.metabrainz.mobile.databinding.ItemCollectionBinding
 import org.metabrainz.mobile.presentation.features.collection.CollectionListAdapter.CollectionViewHolder
 
-internal class CollectionListAdapter(private val collections: List<Collection>) : RecyclerView.Adapter<CollectionViewHolder>() {
+internal class CollectionListAdapter(private val collections: List<Collection>) :
+        RecyclerView.Adapter<CollectionViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionViewHolder {
-        val inflater = parent.context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return CollectionViewHolder(ItemCollectionBinding.inflate(inflater, parent, false))
     }
 
