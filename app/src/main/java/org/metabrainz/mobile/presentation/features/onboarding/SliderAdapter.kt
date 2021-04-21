@@ -10,10 +10,10 @@ import org.metabrainz.mobile.databinding.OnboardInstancePageBinding
 class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SlideViewHolder>() {
 
     private val slides = arrayOf(
-            Pair(R.drawable.ic_baseline_audiotrack_24, "Fix your Audio Metadata"),
+            Pair(R.drawable.ic_music_note, "Fix your Audio Metadata"),
             Pair(R.drawable.search_icon, "Explore MusicBrainz Data"),
-            Pair(R.drawable.collection_icon, "Explore your MusicBrainz Collection"),
-            Pair(R.drawable.scan_icon, "Scan using Barcodes")
+            Pair(R.drawable.ic_collection, "Explore your MusicBrainz Collection"),
+            Pair(R.drawable.ic_scan, "Scan using Barcodes")
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SlideViewHolder {

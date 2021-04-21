@@ -39,24 +39,24 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         suggestionAdapter = suggestionHelper!!.adapter
         binding.searchView.suggestionsAdapter = suggestionAdapter
 
-        binding.addArtist.setOnClickListener {
+        binding.cardArtist.setOnClickListener {
             performAction(Constants.ADD_ARTIST)
         }
 
-        binding.addRelease.setOnClickListener {
+        binding.cardRelease.setOnClickListener {
             performAction(Constants.ADD_RELEASE)
         }
-        binding.addEvent.setOnClickListener {
+        binding.cardEvent.setOnClickListener {
             performAction(Constants.ADD_EVENT)
         }
-        binding.addReleaseGroup.setOnClickListener {
+        binding.cardReleaseGroup.setOnClickListener {
             performAction(Constants.ADD_RELEASEGROUP)
         }
-        binding.addLabel.setOnClickListener {
+        binding.cardLabel.setOnClickListener {
             performAction(Constants.ADD_LABEL)
         }
 
-        binding.addRecording.setOnClickListener {
+        binding.cardRecording.setOnClickListener {
             performAction(Constants.ADD_RECORDING)
         }
 

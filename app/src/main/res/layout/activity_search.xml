@@ -1,274 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/app_bg"
+    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+    <RelativeLayout
+        android:background="@color/app_bg"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/music_search" />
+        android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/search_spin"
-        android:layout_below="@id/animation_view"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/music_search" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_below="@id/search_spin"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:queryHint="@string/search_hint"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:background="@color/app_bg_light2"
-        app:searchIcon="@drawable/ic_search"/>
+        <Spinner
+            android:id="@+id/search_spin"
+            android:layout_below="@id/animation_view"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:background="@color/app_bg_light2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/gridView"
-        android:layout_below="@id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        app:columnCount="2"
-        app:rowCount="3">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_below="@id/search_spin"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:queryHint="@string/search_hint"
+            android:inputType="textCapWords"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@color/app_bg_light2"
+            app:searchIcon="@drawable/ic_search"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="8dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            app:cardCornerRadius="8dp"
-            app:layout_row="0"
-            app:layout_column="0"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridView"
+            android:layout_below="@id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            app:columnCount="2"
+            app:rowCount="3">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="@color/app_bg_light2"
+                app:cardCornerRadius="8dp"
+                app:layout_row="0"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1">
 
-                <TextView
-                    android:id="@+id/add_artist"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/artistadd"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/erpButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_musician"/>
+                    <TextView
+                        android:id="@+id/add_artist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/artistadd"
+                        android:gravity="center"
+                        android:textSize="16sp" />
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/ic_musician"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            app:cardCornerRadius="8dp"
-            app:layout_row="0"
-            app:layout_column="1"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1">
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_release"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/app_bg_light2"
+                app:cardCornerRadius="8dp"
+                app:layout_row="0"
+                app:layout_column="1"
+                app:layout_rowWeight="1"
+                app:layout_columnWeight="1">
 
-                <TextView
-                    android:id="@+id/add_release"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/releaseadd"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/allin1Button"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_music"/>
+                    <TextView
+                        android:id="@+id/add_release"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/releaseadd"
+                        android:gravity="center"
+                        android:textSize="16sp" />
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/ic_music"/>
 
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            app:cardCornerRadius="8dp"
-            app:layout_row="1"
-            app:layout_column="0"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1">
+            </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="@color/app_bg_light2"
+                app:cardCornerRadius="8dp"
+                app:layout_row="1"
+                app:layout_column="0"
+                app:layout_rowWeight="1"
+                app:layout_columnWeight="1">
 
-                <TextView
-                    android:id="@+id/add_event"
-                    android:text="@string/eventadd"
-                    android:padding="5dp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/libraryButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_event"/>
+                    <TextView
+                        android:id="@+id/add_event"
+                        android:text="@string/eventadd"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="16sp"/>
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/ic_event"/>
 
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            app:cardCornerRadius="8dp"
-            app:layout_row="1"
-            app:layout_column="1"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1">
+            </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_release_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/app_bg_light2"
+                app:cardCornerRadius="8dp"
+                app:layout_row="1"
+                app:layout_column="1"
+                app:layout_rowWeight="1"
+                app:layout_columnWeight="1">
 
-                <TextView
-                    android:id="@+id/add_release_group"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/releasegroupadd"
-                    android:padding="5dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/messButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_record"/>
+                    <TextView
+                        android:id="@+id/add_release_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/releasegroupadd"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:textSize="16sp"/>
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/ic_record"/>
 
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            app:cardCornerRadius="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_row="2"
-            app:layout_column="0"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1">
+            </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/app_bg_light2"
+                app:cardCornerRadius="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_row="2"
+                app:layout_column="0"
+                app:layout_rowWeight="1"
+                app:layout_columnWeight="1">
 
-                <TextView
-                    android:id="@+id/add_label"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/labeladd"
-                    android:padding="5dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/meetButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_tag"/>
+                    <TextView
+                        android:id="@+id/add_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/labeladd"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:textSize="16sp"/>
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/ic_tag"/>
 
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@color/dark_gray"
-            app:cardCornerRadius="8dp"
-            app:layout_row="2"
-            app:layout_column="1"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1">
+            </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_recording"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/app_bg_light2"
+                app:cardCornerRadius="8dp"
+                app:layout_row="2"
+                app:layout_column="1"
+                app:layout_rowWeight="1"
+                app:layout_columnWeight="1">
 
-                <TextView
-                    android:id="@+id/add_recording"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recordingadd"
-                    android:padding="5dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/classroomButton"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_recording"/>
+                    <TextView
+                        android:id="@+id/add_recording"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recordingadd"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:textSize="16sp"/>
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/ic_recording"/>
 
-        </androidx.cardview.widget.CardView>
-    </androidx.gridlayout.widget.GridLayout>
+                </LinearLayout>
 
-</RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.gridlayout.widget.GridLayout>
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
