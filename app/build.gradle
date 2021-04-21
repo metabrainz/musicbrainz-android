@@ -70,6 +70,7 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.1.0"
     implementation "androidx.fragment:fragment-ktx:1.2.5"
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
     // webservice Setup
     implementation 'com.google.code.gson:gson:2.8.6'

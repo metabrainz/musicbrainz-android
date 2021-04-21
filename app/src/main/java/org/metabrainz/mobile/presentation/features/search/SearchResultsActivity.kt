@@ -79,8 +79,9 @@ class SearchResultsActivity : MusicBrainzActivity(), SearchView.OnQueryTextListe
     private fun doSearch() {
         saveSearchSuggestion(query)
         adapter!!.resetAnimation()
-        viewModel!!.search(entity, query)
-                .observe(this, { pagingData: PagingData<ResultItem> -> adapter!!.submitData(lifecycle, pagingData) })
+        viewModel!!.search(entity, query).observe(this, { pagingData: PagingData<ResultItem> ->
+            adapter!!.submitData(lifecycle, pagingData)
+        })
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
@@ -97,8 +98,7 @@ class SearchResultsActivity : MusicBrainzActivity(), SearchView.OnQueryTextListe
     }
 
     private fun saveSearchSuggestion(query: String?) {
-        val suggestions = SearchRecentSuggestions(this,
-                SuggestionProvider.AUTHORITY, SuggestionProvider.MODE)
+        val suggestions = SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE)
         suggestions.saveRecentQuery(query, null)
     }
 
