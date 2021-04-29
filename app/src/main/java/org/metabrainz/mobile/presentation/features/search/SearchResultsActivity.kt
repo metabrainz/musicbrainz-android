@@ -103,6 +103,6 @@ class SearchResultsActivity : MusicBrainzActivity(), SearchView.OnQueryTextListe
     }
 
     override fun getBrowserURI(): Uri {
-        return Uri.parse(App.WEBSITE_BASE_URL + "search?type=" + entity!!.name + "&query=" + query)
+        return Uri.parse(App.WEBSITE_BASE_URL + "search?type=" + entity!!.nameHere + "&query=" + query)
     }
 }
