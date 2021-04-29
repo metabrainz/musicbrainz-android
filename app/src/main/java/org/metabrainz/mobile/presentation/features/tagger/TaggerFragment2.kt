@@ -17,7 +17,7 @@ class TaggerFragment2 : Fragment() {
     private lateinit var binding: FragmentTagger2Binding
     private val viewModel: TaggerViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTagger2Binding.inflate(inflater)
 
         binding.originalValue.visibility = View.VISIBLE
@@ -102,7 +102,7 @@ class TaggerFragment2 : Fragment() {
         }
     }
 
-    fun reset(){
+    private fun reset(){
         binding.taglibFetched.title.text = ""
         binding.serverFetched.title.setText("")
 

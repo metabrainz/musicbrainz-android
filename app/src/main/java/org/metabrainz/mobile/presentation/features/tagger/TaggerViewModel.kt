@@ -24,12 +24,10 @@ class TaggerViewModel @ViewModelInject constructor(
         val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
 
     private val _taglibFetchedMetadata = MutableLiveData<HashMap<String, String>>()
-    val taglibFetchedMetadata: LiveData<HashMap<String, String>>
-        get() = _taglibFetchedMetadata
+    val taglibFetchedMetadata: LiveData<HashMap<String, String>> get() = _taglibFetchedMetadata
 
     private val _uri = MutableLiveData<Uri>()
-    val uri:LiveData<Uri>
-        get() = _uri
+    val uri:LiveData<Uri> get() = _uri
 
     val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
