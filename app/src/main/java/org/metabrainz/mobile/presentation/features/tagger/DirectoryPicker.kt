@@ -59,7 +59,7 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_DOCUMENT)
             }
             catch (ex: Exception){
-                Log.e("TaggerDirectoryPicker",ex.message.toString())
+                Toast.makeText(context, "Something went wrong! We could not select the directory", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root
