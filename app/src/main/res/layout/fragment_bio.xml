@@ -1,30 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView2"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="4dp"
-    android:fillViewport="true">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_padding"
+    app:cardCornerRadius="@dimen/item_padding"
+    app:cardBackgroundColor="@color/dark_gray"
+    app:cardElevation="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/card_artist_info"
-            layout="@layout/card_artist_info"
+        <ImageView
+            android:id="@+id/artist_image"
+            android:layout_above="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:contentDescription="@null" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl"
+            android:layout_above="@id/wiki_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp" />
+            android:background="@color/app_bg"
+            android:layout_margin="5dp"
+            android:padding="10dp">
 
-        <include
-            android:id="@+id/card_artist_wiki"
-            layout="@layout/card_artist_wiki"
+            <TextView
+                android:id="@+id/artist_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/white"
+                tools:text="Person" />
+
+            <TextView
+                android:id="@+id/artist_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Gender" />
+
+            <TextView
+                android:id="@+id/artist_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artist_gender"
+                tools:text="United States" />
+
+            <TextView
+                android:id="@+id/life_span"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artist_type"
+                tools:text="22/10/2000-21/10/2001" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/wiki_summary"
+            android:layout_above="@id/powered_by_wikipedia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp" />
+            android:textSize="16sp"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            tools:text="TextView" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/powered_by_wikipedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="@string/bio_powered_by"
+            android:textColor="@color/white"
+            android:drawablePadding="10dp"
+            app:drawableEndCompat="@drawable/logo_wikipedia"
+            app:drawableRightCompat="@drawable/logo_wikipedia"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
 
-</ScrollView>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
