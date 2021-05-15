@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import org.metabrainz.mobile.databinding.FragmentTagger2Binding
 import java.util.concurrent.TimeUnit
 
-
 class TaggerFragment2 : Fragment() {
 
     private lateinit var binding: FragmentTagger2Binding

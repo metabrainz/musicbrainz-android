@@ -68,7 +68,8 @@
         <activity
             android:name=".presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger"
-            android:theme="@style/AppThemeGrayScale" />
+            android:theme="@style/AppThemeGrayScale"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:label="@string/search_type_recording"

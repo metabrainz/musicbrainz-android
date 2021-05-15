@@ -14,6 +14,7 @@ import org.metabrainz.mobile.presentation.features.links.LinksFragment
 import org.metabrainz.mobile.presentation.features.links.LinksViewModel
 import org.metabrainz.mobile.presentation.features.userdata.UserDataFragment
 import org.metabrainz.mobile.presentation.features.userdata.UserViewModel
+import org.metabrainz.mobile.util.Log
 
 @AndroidEntryPoint
 class ReleaseActivity : LookupActivity<Release>() {
@@ -26,8 +27,10 @@ class ReleaseActivity : LookupActivity<Release>() {
         super.onCreate(savedInstanceState)
 
         val mbid = intent.getStringExtra(Constants.MBID)
-        if (mbid != null && mbid.isNotEmpty())
+        if (mbid != null && mbid.isNotEmpty()) {
             releaseViewModel.mbid.value = mbid
+            Log.d(mbid)
+        }
         releaseViewModel.data.observe(this) { processData(it) }
     }
 
