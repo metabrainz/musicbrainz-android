@@ -33,7 +33,7 @@ class ListenService : NotificationListenerService() {
         d("Initializing Listener Service")
         val token = preferenceListenBrainzToken
         if (token == null || token.isEmpty()){
-            d("MusicBrainz User token has not been set!")
+            d("ListenBrainz User token has not been set!")
         }
         handler = ListenHandler()
         sessionManager = applicationContext

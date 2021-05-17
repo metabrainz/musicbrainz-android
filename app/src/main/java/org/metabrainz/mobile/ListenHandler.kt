@@ -22,7 +22,7 @@ class ListenHandler : Handler(Looper.getMainLooper()) {
         super.handleMessage(msg)
         val token = preferenceListenBrainzToken
         if (token == null || token.isEmpty()) {
-            d("MusicBrainz User token has not been set!")
+            d("ListenBrainz User token has not been set!")
             return
         }
         val service = createService(ListenSubmitService::class.java, false)
