@@ -6,7 +6,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_gray"
+    android:background="@color/app_bg"
     tools:context=".presentation.features.tagger.TaggerFragment">
 
     <androidx.recyclerview.widget.RecyclerView
