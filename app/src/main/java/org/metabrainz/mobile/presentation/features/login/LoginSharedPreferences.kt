@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.presentation.features.login
 
-import android.content.Context
 import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import org.metabrainz.mobile.App
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo
@@ -12,9 +12,8 @@ object LoginSharedPreferences {
     private const val USERNAME = "username"
     const val STATUS_LOGGED_IN = 1
     const val STATUS_LOGGED_OUT = 0
-    private const val SHARED_PREF_FILE = "shared_pref_file"
     val preferences: SharedPreferences
-        get() = App.context!!.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+        get() = PreferenceManager.getDefaultSharedPreferences(App.context)
 
     fun saveOAuthToken(token: AccessToken) {
         val editor = preferences.edit()
