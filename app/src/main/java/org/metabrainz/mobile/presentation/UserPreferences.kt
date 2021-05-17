@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.presentation
 
-import android.content.Context
 import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import org.metabrainz.mobile.App
 import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences
 
@@ -15,9 +15,8 @@ object UserPreferences {
     private const val PREFERENCE_RATINGS_TAGS = "ratings_tags"
     private const val PREFERENCE_SYSTEM_LANGUAGE = "use_english"
     private const val PREFERENCE_ONBOARDING = "show_onboarding"
-    private const val SHARED_PREF_FILE = "shared_pref_file"
     private val preferences: SharedPreferences
-        get() = App.context!!.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+        get() = PreferenceManager.getDefaultSharedPreferences(App.context)
 
     @JvmStatic
     fun setOnBoardingCompleted() {
