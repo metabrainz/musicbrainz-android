@@ -1,10 +1,7 @@
 package org.metabrainz.mobile
 
 import android.media.MediaMetadata
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Message
+import android.os.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import okhttp3.ResponseBody
@@ -18,14 +15,14 @@ import retrofit2.Call
 import retrofit2.Response
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-class ListenHandler : Handler() {
+class ListenHandler : Handler(Looper.getMainLooper()) {
     private val DELAY = 30000
     private val TIMESTAMP = "timestamp"
     override fun handleMessage(msg: Message) {
         super.handleMessage(msg)
         val token = preferenceListenBrainzToken
         if (token == null || token.isEmpty()) {
-            Toast.makeText(App.context!!, "User token has not been set!", Toast.LENGTH_LONG).show()
+            d("MusicBrainz User token has not been set!")
             return
         }
         val service = createService(ListenSubmitService::class.java, false)

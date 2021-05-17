@@ -32,7 +32,9 @@ class ListenService : NotificationListenerService() {
     fun initialize() {
         d("Initializing Listener Service")
         val token = preferenceListenBrainzToken
-        if (token == null || token.isEmpty()) Toast.makeText(this, "User token has not been set!", Toast.LENGTH_LONG).show()
+        if (token == null || token.isEmpty()){
+            d("MusicBrainz User token has not been set!")
+        }
         handler = ListenHandler()
         sessionManager = applicationContext
                 .getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
