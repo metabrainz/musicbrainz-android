@@ -2,7 +2,6 @@ package org.metabrainz.mobile
 
 import android.media.MediaMetadata
 import android.os.*
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import okhttp3.ResponseBody
 import org.metabrainz.mobile.data.sources.api.ListenSubmitService
