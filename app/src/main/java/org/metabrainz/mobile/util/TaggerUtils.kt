@@ -40,12 +40,12 @@ object TaggerUtils {
         return Collections.unmodifiableMap(map)
     }
 
-    fun calculateSimilarity(firstWord: String?, secondWord: String?): Double {
+    private fun calculateSimilarity(firstWord: String?, secondWord: String?): Double {
         return levenshtein.distance(firstWord, secondWord)
     }
 
     // Calculate similarity of multi word strings
-    fun calculateMultiWordSimilarity(first: String?, second: String?): Double {
+    private fun calculateMultiWordSimilarity(first: String?, second: String?): Double {
         return if (first != null && second != null) {
             val firstList = first.toLowerCase().split("\\W+").toTypedArray()
             val secondList: MutableList<String> = ArrayList(Arrays.asList(*second.toLowerCase().split("\\W+").toTypedArray()))
