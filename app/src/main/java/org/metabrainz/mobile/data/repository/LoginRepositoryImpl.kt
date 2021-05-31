@@ -14,8 +14,8 @@ import javax.inject.Singleton
 @Singleton
 class LoginRepositoryImpl @Inject constructor(private val service: LoginService) : LoginRepository{
 
-    val accessTokenLiveData: MutableLiveData<AccessToken?> = MutableLiveData()
-    val userInfoLiveData: MutableLiveData<UserInfo?> = MutableLiveData()
+    override val accessTokenLiveData: MutableLiveData<AccessToken?> = MutableLiveData()
+    override val userInfoLiveData: MutableLiveData<UserInfo?> = MutableLiveData()
 
     override fun fetchAccessToken(code: String?) {
         service.getAccessToken(MusicBrainzServiceGenerator.AUTH_BASE_URL + "token",
