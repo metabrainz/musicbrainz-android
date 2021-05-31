@@ -1,82 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/dark_gray"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_height="match_parent"
+    android:layout_margin="4dp"
+    android:background="@color/dark_gray">
 
-    <LinearLayout
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager_slideshow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/release_title"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toTopOf="@id/tab_indicator"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager_slideshow"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.9" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            app:tabBackground="@drawable/indicator_selector"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp" />
-
-    </LinearLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@id/release_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabBackground="@drawable/indicator_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp" />
 
     <TextView
         android:id="@+id/release_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:textSize="20sp"
-        android:layout_margin="5dp"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_above="@id/release_barcode"
         android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/release_barcode"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="Title" />
 
-        <TextView
-            android:id="@+id/release_barcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            android:layout_above="@id/release_language"
-            android:textColor="@color/white"
-            tools:text="Barcode:" />
+    <TextView
+        android:id="@+id/release_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/release_language"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Barcode:" />
 
-        <TextView
-            android:id="@+id/release_language"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:layout_above="@id/release_status"
-            tools:text="Language" />
+    <TextView
+        android:id="@+id/release_language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/release_status"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Language" />
 
-        <TextView
-            android:id="@+id/release_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:layout_alignParentBottom="true"
-            tools:text="Status" />
+    <TextView
+        android:id="@+id/release_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Status" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
