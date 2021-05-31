@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.squareup.picasso.Picasso
+import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist
 import org.metabrainz.mobile.databinding.FragmentBioBinding
@@ -41,18 +42,9 @@ class ArtistBioFragment : Fragment() {
             else {
                 hideWikiCard()
             }
-            if(wiki.originalImage != null){
-                Picasso.get().load(wiki.originalImage!!.source)
-                    .into(binding!!.artistImage)
-                binding!!.artistImage.visibility = View.VISIBLE
-            }
-            else{
-                binding!!.artistImage.visibility = View.GONE
-            }
         }
         else {
             hideWikiCard()
-            binding!!.artistImage.visibility = View.GONE
         }
     }
 
@@ -72,6 +64,12 @@ class ArtistBioFragment : Fragment() {
 
             if (artist!!.type != null && artist.type!!.isNotEmpty()) {
                 binding!!.artistType.text = artist.type
+                if(artist.type == "Group"){
+                    binding!!.animationView.setAnimation(R.raw.group)
+                }
+                else{
+                    binding!!.animationView.setAnimation(R.raw.usual)
+                }
             }
             if (artist.gender != null && artist.gender!!.isNotEmpty()) {
                 binding!!.artistGender.text = artist.gender
