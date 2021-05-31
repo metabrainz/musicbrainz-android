@@ -8,7 +8,6 @@ import android.os.Handler
 import android.os.Looper
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import org.metabrainz.mobile.presentation.UserPreferences.preferenceListenBrainzToken
 import org.metabrainz.mobile.util.Log.d
@@ -29,13 +28,14 @@ class ListenService : NotificationListenerService() {
         if (Looper.myLooper() == null) Handler(Looper.getMainLooper()).post { initialize() } else initialize()
     }
 
-    fun initialize() {
+    private fun initialize() {
         d("Initializing Listener Service")
         val token = preferenceListenBrainzToken
-        if (token == null || token.isEmpty()) Toast.makeText(this, "User token has not been set!", Toast.LENGTH_LONG).show()
+        if (token == null || token.isEmpty()){
+            d("ListenBrainz User token has not been set!")
+        }
         handler = ListenHandler()
-        sessionManager = applicationContext
-                .getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
+        sessionManager = applicationContext.getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
         sessionListener = ListenSessionListener(handler!!)
         listenServiceComponent = ComponentName(this, this.javaClass)
         sessionManager!!.addOnActiveSessionsChangedListener(sessionListener!!, listenServiceComponent)
