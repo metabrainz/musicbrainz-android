@@ -1,67 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/dark_gray"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dark_gray">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadingAnimation"
+        android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_width="match_parent"
-        app:lottie_rawRes="@raw/celebration_music"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        android:layout_gravity="center" />
+        app:lottie_rawRes="@raw/celebration_music" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_below="@id/loadingAnimation"
-        android:layout_above="@id/chooseDirectoryButton"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/dark_gray"
         android:clipToPadding="false"
         android:padding="10dp"
-        android:background="@color/dark_gray"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loadingAnimation"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/list_item_document" />
 
     <TextView
         android:id="@+id/instruction"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/chooseDirectoryButton"
-        android:layout_below="@id/loadingAnimation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
         android:background="@color/dark_gray"
         android:gravity="start|center_vertical"
         android:padding="20dp"
         android:text="@string/instruction"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/loadingAnimation"/>
 
     <TextView
         android:id="@+id/instruction_for_tag_fix"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/tagger_file_chooser_Instructions"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="20dp"
         android:layout_alignStart="@id/chooseDirectoryButton"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:padding="10dp"
+        android:text="@string/tagger_file_chooser_Instructions"
+        android:textColor="@color/white"
         android:textSize="15sp"
-        android:textColor="@color/white" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/chooseDirectoryButton"
@@ -74,6 +80,6 @@
         android:textAllCaps="false"
         android:textColor="@color/app_bg_light2"
         android:textSize="18sp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
-</RelativeLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
