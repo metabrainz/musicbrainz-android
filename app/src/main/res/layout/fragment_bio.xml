@@ -3,34 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="@dimen/item_padding"
     app:cardCornerRadius="@dimen/item_padding"
     app:cardBackgroundColor="@color/dark_gray"
     app:cardElevation="4dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
-            android:layout_above="@+id/cl"
+            app:layout_constraintBottom_toTopOf="@+id/cl"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/group"/>
+            app:lottie_rawRes="@raw/group" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl"
-            android:layout_above="@id/wiki_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@color/app_bg"
-            android:layout_margin="5dp"
-            android:padding="10dp">
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@id/wiki_summary"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/artist_type"
@@ -38,19 +43,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textColor="@color/white"
                 tools:text="Person" />
 
             <TextView
                 android:id="@+id/artist_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -60,9 +65,9 @@
                 android:id="@+id/artist_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artist_gender"
@@ -72,9 +77,9 @@
                 android:id="@+id/life_span"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artist_type"
@@ -84,27 +89,34 @@
 
         <TextView
             android:id="@+id/wiki_summary"
-            android:layout_above="@id/powered_by_wikipedia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
             android:padding="10dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/powered_by_wikipedia"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="TextView" />
 
         <TextView
             android:id="@+id/powered_by_wikipedia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawablePadding="10dp"
             android:padding="10dp"
             android:text="@string/bio_powered_by"
             android:textColor="@color/white"
-            android:drawablePadding="10dp"
             app:drawableEndCompat="@drawable/logo_wikipedia"
             app:drawableRightCompat="@drawable/logo_wikipedia"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
