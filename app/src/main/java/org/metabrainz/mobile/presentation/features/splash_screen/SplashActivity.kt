@@ -22,9 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
         //hiding title bar of this activity
         window.requestFeature(Window.FEATURE_NO_TITLE)
-        //making this activity full screen
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
         setContentView(R.layout.activity_splash)
 
         val splashImage: ImageView = findViewById(R.id.splash_image)
