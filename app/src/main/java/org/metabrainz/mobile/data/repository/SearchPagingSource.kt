@@ -1,8 +1,6 @@
 package org.metabrainz.mobile.data.repository
 
-import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
-import androidx.paging.PagingState
 import com.google.gson.JsonParser
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator
 import org.metabrainz.mobile.data.sources.api.SearchService
@@ -39,10 +37,5 @@ class SearchPagingSource(val entity: MBEntityType, val query: String) : PagingSo
             e.printStackTrace()
             LoadResult.Error(e)
         }
-    }
-
-    @ExperimentalPagingApi
-    override fun getRefreshKey(state: PagingState<Int, ResultItem>): Int? {
-        TODO("Not yet implemented")
     }
 }
