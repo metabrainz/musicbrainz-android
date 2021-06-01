@@ -33,7 +33,7 @@ class TaggerViewModel @ViewModelInject constructor(
     private val matchedResult: LiveData<ComparisionResult>
 
     fun setTaglibFetchedMetadata(metadata: HashMap<String, String>?) {
-        _taglibFetchedMetadata.value = metadata
+        _taglibFetchedMetadata.value = metadata!!
     }
 
     fun setURI(uri:Uri){

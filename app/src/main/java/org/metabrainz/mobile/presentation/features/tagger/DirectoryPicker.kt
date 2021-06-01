@@ -54,6 +54,8 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         binding.chooseDirectoryButton.setOnClickListener {
             binding.instructionForTagFix.visibility = View.VISIBLE
             binding.instruction.visibility = View.GONE
+            binding.loadingAnimation.visibility = View.GONE
+
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
             try {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_DOCUMENT)
