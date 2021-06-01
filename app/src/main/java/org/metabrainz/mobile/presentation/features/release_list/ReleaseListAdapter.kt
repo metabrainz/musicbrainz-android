@@ -77,7 +77,7 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
                         .images[0]
                         .thumbnails!!
                         .small
-                if (url != null && !url.isEmpty()) {
+                if (url != null && url.isNotEmpty()) {
                     Picasso.get()
                             .load(Uri.parse(url))
                             .placeholder(R.drawable.link_discog)

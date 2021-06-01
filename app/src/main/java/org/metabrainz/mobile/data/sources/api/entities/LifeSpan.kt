@@ -17,9 +17,9 @@ class LifeSpan : Serializable {
     val timePeriod: String
         get() {
             val builder = StringBuilder()
-            if (begin != null && !begin!!.isEmpty()) builder.append(begin)
-            if (begin != null && !begin!!.isEmpty() && end != null && !end!!.isEmpty()) builder.append("-")
-            if (end != null && !end!!.isEmpty()) builder.append(end)
+            if (begin != null && begin!!.isNotEmpty()) builder.append(begin)
+            if (begin != null && begin!!.isNotEmpty() && end != null && end!!.isNotEmpty()) builder.append("-")
+            if (end != null && end!!.isNotEmpty()) builder.append(end)
             return builder.toString()
         }
 }

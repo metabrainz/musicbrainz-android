@@ -21,6 +21,7 @@
 
     <color name="dark_gray">#262626</color>
     <color name="light_gray">#737373</color>
+    <color name="light_blue">#03DAC5</color>
 
 <!--    Background-->
     <color name="app_bg">#263238</color>

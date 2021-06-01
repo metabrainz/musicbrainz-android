@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.databinding.FragmentReleaseListBinding
 import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
@@ -28,7 +28,7 @@ class ReleaseListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentReleaseListBinding.inflate(inflater, container, false)
-        binding!!.recyclerView.layoutManager = LinearLayoutManager(binding!!.root.context)
+        binding!!.recyclerView.layoutManager = GridLayoutManager(binding!!.root.context,2)
         binding!!.recyclerView.adapter = adapter
         val itemDecoration = DividerItemDecoration(binding!!.root.context,
                 DividerItemDecoration.VERTICAL)

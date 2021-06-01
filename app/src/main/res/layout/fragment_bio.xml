@@ -1,30 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView2"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="4dp"
-    android:fillViewport="true">
+    android:layout_margin="@dimen/item_padding"
+    app:cardCornerRadius="@dimen/item_padding"
+    app:cardBackgroundColor="@color/dark_gray"
+    app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/card_artist_info"
-            layout="@layout/card_artist_info"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            app:layout_constraintBottom_toTopOf="@+id/artist_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/group" />
+
+        <TextView
+            android:id="@+id/artist_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/life_span"
+            tools:text="Person" />
+
+        <TextView
+            android:id="@+id/artist_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/artist_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Gender" />
+
+        <TextView
+            android:id="@+id/artist_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/wiki_summary"
+            tools:text="United States" />
+
+        <TextView
+            android:id="@+id/life_span"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/wiki_summary"
+            tools:text="22/10/2000-21/10/2001" />
+
+        <TextView
+            android:id="@+id/wiki_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp" />
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/powered_by_wikipedia"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="TextView" />
 
-        <include
-            android:id="@+id/card_artist_wiki"
-            layout="@layout/card_artist_wiki"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/powered_by_wikipedia"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:text="@string/bio_powered_by"
+            android:textColor="@color/white"
+            app:drawableEndCompat="@drawable/logo_wikipedia"
+            app:drawableRightCompat="@drawable/logo_wikipedia"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
-
-</ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

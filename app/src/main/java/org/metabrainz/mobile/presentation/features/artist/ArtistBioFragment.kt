@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.squareup.picasso.Picasso
+import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist
 import org.metabrainz.mobile.databinding.FragmentBioBinding
@@ -35,31 +37,49 @@ class ArtistBioFragment : Fragment() {
             val wikiText = wiki!!.extract
             if (wikiText != null && wikiText.isNotEmpty()) {
                 showWikiCard()
-                binding!!.cardArtistWiki.wikiSummary.text = wikiText
-            } else hideWikiCard()
-        } else hideWikiCard()
+                binding!!.wikiSummary.text = wikiText
+            }
+            else {
+                hideWikiCard()
+            }
+        }
+        else {
+            hideWikiCard()
+        }
     }
 
     private fun showWikiCard() {
-        binding!!.cardArtistWiki.root.visibility = View.VISIBLE
+        binding!!.wikiSummary.visibility = View.VISIBLE
+        binding!!.poweredByWikipedia.visibility = View.VISIBLE
     }
 
     private fun hideWikiCard() {
-        binding!!.cardArtistWiki.root.visibility = View.GONE
+        binding!!.wikiSummary.visibility = View.GONE
+        binding!!.poweredByWikipedia.visibility = View.GONE
     }
 
     private fun setArtistInfo(resource: Resource<Artist>) {
         if (resource.status == Resource.Status.SUCCESS) {
             val artist = resource.data
 
-            if (artist!!.type != null && artist.type!!.isNotEmpty())
-                binding!!.cardArtistInfo.artistType.text = artist.type
-            if (artist.gender != null && artist.gender!!.isNotEmpty())
-                binding!!.cardArtistInfo.artistGender.text = artist.gender
-            if (artist.area != null && artist.area!!.name != null)
-                binding!!.cardArtistInfo.artistArea.text = artist.area!!.name
-            if (artist.lifeSpan != null)
-                binding!!.cardArtistInfo.lifeSpan.text = artist.lifeSpan!!.timePeriod
+            if (artist!!.type != null && artist.type!!.isNotEmpty()) {
+                binding!!.artistType.text = artist.type
+                if(artist.type == "Group"){
+                    binding!!.animationView.setAnimation(R.raw.group)
+                }
+                else{
+                    binding!!.animationView.setAnimation(R.raw.usual)
+                }
+            }
+            if (artist.gender != null && artist.gender!!.isNotEmpty()) {
+                binding!!.artistGender.text = artist.gender
+            }
+            if (artist.area != null && artist.area!!.name != null) {
+                binding!!.artistArea.text = artist.area!!.name
+            }
+            if (artist.lifeSpan != null) {
+                binding!!.lifeSpan.text = artist.lifeSpan!!.timePeriod
+            }
         }
     }
 

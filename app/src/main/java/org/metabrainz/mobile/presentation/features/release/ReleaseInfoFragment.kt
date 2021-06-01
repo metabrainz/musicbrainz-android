@@ -28,8 +28,8 @@ class ReleaseInfoFragment : Fragment() {
         viewModel.coverArtData.observe(viewLifecycleOwner) { setCoverArt(it) }
         slideshowAdapter = CoverArtSlideshowAdapter(urls)
 
-        binding!!.slideshow.viewpagerSlideshow.adapter = slideshowAdapter
-        TabLayoutMediator(binding!!.slideshow.tabIndicator, binding!!.slideshow.viewpagerSlideshow) { _, _ -> }.attach()
+        binding!!.viewpagerSlideshow.adapter = slideshowAdapter
+        TabLayoutMediator(binding!!.tabIndicator, binding!!.viewpagerSlideshow) { _, _ -> }.attach()
         return binding!!.root
     }
 
@@ -43,8 +43,13 @@ class ReleaseInfoFragment : Fragment() {
             val release = resource.data
             if (release!!.title != null && release.title!!.isNotEmpty())
                 binding!!.releaseTitle.text = release.title
-            if (release.barcode != null && release.barcode!!.isNotEmpty())
+            if (release.barcode != null && release.barcode!!.isNotEmpty()) {
                 binding!!.releaseBarcode.text = release.barcode
+                binding!!.releaseBarcode.visibility = View.VISIBLE
+            }
+            else{
+                binding!!.releaseBarcode.visibility = View.GONE
+            }
             if (release.status != null && release.status!!.isNotEmpty())
                 binding!!.releaseStatus.text = release.status
             if (release.textRepresentation != null && release.textRepresentation!!.language != null)
@@ -67,9 +72,9 @@ class ReleaseInfoFragment : Fragment() {
         val runnable: Runnable = object : Runnable {
             override fun run() {
                 if (binding != null) {
-                    var position = binding!!.slideshow.viewpagerSlideshow.currentItem
+                    var position = binding!!.viewpagerSlideshow.currentItem
                     if (position == NUM_PAGES - 1) position = 0 else position++
-                    binding!!.slideshow.viewpagerSlideshow.setCurrentItem(position, true)
+                    binding!!.viewpagerSlideshow.setCurrentItem(position, true)
                     handler.postDelayed(this, 10000)
                 }
             }
