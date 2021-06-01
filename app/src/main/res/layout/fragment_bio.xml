@@ -16,78 +16,64 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
-            app:layout_constraintBottom_toTopOf="@+id/cl"
+            app:layout_constraintBottom_toTopOf="@+id/artist_type"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/group" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/artist_type"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/app_bg"
             android:padding="10dp"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/life_span"
+            tools:text="Person" />
+
+        <TextView
+            android:id="@+id/artist_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/artist_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Gender" />
+
+        <TextView
+            android:id="@+id/artist_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/wiki_summary"
+            tools:text="United States" />
+
+        <TextView
+            android:id="@+id/life_span"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/wiki_summary"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/artist_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Person" />
-
-            <TextView
-                android:id="@+id/artist_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Gender" />
-
-            <TextView
-                android:id="@+id/artist_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/artist_gender"
-                tools:text="United States" />
-
-            <TextView
-                android:id="@+id/life_span"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/artist_type"
-                tools:text="22/10/2000-21/10/2001" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:text="22/10/2000-21/10/2001" />
 
         <TextView
             android:id="@+id/wiki_summary"
