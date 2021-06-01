@@ -12,6 +12,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/app_bg</item>
+        <item name="colorPrimaryDark">@color/app_bg</item>
         <item name="colorAccent">@color/app_bg_light2</item>
     </style>
 
@@ -42,7 +43,9 @@
         <item name="android:windowAnimationStyle">@style/loginrequiredDialogAnimation</item>
     </style>
 
-    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimaryDark">@color/app_bg</item>
+    </style>
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner</item>
