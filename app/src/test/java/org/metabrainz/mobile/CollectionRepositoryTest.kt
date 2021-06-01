@@ -1,6 +1,8 @@
 package org.metabrainz.mobile
 
 import com.google.gson.Gson
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -34,7 +36,7 @@ class CollectionRepositoryTest {
         webServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 val endpoint = request.path?.substring(1, request.path!!.indexOf('/', 1))
-                val file = endpoint + "_collection.json"
+                val file = endpoint + "_public.json"
                 return MockResponse().setResponseCode(200).setBody(loadResourceAsString(file))
             }
         }
@@ -43,9 +45,9 @@ class CollectionRepositoryTest {
         repository = CollectionRepositoryImpl(service)
     }
 
-    // Still working on this.
+    @ExperimentalCoroutinesApi
     @Test
-    suspend fun fetchCollectionDetails() {
+    fun fetchCollectionDetails() = runBlockingTest {
         val expected = testCollectionDetails
         val resource = repository.fetchCollectionDetails("release","a691377c-6949-44cb-8a10-9696178cca18")
         Assert.assertEquals(Resource.Status.SUCCESS, resource.status)
@@ -53,9 +55,9 @@ class CollectionRepositoryTest {
         AssertionUtils.checkCollectionDetailsAssertions(expected, collectionDetails)
     }
 
-    // Not correct yet.
+    @ExperimentalCoroutinesApi
     @Test
-    suspend fun fetchCollections() {
+    fun fetchCollections() = runBlockingTest {
         val expected = testCollection
         val resource = repository.fetchCollections("akshaaatt",false)
         Assert.assertEquals(Resource.Status.SUCCESS, resource.status)
