@@ -32,7 +32,6 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         Log.e("MainActivity", "Coroutine failed: ${throwable.localizedMessage}")
     }
 
-    private val Fragment.packageManager get() = activity?.packageManager
     private val Fragment.contentResolver get() = activity?.contentResolver
 
     private val scope = CoroutineScope(Dispatchers.Main + exceptionHandler)
@@ -64,7 +63,6 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
     }
 
     override fun onItemClicked(metadata: AudioFile?,uri: Uri?) {
-        //Toast.makeText(requireContext(), metadata?.title, Toast.LENGTH_SHORT).show()
         metadata?.allProperties?.let { viewmodel.setTaglibFetchedMetadata(it) }
         uri?.let { viewmodel.setURI(it) }
         if(App.context!!.isOnline)
@@ -78,10 +76,6 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_CODE_OPEN_DOCUMENT && resultCode == Activity.RESULT_OK) {
-            binding.instructionForTagFix.visibility = View.VISIBLE
-            binding.instruction.visibility = View.GONE
-            binding.loadingAnimation.visibility = View.GONE
-
             data?.let { intent ->
                 intent.data?.let { uri ->
                     contentResolver?.takePersistableUriPermission(uri,
@@ -89,6 +83,15 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
                     scope.launch {
                         documentAdapter.clear()
                         val documents = parseUri(uri)
+                        if(documents.isNotEmpty()){
+                            binding.instructionForTagFix.visibility = View.VISIBLE
+                            binding.instruction.visibility = View.GONE
+                            binding.loadingAnimation.visibility = View.GONE
+                            binding.recyclerView.visibility = View.VISIBLE
+                        }
+                        else{
+                            Toast.makeText(context,"This folder does not have any supported media files!",Toast.LENGTH_LONG).show()
+                        }
                         getTags(documents).collect { pair ->
                             documentAdapter.addItem(pair as Pair<AudioFile, Document>)
                         }
