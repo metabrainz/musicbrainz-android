@@ -76,6 +76,10 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_CODE_OPEN_DOCUMENT && resultCode == Activity.RESULT_OK) {
+            binding.instructionForTagFix.visibility = View.VISIBLE
+            binding.instruction.visibility = View.GONE
+            binding.loadingAnimation.visibility = View.GONE
+
             data?.let { intent ->
                 intent.data?.let { uri ->
                     contentResolver?.takePersistableUriPermission(uri,
