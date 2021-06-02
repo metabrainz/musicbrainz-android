@@ -1,7 +1,10 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
 import android.app.Activity
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -24,9 +28,12 @@ import kotlinx.coroutines.flow.flowOn
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
 import org.metabrainz.mobile.App
+import org.metabrainz.mobile.data.sources.Constants
+import org.metabrainz.mobile.presentation.features.search.SearchResultsActivity
+import java.util.*
 
 @AndroidEntryPoint
-class DirectoryPicker : Fragment(), OnItemCLickListener {
+class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextListener {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("MainActivity", "Coroutine failed: ${throwable.localizedMessage}")
@@ -37,13 +44,15 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
     private val scope = CoroutineScope(Dispatchers.Main + exceptionHandler)
 
     private lateinit var documentAdapter: DocumentAdapter
+    private var dataFiles: MutableList<Pair<AudioFile, Document>> = mutableListOf()
+    val copyDataFiles : MutableList<Pair<AudioFile, Document>> = mutableListOf()
 
     private val viewmodel: TaggerViewModel by activityViewModels()
     private lateinit var binding: FragmentDirectoryPickerBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDirectoryPickerBinding.inflate(inflater)
-        documentAdapter = DocumentAdapter(this)
+        documentAdapter = DocumentAdapter(dataFiles,this)
 
         val recyclerView = binding.recyclerView
         recyclerView.adapter = documentAdapter
@@ -58,6 +67,15 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
             catch (ex: Exception){
                 Toast.makeText(context, "Something went wrong! We could not select the directory", Toast.LENGTH_SHORT).show()
             }
+        }
+        setupSearchView()
+
+        if(copyDataFiles.isNotEmpty()){
+            binding.instructionForTagFix.visibility = View.VISIBLE
+            binding.instruction.visibility = View.GONE
+            binding.loadingAnimation.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.searchView.visibility = View.VISIBLE
         }
         return binding.root
     }
@@ -92,16 +110,73 @@ class DirectoryPicker : Fragment(), OnItemCLickListener {
                             binding.instruction.visibility = View.GONE
                             binding.loadingAnimation.visibility = View.GONE
                             binding.recyclerView.visibility = View.VISIBLE
+                            binding.searchView.visibility = View.VISIBLE
                         }
                         else{
                             Toast.makeText(context,"This folder does not have any supported media files!",Toast.LENGTH_LONG).show()
                         }
                         getTags(documents).collect { pair ->
-                            documentAdapter.addItem(pair as Pair<AudioFile, Document>)
+                            dataFiles.add(pair as Pair<AudioFile, Document>)
+                            documentAdapter.notifyItemChanged(dataFiles.size-1)
                         }
+                        copyDataFiles.addAll(dataFiles)
                     }
                 } ?: Log.e(TAG, "Intent uri null")
             } ?: Log.e(TAG, "onActivityResult failed to handle result: Intent data null")
+        }
+    }
+
+    private fun setupSearchView() {
+        val searchManager = context?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+        binding.searchView.isSubmitButtonEnabled = true
+        binding.searchView.setIconifiedByDefault(false)
+        binding.searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        startSearch(newText)
+        return false
+    }
+
+    private fun startSearch(query: String) {
+        dataFiles.clear()
+        documentAdapter.notifyDataSetChanged()
+        if (query.isNotEmpty()) {
+
+            for((audioFile, document) in copyDataFiles) {
+                if(document.displayName.toLowerCase(Locale.getDefault()).
+                    contains(query.toLowerCase(Locale.getDefault()))){
+                    dataFiles.add(Pair(audioFile,document))
+                    documentAdapter.notifyItemChanged(dataFiles.size-1)
+                }
+                if(audioFile.album!=null){
+                    if(audioFile.album.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
+                        dataFiles.add(Pair(audioFile,document))
+                        documentAdapter.notifyItemChanged(dataFiles.size-1)
+                    }
+                }
+                if(audioFile.artist!=null){
+                    if(audioFile.artist.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
+                        dataFiles.add(Pair(audioFile,document))
+                        documentAdapter.notifyItemChanged(dataFiles.size-1)
+                    }
+                }
+                if(audioFile.albumArtist!=null){
+                    if(audioFile.albumArtist.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
+                        dataFiles.add(Pair(audioFile,document))
+                        documentAdapter.notifyItemChanged(dataFiles.size-1)
+                    }
+                }
+            }
+        }
+        else{
+            dataFiles.addAll(copyDataFiles)
+            documentAdapter.notifyDataSetChanged()
         }
     }
 

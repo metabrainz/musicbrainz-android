@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.metabrainz.mobile.databinding.ListItemDocumentBinding
 import java.util.concurrent.TimeUnit
 
-class DocumentAdapter(private val itemClickListener: OnItemCLickListener) : RecyclerView.Adapter<DocumentAdapter.ViewHolder>() {
-    val data: MutableList<Pair<AudioFile, Document>> = mutableListOf()
+class DocumentAdapter(private val data: MutableList<Pair<AudioFile, Document>>, private val itemClickListener: OnItemCLickListener) : RecyclerView.Adapter<DocumentAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListItemDocumentBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -47,11 +46,6 @@ class DocumentAdapter(private val itemClickListener: OnItemCLickListener) : Recy
     fun clear() {
         data.clear()
         notifyDataSetChanged()
-    }
-
-    fun addItem(item: Pair<AudioFile, Document>) {
-        data.add(item)
-        notifyItemChanged(data.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

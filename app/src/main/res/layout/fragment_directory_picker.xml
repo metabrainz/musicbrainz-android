@@ -18,6 +18,22 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/celebration_music" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Search Your Audio File"
+        android:inputType="textCapWords"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:background="@color/app_bg_light2"
+        app:searchIcon="@drawable/ic_search"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
@@ -26,10 +42,11 @@
         android:background="@color/dark_gray"
         android:clipToPadding="false"
         android:padding="10dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loadingAnimation"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/list_item_document" />
