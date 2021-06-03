@@ -31,7 +31,6 @@
         android:inputType="textCapWords"
         android:layout_margin="10dp"
         android:padding="5dp"
-        android:background="@color/app_bg_light2"
         app:searchIcon="@drawable/ic_search"/>
 
     <androidx.recyclerview.widget.RecyclerView

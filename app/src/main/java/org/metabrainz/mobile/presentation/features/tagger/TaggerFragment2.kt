@@ -93,10 +93,10 @@ class TaggerFragment2 : Fragment() {
                 "ARTIST" -> binding.serverFetched.artist.setText(tags.newValue)
                 "ALBUM" -> binding.serverFetched.album.setText(tags.newValue)
                 "TRACKNUMBER" -> binding.serverFetched.track.setText(tags.newValue)
-                //"discnumber" -> binding.serverFetched.disc2.setText(tags.newValue)
+//                "discnumber" -> binding.serverFetched.disc2.setText(tags.newValue)
                 "DATE" -> binding.serverFetched.year.setText(tags.newValue)
                 "MUSICBRAINZ_TRACKID" -> binding.serverFetched.MBID.text = tags.newValue
-                //"acoustid_id" -> binding.serverFetched.AccousticID.text = tags.newValue
+//                "acoustid_id" -> binding.serverFetched.AccousticID.text = tags.newValue
             }
         }
     }
