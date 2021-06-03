@@ -94,10 +94,6 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_CODE_OPEN_DOCUMENT && resultCode == Activity.RESULT_OK) {
-            binding.instructionForTagFix.visibility = View.VISIBLE
-            binding.instruction.visibility = View.GONE
-            binding.loadingAnimation.visibility = View.GONE
-
             data?.let { intent ->
                 intent.data?.let { uri ->
                     contentResolver?.takePersistableUriPermission(uri,
@@ -113,6 +109,11 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
                             binding.searchView.visibility = View.VISIBLE
                         }
                         else{
+                            binding.instructionForTagFix.visibility = View.GONE
+                            binding.instruction.visibility = View.VISIBLE
+                            binding.loadingAnimation.visibility = View.VISIBLE
+                            binding.recyclerView.visibility = View.GONE
+                            binding.searchView.visibility = View.GONE
                             Toast.makeText(context,"This folder does not have any supported media files!",Toast.LENGTH_LONG).show()
                         }
                         getTags(documents).collect { pair ->
@@ -154,19 +155,19 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
                     dataFiles.add(Pair(audioFile,document))
                     documentAdapter.notifyItemChanged(dataFiles.size-1)
                 }
-                if(audioFile.album!=null){
+                if(audioFile.album!=null && !dataFiles.contains(Pair(audioFile,document))){
                     if(audioFile.album.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
                         dataFiles.add(Pair(audioFile,document))
                         documentAdapter.notifyItemChanged(dataFiles.size-1)
                     }
                 }
-                if(audioFile.artist!=null){
+                if(audioFile.artist!=null && !dataFiles.contains(Pair(audioFile,document))){
                     if(audioFile.artist.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
                         dataFiles.add(Pair(audioFile,document))
                         documentAdapter.notifyItemChanged(dataFiles.size-1)
                     }
                 }
-                if(audioFile.albumArtist!=null){
+                if(audioFile.albumArtist!=null && !dataFiles.contains(Pair(audioFile,document))){
                     if(audioFile.albumArtist.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
                         dataFiles.add(Pair(audioFile,document))
                         documentAdapter.notifyItemChanged(dataFiles.size-1)
