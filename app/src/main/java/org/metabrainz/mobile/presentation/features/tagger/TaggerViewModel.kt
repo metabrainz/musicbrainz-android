@@ -3,6 +3,7 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.app.Application
 import android.net.Uri
 import android.util.Log
+import android.util.Log.d
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -22,8 +23,8 @@ import org.metabrainz.mobile.util.TaggerUtils
 class TaggerViewModel @ViewModelInject constructor(
         val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
 
-    private val _taglibFetchedMetadata = MutableLiveData<HashMap<String, String>>()
-    val taglibFetchedMetadata: LiveData<HashMap<String, String>> get() = _taglibFetchedMetadata
+    private val _taglibFetchedMetadata = MutableLiveData<AudioFile?>()
+    val taglibFetchedMetadata: LiveData<AudioFile?> get() = _taglibFetchedMetadata
 
     private val _uri = MutableLiveData<Uri>()
     val uri:LiveData<Uri> get() = _uri
@@ -31,7 +32,7 @@ class TaggerViewModel @ViewModelInject constructor(
     val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
 
-    fun setTaglibFetchedMetadata(metadata: HashMap<String, String>?) {
+    fun setTaglibFetchedMetadata(metadata: AudioFile?) {
         _taglibFetchedMetadata.value = metadata!!
     }
 
@@ -62,9 +63,9 @@ class TaggerViewModel @ViewModelInject constructor(
         return null
     }
 
-    private fun displayMatchedRelease(release: Release?): List<TagField> {
+    private fun displayMatchedRelease(release: Release): List<TagField> {
         var track: Track? = null
-        if (release?.media != null && release.media!!.isNotEmpty())
+        if (release.media != null && release.media!!.isNotEmpty())
             for (media in release.media!!)
                 for (search in media.tracks)
                     if (search.recording!!.mbid.equals(matchedResult.value?.trackMbid, true))

@@ -83,15 +83,15 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/albumArtistHeading"
+                    android:id="@+id/albumHeading"
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Album Artist"
+                    android:text="Album"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/albumArtist"
+                    android:id="@+id/album"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -106,31 +106,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/albumHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Album"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/albumArtist" />
-
-                <TextView
-                    android:id="@+id/album"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="Lateralus" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"

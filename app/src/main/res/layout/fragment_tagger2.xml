@@ -16,19 +16,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <ImageView
+        android:id="@+id/albumArtLocal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="14dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
     <TextView
         android:id="@+id/MBIDHeading"
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="0dp"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:text="MusicBrainz ID"
         android:textColor="@color/white"
         android:layout_margin="8dp"
-        android:layout_marginTop="6dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="14sp" />
 
@@ -38,12 +45,11 @@
         android:gravity="center"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:visibility="gone"
         android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
         app:layout_constraintTop_toBottomOf="@id/MBIDHeading"
-        android:textSize="18sp"
+        android:textSize="12sp"
         android:text="2001" />
 
     <TextView
@@ -53,11 +59,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Acoust ID"
-        android:visibility="gone"
         android:layout_margin="8dp"
         app:layout_constraintTop_toBottomOf="@id/MBID"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
         android:textColor="@color/white"
         android:textSize="14sp" />
 
@@ -66,15 +71,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="12sp"
         android:gravity="center"
-        android:visibility="gone"
         android:layout_margin="8dp"
         app:layout_constraintTop_toBottomOf="@id/AcoustIDHeading"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
         android:text="2001" />
 
+    <ImageView
+        android:id="@+id/albumArtServer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="8dp"
+        android:layout_margin="14dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
 
     <TableLayout
         android:layout_width="0dp"
@@ -83,7 +95,7 @@
         app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AcoustID">
+        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal">
 
         <TableRow>
             <include
@@ -106,9 +118,9 @@
         android:id="@+id/overwrite_tags_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="6dp"
         android:backgroundTint="@color/app_bg"
-        android:padding="10dp"
+        android:padding="6dp"
         android:textColor="@color/app_bg_light2"
         android:text="@string/tagger_file_save"
         android:textAllCaps="false"

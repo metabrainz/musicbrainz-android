@@ -10,13 +10,13 @@ import org.metabrainz.mobile.presentation.features.tagger.AudioFile
 import org.metabrainz.mobile.presentation.features.tagger.TagField
 
 object Metadata {
-    fun getDefaultTagList(metadata: HashMap<String, String>): HashMap<String, String> {
+    fun getDefaultTagList(metadata: AudioFile?): HashMap<String, String> {
         val defaultTagMap = HashMap<String, String>()
-        defaultTagMap["title"] = metadata["TITLE"] ?: ""
-        defaultTagMap["artist"] = metadata["ARTIST"] ?: ""
-        defaultTagMap["release"] = metadata["ALBUM"] ?: ""
-        defaultTagMap["tnum"] = metadata["TRACK"] ?: ""
-        defaultTagMap["tracks"] = metadata["TRACKTOTAL"] ?: ""
+        defaultTagMap["title"] = metadata!!.allProperties["TITLE"] ?: ""
+        defaultTagMap["artist"] = metadata.allProperties["ARTIST"] ?: ""
+        defaultTagMap["release"] = metadata.allProperties["ALBUM"] ?: ""
+        defaultTagMap["tnum"] = metadata.allProperties["TRACK"] ?: ""
+        defaultTagMap["tracks"] = metadata.allProperties["TRACKTOTAL"] ?: ""
         Log.d(defaultTagMap.toString())
         return defaultTagMap
     }
@@ -41,27 +41,28 @@ object Metadata {
                 trackNum, trackTotal, 0, 0, duration, "", "")
     }
 
-    fun createRecordingFromHashMap(metadata: HashMap<String, String>): Recording {
+    fun createRecordingFromHashMap(metadata: AudioFile?): Recording {
         val recording = Recording()
         recording.releases = mutableListOf(Release())
         recording.artistCredits = mutableListOf(ArtistCredit())
         recording.releases[0].artistCredits = mutableListOf(ArtistCredit())
         recording.releases[0].media = mutableListOf(Media())
 
-        recording.title = metadata["TITLE"]
-        recording.releases[0].title = metadata["ALBUM"]
-        recording.artistCredits[0].name = metadata["ARTIST"]
+
+        recording.title = metadata!!.allProperties["TITLE"]
+        recording.releases[0].title = metadata.allProperties["ALBUM"]
+        recording.artistCredits[0].name = metadata.allProperties["ARTIST"]
         recording.artistCredits[0].joinphrase = ""
-        recording.releases[0].artistCredits[0].name = metadata["ALBUMARTIST"]
+        recording.releases[0].artistCredits[0].name = metadata.allProperties["ALBUMARTIST"]
         recording.releases[0].artistCredits[0].joinphrase = ""
-        recording.releases[0].media!![0].trackCount = metadata["TRACKTOTAL"]?.toInt() ?: 0
+        recording.releases[0].media!![0].trackCount = metadata.allProperties["TRACKTOTAL"]?.toInt() ?: 0
         return recording
     }
 
-    fun createTagFields(local: HashMap<String, String>?, track: Track?): List<TagField> {
+    fun createTagFields(local: AudioFile?, track: Track?): List<TagField> {
         val tagFields = HashMap<String, TagField>()
         if (local != null) {
-            for (entry in local)
+            for (entry in local.allProperties)
                 tagFields[entry.key] = TagField(entry.key, entry.value)
             if (track != null) {
                 tagFields.setNewValue("TITLE", track.title)

@@ -26,15 +26,6 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/documentName"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            tools:text="/storage/music/tool/lateralus/the_patient.opus" />
-
-        <TextView
             android:id="@+id/titleHeading"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"

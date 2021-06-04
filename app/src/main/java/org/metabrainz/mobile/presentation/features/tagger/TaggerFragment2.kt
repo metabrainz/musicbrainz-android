@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,7 @@ class TaggerFragment2 : Fragment() {
         return binding.root
     }
 
-    private fun setTaglibFetchedMetadata(metadata: HashMap<String, String>) {
+    private fun setTaglibFetchedMetadata(metadata: AudioFile?) {
         binding.loadingAnimation.root.visibility = View.VISIBLE
         binding.taglibFetched.originalValue.visibility = View.GONE
         binding.serverFetched.newValue.visibility = View.GONE
@@ -50,30 +51,35 @@ class TaggerFragment2 : Fragment() {
         binding.AcoustIDHeading.visibility = View.GONE
         binding.MBID.visibility = View.GONE
         binding.MBIDHeading.visibility = View.GONE
+        binding.albumArtLocal.visibility = View.GONE
+        binding.albumArtServer.visibility = View.GONE
 
         reset()
 
-        binding.taglibFetched.title.setText(metadata["TITLE"])
-        binding.serverFetched.title.setText(metadata["TITLE"])
+        GlideApp.with(binding.albumArtLocal)
+            .load(metadata)
+            .into(binding.albumArtLocal)
 
-        binding.taglibFetched.track.setText(metadata["TRACK"])
-        binding.serverFetched.track.setText(metadata["TRACK"])
+        binding.taglibFetched.title.setText(metadata!!.allProperties["TITLE"])
+        binding.serverFetched.title.setText(metadata.allProperties["TITLE"])
 
-        binding.taglibFetched.disc.setText(metadata["DISC"])
-        binding.serverFetched.disc.setText(metadata["DISC"])
+        binding.taglibFetched.track.setText(metadata.allProperties["TRACK"])
+        binding.serverFetched.track.setText(metadata.allProperties["TRACK"])
 
-        binding.serverFetched.duration.setText(metadata["DURATION"]?.toInt()?.toHms())
-        binding.taglibFetched.duration.setText(metadata["DURATION"]?.toInt()?.toHms())
+        binding.taglibFetched.disc.setText(metadata.allProperties["DISC"])
+        binding.serverFetched.disc.setText(metadata.allProperties["DISC"])
 
-        binding.serverFetched.artist.setText(metadata["ARTIST"])
-        binding.taglibFetched.artist.setText(metadata["ARTIST"])
+        binding.serverFetched.duration.setText(metadata.allProperties["DURATION"]?.toInt()?.toHms())
+        binding.taglibFetched.duration.setText(metadata.allProperties["DURATION"]?.toInt()?.toHms())
 
-        binding.serverFetched.album.setText(metadata["ALBUM"])
-        binding.taglibFetched.album.setText(metadata["ALBUM"])
+        binding.serverFetched.artist.setText(metadata.allProperties["ARTIST"])
+        binding.taglibFetched.artist.setText(metadata.allProperties["ARTIST"])
 
-        binding.serverFetched.year.setText(metadata["DATE"])
-        binding.taglibFetched.year.setText(metadata["DATE"])
+        binding.serverFetched.album.setText(metadata.allProperties["ALBUM"])
+        binding.taglibFetched.album.setText(metadata.allProperties["ALBUM"])
 
+        binding.serverFetched.year.setText(metadata.allProperties["DATE"])
+        binding.taglibFetched.year.setText(metadata.allProperties["DATE"])
     }
 
     private fun setServerFetchedMetadata(tagsList: List<TagField>) {
@@ -83,12 +89,11 @@ class TaggerFragment2 : Fragment() {
         binding.overwriteTagsButton.visibility = View.VISIBLE
         binding.serverFetched.root.visibility = View.VISIBLE
         binding.taglibFetched.root.visibility = View.VISIBLE
-        
-        var countOfEmptyOccurrences = 0
+        binding.albumArtLocal.visibility = View.VISIBLE
+        binding.albumArtServer.visibility = View.VISIBLE
 
         for (tags in tagsList) {
             if (tags.newValue.isEmpty()) {
-                countOfEmptyOccurrences++
                 continue
             }
 
@@ -101,6 +106,7 @@ class TaggerFragment2 : Fragment() {
                 "DATE" -> binding.serverFetched.year.setText(tags.newValue)
                 "MUSICBRAINZ_TRACKID" -> {
                     binding.MBID.text = tags.newValue
+                    d("ok",tags.newValue)
                     binding.MBID.visibility = View.VISIBLE
                     binding.MBIDHeading.visibility = View.VISIBLE
                 }

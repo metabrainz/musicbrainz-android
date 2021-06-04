@@ -8,13 +8,13 @@ class CoverArt {
     val allImageLinks: ArrayList<String?>
         get() {
             val urls = ArrayList<String?>()
-            for (image in images) if (image != null && !image.image!!.isEmpty()) urls.add(image.image)
+            for (image in images) if (image.image!!.isNotEmpty()) urls.add(image.image)
             return urls
         }
     val allThumbnailsLinks: ArrayList<String?>
         get() {
             val urls = ArrayList<String?>()
-            for (image in images) if (image != null && image.thumbnails != null) urls.add(image.thumbnails!!.small)
+            for (image in images) if (image.thumbnails != null) urls.add(image.thumbnails!!.small)
             return urls
         }
 }

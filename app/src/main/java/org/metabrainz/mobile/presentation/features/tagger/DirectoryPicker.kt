@@ -80,8 +80,8 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
         return binding.root
     }
 
-    override fun onItemClicked(metadata: AudioFile?,uri: Uri?) {
-        metadata?.allProperties?.let { viewmodel.setTaglibFetchedMetadata(it) }
+    override fun onItemClicked(audioFile: AudioFile?,uri: Uri?) {
+        viewmodel.setTaglibFetchedMetadata(audioFile)
         uri?.let { viewmodel.setURI(it) }
         if(App.context!!.isOnline)
             findNavController().navigate(R.id.action_directoryPicker_to_taggerFragment2)
