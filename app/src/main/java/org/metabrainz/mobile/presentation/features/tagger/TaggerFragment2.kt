@@ -19,8 +19,8 @@ class TaggerFragment2 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTagger2Binding.inflate(inflater)
 
-        binding.originalValue.visibility = View.VISIBLE
-        binding.newValue.visibility = View.VISIBLE
+        binding.taglibFetched.originalValue.visibility = View.VISIBLE
+        binding.serverFetched.newValue.visibility = View.VISIBLE
         binding.overwriteTagsButton.visibility = View.VISIBLE
         binding.serverFetched.root.visibility = View.VISIBLE
         binding.taglibFetched.root.visibility = View.VISIBLE
@@ -41,41 +41,45 @@ class TaggerFragment2 : Fragment() {
 
     private fun setTaglibFetchedMetadata(metadata: HashMap<String, String>) {
         binding.loadingAnimation.root.visibility = View.VISIBLE
-        binding.originalValue.visibility = View.GONE
-        binding.newValue.visibility = View.GONE
+        binding.taglibFetched.originalValue.visibility = View.GONE
+        binding.serverFetched.newValue.visibility = View.GONE
         binding.overwriteTagsButton.visibility = View.GONE
         binding.serverFetched.root.visibility = View.GONE
         binding.taglibFetched.root.visibility = View.GONE
+        binding.AcoustID.visibility = View.GONE
+        binding.AcoustIDHeading.visibility = View.GONE
+        binding.MBID.visibility = View.GONE
+        binding.MBIDHeading.visibility = View.GONE
 
         reset()
 
-        binding.taglibFetched.title.text = metadata["TITLE"]
+        binding.taglibFetched.title.setText(metadata["TITLE"])
         binding.serverFetched.title.setText(metadata["TITLE"])
 
-        binding.taglibFetched.track.text = metadata["TRACK"]
+        binding.taglibFetched.track.setText(metadata["TRACK"])
         binding.serverFetched.track.setText(metadata["TRACK"])
 
-        binding.taglibFetched.disc.text = metadata["DISC"]
+        binding.taglibFetched.disc.setText(metadata["DISC"])
         binding.serverFetched.disc.setText(metadata["DISC"])
 
-        binding.taglibFetched.duration.text = metadata["DURATION"]?.toInt()?.toHms()
         binding.serverFetched.duration.setText(metadata["DURATION"]?.toInt()?.toHms())
+        binding.taglibFetched.duration.setText(metadata["DURATION"]?.toInt()?.toHms())
 
-        binding.taglibFetched.artist.text = metadata["ARTIST"]
         binding.serverFetched.artist.setText(metadata["ARTIST"])
+        binding.taglibFetched.artist.setText(metadata["ARTIST"])
 
-        binding.taglibFetched.album.text = metadata["ALBUM"]
         binding.serverFetched.album.setText(metadata["ALBUM"])
+        binding.taglibFetched.album.setText(metadata["ALBUM"])
 
-        binding.taglibFetched.year.text = metadata["DATE"]
         binding.serverFetched.year.setText(metadata["DATE"])
+        binding.taglibFetched.year.setText(metadata["DATE"])
 
     }
 
     private fun setServerFetchedMetadata(tagsList: List<TagField>) {
         binding.loadingAnimation.root.visibility = View.GONE
-        binding.originalValue.visibility = View.VISIBLE
-        binding.newValue.visibility = View.VISIBLE
+        binding.taglibFetched.originalValue.visibility = View.VISIBLE
+        binding.serverFetched.newValue.visibility = View.VISIBLE
         binding.overwriteTagsButton.visibility = View.VISIBLE
         binding.serverFetched.root.visibility = View.VISIBLE
         binding.taglibFetched.root.visibility = View.VISIBLE
@@ -95,34 +99,41 @@ class TaggerFragment2 : Fragment() {
                 "TRACKNUMBER" -> binding.serverFetched.track.setText(tags.newValue)
 //                "discnumber" -> binding.serverFetched.disc2.setText(tags.newValue)
                 "DATE" -> binding.serverFetched.year.setText(tags.newValue)
-                "MUSICBRAINZ_TRACKID" -> binding.serverFetched.MBID.text = tags.newValue
-//                "acoustid_id" -> binding.serverFetched.AccousticID.text = tags.newValue
+                "MUSICBRAINZ_TRACKID" -> {
+                    binding.MBID.text = tags.newValue
+                    binding.MBID.visibility = View.VISIBLE
+                    binding.MBIDHeading.visibility = View.VISIBLE
+                }
+                "acoustid_id" -> {
+                    binding.AcoustID.text = tags.newValue
+                    binding.AcoustID.visibility = View.VISIBLE
+                    binding.AcoustIDHeading.visibility = View.VISIBLE
+                }
             }
         }
     }
 
     private fun reset(){
-        binding.taglibFetched.title.text = ""
         binding.serverFetched.title.setText("")
+        binding.taglibFetched.title.setText("")
 
-        binding.taglibFetched.track.text = ""
         binding.serverFetched.track.setText("")
+        binding.taglibFetched.track.setText("")
 
-        binding.taglibFetched.disc.text = ""
         binding.serverFetched.disc.setText("")
+        binding.taglibFetched.disc.setText("")
 
-        binding.taglibFetched.duration.text = ""
         binding.serverFetched.duration.setText("")
+        binding.taglibFetched.duration.setText("")
 
-        binding.taglibFetched.artist.text = ""
         binding.serverFetched.artist.setText("")
+        binding.taglibFetched.artist.setText("")
 
-        binding.taglibFetched.album.text = ""
         binding.serverFetched.album.setText("")
+        binding.taglibFetched.album.setText("")
 
-        binding.taglibFetched.year.text = ""
         binding.serverFetched.year.setText("")
-
+        binding.taglibFetched.year.setText("")
     }
 
     private fun saveMetadata() {
@@ -142,8 +153,11 @@ class TaggerFragment2 : Fragment() {
         if (binding.serverFetched.artist.text.toString().isNotEmpty())
             newMetadata["ARTIST"] = binding.serverFetched.artist.text.toString()
 
-        if (binding.serverFetched.MBID.text.toString().isNotEmpty())
-            newMetadata["MBID"] = binding.serverFetched.MBID.text.toString()
+        if (binding.MBID.text.toString().isNotEmpty())
+            newMetadata["MBID"] = binding.MBID.text.toString()
+
+        if (binding.serverFetched.year.text.toString().isNotEmpty())
+            newMetadata["DATE"] = binding.serverFetched.year.text.toString()
 
         if (viewModel.saveMetadataTags(newMetadata))
             Toast.makeText(activity, "Saved Tags Successfully!", LENGTH_SHORT).show()

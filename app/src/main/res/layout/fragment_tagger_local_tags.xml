@@ -13,6 +13,19 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/original_value"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:text="Original Value"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/documentName"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
@@ -32,12 +45,14 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:enabled="false"
             android:textColor="@color/white"
+            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="The Patient" />
 
@@ -47,17 +62,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="4dp"
             android:text="Artist"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/artist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:enabled="false"
             android:textColor="@color/white"
+            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="TOOL" />
 
@@ -67,17 +84,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="4dp"
             android:text="Album"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:enabled="false"
             android:textColor="@color/white"
+            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="Lateralus" />
 
@@ -88,17 +107,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="4dp"
             android:text="Track"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/track"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:enabled="false"
             android:textColor="@color/white"
+            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="3" />
 
@@ -108,17 +129,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
             android:text="Disc"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/disc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:enabled="false"
             android:textColor="@color/white"
+            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="1" />
 
@@ -128,17 +150,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="4dp"
             android:text="Duration"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:enabled="false"
             android:textColor="@color/white"
+            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="7:14" />
 
@@ -149,17 +173,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="4dp"
             android:text="Year"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:textColor="@color/white"
+            android:enabled="false"
+            android:textColorHint="@color/light_gray"
             android:textSize="18sp"
             tools:text="2001" />
 

@@ -17,67 +17,102 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/original_value"
+        android:id="@+id/MBIDHeading"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:gravity="center"
-        android:text="Original Value"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="MusicBrainz ID"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/new_value"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_margin="8dp"
+        android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/new_value"
+        android:id="@+id/MBID"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MBIDHeading"
+        android:textSize="18sp"
+        android:text="2001" />
+
+    <TextView
+        android:id="@+id/AcoustIDHeading"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:gravity="center"
-        android:text="New Value"
+        android:text="Acoust ID"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/MBID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/AcoustID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/original_value"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <include
-        android:id="@+id/taglibFetched"
-        layout="@layout/fragment_tagger_local_tags"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
-        app:layout_constraintEnd_toStartOf="@+id/serverFetched"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/AcoustIDHeading"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/original_value" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="2001" />
 
-    <include
-        android:id="@+id/serverFetched"
-        layout="@layout/fragment_tagger_server_tags"
+
+    <TableLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:stretchColumns="0,1"
         app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/taglibFetched"
-        app:layout_constraintTop_toBottomOf="@+id/new_value" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AcoustID">
+
+        <TableRow>
+            <include
+                android:id="@+id/taglibFetched"
+                layout="@layout/fragment_tagger_local_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <include
+                android:id="@+id/serverFetched"
+                layout="@layout/fragment_tagger_server_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </TableRow>
+
+    </TableLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/overwrite_tags_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/app_bg"
-        android:padding="8dp"
+        android:padding="10dp"
         android:textColor="@color/app_bg_light2"
         android:text="@string/tagger_file_save"
         android:textAllCaps="false"
+        android:gravity="center"
         android:textSize="18sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"

@@ -19,7 +19,6 @@ import org.metabrainz.mobile.util.ComparisionResult
 import org.metabrainz.mobile.util.Metadata
 import org.metabrainz.mobile.util.TaggerUtils
 
-
 class TaggerViewModel @ViewModelInject constructor(
         val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
 
@@ -77,7 +76,7 @@ class TaggerViewModel @ViewModelInject constructor(
 //        val filePath = _taglibFetchedMetadata.value?.get("filePath")
         Log.i("filepath",_uri.value.toString())
         var result = false
-        context.contentResolver?.openFileDescriptor(Uri.parse(_uri.value.toString()), "rw")?.use {
+        context.contentResolver.openFileDescriptor(Uri.parse(_uri.value.toString()), "rw")?.use {
             result = KTagLib.writeMetadata(it.detachFd(), tags)
 
             Log.i("resulttag",result.toString())
