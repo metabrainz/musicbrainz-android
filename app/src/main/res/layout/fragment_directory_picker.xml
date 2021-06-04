@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/app_bg_light"
+        android:background="@color/app_bg"
         android:padding="10dp"
         android:text="@string/tagger_file_chooser_pickDirectory"
         android:textAllCaps="false"

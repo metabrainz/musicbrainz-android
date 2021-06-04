@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
@@ -78,7 +78,7 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
                         .thumbnails!!
                         .small
                 if (url != null && url.isNotEmpty()) {
-                    Picasso.get()
+                    Glide.with(context)
                             .load(Uri.parse(url))
                             .placeholder(R.drawable.link_discog)
                             .into(binding.releaseCoverArt)
