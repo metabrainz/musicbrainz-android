@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal">
+        app:layout_constraintTop_toBottomOf="@+id/AcoustID">
 
         <TableRow>
             <include
@@ -115,19 +115,30 @@
     </TableLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/overwrite_tags_button"
-        android:layout_width="0dp"
+        android:id="@+id/recording_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:backgroundTint="@color/app_bg"
-        android:padding="6dp"
-        android:textColor="@color/app_bg_light2"
+        android:layout_alignStart="@id/overwrite_tags_button"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:text="@string/search_type_recording"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/overwrite_tags_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/app_bg"
+        android:padding="10dp"
         android:text="@string/tagger_file_save"
         android:textAllCaps="false"
-        android:gravity="center"
+        android:textColor="@color/app_bg_light2"
         android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,9 +59,6 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
         fun bind(release: Release) {
             binding.releaseName.text = release.title
             setViewVisibility(release.disambiguation, binding.releaseDisambiguation)
-            binding.releaseCoverArt.setImageDrawable(binding.root.context
-                    .resources
-                    .getDrawable(R.drawable.link_discog))
             if (release.coverArt != null) setCoverArtView(release) else fetchCoverArtForRelease(release)
             itemView.setOnClickListener { v: View ->
                 val intent = Intent(v.context, ReleaseActivity::class.java)

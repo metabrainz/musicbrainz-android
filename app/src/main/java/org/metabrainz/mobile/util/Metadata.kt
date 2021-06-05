@@ -21,26 +21,6 @@ object Metadata {
         return defaultTagMap
     }
 
-    fun getAudioFileFromTrack(track: Track?): AudioFile {
-        val title = track?.title ?: ""
-        val duration = track?.length?.toInt() ?: 0
-        val trackNum = track?.position ?: 0
-        val albumArtist = ""
-        var artist: String? = ""
-        var album = ""
-        var trackTotal = 0
-        val recording = track?.recording
-        if (recording != null) {
-            trackTotal = recording.trackCount
-            if (recording.releases.size > 0) {
-                artist = EntityUtils.getDisplayArtist(recording.releases[0].artistCredits)
-                album = recording.releases[0].title!!
-            }
-        }
-        return AudioFile("", 0, 0, title, albumArtist, artist, album,
-                trackNum, trackTotal, 0, 0, duration, "", "")
-    }
-
     fun createRecordingFromHashMap(metadata: AudioFile?): Recording {
         val recording = Recording()
         recording.releases = mutableListOf(Release())
@@ -59,7 +39,7 @@ object Metadata {
         return recording
     }
 
-    fun createTagFields(local: AudioFile?, track: Track?): List<TagField> {
+    fun createTagFields(local: AudioFile?, track: Track?, release: Release): List<TagField> {
         val tagFields = HashMap<String, TagField>()
         if (local != null) {
             for (entry in local.allProperties)
@@ -67,10 +47,12 @@ object Metadata {
             if (track != null) {
                 tagFields.setNewValue("TITLE", track.title)
                 tagFields.setNewValue("MUSICBRAINZ_TRACKID", track.mbid)
+                tagFields.setNewValue("MUSICBRAINZ_RECORDINGID", track.recording?.mbid)
+                tagFields.setNewValue("MUSICBRAINZ_RELEASEID", release.mbid)
                 tagFields.setNewValue("TRACKNUMBER", track.position.toString())
                 tagFields.setNewValue("LENGTH", track.length.toString())
-                tagFields.setNewValue("ARTIST",
-                        EntityUtils.getDisplayArtist(track.recording?.artistCredits))
+                tagFields.setNewValue("ARTIST", EntityUtils.getDisplayArtist(track.recording?.artistCredits))
+                //tagFields.setNewValue("acoustid_id",track.)
             }
         }
         return tagFields.values.toList()

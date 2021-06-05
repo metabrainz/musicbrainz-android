@@ -3,7 +3,6 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.app.Application
 import android.net.Uri
 import android.util.Log
-import android.util.Log.d
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -20,8 +19,7 @@ import org.metabrainz.mobile.util.ComparisionResult
 import org.metabrainz.mobile.util.Metadata
 import org.metabrainz.mobile.util.TaggerUtils
 
-class TaggerViewModel @ViewModelInject constructor(
-        val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
+class TaggerViewModel @ViewModelInject constructor(val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
 
     private val _taglibFetchedMetadata = MutableLiveData<AudioFile?>()
     val taglibFetchedMetadata: LiveData<AudioFile?> get() = _taglibFetchedMetadata
@@ -41,8 +39,9 @@ class TaggerViewModel @ViewModelInject constructor(
     }
 
     private fun chooseRecordingFromList(recordings: List<Recording>): ComparisionResult? {
-        if (taglibFetchedMetadata.value == null)
+        if (taglibFetchedMetadata.value == null) {
             return null
+        }
         val recording = Metadata.createRecordingFromHashMap(taglibFetchedMetadata.value!!)
         var maxScore = 0.0
         var comparisionResult = ComparisionResult(0.0, null, null)
@@ -54,27 +53,28 @@ class TaggerViewModel @ViewModelInject constructor(
             }
         }
 
-        //Log.d(recordings.toString())
-
-        if (comparisionResult.releaseMbid != null
-                && comparisionResult.releaseMbid!!.isNotEmpty()
-                && comparisionResult.score > TaggerUtils.THRESHOLD)
+        if (comparisionResult.releaseMbid != null && comparisionResult.releaseMbid!!.isNotEmpty()
+                && comparisionResult.score > TaggerUtils.THRESHOLD) {
             return comparisionResult
+        }
         return null
     }
 
     private fun displayMatchedRelease(release: Release): List<TagField> {
         var track: Track? = null
-        if (release.media != null && release.media!!.isNotEmpty())
-            for (media in release.media!!)
-                for (search in media.tracks)
-                    if (search.recording!!.mbid.equals(matchedResult.value?.trackMbid, true))
+        if (release.media != null && release.media!!.isNotEmpty()) {
+            for (media in release.media!!) {
+                for (search in media.tracks) {
+                    if (search.recording!!.mbid.equals(matchedResult.value?.trackMbid, true)) {
                         track = search
-        return Metadata.createTagFields(taglibFetchedMetadata.value, track)
+                    }
+                }
+            }
+        }
+        return Metadata.createTagFields(taglibFetchedMetadata.value, track, release)
     }
 
     fun saveMetadataTags(tags: HashMap<String, String>): Boolean {
-//        val filePath = _taglibFetchedMetadata.value?.get("filePath")
         Log.i("filepath",_uri.value.toString())
         var result = false
         context.contentResolver.openFileDescriptor(Uri.parse(_uri.value.toString()), "rw")?.use {
@@ -90,8 +90,20 @@ class TaggerViewModel @ViewModelInject constructor(
         { repository.fetchRecordings(QueryUtils.getQuery(Metadata.getDefaultTagList(it))) })
         { chooseRecordingFromList(it) }
 
-        serverFetchedMetadata = map(switchMap(matchedResult)
-        { if (it != null) repository.fetchMatchedRelease(it.releaseMbid) else null })
-        { if (it != null) displayMatchedRelease(it) else null }
+        serverFetchedMetadata = map(switchMap(matchedResult) { comparisonResult ->
+            if (comparisonResult != null) {
+                repository.fetchMatchedRelease(comparisonResult.releaseMbid)
+            }
+            else{
+                null
+            }
+        }) { release ->
+            if (release != null) {
+                displayMatchedRelease(release)
+            }
+            else {
+                null
+            }
+        }
     }
 }

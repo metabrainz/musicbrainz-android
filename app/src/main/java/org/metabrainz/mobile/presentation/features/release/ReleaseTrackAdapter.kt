@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
@@ -115,6 +116,7 @@ class ReleaseTrackAdapter(private val mediaList: List<Media>?) : RecyclerView.Ad
             setViewVisibility(EntityUtils.getDisplayArtist(item.recording!!.artistCredits),
                     binding.trackArtist)
             itemView.setOnClickListener { v: View ->
+                Toast.makeText(v.context,"Cool Oye",Toast.LENGTH_SHORT).show()
                 val intent = Intent(v.context, RecordingActivity::class.java)
                 intent.putExtra(Constants.MBID, item.recording!!.mbid)
                 v.context.startActivity(intent)

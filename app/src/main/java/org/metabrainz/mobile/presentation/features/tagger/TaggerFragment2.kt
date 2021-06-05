@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import android.view.LayoutInflater
@@ -9,13 +10,17 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.databinding.FragmentTagger2Binding
+import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
 import java.util.concurrent.TimeUnit
 
 class TaggerFragment2 : Fragment() {
 
     private lateinit var binding: FragmentTagger2Binding
     private val viewModel: TaggerViewModel by activityViewModels()
+    private var recordingMBID: String? = null
+    private var releaseMBID: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTagger2Binding.inflate(inflater)
@@ -35,7 +40,15 @@ class TaggerFragment2 : Fragment() {
         }
 
 
-        binding.overwriteTagsButton.setOnClickListener { saveMetadata() }
+        binding.overwriteTagsButton.setOnClickListener {
+            saveMetadata()
+        }
+
+        binding.recordingButton.setOnClickListener {
+            val intent = Intent(context, RecordingActivity::class.java)
+            intent.putExtra(Constants.MBID, recordingMBID)
+            context?.startActivity(intent)
+        }
 
         return binding.root
     }
@@ -53,6 +66,7 @@ class TaggerFragment2 : Fragment() {
         binding.MBIDHeading.visibility = View.GONE
         binding.albumArtLocal.visibility = View.GONE
         binding.albumArtServer.visibility = View.GONE
+        binding.recordingButton.visibility = View.GONE
 
         reset()
 
@@ -91,6 +105,7 @@ class TaggerFragment2 : Fragment() {
         binding.taglibFetched.root.visibility = View.VISIBLE
         binding.albumArtLocal.visibility = View.VISIBLE
         binding.albumArtServer.visibility = View.VISIBLE
+        binding.recordingButton.visibility = View.VISIBLE
 
         for (tags in tagsList) {
             if (tags.newValue.isEmpty()) {
@@ -109,6 +124,12 @@ class TaggerFragment2 : Fragment() {
                     d("ok",tags.newValue)
                     binding.MBID.visibility = View.VISIBLE
                     binding.MBIDHeading.visibility = View.VISIBLE
+                }
+                "MUSICBRAINZ_RELEASEID"->{
+                    releaseMBID = tags.newValue
+                }
+                "MUSICBRAINZ_RECORDINGID" ->{
+                    recordingMBID = tags.newValue
                 }
                 "acoustid_id" -> {
                     binding.AcoustID.text = tags.newValue
