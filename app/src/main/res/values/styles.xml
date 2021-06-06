@@ -42,11 +42,11 @@
         <item name="android:windowAnimationStyle">@style/loginrequiredDialogAnimation</item>
     </style>
 
-    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="AppThemeNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar" >
         <item name="colorPrimaryDark">@color/app_bg</item>
     </style>
 
-    <style name="SettingsSwitchTheme" parent="@style/Widget.AppCompat.CompoundButton.Switch">
+    <style name="SettingsSwitchTheme" parent="@style/Widget.MaterialComponents.CompoundButton.Switch">
         <item name="android:colorForeground">#f57f17</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>
