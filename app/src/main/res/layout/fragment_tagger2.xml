@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="14dp"
+        android:scaleType="centerCrop"
         android:layout_width="100dp"
         android:layout_height="100dp" />
 
@@ -31,7 +32,7 @@
         android:gravity="center"
         android:layout_height="wrap_content"
         android:text="MusicBrainz ID"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:layout_margin="8dp"
         android:paddingTop="8dp"
         app:layout_constraintStart_toEndOf="@id/albumArtLocal"
@@ -63,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/MBID"
         app:layout_constraintStart_toEndOf="@id/albumArtLocal"
         app:layout_constraintEnd_toStartOf="@id/albumArtServer"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 
     <TextView
@@ -84,6 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:padding="8dp"
+        android:scaleType="centerCrop"
         android:layout_margin="14dp"
         android:layout_width="100dp"
         android:layout_height="100dp" />
@@ -125,6 +127,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/dark_gray"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -133,13 +136,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/app_bg"
         android:padding="10dp"
         android:text="@string/tagger_file_save"
         android:textAllCaps="false"
         android:textColor="@color/app_bg_light2"
         android:textSize="18sp"
-        app:cornerRadius="8dp"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

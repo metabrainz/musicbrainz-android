@@ -32,7 +32,7 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
     val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
 
-    var serverCoverArt: LiveData<Resource<CoverArt>> = MutableLiveData()
+    val serverCoverArt: LiveData<Resource<CoverArt>>
 
     fun setTaglibFetchedMetadata(metadata: AudioFile?) {
         _taglibFetchedMetadata.value = metadata!!
@@ -103,12 +103,19 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
             }
         }) { release ->
             if (release != null) {
-                serverCoverArt = repository.fetchCoverArt(release.mbid)
                 displayMatchedRelease(release)
             }
             else {
                 null
             }
         }
+        serverCoverArt = map(switchMap(matchedResult) { comparisonResult ->
+                if (comparisonResult != null) {
+                    repository.fetchCoverArt(comparisonResult.releaseMbid)
+                }
+                else{
+                    null
+                }
+        }){ it }
     }
 }

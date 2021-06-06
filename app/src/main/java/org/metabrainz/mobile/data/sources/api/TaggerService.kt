@@ -26,5 +26,5 @@ interface TaggerService {
                           @Query("fingerprint") fingerprint: String?): Call<AcoustIDResponse?>?
 
     @GET("http://coverartarchive.org/release/{MBID}")
-    fun getCoverArt(@Path("MBID") MBID: String?): CoverArt
+    fun getCoverArt(@Path("MBID") MBID: String?): Call<CoverArt>
 }

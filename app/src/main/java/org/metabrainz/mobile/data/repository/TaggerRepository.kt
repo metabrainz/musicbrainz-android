@@ -56,30 +56,37 @@ class TaggerRepository @Inject constructor(private val service: TaggerService) {
 
     fun fetchCoverArt(MBID: String?): LiveData<Resource<CoverArt>> {
         val coverArtData = MutableLiveData<Resource<CoverArt>>()
-        try {
-            val coverArt = service.getCoverArt(MBID)
-            coverArtData.setValue(Resource(Resource.Status.SUCCESS, coverArt))
-        } catch (e: Exception) {
-            Resource.getFailure(CoverArt::class.java)
-        }
+        service.getCoverArt(MBID).enqueue(object : Callback<CoverArt>{
+            override fun onResponse(call: Call<CoverArt>, response: Response<CoverArt>) {
+                try {
+                    val result = response.body()
+                    coverArtData.value = Resource(Resource.Status.SUCCESS, result)
+                }
+                catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onFailure(call: Call<CoverArt>, t: Throwable) {}
+        })
         return coverArtData
     }
 
     fun fetchAcoustIDResults(duration: Long, fingerprint: String?): LiveData<List<Recording>> {
         val recordingResponseData = MutableLiveData<List<Recording>>()
         service.lookupFingerprint(ACOUST_ID_KEY, Constants.ACOUST_ID_RESPONSE_PARAMS, duration, fingerprint)!!
-                .enqueue(object : Callback<AcoustIDResponse?> {
-                    override fun onResponse(call: Call<AcoustIDResponse?>, response: Response<AcoustIDResponse?>) {
-                        try {
-                            val result = response.body()!!.results
-                            recordingResponseData.setValue(TaggerUtils.parseResults(result))
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+            .enqueue(object : Callback<AcoustIDResponse?> {
+                override fun onResponse(call: Call<AcoustIDResponse?>, response: Response<AcoustIDResponse?>) {
+                    try {
+                        val result = response.body()!!.results
+                        recordingResponseData.setValue(TaggerUtils.parseResults(result))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
+                }
 
-                    override fun onFailure(call: Call<AcoustIDResponse?>, t: Throwable) {}
-                })
+                override fun onFailure(call: Call<AcoustIDResponse?>, t: Throwable) {}
+            })
         return recordingResponseData
     }
 }
