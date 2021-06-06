@@ -72,5 +72,4 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             Resource.getFailure(CoverArt::class.java)
         }
     }
-
 }

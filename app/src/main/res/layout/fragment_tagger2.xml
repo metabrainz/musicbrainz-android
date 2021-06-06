@@ -21,8 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="14dp"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
     <TextView
         android:id="@+id/MBIDHeading"
@@ -85,8 +85,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:padding="8dp"
         android:layout_margin="14dp"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
     <TableLayout
         android:layout_width="0dp"
@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AcoustID">
+        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal">
 
         <TableRow>
             <include
@@ -124,7 +124,7 @@
         android:text="@string/search_type_recording"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:background="@color/dark_gray"
+        app:backgroundTint="@color/dark_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -139,6 +139,7 @@
         android:textAllCaps="false"
         android:textColor="@color/app_bg_light2"
         android:textSize="18sp"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

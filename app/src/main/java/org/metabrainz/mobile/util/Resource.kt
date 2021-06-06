@@ -1,7 +1,5 @@
 package org.metabrainz.mobile.util
 
-import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
-
 class Resource<T>(val status: Status, val data: T?) {
 
     enum class Status {

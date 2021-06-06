@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.sources.api
 
+import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.AcoustIDResponse
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.data.sources.api.entities.response.RecordingSearchResponse
@@ -23,4 +24,7 @@ interface TaggerService {
                           @Query("meta") metadata: String?,
                           @Query("duration") duration: Long,
                           @Query("fingerprint") fingerprint: String?): Call<AcoustIDResponse?>?
+
+    @GET("http://coverartarchive.org/release/{MBID}")
+    fun getCoverArt(@Path("MBID") MBID: String?): CoverArt
 }

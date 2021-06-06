@@ -10,6 +10,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.databinding.FragmentTagger2Binding
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
@@ -38,7 +39,11 @@ class TaggerFragment2 : Fragment() {
         viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner) {
             setTaglibFetchedMetadata(it)
         }
-
+        viewModel.serverCoverArt.observe(viewLifecycleOwner) {
+            Glide.with(this)
+                .load(it.data!!.allThumbnailsLinks[0])
+                .into(binding.albumArtServer)
+        }
 
         binding.overwriteTagsButton.setOnClickListener {
             saveMetadata()

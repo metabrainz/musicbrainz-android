@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator.ACOUST_ID_KEY
 import org.metabrainz.mobile.data.sources.api.TaggerService
+import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.AcoustIDResponse
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.data.sources.api.entities.response.RecordingSearchResponse
+import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.TaggerUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -50,6 +52,17 @@ class TaggerRepository @Inject constructor(private val service: TaggerService) {
             override fun onFailure(call: Call<Release?>, t: Throwable) {}
         })
         return matchedReleaseData
+    }
+
+    fun fetchCoverArt(MBID: String?): LiveData<Resource<CoverArt>> {
+        val coverArtData = MutableLiveData<Resource<CoverArt>>()
+        try {
+            val coverArt = service.getCoverArt(MBID)
+            coverArtData.setValue(Resource(Resource.Status.SUCCESS, coverArt))
+        } catch (e: Exception) {
+            Resource.getFailure(CoverArt::class.java)
+        }
+        return coverArtData
     }
 
     fun fetchAcoustIDResults(duration: Long, fingerprint: String?): LiveData<List<Recording>> {

@@ -12,11 +12,13 @@ import androidx.lifecycle.Transformations.switchMap
 import com.simplecityapps.ktaglib.KTagLib
 import org.metabrainz.mobile.data.repository.TaggerRepository
 import org.metabrainz.mobile.data.sources.QueryUtils
+import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.Track
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.util.ComparisionResult
 import org.metabrainz.mobile.util.Metadata
+import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.TaggerUtils
 
 class TaggerViewModel @ViewModelInject constructor(val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
@@ -29,6 +31,8 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
 
     val serverFetchedMetadata: LiveData<List<TagField>>
     private val matchedResult: LiveData<ComparisionResult>
+
+    var serverCoverArt: LiveData<Resource<CoverArt>> = MutableLiveData()
 
     fun setTaglibFetchedMetadata(metadata: AudioFile?) {
         _taglibFetchedMetadata.value = metadata!!
@@ -99,6 +103,7 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
             }
         }) { release ->
             if (release != null) {
+                serverCoverArt = repository.fetchCoverArt(release.mbid)
                 displayMatchedRelease(release)
             }
             else {
