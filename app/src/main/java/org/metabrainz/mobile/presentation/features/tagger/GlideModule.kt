@@ -14,7 +14,6 @@ class GlideModule : AppGlideModule() {
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         registry.append(AudioFile::class.java,
             ByteArrayInputStream::class.java,
-            AlbumArtLoader.Factory(context.applicationContext,
-            KTagLib))
+            AlbumArtLoader.Factory(context.applicationContext, KTagLib))
     }
 }
