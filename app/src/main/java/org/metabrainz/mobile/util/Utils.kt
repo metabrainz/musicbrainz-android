@@ -66,11 +66,7 @@ object Utils {
             } else {
                 config.locale = locale
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                context = context.createConfigurationContext(config)
-            } else {
-                context.resources.updateConfiguration(config, context.resources.displayMetrics)
-            }
+            context = context.createConfigurationContext(config)
         }
         return ContextWrapper(context)
     }
