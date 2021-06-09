@@ -27,8 +27,7 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
             .get(ReleaseListViewModel::class.java)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReleaseItemViewHolder {
-        val inflater = parent.context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return ReleaseItemViewHolder(CardReleaseItemBinding.inflate(inflater, parent, false))
     }
 
@@ -59,7 +58,12 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
         fun bind(release: Release) {
             binding.releaseName.text = release.title
             setViewVisibility(release.disambiguation, binding.releaseDisambiguation)
-            if (release.coverArt != null) setCoverArtView(release) else fetchCoverArtForRelease(release)
+            if (release.coverArt != null){
+                setCoverArtView(release)
+            }
+            else {
+                fetchCoverArtForRelease(release)
+            }
             itemView.setOnClickListener { v: View ->
                 val intent = Intent(v.context, ReleaseActivity::class.java)
                 intent.putExtra(Constants.MBID, release.mbid)
