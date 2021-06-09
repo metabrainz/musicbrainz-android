@@ -12,19 +12,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import org.metabrainz.mobile.data.sources.Constants
-import org.metabrainz.mobile.databinding.FragmentTagger2Binding
+import org.metabrainz.mobile.databinding.FragmentTaggerBinding
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
 import java.util.concurrent.TimeUnit
 
-class TaggerFragment2 : Fragment() {
+class TaggerFragment : Fragment() {
 
-    private lateinit var binding: FragmentTagger2Binding
+    private lateinit var binding: FragmentTaggerBinding
     private val viewModel: TaggerViewModel by activityViewModels()
     private var recordingMBID: String? = null
     private var releaseMBID: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentTagger2Binding.inflate(inflater)
+        binding = FragmentTaggerBinding.inflate(inflater)
 
         binding.taglibFetched.originalValue.visibility = View.VISIBLE
         binding.serverFetched.newValue.visibility = View.VISIBLE

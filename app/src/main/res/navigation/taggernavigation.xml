@@ -24,6 +24,6 @@
         tools:layout="@layout/fragment_tagger" />
     <fragment
         android:id="@+id/taggerFragment2"
-        android:name="org.metabrainz.mobile.presentation.features.tagger.TaggerFragment2"
+        android:name="org.metabrainz.mobile.presentation.features.tagger.TaggerFragment"
         android:label="TaggerFragment2" />
 </navigation>
