@@ -150,25 +150,24 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
         if (query.isNotEmpty()) {
 
             for((audioFile, document) in copyDataFiles) {
-                if(document.displayName.toLowerCase(Locale.getDefault()).
-                    contains(query.toLowerCase(Locale.getDefault()))){
+                if(document.displayName.contains(query,ignoreCase = true)){
                     dataFiles.add(Pair(audioFile,document))
                     documentAdapter.notifyItemChanged(dataFiles.size-1)
                 }
                 if(audioFile.album!=null && !dataFiles.contains(Pair(audioFile,document))){
-                    if(audioFile.album.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
+                    if(audioFile.album.contains(query,ignoreCase = true)){
                         dataFiles.add(Pair(audioFile,document))
                         documentAdapter.notifyItemChanged(dataFiles.size-1)
                     }
                 }
                 if(audioFile.artist!=null && !dataFiles.contains(Pair(audioFile,document))){
-                    if(audioFile.artist.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
+                    if(audioFile.artist.contains(query,ignoreCase = true)){
                         dataFiles.add(Pair(audioFile,document))
                         documentAdapter.notifyItemChanged(dataFiles.size-1)
                     }
                 }
                 if(audioFile.albumArtist!=null && !dataFiles.contains(Pair(audioFile,document))){
-                    if(audioFile.albumArtist.toLowerCase(Locale.getDefault()).contains(query.toLowerCase(Locale.getDefault()))){
+                    if(audioFile.albumArtist.contains(query,ignoreCase = true)){
                         dataFiles.add(Pair(audioFile,document))
                         documentAdapter.notifyItemChanged(dataFiles.size-1)
                     }
