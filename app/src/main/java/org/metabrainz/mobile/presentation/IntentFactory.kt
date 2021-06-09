@@ -9,14 +9,13 @@ import org.metabrainz.mobile.presentation.features.login.LoginActivity
 import org.metabrainz.mobile.presentation.features.settings.SettingsActivity
 
 object IntentFactory {
-    @JvmStatic
+
     fun getDashboard(context: Context?): Intent {
         val intent = Intent(context, DashboardActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         return intent
     }
 
-    @JvmStatic
     fun getLogin(context: Context?): Intent {
         return Intent(context, LoginActivity::class.java)
     }
@@ -29,7 +28,6 @@ object IntentFactory {
         return Intent(context, AboutActivity::class.java)
     }
 
-    @JvmStatic
     fun getSettings(context: Context?): Intent {
         return Intent(context, SettingsActivity::class.java)
     }

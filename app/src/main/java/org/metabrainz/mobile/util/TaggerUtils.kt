@@ -29,6 +29,7 @@ object TaggerUtils {
     const val UNMATCHED_WORDS_WEIGHT = 0.4
     private val levenshtein = Levenshtein()
     val WEIGHTS = initializeWeights()
+
     fun initializeWeights(): Map<String, Int> {
         val map: MutableMap<String, Int> = HashMap()
         map[TITLE] = 13
@@ -73,7 +74,7 @@ object TaggerUtils {
         } else 0.0
     }
 
-    fun compareTracks(localTrack: Recording?, searchedTrack: Recording): ComparisionResult {
+    fun compareTracks(localTrack: Recording?, searchedTrack: Recording): ComparisonResult {
         val scoreList: MutableList<Pair<Double, Int?>> = ArrayList()
         var releaseMbid: String? = ""
         var score = 0.0
@@ -108,7 +109,7 @@ object TaggerUtils {
             if (searchedTrack.score != 0) score *= searchedTrack.score / 100.0
         }
         d(searchedTrack.title + " score: " + score)
-        return ComparisionResult(score, releaseMbid, searchedTrack.mbid)
+        return ComparisonResult(score, releaseMbid, searchedTrack.mbid)
     }
 
     fun lengthScore(firstLength: Long, secondLength: Long): Double {
@@ -197,20 +198,5 @@ object TaggerUtils {
             }
         }
         return recordings
-    }
-
-    fun getPermissionsList(context: Context?): Array<String?> {
-        val readStoragePermission: Boolean
-        val writeStoragePermission: Boolean
-        readStoragePermission = ContextCompat.checkSelfPermission(context!!,
-                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-        writeStoragePermission = ContextCompat.checkSelfPermission(context,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-        val permissionsList = ArrayList<String>()
-        if (!readStoragePermission) permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-        if (!writeStoragePermission) permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        var permissions = arrayOfNulls<String>(permissionsList.size)
-        permissions = permissionsList.toArray(permissions)
-        return permissions
     }
 }

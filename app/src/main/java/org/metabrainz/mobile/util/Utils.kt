@@ -14,12 +14,12 @@ import java.util.*
  * A set of fairly general Android utility methods.
  */
 object Utils {
+
     fun shareIntent(text: String?): Intent {
         val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
         return intent.putExtra(Intent.EXTRA_TEXT, text)
     }
 
-    @JvmStatic
     fun emailIntent(recipient: String, subject: String?): Intent {
         val uri = Uri.parse("mailto:$recipient")
         val intent = Intent(Intent.ACTION_SENDTO, uri)
@@ -47,7 +47,6 @@ object Utils {
         }
     }
 
-    @JvmStatic
     fun changeLanguage(context: Context, lang_code: String): ContextWrapper {
         var context = context
         val sysLocale: Locale

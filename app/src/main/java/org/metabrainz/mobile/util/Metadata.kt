@@ -10,6 +10,7 @@ import org.metabrainz.mobile.presentation.features.tagger.AudioFile
 import org.metabrainz.mobile.presentation.features.tagger.TagField
 
 object Metadata {
+
     fun getDefaultTagList(metadata: AudioFile?): HashMap<String, String> {
         val defaultTagMap = HashMap<String, String>()
         defaultTagMap["title"] = metadata!!.allProperties["TITLE"] ?: ""

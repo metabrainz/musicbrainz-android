@@ -16,7 +16,7 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.Track
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
-import org.metabrainz.mobile.util.ComparisionResult
+import org.metabrainz.mobile.util.ComparisonResult
 import org.metabrainz.mobile.util.Metadata
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.TaggerUtils
@@ -30,7 +30,7 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
     val uri:LiveData<Uri> get() = _uri
 
     val serverFetchedMetadata: LiveData<List<TagField>>
-    private val matchedResult: LiveData<ComparisionResult>
+    private val matchedResult: LiveData<ComparisonResult>
 
     val serverCoverArt: LiveData<Resource<CoverArt>>
 
@@ -42,13 +42,13 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
         _uri.value = uri
     }
 
-    private fun chooseRecordingFromList(recordings: List<Recording>): ComparisionResult? {
+    private fun chooseRecordingFromList(recordings: List<Recording>): ComparisonResult? {
         if (taglibFetchedMetadata.value == null) {
             return null
         }
         val recording = Metadata.createRecordingFromHashMap(taglibFetchedMetadata.value!!)
         var maxScore = 0.0
-        var comparisionResult = ComparisionResult(0.0, null, null)
+        var comparisionResult = ComparisonResult(0.0, null, null)
         for (searchResult in recordings) {
             val result = TaggerUtils.compareTracks(recording, searchResult)
             if (result.score > maxScore) {
