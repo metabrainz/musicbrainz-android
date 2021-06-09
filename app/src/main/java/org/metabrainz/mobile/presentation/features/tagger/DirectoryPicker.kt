@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -25,18 +24,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import org.metabrainz.mobile.App
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
-import org.metabrainz.mobile.App
-import org.metabrainz.mobile.data.sources.Constants
-import org.metabrainz.mobile.presentation.features.search.SearchResultsActivity
-import java.util.*
 
 @AndroidEntryPoint
 class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextListener {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        Log.e("MainActivity", "Coroutine failed: ${throwable.localizedMessage}")
+        Log.e("DirectoryPicker", "Coroutine failed: ${throwable.localizedMessage}")
     }
 
     private val Fragment.contentResolver get() = activity?.contentResolver
@@ -148,7 +144,6 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
         dataFiles.clear()
         documentAdapter.notifyDataSetChanged()
         if (query.isNotEmpty()) {
-
             for((audioFile, document) in copyDataFiles) {
                 if(document.displayName.contains(query,ignoreCase = true)){
                     dataFiles.add(Pair(audioFile,document))
