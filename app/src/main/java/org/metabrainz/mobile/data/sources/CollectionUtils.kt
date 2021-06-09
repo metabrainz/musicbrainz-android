@@ -37,7 +37,6 @@ object CollectionUtils {
         return collections
     }
 
-    @JvmStatic
     fun removeCollections(collections: MutableList<Collection>) {
         val itr = collections.iterator()
         while (itr.hasNext()) {
@@ -50,11 +49,11 @@ object CollectionUtils {
         }
     }
 
-    @JvmStatic
     fun getCollectionEntityType(collection: Collection): MBEntityType {
         return MBEntityType.valueOf(collection
                 .entityType
                 !!.replace('-', '_')
-                .toUpperCase())
+                .toUpperCase(Locale.ROOT)
+        )
     }
 }

@@ -26,6 +26,7 @@ object Constants {
     const val OFFSET = 0
     const val MBID = "mbid"
     const val TYPE = "type"
+
     fun getDefaultParams(entity: MBEntityType?): String? {
         return when (entity) {
             MBEntityType.ARTIST -> LOOKUP_ARTIST_PARAMS
