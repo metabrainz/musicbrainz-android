@@ -67,11 +67,7 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
         setupSearchView()
 
         if(copyDataFiles.isNotEmpty()){
-            binding.instructionForTagFix.visibility = View.VISIBLE
-            binding.instruction.visibility = View.GONE
-            binding.loadingAnimation.visibility = View.GONE
-            binding.recyclerView.visibility = View.VISIBLE
-            binding.searchView.visibility = View.VISIBLE
+           hideInstructions()
         }
         return binding.root
     }
@@ -92,24 +88,15 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
         if (requestCode == REQUEST_CODE_OPEN_DOCUMENT && resultCode == Activity.RESULT_OK) {
             data?.let { intent ->
                 intent.data?.let { uri ->
-                    contentResolver?.takePersistableUriPermission(uri,
-                            Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     scope.launch {
                         documentAdapter.clear()
                         val documents = parseUri(uri)
                         if(documents.isNotEmpty()){
-                            binding.instructionForTagFix.visibility = View.VISIBLE
-                            binding.instruction.visibility = View.GONE
-                            binding.loadingAnimation.visibility = View.GONE
-                            binding.recyclerView.visibility = View.VISIBLE
-                            binding.searchView.visibility = View.VISIBLE
+                            hideInstructions()
                         }
                         else{
-                            binding.instructionForTagFix.visibility = View.GONE
-                            binding.instruction.visibility = View.VISIBLE
-                            binding.loadingAnimation.visibility = View.VISIBLE
-                            binding.recyclerView.visibility = View.GONE
-                            binding.searchView.visibility = View.GONE
+                            showInstructions()
                             Toast.makeText(context,"This folder does not have any supported media files!",Toast.LENGTH_LONG).show()
                         }
                         getTags(documents).collect { pair ->
@@ -121,6 +108,22 @@ class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextL
                 } ?: Log.e(TAG, "Intent uri null")
             } ?: Log.e(TAG, "onActivityResult failed to handle result: Intent data null")
         }
+    }
+
+    private fun showInstructions(){
+        binding.instructionForTagFix.visibility = View.GONE
+        binding.instruction.visibility = View.VISIBLE
+        binding.loadingAnimation.visibility = View.VISIBLE
+        binding.recyclerView.visibility = View.GONE
+        binding.searchView.visibility = View.GONE
+    }
+
+    private fun hideInstructions(){
+        binding.instructionForTagFix.visibility = View.VISIBLE
+        binding.instruction.visibility = View.GONE
+        binding.loadingAnimation.visibility = View.GONE
+        binding.recyclerView.visibility = View.VISIBLE
+        binding.searchView.visibility = View.VISIBLE
     }
 
     private fun setupSearchView() {
