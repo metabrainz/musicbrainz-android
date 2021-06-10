@@ -11,12 +11,12 @@
 
         <ImageView
             android:id="@+id/albumArt"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginStart="32dp"
             android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintEnd_toStartOf="@+id/documentName"
-            app:layout_constraintStart_toStartOf="@+id/artistHeading"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
