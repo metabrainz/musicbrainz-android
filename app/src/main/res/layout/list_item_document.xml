@@ -13,34 +13,35 @@
             android:id="@+id/albumArt"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/title"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/documentName"
+            android:layout_marginEnd="27dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="@+id/documentName"
             tools:text="The Patient" />
 
         <TextView
             android:id="@+id/documentName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="74dp"
             android:layout_marginEnd="27dp"
-            android:layout_marginBottom="73dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/album"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            app:layout_goneMarginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/albumArt"
+            app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="/storage/music/tool/lateralus/the_patient.opus" />
 
 
@@ -49,8 +50,7 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_margin="20dp"
             android:text="Artist"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,28 +65,30 @@
             app:layout_constraintTop_toBottomOf="@+id/artistHeading"
             tools:text="TOOL" />
 
-
         <TextView
             android:id="@+id/albumHeading"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Album"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="27dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="84dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/album"
-            app:layout_constraintStart_toStartOf="@+id/album" />
+            app:layout_constraintTop_toBottomOf="@id/albumArt"
+            app:layout_constraintStart_toEndOf="@id/artistHeading"/>
 
         <TextView
             android:id="@+id/album"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginBottom="17dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/trackHeading"
-            app:layout_constraintStart_toEndOf="@+id/trackHeading"
+            android:layout_marginEnd="27dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/albumHeading"
+            app:layout_constraintTop_toBottomOf="@id/albumHeading"
             tools:text="TOOL" />
-
 
         <TextView
             android:id="@+id/yearHeading"
@@ -115,41 +117,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Track"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="84dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/track"
-            app:layout_constraintStart_toStartOf="@+id/track" />
+            app:layout_constraintTop_toBottomOf="@id/album"
+            app:layout_constraintStart_toEndOf="@id/yearHeading"/>
 
         <TextView
             android:id="@+id/track"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="126dp"
-            android:layout_marginEnd="127dp"
-            android:layout_marginBottom="17dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/mimeTypeHeading"
-            app:layout_constraintEnd_toEndOf="@+id/disc"
-            app:layout_constraintStart_toStartOf="@+id/durationHeading"
+            app:layout_constraintStart_toStartOf="@+id/trackHeading"
+            app:layout_constraintTop_toBottomOf="@+id/trackHeading"
             tools:text="3" />
 
         <TextView
             android:id="@+id/discHeading"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Disc"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="27dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="84dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/disc"
-            app:layout_constraintStart_toStartOf="@+id/disc" />
+            app:layout_constraintTop_toBottomOf="@id/album"
+            app:layout_constraintStart_toEndOf="@id/trackHeading"/>
 
         <TextView
             android:id="@+id/disc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="17dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/sizeHeading"
-            app:layout_constraintStart_toStartOf="@+id/sizeHeading"
+            android:layout_marginEnd="27dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/discHeading"
+            app:layout_constraintTop_toBottomOf="@+id/discHeading"
             tools:text="1" />
 
 
@@ -160,17 +165,17 @@
             android:layout_height="wrap_content"
             android:text="Duration"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/duration"
-            app:layout_constraintEnd_toEndOf="@+id/year"
-            app:layout_constraintStart_toEndOf="@+id/year" />
-
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/year"/>
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/durationHeading"
             app:layout_constraintStart_toStartOf="@+id/durationHeading"
             tools:text="7:14" />
 
@@ -181,10 +186,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mime Type"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="84dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/mimeType"
-            app:layout_constraintEnd_toEndOf="@+id/trackHeading"
-            app:layout_constraintStart_toEndOf="@+id/trackHeading" />
+            app:layout_constraintTop_toBottomOf="@id/track"
+            app:layout_constraintStart_toEndOf="@id/durationHeading" />
 
         <TextView
             android:id="@+id/mimeType"
@@ -200,26 +206,27 @@
         <TextView
             android:id="@+id/sizeHeading"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Size"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="27dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="84dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/size"
-            app:layout_constraintStart_toStartOf="@+id/size" />
+            app:layout_constraintTop_toBottomOf="@id/disc"
+            app:layout_constraintStart_toEndOf="@id/mimeTypeHeading" />
 
         <TextView
             android:id="@+id/size"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="84dp"
-            android:layout_marginLeft="84dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginRight="84dp"
             android:layout_marginBottom="16dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="27dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/sizeHeading"
             tools:text="4.98MB" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
