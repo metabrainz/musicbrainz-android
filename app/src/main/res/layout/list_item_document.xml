@@ -1,260 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/albumArt"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toStartOf="@+id/documentName"
+            app:layout_constraintStart_toStartOf="@+id/artistHeading"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginBottom="1dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/documentName"
+            app:layout_constraintStart_toStartOf="@+id/documentName"
+            tools:text="The Patient" />
 
-            <ImageView
-                android:id="@+id/albumArt"
-                android:layout_width="80dp"
-                android:layout_height="80dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="16dp">
-
-                <TextView
-                    android:id="@+id/title"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    tools:text="The Patient" />
-
-                <TextView
-                    android:id="@+id/documentName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="/storage/music/tool/lateralus/the_patient.opus" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/documentName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="74dp"
+            android:layout_marginEnd="27dp"
+            android:layout_marginBottom="73dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/album"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="/storage/music/tool/lateralus/the_patient.opus" />
+
+
+        <TextView
+            android:id="@+id/artistHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+            android:text="Artist"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumArt" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/artistHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Artist"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/artist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="TOOL" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/albumHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Album"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/album"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="TOOL" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/artistHeading"
+            app:layout_constraintTop_toBottomOf="@+id/artistHeading"
+            tools:text="TOOL" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/yearHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Year"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/year"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="2001" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/trackHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Track"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/track"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="3" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/discHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Disc"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/disc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="1" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/albumHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+            android:text="Album"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/album"
+            app:layout_constraintStart_toStartOf="@+id/album" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="29dp"
+            android:layout_marginBottom="17dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/trackHeading"
+            app:layout_constraintStart_toEndOf="@+id/trackHeading"
+            tools:text="TOOL" />
 
-                <TextView
-                    android:id="@+id/durationHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Duration"
-                    android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/duration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="7:14" />
+        <TextView
+            android:id="@+id/yearHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Year"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/artist"
+            app:layout_constraintTop_toBottomOf="@+id/artist" />
 
-            </LinearLayout>
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/yearHeading"
+            app:layout_constraintTop_toBottomOf="@+id/yearHeading"
+            tools:text="2001" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/mimeTypeHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mime Type"
-                    android:textSize="14sp" />
+        <TextView
+            android:id="@+id/trackHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Track"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/track"
+            app:layout_constraintStart_toStartOf="@+id/track" />
 
-                <TextView
-                    android:id="@+id/mimeType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="audio/ogg" />
+        <TextView
+            android:id="@+id/track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="126dp"
+            android:layout_marginEnd="127dp"
+            android:layout_marginBottom="17dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/mimeTypeHeading"
+            app:layout_constraintEnd_toEndOf="@+id/disc"
+            app:layout_constraintStart_toStartOf="@+id/durationHeading"
+            tools:text="3" />
 
-            </LinearLayout>
+        <TextView
+            android:id="@+id/discHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disc"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/disc"
+            app:layout_constraintStart_toStartOf="@+id/disc" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/disc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/sizeHeading"
+            app:layout_constraintStart_toStartOf="@+id/sizeHeading"
+            tools:text="1" />
 
-                <TextView
-                    android:id="@+id/sizeHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Size"
-                    android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    tools:text="4.98MB" />
+        <TextView
+            android:id="@+id/durationHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/duration"
+            app:layout_constraintEnd_toEndOf="@+id/year"
+            app:layout_constraintStart_toEndOf="@+id/year" />
 
-            </LinearLayout>
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/durationHeading"
+            tools:text="7:14" />
 
-        </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/mimeTypeHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mime Type"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/mimeType"
+            app:layout_constraintEnd_toEndOf="@+id/trackHeading"
+            app:layout_constraintStart_toEndOf="@+id/trackHeading" />
 
-</androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/mimeType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/mimeTypeHeading"
+            tools:text="audio/ogg" />
+
+
+        <TextView
+            android:id="@+id/sizeHeading"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Size"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/size"
+            app:layout_constraintStart_toStartOf="@+id/size" />
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginLeft="84dp"
+            android:layout_marginEnd="84dp"
+            android:layout_marginRight="84dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/title"
+            tools:text="4.98MB" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
