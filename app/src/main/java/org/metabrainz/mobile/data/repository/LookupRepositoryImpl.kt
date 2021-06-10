@@ -49,14 +49,15 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
         return try {
             val responseBody = service.getWikipediaLink(id)
             val jsonResponse = responseBody.string()
-            val result = JsonParser.parseString(jsonResponse).asJsonObject
-                    .getAsJsonObject("entities").getAsJsonObject(id)
+            val result = JsonParser.parseString(jsonResponse).asJsonObject.getAsJsonObject("entities").getAsJsonObject(id)
             val wikiDataResponse = Gson().fromJson(result, WikiDataResponse::class.java)
             val title = wikiDataResponse.sitelinks!!["enwiki"]?.title
-            if (title != null)
+            if (title != null) {
                 fetchWiki(title)
-            else
+            }
+            else {
                 Resource.getFailure(WikiSummary::class.java)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.getFailure(WikiSummary::class.java)

@@ -28,10 +28,12 @@ abstract class LookupViewModel<T : MBEntity> protected constructor(
 
     inline fun <reified T> parseData(data: Resource<String>): Resource<T> {
         return try {
-            if (data.status == SUCCESS)
+            if (data.status == SUCCESS) {
                 Resource(SUCCESS, Gson().fromJson(data.data, T::class.java))
-            else
+            }
+            else {
                 Resource.getFailure(T::class.java)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.getFailure(T::class.java)

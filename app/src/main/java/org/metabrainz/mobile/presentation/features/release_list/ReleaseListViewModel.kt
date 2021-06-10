@@ -18,8 +18,9 @@ class ReleaseListViewModel @ViewModelInject constructor(val repository: LookupRe
     fun fetchCoverArtForRelease(release: Release): LiveData<CoverArt> {
         return liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             val result = repository.fetchCoverArt(release.mbid!!)
-            if (result.status == SUCCESS)
+            if (result.status == SUCCESS) {
                 emit(result.data!!)
+            }
         }
     }
 

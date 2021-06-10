@@ -18,8 +18,9 @@ class ReleaseViewModel @ViewModelInject constructor(repository: LookupRepository
     val coverArtData: LiveData<CoverArt?> = mbid.switchMap {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             val result = repository.fetchCoverArt(it)
-            if (result.status == SUCCESS)
+            if (result.status == SUCCESS) {
                 emit(result.data)
+            }
         }
     }
 

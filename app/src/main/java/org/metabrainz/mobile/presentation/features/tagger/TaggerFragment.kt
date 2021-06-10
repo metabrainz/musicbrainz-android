@@ -26,12 +26,6 @@ class TaggerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTaggerBinding.inflate(inflater)
 
-        binding.taglibFetched.originalValue.visibility = View.VISIBLE
-        binding.serverFetched.newValue.visibility = View.VISIBLE
-        binding.overwriteTagsButton.visibility = View.VISIBLE
-        binding.serverFetched.root.visibility = View.VISIBLE
-        binding.taglibFetched.root.visibility = View.VISIBLE
-
         viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {
             setServerFetchedMetadata(it)
         }
@@ -198,15 +192,17 @@ class TaggerFragment : Fragment() {
     }
 
     private fun Int.toHms(defaultValue: String? = null): String {
-        if (this == 0 && defaultValue != null)
+        if (this == 0 && defaultValue != null) {
             return defaultValue
+        }
         val hours = TimeUnit.MILLISECONDS.toHours(this.toLong())
         val minutes = TimeUnit.MILLISECONDS.toMinutes(this.toLong()) % TimeUnit.HOURS.toMinutes(1)
         val seconds = TimeUnit.MILLISECONDS.toSeconds(this.toLong()) % TimeUnit.MINUTES.toSeconds(1)
 
         return if (hours == 0L) {
             String.format("%2d:%02d", minutes, seconds)
-        } else {
+        }
+        else {
             String.format("%2d:%02d:%02d", hours, minutes, seconds)
         }
     }

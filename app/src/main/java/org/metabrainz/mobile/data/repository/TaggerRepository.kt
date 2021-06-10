@@ -1,5 +1,6 @@
 package org.metabrainz.mobile.data.repository
 
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.metabrainz.mobile.data.sources.Constants
@@ -20,6 +21,7 @@ import javax.inject.Singleton
 
 @Singleton
 class TaggerRepository @Inject constructor(private val service: TaggerService) {
+
     fun fetchRecordings(query: String?): LiveData<List<Recording>> {
         val recordingResponseData = MutableLiveData<List<Recording>>()
         service.searchRecording(query, Constants.LIMIT)!!.enqueue(object : Callback<RecordingSearchResponse?> {
@@ -54,22 +56,14 @@ class TaggerRepository @Inject constructor(private val service: TaggerService) {
         return matchedReleaseData
     }
 
-    fun fetchCoverArt(MBID: String?): LiveData<Resource<CoverArt>> {
-        val coverArtData = MutableLiveData<Resource<CoverArt>>()
-        service.getCoverArt(MBID).enqueue(object : Callback<CoverArt>{
-            override fun onResponse(call: Call<CoverArt>, response: Response<CoverArt>) {
-                try {
-                    val result = response.body()
-                    coverArtData.value = Resource(Resource.Status.SUCCESS, result)
-                }
-                catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun onFailure(call: Call<CoverArt>, t: Throwable) {}
-        })
-        return coverArtData
+    @WorkerThread
+    suspend fun fetchCoverArt(MBID: String): Resource<CoverArt> {
+        return try {
+            val coverArt = service.getCoverArt(MBID)
+            Resource(Resource.Status.SUCCESS, coverArt)
+        } catch (e: Exception) {
+            Resource.getFailure(CoverArt::class.java)
+        }
     }
 
     fun fetchAcoustIDResults(duration: Long, fingerprint: String?): LiveData<List<Recording>> {

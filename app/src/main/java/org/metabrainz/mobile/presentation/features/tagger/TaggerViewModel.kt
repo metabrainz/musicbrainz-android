@@ -3,13 +3,13 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.app.Application
 import android.net.Uri
 import android.util.Log
+import android.util.Log.d
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
 import com.simplecityapps.ktaglib.KTagLib
+import kotlinx.coroutines.Dispatchers
 import org.metabrainz.mobile.data.repository.TaggerRepository
 import org.metabrainz.mobile.data.sources.QueryUtils
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
@@ -109,13 +109,21 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
                 null
             }
         }
+
         serverCoverArt = map(switchMap(matchedResult) { comparisonResult ->
                 if (comparisonResult != null) {
-                    repository.fetchCoverArt(comparisonResult.releaseMbid)
+                    liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                        val result = repository.fetchCoverArt(comparisonResult.releaseMbid!!)
+                        if (result.status == Resource.Status.SUCCESS) {
+                            emit(result.data)
+                        }
+                    }
                 }
                 else{
                     null
                 }
-        }){ it }
+        }){ coverArt ->
+            Resource(Resource.Status.SUCCESS,coverArt)
+        }
     }
 }
