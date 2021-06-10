@@ -22,15 +22,11 @@ object MusicBrainzServiceGenerator {
     const val OAUTH_REDIRECT_URI = "org.metabrainz.mobile://oauth"
     const val ACOUST_ID_KEY = "5mgEECwRkp"
 
-    private const val cacheSize = (5 * 1024 * 1024).toLong()
-    private val  myCache = Cache(App.context!!.cacheDir, cacheSize)
-
     private var authenticator: OAuthAuthenticator? = null
     private val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private var headerInterceptor: HeaderInterceptor? = null
 
     private val httpClientBuilder = OkHttpClient.Builder()
-            .cache(myCache)
             .addInterceptor { chain ->
                 var request = chain.request()
                 request = if (hasNetwork(App.context!!)) {
@@ -63,7 +59,6 @@ object MusicBrainzServiceGenerator {
         }
     }
 
-    @JvmStatic
     fun <S> createService(service: Class<S>, requiresAuthenticator: Boolean): S {
         headerInterceptor = HeaderInterceptor()
         addInterceptors(headerInterceptor)

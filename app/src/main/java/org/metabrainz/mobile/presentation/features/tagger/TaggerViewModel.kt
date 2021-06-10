@@ -3,25 +3,21 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.app.Application
 import android.net.Uri
 import android.util.Log
-import android.util.Log.d
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
 import com.simplecityapps.ktaglib.KTagLib
 import kotlinx.coroutines.Dispatchers
-import org.metabrainz.mobile.data.repository.TaggerRepository
+import org.metabrainz.mobile.data.repository.LookupRepository
 import org.metabrainz.mobile.data.sources.QueryUtils
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.Track
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
-import org.metabrainz.mobile.util.ComparisonResult
-import org.metabrainz.mobile.util.Metadata
-import org.metabrainz.mobile.util.Resource
-import org.metabrainz.mobile.util.TaggerUtils
+import org.metabrainz.mobile.util.*
 
-class TaggerViewModel @ViewModelInject constructor(val repository: TaggerRepository, val context: Application) : AndroidViewModel(context) {
+class TaggerViewModel @ViewModelInject constructor(val repository: LookupRepository, val context: Application) : AndroidViewModel(context) {
 
     private val _taglibFetchedMetadata = MutableLiveData<AudioFile?>()
     val taglibFetchedMetadata: LiveData<AudioFile?> get() = _taglibFetchedMetadata
@@ -90,13 +86,30 @@ class TaggerViewModel @ViewModelInject constructor(val repository: TaggerReposit
     }
 
     init {
-        matchedResult = map(switchMap(taglibFetchedMetadata)
-        { repository.fetchRecordings(QueryUtils.getQuery(Metadata.getDefaultTagList(it))) })
-        { chooseRecordingFromList(it) }
+        matchedResult = map(switchMap(taglibFetchedMetadata) {
+            liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                val result = repository.fetchRecordings(QueryUtils.getQuery(Metadata.getDefaultTagList(it)))
+                if (result.status == Resource.Status.SUCCESS) {
+                    emit(result.data)
+                }
+            }
+        }) { recordings ->
+            if(recordings!=null){
+                chooseRecordingFromList(recordings)
+            }
+            else{
+                null
+            }
+        }
 
         serverFetchedMetadata = map(switchMap(matchedResult) { comparisonResult ->
             if (comparisonResult != null) {
-                repository.fetchMatchedRelease(comparisonResult.releaseMbid)
+                liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                    val result = repository.fetchMatchedRelease(comparisonResult.releaseMbid)
+                    if (result.status == Resource.Status.SUCCESS) {
+                        emit(result.data)
+                    }
+                }
             }
             else{
                 null

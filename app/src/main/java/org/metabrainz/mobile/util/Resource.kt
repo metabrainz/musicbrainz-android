@@ -7,7 +7,7 @@ class Resource<T>(val status: Status, val data: T?) {
     }
 
     companion object {
-        fun <S> getFailure(tClass: Class<S>?): Resource<S> {
+        fun <S> getFailure(): Resource<S> {
             return Resource(Status.FAILED, null)
         }
     }

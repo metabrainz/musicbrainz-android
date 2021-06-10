@@ -3,12 +3,17 @@ package org.metabrainz.mobile.data.repository
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.LookupService
+import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.WikiDataResponse
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
+import org.metabrainz.mobile.util.TaggerUtils
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,7 +27,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             Resource(SUCCESS, data.string())
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure(String::class.java)
+            Resource.getFailure()
         }
     }
 
@@ -40,7 +45,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             val data = service.getWikipediaSummary(title)
             Resource(SUCCESS, data)
         } catch (e: Exception) {
-            Resource.getFailure(WikiSummary::class.java)
+            Resource.getFailure()
         }
     }
 
@@ -56,11 +61,11 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
                 fetchWiki(title)
             }
             else {
-                Resource.getFailure(WikiSummary::class.java)
+                Resource.getFailure()
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure(WikiSummary::class.java)
+            Resource.getFailure()
         }
     }
 
@@ -70,7 +75,34 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             val coverArt = service.getCoverArt(MBID)
             Resource(SUCCESS, coverArt)
         } catch (e: Exception) {
-            Resource.getFailure(CoverArt::class.java)
+            Resource.getFailure()
+        }
+    }
+
+    override suspend fun fetchRecordings(query: String?): Resource<List<Recording>> {
+        return try {
+            val data = service.searchRecording(query, Constants.LIMIT)
+            Resource(SUCCESS, data.recordings)
+        } catch (e: Exception) {
+            Resource.getFailure()
+        }
+    }
+
+    override suspend fun fetchMatchedRelease(MBID: String?): Resource<Release> {
+        return try {
+            val data = service.lookupRecording(MBID, Constants.TAGGER_RELEASE_PARAMS)
+            Resource(SUCCESS, data)
+        } catch (e: Exception) {
+            Resource.getFailure()
+        }
+    }
+
+    override suspend fun fetchAcoustIDResults(duration: Long, fingerprint: String?): Resource<List<Recording>> {
+        return try {
+            val data = service.lookupFingerprint(MusicBrainzServiceGenerator.ACOUST_ID_KEY, Constants.ACOUST_ID_RESPONSE_PARAMS, duration, fingerprint)!!
+            Resource(SUCCESS, TaggerUtils.parseResults(data.results))
+        } catch (e: Exception) {
+            Resource.getFailure()
         }
     }
 }

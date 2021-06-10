@@ -1,21 +1,18 @@
 package org.metabrainz.mobile.util
 
-import android.Manifest
-import android.content.Context
-import org.metabrainz.mobile.util.Log.d
-import info.debatty.java.stringsimilarity.Levenshtein
-import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
-import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit
-import androidx.core.content.ContextCompat
-import android.content.pm.PackageManager
 import android.util.Pair
+import info.debatty.java.stringsimilarity.Levenshtein
+import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
 import org.metabrainz.mobile.data.sources.api.entities.Media
 import org.metabrainz.mobile.data.sources.api.entities.acoustid.Result
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Artist
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup
+import org.metabrainz.mobile.util.Log.d
 import java.util.*
+import kotlin.math.min
 
 object TaggerUtils {
     const val LENGTH_SCORE_THRESHOLD_MS: Long = 30000
@@ -48,8 +45,8 @@ object TaggerUtils {
     // Calculate similarity of multi word strings
     private fun calculateMultiWordSimilarity(first: String?, second: String?): Double {
         return if (first != null && second != null) {
-            val firstList = first.toLowerCase().split("\\W+").toTypedArray()
-            val secondList: MutableList<String> = ArrayList(Arrays.asList(*second.toLowerCase().split("\\W+").toTypedArray()))
+            val firstList = first.toLowerCase(Locale.ROOT).split("\\W+").toTypedArray()
+            val secondList: MutableList<String> = ArrayList(listOf(*second.toLowerCase(Locale.ROOT).split("\\W+").toTypedArray()))
             var total = 0.0
             var totalScore = 0.0
             for (firstWord in firstList) {
@@ -97,7 +94,7 @@ object TaggerUtils {
                 var max = 0.0
 
                 // Base case if no suitable release found
-                if (!searchedTrack.releases.isEmpty()) releaseMbid = searchedTrack.releases[0].mbid
+                if (searchedTrack.releases.isNotEmpty()) releaseMbid = searchedTrack.releases[0].mbid
                 for (searchedRelease in searchedTrack.releases) {
                     val releaseScore = compareReleaseParts(localRelease, searchedRelease)
                     if (releaseScore > max) {
@@ -113,7 +110,7 @@ object TaggerUtils {
     }
 
     fun lengthScore(firstLength: Long, secondLength: Long): Double {
-        return 1.0 - Math.min(firstLength - secondLength, LENGTH_SCORE_THRESHOLD_MS) / LENGTH_SCORE_THRESHOLD_MS.toDouble()
+        return 1.0 - min(firstLength - secondLength, LENGTH_SCORE_THRESHOLD_MS) / LENGTH_SCORE_THRESHOLD_MS.toDouble()
     }
 
     fun compareReleaseParts(localRelease: Release?, searchedRelease: Release?): Double {

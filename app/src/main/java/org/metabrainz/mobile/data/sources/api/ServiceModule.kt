@@ -10,23 +10,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 class ServiceModule {
-    @get:Provides
-    @get:Singleton
-    val lookupService: LookupService
-        get() = createService(LookupService::class.java, true)
 
     @get:Provides
     @get:Singleton
-    val collectionService: CollectionService
-        get() = createService(CollectionService::class.java, true)
+    val lookupService: LookupService = createService(LookupService::class.java, true)
 
     @get:Provides
     @get:Singleton
-    val loginService: LoginService
-        get() = createService(LoginService::class.java, false)
+    val collectionService: CollectionService = createService(CollectionService::class.java, true)
 
     @get:Provides
     @get:Singleton
-    val taggerService: TaggerService
-        get() = createService(TaggerService::class.java, false)
+    val loginService: LoginService = createService(LoginService::class.java, false)
+
 }

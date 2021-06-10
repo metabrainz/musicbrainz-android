@@ -37,7 +37,7 @@ class ArtistViewModel @ViewModelInject constructor(repository: LookupRepository)
             if (title.isNotEmpty())
                 return repository.fetchWikiSummary(title, method)
         }
-        return Resource.getFailure(WikiSummary::class.java)
+        return Resource.getFailure()
     }
 
     init {
