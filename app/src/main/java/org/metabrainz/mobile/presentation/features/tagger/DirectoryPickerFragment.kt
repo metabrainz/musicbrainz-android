@@ -29,7 +29,7 @@ import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.FragmentDirectoryPickerBinding
 
 @AndroidEntryPoint
-class DirectoryPicker : Fragment(), OnItemCLickListener, SearchView.OnQueryTextListener {
+class DirectoryPickerFragment : Fragment(), OnItemCLickListener, SearchView.OnQueryTextListener {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("DirectoryPicker", "Coroutine failed: ${throwable.localizedMessage}")

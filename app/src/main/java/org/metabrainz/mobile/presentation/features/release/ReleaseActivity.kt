@@ -40,8 +40,7 @@ class ReleaseActivity : LookupActivity<Release>() {
         linksViewModel.setData(data.relations)
     }
 
-    override fun getTabsList(): List<Int> = listOf(R.string.tab_info,
-            R.string.tab_mediums, R.string.tab_links, R.string.tab_edits)
+    override fun getTabsList(): List<Int> = listOf(R.string.tab_info, R.string.tab_mediums, R.string.tab_links, R.string.tab_edits)
 
     override fun getFragmentsList(): List<MusicBrainzFragment> = listOf(ReleaseInfoFragment,
             ReleaseTracksFragment, LinksFragment, UserDataFragment)
