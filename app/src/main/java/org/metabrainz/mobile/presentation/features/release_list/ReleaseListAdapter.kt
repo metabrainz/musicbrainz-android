@@ -91,7 +91,7 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
             if (coverArt?.images != null && coverArt.images.isNotEmpty()) {
                 val coverArtRelease = coverArt.release
                 for (release in releaseList) {
-                    if (coverArtRelease!!.endsWith(release.mbid!!)) {
+                    if (coverArtRelease.endsWith(release.mbid!!)) {
                         release.coverArt = coverArt
                         setCoverArtView(release)
                         break

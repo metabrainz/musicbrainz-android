@@ -35,7 +35,7 @@ class TaggerFragment : Fragment() {
         }
         viewModel.serverCoverArt.observe(viewLifecycleOwner) {
             Glide.with(this)
-                .load(it.data!!.allThumbnailsLinks[0])
+                .load(it.data!!.images[0].thumbnails.small)
                 .into(binding.albumArtServer)
         }
 

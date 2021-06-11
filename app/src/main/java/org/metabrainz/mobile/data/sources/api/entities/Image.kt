@@ -1,18 +1,13 @@
 package org.metabrainz.mobile.data.sources.api.entities
 
-import com.google.gson.annotations.SerializedName
-import org.metabrainz.mobile.data.sources.api.entities.Image.Thumbnail
-import java.util.ArrayList
-
-class Image {
-    var types = ArrayList<String>()
-    var isFront = false
-    var isBack = false
-    var image: String? = null
-    var thumbnails: Thumbnail? = null
-
-    class Thumbnail {
-        var small: String? = null
-        var large: String? = null
-    }
-}
+data class Image(
+    val approved: Boolean,
+    val back: Boolean,
+    val comment: String,
+    val edit: Int,
+    val front: Boolean,
+    val id: String,
+    val image: String,
+    val thumbnails: Thumbnails,
+    val types: List<String>
+)

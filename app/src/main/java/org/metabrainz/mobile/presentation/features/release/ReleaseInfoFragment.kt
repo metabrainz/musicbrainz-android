@@ -60,7 +60,7 @@ class ReleaseInfoFragment : Fragment() {
     private fun setCoverArt(coverArt: CoverArt?) {
         if (coverArt != null && coverArt.images.isNotEmpty()) {
             urls.clear()
-            urls.addAll(coverArt.allThumbnailsLinks as Collection<String>)
+            urls.addAll(coverArt.images[0].image as Collection<String>)
             slideshowAdapter.notifyDataSetChanged()
             startAutoSlide()
         }

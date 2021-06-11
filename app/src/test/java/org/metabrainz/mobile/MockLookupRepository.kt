@@ -3,7 +3,6 @@ package org.metabrainz.mobile
 import com.google.gson.Gson
 import org.metabrainz.mobile.EntityTestUtils.loadResourceAsString
 import org.metabrainz.mobile.data.repository.LookupRepository
-import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS

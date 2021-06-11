@@ -5,9 +5,6 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import androidx.annotation.WorkerThread
-import org.metabrainz.mobile.data.sources.api.LookupService
-import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.util.Log.e
 import java.io.ByteArrayOutputStream
 import java.io.IOException
