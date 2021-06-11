@@ -45,6 +45,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             val data = service.getWikipediaSummary(title)
             Resource(SUCCESS, data)
         } catch (e: Exception) {
+            e.printStackTrace()
             Resource.getFailure()
         }
     }
@@ -75,33 +76,40 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             val coverArt = service.getCoverArt(MBID)
             Resource(SUCCESS, coverArt)
         } catch (e: Exception) {
+            e.printStackTrace()
             Resource.getFailure()
         }
     }
 
+    @WorkerThread
     override suspend fun fetchRecordings(query: String?): Resource<List<Recording>> {
         return try {
             val data = service.searchRecording(query, Constants.LIMIT)
             Resource(SUCCESS, data.recordings)
         } catch (e: Exception) {
+            e.printStackTrace()
             Resource.getFailure()
         }
     }
 
+    @WorkerThread
     override suspend fun fetchMatchedRelease(MBID: String?): Resource<Release> {
         return try {
             val data = service.lookupRecording(MBID, Constants.TAGGER_RELEASE_PARAMS)
             Resource(SUCCESS, data)
         } catch (e: Exception) {
+            e.printStackTrace()
             Resource.getFailure()
         }
     }
 
+    @WorkerThread
     override suspend fun fetchAcoustIDResults(duration: Long, fingerprint: String?): Resource<List<Recording>> {
         return try {
             val data = service.lookupFingerprint(MusicBrainzServiceGenerator.ACOUST_ID_KEY, Constants.ACOUST_ID_RESPONSE_PARAMS, duration, fingerprint)!!
             Resource(SUCCESS, TaggerUtils.parseResults(data.results))
         } catch (e: Exception) {
+            e.printStackTrace()
             Resource.getFailure()
         }
     }

@@ -11,7 +11,6 @@ import org.metabrainz.mobile.presentation.features.base.LookupViewModel
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 
-
 class ReleaseViewModel @ViewModelInject constructor(repository: LookupRepository) :
         LookupViewModel<Release>(repository, MBEntityType.RELEASE) {
 

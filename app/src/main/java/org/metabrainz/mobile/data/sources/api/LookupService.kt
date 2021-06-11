@@ -23,7 +23,7 @@ interface LookupService {
     suspend fun getCoverArt(@Path("MBID") MBID: String?): CoverArt
 
     @GET("recording/")
-    fun searchRecording(@Query("query") searchQuery: String?,
+    suspend fun searchRecording(@Query("query") searchQuery: String?,
                         @Query("limit") limit: Int): RecordingSearchResponse
 
     @GET("release/{MBID}")
