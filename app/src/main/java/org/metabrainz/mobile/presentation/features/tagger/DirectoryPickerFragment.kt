@@ -148,26 +148,28 @@ class DirectoryPickerFragment : Fragment(), OnItemCLickListener, SearchView.OnQu
         documentAdapter.notifyDataSetChanged()
         if (query.isNotEmpty()) {
             for((audioFile, document) in copyDataFiles) {
-                if(document.displayName.contains(query,ignoreCase = true)){
-                    dataFiles.add(Pair(audioFile,document))
-                    documentAdapter.notifyItemChanged(dataFiles.size-1)
-                }
-                if(audioFile.album!=null && !dataFiles.contains(Pair(audioFile,document))){
-                    if(audioFile.album.contains(query,ignoreCase = true)){
+                if(!dataFiles.contains(Pair(audioFile,document))){
+                    if(document.displayName.contains(query,ignoreCase = true)){
                         dataFiles.add(Pair(audioFile,document))
                         documentAdapter.notifyItemChanged(dataFiles.size-1)
                     }
-                }
-                if(audioFile.artist!=null && !dataFiles.contains(Pair(audioFile,document))){
-                    if(audioFile.artist.contains(query,ignoreCase = true)){
-                        dataFiles.add(Pair(audioFile,document))
-                        documentAdapter.notifyItemChanged(dataFiles.size-1)
+                    if(audioFile.album!=null){
+                        if(audioFile.album.contains(query,ignoreCase = true)){
+                            dataFiles.add(Pair(audioFile,document))
+                            documentAdapter.notifyItemChanged(dataFiles.size-1)
+                        }
                     }
-                }
-                if(audioFile.albumArtist!=null && !dataFiles.contains(Pair(audioFile,document))){
-                    if(audioFile.albumArtist.contains(query,ignoreCase = true)){
-                        dataFiles.add(Pair(audioFile,document))
-                        documentAdapter.notifyItemChanged(dataFiles.size-1)
+                    if(audioFile.artist!=null){
+                        if(audioFile.artist.contains(query,ignoreCase = true)){
+                            dataFiles.add(Pair(audioFile,document))
+                            documentAdapter.notifyItemChanged(dataFiles.size-1)
+                        }
+                    }
+                    if(audioFile.albumArtist!=null){
+                        if(audioFile.albumArtist.contains(query,ignoreCase = true)){
+                            dataFiles.add(Pair(audioFile,document))
+                            documentAdapter.notifyItemChanged(dataFiles.size-1)
+                        }
                     }
                 }
             }

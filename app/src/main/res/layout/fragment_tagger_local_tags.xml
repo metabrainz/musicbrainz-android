@@ -22,7 +22,7 @@
             android:layout_margin="8dp"
             android:padding="8dp"
             android:text="Original Value"
-            android:textColor="@color/colorPrimaryLight"
+            android:textColor="@color/green"
             android:textSize="18sp" />
 
         <TextView

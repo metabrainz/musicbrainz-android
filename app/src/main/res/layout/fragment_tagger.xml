@@ -95,22 +95,20 @@
         layout="@layout/fragment_tagger_local_tags"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.5"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal"
-        android:layout_weight="1"/>
+        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal" />
 
     <include
         android:id="@+id/serverFetched"
         layout="@layout/fragment_tagger_server_tags"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.5"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal"
-        android:layout_weight="1" />
+        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/recording_button"
