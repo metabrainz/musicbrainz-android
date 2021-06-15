@@ -3,11 +3,11 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.app.Application
 import android.net.Uri
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
 import com.simplecityapps.ktaglib.KTagLib
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import org.metabrainz.mobile.data.repository.LookupRepository
 import org.metabrainz.mobile.data.sources.QueryUtils
@@ -16,8 +16,10 @@ import org.metabrainz.mobile.data.sources.api.entities.Track
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.util.*
+import javax.inject.Inject
 
-class TaggerViewModel @ViewModelInject constructor(val repository: LookupRepository, val context: Application) : AndroidViewModel(context) {
+@HiltViewModel
+class TaggerViewModel @Inject constructor(val repository: LookupRepository, val context: Application) : AndroidViewModel(context) {
 
     private val _taglibFetchedMetadata = MutableLiveData<AudioFile?>()
     val taglibFetchedMetadata: LiveData<AudioFile?> get() = _taglibFetchedMetadata

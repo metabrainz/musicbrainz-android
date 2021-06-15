@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.presentation.features.release_group
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import org.metabrainz.mobile.data.repository.LookupRepository
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
@@ -9,8 +9,10 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.ReleaseGroup
 import org.metabrainz.mobile.presentation.features.base.LookupViewModel
 import org.metabrainz.mobile.util.Resource
+import javax.inject.Inject
 
-class ReleaseGroupViewModel @ViewModelInject constructor(repository: LookupRepository) :
+@HiltViewModel
+class ReleaseGroupViewModel @Inject constructor(repository: LookupRepository) :
         LookupViewModel<ReleaseGroup>(repository, MBEntityType.RELEASE_GROUP) {
 
     val wikiData: LiveData<Resource<WikiSummary>>
