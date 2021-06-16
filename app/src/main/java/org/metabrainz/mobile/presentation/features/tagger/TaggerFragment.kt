@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.databinding.FragmentTaggerBinding
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
+import org.metabrainz.mobile.util.Resource
 import java.util.concurrent.TimeUnit
 
 class TaggerFragment : Fragment() {
@@ -33,10 +34,15 @@ class TaggerFragment : Fragment() {
         viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner) {
             setTaglibFetchedMetadata(it)
         }
-        viewModel.serverCoverArt.observe(viewLifecycleOwner) {
-            Glide.with(this)
-                .load(it.data!!.images[0].thumbnails.small)
-                .into(binding.albumArtServer)
+        viewModel.serverCoverArt.observe(viewLifecycleOwner) { resource->
+            if (resource.status == Resource.Status.SUCCESS) {
+                Glide.with(this)
+                    .load(resource.data!!.images[0].thumbnails.small)
+                    .into(binding.albumArtServer)
+            }
+            else{
+                Toast.makeText(context,"Error fetching cover art from server!",Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.overwriteTagsButton.setOnClickListener {
