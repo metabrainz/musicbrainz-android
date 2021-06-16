@@ -36,8 +36,9 @@ class ArtistViewModel @Inject constructor(repository: LookupRepository)
                     break
                 }
             }
-            if (title.isNotEmpty())
+            if (title.isNotEmpty()) {
                 return repository.fetchWikiSummary(title, method)
+            }
         }
         return Resource.getFailure()
     }

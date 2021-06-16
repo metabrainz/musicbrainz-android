@@ -40,7 +40,7 @@ object Metadata {
         return recording
     }
 
-    fun createTagFields(local: AudioFile?, track: Track?, release: Release): List<TagField> {
+    fun createTagFields(local: AudioFile?, track: Track?, release: Release): Resource<List<TagField>> {
         val tagFields = HashMap<String, TagField>()
         if (local != null) {
             for (entry in local.allProperties)
@@ -56,7 +56,7 @@ object Metadata {
                 //tagFields.setNewValue("acoustid_id",track.)
             }
         }
-        return tagFields.values.toList()
+        return Resource(Resource.Status.SUCCESS, tagFields.values.toList())
     }
 
     private fun HashMap<String, TagField>.setNewValue(key: String, newValue: String?) {

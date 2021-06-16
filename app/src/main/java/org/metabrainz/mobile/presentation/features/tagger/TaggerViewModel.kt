@@ -27,7 +27,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
     private val _uri = MutableLiveData<Uri>()
     val uri:LiveData<Uri> get() = _uri
 
-    val serverFetchedMetadata: LiveData<List<TagField>>
+    val serverFetchedMetadata: LiveData<Resource<List<TagField>>>
     private val matchedResult: LiveData<ComparisonResult>
 
     val serverCoverArt: LiveData<Resource<CoverArt>>
@@ -55,14 +55,13 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
             }
         }
 
-        if (comparisionResult.releaseMbid != null && comparisionResult.releaseMbid!!.isNotEmpty()
-                && comparisionResult.score > TaggerUtils.THRESHOLD) {
+        if (comparisionResult.releaseMbid != null && comparisionResult.releaseMbid!!.isNotEmpty() && comparisionResult.score > TaggerUtils.THRESHOLD) {
             return comparisionResult
         }
         return null
     }
 
-    private fun displayMatchedRelease(release: Release): List<TagField> {
+    private fun displayMatchedRelease(release: Release): Resource<List<TagField>> {
         var track: Track? = null
         if (release.media != null && release.media!!.isNotEmpty()) {
             for (media in release.media!!) {
@@ -117,28 +116,21 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
                 null
             }
         }) { release ->
-            if (release != null) {
-                displayMatchedRelease(release)
-            }
-            else {
-                null
-            }
+            release?.let { displayMatchedRelease(it) }
         }
 
         serverCoverArt = map(switchMap(matchedResult) { comparisonResult ->
                 if (comparisonResult != null) {
                     liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
                         val result = repository.fetchCoverArt(comparisonResult.releaseMbid!!)
-                        if (result.status == Resource.Status.SUCCESS) {
-                            emit(result.data)
-                        }
+                        emit(result)
                     }
                 }
                 else{
                     null
                 }
         }){ coverArt ->
-            Resource(Resource.Status.SUCCESS,coverArt)
+            coverArt
         }
     }
 }

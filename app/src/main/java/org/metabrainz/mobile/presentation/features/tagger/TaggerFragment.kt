@@ -27,8 +27,13 @@ class TaggerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTaggerBinding.inflate(inflater)
 
-        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {
-            setServerFetchedMetadata(it)
+        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {resource->
+            if (resource.status == Resource.Status.SUCCESS) {
+                setServerFetchedMetadata(resource.data!!)
+            }
+            else{
+                Toast.makeText(context,"Error fetching data from server!",Toast.LENGTH_SHORT).show()
+            }
         }
 
         viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner) {
