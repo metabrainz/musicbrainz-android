@@ -2,7 +2,6 @@ package org.metabrainz.mobile.presentation.features.tagger
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.bumptech.glide.Glide
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.databinding.FragmentTaggerBinding
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
+import org.metabrainz.mobile.util.Log.d
 import org.metabrainz.mobile.util.Resource
 import java.util.concurrent.TimeUnit
 
@@ -40,13 +40,20 @@ class TaggerFragment : Fragment() {
             setTaglibFetchedMetadata(it)
         }
         viewModel.serverCoverArt.observe(viewLifecycleOwner) { resource->
-            if (resource.status == Resource.Status.SUCCESS) {
-                Glide.with(this)
-                    .load(resource.data!!.images[0].thumbnails.small)
-                    .into(binding.albumArtServer)
-            }
-            else{
-                Toast.makeText(context,"Error fetching cover art from server!",Toast.LENGTH_SHORT).show()
+            //Handling the status of the api call
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                    Glide.with(this)
+                        .load(resource.data!!.images[0].thumbnails.small)
+                        .into(binding.albumArtServer)
+                }
+                Resource.Status.LOADING -> {
+                    Toast.makeText(context,"Loading!",Toast.LENGTH_SHORT).show()
+                    d("Loading the cover art...")
+                }
+                Resource.Status.FAILED -> {
+                    Toast.makeText(context,"Error fetching cover art from server!",Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -131,7 +138,6 @@ class TaggerFragment : Fragment() {
                 "DATE" -> binding.serverFetched.year.setText(tags.newValue)
                 "MUSICBRAINZ_TRACKID" -> {
                     binding.MBID.text = tags.newValue
-                    d("ok",tags.newValue)
                     binding.MBID.visibility = View.VISIBLE
                     binding.MBIDHeading.visibility = View.VISIBLE
                 }

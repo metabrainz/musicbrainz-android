@@ -75,7 +75,8 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
         return try {
             val coverArt = service.getCoverArt(MBID)
             Resource(SUCCESS, coverArt)
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             e.printStackTrace()
             Resource.getFailure()
         }
