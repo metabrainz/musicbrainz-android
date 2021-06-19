@@ -40,7 +40,7 @@ class ArtistViewModel @Inject constructor(repository: LookupRepository)
                 return repository.fetchWikiSummary(title, method)
             }
         }
-        return Resource.getFailure()
+        return Resource.failure()
     }
 
     init {

@@ -3,6 +3,7 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.app.Application
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
@@ -106,22 +107,32 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         serverFetchedMetadata = map(switchMap(matchedResult) { comparisonResult ->
             if (comparisonResult != null) {
                 liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                    emit(Resource.loading())
                     val result = repository.fetchMatchedRelease(comparisonResult.releaseMbid)
-                    if (result.status == Resource.Status.SUCCESS) {
-                        emit(result.data)
-                    }
+                    emit(result)
                 }
             }
             else{
                 null
             }
-        }) { release ->
-            release?.let { displayMatchedRelease(it) }
+        }) { resource ->
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                    displayMatchedRelease(resource.data!!)
+                }
+                Resource.Status.LOADING -> {
+                    Resource.loading()
+                }
+                Resource.Status.FAILED -> {
+                    Resource.failure()
+                }
+            }
         }
 
         serverCoverArt = map(switchMap(matchedResult) { comparisonResult ->
                 if (comparisonResult != null) {
                     liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                        emit(Resource.loading())
                         val result = repository.fetchCoverArt(comparisonResult.releaseMbid!!)
                         emit(result)
                     }
@@ -129,8 +140,6 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
                 else{
                     null
                 }
-        }){ coverArt ->
-            coverArt
-        }
+        }){ it }
     }
 }

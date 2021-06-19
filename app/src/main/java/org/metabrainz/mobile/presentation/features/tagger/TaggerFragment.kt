@@ -28,18 +28,24 @@ class TaggerFragment : Fragment() {
         binding = FragmentTaggerBinding.inflate(inflater)
 
         viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {resource->
-            if (resource.status == Resource.Status.SUCCESS) {
-                setServerFetchedMetadata(resource.data!!)
-            }
-            else{
-                Toast.makeText(context,"Error fetching data from server!",Toast.LENGTH_SHORT).show()
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                    setServerFetchedMetadata(resource.data!!)
+                }
+                Resource.Status.LOADING -> {
+                    d("Loading the server data...")
+                }
+                Resource.Status.FAILED -> {
+                    Toast.makeText(context,"Error fetching data from server!",LENGTH_SHORT).show()
+                }
             }
         }
 
         viewModel.taglibFetchedMetadata.observe(viewLifecycleOwner) {
             setTaglibFetchedMetadata(it)
         }
-        viewModel.serverCoverArt.observe(viewLifecycleOwner) { resource->
+
+        viewModel.serverCoverArt.observe(viewLifecycleOwner) { resource ->
             //Handling the status of the api call
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
@@ -48,11 +54,10 @@ class TaggerFragment : Fragment() {
                         .into(binding.albumArtServer)
                 }
                 Resource.Status.LOADING -> {
-                    Toast.makeText(context,"Loading!",Toast.LENGTH_SHORT).show()
                     d("Loading the cover art...")
                 }
                 Resource.Status.FAILED -> {
-                    Toast.makeText(context,"Error fetching cover art from server!",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Error fetching cover art from server!",LENGTH_SHORT).show()
                 }
             }
         }

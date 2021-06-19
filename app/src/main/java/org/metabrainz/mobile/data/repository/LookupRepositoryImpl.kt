@@ -27,7 +27,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             Resource(SUCCESS, data.string())
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 
@@ -46,7 +46,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             Resource(SUCCESS, data)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 
@@ -62,11 +62,11 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
                 fetchWiki(title)
             }
             else {
-                Resource.getFailure()
+                Resource.failure()
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 
@@ -78,7 +78,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
         }
         catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 
@@ -89,7 +89,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             Resource(SUCCESS, data.recordings)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 
@@ -100,7 +100,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             Resource(SUCCESS, data)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 
@@ -111,7 +111,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
             Resource(SUCCESS, TaggerUtils.parseResults(data.results))
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 }

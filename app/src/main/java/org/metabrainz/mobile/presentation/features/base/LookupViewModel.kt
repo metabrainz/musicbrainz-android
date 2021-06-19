@@ -30,11 +30,11 @@ abstract class LookupViewModel<T : MBEntity> protected constructor(val repositor
                 Resource(SUCCESS, Gson().fromJson(data.data, T::class.java))
             }
             else {
-                Resource.getFailure()
+                Resource.failure()
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure()
+            Resource.failure()
         }
     }
 

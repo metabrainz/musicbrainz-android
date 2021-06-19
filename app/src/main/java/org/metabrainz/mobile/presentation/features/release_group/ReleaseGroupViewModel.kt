@@ -37,7 +37,7 @@ class ReleaseGroupViewModel @Inject constructor(repository: LookupRepository) :
             if (title.isNotEmpty())
                 return repository.fetchWikiSummary(title, method)
         }
-        return Resource.getFailure()
+        return Resource.failure()
     }
 
     init {
