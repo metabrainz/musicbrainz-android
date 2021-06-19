@@ -28,6 +28,7 @@ class TaggerFragment : Fragment() {
         binding = FragmentTaggerBinding.inflate(inflater)
 
         viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {resource->
+            //Making the required changes if  the results were found
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
                     setServerFetchedMetadata(resource.data!!)

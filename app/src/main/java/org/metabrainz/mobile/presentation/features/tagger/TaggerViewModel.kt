@@ -3,7 +3,6 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.app.Application
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
@@ -16,7 +15,10 @@ import org.metabrainz.mobile.data.sources.api.entities.CoverArt
 import org.metabrainz.mobile.data.sources.api.entities.Track
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
-import org.metabrainz.mobile.util.*
+import org.metabrainz.mobile.util.ComparisonResult
+import org.metabrainz.mobile.util.Metadata
+import org.metabrainz.mobile.util.Resource
+import org.metabrainz.mobile.util.TaggerUtils
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +31,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
     val uri:LiveData<Uri> get() = _uri
 
     val serverFetchedMetadata: LiveData<Resource<List<TagField>>>
-    private val matchedResult: LiveData<ComparisonResult>
+    private val matchedResult: LiveData<Resource<ComparisonResult>>
 
     val serverCoverArt: LiveData<Resource<CoverArt>>
 
@@ -67,7 +69,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         if (release.media != null && release.media!!.isNotEmpty()) {
             for (media in release.media!!) {
                 for (search in media.tracks) {
-                    if (search.recording!!.mbid.equals(matchedResult.value?.trackMbid, true)) {
+                    if (search.recording!!.mbid.equals(matchedResult.value?.data!!.trackMbid, true)) {
                         track = search
                     }
                 }
@@ -90,25 +92,35 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
     init {
         matchedResult = map(switchMap(taglibFetchedMetadata) {
             liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                emit(Resource.loading())
                 val result = repository.fetchRecordings(QueryUtils.getQuery(Metadata.getDefaultTagList(it)))
-                if (result.status == Resource.Status.SUCCESS) {
-                    emit(result.data)
+                emit(result)
+            }
+        }) { resource ->
+            //Handling the status of the api call
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                    if(resource.data !=null){
+                        Resource(Resource.Status.SUCCESS,chooseRecordingFromList(resource.data))
+                    }
+                    else{
+                        null
+                    }
                 }
-            }
-        }) { recordings ->
-            if(recordings!=null){
-                chooseRecordingFromList(recordings)
-            }
-            else{
-                null
+                Resource.Status.LOADING -> {
+                    Resource.loading()
+                }
+                Resource.Status.FAILED -> {
+                    Resource.failure()
+                }
             }
         }
 
-        serverFetchedMetadata = map(switchMap(matchedResult) { comparisonResult ->
-            if (comparisonResult != null) {
+        serverFetchedMetadata = map(switchMap(matchedResult) { resource ->
+            if (resource.data != null) {
                 liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
                     emit(Resource.loading())
-                    val result = repository.fetchMatchedRelease(comparisonResult.releaseMbid)
+                    val result = repository.fetchMatchedRelease(resource.data.releaseMbid)
                     emit(result)
                 }
             }
@@ -116,6 +128,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
                 null
             }
         }) { resource ->
+            //Handling the status of the api call
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
                     displayMatchedRelease(resource.data!!)
@@ -129,11 +142,11 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
             }
         }
 
-        serverCoverArt = map(switchMap(matchedResult) { comparisonResult ->
-                if (comparisonResult != null) {
+        serverCoverArt = map(switchMap(matchedResult) { resource ->
+                if (resource.data != null) {
                     liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
                         emit(Resource.loading())
-                        val result = repository.fetchCoverArt(comparisonResult.releaseMbid!!)
+                        val result = repository.fetchCoverArt(resource.data.releaseMbid!!)
                         emit(result)
                     }
                 }
