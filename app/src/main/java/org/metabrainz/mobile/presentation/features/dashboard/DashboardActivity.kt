@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
+import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.ActivityDashboardBinding
 import org.metabrainz.mobile.presentation.IntentFactory
@@ -15,7 +16,6 @@ import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity
 import org.metabrainz.mobile.presentation.features.search.SearchActivity
 import org.metabrainz.mobile.presentation.features.tagger.TaggerActivity
-import org.metabrainz.mobile.presentation.features.webview.WebViewActivity
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -63,14 +63,10 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, BarcodeActivity::class.java))
         }
         binding.dashboardListenId.setOnClickListener {
-            val intent = Intent(this, WebViewActivity::class.java)
-            intent.putExtra("url","https://listenbrainz.org/")
-            startActivity(intent)
+            FinestWebView.Builder(this).show("https://listenbrainz.org/");
         }
         binding.dashboardCritiqueId.setOnClickListener {
-            val intent = Intent(this, WebViewActivity::class.java)
-            intent.putExtra("url","https://critiquebrainz.org/")
-            startActivity(intent)
+            FinestWebView.Builder(this).show("https://critiquebrainz.org/");
         }
 
 

@@ -23,10 +23,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="30">
-        <activity android:name=".presentation.features.webview.WebViewActivity"
-            android:theme="@style/AppThemeNoActionBar">
 
-        </activity>
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/FinestWebViewTheme.Light" />
 
         <service
             android:name=".ListenService"
