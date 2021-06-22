@@ -23,6 +23,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="30">
+        <activity android:name=".presentation.features.webview.WebViewActivity"
+            android:theme="@style/AppThemeNoActionBar">
+
+        </activity>
 
         <service
             android:name=".ListenService"
@@ -69,7 +73,7 @@
             android:name=".presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger"
             android:theme="@style/AppThemeGrayScale"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:label="@string/search_type_recording"
@@ -115,7 +119,6 @@
             android:name=".presentation.features.search.SearchResultsActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppThemeGrayScale">
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -159,7 +162,6 @@
             android:exported="false" />
 
         <dist:module dist:instant="true" />
-
     </application>
 
 </manifest>

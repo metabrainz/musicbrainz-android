@@ -15,6 +15,7 @@ import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity
 import org.metabrainz.mobile.presentation.features.search.SearchActivity
 import org.metabrainz.mobile.presentation.features.tagger.TaggerActivity
+import org.metabrainz.mobile.presentation.features.webview.WebViewActivity
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -61,6 +62,16 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardScanId.setOnClickListener {
             startActivity(Intent(this, BarcodeActivity::class.java))
         }
+        binding.dashboardListenId.setOnClickListener {
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra("url","https://listenbrainz.org/")
+            startActivity(intent)
+        }
+        binding.dashboardCritiqueId.setOnClickListener {
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra("url","https://critiquebrainz.org/")
+            startActivity(intent)
+        }
 
 
         //cardview animation
@@ -72,6 +83,8 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardDonateId.animation = leftItemAnimation
         binding.dashboardAboutId.animation = rightItemAnimation
         binding.dashboardCollectionId.animation = leftItemAnimation
+        binding.dashboardCritiqueId.animation = leftItemAnimation
+        binding.dashboardListenId.animation = rightItemAnimation
 
     }
 
@@ -91,7 +104,7 @@ class DashboardActivity : AppCompatActivity() {
                 startActivity(IntentFactory.getSettings(this))
                 true
             }
-            android.R.id.home -> {
+            R.id.home -> {
                 onBackPressed()
                 true
             }
