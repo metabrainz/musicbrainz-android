@@ -117,7 +117,7 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:padding="10dp"
-                            android:src="@drawable/ic_picard_logo_no_text" />
+                            android:src="@drawable/ic_music_note" />
 
                         <TextView
                             android:layout_width="wrap_content"
