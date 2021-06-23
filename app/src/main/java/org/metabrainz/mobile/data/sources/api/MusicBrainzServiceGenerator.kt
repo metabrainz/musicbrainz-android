@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -23,33 +22,27 @@ object MusicBrainzServiceGenerator {
     const val OAUTH_REDIRECT_URI = "org.metabrainz.mobile://oauth"
     const val ACOUST_ID_KEY = "5mgEECwRkp"
 
-    private const val cacheSize = (5 * 1024 * 1024).toLong()
-    private val  myCache = Cache(App.context!!.cacheDir, cacheSize)
-
     private var authenticator: OAuthAuthenticator? = null
-    private val loggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    private val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private var headerInterceptor: HeaderInterceptor? = null
 
     private val httpClientBuilder = OkHttpClient.Builder()
-            .cache(myCache)
             .addInterceptor { chain ->
                 var request = chain.request()
-                request = if (hasNetwork(App.context!!)!!)
+                request = if (hasNetwork(App.context!!)) {
                     request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
-                else
+                }
+                else {
                     request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
+                }
                 chain.proceed(request)
             }
 
-    private val builder = Retrofit.Builder()
-            .baseUrl(API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+    private val builder = Retrofit.Builder().baseUrl(API_BASE_URL).addConverterFactory(GsonConverterFactory.create())
 
     private var retrofit = builder.build()
 
-    private fun hasNetwork(context: Context): Boolean? {
+    private fun hasNetwork(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val nw = connectivityManager.activeNetwork ?: return false
@@ -59,13 +52,13 @@ object MusicBrainzServiceGenerator {
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                 else -> false
             }
-        } else {
+        }
+        else {
             val nwInfo = connectivityManager.activeNetworkInfo ?: return false
             return nwInfo.isConnected
         }
     }
 
-    @JvmStatic
     fun <S> createService(service: Class<S>, requiresAuthenticator: Boolean): S {
         headerInterceptor = HeaderInterceptor()
         addInterceptors(headerInterceptor)

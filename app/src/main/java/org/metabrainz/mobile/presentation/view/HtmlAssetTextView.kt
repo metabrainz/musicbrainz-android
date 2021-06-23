@@ -1,7 +1,6 @@
 package org.metabrainz.mobile.presentation.view
 
 import android.content.Context
-import android.text.Html
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.HtmlCompat

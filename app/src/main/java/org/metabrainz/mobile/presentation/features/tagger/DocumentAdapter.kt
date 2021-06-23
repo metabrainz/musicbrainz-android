@@ -3,16 +3,21 @@ package org.metabrainz.mobile.presentation.features.tagger
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.metabrainz.mobile.databinding.ListItemDocumentBinding
 import java.util.concurrent.TimeUnit
 
-class DocumentAdapter(private val itemClickListener: OnItemCLickListener) : RecyclerView.Adapter<DocumentAdapter.ViewHolder>() {
-    val data: MutableList<Pair<AudioFile, Document>> = mutableListOf()
+class DocumentAdapter(private val data: MutableList<Pair<AudioFile, Document>>, private val itemClickListener: OnItemCLickListener) : RecyclerView.Adapter<DocumentAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListItemDocumentBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(metadata: Pair<AudioFile, Document>, cLickListener: OnItemCLickListener) {
             val (audioFile, document) = metadata
+
+            GlideApp.with(binding.albumArt)
+                .load(audioFile)
+                .into(binding.albumArt)
+
             binding.documentName.text = document.displayName
             binding.title.text = audioFile.title
             binding.track.text = audioFile.track.toString()
@@ -47,11 +52,6 @@ class DocumentAdapter(private val itemClickListener: OnItemCLickListener) : Recy
     fun clear() {
         data.clear()
         notifyDataSetChanged()
-    }
-
-    fun addItem(item: Pair<AudioFile, Document>) {
-        data.add(item)
-        notifyItemChanged(data.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -1,13 +1,15 @@
 package org.metabrainz.mobile.presentation.features.login
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.metabrainz.mobile.data.repository.LoginRepository
 import org.metabrainz.mobile.data.sources.api.entities.AccessToken
 import org.metabrainz.mobile.data.sources.api.entities.userdata.UserInfo
+import javax.inject.Inject
 
-class LoginViewModel @ViewModelInject constructor(private var repository: LoginRepository?) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private var repository: LoginRepository?) : ViewModel() {
     var accessTokenLiveData: MutableLiveData<AccessToken?>? = null
         get() {
             if (field == null) field = repository!!.accessTokenLiveData

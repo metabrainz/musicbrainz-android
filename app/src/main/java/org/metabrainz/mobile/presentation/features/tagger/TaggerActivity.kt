@@ -23,5 +23,4 @@ class TaggerActivity : MusicBrainzActivity() {
         menuInflater.inflate(R.menu.about, menu)
         return true
     }
-
 }

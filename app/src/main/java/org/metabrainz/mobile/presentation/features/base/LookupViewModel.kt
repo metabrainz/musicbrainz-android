@@ -10,17 +10,18 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 
-abstract class LookupViewModel<T : MBEntity> protected constructor(
-        val repository: LookupRepository, val entity: MBEntityType) : ViewModel() {
+abstract class LookupViewModel<T : MBEntity> protected constructor(val repository: LookupRepository, val entity: MBEntityType) : ViewModel() {
 
     val mbid: MutableLiveData<String> = MutableLiveData()
 
     protected val jsonLiveData: LiveData<Resource<String>> = mbid.switchMap {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-            if (it == null)
-                emit(Resource.getFailure(String::class.java))
-            else
+            if (it == null) {
+                emit(Resource.failure<String>())
+            }
+            else{
                 emit(repository.fetchData(entity.nameHere, it, Constants.getDefaultParams(entity)))
+            }
         }
     }
 
@@ -28,13 +29,15 @@ abstract class LookupViewModel<T : MBEntity> protected constructor(
 
     inline fun <reified T> parseData(data: Resource<String>): Resource<T> {
         return try {
-            if (data.status == SUCCESS)
+            if (data.status == SUCCESS) {
                 Resource(SUCCESS, Gson().fromJson(data.data, T::class.java))
-            else
-                Resource.getFailure(T::class.java)
+            }
+            else {
+                Resource.failure()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure(T::class.java)
+            Resource.failure()
         }
     }
 

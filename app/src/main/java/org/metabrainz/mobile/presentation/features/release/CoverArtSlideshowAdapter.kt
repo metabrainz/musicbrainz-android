@@ -5,7 +5,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import org.metabrainz.mobile.databinding.CoverArtSlideshowItemBinding
 
 class CoverArtSlideshowAdapter(private val data: List<String>)
@@ -25,8 +25,7 @@ class CoverArtSlideshowAdapter(private val data: List<String>)
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(uri: String) {
-            Picasso.get().isLoggingEnabled = true
-            Picasso.get().load(Uri.parse(uri)).into(binding.releaseCoverArt)
+            Glide.with(binding.releaseCoverArt).load(Uri.parse(uri)).into(binding.releaseCoverArt)
         }
     }
 

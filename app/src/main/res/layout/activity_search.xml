@@ -57,7 +57,7 @@
             app:columnCount="2"
             app:rowCount="3">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_artist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,9 +90,9 @@
                         app:srcCompat="@drawable/ic_musician"/>
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,9 +125,9 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,9 +162,9 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_release_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -198,9 +198,9 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -235,9 +235,9 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_recording"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.gridlayout.widget.GridLayout>
 
     </RelativeLayout>

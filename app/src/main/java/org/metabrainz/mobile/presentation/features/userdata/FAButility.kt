@@ -10,12 +10,10 @@ class FAButility : Fragment(R.layout.fragment_fab_utility) {
 
     private lateinit var binding:FragmentFabUtilityBinding
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentFabUtilityBinding.bind(view)
 
     }
-
 }

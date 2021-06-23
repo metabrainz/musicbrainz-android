@@ -15,7 +15,7 @@ class Track {
             val builder = StringBuilder()
             var seconds = length / 1000
             val minutes = seconds / 60
-            seconds = seconds % 60
+            seconds %= 60
             builder.append(minutes).append(':')
             if (seconds < 10) builder.append('0')
             builder.append(seconds)

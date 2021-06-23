@@ -109,7 +109,7 @@ class Release : MBEntity() {
             val catalogNumber = labelInfo.catalogNumber
             val label = labelInfo.label
             if (label != null) {
-                if (catalogNumber != null && !catalogNumber.isEmpty()) {
+                if (catalogNumber != null && catalogNumber.isNotEmpty()) {
                     builder.append(catalogNumber).append(" (")
                     builder.append(label.name)
                     builder.append(")")

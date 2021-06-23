@@ -1,7 +1,6 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/app_bg</item>
         <item name="colorPrimaryDark">@color/app_bg</item>
@@ -43,15 +42,11 @@
         <item name="android:windowAnimationStyle">@style/loginrequiredDialogAnimation</item>
     </style>
 
-    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="AppThemeNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar" >
         <item name="colorPrimaryDark">@color/app_bg</item>
     </style>
 
-    <style name="SpinnerTheme" parent="android:Widget.Spinner">
-        <item name="android:background">@drawable/bg_spinner</item>
-    </style>
-
-    <style name="SettingsSwitchTheme" parent="@style/Widget.AppCompat.CompoundButton.Switch">
+    <style name="SettingsSwitchTheme" parent="@style/Widget.MaterialComponents.CompoundButton.Switch">
         <item name="android:colorForeground">#f57f17</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>

@@ -1,10 +1,10 @@
 package org.metabrainz.mobile.presentation.features.collection
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import org.metabrainz.mobile.data.repository.CollectionRepository
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection
@@ -14,8 +14,10 @@ import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.Resource.Status.FAILED
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
+import javax.inject.Inject
 
-class CollectionViewModel @ViewModelInject constructor(val repository: CollectionRepository) : ViewModel() {
+@HiltViewModel
+class CollectionViewModel @Inject constructor(val repository: CollectionRepository) : ViewModel() {
 
     fun fetchCollectionData(editor: String, fetchPrivate: Boolean): LiveData<Resource<MutableList<Collection>>> {
         return liveData(viewModelScope.coroutineContext + Dispatchers.IO) {

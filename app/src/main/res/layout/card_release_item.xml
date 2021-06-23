@@ -15,8 +15,7 @@
         android:contentDescription="@string/cover_art_front"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/link_discog"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/link_discog"/>
 
     <TextView
         android:id="@+id/release_name"

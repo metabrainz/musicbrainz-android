@@ -9,14 +9,30 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadingAnimation"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/instruction"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/celebration_music" />
+        app:lottie_rawRes="@raw/tagger" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Search Your Audio File"
+        android:inputType="textCapWords"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        app:searchIcon="@drawable/ic_search"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -26,31 +42,31 @@
         android:background="@color/dark_gray"
         android:clipToPadding="false"
         android:padding="10dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loadingAnimation"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/list_item_document" />
 
     <TextView
         android:id="@+id/instruction"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="20dp"
         android:background="@color/dark_gray"
         android:gravity="start|center_vertical"
-        android:padding="20dp"
+        android:padding="30dp"
         android:text="@string/instruction"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/chooseDirectoryButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loadingAnimation"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/instruction_for_tag_fix"
@@ -74,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/app_bg_light"
+        android:background="@color/app_bg"
         android:padding="10dp"
         android:text="@string/tagger_file_chooser_pickDirectory"
         android:textAllCaps="false"
@@ -82,4 +98,5 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
