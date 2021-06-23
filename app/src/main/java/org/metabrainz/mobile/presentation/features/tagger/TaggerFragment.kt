@@ -1,7 +1,11 @@
 package org.metabrainz.mobile.presentation.features.tagger
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +14,21 @@ import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import org.metabrainz.mobile.App.Companion.PICARD_OPENALBUM_URL
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.databinding.FragmentTaggerBinding
+import org.metabrainz.mobile.presentation.UserPreferences
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
 import org.metabrainz.mobile.util.Log.d
 import org.metabrainz.mobile.util.Resource
+import java.io.IOException
+import java.io.UnsupportedEncodingException
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
+import java.net.URLEncoder
 import java.util.concurrent.TimeUnit
+
 
 class TaggerFragment : Fragment() {
 
@@ -73,7 +86,50 @@ class TaggerFragment : Fragment() {
             context?.startActivity(intent)
         }
 
+        binding.picard.setOnClickListener {
+            val ipAddress = UserPreferences.preferenceIpAddress
+            if(ipAddress==null){
+                Toast.makeText(context,"Add your IP Address in the settings, matched according to your Picard network", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            //To allow http requests specially
+            val policy = ThreadPolicy.Builder().permitAll().build()
+            StrictMode.setThreadPolicy(policy)
+
+            val url = String.format(
+                PICARD_OPENALBUM_URL, ipAddress,
+                UserPreferences.preferencePicardPort, uriEncode(releaseMBID!!)
+            )
+            var connection: HttpURLConnection? = null
+            try {
+                val u = URL(url)
+                connection = u.openConnection() as HttpURLConnection?
+                connection!!.requestMethod = "GET"
+                val code = connection.responseCode
+                if(code==200){
+                    (context as Activity).runOnUiThread {
+                        Toast.makeText(context, "Release sent to your Picard!", LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: MalformedURLException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            } finally {
+                connection?.disconnect()
+            }
+        }
+
         return binding.root
+    }
+    private fun uriEncode(releaseId: String): String {
+        return try {
+            URLEncoder.encode(releaseId, "UTF-8")
+        }
+        catch (e: UnsupportedEncodingException) {
+            Log.e(this.javaClass.name, e.message, e)
+            URLEncoder.encode(releaseId)
+        }
     }
 
     private fun setTaglibFetchedMetadata(metadata: AudioFile?) {
@@ -90,6 +146,7 @@ class TaggerFragment : Fragment() {
         binding.albumArtLocal.visibility = View.GONE
         binding.albumArtServer.visibility = View.GONE
         binding.recordingButton.visibility = View.GONE
+        binding.picard.visibility = View.GONE
 
         reset()
 
@@ -129,6 +186,7 @@ class TaggerFragment : Fragment() {
         binding.albumArtLocal.visibility = View.VISIBLE
         binding.albumArtServer.visibility = View.VISIBLE
         binding.recordingButton.visibility = View.VISIBLE
+        binding.picard.visibility = View.VISIBLE
 
         for (tags in tagsList) {
             if (tags.newValue.isEmpty()) {

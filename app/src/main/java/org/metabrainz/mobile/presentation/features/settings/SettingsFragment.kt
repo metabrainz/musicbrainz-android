@@ -17,6 +17,7 @@ import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider
 
 class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClickListener {
     private var preferenceChangeListener: Preference.OnPreferenceChangeListener? = null
+
     fun setPreferenceChangeListener(preferenceChangeListener: Preference.OnPreferenceChangeListener?) {
         this.preferenceChangeListener = preferenceChangeListener
     }
@@ -47,8 +48,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     }
 
     private fun clearSuggestionHistory() {
-        val suggestions = SearchRecentSuggestions(activity, SuggestionProvider.AUTHORITY,
-                SuggestionProvider.MODE)
+        val suggestions = SearchRecentSuggestions(activity, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE)
         suggestions.clearHistory()
         Toast.makeText(activity, R.string.toast_search_cleared, Toast.LENGTH_SHORT).show()
     }

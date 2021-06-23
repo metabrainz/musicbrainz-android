@@ -15,6 +15,7 @@ android {
 
         versionName "2.2.9"
         multiDexEnabled true
+        useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -62,8 +63,8 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0-alpha02'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.activity:activity-ktx:1.2.3'

@@ -7,8 +7,9 @@ import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences
 object UserPreferences {
 
     const val PREFERENCE_CLEAR_SUGGESTIONS = "clear_suggestions"
-    const val PREFERENCE_TAGGER_DIRECTORY = "tagger_directory"
     const val PREFERENCE_LISTENBRAINZ_TOKEN = "listenbrainz_user_token"
+    const val PREFERENCE_PICARD_PORT = "picard_port"
+    const val PREFERENCE_IP_ADDRESS = "ip_address"
     const val PREFERENCE_LISTENING_ENABLED = "listening_enabled"
     private const val PREFERENCE_LISTENING_SPOTIFY = "listening_spotify_enabled"
     private const val PREFERENCE_GET_PRIVATE_COLLECTIONS = "private_collections"
@@ -26,8 +27,10 @@ object UserPreferences {
     val onBoardingStatus = preferences.getBoolean(PREFERENCE_ONBOARDING, false)
     val privateCollectionsPreference = preferences.getBoolean(PREFERENCE_GET_PRIVATE_COLLECTIONS, false)
     val ratingsTagsPreference = preferences.getBoolean(PREFERENCE_RATINGS_TAGS, false)
-    val taggerDirectoryPreference = preferences.getString(PREFERENCE_TAGGER_DIRECTORY, App.TAGGER_ROOT_DIRECTORY)
     val systemLanguagePreference = preferences.getBoolean(PREFERENCE_SYSTEM_LANGUAGE, false)
+
+    val preferencePicardPort = preferences.getString(PREFERENCE_PICARD_PORT, "8000")
+    val preferenceIpAddress = preferences.getString(PREFERENCE_IP_ADDRESS, null)
 
     val preferenceListenBrainzToken = preferences.getString(PREFERENCE_LISTENBRAINZ_TOKEN, null)
     var preferenceListeningEnabled: Boolean
