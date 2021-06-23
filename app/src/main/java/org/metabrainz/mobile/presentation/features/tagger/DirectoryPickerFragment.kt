@@ -148,31 +148,16 @@ class DirectoryPickerFragment : Fragment(), OnItemCLickListener, SearchView.OnQu
         documentAdapter.notifyDataSetChanged()
         if (query.isNotEmpty()) {
             for((audioFile, document) in copyDataFiles) {
-                if(document.displayName.contains(query,ignoreCase = true)){
-                    dataFiles.add(Pair(audioFile,document))
-                    documentAdapter.notifyItemChanged(dataFiles.size-1)
-                }
-                else if(audioFile.album!=null){
-                    if(audioFile.album.contains(query,ignoreCase = true)){
-                        dataFiles.add(Pair(audioFile,document))
-                        documentAdapter.notifyItemChanged(dataFiles.size-1)
-                    }
-                    else if(audioFile.artist!=null){
-                        if(audioFile.artist.contains(query,ignoreCase = true)){
-                            dataFiles.add(Pair(audioFile,document))
-                            documentAdapter.notifyItemChanged(dataFiles.size-1)
-                        }
-                        else if(audioFile.albumArtist!=null){
-                            if(audioFile.albumArtist.contains(query,ignoreCase = true)){
-                                dataFiles.add(Pair(audioFile,document))
-                                documentAdapter.notifyItemChanged(dataFiles.size-1)
-                            }
-                        }
-                    }
+                val addToList = document.displayName.contains(query, ignoreCase = true) ||
+                        (audioFile.album != null && audioFile.album.contains(query, ignoreCase = true)) ||
+                        (audioFile.artist != null && audioFile.artist.contains(query, ignoreCase = true)) ||
+                        (audioFile.albumArtist != null && audioFile.albumArtist.contains(query, ignoreCase = true))
+                if (addToList) {
+                    dataFiles.add(Pair(audioFile, document))
+                    documentAdapter.notifyItemChanged(dataFiles.size - 1)
                 }
             }
-        }
-        else{
+        } else {
             dataFiles.addAll(copyDataFiles)
             documentAdapter.notifyDataSetChanged()
         }
