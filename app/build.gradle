@@ -15,7 +15,6 @@ android {
 
         versionName "2.2.9"
         multiDexEnabled true
-        useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
