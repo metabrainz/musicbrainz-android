@@ -29,8 +29,10 @@ object UserPreferences {
     val ratingsTagsPreference = preferences.getBoolean(PREFERENCE_RATINGS_TAGS, false)
     val systemLanguagePreference = preferences.getBoolean(PREFERENCE_SYSTEM_LANGUAGE, false)
 
-    val preferencePicardPort = preferences.getString(PREFERENCE_PICARD_PORT, "8000")
-    val preferenceIpAddress = preferences.getString(PREFERENCE_IP_ADDRESS, null)
+    val preferencePicardPort: String
+        get() = preferences.getString(PREFERENCE_PICARD_PORT, "8000")!!
+    val preferenceIpAddress: String?
+        get() = preferences.getString(PREFERENCE_IP_ADDRESS, null)
 
     val preferenceListenBrainzToken = preferences.getString(PREFERENCE_LISTENBRAINZ_TOKEN, null)
     var preferenceListeningEnabled: Boolean
