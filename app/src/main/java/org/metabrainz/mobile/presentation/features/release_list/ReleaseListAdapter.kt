@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.entities.CoverArt
@@ -27,8 +27,7 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
             .get(ReleaseListViewModel::class.java)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReleaseItemViewHolder {
-        val inflater = parent.context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return ReleaseItemViewHolder(CardReleaseItemBinding.inflate(inflater, parent, false))
     }
 
@@ -59,10 +58,12 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
         fun bind(release: Release) {
             binding.releaseName.text = release.title
             setViewVisibility(release.disambiguation, binding.releaseDisambiguation)
-            binding.releaseCoverArt.setImageDrawable(binding.root.context
-                    .resources
-                    .getDrawable(R.drawable.link_discog))
-            if (release.coverArt != null) setCoverArtView(release) else fetchCoverArtForRelease(release)
+            if (release.coverArt != null){
+                setCoverArtView(release)
+            }
+            else {
+                fetchCoverArtForRelease(release)
+            }
             itemView.setOnClickListener { v: View ->
                 val intent = Intent(v.context, ReleaseActivity::class.java)
                 intent.putExtra(Constants.MBID, release.mbid)
@@ -78,7 +79,7 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
                         .thumbnails!!
                         .small
                 if (url != null && url.isNotEmpty()) {
-                    Picasso.get()
+                    Glide.with(context)
                             .load(Uri.parse(url))
                             .placeholder(R.drawable.link_discog)
                             .into(binding.releaseCoverArt)
@@ -87,10 +88,10 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
         }
 
         private fun addCoverArt(coverArt: CoverArt?) {
-            if (coverArt?.images != null && !coverArt.images.isEmpty()) {
+            if (coverArt?.images != null && coverArt.images.isNotEmpty()) {
                 val coverArtRelease = coverArt.release
                 for (release in releaseList) {
-                    if (coverArtRelease!!.endsWith(release.mbid!!)) {
+                    if (coverArtRelease.endsWith(release.mbid!!)) {
                         release.coverArt = coverArt
                         setCoverArtView(release)
                         break

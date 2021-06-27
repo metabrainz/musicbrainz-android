@@ -33,8 +33,7 @@ class ReleaseTracksFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTracklistBinding.inflate(inflater, container, false)
         binding!!.trackList.layoutManager = LinearLayoutManager(binding!!.root.context)
-        val itemDecoration = DividerItemDecoration(binding!!.root.context,
-                DividerItemDecoration.VERTICAL)
+        val itemDecoration = DividerItemDecoration(binding!!.root.context, DividerItemDecoration.VERTICAL)
         binding!!.trackList.addItemDecoration(itemDecoration)
         binding!!.trackList.adapter = adapter
         ViewCompat.setNestedScrollingEnabled(binding!!.trackList, false)

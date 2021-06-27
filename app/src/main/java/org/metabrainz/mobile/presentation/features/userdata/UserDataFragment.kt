@@ -16,11 +16,10 @@ import org.metabrainz.mobile.presentation.features.base.MusicBrainzFragment
 import java.util.*
 
 class UserDataFragment : Fragment() {
-    private var binding: FragmentUserDataBinding? = null
 
+    private var binding: FragmentUserDataBinding? = null
     private lateinit var tagsAdapter: TagAdapter
     private lateinit var userTagsAdapter: UserTagAdapter
-
     private val tags: MutableList<Tag> = ArrayList()
     private val userTags: MutableList<UserTag> = ArrayList()
     private val viewModel: UserViewModel by activityViewModels()
@@ -49,8 +48,7 @@ class UserDataFragment : Fragment() {
         binding!!.tagsList.adapter = tagsAdapter
         binding!!.userTagsList.layoutManager = LinearLayoutManager(activity)
         binding!!.userTagsList.adapter = userTagsAdapter
-        val dividerItemDecoration = DividerItemDecoration(requireActivity(),
-                DividerItemDecoration.VERTICAL)
+        val dividerItemDecoration = DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
         binding!!.tagsList.addItemDecoration(dividerItemDecoration)
         binding!!.userTagsList.addItemDecoration(dividerItemDecoration)
         binding!!.noRating.visibility = View.GONE

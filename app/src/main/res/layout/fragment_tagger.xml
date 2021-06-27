@@ -1,33 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg"
-    tools:context=".presentation.features.tagger.TaggerFragment">
+    android:background="@color/dark_gray">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/save_tags"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_metadata_change" />
-
-    <Button
-        android:id="@+id/save_tags"
+    <include
+        android:id="@+id/loadingAnimation"
+        layout="@layout/loading"
+        android:visibility="gone"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_margin="4dp"
-        android:background="@color/app_bg_light"
-        android:text="@string/tagger_file_save"
-        android:textAllCaps="false"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@color/white"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/albumArtLocal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="14dp"
+        android:scaleType="centerCrop"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <TextView
+        android:id="@+id/MBIDHeading"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="MusicBrainz ID"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/MBID"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
+        app:layout_constraintTop_toBottomOf="@id/MBIDHeading"
+        android:textSize="12sp"
+        android:text="2001" />
+
+    <TextView
+        android:id="@+id/AcoustIDHeading"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Acoust ID"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/MBID"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/AcoustID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/AcoustIDHeading"
+        app:layout_constraintStart_toEndOf="@id/albumArtLocal"
+        app:layout_constraintEnd_toStartOf="@id/albumArtServer"
+        android:text="2001" />
+
+    <ImageView
+        android:id="@+id/albumArtServer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="8dp"
+        android:scaleType="centerCrop"
+        android:layout_margin="14dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <include
+        android:id="@+id/taglibFetched"
+        layout="@layout/fragment_tagger_local_tags"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.5"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal" />
+
+    <include
+        android:id="@+id/serverFetched"
+        layout="@layout/fragment_tagger_server_tags"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.5"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/overwrite_tags_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumArtLocal"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/recording_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/overwrite_tags_button"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:text="@string/search_type_recording"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:backgroundTint="@color/dark_gray"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/overwrite_tags_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:text="@string/tagger_file_save"
+        android:textAllCaps="false"
+        android:textColor="@color/app_bg_light2"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

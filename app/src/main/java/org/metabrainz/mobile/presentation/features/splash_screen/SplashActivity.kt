@@ -19,22 +19,19 @@ import org.metabrainz.mobile.presentation.features.onboarding.AllowMe
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //hiding title bar of this activity
-        window.requestFeature(Window.FEATURE_NO_TITLE)
-
         setContentView(R.layout.activity_splash)
 
         val splashImage: ImageView = findViewById(R.id.splash_image)
-        splashImage.animation = AnimationUtils.loadAnimation(this,
-                R.anim.splashscreen_middle_animation)
+        splashImage.animation = AnimationUtils.loadAnimation(this, R.anim.splashscreen_middle_animation)
 
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
-            if (UserPreferences.onBoardingStatus)
+            if (UserPreferences.onBoardingStatus) {
                 startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
-            else
+            }
+            else {
                 startActivity(Intent(this@SplashActivity, AllowMe::class.java))
+            }
             finish()
         }
     }

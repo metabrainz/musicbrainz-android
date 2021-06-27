@@ -98,7 +98,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/dashboard_tag_Id"
                         android:layout_width="160dp"
                         android:layout_height="190dp"
@@ -144,9 +144,9 @@
 
                         </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/dashboard_search_Id"
                         android:layout_width="160dp"
                         android:layout_height="190dp"
@@ -191,7 +191,7 @@
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 
@@ -202,7 +202,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/dashboard_collection_Id"
                         android:layout_width="160dp"
                         android:layout_height="190dp"
@@ -247,9 +247,9 @@
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/dashboard_scan_Id"
                         android:layout_width="160dp"
                         android:layout_height="190dp"
@@ -294,7 +294,7 @@
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 
@@ -305,7 +305,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/dashboard_donate_Id"
                         android:layout_width="160dp"
                         android:layout_height="190dp"
@@ -350,9 +350,9 @@
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/dashboard_about_Id"
                         android:layout_width="160dp"
                         android:layout_height="190dp"
@@ -397,7 +397,7 @@
                                 android:textColor="@android:color/darker_gray" />
 
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
             </LinearLayout>

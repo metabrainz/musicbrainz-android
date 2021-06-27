@@ -1,7 +1,7 @@
 package org.metabrainz.mobile.presentation.features.artist
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import org.metabrainz.mobile.data.repository.LookupRepository
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
@@ -10,8 +10,10 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType.ART
 import org.metabrainz.mobile.presentation.features.base.LookupViewModel
 import org.metabrainz.mobile.util.Resource
 import org.metabrainz.mobile.util.Resource.Status.SUCCESS
+import javax.inject.Inject
 
-class ArtistViewModel @ViewModelInject constructor(repository: LookupRepository)
+@HiltViewModel
+class ArtistViewModel @Inject constructor(repository: LookupRepository)
     : LookupViewModel<Artist>(repository, ARTIST) {
 
     val wikiData: LiveData<Resource<WikiSummary>>
@@ -34,10 +36,11 @@ class ArtistViewModel @ViewModelInject constructor(repository: LookupRepository)
                     break
                 }
             }
-            if (title.isNotEmpty())
+            if (title.isNotEmpty()) {
                 return repository.fetchWikiSummary(title, method)
+            }
         }
-        return Resource.getFailure(WikiSummary::class.java)
+        return Resource.failure()
     }
 
     init {

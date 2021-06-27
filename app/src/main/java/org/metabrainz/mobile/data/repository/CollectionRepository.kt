@@ -18,7 +18,7 @@ class CollectionRepository @Inject constructor(val service: CollectionService) {
             Resource(SUCCESS, result.string())
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.getFailure(String::class.java)
+            Resource.failure()
         }
     }
 

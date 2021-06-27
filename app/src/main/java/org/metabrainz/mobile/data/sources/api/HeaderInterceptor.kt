@@ -7,6 +7,7 @@ import org.metabrainz.mobile.presentation.features.login.LoginSharedPreferences
 import java.io.IOException
 
 internal class HeaderInterceptor : Interceptor {
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original: Request = chain.request()
@@ -36,8 +37,7 @@ internal class HeaderInterceptor : Interceptor {
     }
 
     private fun checkLoginStatus(): Boolean {
-        return (LoginSharedPreferences.loginStatus
-                == LoginSharedPreferences.STATUS_LOGGED_IN)
+        return (LoginSharedPreferences.loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN)
     }
 
     private val accessToken: String get() = LoginSharedPreferences.accessToken!!
