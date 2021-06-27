@@ -1,13 +1,24 @@
 package org.metabrainz.mobile.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.os.StrictMode
+import android.util.Log
+import android.widget.Toast
+import org.metabrainz.mobile.App
+import org.metabrainz.mobile.presentation.UserPreferences
 import org.metabrainz.mobile.util.Log.e
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.io.UnsupportedEncodingException
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
+import java.net.URLEncoder
 import java.util.*
 
 /**
@@ -29,6 +40,50 @@ object Utils {
 
     fun urlIntent(url: String?): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    }
+
+    fun sendToPicard(context: Context, releaseMBID: String){
+        val ipAddress = UserPreferences.preferenceIpAddress
+        if(ipAddress==null){
+            Toast.makeText(context,"Add your IP Address in the settings, matched according to your Picard network", Toast.LENGTH_LONG).show()
+            return
+        }
+        //To allow http requests specially
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
+        val url = String.format(
+            App.PICARD_OPENALBUM_URL, ipAddress,
+            UserPreferences.preferencePicardPort, uriEncode(releaseMBID)
+        )
+        var connection: HttpURLConnection? = null
+        try {
+            val u = URL(url)
+            connection = u.openConnection() as HttpURLConnection?
+            connection!!.requestMethod = "GET"
+            val code = connection.responseCode
+            if(code==200){
+                (context as Activity).runOnUiThread {
+                    Toast.makeText(context, "Release sent to your Picard!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: MalformedURLException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            connection?.disconnect()
+        }
+    }
+
+    private fun uriEncode(releaseId: String): String {
+        return try {
+            URLEncoder.encode(releaseId, "UTF-8")
+        }
+        catch (e: UnsupportedEncodingException) {
+            Log.e(this.javaClass.name, e.message, e)
+            URLEncoder.encode(releaseId)
+        }
     }
 
     fun stringFromAsset(context: Context, asset: String?): String {
