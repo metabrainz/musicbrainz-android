@@ -9,6 +9,9 @@ import android.os.Build
 import android.os.StrictMode
 import android.util.Log
 import android.widget.Toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.metabrainz.mobile.App
 import org.metabrainz.mobile.presentation.UserPreferences
 import org.metabrainz.mobile.util.Log.e
@@ -56,23 +59,26 @@ object Utils {
             App.PICARD_OPENALBUM_URL, ipAddress,
             UserPreferences.preferencePicardPort, uriEncode(releaseMBID)
         )
-        var connection: HttpURLConnection? = null
-        try {
-            val u = URL(url)
-            connection = u.openConnection() as HttpURLConnection?
-            connection!!.requestMethod = "GET"
-            val code = connection.responseCode
-            if(code==200){
-                (context as Activity).runOnUiThread {
-                    Toast.makeText(context, "Release sent to your Picard!", Toast.LENGTH_SHORT).show()
+
+        CoroutineScope(context = Dispatchers.Default).launch {
+            var connection: HttpURLConnection? = null
+            try {
+                val u = URL(url)
+                connection = u.openConnection() as HttpURLConnection?
+                connection!!.requestMethod = "GET"
+                val code = connection.responseCode
+                if(code==200){
+                    (context as Activity).runOnUiThread {
+                        Toast.makeText(context, "Release sent to your Picard!", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            } catch (e: MalformedURLException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            } finally {
+                connection?.disconnect()
             }
-        } catch (e: MalformedURLException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            connection?.disconnect()
         }
     }
 

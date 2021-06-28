@@ -75,7 +75,7 @@ class TaggerFragment : Fragment() {
         }
 
         binding.picard.setOnClickListener {
-           Utils.sendToPicard(context!!,releaseMBID!!)
+           Utils.sendToPicard(requireContext(),releaseMBID!!)
         }
 
         return binding.root
