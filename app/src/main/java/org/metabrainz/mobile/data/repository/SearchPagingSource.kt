@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.data.repository
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.google.gson.JsonParser
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator
 import org.metabrainz.mobile.data.sources.api.SearchService
@@ -10,8 +11,7 @@ import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils
 
 class SearchPagingSource(val entity: MBEntityType, val query: String) : PagingSource<Int, ResultItem>() {
 
-    private val service = MusicBrainzServiceGenerator
-        .createService(SearchService::class.java, true)
+    private val service = MusicBrainzServiceGenerator.createService(SearchService::class.java, true)
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResultItem> {
         val pageSize: Int = params.loadSize
@@ -37,5 +37,9 @@ class SearchPagingSource(val entity: MBEntityType, val query: String) : PagingSo
             e.printStackTrace()
             LoadResult.Error(e)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, ResultItem>): Int? {
+        TODO("Not yet implemented")
     }
 }
