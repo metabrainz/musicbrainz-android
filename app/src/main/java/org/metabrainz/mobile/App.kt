@@ -75,7 +75,8 @@ class App : Application() {
         val version: String
             get() = try {
                 context!!.packageManager.getPackageInfo(context!!.packageName, 0).versionName
-            } catch (e: PackageManager.NameNotFoundException) {
+            }
+            catch (e: PackageManager.NameNotFoundException) {
                 "unknown"
             }
     }

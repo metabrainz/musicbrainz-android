@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
@@ -11,6 +13,7 @@ import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.ActivityDashboardBinding
 import org.metabrainz.mobile.presentation.IntentFactory
+import org.metabrainz.mobile.presentation.UserPreferences.advancedFeaturesPreference
 import org.metabrainz.mobile.presentation.features.about.AboutActivity
 import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity
@@ -82,6 +85,16 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardCritiqueId.animation = leftItemAnimation
         binding.dashboardListenId.animation = rightItemAnimation
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(advancedFeaturesPreference){
+            binding.advancedFeatures.visibility = VISIBLE
+        }
+        else{
+            binding.advancedFeatures.visibility = GONE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
