@@ -53,6 +53,14 @@ class FeaturesActivity : OnboardAdvanced() {
         ))
 
         addSlide(OnboardFragment.newInstance(
+            "Cross Platform",
+            "Transfer music data across devices",
+            resourceId = R.raw.laptop_and_stuff,
+            backgroundColor =  resources.getColor(R.color.app_bg),
+            isLottie = true
+        ))
+
+        addSlide(OnboardFragment.newInstance(
             "Listens",
             "Track your music listening habits ",
             resourceId = R.raw.teen,
