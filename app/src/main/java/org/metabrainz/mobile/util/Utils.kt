@@ -12,15 +12,13 @@ import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.*
 import org.metabrainz.mobile.App
 import org.metabrainz.mobile.presentation.UserPreferences
 import org.metabrainz.mobile.util.Log.e
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.UnsupportedEncodingException
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
 import java.net.URLEncoder
 import java.util.*
 
@@ -61,24 +59,24 @@ object Utils {
         )
 
         CoroutineScope(context = Dispatchers.Default).launch {
-            var connection: HttpURLConnection? = null
-            try {
-                val u = URL(url)
-                connection = u.openConnection() as HttpURLConnection?
-                connection!!.requestMethod = "GET"
-                val code = connection.responseCode
-                if(code==200){
+            val client = OkHttpClient()
+            val request = Request.Builder().url(url).build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
                     (context as Activity).runOnUiThread {
-                        Toast.makeText(context, "Release sent to your Picard!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Do you have your Picard running?", Toast.LENGTH_SHORT).show()
                     }
                 }
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            } finally {
-                connection?.disconnect()
-            }
+
+                override fun onResponse(call: Call, response: Response) {
+                    if(response.code==200){
+                        (context as Activity).runOnUiThread {
+                            Toast.makeText(context, "Release sent to your Picard!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            })
         }
     }
 
