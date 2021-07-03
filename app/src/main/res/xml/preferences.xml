@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/settings_search">
 
@@ -12,6 +11,16 @@
         <Preference
             android:key="clear_suggestions"
             android:title="@string/settings_clear" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Advanced">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="advanced_features"
+            android:summary="Unlock ListenBrainz, CritiqueBrainz functionalities."
+            android:title="Features" />
 
     </PreferenceCategory>
 

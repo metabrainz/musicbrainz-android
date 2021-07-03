@@ -15,6 +15,7 @@ object UserPreferences {
     private const val PREFERENCE_RATINGS_TAGS = "ratings_tags"
     private const val PREFERENCE_SYSTEM_LANGUAGE = "use_english"
     private const val PREFERENCE_ONBOARDING = "show_onboarding"
+    private const val PREFERENCE_ADVANCED = "advanced_features"
     private val preferences = PreferenceManager.getDefaultSharedPreferences(App.context)
 
     fun setOnBoardingCompleted() {
@@ -28,6 +29,14 @@ object UserPreferences {
     val ratingsTagsPreference = preferences.getBoolean(PREFERENCE_RATINGS_TAGS, false)
     val taggerDirectoryPreference = preferences.getString(PREFERENCE_TAGGER_DIRECTORY, App.TAGGER_ROOT_DIRECTORY)
     val systemLanguagePreference = preferences.getBoolean(PREFERENCE_SYSTEM_LANGUAGE, false)
+
+    var advancedFeaturesPreference: Boolean
+        get() = preferences.getBoolean(PREFERENCE_ADVANCED, false)
+        set(value) {
+            val editor = preferences.edit()
+            editor.putBoolean(PREFERENCE_ADVANCED, value)
+            editor.apply()
+        }
 
     val preferenceListenBrainzToken = preferences.getString(PREFERENCE_LISTENBRAINZ_TOKEN, null)
     var preferenceListeningEnabled: Boolean
