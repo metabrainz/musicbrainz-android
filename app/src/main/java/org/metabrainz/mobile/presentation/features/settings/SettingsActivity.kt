@@ -27,11 +27,13 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
         val toolbarBinding = LayoutToolbarBinding.bind(binding.root)
         setSupportActionBar(toolbarBinding.toolbar)
-        Objects.requireNonNull(supportActionBar)!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.settings_container, SettingsFragment())
                 .commit()
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) ACTION_NOTIFICATION_LISTENER_SETTINGS = Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
         preferenceChangeListener = Preference.OnPreferenceChangeListener { preference: Preference, newValue: Any ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

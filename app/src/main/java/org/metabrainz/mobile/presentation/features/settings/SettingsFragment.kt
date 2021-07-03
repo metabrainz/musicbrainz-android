@@ -55,10 +55,12 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
-        if (item.itemId == android.R.id.home) {
-            startActivity(getDashboard(activity))
-            return true
+        return when (item.itemId) {
+            android.R.id.home -> {
+                startActivity(getDashboard(activity))
+                true
+            }
+            else -> false
         }
-        return false
     }
 }
