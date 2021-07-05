@@ -53,7 +53,7 @@ MusicBrainz for Android is a mobile app for viewing MusicBrainz data on the Andr
 	    
 ## Contributing
 	  
-Got **something interesting** you'd like to **ask or share**? Start a discussion at `#metabrainz` IRC channel.
+Got **something interesting** you'd like to **ask or share**? Start a discussion at `#metabrainz` IRC channel on libera.chat.
 	    
 ## Issues
 	  
@@ -63,9 +63,8 @@ If you think you have found a bug, please report it on the [issue tracker](https
 
 Reach out to the developers at one of the following places:
 
-- Community interaction at https://community.metabrainz.org/c/musicbrainz/
+- MetaBrainz Community: https://community.metabrainz.org/tag/android
 - Development IRC Channel: `#metabrainz`
-- Non-Development IRC Channel: `#musicbrainz`
 - E-Mail: **support@metabrainz.org**
 
 ## License
