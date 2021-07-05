@@ -3,7 +3,7 @@
   <a href="https://github.com/ArmynC/ArminC-AutoExec/archive/master.zip"><img src="https://github.com/metabrainz/metabrainz-logos/blob/master/logos/MusicBrainz/SVG/MusicBrainz_logo.svg" alt="MusicBrainz Android"></a>
 </h1>
 
-<h4 align="center">MusicBrainz App</h4>
+<h4 align="center">MusicBrainz Android</h4>
 
 <p align="center">
     <a href="https://github.com/metabrainz/musicbrainz-android/commits/master">
@@ -19,7 +19,7 @@
       
 <p align="center">
   <a href="#about">About</a> •
-  <a href="#installation">Installation</a> •
+  <a href="#development">Development</a> •
   <a href="#downloading">Downloading</a> •
   <a href="#developers">Developers</a> •
   <a href="#wiki">Wiki</a> •
@@ -41,9 +41,9 @@ MusicBrainz for Android is a mobile app for viewing MusicBrainz data on the Andr
 * Tag audio files like Picard
 * Donate to the MetaBrainz Foundation via PayPal
 
-## Installation
+## Development
 	    
-* First start with installing Android Studio on your pc.
+* Prerequisite: Latest version of the Android Studio and SDKs on your pc.
 * Clone this repository.
 * Use the `gradlew build` command to build the project directly or use the IDE to run the project to your phone or the emulator.
 
@@ -52,14 +52,6 @@ MusicBrainz for Android is a mobile app for viewing MusicBrainz data on the Andr
 * [Google Play Store](https://play.google.com/store/apps/details?id=org.metabrainz.android)
 	    
 * [F-Droid](https://f-droid.org/en/packages/org.metabrainz.android/)
-	 
-## Developers
-	    
-MusicBrainz App was first created in 2010-11 as a part of GSoC by Jamie McDonald. The project went stagnant for a few years.
-
-In GSoC 2019, development on the project started again and was later taken up as another GSoC project by amCap1712.
-
-In GSoC 2020,combined effort of SomalRudra & amCap1712 revamped the app design, improved overall infrastructure, integrated testing,Continous Integration & has been successful to implement the key feature : Tagger
 
 ## Wiki
 
@@ -75,9 +67,11 @@ If you think you have found a bug, please report it on the [issue tracker](https
 	    
 ## Support
 
-Reach out to me at one of the following places:
+Reach out to the developers at one of the following places:
 
-- Website at [musicbrainz.org](https://musicbrainz.org)
+- [Community](https://community.metabrainz.org/c/musicbrainz/)
+- [Development IRC Channel: #musicbrainz]
+- [Non-Development IRC Channel: #musicbrainz]
 - E-Mail: **support@metabrainz.org**
 
 ## License
