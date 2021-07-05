@@ -21,7 +21,6 @@
   <a href="#about">About</a> •
   <a href="#development">Development</a> •
   <a href="#downloading">Downloading</a> •
-  <a href="#developers">Developers</a> •
   <a href="#wiki">Wiki</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#issues">Issues</a> •
@@ -52,14 +51,6 @@ MusicBrainz for Android is a mobile app for viewing MusicBrainz data on the Andr
 * [Google Play Store](https://play.google.com/store/apps/details?id=org.metabrainz.android)
 	    
 * [F-Droid](https://f-droid.org/en/packages/org.metabrainz.android/)
-
-## Wiki
-
-Do you **need some help**? Check the _articles_ from the wiki.
-
-## Contributing
-
-Got **something interesting** you'd like to **share**? Learn about contributing.
 	    
 ## Issues
 	  
@@ -69,9 +60,9 @@ If you think you have found a bug, please report it on the [issue tracker](https
 
 Reach out to the developers at one of the following places:
 
-- [Community](https://community.metabrainz.org/c/musicbrainz/)
-- [Development IRC Channel: #musicbrainz]
-- [Non-Development IRC Channel: #musicbrainz]
+- Community interaction at https://community.metabrainz.org/c/musicbrainz/
+- Development IRC Channel: `#musicbrainz`
+- Non-Development IRC Channel: `#musicbrainz`
 - E-Mail: **support@metabrainz.org**
 
 ## License
