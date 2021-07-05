@@ -64,7 +64,7 @@ If you think you have found a bug, please report it on the [issue tracker](https
 Reach out to the developers at one of the following places:
 
 - Community interaction at https://community.metabrainz.org/c/musicbrainz/
-- Development IRC Channel: `#musicbrainz`
+- Development IRC Channel: `#metabrainz`
 - Non-Development IRC Channel: `#musicbrainz`
 - E-Mail: **support@metabrainz.org**
 
