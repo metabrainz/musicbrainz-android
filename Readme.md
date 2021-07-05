@@ -57,7 +57,7 @@ Got **something interesting** you'd like to **ask or share**? Start a discussion
 	    
 ## Issues
 	  
-If you think you have found a bug, please report it on the [issue tracker](https://tickets.metabrainz.org/projects/MOBILE/issues). The app is under active development again since 2019 and some new features are planned. You can suggest and vote for new features in the same location.
+If you think you have found a bug, please report it on the [issue tracker](https://tickets.metabrainz.org/projects/MOBILE/issues). The app is under active development and some new features are planned. You can suggest and vote for new features in the same location.
 	    
 ## Support
 
