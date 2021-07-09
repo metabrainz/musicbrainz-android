@@ -1,6 +1,5 @@
-+-----------------------+------------------+-----------------+-----------------------------------------------------------------------------------------------------------------+
-|         Asset         |        Type      |     Author      |	    			                                 URL     		                                             |
-+-----------------------+------------------+-----------------+-----------------------------------------------------------------------------------------------------------------+
+|         Asset         | Type             | Author          | URL                                                                                                             |
+|:---------------------:|------------------|-----------------|-----------------------------------------------------------------------------------------------------------------|
 | headphone_meb_loading | Lottie Animation | puput_santoso   | https://lottiefiles.com/19782-listening-to-music                                                                |
 | usual                 | Lottie Animation | Korhan Ulusoy   | https://lottiefiles.com/37915-headphone                                                                         |
 | tagger                | Lottie Animation | Jake Cowan      | https://lottiefiles.com/31634-turn-music-into-audience                                                          |
@@ -10,5 +9,3 @@
 | teen                  | Lottie Animation | Alison Santos   | https://lottiefiles.com/62075-teen-walking                                                                      |
 | scan                  | Lottie Animation | Surakiti S'Asia | https://lottiefiles.com/34995-scanner                                                                           |
 | search                | Lottie Animation | Anh Nguyen      | https://lottiefiles.com/3722-search                                                                             |
-
-
