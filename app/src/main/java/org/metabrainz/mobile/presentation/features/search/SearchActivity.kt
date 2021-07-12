@@ -168,6 +168,8 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         })
         binding.recyclerView.visibility = VISIBLE
         binding.gridView.visibility = GONE
+
+        binding.searchView.clearFocus()
         return true
     }
 
