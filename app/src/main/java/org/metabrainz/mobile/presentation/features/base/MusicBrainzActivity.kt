@@ -31,7 +31,7 @@ abstract class MusicBrainzActivity : AppCompatActivity() {
     protected fun setupToolbar(binding: ViewBinding) {
         val toolbarBinding = LayoutToolbarBinding.bind(binding.root)
         setSupportActionBar(toolbarBinding.toolbar)
-        Objects.requireNonNull(supportActionBar)!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

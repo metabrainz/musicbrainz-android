@@ -6,19 +6,29 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri.parse
 import android.os.Bundle
+import android.provider.SearchRecentSuggestions
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.cursoradapter.widget.CursorAdapter
+import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagingData
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import org.metabrainz.mobile.App
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.databinding.ActivitySearchBinding
 import org.metabrainz.mobile.presentation.IntentFactory
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem
+import org.metabrainz.mobile.presentation.features.adapters.ResultItemComparator
+import org.metabrainz.mobile.presentation.features.adapters.ResultPagingAdapter
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper
+import org.metabrainz.mobile.presentation.features.suggestion.SuggestionProvider
 
 class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -27,6 +37,9 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: ActivitySearchBinding
     private var search_index = 0
+
+    private var viewModel: SearchViewModel? = null
+    private var adapter: ResultPagingAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +52,9 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         suggestionHelper = SuggestionHelper(this)
         suggestionAdapter = suggestionHelper!!.adapter
         binding.searchView.suggestionsAdapter = suggestionAdapter
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
 
         binding.cardArtist.setOnClickListener {
             performAction(Constants.ADD_ARTIST)
@@ -77,7 +93,6 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.dash, menu)
-        menu?.findItem(R.id.menu_open_website)?.isVisible = false
         return true
     }
 
@@ -91,8 +106,12 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 startActivity(IntentFactory.getSettings(this))
                 true
             }
-            android.R.id.home -> {
+            R.id.home -> {
                 onBackPressed()
+                true
+            }
+            R.id.menu_open_website -> {
+                performAction(App.WEBSITE_BASE_URL + "search?type=" + searchTypeFromSpinner!!.nameHere + "&query=" + binding.searchView.query.toString())
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -103,18 +122,6 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = parse(url)
         startActivity(intent)
-    }
-
-    private fun startSearch() {
-        val query = binding.searchView.query.toString()
-        if (query.isNotEmpty()) {
-            val searchIntent = Intent(this, SearchResultsActivity::class.java)
-            searchIntent.putExtra(SearchManager.QUERY, query)
-            searchIntent.putExtra(Constants.TYPE, searchTypeFromSpinner)
-            startActivity(searchIntent)
-        } else {
-            Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show()
-        }
     }
 
     private val searchTypeFromSpinner: MBEntityType? get() {
@@ -151,12 +158,32 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
-        startSearch()
+        saveSearchSuggestion(query)
+
+        adapter = ResultPagingAdapter(ResultItemComparator(), searchTypeFromSpinner!!)
+        binding.recyclerView.adapter = adapter
+        adapter!!.resetAnimation()
+        viewModel!!.search(searchTypeFromSpinner, query).observe(this, { pagingData: PagingData<ResultItem> ->
+            adapter!!.submitData(lifecycle, pagingData)
+        })
+        binding.recyclerView.visibility = VISIBLE
+        binding.gridView.visibility = GONE
         return true
     }
 
+    private fun saveSearchSuggestion(query: String?) {
+        val suggestions = SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE)
+        suggestions.saveRecentQuery(query, null)
+    }
+
     override fun onQueryTextChange(newText: String): Boolean {
-        suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
+        if(newText.isEmpty()){
+            binding.recyclerView.visibility = GONE
+            binding.gridView.visibility = VISIBLE
+        }
+        else {
+            suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
+        }
         return false
     }
 }

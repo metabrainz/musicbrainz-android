@@ -10,6 +10,8 @@
         <item>@string/search_type_event</item>
         <item>@string/search_type_release_group</item>
         <item>@string/search_type_instrument</item>
+        <item>Area</item>
+        <item>Editor</item>
     </string-array>
 
 </resources>
