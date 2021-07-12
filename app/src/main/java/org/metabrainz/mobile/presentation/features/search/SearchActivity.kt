@@ -12,8 +12,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.cursoradapter.widget.CursorAdapter
+import com.google.android.material.chip.Chip
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.Constants
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.databinding.ActivitySearchBinding
 import org.metabrainz.mobile.presentation.IntentFactory
 import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper
@@ -24,6 +26,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private var suggestionAdapter: CursorAdapter? = null
 
     private lateinit var binding: ActivitySearchBinding
+    private var search_index = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +61,18 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             performAction(Constants.ADD_RECORDING)
         }
 
+        val textArray = resources.getStringArray(R.array.searchType)
+        for ((index, text) in textArray.withIndex()) {
+            val chip = layoutInflater.inflate(R.layout.cat_chip_group_item_choice, binding.chipGroup, false) as Chip
+            chip.text = text
+            chip.isCloseIconVisible = false
+            chip.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked){
+                    search_index = index
+                }
+            }
+            binding.chipGroup.addView(chip)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -90,37 +105,30 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         startActivity(intent)
     }
 
-//    private fun setupSearchTypeSpinner() {
-//        val typeAdapter = ArrayAdapter.createFromResource(this,
-//                R.array.searchType, android.R.layout.simple_spinner_item)
-//        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        binding.searchSpin.adapter = typeAdapter
-//    }
-
     private fun startSearch() {
         val query = binding.searchView.query.toString()
         if (query.isNotEmpty()) {
-//            val searchIntent = Intent(this, SearchResultsActivity::class.java)
-//            searchIntent.putExtra(SearchManager.QUERY, query)
-//            searchIntent.putExtra(Constants.TYPE, searchTypeFromSpinner)
-//            startActivity(searchIntent)
+            val searchIntent = Intent(this, SearchResultsActivity::class.java)
+            searchIntent.putExtra(SearchManager.QUERY, query)
+            searchIntent.putExtra(Constants.TYPE, searchTypeFromSpinner)
+            startActivity(searchIntent)
         } else {
             Toast.makeText(this, R.string.toast_search_err, Toast.LENGTH_SHORT).show()
         }
     }
 
-//    private val searchTypeFromSpinner: MBEntityType? get() {
-//        return when (binding.searchSpin.selectedItemPosition) {
-//            0 -> MBEntityType.ARTIST
-//            1 -> MBEntityType.RELEASE
-//            2 -> MBEntityType.LABEL
-//            3 -> MBEntityType.RECORDING
-//            4 -> MBEntityType.RELEASE_GROUP
-//            5 -> MBEntityType.INSTRUMENT
-//            6 -> MBEntityType.EVENT
-//            else -> null
-//        }
-//    }
+    private val searchTypeFromSpinner: MBEntityType? get() {
+        return when (search_index) {
+            0 -> MBEntityType.ARTIST
+            1 -> MBEntityType.RELEASE
+            2 -> MBEntityType.LABEL
+            3 -> MBEntityType.RECORDING
+            4 -> MBEntityType.EVENT
+            5 -> MBEntityType.RELEASE_GROUP
+            6 -> MBEntityType.INSTRUMENT
+            else -> null
+        }
+    }
 
     private fun setupSearchView() {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
