@@ -3,6 +3,7 @@ package org.metabrainz.mobile.presentation.features.base
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem

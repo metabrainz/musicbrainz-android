@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri.parse
 import android.os.Bundle
 import android.provider.SearchRecentSuggestions
@@ -44,6 +45,8 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
+
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setContentView(binding.root)
 
@@ -106,7 +109,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 startActivity(IntentFactory.getSettings(this))
                 true
             }
-            R.id.home -> {
+            android.R.id.home -> {
                 onBackPressed()
                 true
             }
