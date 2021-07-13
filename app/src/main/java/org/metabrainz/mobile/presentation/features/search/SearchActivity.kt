@@ -91,6 +91,9 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
             }
             binding.chipGroup.addView(chip)
+            if(index==0){
+                binding.chipGroup.check(chip.id)
+            }
         }
     }
 
