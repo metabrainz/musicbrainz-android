@@ -15,7 +15,7 @@
             android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="6dp"
             android:background="@color/dark_gray"
             android:inputType="textCapWords"
             android:padding="5dp"
@@ -33,12 +33,12 @@
             app:layout_constraintTop_toBottomOf="@id/searchView"
             android:layout_height="wrap_content"
             app:singleSelection="true"
-            android:layout_margin="8dp"/>
+            android:layout_margin="6dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
-            android:layout_margin="8dp"
+            android:layout_margin="6dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group"
@@ -49,12 +49,12 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gridView"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="6dp"
             android:padding="5dp"
             app:columnCount="2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group"
             app:rowCount="3">
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                app:cardBackgroundColor="@color/dark_gray"
+                app:cardBackgroundColor="@color/app_bg"
                 app:cardCornerRadius="8dp"
                 app:layout_column="0"
                 app:layout_columnWeight="1"
@@ -83,13 +83,15 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_margin="6dp"
                         android:text="@string/artistadd"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="6dp"
                         app:srcCompat="@drawable/ic_musician" />
 
                 </LinearLayout>
@@ -99,7 +101,7 @@
                 android:id="@+id/card_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/dark_gray"
+                app:cardBackgroundColor="@color/app_bg"
                 app:cardCornerRadius="8dp"
                 app:layout_column="1"
                 app:layout_columnWeight="1"
@@ -118,13 +120,15 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_margin="6dp"
                         android:text="@string/releaseadd"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="6dp"
                         app:srcCompat="@drawable/ic_music" />
 
                 </LinearLayout>
@@ -137,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:cardBackgroundColor="@color/dark_gray"
+                app:cardBackgroundColor="@color/app_bg"
                 app:cardCornerRadius="8dp"
                 app:layout_column="0"
                 app:layout_columnWeight="1"
@@ -156,13 +160,15 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_margin="6dp"
                         android:text="@string/eventadd"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="6dp"
                         app:srcCompat="@drawable/ic_event" />
 
                 </LinearLayout>
@@ -174,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:cardBackgroundColor="@color/dark_gray"
+                app:cardBackgroundColor="@color/app_bg"
                 app:cardCornerRadius="8dp"
                 app:layout_column="1"
                 app:layout_columnWeight="1"
@@ -193,13 +199,15 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_margin="6dp"
                         android:text="@string/releasegroupadd"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="6dp"
                         app:srcCompat="@drawable/ic_record" />
 
                 </LinearLayout>
@@ -212,7 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:cardBackgroundColor="@color/dark_gray"
+                app:cardBackgroundColor="@color/app_bg"
                 app:cardCornerRadius="8dp"
                 app:layout_column="0"
                 app:layout_columnWeight="1"
@@ -231,13 +239,15 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_margin="6dp"
                         android:text="@string/labeladd"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="6dp"
                         app:srcCompat="@drawable/ic_tag" />
 
                 </LinearLayout>
@@ -249,7 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:cardBackgroundColor="@color/dark_gray"
+                app:cardBackgroundColor="@color/app_bg"
                 app:cardCornerRadius="8dp"
                 app:layout_column="1"
                 app:layout_columnWeight="1"
@@ -268,13 +278,15 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_margin="6dp"
                         android:text="@string/recordingadd"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="6dp"
                         app:srcCompat="@drawable/ic_recording" />
 
                 </LinearLayout>
