@@ -53,9 +53,6 @@
             android:name=".presentation.features.onboarding.FeaturesActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".presentation.features.onboarding.GettingStarted"
-            android:theme="@style/AppThemeNoActionBar" />
-        <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
