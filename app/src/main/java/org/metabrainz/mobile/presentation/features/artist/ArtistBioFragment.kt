@@ -63,12 +63,12 @@ class ArtistBioFragment : Fragment() {
 
             if (artist!!.type != null && artist.type!!.isNotEmpty()) {
                 binding!!.artistType.text = artist.type
-                if(artist.type == "Group"){
-                    binding!!.animationView.setAnimation(R.raw.group)
-                }
-                else{
-                    binding!!.animationView.setAnimation(R.raw.usual)
-                }
+//                if(artist.type == "Group"){
+//                    binding!!.animationView.setAnimation(R.raw.group)
+//                }
+//                else{
+//                    binding!!.animationView.setAnimation(R.raw.usual)
+//                }
             }
             if (artist.gender != null && artist.gender!!.isNotEmpty()) {
                 binding!!.artistGender.text = artist.gender
