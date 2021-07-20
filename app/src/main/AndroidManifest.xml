@@ -28,7 +28,7 @@
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"
-            android:theme="@style/FinestWebViewTheme.Light" />
+            android:theme="@style/FinestWebViewTheme" />
 
         <service
             android:name=".ListenService"
