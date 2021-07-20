@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/settings_search">
 
@@ -12,6 +11,16 @@
         <Preference
             android:key="clear_suggestions"
             android:title="@string/settings_clear" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Advanced">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="advanced_features"
+            android:summary="Unlock ListenBrainz, CritiqueBrainz functionalities."
+            android:title="Features" />
 
     </PreferenceCategory>
 
@@ -59,6 +68,25 @@
             android:key="listening_spotify_enabled"
             android:title="@string/settings_listenbrainz_spotify"
             android:summary="@string/settings_listenbrainz_spotify_summary" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="picard_settings"
+        android:title="Picard">
+
+        <EditTextPreference
+            android:key="ip_address"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Connect your device to the same network as the computer running Picard. Enter the IP address."
+            android:title="IP Address" />
+
+        <EditTextPreference
+            android:key="picard_port"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Find your Picard's port number on the bottom right. Usually it is 8000."
+            android:title="Port" />
 
     </PreferenceCategory>
 

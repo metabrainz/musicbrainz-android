@@ -24,6 +24,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="30">
 
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/FinestWebViewTheme.Light" />
+
         <service
             android:name=".ListenService"
             android:enabled="true"
@@ -44,11 +50,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.features.onboarding.AllowMe"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:name=".presentation.features.onboarding.FeaturesActivity"
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".presentation.features.onboarding.GettingStarted"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
             android:theme="@style/AppThemeNoActionBar" />
@@ -69,7 +75,7 @@
             android:name=".presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger"
             android:theme="@style/AppThemeGrayScale"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:label="@string/search_type_recording"
@@ -115,7 +121,6 @@
             android:name=".presentation.features.search.SearchResultsActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppThemeGrayScale">
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -159,7 +164,6 @@
             android:exported="false" />
 
         <dist:module dist:instant="true" />
-
     </application>
 
 </manifest>
