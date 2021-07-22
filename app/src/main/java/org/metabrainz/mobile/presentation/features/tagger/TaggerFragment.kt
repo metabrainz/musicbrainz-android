@@ -15,7 +15,6 @@ import org.metabrainz.mobile.databinding.FragmentTaggerBinding
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
 import org.metabrainz.mobile.util.Log.d
 import org.metabrainz.mobile.util.Resource
-import org.metabrainz.mobile.util.Utils
 import java.util.concurrent.TimeUnit
 
 class TaggerFragment : Fragment() {
@@ -74,21 +73,15 @@ class TaggerFragment : Fragment() {
             context?.startActivity(intent)
         }
 
-        binding.picard.setOnClickListener {
-           Utils.sendToPicard(requireContext(),releaseMBID!!)
-        }
-
         return binding.root
     }
 
-
     private fun setTaglibFetchedMetadata(metadata: AudioFile?) {
         binding.loadingAnimation.root.visibility = View.VISIBLE
-        binding.taglibFetched.originalValue.visibility = View.GONE
-        binding.serverFetched.newValue.visibility = View.GONE
+        binding.originalValue.visibility = View.GONE
+        binding.newValue.visibility = View.GONE
         binding.overwriteTagsButton.visibility = View.GONE
-        binding.serverFetched.root.visibility = View.GONE
-        binding.taglibFetched.root.visibility = View.GONE
+        binding.scrollView.visibility = View.GONE
         binding.AcoustID.visibility = View.GONE
         binding.AcoustIDHeading.visibility = View.GONE
         binding.MBID.visibility = View.GONE
@@ -96,7 +89,6 @@ class TaggerFragment : Fragment() {
         binding.albumArtLocal.visibility = View.GONE
         binding.albumArtServer.visibility = View.GONE
         binding.recordingButton.visibility = View.GONE
-        binding.picard.visibility = View.GONE
 
         reset()
 
@@ -104,39 +96,37 @@ class TaggerFragment : Fragment() {
             .load(metadata)
             .into(binding.albumArtLocal)
 
-        binding.taglibFetched.title.setText(metadata!!.allProperties["TITLE"])
-        binding.serverFetched.title.setText(metadata.allProperties["TITLE"])
+        binding.title.setText(metadata!!.allProperties["TITLE"])
+        binding.titleServer.setText(metadata.allProperties["TITLE"])
 
-        binding.taglibFetched.track.setText(metadata.allProperties["TRACK"])
-        binding.serverFetched.track.setText(metadata.allProperties["TRACK"])
+        binding.track.setText(metadata.allProperties["TRACK"])
+        binding.trackServer.setText(metadata.allProperties["TRACK"])
 
-        binding.taglibFetched.disc.setText(metadata.allProperties["DISC"])
-        binding.serverFetched.disc.setText(metadata.allProperties["DISC"])
+        binding.disc.setText(metadata.allProperties["DISC"])
+        binding.discServer.setText(metadata.allProperties["DISC"])
 
-        binding.serverFetched.duration.setText(metadata.allProperties["DURATION"]?.toInt()?.toHms())
-        binding.taglibFetched.duration.setText(metadata.allProperties["DURATION"]?.toInt()?.toHms())
+        binding.duration.setText(metadata.allProperties["DURATION"]?.toInt()?.toHms())
+        binding.durationServer.setText(metadata.allProperties["DURATION"]?.toInt()?.toHms())
 
-        binding.serverFetched.artist.setText(metadata.allProperties["ARTIST"])
-        binding.taglibFetched.artist.setText(metadata.allProperties["ARTIST"])
+        binding.artist.setText(metadata.allProperties["ARTIST"])
+        binding.artistServer.setText(metadata.allProperties["ARTIST"])
 
-        binding.serverFetched.album.setText(metadata.allProperties["ALBUM"])
-        binding.taglibFetched.album.setText(metadata.allProperties["ALBUM"])
+        binding.album.setText(metadata.allProperties["ALBUM"])
+        binding.albumServer.setText(metadata.allProperties["ALBUM"])
 
-        binding.serverFetched.year.setText(metadata.allProperties["DATE"])
-        binding.taglibFetched.year.setText(metadata.allProperties["DATE"])
+        binding.year.setText(metadata.allProperties["DATE"])
+        binding.yearServer.setText(metadata.allProperties["DATE"])
     }
 
     private fun setServerFetchedMetadata(tagsList: List<TagField>) {
         binding.loadingAnimation.root.visibility = View.GONE
-        binding.taglibFetched.originalValue.visibility = View.VISIBLE
-        binding.serverFetched.newValue.visibility = View.VISIBLE
+        binding.originalValue.visibility = View.VISIBLE
+        binding.newValue.visibility = View.VISIBLE
         binding.overwriteTagsButton.visibility = View.VISIBLE
-        binding.serverFetched.root.visibility = View.VISIBLE
-        binding.taglibFetched.root.visibility = View.VISIBLE
         binding.albumArtLocal.visibility = View.VISIBLE
         binding.albumArtServer.visibility = View.VISIBLE
         binding.recordingButton.visibility = View.VISIBLE
-        binding.picard.visibility = View.VISIBLE
+        binding.scrollView.visibility = View.VISIBLE
 
         for (tags in tagsList) {
             if (tags.newValue.isEmpty()) {
@@ -144,12 +134,12 @@ class TaggerFragment : Fragment() {
             }
 
             when (tags.tagName) {
-                "TITLE" -> binding.serverFetched.title.setText(tags.newValue)
-                "ARTIST" -> binding.serverFetched.artist.setText(tags.newValue)
-                "ALBUM" -> binding.serverFetched.album.setText(tags.newValue)
-                "TRACKNUMBER" -> binding.serverFetched.track.setText(tags.newValue)
+                "TITLE" -> binding.titleServer.setText(tags.newValue)
+                "ARTIST" -> binding.artistServer.setText(tags.newValue)
+                "ALBUM" -> binding.albumServer.setText(tags.newValue)
+                "TRACKNUMBER" -> binding.trackServer.setText(tags.newValue)
 //                "discnumber" -> binding.serverFetched.disc2.setText(tags.newValue)
-                "DATE" -> binding.serverFetched.year.setText(tags.newValue)
+                "DATE" -> binding.yearServer.setText(tags.newValue)
                 "MUSICBRAINZ_TRACKID" -> {
                     binding.MBID.text = tags.newValue
                     binding.MBID.visibility = View.VISIBLE
@@ -171,50 +161,50 @@ class TaggerFragment : Fragment() {
     }
 
     private fun reset(){
-        binding.serverFetched.title.setText("")
-        binding.taglibFetched.title.setText("")
+        binding.titleServer.setText("")
+        binding.title.setText("")
 
-        binding.serverFetched.track.setText("")
-        binding.taglibFetched.track.setText("")
+        binding.track.setText("")
+        binding.trackServer.setText("")
 
-        binding.serverFetched.disc.setText("")
-        binding.taglibFetched.disc.setText("")
+        binding.discServer.setText("")
+        binding.disc.setText("")
 
-        binding.serverFetched.duration.setText("")
-        binding.taglibFetched.duration.setText("")
+        binding.duration.setText("")
+        binding.durationServer.setText("")
 
-        binding.serverFetched.artist.setText("")
-        binding.taglibFetched.artist.setText("")
+        binding.artist.setText("")
+        binding.artistServer.setText("")
 
-        binding.serverFetched.album.setText("")
-        binding.taglibFetched.album.setText("")
+        binding.album.setText("")
+        binding.albumServer.setText("")
 
-        binding.serverFetched.year.setText("")
-        binding.taglibFetched.year.setText("")
+        binding.year.setText("")
+        binding.yearServer.setText("")
     }
 
     private fun saveMetadata() {
         val newMetadata = HashMap<String, String>()
-        if (binding.serverFetched.title.text.toString().isNotEmpty())
-            newMetadata["TITLE"] = binding.serverFetched.title.text.toString()
+        if (binding.titleServer.text.toString().isNotEmpty())
+            newMetadata["TITLE"] = binding.titleServer.text.toString()
 
-        if (binding.serverFetched.track.text.toString().isNotEmpty())
-            newMetadata["TRACK"] = binding.serverFetched.track.text.toString()
+        if (binding.trackServer.text.toString().isNotEmpty())
+            newMetadata["TRACK"] = binding.trackServer.text.toString()
 
-        if (binding.serverFetched.disc.text.toString().isNotEmpty())
-            newMetadata["DISC"] = binding.serverFetched.disc.text.toString()
+        if (binding.discServer.text.toString().isNotEmpty())
+            newMetadata["DISC"] = binding.discServer.text.toString()
 
-        if (binding.serverFetched.album.text.toString().isNotEmpty())
-            newMetadata["ALBUM"] = binding.serverFetched.album.text.toString()
+        if (binding.albumServer.text.toString().isNotEmpty())
+            newMetadata["ALBUM"] = binding.albumServer.text.toString()
 
-        if (binding.serverFetched.artist.text.toString().isNotEmpty())
-            newMetadata["ARTIST"] = binding.serverFetched.artist.text.toString()
+        if (binding.artistServer.text.toString().isNotEmpty())
+            newMetadata["ARTIST"] = binding.artistServer.text.toString()
 
         if (binding.MBID.text.toString().isNotEmpty())
             newMetadata["MBID"] = binding.MBID.text.toString()
 
-        if (binding.serverFetched.year.text.toString().isNotEmpty())
-            newMetadata["DATE"] = binding.serverFetched.year.text.toString()
+        if (binding.yearServer.text.toString().isNotEmpty())
+            newMetadata["DATE"] = binding.yearServer.text.toString()
 
         if (viewModel.saveMetadataTags(newMetadata))
             Toast.makeText(activity, "Saved Tags Successfully!", LENGTH_SHORT).show()
