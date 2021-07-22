@@ -15,6 +15,7 @@ import org.metabrainz.mobile.databinding.FragmentTaggerBinding
 import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
 import org.metabrainz.mobile.util.Log.d
 import org.metabrainz.mobile.util.Resource
+import org.metabrainz.mobile.util.Utils
 import java.util.concurrent.TimeUnit
 
 class TaggerFragment : Fragment() {
@@ -71,6 +72,9 @@ class TaggerFragment : Fragment() {
             val intent = Intent(context, RecordingActivity::class.java)
             intent.putExtra(Constants.MBID, recordingMBID)
             context?.startActivity(intent)
+        }
+        binding.picard.setOnClickListener {
+            Utils.sendToPicard(requireContext(),releaseMBID!!)
         }
 
         return binding.root

@@ -35,14 +35,13 @@
             <TextView
                 android:id="@+id/MBIDHeading"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MusicBrainz ID"
+                android:text="MusicBrainz ID: "
                 android:textColor="@color/colorPrimary"
                 android:layout_margin="8dp"
                 android:paddingTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="14sp" />
 
@@ -52,22 +51,22 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:layout_margin="8dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:paddingTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/MBIDHeading"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/MBIDHeading"
                 android:textSize="12sp"
                 android:text="2001" />
 
             <TextView
                 android:id="@+id/AcoustIDHeading"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Acoust ID"
+                android:text="Acoust ID: "
                 android:layout_margin="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/MBID"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 
@@ -78,18 +77,10 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:layout_margin="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/AcoustIDHeading"
+                app:layout_constraintStart_toEndOf="@id/AcoustIDHeading"
+                app:layout_constraintTop_toBottomOf="@id/MBID"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="2001" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/linearLayout"
-                android:layout_width="0dp"
-                app:layout_constraintWidth_percent="0.5"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/AcoustID"
-                xmlns:tools="http://schemas.android.com/tools">
 
                 <TextView
                     android:id="@+id/original_value"
@@ -105,7 +96,7 @@
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/albumArtLocal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/AcoustID" />
 
                 <ImageView
                     android:id="@+id/albumArtLocal"
@@ -319,8 +310,6 @@
                     app:layout_constraintStart_toEndOf="@+id/yearHeading"
                     app:layout_constraintTop_toBottomOf="@+id/yearHeading"
                     tools:text="2001" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
