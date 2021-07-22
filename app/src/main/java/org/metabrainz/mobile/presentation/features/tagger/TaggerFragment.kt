@@ -92,6 +92,7 @@ class TaggerFragment : Fragment() {
         binding.MBIDHeading.visibility = View.GONE
         binding.albumArtLocal.visibility = View.GONE
         binding.albumArtServer.visibility = View.GONE
+        binding.picard.visibility = View.GONE
         binding.recordingButton.visibility = View.GONE
 
         reset()
@@ -131,6 +132,7 @@ class TaggerFragment : Fragment() {
         binding.albumArtServer.visibility = View.VISIBLE
         binding.recordingButton.visibility = View.VISIBLE
         binding.scrollView.visibility = View.VISIBLE
+        binding.picard.visibility = View.VISIBLE
 
         for (tags in tagsList) {
             if (tags.newValue.isEmpty()) {
