@@ -89,23 +89,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="22dp"
+                android:layout_marginStart="16dp"
                 android:padding="8dp"
                 android:text="Original Value"
                 android:textColor="@color/green"
                 android:textSize="18sp"
                 app:layout_constraintWidth_percent="0.5"
-                app:layout_constraintBottom_toTopOf="@+id/albumArtLocal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/AcoustID" />
 
             <ImageView
                 android:id="@+id/albumArtLocal"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:scaleType="centerCrop"
                 android:layout_margin="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/original_value"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/original_value" />
 
@@ -125,7 +123,7 @@
 
             <EditText
                 android:id="@+id/title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -154,7 +152,7 @@
 
             <EditText
                 android:id="@+id/artist"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -182,7 +180,7 @@
 
             <EditText
                 android:id="@+id/album"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -211,7 +209,7 @@
 
             <EditText
                 android:id="@+id/track"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -239,7 +237,7 @@
 
             <EditText
                 android:id="@+id/disc"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:enabled="false"
@@ -266,7 +264,7 @@
 
             <EditText
                 android:id="@+id/duration"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:enabled="false"
@@ -294,7 +292,7 @@
 
             <EditText
                 android:id="@+id/year"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:textColor="@color/white"
@@ -312,11 +310,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
                 android:padding="8dp"
                 android:text="New Value"
                 android:textColor="@color/green"
                 android:textSize="18sp"
-                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/original_value"
                 app:layout_constraintTop_toBottomOf="@id/AcoustID"
@@ -324,12 +322,11 @@
 
             <ImageView
                 android:id="@+id/albumArtServer"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:layout_margin="16dp"
                 android:padding="8dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/original_value"
                 app:layout_constraintTop_toBottomOf="@+id/new_value" />
 
@@ -551,7 +548,7 @@
         app:backgroundTint="@color/dark_gray"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toStartOf="@id/picard"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/picardText"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -561,7 +558,7 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toStartOf="@id/overwrite_tags_button"
         app:layout_constraintStart_toEndOf="@id/recording_button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/picardText"
         android:padding="10dp"
         android:src="@drawable/ic_picard_logo_no_text"/>
 
@@ -577,6 +574,21 @@
         android:textSize="18sp"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toEndOf="@id/picard"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/picardText"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/picardText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Hit the icon above to send this release to your Picard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
