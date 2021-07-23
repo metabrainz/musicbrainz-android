@@ -20,7 +20,7 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@color/dark_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,468 +83,456 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="2001" />
 
-                <TextView
-                    android:id="@+id/original_value"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="22dp"
-                    android:padding="8dp"
-                    android:text="Original Value"
-                    android:textColor="@color/green"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/albumArtLocal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/AcoustID" />
-
-                <ImageView
-                    android:id="@+id/albumArtLocal"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="22dp"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginEnd="22dp"
-                    android:layout_marginRight="22dp"
-                    android:layout_marginBottom="26dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toTopOf="@+id/titleHeading"
-                    app:layout_constraintEnd_toEndOf="@+id/original_value"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/original_value" />
-
-                <TextView
-                    android:id="@+id/titleHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Title"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/albumArtLocal" />
-
-                <EditText
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:enabled="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/artistHeading"
-                    app:layout_constraintStart_toStartOf="@+id/titleHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/titleHeading"
-                    tools:text="The Patient" />
-
-                <TextView
-                    android:id="@+id/artistHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Artist"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/artist"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title" />
-
-                <EditText
-                    android:id="@+id/artist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:enabled="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/albumHeading"
-                    app:layout_constraintStart_toStartOf="@+id/artistHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/artistHeading"
-                    tools:text="TOOL" />
-
-                <TextView
-                    android:id="@+id/albumHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Album"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/album"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/artist" />
-
-                <EditText
-                    android:id="@+id/album"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:enabled="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/trackHeading"
-                    app:layout_constraintStart_toStartOf="@+id/albumHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/albumHeading"
-                    tools:text="Lateralus" />
-
-
-                <TextView
-                    android:id="@+id/trackHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Track"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/track"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/album" />
-
-                <EditText
-                    android:id="@+id/track"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
-                    android:layout_margin="6dp"
-                    android:enabled="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/discHeading"
-                    app:layout_constraintEnd_toEndOf="@+id/discHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/trackHeading"
-                    tools:text="3" />
-
-                <TextView
-                    android:id="@+id/discHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Disc"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/disc"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/track" />
-
-                <EditText
-                    android:id="@+id/disc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
-                    android:layout_margin="6dp"
-                    android:layout_marginBottom="4dp"
-                    android:enabled="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/durationHeading"
-                    app:layout_constraintEnd_toEndOf="@+id/discHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/discHeading"
-                    tools:text="1" />
-
-                <TextView
-                    android:id="@+id/durationHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Duration"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/duration"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/disc" />
-
-                <EditText
-                    android:id="@+id/duration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:enabled="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/yearHeading"
-                    app:layout_constraintEnd_toEndOf="@+id/disc"
-                    app:layout_constraintStart_toEndOf="@+id/disc"
-                    app:layout_constraintTop_toBottomOf="@+id/durationHeading"
-                    tools:text="7:14" />
-
-
-                <TextView
-                    android:id="@+id/yearHeading"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Year"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/year"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/duration" />
-
-                <EditText
-                    android:id="@+id/year"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/yearHeading"
-                    app:layout_constraintStart_toEndOf="@+id/yearHeading"
-                    app:layout_constraintTop_toBottomOf="@+id/yearHeading"
-                    tools:text="2001" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/original_value"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="22dp"
+                android:padding="8dp"
+                android:text="Original Value"
+                android:textColor="@color/green"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintBottom_toTopOf="@+id/albumArtLocal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/AcoustID" />
+
+            <ImageView
+                android:id="@+id/albumArtLocal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:layout_margin="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/original_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/original_value" />
+
+            <TextView
+                android:id="@+id/titleHeading"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Title"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/albumArtLocal" />
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:enabled="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="@+id/titleHeading"
+                app:layout_constraintTop_toBottomOf="@+id/titleHeading"
+                tools:text="The Patient" />
+
+            <TextView
+                android:id="@+id/artistHeading"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Artist"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintBottom_toTopOf="@+id/artist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <EditText
+                android:id="@+id/artist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:enabled="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="@+id/artistHeading"
+                app:layout_constraintTop_toBottomOf="@+id/artistHeading"
+                tools:text="TOOL" />
+
+            <TextView
+                android:id="@+id/albumHeading"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Album"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artist" />
+
+            <EditText
+                android:id="@+id/album"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:enabled="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="@+id/albumHeading"
+                app:layout_constraintTop_toBottomOf="@+id/albumHeading"
+                tools:text="Lateralus" />
+
+            <TextView
+                android:id="@+id/trackHeading"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Track"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintBottom_toTopOf="@+id/track"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/album" />
+
+            <EditText
+                android:id="@+id/track"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:enabled="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="@id/trackHeading"
+                app:layout_constraintTop_toBottomOf="@+id/trackHeading"
+                tools:text="3" />
+
+            <TextView
+                android:id="@+id/discHeading"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Disc"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/track" />
+
+            <EditText
+                android:id="@+id/disc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:enabled="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="@id/discHeading"
+                app:layout_constraintTop_toBottomOf="@+id/discHeading"
+                tools:text="1" />
+
+            <TextView
+                android:id="@+id/durationHeading"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Duration"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc" />
+
+            <EditText
+                android:id="@+id/duration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:enabled="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="@id/durationHeading"
+                app:layout_constraintTop_toBottomOf="@+id/durationHeading"
+                tools:text="7:14" />
+
+
+            <TextView
+                android:id="@+id/yearHeading"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Year"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/duration" />
+
+            <EditText
+                android:id="@+id/year"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="@id/yearHeading"
+                app:layout_constraintTop_toBottomOf="@+id/yearHeading"
+                tools:text="2001" />
+
+
+            <TextView
+                android:id="@+id/new_value"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="8dp"
+                android:text="New Value"
+                android:textColor="@color/green"
+                android:textSize="18sp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/original_value"
                 app:layout_constraintTop_toBottomOf="@id/AcoustID"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintWidth_percent="0.5" />
 
-                <TextView
-                    android:id="@+id/new_value"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="22dp"
-                    android:padding="8dp"
-                    android:text="New Value"
-                    android:textColor="@color/green"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/albumArtServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/albumArtServer"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/original_value"
+                app:layout_constraintTop_toBottomOf="@+id/new_value" />
 
-                <ImageView
-                    android:id="@+id/albumArtServer"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="22dp"
-                    android:layout_marginEnd="27dp"
-                    android:layout_marginBottom="26dp"
-                    android:padding="8dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toTopOf="@+id/titleHeadingServer"
-                    app:layout_constraintEnd_toEndOf="@+id/titleServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/new_value" />
+            <TextView
+                android:id="@+id/titleHeadingServer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"                    android:text="Title"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toEndOf="@id/titleHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/albumArtServer" />
 
-                <TextView
-                    android:id="@+id/titleHeadingServer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Title"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/titleServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/albumArtServer" />
+            <EditText
+                android:id="@+id/titleServer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:hint="Enter Title here"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/titleHeadingServer"
+                app:layout_constraintTop_toBottomOf="@+id/titleHeadingServer"
+                tools:text="The Patient" />
 
-                <EditText
-                    android:id="@+id/titleServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:hint="Enter Title here"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/artistHeadingServer"
-                    app:layout_constraintStart_toStartOf="@+id/titleHeadingServer"
-                    app:layout_constraintTop_toBottomOf="@+id/titleHeadingServer"
-                    tools:text="The Patient" />
+            <TextView
+                android:id="@+id/artistHeadingServer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Artist"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toEndOf="@id/artistHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleServer" />
 
-                <TextView
-                    android:id="@+id/artistHeadingServer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Artist"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/artistServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleServer" />
+            <EditText
+                android:id="@+id/artistServer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:hint="Enter Artist Here"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/artistHeadingServer"
+                app:layout_constraintTop_toBottomOf="@+id/artistHeadingServer"
+                tools:text="TOOL" />
 
-                <EditText
-                    android:id="@+id/artistServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:hint="Enter Artist Here"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/albumHeadingServer"
-                    app:layout_constraintStart_toStartOf="@+id/artistHeadingServer"
-                    app:layout_constraintTop_toBottomOf="@+id/artistHeadingServer"
-                    tools:text="TOOL" />
+            <TextView
+                android:id="@+id/albumHeadingServer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Album"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/albumHeading"
+                app:layout_constraintTop_toBottomOf="@+id/artistServer" />
 
-                <TextView
-                    android:id="@+id/albumHeadingServer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Album"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/albumServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/artistServer" />
+            <EditText
+                android:id="@+id/albumServer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:hint="Enter Album Here"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/albumHeadingServer"
+                app:layout_constraintTop_toBottomOf="@+id/albumHeadingServer"
+                tools:text="Lateralus" />
 
-                <EditText
-                    android:id="@+id/albumServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:hint="Enter Album Here"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/trackHeadingServer"
-                    app:layout_constraintStart_toStartOf="@+id/albumHeadingServer"
-                    app:layout_constraintTop_toBottomOf="@+id/albumHeadingServer"
-                    tools:text="Lateralus" />
+            <TextView
+                android:id="@+id/trackHeadingServer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Track"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/trackHeading"
+                app:layout_constraintTop_toBottomOf="@+id/albumServer" />
 
+            <EditText
+                android:id="@+id/trackServer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:hint="Enter Track Here"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/trackHeadingServer"
+                app:layout_constraintTop_toBottomOf="@+id/trackHeadingServer"
+                tools:text="3" />
 
-                <TextView
-                    android:id="@+id/trackHeadingServer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Track"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/trackServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/albumServer" />
+            <TextView
+                android:id="@+id/discHeadingServer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Disc"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/discHeading"
+                app:layout_constraintTop_toBottomOf="@+id/trackServer" />
 
-                <EditText
-                    android:id="@+id/trackServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:hint="Enter Track Here"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/discHeadingServer"
-                    app:layout_constraintStart_toStartOf="@+id/trackHeadingServer"
-                    app:layout_constraintTop_toBottomOf="@+id/trackHeadingServer"
-                    tools:text="3" />
+            <EditText
+                android:id="@+id/discServer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:hint="Enter Disc Here"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/discHeadingServer"
+                app:layout_constraintTop_toBottomOf="@+id/discHeadingServer"
+                tools:text="1" />
 
-                <TextView
-                    android:id="@+id/discHeadingServer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Disc"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/discServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/trackServer" />
+            <TextView
+                android:id="@+id/durationHeadingServer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Duration"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/durationHeading"
+                app:layout_constraintTop_toBottomOf="@+id/discServer" />
 
-                <EditText
-                    android:id="@+id/discServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:hint="Enter Disc Here"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/durationHeadingServer"
-                    app:layout_constraintStart_toStartOf="@+id/discHeadingServer"
-                    app:layout_constraintTop_toBottomOf="@+id/discHeadingServer"
-                    tools:text="1" />
+            <EditText
+                android:id="@+id/durationServer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:hint="Enter Duration"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/durationHeadingServer"
+                app:layout_constraintTop_toBottomOf="@+id/durationHeadingServer"
+                tools:text="7:14" />
 
-                <TextView
-                    android:id="@+id/durationHeadingServer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Duration"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/durationServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/discServer" />
+            <TextView
+                android:id="@+id/yearHeadingServer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Year"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/yearHeading"
+                app:layout_constraintTop_toBottomOf="@+id/durationServer" />
 
-                <EditText
-                    android:id="@+id/durationServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:hint="Enter Duration"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/yearHeadingServer"
-                    app:layout_constraintStart_toStartOf="@+id/durationHeadingServer"
-                    app:layout_constraintTop_toBottomOf="@+id/durationHeadingServer"
-                    tools:text="7:14" />
-
-
-                <TextView
-                    android:id="@+id/yearHeadingServer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Year"
-                    android:textColor="@color/light_blue"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/yearServer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/durationServer" />
-
-                <EditText
-                    android:id="@+id/yearServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:hint="Enter Year Here"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/light_gray"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/yearHeadingServer"
-                    app:layout_constraintTop_toBottomOf="@+id/yearHeadingServer"
-                    tools:text="2001" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/yearServer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:hint="Enter Year Here"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/yearHeadingServer"
+                app:layout_constraintTop_toBottomOf="@+id/yearHeadingServer"
+                tools:text="2001" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
