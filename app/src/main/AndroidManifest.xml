@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="30">
+        tools:targetApi="31">
 
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
@@ -42,7 +42,8 @@
 
         <activity
             android:name=".presentation.features.splash_screen.SplashActivity"
-            android:theme="@style/AppThemeNoActionBar">
+            android:theme="@style/AppThemeNoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -96,7 +97,8 @@
         </activity>
         <activity
             android:name=".presentation.features.login.LoginActivity"
-            android:label="@string/auth_title">
+            android:label="@string/auth_title"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
