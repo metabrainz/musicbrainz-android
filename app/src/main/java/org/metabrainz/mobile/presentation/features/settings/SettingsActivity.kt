@@ -29,8 +29,8 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val toolbarBinding = LayoutToolbarBinding.bind(binding.root)
-
         setSupportActionBar(toolbarBinding.toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         supportFragmentManager
                 .beginTransaction()

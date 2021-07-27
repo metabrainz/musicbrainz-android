@@ -28,7 +28,7 @@
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"
-            android:theme="@style/FinestWebViewTheme.Light" />
+            android:theme="@style/FinestWebViewTheme" />
 
         <service
             android:name=".ListenService"
@@ -51,9 +51,6 @@
         </activity>
         <activity
             android:name=".presentation.features.onboarding.FeaturesActivity"
-            android:theme="@style/AppThemeNoActionBar" />
-        <activity
-            android:name=".presentation.features.onboarding.GettingStarted"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
@@ -117,18 +114,6 @@
         <activity
             android:name=".presentation.features.dashboard.DonateActivity"
             android:label="@string/donate_title" />
-        <activity
-            android:name=".presentation.features.search.SearchResultsActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/AppThemeGrayScale">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
         <activity
             android:name=".presentation.features.release.ReleaseActivity"
             android:label="@string/release_title"
