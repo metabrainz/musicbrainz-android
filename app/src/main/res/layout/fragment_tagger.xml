@@ -123,7 +123,7 @@
 
             <EditText
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -152,7 +152,7 @@
 
             <EditText
                 android:id="@+id/artist"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -180,7 +180,7 @@
 
             <EditText
                 android:id="@+id/album"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -209,7 +209,7 @@
 
             <EditText
                 android:id="@+id/track"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"
@@ -237,7 +237,7 @@
 
             <EditText
                 android:id="@+id/disc"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:enabled="false"
@@ -264,7 +264,7 @@
 
             <EditText
                 android:id="@+id/duration"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:enabled="false"
@@ -292,7 +292,7 @@
 
             <EditText
                 android:id="@+id/year"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:textColor="@color/white"
