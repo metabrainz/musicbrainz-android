@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.data.repository
+package org.metabrainz.mobile.presentation.features.search
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

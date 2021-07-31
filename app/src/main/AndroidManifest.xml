@@ -22,13 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="30">
+        tools:targetApi="31">
 
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"
-            android:theme="@style/FinestWebViewTheme.Light" />
+            android:theme="@style/FinestWebViewTheme" />
 
         <service
             android:name=".ListenService"
@@ -42,7 +42,8 @@
 
         <activity
             android:name=".presentation.features.splash_screen.SplashActivity"
-            android:theme="@style/AppThemeNoActionBar">
+            android:theme="@style/AppThemeNoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,9 +52,6 @@
         </activity>
         <activity
             android:name=".presentation.features.onboarding.FeaturesActivity"
-            android:theme="@style/AppThemeNoActionBar" />
-        <activity
-            android:name=".presentation.features.onboarding.GettingStarted"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
@@ -99,7 +97,8 @@
         </activity>
         <activity
             android:name=".presentation.features.login.LoginActivity"
-            android:label="@string/auth_title">
+            android:label="@string/auth_title"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -117,18 +116,6 @@
         <activity
             android:name=".presentation.features.dashboard.DonateActivity"
             android:label="@string/donate_title" />
-        <activity
-            android:name=".presentation.features.search.SearchResultsActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/AppThemeGrayScale">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
         <activity
             android:name=".presentation.features.release.ReleaseActivity"
             android:label="@string/release_title"
