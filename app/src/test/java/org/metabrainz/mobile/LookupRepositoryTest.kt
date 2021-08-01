@@ -50,6 +50,16 @@ class LookupRepositoryTest {
                 val endpoint = request.path?.substring(1, request.path!!.indexOf('/', 1))
                 val file = endpoint + "_lookup.json"
                 return MockResponse().setResponseCode(200).setBody(loadResourceAsString(file))
+
+                // Head to https://github.com/square/okhttp/tree/master/mockwebserver for documentation
+                // Equivalent to
+                /*
+                    when (request.path) {
+                       "/v1/check/version/" -> {
+                           return MockResponse().setResponseCode(200).setBody(loadResourceAsString(file))
+                       }
+                   }
+                 */
             }
         }
         webServer.start()
@@ -61,7 +71,7 @@ class LookupRepositoryTest {
     @Test
     fun testArtistLookup() = runBlockingTest {
         val expected = testArtist
-        val resource = repository.fetchData(MBEntityType.ARTIST.nameHere, expected.mbid!!, LOOKUP_ARTIST_PARAMS)
+        val resource = repository.fetchData(MBEntityType.ARTIST.entity, expected.mbid!!, LOOKUP_ARTIST_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val actual = Gson().fromJson(resource.data, Artist::class.java)
         checkArtistAssertions(expected, actual)
@@ -71,7 +81,7 @@ class LookupRepositoryTest {
     @Test
     fun testReleaseLookup() = runBlockingTest {
         val expected = testRelease
-        val resource = repository.fetchData(MBEntityType.RELEASE.nameHere, expected.mbid!!, LOOKUP_RELEASE_PARAMS)
+        val resource = repository.fetchData(MBEntityType.RELEASE.entity, expected.mbid!!, LOOKUP_RELEASE_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val actual = Gson().fromJson(resource.data, Release::class.java)
         checkReleaseAssertions(expected, actual)
@@ -81,7 +91,7 @@ class LookupRepositoryTest {
     @Test
     fun testReleaseGroupLookup() = runBlockingTest {
         val expected = testReleaseGroup
-        val resource = repository.fetchData(MBEntityType.RELEASE_GROUP.nameHere, expected.mbid!!, LOOKUP_RELEASE_GROUP_PARAMS)
+        val resource = repository.fetchData(MBEntityType.RELEASE_GROUP.entity, expected.mbid!!, LOOKUP_RELEASE_GROUP_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val actual = Gson().fromJson(resource.data, ReleaseGroup::class.java)
         checkReleaseGroupAssertions(expected, actual)
@@ -91,7 +101,7 @@ class LookupRepositoryTest {
     @Test
     fun testLabelLookup() = runBlockingTest {
         val expected = testLabel
-        val resource = repository.fetchData(MBEntityType.LABEL.nameHere, expected.mbid!!, LOOKUP_LABEL_PARAMS)
+        val resource = repository.fetchData(MBEntityType.LABEL.entity, expected.mbid!!, LOOKUP_LABEL_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val label = Gson().fromJson(resource.data, Label::class.java)
         checkLabelAssertions(expected, label)
@@ -101,7 +111,7 @@ class LookupRepositoryTest {
     @Test
     fun testRecordingLookup() = runBlockingTest {
         val expected = testRecording
-        val resource = repository.fetchData(MBEntityType.RECORDING.nameHere, expected.mbid!!, LOOKUP_RECORDING_PARAMS)
+        val resource = repository.fetchData(MBEntityType.RECORDING.entity, expected.mbid!!, LOOKUP_RECORDING_PARAMS)
         assertEquals(SUCCESS, resource.status)
         val recording = Gson().fromJson(resource.data, Recording::class.java)
         checkRecordingAssertions(expected, recording)

@@ -39,7 +39,7 @@ class CollectionViewModelTest {
     fun testCollectionViewModel() = testDispatcher.runBlockingTest {
         val testCollection = EntityTestUtils.testCollection
         val viewModel = CollectionViewModel(MockCollectionRepository())
-        viewModel.mbid.value = EntityTestUtils.testCollectionMBID
+        //viewModel.mbid.value = EntityTestUtils.testCollectionMBID
 //        val resource = LiveDataTestUtil.getOrAwaitValue(viewModel.data)
 //        Assert.assertEquals(Resource.Status.SUCCESS, resource!!.status)
 //        AssertionUtils.checkCollectionAssertions(testCollection, resource.data!!)

@@ -9,35 +9,43 @@ import java.lang.reflect.Type
 import java.util.*
 
 object ResultItemUtils {
-    @JvmStatic
     fun getEntityAsResultItem(entity: MBEntity?): ResultItem {
-        val item: ResultItem? = if (entity is Artist) {
-            ResultItem(entity.mbid, entity.name, entity.disambiguation,
+        val item: ResultItem? = when (entity) {
+            is Artist -> {
+                ResultItem(entity.mbid, entity.name, entity.disambiguation,
                     entity.type, entity.country)
-        } else if (entity is Event) {
-            val event = entity
-            if (event.lifeSpan != null) ResultItem(event.mbid, event.name, event.disambiguation,
+            }
+            is Event -> {
+                val event = entity
+                if (event.lifeSpan != null) ResultItem(event.mbid, event.name, event.disambiguation,
                     event.type, event.lifeSpan!!.timePeriod) else ResultItem(event.mbid, event.name, event.disambiguation,
                     event.type, "")
-        } else if (entity is Instrument) {
-            val instrument = entity
-            ResultItem(instrument.mbid, instrument.name, instrument.disambiguation,
+            }
+            is Instrument -> {
+                val instrument = entity
+                ResultItem(instrument.mbid, instrument.name, instrument.disambiguation,
                     instrument.description, instrument.type)
-        } else if (entity is Label) {
-            val label = entity
-            ResultItem(label.mbid, label.name, label.disambiguation,
+            }
+            is Label -> {
+                val label = entity
+                ResultItem(label.mbid, label.name, label.disambiguation,
                     label.type, label.country)
-        } else if (entity is Recording) {
-            if (entity.releases.size > 0) ResultItem(entity.mbid, entity.title, entity.disambiguation,
+            }
+            is Recording -> {
+                if (entity.releases.size > 0) ResultItem(entity.mbid, entity.title, entity.disambiguation,
                     entity.releases[0].title, getDisplayArtist(entity.artistCredits)) else ResultItem(entity.mbid, entity.title, entity.disambiguation,
                     "", getDisplayArtist(entity.artistCredits))
-        } else if (entity is Release) {
-            ResultItem(entity.mbid, entity.title, entity.disambiguation,
-                    getDisplayArtist(entity.getArtistCredits()), entity.labelCatalog())
-        } else if (entity is ReleaseGroup) {
-            ResultItem(entity.mbid, entity.title, entity.disambiguation,
+            }
+            is Release -> {
+                ResultItem(entity.mbid, entity.title, entity.disambiguation,
+                    getDisplayArtist(entity.artistCredits), entity.labelCatalog())
+            }
+            is ReleaseGroup -> {
+                ResultItem(entity.mbid, entity.title, entity.disambiguation,
                     getDisplayArtist(entity.getArtistCredits()), entity.fullType)
-        } else null
+            }
+            else -> null
+        }
         return item!!
     }
 
@@ -46,9 +54,7 @@ object ResultItemUtils {
     }
 
     fun getJSONResponseAsResultItemList(response: String?, entity: MBEntityType): List<ResultItem> {
-        val list = Gson().fromJson<List<MBEntity>>(
-                JsonParser.parseString(response)
-                        .asJsonObject[entity.nameHere + "s"], getTypeToken(entity))
+        val list = Gson().fromJson<List<MBEntity>>(JsonParser.parseString(response).asJsonObject[entity.entity + "s"], getTypeToken(entity))
         val items: MutableList<ResultItem> = ArrayList()
         for (e in list) items.add(getEntityAsResultItem(e))
         return items

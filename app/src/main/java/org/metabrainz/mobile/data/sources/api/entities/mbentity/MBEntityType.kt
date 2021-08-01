@@ -6,8 +6,7 @@ import org.metabrainz.mobile.presentation.features.recording.RecordingActivity
 import org.metabrainz.mobile.presentation.features.release.ReleaseActivity
 import org.metabrainz.mobile.presentation.features.release_group.ReleaseGroupActivity
 
-enum class MBEntityType(entity: String, var typeActivityClass: Class<*>) {
-
+enum class MBEntityType(var entity: String, var typeActivityClass: Class<*>) {
     ARTIST("artist", ArtistActivity::class.java),
     RELEASE("release", ReleaseActivity::class.java),
     LABEL("label", LabelActivity::class.java),
@@ -15,7 +14,4 @@ enum class MBEntityType(entity: String, var typeActivityClass: Class<*>) {
     RECORDING("recording", RecordingActivity::class.java),
     EVENT("event", ArtistActivity::class.java),
     INSTRUMENT("instrument", ArtistActivity::class.java);
-
-    var nameHere = entity
-    var display = nameHere
 }

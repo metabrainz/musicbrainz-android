@@ -27,7 +27,7 @@ class CollectionViewModel @Inject constructor(val repository: CollectionReposito
 
     fun fetchCollectionDetails(entity: MBEntityType, id: String): LiveData<Resource<List<ResultItem>>> {
         return liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-            val result = repository.fetchCollectionDetails(entity.nameHere, id)
+            val result = repository.fetchCollectionDetails(entity.entity, id)
             emit(toResultItemsList(entity, result))
         }
     }
