@@ -4,12 +4,12 @@
             "name": "Rock and Roll",
             "editor": "akshaaatt",
             "release-list": {
-                "_count": "3"
+                "count": "3"
             },
-            "_id": "a691377c-6949-44cb-8a10-9696178cca18",
-            "_type": "Release",
-            "_entity-type": "release"
+            "id": "a691377c-6949-44cb-8a10-9696178cca18",
+            "type": "Release",
+            "entity-type": "release"
         },
-        "_count": "1"
+        "count": "1"
     }
 }

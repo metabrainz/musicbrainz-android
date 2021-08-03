@@ -19,20 +19,22 @@ object CollectionUtils {
         val collections: MutableList<Collection> = ArrayList(response.collections)
         val jsonElement = JsonParser.parseString(jsonResponse)
         val result = jsonElement.asJsonObject.getAsJsonArray("collections")
-        for (element in result) {
-            val entries = element.asJsonObject.entrySet()
-            var count = ""
-            var id = ""
-            for ((key, value) in entries) {
-                if (key.contains("count")) count = value.asString
-                if (key.equals("id", ignoreCase = true)) id = value.asString
+        if(result!=null){
+            for (element in result) {
+                val entries = element.asJsonObject.entrySet()
+                var count = ""
+                var id = ""
+                for ((key, value) in entries) {
+                    if (key.contains("count")) count = value.asString
+                    if (key.equals("id", ignoreCase = true)) id = value.asString
+                }
+                d("$id $count")
+                countList[id] = count
             }
-            d("$id $count")
-            countList[id] = count
-        }
-        for (collection in collections) {
-            val id = collection.mbid
-            collection.count = Objects.requireNonNull(countList[id])!!.toInt()
+            for (collection in collections) {
+                val id = collection.mbid
+                collection.count = countList[id]!!.toInt()
+            }
         }
         return collections
     }
@@ -53,7 +55,7 @@ object CollectionUtils {
         return MBEntityType.valueOf(collection
                 .entityType
                 !!.replace('-', '_')
-                .toUpperCase(Locale.ROOT)
+                .uppercase()
         )
     }
 }

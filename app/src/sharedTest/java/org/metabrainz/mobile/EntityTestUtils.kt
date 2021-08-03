@@ -188,12 +188,12 @@ object EntityTestUtils {
         }
 
 
-    val testCollectionMBID: String
+    val testCollectionPublicMBID: String
         get() = "a691377c-6949-44cb-8a10-9696178cca18"
 
-    val testCollection: Collection
+    val testCollectionPublic: Collection
         get() {
-            val MBID = testCollectionMBID
+            val MBID = testCollectionPublicMBID
             val testCollection = Collection()
             testCollection.mbid = MBID
             testCollection.type = "Release"
@@ -201,6 +201,22 @@ object EntityTestUtils {
             testCollection.count = 1
             testCollection.editor = "akshaaatt"
             testCollection.entityType = "release"
+            return testCollection
+        }
+
+    val testCollectionPrivateMBID: String
+        get() = "d103a421-9340-413f-a04e-5e63dd234bc4"
+
+    val testCollectionPrivate: Collection
+        get() {
+            val MBID = testCollectionPrivateMBID
+            val testCollection = Collection()
+            testCollection.mbid = MBID
+            testCollection.type = "Artist"
+            testCollection.name = "Sweet Talks"
+            testCollection.count = 3
+            testCollection.editor = "akshaaatt"
+            testCollection.entityType = "artist"
             return testCollection
         }
 

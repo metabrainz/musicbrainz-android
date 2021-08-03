@@ -1,7 +1,6 @@
 package org.metabrainz.mobile
 
 import com.google.gson.Gson
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -36,9 +35,6 @@ import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 
 class LookupRepositoryTest {
 
-    // FIXME: Replaced runBlockingTest with runBlocking for the time being to pass the tests
-    // This is a bug in the kotlinx-coroutines-test library. This should not be necessary once the
-    // bug is fixed upstream.
     private lateinit var webServer: MockWebServer
     private lateinit var repository: LookupRepository
 
@@ -67,7 +63,6 @@ class LookupRepositoryTest {
         repository = LookupRepositoryImpl(service)
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun testArtistLookup() = runBlocking {
         val expected = testArtist
@@ -77,7 +72,6 @@ class LookupRepositoryTest {
         checkArtistAssertions(expected, actual)
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun testReleaseLookup() = runBlocking {
         val expected = testRelease
@@ -87,7 +81,6 @@ class LookupRepositoryTest {
         checkReleaseAssertions(expected, actual)
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun testReleaseGroupLookup() = runBlocking {
         val expected = testReleaseGroup
@@ -97,7 +90,6 @@ class LookupRepositoryTest {
         checkReleaseGroupAssertions(expected, actual)
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun testLabelLookup() = runBlocking {
         val expected = testLabel
@@ -107,7 +99,6 @@ class LookupRepositoryTest {
         checkLabelAssertions(expected, label)
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun testRecordingLookup() = runBlocking {
         val expected = testRecording
