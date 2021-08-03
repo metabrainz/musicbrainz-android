@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object MusicBrainzServiceGenerator {
 
-    private const val API_BASE_URL = "https://musicbrainz.org/ws/2/"
+    const val API_BASE_URL = "https://musicbrainz.org/ws/2/"
     const val AUTH_BASE_URL = "https://musicbrainz.org/oauth2/"
     const val ACOUST_ID_BASE_URL = "https://api.acoustid.org/v2/lookup"
     const val CLIENT_ID = "BZn9PT8PXtzoUvR1ZIaXFw"

@@ -4,8 +4,8 @@
             {
                 "title": "What I've Done",
                 "status": {
-                    "_id": "4e304316-386d-3409-af2e-78857eec5cfe",
-                    "__text": "Official"
+                    "id": "4e304316-386d-3409-af2e-78857eec5cfe",
+                    "text": "Official"
                 },
                 "quality": "normal",
                 "text-representation": {
@@ -22,10 +22,10 @@
                             "iso-3166-1-code-list": {
                                 "iso-3166-1-code": "XW"
                             },
-                            "_id": "525d4e18-3d00-31b9-a58b-a146a916de8f"
+                            "id": "525d4e18-3d00-31b9-a58b-a146a916de8f"
                         }
                     },
-                    "_count": "1"
+                    "count": "1"
                 },
                 "barcode": "054391998583",
                 "cover-art-archive": {
@@ -34,18 +34,18 @@
                     "front": "true",
                     "back": "false"
                 },
-                "_id": "8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5"
+                "id": "8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5"
             },
             {
                 "title": "Do I Wanna Know?",
                 "status": {
-                    "_id": "4e304316-386d-3409-af2e-78857eec5cfe",
-                    "__text": "Official"
+                    "id": "4e304316-386d-3409-af2e-78857eec5cfe",
+                    "text": "Official"
                 },
                 "quality": "normal",
                 "packaging": {
-                    "_id": "119eba76-b343-3e02-a292-f0f00644bb9b",
-                    "__text": "None"
+                    "id": "119eba76-b343-3e02-a292-f0f00644bb9b",
+                    "text": "None"
                 },
                 "text-representation": {
                     "language": "eng",
@@ -62,10 +62,10 @@
                             "iso-3166-1-code-list": {
                                 "iso-3166-1-code": "GB"
                             },
-                            "_id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed"
+                            "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed"
                         }
                     },
-                    "_count": "1"
+                    "count": "1"
                 },
                 "barcode": "887829054267",
                 "asin": "B00E199RJG",
@@ -75,18 +75,18 @@
                     "front": "true",
                     "back": "false"
                 },
-                "_id": "37f30c11-3eb1-426a-bfab-ab46a0dc1880"
+                "id": "37f30c11-3eb1-426a-bfab-ab46a0dc1880"
             },
             {
                 "title": "evermore",
                 "status": {
-                    "_id": "4e304316-386d-3409-af2e-78857eec5cfe",
-                    "__text": "Official"
+                    "id": "4e304316-386d-3409-af2e-78857eec5cfe",
+                    "text": "Official"
                 },
                 "quality": "normal",
                 "packaging": {
-                    "_id": "119eba76-b343-3e02-a292-f0f00644bb9b",
-                    "__text": "None"
+                    "id": "119eba76-b343-3e02-a292-f0f00644bb9b",
+                    "text": "None"
                 },
                 "text-representation": {
                     "language": "eng",
@@ -103,10 +103,10 @@
                             "iso-3166-1-code-list": {
                                 "iso-3166-1-code": "XW"
                             },
-                            "_id": "525d4e18-3d00-31b9-a58b-a146a916de8f"
+                            "id": "525d4e18-3d00-31b9-a58b-a146a916de8f"
                         }
                     },
-                    "_count": "1"
+                    "count": "1"
                 },
                 "asin": "B08Q8LLD9T",
                 "cover-art-archive": {
@@ -115,9 +115,9 @@
                     "front": "true",
                     "back": "true"
                 },
-                "_id": "51291562-2794-45c9-9d77-bc1e65888edf"
+                "id": "51291562-2794-45c9-9d77-bc1e65888edf"
             }
         ],
-        "_count": "3"
+        "count": "3"
     }
 }

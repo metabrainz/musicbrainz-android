@@ -220,8 +220,12 @@ object EntityTestUtils {
             return testCollection
         }
 
-    val testCollectionDetails: ResultItem
-        get() {
-            TODO()
-        }
+    val testCollectionDetailsMBID: String
+        get() = "8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5"
+
+//    val testCollectionDetails: ResultItem
+//        get() {
+//            val MBID = testCollectionPrivateMBID
+//            return ResultItem(entity.mbid, entity.name, entity.disambiguation, entity.type, entity.country)
+//        }
 }

@@ -96,5 +96,4 @@ object AssertionUtils {
         assertEquals(testCollection.editor, collection.editor)
         assertEquals(testCollection.entityType, collection.entityType)
     }
-
 }

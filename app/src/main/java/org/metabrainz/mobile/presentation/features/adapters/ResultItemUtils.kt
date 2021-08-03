@@ -16,33 +16,36 @@ object ResultItemUtils {
                     entity.type, entity.country)
             }
             is Event -> {
-                val event = entity
-                if (event.lifeSpan != null) ResultItem(event.mbid, event.name, event.disambiguation,
-                    event.type, event.lifeSpan!!.timePeriod) else ResultItem(event.mbid, event.name, event.disambiguation,
-                    event.type, "")
+                when {
+                    entity.lifeSpan != null -> {
+                        ResultItem(entity.mbid, entity.name, entity.disambiguation, entity.type, entity.lifeSpan!!.timePeriod)
+                    }
+                    else -> {
+                        ResultItem(entity.mbid, entity.name, entity.disambiguation, entity.type, "")
+                    }
+                }
             }
             is Instrument -> {
-                val instrument = entity
-                ResultItem(instrument.mbid, instrument.name, instrument.disambiguation,
-                    instrument.description, instrument.type)
+                ResultItem(entity.mbid, entity.name, entity.disambiguation, entity.description, entity.type)
             }
             is Label -> {
-                val label = entity
-                ResultItem(label.mbid, label.name, label.disambiguation,
-                    label.type, label.country)
+                ResultItem(entity.mbid, entity.name, entity.disambiguation, entity.type, entity.country)
             }
             is Recording -> {
-                if (entity.releases.size > 0) ResultItem(entity.mbid, entity.title, entity.disambiguation,
-                    entity.releases[0].title, getDisplayArtist(entity.artistCredits)) else ResultItem(entity.mbid, entity.title, entity.disambiguation,
-                    "", getDisplayArtist(entity.artistCredits))
+                when {
+                    entity.releases.size > 0 -> {
+                        ResultItem(entity.mbid, entity.title, entity.disambiguation, entity.releases[0].title, getDisplayArtist(entity.artistCredits))
+                    }
+                    else -> {
+                        ResultItem(entity.mbid, entity.title, entity.disambiguation, "", getDisplayArtist(entity.artistCredits))
+                    }
+                }
             }
             is Release -> {
-                ResultItem(entity.mbid, entity.title, entity.disambiguation,
-                    getDisplayArtist(entity.artistCredits), entity.labelCatalog())
+                ResultItem(entity.mbid, entity.title, entity.disambiguation, getDisplayArtist(entity.artistCredits), entity.labelCatalog())
             }
             is ReleaseGroup -> {
-                ResultItem(entity.mbid, entity.title, entity.disambiguation,
-                    getDisplayArtist(entity.getArtistCredits()), entity.fullType)
+                ResultItem(entity.mbid, entity.title, entity.disambiguation, getDisplayArtist(entity.getArtistCredits()), entity.fullType)
             }
             else -> null
         }
@@ -50,7 +53,16 @@ object ResultItemUtils {
     }
 
     private fun getTypeToken(entity: MBEntityType): Type? {
-        return if (entity === MBEntityType.ARTIST) TypeToken.getParameterized(MutableList::class.java, Artist::class.java).type else if (entity === MBEntityType.RELEASE) TypeToken.getParameterized(MutableList::class.java, Release::class.java).type else if (entity === MBEntityType.LABEL) TypeToken.getParameterized(MutableList::class.java, Label::class.java).type else if (entity === MBEntityType.RECORDING) TypeToken.getParameterized(MutableList::class.java, Recording::class.java).type else if (entity === MBEntityType.EVENT) TypeToken.getParameterized(MutableList::class.java, Event::class.java).type else if (entity === MBEntityType.INSTRUMENT) TypeToken.getParameterized(MutableList::class.java, Instrument::class.java).type else if (entity === MBEntityType.RELEASE_GROUP) TypeToken.getParameterized(MutableList::class.java, ReleaseGroup::class.java).type else null
+        return when {
+            entity === MBEntityType.ARTIST -> TypeToken.getParameterized(MutableList::class.java, Artist::class.java).type
+            entity === MBEntityType.RELEASE -> TypeToken.getParameterized(MutableList::class.java, Release::class.java).type
+            entity === MBEntityType.LABEL -> TypeToken.getParameterized(MutableList::class.java, Label::class.java).type
+            entity === MBEntityType.RECORDING -> TypeToken.getParameterized(MutableList::class.java, Recording::class.java).type
+            entity === MBEntityType.EVENT -> TypeToken.getParameterized(MutableList::class.java, Event::class.java).type
+            entity === MBEntityType.INSTRUMENT -> TypeToken.getParameterized(MutableList::class.java, Instrument::class.java).type
+            entity === MBEntityType.RELEASE_GROUP -> TypeToken.getParameterized(MutableList::class.java, ReleaseGroup::class.java).type
+            else -> null
+        }
     }
 
     fun getJSONResponseAsResultItemList(response: String?, entity: MBEntityType): List<ResultItem> {
