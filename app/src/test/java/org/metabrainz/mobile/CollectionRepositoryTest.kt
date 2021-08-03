@@ -2,6 +2,7 @@ package org.metabrainz.mobile
 
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -24,7 +25,7 @@ import org.metabrainz.mobile.util.Resource
 
 class CollectionRepositoryTest {
 
-    // FIXME: Replace runBlockingTest with runBlocking for the time being to pass the tests
+    // FIXME: Replaced runBlockingTest with runBlocking for the time being to pass the tests
     // This is a bug in the kotlinx-coroutines-test library. This should not be necessary once the
     // bug is fixed upstream.
     private lateinit var webServer: MockWebServer
@@ -47,7 +48,7 @@ class CollectionRepositoryTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun fetchCollectionDetails() = runBlockingTest {
+    fun fetchCollectionDetails() = runBlocking {
         val expected = testCollectionDetails
         val resource = repository.fetchCollectionDetails("release","a691377c-6949-44cb-8a10-9696178cca18")
         Assert.assertEquals(Resource.Status.SUCCESS, resource.status)
@@ -57,7 +58,7 @@ class CollectionRepositoryTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun fetchCollections() = runBlockingTest {
+    fun fetchCollections() = runBlocking {
         val expected = testCollection
         val resource = repository.fetchCollections("akshaaatt",false)
         Assert.assertEquals(Resource.Status.SUCCESS, resource.status)

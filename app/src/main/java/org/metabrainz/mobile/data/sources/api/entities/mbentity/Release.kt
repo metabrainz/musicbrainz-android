@@ -80,7 +80,7 @@ class Release : MBEntity() {
                 ", date='" + date + '\'' +
                 ", barcode='" + barcode + '\'' +  //                ", packaging='" + packaging + '\'' +
                 ", releaseGroup=" + releaseGroup +
-                ", releaseEvents=" + releaseEvents.toString() +
+                ", releaseEvents=" + releaseEvents +
                 ", labels=" + labels +
                 ", trackCount=" + trackCount +
                 ", country='" + country + '\'' +

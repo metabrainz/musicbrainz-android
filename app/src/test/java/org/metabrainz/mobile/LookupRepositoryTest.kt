@@ -2,7 +2,7 @@ package org.metabrainz.mobile
 
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -36,7 +36,7 @@ import org.metabrainz.mobile.util.Resource.Status.SUCCESS
 
 class LookupRepositoryTest {
 
-    // FIXME: Replace runBlockingTest with runBlocking for the time being to pass the tests
+    // FIXME: Replaced runBlockingTest with runBlocking for the time being to pass the tests
     // This is a bug in the kotlinx-coroutines-test library. This should not be necessary once the
     // bug is fixed upstream.
     private lateinit var webServer: MockWebServer
@@ -69,7 +69,7 @@ class LookupRepositoryTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testArtistLookup() = runBlockingTest {
+    fun testArtistLookup() = runBlocking {
         val expected = testArtist
         val resource = repository.fetchData(MBEntityType.ARTIST.entity, expected.mbid!!, LOOKUP_ARTIST_PARAMS)
         assertEquals(SUCCESS, resource.status)
@@ -79,7 +79,7 @@ class LookupRepositoryTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testReleaseLookup() = runBlockingTest {
+    fun testReleaseLookup() = runBlocking {
         val expected = testRelease
         val resource = repository.fetchData(MBEntityType.RELEASE.entity, expected.mbid!!, LOOKUP_RELEASE_PARAMS)
         assertEquals(SUCCESS, resource.status)
@@ -89,7 +89,7 @@ class LookupRepositoryTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testReleaseGroupLookup() = runBlockingTest {
+    fun testReleaseGroupLookup() = runBlocking {
         val expected = testReleaseGroup
         val resource = repository.fetchData(MBEntityType.RELEASE_GROUP.entity, expected.mbid!!, LOOKUP_RELEASE_GROUP_PARAMS)
         assertEquals(SUCCESS, resource.status)
@@ -99,7 +99,7 @@ class LookupRepositoryTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testLabelLookup() = runBlockingTest {
+    fun testLabelLookup() = runBlocking {
         val expected = testLabel
         val resource = repository.fetchData(MBEntityType.LABEL.entity, expected.mbid!!, LOOKUP_LABEL_PARAMS)
         assertEquals(SUCCESS, resource.status)
@@ -109,7 +109,7 @@ class LookupRepositoryTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun testRecordingLookup() = runBlockingTest {
+    fun testRecordingLookup() = runBlocking {
         val expected = testRecording
         val resource = repository.fetchData(MBEntityType.RECORDING.entity, expected.mbid!!, LOOKUP_RECORDING_PARAMS)
         assertEquals(SUCCESS, resource.status)
