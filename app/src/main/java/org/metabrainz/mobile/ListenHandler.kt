@@ -13,7 +13,6 @@ import org.metabrainz.mobile.util.Log.d
 import retrofit2.Call
 import retrofit2.Response
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 class ListenHandler : Handler(Looper.getMainLooper()) {
     private val DELAY = 30000
     private val TIMESTAMP = "timestamp"
