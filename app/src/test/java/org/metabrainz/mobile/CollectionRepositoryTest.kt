@@ -1,5 +1,6 @@
 package org.metabrainz.mobile
 
+import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.Dispatcher
@@ -33,7 +34,12 @@ class CollectionRepositoryTest {
         webServer = MockWebServer()
         webServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
-                return MockResponse().setResponseCode(200).setBody(loadResourceAsString("collections_private.json"))
+                val params = request.requestUrl?.queryParameter("inc")
+                val file = when {
+                        params != null && params.equals("user-collections", ignoreCase = true) -> "collections_private.json"
+                        else -> "collections_public.json"
+                    }
+                return MockResponse().setResponseCode(200).setBody(loadResourceAsString(file))
             }
         }
         webServer.start()
@@ -53,17 +59,19 @@ class CollectionRepositoryTest {
 
     @Test
     fun fetchCollections() = runBlocking {
+        val expectedPrivate = testCollectionPrivate
+        val resourcePrivate = repository.fetchCollections(expectedPrivate.editor!!,true)
+        assertEquals(Resource.Status.SUCCESS, resourcePrivate.status)
+        val collectionPrivate = resourcePrivate.data!!.indexOf(expectedPrivate)
+        checkCollectionAssertions(expectedPrivate, resourcePrivate.data!![collectionPrivate])
+
         val expectedPublic = testCollectionPublic
         val resourcePublic = repository.fetchCollections(expectedPublic.editor!!,false)
         assertEquals(Resource.Status.SUCCESS, resourcePublic.status)
         val collectionPublic = resourcePublic.data!!.indexOf(expectedPublic)
         checkCollectionAssertions(expectedPublic, resourcePublic.data!![collectionPublic])
 
-        val expectedPrivate = testCollectionPrivate
-        val resourcePrivate = repository.fetchCollections(expectedPrivate.editor!!,true)
-        assertEquals(Resource.Status.SUCCESS, resourcePrivate.status)
-        val collectionPrivate = resourcePrivate.data!!.indexOf(expectedPrivate)
-        checkCollectionAssertions(expectedPrivate, resourcePrivate.data!![collectionPrivate])
+
     }
 
     @After
