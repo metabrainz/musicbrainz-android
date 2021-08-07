@@ -8,6 +8,7 @@ import org.metabrainz.mobile.databinding.ItemResultBinding
 class ResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val binding: ItemResultBinding = ItemResultBinding.bind(itemView)
+
     fun bind(item: ResultItem?) {
         setViewVisibility(item!!.name, binding.itemName)
         setViewVisibility(item.disambiguation, binding.itemDisambiguation)

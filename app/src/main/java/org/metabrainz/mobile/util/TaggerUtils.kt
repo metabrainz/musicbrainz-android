@@ -182,7 +182,9 @@ object TaggerUtils {
                             artist.name = responseArtist.name
                             artist.sortName = responseArtist.name
                         }
-                        if (responseArtist.joinphrase != null && responseArtist.joinphrase!!.isNotEmpty()) artistCredit.joinphrase = responseArtist.joinphrase
+                        if (responseArtist.joinphrase != null && responseArtist.joinphrase!!.isNotEmpty()) {
+                            artistCredit.joinphrase = responseArtist.joinphrase
+                        }
                         artistCredit.artist = artist
                         artistCredits.add(artistCredit)
                     }

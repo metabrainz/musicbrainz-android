@@ -50,10 +50,6 @@ object CollectionUtils {
     }
 
     fun getCollectionEntityType(collection: Collection): MBEntityType {
-        return MBEntityType.valueOf(collection
-                .entityType
-                !!.replace('-', '_')
-                .toUpperCase(Locale.ROOT)
-        )
+        return MBEntityType.valueOf(collection.entityType!!.replace('-', '_').uppercase(Locale.ROOT))
     }
 }

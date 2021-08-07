@@ -66,14 +66,13 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, BarcodeActivity::class.java))
         }
         binding.dashboardListenId.setOnClickListener {
-            FinestWebView.Builder(this).show("https://listenbrainz.org/");
+            FinestWebView.Builder(this).show("https://listenbrainz.org/")
         }
         binding.dashboardCritiqueId.setOnClickListener {
-            FinestWebView.Builder(this).show("https://critiquebrainz.org/");
+            FinestWebView.Builder(this).show("https://critiquebrainz.org/")
         }
 
-
-        //cardview animation
+        //CardView animation
         val leftItemAnimation = AnimationUtils.loadAnimation(this, R.anim.left_dashboard_item_animation)
         val rightItemAnimation = AnimationUtils.loadAnimation(this, R.anim.right_dashboard_item_animation)
         binding.dashboardTagId.animation = leftItemAnimation
@@ -84,16 +83,17 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardCollectionId.animation = leftItemAnimation
         binding.dashboardCritiqueId.animation = leftItemAnimation
         binding.dashboardListenId.animation = rightItemAnimation
-
     }
 
     override fun onResume() {
         super.onResume()
-        if(advancedFeaturesPreference){
-            binding.advancedFeatures.visibility = VISIBLE
-        }
-        else{
-            binding.advancedFeatures.visibility = GONE
+        when {
+            advancedFeaturesPreference -> {
+                binding.advancedFeatures.visibility = VISIBLE
+            }
+            else -> {
+                binding.advancedFeatures.visibility = GONE
+            }
         }
     }
 

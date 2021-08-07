@@ -17,8 +17,7 @@ class ResultAdapter(private val data: List<ResultItem>, private val entity: MBEn
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_result, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_result, parent, false)
         return ResultViewHolder(view)
     }
 
