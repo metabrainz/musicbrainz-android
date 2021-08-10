@@ -1,7 +1,5 @@
 package org.metabrainz.mobile
 
-import android.util.Log
-import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -19,10 +17,7 @@ import org.metabrainz.mobile.RetrofitUtils.createTestService
 import org.metabrainz.mobile.data.repository.CollectionRepository
 import org.metabrainz.mobile.data.repository.CollectionRepositoryImpl
 import org.metabrainz.mobile.data.sources.api.CollectionService
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
-import org.metabrainz.mobile.presentation.features.adapters.ResultItem
 import org.metabrainz.mobile.util.Resource
-import java.lang.Exception
 
 class CollectionRepositoryTest {
 
@@ -70,8 +65,6 @@ class CollectionRepositoryTest {
         assertEquals(Resource.Status.SUCCESS, resourcePublic.status)
         val collectionPublic = resourcePublic.data!!.indexOf(expectedPublic)
         checkCollectionAssertions(expectedPublic, resourcePublic.data!![collectionPublic])
-
-
     }
 
     @After

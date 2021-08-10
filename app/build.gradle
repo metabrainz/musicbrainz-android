@@ -100,7 +100,7 @@ dependencies {
     testImplementation 'com.squareup.okhttp3:mockwebserver:5.0.0-alpha.2'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1-native-mt'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
 
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -119,7 +119,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0-alpha01'
     implementation 'androidx.browser:browser:1.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'com.airbnb.android:lottie:4.0.0'
     implementation 'com.github.akshaaatt:Onboarding:1.0.1'
