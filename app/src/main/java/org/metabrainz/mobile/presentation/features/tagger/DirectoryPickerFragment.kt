@@ -194,9 +194,7 @@ class DirectoryPickerFragment : Fragment(), OnItemCLickListener, SearchView.OnQu
                     val mimeType = cursor.getString(cursor.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE))
                     val childDocumentUri = DocumentsContract.buildDocumentUriUsingTree(documentUri, documentId)
                     if (mimeType == DocumentsContract.Document.MIME_TYPE_DIR) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            traverse(treeUri, DocumentsContract.buildChildDocumentsUriUsingTree(treeUri, documentId), documents)
-                        }
+                        traverse(treeUri, DocumentsContract.buildChildDocumentsUriUsingTree(treeUri, documentId), documents)
                     } else {
                         if (mimeType.startsWith("audio") ||
                                 arrayOf("mp3", "3gp", "m4a", "m4b", "aac", "ts", "flac", "mid", "xmf", "mxmf", "midi", "rtttl", "rtx", "ota", "imy", "ogg", "mkv", "wav", "opus")
