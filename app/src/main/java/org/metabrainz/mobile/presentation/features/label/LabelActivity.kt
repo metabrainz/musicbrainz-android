@@ -28,8 +28,9 @@ class LabelActivity : LookupActivity<Label>() {
         super.onCreate(savedInstanceState)
 
         val mbid = intent.getStringExtra(Constants.MBID)
-        if (mbid != null && mbid.isNotEmpty())
+        if (mbid != null && mbid.isNotEmpty()) {
             labelViewModel.mbid.value = mbid
+        }
         labelViewModel.data.observe(this) { processData(it) }
     }
 

@@ -52,8 +52,7 @@ class CollectionActivity : MusicBrainzActivity() {
             binding.recyclerView.visibility = View.GONE
             val getPrivateCollections = (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN
                     && privateCollectionsPreference)
-            viewModel!!.fetchCollectionData(username!!,
-                    getPrivateCollections).observe(this, { resource: Resource<MutableList<Collection>>? -> setCollections(resource) })
+            viewModel!!.fetchCollectionData(username!!, getPrivateCollections).observe(this, { resource: Resource<MutableList<Collection>>? -> setCollections(resource) })
         } else {
             binding.noResult.root.visibility = View.GONE
             binding.recyclerView.visibility = View.GONE

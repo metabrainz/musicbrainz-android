@@ -34,11 +34,15 @@ class CollectionViewModel @Inject constructor(val repository: CollectionReposito
 
     private fun toResultItemsList(entity: MBEntityType, response: Resource<String>): Resource<List<ResultItem>> {
         return try {
-            if (response.status == SUCCESS) {
-                val resultItems = ResultItemUtils.getJSONResponseAsResultItemList(response.data, entity)
-                return Resource(SUCCESS, resultItems)
-            } else
-                Resource(FAILED, null)
+            when (response.status) {
+                SUCCESS -> {
+                    val resultItems = ResultItemUtils.getJSONResponseAsResultItemList(response.data, entity)
+                    return Resource(SUCCESS, resultItems)
+                }
+                else -> {
+                    Resource(FAILED, null)
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             Resource(FAILED, null)

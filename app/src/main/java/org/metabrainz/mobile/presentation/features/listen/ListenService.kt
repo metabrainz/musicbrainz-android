@@ -1,4 +1,4 @@
-package org.metabrainz.mobile
+package org.metabrainz.mobile.presentation.features.listen
 
 import android.content.ComponentName
 import android.content.Intent
@@ -37,7 +37,7 @@ class ListenService : NotificationListenerService() {
 
     private fun initialize() {
         d("Initializing Listener Service")
-
+        //We check whether the user has added their LB User Token in Settings.
         val token = preferenceListenBrainzToken
         if (token == null || token.isEmpty()){
             d("ListenBrainz User token has not been set!")
@@ -51,6 +51,7 @@ class ListenService : NotificationListenerService() {
 
     override fun onDestroy() {
         super.onDestroy()
+        //Important
         sessionManager!!.removeOnActiveSessionsChangedListener(sessionListener!!)
         sessionListener!!.clearSessions()
     }

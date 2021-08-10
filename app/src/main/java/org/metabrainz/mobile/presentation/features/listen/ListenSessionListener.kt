@@ -1,4 +1,4 @@
-package org.metabrainz.mobile
+package org.metabrainz.mobile.presentation.features.listen
 
 import android.media.MediaMetadata
 import android.media.session.MediaController
@@ -26,7 +26,13 @@ class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedLis
     }
 
     fun clearSessions() {
-        for ((key, value) in activeSessions) for (controller in controllers) if (controller.sessionToken == key) controller.unregisterCallback(value!!)
+        for ((key, value) in activeSessions) {
+            for (controller in controllers) {
+                if (controller.sessionToken == key){
+                    controller.unregisterCallback(value!!)
+                }
+            }
+        }
         activeSessions.clear()
         controllers.clear()
     }

@@ -8,11 +8,11 @@ import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.os.Environment
 import android.provider.Settings
 import dagger.hilt.android.HiltAndroidApp
 import org.metabrainz.mobile.presentation.Configuration
 import org.metabrainz.mobile.presentation.UserPreferences.preferenceListeningEnabled
+import org.metabrainz.mobile.presentation.features.listen.ListenService
 
 @HiltAndroidApp
 class App : Application() {

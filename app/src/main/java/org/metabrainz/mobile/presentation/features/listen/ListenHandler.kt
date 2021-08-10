@@ -1,8 +1,8 @@
-package org.metabrainz.mobile
+package org.metabrainz.mobile.presentation.features.listen
 
 import android.media.MediaMetadata
 import android.os.*
-import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
 import okhttp3.ResponseBody
 import org.metabrainz.mobile.data.sources.api.ListenSubmitService
 import org.metabrainz.mobile.data.sources.api.MusicBrainzServiceGenerator.createService
@@ -32,12 +32,12 @@ class ListenHandler : Handler(Looper.getMainLooper()) {
         body.listenType = "single"
         d(body.toString())
         service.submitListen("Token $token", body)!!.enqueue(object : retrofit2.Callback<ResponseBody?> {
-                    override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                        d(response.message())
-                    }
+            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                d(response.message())
+            }
 
-                    override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {}
-                })
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {}
+        })
     }
 
     fun submitListen(artist: String?, title: String?, timestamp: Long) {
