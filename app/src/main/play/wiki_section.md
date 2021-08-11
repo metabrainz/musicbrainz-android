@@ -34,3 +34,18 @@ MusicBrainz is designed to do the following:
 # How does MusicBrainz Do This?
 
 MusicBrainz captures information about artists, their recorded works, and the relationships between them. Recorded works entries capture at a minimum the album title, track titles, and the length of each track. These entries are maintained by volunteer editors who follow community written style guidelines. Recorded works can also store information about the release date and country, the CD ID, cover art, acoustic fingerprint, free-form annotation text, and other metadata. As of September 2020, MusicBrainz contained information on roughly 1.7 million artists, 2.6 million releases, and 23 million recordings. End-users can use software that communicates with MusicBrainz to add metadata tags to their digital media files, such as ALAC, FLAC, MP3, Ogg Vorbis, or AAC.
+
+# Tutorials
+
+[Tagger Tutorials](https://picard-docs.musicbrainz.org/en/tutorials/android_app.html)
+
+# App Screenshots
+
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/1.jpg)
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/2.jpg)
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/3.jpg)
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/4.jpg)
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/5.jpg)
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/6.jpg)
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/7.jpg)
+![](https://github.com/metabrainz/musicbrainz-android/blob/master/app/src/main/play/listings/en-US/graphics/phone-screenshots/8.jpg)
