@@ -30,11 +30,14 @@ class LoginActivity : MusicBrainzActivity() {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         loginViewModel!!.accessTokenLiveData!!.observe(this, { accessToken: AccessToken? -> saveOAuthToken(accessToken) })
         loginViewModel!!.userInfoLiveData!!.observe(this, { userInfo: UserInfo? -> saveUserInfo(userInfo) })
-        if (LoginSharedPreferences.loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN) {
-            binding!!.loginPromptId.setText(R.string.logout_prompt)
-            binding!!.loginBtn.setText(R.string.logout)
-            binding!!.loginBtn.setOnClickListener { logoutUser() }
-        } else binding!!.loginBtn.setOnClickListener { startLogin() }
+        when (LoginSharedPreferences.loginStatus) {
+            LoginSharedPreferences.STATUS_LOGGED_IN -> {
+                binding!!.loginPromptId.setText(R.string.logout_prompt)
+                binding!!.loginBtn.setText(R.string.logout)
+                binding!!.loginBtn.setOnClickListener { logoutUser() }
+            }
+            else -> binding!!.loginBtn.setOnClickListener { startLogin() }
+        }
     }
 
     override fun onResume() {

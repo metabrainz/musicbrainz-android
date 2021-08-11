@@ -45,8 +45,8 @@ object TaggerUtils {
     // Calculate similarity of multi word strings
     private fun calculateMultiWordSimilarity(first: String?, second: String?): Double {
         return if (first != null && second != null) {
-            val firstList = first.toLowerCase(Locale.ROOT).split("\\W+").toTypedArray()
-            val secondList: MutableList<String> = ArrayList(listOf(*second.toLowerCase(Locale.ROOT).split("\\W+").toTypedArray()))
+            val firstList = first.lowercase(Locale.ROOT).split("\\W+").toTypedArray()
+            val secondList: MutableList<String> = ArrayList(listOf(*second.lowercase(Locale.ROOT).split("\\W+").toTypedArray()))
             var total = 0.0
             var totalScore = 0.0
             for (firstWord in firstList) {
@@ -145,7 +145,7 @@ object TaggerUtils {
 
     fun parseResults(results: List<Result>?): List<Recording> {
         val recordings: MutableList<Recording> = ArrayList()
-        if (results != null && !results.isEmpty()) {
+        if (results != null && results.isNotEmpty()) {
             for (result in results) {
                 var maxSources = 1
                 for (responseRecording in result.recordings) {
