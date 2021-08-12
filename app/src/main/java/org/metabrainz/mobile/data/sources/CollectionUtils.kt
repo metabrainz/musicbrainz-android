@@ -5,18 +5,18 @@ import com.google.gson.JsonParser
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.data.sources.api.entities.response.CollectionListResponse
-import org.metabrainz.mobile.util.Log.d
 import java.util.*
 
 object CollectionUtils {
     /*
      * The response from ws/2/collections has a field for count in all collections. Depending on the
      * entity, the name of the field can be artist-count, release-count etc. This method finds the
-     * correct field name and assigns the value to count field in each collection. */
+     * correct field name and assigns the value to count field in each collection.
+     */
     fun setGenericCountParameter(jsonResponse: String?): MutableList<Collection> {
         val countList: MutableMap<String, String> = HashMap()
         val response = Gson().fromJson(jsonResponse, CollectionListResponse::class.java)
-        val collections: MutableList<Collection> = ArrayList(response.collections)
+        val collections = ArrayList(response.collections)
         val jsonElement = JsonParser.parseString(jsonResponse)
         val result = jsonElement.asJsonObject.getAsJsonArray("collections")
         if(result!=null){
@@ -28,7 +28,7 @@ object CollectionUtils {
                     if (key.contains("count")) count = value.asString
                     if (key.equals("id", ignoreCase = true)) id = value.asString
                 }
-                d("$id $count")
+                //d("$id $count")
                 countList[id] = count
             }
             for (collection in collections) {

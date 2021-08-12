@@ -27,10 +27,10 @@ class CollectionRepositoryImpl @Inject constructor(val service: CollectionServic
     @WorkerThread
     override suspend fun fetchCollections(editor: String, fetchPrivate: Boolean): Resource<MutableList<Collection>> {
         return try {
-            val response = if (fetchPrivate)
-                        service.getAllUserCollections(editor, "user-collections")
-                    else
-                        service.getPublicUserCollections(editor)
+            val response = when {
+                fetchPrivate -> service.getAllUserCollections(editor, "user-collections")
+                else -> service.getPublicUserCollections(editor)
+            }
             val collections = CollectionUtils.setGenericCountParameter(response.string())
             Resource(SUCCESS, collections)
         } catch (e: Exception) {

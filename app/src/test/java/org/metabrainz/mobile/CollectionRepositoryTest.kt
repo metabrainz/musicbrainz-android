@@ -39,7 +39,6 @@ class CollectionRepositoryTest {
         }
         webServer.start()
         val service = createTestService(CollectionService::class.java, webServer.url("/"))
-        println(service.toString())
         repository = CollectionRepositoryImpl(service)
     }
 
@@ -54,17 +53,17 @@ class CollectionRepositoryTest {
 
     @Test
     fun fetchCollections() = runBlocking {
-        val expectedPrivate = testCollectionPrivate
-        val resourcePrivate = repository.fetchCollections(expectedPrivate.editor!!,true)
-        assertEquals(Resource.Status.SUCCESS, resourcePrivate.status)
-        val collectionPrivate = resourcePrivate.data!!.indexOf(expectedPrivate)
-        checkCollectionAssertions(expectedPrivate, resourcePrivate.data!![collectionPrivate])
-
         val expectedPublic = testCollectionPublic
         val resourcePublic = repository.fetchCollections(expectedPublic.editor!!,false)
         assertEquals(Resource.Status.SUCCESS, resourcePublic.status)
-        val collectionPublic = resourcePublic.data!!.indexOf(expectedPublic)
+        val collectionPublic = resourcePublic.data!!.indexOfFirst { it.mbid == expectedPublic.mbid }
         checkCollectionAssertions(expectedPublic, resourcePublic.data!![collectionPublic])
+
+        val expectedPrivate = testCollectionPrivate
+        val resourcePrivate = repository.fetchCollections(expectedPrivate.editor!!,true)
+        assertEquals(Resource.Status.SUCCESS, resourcePrivate.status)
+        val collectionPrivate = resourcePrivate.data!!.indexOfFirst { it.mbid == expectedPrivate.mbid }
+        checkCollectionAssertions(expectedPrivate, resourcePrivate.data!![collectionPrivate])
     }
 
     @After

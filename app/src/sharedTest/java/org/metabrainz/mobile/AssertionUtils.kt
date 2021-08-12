@@ -88,7 +88,6 @@ object AssertionUtils {
     }
 
     fun checkCollectionAssertions(testCollection: Collection, collection: Collection) {
-        assertEquals(testCollection, collection)
         assertEquals(testCollection.mbid, collection.mbid)
         assertEquals(testCollection.type, collection.type)
         assertEquals(testCollection.name, collection.name)
