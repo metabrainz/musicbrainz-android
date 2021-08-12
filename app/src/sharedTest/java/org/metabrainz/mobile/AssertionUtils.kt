@@ -80,11 +80,8 @@ object AssertionUtils {
     }
 
     fun checkCollectionDetailsAssertions(testCollectionDetails: ResultItem, collectionDetails: ResultItem) {
-        assertEquals(testCollectionDetails, collectionDetails)
         assertEquals(testCollectionDetails.name, collectionDetails.name)
-        assertEquals(testCollectionDetails.disambiguation, collectionDetails.disambiguation)
-        assertEquals(testCollectionDetails.name, collectionDetails.name)
-        assertEquals(testCollectionDetails.name, collectionDetails.name)
+        assertEquals(testCollectionDetails.mBID, collectionDetails.mBID)
     }
 
     fun checkCollectionAssertions(testCollection: Collection, collection: Collection) {

@@ -1,123 +1,16 @@
 {
-    "release-list": {
-        "release": [
-            {
-                "title": "What I've Done",
-                "status": {
-                    "id": "4e304316-386d-3409-af2e-78857eec5cfe",
-                    "text": "Official"
-                },
-                "quality": "normal",
-                "text-representation": {
-                    "language": "eng"
-                },
-                "date": "2007-05-06",
-                "country": "XW",
-                "release-event-list": {
-                    "release-event": {
-                        "date": "2007-05-06",
-                        "area": {
-                            "name": "[Worldwide]",
-                            "sort-name": "[Worldwide]",
-                            "iso-3166-1-code-list": {
-                                "iso-3166-1-code": "XW"
-                            },
-                            "id": "525d4e18-3d00-31b9-a58b-a146a916de8f"
-                        }
-                    },
-                    "count": "1"
-                },
-                "barcode": "054391998583",
-                "cover-art-archive": {
-                    "artwork": "true",
-                    "count": "1",
-                    "front": "true",
-                    "back": "false"
-                },
-                "id": "8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5"
-            },
-            {
-                "title": "Do I Wanna Know?",
-                "status": {
-                    "id": "4e304316-386d-3409-af2e-78857eec5cfe",
-                    "text": "Official"
-                },
-                "quality": "normal",
-                "packaging": {
-                    "id": "119eba76-b343-3e02-a292-f0f00644bb9b",
-                    "text": "None"
-                },
-                "text-representation": {
-                    "language": "eng",
-                    "script": "Latn"
-                },
-                "date": "2013-07-18",
-                "country": "GB",
-                "release-event-list": {
-                    "release-event": {
-                        "date": "2013-07-18",
-                        "area": {
-                            "name": "United Kingdom",
-                            "sort-name": "United Kingdom",
-                            "iso-3166-1-code-list": {
-                                "iso-3166-1-code": "GB"
-                            },
-                            "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed"
-                        }
-                    },
-                    "count": "1"
-                },
-                "barcode": "887829054267",
-                "asin": "B00E199RJG",
-                "cover-art-archive": {
-                    "artwork": "true",
-                    "count": "1",
-                    "front": "true",
-                    "back": "false"
-                },
-                "id": "37f30c11-3eb1-426a-bfab-ab46a0dc1880"
-            },
-            {
-                "title": "evermore",
-                "status": {
-                    "id": "4e304316-386d-3409-af2e-78857eec5cfe",
-                    "text": "Official"
-                },
-                "quality": "normal",
-                "packaging": {
-                    "id": "119eba76-b343-3e02-a292-f0f00644bb9b",
-                    "text": "None"
-                },
-                "text-representation": {
-                    "language": "eng",
-                    "script": "Latn"
-                },
-                "date": "2020-12-11",
-                "country": "XW",
-                "release-event-list": {
-                    "release-event": {
-                        "date": "2020-12-11",
-                        "area": {
-                            "name": "[Worldwide]",
-                            "sort-name": "[Worldwide]",
-                            "iso-3166-1-code-list": {
-                                "iso-3166-1-code": "XW"
-                            },
-                            "id": "525d4e18-3d00-31b9-a58b-a146a916de8f"
-                        }
-                    },
-                    "count": "1"
-                },
-                "asin": "B08Q8LLD9T",
-                "cover-art-archive": {
-                    "artwork": "true",
-                    "count": "3",
-                    "front": "true",
-                    "back": "true"
-                },
-                "id": "51291562-2794-45c9-9d77-bc1e65888edf"
-            }
-        ],
-        "count": "3"
-    }
+    "releases": [
+        {
+            "title": "What I've Done",
+            "id": "8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5"
+        },
+        {
+            "title": "Do I Wanna Know?",
+            "id": "37f30c11-3eb1-426a-bfab-ab46a0dc1880"
+        },
+        {
+            "title": "evermore",
+            "id": "51291562-2794-45c9-9d77-bc1e65888edf"
+        }
+    ]
 }

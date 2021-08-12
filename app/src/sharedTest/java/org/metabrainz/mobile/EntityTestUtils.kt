@@ -2,6 +2,7 @@ package org.metabrainz.mobile
 
 import org.junit.Assert.fail
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.*
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection
@@ -220,12 +221,9 @@ object EntityTestUtils {
             return testCollection
         }
 
-    val testCollectionDetailsMBID: String
-        get() = "8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5"
 
-//    val testCollectionDetails: ResultItem
-//        get() {
-//            val MBID = testCollectionPrivateMBID
-//            return ResultItem(entity.mbid, entity.name, entity.disambiguation, entity.type, entity.country)
-//        }
+    val testCollectionDetails: ResultItem
+        get() {
+            return ResultItem("8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5", "What I've Done", "", "","")
+        }
 }

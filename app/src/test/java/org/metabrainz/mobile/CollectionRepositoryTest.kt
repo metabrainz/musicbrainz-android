@@ -11,13 +11,16 @@ import org.junit.Before
 import org.junit.Test
 import org.metabrainz.mobile.AssertionUtils.checkCollectionAssertions
 import org.metabrainz.mobile.EntityTestUtils.loadResourceAsString
+import org.metabrainz.mobile.EntityTestUtils.testCollectionDetails
 import org.metabrainz.mobile.EntityTestUtils.testCollectionPrivate
 import org.metabrainz.mobile.EntityTestUtils.testCollectionPublic
 import org.metabrainz.mobile.RetrofitUtils.createTestService
 import org.metabrainz.mobile.data.repository.CollectionRepository
 import org.metabrainz.mobile.data.repository.CollectionRepositoryImpl
 import org.metabrainz.mobile.data.sources.api.CollectionService
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.util.Resource
+import org.metabrainz.mobile.util.Utils
 
 class CollectionRepositoryTest {
 
@@ -30,8 +33,10 @@ class CollectionRepositoryTest {
         webServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 val params = request.requestUrl?.queryParameter("inc")
+                val paramsDetails = request.requestUrl?.queryParameter("collection")
                 val file = when {
                         params != null && params.equals("user-collections", ignoreCase = true) -> "collections_private.json"
+                        paramsDetails != null -> "collection_details.json"
                         else -> "collections_public.json"
                     }
                 return MockResponse().setResponseCode(200).setBody(loadResourceAsString(file))
@@ -44,11 +49,12 @@ class CollectionRepositoryTest {
 
     @Test
     fun fetchCollectionDetails() = runBlocking {
-//        val expected = testCollectionDetails
-//        val resource = repository.fetchCollectionDetails(MBEntityType.RELEASE.entity,expected.mBID!!)
-//        assertEquals(Resource.Status.SUCCESS, resource.status)
-//        val collectionDetails = Gson().fromJson(resource.data, ResultItem::class.java)
-//        AssertionUtils.checkCollectionDetailsAssertions(expected, collectionDetails)
+        val expected = testCollectionDetails
+        val resource = repository.fetchCollectionDetails(MBEntityType.RELEASE.entity,expected.mBID!!)
+        assertEquals(Resource.Status.SUCCESS, resource.status)
+        val collectionDetails = Utils.toResultItemsList(MBEntityType.RELEASE, resource)
+        val cDIndex = collectionDetails.data!!.indexOfFirst { it.mBID == expected.mBID!!}
+        AssertionUtils.checkCollectionDetailsAssertions(expected, collectionDetails.data!![cDIndex])
     }
 
     @Test

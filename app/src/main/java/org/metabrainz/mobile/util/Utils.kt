@@ -14,7 +14,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
 import org.metabrainz.mobile.App
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.presentation.UserPreferences
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem
+import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils
 import org.metabrainz.mobile.util.Log.e
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -127,5 +130,18 @@ object Utils {
             context = context.createConfigurationContext(config)
         }
         return ContextWrapper(context)
+    }
+
+    fun toResultItemsList(entity: MBEntityType, response: Resource<String>): Resource<List<ResultItem>> {
+        return try {
+            if (response.status == Resource.Status.SUCCESS) {
+                val resultItems = ResultItemUtils.getJSONResponseAsResultItemList(response.data, entity)
+                return Resource(Resource.Status.SUCCESS, resultItems)
+            } else
+                Resource(Resource.Status.FAILED, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource(Resource.Status.FAILED, null)
+        }
     }
 }
