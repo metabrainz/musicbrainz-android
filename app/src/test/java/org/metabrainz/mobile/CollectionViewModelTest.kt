@@ -8,8 +8,10 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.*
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.presentation.features.collection.CollectionViewModel
 import org.metabrainz.mobile.util.Resource
+import org.metabrainz.mobile.util.Utils
 
 class CollectionViewModelTest {
 
@@ -31,18 +33,23 @@ class CollectionViewModelTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testCollectionDetailsViewModel() = testDispatcher.runBlockingTest {
-        TODO()
+        val testCollectionDetails = EntityTestUtils.testCollectionDetails
+        val viewModel = CollectionViewModel(MockCollectionRepository())
+        val resource = LiveDataTestUtil.getOrAwaitValue(viewModel.fetchCollectionDetails(MBEntityType.RELEASE,testCollectionDetails.mBID!!))
+        Assert.assertEquals(Resource.Status.SUCCESS, resource!!.status)
+        val cDIndex = resource.data!!.indexOfFirst { it.mBID == testCollectionDetails.mBID!!}
+        AssertionUtils.checkCollectionDetailsAssertions(testCollectionDetails, resource.data!![cDIndex])
     }
 
     @ExperimentalCoroutinesApi
     @Test
     fun testCollectionViewModel() = testDispatcher.runBlockingTest {
-//        val testCollection = EntityTestUtils.testCollection
-//        val viewModel = CollectionViewModel(MockCollectionRepository())
-        //viewModel.mbid.value = EntityTestUtils.testCollectionMBID
-//        val resource = LiveDataTestUtil.getOrAwaitValue(viewModel.data)
-//        Assert.assertEquals(Resource.Status.SUCCESS, resource!!.status)
-//        AssertionUtils.checkCollectionAssertions(testCollection, resource.data!!)
+        val testCollection = EntityTestUtils.testCollectionPublic
+        val viewModel = CollectionViewModel(MockCollectionRepository())
+        val resource = LiveDataTestUtil.getOrAwaitValue(viewModel.fetchCollectionData(testCollection.mbid!!,false))
+        Assert.assertEquals(Resource.Status.SUCCESS, resource!!.status)
+        val collectionPublic = resource.data!!.indexOfFirst { it.mbid == testCollection.mbid }
+        AssertionUtils.checkCollectionAssertions(testCollection, resource.data!![collectionPublic])
     }
 
     @ExperimentalCoroutinesApi
