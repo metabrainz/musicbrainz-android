@@ -62,8 +62,7 @@ Proposed future plans for the app are as follows:
 
 - Introduce Jetpack Compose to the app.
 - Support more entities for search.
-- Ability to add entities natively from the app.
-- Showcase ListenBrainz functionalities to discover a wide range of users based on musical similarities.
+- Showcase more \*Brainz powered functionalities.
 - Find whether the recordings are present in your collections or not.
 - Add AcoustId functionalities to the app.
 	    
