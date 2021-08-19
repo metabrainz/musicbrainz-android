@@ -22,6 +22,7 @@
   <a href="#development">Development</a> •
   <a href="#downloading">Downloading</a> •
   <a href="#contributing">Contributing</a> •
+  <a href="roadmap">Roadmap</a> • 
   <a href="#issues">Issues</a> •
   <a href="#support">Support</a> •
   <a href="#license">License</a>
@@ -54,6 +55,17 @@ MusicBrainz for Android is a mobile app for viewing MusicBrainz data on the Andr
 ## Contributing
 	  
 Got **something interesting** you'd like to **ask or share**? Start a discussion at `#metabrainz` IRC channel on libera.chat.
+
+## Roadmap
+
+Proposed future plans for the app are as follows:
+
+- Introduce Jetpack Compose to the app.
+- Support more entities for search.
+- Ability to add entities natively from the app.
+- Showcase ListenBrainz functionalities to discover a wide range of users based on musical similarities.
+- Find whether the recordings are present in your collections or not.
+- Add AcoustId functionalities to the app.
 	    
 ## Issues
 	  
