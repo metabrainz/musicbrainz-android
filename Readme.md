@@ -18,7 +18,7 @@
 </p>
       
 <p align="center">
-  <a href="#about">About</a> •
+  <a href="#whatismusicbrainz?">About</a> •
   <a href="#development">Development</a> •
   <a href="#downloading">Downloading</a> •
   <a href="#contributing">Contributing</a> •
