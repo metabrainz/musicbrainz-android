@@ -18,7 +18,10 @@
 </p>
       
 <p align="center">
-  <a href="#What Is MusicBrainz?">About</a> •
+  <a href="#what-is-musicbrainz">About</a> •
+  <a href="#history-of-musicbrainz">History</a> •
+  <a href="#what-is-musicbrainz-android-for">Android</a> •
+  <a href="#how-does-musicbrainz-do-this">Technique</a> •
   <a href="#development">Development</a> •
   <a href="#downloading">Downloading</a> •
   <a href="#contributing">Contributing</a> •
