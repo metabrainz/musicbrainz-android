@@ -27,6 +27,7 @@
   <a href="#contributing">Contributing</a> •
   <a href="roadmap">Roadmap</a> • 
   <a href="#issues">Issues</a> •
+  <a href="#tutorials">Tutorials</a> •
   <a href="#support">Support</a> •
   <a href="#license">License</a>
 </p>
