@@ -9,7 +9,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.mobile.presentation.features.adapters.ResultItem
 import org.metabrainz.mobile.presentation.features.adapters.ResultItemUtils
 
-class SearchPagingSource(val entity: MBEntityType, val query: String) : PagingSource<Int, ResultItem>() {
+class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : PagingSource<Int, ResultItem>() {
 
     private val service = MusicBrainzServiceGenerator.createService(SearchService::class.java, true)
 
@@ -17,7 +17,7 @@ class SearchPagingSource(val entity: MBEntityType, val query: String) : PagingSo
         val pageSize: Int = params.loadSize
         val offset = params.key ?: 0
         return try {
-            val response = service.searchEntity(entity.display, query, pageSize, offset)?.string()
+            val response = service.searchEntity(mbEntityType.entity, query, pageSize, offset)?.string()
             var count = LoadResult.Page.COUNT_UNDEFINED
             if (offset == 0) {
                 val responseObject = JsonParser.parseString(response)
@@ -28,10 +28,10 @@ class SearchPagingSource(val entity: MBEntityType, val query: String) : PagingSo
             // itemsAfter is required to be at least otherwise the current page will be not loaded
 
             LoadResult.Page(
-                    data = ResultItemUtils.getJSONResponseAsResultItemList(response, entity),
-                    prevKey = null,
-                    nextKey = pageSize + offset,
-                    itemsAfter = itemsAfter
+                data = ResultItemUtils.getJSONResponseAsResultItemList(response, mbEntityType),
+                prevKey = null,
+                nextKey = pageSize + offset,
+                itemsAfter = itemsAfter
             )
         } catch (e: Exception) {
             e.printStackTrace()

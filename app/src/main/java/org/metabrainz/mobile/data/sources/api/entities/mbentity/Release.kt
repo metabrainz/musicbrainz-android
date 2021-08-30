@@ -41,39 +41,7 @@ class Release : MBEntity() {
     var textRepresentation: TextRepresentation? = null
     @JvmField
     val relations: MutableList<Link> = ArrayList()
-    fun getRelations(): List<Link> {
-        return relations
-    }
 
-    fun setRelations(relations: List<Link>?) {
-        this.relations.addAll(relations!!)
-    }
-
-    @JvmName("getArtistCredits1")
-    fun getArtistCredits(): MutableList<ArtistCredit> {
-        return artistCredits
-    }
-
-    @JvmName("setArtistCredits1")
-    fun setArtistCredits(artistCredits: List<ArtistCredit>?) {
-        this.artistCredits.addAll(artistCredits!!)
-    }
-
-    fun getReleaseEvents(): List<ReleaseEvent> {
-        return releaseEvents
-    }
-
-    fun setReleaseEvents(releaseEvents: List<ReleaseEvent>?) {
-        this.releaseEvents.addAll(releaseEvents!!)
-    }
-
-    fun getLabels(): List<LabelInfo> {
-        return labels
-    }
-
-    fun setLabels(labels: List<LabelInfo>?) {
-        this.labels.addAll(labels!!)
-    }
 
     @JvmName("getTrackCount1")
     fun getTrackCount(): Int {
@@ -83,21 +51,6 @@ class Release : MBEntity() {
             return count
         }
         return trackCount
-    }
-
-    @JvmName("setTrackCount1")
-    fun setTrackCount(trackCount: Int) {
-        this.trackCount = trackCount
-    }
-
-    @JvmName("getMedia1")
-    fun getMedia(): List<Media>? {
-        return media
-    }
-
-    @JvmName("setMedia1")
-    fun setMedia(media: List<Media>?) {
-        this.media!!.addAll(media!!)
     }
 
     //TODO: Implement Text Representation
@@ -134,7 +87,7 @@ class Release : MBEntity() {
                 ", status='" + status + '\'' +
                 ", media=" + media +
                 ", coverArt=" + coverArt +
-                ", textRepresentation=" + textRepresentation +
+                ", textRepresentation=" + textRepresentation.toString() +
                 ", relations=" + relations +
                 ", mbid='" + mbid + '\'' +
                 ", disambiguation='" + disambiguation + '\'' +

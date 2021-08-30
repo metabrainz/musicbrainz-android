@@ -2,8 +2,11 @@ package org.metabrainz.mobile
 
 import org.junit.Assert.fail
 import org.metabrainz.mobile.data.sources.api.entities.ArtistCredit
+import org.metabrainz.mobile.data.sources.api.entities.EntityUtils
 import org.metabrainz.mobile.data.sources.api.entities.WikiSummary
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.*
+import org.metabrainz.mobile.data.sources.api.entities.mbentity.Collection
+import org.metabrainz.mobile.presentation.features.adapters.ResultItem
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -183,5 +186,44 @@ object EntityTestUtils {
             testArtistCredit.artist = testArtist
             testRecording.artistCredits = testArtistCredits
             return testRecording
+        }
+
+
+    val testCollectionPublicMBID: String
+        get() = "a691377c-6949-44cb-8a10-9696178cca18"
+
+    val testCollectionPublic: Collection
+        get() {
+            val MBID = testCollectionPublicMBID
+            val testCollection = Collection()
+            testCollection.mbid = MBID
+            testCollection.type = "Release"
+            testCollection.name = "Rock and Roll"
+            testCollection.count = 1
+            testCollection.editor = "akshaaatt"
+            testCollection.entityType = "release"
+            return testCollection
+        }
+
+    val testCollectionPrivateMBID: String
+        get() = "d103a421-9340-413f-a04e-5e63dd234bc4"
+
+    val testCollectionPrivate: Collection
+        get() {
+            val MBID = testCollectionPrivateMBID
+            val testCollection = Collection()
+            testCollection.mbid = MBID
+            testCollection.type = "Artist"
+            testCollection.name = "Sweet Talks"
+            testCollection.count = 3
+            testCollection.editor = "akshaaatt"
+            testCollection.entityType = "artist"
+            return testCollection
+        }
+
+
+    val testCollectionDetails: ResultItem
+        get() {
+            return ResultItem("8b08b9bb-cedf-42d8-8a43-f1f8a543ddb5", "What I've Done", "", "","")
         }
 }

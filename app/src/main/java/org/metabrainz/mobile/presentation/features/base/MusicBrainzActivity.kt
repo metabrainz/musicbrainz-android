@@ -3,7 +3,6 @@ package org.metabrainz.mobile.presentation.features.base
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
@@ -19,7 +18,6 @@ import org.metabrainz.mobile.presentation.UserPreferences.systemLanguagePreferen
 import org.metabrainz.mobile.presentation.features.onboarding.FeaturesActivity
 import org.metabrainz.mobile.util.Utils.changeLanguage
 import org.metabrainz.mobile.util.Utils.emailIntent
-import java.util.*
 
 abstract class MusicBrainzActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

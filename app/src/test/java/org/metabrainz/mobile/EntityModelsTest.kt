@@ -2,7 +2,6 @@ package org.metabrainz.mobile
 
 import com.google.gson.Gson
 import org.junit.Test
-import org.metabrainz.mobile.AssertionUtils
 import org.metabrainz.mobile.EntityTestUtils.loadResourceAsString
 import org.metabrainz.mobile.EntityTestUtils.testArtist
 import org.metabrainz.mobile.EntityTestUtils.testLabel
@@ -14,9 +13,7 @@ import org.metabrainz.mobile.data.sources.api.entities.mbentity.*
 class EntityModelsTest {
     @Test
     fun testArtistModel() {
-        val artist: Artist = Gson().fromJson(
-            loadResourceAsString("artist_lookup.json"),
-            Artist::class.java)
+        val artist: Artist = Gson().fromJson(loadResourceAsString("artist_lookup.json"),Artist::class.java)
         AssertionUtils.checkArtistAssertions(testArtist, artist)
     }
 

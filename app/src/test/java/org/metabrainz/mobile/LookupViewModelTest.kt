@@ -105,6 +105,17 @@ class LookupViewModelTest {
     }
 
     @ExperimentalCoroutinesApi
+    @Test
+    fun testCoverArtViewModel() = testDispatcher.runBlockingTest {
+//        val testCoverArt = EntityTestUtils.testCoverArt
+//        val viewModel = RecordingViewModel(MockLookupRepository())
+//        viewModel.mbid.value = EntityTestUtils.testRecordingMBID
+//        val resource = getOrAwaitValue(viewModel.data)
+//        assertEquals(SUCCESS, resource?.status!!)
+//        checkRecordingAssertions(testCoverArt, resource.data!!)
+    }
+
+    @ExperimentalCoroutinesApi
     @After
     fun teardown() {
         Dispatchers.resetMain()
