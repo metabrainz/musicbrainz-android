@@ -8,7 +8,7 @@
     <string name="recording_releases">Appears On Releases</string>
 
     <!-- DashboardActivity -->
-    <string name="app_name">@color/white</string>
+    <string name="app_name">MusicBrainz</string>
     <string name="search_hint">Search MusicBrainz</string>
     <string name="dash_scan">Scan</string>
     <string name="dash_collections">Collections</string>
