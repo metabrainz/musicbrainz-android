@@ -33,7 +33,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
-        android:textColor="@color/app_bg_light2"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/track_time"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/track_number"

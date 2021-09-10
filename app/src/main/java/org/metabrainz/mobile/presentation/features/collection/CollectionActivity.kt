@@ -2,6 +2,7 @@ package org.metabrainz.mobile.presentation.features.collection
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -36,7 +37,9 @@ class CollectionActivity : MusicBrainzActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCollectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         viewModel = ViewModelProvider(this).get(CollectionViewModel::class.java)
         collections = ArrayList()
         adapter = CollectionListAdapter(collections!!)

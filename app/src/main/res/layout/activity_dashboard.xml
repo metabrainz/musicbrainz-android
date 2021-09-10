@@ -68,7 +68,7 @@
                 android:background="@color/app_bg"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:titleTextColor="@color/app_bg" />
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -83,7 +83,7 @@
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#263238"
+            android:background="@color/app_bg"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp"
@@ -139,7 +139,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="Choose your Audio, Fix the Tag"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
 
@@ -188,7 +188,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="@string/explain_search_feature"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -246,7 +246,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="Read reviews about an album or event"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -294,7 +294,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="Track your music listening habits"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
 
@@ -352,7 +352,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="@string/explain_collection"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -400,7 +400,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="@string/explain_scan"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -457,7 +457,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="Donate to MusicBrainz"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -505,7 +505,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="What is MusicBrainz?"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/gray" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

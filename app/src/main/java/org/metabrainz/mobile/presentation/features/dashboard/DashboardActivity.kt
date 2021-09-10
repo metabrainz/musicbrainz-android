@@ -38,6 +38,7 @@ class DashboardActivity : AppCompatActivity() {
             }
             if (scrollRange + verticalOffset == 0) {
                 binding.colToolbarId.title = "MusicBrainz"
+                binding.colToolbarId.setCollapsedTitleTextColor(resources.getColor(R.color.white))
                 isShow = true
             } else if (isShow) {
                 binding.colToolbarId.title = " "

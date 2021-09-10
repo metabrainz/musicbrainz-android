@@ -570,7 +570,7 @@
         android:padding="10dp"
         android:text="@string/tagger_file_save"
         android:textAllCaps="false"
-        android:textColor="@color/app_bg_light2"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toEndOf="@id/picard"
