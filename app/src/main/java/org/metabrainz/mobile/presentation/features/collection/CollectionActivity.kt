@@ -85,7 +85,7 @@ class CollectionActivity : MusicBrainzActivity() {
     }
 
     fun callAlert() {
-        val builder = AlertDialog.Builder(this, R.style.loginrequiredDialog)
+        val builder = AlertDialog.Builder(this)
         builder.setTitle("Login Required")
         builder.setMessage("You need to log in to see your collections")
         builder.setPositiveButton("Login") { dialog: DialogInterface?, which: Int ->

@@ -15,7 +15,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="settingsDialog" parent="Base.Theme.MaterialComponents.Dialog.Alert">
+    <style name="settingsDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
