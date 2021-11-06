@@ -9,6 +9,9 @@ import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.paymentsheet.PaymentSheet
+import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.ActivityDashboardBinding
@@ -26,8 +29,9 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
+        val paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
 
         //showing the title only when collapsed
         var isShow = true
@@ -60,7 +64,17 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, CollectionActivity::class.java))
         }
         binding.dashboardDonateId.setOnClickListener {
-            startActivity(Intent(this, DonateActivity::class.java))
+            prepareCheckout { customerConfig, clientSecret ->
+                paymentSheet.presentWithPaymentIntent(
+                    clientSecret,
+                    PaymentSheet.Configuration(
+                        merchantDisplayName = merchantName,
+                        customer = customerConfig,
+                        googlePay = googlePayConfig,
+                        allowsDelayedPaymentMethods = true
+                    )
+                )
+            }
         }
         binding.dashboardScanId.setOnClickListener {
             startActivity(Intent(this, BarcodeActivity::class.java))
@@ -119,5 +133,39 @@ class DashboardActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    val viewModel: PaymentSheetViewModel by lazy {
+        PaymentSheetViewModel(application)
+    }
+
+    private fun prepareCheckout(onSuccess: (PaymentSheet.CustomerConfiguration?, String) -> Unit) {
+        viewModel.prepareCheckout(backendUrl)
+
+        viewModel.exampleCheckoutResponse.observe(this) { checkoutResponse ->
+            // Init PaymentConfiguration with the publishable key returned from the backend,
+            // which will be used on all Stripe API calls
+            PaymentConfiguration.init(this, checkoutResponse.publishableKey)
+
+            onSuccess(
+                checkoutResponse.makeCustomerConfig(),
+                checkoutResponse.paymentIntent
+            )
+
+            viewModel.exampleCheckoutResponse.removeObservers(this)
+        }
+    }
+
+    private fun onPaymentSheetResult(paymentResult: PaymentSheetResult) {
+        viewModel.status.value = paymentResult.toString()
+    }
+
+    companion object {
+        const val merchantName = "METABRAINZ FOUNDATION"
+        const val backendUrl = "https://stripe-server-akshaaatt.herokuapp.com/checkout"
+        val googlePayConfig = PaymentSheet.GooglePayConfiguration(
+            environment = PaymentSheet.GooglePayConfiguration.Environment.Production,
+            countryCode = "US"
+        )
     }
 }

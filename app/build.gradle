@@ -126,6 +126,12 @@ dependencies {
 
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
 
+    //Stripe
+    implementation ('com.stripe:stripe-android:18.2.0'){
+        exclude group: 'com.github.stephenc.jcip', module: 'jcip-annotations'
+    }
+    implementation 'com.github.kittinunf.fuel:fuel:2.3.1'
+
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
