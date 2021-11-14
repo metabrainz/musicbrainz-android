@@ -8,11 +8,13 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import com.thefinestartist.finestwebview.FinestWebView
+import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.databinding.ActivityDashboardBinding
 import org.metabrainz.mobile.presentation.IntentFactory
@@ -23,8 +25,10 @@ import org.metabrainz.mobile.presentation.features.collection.CollectionActivity
 import org.metabrainz.mobile.presentation.features.search.SearchActivity
 import org.metabrainz.mobile.presentation.features.tagger.TaggerActivity
 
+@AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
+    var viewModel: PaymentViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,7 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
+        viewModel = ViewModelProvider(this).get(PaymentViewModel::class.java)
 
         //showing the title only when collapsed
         var isShow = true
@@ -135,29 +140,24 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    val viewModel: PaymentSheetViewModel by lazy {
-        PaymentSheetViewModel(application)
-    }
 
     private fun prepareCheckout(onSuccess: (PaymentSheet.CustomerConfiguration?, String) -> Unit) {
-        viewModel.prepareCheckout(backendUrl)
-
-        viewModel.exampleCheckoutResponse.observe(this) { checkoutResponse ->
+        viewModel!!.fetchPaymentIntent("https://stripe-server-akshaaatt.herokuapp.com/checkout").observe(this) { checkoutResponse ->
             // Init PaymentConfiguration with the publishable key returned from the backend,
             // which will be used on all Stripe API calls
-            PaymentConfiguration.init(this, checkoutResponse.publishableKey)
+            PaymentConfiguration.init(this, checkoutResponse.data?.publishableKey!!)
 
             onSuccess(
-                checkoutResponse.makeCustomerConfig(),
-                checkoutResponse.paymentIntent
+                checkoutResponse.data.makeCustomerConfig(),
+                checkoutResponse.data.paymentIntent
             )
 
-            viewModel.exampleCheckoutResponse.removeObservers(this)
+            viewModel!!.fetchPaymentIntent("https://stripe-server-akshaaatt.herokuapp.com/checkout").removeObservers(this)
         }
     }
 
     private fun onPaymentSheetResult(paymentResult: PaymentSheetResult) {
-        viewModel.status.value = paymentResult.toString()
+//        viewModel!!. = paymentResult.toString()
     }
 
     companion object {

@@ -21,6 +21,10 @@ class ServiceModule {
 
     @get:Provides
     @get:Singleton
+    val paymentService: PaymentService = createService(PaymentService::class.java, true)
+
+    @get:Provides
+    @get:Singleton
     val loginService: LoginService = createService(LoginService::class.java, false)
 
 }
