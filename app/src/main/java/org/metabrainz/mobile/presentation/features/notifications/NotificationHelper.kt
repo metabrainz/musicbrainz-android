@@ -34,7 +34,7 @@ class NotificationHelper(base: Context?,val icon: Bitmap) : ContextWrapper(base)
     }
 
     val channelNotification: NotificationCompat.Builder get() = NotificationCompat.Builder(applicationContext, channelID)
-        .setContentTitle("MetaBrainz News")
+        .setContentTitle("NewsBrainz")
         .setContentText("Here are your updates for the day!")
         .setSmallIcon(R.mipmap.ic_launcher)
         .setColor(ContextCompat.getColor(this,R.color.blue_diff))

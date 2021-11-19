@@ -17,6 +17,7 @@ import org.metabrainz.mobile.presentation.UserPreferences.advancedFeaturesPrefer
 import org.metabrainz.mobile.presentation.features.about.AboutActivity
 import org.metabrainz.mobile.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.mobile.presentation.features.collection.CollectionActivity
+import org.metabrainz.mobile.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.mobile.presentation.features.search.SearchActivity
 import org.metabrainz.mobile.presentation.features.tagger.TaggerActivity
 
@@ -65,13 +66,18 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardScanId.setOnClickListener {
             startActivity(Intent(this, BarcodeActivity::class.java))
         }
+        binding.dashboardNewsbrainz.setOnClickListener {
+            startActivity(Intent(this, NewsBrainzActivity::class.java))
+        }
         binding.dashboardListenId.setOnClickListener {
             FinestWebView.Builder(this).show("https://listenbrainz.org/");
         }
         binding.dashboardCritiqueId.setOnClickListener {
             FinestWebView.Builder(this).show("https://critiquebrainz.org/");
         }
-
+        binding.dashboardMetabrainz.setOnClickListener {
+            FinestWebView.Builder(this).show("https://metabrainz.org/");
+        }
 
         //cardview animation
         val leftItemAnimation = AnimationUtils.loadAnimation(this, R.anim.left_dashboard_item_animation)
