@@ -46,7 +46,7 @@ class NewsBrainzActivity : AppCompatActivity(){
         adapter = ResultPagingAdapter(ResultItemComparator(), MBEntityType.ARTIST)
         binding.recyclerView.adapter = adapter
         adapter!!.resetAnimation()
-        viewModel!!.search(MBEntityType.ARTIST, "Linkin Park").observe(this, { pagingData: PagingData<ResultItem> ->
+        viewModel!!.search(MBEntityType.ARTIST, "News").observe(this, { pagingData: PagingData<ResultItem> ->
             adapter!!.submitData(lifecycle, pagingData)
         })
         binding.recyclerView.visibility = View.VISIBLE
