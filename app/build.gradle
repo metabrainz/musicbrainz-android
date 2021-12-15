@@ -22,9 +22,9 @@ android {
         applicationId "org.metabrainz.android"
         minSdk 21
         targetSdk 31
-        versionCode 41
+        versionCode 42
 
-        versionName "5.0.0"
+        versionName "5.0.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
@@ -61,8 +61,6 @@ android {
         disable 'InvalidPackage'
         disable 'MissingTranslation'
     }
-
-    ndkVersion '21.2.6472646'
 }
 
 dependencies {
