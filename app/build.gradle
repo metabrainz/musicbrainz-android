@@ -5,9 +5,8 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
 
 android {
     compileSdkVersion 31
