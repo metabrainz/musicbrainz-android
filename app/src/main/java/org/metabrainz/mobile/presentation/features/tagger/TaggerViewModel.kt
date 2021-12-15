@@ -139,6 +139,9 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
                 Resource.Status.FAILED -> {
                     Resource.failure()
                 }
+                else -> {
+                    Resource.failure()
+                }
             }
         }
 

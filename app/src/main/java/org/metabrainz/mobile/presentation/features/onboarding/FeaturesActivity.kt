@@ -6,10 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.limerse.onboard.OnboardAdvanced
-import com.limerse.onboard.OnboardFragment
-import com.limerse.onboard.OnboardPageTransformerType
-import com.limerse.onboard.model.SliderPage
+import com.aemerse.onboard.OnboardAdvanced
+import com.aemerse.onboard.OnboardFragment
+import com.aemerse.onboard.OnboardPageTransformerType
+import com.aemerse.onboard.model.SliderPage
 import org.metabrainz.mobile.R
 import org.metabrainz.mobile.presentation.UserPreferences
 import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity
