@@ -116,18 +116,13 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
             }
         }
 
-        serverFetchedMetadata = map(switchMap(matchedResult) { resource ->
-            if (resource.data != null) {
-                liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-                    emit(Resource.loading())
-                    val result = repository.fetchMatchedRelease(resource.data.releaseMbid)
-                    emit(result)
-                }
+        serverFetchedMetadata = map(switchMap(matchedResult){
+            liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                emit(Resource.loading())
+                val result = repository.fetchMatchedRelease(it.data?.releaseMbid)
+                emit(result)
             }
-            else{
-                null
-            }
-        }) { resource ->
+        })  { resource ->
             //Handling the status of the api call
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
@@ -139,23 +134,28 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
                 Resource.Status.FAILED -> {
                     Resource.failure()
                 }
-                else -> {
+            }
+        }
+
+        serverCoverArt = map(switchMap(matchedResult) {
+            liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                emit(Resource.loading())
+                val result = repository.fetchCoverArt(it.data?.releaseMbid!!)
+                emit(result)
+            }
+        })  { resource ->
+            //Handling the status of the api call
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                   null
+                }
+                Resource.Status.LOADING -> {
+                    Resource.loading()
+                }
+                Resource.Status.FAILED -> {
                     Resource.failure()
                 }
             }
         }
-
-        serverCoverArt = map(switchMap(matchedResult) { resource ->
-                if (resource.data != null) {
-                    liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-                        emit(Resource.loading())
-                        val result = repository.fetchCoverArt(resource.data.releaseMbid!!)
-                        emit(result)
-                    }
-                }
-                else{
-                    null
-                }
-        }){ it }
     }
 }
