@@ -89,8 +89,8 @@ class LookupViewModelTest {
         val viewModel = LabelViewModel(MockLookupRepository())
         viewModel.mbid.value = EntityTestUtils.testLabelMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource?.status)
-        checkLabelAssertions(testLabel, resource?.data!!)
+        assertEquals(SUCCESS, resource?.status!!)
+        checkLabelAssertions(testLabel, resource.data!!)
     }
 
     @ExperimentalCoroutinesApi
