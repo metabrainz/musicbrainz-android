@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:orientation="vertical"
-        tools:context="org.metabrainz.mobile.presentation.features.userdata.UserDataFragment">
+        tools:context="org.metabrainz.android.presentation.features.userdata.UserDataFragment">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_rating"
