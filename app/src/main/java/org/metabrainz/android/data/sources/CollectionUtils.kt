@@ -28,7 +28,6 @@ object CollectionUtils {
                     if (key.contains("count")) count = value.asString
                     if (key.equals("id", ignoreCase = true)) id = value.asString
                 }
-                //d("$id $count")
                 countList[id] = count
             }
             for (collection in collections) {
