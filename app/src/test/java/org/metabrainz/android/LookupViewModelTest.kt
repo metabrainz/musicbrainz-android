@@ -78,8 +78,8 @@ class LookupViewModelTest {
         val viewModel = ReleaseGroupViewModel(MockLookupRepository())
         viewModel.mbid.value = EntityTestUtils.testReleaseGroupMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource?.status!!)
-        checkReleaseGroupAssertions(testReleaseGroup, resource.data!!)
+        assertEquals(SUCCESS, resource?.status)
+        checkReleaseGroupAssertions(testReleaseGroup, resource?.data!!)
     }
 
     @ExperimentalCoroutinesApi
@@ -118,7 +118,7 @@ class LookupViewModelTest {
     @ExperimentalCoroutinesApi
     @After
     fun teardown() {
-        Dispatchers.resetMain()
         testDispatcher.cleanupTestCoroutines()
+        Dispatchers.resetMain()
     }
 }
