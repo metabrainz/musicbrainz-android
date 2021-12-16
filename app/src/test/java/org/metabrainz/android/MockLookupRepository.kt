@@ -22,7 +22,7 @@ class MockLookupRepository : LookupRepository {
         return Resource(SUCCESS, summary)
     }
 
-    override suspend fun fetchCoverArt(MBID: String): Resource<CoverArt> {
+    override suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt> {
         val response = loadResourceAsString("cover_art.json")
         val coverArt = Gson().fromJson(response, CoverArt::class.java)
         return Resource(SUCCESS, coverArt)
