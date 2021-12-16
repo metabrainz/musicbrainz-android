@@ -27,6 +27,8 @@ android {
         versionName "5.0.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        signingConfig signingConfigs.config
     }
 
     buildFeatures {
@@ -36,7 +38,6 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.config
             minifyEnabled false
             // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
