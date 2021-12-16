@@ -6,8 +6,6 @@
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar" />
-
     <include
         android:id="@+id/no_result"
         layout="@layout/error_no_result" />

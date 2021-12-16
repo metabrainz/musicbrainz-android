@@ -1,6 +1,7 @@
 package org.metabrainz.mobile.presentation.features.barcode
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.mobile.App
+import org.metabrainz.mobile.R
 import org.metabrainz.mobile.data.sources.Constants
 import org.metabrainz.mobile.data.sources.api.entities.mbentity.Release
 import org.metabrainz.mobile.databinding.ActivityBarcodeResultBinding
@@ -31,7 +33,9 @@ class BarcodeResultActivity : MusicBrainzActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBarcodeResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         adapter = ReleaseListAdapter(this, releases)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)

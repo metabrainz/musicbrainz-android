@@ -97,7 +97,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.dash, menu)
         return true
     }

@@ -8,9 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewbinding.ViewBinding
 import org.metabrainz.mobile.R
-import org.metabrainz.mobile.databinding.LayoutToolbarBinding
 import org.metabrainz.mobile.presentation.Configuration
 import org.metabrainz.mobile.presentation.IntentFactory.getLogin
 import org.metabrainz.mobile.presentation.IntentFactory.getSettings
@@ -27,11 +25,6 @@ abstract class MusicBrainzActivity : AppCompatActivity() {
 
     protected open fun getBrowserURI(): Uri? {
         return Uri.EMPTY
-    }
-    protected fun setupToolbar(binding: ViewBinding) {
-        val toolbarBinding = LayoutToolbarBinding.bind(binding.root)
-        setSupportActionBar(toolbarBinding.toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

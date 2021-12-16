@@ -16,6 +16,7 @@ class AboutActivity : MusicBrainzActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
