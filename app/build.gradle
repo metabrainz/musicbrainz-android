@@ -58,7 +58,6 @@ android {
     }
     
     lintOptions{
-        disable 'InvalidPackage'
         disable 'MissingTranslation'
     }
     ndkVersion '23.1.7779620'
