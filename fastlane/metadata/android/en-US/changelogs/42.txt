@@ -1,3 +1,1 @@
 Light/Dark Theme Support has been added!
-Revamped Search UI
-Bug fixes
