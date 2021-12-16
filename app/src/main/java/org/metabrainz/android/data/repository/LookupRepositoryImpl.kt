@@ -71,7 +71,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
     }
 
     @WorkerThread
-    override suspend fun fetchCoverArt(MBID: String): Resource<CoverArt> {
+    override suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt> {
         return try {
             val coverArt = service.getCoverArt(MBID)
             Resource(SUCCESS, coverArt)

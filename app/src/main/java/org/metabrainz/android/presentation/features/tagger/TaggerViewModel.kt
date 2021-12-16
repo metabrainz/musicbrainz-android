@@ -140,14 +140,19 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         serverCoverArt = map(switchMap(matchedResult) {
             liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
                 emit(Resource.loading())
-                val result = repository.fetchCoverArt(it.data?.releaseMbid!!)
+                val result = repository.fetchCoverArt(it.data?.releaseMbid)
                 emit(result)
             }
         })  { resource ->
             //Handling the status of the api call
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
-                   null
+                    if(resource.data !=null){
+                        Resource(Resource.Status.SUCCESS,resource.data)
+                    }
+                    else{
+                        null
+                    }
                 }
                 Resource.Status.LOADING -> {
                     Resource.loading()

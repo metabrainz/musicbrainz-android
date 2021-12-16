@@ -3,5 +3,5 @@
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
     android:hint="@string/search_hint"
     android:label="@string/search_name"
-    android:searchSuggestAuthority="org.metabrainz.mobile.SearchSuggestionProvider"
+    android:searchSuggestAuthority="org.metabrainz.android.SearchSuggestionProvider"
     android:searchSuggestSelection=" ?" />

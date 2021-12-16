@@ -19,7 +19,7 @@ object MusicBrainzServiceGenerator {
     const val ACOUST_ID_BASE_URL = "https://api.acoustid.org/v2/lookup"
     const val CLIENT_ID = "BZn9PT8PXtzoUvR1ZIaXFw"
     const val CLIENT_SECRET = "WN6o5cjehjPAP4dib0zOmQ"
-    const val OAUTH_REDIRECT_URI = "org.metabrainz.mobile://oauth"
+    const val OAUTH_REDIRECT_URI = "org.metabrainz.android://oauth"
     const val ACOUST_ID_KEY = "5mgEECwRkp"
 
     private var authenticator: OAuthAuthenticator? = null

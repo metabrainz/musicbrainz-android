@@ -101,7 +101,7 @@
 
                 <data
                     android:host="oauth"
-                    android:scheme="org.metabrainz.mobile" />
+                    android:scheme="org.metabrainz.android" />
             </intent-filter>
         </activity>
         <activity
