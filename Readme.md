@@ -21,12 +21,10 @@
       
 <p align="center">
   <a href="#what-is-musicbrainz">About</a> •
-  <a href="#what-is-musicbrainz-android-for">Android</a> •
-  <a href="#how-does-musicbrainz-do-this">Technique</a> •
   <a href="#development">Development</a> •
   <a href="#downloading">Downloading</a> •
   <a href="#contributing">Contributing</a> •
-  <a href="roadmap">Roadmap</a> • 
+  <a href="#roadmap">Roadmap</a> • 
   <a href="#issues">Issues</a> •
   <a href="#tutorials">Tutorials</a> •
   <a href="#support">Support</a> •
