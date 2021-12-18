@@ -5,19 +5,23 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
-
 android {
     compileSdk 31
     signingConfigs {
         config {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            def keystorePropertiesFile = rootProject.file("keystore.properties")
+            if (keystorePropertiesFile.exists()) {
+                def keystoreProperties = new Properties()
+                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
         }
     }
+
     defaultConfig {
         applicationId "org.metabrainz.android"
         minSdk 21
