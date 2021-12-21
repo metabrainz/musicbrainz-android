@@ -134,7 +134,7 @@
 
         <provider
             android:name="org.metabrainz.android.presentation.features.suggestion.SuggestionProvider"
-            android:authorities="org.metabrainz.android.SearchSuggestionProvider"
+            android:authorities="${applicationId}.SearchSuggestionProvider"
             android:exported="false" />
 
         <dist:module dist:instant="true" />
