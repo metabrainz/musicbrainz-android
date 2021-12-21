@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/directoryPicker"
-        android:name="org.metabrainz.mobile.presentation.features.tagger.DirectoryPickerFragment"
+        android:name="org.metabrainz.android.presentation.features.tagger.DirectoryPickerFragment"
         android:label="fragment_directory_picker"
         tools:layout="@layout/fragment_directory_picker" >
         <action
@@ -19,11 +19,11 @@
     </fragment>
     <fragment
         android:id="@+id/taggerFragment"
-        android:name="org.metabrainz.mobile.presentation.features.tagger.TaggerFragment"
+        android:name="org.metabrainz.android.presentation.features.tagger.TaggerFragment"
         android:label="fragment_tagger"
         tools:layout="@layout/fragment_tagger" />
     <fragment
         android:id="@+id/taggerFragment2"
-        android:name="org.metabrainz.mobile.presentation.features.tagger.TaggerFragment"
+        android:name="org.metabrainz.android.presentation.features.tagger.TaggerFragment"
         android:label="TaggerFragment2" />
 </navigation>

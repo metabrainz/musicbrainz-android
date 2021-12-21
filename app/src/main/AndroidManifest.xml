@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.metabrainz.mobile">
+    package="org.metabrainz.android">
 
     <!-- Over here we define all the permissions our app needs. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,7 +11,7 @@
     <uses-permission android:name="android.Manifest.permission.MEDIA_CONTENT_CONTROL" />
 
     <application
-        android:name=".App"
+        android:name="org.metabrainz.android.App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -21,7 +21,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".presentation.features.splash_screen.SplashActivity"
+            android:name="org.metabrainz.android.presentation.features.splash_screen.SplashActivity"
             android:theme="@style/AppThemeNoActionBar"
             android:exported="true">
             <intent-filter>
@@ -31,43 +31,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.features.onboarding.FeaturesActivity"
+            android:name="org.metabrainz.android.presentation.features.onboarding.FeaturesActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".presentation.features.dashboard.DashboardActivity"
+            android:name="org.metabrainz.android.presentation.features.dashboard.DashboardActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".presentation.features.collection.CollectionDetailsActivity"
+            android:name="org.metabrainz.android.presentation.features.collection.CollectionDetailsActivity"
             android:label="Collection"
-            android:parentActivityName=".presentation.features.collection.CollectionActivity"
+            android:parentActivityName="org.metabrainz.android.presentation.features.collection.CollectionActivity"
             android:theme="@style/AppThemeGrayScale">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.features.collection.CollectionActivity" />
+                android:value="org.metabrainz.android.presentation.features.collection.CollectionActivity" />
         </activity>
         <activity
-            android:name=".presentation.features.collection.CollectionActivity"
+            android:name="org.metabrainz.android.presentation.features.collection.CollectionActivity"
             android:label="@string/dash_collections"
             android:theme="@style/AppThemeGrayScale" />
         <activity
-            android:name=".presentation.features.tagger.TaggerActivity"
+            android:name="org.metabrainz.android.presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger"
             android:theme="@style/AppThemeGrayScale"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".presentation.features.recording.RecordingActivity"
+            android:name="org.metabrainz.android.presentation.features.recording.RecordingActivity"
             android:label="@string/search_type_recording"
             android:theme="@style/AppThemeGrayScale" />
         <activity
-            android:name=".presentation.features.label.LabelActivity"
+            android:name="org.metabrainz.android.presentation.features.label.LabelActivity"
             android:label="@string/search_type_label"
             android:theme="@style/AppThemeGrayScale" />
         <activity
-            android:name=".presentation.features.release_group.ReleaseGroupActivity"
+            android:name="org.metabrainz.android.presentation.features.release_group.ReleaseGroupActivity"
             android:label="@string/search_type_release_group"
             android:theme="@style/AppThemeGrayScale" />
         <activity
-            android:name=".presentation.features.search.SearchActivity"
+            android:name="org.metabrainz.android.presentation.features.search.SearchActivity"
             android:label="@string/settings_search"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden">
@@ -76,7 +76,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".presentation.features.login.LoginActivity"
+            android:name="org.metabrainz.android.presentation.features.login.LoginActivity"
             android:label="@string/auth_title"
             android:exported="true">
             <intent-filter>
@@ -91,28 +91,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.features.about.AboutActivity"
+            android:name="org.metabrainz.android.presentation.features.about.AboutActivity"
             android:label="@string/about_title" />
         <activity
-            android:name=".presentation.features.dashboard.DonateActivity"
+            android:name="org.metabrainz.android.presentation.features.dashboard.DonateActivity"
             android:label="@string/donate_title" />
         <activity
-            android:name=".presentation.features.release.ReleaseActivity"
+            android:name="org.metabrainz.android.presentation.features.release.ReleaseActivity"
             android:label="@string/release_title"
             android:theme="@style/AppThemeGrayScale" />
         <activity
-            android:name=".presentation.features.artist.ArtistActivity"
+            android:name="org.metabrainz.android.presentation.features.artist.ArtistActivity"
             android:label="@string/artist_title"
             android:theme="@style/AppThemeGrayScale" />
         <activity
-            android:name=".presentation.features.settings.SettingsActivity"
+            android:name="org.metabrainz.android.presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title"
             android:theme="@style/AppThemeForSettings" />
         <activity
-            android:name=".presentation.features.barcode.BarcodeActivity"
+            android:name="org.metabrainz.android.presentation.features.barcode.BarcodeActivity"
             android:theme="@style/AppThemeCustomActionBar" />
         <activity
-            android:name=".presentation.features.barcode.BarcodeResultActivity"
+            android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity"
             android:theme="@style/AppThemeGrayScale" />
 
         <!-- Required to add this to the manifest for usage of the web view library. -->
@@ -123,13 +123,13 @@
             android:theme="@style/FinestWebViewTheme" />
 
         <provider
-            android:name=".presentation.features.suggestion.SuggestionProvider"
-            android:authorities="org.metabrainz.mobile.SearchSuggestionProvider"
+            android:name="org.metabrainz.android.presentation.features.suggestion.SuggestionProvider"
+            android:authorities="org.metabrainz.android.SearchSuggestionProvider"
             android:exported="false" />
 
         <!-- We need to add this so that we can access the notifications and submit listens. -->
         <service
-            android:name=".presentation.features.listen.ListenService"
+            android:name="org.metabrainz.android.presentation.features.listen.ListenService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
