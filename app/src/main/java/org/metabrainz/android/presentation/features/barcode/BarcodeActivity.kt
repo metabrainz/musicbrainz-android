@@ -26,22 +26,23 @@ class BarcodeActivity : Activity(), ZBarScannerView.ResultHandler {
         scannerView = ZBarScannerView(this)
         contentFrame.addView(scannerView)
         scannerView!!.setResultHandler(this)
-        cameraPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-        if (!cameraPermission) ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION)
+        cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        if (!cameraPermission){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION)
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        cameraPermission = requestCode == CAMERA_PERMISSION && grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        cameraPermission = requestCode == CAMERA_PERMISSION && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
         if (cameraPermission) scannerView!!.startCamera() else {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Camera Permission Denied")
             builder.setMessage("You need to grant MusicBrainz for Android access to your device's " +
                     "camera to scan a barcode.")
             builder.setNegativeButton("Close") { dialog: DialogInterface?, which: Int -> finish() }
-            builder.setOnCancelListener { dialog: DialogInterface? -> finish() }
-            builder.setOnDismissListener { dialog: DialogInterface? -> finish() }
+            builder.setOnCancelListener { finish() }
+            builder.setOnDismissListener { finish() }
             builder.create().show()
         }
     }
@@ -57,8 +58,7 @@ class BarcodeActivity : Activity(), ZBarScannerView.ResultHandler {
     }
 
     override fun handleResult(rawResult: Result) {
-        Toast.makeText(this, "Contents = " + rawResult.contents +
-                ", Format = " + rawResult.barcodeFormat.name, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Contents = " + rawResult.contents + ", Format = " + rawResult.barcodeFormat.name, Toast.LENGTH_SHORT).show()
         val intent = Intent(this, BarcodeResultActivity::class.java)
         intent.putExtra("barcode", rawResult.contents)
         startActivity(intent)

@@ -8,14 +8,12 @@ import org.metabrainz.android.data.sources.api.MusicBrainzServiceGenerator.creat
 import org.metabrainz.android.presentation.features.login.LoginSharedPreferences
 import org.metabrainz.android.util.Log.d
 import java.io.IOException
-import java.util.*
 
 internal class OAuthAuthenticator : Authenticator {
     @Throws(IOException::class)
     override fun authenticate(route: Route?, response: Response): Request? {
-        val service = createService(LoginService::class.java,
-                false)
-        d("OkHttp : " + Objects.requireNonNull(response.body)!!.string())
+        val service = createService(LoginService::class.java, false)
+        d("OkHttp : " + response.body!!.string())
         val refreshToken = LoginSharedPreferences.refreshToken
         val call = service.refreshAccessToken(refreshToken,
                 "refresh_token",
@@ -29,9 +27,12 @@ internal class OAuthAuthenticator : Authenticator {
             editor.putString(LoginSharedPreferences.ACCESS_TOKEN, token.accessToken)
             editor.apply()
         }
-        return if (token?.accessToken != null) response.request
+        return when {
+            token?.accessToken != null -> response.request
                 .newBuilder()
                 .header("Authorization", "Bearer " + token.accessToken)
-                .build() else null
+                .build()
+            else -> null
+        }
     }
 }
