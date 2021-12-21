@@ -44,7 +44,7 @@
         android:padding="10dp"
         android:text="@string/login"
         android:textAllCaps="false"
-        android:textColor="@color/app_bg_light2"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/login_prompt_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

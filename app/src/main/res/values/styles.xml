@@ -1,26 +1,11 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/app_bg</item>
         <item name="colorPrimaryDark">@color/app_bg</item>
         <item name="colorAccent">@color/light_blue</item>
-    </style>
 
-    <style name="AppThemeGrayScale" parent="Base.Theme.MaterialComponents">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/app_bg</item>
-        <item name="colorPrimaryDark">@color/app_bg</item>
-        <item name="colorAccent">@color/light_blue</item>
-    </style>
-
-    <style name="AppThemeForSettings" parent="Base.Theme.MaterialComponents">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/app_bg</item>
-        <item name="colorAccent">@color/app_bg_light2</item>
-        <item name="colorPrimaryDark">@color/app_bg</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="alertDialogTheme">@style/settingsDialog</item>
     </style>
@@ -30,7 +15,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="settingsDialog" parent="Base.Theme.MaterialComponents.Dialog.Alert">
+    <style name="settingsDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 

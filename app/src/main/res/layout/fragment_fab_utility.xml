@@ -5,28 +5,13 @@
     android:layout_height="wrap_content"
     tools:context=".presentation.features.userdata.FAButility">
 
-    <!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--        android:id="@+id/authentication_id"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="end|center"-->
-    <!--        android:layout_margin="30dp"-->
-    <!--        android:backgroundTint="@color/black"-->
-    <!--        app:elevation="10dp"-->
-    <!--        android:src="@drawable/tag_icon"-->
-    <!--        android:background="@color/white">-->
-
-    <!--    </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/settings_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="30dp"
         android:backgroundTint="@color/black"
-        android:src="@drawable/action_settings">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:src="@drawable/action_settings"/>
 
 </RelativeLayout>

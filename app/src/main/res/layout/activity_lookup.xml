@@ -7,8 +7,6 @@
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar" />
-
     <include
         android:id="@+id/no_result"
         layout="@layout/error_no_result" />
@@ -21,7 +19,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabSelectedTextColor="@color/app_bg_light2"
+        app:tabSelectedTextColor="@color/white"
         app:tabGravity="center" />
 
     <androidx.viewpager2.widget.ViewPager2

@@ -7,8 +7,6 @@
     android:background="@color/app_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_toolbar" />
-
     <FrameLayout
         android:id="@+id/settings_container"
         android:layout_width="match_parent"
