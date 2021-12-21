@@ -1,19 +1,21 @@
-package org.metabrainz.android.presentation.features.listen
+package org.metabrainz.android
 
 import android.media.MediaMetadata
 import android.media.session.MediaController
 import android.media.session.MediaSession
 import android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
 import android.media.session.PlaybackState
+import android.os.Build
+import androidx.annotation.RequiresApi
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningSpotifyEnabled
 import org.metabrainz.android.util.Log.d
 import java.util.*
 
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedListener {
     private val controllers: MutableList<MediaController>
     private val handler: ListenHandler
     private val activeSessions: MutableMap<MediaSession.Token, ListenCallback?>
-
     override fun onActiveSessionsChanged(controllers: List<MediaController>?) {
         if (controllers == null) return
         clearSessions()
@@ -26,13 +28,7 @@ class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedLis
     }
 
     fun clearSessions() {
-        for ((key, value) in activeSessions) {
-            for (controller in controllers) {
-                if (controller.sessionToken == key){
-                    controller.unregisterCallback(value!!)
-                }
-            }
-        }
+        for ((key, value) in activeSessions) for (controller in controllers) if (controller.sessionToken == key) controller.unregisterCallback(value!!)
         activeSessions.clear()
         controllers.clear()
     }
@@ -45,20 +41,11 @@ class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedLis
         var submitted = true
         override fun onMetadataChanged(metadata: MediaMetadata?) {
             if (metadata == null) return
-            if (state != null) {
-                d("Listen Metadata " + state!!.state)
-            }
-            else{
-                d("Listen Metadata")
-            }
+            if (state != null) d("Listen Metadata " + state!!.state) else d("Listen Metadata")
             artist = metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)
-            if (artist == null || artist!!.isEmpty()){
-                artist = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST)
-            }
+            if (artist == null || artist!!.isEmpty()) artist = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST)
             title = metadata.getString(MediaMetadata.METADATA_KEY_TITLE)
-            if (artist == null || title == null || artist!!.isEmpty() || title!!.isEmpty()) {
-                return
-            }
+            if (artist == null || title == null || artist!!.isEmpty() || title!!.isEmpty()) return
             if (System.currentTimeMillis() / 1000 - timestamp >= 1000) submitted = false
             timestamp = System.currentTimeMillis() / 1000
             if (state != null && state!!.state == PlaybackState.STATE_PLAYING && !submitted) {
@@ -68,16 +55,15 @@ class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedLis
         }
 
         override fun onPlaybackStateChanged(state: PlaybackState?) {
-            if (state == null){
-                return
-            }
+            if (state == null) return
             this.state = state
             d("Listen PlaybackState " + state.state)
             if (state.state == PlaybackState.STATE_PLAYING && !submitted) {
                 handler.submitListen(artist, title, timestamp)
                 submitted = true
             }
-            if (state.state == PlaybackState.STATE_PAUSED || state.state == PlaybackState.STATE_STOPPED) {
+            if (state.state == PlaybackState.STATE_PAUSED ||
+                    state.state == PlaybackState.STATE_STOPPED) {
                 handler.cancelListen(timestamp)
                 artist = ""
                 title = ""

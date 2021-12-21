@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.metabrainz.android.databinding.CoverArtSlideshowItemBinding
 
-class CoverArtSlideshowAdapter(private val data: List<String>)
-    : RecyclerView.Adapter<CoverArtSlideshowAdapter.CoverArtViewHolder>() {
+class CoverArtSlideshowAdapter(private val data: List<String>) : RecyclerView.Adapter<CoverArtSlideshowAdapter.CoverArtViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoverArtViewHolder {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -21,8 +20,7 @@ class CoverArtSlideshowAdapter(private val data: List<String>)
 
     override fun getItemCount(): Int = data.size
 
-    class CoverArtViewHolder(private val binding: CoverArtSlideshowItemBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    class CoverArtViewHolder(private val binding: CoverArtSlideshowItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(uri: String) {
             Glide.with(binding.releaseCoverArt).load(Uri.parse(uri)).into(binding.releaseCoverArt)

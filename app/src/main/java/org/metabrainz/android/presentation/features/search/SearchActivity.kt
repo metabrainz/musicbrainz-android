@@ -97,7 +97,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.dash, menu)
         return true
     }
@@ -117,7 +117,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 true
             }
             R.id.menu_open_website -> {
-                performAction(App.WEBSITE_BASE_URL + "search?type=" + searchTypeFromSpinner!!.nameHere + "&query=" + binding.searchView.query.toString())
+                performAction(App.WEBSITE_BASE_URL + "search?type=" + searchTypeFromSpinner!!.entity + "&query=" + binding.searchView.query.toString())
                 true
             }
             else -> super.onOptionsItemSelected(item)

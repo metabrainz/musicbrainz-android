@@ -5,34 +5,35 @@ import com.google.gson.JsonParser
 import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
 import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.android.data.sources.api.entities.response.CollectionListResponse
-import org.metabrainz.android.util.Log.d
 import java.util.*
 
 object CollectionUtils {
     /*
      * The response from ws/2/collections has a field for count in all collections. Depending on the
      * entity, the name of the field can be artist-count, release-count etc. This method finds the
-     * correct field name and assigns the value to count field in each collection. */
+     * correct field name and assigns the value to count field in each collection.
+     */
     fun setGenericCountParameter(jsonResponse: String?): MutableList<Collection> {
         val countList: MutableMap<String, String> = HashMap()
         val response = Gson().fromJson(jsonResponse, CollectionListResponse::class.java)
-        val collections: MutableList<Collection> = ArrayList(response.collections)
+        val collections = ArrayList(response.collections)
         val jsonElement = JsonParser.parseString(jsonResponse)
         val result = jsonElement.asJsonObject.getAsJsonArray("collections")
-        for (element in result) {
-            val entries = element.asJsonObject.entrySet()
-            var count = ""
-            var id = ""
-            for ((key, value) in entries) {
-                if (key.contains("count")) count = value.asString
-                if (key.equals("id", ignoreCase = true)) id = value.asString
+        if(result!=null){
+            for (element in result) {
+                val entries = element.asJsonObject.entrySet()
+                var count = ""
+                var id = ""
+                for ((key, value) in entries) {
+                    if (key.contains("count")) count = value.asString
+                    if (key.equals("id", ignoreCase = true)) id = value.asString
+                }
+                countList[id] = count
             }
-            d("$id $count")
-            countList[id] = count
-        }
-        for (collection in collections) {
-            val id = collection.mbid
-            collection.count = Objects.requireNonNull(countList[id])!!.toInt()
+            for (collection in collections) {
+                val id = collection.mbid
+                collection.count = countList[id]!!.toInt()
+            }
         }
         return collections
     }
@@ -50,6 +51,10 @@ object CollectionUtils {
     }
 
     fun getCollectionEntityType(collection: Collection): MBEntityType {
-        return MBEntityType.valueOf(collection.entityType!!.replace('-', '_').uppercase(Locale.ROOT))
+        return MBEntityType.valueOf(collection
+                .entityType
+                !!.replace('-', '_')
+                .uppercase()
+        )
     }
 }

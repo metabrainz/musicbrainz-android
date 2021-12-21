@@ -1,5 +1,6 @@
 package org.metabrainz.android.presentation.features.tagger
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,8 @@ class TaggerActivity : MusicBrainzActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTaggerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

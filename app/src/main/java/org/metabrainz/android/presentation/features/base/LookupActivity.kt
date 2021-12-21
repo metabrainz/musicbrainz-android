@@ -1,5 +1,6 @@
 package org.metabrainz.android.presentation.features.base
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
@@ -17,7 +18,8 @@ abstract class LookupActivity<T : MBEntity> : MusicBrainzActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLookupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val pagerAdapter = ViewPagerAdapter(this, getFragmentsList())
         binding.pager.adapter = pagerAdapter

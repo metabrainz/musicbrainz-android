@@ -11,7 +11,6 @@ import org.metabrainz.android.util.Resource
 import javax.inject.Inject
 
 @HiltViewModel
-class RecordingViewModel @Inject constructor(repository: LookupRepository)
-    : LookupViewModel<Recording>(repository, MBEntityType.RECORDING) {
+class RecordingViewModel @Inject constructor(repository: LookupRepository) : LookupViewModel<Recording>(repository, MBEntityType.RECORDING) {
     override val data: LiveData<Resource<Recording>> = jsonLiveData.map { parseData(it) }
 }

@@ -1,5 +1,6 @@
 package org.metabrainz.android.presentation.features.collection
 
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -34,7 +35,9 @@ class CollectionDetailsActivity : MusicBrainzActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCollectionDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         binding.noResult.root.visibility = View.GONE
         binding.progressSpinner.root.visibility = View.VISIBLE
         entity = intent.getSerializableExtra(Constants.TYPE) as MBEntityType?

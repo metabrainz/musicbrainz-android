@@ -78,8 +78,8 @@ class LookupViewModelTest {
         val viewModel = ReleaseGroupViewModel(MockLookupRepository())
         viewModel.mbid.value = EntityTestUtils.testReleaseGroupMBID
         val resource = getOrAwaitValue(viewModel.data)
-        assertEquals(SUCCESS, resource?.status!!)
-        checkReleaseGroupAssertions(testReleaseGroup, resource.data!!)
+        assertEquals(SUCCESS, resource?.status)
+        checkReleaseGroupAssertions(testReleaseGroup, resource?.data!!)
     }
 
     @ExperimentalCoroutinesApi
@@ -93,7 +93,6 @@ class LookupViewModelTest {
         checkLabelAssertions(testLabel, resource?.data!!)
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun testRecordingViewModel() = testDispatcher.runBlockingTest {
         val testRecording = EntityTestUtils.testRecording
@@ -105,9 +104,20 @@ class LookupViewModelTest {
     }
 
     @ExperimentalCoroutinesApi
+    @Test
+    fun testCoverArtViewModel() = testDispatcher.runBlockingTest {
+//        val testCoverArt = EntityTestUtils.testCoverArt
+//        val viewModel = RecordingViewModel(MockLookupRepository())
+//        viewModel.mbid.value = EntityTestUtils.testRecordingMBID
+//        val resource = getOrAwaitValue(viewModel.data)
+//        assertEquals(SUCCESS, resource?.status!!)
+//        checkRecordingAssertions(testCoverArt, resource.data!!)
+    }
+
+    @ExperimentalCoroutinesApi
     @After
     fun teardown() {
-        Dispatchers.resetMain()
         testDispatcher.cleanupTestCoroutines()
+        Dispatchers.resetMain()
     }
 }

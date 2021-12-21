@@ -1,7 +1,8 @@
-package org.metabrainz.android.presentation.features.listen
+package org.metabrainz.android
 
 import android.media.MediaMetadata
 import android.os.*
+import androidx.annotation.RequiresApi
 import okhttp3.ResponseBody
 import org.metabrainz.android.data.sources.api.ListenSubmitService
 import org.metabrainz.android.data.sources.api.MusicBrainzServiceGenerator.createService
@@ -12,6 +13,7 @@ import org.metabrainz.android.util.Log.d
 import retrofit2.Call
 import retrofit2.Response
 
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 class ListenHandler : Handler(Looper.getMainLooper()) {
     private val DELAY = 30000
     private val TIMESTAMP = "timestamp"
@@ -31,12 +33,12 @@ class ListenHandler : Handler(Looper.getMainLooper()) {
         body.listenType = "single"
         d(body.toString())
         service.submitListen("Token $token", body)!!.enqueue(object : retrofit2.Callback<ResponseBody?> {
-            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                d(response.message())
-            }
+                    override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                        d(response.message())
+                    }
 
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {}
-        })
+                    override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {}
+                })
     }
 
     fun submitListen(artist: String?, title: String?, timestamp: Long) {

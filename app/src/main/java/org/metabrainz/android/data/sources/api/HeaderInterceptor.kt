@@ -13,35 +13,24 @@ internal class HeaderInterceptor : Interceptor {
         val original: Request = chain.request()
 
         // Do not add any headers if fetching data from wiki
-        if (original.url.host.contains("wiki")) {
-            return chain.proceed(original)
-        }
+        if (original.url.host.contains("wiki")) return chain.proceed(original)
 
         // Do not add Authorization Header if request is sent to OAuth endpoint except to fetch userinfo
-        val request: Request = when {
-            original.url.encodedPath.contains("oauth2") -> {
-                when {
-                    original.url.encodedPath.contains("userinfo") -> original.newBuilder()
+        val request: Request = if (original.url.encodedPath.contains("oauth2")) {
+            if (original.url.encodedPath.contains("userinfo")) original.newBuilder()
+                    .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
+                    .addHeader("Accept", "application/json")
+                    .header("Authorization", " Bearer $accessToken").build() else return chain.proceed(original)
+        } else {
+            if (checkLoginStatus()) {
+                original.newBuilder()
                         .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
                         .addHeader("Accept", "application/json")
                         .header("Authorization", " Bearer $accessToken").build()
-                    else -> return chain.proceed(original)
-                }
-            }
-            else -> {
-                when {
-                    checkLoginStatus() -> {
-                        original.newBuilder()
-                            .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
-                            .addHeader("Accept", "application/json")
-                            .header("Authorization", " Bearer $accessToken").build()
-                    }
-                    else -> {
-                        original.newBuilder()
-                            .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
-                            .addHeader("Accept", "application/json").build()
-                    }
-                }
+            } else {
+                original.newBuilder()
+                        .header("User-agent", "MusicBrainzAndroid/Test (kartikohri13@gmail.com)")
+                        .addHeader("Accept", "application/json").build()
             }
         }
         return chain.proceed(request)

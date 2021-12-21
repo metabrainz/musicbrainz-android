@@ -2,6 +2,7 @@ package org.metabrainz.android.presentation.features.collection
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -36,7 +37,9 @@ class CollectionActivity : MusicBrainzActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCollectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         viewModel = ViewModelProvider(this).get(CollectionViewModel::class.java)
         collections = ArrayList()
         adapter = CollectionListAdapter(collections!!)
@@ -46,14 +49,13 @@ class CollectionActivity : MusicBrainzActivity() {
             binding.progressSpinner.root.visibility = View.VISIBLE
             binding.recyclerView.adapter = adapter
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
-            val itemDecoration = DividerItemDecoration(
-                    binding.recyclerView.context, DividerItemDecoration.VERTICAL)
+            val itemDecoration = DividerItemDecoration(binding.recyclerView.context, DividerItemDecoration.VERTICAL)
             binding.recyclerView.addItemDecoration(itemDecoration)
             binding.recyclerView.visibility = View.GONE
-            val getPrivateCollections = (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN
-                    && privateCollectionsPreference)
+            val getPrivateCollections = (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN && privateCollectionsPreference)
             viewModel!!.fetchCollectionData(username!!, getPrivateCollections).observe(this, { resource: Resource<MutableList<Collection>>? -> setCollections(resource) })
-        } else {
+        }
+        else {
             binding.noResult.root.visibility = View.GONE
             binding.recyclerView.visibility = View.GONE
             binding.progressSpinner.root.visibility = View.GONE
@@ -83,7 +85,7 @@ class CollectionActivity : MusicBrainzActivity() {
     }
 
     fun callAlert() {
-        val builder = AlertDialog.Builder(this, R.style.loginrequiredDialog)
+        val builder = AlertDialog.Builder(this)
         builder.setTitle("Login Required")
         builder.setMessage("You need to log in to see your collections")
         builder.setPositiveButton("Login") { dialog: DialogInterface?, which: Int ->

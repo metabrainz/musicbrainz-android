@@ -13,9 +13,7 @@ import org.metabrainz.android.data.sources.api.entities.mbentity.*
 class EntityModelsTest {
     @Test
     fun testArtistModel() {
-        val artist: Artist = Gson().fromJson(
-            loadResourceAsString("artist_lookup.json"),
-            Artist::class.java)
+        val artist: Artist = Gson().fromJson(loadResourceAsString("artist_lookup.json"),Artist::class.java)
         AssertionUtils.checkArtistAssertions(testArtist, artist)
     }
 

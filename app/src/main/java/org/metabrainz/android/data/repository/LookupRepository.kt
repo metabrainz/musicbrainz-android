@@ -12,7 +12,7 @@ interface LookupRepository {
 
     suspend fun fetchWikiSummary(string: String, method: Int): Resource<WikiSummary>
 
-    suspend fun fetchCoverArt(MBID: String): Resource<CoverArt>
+    suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt>
 
     suspend fun fetchRecordings(query: String?): Resource<List<Recording>>
 

@@ -95,7 +95,6 @@ class TaggerFragment : Fragment() {
         binding.picard.visibility = View.GONE
         binding.recordingButton.visibility = View.GONE
         binding.picardText.visibility = View.GONE
-
         reset()
 
         GlideApp.with(binding.albumArtLocal)

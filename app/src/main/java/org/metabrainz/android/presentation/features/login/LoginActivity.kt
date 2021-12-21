@@ -19,8 +19,10 @@ import org.metabrainz.android.util.Log.d
 
 @AndroidEntryPoint
 class LoginActivity : MusicBrainzActivity() {
+
     private var binding: ActivityLoginBinding? = null
     private var loginViewModel: LoginViewModel? = null
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -28,16 +30,19 @@ class LoginActivity : MusicBrainzActivity() {
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        loginViewModel!!.accessTokenLiveData!!.observe(this, { accessToken: AccessToken? -> saveOAuthToken(accessToken) })
-        loginViewModel!!.userInfoLiveData!!.observe(this, { userInfo: UserInfo? -> saveUserInfo(userInfo) })
-        when (LoginSharedPreferences.loginStatus) {
-            LoginSharedPreferences.STATUS_LOGGED_IN -> {
-                binding!!.loginPromptId.setText(R.string.logout_prompt)
-                binding!!.loginBtn.setText(R.string.logout)
-                binding!!.loginBtn.setOnClickListener { logoutUser() }
-            }
-            else -> binding!!.loginBtn.setOnClickListener { startLogin() }
+        loginViewModel!!.accessTokenLiveData!!.observe(this) { accessToken: AccessToken? ->
+            saveOAuthToken(accessToken)
         }
+        loginViewModel!!.userInfoLiveData!!.observe(this) { userInfo: UserInfo? ->
+            saveUserInfo(
+                userInfo
+            )
+        }
+        if (LoginSharedPreferences.loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN) {
+            binding!!.loginPromptId.setText(R.string.logout_prompt)
+            binding!!.loginBtn.setText(R.string.logout)
+            binding!!.loginBtn.setOnClickListener { logoutUser() }
+        } else binding!!.loginBtn.setOnClickListener { startLogin() }
     }
 
     override fun onResume() {

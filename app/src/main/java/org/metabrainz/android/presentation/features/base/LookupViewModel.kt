@@ -20,7 +20,7 @@ abstract class LookupViewModel<T : MBEntity> protected constructor(val repositor
                 emit(Resource.failure<String>())
             }
             else{
-                emit(repository.fetchData(entity.nameHere, it, Constants.getDefaultParams(entity)))
+                emit(repository.fetchData(entity.entity, it, Constants.getDefaultParams(entity)))
             }
         }
     }

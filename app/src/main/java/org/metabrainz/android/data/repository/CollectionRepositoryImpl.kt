@@ -1,5 +1,6 @@
 package org.metabrainz.android.data.repository
 
+import androidx.annotation.WorkerThread
 import org.metabrainz.android.data.sources.CollectionUtils
 import org.metabrainz.android.data.sources.api.CollectionService
 import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
@@ -10,9 +11,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CollectionRepository @Inject constructor(val service: CollectionService) {
+class CollectionRepositoryImpl @Inject constructor(val service: CollectionService) : CollectionRepository{
 
-    suspend fun fetchCollectionDetails(entity: String, id: String): Resource<String> {
+    @WorkerThread
+    override suspend fun fetchCollectionDetails(entity: String, id: String): Resource<String> {
         return try {
             val result = service.getCollectionContents(entity, id)
             Resource(SUCCESS, result.string())
@@ -22,13 +24,13 @@ class CollectionRepository @Inject constructor(val service: CollectionService) {
         }
     }
 
-    suspend fun fetchCollections(editor: String, fetchPrivate: Boolean): Resource<MutableList<Collection>> {
+    @WorkerThread
+    override suspend fun fetchCollections(editor: String, fetchPrivate: Boolean): Resource<MutableList<Collection>> {
         return try {
-            val response =
-                    if (fetchPrivate)
-                        service.getAllUserCollections(editor, "user-collections")
-                    else
-                        service.getPublicUserCollections(editor)
+            val response = when {
+                fetchPrivate -> service.getAllUserCollections(editor, "user-collections")
+                else -> service.getPublicUserCollections(editor)
+            }
             val collections = CollectionUtils.setGenericCountParameter(response.string())
             Resource(SUCCESS, collections)
         } catch (e: Exception) {

@@ -4,11 +4,12 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.limerse.onboard.OnboardAdvanced
-import com.limerse.onboard.OnboardFragment
-import com.limerse.onboard.OnboardPageTransformerType
-import com.limerse.onboard.model.SliderPage
+import com.aemerse.onboard.OnboardAdvanced
+import com.aemerse.onboard.OnboardFragment
+import com.aemerse.onboard.OnboardPageTransformerType
+import com.aemerse.onboard.model.SliderPage
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.UserPreferences
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
@@ -22,8 +23,10 @@ class FeaturesActivity : OnboardAdvanced() {
             "Tag",
             "Fix your Audio Metadata",
             resourceId = R.raw.tagger,
-            backgroundColor =  resources.getColor(R.color.app_bg),
-            isLottie = true
+            isLottie = true,
+            backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+            titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+            descriptionColor = ContextCompat.getColor(applicationContext, R.color.white)
         ))
 
         addSlide(OnboardFragment.newInstance(
@@ -31,7 +34,9 @@ class FeaturesActivity : OnboardAdvanced() {
                 "Search",
                 "Explore MusicBrainz Data",
                 resourceId = R.raw.search,
-                backgroundColor =  resources.getColor(R.color.app_bg),
+                backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+                titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+                descriptionColor = ContextCompat.getColor(applicationContext, R.color.white),
                 isLottie = true
             )
         ))
@@ -40,7 +45,9 @@ class FeaturesActivity : OnboardAdvanced() {
             "Scan",
             "Barcodes Search",
             resourceId = R.raw.scan,
-            backgroundColor =  resources.getColor(R.color.app_bg),
+            backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+            titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+            descriptionColor = ContextCompat.getColor(applicationContext, R.color.white),
             isLottie = true
         ))
 
@@ -48,7 +55,9 @@ class FeaturesActivity : OnboardAdvanced() {
             "Collections",
             "Explore your MusicBrainz Collection",
             resourceId = R.raw.collections,
-            backgroundColor =  resources.getColor(R.color.app_bg),
+            backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+            titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+            descriptionColor = ContextCompat.getColor(applicationContext, R.color.white),
             isLottie = true
         ))
 
@@ -56,7 +65,9 @@ class FeaturesActivity : OnboardAdvanced() {
             "Cross Platform",
             "Transfer music data across devices",
             resourceId = R.raw.laptop_and_stuff,
-            backgroundColor =  resources.getColor(R.color.app_bg),
+            backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+            titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+            descriptionColor = ContextCompat.getColor(applicationContext, R.color.white),
             isLottie = true
         ))
 
@@ -64,7 +75,9 @@ class FeaturesActivity : OnboardAdvanced() {
             "Listens",
             "Track your music listening habits ",
             resourceId = R.raw.teen,
-            backgroundColor =  resources.getColor(R.color.app_bg),
+            backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+            titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+            descriptionColor = ContextCompat.getColor(applicationContext, R.color.white),
             isLottie = true
         ))
 
@@ -72,7 +85,9 @@ class FeaturesActivity : OnboardAdvanced() {
             "Critiques",
             "Read and write about an album or event",
             resourceId = R.raw.review,
-            backgroundColor =  resources.getColor(R.color.app_bg),
+            backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+            titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+            descriptionColor = ContextCompat.getColor(applicationContext, R.color.white),
             isLottie = true
         ))
 

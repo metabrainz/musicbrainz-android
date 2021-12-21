@@ -38,6 +38,7 @@ class DashboardActivity : AppCompatActivity() {
             }
             if (scrollRange + verticalOffset == 0) {
                 binding.colToolbarId.title = "MusicBrainz"
+                binding.colToolbarId.setCollapsedTitleTextColor(resources.getColor(R.color.white))
                 isShow = true
             } else if (isShow) {
                 binding.colToolbarId.title = " "
@@ -97,9 +98,9 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.dash, menu)
-        menu?.findItem(R.id.menu_open_website)?.isVisible = false
+        menu.findItem(R.id.menu_open_website)?.isVisible = false
         return true
     }
 

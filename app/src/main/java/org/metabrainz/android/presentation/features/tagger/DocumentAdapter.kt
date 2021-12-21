@@ -3,6 +3,7 @@ package org.metabrainz.android.presentation.features.tagger
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.metabrainz.android.databinding.ListItemDocumentBinding
 import java.util.concurrent.TimeUnit
 

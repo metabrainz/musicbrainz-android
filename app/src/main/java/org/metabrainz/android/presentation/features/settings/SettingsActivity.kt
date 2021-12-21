@@ -2,6 +2,7 @@ package org.metabrainz.android.presentation.features.settings
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -14,7 +15,6 @@ import androidx.preference.SwitchPreference
 import org.metabrainz.android.App
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityPreferencesBinding
-import org.metabrainz.android.databinding.LayoutToolbarBinding
 import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEnabled
 import java.util.*
@@ -28,8 +28,7 @@ class SettingsActivity : AppCompatActivity() {
         val binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbarBinding = LayoutToolbarBinding.bind(binding.root)
-        setSupportActionBar(toolbarBinding.toolbar)
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         supportFragmentManager

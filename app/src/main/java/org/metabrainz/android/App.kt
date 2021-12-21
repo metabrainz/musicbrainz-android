@@ -8,11 +8,11 @@ import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.os.Environment
 import android.provider.Settings
 import dagger.hilt.android.HiltAndroidApp
 import org.metabrainz.android.presentation.Configuration
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEnabled
-import org.metabrainz.android.presentation.features.listen.ListenService
 
 @HiltAndroidApp
 class App : Application() {
@@ -63,6 +63,7 @@ class App : Application() {
         }
 
     companion object {
+        val TAGGER_ROOT_DIRECTORY = Environment.getRootDirectory().toString() + "/Picard/"
         const val WEBSITE_BASE_URL = "https://musicbrainz.org/"
         const val PICARD_OPENALBUM_URL = "http://%s:%s/openalbum?id=%s"
         var context: App? = null
