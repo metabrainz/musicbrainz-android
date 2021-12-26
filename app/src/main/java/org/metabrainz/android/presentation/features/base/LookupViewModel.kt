@@ -17,7 +17,7 @@ abstract class LookupViewModel<T : MBEntity> protected constructor(val repositor
     protected val jsonLiveData: LiveData<Resource<String>> = mbid.switchMap {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             if (it == null) {
-                emit(Resource.failure<String>())
+                emit(Resource.failure())
             }
             else{
                 emit(repository.fetchData(entity.entity, it, Constants.getDefaultParams(entity)))
