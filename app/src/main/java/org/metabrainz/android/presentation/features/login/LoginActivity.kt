@@ -29,7 +29,7 @@ class LoginActivity : MusicBrainzActivity() {
         setContentView(binding!!.root)
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         loginViewModel!!.accessTokenLiveData!!.observe(this) { accessToken: AccessToken? ->
             saveOAuthToken(accessToken)
         }
@@ -47,8 +47,7 @@ class LoginActivity : MusicBrainzActivity() {
 
     override fun onResume() {
         val callbackUri = intent.data
-        if (callbackUri != null &&
-                callbackUri.toString().startsWith(MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)) {
+        if (callbackUri != null && callbackUri.toString().startsWith(MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)) {
             val code = callbackUri.getQueryParameter("code")
             if (code != null) loginViewModel!!.fetchAccessToken(code)
         }

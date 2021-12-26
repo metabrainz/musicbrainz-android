@@ -16,8 +16,8 @@ object MusicBrainzServiceGenerator {
     const val API_BASE_URL = "https://musicbrainz.org/ws/2/"
     const val AUTH_BASE_URL = "https://musicbrainz.org/oauth2/"
     const val ACOUST_ID_BASE_URL = "https://api.acoustid.org/v2/lookup"
-    const val CLIENT_ID = "BZn9PT8PXtzoUvR1ZIaXFw"
-    const val CLIENT_SECRET = "WN6o5cjehjPAP4dib0zOmQ"
+    const val CLIENT_ID = "DfX8Xv3B5Cbco8nZgd6KYMS504F3gmJx"
+    const val CLIENT_SECRET = "XypxMsphalFfTIh_IagjcsIlSKuUWoc-"
     const val OAUTH_REDIRECT_URI = "org.metabrainz.android://oauth"
     const val ACOUST_ID_KEY = "5mgEECwRkp"
 
