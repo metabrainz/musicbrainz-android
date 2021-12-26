@@ -13,8 +13,7 @@ import org.metabrainz.android.util.Resource.Status.SUCCESS
 import javax.inject.Inject
 
 @HiltViewModel
-class ArtistViewModel @Inject constructor(repository: LookupRepository)
-    : LookupViewModel<Artist>(repository, ARTIST) {
+class ArtistViewModel @Inject constructor(repository: LookupRepository) : LookupViewModel<Artist>(repository, ARTIST) {
 
     val wikiData: LiveData<Resource<WikiSummary>>
 

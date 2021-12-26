@@ -15,7 +15,7 @@ object Constants {
             "tracks compress sources"
     const val USER_DATA_PARAMS = "+user-tags+user-ratings"
 
-    //    urls for adding in the database
+    //Urls for adding in the database
     const val ADD_ARTIST = "https://musicbrainz.org/artist/create?edit-artist"
     const val ADD_RELEASE = "https://musicbrainz.org/release/add"
     const val ADD_EVENT = "https://musicbrainz.org/event/create?edit-event"

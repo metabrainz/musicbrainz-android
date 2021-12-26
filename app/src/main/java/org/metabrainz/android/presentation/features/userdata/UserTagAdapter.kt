@@ -10,8 +10,7 @@ import org.metabrainz.android.databinding.LayoutTagBinding
 class UserTagAdapter(private val list: List<UserTag>) : RecyclerView.Adapter<UserTagAdapter.TagViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
-        val inflater = parent.context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return TagViewHolder(LayoutTagBinding.inflate(inflater, parent, false))
     }
 

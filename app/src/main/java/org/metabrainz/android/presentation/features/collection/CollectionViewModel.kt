@@ -10,10 +10,7 @@ import org.metabrainz.android.data.repository.CollectionRepository
 import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
 import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.android.presentation.features.adapters.ResultItem
-import org.metabrainz.android.presentation.features.adapters.ResultItemUtils
 import org.metabrainz.android.util.Resource
-import org.metabrainz.android.util.Resource.Status.FAILED
-import org.metabrainz.android.util.Resource.Status.SUCCESS
 import org.metabrainz.android.util.Utils.toResultItemsList
 import javax.inject.Inject
 

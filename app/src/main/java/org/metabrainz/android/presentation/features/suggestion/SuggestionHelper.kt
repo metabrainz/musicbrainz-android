@@ -24,9 +24,9 @@ class SuggestionHelper(private val context: Context) {
         if (constraint == null) {
             return null
         }
-        val where = COLUMN + " LIKE ?"
+        val where = "$COLUMN LIKE ?"
         val args = arrayOf(constraint.trim { it <= ' ' } + "%")
-        val cursorLoader = CursorLoader(context, Uri.parse(URI), null, where, args, COLUMN + " ASC")
+        val cursorLoader = CursorLoader(context, Uri.parse(URI), null, where, args, "$COLUMN ASC")
         val cursor = cursorLoader.loadInBackground()
         cursor?.moveToFirst()
         return cursor
@@ -47,7 +47,7 @@ class SuggestionHelper(private val context: Context) {
 
     companion object {
         private const val COLUMN = "display1"
-        private val URI = "content://" + SuggestionProvider.Companion.AUTHORITY + "/suggestions"
+        private const val URI = "content://" + SuggestionProvider.AUTHORITY + "/suggestions"
         private val FROM = arrayOf(COLUMN)
         private val TO = intArrayOf(R.id.dropdown_item)
     }

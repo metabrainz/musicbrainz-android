@@ -27,8 +27,7 @@
             android:text="@string/links"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            app:fontFamily="@font/roboto_medium" />
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/links_list"
