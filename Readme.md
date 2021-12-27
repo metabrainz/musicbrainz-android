@@ -9,14 +9,10 @@
     <a href="https://github.com/metabrainz/musicbrainz-android/commits/master">
     <img src="https://img.shields.io/github/last-commit/metabrainz/musicbrainz-android.svg?style=flat-square&logo=github&logoColor=white"
          alt="GitHub last commit"></a>
-    <a href="https://github.com/metabrainz/musicbrainz-android/issues">
-    <img src="https://img.shields.io/github/issues-raw/metabrainz/musicbrainz-android.svg?style=flat-square&logo=github&logoColor=white"
-         alt="GitHub issues"></a>
     <a href="https://github.com/metabrainz/musicbrainz-android/pulls">
     <img src="https://img.shields.io/github/issues-pr-raw/metabrainz/musicbrainz-android.svg?style=flat-square&logo=github&logoColor=white"
          alt="GitHub pull requests"></a>
     <img src="https://PlayBadges.pavi2410.me/badge/downloads?id=org.metabrainz.android">
-    <img src="https://PlayBadges.pavi2410.me/badge/ratings?id=org.metabrainz.android">
 </p>
       
 <p align="center">
