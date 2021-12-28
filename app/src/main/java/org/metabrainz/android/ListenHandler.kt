@@ -33,12 +33,11 @@ class ListenHandler : Handler(Looper.getMainLooper()) {
         body.listenType = "single"
         d(body.toString())
         service.submitListen("Token $token", body)!!.enqueue(object : retrofit2.Callback<ResponseBody?> {
-                    override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                        d(response.message())
-                    }
-
-                    override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {}
-                })
+            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                d(response.message())
+            }
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {}
+        })
     }
 
     fun submitListen(artist: String?, title: String?, timestamp: Long) {

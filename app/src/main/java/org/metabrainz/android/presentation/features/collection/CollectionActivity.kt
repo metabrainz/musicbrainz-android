@@ -40,27 +40,29 @@ class CollectionActivity : MusicBrainzActivity() {
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        viewModel = ViewModelProvider(this).get(CollectionViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CollectionViewModel::class.java]
         collections = ArrayList()
         adapter = CollectionListAdapter(collections!!)
-        if (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN) {
-            binding.loginRequired.visibility = View.GONE
-            binding.noResult.root.visibility = View.GONE
-            binding.progressSpinner.root.visibility = View.VISIBLE
-            binding.recyclerView.adapter = adapter
-            binding.recyclerView.layoutManager = LinearLayoutManager(this)
-            val itemDecoration = DividerItemDecoration(binding.recyclerView.context, DividerItemDecoration.VERTICAL)
-            binding.recyclerView.addItemDecoration(itemDecoration)
-            binding.recyclerView.visibility = View.GONE
-            val getPrivateCollections = (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN && privateCollectionsPreference)
-            viewModel!!.fetchCollectionData(username!!, getPrivateCollections).observe(this, { resource: Resource<MutableList<Collection>>? -> setCollections(resource) })
-        }
-        else {
-            binding.noResult.root.visibility = View.GONE
-            binding.recyclerView.visibility = View.GONE
-            binding.progressSpinner.root.visibility = View.GONE
-            binding.loginRequired.visibility = View.GONE
-            callAlert()
+        when (loginStatus) {
+            LoginSharedPreferences.STATUS_LOGGED_IN -> {
+                binding.loginRequired.visibility = View.GONE
+                binding.noResult.root.visibility = View.GONE
+                binding.progressSpinner.root.visibility = View.VISIBLE
+                binding.recyclerView.adapter = adapter
+                binding.recyclerView.layoutManager = LinearLayoutManager(this)
+                val itemDecoration = DividerItemDecoration(binding.recyclerView.context, DividerItemDecoration.VERTICAL)
+                binding.recyclerView.addItemDecoration(itemDecoration)
+                binding.recyclerView.visibility = View.GONE
+                val getPrivateCollections = (loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN && privateCollectionsPreference)
+                viewModel!!.fetchCollectionData(username!!, getPrivateCollections).observe(this, { resource: Resource<MutableList<Collection>>? -> setCollections(resource) })
+            }
+            else -> {
+                binding.noResult.root.visibility = View.GONE
+                binding.recyclerView.visibility = View.GONE
+                binding.progressSpinner.root.visibility = View.GONE
+                binding.loginRequired.visibility = View.GONE
+                callAlert()
+            }
         }
     }
 

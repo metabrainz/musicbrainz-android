@@ -33,10 +33,10 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
 
     @WorkerThread
     override suspend fun fetchWikiSummary(string: String, method: Int): Resource<WikiSummary> {
-        return if (method == LookupRepository.METHOD_WIKIPEDIA_URL)
-            fetchWiki(string)
-        else
-            fetchWikiData(string)
+        return when (method) {
+            LookupRepository.METHOD_WIKIPEDIA_URL -> fetchWiki(string)
+            else -> fetchWikiData(string)
+        }
     }
 
     @WorkerThread
