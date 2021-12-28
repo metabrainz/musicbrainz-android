@@ -22,5 +22,4 @@ class ServiceModule {
     @get:Provides
     @get:Singleton
     val loginService: LoginService = createService(LoginService::class.java, false)
-
 }
