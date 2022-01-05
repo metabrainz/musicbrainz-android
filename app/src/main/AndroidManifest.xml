@@ -12,6 +12,15 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.Manifest.permission.MEDIA_CONTENT_CONTROL" />
 
+    <uses-feature android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:name="org.metabrainz.android.App"
         android:allowBackup="false"
@@ -22,6 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:banner="@color/app_bg"
         tools:targetApi="31">
 
         <activity
@@ -46,10 +56,11 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="org.metabrainz.android.presentation.features.onboarding.FeaturesActivity"
             android:theme="@style/AppThemeNoActionBar" />
