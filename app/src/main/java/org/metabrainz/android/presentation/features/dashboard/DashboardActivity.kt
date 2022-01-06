@@ -19,6 +19,10 @@ import org.metabrainz.android.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
+import android.content.pm.PackageManager
+
+
+
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -84,6 +88,11 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardCollectionId.animation = leftItemAnimation
         binding.dashboardCritiqueId.animation = leftItemAnimation
         binding.dashboardListenId.animation = rightItemAnimation
+
+
+        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+            binding.dashboardScanId.visibility = GONE
+        }
     }
 
     override fun onResume() {
