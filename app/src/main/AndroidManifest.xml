@@ -31,7 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:banner="@color/app_bg"
+        android:banner="@drawable/tv_banner"
         tools:targetApi="31">
 
         <activity
