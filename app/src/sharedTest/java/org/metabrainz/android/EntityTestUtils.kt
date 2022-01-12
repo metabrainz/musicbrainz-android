@@ -2,7 +2,6 @@ package org.metabrainz.android
 
 import org.junit.Assert.fail
 import org.metabrainz.android.data.sources.api.entities.ArtistCredit
-import org.metabrainz.android.data.sources.api.entities.EntityUtils
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
 import org.metabrainz.android.data.sources.api.entities.mbentity.*
 import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
@@ -10,8 +9,7 @@ import org.metabrainz.android.presentation.features.adapters.ResultItem
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-import java.lang.StringBuilder
-import java.util.ArrayList
+import java.util.*
 
 object EntityTestUtils {
 

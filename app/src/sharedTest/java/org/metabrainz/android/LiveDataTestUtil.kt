@@ -25,6 +25,6 @@ object LiveDataTestUtil {
         if (!latch.await(2, TimeUnit.SECONDS)) {
             throw RuntimeException("LiveData value was never set.")
         }
-        return data[0] as T?
+        return data[0]
     }
 }

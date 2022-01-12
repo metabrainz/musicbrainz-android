@@ -107,7 +107,10 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
     @WorkerThread
     override suspend fun fetchAcoustIDResults(duration: Long, fingerprint: String?): Resource<List<Recording>> {
         return try {
-            val data = service.lookupFingerprint(MusicBrainzServiceGenerator.ACOUST_ID_KEY, Constants.ACOUST_ID_RESPONSE_PARAMS, duration, fingerprint)!!
+            val data = service.lookupFingerprint(MusicBrainzServiceGenerator.ACOUST_ID_KEY,
+                Constants.ACOUST_ID_RESPONSE_PARAMS,
+                duration,
+                fingerprint)
             Resource(SUCCESS, TaggerUtils.parseResults(data.results))
         } catch (e: Exception) {
             e.printStackTrace()

@@ -133,7 +133,7 @@ dependencies {
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
 
     //Instant App
-    //implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
+    implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
 
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")

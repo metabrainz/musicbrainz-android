@@ -4,11 +4,13 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.*
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.*
 import org.metabrainz.android.LiveDataTestUtil.getOrAwaitValue
 import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
-import org.metabrainz.android.presentation.features.adapters.ResultItem
 import org.metabrainz.android.presentation.features.collection.CollectionViewModel
 import org.metabrainz.android.util.Resource
 
