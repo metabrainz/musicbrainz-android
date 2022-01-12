@@ -36,13 +36,16 @@ class DashboardActivity : AppCompatActivity() {
             if (scrollRange == -1) {
                 scrollRange = barLayout?.totalScrollRange!!
             }
-            if (scrollRange + verticalOffset == 0) {
-                binding.colToolbarId.title = "MusicBrainz"
-                binding.colToolbarId.setCollapsedTitleTextColor(resources.getColor(R.color.white))
-                isShow = true
-            } else if (isShow) {
-                binding.colToolbarId.title = " "
-                isShow = false
+            when {
+                scrollRange + verticalOffset == 0 -> {
+                    binding.colToolbarId.title = "MusicBrainz"
+                    binding.colToolbarId.setCollapsedTitleTextColor(resources.getColor(R.color.white))
+                    isShow = true
+                }
+                isShow -> {
+                    binding.colToolbarId.title = " "
+                    isShow = false
+                }
             }
         })
         setSupportActionBar(binding.toolbar)
