@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.metabrainz.android">
 
+    <dist:module dist:instant="true" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,6 +22,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:targetSandboxVersion="2"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
@@ -137,7 +139,6 @@
             android:authorities="${applicationId}.SearchSuggestionProvider"
             android:exported="false" />
 
-        <dist:module dist:instant="true" />
     </application>
 
 </manifest>

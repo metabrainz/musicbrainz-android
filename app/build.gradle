@@ -132,7 +132,11 @@ dependencies {
     implementation 'com.airbnb.android:lottie:4.2.2'
     implementation 'com.github.akshaaatt:Onboarding:1.0.3'
 
+    //Barcode Scan
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+
+    //Instant App
+    implementation("com.google.android.gms:play-services-instantapps:18.0.1")
 
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
