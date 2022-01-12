@@ -97,7 +97,7 @@ dependencies {
     //Fragment Setup For Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
 
     //Test Setup
