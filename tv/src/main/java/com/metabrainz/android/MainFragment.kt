@@ -201,7 +201,7 @@ class MainFragment : BrowseSupportFragment() {
     }
 
     private inner class GridItemPresenter : Presenter() {
-        override fun onCreateViewHolder(parent: ViewGroup): Presenter.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
             val view = TextView(parent.context)
             view.layoutParams = ViewGroup.LayoutParams(GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT)
             view.isFocusable = true
@@ -209,14 +209,14 @@ class MainFragment : BrowseSupportFragment() {
             view.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.default_background))
             view.setTextColor(Color.WHITE)
             view.gravity = Gravity.CENTER
-            return Presenter.ViewHolder(view)
+            return ViewHolder(view)
         }
 
-        override fun onBindViewHolder(viewHolder: Presenter.ViewHolder, item: Any) {
+        override fun onBindViewHolder(viewHolder: ViewHolder, item: Any) {
             (viewHolder.view as TextView).text = item as String
         }
 
-        override fun onUnbindViewHolder(viewHolder: Presenter.ViewHolder) {}
+        override fun onUnbindViewHolder(viewHolder: ViewHolder) {}
     }
 
     companion object {
