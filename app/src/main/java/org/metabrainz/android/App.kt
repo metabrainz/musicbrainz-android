@@ -16,7 +16,6 @@ import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEn
 
 @HiltAndroidApp
 class App : Application() {
-
     override fun onCreate() {
         super.onCreate()
         context = this
