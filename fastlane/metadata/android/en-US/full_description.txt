@@ -11,7 +11,7 @@ Visit https://musicbrainz.org/ to know more
 MusicBrainz App is designed to do the following:
 
 - View release information by scanning a barcode
-- Search for information about artists, releases, release groups,labels, recordings, instruments, and events.
+- Search for information about artists, releases, release groups, labels, recordings, instruments, and events.
 - View collections
 - Tag audio files like Picard
 - Send Releases to your Picard
