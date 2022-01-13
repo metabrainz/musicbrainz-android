@@ -76,6 +76,7 @@ Proposed future plans for the app are as follows:
 - Showcase more \*Brainz powered functionalities.
 - Find whether the recordings are present in your collections or not.
 - Add AcoustId functionalities to the app.
+- TV Support for the app.
 	    
 ## Issues
 	  
