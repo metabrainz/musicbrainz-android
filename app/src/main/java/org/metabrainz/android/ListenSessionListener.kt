@@ -11,11 +11,11 @@ import org.metabrainz.android.presentation.UserPreferences.preferenceListeningSp
 import org.metabrainz.android.util.Log.d
 import java.util.*
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedListener {
     private val controllers: MutableList<MediaController>
     private val handler: ListenHandler
     private val activeSessions: MutableMap<MediaSession.Token, ListenCallback?>
+
     override fun onActiveSessionsChanged(controllers: List<MediaController>?) {
         if (controllers == null) return
         clearSessions()
@@ -41,12 +41,21 @@ class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedLis
         var submitted = true
         override fun onMetadataChanged(metadata: MediaMetadata?) {
             if (metadata == null) return
-            if (state != null) d("Listen Metadata " + state!!.state) else d("Listen Metadata")
+            when {
+                state != null -> d("Listen Metadata " + state!!.state)
+                else -> d("Listen Metadata")
+            }
             artist = metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)
-            if (artist == null || artist!!.isEmpty()) artist = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST)
+            if (artist == null || artist!!.isEmpty()) {
+                artist = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST)
+            }
             title = metadata.getString(MediaMetadata.METADATA_KEY_TITLE)
-            if (artist == null || title == null || artist!!.isEmpty() || title!!.isEmpty()) return
-            if (System.currentTimeMillis() / 1000 - timestamp >= 1000) submitted = false
+            if (artist == null || title == null || artist!!.isEmpty() || title!!.isEmpty()){
+                return
+            }
+            if (System.currentTimeMillis() / 1000 - timestamp >= 1000) {
+                submitted = false
+            }
             timestamp = System.currentTimeMillis() / 1000
             if (state != null && state!!.state == PlaybackState.STATE_PLAYING && !submitted) {
                 handler.submitListen(artist, title, timestamp)

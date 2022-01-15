@@ -3,16 +3,13 @@ package org.metabrainz.android
 import android.content.ComponentName
 import android.content.Intent
 import android.media.session.MediaSessionManager
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
-import androidx.annotation.RequiresApi
 import org.metabrainz.android.presentation.UserPreferences.preferenceListenBrainzToken
 import org.metabrainz.android.util.Log.d
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 class ListenService : NotificationListenerService() {
     private var sessionManager: MediaSessionManager? = null
     private var handler: ListenHandler? = null
@@ -25,7 +22,12 @@ class ListenService : NotificationListenerService() {
 
     override fun onListenerConnected() {
         super.onListenerConnected()
-        if (Looper.myLooper() == null) Handler(Looper.getMainLooper()).post { initialize() } else initialize()
+        when {
+            Looper.myLooper() == null -> {
+                Handler(Looper.getMainLooper()).post { initialize() }
+            }
+            else -> initialize()
+        }
     }
 
     private fun initialize() {

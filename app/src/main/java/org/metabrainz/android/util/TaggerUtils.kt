@@ -27,7 +27,7 @@ object TaggerUtils {
     private val levenshtein = Levenshtein()
     val WEIGHTS = initializeWeights()
 
-    fun initializeWeights(): Map<String, Int> {
+    private fun initializeWeights(): Map<String, Int> {
         val map: MutableMap<String, Int> = HashMap()
         map[TITLE] = 13
         map[ARTIST] = 4
@@ -109,11 +109,11 @@ object TaggerUtils {
         return ComparisonResult(score, releaseMbid, searchedTrack.mbid)
     }
 
-    fun lengthScore(firstLength: Long, secondLength: Long): Double {
+    private fun lengthScore(firstLength: Long, secondLength: Long): Double {
         return 1.0 - min(firstLength - secondLength, LENGTH_SCORE_THRESHOLD_MS) / LENGTH_SCORE_THRESHOLD_MS.toDouble()
     }
 
-    fun compareReleaseParts(localRelease: Release?, searchedRelease: Release?): Double {
+    private fun compareReleaseParts(localRelease: Release?, searchedRelease: Release?): Double {
         val scoreList: MutableList<Pair<Double, Int?>> = ArrayList()
         if (localRelease != null && searchedRelease != null) {
             if (localRelease.title != null && localRelease.title!!.isNotEmpty() && searchedRelease.title != null && searchedRelease.title!!.isNotEmpty()) scoreList.add(Pair(
@@ -137,7 +137,7 @@ object TaggerUtils {
         return linearCombinationOfWeights(scoreList)
     }
 
-    fun linearCombinationOfWeights(weightList: List<Pair<Double, Int?>>): Double {
+    private fun linearCombinationOfWeights(weightList: List<Pair<Double, Int?>>): Double {
         var weightSum = 0.0
         for (weight in weightList) weightSum += weight.first * weight.second!!
         return weightSum

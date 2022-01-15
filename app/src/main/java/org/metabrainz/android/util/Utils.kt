@@ -134,11 +134,13 @@ object Utils {
 
     fun toResultItemsList(entity: MBEntityType, response: Resource<String>): Resource<List<ResultItem>> {
         return try {
-            if (response.status == Resource.Status.SUCCESS) {
-                val resultItems = ResultItemUtils.getJSONResponseAsResultItemList(response.data, entity)
-                return Resource(Resource.Status.SUCCESS, resultItems)
-            } else
-                Resource(Resource.Status.FAILED, null)
+            when (response.status) {
+                Resource.Status.SUCCESS -> {
+                    val resultItems = ResultItemUtils.getJSONResponseAsResultItemList(response.data, entity)
+                    return Resource(Resource.Status.SUCCESS, resultItems)
+                }
+                else -> Resource(Resource.Status.FAILED, null)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             Resource(Resource.Status.FAILED, null)
