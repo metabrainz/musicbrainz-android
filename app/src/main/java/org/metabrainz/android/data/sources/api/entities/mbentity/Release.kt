@@ -11,16 +11,7 @@ class Release : MBEntity() {
     var artistCredits: MutableList<ArtistCredit> = ArrayList()
     var date: String? = null
     var barcode: String? = null
-
-    //    public String getPackaging() {
-    //        return packaging;
-    //    }
-    //
-    //    public void setPackaging(String packaging) {
-    //        this.packaging = packaging;
-    //    }
-    // FIXME: Temporary fix due to mismatch with API response until issue is resolved
-    //    private String packaging;
+    
     @SerializedName("release-group")
     var releaseGroup: ReleaseGroup? = null
 

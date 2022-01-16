@@ -8,16 +8,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.android.databinding.ActivityNewsbrainzBinding
 import org.metabrainz.android.presentation.IntentFactory
-import org.metabrainz.android.presentation.features.adapters.ResultItem
 import org.metabrainz.android.presentation.features.adapters.ResultItemComparator
 import org.metabrainz.android.presentation.features.adapters.ResultPagingAdapter
-import org.metabrainz.android.presentation.features.search.SearchViewModel
 import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
 
 class NewsBrainzActivity : AppCompatActivity(){
@@ -26,7 +23,7 @@ class NewsBrainzActivity : AppCompatActivity(){
     private var suggestionAdapter: CursorAdapter? = null
 
     private lateinit var binding: ActivityNewsbrainzBinding
-    private var viewModel: SearchViewModel? = null
+    private var viewModel: NewsListViewModel? = null
     private var adapter: ResultPagingAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,13 +38,13 @@ class NewsBrainzActivity : AppCompatActivity(){
         suggestionAdapter = suggestionHelper!!.adapter
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+        viewModel = ViewModelProvider(this)[NewsListViewModel::class.java]
 
         adapter = ResultPagingAdapter(ResultItemComparator(), MBEntityType.ARTIST)
         binding.recyclerView.adapter = adapter
         adapter!!.resetAnimation()
-        viewModel!!.search(MBEntityType.ARTIST, "News").observe(this, { pagingData: PagingData<ResultItem> ->
-            adapter!!.submitData(lifecycle, pagingData)
+        viewModel!!.fetchBlogs().observe(this, {
+           // adapter.submitData()
         })
         binding.recyclerView.visibility = View.VISIBLE
     }

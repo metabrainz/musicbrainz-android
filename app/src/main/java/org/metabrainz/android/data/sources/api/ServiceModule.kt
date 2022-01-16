@@ -17,6 +17,10 @@ class ServiceModule {
 
     @get:Provides
     @get:Singleton
+    val blogService: BlogService = createService(BlogService::class.java, true)
+
+    @get:Provides
+    @get:Singleton
     val collectionService: CollectionService = createService(CollectionService::class.java, true)
 
     @get:Provides

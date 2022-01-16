@@ -21,14 +21,22 @@ class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedLis
         clearSessions()
         this.controllers.addAll(controllers)
         for (controller in controllers) {
-            if (!preferenceListeningSpotifyEnabled && controller.packageName == SPOTIFY_PACKAGE_NAME) continue
+            if (!preferenceListeningSpotifyEnabled && controller.packageName == SPOTIFY_PACKAGE_NAME){
+                continue
+            }
             val callback = ListenCallback()
             controller.registerCallback(callback)
         }
     }
 
     fun clearSessions() {
-        for ((key, value) in activeSessions) for (controller in controllers) if (controller.sessionToken == key) controller.unregisterCallback(value!!)
+        for ((key, value) in activeSessions) {
+            for (controller in controllers) {
+                if (controller.sessionToken == key){
+                    controller.unregisterCallback(value!!)
+                }
+            }
+        }
         activeSessions.clear()
         controllers.clear()
     }
