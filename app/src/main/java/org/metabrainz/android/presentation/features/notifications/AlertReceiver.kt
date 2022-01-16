@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.notifications
+package org.metabrainz.android.presentation.features.notifications
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import org.metabrainz.mobile.R
+import org.metabrainz.android.R
 
 class AlertReceiver : BroadcastReceiver() {
 

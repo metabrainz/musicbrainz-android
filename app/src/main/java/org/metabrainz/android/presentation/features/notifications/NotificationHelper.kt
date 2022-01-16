@@ -1,4 +1,4 @@
-package org.metabrainz.mobile.presentation.features.notifications
+package org.metabrainz.android.presentation.features.notifications
 
 import android.annotation.TargetApi
 import android.app.NotificationChannel
@@ -12,8 +12,8 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import org.metabrainz.mobile.R
-import org.metabrainz.mobile.presentation.features.dashboard.DashboardActivity
+import org.metabrainz.android.R
+import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 
 class NotificationHelper(base: Context?,val icon: Bitmap) : ContextWrapper(base) {
 

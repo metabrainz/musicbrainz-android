@@ -74,16 +74,13 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.features.recording.RecordingActivity"
-            android:label="@string/search_type_recording"
-            android:theme="@style/AppThemeGrayScale" />
+            android:label="@string/search_type_recording" />
         <activity
             android:name=".presentation.features.label.LabelActivity"
-            android:label="@string/search_type_label"
-            android:theme="@style/AppThemeGrayScale" />
+            android:label="@string/search_type_label" />
         <activity
             android:name=".presentation.features.release_group.ReleaseGroupActivity"
-            android:label="@string/search_type_release_group"
-            android:theme="@style/AppThemeGrayScale" />
+            android:label="@string/search_type_release_group" />
         <activity
             android:name=".presentation.features.search.SearchActivity"
             android:label="@string/settings_search"

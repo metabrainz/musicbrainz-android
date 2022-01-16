@@ -10,15 +10,15 @@ import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.metabrainz.mobile.R
-import org.metabrainz.mobile.data.sources.api.entities.mbentity.MBEntityType
-import org.metabrainz.mobile.databinding.ActivityNewsbrainzBinding
-import org.metabrainz.mobile.presentation.IntentFactory
-import org.metabrainz.mobile.presentation.features.adapters.ResultItem
-import org.metabrainz.mobile.presentation.features.adapters.ResultItemComparator
-import org.metabrainz.mobile.presentation.features.adapters.ResultPagingAdapter
-import org.metabrainz.mobile.presentation.features.search.SearchViewModel
-import org.metabrainz.mobile.presentation.features.suggestion.SuggestionHelper
+import org.metabrainz.android.R
+import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
+import org.metabrainz.android.databinding.ActivityNewsbrainzBinding
+import org.metabrainz.android.presentation.IntentFactory
+import org.metabrainz.android.presentation.features.adapters.ResultItem
+import org.metabrainz.android.presentation.features.adapters.ResultItemComparator
+import org.metabrainz.android.presentation.features.adapters.ResultPagingAdapter
+import org.metabrainz.android.presentation.features.search.SearchViewModel
+import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
 
 class NewsBrainzActivity : AppCompatActivity(){
 
@@ -75,4 +75,3 @@ class NewsBrainzActivity : AppCompatActivity(){
         }
     }
 }
-//1.Add Artist:   https://musicbrainz.org/artist/create?edit-artist2.Add Release: https://musicbrainz.org/release/add3.Add Event: https://musicbrainz.org/event/create?edit-event4.Add Release group:https://musicbrainz.org/release-group/create?edit-release-group5.Add label: https://musicbrainz.org/label/create?edit-label6.Add recording: https://musicbrainz.org/recording/create?edit-recording
