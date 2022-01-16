@@ -41,7 +41,7 @@ class NewsBrainzActivity : AppCompatActivity(){
         suggestionAdapter = suggestionHelper!!.adapter
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         adapter = ResultPagingAdapter(ResultItemComparator(), MBEntityType.ARTIST)
         binding.recyclerView.adapter = adapter
