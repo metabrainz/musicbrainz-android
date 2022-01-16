@@ -7,6 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/app_bg"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -39,6 +40,7 @@
             android:textSize="12sp"
             android:layout_marginTop="8dp"
             android:layout_marginStart="10dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/albumArt"
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -62,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/artistHeading"
             app:layout_constraintTop_toBottomOf="@+id/artistHeading"
             tools:text="TOOL" />
@@ -87,6 +90,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:layout_marginEnd="30dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/albumHeading"
             app:layout_constraintTop_toBottomOf="@id/albumHeading"
@@ -109,6 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/yearHeading"
             app:layout_constraintTop_toBottomOf="@+id/yearHeading"
             tools:text="2001" />
@@ -132,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/trackHeading"
             app:layout_constraintTop_toBottomOf="@+id/trackHeading"
             tools:text="3" />
@@ -156,6 +162,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="@color/white"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/discHeading"
@@ -179,6 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="16dp"
             app:layout_constraintTop_toBottomOf="@id/durationHeading"
@@ -205,6 +213,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/mimeTypeHeading"
             tools:text="audio/ogg" />
@@ -232,6 +241,7 @@
             android:layout_marginBottom="16dp"
             android:textSize="12sp"
             android:layout_marginEnd="30dp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sizeHeading"
             app:layout_constraintStart_toStartOf="@+id/sizeHeading"

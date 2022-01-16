@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.metabrainz.mobile">
+    package="org.metabrainz.android">
+
+    <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -46,7 +48,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -59,20 +60,17 @@
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"
             android:label="Collection"
-            android:parentActivityName=".presentation.features.collection.CollectionActivity"
-            android:theme="@style/AppThemeGrayScale">
+            android:parentActivityName="org.metabrainz.android.presentation.features.collection.CollectionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.features.collection.CollectionActivity" />
         </activity>
         <activity
-            android:name=".presentation.features.collection.CollectionActivity"
-            android:label="@string/dash_collections"
-            android:theme="@style/AppThemeGrayScale" />
+            android:name="org.metabrainz.android.presentation.features.collection.CollectionActivity"
+            android:label="@string/dash_collections" />
         <activity
-            android:name=".presentation.features.tagger.TaggerActivity"
+            android:name="org.metabrainz.android.presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger"
-            android:theme="@style/AppThemeGrayScale"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.features.recording.RecordingActivity"
@@ -107,7 +105,7 @@
 
                 <data
                     android:host="oauth"
-                    android:scheme="org.metabrainz.mobile" />
+                    android:scheme="org.metabrainz.android" />
             </intent-filter>
         </activity>
         <activity
@@ -117,24 +115,19 @@
             android:name=".presentation.features.dashboard.DonateActivity"
             android:label="@string/donate_title" />
         <activity
-            android:name=".presentation.features.release.ReleaseActivity"
-            android:label="@string/release_title"
-            android:theme="@style/AppThemeGrayScale" />
+            android:name="org.metabrainz.android.presentation.features.release.ReleaseActivity"
+            android:label="@string/release_title" />
         <activity
-            android:name=".presentation.features.artist.ArtistActivity"
-            android:label="@string/artist_title"
-            android:theme="@style/AppThemeGrayScale" />
+            android:name="org.metabrainz.android.presentation.features.artist.ArtistActivity"
+            android:label="@string/artist_title" />
         <activity
-            android:name=".presentation.features.settings.SettingsActivity"
-            android:label="@string/preferences_title"
-            android:theme="@style/AppThemeForSettings" />
+            android:name="org.metabrainz.android.presentation.features.settings.SettingsActivity"
+            android:label="@string/preferences_title" />
         <activity
             android:name=".presentation.features.barcode.BarcodeActivity"
             android:theme="@style/AppThemeCustomActionBar" />
         <activity
-            android:name=".presentation.features.barcode.BarcodeResultActivity"
-            android:theme="@style/AppThemeGrayScale" />
-        <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
+            android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
 
         <meta-data
             android:name="android.app.default_searchable"
@@ -142,16 +135,12 @@
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:name=".presentation.features.suggestion.SuggestionProvider"
-            android:authorities="org.metabrainz.mobile.SearchSuggestionProvider"
+            android:name="org.metabrainz.android.presentation.features.suggestion.SuggestionProvider"
+            android:authorities="${applicationId}.SearchSuggestionProvider"
             android:exported="false" />
 
-        <dist:module dist:instant="true" />
     </application>
 
 </manifest>

@@ -94,7 +94,7 @@
         android:padding="10dp"
         android:text="@string/tagger_file_chooser_pickDirectory"
         android:textAllCaps="false"
-        android:textColor="@color/app_bg_light2"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
