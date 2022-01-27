@@ -46,6 +46,24 @@
             android:nestedScrollingEnabled="false"
             android:layout_height="wrap_content" />
 
+        <include
+            android:id="@+id/loadingAnimation"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/chip_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            layout="@layout/loading"/>
+        <include
+            android:id="@+id/no_result"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            layout="@layout/error_no_result"
+            />
+
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gridView"
             android:layout_width="0dp"

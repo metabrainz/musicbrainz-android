@@ -12,13 +12,18 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.launch
 import org.metabrainz.android.App
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.Constants
@@ -164,14 +169,24 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
+        if (!App.context!!.isOnline){
+            Toast.makeText(this,"Connect to Internet and Try Again",Toast.LENGTH_LONG).show()
+            return false
+        }
         saveSearchSuggestion(query)
 
         adapter = ResultPagingAdapter(ResultItemComparator(), searchTypeFromSpinner!!)
         binding.recyclerView.adapter = adapter
         adapter!!.resetAnimation()
-        viewModel!!.search(searchTypeFromSpinner, query).observe(this, { pagingData: PagingData<ResultItem> ->
+        viewModel!!.search(searchTypeFromSpinner, query).observe(this) { pagingData: PagingData<ResultItem> ->
             adapter!!.submitData(lifecycle, pagingData)
-        })
+        }
+        lifecycleScope.launch {
+            adapter!!.loadStateFlow.collect {
+                binding.loadingAnimation.root.isVisible = it.refresh is LoadState.Loading
+                binding.noResult.root.isVisible = it.refresh is LoadState.Error
+            }
+        }
         binding.recyclerView.visibility = VISIBLE
         binding.gridView.visibility = GONE
 
