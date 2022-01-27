@@ -23,6 +23,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.metabrainz.android.App
 import org.metabrainz.android.R
