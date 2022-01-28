@@ -215,6 +215,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         if (!binding.gridView.isVisible){
             binding.gridView.visibility= VISIBLE
             binding.recyclerView.visibility = GONE
+            binding.loadingAnimation.visibility = GONE
             binding.noResult.visibility= GONE
         }
         else {
