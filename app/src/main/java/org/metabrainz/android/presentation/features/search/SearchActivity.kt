@@ -170,7 +170,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
-        if (!App.context!!.isOnline){
+        if (App.context?.isOnline == false){
             Toast.makeText(this,"Connect to Internet and Try Again",Toast.LENGTH_LONG).show()
             return false
         }
@@ -183,9 +183,9 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             adapter!!.submitData(lifecycle, pagingData)
         }
         lifecycleScope.launch {
-            adapter!!.loadStateFlow.collect {
-                binding.loadingAnimation.root.isVisible = it.refresh is LoadState.Loading
-                binding.noResult.root.isVisible = it.refresh is LoadState.Error
+            adapter!!.loadStateFlow.collect {loadState->
+                binding.loadingAnimation.isVisible = loadState.refresh is LoadState.Loading
+                binding.noResult.isVisible = loadState.refresh is LoadState.Error
             }
         }
         binding.recyclerView.visibility = VISIBLE
@@ -209,6 +209,17 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
         }
         return false
+    }
+
+    override fun onBackPressed() {
+        if (!binding.gridView.isVisible){
+            binding.gridView.visibility= VISIBLE
+            binding.recyclerView.visibility = GONE
+            binding.noResult.visibility= GONE
+        }
+        else {
+            super.onBackPressed()
+        }
     }
 }
 //1.Add Artist:   https://musicbrainz.org/artist/create?edit-artist2.Add Release: https://musicbrainz.org/release/add3.Add Event: https://musicbrainz.org/event/create?edit-event4.Add Release group:https://musicbrainz.org/release-group/create?edit-release-group5.Add label: https://musicbrainz.org/label/create?edit-label6.Add recording: https://musicbrainz.org/recording/create?edit-recording
