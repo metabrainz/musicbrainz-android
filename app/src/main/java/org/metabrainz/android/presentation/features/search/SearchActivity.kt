@@ -212,7 +212,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onBackPressed() {
-        if (!binding.gridView.isVisible){
+        if (binding.noResult.isVisible){
             binding.gridView.visibility= VISIBLE
             binding.recyclerView.visibility = GONE
             binding.loadingAnimation.visibility = GONE
