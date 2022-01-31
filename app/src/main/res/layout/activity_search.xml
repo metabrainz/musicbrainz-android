@@ -46,6 +46,31 @@
             android:nestedScrollingEnabled="false"
             android:layout_height="wrap_content" />
 
+        <LinearLayout
+            android:id="@+id/loadingAnimation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+                <include
+                    layout="@layout/loading"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/no_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <include
+                layout="@layout/error_no_result"/>
+        </LinearLayout>
+
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gridView"
             android:layout_width="0dp"
