@@ -40,8 +40,8 @@ class SuggestionHelper(private val context: Context) {
     }
 
     private inner class SuggestionFilterQuery : FilterQueryProvider {
-        override fun runQuery(constraint: CharSequence): Cursor {
-            return getMatchingEntries(constraint.toString())!!
+        override fun runQuery(constraint: CharSequence): Cursor? {
+            return getMatchingEntries(constraint.toString())
         }
     }
 
