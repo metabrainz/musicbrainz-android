@@ -19,6 +19,7 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
         return try {
             val response = service.searchEntity(mbEntityType.entity, query, pageSize, offset)?.string()
             var count = LoadResult.Page.COUNT_UNDEFINED
+            val artistList = JsonParser.parseString(response).asJsonObject.get("artists").asJsonArray
             if (offset == 0) {
                 val responseObject = JsonParser.parseString(response)
                 count = responseObject.asJsonObject.get("count").asInt
@@ -26,11 +27,12 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
             val itemsAfter = if (count == LoadResult.Page.COUNT_UNDEFINED) count
             else (count - offset - pageSize).coerceAtLeast(0)
             // itemsAfter is required to be at least otherwise the current page will be not loaded
-
+            val nextKey = if (artistList.isEmpty)  null
+            else pageSize+offset
             LoadResult.Page(
                 data = ResultItemUtils.getJSONResponseAsResultItemList(response, mbEntityType),
                 prevKey = null,
-                nextKey = pageSize + offset,
+                nextKey = nextKey,
                 itemsAfter = itemsAfter
             )
         } catch (e: Exception) {
