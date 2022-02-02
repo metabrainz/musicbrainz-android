@@ -17,7 +17,7 @@ object UserPreferences {
     private const val PREFERENCE_SYSTEM_LANGUAGE = "use_english"
     private const val PREFERENCE_ONBOARDING = "onboarding"
     private const val PREFERENCE_ADVANCED = "advanced_features"
-    private val preferences = PreferenceManager.getDefaultSharedPreferences(App.context)
+    private val preferences = PreferenceManager.getDefaultSharedPreferences(App.context!!)
 
     fun setOnBoardingCompleted() {
         val editor = LoginSharedPreferences.preferences.edit()

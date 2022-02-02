@@ -13,7 +13,7 @@ object LoginSharedPreferences {
     const val STATUS_LOGGED_IN = 1
     const val STATUS_LOGGED_OUT = 0
     val preferences: SharedPreferences
-        get() = PreferenceManager.getDefaultSharedPreferences(App.context)
+        get() = PreferenceManager.getDefaultSharedPreferences(App.context!!)
 
     fun saveOAuthToken(token: AccessToken) {
         val editor = preferences.edit()
