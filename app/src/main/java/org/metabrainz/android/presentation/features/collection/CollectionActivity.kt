@@ -86,7 +86,7 @@ class CollectionActivity : MusicBrainzActivity() {
         }
     }
 
-    fun callAlert() {
+    private fun callAlert() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Login Required")
         builder.setMessage("You need to log in to see your collections")

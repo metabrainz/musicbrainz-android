@@ -11,9 +11,9 @@ import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.Constants
 import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 
-class ResultPagingAdapter(diffCallback: DiffUtil.ItemCallback<ResultItem>,
-                          private val entity: MBEntityType) : PagingDataAdapter<ResultItem, ResultViewHolder>(diffCallback) {
+class ResultPagingAdapter(diffCallback: DiffUtil.ItemCallback<ResultItem>, private val entity: MBEntityType) : PagingDataAdapter<ResultItem, ResultViewHolder>(diffCallback) {
     private var lastPosition = -1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_result, parent, false)
         return ResultViewHolder(view)

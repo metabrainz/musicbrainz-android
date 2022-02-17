@@ -20,9 +20,7 @@ import org.metabrainz.android.presentation.features.collection.CollectionActivit
 import org.metabrainz.android.presentation.features.search.SearchActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
 import android.content.pm.PackageManager
-
-
-
+import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -70,6 +68,9 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardDonateId.setOnClickListener {
             startActivity(Intent(this, DonateActivity::class.java))
         }
+        binding.dashboardNewsbrainz.setOnClickListener {
+            startActivity(Intent(this, NewsBrainzActivity::class.java))
+        }
         binding.dashboardScanId.setOnClickListener {
             startActivity(Intent(this, BarcodeActivity::class.java))
         }
@@ -78,6 +79,9 @@ class DashboardActivity : AppCompatActivity() {
         }
         binding.dashboardCritiqueId.setOnClickListener {
             FinestWebView.Builder(this).show("https://critiquebrainz.org/")
+        }
+        binding.dashboardMetabrainz.setOnClickListener {
+            FinestWebView.Builder(this).show("https://metabrainz.org/")
         }
 
         //CardView animation
@@ -91,7 +95,8 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardCollectionId.animation = leftItemAnimation
         binding.dashboardCritiqueId.animation = leftItemAnimation
         binding.dashboardListenId.animation = rightItemAnimation
-
+        binding.dashboardNewsbrainz.animation = leftItemAnimation
+        binding.dashboardMetabrainz.animation = rightItemAnimation
 
         if (!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             binding.dashboardScanId.visibility = GONE

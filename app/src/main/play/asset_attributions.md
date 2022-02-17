@@ -8,3 +8,4 @@
 | teen                  | Lottie Animation | Alison Santos   | https://lottiefiles.com/62075-teen-walking                                                                      |
 | scan                  | Lottie Animation | Surakiti S'Asia | https://lottiefiles.com/34995-scanner                                                                           |
 | search                | Lottie Animation | Anh Nguyen      | https://lottiefiles.com/3722-search                                                                             |
+| ic_news               | Icon             | Icons8          | https://icons8.com/icons/set/news                                                                               |
