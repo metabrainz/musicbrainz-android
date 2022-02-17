@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.android.databinding.ActivityNewsbrainzBinding
@@ -17,6 +18,7 @@ import org.metabrainz.android.presentation.features.adapters.ResultItemComparato
 import org.metabrainz.android.presentation.features.adapters.ResultPagingAdapter
 import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
 
+@AndroidEntryPoint
 class NewsBrainzActivity : AppCompatActivity(){
 
     private var suggestionHelper: SuggestionHelper? = null
@@ -43,9 +45,9 @@ class NewsBrainzActivity : AppCompatActivity(){
         adapter = ResultPagingAdapter(ResultItemComparator(), MBEntityType.ARTIST)
         binding.recyclerView.adapter = adapter
         adapter!!.resetAnimation()
-        viewModel!!.fetchBlogs().observe(this, {
-           // adapter.submitData()
-        })
+        viewModel!!.fetchBlogs().observe(this) {
+            // adapter.submitData()
+        }
         binding.recyclerView.visibility = View.VISIBLE
     }
 
