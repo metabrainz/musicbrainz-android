@@ -23,8 +23,10 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
                 val responseObject = JsonParser.parseString(response)
                 count = responseObject.asJsonObject.get("count").asInt
             }
-            val itemsAfter = if (count == LoadResult.Page.COUNT_UNDEFINED) count
-            else (count - offset - pageSize).coerceAtLeast(0)
+            val itemsAfter = when (count) {
+                LoadResult.Page.COUNT_UNDEFINED -> count
+                else -> (count - offset - pageSize).coerceAtLeast(0)
+            }
             // itemsAfter is required to be at least otherwise the current page will be not loaded
 
             LoadResult.Page(
@@ -40,6 +42,9 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
     }
 
     override fun getRefreshKey(state: PagingState<Int, ResultItem>): Int? {
-        TODO("Not yet implemented")
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
     }
 }

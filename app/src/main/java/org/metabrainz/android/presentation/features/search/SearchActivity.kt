@@ -12,13 +12,19 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.metabrainz.android.App
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.Constants
@@ -164,14 +170,24 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
+        if (App.context?.isOnline == false){
+            Toast.makeText(this,"Connect to Internet and Try Again",Toast.LENGTH_LONG).show()
+            return false
+        }
         saveSearchSuggestion(query)
 
         adapter = ResultPagingAdapter(ResultItemComparator(), searchTypeFromSpinner!!)
         binding.recyclerView.adapter = adapter
         adapter!!.resetAnimation()
-        viewModel!!.search(searchTypeFromSpinner, query).observe(this, { pagingData: PagingData<ResultItem> ->
+        viewModel!!.search(searchTypeFromSpinner, query).observe(this) { pagingData: PagingData<ResultItem> ->
             adapter!!.submitData(lifecycle, pagingData)
-        })
+        }
+        lifecycleScope.launch {
+            adapter!!.loadStateFlow.collect {loadState->
+                binding.loadingAnimation.isVisible = loadState.refresh is LoadState.Loading
+                binding.noResult.isVisible = loadState.refresh is LoadState.Error
+            }
+        }
         binding.recyclerView.visibility = VISIBLE
         binding.gridView.visibility = GONE
 
@@ -193,6 +209,18 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
         }
         return false
+    }
+
+    override fun onBackPressed() {
+        if (binding.noResult.isVisible){
+            binding.gridView.visibility= VISIBLE
+            binding.recyclerView.visibility = GONE
+            binding.loadingAnimation.visibility = GONE
+            binding.noResult.visibility= GONE
+        }
+        else {
+            super.onBackPressed()
+        }
     }
 }
 //1.Add Artist:   https://musicbrainz.org/artist/create?edit-artist2.Add Release: https://musicbrainz.org/release/add3.Add Event: https://musicbrainz.org/event/create?edit-event4.Add Release group:https://musicbrainz.org/release-group/create?edit-release-group5.Add label: https://musicbrainz.org/label/create?edit-label6.Add recording: https://musicbrainz.org/recording/create?edit-recording
