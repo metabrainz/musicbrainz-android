@@ -1,8 +1,9 @@
 package org.metabrainz.android.presentation.features.newsbrainz
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,18 +12,16 @@ import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 import org.metabrainz.android.R
-import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
+import org.metabrainz.android.data.sources.api.entities.blog.Post
 import org.metabrainz.android.databinding.ActivityNewsbrainzBinding
 import org.metabrainz.android.presentation.IntentFactory
 import org.metabrainz.android.presentation.features.adapters.BlogAdapter
-import org.metabrainz.android.presentation.features.adapters.ResultItemComparator
-import org.metabrainz.android.presentation.features.adapters.ResultPagingAdapter
 import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
 
+
 @AndroidEntryPoint
-class NewsBrainzActivity : AppCompatActivity() {
+class NewsBrainzActivity : AppCompatActivity(), BlogAdapter.ClickListener {
 
     private var suggestionHelper: SuggestionHelper? = null
     private var suggestionAdapter: CursorAdapter? = null
@@ -30,6 +29,7 @@ class NewsBrainzActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewsbrainzBinding
     private var viewModel: NewsListViewModel? = null
     private var adapter: BlogAdapter? = null
+    private lateinit var postsList: ArrayList<Post>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +37,7 @@ class NewsBrainzActivity : AppCompatActivity() {
 
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title = "NewsBrainz"
         setContentView(binding.root)
 
         suggestionHelper = SuggestionHelper(this)
@@ -45,12 +46,14 @@ class NewsBrainzActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         viewModel = ViewModelProvider(this)[NewsListViewModel::class.java]
 
-        adapter = BlogAdapter()
+        postsList  = ArrayList()
+        adapter = BlogAdapter(this, postsList, this)
         binding.recyclerView.adapter = adapter
-        adapter!!.resetAnimation()
+
         viewModel!!.fetchBlogs().observe(this) {
-            adapter.submitData()
-            Log.d("njaif",it.posts[0].title)
+            postsList.clear()
+            postsList.addAll(it.posts)
+            adapter!!.notifyDataSetChanged()
         }
         binding.recyclerView.visibility = View.VISIBLE
     }
@@ -76,5 +79,9 @@ class NewsBrainzActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onUserClicked(position: Int) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(postsList[position].URL)))
     }
 }

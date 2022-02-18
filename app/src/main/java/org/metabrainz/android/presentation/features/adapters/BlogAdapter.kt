@@ -1,45 +1,58 @@
 package org.metabrainz.android.presentation.features.adapters
 
+import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import org.metabrainz.android.R
-import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
+import org.metabrainz.android.data.sources.api.entities.blog.Post
 
-class BlogAdapter(private val data: List<ResultItem>, private val entity: MBEntityType) : RecyclerView.Adapter<ResultViewHolder>() {
-    private var lastPosition = -1
+class BlogAdapter(private val context: Context, private val posts: ArrayList<Post>, private val clickListener: ClickListener) : RecyclerView.Adapter<BlogAdapter.ViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return data.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.card_blog, parent, false)
+        return ViewHolder(v)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_result, parent, false)
-        return ResultViewHolder(view)
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val post = posts[position]
+        holder.heading.text = post.title
 
-    override fun onBindViewHolder(holder: ResultViewHolder, position: Int) {
-        holder.bind(data[position])
-        setAnimation(holder.itemView, position)
-        holder.itemView.setOnClickListener { v: View -> onClick(v, position) }
-    }
-
-    private fun setAnimation(viewToAnimate: View, position: Int) {
-        if (position > lastPosition) {
-            val animation = AnimationUtils
-                .loadAnimation(viewToAnimate.context, android.R.anim.slide_in_left)
-            viewToAnimate.startAnimation(animation)
-            lastPosition = position
+        holder.body.text = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> {
+                Html.fromHtml(post.content, Html.FROM_HTML_MODE_COMPACT)
+            }
+            else -> {
+                Html.fromHtml(post.content)
+            }
         }
     }
 
-    fun resetAnimation() {
-        lastPosition = -1
+    override fun getItemCount(): Int {
+        return posts.size
     }
 
-    private fun onClick(view: View, position: Int) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
+        val body: TextView = itemView.findViewById(R.id.tv_body)
+        val heading: TextView = itemView.findViewById(R.id.tv_heading)
+        val card: CardView = itemView.findViewById(R.id.card)
+
+        override fun onClick(v: View) {
+            clickListener.onUserClicked(adapterPosition)
+        }
+
+        init {
+            body.setOnClickListener(this)
+        }
+    }
+
+    interface ClickListener {
+        fun onUserClicked(position: Int)
     }
 }
