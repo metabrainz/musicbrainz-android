@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
@@ -49,13 +51,14 @@ class NewsBrainzActivity : AppCompatActivity(), BlogAdapter.ClickListener {
         postsList  = ArrayList()
         adapter = BlogAdapter(this, postsList, this)
         binding.recyclerView.adapter = adapter
+        binding.loadingAnimation.root.visibility = VISIBLE
 
         viewModel!!.fetchBlogs().observe(this) {
             postsList.clear()
             postsList.addAll(it.posts)
             adapter!!.notifyDataSetChanged()
+            binding.loadingAnimation.root.visibility = GONE
         }
-        binding.recyclerView.visibility = View.VISIBLE
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
