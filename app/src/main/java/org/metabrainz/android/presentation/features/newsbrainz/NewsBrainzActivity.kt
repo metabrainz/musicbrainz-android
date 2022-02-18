@@ -2,6 +2,7 @@ package org.metabrainz.android.presentation.features.newsbrainz
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -10,23 +11,25 @@ import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.android.databinding.ActivityNewsbrainzBinding
 import org.metabrainz.android.presentation.IntentFactory
+import org.metabrainz.android.presentation.features.adapters.BlogAdapter
 import org.metabrainz.android.presentation.features.adapters.ResultItemComparator
 import org.metabrainz.android.presentation.features.adapters.ResultPagingAdapter
 import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
 
 @AndroidEntryPoint
-class NewsBrainzActivity : AppCompatActivity(){
+class NewsBrainzActivity : AppCompatActivity() {
 
     private var suggestionHelper: SuggestionHelper? = null
     private var suggestionAdapter: CursorAdapter? = null
 
     private lateinit var binding: ActivityNewsbrainzBinding
     private var viewModel: NewsListViewModel? = null
-    private var adapter: ResultPagingAdapter? = null
+    private var adapter: BlogAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +45,12 @@ class NewsBrainzActivity : AppCompatActivity(){
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         viewModel = ViewModelProvider(this)[NewsListViewModel::class.java]
 
-        adapter = ResultPagingAdapter(ResultItemComparator(), MBEntityType.ARTIST)
+        adapter = BlogAdapter()
         binding.recyclerView.adapter = adapter
         adapter!!.resetAnimation()
         viewModel!!.fetchBlogs().observe(this) {
-            // adapter.submitData()
+            adapter.submitData()
+            Log.d("njaif",it.posts[0].title)
         }
         binding.recyclerView.visibility = View.VISIBLE
     }
