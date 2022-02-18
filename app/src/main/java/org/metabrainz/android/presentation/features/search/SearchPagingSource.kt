@@ -1,5 +1,6 @@
 package org.metabrainz.android.presentation.features.search
 
+
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.google.gson.JsonParser
@@ -19,6 +20,7 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
         return try {
             val response = service.searchEntity(mbEntityType.entity, query, pageSize, offset)?.string()
             var count = LoadResult.Page.COUNT_UNDEFINED
+            val data = ResultItemUtils.getJSONResponseAsResultItemList(response, mbEntityType)
             if (offset == 0) {
                 val responseObject = JsonParser.parseString(response)
                 count = responseObject.asJsonObject.get("count").asInt
@@ -28,11 +30,16 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
                 else -> (count - offset - pageSize).coerceAtLeast(0)
             }
             // itemsAfter is required to be at least otherwise the current page will be not loaded
+            val nextKey = if (data.isEmpty()) null
+            else pageSize+offset
 
+            if (offset==0 && data.isEmpty() && count==0){
+                throw ArrayIndexOutOfBoundsException()
+            }
             LoadResult.Page(
-                data = ResultItemUtils.getJSONResponseAsResultItemList(response, mbEntityType),
+                data = data,
                 prevKey = null,
-                nextKey = pageSize + offset,
+                nextKey = nextKey,
                 itemsAfter = itemsAfter
             )
         } catch (e: Exception) {

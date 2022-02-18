@@ -202,6 +202,8 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextChange(newText: String): Boolean {
         if(newText.isEmpty()){
+            binding.noResult.visibility = GONE
+            binding.loadingAnimation.visibility = GONE
             binding.recyclerView.visibility = GONE
             binding.gridView.visibility = VISIBLE
         }
