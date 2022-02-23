@@ -5,11 +5,8 @@ import android.media.session.MediaController
 import android.media.session.MediaSession
 import android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
 import android.media.session.PlaybackState
-import android.os.Build
-import androidx.annotation.RequiresApi
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningSpotifyEnabled
 import org.metabrainz.android.util.Log.d
-import java.util.*
 
 class ListenSessionListener(handler: ListenHandler) : OnActiveSessionsChangedListener {
     private val controllers: MutableList<MediaController>
