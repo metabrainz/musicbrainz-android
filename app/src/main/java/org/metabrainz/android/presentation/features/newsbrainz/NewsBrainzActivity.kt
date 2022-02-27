@@ -6,13 +6,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aemerse.share.SharableItem
+import com.aemerse.share.Share
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.blog.Post
@@ -20,7 +21,8 @@ import org.metabrainz.android.databinding.ActivityNewsbrainzBinding
 import org.metabrainz.android.presentation.IntentFactory
 import org.metabrainz.android.presentation.features.adapters.BlogAdapter
 import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
-
+import org.metabrainz.android.util.Log.d
+import org.metabrainz.android.util.Log.e
 
 @AndroidEntryPoint
 class NewsBrainzActivity : AppCompatActivity(), BlogAdapter.ClickListener {
@@ -86,5 +88,30 @@ class NewsBrainzActivity : AppCompatActivity(), BlogAdapter.ClickListener {
 
     override fun onUserClicked(position: Int) {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(postsList[position].URL)))
+    }
+
+    override fun onUserLongClicked(position: Int) {
+        Share.with(context = this)
+            .item(SharableItem(
+                pictureUrl = null,
+                data = postsList[position].URL + "\n",
+                shareAppLink = true,
+                downloadOurAppMessage = "Download our app"
+            ),
+                onStart = {
+                    d( "onStart Sharing")
+                },
+                onFinish = { isSuccessful: Boolean, errorMessage: String ->
+                    // if isSuccessful you will see an intent chooser else check the error message
+                    when {
+                        isSuccessful -> {
+                            e("Successfully shared")
+                        }
+                        else -> {
+                            e("error happened : $errorMessage")
+                        }
+                    }
+                }
+            )
     }
 }
