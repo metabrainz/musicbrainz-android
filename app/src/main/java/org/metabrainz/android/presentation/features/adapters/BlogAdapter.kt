@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.blog.Post
@@ -28,7 +29,7 @@ class BlogAdapter(private val context: Context, private val posts: ArrayList<Pos
                 Html.fromHtml(post.content, Html.FROM_HTML_MODE_COMPACT)
             }
             else -> {
-                Html.fromHtml(post.content)
+                HtmlCompat.fromHtml(post.content, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
     }
@@ -37,7 +38,7 @@ class BlogAdapter(private val context: Context, private val posts: ArrayList<Pos
         return posts.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
 
         val body: TextView = itemView.findViewById(R.id.tv_body)
         val heading: TextView = itemView.findViewById(R.id.tv_heading)
@@ -47,12 +48,19 @@ class BlogAdapter(private val context: Context, private val posts: ArrayList<Pos
             clickListener.onUserClicked(adapterPosition)
         }
 
+        override fun onLongClick(v: View?): Boolean {
+            clickListener.onUserLongClicked(adapterPosition)
+            return false
+        }
+
         init {
             body.setOnClickListener(this)
+            body.setOnLongClickListener(this)
         }
     }
 
     interface ClickListener {
         fun onUserClicked(position: Int)
+        fun onUserLongClicked(position: Int)
     }
 }
