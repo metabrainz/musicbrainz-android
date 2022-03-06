@@ -10,8 +10,9 @@ import android.os.Bundle
 import android.provider.SearchRecentSuggestions
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
+import android.widget.ArrayAdapter
+import android.widget.ListPopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -23,7 +24,6 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.metabrainz.android.App
 import org.metabrainz.android.R
@@ -34,17 +34,21 @@ import org.metabrainz.android.presentation.IntentFactory
 import org.metabrainz.android.presentation.features.adapters.ResultItem
 import org.metabrainz.android.presentation.features.adapters.ResultItemComparator
 import org.metabrainz.android.presentation.features.adapters.ResultPagingAdapter
+import org.metabrainz.android.presentation.features.search.SearchPagingSource.Companion.loadResultCount
 import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
 import org.metabrainz.android.presentation.features.suggestion.SuggestionProvider
 
 class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
+    private val defaultOffsetSize = 30 //Number of entities to be shown in a page
+    private val firstPageOffset = 0
+
     private var suggestionHelper: SuggestionHelper? = null
     private var suggestionAdapter: CursorAdapter? = null
-
     private lateinit var binding: ActivitySearchBinding
+    private var pageArray : ArrayList<Int> = arrayListOf()
     private var search_index = 0
-
+    private var offset = 0
     private var viewModel: SearchViewModel? = null
     private var adapter: ResultPagingAdapter? = null
 
@@ -92,6 +96,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             chip.text = text
             chip.isCloseIconVisible = false
             chip.setOnCheckedChangeListener { _, isChecked ->
+                pageArray.clear()
                 if (isChecked){
                     search_index = index
                 }
@@ -175,17 +180,79 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             return false
         }
         saveSearchSuggestion(query)
+        binding.btnPageNumber.text = "1"//On a fresh search, the page size should change to 1.
 
         adapter = ResultPagingAdapter(ResultItemComparator(), searchTypeFromSpinner!!)
         binding.recyclerView.adapter = adapter
         adapter!!.resetAnimation()
-        viewModel!!.search(searchTypeFromSpinner, query).observe(this) { pagingData: PagingData<ResultItem> ->
+        //Using SearchView for searching entity , represents the first page of the search results.
+        viewModel!!.search(searchTypeFromSpinner, query, firstPageOffset).observe(this) { pagingData: PagingData<ResultItem> ->
             adapter!!.submitData(lifecycle, pagingData)
+            offset = 0
+            binding.btnLoadPrevSearches.isVisible = false
+        }
+
+        //Pressing btnLoadMoreSearches button to get to next page
+        binding.btnLoadMoreSearches.setOnClickListener {
+            viewModel!!.search(searchTypeFromSpinner, query, offset+defaultOffsetSize).observe(this)
+            { pagingData: PagingData<ResultItem> ->
+                adapter!!.submitData(lifecycle, pagingData)
+                offset += defaultOffsetSize
+                val currentPageNumber = (offset/defaultOffsetSize) + 1
+                binding.btnPageNumber.text = (currentPageNumber).toString()
+            }
+        }
+
+        //Pressing btnLoadPrevSearches button to get to previous page
+        binding.btnLoadPrevSearches.setOnClickListener {
+            viewModel!!.search(searchTypeFromSpinner, query, offset-defaultOffsetSize).observe(this)
+            { pagingData: PagingData<ResultItem> ->
+                adapter!!.submitData(lifecycle, pagingData)
+                offset-=defaultOffsetSize
+                val currentPageNumber = (offset/defaultOffsetSize) + 1
+                binding.btnPageNumber.text = (currentPageNumber).toString()
+            }
         }
         lifecycleScope.launch {
+            //Companion Object's loadResultCount was dealt with here, as otherwise the variable was accessed before it was reassigned.
             adapter!!.loadStateFlow.collect {loadState->
+
                 binding.loadingAnimation.isVisible = loadState.refresh is LoadState.Loading
                 binding.noResult.isVisible = loadState.refresh is LoadState.Error
+                binding.btnLoadMoreSearches.isVisible = offset +defaultOffsetSize< loadResultCount
+                binding.btnLoadPrevSearches.isVisible = offset >= defaultOffsetSize
+                binding.btnsPageNav.isVisible = when {
+                    loadState.refresh is LoadState.Error -> false
+                    loadResultCount<defaultOffsetSize -> false
+                    else -> loadState.refresh !is LoadState.Loading
+                }
+                binding.recyclerView.isVisible = if(loadState.refresh is LoadState.Error) false
+                                    else loadState.refresh !is LoadState.Loading
+
+                //Setting the pages menu
+                val listPopupWindow = ListPopupWindow(this@SearchActivity,null,R.attr.listPopupWindowStyle)
+                listPopupWindow.anchorView = binding.btnPageNumber
+                val pageAdapter = ArrayAdapter(this@SearchActivity,R.layout.dropdown_page,pageArray)
+                listPopupWindow.setAdapter(pageAdapter)
+
+                // Show list popup window on button click.
+                binding.btnPageNumber.setOnClickListener {
+                    if (pageArray.isEmpty()) {
+                        for (pageNumber in 1..loadResultCount/defaultOffsetSize){
+                            pageArray.add(pageNumber)
+                        }
+                        pageArray.add(pageArray.lastIndex+2)
+                    }
+                    listPopupWindow.show()
+                  }
+                //Menu items clicks handled here
+                listPopupWindow.setOnItemClickListener { _, _, i, _ ->
+                    viewModel!!.search(searchTypeFromSpinner, query, (pageArray[i]-1)*defaultOffsetSize).observe(this@SearchActivity) { pagingData: PagingData<ResultItem> ->
+                        adapter!!.submitData(lifecycle, pagingData)
+                        offset = (pageArray[i]-1)*defaultOffsetSize
+                        binding.btnPageNumber.text = pageArray[i].toString()
+                    }
+                }
             }
         }
         binding.recyclerView.visibility = VISIBLE
@@ -201,27 +268,34 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        if(newText.isEmpty()){
-            binding.noResult.visibility = GONE
-            binding.loadingAnimation.visibility = GONE
-            binding.recyclerView.visibility = GONE
-            binding.gridView.visibility = VISIBLE
-        }
-        else {
-            suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
+        pageArray.clear()
+        when {
+            newText.isEmpty() -> {
+                binding.noResult.visibility = GONE
+                binding.loadingAnimation.visibility = GONE
+                binding.recyclerView.visibility = GONE
+                binding.gridView.visibility = VISIBLE
+                binding.btnsPageNav.visibility = GONE
+            }
+            else -> {
+                suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
+            }
         }
         return false
     }
 
     override fun onBackPressed() {
-        if (binding.noResult.isVisible){
-            binding.gridView.visibility= VISIBLE
-            binding.recyclerView.visibility = GONE
-            binding.loadingAnimation.visibility = GONE
-            binding.noResult.visibility= GONE
-        }
-        else {
-            super.onBackPressed()
+        when {
+            binding.noResult.isVisible -> {
+                binding.gridView.visibility = VISIBLE
+                binding.recyclerView.visibility = GONE
+                binding.btnsPageNav.visibility = GONE
+                binding.loadingAnimation.visibility = GONE
+                binding.noResult.visibility = GONE
+            }
+            else -> {
+                super.onBackPressed()
+            }
         }
     }
 }
