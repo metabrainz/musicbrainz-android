@@ -38,13 +38,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
-            android:layout_margin="6dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chip_group"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="6dp"
             android:nestedScrollingEnabled="false"
-            android:layout_height="wrap_content" />
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group" />
 
         <LinearLayout
             android:id="@+id/loadingAnimation"
@@ -318,6 +320,45 @@
 
             </com.google.android.material.card.MaterialCardView>
         </androidx.gridlayout.widget.GridLayout>
+
+        <RelativeLayout
+            android:id="@+id/btns_page_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="6dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_load_prev_searches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                app:fabSize="mini"
+                android:layout_alignParentStart="true"
+                app:backgroundTint="@color/dark_gray"
+                android:src="@drawable/back" />
+
+            <Button
+                android:id="@+id/btn_page_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_load_more_searches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/forward"
+                android:layout_alignParentEnd="true"
+                app:backgroundTint="@color/dark_gray"
+                app:fabSize="mini"
+                />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

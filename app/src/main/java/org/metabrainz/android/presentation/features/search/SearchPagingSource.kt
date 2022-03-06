@@ -10,13 +10,22 @@ import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.android.presentation.features.adapters.ResultItem
 import org.metabrainz.android.presentation.features.adapters.ResultItemUtils
 
-class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : PagingSource<Int, ResultItem>() {
+class SearchPagingSource(val mbEntityType: MBEntityType, val query: String , var offset : Int) : PagingSource<Int, ResultItem>() {
+
+    companion object{
+        //Using loadResultCount to access the data size of the response in the SearchActivity.
+        var loadResultCount : Int = 0
+    }
 
     private val service = MusicBrainzServiceGenerator.createService(SearchService::class.java, true)
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResultItem> {
         val pageSize: Int = params.loadSize
-        val offset = params.key ?: 0
+        if (offset==0){
+            if (params.key!=null){
+                offset = params.key!!
+            }
+        }
         return try {
             val response = service.searchEntity(mbEntityType.entity, query, pageSize, offset)?.string()
             var count = LoadResult.Page.COUNT_UNDEFINED
@@ -24,14 +33,13 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
             if (offset == 0) {
                 val responseObject = JsonParser.parseString(response)
                 count = responseObject.asJsonObject.get("count").asInt
+                loadResultCount = count
             }
             val itemsAfter = when (count) {
                 LoadResult.Page.COUNT_UNDEFINED -> count
                 else -> (count - offset - pageSize).coerceAtLeast(0)
             }
             // itemsAfter is required to be at least otherwise the current page will be not loaded
-            val nextKey = if (data.isEmpty()) null
-            else pageSize+offset
 
             if (offset==0 && data.isEmpty() && count==0){
                 throw ArrayIndexOutOfBoundsException()
@@ -39,7 +47,7 @@ class SearchPagingSource(val mbEntityType: MBEntityType, val query: String) : Pa
             LoadResult.Page(
                 data = data,
                 prevKey = null,
-                nextKey = nextKey,
+                nextKey = null,
                 itemsAfter = itemsAfter
             )
         } catch (e: Exception) {
