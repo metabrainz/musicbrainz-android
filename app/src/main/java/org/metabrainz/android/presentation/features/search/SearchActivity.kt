@@ -24,7 +24,6 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.metabrainz.android.App
 import org.metabrainz.android.R
@@ -270,30 +269,33 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextChange(newText: String): Boolean {
         pageArray.clear()
-
-        if(newText.isEmpty()){
-            binding.noResult.visibility = GONE
-            binding.loadingAnimation.visibility = GONE
-            binding.recyclerView.visibility = GONE
-            binding.gridView.visibility = VISIBLE
-            binding.btnsPageNav.visibility = INVISIBLE
-        }
-        else {
-            suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
+        when {
+            newText.isEmpty() -> {
+                binding.noResult.visibility = GONE
+                binding.loadingAnimation.visibility = GONE
+                binding.recyclerView.visibility = GONE
+                binding.gridView.visibility = VISIBLE
+                binding.btnsPageNav.visibility = GONE
+            }
+            else -> {
+                suggestionAdapter!!.changeCursor(suggestionHelper!!.getMatchingEntries(newText))
+            }
         }
         return false
     }
 
     override fun onBackPressed() {
-        if (binding.noResult.isVisible) {
-            binding.gridView.visibility = VISIBLE
-            binding.recyclerView.visibility = GONE
-            binding.btnsPageNav.visibility = GONE
-            binding.loadingAnimation.visibility = GONE
-            binding.noResult.visibility = GONE
-
-        } else {
-            super.onBackPressed()
+        when {
+            binding.noResult.isVisible -> {
+                binding.gridView.visibility = VISIBLE
+                binding.recyclerView.visibility = GONE
+                binding.btnsPageNav.visibility = GONE
+                binding.loadingAnimation.visibility = GONE
+                binding.noResult.visibility = GONE
+            }
+            else -> {
+                super.onBackPressed()
+            }
         }
     }
 }
