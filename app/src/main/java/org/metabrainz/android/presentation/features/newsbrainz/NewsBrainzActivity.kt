@@ -63,7 +63,7 @@ class NewsBrainzActivity : AppCompatActivity(), BlogAdapter.ClickListener {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.dash, menu)
         return true
     }

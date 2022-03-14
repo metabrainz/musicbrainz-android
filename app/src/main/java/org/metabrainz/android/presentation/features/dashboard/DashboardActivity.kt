@@ -20,6 +20,13 @@ import org.metabrainz.android.presentation.features.collection.CollectionActivit
 import org.metabrainz.android.presentation.features.search.SearchActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
 import android.content.pm.PackageManager
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import org.metabrainz.android.presentation.features.navigation.NavigationItem
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 
 class DashboardActivity : AppCompatActivity() {
@@ -30,6 +37,12 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        binding.bottomNav.setContent {
+            MaterialTheme {
+                BottomNavigationBar()
+            }
+        }
 
         //showing the title only when collapsed
         var isShow = true
@@ -119,6 +132,39 @@ class DashboardActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.dash, menu)
         menu.findItem(R.id.menu_open_website)?.isVisible = false
         return true
+    }
+
+    @Composable
+    fun BottomNavigationBar() {
+        val items = listOf(
+            NavigationItem.Home,
+            NavigationItem.Listens,
+            NavigationItem.Critiques
+        )
+        BottomNavigation(
+            backgroundColor = colorResource(id = R.color.colorPrimary),
+            contentColor = Color.White
+        ) {
+            items.forEach { item ->
+                BottomNavigationItem(
+                    icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
+                    label = { Text(text = item.title) },
+                    selectedContentColor = Color.White,
+                    unselectedContentColor = Color.White.copy(0.4f),
+                    alwaysShowLabel = true,
+                    selected = false,
+                    onClick = {
+                        /* Add code later */
+                    }
+                )
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun BottomNavigationBarPreview() {
+        BottomNavigationBar()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
