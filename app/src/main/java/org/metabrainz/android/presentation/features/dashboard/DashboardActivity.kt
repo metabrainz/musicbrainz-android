@@ -8,7 +8,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.AppBarLayout
 import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityDashboardBinding
@@ -39,30 +38,9 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.bottomNav.setContent {
-            MaterialTheme {
-                BottomNavigationBar()
-            }
+            BottomNavigationBar()
         }
 
-        //showing the title only when collapsed
-        var isShow = true
-        var scrollRange = -1
-        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
-            if (scrollRange == -1) {
-                scrollRange = barLayout?.totalScrollRange!!
-            }
-            when {
-                scrollRange + verticalOffset == 0 -> {
-                    binding.colToolbarId.title = "MusicBrainz"
-                    binding.colToolbarId.setCollapsedTitleTextColor(resources.getColor(R.color.white))
-                    isShow = true
-                }
-                isShow -> {
-                    binding.colToolbarId.title = " "
-                    isShow = false
-                }
-            }
-        })
         setSupportActionBar(binding.toolbar)
 
         //navigation
@@ -142,19 +120,28 @@ class DashboardActivity : AppCompatActivity() {
             NavigationItem.Critiques
         )
         BottomNavigation(
-            backgroundColor = colorResource(id = R.color.colorPrimary),
-            contentColor = Color.White
+            backgroundColor = colorResource(id = R.color.app_bg),
         ) {
             items.forEach { item ->
                 BottomNavigationItem(
-                    icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
+                    icon = { Icon(painterResource(id = item.icon), contentDescription = item.title, tint = Color.Unspecified) },
                     label = { Text(text = item.title) },
                     selectedContentColor = Color.White,
                     unselectedContentColor = Color.White.copy(0.4f),
                     alwaysShowLabel = true,
                     selected = false,
                     onClick = {
-                        /* Add code later */
+                        when(item.route){
+                            "home" -> {
+
+                            }
+                            "listens" -> {
+                                FinestWebView.Builder(applicationContext).show("https://listenbrainz.org/")
+                            }
+                            "critiques" -> {
+                                FinestWebView.Builder(applicationContext).show("https://critiquebrainz.org/")
+                            }
+                        }
                     }
                 )
             }
