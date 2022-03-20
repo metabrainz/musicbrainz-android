@@ -3,6 +3,7 @@ package org.metabrainz.android.presentation.features.label
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.App
 import org.metabrainz.android.data.sources.Constants
@@ -20,8 +21,12 @@ import org.metabrainz.android.presentation.features.userdata.UserViewModel
 class LabelActivity : LookupActivity<Label>() {
 
     private val labelViewModel: LabelViewModel by viewModels()
-    private val userViewModel: UserViewModel by viewModels()
-    private val linksViewModel: LinksViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels {
+        SavedStateViewModelFactory(application, this)
+    }
+    private val linksViewModel: LinksViewModel by viewModels {
+        SavedStateViewModelFactory(application, this)
+    }
     private val releaseListViewModel: ReleaseListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

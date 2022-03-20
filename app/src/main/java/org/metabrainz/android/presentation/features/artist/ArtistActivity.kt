@@ -3,6 +3,7 @@ package org.metabrainz.android.presentation.features.artist
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.App
 import org.metabrainz.android.data.sources.Constants
@@ -24,8 +25,12 @@ class ArtistActivity : LookupActivity<Artist>() {
 
     private val artistViewModel: ArtistViewModel by viewModels()
     private val releaseListViewModel: ReleaseListViewModel by viewModels()
-    private val linksViewModel: LinksViewModel by viewModels()
-    private val userViewModel: UserViewModel by viewModels()
+    private val linksViewModel: LinksViewModel by viewModels(){
+        SavedStateViewModelFactory(application, this)
+    }
+    private val userViewModel: UserViewModel by viewModels {
+        SavedStateViewModelFactory(application, this)
+    }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
