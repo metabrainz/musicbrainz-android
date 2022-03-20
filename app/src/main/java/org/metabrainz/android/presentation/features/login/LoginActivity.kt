@@ -103,7 +103,6 @@ class LoginActivity : MusicBrainzActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         menu.findItem(R.id.menu_open_website).isVisible = false
-        menu.findItem(R.id.menu_login).isVisible = false
         return true
     }
 }

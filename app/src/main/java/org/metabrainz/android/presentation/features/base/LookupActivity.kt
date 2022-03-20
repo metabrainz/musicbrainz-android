@@ -12,7 +12,7 @@ import org.metabrainz.android.util.Resource
 
 abstract class LookupActivity<T : MBEntity> : MusicBrainzActivity() {
 
-    lateinit var binding: ActivityLookupBinding
+    private lateinit var binding: ActivityLookupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,14 +45,16 @@ abstract class LookupActivity<T : MBEntity> : MusicBrainzActivity() {
 
     open fun processData(resource: Resource<T>) {
         binding.progressSpinner.root.visibility = View.GONE
-        if (resource.status == Resource.Status.SUCCESS) {
-            binding.noResult.root.visibility = View.GONE
-            binding.tabs.visibility = View.VISIBLE
-            binding.pager.visibility = View.VISIBLE
-            setData(resource.data!!)
-        }
-        else {
-            binding.noResult.root.visibility = View.VISIBLE
+        when (resource.status) {
+            Resource.Status.SUCCESS -> {
+                binding.noResult.root.visibility = View.GONE
+                binding.tabs.visibility = View.VISIBLE
+                binding.pager.visibility = View.VISIBLE
+                setData(resource.data!!)
+            }
+            else -> {
+                binding.noResult.root.visibility = View.VISIBLE
+            }
         }
     }
 

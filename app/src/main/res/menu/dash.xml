@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -7,12 +6,6 @@
         android:id="@+id/menu_open_website"
         android:title="@string/open_on_website"
         android:icon="@drawable/ic_musicbrainz_logo_icon"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/menu_login"
-        android:title="@string/action_authentication"
-        android:icon="@drawable/user"
         app:showAsAction="ifRoom" />
 
     <item
