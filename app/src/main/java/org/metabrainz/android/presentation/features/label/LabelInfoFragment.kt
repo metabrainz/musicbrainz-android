@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import org.metabrainz.android.data.sources.api.entities.mbentity.Label
 import org.metabrainz.android.databinding.FragmentLabelInfoBinding
 import org.metabrainz.android.presentation.features.base.MusicBrainzFragment
@@ -13,9 +14,11 @@ import org.metabrainz.android.util.Resource
 
 class LabelInfoFragment : Fragment() {
     private var binding: FragmentLabelInfoBinding? = null
-    private val labelViewModel: LabelViewModel by activityViewModels()
+    private val labelViewModel: LabelViewModel by activityViewModels {
+        SavedStateViewModelFactory(requireActivity().application, this)
+    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLabelInfoBinding.inflate(inflater, container, false)
         labelViewModel.data.observe(viewLifecycleOwner) { setLabelInfo(it) }
         return binding!!.root

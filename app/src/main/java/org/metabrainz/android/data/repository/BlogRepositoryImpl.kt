@@ -1,7 +1,6 @@
 package org.metabrainz.android.data.repository
 
 import androidx.annotation.WorkerThread
-import org.json.JSONObject
 import org.metabrainz.android.data.sources.api.BlogService
 import org.metabrainz.android.data.sources.api.entities.blog.Blog
 import org.metabrainz.android.util.Resource

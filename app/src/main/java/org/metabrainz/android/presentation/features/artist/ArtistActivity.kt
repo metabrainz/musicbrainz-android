@@ -3,12 +3,12 @@ package org.metabrainz.android.presentation.features.artist
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.App
 import org.metabrainz.android.data.sources.Constants
 import org.metabrainz.android.data.sources.api.entities.mbentity.Artist
 import org.metabrainz.android.presentation.features.base.LookupActivity
-import org.metabrainz.android.presentation.features.base.MusicBrainzFragment
 import org.metabrainz.android.presentation.features.links.LinksFragment
 import org.metabrainz.android.presentation.features.links.LinksViewModel
 import org.metabrainz.android.presentation.features.release_list.ReleaseListFragment
@@ -25,8 +25,12 @@ class ArtistActivity : LookupActivity<Artist>() {
 
     private val artistViewModel: ArtistViewModel by viewModels()
     private val releaseListViewModel: ReleaseListViewModel by viewModels()
-    private val linksViewModel: LinksViewModel by viewModels()
-    private val userViewModel: UserViewModel by viewModels()
+    private val linksViewModel: LinksViewModel by viewModels(){
+        SavedStateViewModelFactory(application, this)
+    }
+    private val userViewModel: UserViewModel by viewModels {
+        SavedStateViewModelFactory(application, this)
+    }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +53,6 @@ class ArtistActivity : LookupActivity<Artist>() {
         linksViewModel.setData(data.relations)
     }
 
-    override fun getFragmentsList(): List<MusicBrainzFragment> = listOf(ArtistBioFragment,
+    override fun getFragmentsList() = listOf(ArtistBioFragment,
             ReleaseListFragment, LinksFragment, UserDataFragment)
-
 }

@@ -41,9 +41,6 @@ abstract class MusicBrainzActivity : AppCompatActivity() {
             R.id.menu_features -> {
                 startActivity(Intent(this,FeaturesActivity::class.java))
             }
-            R.id.menu_login -> {
-                startActivity(getLogin(applicationContext))
-            }
             R.id.menu_open_website -> {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = getBrowserURI()

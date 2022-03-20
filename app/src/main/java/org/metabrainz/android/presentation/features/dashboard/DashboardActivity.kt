@@ -1,26 +1,34 @@
 package org.metabrainz.android.presentation.features.dashboard
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.AppBarLayout
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityDashboardBinding
 import org.metabrainz.android.presentation.IntentFactory
-import org.metabrainz.android.presentation.UserPreferences.advancedFeaturesPreference
 import org.metabrainz.android.presentation.features.about.AboutActivity
 import org.metabrainz.android.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
+import org.metabrainz.android.presentation.features.login.LoginActivity
+import org.metabrainz.android.presentation.features.navigation.NavigationItem
+import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
-import android.content.pm.PackageManager
-import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
@@ -31,28 +39,13 @@ class DashboardActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        //showing the title only when collapsed
-        var isShow = true
-        var scrollRange = -1
-        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
-            if (scrollRange == -1) {
-                scrollRange = barLayout?.totalScrollRange!!
-            }
-            when {
-                scrollRange + verticalOffset == 0 -> {
-                    binding.colToolbarId.title = "MusicBrainz"
-                    binding.colToolbarId.setCollapsedTitleTextColor(resources.getColor(R.color.white))
-                    isShow = true
-                }
-                isShow -> {
-                    binding.colToolbarId.title = " "
-                    isShow = false
-                }
-            }
-        })
+        binding.bottomNav.setContent {
+            BottomNavigationBar()
+        }
+
         setSupportActionBar(binding.toolbar)
 
-        //navigation
+        //Navigation
         binding.dashboardTagId.setOnClickListener {
             startActivity(Intent(this, TaggerActivity::class.java))
         }
@@ -68,20 +61,8 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardDonateId.setOnClickListener {
             startActivity(Intent(this, DonateActivity::class.java))
         }
-        binding.dashboardNewsbrainz.setOnClickListener {
-            startActivity(Intent(this, NewsBrainzActivity::class.java))
-        }
         binding.dashboardScanId.setOnClickListener {
             startActivity(Intent(this, BarcodeActivity::class.java))
-        }
-        binding.dashboardListenId.setOnClickListener {
-            FinestWebView.Builder(this).show("https://listenbrainz.org/")
-        }
-        binding.dashboardCritiqueId.setOnClickListener {
-            FinestWebView.Builder(this).show("https://critiquebrainz.org/")
-        }
-        binding.dashboardMetabrainz.setOnClickListener {
-            FinestWebView.Builder(this).show("https://metabrainz.org/")
         }
 
         //CardView animation
@@ -93,25 +74,9 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardDonateId.animation = leftItemAnimation
         binding.dashboardAboutId.animation = rightItemAnimation
         binding.dashboardCollectionId.animation = leftItemAnimation
-        binding.dashboardCritiqueId.animation = leftItemAnimation
-        binding.dashboardListenId.animation = rightItemAnimation
-        binding.dashboardNewsbrainz.animation = leftItemAnimation
-        binding.dashboardMetabrainz.animation = rightItemAnimation
 
         if (!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             binding.dashboardScanId.visibility = GONE
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        when {
-            advancedFeaturesPreference -> {
-                binding.advancedFeatures.visibility = VISIBLE
-            }
-            else -> {
-                binding.advancedFeatures.visibility = GONE
-            }
         }
     }
 
@@ -121,12 +86,55 @@ class DashboardActivity : AppCompatActivity() {
         return true
     }
 
+    @Composable
+    fun BottomNavigationBar() {
+        val items = listOf(
+            NavigationItem.Home,
+            NavigationItem.News,
+            NavigationItem.Listens,
+            NavigationItem.Critiques,
+            NavigationItem.Profile,
+        )
+        BottomNavigation(
+            backgroundColor = colorResource(id = R.color.app_bg),
+        ) {
+            items.forEach { item ->
+                BottomNavigationItem(
+                    icon = { Icon(painterResource(id = item.icon), contentDescription = item.title, tint = Color.Unspecified) },
+                    label = { Text(text = item.title) },
+                    selectedContentColor = colorResource(id = R.color.white),
+                    unselectedContentColor = colorResource(id = R.color.gray),
+                    alwaysShowLabel = true,
+                    selected = true,
+                    onClick = {
+                        when(item.route){
+                            "news" -> {
+                                startActivity(Intent(applicationContext, NewsBrainzActivity::class.java))
+                            }
+                            "listens" -> {
+                                FinestWebView.Builder(applicationContext).show("https://listenbrainz.org/")
+                            }
+                            "critiques" -> {
+                                FinestWebView.Builder(applicationContext).show("https://critiquebrainz.org/")
+                            }
+                            "profile" -> {
+                                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                            }
+                        }
+                    }
+                )
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun BottomNavigationBarPreview() {
+        BottomNavigationBar()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_login -> {
-                startActivity(IntentFactory.getLogin(this))
-                true
-            }
             R.id.menu_preferences -> {
                 startActivity(IntentFactory.getSettings(this))
                 true
