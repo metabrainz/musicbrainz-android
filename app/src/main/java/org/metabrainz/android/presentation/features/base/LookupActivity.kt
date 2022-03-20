@@ -12,7 +12,7 @@ import org.metabrainz.android.util.Resource
 
 abstract class LookupActivity<T : MBEntity> : MusicBrainzActivity() {
 
-    private lateinit var binding: ActivityLookupBinding
+    lateinit var binding: ActivityLookupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,5 +57,4 @@ abstract class LookupActivity<T : MBEntity> : MusicBrainzActivity() {
             }
         }
     }
-
 }
