@@ -5,6 +5,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.metabrainz.android.data.sources.api.MusicBrainzServiceGenerator.createService
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -17,7 +19,10 @@ class ServiceModule {
 
     @get:Provides
     @get:Singleton
-    val blogService: BlogService = createService(BlogService::class.java, true)
+    val blogService: BlogService = Retrofit.Builder()
+        .baseUrl("https://public-api.wordpress.com/rest/v1.1/sites/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build().create(BlogService::class.java)
 
     @get:Provides
     @get:Singleton
