@@ -14,16 +14,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Advanced">
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="advanced_features"
-            android:summary="Unlock ListenBrainz, CritiqueBrainz functionalities."
-            android:title="Features" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/settings_user_data">
         <SwitchPreference
             android:defaultValue="true"

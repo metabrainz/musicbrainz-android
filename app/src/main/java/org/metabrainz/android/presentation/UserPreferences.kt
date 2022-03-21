@@ -16,7 +16,6 @@ object UserPreferences {
     private const val PREFERENCE_RATINGS_TAGS = "ratings_tags"
     private const val PREFERENCE_SYSTEM_LANGUAGE = "use_english"
     private const val PREFERENCE_ONBOARDING = "onboarding"
-    private const val PREFERENCE_ADVANCED = "advanced_features"
     private val preferences = PreferenceManager.getDefaultSharedPreferences(App.context!!)
 
     fun setOnBoardingCompleted() {
@@ -34,14 +33,6 @@ object UserPreferences {
         get() = preferences.getString(PREFERENCE_PICARD_PORT, "8000")!!
     val preferenceIpAddress: String?
         get() = preferences.getString(PREFERENCE_IP_ADDRESS, null)
-
-    var advancedFeaturesPreference: Boolean
-        get() = preferences.getBoolean(PREFERENCE_ADVANCED, false)
-        set(value) {
-            val editor = preferences.edit()
-            editor.putBoolean(PREFERENCE_ADVANCED, value)
-            editor.apply()
-        }
 
     val preferenceListenBrainzToken = preferences.getString(PREFERENCE_LISTENBRAINZ_TOKEN, null)
     var preferenceListeningEnabled: Boolean

@@ -1,5 +1,6 @@
 package org.metabrainz.android.presentation.features.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.SearchRecentSuggestions
 import android.view.MenuItem
@@ -9,10 +10,10 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import org.metabrainz.android.App
 import org.metabrainz.android.R
-import org.metabrainz.android.presentation.IntentFactory.getDashboard
 import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_CLEAR_SUGGESTIONS
 import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEnabled
+import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.android.presentation.features.suggestion.SuggestionProvider
 
 class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClickListener {
@@ -57,7 +58,9 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         super.onOptionsItemSelected(item)
         return when (item.itemId) {
             android.R.id.home -> {
-                startActivity(getDashboard(activity))
+                val intent = Intent(context, DashboardActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
                 true
             }
             else -> false

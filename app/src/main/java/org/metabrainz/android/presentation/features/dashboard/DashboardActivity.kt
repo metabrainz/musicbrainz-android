@@ -3,24 +3,19 @@ package org.metabrainz.android.presentation.features.dashboard
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View.GONE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityDashboardBinding
-import org.metabrainz.android.presentation.IntentFactory
 import org.metabrainz.android.presentation.features.about.AboutActivity
 import org.metabrainz.android.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
@@ -28,6 +23,7 @@ import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.navigation.NavigationItem
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
+import org.metabrainz.android.presentation.features.settings.SettingsActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
 
 class DashboardActivity : AppCompatActivity() {
@@ -42,24 +38,19 @@ class DashboardActivity : AppCompatActivity() {
         binding.bottomNav.setContent {
             BottomNavigationBar()
         }
-
-        setSupportActionBar(binding.toolbar)
+        binding.topAppBar.setContent {
+            TopAppBar()
+        }
 
         //Navigation
         binding.dashboardTagId.setOnClickListener {
             startActivity(Intent(this, TaggerActivity::class.java))
-        }
-        binding.dashboardAboutId.setOnClickListener {
-            startActivity(Intent(this, AboutActivity::class.java))
         }
         binding.dashboardSearchId.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
         }
         binding.dashboardCollectionId.setOnClickListener {
             startActivity(Intent(this, CollectionActivity::class.java))
-        }
-        binding.dashboardDonateId.setOnClickListener {
-            startActivity(Intent(this, DonateActivity::class.java))
         }
         binding.dashboardScanId.setOnClickListener {
             startActivity(Intent(this, BarcodeActivity::class.java))
@@ -71,8 +62,6 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardTagId.animation = leftItemAnimation
         binding.dashboardSearchId.animation = rightItemAnimation
         binding.dashboardScanId.animation = rightItemAnimation
-        binding.dashboardDonateId.animation = leftItemAnimation
-        binding.dashboardAboutId.animation = rightItemAnimation
         binding.dashboardCollectionId.animation = leftItemAnimation
 
         if (!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
@@ -80,10 +69,33 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.dash, menu)
-        menu.findItem(R.id.menu_open_website)?.isVisible = false
-        return true
+    @Composable
+    fun TopAppBar() {
+        TopAppBar(
+            title = {
+                Text(text = "MusicBrainz")
+            },
+            backgroundColor = colorResource(id = R.color.app_bg),
+            contentColor = colorResource(id = R.color.white),
+            elevation = 2.dp,
+            actions = {
+                IconButton(onClick = {
+                    startActivity(Intent(applicationContext, AboutActivity::class.java))
+                }) {
+                    Icon(painterResource(id = R.drawable.ic_information), "About", tint = Color.Unspecified)
+                }
+                IconButton(onClick = {
+                    startActivity(Intent(applicationContext, DonateActivity::class.java))
+                }) {
+                    Icon(painterResource(id = R.drawable.ic_donate), "Donate", tint = Color.Unspecified)
+                }
+                IconButton(onClick = {
+                    startActivity(Intent(applicationContext, SettingsActivity::class.java))
+                }) {
+                    Icon(painterResource(id = R.drawable.action_settings), "Settings", tint = Color.Unspecified)
+                }
+            }
+        )
     }
 
     @Composable
@@ -131,19 +143,5 @@ class DashboardActivity : AppCompatActivity() {
     @Composable
     fun BottomNavigationBarPreview() {
         BottomNavigationBar()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_preferences -> {
-                startActivity(IntentFactory.getSettings(this))
-                true
-            }
-            R.id.home -> {
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
