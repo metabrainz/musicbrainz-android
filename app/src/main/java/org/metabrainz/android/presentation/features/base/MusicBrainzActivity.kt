@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.Configuration
-import org.metabrainz.android.presentation.IntentFactory.getLogin
 import org.metabrainz.android.presentation.IntentFactory.getSettings
 import org.metabrainz.android.presentation.UserPreferences.systemLanguagePreference
 import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
