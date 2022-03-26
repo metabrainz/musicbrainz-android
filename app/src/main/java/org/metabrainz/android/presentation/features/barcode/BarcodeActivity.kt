@@ -17,7 +17,6 @@ import me.dm7.barcodescanner.zbar.Result
 import me.dm7.barcodescanner.zbar.ZBarScannerView
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.IntentFactory
-import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
 
 class BarcodeActivity : AppCompatActivity(), ZBarScannerView.ResultHandler {
     private var scannerView: ZBarScannerView? = null
