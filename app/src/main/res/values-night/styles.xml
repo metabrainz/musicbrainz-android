@@ -12,11 +12,6 @@
         <item name="alertDialogTheme">@style/settingsDialog</item>
     </style>
 
-    <style name="AppThemeCustomActionBar" parent="AppTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="settingsDialog" parent="Base.Theme.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
