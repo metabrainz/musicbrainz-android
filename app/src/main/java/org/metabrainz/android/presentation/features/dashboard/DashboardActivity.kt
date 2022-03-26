@@ -1,9 +1,7 @@
 package org.metabrainz.android.presentation.features.dashboard
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View.GONE
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.*
@@ -17,7 +15,6 @@ import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityDashboardBinding
 import org.metabrainz.android.presentation.features.about.AboutActivity
-import org.metabrainz.android.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
 import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.navigation.NavigationItem
@@ -52,21 +49,13 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardCollectionId.setOnClickListener {
             startActivity(Intent(this, CollectionActivity::class.java))
         }
-        binding.dashboardScanId.setOnClickListener {
-            startActivity(Intent(this, BarcodeActivity::class.java))
-        }
 
         //CardView animation
         val leftItemAnimation = AnimationUtils.loadAnimation(this, R.anim.left_dashboard_item_animation)
         val rightItemAnimation = AnimationUtils.loadAnimation(this, R.anim.right_dashboard_item_animation)
         binding.dashboardTagId.animation = leftItemAnimation
         binding.dashboardSearchId.animation = rightItemAnimation
-        binding.dashboardScanId.animation = rightItemAnimation
         binding.dashboardCollectionId.animation = leftItemAnimation
-
-        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
-            binding.dashboardScanId.visibility = GONE
-        }
     }
 
     @Composable
@@ -137,6 +126,12 @@ class DashboardActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun TopAppBarPreview() {
+        TopAppBar()
     }
 
     @Preview(showBackground = true)

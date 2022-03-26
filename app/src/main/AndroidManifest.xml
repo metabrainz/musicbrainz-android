@@ -16,7 +16,6 @@
 
     <application
         android:name=".App"
-        android:allowBackup="false"
         android:autoRevokePermissions="allowed"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher_round"
@@ -120,9 +119,9 @@
         <activity
             android:name="org.metabrainz.android.presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title" />
-        <activity
-            android:name=".presentation.features.barcode.BarcodeActivity"
-            android:theme="@style/AppThemeCustomActionBar" />
+
+        <activity android:name=".presentation.features.barcode.BarcodeActivity" />
+
         <activity
             android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
         <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
