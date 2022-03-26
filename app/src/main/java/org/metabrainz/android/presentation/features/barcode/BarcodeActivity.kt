@@ -1,21 +1,24 @@
 package org.metabrainz.android.presentation.features.barcode
 
 import android.Manifest
-import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import me.dm7.barcodescanner.zbar.Result
 import me.dm7.barcodescanner.zbar.ZBarScannerView
 import org.metabrainz.android.R
+import org.metabrainz.android.presentation.IntentFactory
 
-class BarcodeActivity : Activity(), ZBarScannerView.ResultHandler {
+class BarcodeActivity : AppCompatActivity(), ZBarScannerView.ResultHandler {
     private var scannerView: ZBarScannerView? = null
     private var cameraPermission = false
     private val CAMERA_PERMISSION = 0
@@ -30,6 +33,11 @@ class BarcodeActivity : Activity(), ZBarScannerView.ResultHandler {
         if (!cameraPermission){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION)
         }
+
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Search using Barcode"
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -49,12 +57,16 @@ class BarcodeActivity : Activity(), ZBarScannerView.ResultHandler {
 
     public override fun onPause() {
         super.onPause()
-        if (cameraPermission) scannerView!!.stopCamera()
+        when {
+            cameraPermission -> scannerView!!.stopCamera()
+        }
     }
 
     public override fun onResume() {
         super.onResume()
-        if (cameraPermission) scannerView!!.startCamera()
+        when {
+            cameraPermission -> scannerView!!.startCamera()
+        }
     }
 
     override fun handleResult(rawResult: Result) {
@@ -63,5 +75,17 @@ class BarcodeActivity : Activity(), ZBarScannerView.ResultHandler {
         intent.putExtra("barcode", rawResult.contents)
         startActivity(intent)
         finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+            R.id.menu_preferences -> {
+                startActivity(IntentFactory.getSettings(applicationContext))
+            }
+        }
+        return false
     }
 }

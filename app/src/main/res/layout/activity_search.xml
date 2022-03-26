@@ -14,16 +14,28 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/dark_gray"
             android:inputType="textCapWords"
-            android:padding="5dp"
+            android:padding="10dp"
+            android:layout_margin="6dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/barcodeScan"
             app:layout_constraintTop_toTopOf="parent"
             app:queryHint="MusicBrainz Data"
             app:searchIcon="@drawable/ic_search" />
+
+        <ImageView
+            android:id="@+id/barcodeScan"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:padding="10dp"
+            android:layout_margin="6dp"
+            android:background="@color/dark_gray"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_scan"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group"

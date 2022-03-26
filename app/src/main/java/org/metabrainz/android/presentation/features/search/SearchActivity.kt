@@ -3,6 +3,7 @@ package org.metabrainz.android.presentation.features.search
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri.parse
@@ -34,6 +35,7 @@ import org.metabrainz.android.presentation.IntentFactory
 import org.metabrainz.android.presentation.features.adapters.ResultItem
 import org.metabrainz.android.presentation.features.adapters.ResultItemComparator
 import org.metabrainz.android.presentation.features.adapters.ResultPagingAdapter
+import org.metabrainz.android.presentation.features.barcode.BarcodeActivity
 import org.metabrainz.android.presentation.features.search.SearchPagingSource.Companion.loadResultCount
 import org.metabrainz.android.presentation.features.suggestion.SuggestionHelper
 import org.metabrainz.android.presentation.features.suggestion.SuggestionProvider
@@ -90,6 +92,12 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             performAction(Constants.ADD_RECORDING)
         }
 
+        binding.barcodeScan.setOnClickListener{
+            startActivity(Intent(this, BarcodeActivity::class.java))
+        }
+        if (!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+            binding.barcodeScan.visibility = GONE
+        }
         val textArray = resources.getStringArray(R.array.searchType)
         for ((index, text) in textArray.withIndex()) {
             val chip = layoutInflater.inflate(R.layout.cat_chip_group_item_choice, binding.chipGroup, false) as Chip

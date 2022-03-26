@@ -35,17 +35,18 @@ class LoginActivity : MusicBrainzActivity() {
             saveOAuthToken(accessToken)
         }
         loginViewModel!!.userInfoLiveData!!.observe(this) { userInfo: UserInfo? ->
-            saveUserInfo(
-                userInfo
-            )
+            saveUserInfo(userInfo)
         }
-        if (LoginSharedPreferences.loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN) {
-            startActivity(Intent(this,ProfileActivity::class.java))
-            finish()
-//            binding!!.loginPromptId.setText(R.string.logout_prompt)
-//            binding!!.loginBtn.setText(R.string.logout)
-//            binding!!.loginBtn.setOnClickListener { logoutUser() }
-        } else binding!!.loginBtn.setOnClickListener { startLogin() }
+        when (LoginSharedPreferences.loginStatus) {
+            LoginSharedPreferences.STATUS_LOGGED_IN -> {
+                startActivity(Intent(this,ProfileActivity::class.java))
+                finish()
+//                binding!!.loginPromptId.setText(R.string.logout_prompt)
+//                binding!!.loginBtn.setText(R.string.logout)
+//                binding!!.loginBtn.setOnClickListener { logoutUser() }
+            }
+            else -> binding!!.loginBtn.setOnClickListener { startLogin() }
+        }
     }
 
     override fun onResume() {
@@ -70,14 +71,17 @@ class LoginActivity : MusicBrainzActivity() {
     }
 
     private fun saveOAuthToken(accessToken: AccessToken?) {
-        if (accessToken != null) {
-            d(accessToken.accessToken)
-            LoginSharedPreferences.saveOAuthToken(accessToken)
-            loginViewModel!!.fetchUserInfo()
-        } else {
-            Toast.makeText(applicationContext,
+        when {
+            accessToken != null -> {
+                d(accessToken.accessToken)
+                LoginSharedPreferences.saveOAuthToken(accessToken)
+                loginViewModel!!.fetchUserInfo()
+            }
+            else -> {
+                Toast.makeText(applicationContext,
                     "Failed to obtain access token ",
                     Toast.LENGTH_LONG).show()
+            }
         }
     }
 
