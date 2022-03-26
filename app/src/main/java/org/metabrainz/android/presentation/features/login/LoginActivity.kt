@@ -15,6 +15,7 @@ import org.metabrainz.android.data.sources.api.entities.userdata.UserInfo
 import org.metabrainz.android.databinding.ActivityLoginBinding
 import org.metabrainz.android.presentation.features.base.MusicBrainzActivity
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
+import org.metabrainz.android.presentation.features.userprofile.ProfileActivity
 import org.metabrainz.android.util.Log.d
 
 @AndroidEntryPoint
@@ -39,9 +40,11 @@ class LoginActivity : MusicBrainzActivity() {
             )
         }
         if (LoginSharedPreferences.loginStatus == LoginSharedPreferences.STATUS_LOGGED_IN) {
-            binding!!.loginPromptId.setText(R.string.logout_prompt)
-            binding!!.loginBtn.setText(R.string.logout)
-            binding!!.loginBtn.setOnClickListener { logoutUser() }
+            startActivity(Intent(this,ProfileActivity::class.java))
+            finish()
+//            binding!!.loginPromptId.setText(R.string.logout_prompt)
+//            binding!!.loginBtn.setText(R.string.logout)
+//            binding!!.loginBtn.setOnClickListener { logoutUser() }
         } else binding!!.loginBtn.setOnClickListener { startLogin() }
     }
 
