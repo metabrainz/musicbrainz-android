@@ -5,18 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.metabrainz.android.R
-import org.metabrainz.android.databinding.FragmentProfileBinding
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.ComposeView
+import org.metabrainz.android.presentation.features.userprofile.ProfileTheme
 
 class ProfileFragment : Fragment() {
-    lateinit var binding: FragmentProfileBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentProfileBinding.inflate(inflater,container,false)
-        return binding.root
+        val view = ComposeView(requireContext())
+        view.apply {
+            setContent {
+                ProfileTheme {
+                    Surface {
+                        ProfileFragmentScreen()
+                    }
+                }
+            }
+        }
+        return view
     }
+}
 
+@Composable
+private fun ProfileFragmentScreen(){
+    ProfileSectionScreen()
 }

@@ -1,60 +1,63 @@
 package org.metabrainz.android.presentation.features.userprofile.ratings_section
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.metabrainz.android.R
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.fragment.app.Fragment
+import org.metabrainz.android.presentation.features.userprofile.ProfileTheme
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RatingsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class RatingsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ratings, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RatingsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RatingsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    ): View {
+        val view = ComposeView(requireContext())
+        view.apply {
+            setContent {
+                ProfileTheme {
+                    Surface {
+                        RatingsFragmentScreen()
+                    }
                 }
             }
+        }
+        return view
     }
 }
+
+@Composable
+fun RatingsFragmentScreen(){
+    val constraints = ConstraintSet {
+        val chipSet = createRefFor("chipSet")
+        val ratings = createRefFor("ratings")
+
+        constrain(chipSet){
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+        constrain(ratings){
+            top.linkTo(chipSet.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+    }
+    ConstraintLayout(constraints,modifier = Modifier.fillMaxSize()) {
+        val ratingEntities = listOf("Artist","Event","Label","Release Group","Recording","Work")
+        val ratedEntities = listOf(Pair("Fall Out Boy",3f),Pair("Sean Paul",4.5f),Pair("Ed Sheeren",5f))
+        RatingChipsSection(ratingEntities,"chipSet")
+        Ratings(items = ratedEntities, layoutID = "ratings")
+
+    }
+}
+

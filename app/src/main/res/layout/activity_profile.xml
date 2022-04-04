@@ -10,6 +10,9 @@
         android:id="@+id/profile_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_gray"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
         app:tabMode="auto"
         app:layout_constraintTop_toTopOf="parent" />
 
