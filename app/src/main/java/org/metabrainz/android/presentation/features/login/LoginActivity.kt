@@ -41,9 +41,6 @@ class LoginActivity : MusicBrainzActivity() {
             LoginSharedPreferences.STATUS_LOGGED_IN -> {
                 startActivity(Intent(this,ProfileActivity::class.java))
                 finish()
-//                binding!!.loginPromptId.setText(R.string.logout_prompt)
-//                binding!!.loginBtn.setText(R.string.logout)
-//                binding!!.loginBtn.setOnClickListener { logoutUser() }
             }
             else -> binding!!.loginBtn.setOnClickListener { startLogin() }
         }
@@ -98,14 +95,6 @@ class LoginActivity : MusicBrainzActivity() {
         }
     }
 
-    private fun logoutUser() {
-        LoginSharedPreferences.logoutUser()
-        Toast.makeText(applicationContext,
-                "User has successfully logged out.",
-                Toast.LENGTH_LONG).show()
-        startActivity(Intent(this, DashboardActivity::class.java))
-        finish()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
