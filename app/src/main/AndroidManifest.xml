@@ -125,6 +125,7 @@
         <activity
             android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
         <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
+        <activity android:name=".presentation.features.listens.ListensActivity" />
 
         <meta-data
             android:name="android.app.default_searchable"
