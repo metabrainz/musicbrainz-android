@@ -44,7 +44,7 @@ class ProfileActivity : AppCompatActivity() {
         setContent {
             Column {
                 TopAppBar()
-                CombinedTab()
+                TabBar()
                 if (showDialog.value) LogOutDialog()
                 TopAppBar()
             }
@@ -98,7 +98,7 @@ class ProfileActivity : AppCompatActivity() {
 
     @OptIn(ExperimentalPagerApi::class)
     @Composable
-    fun CombinedTab() {
+    fun TabBar() {
         val tabdata = listOf(
             ProfileTabItem.Profile,
             ProfileTabItem.Subscriptions,
