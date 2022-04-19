@@ -22,11 +22,43 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import org.metabrainz.android.R
-import org.metabrainz.android.presentation.features.userprofile.ChipTextColor
-import org.metabrainz.android.presentation.features.userprofile.DisabledChipColor
-import org.metabrainz.android.presentation.features.userprofile.EnabledChipColor
+import org.metabrainz.android.theme.ChipTextColor
+import org.metabrainz.android.theme.DisabledChipColor
+import org.metabrainz.android.theme.EnabledChipColor
+
+
+@Composable
+fun TagsSectionScreen(){
+    val constraints = ConstraintSet {
+        val chipsSet = createRefFor("chipsSet")
+        val predefinedTagSection = createRefFor("genreTypeSection")
+        val otherTagSection = createRefFor("otherTypeSection")
+
+        constrain(chipsSet){
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+        constrain(predefinedTagSection){
+            top.linkTo(chipsSet.bottom)
+            start.linkTo(parent.start)
+        }
+        constrain(otherTagSection){
+            top.linkTo(predefinedTagSection.bottom)
+            start.linkTo(parent.start)
+        }
+    }
+    ConstraintLayout(constraints, modifier = Modifier.fillMaxSize()) {
+
+        TagsChipsSection(listOf(UpvotedDownvotedTag.UPVOTE,UpvotedDownvotedTag.DOWNVOTE), layoutID = "chipsSet")
+        TagTypeSection("Genres", listOf("Electronic","Experimental","Rock"), layoutID ="genreTypeSection" )
+        TagTypeSection("Other Tags", listOf("Cool","Favourite"), layoutID = "otherTypeSection")
+    }
+
+}
 
 
 @Composable

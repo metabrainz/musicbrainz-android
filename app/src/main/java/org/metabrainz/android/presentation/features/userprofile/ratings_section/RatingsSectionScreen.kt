@@ -16,10 +16,39 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
 import org.metabrainz.android.R
-import org.metabrainz.android.presentation.features.userprofile.ChipTextColor
-import org.metabrainz.android.presentation.features.userprofile.DisabledChipColor
-import org.metabrainz.android.presentation.features.userprofile.EnabledChipColor
+import org.metabrainz.android.theme.ChipTextColor
+import org.metabrainz.android.theme.DisabledChipColor
+
+import org.metabrainz.android.theme.EnabledChipColor
+
+@Composable
+fun RatingsSectionScreen(){
+    val constraints = ConstraintSet {
+        val chipSet = createRefFor("chipSet")
+        val ratings = createRefFor("ratings")
+
+        constrain(chipSet){
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+        constrain(ratings){
+            top.linkTo(chipSet.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+    }
+    ConstraintLayout(constraints,modifier = Modifier.fillMaxSize()) {
+        val ratingEntities = listOf("Artist","Event","Label","Release Group","Recording","Work")
+        val ratedEntities = listOf(Pair("Fall Out Boy",3f),Pair("Sean Paul",4.5f),Pair("Ed Sheeren",5f))
+        RatingChipsSection(ratingEntities,"chipSet")
+        Ratings(items = ratedEntities, layoutID = "ratings")
+
+    }
+}
 
 @Composable
 fun RatingChipsSection(

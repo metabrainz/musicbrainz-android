@@ -12,20 +12,26 @@ import androidx.compose.ui.unit.dp
 import org.metabrainz.android.R
 
 @Composable
-fun MockCard(){
-    Row(modifier = Modifier.fillMaxWidth()
-        .height(30.dp)
-        .padding(12.dp)) {
-        Card(modifier = Modifier.fillMaxWidth(),
+fun SubscribersSectionScreen() {
+    MockCard()
+}
+
+@Composable
+fun MockCard() {
+    Row(modifier = Modifier.fillMaxSize().padding(10.dp)) {
+        Card(
+            modifier = Modifier.fillMaxWidth(),
             elevation = 3.dp,
             shape = RoundedCornerShape(10.dp),
             backgroundColor = colorResource(R.color.dark_gray)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.padding(13.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.padding(13.dp)
+            ) {
                 Text("YellowHatpro")
             }
-
         }
     }
 }

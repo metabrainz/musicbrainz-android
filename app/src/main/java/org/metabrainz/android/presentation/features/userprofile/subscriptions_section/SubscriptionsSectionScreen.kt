@@ -16,9 +16,38 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import org.metabrainz.android.presentation.features.userprofile.ChipTextColor
-import org.metabrainz.android.presentation.features.userprofile.DisabledChipColor
-import org.metabrainz.android.presentation.features.userprofile.EnabledChipColor
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import org.metabrainz.android.theme.ChipTextColor
+import org.metabrainz.android.theme.DisabledChipColor
+import org.metabrainz.android.theme.EnabledChipColor
+
+@Composable
+fun SubscriptionSectionScreen(){
+
+    val constraints = ConstraintSet {
+        val chipSet = createRefFor("chipSet")
+        val subscriptions = createRefFor("subscriptions")
+
+        constrain(chipSet){
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+        constrain(subscriptions){
+            top.linkTo(chipSet.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+    }
+
+    ConstraintLayout(constraints,modifier = Modifier.fillMaxSize()) {
+        val subscriptionEntities = listOf("Artist", "Series", "Label", "Collection", "Editor")
+        val subscriptions = listOf("P!nk","Arijit Singh","Coldplay")
+        SubscriptionChipSection(subscriptionEntities, "chipSet")
+        SubscriptionsCards(subscriptions,"subscriptions")
+    }
+}
 
 @Composable
 fun SubscriptionChipSection(
