@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.metabrainz.android.data.sources.api.entities.listens.Listen
-import org.metabrainz.android.ui.component.ItemDogCard
+import org.metabrainz.android.ui.component.ItemListenCard
 
 class ListensActivity: AppCompatActivity() {
 
@@ -34,7 +34,7 @@ fun Home(
         }
         items(listens) {
             listens.forEach {
-                ItemDogCard(
+                ItemListenCard(
                     it,
                     onItemClicked = { listen ->
 

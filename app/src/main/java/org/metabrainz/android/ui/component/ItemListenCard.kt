@@ -31,7 +31,7 @@ import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.listens.Listen
 
 @Composable
-fun ItemDogCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
+fun ItemListenCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
