@@ -26,6 +26,13 @@ class ServiceModule {
 
     @get:Provides
     @get:Singleton
+    val listensService: ListensService = Retrofit.Builder()
+        .baseUrl("https://api.listenbrainz.org/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build().create(ListensService::class.java)
+
+    @get:Provides
+    @get:Singleton
     val collectionService: CollectionService = createService(CollectionService::class.java, true)
 
     @get:Provides

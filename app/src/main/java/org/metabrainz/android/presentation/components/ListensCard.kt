@@ -1,4 +1,4 @@
-package org.metabrainz.android.ui.component
+package org.metabrainz.android.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -31,7 +31,7 @@ import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.listens.Listen
 
 @Composable
-fun ItemListenCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
+fun ListensCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -47,7 +47,7 @@ fun ItemListenCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
                 .padding(16.dp)
         ) {
 
-            val image: Painter = painterResource(id = R.drawable.ic_baseline_heart_broken_24)
+            val image: Painter = painterResource(id = R.drawable.ic_musicbrainz_logo_no_text)
             Image(
                 modifier = Modifier
                     .size(80.dp, 80.dp)

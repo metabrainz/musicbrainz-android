@@ -2,9 +2,12 @@ package org.metabrainz.android.presentation.components
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -12,14 +15,34 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.about.AboutActivity
+import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.android.presentation.features.dashboard.DonateActivity
 import org.metabrainz.android.presentation.features.settings.SettingsActivity
 
 @Composable
-fun TopAppBar(activity: Activity) {
+fun TopAppBar(activity: Activity, title: String = "MusicBrainz") {
     androidx.compose.material.TopAppBar(
         title = {
-            Text(text = "MusicBrainz")
+            Text(text = title)
+        },
+        navigationIcon =  {
+            when {
+                activity::class.java != DashboardActivity::class.java -> {
+                    IconButton(onClick = {
+                        activity.onBackPressed()
+                    }) {
+                        Icon(Icons.Outlined.ArrowBack, contentDescription = "Back")
+                    }
+                }
+                else -> {
+                    IconButton(onClick = {
+                        activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://musicbrainz.org")))
+                    }) {
+                        Icon(painterResource(id = R.drawable.ic_musicbrainz_logo_icon),
+                            "MusicBrainz",
+                            tint = Color.Unspecified)                    }
+                }
+            }
         },
         backgroundColor = colorResource(id = R.color.app_bg),
         contentColor = colorResource(id = R.color.white),
