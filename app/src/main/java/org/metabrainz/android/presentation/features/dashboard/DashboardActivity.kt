@@ -4,40 +4,39 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.thefinestartist.finestwebview.FinestWebView
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityDashboardBinding
-import org.metabrainz.android.presentation.features.about.AboutActivity
+import org.metabrainz.android.presentation.UserPreferences
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
-import org.metabrainz.android.presentation.features.login.LoginActivity
-import org.metabrainz.android.presentation.features.navigation.NavigationItem
-import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
+import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
-import org.metabrainz.android.presentation.features.settings.SettingsActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
-import org.metabrainz.android.ui.component.BottomBar
+import org.metabrainz.android.presentation.components.BottomNavigationBar
+import org.metabrainz.android.presentation.components.TopAppBar
 
+@AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
+
+        if (!UserPreferences.onBoardingStatus) {
+            startActivity(Intent(this, FeaturesActivity::class.java))
+            finish()
+        }
         binding = ActivityDashboardBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
         binding.bottomNav.setContent {
-            BottomBar(this)
+            BottomNavigationBar(this)
         }
         binding.topAppBar.setContent {
-            TopAppBar()
+            TopAppBar(this)
         }
 
         //Navigation
@@ -57,42 +56,5 @@ class DashboardActivity : AppCompatActivity() {
         binding.dashboardTagId.animation = leftItemAnimation
         binding.dashboardSearchId.animation = rightItemAnimation
         binding.dashboardCollectionId.animation = leftItemAnimation
-    }
-
-    @Composable
-    fun TopAppBar() {
-        TopAppBar(
-            title = {
-                Text(text = "MusicBrainz")
-            },
-            backgroundColor = colorResource(id = R.color.app_bg),
-            contentColor = colorResource(id = R.color.white),
-            elevation = 2.dp,
-            actions = {
-                IconButton(onClick = {
-                    startActivity(Intent(applicationContext, AboutActivity::class.java))
-                }) {
-                    Icon(painterResource(id = R.drawable.ic_information), "About", tint = Color.Unspecified)
-                }
-                IconButton(onClick = {
-                    startActivity(Intent(applicationContext, DonateActivity::class.java))
-                }) {
-                    Icon(painterResource(id = R.drawable.ic_donate), "Donate", tint = Color.Unspecified)
-                }
-                IconButton(onClick = {
-                    startActivity(Intent(applicationContext, SettingsActivity::class.java))
-                }) {
-                    Icon(painterResource(id = R.drawable.action_settings), "Settings", tint = Color.Unspecified)
-                }
-            }
-        )
-    }
-
-
-
-    @Preview(showBackground = true)
-    @Composable
-    fun TopAppBarPreview() {
-        TopAppBar()
     }
 }
