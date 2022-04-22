@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="32">
 
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
@@ -42,20 +42,17 @@
         </service>
 
         <activity
-            android:name=".presentation.features.splash_screen.SplashActivity"
-            android:theme="@style/AppThemeNoActionBar"
+            android:name=".presentation.features.onboarding.FeaturesActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".presentation.features.dashboard.DashboardActivity"
+            android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.features.onboarding.FeaturesActivity"
-            android:theme="@style/AppThemeNoActionBar" />
-        <activity
-            android:name=".presentation.features.dashboard.DashboardActivity"
-            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"
             android:label="Collection"
