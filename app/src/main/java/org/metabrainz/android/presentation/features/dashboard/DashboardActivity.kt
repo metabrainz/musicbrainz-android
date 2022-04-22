@@ -13,8 +13,8 @@ import org.metabrainz.android.presentation.features.collection.CollectionActivit
 import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
-import org.metabrainz.android.ui.components.BottomNavigationBar
-import org.metabrainz.android.ui.components.TopAppBar
+import org.metabrainz.android.presentation.components.BottomNavigationBar
+import org.metabrainz.android.presentation.components.TopAppBar
 
 @AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
@@ -23,6 +23,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+
         if (!UserPreferences.onBoardingStatus) {
             startActivity(Intent(this, FeaturesActivity::class.java))
             finish()

@@ -1,4 +1,4 @@
-package org.metabrainz.android.ui.components
+package org.metabrainz.android.presentation.components
 
 import android.app.Activity
 import android.content.Intent
