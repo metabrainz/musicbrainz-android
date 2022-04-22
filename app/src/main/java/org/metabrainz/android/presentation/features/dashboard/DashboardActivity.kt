@@ -23,7 +23,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-        if (!UserPreferences.onBoardingStatus) {
+        if (UserPreferences.onBoardingStatus) {
             startActivity(Intent(this, FeaturesActivity::class.java))
             finish()
         }
