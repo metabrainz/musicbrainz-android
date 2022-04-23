@@ -2,18 +2,9 @@ package org.metabrainz.android.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
@@ -21,17 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import org.metabrainz.android.R
+import coil.compose.rememberAsyncImagePainter
+import org.metabrainz.android.data.sources.api.entities.CoverArt
 import org.metabrainz.android.data.sources.api.entities.listens.Listen
 
 @Composable
-fun ListensCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
+fun ListenCard(listen: Listen, coverArt: CoverArt?, onItemClicked: (listen: Listen) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,13 +35,11 @@ fun ListensCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-
-            val image: Painter = painterResource(id = R.drawable.ic_musicbrainz_logo_no_text)
             Image(
                 modifier = Modifier
                     .size(80.dp, 80.dp)
                     .clip(RoundedCornerShape(16.dp)),
-                painter = image,
+                painter = rememberAsyncImagePainter(coverArt?.images?.get(0)?.thumbnails?.large),
                 alignment = Alignment.CenterStart,
                 contentDescription = "",
                 contentScale = ContentScale.Crop
@@ -62,7 +49,7 @@ fun ListensCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
 
             Column(modifier = Modifier.align(Alignment.CenterVertically)) {
                 Text(
-                    text = listen.user_name,
+                    text = listen.track_metadata.track_name,
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                     color = MaterialTheme.colors.surface,
                     fontWeight = FontWeight.Bold,
@@ -73,8 +60,6 @@ fun ListensCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
                 Text(
                     text = buildString {
                         append(listen.track_metadata.artist_name)
-                        append("yrs | ")
-                        append(listen.recording_msid)
                     },
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                     color = MaterialTheme.colors.surface,
@@ -82,30 +67,33 @@ fun ListensCard(listen: Listen, onItemClicked: (listen: Listen) -> Unit) {
                 )
 
                 Row(verticalAlignment = Alignment.Bottom) {
-
-                    val location: Painter = painterResource(id = R.drawable.ic_baseline_heart_broken_24)
-
-                    Icon(
-                        painter = location,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp, 16.dp),
-                        tint = Color.Red
-                    )
-
                     Text(
                         text = listen.track_metadata.release_name,
-                        modifier = Modifier.padding(8.dp, 12.dp, 12.dp, 0.dp),
+                        modifier = Modifier.padding(0.dp, 12.dp, 12.dp, 0.dp),
                         color = MaterialTheme.colors.surface,
                         style = typography.caption
                     )
                 }
             }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-
-            }
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalArrangement = Arrangement.End,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                Icon(
+//                    painter = painterResource(id = R.drawable.ic_baseline_heart_broken_24),
+//                    contentDescription = null,
+//                    modifier = Modifier.size(16.dp, 16.dp),
+//                    tint = Color.Red
+//                )
+//
+//                Icon(
+//                    painter = painterResource(id = R.drawable.ic_baseline_heart_broken_24),
+//                    contentDescription = null,
+//                    modifier = Modifier.size(16.dp, 16.dp),
+//                    tint = Color.Red
+//                )
+//            }
         }
     }
 }

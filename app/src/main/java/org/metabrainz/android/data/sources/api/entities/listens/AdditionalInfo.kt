@@ -11,6 +11,7 @@ data class AdditionalInfo(
     val release_artist_name: String,
     val release_artist_names: List<String>,
     val release_msid: String,
+    val release_mbid: String?,
     val spotify_album_artist_ids: List<String>,
     val spotify_album_id: String,
     val spotify_artist_ids: List<String>,
