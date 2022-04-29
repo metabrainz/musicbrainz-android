@@ -11,36 +11,47 @@ import org.metabrainz.android.data.repository.ListensRepository
 import org.metabrainz.android.data.sources.api.entities.CoverArt
 import org.metabrainz.android.data.sources.api.entities.listens.Listen
 import org.metabrainz.android.util.Resource
+import org.metabrainz.android.util.Resource.Status.*
 import javax.inject.Inject
 
 @HiltViewModel
 class ListensViewModel @Inject constructor(val repository: ListensRepository) : ViewModel() {
     var listens: List<Listen> by mutableStateOf(listOf())
-    var coverArt: CoverArt? by mutableStateOf(null)
+    var isLoading: Boolean  by mutableStateOf(false)
 
     fun fetchUserListens(userName: String) {
         viewModelScope.launch {
             val response = repository.fetchUserListens(userName)
             when(response.status){
-                Resource.Status.SUCCESS -> {
+                SUCCESS -> {
+                    isLoading = false
                     listens = response.data!!
-                }
-                else -> {
+                    listens.forEachIndexed { index, listen ->
+                        var releaseMBID:String? = null
+                        when {
+                            listen.track_metadata.mbid_mapping.release_mbid != null -> {
+                               releaseMBID = listen.track_metadata.mbid_mapping.release_mbid
+                            }
+                            listen.track_metadata.additional_info.release_mbid != null -> {
+                                releaseMBID = listen.track_metadata.additional_info.release_mbid
+                            }
+                        }
+                        val responseCoverArt = repository.fetchCoverArt(releaseMBID)
+                        when(responseCoverArt.status) {
+                            SUCCESS -> {
+                                listens[index].coverArt = responseCoverArt.data!!
+                            }
+                            else -> {
 
+                            }
+                        }
+                    }
                 }
-            }
-        }
-    }
-
-    fun fetchCoverArt(MBID: String) {
-        viewModelScope.launch {
-            val response = repository.fetchCoverArt(MBID)
-            when(response.status){
-                Resource.Status.SUCCESS -> {
-                    coverArt = response.data!!
+                LOADING -> {
+                    isLoading = true
                 }
-                else -> {
-
+                FAILED -> {
+                    isLoading = false
                 }
             }
         }

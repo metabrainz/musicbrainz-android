@@ -1,13 +1,9 @@
 package org.metabrainz.android.data.repository
 
 import androidx.annotation.WorkerThread
-import org.metabrainz.android.data.sources.CollectionUtils
-import org.metabrainz.android.data.sources.api.CollectionService
 import org.metabrainz.android.data.sources.api.ListensService
 import org.metabrainz.android.data.sources.api.entities.CoverArt
 import org.metabrainz.android.data.sources.api.entities.listens.Listen
-import org.metabrainz.android.data.sources.api.entities.listens.Listens
-import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
 import org.metabrainz.android.util.Resource
 import org.metabrainz.android.util.Resource.Status.FAILED
 import org.metabrainz.android.util.Resource.Status.SUCCESS

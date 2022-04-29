@@ -1,26 +1,40 @@
 package org.metabrainz.android.presentation.features.listens
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.components.BottomNavigationBar
 import org.metabrainz.android.presentation.components.ListenCard
 import org.metabrainz.android.presentation.components.TopAppBar
+import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.login.LoginSharedPreferences.username
 
 @AndroidEntryPoint
 class ListensActivity: ComponentActivity() {
+    var loading =  mutableStateOf(true)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +44,10 @@ class ListensActivity: ComponentActivity() {
                 topBar = { TopAppBar(activity = this, title = "Listens") },
                 bottomBar = { BottomNavigationBar(activity = this) }
             ) {
+                Loader()
                 AllUserListens(
-                    modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
+                    modifier = Modifier.padding(it),
+                    activity = this
                 )
             }
         }
@@ -40,27 +56,51 @@ class ListensActivity: ComponentActivity() {
 
 @Composable
 fun AllUserListens(
+    modifier: Modifier = Modifier,
     viewModel: ListensViewModel = viewModel(),
-    modifier: Modifier = Modifier
+    activity: Activity
 ) {
+    if(username == ""){
+        AlertDialog(
+            onDismissRequest = { },
+            confirmButton = {
+                TextButton(onClick = {
+                    activity.startActivity(Intent(activity, LoginActivity::class.java))
+                })
+                { Text(text = "OK") }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    activity.finish()
+                })
+                { Text(text = "Cancel") }
+            },
+            title = { Text(text = "Please login to your profile") },
+            text = { Text(text = "We will fetch your listens once you have logged in") }
+        )
+        return
+    }
+
     username?.let { viewModel.fetchUserListens(userName = it) }
+
+    AnimatedVisibility(visible = viewModel.isLoading){
+        Loader()
+    }
     LazyColumn(modifier) {
             items(viewModel.listens) { listen->
-                when {
-                    listen.track_metadata.additional_info.release_mbid!=null -> {
-                        viewModel.fetchCoverArt(listen.track_metadata.additional_info.release_mbid)
-                    }
-                    listen.track_metadata.mbid_mapping.release_mbid!=null -> {
-                        viewModel.fetchCoverArt(listen.track_metadata.mbid_mapping.release_mbid)
-                    }
-                }
                 ListenCard(
                     listen,
-                    viewModel.coverArt,
+                    coverArt = listen.coverArt,
                     onItemClicked = { listen ->
 
                     }
                 )
             }
     }
+}
+
+@Composable
+fun Loader() {
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.headphone_meb_loading))
+    LottieAnimation(composition)
 }
