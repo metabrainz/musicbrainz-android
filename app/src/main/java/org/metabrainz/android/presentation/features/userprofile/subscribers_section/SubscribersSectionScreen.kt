@@ -1,6 +1,7 @@
 package org.metabrainz.android.presentation.features.userprofile.subscribers_section
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -13,25 +14,31 @@ import org.metabrainz.android.R
 
 @Composable
 fun SubscribersSectionScreen() {
-    MockCard()
+    val name = "YellowHatpro"
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        item {
+            SubscriberCard(name)
+        }
+    }
 }
 
 @Composable
-fun MockCard() {
-    Row(modifier = Modifier.fillMaxSize().padding(10.dp)) {
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            elevation = 3.dp,
-            shape = RoundedCornerShape(10.dp),
-            backgroundColor = colorResource(R.color.dark_gray)
+fun SubscriberCard(name: String) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 20.dp, vertical = 4.dp)
+            .fillMaxWidth()
+            .height(60.dp),
+        elevation = 3.dp,
+        shape = RoundedCornerShape(10.dp),
+        backgroundColor = colorResource(R.color.dark_gray)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.padding(13.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.padding(13.dp)
-            ) {
-                Text("YellowHatpro")
-            }
+            Text(name)
         }
     }
 }

@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="32">
+
         <activity
             android:name=".presentation.features.userprofile.ProfileActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
@@ -45,34 +46,30 @@
         </service>
 
         <activity
-            android:name=".presentation.features.splash_screen.SplashActivity"
-            android:exported="true"
-            android:theme="@style/AppThemeNoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".presentation.features.onboarding.FeaturesActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".presentation.features.dashboard.DashboardActivity"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/Theme.App.Starting"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.features.collection.CollectionDetailsActivity"
             android:label="Collection"
-            android:parentActivityName=".presentation.features.collection.CollectionActivity">
+            android:parentActivityName="org.metabrainz.android.presentation.features.collection.CollectionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.features.collection.CollectionActivity" />
         </activity>
         <activity
-            android:name=".presentation.features.collection.CollectionActivity"
+            android:name="org.metabrainz.android.presentation.features.collection.CollectionActivity"
             android:label="@string/dash_collections" />
         <activity
-            android:name=".presentation.features.tagger.TaggerActivity"
+            android:name="org.metabrainz.android.presentation.features.tagger.TaggerActivity"
             android:label="@string/settings_tagger"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -95,8 +92,8 @@
         </activity>
         <activity
             android:name=".presentation.features.login.LoginActivity"
-            android:exported="true"
-            android:label="@string/auth_title">
+            android:label="@string/auth_title"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -115,20 +112,19 @@
             android:name=".presentation.features.dashboard.DonateActivity"
             android:label="@string/donate_title" />
         <activity
-            android:name=".presentation.features.release.ReleaseActivity"
+            android:name="org.metabrainz.android.presentation.features.release.ReleaseActivity"
             android:label="@string/release_title" />
         <activity
-            android:name=".presentation.features.artist.ArtistActivity"
+            android:name="org.metabrainz.android.presentation.features.artist.ArtistActivity"
             android:label="@string/artist_title" />
         <activity
-            android:name=".presentation.features.settings.SettingsActivity"
+            android:name="org.metabrainz.android.presentation.features.settings.SettingsActivity"
             android:label="@string/preferences_title" />
 
         <activity android:name=".presentation.features.barcode.BarcodeActivity" />
 
         <activity
             android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
-
         <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
 
         <meta-data
@@ -139,9 +135,10 @@
             android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
 
         <provider
-            android:name=".presentation.features.suggestion.SuggestionProvider"
+            android:name="org.metabrainz.android.presentation.features.suggestion.SuggestionProvider"
             android:authorities="${applicationId}.SearchSuggestionProvider"
             android:exported="false" />
+
     </application>
 
 </manifest>
