@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.sp
 import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.login.LoginActivity
@@ -31,7 +32,7 @@ fun BottomNavigationBar(activity: Activity) {
         items.forEach { item ->
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title, tint = Color.Unspecified) },
-                label = { Text(text = item.title) },
+                label = { Text(text = item.title, fontSize = 11.sp) },
                 selectedContentColor = colorResource(id = R.color.white),
                 unselectedContentColor = colorResource(id = R.color.gray),
                 alwaysShowLabel = true,

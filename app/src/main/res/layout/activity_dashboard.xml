@@ -37,8 +37,8 @@
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:padding="20dp"
+                android:layout_height="175dp"
+                android:padding="10dp"
                 android:src="@drawable/ic_musicbrainz_logo_no_text" />
 
             <LinearLayout

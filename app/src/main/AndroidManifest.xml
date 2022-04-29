@@ -26,6 +26,10 @@
         tools:targetApi="32">
 
         <activity
+            android:name=".presentation.features.userprofile.ProfileActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"

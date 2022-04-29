@@ -15,6 +15,7 @@ import org.metabrainz.android.data.sources.api.entities.userdata.UserInfo
 import org.metabrainz.android.databinding.ActivityLoginBinding
 import org.metabrainz.android.presentation.features.base.MusicBrainzActivity
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
+import org.metabrainz.android.presentation.features.userprofile.ProfileActivity
 import org.metabrainz.android.util.Log.d
 
 @AndroidEntryPoint
@@ -38,9 +39,8 @@ class LoginActivity : MusicBrainzActivity() {
         }
         when (LoginSharedPreferences.loginStatus) {
             LoginSharedPreferences.STATUS_LOGGED_IN -> {
-                binding!!.loginPromptId.setText(R.string.logout_prompt)
-                binding!!.loginBtn.setText(R.string.logout)
-                binding!!.loginBtn.setOnClickListener { logoutUser() }
+                startActivity(Intent(this,ProfileActivity::class.java))
+                finish()
             }
             else -> binding!!.loginBtn.setOnClickListener { startLogin() }
         }
@@ -95,14 +95,6 @@ class LoginActivity : MusicBrainzActivity() {
         }
     }
 
-    private fun logoutUser() {
-        LoginSharedPreferences.logoutUser()
-        Toast.makeText(applicationContext,
-                "User has successfully logged out.",
-                Toast.LENGTH_LONG).show()
-        startActivity(Intent(this, DashboardActivity::class.java))
-        finish()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
