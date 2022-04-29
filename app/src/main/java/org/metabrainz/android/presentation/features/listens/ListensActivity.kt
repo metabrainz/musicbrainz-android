@@ -1,7 +1,6 @@
 package org.metabrainz.android.presentation.features.listens
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,7 +21,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.R
@@ -44,7 +42,6 @@ class ListensActivity: ComponentActivity() {
                 topBar = { TopAppBar(activity = this, title = "Listens") },
                 bottomBar = { BottomNavigationBar(activity = this) }
             ) {
-                Loader()
                 AllUserListens(
                     modifier = Modifier.padding(it),
                     activity = this

@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ListensViewModel @Inject constructor(val repository: ListensRepository) : ViewModel() {
     var listens: List<Listen> by mutableStateOf(listOf())
-    var isLoading: Boolean  by mutableStateOf(false)
+    var isLoading: Boolean  by mutableStateOf(true)
 
     fun fetchUserListens(userName: String) {
         viewModelScope.launch {
