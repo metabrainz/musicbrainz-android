@@ -12,6 +12,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
+import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
+import org.metabrainz.android.presentation.features.listens.ListensActivity
 import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.navigation.NavigationItem
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
@@ -38,17 +40,32 @@ fun BottomNavigationBar(activity: Activity) {
                 selected = true,
                 onClick = {
                     when(item.route){
+                        "home" -> {
+                            val nextActivity = DashboardActivity::class.java
+                            if(nextActivity != activity::class.java){
+                                activity.startActivity(Intent(activity, DashboardActivity::class.java))
+                            }
+                        }
                         "news" -> {
-                            activity.startActivity(Intent(activity, NewsBrainzActivity::class.java))
+                            val nextActivity = NewsBrainzActivity::class.java
+                            if(nextActivity != activity::class.java){
+                                activity.startActivity(Intent(activity, NewsBrainzActivity::class.java))
+                            }
                         }
                         "listens" -> {
-                            FinestWebView.Builder(activity).show("https://listenbrainz.org/")
+                            val nextActivity = ListensActivity::class.java
+                            if(nextActivity != activity::class.java){
+                                activity.startActivity(Intent(activity, ListensActivity::class.java))
+                            }
                         }
                         "critiques" -> {
                             FinestWebView.Builder(activity).show("https://critiquebrainz.org/")
                         }
                         "profile" -> {
-                            activity.startActivity(Intent(activity, LoginActivity::class.java))
+                            val nextActivity = LoginActivity::class.java
+                            if(nextActivity != activity::class.java){
+                                activity.startActivity(Intent(activity, LoginActivity::class.java))
+                            }
                         }
                     }
                 }
