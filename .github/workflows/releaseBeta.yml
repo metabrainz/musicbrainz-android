@@ -1,6 +1,7 @@
 name: Release (Beta)
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'app/**'
