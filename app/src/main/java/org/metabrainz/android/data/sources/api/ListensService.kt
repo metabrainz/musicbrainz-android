@@ -10,5 +10,5 @@ interface ListensService {
     suspend fun getUserListens(@Path("user_name") user_name: String): Listens
 
     @GET("http://coverartarchive.org/release/{MBID}")
-    suspend fun getCoverArt(@Path("MBID") MBID: String?): CoverArt
+    suspend fun getCoverArt(@Path("MBID") MBID: String): CoverArt
 }

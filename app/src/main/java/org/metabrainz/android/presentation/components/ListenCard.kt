@@ -13,9 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.api.entities.CoverArt
 import org.metabrainz.android.data.sources.api.entities.listens.Listen
 
@@ -35,11 +38,19 @@ fun ListenCard(listen: Listen, coverArt: CoverArt?, onItemClicked: (listen: List
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
+            val painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current)
+                    .data(data = coverArt?.images?.get(0)?.thumbnails?.large)
+                    .placeholder(R.drawable.ic_coverartarchive_logo_no_text)
+                    .error(R.drawable.ic_coverartarchive_logo_no_text)
+                    .build()
+            )
+
             Image(
                 modifier = Modifier
                     .size(80.dp, 80.dp)
                     .clip(RoundedCornerShape(16.dp)),
-                painter = rememberAsyncImagePainter(coverArt?.images?.get(0)?.thumbnails?.large),
+                painter = painter,
                 alignment = Alignment.CenterStart,
                 contentDescription = "",
                 contentScale = ContentScale.Crop

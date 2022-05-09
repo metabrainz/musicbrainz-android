@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -80,7 +83,11 @@ fun AllUserListens(
 
     username?.let { viewModel.fetchUserListens(userName = it) }
 
-    AnimatedVisibility(visible = viewModel.isLoading){
+    AnimatedVisibility(
+        visible = viewModel.isLoading,
+        enter = fadeIn(initialAlpha = 0.4f),
+        exit = fadeOut(animationSpec = tween(durationMillis = 250))
+    ){
         Loader()
     }
     LazyColumn(modifier) {

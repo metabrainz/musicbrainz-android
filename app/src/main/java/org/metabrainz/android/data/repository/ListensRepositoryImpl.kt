@@ -24,7 +24,7 @@ class ListensRepositoryImpl @Inject constructor(val service: ListensService) : L
         }
     }
 
-    override suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt> {
+    override suspend fun fetchCoverArt(MBID: String): Resource<CoverArt> {
         return try {
             val coverArt = service.getCoverArt(MBID)
             Resource(SUCCESS, coverArt)
