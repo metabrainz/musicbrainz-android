@@ -1,0 +1,2 @@
+The entire UI has been revamped and re-written in Compose.
+Most importantly, official ListenBrainz features have been added to the app!
