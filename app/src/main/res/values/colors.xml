@@ -26,6 +26,8 @@
     <!-- Brand -->
     <color name="mb_purple_medium">#736dab</color>
     <color name="mb_purple_dark">#34176b</color>
+    <color name="mb_purple">#ba478f</color>
+    <color name="mb_orange">#eb743b</color>
 
     <color name="dark_gray">#d6f6dd</color>
     <color name="light_gray">#737373</color>

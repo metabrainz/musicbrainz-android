@@ -10,6 +10,9 @@
     <!-- DashboardActivity -->
     <string name="app_name">MusicBrainz</string>
     <string name="search_hint">Search MusicBrainz</string>
+    <string name="search_card">Explore MusicBrainz data</string>
+    <string name="tagger_card">Choose your Audio, Fix the tag</string>
+    <string name="collection_card">Explore your MusicBrainz Collection</string>
     <string name="dash_scan">Scan</string>
     <string name="dash_collections">Collections</string>
     <string name="dash_donate">Donate</string>

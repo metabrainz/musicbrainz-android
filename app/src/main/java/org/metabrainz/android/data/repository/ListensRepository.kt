@@ -6,5 +6,5 @@ import org.metabrainz.android.util.Resource
 
 interface ListensRepository {
     suspend fun fetchUserListens(userName: String): Resource<List<Listen>>
-    suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt>
+    suspend fun fetchCoverArt(MBID: String): Resource<CoverArt>
 }
