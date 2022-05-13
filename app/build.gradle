@@ -72,6 +72,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
     }
+    namespace 'org.metabrainz.android'
 }
 
 dependencies {
@@ -141,11 +142,15 @@ dependencies {
     implementation "androidx.compose.animation:animation:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
-    implementation 'androidx.navigation:navigation-compose:2.5.0-beta01'
+    implementation 'androidx.navigation:navigation-compose:2.5.0-rc01'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     implementation 'io.coil-kt:coil-compose:2.0.0-rc03'
     implementation 'com.airbnb.android:lottie-compose:5.0.3'
+
+    //Spotify
+    implementation 'com.spotify.android:auth:1.2.5'
+    implementation files('./lib/spotify-app-remote-release-0.7.2.aar')
 
     //Test Setup
     testImplementation 'junit:junit:4.13.2'
