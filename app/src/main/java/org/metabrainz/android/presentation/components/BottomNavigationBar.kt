@@ -17,7 +17,6 @@ import org.metabrainz.android.presentation.features.listens.ListensActivity
 import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.navigation.NavigationItem
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity
 
 @Composable
 fun BottomNavigationBar(activity: Activity) {
@@ -50,7 +49,7 @@ fun BottomNavigationBar(activity: Activity) {
                         "news" -> {
                             val nextActivity = NewsBrainzActivity::class.java
                             if(nextActivity != activity::class.java){
-                                activity.startActivity(Intent(activity, RemotePlayerKotActivity::class.java))
+                                activity.startActivity(Intent(activity, NewsBrainzActivity::class.java))
                             }
                         }
                         "listens" -> {

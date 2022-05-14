@@ -9,7 +9,6 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.appcompat.widget.PopupMenu
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.GsonBuilder
@@ -20,24 +19,23 @@ import com.spotify.android.appremote.api.SpotifyAppRemote
 import com.spotify.android.appremote.api.error.SpotifyDisconnectedException
 import com.spotify.protocol.client.Subscription
 import com.spotify.protocol.types.*
-import com.spotify.sdk.demo.TrackProgressBar
 import kotlinx.coroutines.launch
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.AppRemoteLayoutBinding
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity.AuthParams.CLIENT_ID
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity.AuthParams.REDIRECT_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity.SpotifySampleContexts.ALBUM_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity.SpotifySampleContexts.ARTIST_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity.SpotifySampleContexts.PLAYLIST_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity.SpotifySampleContexts.PODCAST_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerKotActivity.SpotifySampleContexts.TRACK_URI
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.AuthParams.CLIENT_ID
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.AuthParams.REDIRECT_URI
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.ALBUM_URI
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.ARTIST_URI
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.PLAYLIST_URI
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.PODCAST_URI
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.TRACK_URI
 import java.util.*
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class RemotePlayerKotActivity : AppCompatActivity() {
+class RemotePlayerActivity : AppCompatActivity() {
 
     object AuthParams {
         const val CLIENT_ID = "da5388546fde4aa8a47aad3539e7f87b"
@@ -68,6 +66,36 @@ class RemotePlayerKotActivity : AppCompatActivity() {
     private lateinit var binding: AppRemoteLayoutBinding
 
     private val errorCallback = { throwable: Throwable -> logError(throwable) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = AppRemoteLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.seekTo.apply {
+            isEnabled = false
+            progressDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
+            indeterminateDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
+        }
+
+        trackProgressBar = TrackProgressBar(binding.seekTo) { seekToPosition: Long -> seekTo(seekToPosition) }
+
+        views = listOf(
+            binding.subscribeToPlayerContextButton,
+            binding.subscribeToPlayerStateButton,
+            binding.playPauseButton,
+            binding.seekForwardButton,
+            binding.seekBackButton,
+            binding.skipPrevButton,
+            binding.skipNextButton,
+            binding.seekTo)
+
+        SpotifyAppRemote.setDebugMode(true)
+
+        onDisconnected()
+        connect()
+    }
+
 
     private val playerContextEventCallback = Subscription.EventCallback<PlayerContext> { playerContext ->
         binding.currentContextLabel.apply {
@@ -114,10 +142,13 @@ class RemotePlayerKotActivity : AppCompatActivity() {
     private fun updateSeekbar(playerState: PlayerState) {
         // Update progressbar
         trackProgressBar.apply {
-            if (playerState.playbackSpeed > 0) {
-                unpause()
-            } else {
-                pause()
+            when {
+                playerState.playbackSpeed > 0 -> {
+                    unpause()
+                }
+                else -> {
+                    pause()
+                }
             }
             // Invalidate seekbar length and position
             binding.seekTo.max = playerState.track.duration.toInt()
@@ -135,35 +166,6 @@ class RemotePlayerKotActivity : AppCompatActivity() {
             .setResultCallback { bitmap ->
                 binding.image.setImageBitmap(bitmap)
             }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = AppRemoteLayoutBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.seekTo.apply {
-            isEnabled = false
-            progressDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
-            indeterminateDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
-        }
-
-        trackProgressBar = TrackProgressBar(binding.seekTo) { seekToPosition: Long -> seekTo(seekToPosition) }
-
-        views = listOf(
-            binding.subscribeToPlayerContextButton,
-            binding.subscribeToPlayerStateButton,
-            binding.playPauseButton,
-            binding.seekForwardButton,
-            binding.seekBackButton,
-            binding.skipPrevButton,
-            binding.skipNextButton,
-            binding.seekTo)
-
-        SpotifyAppRemote.setDebugMode(true)
-
-        onDisconnected()
-        connect()
     }
 
     private fun seekTo(seekToPosition: Long) {
@@ -238,34 +240,6 @@ class RemotePlayerKotActivity : AppCompatActivity() {
                     }
                 })
         }
-
-    fun onImageClicked(view: View) {
-        assertAppRemoteConnected().let {
-            it.playerApi
-                .playerState
-                .setResultCallback { playerState ->
-                    val popupMenu = PopupMenu(this, view)
-                    popupMenu.run {
-                        menu.add(720, 720, 0, "Large (720px)")
-                        menu.add(480, 480, 1, "Medium (480px)")
-                        menu.add(360, 360, 2, "Small (360px)")
-                        menu.add(240, 240, 3, "X Small (240px)")
-                        menu.add(144, 144, 4, "Thumbnail (144px)")
-                        setOnMenuItemClickListener { item ->
-                            it.imagesApi
-                                .getImage(
-                                    playerState.track.imageUri, Image.Dimension.values()[item.order])
-                                .setResultCallback { bitmap ->
-                                    binding.image.setImageBitmap(bitmap)
-                                }
-                            false
-                        }
-                        show()
-                    }
-                }
-                .setErrorCallback(errorCallback)
-        }
-    }
 
     fun onPlayPodcastButtonClicked(notUsed: View) {
         playUri(PODCAST_URI)

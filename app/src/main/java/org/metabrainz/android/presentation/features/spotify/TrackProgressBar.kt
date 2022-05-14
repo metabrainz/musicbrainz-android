@@ -1,4 +1,4 @@
-package com.spotify.sdk.demo
+package org.metabrainz.android.presentation.features.spotify
 
 import android.os.Handler
 import android.widget.SeekBar

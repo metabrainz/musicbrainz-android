@@ -124,7 +124,7 @@
         <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
         <activity android:name=".presentation.features.listens.ListensActivity"
             android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".presentation.features.spotify.RemotePlayerKotActivity"
+        <activity android:name=".presentation.features.spotify.RemotePlayerActivity"
             android:theme="@style/AppThemeNoActionBar"/>
 
         <meta-data

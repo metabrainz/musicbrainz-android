@@ -32,6 +32,7 @@ import org.metabrainz.android.presentation.components.ListenCard
 import org.metabrainz.android.presentation.components.TopAppBar
 import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.login.LoginSharedPreferences.username
+import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity
 
 @AndroidEntryPoint
 class ListensActivity: ComponentActivity() {
@@ -96,7 +97,7 @@ fun AllUserListens(
                     listen,
                     coverArt = listen.coverArt,
                     onItemClicked = { listen ->
-
+                        activity.startActivity(Intent(activity, RemotePlayerActivity::class.java))
                     }
                 )
             }
