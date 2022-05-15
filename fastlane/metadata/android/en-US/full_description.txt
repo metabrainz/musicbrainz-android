@@ -24,4 +24,4 @@ Recorded works can also store information about the release date and country, th
 
 The source code for this app is available on GitHub at https://github.com/metabrainz/musicbrainz-android
 
-This app uses icons designed by Freepik and Flaticon
+This app uses icons designed by Freepik and Flaticon, leverages the Spotify Android SDK for playing tracks.

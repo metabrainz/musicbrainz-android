@@ -1,0 +1,3 @@
+Official ListenBrainz integration to the app has been made.
+Spotify Android SDK has been leveraged to make updates.
+Also, the entire UI has been revamped and re-written in Compose.
