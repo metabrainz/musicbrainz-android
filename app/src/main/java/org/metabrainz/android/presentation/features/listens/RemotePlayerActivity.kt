@@ -1,34 +1,27 @@
-package org.metabrainz.android.presentation.features.spotify
+package org.metabrainz.android.presentation.features.listens
 
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.GsonBuilder
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
-import com.spotify.android.appremote.api.ContentApi
 import com.spotify.android.appremote.api.SpotifyAppRemote
 import com.spotify.android.appremote.api.error.SpotifyDisconnectedException
 import com.spotify.protocol.client.Subscription
-import com.spotify.protocol.types.*
+import com.spotify.protocol.types.Image
+import com.spotify.protocol.types.PlayerContext
+import com.spotify.protocol.types.PlayerState
 import kotlinx.coroutines.launch
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.AppRemoteLayoutBinding
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.AuthParams.CLIENT_ID
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.AuthParams.REDIRECT_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.ALBUM_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.ARTIST_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.PLAYLIST_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.PODCAST_URI
-import org.metabrainz.android.presentation.features.spotify.RemotePlayerActivity.SpotifySampleContexts.TRACK_URI
+import org.metabrainz.android.presentation.features.listens.RemotePlayerActivity.AuthParams.CLIENT_ID
+import org.metabrainz.android.presentation.features.listens.RemotePlayerActivity.AuthParams.REDIRECT_URI
 import java.util.*
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
@@ -42,20 +35,13 @@ class RemotePlayerActivity : AppCompatActivity() {
         const val REDIRECT_URI = "org.metabrainz.android://callback"
     }
 
-    object SpotifySampleContexts {
-        const val TRACK_URI = "spotify:track:4IWZsfEkaK49itBwCTFDXQ"
-        const val ALBUM_URI = "spotify:album:4m2880jivSbbyEGAKfITCa"
-        const val ARTIST_URI = "spotify:artist:3WrFJ7ztbogyGnTHbHJFl2"
-        const val PLAYLIST_URI = "spotify:playlist:37i9dQZEVXbMDoHDwVN2tF"
-        const val PODCAST_URI = "spotify:show:2tgPYIeGErjk6irHRhk9kj"
-    }
-
     companion object {
         const val TAG = "MusicBrainz Player"
         const val STEP_MS = 15000L
     }
 
     private val gson = GsonBuilder().setPrettyPrinting().create()
+    private lateinit var trackId: String
 
     private var playerStateSubscription: Subscription<PlayerState>? = null
     private var playerContextSubscription: Subscription<PlayerContext>? = null
@@ -72,6 +58,8 @@ class RemotePlayerActivity : AppCompatActivity() {
         binding = AppRemoteLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        trackId = intent.getStringExtra("spotify_trackId")!!
+
         binding.seekTo.apply {
             isEnabled = false
             progressDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
@@ -81,7 +69,6 @@ class RemotePlayerActivity : AppCompatActivity() {
         trackProgressBar = TrackProgressBar(binding.seekTo) { seekToPosition: Long -> seekTo(seekToPosition) }
 
         views = listOf(
-            binding.subscribeToPlayerContextButton,
             binding.subscribeToPlayerStateButton,
             binding.playPauseButton,
             binding.seekForwardButton,
@@ -94,14 +81,6 @@ class RemotePlayerActivity : AppCompatActivity() {
 
         onDisconnected()
         connect()
-    }
-
-
-    private val playerContextEventCallback = Subscription.EventCallback<PlayerContext> { playerContext ->
-        binding.currentContextLabel.apply {
-            text = String.format(Locale.US, "%s", playerContext.title)
-            tag = playerContext
-        }
     }
 
     private val playerStateEventCallback = Subscription.EventCallback<PlayerState> { playerState ->
@@ -133,10 +112,6 @@ class RemotePlayerActivity : AppCompatActivity() {
             text = String.format(Locale.US, "%s\n%s", playerState.track.name, playerState.track.artist.name)
             tag = playerState
         }
-    }
-
-    private fun AppCompatImageButton.setTint(@ColorInt tint: Int) {
-        DrawableCompat.setTint(drawable, Color.WHITE)
     }
 
     private fun updateSeekbar(playerState: PlayerState) {
@@ -187,7 +162,9 @@ class RemotePlayerActivity : AppCompatActivity() {
         }
 
         onSubscribedToPlayerStateButtonClicked(binding.subscribeToPlayerStateButton)
-        onSubscribedToPlayerContextButtonClicked(binding.subscribeToPlayerContextButton)
+        onSubscribedToPlayerContextButtonClicked()
+
+        playUri("spotify:track:${trackId}")
     }
 
     private fun onDisconnected() {
@@ -195,21 +172,15 @@ class RemotePlayerActivity : AppCompatActivity() {
             view.isEnabled = false
         }
         binding.image.setImageResource(R.drawable.widget_placeholder)
-        binding.subscribeToPlayerContextButton.apply {
-            visibility = View.VISIBLE
-            setText(R.string.title_player_context)
-        }
         binding.subscribeToPlayerStateButton.apply {
             visibility = View.VISIBLE
             setText(R.string.title_current_track)
         }
 
-        binding.currentContextLabel.visibility = View.INVISIBLE
         binding.currentTrackLabel.visibility = View.INVISIBLE
     }
 
     private fun connect() {
-
         SpotifyAppRemote.disconnect(spotifyAppRemote)
         lifecycleScope.launch {
             try {
@@ -241,26 +212,6 @@ class RemotePlayerActivity : AppCompatActivity() {
                 })
         }
 
-    fun onPlayPodcastButtonClicked(notUsed: View) {
-        playUri(PODCAST_URI)
-    }
-
-    fun onPlayTrackButtonClicked(notUsed: View) {
-        playUri(TRACK_URI)
-    }
-
-    fun onPlayAlbumButtonClicked(notUsed: View) {
-        playUri(ALBUM_URI)
-    }
-
-    fun onPlayArtistButtonClicked(notUsed: View) {
-        playUri(ARTIST_URI)
-    }
-
-    fun onPlayPlaylistButtonClicked(notUsed: View) {
-        playUri(PLAYLIST_URI)
-    }
-
     private fun playUri(uri: String) {
         assertAppRemoteConnected()
             .playerApi
@@ -279,22 +230,6 @@ class RemotePlayerActivity : AppCompatActivity() {
         view.tag?.let {
             showDialog("PlayerState", gson.toJson(it))
         }
-    }
-
-    fun onToggleShuffleButtonClicked(notUsed: View) {
-        assertAppRemoteConnected()
-            .playerApi
-            .toggleShuffle()
-            .setResultCallback { logMessage(getString(R.string.command_feedback, "toggle shuffle")) }
-            .setErrorCallback(errorCallback)
-    }
-
-    fun onToggleRepeatButtonClicked(notUsed: View) {
-        assertAppRemoteConnected()
-            .playerApi
-            .toggleRepeat()
-            .setResultCallback { logMessage(getString(R.string.command_feedback, "toggle repeat")) }
-            .setErrorCallback(errorCallback)
     }
 
     fun onSkipPreviousButtonClicked(notUsed: View) {
@@ -350,48 +285,13 @@ class RemotePlayerActivity : AppCompatActivity() {
             .setErrorCallback(errorCallback)
     }
 
-    private fun convertToList(inputItems: ListItems?): List<ListItem> {
-        return if (inputItems?.items != null) {
-            inputItems.items.toList()
-        } else {
-            emptyList()
-        }
-    }
-
-    private suspend fun loadRootRecommendations(appRemote: SpotifyAppRemote): ListItems? =
-        suspendCoroutine { cont ->
-            appRemote.contentApi
-                .getRecommendedContentItems(ContentApi.ContentType.FITNESS)
-                .setResultCallback { listItems -> cont.resume(listItems) }
-                .setErrorCallback { throwable ->
-                    errorCallback.invoke(throwable)
-                    cont.resumeWithException(throwable)
-                }
-        }
-
-    private suspend fun loadChildren(appRemote: SpotifyAppRemote, parent: ListItem): ListItems? =
-        suspendCoroutine { cont ->
-            appRemote.contentApi
-                .getChildrenOfItem(parent, 6, 0)
-                .setResultCallback { listItems -> cont.resume(listItems) }
-                .setErrorCallback { throwable ->
-                    errorCallback.invoke(throwable)
-                    cont.resumeWithException(throwable)
-                }
-        }
-
-    fun onSubscribedToPlayerContextButtonClicked(notUsed: View) {
+    fun onSubscribedToPlayerContextButtonClicked() {
         playerContextSubscription = cancelAndResetSubscription(playerContextSubscription)
 
-        binding.currentContextLabel.visibility = View.VISIBLE
-        binding.subscribeToPlayerContextButton.visibility = View.INVISIBLE
         playerContextSubscription = assertAppRemoteConnected()
             .playerApi
             .subscribeToPlayerContext()
-            .setEventCallback(playerContextEventCallback)
             .setErrorCallback { throwable ->
-                binding.currentContextLabel.visibility = View.INVISIBLE
-                binding.subscribeToPlayerContextButton.visibility = View.VISIBLE
                 logError(throwable)
             } as Subscription<PlayerContext>
     }

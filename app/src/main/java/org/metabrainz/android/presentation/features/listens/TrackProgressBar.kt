@@ -1,4 +1,4 @@
-package org.metabrainz.android.presentation.features.spotify
+package org.metabrainz.android.presentation.features.listens
 
 import android.os.Handler
 import android.widget.SeekBar

@@ -40,6 +40,7 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
+            versionNameSuffix ".debug"
         }
         release {
             if (keystorePropertiesFile.exists()) {
@@ -98,8 +99,8 @@ dependencies {
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
     //Image downloading and Caching library
-    implementation 'com.github.bumptech.glide:glide:4.13.1'
-    kapt 'com.github.bumptech.glide:compiler:4.13.1'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     //Fragment Setup For Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -145,7 +146,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-compose:2.5.0-rc01'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    implementation 'io.coil-kt:coil-compose:2.0.0-rc03'
+    implementation 'io.coil-kt:coil-compose:2.0.0'
     implementation 'com.airbnb.android:lottie-compose:5.0.3'
 
     //Spotify
