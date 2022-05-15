@@ -124,6 +124,8 @@
         <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
         <activity android:name=".presentation.features.listens.ListensActivity"
             android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".presentation.features.listens.RemotePlayerActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
 
         <meta-data
             android:name="android.app.default_searchable"

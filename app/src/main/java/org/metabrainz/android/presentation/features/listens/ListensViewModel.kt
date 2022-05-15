@@ -26,6 +26,10 @@ class ListensViewModel @Inject constructor(val repository: ListensRepository) : 
                     listens = response.data!!
                     listens.forEachIndexed { index, listen ->
                         var releaseMBID:String? = null
+                        var spotifyImage: String? = null
+                        if(spotifyImage!=null){
+                            return@forEachIndexed
+                        }
                         when {
                             listen.track_metadata.additional_info?.release_mbid != null -> {
                                 releaseMBID = listen.track_metadata.additional_info.release_mbid
