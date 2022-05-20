@@ -1,6 +1,7 @@
 package org.metabrainz.android.data.repository
 
 import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.data.sources.api.entities.RecordingItem
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
 import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.android.data.sources.api.entities.mbentity.Release
@@ -14,7 +15,7 @@ interface LookupRepository {
 
     suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt>
 
-    suspend fun fetchRecordings(query: String?): Resource<List<Recording>>
+    suspend fun fetchRecordings(artist: String?, title: String?): Resource<List<RecordingItem>>
 
     suspend fun fetchMatchedRelease(MBID: String?): Resource<Release>
 

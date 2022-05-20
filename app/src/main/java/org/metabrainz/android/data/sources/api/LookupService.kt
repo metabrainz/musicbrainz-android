@@ -4,6 +4,7 @@ import okhttp3.ResponseBody
 import org.metabrainz.android.data.sources.api.entities.CoverArt
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
 import org.metabrainz.android.data.sources.api.entities.acoustid.AcoustIDResponse
+import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.android.data.sources.api.entities.mbentity.Release
 import org.metabrainz.android.data.sources.api.entities.response.BarcodeReleaseResponse
 import org.metabrainz.android.data.sources.api.entities.response.RecordingSearchResponse
@@ -21,9 +22,10 @@ interface LookupService {
     @GET("http://coverartarchive.org/release/{MBID}")
     suspend fun getCoverArt(@Path("MBID") MBID: String?): CoverArt
 
-    @GET("recording/")
-    suspend fun searchRecording(@Query("query") searchQuery: String?,
-                        @Query("limit") limit: Int): RecordingSearchResponse
+
+    @GET("https://labs.api.listenbrainz.org/mbid-mapping/json")
+    suspend fun searchRecording(@Query("[artist_credit_name]") artistCreditName: String?,
+                        @Query("[recording_name]") recordingName: String?): org.metabrainz.android.data.sources.api.entities.Recording
 
     @GET("release/{MBID}")
     suspend fun lookupRecording(@Path("MBID") MBID: String?,

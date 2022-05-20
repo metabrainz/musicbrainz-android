@@ -1,9 +1,6 @@
 package org.metabrainz.android.util
 
-import org.metabrainz.android.data.sources.api.entities.ArtistCredit
-import org.metabrainz.android.data.sources.api.entities.EntityUtils
-import org.metabrainz.android.data.sources.api.entities.Media
-import org.metabrainz.android.data.sources.api.entities.Track
+import org.metabrainz.android.data.sources.api.entities.*
 import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.android.data.sources.api.entities.mbentity.Release
 import org.metabrainz.android.presentation.features.tagger.AudioFile
@@ -40,21 +37,18 @@ object Metadata {
         return recording
     }
 
-    fun createTagFields(local: AudioFile?, track: Track?, release: Release): Resource<List<TagField>> {
+    fun createTagFields(local: AudioFile?, recordingItem: RecordingItem): Resource<List<TagField>> {
         val tagFields = HashMap<String, TagField>()
         if (local != null) {
             for (entry in local.allProperties)
                 tagFields[entry.key] = TagField(entry.key, entry.value)
-            if (track != null) {
-                tagFields.setNewValue("TITLE", track.title)
-                tagFields.setNewValue("MUSICBRAINZ_TRACKID", track.mbid)
-                tagFields.setNewValue("MUSICBRAINZ_RECORDINGID", track.recording?.mbid)
-                tagFields.setNewValue("MUSICBRAINZ_RELEASEID", release.mbid)
-                tagFields.setNewValue("TRACKNUMBER", track.position.toString())
-                tagFields.setNewValue("LENGTH", track.length.toString())
-                tagFields.setNewValue("ARTIST", EntityUtils.getDisplayArtist(track.recording?.artistCredits))
-                //tagFields.setNewValue("acoustid_id",track.)
-            }
+            tagFields.setNewValue("TITLE", recordingItem.recording_name)
+            tagFields.setNewValue("MUSICBRAINZ_TRACKID", recordingItem.recording_mbid)
+            tagFields.setNewValue("MUSICBRAINZ_RECORDINGID", recordingItem.recording_mbid)
+            tagFields.setNewValue("MUSICBRAINZ_RELEASEID", recordingItem.release_mbid)
+            tagFields.setNewValue("TRACKNUMBER", recordingItem.recording_arg)
+            tagFields.setNewValue("LENGTH", recordingItem.release_mbid)
+            tagFields.setNewValue("ARTIST", recordingItem.artist_credit_name)
         }
         return Resource(Resource.Status.SUCCESS, tagFields.values.toList())
     }

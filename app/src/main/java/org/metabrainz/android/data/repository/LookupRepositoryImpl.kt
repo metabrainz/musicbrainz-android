@@ -1,5 +1,6 @@
 package org.metabrainz.android.data.repository
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -7,6 +8,7 @@ import org.metabrainz.android.data.sources.Constants
 import org.metabrainz.android.data.sources.api.LookupService
 import org.metabrainz.android.data.sources.api.MusicBrainzServiceGenerator
 import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.data.sources.api.entities.RecordingItem
 import org.metabrainz.android.data.sources.api.entities.WikiDataResponse
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
 import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
@@ -83,10 +85,11 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
     }
 
     @WorkerThread
-    override suspend fun fetchRecordings(query: String?): Resource<List<Recording>> {
+    override suspend fun fetchRecordings(artist: String?, title: String?): Resource<List<RecordingItem>> {
         return try {
-            val data = service.searchRecording(query, Constants.LIMIT)
-            Resource(SUCCESS, data.recordings)
+            val data = service.searchRecording(artist, title)
+            Log.d("adko", data.toString())
+            Resource(SUCCESS, data)
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.failure()
