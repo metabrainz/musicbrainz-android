@@ -4,14 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.metabrainz.android.App
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 object MusicBrainzServiceGenerator {
 
@@ -84,5 +82,4 @@ object MusicBrainzServiceGenerator {
             retrofit = builder.build()
         }
     }
-
 }
