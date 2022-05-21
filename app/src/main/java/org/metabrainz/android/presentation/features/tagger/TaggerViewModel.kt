@@ -28,7 +28,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
     val uri:LiveData<Uri> get() = _uri
 
     val serverFetchedMetadata: LiveData<Resource<List<TagField>>>
-    private val matchedResult: LiveData<Resource<RecordingItem>> = map(switchMap(taglibFetchedMetadata) {
+    private val matchedResult: LiveData<Resource<RecordingItem>?> = map(switchMap(taglibFetchedMetadata) {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.loading())
             val result = repository.fetchRecordings(it?.artist, it?.title)
@@ -38,7 +38,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         //Handling the status of the api call
         when (resource.status) {
             Resource.Status.SUCCESS -> {
-                if(resource.data !=null){
+                if(resource.data?.isNotEmpty()!!){
                     Resource(Resource.Status.SUCCESS, resource.data[0])
                 }
                 else{
@@ -94,7 +94,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         serverFetchedMetadata = map(switchMap(matchedResult){
             liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
                 emit(Resource.loading())
-                val result = repository.fetchMatchedRelease(it.data?.release_mbid)
+                val result = repository.fetchMatchedRelease(it?.data?.release_mbid)
                 emit(result)
             }
         })  { resource ->
@@ -115,7 +115,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         serverCoverArt = map(switchMap(matchedResult) {
             liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
                 emit(Resource.loading())
-                val result = repository.fetchCoverArt(it.data?.release_mbid)
+                val result = repository.fetchCoverArt(it?.data?.release_mbid)
                 emit(result)
             }
         })  { resource ->
