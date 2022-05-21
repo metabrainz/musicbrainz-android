@@ -39,10 +39,7 @@ object MusicBrainzServiceGenerator {
                 chain.proceed(request)
             }
 
-    var gson = GsonBuilder()
-        .setLenient()
-        .create()
-    private val builder = Retrofit.Builder().baseUrl(API_BASE_URL).addConverterFactory(GsonConverterFactory.create(gson))
+    private val builder = Retrofit.Builder().baseUrl(API_BASE_URL).addConverterFactory(GsonConverterFactory.create())
 
     private var retrofit = builder.build()
 
