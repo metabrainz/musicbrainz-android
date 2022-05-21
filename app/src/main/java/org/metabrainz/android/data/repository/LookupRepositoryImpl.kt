@@ -1,6 +1,5 @@
 package org.metabrainz.android.data.repository
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -88,7 +87,6 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
     override suspend fun fetchRecordings(artist: String?, title: String?): Resource<List<RecordingItem>> {
         return try {
             val data = service.searchRecording(artist, title)
-            Log.d("adko", data.toString())
             Resource(SUCCESS, data)
         } catch (e: Exception) {
             e.printStackTrace()

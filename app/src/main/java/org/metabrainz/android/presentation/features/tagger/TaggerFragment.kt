@@ -28,7 +28,7 @@ class TaggerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTaggerBinding.inflate(inflater)
 
-        viewModel.matchedResult.observe(viewLifecycleOwner) {resource->
+        viewModel.serverFetchedMetadata.observe(viewLifecycleOwner) {resource->
             //Making the required changes if  the results were found
             when (resource.status) {
                 Resource.Status.SUCCESS -> {

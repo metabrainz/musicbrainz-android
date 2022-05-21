@@ -11,6 +11,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import org.metabrainz.android.data.repository.LookupRepository
 import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.data.sources.api.entities.RecordingItem
+import org.metabrainz.android.data.sources.api.entities.Track
+import org.metabrainz.android.data.sources.api.entities.mbentity.Release
 import org.metabrainz.android.util.Metadata
 import org.metabrainz.android.util.Resource
 import javax.inject.Inject
@@ -24,7 +27,8 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
     private val _uri = MutableLiveData<Uri>()
     val uri:LiveData<Uri> get() = _uri
 
-    val matchedResult: LiveData<Resource<List<TagField>>> = map(switchMap(taglibFetchedMetadata) {
+    val serverFetchedMetadata: LiveData<Resource<List<TagField>>>
+    private val matchedResult: LiveData<Resource<RecordingItem>> = map(switchMap(taglibFetchedMetadata) {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.loading())
             val result = repository.fetchRecordings(it?.artist, it?.title)
@@ -35,7 +39,7 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         when (resource.status) {
             Resource.Status.SUCCESS -> {
                 if(resource.data !=null){
-                    Metadata.createTagFields(taglibFetchedMetadata.value, resource.data[0])
+                    Resource(Resource.Status.SUCCESS, resource.data[0])
                 }
                 else{
                     null
@@ -60,6 +64,20 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
         _uri.value = uri
     }
 
+    private fun displayMatchedRelease(release: Release): Resource<List<TagField>> {
+        var track: Track? = null
+        if (release.media != null && release.media!!.isNotEmpty()) {
+            for (media in release.media!!) {
+                for (search in media.tracks) {
+                    if (search.recording!!.mbid.equals(matchedResult.value?.data!!.recording_mbid, true)) {
+                        track = search
+                    }
+                }
+            }
+        }
+        return Metadata.createTagFields(taglibFetchedMetadata.value, track, release)
+    }
+
     fun saveMetadataTags(tags: HashMap<String, String>): Boolean {
         Log.i("filepath",_uri.value.toString())
         var result = false
@@ -73,10 +91,31 @@ class TaggerViewModel @Inject constructor(val repository: LookupRepository, val 
 
     init {
 
+        serverFetchedMetadata = map(switchMap(matchedResult){
+            liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+                emit(Resource.loading())
+                val result = repository.fetchMatchedRelease(it.data?.release_mbid)
+                emit(result)
+            }
+        })  { resource ->
+            //Handling the status of the api call
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                    displayMatchedRelease(resource.data!!)
+                }
+                Resource.Status.LOADING -> {
+                    Resource.loading()
+                }
+                Resource.Status.FAILED -> {
+                    Resource.failure()
+                }
+            }
+        }
+
         serverCoverArt = map(switchMap(matchedResult) {
             liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
                 emit(Resource.loading())
-                val result = repository.fetchCoverArt("5f5aaf10-36a4-3dfc-a7c1-c2d5c2286647")
+                val result = repository.fetchCoverArt(it.data?.release_mbid)
                 emit(result)
             }
         })  { resource ->
