@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import org.metabrainz.android.EntityTestUtils.loadResourceAsString
 import org.metabrainz.android.data.repository.LookupRepository
 import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.data.sources.api.entities.RecordingItem
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
 import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.android.data.sources.api.entities.mbentity.Release
@@ -28,7 +29,7 @@ class MockLookupRepository : LookupRepository {
         return Resource(SUCCESS, coverArt)
     }
 
-    override suspend fun fetchRecordings(query: String?): Resource<List<Recording>> {
+    override suspend fun fetchRecordings(artist: String?, title: String?): Resource<List<RecordingItem>> {
         TODO("Not yet implemented")
     }
 
