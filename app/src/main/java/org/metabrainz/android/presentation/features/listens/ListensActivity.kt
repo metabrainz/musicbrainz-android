@@ -20,10 +20,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -89,15 +86,16 @@ class ListensActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         SpotifyAppRemote.setDebugMode(true)
 
-        connect()
-
         setContent {
             Scaffold(
                 backgroundColor = colorResource(id = R.color.app_bg),
                 topBar = { TopAppBar(activity = this, title = "Listens") },
                 bottomBar = { BottomNavigationBar(activity = this) }
             ) {
-                if(playerState!=null) {
+                var listensModifier: Modifier by remember { mutableStateOf(Modifier.padding(it)) }
+
+                if(playerState?.track?.name !=null) {
+                    listensModifier = Modifier.padding(it).padding(top = 200.dp)
                     AnimatedVisibility(
                         visible = true,
                         enter = fadeIn(initialAlpha = 0.4f),
@@ -113,9 +111,7 @@ class ListensActivity: ComponentActivity() {
                 }
 
                 AllUserListens(
-                    modifier = Modifier
-                        .padding(it)
-                        .padding(top = 180.dp),
+                    modifier = listensModifier,
                     activity = this
                 )
             }
@@ -131,6 +127,11 @@ class ListensActivity: ComponentActivity() {
             .setResultCallback { bitmapHere ->
                 bitmap = bitmapHere
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        connect()
     }
 
     override fun onStop() {
@@ -183,7 +184,8 @@ class ListensActivity: ComponentActivity() {
                     override fun onFailure(error: Throwable) {
                         cont.resumeWithException(error)
                     }
-                })
+                }
+            )
         }
 
     fun playUri(uri: String) {
@@ -266,7 +268,7 @@ class ListensActivity: ComponentActivity() {
 
 @Composable
 fun NowPlaying(
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     activity: Activity,
     playerState: PlayerState?,
     bitmap: Bitmap?
@@ -276,6 +278,7 @@ fun NowPlaying(
             .fillMaxWidth()
             .padding(8.dp)
             .clip(RoundedCornerShape(16.dp))
+            .height(180.dp)
             .clickable(onClick = {
                 //onItemClicked(listen)
             }),
@@ -298,7 +301,8 @@ fun NowPlaying(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp).padding(top = 40.dp)
+                .padding(16.dp)
+                .padding(top = 40.dp)
         ) {
             val painter = rememberAsyncImagePainter(
                 ImageRequest.Builder(activity)
@@ -324,10 +328,12 @@ fun NowPlaying(
                 playerState?.track?.name?.let { track ->
                     Text(
                         text = track,
+
                         modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                         color = MaterialTheme.colors.surface,
                         fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
+                        maxLines = 1
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -338,7 +344,8 @@ fun NowPlaying(
                     },
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                     color = MaterialTheme.colors.surface,
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.caption,
+                    maxLines = 2
                 )
 
                 Row(verticalAlignment = Alignment.Bottom) {
@@ -347,7 +354,8 @@ fun NowPlaying(
                             text = album,
                             modifier = Modifier.padding(0.dp, 12.dp, 12.dp, 0.dp),
                             color = MaterialTheme.colors.surface,
-                            style = MaterialTheme.typography.caption
+                            style = MaterialTheme.typography.caption,
+                            maxLines = 2
                         )
                     }
                 }
