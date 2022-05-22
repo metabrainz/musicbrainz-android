@@ -44,6 +44,4 @@ class AlbumArtFetcher(
     override fun getDataClass(): Class<ByteArrayInputStream> = ByteArrayInputStream::class.java
 
     override fun getDataSource(): DataSource = DataSource.LOCAL
-
-
 }

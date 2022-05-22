@@ -1,18 +1,14 @@
 package org.metabrainz.android.util
 
-import android.util.Pair
 import info.debatty.java.stringsimilarity.Levenshtein
 import org.metabrainz.android.data.sources.api.entities.ArtistCredit
-import org.metabrainz.android.data.sources.api.entities.EntityUtils
 import org.metabrainz.android.data.sources.api.entities.Media
 import org.metabrainz.android.data.sources.api.entities.acoustid.Result
 import org.metabrainz.android.data.sources.api.entities.mbentity.Artist
 import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.android.data.sources.api.entities.mbentity.Release
 import org.metabrainz.android.data.sources.api.entities.mbentity.ReleaseGroup
-import org.metabrainz.android.util.Log.d
 import java.util.*
-import kotlin.math.min
 
 object TaggerUtils {
     const val LENGTH_SCORE_THRESHOLD_MS: Long = 30000
@@ -69,78 +65,6 @@ object TaggerUtils {
             total += secondList.size * UNMATCHED_WORDS_WEIGHT
             if (total > 0) totalScore / total else 0.0
         } else 0.0
-    }
-
-    fun compareTracks(localTrack: Recording?, searchedTrack: Recording): ComparisonResult {
-        val scoreList: MutableList<Pair<Double, Int?>> = ArrayList()
-        var releaseMbid: String? = ""
-        var score = 0.0
-        if (localTrack != null) {
-            if (localTrack.title != null && localTrack.title!!.isNotEmpty()) scoreList.add(Pair(
-                    calculateMultiWordSimilarity(localTrack.title, searchedTrack.title),
-                    WEIGHTS[TITLE]))
-            scoreList.add(Pair(
-                    lengthScore(localTrack.length, searchedTrack.length),
-                    WEIGHTS[TRACK_LENGTH]))
-            if (EntityUtils.getDisplayArtist(localTrack.artistCredits).isNotEmpty() &&
-                    EntityUtils.getDisplayArtist(localTrack.artistCredits).isNotEmpty()) scoreList.add(Pair(
-                    calculateMultiWordSimilarity(
-                            EntityUtils.getDisplayArtist(localTrack.artistCredits),
-                            EntityUtils.getDisplayArtist(localTrack.artistCredits)),
-                    WEIGHTS[ARTIST]))
-            score = linearCombinationOfWeights(scoreList)
-            val localRelease: Release? = if (localTrack.releases.size > 0) localTrack.releases[0] else null
-            if (localRelease != null) {
-                var max = 0.0
-
-                // Base case if no suitable release found
-                if (searchedTrack.releases.isNotEmpty()) releaseMbid = searchedTrack.releases[0].mbid
-                for (searchedRelease in searchedTrack.releases) {
-                    val releaseScore = compareReleaseParts(localRelease, searchedRelease)
-                    if (releaseScore > max) {
-                        max = releaseScore
-                        releaseMbid = searchedRelease.mbid
-                    }
-                }
-            }
-            if (searchedTrack.score != 0) score *= searchedTrack.score / 100.0
-        }
-        d(searchedTrack.title + " score: " + score)
-        return ComparisonResult(score, releaseMbid, searchedTrack.mbid)
-    }
-
-    private fun lengthScore(firstLength: Long, secondLength: Long): Double {
-        return 1.0 - min(firstLength - secondLength, LENGTH_SCORE_THRESHOLD_MS) / LENGTH_SCORE_THRESHOLD_MS.toDouble()
-    }
-
-    private fun compareReleaseParts(localRelease: Release?, searchedRelease: Release?): Double {
-        val scoreList: MutableList<Pair<Double, Int?>> = ArrayList()
-        if (localRelease != null && searchedRelease != null) {
-            if (localRelease.title != null && localRelease.title!!.isNotEmpty() && searchedRelease.title != null && searchedRelease.title!!.isNotEmpty()) scoreList.add(Pair(
-                    calculateMultiWordSimilarity(localRelease.title, searchedRelease.title),
-                    WEIGHTS[ALBUM]))
-            if (EntityUtils.getDisplayArtist(localRelease.artistCredits).isNotEmpty() && EntityUtils.getDisplayArtist(searchedRelease.artistCredits).isNotEmpty()) scoreList.add(Pair(
-                    calculateMultiWordSimilarity(
-                            EntityUtils.getDisplayArtist(localRelease.artistCredits),
-                            EntityUtils.getDisplayArtist(searchedRelease.artistCredits)),
-                    WEIGHTS[ARTIST]
-            ))
-            if (localRelease.trackCount > 0 && searchedRelease.trackCount > 0) {
-                val localTrackCount = localRelease.trackCount
-                val searchedTrackCount = searchedRelease.trackCount
-                val trackCountScore: Double = if (localTrackCount > searchedTrackCount) 0.0 else if (localTrackCount < searchedTrackCount) 0.3 else 1.0
-                scoreList.add(Pair(trackCountScore, WEIGHTS[TOTAL_TRACKS]))
-            }
-
-            // TODO : Add release formats, countries and types
-        }
-        return linearCombinationOfWeights(scoreList)
-    }
-
-    private fun linearCombinationOfWeights(weightList: List<Pair<Double, Int?>>): Double {
-        var weightSum = 0.0
-        for (weight in weightList) weightSum += weight.first * weight.second!!
-        return weightSum
     }
 
     fun parseResults(results: List<Result>?): List<Recording> {

@@ -82,5 +82,4 @@ object MusicBrainzServiceGenerator {
             retrofit = builder.build()
         }
     }
-
 }

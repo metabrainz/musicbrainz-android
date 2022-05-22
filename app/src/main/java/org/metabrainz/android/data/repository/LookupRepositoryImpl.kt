@@ -7,6 +7,7 @@ import org.metabrainz.android.data.sources.Constants
 import org.metabrainz.android.data.sources.api.LookupService
 import org.metabrainz.android.data.sources.api.MusicBrainzServiceGenerator
 import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.data.sources.api.entities.RecordingItem
 import org.metabrainz.android.data.sources.api.entities.WikiDataResponse
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
 import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
@@ -83,10 +84,10 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
     }
 
     @WorkerThread
-    override suspend fun fetchRecordings(query: String?): Resource<List<Recording>> {
+    override suspend fun fetchRecordings(artist: String?, title: String?): Resource<List<RecordingItem>> {
         return try {
-            val data = service.searchRecording(query, Constants.LIMIT)
-            Resource(SUCCESS, data.recordings)
+            val data = service.searchRecording(artist, title)
+            Resource(SUCCESS, data)
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.failure()

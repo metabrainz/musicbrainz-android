@@ -59,7 +59,7 @@ class TaggerFragment : Fragment() {
                     d("Loading the cover art...")
                 }
                 Resource.Status.FAILED -> {
-                    Toast.makeText(context,"Error fetching cover art from server!",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Error fetching cover art from server!", LENGTH_SHORT).show()
                 }
             }
         }
