@@ -1,14 +1,10 @@
 name: Android Lint
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
-    paths:
-      - .github/workflows/android-lint.yml
-      - '*/src/**'
-      - gradle/**
-      - '**.gradle'
-      - gradle.properties
-      - gradlew*
+    branches: [ master ]
 
 jobs:
   android-lint:
