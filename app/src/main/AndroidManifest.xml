@@ -24,7 +24,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="32">
-
+        <activity
+            android:name=".presentation.features.critiques.ReviewDescriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.features.critiques.CritiqueActivity"
+            android:exported="false" />
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -118,14 +123,14 @@
             android:label="@string/preferences_title" />
 
         <activity android:name=".presentation.features.barcode.BarcodeActivity" />
-
-        <activity
-            android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
+        <activity android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
         <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
-        <activity android:name=".presentation.features.listens.ListensActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".presentation.features.listens.RemotePlayerActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".presentation.features.listens.ListensActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".presentation.features.listens.RemotePlayerActivity"
+            android:theme="@style/AppThemeNoActionBar" />
 
         <meta-data
             android:name="android.app.default_searchable"

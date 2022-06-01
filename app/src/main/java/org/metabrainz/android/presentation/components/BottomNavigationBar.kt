@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
+import org.metabrainz.android.presentation.features.critiques.CritiqueActivity
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.android.presentation.features.listens.ListensActivity
 import org.metabrainz.android.presentation.features.login.LoginActivity
@@ -59,7 +59,10 @@ fun BottomNavigationBar(activity: Activity) {
                             }
                         }
                         "critiques" -> {
-                            FinestWebView.Builder(activity).show("https://critiquebrainz.org/")
+                            val nextActivity = CritiqueActivity::class.java
+                            if (nextActivity != activity::class.java){
+                                activity.startActivity(Intent(activity, CritiqueActivity::class.java))
+                            }
                         }
                         "profile" -> {
                             val nextActivity = LoginActivity::class.java

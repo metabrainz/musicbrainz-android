@@ -38,4 +38,12 @@ class ServiceModule {
     @get:Provides
     @get:Singleton
     val loginService: LoginService = createService(LoginService::class.java, false)
+
+    @get:Provides
+    @get:Singleton
+    val critiquesService: CritiquesService = Retrofit.Builder()
+    .baseUrl("https://critiquebrainz.org/ws/1/")
+    .addConverterFactory(GsonConverterFactory.create())
+    .build().create(CritiquesService::class.java)
+
 }
