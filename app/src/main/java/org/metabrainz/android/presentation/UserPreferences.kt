@@ -19,12 +19,11 @@ object UserPreferences {
     private val preferences = PreferenceManager.getDefaultSharedPreferences(App.context!!)
 
     fun setOnBoardingCompleted() {
-        val editor = LoginSharedPreferences.preferences.edit()
+        val editor = preferences.edit()
         editor.putBoolean(PREFERENCE_ONBOARDING, true)
         editor.apply()
     }
 
-    val onBoardingStatus = preferences.getBoolean(PREFERENCE_ONBOARDING, false)
     val privateCollectionsPreference = preferences.getBoolean(PREFERENCE_GET_PRIVATE_COLLECTIONS, false)
     val ratingsTagsPreference = preferences.getBoolean(PREFERENCE_RATINGS_TAGS, false)
     val systemLanguagePreference = preferences.getBoolean(PREFERENCE_SYSTEM_LANGUAGE, false)
