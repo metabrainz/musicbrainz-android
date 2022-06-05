@@ -66,7 +66,7 @@ class ListensActivity: ComponentActivity() {
     var bitmap: Bitmap? by mutableStateOf(null)
 
     object AuthParams {
-        const val CLIENT_ID = "da5388546fde4aa8a47aad3539e7f87b"
+        const val CLIENT_ID = "2a0d7ed37e9841269130b82843d3f842"
         const val REDIRECT_URI = "org.metabrainz.android://callback"
     }
 
