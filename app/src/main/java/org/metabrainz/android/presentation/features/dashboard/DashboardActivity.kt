@@ -6,18 +6,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -27,14 +27,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import com.thefinestartist.finestwebview.FinestWebView
+import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.R
-import org.metabrainz.android.presentation.UserPreferences
 import org.metabrainz.android.presentation.components.BottomNavigationBar
 import org.metabrainz.android.presentation.components.TopAppBar
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
@@ -49,7 +45,7 @@ class DashboardActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
 
-        if (!UserPreferences.onBoardingStatus) {
+        if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("onboarding", false)) {
             startActivity(Intent(this, FeaturesActivity::class.java))
             finish()
         }
@@ -237,9 +233,8 @@ class DashboardActivity : ComponentActivity() {
                             }
                         }
                     }
-            }
+                }
             }
         }
     }
-
 }
