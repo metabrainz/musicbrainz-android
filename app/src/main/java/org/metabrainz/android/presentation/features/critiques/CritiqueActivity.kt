@@ -53,8 +53,10 @@ class CritiqueActivity : ComponentActivity() {
                     )
                 },
                 bottomBar = { BottomNavigationBar(activity = this) }
-            ) {
-                CritiquesMainScreen(this@CritiqueActivity)
+            ) { innerPadding ->
+                Box(modifier = Modifier.padding(innerPadding)) {
+                    CritiquesMainScreen(this@CritiqueActivity)
+                }
             }
         }
     }

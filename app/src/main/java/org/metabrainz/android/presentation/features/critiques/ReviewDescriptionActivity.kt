@@ -78,8 +78,8 @@ fun ReviewDescriptionScreen(review: Review?) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Rating: ",
-                color = MaterialTheme.colors.onSurface,
+                text = "Rating:  ",
+                color = colorResource(id = R.color.white),
                 textAlign = TextAlign.Center,
                 fontSize = 16.sp
             )
@@ -87,14 +87,15 @@ fun ReviewDescriptionScreen(review: Review?) {
         }
 
         Column(
-            modifier = Modifier.verticalScroll(rememberScrollState())
-                .padding(start= 12.dp, bottom = 20.dp, end = 12.dp)
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(start = 12.dp, bottom = 20.dp, end = 12.dp)
         ) {
             review?.text?.let {
                 Text(
                     text = it,
                     fontSize = 16.sp,
-                    color = MaterialTheme.colors.onSurface,
+                    color = colorResource(id = R.color.white),
                 )
             }
         }
