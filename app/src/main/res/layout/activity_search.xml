@@ -349,10 +349,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                app:fabSize="mini"
                 android:layout_alignParentStart="true"
+                android:src="@drawable/ic_back"
                 app:backgroundTint="@color/dark_gray"
-                android:src="@drawable/back" />
+                app:fabSize="mini" />
 
             <Button
                 android:id="@+id/btn_page_number"
@@ -365,11 +365,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:src="@drawable/forward"
                 android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_forward"
                 app:backgroundTint="@color/dark_gray"
-                app:fabSize="mini"
-                />
+                app:fabSize="mini" />
+
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

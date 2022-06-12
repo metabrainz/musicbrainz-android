@@ -25,16 +25,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="32">
         <activity
-            android:name=".presentation.features.critiques.ReviewDescriptionActivity"
-            android:exported="false" />
+            android:name=".presentation.features.critiques.ReviewDescriptionActivity" />
         <activity
-            android:name=".presentation.features.critiques.CritiqueActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="sensor"
-            android:theme="@style/FinestWebViewTheme" />
+            android:name=".presentation.features.critiques.CritiqueActivity" />
 
         <service
             android:name=".presentation.features.listens.submitter.ListenService"

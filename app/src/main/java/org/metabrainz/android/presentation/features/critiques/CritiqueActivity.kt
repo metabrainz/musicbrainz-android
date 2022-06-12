@@ -182,7 +182,7 @@ fun EntityChips(
                 Row {
                     Text(
                         text = entities[it].displayName,
-                        color = Color.Black,
+                        color = Color.White,
                         modifier = Modifier.padding(end = 4.dp),
                         fontWeight = FontWeight.Bold
                     )
