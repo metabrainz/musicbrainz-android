@@ -165,4 +165,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+
+    //ViewPager
+    implementation "com.google.accompanist:accompanist-pager:0.23.0"
+
+    //Exoplayer
+    api "com.google.android.exoplayer:exoplayer-core:2.18.0"
+    api "com.google.android.exoplayer:exoplayer-ui:2.18.0"
+    api "com.google.android.exoplayer:extension-mediasession:2.18.0"
 }

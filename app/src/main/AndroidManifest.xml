@@ -40,6 +40,12 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
+        <service android:name=".presentation.features.brainzplayer.services.BrainzPlayerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaMrowserService"/>
+            </intent-filter>
+        </service>
 
         <activity
             android:name=".presentation.features.onboarding.FeaturesActivity"
