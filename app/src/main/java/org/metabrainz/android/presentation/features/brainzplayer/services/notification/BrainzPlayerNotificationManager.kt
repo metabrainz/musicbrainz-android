@@ -33,6 +33,7 @@ class BrainzPlayerNotificationManager(
             .setChannelNameResourceId(R.string.brainzplayer_notification_channel_name)
             .setChannelDescriptionResourceId(R.string.brainzplayer_notification_channel_description)
             .setMediaDescriptionAdapter(DescriptionAdapter(mediaController))
+            .setNotificationListener(notificationListener)
             .build()
             .apply {
                 setSmallIcon(R.drawable.ic_musicbrainz_logo_no_text)
@@ -47,6 +48,7 @@ class BrainzPlayerNotificationManager(
     inner class DescriptionAdapter(private val mediaController: MediaControllerCompat) :
         PlayerNotificationManager.MediaDescriptionAdapter {
         override fun getCurrentContentTitle(player: Player): CharSequence {
+            newSongCallback()
             return mediaController.metadata.description.title.toString()
         }
 
