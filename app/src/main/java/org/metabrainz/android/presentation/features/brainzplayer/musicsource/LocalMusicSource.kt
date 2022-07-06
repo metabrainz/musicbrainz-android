@@ -14,11 +14,8 @@ import org.metabrainz.android.data.repository.SongRepository
 import org.metabrainz.android.presentation.features.brainzplayer.musicsource.State.*
 import javax.inject.Inject
 
-class LocalMusicSource :
+class LocalMusicSource @Inject constructor(private val songRepository: SongRepository) :
     MusicSource<MediaMetadataCompat> {
-
-    @Inject
-    lateinit var songRepository : SongRepository
 
     override var songs = emptyList<MediaMetadataCompat>()
 
@@ -63,7 +60,7 @@ class LocalMusicSource :
                 .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, song.artist)
                 .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, song.mediaID)
                 .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
-                .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, song.uri.toString())
+                .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, song.uri)
                 .build()
         }
         state = STATE_INITIALIZED

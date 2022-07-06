@@ -34,10 +34,18 @@ class BrainzPlayerNotificationManager(
             .setChannelDescriptionResourceId(R.string.brainzplayer_notification_channel_description)
             .setMediaDescriptionAdapter(DescriptionAdapter(mediaController))
             .setNotificationListener(notificationListener)
+            .setNextActionIconResourceId(R.drawable.btn_next)
+            .setPreviousActionIconResourceId(R.drawable.btn_prev)
+            .setPlayActionIconResourceId(R.drawable.ic_play)
+            .setPauseActionIconResourceId(R.drawable.ic_pause)
             .build()
             .apply {
                 setSmallIcon(R.drawable.ic_musicbrainz_logo_no_text)
                 setMediaSessionToken(sessionToken)
+                setUseNextActionInCompactView(true)
+                setUsePreviousActionInCompactView(true)
+                setUseFastForwardAction(false)
+                setUseRewindAction(false)
             }
     }
 

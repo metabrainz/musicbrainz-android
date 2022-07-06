@@ -24,6 +24,9 @@ class BrainzPlayerServiceConnection(
     private val _currentlyPlayingSong = MutableStateFlow<MediaMetadataCompat?>(NOTHING_PLAYING)
     val currentPlayingSong = _currentlyPlayingSong.asStateFlow()
 
+    private val _isPlaying = MutableStateFlow(false)
+    val isPlaying = _isPlaying.asStateFlow()
+
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
 
     private val mediaBrowser = MediaBrowserCompat(
@@ -73,7 +76,8 @@ class BrainzPlayerServiceConnection(
 
     private inner class MediaControllerCallback : MediaControllerCompat.Callback() {
         override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
-            _playbackState.value = state
+            _playbackState.value = state ?: EMPTY_PLAYBACK_STATE
+
         }
 
         override fun onMetadataChanged(metadata: MediaMetadataCompat?) {

@@ -2,21 +2,31 @@ package org.metabrainz.android.presentation.components
 
 import android.app.Activity
 import android.content.Intent
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import com.thefinestartist.finestwebview.FinestWebView
+import kotlinx.coroutines.flow.distinctUntilChanged
 import org.metabrainz.android.R
+import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerViewModel
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
+import org.metabrainz.android.presentation.features.dashboard.DashboardActivity.Companion.currentlyPayingSong
 import org.metabrainz.android.presentation.features.listens.ListensActivity
 import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.navigation.NavigationItem
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
+import org.metabrainz.android.util.BrainzPlayerExtensions.toSong
 
 @Composable
 fun BottomNavigationBar(activity: Activity) {
@@ -70,6 +80,50 @@ fun BottomNavigationBar(activity: Activity) {
                     }
                 }
             )
+        }
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun SongViewPager(viewModel: BrainzPlayerViewModel) {
+    val songList = viewModel.mediaItems.collectAsState().value
+    val currentPlayingSong = viewModel.currentlyPlayingSong.collectAsState().value
+    currentlyPayingSong = currentPlayingSong.toSong
+    val pageState = rememberPagerState()
+    songList.data?.let {
+
+        HorizontalPager(count = it.size, state = pageState, modifier = Modifier.background(
+            colorResource(id = R.color.app_bg))) { page ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                shape = RoundedCornerShape(15.dp),
+                backgroundColor = colorResource(id = R.color.light_blue)
+            ) {
+                Row {
+                    Column(Modifier.padding(start = 50.dp, top = 8.dp)) {
+                        Text(text = it[page].title, fontWeight = FontWeight.Bold)
+                        Text(text = it[page].artist)
+                    }
+                }
+            }
+        }
+        LaunchedEffect(pageState) {
+            snapshotFlow { pageState.currentPage }
+                .distinctUntilChanged()
+                .collect { page->
+
+                    if (page>songList.data.indexOf(currentlyPayingSong)) {
+                        viewModel.skipToNextSong()
+                        viewModel.playOrToggleSong(songList.data[page])
+                    }
+                    else if (page<songList.data.indexOf(currentlyPayingSong)) {
+                        viewModel.skipToPreviousSong()
+                        viewModel.playOrToggleSong(songList.data[page])
+                    }
+                }
         }
     }
 }
