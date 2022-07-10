@@ -6,8 +6,12 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Pause
+import androidx.compose.material.icons.rounded.PlayArrow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import org.metabrainz.android.util.BrainzPlayerExtensions.isPlaying
 import org.metabrainz.android.util.Resource
 
 class BrainzPlayerServiceConnection(
@@ -18,15 +22,19 @@ class BrainzPlayerServiceConnection(
     private val _isConnected = MutableStateFlow<Resource<Boolean>>(Resource.loading())
     val isConnected = _isConnected.asStateFlow()
 
-    private val _playbackState = MutableStateFlow<PlaybackStateCompat?>(EMPTY_PLAYBACK_STATE)
+    private val _playbackState = MutableStateFlow(EMPTY_PLAYBACK_STATE)
     val playbackState = _playbackState.asStateFlow()
 
-    private val _currentlyPlayingSong = MutableStateFlow<MediaMetadataCompat?>(NOTHING_PLAYING)
+    private val _currentlyPlayingSong = MutableStateFlow(NOTHING_PLAYING)
     val currentPlayingSong = _currentlyPlayingSong.asStateFlow()
 
     private val _isPlaying = MutableStateFlow(false)
     val isPlaying = _isPlaying.asStateFlow()
 
+    private val _playButtonState = MutableStateFlow(Icons.Rounded.PlayArrow)
+    val playButtonState = _playButtonState.asStateFlow()
+
+    private var previousPlaybackState: Boolean = false
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
 
     private val mediaBrowser = MediaBrowserCompat(
@@ -77,6 +85,10 @@ class BrainzPlayerServiceConnection(
     private inner class MediaControllerCallback : MediaControllerCompat.Callback() {
         override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
             _playbackState.value = state ?: EMPTY_PLAYBACK_STATE
+            _playButtonState.value = if (state?.isPlaying==true) Icons.Rounded.Pause
+            else Icons.Rounded.PlayArrow
+            if (state?.isPlaying != previousPlaybackState) _isPlaying.value = state?.isPlaying == true
+            previousPlaybackState = state?.isPlaying == true
 
         }
 

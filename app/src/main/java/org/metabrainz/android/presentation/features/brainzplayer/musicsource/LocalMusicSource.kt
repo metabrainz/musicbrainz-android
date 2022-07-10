@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.metabrainz.android.data.repository.SongRepository
 import org.metabrainz.android.presentation.features.brainzplayer.musicsource.State.*
+import org.metabrainz.android.util.BrainzPlayerExtensions.toMediaMetadataCompat
 import javax.inject.Inject
 
 class LocalMusicSource @Inject constructor(private val songRepository: SongRepository) :
@@ -38,6 +39,7 @@ class LocalMusicSource @Inject constructor(private val songRepository: SongRepos
             .setTitle(song.description.title)
             .setMediaId(song.description.mediaId)
             .setSubtitle(song.description.subtitle)
+            .setIconUri(song.description.iconUri)
             .build()
         MediaBrowserCompat.MediaItem(desc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE)
     }.toMutableList()
@@ -56,12 +58,7 @@ class LocalMusicSource @Inject constructor(private val songRepository: SongRepos
         state = STATE_INITIALIZING
         val listOfAllSongs = songRepository.fetchSongs()
         songs = listOfAllSongs.map { song ->
-            MediaMetadataCompat.Builder()
-                .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, song.artist)
-                .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, song.mediaID)
-                .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
-                .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, song.uri)
-                .build()
+            song.toMediaMetadataCompat
         }
         state = STATE_INITIALIZED
     }

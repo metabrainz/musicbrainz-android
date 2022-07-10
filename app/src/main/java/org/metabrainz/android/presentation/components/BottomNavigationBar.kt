@@ -7,19 +7,29 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.thefinestartist.finestwebview.FinestWebView
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerViewModel
+import org.metabrainz.android.presentation.features.brainzplayer.ui.components.MarqueeText
+import org.metabrainz.android.presentation.features.brainzplayer.ui.components.PlayPauseIcon
+import org.metabrainz.android.presentation.features.brainzplayer.ui.components.SeekBar
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity.Companion.currentlyPayingSong
 import org.metabrainz.android.presentation.features.listens.ListensActivity
@@ -88,33 +98,86 @@ fun BottomNavigationBar(activity: Activity) {
 @Composable
 fun SongViewPager(viewModel: BrainzPlayerViewModel) {
     val songList = viewModel.mediaItems.collectAsState().value
-    val currentPlayingSong = viewModel.currentlyPlayingSong.collectAsState().value
-    currentlyPayingSong = currentPlayingSong.toSong
-    val pageState = rememberPagerState()
+    val currentPlayingSong = viewModel.currentlyPlayingSong.collectAsState()
+    currentlyPayingSong = currentPlayingSong.value.toSong
+    val pageState = rememberPagerState(initialPage = 0)
+    val scope = rememberCoroutineScope()
     songList.data?.let {
 
-        HorizontalPager(count = it.size, state = pageState, modifier = Modifier.background(
-            colorResource(id = R.color.app_bg))) { page ->
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(15.dp),
-                backgroundColor = colorResource(id = R.color.light_blue)
-            ) {
-                Row {
-                    Column(Modifier.padding(start = 50.dp, top = 8.dp)) {
-                        Text(text = it[page].title, fontWeight = FontWeight.Bold)
-                        Text(text = it[page].artist)
+        HorizontalPager(count = it.size, state = pageState, modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                colorResource(id = R.color.app_bg)
+            )) { page ->
+            Column {
+                Box {
+                    val progress by viewModel.progress.collectAsState()
+                    SeekBar(
+                        modifier = Modifier
+                            .height(10.dp)
+                            .fillMaxWidth(0.98F)
+                            .padding(10.dp),
+                        progress = progress,
+                        onValueChange = viewModel::onSeek,
+                        onValueChanged = viewModel::onSeeked
+                    )
+                }
+                Spacer(modifier = Modifier.height(14.dp))
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth(0.98f)
+                        .height(56.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    backgroundColor = colorResource(id = R.color.light_blue)
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                                .height(45.dp)
+                                .width(45.dp)
+                        ) {
+                            AsyncImage(
+                                modifier = Modifier
+                                    .matchParentSize()
+                                    .clip(shape = RoundedCornerShape(15.dp))
+                                    .graphicsLayer { clip = true },
+                                model = it[page].albumArt,
+                                contentDescription = "",
+                                error = painterResource(
+                                    id = R.drawable.ic_musicbrainz_logo_icon
+                                ),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+                        Column(
+                            Modifier
+                                .width(255.dp)
+                                .align(Alignment.CenterVertically)
+                                .padding(start = 20.dp)
+                        ) {
+                            MarqueeText(text = it[page].title, fontWeight = FontWeight.Bold)
+                            MarqueeText(text = it[page].artist)
+                        }
+                        val playIcon by viewModel.playButton.collectAsState()
+                        Column(
+                            Modifier
+                                .align(Alignment.CenterVertically)
+                                .fillMaxWidth()
+                                .padding(end = 10.dp), horizontalAlignment = Alignment.End
+                        ) {
+                            PlayPauseIcon(playIcon, viewModel)
+
+                        }
                     }
                 }
             }
         }
-        LaunchedEffect(pageState) {
+        LaunchedEffect(key1= pageState) {
             snapshotFlow { pageState.currentPage }
                 .distinctUntilChanged()
+                .filter { pageState.currentPage>=0 }
                 .collect { page->
-
                     if (page>songList.data.indexOf(currentlyPayingSong)) {
                         viewModel.skipToNextSong()
                         viewModel.playOrToggleSong(songList.data[page])
@@ -124,6 +187,14 @@ fun SongViewPager(viewModel: BrainzPlayerViewModel) {
                         viewModel.playOrToggleSong(songList.data[page])
                     }
                 }
+        }
+        scope.launch {
+            if (songList.data.indexOf(currentlyPayingSong) == -1) pageState.animateScrollToPage(0)
+            else pageState.scrollToPage(
+                songList.data.indexOf(
+                    currentlyPayingSong
+                )
+            )
         }
     }
 }
