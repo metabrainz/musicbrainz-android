@@ -1,7 +1,20 @@
 package org.metabrainz.android.util
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.SystemClock
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import androidx.core.graphics.drawable.toBitmap
+import coil.imageLoader
+import coil.request.ErrorResult
+import coil.request.ImageRequest
+import coil.request.SuccessResult
+import coil.size.Scale
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.brainzplayer.Song
 
 object BrainzPlayerExtensions {
@@ -13,17 +26,21 @@ object BrainzPlayerExtensions {
                 mediaID = it.mediaId.toString(),
                 title = it.title.toString(),
                 artist = it.subtitle.toString(),
-                uri = it.mediaUri.toString()
+                uri = it.mediaUri.toString(),
+                albumArt = it.iconUri.toString()
             )
         } ?: Song()
 
-    inline val Song?.toMediaMetadataCompat
-        get() = this?.let { song ->
+
+    inline val Song.toMediaMetadataCompat: MediaMetadataCompat
+        get() = this.let { song ->
             MediaMetadataCompat.Builder()
                 .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, song.artist)
                 .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, song.mediaID)
                 .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
-                .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, song.uri.toString())
+                .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, song.uri)
+                .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI, song.albumArt)
+                .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON_URI, song.albumArt)
                 .build()
         }
 
@@ -41,4 +58,39 @@ object BrainzPlayerExtensions {
         get() = actions and PlaybackStateCompat.ACTION_PLAY != 0L ||
                 (actions and PlaybackStateCompat.ACTION_PLAY_PAUSE != 0L) ||
                 ( state == PlaybackStateCompat.STATE_PAUSED)
+
+    inline val PlaybackStateCompat.currentPlaybackPosition: Long
+        get() = if (state == PlaybackStateCompat.STATE_PLAYING) {
+            val timeDelta = SystemClock.elapsedRealtime() - lastPositionUpdateTime
+            (position + (timeDelta * playbackSpeed)).toLong()
+        }
+        else position
+
+    //Image Extensions
+    suspend fun String.bitmap(context: Context): Bitmap = withContext(Dispatchers.IO) {
+        val imageRequest = ImageRequest.Builder(context)
+            .data(this@bitmap)
+            .size(128)
+            .scale(Scale.FILL)
+            .allowHardware(false)
+            .build()
+
+        when (val result = imageRequest.context.imageLoader.execute(imageRequest)) {
+            is SuccessResult -> result.drawable.toBitmap()
+            is ErrorResult -> R.drawable.ic_musicbrainz_logo_no_text.bitmap(context)
+        }
+    }
+    suspend fun Int.bitmap(context: Context): Bitmap = withContext(Dispatchers.IO) {
+        val imageRequest = ImageRequest.Builder(context)
+            .data(this@bitmap)
+            .size(128)
+            .scale(Scale.FILL)
+            .allowHardware(false)
+            .build()
+
+        when (val result = imageRequest.context.imageLoader.execute(imageRequest)) {
+            is SuccessResult -> result.drawable.toBitmap()
+            is ErrorResult -> BitmapFactory.decodeResource(context.resources, R.drawable.ic_musicbrainz_logo_no_text)
+        }
+    }
 }

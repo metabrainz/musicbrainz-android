@@ -44,15 +44,18 @@ class SongRepositoryImpl @Inject constructor(private val context: Context): Song
             val id = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns._ID)
             val name = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.TITLE)
             val artist = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ARTIST)
+            val albumId = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ALBUM_ID)
             while (cursor.moveToNext()) {
                 val songId = cursor.getLong(id).toString()
+                val albumID = cursor.getLong(albumId).toString()
                 val songName = cursor.getString(name)
                 val artistName = cursor.getString(artist)
+                val albumArt = "content://media/external/audio/albumart/$albumID"
                 val contentUri = ContentUris.withAppendedId(
                     collection,
                     songId.toLong()
                 ).toString()
-                songs += Song(songId, songName, artistName, contentUri)
+                songs += Song(songId, songName, artistName, contentUri, albumArt)
             }
         }
         return songs
