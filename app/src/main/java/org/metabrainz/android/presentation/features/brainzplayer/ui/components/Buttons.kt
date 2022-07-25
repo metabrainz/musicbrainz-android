@@ -13,7 +13,7 @@ import org.metabrainz.android.util.BrainzPlayerExtensions.toSong
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun PlayPauseIcon(icon: ImageVector, viewModel: BrainzPlayerViewModel) {
+fun PlayPauseIcon(icon: ImageVector, viewModel: BrainzPlayerViewModel , modifier: Modifier = Modifier) {
     AnimatedContent(
         targetState = icon,
         transitionSpec = {
@@ -30,7 +30,7 @@ fun PlayPauseIcon(icon: ImageVector, viewModel: BrainzPlayerViewModel) {
         }
 
     ) {
-        Icon(imageVector = it, contentDescription = "", Modifier.clickable {
+        Icon(imageVector = it, contentDescription = "", modifier.clickable {
             viewModel.playOrToggleSong(viewModel.currentlyPlayingSong.value.toSong,viewModel.isPlaying.value)
         })
     }

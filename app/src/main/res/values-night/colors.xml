@@ -19,6 +19,7 @@
     <color name="blue_diff">#007afe</color>
     <color name="green_diff">#08a045</color>
     <color name="gray">#c4c4c4</color>
+    <color name="lavender">#eaddff</color>
 
     <!-- Theme -->
     <color name="aux_text">#666666</color>

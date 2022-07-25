@@ -2,6 +2,7 @@ package org.metabrainz.android.presentation.components
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,6 +38,7 @@ import org.metabrainz.android.presentation.features.login.LoginActivity
 import org.metabrainz.android.presentation.features.navigation.NavigationItem
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.android.util.BrainzPlayerExtensions.toSong
+import java.lang.IndexOutOfBoundsException
 
 @Composable
 fun BottomNavigationBar(activity: Activity) {
@@ -96,7 +98,7 @@ fun BottomNavigationBar(activity: Activity) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun SongViewPager(viewModel: BrainzPlayerViewModel) {
+fun SongViewPager(viewModel: BrainzPlayerViewModel, activity: Activity) {
     val songList = viewModel.mediaItems.collectAsState().value
     val currentPlayingSong = viewModel.currentlyPlayingSong.collectAsState()
     currentlyPayingSong = currentPlayingSong.value.toSong
@@ -174,19 +176,29 @@ fun SongViewPager(viewModel: BrainzPlayerViewModel) {
             }
         }
         LaunchedEffect(key1= pageState) {
-            snapshotFlow { pageState.currentPage }
-                .distinctUntilChanged()
-                .filter { pageState.currentPage>=0 }
-                .collect { page->
-                    if (page>songList.data.indexOf(currentlyPayingSong)) {
-                        viewModel.skipToNextSong()
-                        viewModel.playOrToggleSong(songList.data[page])
+            try{
+                snapshotFlow { pageState.currentPage }
+                    .distinctUntilChanged()
+                    .filter { pageState.currentPage>=0 }
+                    .collect { page->
+                        if (page>songList.data.indexOf(currentlyPayingSong)) {
+                            viewModel.skipToNextSong()
+                            viewModel.playOrToggleSong(songList.data[page])
+                        }
+                        else if (page<songList.data.indexOf(currentlyPayingSong)) {
+                            viewModel.skipToPreviousSong()
+                            viewModel.playOrToggleSong(songList.data[page])
+                        }
                     }
-                    else if (page<songList.data.indexOf(currentlyPayingSong)) {
-                        viewModel.skipToPreviousSong()
-                        viewModel.playOrToggleSong(songList.data[page])
-                    }
+            } catch (e: IndexOutOfBoundsException){
+                if (songList.data.isEmpty()){
+                    Toast.makeText(
+                        activity,
+                        "There are no songs on your device",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+            }
         }
         scope.launch {
             if (songList.data.indexOf(currentlyPayingSong) == -1) pageState.animateScrollToPage(0)

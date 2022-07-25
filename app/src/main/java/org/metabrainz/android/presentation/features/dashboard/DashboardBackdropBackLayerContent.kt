@@ -1,5 +1,6 @@
 package org.metabrainz.android.presentation.features.dashboard
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.*
@@ -29,7 +30,7 @@ import org.metabrainz.android.presentation.features.tagger.TaggerActivity
 
 
 @Composable
-fun BackLayerContent(activity: DashboardActivity, applicationContext: Context) {
+fun BackLayerContent(activity: Activity, applicationContext: Context) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
