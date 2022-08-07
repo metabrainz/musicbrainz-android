@@ -2,6 +2,7 @@ package org.metabrainz.android.presentation.features.brainzplayer.ui
 
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +33,7 @@ class BrainzPlayerViewModel @Inject constructor(
     val progress = _progress.asStateFlow()
 
     private val playbackState = brainzPlayerServiceConnection.playbackState
+    val isShuffled = brainzPlayerServiceConnection.shuffleState
     val isConnected = brainzPlayerServiceConnection.isConnected
     val currentlyPlayingSong = brainzPlayerServiceConnection.currentPlayingSong
     val isPlaying = brainzPlayerServiceConnection.isPlaying
@@ -77,6 +79,10 @@ class BrainzPlayerViewModel @Inject constructor(
 
     fun onSeeked() {
         brainzPlayerServiceConnection.transportControls.seekTo((_songDuration.value * progress.value).toLong())
+    }
+    fun shuffle(){
+        val transportControls = brainzPlayerServiceConnection.transportControls
+        transportControls.setShuffleMode(if(isShuffled.value) PlaybackStateCompat.SHUFFLE_MODE_NONE else PlaybackStateCompat.SHUFFLE_MODE_ALL)
     }
 
     fun playOrToggleSong(mediaItem: Song, toggle: Boolean = false) {

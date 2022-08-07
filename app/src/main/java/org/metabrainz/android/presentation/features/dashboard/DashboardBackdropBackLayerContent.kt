@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
+import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
 import org.metabrainz.android.presentation.features.tagger.TaggerActivity
 
@@ -223,6 +224,58 @@ fun BackLayerContent(activity: Activity, applicationContext: Context) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = stringResource(id = R.string.collection_card),
+                        modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
+                        color = MaterialTheme.colors.surface,
+                        style = MaterialTheme.typography.caption
+                    )
+                }
+            }
+        }
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(18.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .clickable(onClick = {
+                    activity.startActivity(
+                        Intent(
+                            applicationContext,
+                            NewsBrainzActivity::class.java
+                        )
+                    )
+                }),
+            elevation = 0.dp,
+            backgroundColor = MaterialTheme.colors.onSurface
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp)
+            ) {
+                Image(
+                    modifier = Modifier
+                        .size(80.dp, 80.dp)
+                        .padding(4.dp),
+                    painter = painterResource(id = R.drawable.ic_news),
+                    alignment = Alignment.CenterStart,
+                    contentDescription = "",
+                    contentScale = ContentScale.Fit
+                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Column(modifier = Modifier.align(Alignment.CenterVertically)) {
+                    Text(
+                        text = "News",
+                        modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
+                        color = MaterialTheme.colors.surface,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.subtitle1
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(id = R.string.news_card),
                         modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                         color = MaterialTheme.colors.surface,
                         style = MaterialTheme.typography.caption

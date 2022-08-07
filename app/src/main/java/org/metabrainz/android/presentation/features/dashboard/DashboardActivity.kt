@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.*
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.preference.PreferenceManager
@@ -48,7 +48,9 @@ class DashboardActivity : ComponentActivity() {
                     activity = this,
                     paddingValues = paddingValues,
                     brainzPlayerViewModel = brainzPlayerViewModel
-                )
+                ){
+                    BackLayerContent(activity = this, applicationContext = LocalContext.current)
+                }
             }
         }
     }

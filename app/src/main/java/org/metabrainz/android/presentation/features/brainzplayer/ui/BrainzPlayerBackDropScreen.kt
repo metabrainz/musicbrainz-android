@@ -15,10 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Loop
-import androidx.compose.material.icons.rounded.Shuffle
-import androidx.compose.material.icons.rounded.SkipNext
-import androidx.compose.material.icons.rounded.SkipPrevious
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.runtime.*
@@ -47,25 +44,30 @@ import org.metabrainz.android.presentation.components.SongViewPager
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.MarqueeText
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.PlayPauseIcon
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.SeekBar
-import org.metabrainz.android.presentation.features.dashboard.BackLayerContent
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.android.util.BrainzPlayerExtensions.toSong
 import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
-                               activity: Activity,
-                               paddingValues: PaddingValues,
-                               brainzPlayerViewModel: BrainzPlayerViewModel) {
+fun BrainzPlayerBackDropScreen(
+    backdropScaffoldState: BackdropScaffoldState,
+    activity: Activity,
+    paddingValues: PaddingValues,
+    brainzPlayerViewModel: BrainzPlayerViewModel,
+    backlayerContent: @Composable () -> Unit
+) {
     val backdropRevealed by rememberSaveable {
         mutableStateOf(backdropScaffoldState.isRevealed)
     }
     var listenLiked by rememberSaveable{
         mutableStateOf(false)
     }
+
+    val isShuffled = brainzPlayerViewModel.isShuffled.collectAsState()
     val transition = updateTransition(backdropRevealed, label = "")
     val currentlyPlayingSong = brainzPlayerViewModel.currentlyPlayingSong.collectAsState()
+
     DashboardActivity.currentlyPayingSong = currentlyPlayingSong.value.toSong
 
     BackdropScaffold(
@@ -76,7 +78,7 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
         peekHeight = 0.dp,
         scaffoldState = backdropScaffoldState,
         backLayerContent = {
-            BackLayerContent(activity = activity, applicationContext = activity.applicationContext)
+            backlayerContent()
         },
         frontLayerBackgroundColor = colorResource(id = R.color.app_bg),
         frontLayerElevation = 10.dp,
@@ -94,7 +96,9 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
                 exit = fadeOut(animationSpec = tween(200))) {
                 Scaffold(
                     modifier = Modifier
-                        .fillMaxSize(), backgroundColor = colorResource(id = R.color.app_bg)
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                    backgroundColor = colorResource(id = R.color.app_bg)
                 ) {
                     LazyColumn {
                         item {
@@ -106,26 +110,28 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
                                 Column(modifier = Modifier.fillMaxWidth(0.8f)) {
                                     Spacer(modifier = Modifier.height(25.dp))
                                     MarqueeText(
-                                        text = brainzPlayerViewModel.currentlyPlayingSong.value.toSong.title,
+                                        text = currentlyPlayingSong.value.toSong.title,
                                         fontSize = 20.sp,
                                         modifier = Modifier
                                             .fillParentMaxWidth()
                                             .padding(start = 25.dp),
                                         fontWeight = FontWeight.Bold,
-                                        textAlign = TextAlign.Start
+                                        textAlign = TextAlign.Start,
+                                        color = colorResource(id = R.color.white)
                                     )
                                     MarqueeText(
-                                        text = brainzPlayerViewModel.currentlyPlayingSong.value.toSong.artist,
+                                        text = currentlyPlayingSong.value.toSong.artist,
                                         fontSize = 16.sp,
                                         modifier = Modifier
                                             .fillParentMaxWidth()
                                             .padding(start = 25.dp),
-                                        textAlign = TextAlign.Start
+                                        textAlign = TextAlign.Start,
+                                        color = colorResource(id = R.color.white)
                                     )
                                     Spacer(modifier = Modifier.height(20.dp))
                                 }
                                 Icon(
-                                   painterResource(id = if (listenLiked) R.drawable.ic_not_liked else R.drawable.ic_liked) ,
+                                    painterResource(id = if (listenLiked) R.drawable.ic_not_liked else R.drawable.ic_liked),
                                     contentDescription = null,
                                     Modifier.clickable { listenLiked = !listenLiked },
 
@@ -133,7 +139,6 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
                                 )
                             }
                         }
-
 
                         item {
                             Box {
@@ -152,22 +157,26 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
                         item {
                             val playIcon by brainzPlayerViewModel.playButton.collectAsState()
 
-                            Row(verticalAlignment = Alignment.CenterVertically,
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(top = 60.dp)
                             ) {
-                                Icon(imageVector = Icons.Rounded.Loop,
-                                contentDescription = "",
-                                modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
-                                    tint = colorResource(id = R.color.lavender)
+                                Icon(
+                                    imageVector = Icons.Rounded.Loop,
+                                    contentDescription = "",
+                                    modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
+                                    tint = colorResource(id = R.color.bp_lavender)
                                 )
 
                                 Icon(
                                     imageVector = Icons.Rounded.SkipPrevious,
                                     contentDescription = "",
-                                    modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
-                                    tint = colorResource(id = R.color.lavender)
+                                    modifier = Modifier
+                                        .size(FloatingActionButtonDefaults.LargeIconSize)
+                                        .clickable { brainzPlayerViewModel.skipToPreviousSong() },
+                                    tint = colorResource(id = R.color.bp_lavender)
                                 )
 
                                 LargeFloatingActionButton(onClick = {
@@ -183,40 +192,65 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
                                         modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize)
                                     )
                                 }
-                                Icon(imageVector = Icons.Rounded.SkipNext,
+                                Icon(
+                                    imageVector = Icons.Rounded.SkipNext,
                                     contentDescription = "",
-                                    modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
-                                    tint = colorResource(id = R.color.lavender)
+                                    modifier = Modifier
+                                        .size(FloatingActionButtonDefaults.LargeIconSize)
+                                        .clickable { brainzPlayerViewModel.skipToNextSong() },
+                                    tint = colorResource(id = R.color.bp_lavender)
                                 )
-                                Icon(imageVector = Icons.Rounded.Shuffle,
+                                Icon(
+                                    imageVector = if (isShuffled.value) Icons.Rounded.ShuffleOn else Icons.Rounded.Shuffle,
                                     contentDescription = "",
-                                    modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
-                                    tint = colorResource(id = R.color.lavender)
+                                    modifier = Modifier
+                                        .size(FloatingActionButtonDefaults.LargeIconSize)
+                                        .clickable { brainzPlayerViewModel.shuffle() },
+                                    tint = colorResource(id = R.color.bp_lavender)
                                 )
                             }
                         }
-                        
+
                         item {
                             Spacer(modifier = Modifier.height(16.dp))
-                            Text("Now Playing", fontSize = 24.sp, modifier = Modifier.padding(start = 25.dp), fontWeight = FontWeight.SemiBold)
+                            Text(
+                                "Now Playing",
+                                fontSize = 24.sp,
+                                modifier = Modifier.padding(start = 25.dp),
+                                fontWeight = FontWeight.SemiBold,
+                                color = colorResource(
+                                    id = R.color.white
+                                )
+                            )
                             Spacer(modifier = Modifier.height(12.dp))
                         }
-                        items(items = brainzPlayerViewModel.mediaItems.value.data!!){
-                            Card(modifier = Modifier
-                                .padding(10.dp)
-                                .fillMaxWidth(0.98f),
-                            backgroundColor = MaterialTheme.colors.onSurface) {
+                        items(items = brainzPlayerViewModel.mediaItems.value.data!!) {
+                            Card(
+                                modifier = Modifier
+                                    .padding(10.dp)
+                                    .fillMaxWidth(0.98f),
+                                backgroundColor = MaterialTheme.colors.onSurface
+                            ) {
                                 Spacer(modifier = Modifier.height(50.dp))
                                 Row(horizontalArrangement = Arrangement.Start) {
-                                    AsyncImage(model = it.albumArt,
+                                    AsyncImage(
+                                        model = it.albumArt,
                                         contentDescription = "",
                                         error = painterResource(
-                                            id = R.drawable.ic_erroralbumart),
+                                            id = R.drawable.ic_erroralbumart
+                                        ),
                                         contentScale = ContentScale.FillBounds,
-                                    modifier = Modifier.size(70.dp))
+                                        modifier = Modifier.size(70.dp)
+                                    )
                                     Column(Modifier.padding(start = 10.dp)) {
-                                        Text(text = it.title, color = colorResource(id = R.color.white))
-                                        Text(text = it.artist, color = colorResource(id = R.color.white))
+                                        Text(
+                                            text = it.title,
+                                            color = Color.White
+                                        )
+                                        Text(
+                                            text = it.artist,
+                                            color = Color.White
+                                        )
                                     }
                                 }
                             }
@@ -227,7 +261,7 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
             AnimatedVisibility(visible = backdropScaffoldState.isRevealed,
                 enter = fadeIn(animationSpec = tween(200)),
                 exit = fadeOut(animationSpec = tween(200))
-            ){
+            ) {
                 Scaffold(
                     modifier = Modifier
                         .padding(paddingValues)
@@ -241,7 +275,6 @@ fun BrainzPlayerBackDropScreen(backdropScaffoldState: BackdropScaffoldState,
                     SongViewPager(viewModel = brainzPlayerViewModel, activity = activity)
                 }
             }
-
         })
 }
 
@@ -259,10 +292,6 @@ fun AlbumArtViewPager(viewModel: BrainzPlayerViewModel) {
             .background(
                 colorResource(id = R.color.app_bg)
             ),
-//            flingBehavior = rememberFlingBehaviorMultiplier(
-//                multiplier = 2.5f,
-//                baseFlingBehavior = PagerDefaults.flingBehavior(state = pageState)
-//            )
             ) { page ->
             Column(
                 Modifier

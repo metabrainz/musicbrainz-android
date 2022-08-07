@@ -25,7 +25,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="32">
-
+        <activity
+            android:name=".presentation.features.brainzplayer.ui.BrainzPlayerActivity"
+            android:exported="false" />
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
