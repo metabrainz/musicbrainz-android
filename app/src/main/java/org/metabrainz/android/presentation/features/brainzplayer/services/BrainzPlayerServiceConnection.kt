@@ -34,6 +34,9 @@ class BrainzPlayerServiceConnection(
     private val _playButtonState = MutableStateFlow(Icons.Rounded.PlayArrow)
     val playButtonState = _playButtonState.asStateFlow()
 
+    private val _shuffleState = MutableStateFlow(false)
+    val shuffleState = _shuffleState.asStateFlow()
+
     private var previousPlaybackState: Boolean = false
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
 
@@ -90,6 +93,12 @@ class BrainzPlayerServiceConnection(
             if (state?.isPlaying != previousPlaybackState) _isPlaying.value = state?.isPlaying == true
             previousPlaybackState = state?.isPlaying == true
 
+        }
+
+        override fun onShuffleModeChanged(shuffleMode: Int) {
+            super.onShuffleModeChanged(shuffleMode)
+            _shuffleState.value = shuffleMode == PlaybackStateCompat.SHUFFLE_MODE_ALL
+                    || shuffleMode == PlaybackStateCompat.SHUFFLE_MODE_ALL
         }
 
         override fun onMetadataChanged(metadata: MediaMetadataCompat?) {

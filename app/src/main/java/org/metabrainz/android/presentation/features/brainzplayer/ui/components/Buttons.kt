@@ -7,31 +7,33 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerViewModel
 import org.metabrainz.android.util.BrainzPlayerExtensions.toSong
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun PlayPauseIcon(icon: ImageVector, viewModel: BrainzPlayerViewModel) {
+fun PlayPauseIcon(icon: ImageVector, viewModel: BrainzPlayerViewModel , modifier: Modifier = Modifier, tint : Color = Color.Black) {
     AnimatedContent(
         targetState = icon,
         transitionSpec = {
             when (targetState) {
                 Icons.Rounded.PlayArrow -> {
-                    slideInHorizontally { height -> -height } + fadeIn() with
+                    slideInVertically { height -> -height } + fadeIn() with
                             slideOutHorizontally { height -> height } + fadeOut()
                 }
                 else -> {
-                    slideInHorizontally { height -> height } + fadeIn() with
+                    slideInVertically { height -> height } + fadeIn() with
                             slideOutHorizontally{ height -> -height } + fadeOut()
                 }
             }.using(SizeTransform(false))
         }
 
     ) {
-        Icon(imageVector = it, contentDescription = "", Modifier.clickable {
+        Icon(imageVector = it, contentDescription = "",  modifier.clickable {
             viewModel.playOrToggleSong(viewModel.currentlyPlayingSong.value.toSong,viewModel.isPlaying.value)
-        })
+        }
+        ,tint = tint)
     }
 }
