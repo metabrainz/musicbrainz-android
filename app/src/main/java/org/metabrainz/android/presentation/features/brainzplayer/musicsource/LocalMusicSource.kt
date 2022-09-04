@@ -9,6 +9,7 @@ import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import org.metabrainz.android.data.repository.SongRepository
 import org.metabrainz.android.presentation.features.brainzplayer.musicsource.State.*
@@ -56,7 +57,7 @@ class LocalMusicSource @Inject constructor(private val songRepository: SongRepos
 
     suspend fun fetchMediaData() = withContext(Dispatchers.IO) {
         state = STATE_INITIALIZING
-        val listOfAllSongs = songRepository.fetchSongs()
+        val listOfAllSongs = songRepository.getSongsStream().first()
         songs = listOfAllSongs.map { song ->
             song.toMediaMetadataCompat
         }
