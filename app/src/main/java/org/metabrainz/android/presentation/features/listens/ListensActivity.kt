@@ -36,6 +36,7 @@ import coil.request.ImageRequest
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.gson.GsonBuilder
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
@@ -82,6 +83,7 @@ class ListensActivity: ComponentActivity() {
 
     private val errorCallback = { throwable: Throwable -> logError(throwable) }
 
+    @OptIn(ExperimentalPagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SpotifyAppRemote.setDebugMode(true)
