@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.SystemClock
+import android.support.v4.media.MediaBrowserCompat
+import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -18,6 +20,26 @@ import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.brainzplayer.Song
 
 object BrainzPlayerExtensions {
+
+    //MediaDescriptionCompat extensions
+    inline val MediaDescriptionCompat.toSong
+    get() = Song(
+        mediaID = mediaId.toString(),
+        title = title.toString(),
+        artist = subtitle.toString(),
+        albumArt = iconUri.toString(),
+        uri = mediaUri.toString()
+    )
+
+    //MediaBrowserCompat extensions
+    inline val MediaBrowserCompat.MediaItem.toSong
+        get() = Song(
+            mediaID = mediaId!!,
+            title = description.title.toString(),
+            artist = description.subtitle.toString(),
+            albumArt = description.iconUri.toString(),
+            uri = description.mediaUri.toString()
+        )
 
     //MediaMetadataCompat extensions
     inline val MediaMetadataCompat?.toSong

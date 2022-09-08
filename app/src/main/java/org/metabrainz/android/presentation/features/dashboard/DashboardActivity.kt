@@ -9,8 +9,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.preference.PreferenceManager
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
-import org.metabrainz.android.data.sources.brainzplayer.Song
 import org.metabrainz.android.presentation.components.BottomNavigationBar
 import org.metabrainz.android.presentation.components.TopAppBar
 import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerBackDropScreen
@@ -21,11 +21,7 @@ import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
 @AndroidEntryPoint
 class DashboardActivity : ComponentActivity() {
 
-    companion object {
-        var currentlyPayingSong: Song? = null
-    }
-
-    @OptIn(ExperimentalMaterialApi::class)
+    @OptIn(ExperimentalMaterialApi::class, ExperimentalPagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -45,10 +41,9 @@ class DashboardActivity : ComponentActivity() {
             ) { paddingValues ->
                 BrainzPlayerBackDropScreen(
                     backdropScaffoldState = backdropScaffoldState,
-                    activity = this,
                     paddingValues = paddingValues,
                     brainzPlayerViewModel = brainzPlayerViewModel
-                ){
+                ) {
                     BackLayerContent(activity = this, applicationContext = LocalContext.current)
                 }
             }

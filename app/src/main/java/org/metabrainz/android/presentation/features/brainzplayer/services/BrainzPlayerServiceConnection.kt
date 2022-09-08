@@ -17,9 +17,7 @@ import org.metabrainz.android.util.Resource
 class BrainzPlayerServiceConnection(
     context: Context
 ) {
-    lateinit var mediaController: MediaControllerCompat
-
-    private val _isConnected = MutableStateFlow<Resource<Boolean>>(Resource.loading())
+    private val _isConnected = MutableStateFlow(Resource(Resource.Status.LOADING, false))
     val isConnected = _isConnected.asStateFlow()
 
     private val _playbackState = MutableStateFlow(EMPTY_PLAYBACK_STATE)
@@ -39,6 +37,8 @@ class BrainzPlayerServiceConnection(
 
     private var previousPlaybackState: Boolean = false
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
+
+    lateinit var mediaController: MediaControllerCompat
 
     private val mediaBrowser = MediaBrowserCompat(
         context,
@@ -82,9 +82,7 @@ class BrainzPlayerServiceConnection(
         override fun onConnectionFailed() {
             _isConnected.value = Resource(Resource.Status.FAILED, false)
         }
-
     }
-
     private inner class MediaControllerCallback : MediaControllerCompat.Callback() {
         override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
             _playbackState.value = state ?: EMPTY_PLAYBACK_STATE

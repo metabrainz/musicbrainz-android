@@ -1,10 +1,7 @@
 package org.metabrainz.android.presentation.features.brainzplayer.ui
 
-import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
@@ -34,41 +31,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.google.accompanist.pager.*
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import org.metabrainz.android.R
+import org.metabrainz.android.data.sources.brainzplayer.Playlist.Companion.currentlyPlaying
+import org.metabrainz.android.data.sources.brainzplayer.Playlist.Companion.favourite
 import org.metabrainz.android.presentation.components.SongViewPager
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.MarqueeText
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.PlayPauseIcon
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.SeekBar
-import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
+import org.metabrainz.android.presentation.features.brainzplayer.ui.playlist.PlaylistViewModel
 import org.metabrainz.android.util.BrainzPlayerExtensions.toSong
 import kotlin.math.absoluteValue
 
-@OptIn(ExperimentalMaterialApi::class)
+@ExperimentalMaterialApi
+@ExperimentalPagerApi
 @Composable
 fun BrainzPlayerBackDropScreen(
     backdropScaffoldState: BackdropScaffoldState,
-    activity: Activity,
     paddingValues: PaddingValues,
     brainzPlayerViewModel: BrainzPlayerViewModel,
-    backlayerContent: @Composable () -> Unit
+    backLayerContent: @Composable () -> Unit
 ) {
-    val backdropRevealed by rememberSaveable {
-        mutableStateOf(backdropScaffoldState.isRevealed)
-    }
-    var listenLiked by rememberSaveable{
-        mutableStateOf(false)
-    }
-
+    val scope = rememberCoroutineScope()
+    val playlistViewModel = hiltViewModel<PlaylistViewModel>()
     val isShuffled = brainzPlayerViewModel.isShuffled.collectAsState()
-    val transition = updateTransition(backdropRevealed, label = "")
-    val currentlyPlayingSong = brainzPlayerViewModel.currentlyPlayingSong.collectAsState()
-
-    DashboardActivity.currentlyPayingSong = currentlyPlayingSong.value.toSong
+    val currentlyPlayingSong = brainzPlayerViewModel.currentlyPlayingSong.collectAsState().value.toSong
+    var listenLiked by rememberSaveable{
+        mutableStateOf(favourite.items.contains(currentlyPlayingSong))
+    }
 
     BackdropScaffold(
         frontLayerShape = RectangleShape,
@@ -78,19 +71,13 @@ fun BrainzPlayerBackDropScreen(
         peekHeight = 0.dp,
         scaffoldState = backdropScaffoldState,
         backLayerContent = {
-            backlayerContent()
+            backLayerContent()
         },
         frontLayerBackgroundColor = colorResource(id = R.color.app_bg),
         frontLayerElevation = 10.dp,
         appBar = {},
         persistentAppBar = false,
         frontLayerContent = {
-            val anim by transition.animateDp(label = "") { state->
-                when(state){
-                    backdropScaffoldState.isRevealed -> 100.dp
-                    else -> 56.dp
-                }
-            }
             AnimatedVisibility (backdropScaffoldState.isConcealed,
                 enter = fadeIn(animationSpec = tween(200)),
                 exit = fadeOut(animationSpec = tween(200))) {
@@ -110,7 +97,7 @@ fun BrainzPlayerBackDropScreen(
                                 Column(modifier = Modifier.fillMaxWidth(0.8f)) {
                                     Spacer(modifier = Modifier.height(25.dp))
                                     MarqueeText(
-                                        text = currentlyPlayingSong.value.toSong.title,
+                                        text = currentlyPlayingSong.title,
                                         fontSize = 20.sp,
                                         modifier = Modifier
                                             .fillParentMaxWidth()
@@ -120,7 +107,7 @@ fun BrainzPlayerBackDropScreen(
                                         color = colorResource(id = R.color.white)
                                     )
                                     MarqueeText(
-                                        text = currentlyPlayingSong.value.toSong.artist,
+                                        text = currentlyPlayingSong.artist,
                                         fontSize = 16.sp,
                                         modifier = Modifier
                                             .fillParentMaxWidth()
@@ -133,13 +120,17 @@ fun BrainzPlayerBackDropScreen(
                                 Icon(
                                     painterResource(id = if (listenLiked) R.drawable.ic_not_liked else R.drawable.ic_liked),
                                     contentDescription = null,
-                                    Modifier.clickable { listenLiked = !listenLiked },
-
+                                    Modifier.clickable {
+                                        listenLiked = !listenLiked
+                                        scope.launch {
+                                            if (listenLiked) playlistViewModel.addSongToPlaylist(currentlyPlayingSong, favourite)
+                                            else playlistViewModel.deleteSongFromPlaylist(currentlyPlayingSong, favourite)
+                                        }
+                                    },
                                     tint = if (!listenLiked) Color.Red else Color.Black
                                 )
                             }
                         }
-
                         item {
                             Box {
                                 val progress by brainzPlayerViewModel.progress.collectAsState()
@@ -182,7 +173,7 @@ fun BrainzPlayerBackDropScreen(
                                 LargeFloatingActionButton(onClick = {
                                     brainzPlayerViewModel.playOrToggleSong(
                                         brainzPlayerViewModel.currentlyPlayingSong.value.toSong,
-                                        brainzPlayerViewModel.isPlaying.value
+                                        brainzPlayerViewModel.isPlaying.value,
                                     )
                                 }
                                 ) {
@@ -224,7 +215,7 @@ fun BrainzPlayerBackDropScreen(
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                         }
-                        items(items = brainzPlayerViewModel.mediaItems.value.data!!) {
+                        items(items = currentlyPlaying.items) {
                             Card(
                                 modifier = Modifier
                                     .padding(10.dp)
@@ -272,20 +263,19 @@ fun BrainzPlayerBackDropScreen(
                             )
                         )
                 ) {
-                    SongViewPager(viewModel = brainzPlayerViewModel, activity = activity)
+                    SongViewPager()
                 }
             }
         })
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@ExperimentalPagerApi
 @Composable
 fun AlbumArtViewPager(viewModel: BrainzPlayerViewModel) {
-    val songList = viewModel.mediaItems.collectAsState().value
-    val currentPlayingSong = viewModel.currentlyPlayingSong.collectAsState()
-     DashboardActivity.currentlyPayingSong = currentPlayingSong.value.toSong
-    val pageState = rememberPagerState(initialPage = 0)
-    val scope = rememberCoroutineScope()
+    val songList = viewModel.mediaItem.collectAsState().value
+    val currentlyPlayingSong = viewModel.currentlyPlayingSong.collectAsState().value.toSong
+    val pagerState = viewModel.pagerState.collectAsState().value
+    val pageState = rememberPagerState(initialPage = pagerState)
     songList.data?.let {
         HorizontalPager(count = it.size, state = pageState, modifier = Modifier
             .fillMaxWidth()
@@ -335,7 +325,7 @@ fun AlbumArtViewPager(viewModel: BrainzPlayerViewModel) {
                             .padding()
                             .clip(shape = RoundedCornerShape(20.dp))
                             .graphicsLayer { clip = true },
-                        model = it[page].albumArt,
+                        model = currentlyPlayingSong.albumArt,
                         contentDescription = "",
                         error = painterResource(
                             id = R.drawable.ic_erroralbumart
@@ -345,30 +335,6 @@ fun AlbumArtViewPager(viewModel: BrainzPlayerViewModel) {
                 }
             }
         }
-        LaunchedEffect(key1= pageState) {
-            snapshotFlow { pageState.currentPage }
-                .distinctUntilChanged()
-                .filter { pageState.currentPage>=0 }
-                .collect { page->
-                    if (page>songList.data.indexOf(DashboardActivity.currentlyPayingSong)) {
-                        viewModel.skipToNextSong()
-                        viewModel.playOrToggleSong(songList.data[page])
-                    }
-                    else if (page<songList.data.indexOf(DashboardActivity.currentlyPayingSong)) {
-                        viewModel.skipToPreviousSong()
-                        viewModel.playOrToggleSong(songList.data[page])
-                    }
-                }
-        }
-        scope.launch {
-            if (songList.data.indexOf(DashboardActivity.currentlyPayingSong) == -1) pageState.animateScrollToPage(
-                0
-            )
-            else pageState.scrollToPage(
-                songList.data.indexOf(
-                    DashboardActivity.currentlyPayingSong
-                )
-            )
-        }
+            //TODO("Work on ViewPager changing pages")
     }
 }

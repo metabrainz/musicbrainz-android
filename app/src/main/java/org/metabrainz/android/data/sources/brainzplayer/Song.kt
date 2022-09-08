@@ -5,5 +5,7 @@ data class Song (
     val title : String="",
     val artist: String = "",
     val uri : String = "",
-    val albumArt: String = "",
+    val albumID: String = "",
+    val album: String = "",
+    val albumArt: String = ""
 )
