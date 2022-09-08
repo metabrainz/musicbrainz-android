@@ -13,6 +13,7 @@
     <string name="search_card">Explore MusicBrainz data</string>
     <string name="tagger_card">Choose your Audio, Fix the tag</string>
     <string name="collection_card">Explore your MusicBrainz Collection</string>
+    <string name="news_card">MusicBrainz News Updates</string>
     <string name="dash_scan">Scan</string>
     <string name="dash_collections">Collections</string>
     <string name="dash_donate">Donate</string>
@@ -221,4 +222,6 @@
     <string name="title_current_track">Current Track</string>
     <string name="title_image_size">Image size</string>
     <string name="title_image_scale_type">Scale type</string>
+    <string name="brainzplayer_notification_channel_name">BrainzPlayer Now Playing</string>
+    <string name="brainzplayer_notification_channel_description">Currently Playing Song Controls</string>
 </resources>
