@@ -11,6 +11,7 @@ import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayArrow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import org.metabrainz.android.presentation.features.brainzplayer.services.RepeatMode.*
 import org.metabrainz.android.util.BrainzPlayerExtensions.isPlaying
 import org.metabrainz.android.util.Resource
 
@@ -34,6 +35,9 @@ class BrainzPlayerServiceConnection(
 
     private val _shuffleState = MutableStateFlow(false)
     val shuffleState = _shuffleState.asStateFlow()
+
+    private val _repeatModeState = MutableStateFlow(REPEAT_MODE_OFF)
+    val repeatModeState = _repeatModeState.asStateFlow()
 
     private var previousPlaybackState: Boolean = false
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
@@ -90,7 +94,16 @@ class BrainzPlayerServiceConnection(
             else Icons.Rounded.PlayArrow
             if (state?.isPlaying != previousPlaybackState) _isPlaying.value = state?.isPlaying == true
             previousPlaybackState = state?.isPlaying == true
+        }
 
+        override fun onRepeatModeChanged(repeatMode: Int) {
+            super.onRepeatModeChanged(repeatMode)
+            when(repeatMode){
+                PlaybackStateCompat.REPEAT_MODE_NONE -> _repeatModeState.value = REPEAT_MODE_OFF
+                PlaybackStateCompat.REPEAT_MODE_ONE -> _repeatModeState.value = REPEAT_MODE_ONE
+                PlaybackStateCompat.REPEAT_MODE_ALL -> _repeatModeState.value = REPEAT_MODE_ALL
+                else -> _repeatModeState.value = REPEAT_MODE_OFF
+            }
         }
 
         override fun onShuffleModeChanged(shuffleMode: Int) {
@@ -120,3 +133,9 @@ val NOTHING_PLAYING: MediaMetadataCompat = MediaMetadataCompat.Builder()
     .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, "")
     .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, 0)
     .build()
+
+enum class RepeatMode{
+    REPEAT_MODE_ONE,
+    REPEAT_MODE_OFF,
+    REPEAT_MODE_ALL,
+}

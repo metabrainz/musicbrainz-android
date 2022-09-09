@@ -12,7 +12,6 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
-import com.google.android.exoplayer2.upstream.DefaultDataSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import org.metabrainz.android.presentation.features.brainzplayer.musicsource.LocalMusicSource
@@ -26,9 +25,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class BrainzPlayerService: MediaBrowserServiceCompat() {
-
-    @Inject
-    lateinit var dataSourceFactory: DefaultDataSource.Factory
 
     @Inject
     lateinit var exoPlayer: ExoPlayer
@@ -145,7 +141,7 @@ class BrainzPlayerService: MediaBrowserServiceCompat() {
     ) {
         serviceScope.launch(Dispatchers.Main) {
             val currentSongIndex = if (currentSong == null) 0 else songs.indexOf(itemToPlay)
-            exoPlayer.setMediaSource(localMusicSource.asMediaSource(dataSourceFactory))
+            exoPlayer.addMediaItems(localMusicSource.asMediaSource())
             exoPlayer.prepare()
             exoPlayer.seekTo(currentSongIndex, 0L)
             exoPlayer.playWhenReady = playNow

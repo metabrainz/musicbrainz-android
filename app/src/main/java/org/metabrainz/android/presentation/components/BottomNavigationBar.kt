@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import coil.compose.AsyncImage
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -106,115 +107,113 @@ fun BottomNavigationBar(activity: Activity) {
 @ExperimentalPagerApi
 @Composable
 fun SongViewPager(viewModel: BrainzPlayerViewModel = hiltViewModel()) {
-    val songList = viewModel.mediaItem.collectAsState().value.data
+    val songList = viewModel.mediaItem.collectAsState().value.data ?: listOf()
     val currentlyPlayingSong = viewModel.currentlyPlayingSong.collectAsState().value.toSong
     val pagerState = viewModel.pagerState.collectAsState().value
     val pageState = rememberPagerState(initialPage = pagerState)
-    songList?.let{
-        HorizontalPager(count = songList.size, state = pageState, modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                colorResource(id = R.color.bp_bottom_song_viewpager)
-            )) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Box {
-                    val progress by viewModel.progress.collectAsState()
-                    SeekBar(
-                        modifier = Modifier
-                            .height(10.dp)
-                            .fillMaxWidth()
-                            .padding(top = 10.dp),
-                        progress = progress,
-                        onValueChange = viewModel::onSeek,
-                        onValueChanged = viewModel::onSeeked
-                    )
-                }
-                Spacer(modifier = Modifier.height(14.dp))
-                Box(
+    HorizontalPager(count = songList.size, state = pageState, modifier = Modifier
+        .fillMaxWidth()
+        .background(
+            colorResource(id = R.color.bp_bottom_song_viewpager)
+        )) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box {
+                val progress by viewModel.progress.collectAsState()
+                SeekBar(
                     modifier = Modifier
+                        .height(10.dp)
                         .fillMaxWidth()
-                        .height(56.dp)
-                ) {
-                    Row {
-                        Box(
+                        .padding(top = 10.dp),
+                    progress = progress,
+                    onValueChange = viewModel::onSeek,
+                    onValueChanged = viewModel::onSeeked
+                )
+            }
+            Spacer(modifier = Modifier.height(14.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Row {
+                    Box(
+                        modifier = Modifier
+                            .padding(start = 5.dp, end = 5.dp)
+                            .height(45.dp)
+                            .width(45.dp)
+                    ) {
+                        AsyncImage(
                             modifier = Modifier
-                                .padding(start = 5.dp, end = 5.dp)
-                                .height(45.dp)
-                                .width(45.dp)
+                                .matchParentSize()
+                                .clip(shape = RoundedCornerShape(8.dp))
+                                .graphicsLayer { clip = true },
+                            model = currentlyPlayingSong.albumArt,
+                            contentDescription = "",
+                            error = painterResource(
+                                id = R.drawable.ic_erroralbumart
+                            ),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+                    val playIcon by viewModel.playButton.collectAsState()
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(end = 35.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            AsyncImage(
-                                modifier = Modifier
-                                    .matchParentSize()
-                                    .clip(shape = RoundedCornerShape(8.dp))
-                                    .graphicsLayer { clip = true },
-                                model = currentlyPlayingSong.albumArt,
+                            Icon(
+                                imageVector = Icons.Rounded.SkipPrevious,
                                 contentDescription = "",
-                                error = painterResource(
-                                    id = R.drawable.ic_erroralbumart
-                                ),
-                                contentScale = ContentScale.Crop
-                            )
-                        }
-                        val playIcon by viewModel.playButton.collectAsState()
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(end = 35.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceEvenly
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Rounded.SkipPrevious,
-                                    contentDescription = "",
-                                    Modifier
-                                        .size(35.dp)
-                                        .clickable { viewModel.skipToPreviousSong() },
-                                    tint = colorResource(
-                                        id = R.color.bp_color_primary
-                                    )
+                                Modifier
+                                    .size(35.dp)
+                                    .clickable { viewModel.skipToPreviousSong() },
+                                tint = colorResource(
+                                    id = R.color.bp_color_primary
                                 )
-                                Box(
-                                    modifier = Modifier
-                                        .size(35.dp)
-                                        .clip(CircleShape)
-                                        .background(colorResource(id = R.color.bp_color_primary))
-                                ) {
-                                    PlayPauseIcon(
-                                        playIcon,
-                                        viewModel,
-                                        Modifier.size(35.dp),
-                                        tint = colorResource(
-                                            id = R.color.bp_bottom_song_viewpager
-                                        )
-                                    )
-                                }
-                                Icon(
-                                    imageVector = Icons.Rounded.SkipNext,
-                                    contentDescription = "",
-                                    Modifier
-                                        .size(35.dp)
-                                        .clickable { viewModel.skipToNextSong() },
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .size(35.dp)
+                                    .clip(CircleShape)
+                                    .background(colorResource(id = R.color.bp_color_primary))
+                            ) {
+                                PlayPauseIcon(
+                                    playIcon,
+                                    viewModel,
+                                    Modifier.size(35.dp),
                                     tint = colorResource(
-                                        id = R.color.bp_color_primary
+                                        id = R.color.bp_bottom_song_viewpager
                                     )
                                 )
                             }
-                            MarqueeText(
-                                text = currentlyPlayingSong.artist + " - " + currentlyPlayingSong.title,
-                                fontSize = 13.sp,
-                                textAlign = TextAlign.Center,
-                                color = colorResource(
-                                    id = R.color.white
+                            Icon(
+                                imageVector = Icons.Rounded.SkipNext,
+                                contentDescription = "",
+                                Modifier
+                                    .size(35.dp)
+                                    .clickable { viewModel.skipToNextSong() },
+                                tint = colorResource(
+                                    id = R.color.bp_color_primary
                                 )
                             )
                         }
+                        MarqueeText(
+                            text = currentlyPlayingSong.artist + " - " + currentlyPlayingSong.title,
+                            fontSize = 13.sp,
+                            textAlign = TextAlign.Center,
+                            color = colorResource(
+                                id = R.color.white
+                            )
+                        )
                     }
                 }
             }
@@ -247,7 +246,13 @@ fun BrainzPlayerBottomBar( navController: NavController) {
                 alwaysShowLabel = true,
                 selected = selected,
                 onClick = {
-                    navController.navigate(item.route)
+                    navController.navigate(item.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             )
         }

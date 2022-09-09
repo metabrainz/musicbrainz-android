@@ -5,9 +5,6 @@ import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import androidx.core.net.toUri
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.ConcatenatingMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -16,21 +13,20 @@ import org.metabrainz.android.presentation.features.brainzplayer.musicsource.Sta
 import org.metabrainz.android.util.BrainzPlayerExtensions.toMediaMetadataCompat
 import javax.inject.Inject
 
-class LocalMusicSource @Inject constructor(private val songRepository: SongRepository) :
+class LocalMusicSource @Inject constructor(
+    private val songRepository: SongRepository) :
     MusicSource<MediaMetadataCompat> {
 
     override var songs = emptyList<MediaMetadataCompat>()
 
-    override fun asMediaSource(dataSourceFactory: DefaultDataSource.Factory): ConcatenatingMediaSource {
-        val concatenatingMediaSource = ConcatenatingMediaSource()
+    override fun asMediaSource(): MutableList<MediaItem> {
+        val listOfMediaItem = mutableListOf<MediaItem>()
         songs.forEach { song ->
             val mediaItem =
                 MediaItem.fromUri(song.getString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI))
-            val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(mediaItem)
-            concatenatingMediaSource.addMediaSource(mediaSource)
+            listOfMediaItem.add(mediaItem)
         }
-        return concatenatingMediaSource
+        return listOfMediaItem
     }
 
     override fun asMediaItem() = songs.map { song ->

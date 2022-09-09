@@ -8,9 +8,11 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.google.accompanist.pager.ExperimentalPagerApi
 import org.metabrainz.android.data.sources.brainzplayer.Album
 import org.metabrainz.android.data.sources.brainzplayer.Artist
 import org.metabrainz.android.data.sources.brainzplayer.Playlist
+import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerActivity
 import org.metabrainz.android.presentation.features.brainzplayer.ui.HomeScreen
 import org.metabrainz.android.presentation.features.brainzplayer.ui.album.AlbumScreen
 import org.metabrainz.android.presentation.features.brainzplayer.ui.album.OnAlbumClickScreen
@@ -21,14 +23,23 @@ import org.metabrainz.android.presentation.features.brainzplayer.ui.playlist.Pla
 import org.metabrainz.android.presentation.features.brainzplayer.ui.songs.SongScreen
 import org.metabrainz.android.presentation.features.navigation.BrainzNavigationItem
 
+@OptIn(ExperimentalPagerApi::class)
 @ExperimentalMaterial3Api
 @Composable
-fun Navigation(navHostController: NavHostController, albums: List<Album>, artists: List<Artist>, playlists: List<Playlist>,
-               recentlyPlayedSongs: Playlist) {
+fun Navigation(
+    navHostController: NavHostController,
+    albums: List<Album>,
+    artists: List<Artist>,
+    playlists: List<Playlist>,
+    recentlyPlayedSongs: Playlist,
+    brainzPlayerActivity: BrainzPlayerActivity
+) {
     NavHost(navController = navHostController, startDestination = BrainzNavigationItem.Home.route) {
         //BrainzPlayerActivity bottom navigation
         composable(route = BrainzNavigationItem.Home.route) {
-            HomeScreen(albums = albums, artists, playlists, recentlyPlayedSongs, navHostController)
+            HomeScreen(albums = albums, artists, playlists, recentlyPlayedSongs, navHostController = navHostController,
+                activity = brainzPlayerActivity
+            )
         }
         composable(route = BrainzNavigationItem.Songs.route) {
             SongScreen()

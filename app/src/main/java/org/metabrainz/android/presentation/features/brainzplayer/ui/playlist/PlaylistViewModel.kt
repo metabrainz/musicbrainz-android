@@ -55,4 +55,7 @@ class PlaylistViewModel @Inject constructor(
     suspend fun deleteSongFromPlaylist(song:Song, playlist: Playlist){
         playlistRepository.deleteSongFromPlaylist(song,playlist)
     }
+
+    suspend fun updatePlaylist(songs: List<Song>, playlistID: Long) =
+        playlistRepository.updatePlaylist(songs, playlistID)
 }
