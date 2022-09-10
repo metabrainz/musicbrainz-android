@@ -87,21 +87,8 @@ fun BrainzPlayerBackDropScreen(
                 AnimatedContent(
                     targetState = backdropScaffoldState.isConcealed,
                     transitionSpec = {
-                        if (backdropScaffoldState.isAnimationRunning) {
-                            scaleIn(
-                                animationSpec = tween(
-                                    durationMillis = 800,
-                                    delayMillis = 400
-                                )
-                            ) with slideOutVertically(
-                                animationSpec = tween(
-                                    durationMillis = 400,
-                                    delayMillis = 250
-                                )
-                            ) { it }
-                        }
 
-                        else if (backdropScaffoldState.isConcealed) {
+                        if (backdropScaffoldState.isConcealed) {
                             scaleIn(
                                 animationSpec = tween(
                                     durationMillis = 800,
