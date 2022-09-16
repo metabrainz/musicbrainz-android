@@ -2,19 +2,21 @@ package org.metabrainz.android.presentation.features.dashboard
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.preference.PreferenceManager
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.presentation.components.BottomNavigationBar
 import org.metabrainz.android.presentation.components.TopAppBar
 import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerBackDropScreen
-import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerViewModel
 import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
 
 
@@ -30,21 +32,37 @@ class DashboardActivity : ComponentActivity() {
             startActivity(Intent(this, FeaturesActivity::class.java))
             finish()
         }
-
         setContent {
-            val brainzPlayerViewModel = hiltViewModel<BrainzPlayerViewModel>()
+            var isGrantedPerms by remember {
+                mutableStateOf(false)
+            }
+            val launcher = rememberLauncherForActivityResult(
+                contract =
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+                if (!isGranted) {
+                    Toast.makeText(this, "Brainzplayer requires local storage permissions to play local songs", Toast.LENGTH_SHORT).show()
+                } else {
+                    isGrantedPerms = true
+                }
+            }
+            SideEffect {
+                launcher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+
             val backdropScaffoldState =
                 rememberBackdropScaffoldState(initialValue = BackdropValue.Revealed)
             Scaffold(
                 topBar = { TopAppBar(activity = this, title = "Home") },
                 bottomBar = { BottomNavigationBar(activity = this) }
             ) { paddingValues ->
-                BrainzPlayerBackDropScreen(
-                    backdropScaffoldState = backdropScaffoldState,
-                    paddingValues = paddingValues,
-                    brainzPlayerViewModel = brainzPlayerViewModel
-                ) {
-                    BackLayerContent(activity = this, applicationContext = LocalContext.current)
+                if (isGrantedPerms) {
+                    BrainzPlayerBackDropScreen(
+                        backdropScaffoldState = backdropScaffoldState,
+                        paddingValues = paddingValues,
+                    ) {
+                        BackLayerContent(activity = this, applicationContext = LocalContext.current)
+                    }
                 }
             }
         }

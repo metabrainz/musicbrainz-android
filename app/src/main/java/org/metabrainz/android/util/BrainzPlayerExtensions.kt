@@ -1,23 +1,31 @@
 package org.metabrainz.android.util
 
+import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Bundle
 import android.os.SystemClock
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.net.toUri
 import coil.imageLoader
 import coil.request.ErrorResult
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import coil.size.Scale
+import com.google.android.exoplayer2.MediaMetadata
+import com.google.android.exoplayer2.util.MimeTypes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.metabrainz.android.BuildConfig.APPLICATION_ID
 import org.metabrainz.android.R
 import org.metabrainz.android.data.sources.brainzplayer.Song
+import java.io.File
 
 object BrainzPlayerExtensions {
 
@@ -66,6 +74,48 @@ object BrainzPlayerExtensions {
                 .build()
         }
 
+    private inline val MediaMetadataCompat.mediaUri: Uri
+        get() = this.getString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI).toUri()
+
+    inline val MediaMetadataCompat.id: String?
+        get() = getString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID)
+
+    inline val MediaMetadataCompat.title: String?
+        get() = getString(MediaMetadataCompat.METADATA_KEY_TITLE)
+
+    inline val MediaMetadataCompat.artist: String?
+        get() = getString(MediaMetadataCompat.METADATA_KEY_ARTIST)
+
+    inline val MediaMetadataCompat.duration
+        get() = getLong(MediaMetadataCompat.METADATA_KEY_DURATION)
+
+    inline val MediaMetadataCompat.album: String?
+        get() = getString(MediaMetadataCompat.METADATA_KEY_ALBUM)
+
+    private inline val MediaMetadataCompat.albumArtUri: Uri
+        get() = this.getString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI).toUri()
+
+
+    private fun MediaMetadataCompat.toMediaItemMetadata(): MediaMetadata {
+        return with(MediaMetadata.Builder()) {
+            setTitle(title)
+            setAlbumArtist(artist)
+            setAlbumTitle(album)
+            setArtworkUri(albumArtUri)
+            val extras = Bundle()
+            extras.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, duration)
+            setExtras(extras)
+        }.build()
+    }
+
+    fun MediaMetadataCompat.toMediaItem(): com.google.android.exoplayer2.MediaItem {
+        return with(com.google.android.exoplayer2.MediaItem.Builder()) {
+            setMediaId(mediaUri.toString())
+            setUri(mediaUri)
+            setMimeType(MimeTypes.AUDIO_MPEG)
+            setMediaMetadata(toMediaItemMetadata())
+        }.build()
+    }
     //PlaybackStateCompat extensions
     inline val PlaybackStateCompat.isPrepared
         get() = state == PlaybackStateCompat.STATE_BUFFERING ||
@@ -114,5 +164,13 @@ object BrainzPlayerExtensions {
             is SuccessResult -> result.drawable.toBitmap()
             is ErrorResult -> BitmapFactory.decodeResource(context.resources, R.drawable.ic_musicbrainz_logo_no_text)
         }
+    }
+
+    fun File.asAlbumArtContentUri(): Uri {
+        return Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(APPLICATION_ID)
+            .appendPath(this.path)
+            .build()
     }
 }

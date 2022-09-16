@@ -91,6 +91,16 @@ class FeaturesActivity : OnboardAdvanced() {
             isLottie = true
         ))
 
+        addSlide(OnboardFragment.newInstance(
+            "BrainzPlayer",
+            "Listen to locally saved music",
+            resourceId = R.raw.music_player,
+            backgroundColor =  ContextCompat.getColor(applicationContext, R.color.app_bg),
+            titleColor = ContextCompat.getColor(applicationContext, R.color.white),
+            descriptionColor = ContextCompat.getColor(applicationContext, R.color.white),
+            isLottie = true
+        ))
+
         setTransformer(OnboardPageTransformerType.Parallax())
     }
 

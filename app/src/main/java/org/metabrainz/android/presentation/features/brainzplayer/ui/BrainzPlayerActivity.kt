@@ -1,6 +1,8 @@
 package org.metabrainz.android.presentation.features.brainzplayer.ui
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.*
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -28,6 +31,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.inset
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -37,6 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.PopupProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -47,6 +53,7 @@ import org.metabrainz.android.data.sources.brainzplayer.Album
 import org.metabrainz.android.data.sources.brainzplayer.Artist
 import org.metabrainz.android.data.sources.brainzplayer.Playlist
 import org.metabrainz.android.data.sources.brainzplayer.Playlist.Companion.recentlyPlayed
+import org.metabrainz.android.data.sources.brainzplayer.Song
 import org.metabrainz.android.presentation.components.BrainzPlayerBottomBar
 import org.metabrainz.android.presentation.components.TopAppBar
 import org.metabrainz.android.presentation.features.brainzplayer.ui.album.AlbumViewModel
@@ -54,6 +61,7 @@ import org.metabrainz.android.presentation.features.brainzplayer.ui.artist.Artis
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.Navigation
 import org.metabrainz.android.presentation.features.brainzplayer.ui.components.forwardingPainter
 import org.metabrainz.android.presentation.features.brainzplayer.ui.playlist.PlaylistViewModel
+import org.metabrainz.android.presentation.features.listens.ListensActivity
 
 @ExperimentalPagerApi
 @AndroidEntryPoint
@@ -64,7 +72,6 @@ class BrainzPlayerActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            val brainzPlayerViewModel = hiltViewModel<BrainzPlayerViewModel>()
             val albumViewModel = hiltViewModel<AlbumViewModel>()
             val artistViewModel = hiltViewModel<ArtistViewModel>()
             val playlistViewModel = hiltViewModel<PlaylistViewModel>()
@@ -88,31 +95,34 @@ class BrainzPlayerActivity : ComponentActivity() {
                 BrainzPlayerBackDropScreen(
                     backdropScaffoldState = backdropScaffoldState,
                     paddingValues = paddingValues,
-                    brainzPlayerViewModel = brainzPlayerViewModel
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                    ) {
-                        Navigation(navController, albums, artists, playlists, recentlyPlayed)
-                    }
-                }
+                    backLayerContent = {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                        ) {
+                            Navigation(navController, albums, artists, playlists, recentlyPlayed, this@BrainzPlayerActivity)
+                        }
+                    })
             }
         }
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
     albums: List<Album>,
     artists: List<Artist>,
     playlists: List<Playlist>,
     recentlyPlayedSongs: Playlist,
-    navHostController: NavHostController
+    brainzPlayerViewModel: BrainzPlayerViewModel = hiltViewModel(),
+    navHostController: NavHostController,
+    activity: BrainzPlayerActivity
 ) {
     val searchTextState = remember {
         mutableStateOf(TextFieldValue(""))
     }
+
     LazyColumn {
         item {
             Row(
@@ -122,11 +132,11 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                SearchView(state = searchTextState)
+                SearchView(state = searchTextState, brainzPlayerViewModel)
             }
         }
         item {
-            ListenBrainzHistoryCard()
+            ListenBrainzHistoryCard(activity)
         }
         item {
             Column {
@@ -229,56 +239,109 @@ fun HomeScreen(
 }
 
 @Composable
-fun SearchView(state: MutableState<TextFieldValue>) {
-    TextField(modifier= Modifier
-        .fillMaxWidth(0.9f)
-        .padding(2.dp),
-        value = state.value,
-        onValueChange = { value ->
-            state.value = value
-        },
-        textStyle = TextStyle(Color.White, fontSize = 15.sp),
-        leadingIcon = {
-            Icon(
-                Icons.Default.Search,
-                contentDescription = "",
-                modifier = Modifier
-                    .padding(15.dp)
-                    .size(24.dp)
-            )
-        },
-        trailingIcon = {
-            if (state.value != TextFieldValue("")) {
-                IconButton(onClick = {
-                    state.value = TextFieldValue("")
-                }
-                ) {
-                    Icon(
-                        Icons.Default.Close,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .padding(15.dp)
-                            .size(24.dp)
-                    )
-                }
+fun SearchView(state: MutableState<TextFieldValue>, brainzPlayerViewModel: BrainzPlayerViewModel) {
+    var searchStarted by remember {
+        mutableStateOf(false)
+    }
+    var searchItems by remember {
+        mutableStateOf(mutableListOf<Song>())
+    }
+    val itemHeights = remember { mutableStateMapOf<Int, Int>() }
+    val baseHeight = 330.dp
+    val density = LocalDensity.current
+    val maxHeight = remember(itemHeights.toMap()) {
+        if (itemHeights.keys.toSet() != searchItems.indices.toSet ()) {
+            // if we don't have all heights calculated yet, return default value
+            return@remember baseHeight
+        }
+        val baseHeightInt = with(density) { baseHeight.toPx().toInt() }
+        var sum = with(density) { 8.dp.toPx().toInt() } * 2
+        for ((_, itemSize) in itemHeights.toSortedMap()) {
+            sum += itemSize
+            if (sum >= baseHeightInt) {
+                return@remember with(density) { (sum - itemSize / 2).toDp() }
             }
-        },
-        singleLine = true,
-        shape = RoundedCornerShape(25.dp),
-        colors = TextFieldDefaults.textFieldColors(
+        }
+        // all items fit into base height
+        baseHeight
+    }
 
-            textColor = Color.Black,
-            disabledTextColor = Color.Transparent,
-            backgroundColor = Color.Gray,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent
+    Box {
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .padding(2.dp),
+            value = state.value,
+            onValueChange = { value ->
+                state.value = value
+                searchItems = brainzPlayerViewModel.searchSongs(value.text)!!.toMutableList()
+                searchStarted = true
+
+            },
+            textStyle = TextStyle(Color.White, fontSize = 15.sp),
+            leadingIcon = {
+                Icon(
+                    Icons.Default.Search,
+                    contentDescription = "",
+                    modifier = Modifier
+                        .padding(15.dp)
+                        .size(24.dp)
+
+                )
+            },
+            trailingIcon = {
+                if (state.value != TextFieldValue("")) {
+                    IconButton(onClick = {
+                        state.value = TextFieldValue("")
+                    }
+                    ) {
+                        Icon(
+                            Icons.Default.Close,
+                            contentDescription = "",
+                            modifier = Modifier
+                                .padding(15.dp)
+                                .size(24.dp)
+                        )
+                    }
+                }
+            },
+            singleLine = true,
+            shape = RoundedCornerShape(25.dp),
+            colors = TextFieldDefaults.textFieldColors(
+
+                textColor = Color.Black,
+                disabledTextColor = Color.Transparent,
+                backgroundColor = Color.Gray,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent
+            )
         )
-    )
+    }
+    DropdownMenu(
+        modifier = Modifier.requiredSizeIn(maxHeight = maxHeight),
+        properties = PopupProperties(focusable = false ),
+        expanded = searchStarted,
+        onDismissRequest = { searchStarted = false }) {
+        searchItems.forEachIndexed { index, song ->
+
+            DropdownMenuItem(
+                modifier = Modifier.onSizeChanged {
+                        itemHeights[index] = it.height
+
+                },
+                onClick = { brainzPlayerViewModel.playOrToggleSong(song, true)
+                searchStarted = false
+                state.value.text.removeRange(0, state.value.text.length-1)}) {
+                androidx.compose.material3.Text(text = song.title )
+            }
+        }
+    }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ListenBrainzHistoryCard() {
+fun ListenBrainzHistoryCard(activity: BrainzPlayerActivity) {
     val gradientColors =
         Brush.horizontalGradient(0f to Color(0xff353070), 1000f to Color(0xffFFA500))
     Box(
@@ -287,7 +350,10 @@ fun ListenBrainzHistoryCard() {
             .padding(10.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(gradientColors)
-            .height(120.dp),
+            .height(120.dp)
+            .clickable {
+                activity.startActivity(Intent(activity as Activity, ListensActivity::class.java))
+            },
     ) {
         Column {
             Icon(
