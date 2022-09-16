@@ -150,7 +150,10 @@ class BrainzPlayerService: MediaBrowserServiceCompat() {
 
     private inner class BrainzPlayerQueueNavigator: TimelineQueueNavigator(mediaSession) {
         override fun getMediaDescription(player: Player, windowIndex: Int): MediaDescriptionCompat {
-            return localMusicSource.songs[windowIndex].description
+            if (windowIndex< localMusicSource.songs.size){
+                return localMusicSource.songs[windowIndex].description
+            }
+            return MediaDescriptionCompat.Builder().build()
         }
     }
 }
