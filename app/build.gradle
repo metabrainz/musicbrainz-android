@@ -25,8 +25,8 @@ android {
         applicationId 'org.metabrainz.android'
         minSdk 21
         targetSdk 33
-        versionCode 51
-        versionName "5.1.4"
+        versionCode 52
+        versionName "5.1.5"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -99,8 +99,8 @@ dependencies {
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
     //Image downloading and Caching library
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-    kapt 'com.github.bumptech.glide:compiler:4.13.2'
+    implementation 'com.github.bumptech.glide:glide:4.14.1'
+    kapt 'com.github.bumptech.glide:compiler:4.14.1'
 
     //Fragment Setup For Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -142,15 +142,15 @@ dependencies {
     implementation "androidx.compose.ui:ui-util:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.0.0-beta02'
-    implementation 'androidx.compose.material3:material3-window-size-class:1.0.0-beta02'
+    implementation 'androidx.compose.material3:material3:1.0.0-beta03'
+    implementation 'androidx.compose.material3:material3-window-size-class:1.0.0-beta03'
     implementation "androidx.compose.animation:animation:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
     implementation 'androidx.navigation:navigation-compose:2.6.0-alpha01'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    implementation 'io.coil-kt:coil-compose:2.2.1'
+    implementation 'io.coil-kt:coil-compose:2.2.2'
     implementation 'com.airbnb.android:lottie-compose:5.2.0'
     implementation 'androidx.navigation:navigation-compose:2.5.2'
 
@@ -171,7 +171,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    androidTestImplementation 'app.cash.turbine:turbine:0.9.0'
+    androidTestImplementation 'app.cash.turbine:turbine:0.11.0'
 
     //ViewPager
     implementation "com.google.accompanist:accompanist-pager:0.23.0"
@@ -185,5 +185,4 @@ dependencies {
     implementation "androidx.room:room-runtime:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
     implementation "androidx.room:room-ktx:2.4.3"
-
 }

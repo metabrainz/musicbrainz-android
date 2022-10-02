@@ -1,0 +1,1 @@
+BrainzPlayer and Spotify Player bugs have been fixed!

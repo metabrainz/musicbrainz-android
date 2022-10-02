@@ -41,7 +41,6 @@ import com.google.gson.GsonBuilder
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
-import com.spotify.android.appremote.api.error.SpotifyDisconnectedException
 import com.spotify.protocol.client.Subscription
 import com.spotify.protocol.types.PlayerContext
 import com.spotify.protocol.types.PlayerState
@@ -124,10 +123,7 @@ class ListensActivity: ComponentActivity() {
 
     private fun updateTrackCoverArt(playerState: PlayerState) {
         // Get image from track
-        assertAppRemoteConnected()
-            .imagesApi
-            .getImage(playerState.track.imageUri, com.spotify.protocol.types.Image.Dimension.LARGE)
-            .setResultCallback { bitmapHere ->
+        assertAppRemoteConnected()?.imagesApi?.getImage(playerState.track.imageUri, com.spotify.protocol.types.Image.Dimension.LARGE)?.setResultCallback { bitmapHere ->
                 bitmap = bitmapHere
             }
     }
@@ -192,11 +188,7 @@ class ListensActivity: ComponentActivity() {
         }
 
     fun playUri(uri: String) {
-        assertAppRemoteConnected()
-            .playerApi
-            .play(uri)
-            .setResultCallback { logMessage(getString(R.string.command_feedback, "play")) }
-            .setErrorCallback(errorCallback)
+        assertAppRemoteConnected()?.playerApi?.play(uri)?.setResultCallback { logMessage(getString(R.string.command_feedback, "play")) }?.setErrorCallback(errorCallback)
     }
 
     fun showCurrentPlayerState(view: View) {
@@ -207,22 +199,14 @@ class ListensActivity: ComponentActivity() {
 
     fun onSubscribedToPlayerContextButtonClicked() {
         playerContextSubscription = cancelAndResetSubscription(playerContextSubscription)
-        playerContextSubscription = assertAppRemoteConnected()
-            .playerApi
-            .subscribeToPlayerContext()
-            .setEventCallback(playerContextEventCallback)
-            .setErrorCallback { throwable ->
+        playerContextSubscription = assertAppRemoteConnected()?.playerApi?.subscribeToPlayerContext()?.setEventCallback(playerContextEventCallback)?.setErrorCallback { throwable ->
                 logError(throwable)
             } as Subscription<PlayerContext>
     }
 
     fun onSubscribedToPlayerStateButtonClicked() {
         playerStateSubscription = cancelAndResetSubscription(playerStateSubscription)
-        playerStateSubscription = assertAppRemoteConnected()
-            .playerApi
-            .subscribeToPlayerState()
-            .setEventCallback(playerStateEventCallback)
-            .setLifecycleCallback(
+        playerStateSubscription = assertAppRemoteConnected()?.playerApi?.subscribeToPlayerState()?.setEventCallback(playerStateEventCallback)?.setLifecycleCallback(
                 object : Subscription.LifecycleCallback {
                     override fun onStart() {
                         logMessage("Event: start")
@@ -231,8 +215,7 @@ class ListensActivity: ComponentActivity() {
                     override fun onStop() {
                         logMessage("Event: end")
                     }
-                })
-            .setErrorCallback {
+                })?.setErrorCallback {
 
             } as Subscription<PlayerState>
     }
@@ -246,14 +229,14 @@ class ListensActivity: ComponentActivity() {
         }
     }
 
-    private fun assertAppRemoteConnected(): SpotifyAppRemote {
+    private fun assertAppRemoteConnected(): SpotifyAppRemote? {
         spotifyAppRemote?.let {
             if (it.isConnected) {
                 return it
             }
         }
         Log.e(TAG, getString(R.string.err_spotify_disconnected))
-        throw SpotifyDisconnectedException()
+        return null
     }
 
     private fun logError(throwable: Throwable) {
@@ -409,8 +392,10 @@ fun AllUserListens(
                     listen,
                     coverArt = listen.coverArt,
                     onItemClicked = {
-                        Uri.parse(it.track_metadata.additional_info?.spotify_id).lastPathSegment?.let { trackId ->
-                            (activity as ListensActivity).playUri("spotify:track:${trackId}")
+                        if(it.track_metadata.additional_info?.spotify_id != null) {
+                            Uri.parse(it.track_metadata.additional_info.spotify_id).lastPathSegment?.let { trackId ->
+                                (activity as ListensActivity).playUri("spotify:track:${trackId}")
+                            }
                         }
                     }
                 )
