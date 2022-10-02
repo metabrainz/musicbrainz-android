@@ -21,7 +21,6 @@ import org.metabrainz.android.presentation.components.TopAppBar
 import org.metabrainz.android.presentation.features.brainzplayer.ui.BrainzPlayerBackDropScreen
 import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
 
-
 @AndroidEntryPoint
 class DashboardActivity : ComponentActivity() {
 

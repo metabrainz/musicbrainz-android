@@ -15,6 +15,6 @@ data class AdditionalInfo(
     val spotify_album_artist_ids: List<String>,
     val spotify_album_id: String,
     val spotify_artist_ids: List<String>,
-    val spotify_id: String,
+    val spotify_id: String?,
     val tracknumber: Int
 )
