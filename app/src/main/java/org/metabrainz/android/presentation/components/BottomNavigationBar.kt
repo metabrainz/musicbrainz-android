@@ -24,9 +24,6 @@ import org.metabrainz.android.presentation.features.navigation.NavigationItem
 fun BottomNavigationBar(activity: Activity) {
     val items = listOf(
         NavigationItem.Home,
-        NavigationItem.BrainzPlayer,
-        NavigationItem.Listens,
-        NavigationItem.Critiques,
         NavigationItem.Profile,
     )
     BottomNavigation(

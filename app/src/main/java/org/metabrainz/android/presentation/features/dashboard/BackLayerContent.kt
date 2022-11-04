@@ -29,10 +29,11 @@ import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivit
 import org.metabrainz.android.presentation.features.search.SearchActivity
 
 @Composable
-fun BackLayerContent(activity: Activity, applicationContext: Context) {
+fun BackLayerContent(activity: Activity, applicationContext: Context, padding: PaddingValues) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .padding(padding)
             .verticalScroll(rememberScrollState())
             .fillMaxWidth()
             .background(colorResource(id = R.color.app_bg))

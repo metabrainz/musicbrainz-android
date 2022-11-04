@@ -33,7 +33,11 @@ class DashboardActivity : ComponentActivity() {
                 topBar = { TopAppBar(activity = this, title = "Home") },
                 bottomBar = { BottomNavigationBar(activity = this) }
             ){
-                BackLayerContent(activity = this, applicationContext = LocalContext.current)
+                BackLayerContent(
+                    activity = this,
+                    applicationContext = LocalContext.current,
+                    padding = it
+                )
             }
         }
     }
