@@ -12,7 +12,7 @@ import android.provider.Settings
 import dagger.hilt.android.HiltAndroidApp
 import org.metabrainz.android.presentation.Configuration
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEnabled
-import org.metabrainz.android.presentation.features.listens.submitter.ListenService
+import org.metabrainz.android.presentation.features.listens.ListenService
 
 @HiltAndroidApp
 class App : Application() {

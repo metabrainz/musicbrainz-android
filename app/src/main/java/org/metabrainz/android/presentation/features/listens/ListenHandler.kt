@@ -1,4 +1,4 @@
-package org.metabrainz.android.presentation.features.listens.submitter
+package org.metabrainz.android.presentation.features.listens
 
 import android.media.MediaMetadata
 import android.os.Bundle

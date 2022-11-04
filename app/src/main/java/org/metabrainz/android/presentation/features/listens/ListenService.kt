@@ -1,4 +1,4 @@
-package org.metabrainz.android.presentation.features.listens.submitter
+package org.metabrainz.android.presentation.features.listens
 
 import android.content.ComponentName
 import android.content.Intent

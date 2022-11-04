@@ -154,9 +154,6 @@ dependencies {
     implementation 'com.airbnb.android:lottie-compose:5.2.0'
     implementation 'androidx.navigation:navigation-compose:2.5.2'
 
-    //Spotify
-    implementation files('./lib/spotify-app-remote-release-0.7.2.aar')
-
     //Test Setup
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.squareup.okhttp3:mockwebserver:5.0.0-alpha.7'
@@ -171,15 +168,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    androidTestImplementation 'app.cash.turbine:turbine:0.11.0'
-
-    //ViewPager
-    implementation "com.google.accompanist:accompanist-pager:0.23.0"
-
-    //Exoplayer
-    api 'com.google.android.exoplayer:exoplayer-core:2.18.1'
-    api 'com.google.android.exoplayer:exoplayer-ui:2.18.1'
-    api 'com.google.android.exoplayer:extension-mediasession:2.18.1'
 
     //Room db
     implementation "androidx.room:room-runtime:2.4.3"
