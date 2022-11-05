@@ -110,10 +110,6 @@ dependencies {
 
     //Tagger & Metadata Setup
     implementation 'info.debatty:java-string-similarity:2.0.0'
-    implementation 'com.github.amcap1712:KTaglib:release-SNAPSHOT'
-
-    //Handling WebViews
-    implementation 'com.thefinestartist:finestwebview:1.2.7'
 
     //Design Setup
     implementation 'com.google.android.material:material:1.8.0-alpha02'

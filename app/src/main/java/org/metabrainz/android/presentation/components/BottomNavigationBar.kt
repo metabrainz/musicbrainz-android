@@ -14,7 +14,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.thefinestartist.finestwebview.FinestWebView
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.android.presentation.features.login.LoginActivity
@@ -45,9 +44,6 @@ fun BottomNavigationBar(activity: Activity) {
                             if(nextActivity != activity::class.java){
                                 activity.startActivity(Intent(activity, DashboardActivity::class.java))
                             }
-                        }
-                        "critiques" -> {
-                            FinestWebView.Builder(activity).show("https://critiquebrainz.org/")
                         }
                         "profile" -> {
                             val nextActivity = LoginActivity::class.java
