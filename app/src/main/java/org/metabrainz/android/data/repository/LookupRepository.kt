@@ -19,8 +19,6 @@ interface LookupRepository {
 
     suspend fun fetchMatchedRelease(MBID: String?): Resource<Release>
 
-    suspend fun fetchAcoustIDResults(duration: Long, fingerprint: String?): Resource<List<Recording>>
-
     companion object {
         const val METHOD_WIKIPEDIA_URL = 0
         const val METHOD_WIKIDATA_ID = 1

@@ -7,7 +7,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Scaffold
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
@@ -19,8 +24,6 @@ import org.metabrainz.android.presentation.features.onboarding.FeaturesActivity
 @AndroidEntryPoint
 class DashboardActivity : ComponentActivity() {
 
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -31,7 +34,7 @@ class DashboardActivity : ComponentActivity() {
         setContent {
             Scaffold(
                 topBar = { TopAppBar(activity = this, title = "Home") },
-                bottomBar = { BottomNavigationBar(activity = this) }
+                bottomBar = { BottomNavigationBar(activity = this) },
             ){
                 BackLayerContent(
                     activity = this,

@@ -25,7 +25,7 @@ android {
         applicationId 'org.metabrainz.android'
         minSdk 21
         targetSdk 33
-        versionCode 52
+        versionCode 53
         versionName "6.0.0"
 
         multiDexEnabled true
@@ -110,10 +110,6 @@ dependencies {
 
     //Tagger & Metadata Setup
     implementation 'info.debatty:java-string-similarity:2.0.0'
-    implementation 'com.github.amcap1712:KTaglib:release-SNAPSHOT'
-
-    //Handling WebViews
-    implementation 'com.thefinestartist:finestwebview:1.2.7'
 
     //Design Setup
     implementation 'com.google.android.material:material:1.8.0-alpha02'

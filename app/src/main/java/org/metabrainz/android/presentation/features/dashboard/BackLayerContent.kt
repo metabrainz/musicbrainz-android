@@ -33,14 +33,14 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(padding)
             .verticalScroll(rememberScrollState())
             .fillMaxWidth()
+            .padding(padding)
             .background(colorResource(id = R.color.app_bg))
     ) {
         Image(
             modifier = Modifier
-                .size(230.dp, 230.dp)
+                .size(260.dp, 260.dp)
                 .padding(20.dp),
             painter = painterResource(id = R.drawable.ic_musicbrainz_logo_no_text),
             contentDescription = "MusicBrainz",
@@ -71,7 +71,7 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
                     append("Brainz")
                 }
             },
-            fontSize = 45.sp,
+            fontSize = 55.sp,
         )
         Spacer(modifier = Modifier.height(16.dp))
 
