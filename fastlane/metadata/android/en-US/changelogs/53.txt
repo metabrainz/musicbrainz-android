@@ -1,0 +1,1 @@
+Major UI/UX revamp has been done. The Tagger and BrainzPlayer have been removed from the app. Please have a read through our blogs for more detail.
