@@ -26,7 +26,7 @@ android {
         minSdk 21
         targetSdk 33
         versionCode 52
-        versionName "5.1.5"
+        versionName "6.0.0"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -91,7 +91,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0'
 
     //Web Service Setup
-    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.7'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
@@ -99,8 +99,8 @@ dependencies {
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
     //Image downloading and Caching library
-    implementation 'com.github.bumptech.glide:glide:4.14.1'
-    kapt 'com.github.bumptech.glide:compiler:4.14.1'
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    kapt 'com.github.bumptech.glide:compiler:4.14.2'
 
     //Fragment Setup For Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -116,7 +116,7 @@ dependencies {
     implementation 'com.thefinestartist:finestwebview:1.2.7'
 
     //Design Setup
-    implementation 'com.google.android.material:material:1.8.0-alpha01'
+    implementation 'com.google.android.material:material:1.8.0-alpha02'
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'com.github.akshaaatt:Onboarding:1.0.4'
     implementation 'com.github.akshaaatt:Share-Android:1.0.0'
@@ -142,20 +142,17 @@ dependencies {
     implementation "androidx.compose.ui:ui-util:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.0.0-beta03'
-    implementation 'androidx.compose.material3:material3-window-size-class:1.0.0-beta03'
+    implementation 'androidx.compose.material3:material3:1.1.0-alpha01'
+    implementation 'androidx.compose.material3:material3-window-size-class:1.1.0-alpha01'
     implementation "androidx.compose.animation:animation:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
-    implementation 'androidx.navigation:navigation-compose:2.6.0-alpha01'
+    implementation 'androidx.navigation:navigation-compose:2.6.0-alpha03'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     implementation 'io.coil-kt:coil-compose:2.2.2'
     implementation 'com.airbnb.android:lottie-compose:5.2.0'
-    implementation 'androidx.navigation:navigation-compose:2.5.2'
-
-    //Spotify
-    implementation files('./lib/spotify-app-remote-release-0.7.2.aar')
+    implementation 'androidx.navigation:navigation-compose:2.5.3'
 
     //Test Setup
     testImplementation 'junit:junit:4.13.2'
@@ -171,15 +168,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    androidTestImplementation 'app.cash.turbine:turbine:0.11.0'
-
-    //ViewPager
-    implementation "com.google.accompanist:accompanist-pager:0.23.0"
-
-    //Exoplayer
-    api 'com.google.android.exoplayer:exoplayer-core:2.18.1'
-    api 'com.google.android.exoplayer:exoplayer-ui:2.18.1'
-    api 'com.google.android.exoplayer:extension-mediasession:2.18.1'
 
     //Room db
     implementation "androidx.room:room-runtime:2.4.3"

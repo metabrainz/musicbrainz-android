@@ -26,27 +26,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="32">
         <activity
-            android:name=".presentation.features.brainzplayer.ui.BrainzPlayerActivity"
-            android:exported="false" />
-        <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"
             android:theme="@style/FinestWebViewTheme" />
 
         <service
-            android:name=".presentation.features.listens.submitter.ListenService"
+            android:name=".presentation.features.listens.ListenService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
-            </intent-filter>
-        </service>
-        <service android:name=".presentation.features.brainzplayer.services.BrainzPlayerService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.media.browse.MediaMrowserService"/>
             </intent-filter>
         </service>
 
@@ -73,10 +64,6 @@
         <activity
             android:name="org.metabrainz.android.presentation.features.collection.CollectionActivity"
             android:label="@string/dash_collections" />
-        <activity
-            android:name="org.metabrainz.android.presentation.features.tagger.TaggerActivity"
-            android:label="@string/settings_tagger"
-            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.features.recording.RecordingActivity"
             android:label="@string/search_type_recording" />
@@ -131,10 +118,6 @@
         <activity
             android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
         <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
-        <activity android:name=".presentation.features.listens.ListensActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".presentation.features.listens.RemotePlayerActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
 
         <meta-data
             android:name="android.app.default_searchable"
