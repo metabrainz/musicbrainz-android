@@ -25,8 +25,8 @@ android {
         applicationId 'org.metabrainz.android'
         minSdk 21
         targetSdk 33
-        versionCode 53
-        versionName "6.0.0"
+        versionCode 54
+        versionName "6.1.0"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -119,12 +119,6 @@ dependencies {
 
     //Barcode Scan
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
-
-    //Share
-    implementation 'com.github.akshaaatt:Share-Android:1.0.0'
-
-    //Instant App
-    implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
 
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
