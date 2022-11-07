@@ -120,9 +120,6 @@ dependencies {
     //Barcode Scan
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
 
-    //Share
-    implementation 'com.github.akshaaatt:Share-Android:1.0.0'
-
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
