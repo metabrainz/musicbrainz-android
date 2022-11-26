@@ -28,7 +28,7 @@ class BlogAdapter(private val context: Context, private val posts: ArrayList<Pos
                 Html.fromHtml(post.title,Html.FROM_HTML_MODE_COMPACT)
             }
             else ->{
-                Html.fromHtml(post.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                HtmlCompat.fromHtml(post.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
 
