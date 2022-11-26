@@ -22,7 +22,16 @@ class BlogAdapter(private val context: Context, private val posts: ArrayList<Pos
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
-        holder.heading.text = post.title
+        holder.heading.text = when{
+
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ->{
+                Html.fromHtml(post.title,Html.FROM_HTML_MODE_COMPACT)
+            }
+            else ->{
+                Html.fromHtml(post.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            }
+        }
+
 
         holder.body.text = when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> {
