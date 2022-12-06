@@ -2,6 +2,7 @@ package org.metabrainz.android.presentation.theme
 
 import android.app.Activity
 import android.content.Context
+import android.view.Window
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -9,9 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.preference.PreferenceManager
 
 /** Theme for the whole app. */
@@ -47,6 +50,7 @@ lateinit var isUiModeIsDark : MutableState<Boolean?>
 @Composable
 fun MusicBrainzTheme(
     context: Context = LocalContext.current,
+    window : Window,
     content: @Composable () -> Unit
 ) {
     val systemTheme = isSystemInDarkTheme()
@@ -60,7 +64,7 @@ fun MusicBrainzTheme(
     if (!view.isInEditMode) {
         SideEffect {
             (view.context as Activity).window.statusBarColor = colorScheme.background.toArgb()
-            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars =
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
                 when (isUiModeIsDark.value){
                     true -> false
                     false -> true
