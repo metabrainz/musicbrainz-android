@@ -10,10 +10,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.preference.PreferenceManager
 
@@ -64,13 +60,15 @@ fun MusicBrainzTheme(
     if (!view.isInEditMode) {
         SideEffect {
             (view.context as Activity).window.statusBarColor = colorScheme.background.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
-                when (isUiModeIsDark.value){
-                    true -> false
-                    false -> true
-                    else -> !systemTheme
-                }
-                
+            val isLight = when (isUiModeIsDark.value){
+                true -> false
+                false -> true
+                else -> !systemTheme
+            }
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = isLight
+            window.navigationBarColor = colorScheme.background.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = isLight
+            
         }
     }
     MaterialTheme(
