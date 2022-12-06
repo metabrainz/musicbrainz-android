@@ -3,6 +3,7 @@ package org.metabrainz.android.presentation.features.dashboard
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,12 +23,20 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
+
+@Preview
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun Preview(){
+    //BackLayerContent(activity = Activity(), applicationContext = LocalContext.current)
+}
 
 @Composable
 fun BackLayerContent(activity: Activity, applicationContext: Context, padding: PaddingValues) {
@@ -36,7 +46,7 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
             .verticalScroll(rememberScrollState())
             .fillMaxWidth()
             .padding(padding)
-            .background(colorResource(id = R.color.app_bg))
+            .background(androidx.compose.material3.MaterialTheme.colorScheme.background)
     ) {
         Image(
             modifier = Modifier

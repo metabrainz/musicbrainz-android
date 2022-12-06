@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.SwitchPreference
@@ -16,7 +17,9 @@ import org.metabrainz.android.App
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityPreferencesBinding
 import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED
+import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_SYSTEM_THEME
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEnabled
+import org.metabrainz.android.presentation.theme.isUiModeIsDark
 import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
@@ -56,6 +59,25 @@ class SettingsActivity : AppCompatActivity() {
                     }
                     builder.create().show()
                 } else if (!enabled) App.context!!.stopListenService()
+                return@OnPreferenceChangeListener true
+            }
+    
+            // Explicit Ui Mode functionality.
+            if (preference.key == PREFERENCE_SYSTEM_THEME){
+                when (newValue) {
+                    "Dark" -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        isUiModeIsDark.value = true
+                    }
+                    "Light" -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        isUiModeIsDark.value = false
+                    }
+                    else -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                        isUiModeIsDark.value = null
+                    }
+                }
                 return@OnPreferenceChangeListener true
             }
             false

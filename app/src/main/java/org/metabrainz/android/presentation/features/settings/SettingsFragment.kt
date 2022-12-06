@@ -12,6 +12,7 @@ import org.metabrainz.android.App
 import org.metabrainz.android.R
 import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_CLEAR_SUGGESTIONS
 import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED
+import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_SYSTEM_THEME
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEnabled
 import org.metabrainz.android.presentation.features.dashboard.DashboardActivity
 import org.metabrainz.android.presentation.features.suggestion.SuggestionProvider
@@ -26,6 +27,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         findPreference<Preference>(PREFERENCE_CLEAR_SUGGESTIONS)!!.onPreferenceClickListener = this
+        findPreference<Preference>(PREFERENCE_SYSTEM_THEME)!!.onPreferenceChangeListener = preferenceChangeListener
         if (!App.context!!.isNotificationServiceAllowed) {
             (findPreference<Preference>(PREFERENCE_LISTENING_ENABLED) as SwitchPreference?)!!.isChecked = false
             preferenceListeningEnabled = false
