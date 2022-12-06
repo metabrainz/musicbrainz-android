@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/app_bg</item>
+        <item name="colorPrimaryDark">@color/app_bg</item>
+        <item name="colorAccent">@color/light_blue</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="titleTextColor">@color/white</item>
+
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="alertDialogTheme">@style/settingsDialog</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

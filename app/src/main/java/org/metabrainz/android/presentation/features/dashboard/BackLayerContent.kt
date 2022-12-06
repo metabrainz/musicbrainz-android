@@ -30,6 +30,8 @@ import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
+import org.metabrainz.android.presentation.theme.mb_orange
+import org.metabrainz.android.presentation.theme.mb_purple
 
 @Preview
 @Preview(uiMode = UI_MODE_NIGHT_YES)
@@ -62,9 +64,7 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
-                        color = colorResource(
-                            id = R.color.mb_purple
-                        )
+                        color = mb_purple
                     )
                 ) {
                     append("Music")
@@ -73,9 +73,7 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
-                        color = colorResource(
-                            id = R.color.mb_orange
-                        )
+                        color = mb_orange
                     )
                 ) {
                     append("Brainz")
