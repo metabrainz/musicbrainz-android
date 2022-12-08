@@ -38,6 +38,12 @@ class SettingsActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.settings_container, SettingsFragment())
                 .commit()
+        
+        supportFragmentManager.addFragmentOnAttachListener { fragmentManager, fragment ->
+            if (fragment is SettingsFragment) {
+                fragment.setPreferenceChangeListener(preferenceChangeListener)
+            }
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1){
             ACTION_NOTIFICATION_LISTENER_SETTINGS = Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
@@ -81,13 +87,6 @@ class SettingsActivity : AppCompatActivity() {
                 return@OnPreferenceChangeListener true
             }
             false
-        }
-    }
-
-    override fun onAttachFragment(fragment: Fragment) {
-        super.onAttachFragment(fragment)
-        if (fragment is SettingsFragment) {
-            fragment.setPreferenceChangeListener(preferenceChangeListener)
         }
     }
 
