@@ -29,7 +29,7 @@ class DashboardActivity : ComponentActivity() {
             finish()
         }
         setContent {
-            MusicBrainzTheme(window = window) {
+            MusicBrainzTheme() {
                 Scaffold(
                     topBar = { TopAppBar(activity = this, title = "Home") },
                     bottomBar = { BottomNavigationBar(activity = this) },
