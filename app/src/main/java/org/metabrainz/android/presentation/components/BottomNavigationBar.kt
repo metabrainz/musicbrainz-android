@@ -7,6 +7,7 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,14 +27,14 @@ fun BottomNavigationBar(activity: Activity) {
         NavigationItem.Profile,
     )
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.app_bg),
+        backgroundColor = MaterialTheme.colorScheme.background,
     ) {
         items.forEach { item ->
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon),
                     modifier = Modifier.size(28.dp), contentDescription = item.title, tint = Color.Unspecified) },
                 label = { Text(text = item.title, fontSize = 11.sp) },
-                selectedContentColor = colorResource(id = R.color.white),
+                selectedContentColor = MaterialTheme.colorScheme.onSurface,
                 unselectedContentColor = colorResource(id = R.color.gray),
                 alwaysShowLabel = true,
                 selected = true,

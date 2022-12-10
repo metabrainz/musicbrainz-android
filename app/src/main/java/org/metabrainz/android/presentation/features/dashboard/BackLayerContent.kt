@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -27,6 +26,8 @@ import org.metabrainz.android.R
 import org.metabrainz.android.presentation.features.collection.CollectionActivity
 import org.metabrainz.android.presentation.features.newsbrainz.NewsBrainzActivity
 import org.metabrainz.android.presentation.features.search.SearchActivity
+import org.metabrainz.android.presentation.theme.mb_orange
+import org.metabrainz.android.presentation.theme.mb_purple
 
 @Composable
 fun BackLayerContent(activity: Activity, applicationContext: Context, padding: PaddingValues) {
@@ -36,7 +37,7 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
             .verticalScroll(rememberScrollState())
             .fillMaxWidth()
             .padding(padding)
-            .background(colorResource(id = R.color.app_bg))
+            .background(androidx.compose.material3.MaterialTheme.colorScheme.background)
     ) {
         Image(
             modifier = Modifier
@@ -52,9 +53,7 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
-                        color = colorResource(
-                            id = R.color.mb_purple
-                        )
+                        color = mb_purple
                     )
                 ) {
                     append("Music")
@@ -63,9 +62,7 @@ fun BackLayerContent(activity: Activity, applicationContext: Context, padding: P
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
-                        color = colorResource(
-                            id = R.color.mb_orange
-                        )
+                        color = mb_orange
                     )
                 ) {
                     append("Brainz")

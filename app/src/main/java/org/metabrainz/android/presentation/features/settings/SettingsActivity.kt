@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.SwitchPreference
@@ -16,7 +17,9 @@ import org.metabrainz.android.App
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityPreferencesBinding
 import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_LISTENING_ENABLED
+import org.metabrainz.android.presentation.UserPreferences.PREFERENCE_SYSTEM_THEME
 import org.metabrainz.android.presentation.UserPreferences.preferenceListeningEnabled
+import org.metabrainz.android.presentation.theme.isUiModeIsDark
 import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
@@ -35,6 +38,12 @@ class SettingsActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.settings_container, SettingsFragment())
                 .commit()
+        
+        supportFragmentManager.addFragmentOnAttachListener { fragmentManager, fragment ->
+            if (fragment is SettingsFragment) {
+                fragment.setPreferenceChangeListener(preferenceChangeListener)
+            }
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1){
             ACTION_NOTIFICATION_LISTENER_SETTINGS = Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
@@ -58,14 +67,26 @@ class SettingsActivity : AppCompatActivity() {
                 } else if (!enabled) App.context!!.stopListenService()
                 return@OnPreferenceChangeListener true
             }
+    
+            // Explicit Ui Mode functionality.
+            if (preference.key == PREFERENCE_SYSTEM_THEME){
+                when (newValue) {
+                    "Dark" -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        isUiModeIsDark.value = true
+                    }
+                    "Light" -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        isUiModeIsDark.value = false
+                    }
+                    else -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                        isUiModeIsDark.value = null
+                    }
+                }
+                return@OnPreferenceChangeListener true
+            }
             false
-        }
-    }
-
-    override fun onAttachFragment(fragment: Fragment) {
-        super.onAttachFragment(fragment)
-        if (fragment is SettingsFragment) {
-            fragment.setPreferenceChangeListener(preferenceChangeListener)
         }
     }
 
