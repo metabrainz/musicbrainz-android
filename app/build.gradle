@@ -162,7 +162,7 @@ dependencies {
     //Room db
     implementation "androidx.room:room-runtime:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
-    implementation "androidx.room:room-ktx:2.4.3"
+    implementation "androidx.room:room-ktx:2.5.0"
 
     // Jetpack Compose accompanists (https://github.com/google/accompanist)
     implementation 'com.google.accompanist:accompanist-systemuicontroller:0.28.0'
