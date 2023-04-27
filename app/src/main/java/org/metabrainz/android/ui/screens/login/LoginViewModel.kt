@@ -4,13 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.metabrainz.android.repository.LoginRepository
-import org.metabrainz.android.data.sources.api.entities.AccessToken
+import org.metabrainz.android.model.entities.AccessToken
 import org.metabrainz.android.model.userdata.UserInfo
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private var repository: LoginRepository?) : ViewModel() {
-    var accessTokenLiveData: MutableLiveData<AccessToken?>? = null
+    var accessTokenLiveData: MutableLiveData<org.metabrainz.android.model.entities.AccessToken?>? = null
         get() {
             if (field == null) field = repository!!.accessTokenLiveData
             return field

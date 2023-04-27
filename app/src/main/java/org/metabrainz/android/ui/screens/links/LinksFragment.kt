@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import org.metabrainz.android.data.sources.api.entities.Link
+import org.metabrainz.android.model.entities.Link
 import org.metabrainz.android.databinding.FragmentLinksBinding
 import org.metabrainz.android.ui.screens.base.MusicBrainzFragment
 import java.util.*

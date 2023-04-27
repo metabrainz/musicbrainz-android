@@ -1,8 +1,8 @@
 package org.metabrainz.android.repository
 
-import org.metabrainz.android.data.sources.api.entities.CoverArt
-import org.metabrainz.android.data.sources.api.entities.RecordingItem
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.CoverArt
+import org.metabrainz.android.model.entities.RecordingItem
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.util.Resource
 
@@ -12,7 +12,7 @@ interface LookupRepository {
 
     suspend fun fetchWikiSummary(string: String, method: Int): Resource<WikiSummary>
 
-    suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt>
+    suspend fun fetchCoverArt(MBID: String?): Resource<org.metabrainz.android.model.entities.CoverArt>
 
     suspend fun fetchRecordings(artist: String?, title: String?): Resource<List<RecordingItem>>
 

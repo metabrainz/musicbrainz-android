@@ -3,7 +3,7 @@ package org.metabrainz.android.repository
 import androidx.lifecycle.MutableLiveData
 import org.metabrainz.android.service.LoginService
 import org.metabrainz.android.service.MusicBrainzServiceGenerator
-import org.metabrainz.android.data.sources.api.entities.AccessToken
+import org.metabrainz.android.model.entities.AccessToken
 import org.metabrainz.android.model.userdata.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class LoginRepositoryImpl @Inject constructor(private val service: LoginService) : LoginRepository {
 
-    override val accessTokenLiveData: MutableLiveData<AccessToken?> = MutableLiveData()
+    override val accessTokenLiveData: MutableLiveData<org.metabrainz.android.model.entities.AccessToken?> = MutableLiveData()
     override val userInfoLiveData: MutableLiveData<UserInfo?> = MutableLiveData()
 
     override fun fetchAccessToken(code: String?) {
@@ -24,13 +24,13 @@ class LoginRepositoryImpl @Inject constructor(private val service: LoginService)
                 "authorization_code",
                 MusicBrainzServiceGenerator.CLIENT_ID,
                 MusicBrainzServiceGenerator.CLIENT_SECRET,
-                MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)!!.enqueue(object : Callback<AccessToken?> {
-                    override fun onResponse(call: Call<AccessToken?>, response: Response<AccessToken?>) {
+                MusicBrainzServiceGenerator.OAUTH_REDIRECT_URI)!!.enqueue(object : Callback<org.metabrainz.android.model.entities.AccessToken?> {
+                    override fun onResponse(call: Call<org.metabrainz.android.model.entities.AccessToken?>, response: Response<org.metabrainz.android.model.entities.AccessToken?>) {
                         val token = response.body()
                         accessTokenLiveData.value = token
                     }
 
-                    override fun onFailure(call: Call<AccessToken?>, t: Throwable) {
+                    override fun onFailure(call: Call<org.metabrainz.android.model.entities.AccessToken?>, t: Throwable) {
                         t.printStackTrace()
                     }
                 })

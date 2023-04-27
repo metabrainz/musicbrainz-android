@@ -1,4 +1,4 @@
-package org.metabrainz.android.data.sources.api.entities
+package org.metabrainz.android.model.entities
 
 data class Thumbnails(
     val `1200`: String,

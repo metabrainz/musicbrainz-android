@@ -3,7 +3,7 @@ package org.metabrainz.android.ui.screens.links
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.metabrainz.android.data.sources.api.entities.Link
+import org.metabrainz.android.model.entities.Link
 
 class LinksViewModel : ViewModel() {
     private val linksLiveData = MutableLiveData<List<Link>>()

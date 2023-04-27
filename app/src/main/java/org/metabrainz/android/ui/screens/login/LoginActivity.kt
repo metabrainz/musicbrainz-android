@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import org.metabrainz.android.R
 import org.metabrainz.android.service.MusicBrainzServiceGenerator
-import org.metabrainz.android.data.sources.api.entities.AccessToken
+import org.metabrainz.android.model.entities.AccessToken
 import org.metabrainz.android.databinding.ActivityLoginBinding
 import org.metabrainz.android.model.userdata.UserInfo
 import org.metabrainz.android.ui.screens.base.MusicBrainzActivity
@@ -30,7 +30,7 @@ class LoginActivity : MusicBrainzActivity() {
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.app_bg)))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        loginViewModel!!.accessTokenLiveData!!.observe(this) { accessToken: AccessToken? ->
+        loginViewModel!!.accessTokenLiveData!!.observe(this) { accessToken: org.metabrainz.android.model.entities.AccessToken? ->
             saveOAuthToken(accessToken)
         }
         loginViewModel!!.userInfoLiveData!!.observe(this) { userInfo: UserInfo? ->
@@ -68,7 +68,7 @@ class LoginActivity : MusicBrainzActivity() {
         startActivity(intent)
     }
 
-    private fun saveOAuthToken(accessToken: AccessToken?) {
+    private fun saveOAuthToken(accessToken: org.metabrainz.android.model.entities.AccessToken?) {
         when {
             accessToken != null -> {
                 d(accessToken.accessToken)

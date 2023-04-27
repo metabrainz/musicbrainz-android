@@ -1,8 +1,7 @@
 package org.metabrainz.android.model.mbentity
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.Alias
-import org.metabrainz.android.data.sources.api.entities.LifeSpan
+import org.metabrainz.android.model.entities.LifeSpan
 import java.util.*
 
 class Area : org.metabrainz.android.model.mbentity.MBEntity() {
@@ -12,7 +11,7 @@ class Area : org.metabrainz.android.model.mbentity.MBEntity() {
 
     @SerializedName("sort-name")
     var sortName: String? = null
-    private val aliases: MutableList<Alias> = ArrayList()
+    private val aliases: MutableList<org.metabrainz.android.model.entities.Alias> = ArrayList()
 
     @SerializedName("life-span")
     var lifeSpan: LifeSpan? = null
@@ -28,11 +27,11 @@ class Area : org.metabrainz.android.model.mbentity.MBEntity() {
                 '}'
     }
 
-    fun getAliases(): List<Alias> {
+    fun getAliases(): List<org.metabrainz.android.model.entities.Alias> {
         return aliases
     }
 
-    fun setAliases(aliases: List<Alias>?) {
+    fun setAliases(aliases: List<org.metabrainz.android.model.entities.Alias>?) {
         this.aliases.addAll(aliases!!)
     }
 }

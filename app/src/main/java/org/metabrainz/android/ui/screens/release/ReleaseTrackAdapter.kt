@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.metabrainz.android.util.Constants
-import org.metabrainz.android.data.sources.api.entities.EntityUtils
-import org.metabrainz.android.data.sources.api.entities.Media
-import org.metabrainz.android.data.sources.api.entities.Track
+import org.metabrainz.android.model.entities.EntityUtils
+import org.metabrainz.android.model.entities.Media
+import org.metabrainz.android.model.entities.Track
 import org.metabrainz.android.databinding.ItemTrackBinding
 import org.metabrainz.android.databinding.ItemTrackHeadingBinding
 import org.metabrainz.android.ui.screens.recording.RecordingActivity
@@ -112,7 +112,8 @@ class ReleaseTrackAdapter(private val mediaList: List<Media>?) : RecyclerView.Ad
             setViewVisibility(item.title, binding.trackName)
             setViewVisibility(item.position.toString(), binding.trackNumber)
             setViewVisibility(item.duration, binding.trackTime)
-            setViewVisibility(EntityUtils.getDisplayArtist(item.recording!!.artistCredits),
+            setViewVisibility(
+                org.metabrainz.android.model.entities.EntityUtils.getDisplayArtist(item.recording!!.artistCredits),
                     binding.trackArtist)
             itemView.setOnClickListener { v: View ->
                 val intent = Intent(v.context, RecordingActivity::class.java)

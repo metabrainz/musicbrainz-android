@@ -1,6 +1,6 @@
 package org.metabrainz.android.model.listens
 
-import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.model.entities.CoverArt
 
 data class Listen(
     val inserted_at: String,
@@ -8,5 +8,5 @@ data class Listen(
     val recording_msid: String,
     val track_metadata: org.metabrainz.android.model.listens.TrackMetadata,
     val user_name: String,
-    var coverArt: CoverArt? = null
+    var coverArt: org.metabrainz.android.model.entities.CoverArt? = null
 )

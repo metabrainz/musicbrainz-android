@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.metabrainz.android.R
-import org.metabrainz.android.data.sources.api.entities.Link
-import org.metabrainz.android.data.sources.api.entities.LinksClassifier
-import org.metabrainz.android.data.sources.api.entities.Url
+import org.metabrainz.android.model.entities.Link
+import org.metabrainz.android.model.entities.LinksClassifier
+import org.metabrainz.android.model.entities.Url
 import org.metabrainz.android.databinding.ItemLinkBinding
 import org.metabrainz.android.ui.screens.links.LinksAdapter.LinkViewHolder
 

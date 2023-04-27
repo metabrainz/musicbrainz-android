@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.metabrainz.android.R
 import org.metabrainz.android.util.Constants
-import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.model.entities.CoverArt
 import org.metabrainz.android.databinding.CardReleaseItemBinding
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.ui.screens.release.ReleaseActivity
@@ -87,7 +87,7 @@ class ReleaseListAdapter(val context: Activity, private val releaseList: List<Re
             }
         }
 
-        private fun addCoverArt(coverArt: CoverArt?) {
+        private fun addCoverArt(coverArt: org.metabrainz.android.model.entities.CoverArt?) {
             if (coverArt?.images != null && coverArt.images.isNotEmpty()) {
                 val coverArtRelease = coverArt.release
                 for (release in releaseList) {

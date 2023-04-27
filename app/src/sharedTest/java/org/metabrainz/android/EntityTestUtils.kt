@@ -1,8 +1,8 @@
 package org.metabrainz.android
 
 import org.junit.Assert.fail
-import org.metabrainz.android.data.sources.api.entities.ArtistCredit
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.ArtistCredit
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.model.mbentity.Recording
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.model.mbentity.ReleaseGroup
@@ -115,8 +115,8 @@ object EntityTestUtils {
             testRelease.country = "XE"
             testRelease.disambiguation = ""
             testRelease.date = "2011-09-09"
-            val testArtistCredits: ArrayList<ArtistCredit> = ArrayList<ArtistCredit>()
-            val testArtistCredit = ArtistCredit()
+            val testArtistCredits: ArrayList<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList<org.metabrainz.android.model.entities.ArtistCredit>()
+            val testArtistCredit = org.metabrainz.android.model.entities.ArtistCredit()
             testArtistCredit.joinphrase = ""
             testArtistCredit.name = "Ed Sheeran"
             val testArtist = org.metabrainz.android.model.mbentity.Artist()
@@ -138,8 +138,8 @@ object EntityTestUtils {
             testReleaseGroup.title = "+"
             testReleaseGroup.primaryType = "Album"
             testReleaseGroup.disambiguation = "plus"
-            val testArtistCredits: List<ArtistCredit> = ArrayList<ArtistCredit>()
-            val testArtistCredit = ArtistCredit()
+            val testArtistCredits: List<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList<org.metabrainz.android.model.entities.ArtistCredit>()
+            val testArtistCredit = org.metabrainz.android.model.entities.ArtistCredit()
             testArtistCredit.joinphrase = ""
             testArtistCredit.name = "Ed Sheeran"
             val testArtist = org.metabrainz.android.model.mbentity.Artist()
@@ -176,8 +176,8 @@ object EntityTestUtils {
             testRecording.length = 125400
             testRecording.title = "Plus Plus"
             testRecording.disambiguation = "no disambiguation"
-            val testArtistCredits: ArrayList<ArtistCredit> = ArrayList<ArtistCredit>()
-            val testArtistCredit = ArtistCredit()
+            val testArtistCredits: ArrayList<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList<org.metabrainz.android.model.entities.ArtistCredit>()
+            val testArtistCredit = org.metabrainz.android.model.entities.ArtistCredit()
             testArtistCredit.joinphrase = ""
             testArtistCredit.name = "Like a Tim"
             val testArtist = org.metabrainz.android.model.mbentity.Artist()

@@ -3,7 +3,7 @@ package org.metabrainz.android.ui.screens.login
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import org.metabrainz.android.application.App
-import org.metabrainz.android.data.sources.api.entities.AccessToken
+import org.metabrainz.android.model.entities.AccessToken
 import org.metabrainz.android.model.userdata.UserInfo
 
 object LoginSharedPreferences {
@@ -15,7 +15,7 @@ object LoginSharedPreferences {
     val preferences: SharedPreferences
         get() = PreferenceManager.getDefaultSharedPreferences(App.context!!)
 
-    fun saveOAuthToken(token: AccessToken) {
+    fun saveOAuthToken(token: org.metabrainz.android.model.entities.AccessToken) {
         val editor = preferences.edit()
         editor.putString(ACCESS_TOKEN, token.accessToken)
         editor.putString(REFRESH_TOKEN, token.refreshToken)

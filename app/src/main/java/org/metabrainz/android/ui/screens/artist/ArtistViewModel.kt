@@ -3,7 +3,7 @@ package org.metabrainz.android.ui.screens.artist
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.model.mbentity.MBEntityType
 import org.metabrainz.android.repository.LookupRepository
 import org.metabrainz.android.ui.screens.base.LookupViewModel

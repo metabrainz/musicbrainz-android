@@ -1,8 +1,8 @@
 package org.metabrainz.android.model.mbentity
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.ArtistCredit
-import org.metabrainz.android.data.sources.api.entities.Link
+import org.metabrainz.android.model.entities.ArtistCredit
+import org.metabrainz.android.model.entities.Link
 import java.util.*
 
 class ReleaseGroup : org.metabrainz.android.model.mbentity.MBEntity() {
@@ -17,7 +17,7 @@ class ReleaseGroup : org.metabrainz.android.model.mbentity.MBEntity() {
 
     //TODO: Implement correct wrapper JSON
     @SerializedName("artist-credit")
-    val artistCredits: MutableList<ArtistCredit> = ArrayList()
+    val artistCredits: MutableList<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList()
     @JvmField
     val relations: MutableList<Link> = ArrayList()
     @JvmField
@@ -39,11 +39,11 @@ class ReleaseGroup : org.metabrainz.android.model.mbentity.MBEntity() {
     }
 
     @JvmName("getArtistCredits1")
-    fun getArtistCredits(): MutableList<ArtistCredit> {
+    fun getArtistCredits(): MutableList<org.metabrainz.android.model.entities.ArtistCredit> {
         return artistCredits
     }
 
-    fun setArtistCredits(artistCredits: List<ArtistCredit>?) {
+    fun setArtistCredits(artistCredits: List<org.metabrainz.android.model.entities.ArtistCredit>?) {
         this.artistCredits.addAll(artistCredits!!)
     }
 

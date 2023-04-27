@@ -1,4 +1,4 @@
-package org.metabrainz.android.data.sources.api.entities
+package org.metabrainz.android.model.entities
 
 data class RecordingItem(
     val artist_credit_arg: String,

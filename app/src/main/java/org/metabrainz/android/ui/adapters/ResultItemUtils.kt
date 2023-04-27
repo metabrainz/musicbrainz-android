@@ -3,7 +3,7 @@ package org.metabrainz.android.ui.adapters
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-import org.metabrainz.android.data.sources.api.entities.EntityUtils.getDisplayArtist
+import org.metabrainz.android.model.entities.EntityUtils.getDisplayArtist
 import org.metabrainz.android.model.mbentity.MBEntityType
 import org.metabrainz.android.model.mbentity.Recording
 import org.metabrainz.android.model.mbentity.Release

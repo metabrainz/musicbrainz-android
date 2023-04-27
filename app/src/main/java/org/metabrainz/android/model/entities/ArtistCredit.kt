@@ -1,4 +1,4 @@
-package org.metabrainz.android.data.sources.api.entities
+package org.metabrainz.android.model.entities
 
 import org.metabrainz.android.model.mbentity.Artist
 
@@ -8,7 +8,7 @@ class ArtistCredit {
     var artist: Artist? = null
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is ArtistCredit) return false
+        if (other !is org.metabrainz.android.model.entities.ArtistCredit) return false
         return name == other.name && joinphrase == other.joinphrase && artist == other.artist
     }
 

@@ -1,8 +1,8 @@
-package org.metabrainz.android.data.sources.api.entities
+package org.metabrainz.android.model.entities
 
 object EntityUtils {
     @JvmStatic
-    fun getDisplayArtist(artistCredits: MutableList<ArtistCredit>?): String {
+    fun getDisplayArtist(artistCredits: MutableList<org.metabrainz.android.model.entities.ArtistCredit>?): String {
         val builder = StringBuilder()
         val iterator = artistCredits!!.iterator()
         while (iterator.hasNext()) {

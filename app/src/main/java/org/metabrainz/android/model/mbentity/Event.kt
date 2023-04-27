@@ -1,7 +1,7 @@
 package org.metabrainz.android.model.mbentity
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.LifeSpan
+import org.metabrainz.android.model.entities.LifeSpan
 
 class Event : org.metabrainz.android.model.mbentity.MBEntity() {
     //TODO: Add Relations Field

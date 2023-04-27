@@ -1,9 +1,9 @@
 package org.metabrainz.android.service
 
 import okhttp3.ResponseBody
-import org.metabrainz.android.data.sources.api.entities.CoverArt
-import org.metabrainz.android.data.sources.api.entities.RecordingItem
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.CoverArt
+import org.metabrainz.android.model.entities.RecordingItem
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.model.response.BarcodeReleaseResponse
 import retrofit2.http.GET
@@ -18,7 +18,7 @@ interface LookupService {
                                  @Query("inc") params: String): ResponseBody
 
     @GET("http://coverartarchive.org/release/{MBID}")
-    suspend fun getCoverArt(@Path("MBID") MBID: String?): CoverArt
+    suspend fun getCoverArt(@Path("MBID") MBID: String?): org.metabrainz.android.model.entities.CoverArt
 
 
     @GET("https://labs.api.listenbrainz.org/mbid-mapping/json")

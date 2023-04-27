@@ -1,8 +1,8 @@
 package org.metabrainz.android.model.mbentity
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.LifeSpan
-import org.metabrainz.android.data.sources.api.entities.Link
+import org.metabrainz.android.model.entities.LifeSpan
+import org.metabrainz.android.model.entities.Link
 import java.util.*
 
 class Label : org.metabrainz.android.model.mbentity.MBEntity() {

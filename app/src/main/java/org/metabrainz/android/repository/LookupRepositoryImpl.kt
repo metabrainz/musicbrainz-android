@@ -5,10 +5,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 import org.metabrainz.android.util.Constants
 import org.metabrainz.android.service.LookupService
-import org.metabrainz.android.data.sources.api.entities.CoverArt
-import org.metabrainz.android.data.sources.api.entities.RecordingItem
-import org.metabrainz.android.data.sources.api.entities.WikiDataResponse
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.CoverArt
+import org.metabrainz.android.model.entities.RecordingItem
+import org.metabrainz.android.model.entities.WikiDataResponse
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.util.Resource
 import org.metabrainz.android.util.Resource.Status.SUCCESS
@@ -69,7 +69,7 @@ class LookupRepositoryImpl @Inject constructor(private val service: LookupServic
     }
 
     @WorkerThread
-    override suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt> {
+    override suspend fun fetchCoverArt(MBID: String?): Resource<org.metabrainz.android.model.entities.CoverArt> {
         return try {
             val coverArt = service.getCoverArt(MBID)
             Resource(SUCCESS, coverArt)

@@ -1,8 +1,8 @@
 package org.metabrainz.android.model.mbentity
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.ArtistCredit
-import org.metabrainz.android.data.sources.api.entities.Link
+import org.metabrainz.android.model.entities.ArtistCredit
+import org.metabrainz.android.model.entities.Link
 import java.util.*
 
 class Recording : org.metabrainz.android.model.mbentity.MBEntity() {
@@ -10,7 +10,7 @@ class Recording : org.metabrainz.android.model.mbentity.MBEntity() {
     var length: Long = 0
 
     @SerializedName("artist-credit")
-    var artistCredits: MutableList<ArtistCredit> = ArrayList()
+    var artistCredits: MutableList<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList()
         set(artistCredits) {
             this.artistCredits.addAll(artistCredits)
         }

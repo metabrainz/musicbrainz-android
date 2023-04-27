@@ -3,9 +3,9 @@ package org.metabrainz.android
 import com.google.gson.Gson
 import org.metabrainz.android.EntityTestUtils.loadResourceAsString
 import org.metabrainz.android.repository.LookupRepository
-import org.metabrainz.android.data.sources.api.entities.CoverArt
-import org.metabrainz.android.data.sources.api.entities.RecordingItem
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.CoverArt
+import org.metabrainz.android.model.entities.RecordingItem
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.util.Resource
 import org.metabrainz.android.util.Resource.Status.SUCCESS
@@ -22,9 +22,9 @@ class MockLookupRepository : LookupRepository {
         return Resource(SUCCESS, summary)
     }
 
-    override suspend fun fetchCoverArt(MBID: String?): Resource<CoverArt> {
+    override suspend fun fetchCoverArt(MBID: String?): Resource<org.metabrainz.android.model.entities.CoverArt> {
         val response = loadResourceAsString("cover_art.json")
-        val coverArt = Gson().fromJson(response, CoverArt::class.java)
+        val coverArt = Gson().fromJson(response, org.metabrainz.android.model.entities.CoverArt::class.java)
         return Resource(SUCCESS, coverArt)
     }
 

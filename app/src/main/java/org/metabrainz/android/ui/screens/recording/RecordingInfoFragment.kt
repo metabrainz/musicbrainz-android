@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import org.metabrainz.android.data.sources.api.entities.EntityUtils
+import org.metabrainz.android.model.entities.EntityUtils
 import org.metabrainz.android.databinding.FragmentRecordingInfoBinding
 import org.metabrainz.android.model.mbentity.Recording
 import org.metabrainz.android.ui.screens.base.MusicBrainzFragment
@@ -32,7 +32,7 @@ class RecordingInfoFragment : Fragment() {
             val recording = resource.data
             binding!!.recordingTitle.text = recording!!.title
             binding!!.recordingDuration.text = recording.duration
-            binding!!.recordingArtist.text = EntityUtils.getDisplayArtist(recording.artistCredits)
+            binding!!.recordingArtist.text = org.metabrainz.android.model.entities.EntityUtils.getDisplayArtist(recording.artistCredits)
         }
     }
 

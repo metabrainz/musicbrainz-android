@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.metabrainz.android.data.sources.api.entities.Media
+import org.metabrainz.android.model.entities.Media
 import org.metabrainz.android.databinding.FragmentTracklistBinding
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.ui.screens.base.MusicBrainzFragment

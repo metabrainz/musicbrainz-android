@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import org.metabrainz.android.data.sources.api.entities.EntityUtils
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.EntityUtils
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.databinding.CardReleaseGroupInfoBinding
 import org.metabrainz.android.model.mbentity.ReleaseGroup
 import org.metabrainz.android.ui.screens.base.MusicBrainzFragment
@@ -52,7 +52,7 @@ class ReleaseGroupInfoFragment : Fragment() {
         if (resource != null && resource.status == Resource.Status.SUCCESS) {
             val releaseGroup = resource.data
             binding!!.releaseGroupTitle.text = releaseGroup!!.title
-            binding!!.releaseGroupArtist.text = EntityUtils.getDisplayArtist(releaseGroup.artistCredits)
+            binding!!.releaseGroupArtist.text = org.metabrainz.android.model.entities.EntityUtils.getDisplayArtist(releaseGroup.artistCredits)
         }
     }
 

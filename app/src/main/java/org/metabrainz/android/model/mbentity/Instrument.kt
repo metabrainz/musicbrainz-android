@@ -1,13 +1,13 @@
 package org.metabrainz.android.model.mbentity
 
-import org.metabrainz.android.data.sources.api.entities.Alias
+import org.metabrainz.android.model.entities.Alias
 import java.util.*
 
 class Instrument : org.metabrainz.android.model.mbentity.MBEntity() {
     var type: String? = null
     var name: String? = null
     var description: String? = null
-    private val aliases: MutableList<Alias> = ArrayList()
+    private val aliases: MutableList<org.metabrainz.android.model.entities.Alias> = ArrayList()
     override fun toString(): String {
         return "Instrument{" +
                 "mbid='" + mbid + '\'' +
@@ -18,11 +18,11 @@ class Instrument : org.metabrainz.android.model.mbentity.MBEntity() {
                 '}'
     }
 
-    fun getAliases(): List<Alias> {
+    fun getAliases(): List<org.metabrainz.android.model.entities.Alias> {
         return aliases
     }
 
-    fun setAliases(aliases: List<Alias>?) {
+    fun setAliases(aliases: List<org.metabrainz.android.model.entities.Alias>?) {
         this.aliases.addAll(aliases!!)
     }
 }

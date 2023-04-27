@@ -1,14 +1,14 @@
 package org.metabrainz.android.model.mbentity
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.*
+import org.metabrainz.android.model.entities.*
 import java.util.*
 
 class Release : org.metabrainz.android.model.mbentity.MBEntity() {
     var title: String? = null
 
     @SerializedName("artist-credit")
-    var artistCredits: MutableList<ArtistCredit> = ArrayList()
+    var artistCredits: MutableList<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList()
     var date: String? = null
     var barcode: String? = null
     
@@ -26,7 +26,7 @@ class Release : org.metabrainz.android.model.mbentity.MBEntity() {
     var country: String? = null
     var status: String? = null
     var media: MutableList<Media>? = ArrayList()
-    var coverArt: CoverArt? = null
+    var coverArt: org.metabrainz.android.model.entities.CoverArt? = null
 
     @SerializedName("text-representation")
     var textRepresentation: TextRepresentation? = null

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import org.metabrainz.android.R
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
+import org.metabrainz.android.model.entities.WikiSummary
 import org.metabrainz.android.model.mbentity.Artist
 import org.metabrainz.android.databinding.FragmentBioBinding
 import org.metabrainz.android.ui.screens.base.MusicBrainzFragment

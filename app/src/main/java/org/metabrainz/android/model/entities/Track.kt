@@ -1,4 +1,4 @@
-package org.metabrainz.android.data.sources.api.entities
+package org.metabrainz.android.model.entities
 
 import com.google.gson.annotations.SerializedName
 import org.metabrainz.android.model.mbentity.Recording

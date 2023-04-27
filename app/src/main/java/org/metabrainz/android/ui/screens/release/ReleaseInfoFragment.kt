@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
-import org.metabrainz.android.data.sources.api.entities.CoverArt
+import org.metabrainz.android.model.entities.CoverArt
 import org.metabrainz.android.databinding.CardReleaseInfoBinding
 import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.ui.screens.base.MusicBrainzFragment
@@ -67,7 +67,7 @@ class ReleaseInfoFragment : Fragment() {
         }
     }
 
-    private fun setCoverArt(coverArt: CoverArt?) {
+    private fun setCoverArt(coverArt: org.metabrainz.android.model.entities.CoverArt?) {
         if (coverArt != null && coverArt.images.isNotEmpty()) {
             urls.clear()
             urls.addAll(listOf(coverArt.images[0].image))

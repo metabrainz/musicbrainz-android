@@ -1,4 +1,4 @@
-package org.metabrainz.android.data.sources.api.entities
+package org.metabrainz.android.model.entities
 
 object LinksClassifier {
     private const val OFFICIAL_HOMEPAGE = "official homepage"

@@ -1,4 +1,4 @@
-package org.metabrainz.android.data.sources.api.entities
+package org.metabrainz.android.model.entities
 
 class WikiDataResponse {
     var sitelinks: Map<String, WikiDataEntry>? = null
