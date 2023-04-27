@@ -8,8 +8,8 @@ import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.metabrainz.android.data.sources.api.MusicBrainzServiceGenerator
-import org.metabrainz.android.data.sources.api.LoginService
+import org.metabrainz.android.service.MusicBrainzServiceGenerator
+import org.metabrainz.android.service.LoginService
 import java.io.IOException
 import java.util.*
 

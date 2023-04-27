@@ -8,12 +8,15 @@ import org.metabrainz.android.EntityTestUtils.testLabel
 import org.metabrainz.android.EntityTestUtils.testRecording
 import org.metabrainz.android.EntityTestUtils.testRelease
 import org.metabrainz.android.EntityTestUtils.testReleaseGroup
-import org.metabrainz.android.data.sources.api.entities.mbentity.*
+import org.metabrainz.android.model.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Release
+import org.metabrainz.android.model.mbentity.ReleaseGroup
 
 class EntityModelsTest {
     @Test
     fun testArtistModel() {
-        val artist: Artist = Gson().fromJson(loadResourceAsString("artist_lookup.json"),Artist::class.java)
+        val artist: org.metabrainz.android.model.mbentity.Artist = Gson().fromJson(loadResourceAsString("artist_lookup.json"),
+            org.metabrainz.android.model.mbentity.Artist::class.java)
         AssertionUtils.checkArtistAssertions(testArtist, artist)
     }
 
@@ -36,9 +39,9 @@ class EntityModelsTest {
 
     @Test
     fun testLabelModel() {
-        val label: Label = Gson().fromJson(
+        val label: org.metabrainz.android.model.mbentity.Label = Gson().fromJson(
             loadResourceAsString("label_lookup.json"),
-            Label::class.java)
+            org.metabrainz.android.model.mbentity.Label::class.java)
         AssertionUtils.checkLabelAssertions(testLabel, label)
     }
 

@@ -1,8 +1,8 @@
 package org.metabrainz.android
 
-import org.metabrainz.android.data.repository.CollectionRepository
-import org.metabrainz.android.data.sources.CollectionUtils
-import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
+import org.metabrainz.android.repository.CollectionRepository
+import org.metabrainz.android.util.CollectionUtils
+import org.metabrainz.android.model.mbentity.Collection
 import org.metabrainz.android.util.Resource
 
 class MockCollectionRepository : CollectionRepository {
@@ -11,7 +11,7 @@ class MockCollectionRepository : CollectionRepository {
         return Resource(Resource.Status.SUCCESS, EntityTestUtils.loadResourceAsString( "collection_details.json"))
     }
 
-    override suspend fun fetchCollections(editor: String, fetchPrivate: Boolean): Resource<MutableList<Collection>> {
+    override suspend fun fetchCollections(editor: String, fetchPrivate: Boolean): Resource<MutableList<org.metabrainz.android.model.mbentity.Collection>> {
         val response = if (fetchPrivate)
             EntityTestUtils.loadResourceAsString("collections_private.json")
         else

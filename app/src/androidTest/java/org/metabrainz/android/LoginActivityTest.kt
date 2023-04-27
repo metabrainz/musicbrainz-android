@@ -15,8 +15,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.metabrainz.android.data.sources.api.MusicBrainzServiceGenerator
-import org.metabrainz.android.presentation.features.login.LoginActivity
+import org.metabrainz.android.service.MusicBrainzServiceGenerator
+import org.metabrainz.android.ui.screens.login.LoginActivity
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class LoginActivityTest {
@@ -35,7 +35,8 @@ class LoginActivityTest {
     fun testLoginAuthorization() {
         Espresso.onView(ViewMatchers.withId(R.id.login_btn)).perform(ViewActions.click())
         Intents.intended(AllOf.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData(Uri.parse(MusicBrainzServiceGenerator.AUTH_BASE_URL
+                IntentMatchers.hasData(Uri.parse(
+                    MusicBrainzServiceGenerator.AUTH_BASE_URL
                         + "authorize"
                         + "?response_type=code"
                         + "&client_id=" + MusicBrainzServiceGenerator.CLIENT_ID

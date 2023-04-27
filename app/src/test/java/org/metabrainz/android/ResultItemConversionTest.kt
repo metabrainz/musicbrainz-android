@@ -1,6 +1,6 @@
 package org.metabrainz.android
 
-import org.metabrainz.android.presentation.features.adapters.ResultItemUtils.getEntityAsResultItem
+import org.metabrainz.android.ui.adapters.ResultItemUtils.getEntityAsResultItem
 import org.junit.Test
 import org.metabrainz.android.EntityTestUtils.testArtist
 import org.metabrainz.android.EntityTestUtils.testLabel

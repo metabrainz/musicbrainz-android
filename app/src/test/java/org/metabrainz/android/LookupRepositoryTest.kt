@@ -22,15 +22,18 @@ import org.metabrainz.android.EntityTestUtils.testRecording
 import org.metabrainz.android.EntityTestUtils.testRelease
 import org.metabrainz.android.EntityTestUtils.testReleaseGroup
 import org.metabrainz.android.RetrofitUtils.createTestService
-import org.metabrainz.android.data.repository.LookupRepository
-import org.metabrainz.android.data.repository.LookupRepositoryImpl
-import org.metabrainz.android.data.sources.Constants.LOOKUP_ARTIST_PARAMS
-import org.metabrainz.android.data.sources.Constants.LOOKUP_LABEL_PARAMS
-import org.metabrainz.android.data.sources.Constants.LOOKUP_RECORDING_PARAMS
-import org.metabrainz.android.data.sources.Constants.LOOKUP_RELEASE_GROUP_PARAMS
-import org.metabrainz.android.data.sources.Constants.LOOKUP_RELEASE_PARAMS
-import org.metabrainz.android.data.sources.api.LookupService
-import org.metabrainz.android.data.sources.api.entities.mbentity.*
+import org.metabrainz.android.repository.LookupRepository
+import org.metabrainz.android.repository.LookupRepositoryImpl
+import org.metabrainz.android.util.Constants.LOOKUP_ARTIST_PARAMS
+import org.metabrainz.android.util.Constants.LOOKUP_LABEL_PARAMS
+import org.metabrainz.android.util.Constants.LOOKUP_RECORDING_PARAMS
+import org.metabrainz.android.util.Constants.LOOKUP_RELEASE_GROUP_PARAMS
+import org.metabrainz.android.util.Constants.LOOKUP_RELEASE_PARAMS
+import org.metabrainz.android.service.LookupService
+import org.metabrainz.android.model.mbentity.MBEntityType
+import org.metabrainz.android.model.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Release
+import org.metabrainz.android.model.mbentity.ReleaseGroup
 import org.metabrainz.android.util.Resource.Status.SUCCESS
 
 class LookupRepositoryTest {
@@ -68,7 +71,7 @@ class LookupRepositoryTest {
         val expected = testArtist
         val resource = repository.fetchData(MBEntityType.ARTIST.entity, expected.mbid!!, LOOKUP_ARTIST_PARAMS)
         assertEquals(SUCCESS, resource.status)
-        val actual = Gson().fromJson(resource.data, Artist::class.java)
+        val actual = Gson().fromJson(resource.data, org.metabrainz.android.model.mbentity.Artist::class.java)
         checkArtistAssertions(expected, actual)
     }
 
@@ -95,7 +98,7 @@ class LookupRepositoryTest {
         val expected = testLabel
         val resource = repository.fetchData(MBEntityType.LABEL.entity, expected.mbid!!, LOOKUP_LABEL_PARAMS)
         assertEquals(SUCCESS, resource.status)
-        val label = Gson().fromJson(resource.data, Label::class.java)
+        val label = Gson().fromJson(resource.data, org.metabrainz.android.model.mbentity.Label::class.java)
         checkLabelAssertions(expected, label)
     }
 

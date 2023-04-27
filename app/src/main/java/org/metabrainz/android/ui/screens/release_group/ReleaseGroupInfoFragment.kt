@@ -1,0 +1,64 @@
+package org.metabrainz.android.ui.screens.release_group
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import org.metabrainz.android.model.entities.EntityUtils
+import org.metabrainz.android.model.entities.WikiSummary
+import org.metabrainz.android.databinding.CardReleaseGroupInfoBinding
+import org.metabrainz.android.model.mbentity.ReleaseGroup
+import org.metabrainz.android.ui.screens.base.MusicBrainzFragment
+import org.metabrainz.android.util.Resource
+
+class ReleaseGroupInfoFragment : Fragment() {
+    private var binding: CardReleaseGroupInfoBinding? = null
+    private val releaseGroupViewModel: ReleaseGroupViewModel by activityViewModels()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = CardReleaseGroupInfoBinding.inflate(inflater, container, false)
+        releaseGroupViewModel.data.observe(viewLifecycleOwner) { setReleaseGroupInfo(it) }
+        releaseGroupViewModel.wikiData.observe(viewLifecycleOwner) { setWiki(it) }
+        return binding!!.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+    private fun setWiki(wikiSummaryResource: Resource<WikiSummary>?) {
+        if (wikiSummaryResource != null && wikiSummaryResource.status == Resource.Status.SUCCESS) {
+            val wiki = wikiSummaryResource.data
+            val wikiText = wiki!!.extract
+            if (wikiText != null && !wikiText.isEmpty()) {
+                showWikiCard()
+                binding!!.wikiSummary.text = wikiText
+            } else hideWikiCard()
+        } else hideWikiCard()
+    }
+
+    private fun showWikiCard() {
+        binding!!.cardView.visibility = View.VISIBLE
+    }
+
+    private fun hideWikiCard() {
+        binding!!.cardView.visibility = View.GONE
+    }
+
+    private fun setReleaseGroupInfo(resource: Resource<ReleaseGroup>?) {
+        if (resource != null && resource.status == Resource.Status.SUCCESS) {
+            val releaseGroup = resource.data
+            binding!!.releaseGroupTitle.text = releaseGroup!!.title
+            binding!!.releaseGroupArtist.text = org.metabrainz.android.model.entities.EntityUtils.getDisplayArtist(releaseGroup.artistCredits)
+        }
+    }
+
+    companion object : MusicBrainzFragment {
+        override fun newInstance(): Fragment {
+            return ReleaseGroupInfoFragment()
+        }
+    }
+}

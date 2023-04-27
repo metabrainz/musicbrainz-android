@@ -13,11 +13,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
-import org.metabrainz.android.App
-import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
-import org.metabrainz.android.presentation.UserPreferences
-import org.metabrainz.android.presentation.features.adapters.ResultItem
-import org.metabrainz.android.presentation.features.adapters.ResultItemUtils
+import org.metabrainz.android.application.App
+import org.metabrainz.android.model.mbentity.MBEntityType
+import org.metabrainz.android.ui.adapters.ResultItem
+import org.metabrainz.android.ui.adapters.ResultItemUtils
 import org.metabrainz.android.util.Log.e
 import java.io.ByteArrayOutputStream
 import java.io.IOException

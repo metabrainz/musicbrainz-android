@@ -1,11 +1,12 @@
 package org.metabrainz.android
 
 import org.junit.Assert.fail
-import org.metabrainz.android.data.sources.api.entities.ArtistCredit
-import org.metabrainz.android.data.sources.api.entities.WikiSummary
-import org.metabrainz.android.data.sources.api.entities.mbentity.*
-import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
-import org.metabrainz.android.presentation.features.adapters.ResultItem
+import org.metabrainz.android.model.entities.ArtistCredit
+import org.metabrainz.android.model.entities.WikiSummary
+import org.metabrainz.android.model.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Release
+import org.metabrainz.android.model.mbentity.ReleaseGroup
+import org.metabrainz.android.ui.adapters.ResultItem
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -48,10 +49,10 @@ object EntityTestUtils {
     val testArtistMBID: String
         get() = "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6"
 
-    val testArtist: Artist
+    val testArtist: org.metabrainz.android.model.mbentity.Artist
         get() {
             val MBID = testArtistMBID
-            val testArtist = Artist()
+            val testArtist = org.metabrainz.android.model.mbentity.Artist()
             testArtist.mbid = MBID
             testArtist.type = "Person"
             testArtist.country = "GB"
@@ -114,11 +115,11 @@ object EntityTestUtils {
             testRelease.country = "XE"
             testRelease.disambiguation = ""
             testRelease.date = "2011-09-09"
-            val testArtistCredits: ArrayList<ArtistCredit> = ArrayList<ArtistCredit>()
-            val testArtistCredit = ArtistCredit()
+            val testArtistCredits: ArrayList<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList<org.metabrainz.android.model.entities.ArtistCredit>()
+            val testArtistCredit = org.metabrainz.android.model.entities.ArtistCredit()
             testArtistCredit.joinphrase = ""
             testArtistCredit.name = "Ed Sheeran"
-            val testArtist = Artist()
+            val testArtist = org.metabrainz.android.model.mbentity.Artist()
             testArtist.mbid = "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6"
             testArtistCredit.artist = testArtist
             testRelease.artistCredits = testArtistCredits
@@ -137,11 +138,11 @@ object EntityTestUtils {
             testReleaseGroup.title = "+"
             testReleaseGroup.primaryType = "Album"
             testReleaseGroup.disambiguation = "plus"
-            val testArtistCredits: List<ArtistCredit> = ArrayList<ArtistCredit>()
-            val testArtistCredit = ArtistCredit()
+            val testArtistCredits: List<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList<org.metabrainz.android.model.entities.ArtistCredit>()
+            val testArtistCredit = org.metabrainz.android.model.entities.ArtistCredit()
             testArtistCredit.joinphrase = ""
             testArtistCredit.name = "Ed Sheeran"
-            val testArtist = Artist()
+            val testArtist = org.metabrainz.android.model.mbentity.Artist()
             testArtist.mbid = "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6"
             testArtistCredit.artist = testArtist
             testReleaseGroup.setArtistCredits(testArtistCredits)
@@ -151,10 +152,10 @@ object EntityTestUtils {
     val testLabelMBID: String
         get() = "015a28ab-1eb8-45a0-b2c6-601e410548af"
 
-    val testLabel: Label
+    val testLabel: org.metabrainz.android.model.mbentity.Label
         get() {
             val MBID = testLabelMBID
-            val testLabel = Label()
+            val testLabel = org.metabrainz.android.model.mbentity.Label()
             testLabel.mbid = MBID
             testLabel.name = "Speed Records"
             testLabel.code = "SPREC"
@@ -175,11 +176,11 @@ object EntityTestUtils {
             testRecording.length = 125400
             testRecording.title = "Plus Plus"
             testRecording.disambiguation = "no disambiguation"
-            val testArtistCredits: ArrayList<ArtistCredit> = ArrayList<ArtistCredit>()
-            val testArtistCredit = ArtistCredit()
+            val testArtistCredits: ArrayList<org.metabrainz.android.model.entities.ArtistCredit> = ArrayList<org.metabrainz.android.model.entities.ArtistCredit>()
+            val testArtistCredit = org.metabrainz.android.model.entities.ArtistCredit()
             testArtistCredit.joinphrase = ""
             testArtistCredit.name = "Like a Tim"
-            val testArtist = Artist()
+            val testArtist = org.metabrainz.android.model.mbentity.Artist()
             testArtist.mbid = "90568a1e-ef8d-4d22-93fa-faadc819d576"
             testArtistCredit.artist = testArtist
             testRecording.artistCredits = testArtistCredits
@@ -190,10 +191,10 @@ object EntityTestUtils {
     val testCollectionPublicMBID: String
         get() = "a691377c-6949-44cb-8a10-9696178cca18"
 
-    val testCollectionPublic: Collection
+    val testCollectionPublic: org.metabrainz.android.model.mbentity.Collection
         get() {
             val MBID = testCollectionPublicMBID
-            val testCollection = Collection()
+            val testCollection = org.metabrainz.android.model.mbentity.Collection()
             testCollection.mbid = MBID
             testCollection.type = "Release"
             testCollection.name = "Rock and Roll"
@@ -206,10 +207,10 @@ object EntityTestUtils {
     val testCollectionPrivateMBID: String
         get() = "d103a421-9340-413f-a04e-5e63dd234bc4"
 
-    val testCollectionPrivate: Collection
+    val testCollectionPrivate: org.metabrainz.android.model.mbentity.Collection
         get() {
             val MBID = testCollectionPrivateMBID
-            val testCollection = Collection()
+            val testCollection = org.metabrainz.android.model.mbentity.Collection()
             testCollection.mbid = MBID
             testCollection.type = "Artist"
             testCollection.name = "Sweet Talks"

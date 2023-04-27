@@ -18,11 +18,11 @@ import org.metabrainz.android.AssertionUtils.checkReleaseGroupAssertions
 import org.metabrainz.android.AssertionUtils.checkWikiAssertions
 import org.metabrainz.android.EntityTestUtils.testArtist
 import org.metabrainz.android.LiveDataTestUtil.getOrAwaitValue
-import org.metabrainz.android.presentation.features.artist.ArtistViewModel
-import org.metabrainz.android.presentation.features.label.LabelViewModel
-import org.metabrainz.android.presentation.features.recording.RecordingViewModel
-import org.metabrainz.android.presentation.features.release.ReleaseViewModel
-import org.metabrainz.android.presentation.features.release_group.ReleaseGroupViewModel
+import org.metabrainz.android.ui.screens.artist.ArtistViewModel
+import org.metabrainz.android.ui.screens.label.LabelViewModel
+import org.metabrainz.android.ui.screens.recording.RecordingViewModel
+import org.metabrainz.android.ui.screens.release.ReleaseViewModel
+import org.metabrainz.android.ui.screens.release_group.ReleaseGroupViewModel
 import org.metabrainz.android.util.Resource.Status.SUCCESS
 import org.metabrainz.android.EntityTestUtils.testArtistWiki as testArtistWiki
 

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,8 +15,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name=".App"
-        android:autoRevokePermissions="allowed"
+        android:name=".application.App"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -19,21 +23,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
-        <service
-            android:name=".presentation.features.listens.ListenService"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-            <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService" />
-            </intent-filter>
-        </service>
 
         <activity
-            android:name=".presentation.features.onboarding.FeaturesActivity"
+            android:name=".ui.screens.onboarding.FeaturesActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".presentation.features.dashboard.DashboardActivity"
+            android:name=".ui.screens.dashboard.DashboardActivity"
             android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>
@@ -42,27 +37,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.features.collection.CollectionDetailsActivity"
+            android:name=".ui.screens.collection.CollectionDetailsActivity"
             android:label="Collection"
-            android:parentActivityName="org.metabrainz.android.presentation.features.collection.CollectionActivity">
+            android:parentActivityName=".ui.screens.collection.CollectionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.features.collection.CollectionActivity" />
+                android:value=".ui.screens.collection.CollectionActivity" />
         </activity>
         <activity
-            android:name="org.metabrainz.android.presentation.features.collection.CollectionActivity"
+            android:name=".ui.screens.collection.CollectionActivity"
             android:label="@string/dash_collections" />
         <activity
-            android:name=".presentation.features.recording.RecordingActivity"
+            android:name=".ui.screens.recording.RecordingActivity"
             android:label="@string/search_type_recording" />
         <activity
-            android:name=".presentation.features.label.LabelActivity"
+            android:name=".ui.screens.label.LabelActivity"
             android:label="@string/search_type_label" />
         <activity
-            android:name=".presentation.features.release_group.ReleaseGroupActivity"
+            android:name=".ui.screens.release_group.ReleaseGroupActivity"
             android:label="@string/search_type_release_group" />
         <activity
-            android:name=".presentation.features.search.SearchActivity"
+            android:name=".ui.screens.search.SearchActivity"
             android:label="@string/settings_search"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden">
@@ -71,7 +66,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".presentation.features.login.LoginActivity"
+            android:name=".ui.screens.login.LoginActivity"
             android:label="@string/auth_title"
             android:exported="true">
             <intent-filter>
@@ -86,26 +81,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.features.about.AboutActivity"
+            android:name=".ui.screens.about.AboutActivity"
             android:label="@string/about_title" />
         <activity
-            android:name=".presentation.features.dashboard.DonateActivity"
+            android:name=".ui.screens.dashboard.DonateActivity"
             android:label="@string/donate_title" />
         <activity
-            android:name="org.metabrainz.android.presentation.features.release.ReleaseActivity"
+            android:name="org.metabrainz.android.ui.screens.release.ReleaseActivity"
             android:label="@string/release_title" />
         <activity
-            android:name="org.metabrainz.android.presentation.features.artist.ArtistActivity"
+            android:name=".ui.screens.artist.ArtistActivity"
             android:label="@string/artist_title" />
         <activity
-            android:name="org.metabrainz.android.presentation.features.settings.SettingsActivity"
+            android:name=".ui.screens.settings.SettingsActivity"
             android:label="@string/preferences_title" />
 
-        <activity android:name=".presentation.features.barcode.BarcodeActivity" />
+        <activity android:name=".ui.screens.barcode.BarcodeActivity" />
 
-        <activity
-            android:name="org.metabrainz.android.presentation.features.barcode.BarcodeResultActivity" />
-        <activity android:name=".presentation.features.newsbrainz.NewsBrainzActivity" />
+        <activity android:name=".ui.screens.barcode.BarcodeResultActivity" />
+        <activity android:name=".ui.screens.newsbrainz.NewsBrainzActivity" />
 
         <meta-data
             android:name="android.app.default_searchable"
@@ -115,7 +109,7 @@
             android:value="AEdPqrEAAAAIJeBCYRRcklJ4Px20MnlwsLTD9Rpp6eQyjiVNRg" />
 
         <provider
-            android:name="org.metabrainz.android.presentation.features.suggestion.SuggestionProvider"
+            android:name="org.metabrainz.android.ui.screens.suggestion.SuggestionProvider"
             android:authorities="${applicationId}.SearchSuggestionProvider"
             android:exported="false" />
 

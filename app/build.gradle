@@ -8,6 +8,8 @@ plugins {
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 
 android {
+    namespace 'org.metabrainz.android'
+
     compileSdk 33
     signingConfigs {
         release {
@@ -69,11 +71,9 @@ android {
         abortOnError false
         disable 'MissingTranslation'
     }
-
     composeOptions {
         kotlinCompilerExtensionVersion '1.3.0'
     }
-    namespace 'org.metabrainz.android'
 }
 
 dependencies {
