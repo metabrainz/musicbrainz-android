@@ -26,7 +26,7 @@ android {
         applicationId 'org.metabrainz.android'
         minSdk 21
         targetSdk 33
-        versionCode 56
+        versionCode 55
         versionName "7.0.0"
 
         multiDexEnabled true
