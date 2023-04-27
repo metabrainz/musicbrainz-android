@@ -1,6 +1,6 @@
 package org.metabrainz.android.data.sources.api.entities
 
-import org.metabrainz.android.data.sources.api.entities.mbentity.Artist
+import org.metabrainz.android.model.mbentity.Artist
 
 class ArtistCredit {
     var name: String? = null

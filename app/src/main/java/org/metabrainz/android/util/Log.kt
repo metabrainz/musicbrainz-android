@@ -1,7 +1,6 @@
 package org.metabrainz.android.util
 
 import android.util.Log
-import org.metabrainz.android.presentation.Configuration
 
 object Log {
 

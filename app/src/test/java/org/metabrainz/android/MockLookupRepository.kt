@@ -2,11 +2,10 @@ package org.metabrainz.android
 
 import com.google.gson.Gson
 import org.metabrainz.android.EntityTestUtils.loadResourceAsString
-import org.metabrainz.android.data.repository.LookupRepository
+import org.metabrainz.android.repository.LookupRepository
 import org.metabrainz.android.data.sources.api.entities.CoverArt
 import org.metabrainz.android.data.sources.api.entities.RecordingItem
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
-import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
 import org.metabrainz.android.data.sources.api.entities.mbentity.Release
 import org.metabrainz.android.util.Resource
 import org.metabrainz.android.util.Resource.Status.SUCCESS

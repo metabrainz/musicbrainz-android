@@ -1,7 +1,7 @@
 package org.metabrainz.android.data.sources.api.entities
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Recording
 
 class Track {
     @SerializedName("id")

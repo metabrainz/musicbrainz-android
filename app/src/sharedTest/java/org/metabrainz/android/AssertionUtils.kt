@@ -5,8 +5,8 @@ import org.junit.Assert.assertEquals
 import org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
 import org.metabrainz.android.data.sources.api.entities.mbentity.*
-import org.metabrainz.android.data.sources.api.entities.mbentity.Collection
-import org.metabrainz.android.presentation.features.adapters.ResultItem
+import org.metabrainz.android.model.mbentity.Collection
+import org.metabrainz.android.ui.adapters.ResultItem
 
 object AssertionUtils {
     fun checkWikiAssertions(testSummary: WikiSummary, summary: WikiSummary) {
@@ -26,7 +26,7 @@ object AssertionUtils {
         }
     }
 
-    fun checkArtistAssertions(testArtist: Artist, artist: Artist) {
+    fun checkArtistAssertions(testArtist: org.metabrainz.android.model.mbentity.Artist, artist: org.metabrainz.android.model.mbentity.Artist) {
         assertEquals(testArtist, artist)
         assertEquals(testArtist.country, artist.country)
         assertEquals(testArtist.disambiguation, artist.disambiguation)
@@ -52,7 +52,7 @@ object AssertionUtils {
         }
     }
 
-    fun checkLabelAssertions(testLabel: Label, label: Label) {
+    fun checkLabelAssertions(testLabel: org.metabrainz.android.model.mbentity.Label, label: org.metabrainz.android.model.mbentity.Label) {
         assertEquals(testLabel, label)
         assertEquals(testLabel.code, label.code)
         assertEquals(testLabel.type, label.type)
@@ -84,7 +84,7 @@ object AssertionUtils {
         assertEquals(testCollectionDetails.mBID, collectionDetails.mBID)
     }
 
-    fun checkCollectionAssertions(testCollection: Collection, collection: Collection) {
+    fun checkCollectionAssertions(testCollection: org.metabrainz.android.model.mbentity.Collection, collection: org.metabrainz.android.model.mbentity.Collection) {
         assertEquals(testCollection.mbid, collection.mbid)
         assertEquals(testCollection.type, collection.type)
         assertEquals(testCollection.name, collection.name)

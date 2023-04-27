@@ -1,7 +1,7 @@
 package org.metabrainz.android.data.sources.api.entities
 
 import com.google.gson.annotations.SerializedName
-import org.metabrainz.android.data.sources.api.entities.mbentity.Area
+import org.metabrainz.android.model.mbentity.Area
 
 class Place {
     @SerializedName("id")
@@ -9,7 +9,7 @@ class Place {
     var name: String? = null
     private var disambiguation: String? = null
     var type: String? = null
-    var area: Area? = null
+    var area: org.metabrainz.android.model.mbentity.Area? = null
 
     @SerializedName("life-span")
     var lifeSpan: LifeSpan? = null

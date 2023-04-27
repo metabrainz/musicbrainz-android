@@ -1,6 +1,6 @@
 package org.metabrainz.android
 
-import org.metabrainz.android.presentation.features.adapters.ResultItem
+import org.metabrainz.android.ui.adapters.ResultItem
 import org.metabrainz.android.EntityTestUtils.testArtistMBID
 import org.metabrainz.android.EntityTestUtils.testLabelMBID
 import org.metabrainz.android.EntityTestUtils.testRecordingMBID
