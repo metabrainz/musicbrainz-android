@@ -15,10 +15,10 @@ import org.metabrainz.android.EntityTestUtils.testCollectionDetails
 import org.metabrainz.android.EntityTestUtils.testCollectionPrivate
 import org.metabrainz.android.EntityTestUtils.testCollectionPublic
 import org.metabrainz.android.RetrofitUtils.createTestService
+import org.metabrainz.android.model.mbentity.MBEntityType
 import org.metabrainz.android.repository.CollectionRepository
 import org.metabrainz.android.repository.CollectionRepositoryImpl
 import org.metabrainz.android.service.CollectionService
-import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
 import org.metabrainz.android.util.Resource
 import org.metabrainz.android.util.Utils
 

@@ -3,8 +3,9 @@ package org.metabrainz.android
 import org.junit.Assert.fail
 import org.metabrainz.android.data.sources.api.entities.ArtistCredit
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
-import org.metabrainz.android.data.sources.api.entities.mbentity.*
-import org.metabrainz.android.model.mbentity.Collection
+import org.metabrainz.android.model.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Release
+import org.metabrainz.android.model.mbentity.ReleaseGroup
 import org.metabrainz.android.ui.adapters.ResultItem
 import java.io.BufferedReader
 import java.io.IOException

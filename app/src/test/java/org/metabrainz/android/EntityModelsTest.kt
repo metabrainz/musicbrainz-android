@@ -8,7 +8,9 @@ import org.metabrainz.android.EntityTestUtils.testLabel
 import org.metabrainz.android.EntityTestUtils.testRecording
 import org.metabrainz.android.EntityTestUtils.testRelease
 import org.metabrainz.android.EntityTestUtils.testReleaseGroup
-import org.metabrainz.android.data.sources.api.entities.mbentity.*
+import org.metabrainz.android.model.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Release
+import org.metabrainz.android.model.mbentity.ReleaseGroup
 
 class EntityModelsTest {
     @Test

@@ -10,8 +10,8 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.*
 import org.metabrainz.android.LiveDataTestUtil.getOrAwaitValue
-import org.metabrainz.android.data.sources.api.entities.mbentity.MBEntityType
-import org.metabrainz.android.presentation.features.collection.CollectionViewModel
+import org.metabrainz.android.model.mbentity.MBEntityType
+import org.metabrainz.android.ui.screens.collection.CollectionViewModel
 import org.metabrainz.android.util.Resource
 
 class CollectionViewModelTest {

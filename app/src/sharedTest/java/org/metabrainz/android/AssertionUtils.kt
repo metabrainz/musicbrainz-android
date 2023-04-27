@@ -4,8 +4,9 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertEquals
 import org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
-import org.metabrainz.android.data.sources.api.entities.mbentity.*
-import org.metabrainz.android.model.mbentity.Collection
+import org.metabrainz.android.model.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Release
+import org.metabrainz.android.model.mbentity.ReleaseGroup
 import org.metabrainz.android.ui.adapters.ResultItem
 
 object AssertionUtils {

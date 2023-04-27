@@ -30,7 +30,10 @@ import org.metabrainz.android.util.Constants.LOOKUP_RECORDING_PARAMS
 import org.metabrainz.android.util.Constants.LOOKUP_RELEASE_GROUP_PARAMS
 import org.metabrainz.android.util.Constants.LOOKUP_RELEASE_PARAMS
 import org.metabrainz.android.service.LookupService
-import org.metabrainz.android.data.sources.api.entities.mbentity.*
+import org.metabrainz.android.model.mbentity.MBEntityType
+import org.metabrainz.android.model.mbentity.Recording
+import org.metabrainz.android.model.mbentity.Release
+import org.metabrainz.android.model.mbentity.ReleaseGroup
 import org.metabrainz.android.util.Resource.Status.SUCCESS
 
 class LookupRepositoryTest {

@@ -6,7 +6,7 @@ import org.metabrainz.android.repository.LookupRepository
 import org.metabrainz.android.data.sources.api.entities.CoverArt
 import org.metabrainz.android.data.sources.api.entities.RecordingItem
 import org.metabrainz.android.data.sources.api.entities.WikiSummary
-import org.metabrainz.android.data.sources.api.entities.mbentity.Release
+import org.metabrainz.android.model.mbentity.Release
 import org.metabrainz.android.util.Resource
 import org.metabrainz.android.util.Resource.Status.SUCCESS
 

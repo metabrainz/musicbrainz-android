@@ -28,13 +28,6 @@ interface LookupService {
     @GET("release/{MBID}")
     suspend fun lookupRecording(@Path("MBID") MBID: String?,
                         @Query("inc") params: String?): Release
-
-    @POST("https://api.acoustid.org/v2/lookup")
-    suspend fun lookupFingerprint(@Query("client") client: String?,
-                          @Query("meta") metadata: String?,
-                          @Query("duration") duration: Long,
-                          @Query("fingerprint") fingerprint: String?): org.metabrainz.android.model.acoustid.AcoustIDResponse
-
     @GET("https://en.wikipedia.org/api/rest_v1/page/summary/{title}")
     suspend fun getWikipediaSummary(@Path("title") title: String): WikiSummary
 
