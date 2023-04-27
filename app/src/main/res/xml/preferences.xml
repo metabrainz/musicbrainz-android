@@ -45,29 +45,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="listen_settings"
-        android:title="@string/settings_listens">
-
-        <EditTextPreference
-            android:key="listenbrainz_user_token"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:summary="@string/settings_listenbrainz_token_summary"
-            android:title="@string/settings_listenbrainz_token" />
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="listening_enabled"
-            android:title="@string/settings_listenbrainz_enabled" />
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="listening_spotify_enabled"
-            android:title="@string/settings_listenbrainz_spotify"
-            android:summary="@string/settings_listenbrainz_spotify_summary" />
-
-    </PreferenceCategory>
-    <PreferenceCategory
         android:key="picard_settings"
         android:title="Picard">
 

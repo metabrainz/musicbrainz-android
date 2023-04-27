@@ -1,24 +1,17 @@
 package org.metabrainz.android.ui.screens.settings
 
-import android.content.DialogInterface
-import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.Preference
-import androidx.preference.SwitchPreference
-import org.metabrainz.android.application.App
 import org.metabrainz.android.R
 import org.metabrainz.android.databinding.ActivityPreferencesBinding
-import org.metabrainz.android.util.UserPreferences.PREFERENCE_LISTENING_ENABLED
-import org.metabrainz.android.util.UserPreferences.PREFERENCE_SYSTEM_THEME
-import org.metabrainz.android.util.UserPreferences.preferenceListeningEnabled
 import org.metabrainz.android.ui.theme.isUiModeIsDark
+import org.metabrainz.android.util.UserPreferences.PREFERENCE_SYSTEM_THEME
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -48,24 +41,6 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         preferenceChangeListener = Preference.OnPreferenceChangeListener { preference: Preference, newValue: Any ->
-            if (preference.key == PREFERENCE_LISTENING_ENABLED) {
-                val enabled = newValue as Boolean
-                if (enabled && !App.context!!.isNotificationServiceAllowed) {
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Grant Media Control Permissions")
-                    builder.setMessage("The listen service requires the special Notification " +
-                            "Listener Service Permission to run. Please grant this permission to" +
-                            " MusicBrainz for Android if you want to use the service.")
-                    builder.setPositiveButton("Proceed") { dialog: DialogInterface?, which: Int -> startActivity(Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
-                    builder.setNegativeButton("Cancel") { dialog: DialogInterface?, which: Int ->
-                        preferenceListeningEnabled = false
-                        (preference as SwitchPreference).isChecked = false
-                    }
-                    builder.create().show()
-                }
-                return@OnPreferenceChangeListener true
-            }
-    
             // Explicit Ui Mode functionality.
             if (preference.key == PREFERENCE_SYSTEM_THEME){
                 when (newValue) {

@@ -6,10 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.aemerse.onboard.OnboardAdvanced
-import com.aemerse.onboard.OnboardFragment
-import com.aemerse.onboard.OnboardPageTransformerType
-import com.aemerse.onboard.model.SliderPage
+import com.limurse.onboard.OnboardAdvanced
+import com.limurse.onboard.OnboardFragment
+import com.limurse.onboard.OnboardPageTransformerType
+import com.limurse.onboard.model.SliderPage
 import org.metabrainz.android.R
 import org.metabrainz.android.ui.screens.dashboard.DashboardActivity
 import org.metabrainz.android.util.UserPreferences
@@ -19,7 +19,8 @@ class FeaturesActivity : OnboardAdvanced() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        addSlide(OnboardFragment.newInstance(
+        addSlide(
+            OnboardFragment.newInstance(
             SliderPage(
                 "Search",
                 "Explore MusicBrainz Data",

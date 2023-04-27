@@ -7,15 +7,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
-import org.metabrainz.android.application.App
 import org.metabrainz.android.R
-import org.metabrainz.android.util.UserPreferences.PREFERENCE_CLEAR_SUGGESTIONS
-import org.metabrainz.android.util.UserPreferences.PREFERENCE_LISTENING_ENABLED
-import org.metabrainz.android.util.UserPreferences.PREFERENCE_SYSTEM_THEME
-import org.metabrainz.android.util.UserPreferences.preferenceListeningEnabled
-import org.metabrainz.android.ui.screens.suggestion.SuggestionProvider
 import org.metabrainz.android.ui.screens.dashboard.DashboardActivity
+import org.metabrainz.android.ui.screens.suggestion.SuggestionProvider
+import org.metabrainz.android.util.UserPreferences.PREFERENCE_CLEAR_SUGGESTIONS
+import org.metabrainz.android.util.UserPreferences.PREFERENCE_SYSTEM_THEME
 
 class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClickListener {
     private var preferenceChangeListener: Preference.OnPreferenceChangeListener? = null
@@ -28,19 +24,6 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         setPreferencesFromResource(R.xml.preferences, rootKey)
         findPreference<Preference>(PREFERENCE_CLEAR_SUGGESTIONS)!!.onPreferenceClickListener = this
         findPreference<Preference>(PREFERENCE_SYSTEM_THEME)!!.onPreferenceChangeListener = preferenceChangeListener
-        if (!App.context!!.isNotificationServiceAllowed) {
-            (findPreference<Preference>(PREFERENCE_LISTENING_ENABLED) as SwitchPreference?)!!.isChecked = false
-            preferenceListeningEnabled = false
-        }
-        findPreference<Preference>(PREFERENCE_LISTENING_ENABLED)!!.onPreferenceChangeListener = preferenceChangeListener
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (!App.context!!.isNotificationServiceAllowed) {
-            (findPreference<Preference>(PREFERENCE_LISTENING_ENABLED) as SwitchPreference?)!!.isChecked = false
-            preferenceListeningEnabled = false
-        }
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
