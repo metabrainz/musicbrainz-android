@@ -7,7 +7,6 @@ import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.provider.Settings
 import dagger.hilt.android.HiltAndroidApp
 import org.metabrainz.android.util.Configuration
 
@@ -24,11 +23,6 @@ class App : Application() {
         robotoLight = Typeface.createFromAsset(context!!.assets, "Roboto-Light.ttf")
     }
 
-    val isNotificationServiceAllowed: Boolean
-        get() {
-            val listeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
-            return listeners != null && listeners.contains(packageName)
-        }
     val isOnline: Boolean
         get() {
             val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
