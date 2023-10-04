@@ -1,10 +1,10 @@
-name: ListenBrainz CI
+name: MusicBrainz CI
 
 on:
   push:
-    branches: [ main, dev, beta ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main, dev, beta ]
+    branches: [ main, dev ]
 
 jobs:
   build:

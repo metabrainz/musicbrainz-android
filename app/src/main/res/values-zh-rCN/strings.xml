@@ -118,7 +118,6 @@
     <string name="directory_path_label">文件夹路径</string>
     <string name="select_button">选择</string>
     <string name="up_button">向上</string>
-    <string name="settings_language">语言</string>
     <string name="settings_use_language">只使用英语</string>
     <string name="settings_use_language_summary">本选项将忽略系统语言配置，并仅以英文显示所有用户界面。</string>
 
