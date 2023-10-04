@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
     <string name="search_hint">MusicBrainz खोजें</string>
     <string name="dash_about">बारे में</string>
     <!-- AboutActivity -->
     <string name="about_title">बारे में</string>
     <string name="lookup_metadata">मेटाडाटा</string>
+    <string name="search_card">MusicBrainz डेटा का अन्वेषण करें</string>
+    <string name="tagger_card">अपना ऑडियो चुनें, टैग ठीक करें</string>
 </resources>
