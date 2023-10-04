@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-
     <string name="title_tracks">Spor</string>
     <string name="dash_scan">Skann</string>
     <string name="dash_collections">Samlinger</string>
@@ -10,20 +8,16 @@
     <string name="search_type_label">Plateselskap</string>
     <string name="search_type_recording">Innspilling</string>
     <string name="search_type_instrument">Instrument</string>
-
     <!-- Searchable -->
     <string name="search_type_event">Arrangement</string>
     <!-- ReleaseActivity -->
     <string name="release_title">Utgivelse</string>
-
     <!-- ReleaseActivity -->
     <string name="artist_title">Artist</string>
-
     <string name="ratings">Vurdering</string>
     <string name="tags">Tagger</string>
     <string name="genres">Sjangre</string>
     <string name="lookup_metadata">Metadata</string>
     <string name="dash_tag">Tagger</string>
     <string name="save_checkbox">Lagre</string>
-    <string name="settings_language">Språk</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-
     <string name="title_tracks">Utwory</string>
     <string name="releases">Wydania</string>
     <string name="recording_releases">Pojawia się w wydaniach</string>
@@ -14,7 +12,6 @@
     <string name="dash_about">O programie</string>
     <string name="login">Zaloguj się</string>
     <string name="welcome">Witamy w MusicBrainz!</string>
-
     <string name="welcome_loggedin">Zalogowano jako</string>
     <string name="search_type_artist">Artysta</string>
     <string name="search_type_release">Wydanie</string>
@@ -22,42 +19,32 @@
     <string name="search_type_recording">Nagranie</string>
     <string name="search_type_release_group">Grupa wydań</string>
     <string name="search_type_instrument">Instrument</string>
-
     <!-- Searchable -->
     <string name="search_type_event">Wydarzenie</string>
     <string name="search_name">MusicBrainz</string>
-
     <!-- LoginActivity -->
     <string name="auth_title">Zaloguj się</string>
-
     <!-- SearchResultsActivity -->
     <string name="no_results">Brak wyników</string>
-
     <!-- ReleaseActivity -->
     <string name="release_title">Wydanie</string>
-
     <string name="cover_art_front">FRONT</string>
-
     <!-- ReleaseActivity -->
     <string name="artist_title">Artysta</string>
-
     <!-- Pager tabs -->
     <string name="tab_links">WIĘCEJ</string>
     <string name="tab_releases">WYDANIA</string>
     <!-- DonateActivity -->
     <string name="donate_title"> Darowizna</string>
-
     <!-- AboutActivity -->
     <string name="about_title">O programie</string>
     <string name="app_name_official">MusicBrainz dla Androida</string>
     <string name="version_text">Wersja</string>
-
     <!-- Actions -->
     <string name="action_search">Szukaj</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_login">Zaloguj się</string>
     <string name="action_logout">Wyloguj</string>
-
     <!-- Preferences -->
     <string name="preferences_title">Ustawienia</string>
     <string name="settings_search">Szukaj</string>
@@ -71,5 +58,4 @@
     <string name="dash_tag">Tag</string>
     <string name="save_checkbox">Zapisz</string>
     <string name="select_button">Wybierz</string>
-    <string name="settings_language">Język</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-
     <string name="icon_button">Іконка Кнопки</string>
     <string name="title_tracks">Треки</string>
     <string name="releases">Випуск</string>
@@ -15,7 +13,6 @@
     <string name="dash_about">Про програму</string>
     <string name="login">Увійти</string>
     <string name="welcome">Ласкаво просимо у MusicBrainz</string>
-
     <string name="welcome_loggedin">Ви увійшли як </string>
     <string name="search_type_artist">Виконавець</string>
     <string name="search_type_release">Випуск</string>
@@ -23,33 +20,25 @@
     <string name="search_type_recording">Звукозаписуюча компанія</string>
     <string name="search_type_release_group">Группа випуску</string>
     <string name="search_type_instrument">Інструмент</string>
-
     <!-- Searchable -->
     <string name="search_type_event">Подія</string>
     <string name="search_name">MusicBrainz</string>
-
     <!-- LoginActivity -->
     <string name="auth_title">Увійти</string>
-
     <!-- SearchResultsActivity -->
     <string name="no_results">Не знайдено результату пошуку</string>
-
     <!-- ReleaseActivity -->
     <string name="release_title">Випуск</string>
-
     <!-- ReleaseActivity -->
     <string name="artist_title">Виконавець</string>
-
     <!-- BioFragment -->
     <string name="bio_powered_by">Біографія дана за допомогою </string>
-
     <!-- Pager tabs -->
     <string name="tab_links">БІЛЬШЕ</string>
     <string name="tab_releases">ВИПУСК</string>
     <string name="tab_info">БИОГРАФИЯ</string>
     <!-- DonateActivity -->
     <string name="donate_title">Пожертва</string>
-
     <!-- AboutActivity -->
     <string name="about_title">Про програму</string>
     <string name="action_login">Увійти</string>
@@ -57,5 +46,4 @@
     <string name="lookup_metadata">Метадані</string>
     <string name="dash_tag">тег</string>
     <string name="save_checkbox">Зберегти</string>
-    <string name="settings_language">Мова</string>
 </resources>
