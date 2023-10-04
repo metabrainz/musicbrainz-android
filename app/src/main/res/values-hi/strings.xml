@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-
+    <string name="search_hint">MusicBrainz खोजें</string>
     <string name="dash_about">बारे में</string>
     <!-- AboutActivity -->
     <string name="about_title">बारे में</string>
