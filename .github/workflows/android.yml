@@ -1,27 +1,38 @@
-name: MusicBrainz CI
+name: ListenBrainz CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main, dev, beta ]
   pull_request:
-    branches: [ master ]
+    branches: [ main, dev, beta ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - uses: actions/checkout@v4
+
+      - name: set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          distribution: 'oracle'
+          java-version: 17
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Run unit tests
         run: ./gradlew test
+
       - name: Build with Gradle
         run: ./gradlew build
+
+      - name: Run lint with Gradle
+        run: ./gradlew lint
+
+      - name: Check lint results
+        uses: yutailang0119/action-android-lint@v3
+        with:
+          report-path: build/reports/*.xml
+        continue-on-error: false
