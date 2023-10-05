@@ -1,9 +1,7 @@
 package org.metabrainz.android.ui.screens.settings
 
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -34,10 +32,6 @@ class SettingsActivity : AppCompatActivity() {
             if (fragment is SettingsFragment) {
                 fragment.setPreferenceChangeListener(preferenceChangeListener)
             }
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1){
-            ACTION_NOTIFICATION_LISTENER_SETTINGS = Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
         }
 
         preferenceChangeListener = Preference.OnPreferenceChangeListener { preference: Preference, newValue: Any ->
@@ -71,9 +65,5 @@ class SettingsActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    companion object {
-        private var ACTION_NOTIFICATION_LISTENER_SETTINGS = "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"
     }
 }

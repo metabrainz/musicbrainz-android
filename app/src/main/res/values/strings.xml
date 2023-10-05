@@ -226,6 +226,4 @@
     <string name="title_current_track">Current Track</string>
     <string name="title_image_size">Image size</string>
     <string name="title_image_scale_type">Scale type</string>
-    <string name="brainzplayer_notification_channel_name">BrainzPlayer Now Playing</string>
-    <string name="brainzplayer_notification_channel_description">Currently Playing Song Controls</string>
 </resources>
