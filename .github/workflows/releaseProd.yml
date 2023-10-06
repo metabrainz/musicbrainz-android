@@ -4,10 +4,6 @@ on:
   workflow_dispatch:
   release:
     types: [ created ]
-  push:
-    paths:
-      - 'app/**'
-    branches: [ prod ]
 
 jobs:
   deploy:
