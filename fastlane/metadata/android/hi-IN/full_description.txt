@@ -1,0 +1,27 @@
+MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.
+
+MusicBrainz aims to be:
+- The ultimate source of music information by allowing anyone to contribute and releasing the data under open licenses.
+- The universal lingua franca for music by providing a reliable and unambiguous form of music identification, enabling both people and machines to have meaningful conversations about music.
+
+MusicBrainz is maintained by a global community of users and we want everyone, including you, to participate and contribute.
+
+Visit https://musicbrainz.org/ to know more
+
+MusicBrainz App is designed to do the following:
+
+- View release information by scanning a barcode
+- Search for information about artists, releases, release groups, labels, recordings, instruments, and events.
+- View collections
+- Tag audio files like Picard
+- Send Releases to your Picard
+- Donate to the MetaBrainz Foundation
+
+MusicBrainz captures information about artists, their recorded works, and the relationships between them.
+Recorded works entries capture at a minimum the album title, track titles, and the length of each track.
+These entries are maintained by volunteer editors who follow community written style guidelines.
+Recorded works can also store information about the release date and country, the CD ID, cover art, acoustic fingerprint, free-form annotation text, and other metadata.
+
+The source code for this app is available on GitHub at https://github.com/metabrainz/musicbrainz-android
+
+This app uses icons designed by Freepik and Flaticon, leverages the Spotify Android SDK for playing tracks।
