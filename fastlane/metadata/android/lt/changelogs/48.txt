@@ -1,0 +1,3 @@
+Oficiali ListenBrainz integravimas į programėlę padaryta.
+Atnaujinimams atlikti buvo panaudotas Spotify Android SDK.
+Be to, visa naudotojo UI buvo pertvarkyta ir iš naujo perrašyta Compose.
