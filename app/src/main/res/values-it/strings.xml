@@ -155,7 +155,6 @@
     <string name="play_artist_button_label">Riproduci artista</string>
     <string name="play_playlist_button_label">Riproduci playlist</string>
     <string name="remove_uri">Rimuovi dalla collezione</string>
-    <string name="save_uri"></string>
     <string name="browse_content">Esplora contenuti</string>
     <string name="title_current_track">Traccia attuale</string>
 </resources>
