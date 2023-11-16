@@ -41,7 +41,7 @@
 MusicBrainz is designed to do the following:
 
 <li> View release information by scanning a barcode</li>
-<li> Search for information about artists, releases, release groups,labels, recordings, instruments, and events.</li>
+<li> Search for information about artists, releases, release groups, labels, recordings, instruments, and events.</li>
 <li> View collections</li>
 <li> Send Releases to your Picard</li>
 <li> Donate to the MetaBrainz Foundation via PayPal</li>
