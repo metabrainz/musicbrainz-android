@@ -17,7 +17,7 @@
     <string name="dash_donate">Aukoti</string>
     <string name="dash_about">Apie</string>
     <string name="welcome">Sveiki atvykę į MusicBrainz!</string>
-    <string name="welcome_loggedin">Prisijungei kaip</string>
+    <string name="welcome_loggedin">Prisijungęs (-usi) kaip</string>
     <string name="search_type_release">Leidinys</string>
     <string name="search_type_label">Leidykla</string>
     <string name="search_type_recording">Įrašas</string>
