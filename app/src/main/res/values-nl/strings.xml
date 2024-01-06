@@ -81,4 +81,46 @@
     <string name="dash_tag">Tag</string>
     <string name="save_checkbox">Opslaan</string>
     <string name="select_button">Selecteren</string>
+    <string name="logout_prompt">Hé, je bent al aangemeld!</string>
+    <string name="releaseadd">Uitgave toevoegen</string>
+    <string name="noresult">Geen resultaten gevonden</string>
+    <string name="labeladd">Platenmaatschappij toevoegen</string>
+    <string name="Onboarding_landing_page">Welkom bij MusicBrainz! Laat ik je de basis uitleggen.</string>
+    <string name="no_user_tag">Je hebt nog geen tag aan dit object toegevoegd, of je bent niet aangemeld.</string>
+    <string name="next">Volgende</string>
+    <string name="artistadd">Artiest toevoegen</string>
+    <string name="settings_device_theme_dark">Donker</string>
+    <string name="explain_search_feature">Verken de data van MusicBrainz</string>
+    <string name="collection_card">Verken je MusicBrainz-collectie</string>
+    <string name="no_file_selected">Geen bestand geselecteerd</string>
+    <string name="instruction">Selecteer de map waarin je audiobestanden staan.
+\n
+\nNadat de audiobestanden zijn geladen, tik je op het gewenste bestand in de lijst en overschrijf je de tags.
+\n
+\nAls de lijst leeg is, werd er in de geselecteerde map geen audiobestand geselecteerd. Probeer dan een andere map.</string>
+    <string name="finish">Voltooien</string>
+    <string name="tagger_file_chooser_SeeTags">Oorspronkelijke tags</string>
+    <string name="no_user_rating">Je hebt dit object nog niet gewaardeerd, of je bent niet aangemeld.</string>
+    <string name="releasegroupadd">Uitgavegroep toevoegen</string>
+    <string name="settings_use_language">Alleen Engels gebruiken</string>
+    <string name="search_card">Verken de data van MusicBrainz</string>
+    <string name="splashscreen_text">De volgende generatie muziektagger</string>
+    <string name="settings_tagger_directory_summary">Selecteer in welke map Picard je bestanden kan vinden</string>
+    <string name="tab_mediums">MEDIA</string>
+    <string name="skip">Overslaan</string>
+    <string name="previous">Vorige</string>
+    <string name="user_genres">Jouw genres</string>
+    <string name="eventadd">Evenement toevoegen</string>
+    <string name="settings_tagger_directory">Map met bestanden</string>
+    <string name="settings_device_theme_light">Licht</string>
+    <string name="recordingadd">Opname toevoegen</string>
+    <string name="settings_appearance">Uiterlijk</string>
+    <string name="settings_use_language_summary">Deze optie onderdrukt de door de gebruiker ingestelde systeemtaal om de hele gebruikersinterface in het Engels weer te geven.</string>
+    <string name="logout">Afmelden</string>
+    <string name="explain_collection">Verken je MusicBrainz-collectie</string>
+    <string name="settings_device_theme_use_device_theme">Aparaatthema gebruiken</string>
+    <string name="loading">Aan het laden …</string>
+    <string name="tagger_file_chooser_ShowCorrectags">Nieuwe tags</string>
+    <string name="news_card">Nieuws over MusicBrainz</string>
+    <string name="lookup_fingerprint">Vingerafdruk</string>
 </resources>

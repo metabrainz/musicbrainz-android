@@ -1,0 +1,3 @@
+- Uitgaven naar Picard versturen
+- Vernieuwde UI voor zoeken
+- Fouten opgelost
