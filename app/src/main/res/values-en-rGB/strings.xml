@@ -100,4 +100,6 @@
     <string name="settings_use_language">Use English only</string>
     <string name="settings_use_language_summary">This option overrides the user specified system language and
     displays all the user interface in English only.</string>
+    <string name="search_card">Explore MusicBrainz data</string>
+    <string name="news_card">MusicBrainz News Updates</string>
 </resources>
