@@ -2,4 +2,6 @@
 <resources>
     <string name="lookup_metadata">Metadata</string>
     <string name="dash_tag">Tag</string>
+    <string name="icon_button">Tlačítko ikon</string>
+    <string name="title_tracks">Stopy</string>
 </resources>
