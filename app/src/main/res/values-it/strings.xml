@@ -157,4 +157,6 @@
     <string name="remove_uri">Rimuovi dalla collezione</string>
     <string name="browse_content">Esplora contenuti</string>
     <string name="title_current_track">Traccia attuale</string>
+    <string name="tab_mediums">SUPPORTI</string>
+    <string name="save_uri">Salva in una collezione</string>
 </resources>
