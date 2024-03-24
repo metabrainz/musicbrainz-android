@@ -5,7 +5,7 @@
     <string name="dash_scan">Сканировать</string>
     <string name="dash_collections">Коллекции</string>
     <string name="dash_donate">Пожертвовать</string>
-    <string name="dash_about">О</string>
+    <string name="dash_about">О приложении</string>
     <string name="login">Войти</string>
     <string name="welcome">Добро пожаловать на MusicBrainz!</string>
     <string name="search_type_artist">Исполнитель</string>
@@ -18,7 +18,7 @@
     <!-- LoginActivity -->
     <string name="auth_title">Войти</string>
     <!-- SearchResultsActivity -->
-    <string name="no_results">Не найдено</string>
+    <string name="no_results">Ничего не найдено</string>
     <!-- ReleaseActivity -->
     <string name="release_title">Релиз</string>
     <!-- ReleaseActivity -->
@@ -27,7 +27,7 @@
     <!-- DonateActivity -->
     <string name="donate_title">Пожертвовать</string>
     <!-- AboutActivity -->
-    <string name="about_title">О</string>
+    <string name="about_title">О нас</string>
     <string name="version_text">Версия</string>
     <!-- Actions -->
     <string name="action_search">Найти</string>
@@ -41,13 +41,41 @@
     <string name="settings_clear">Очистить историю поиска</string>
     <string name="settings_user_data">Пользовательские Данные</string>
     <string name="toast_search_cleared">История поиска удалена</string>
-    <string name="links">Больше Ссылок</string>
-    <string name="ratings">Рейтинг</string>
+    <string name="links">Больше ссылок</string>
+    <string name="ratings">Оценка</string>
     <string name="tags">Теги</string>
-    <string name="user_tags">Ваши Теги</string>
+    <string name="user_tags">Ваши теги</string>
     <string name="genres">Жанры</string>
     <string name="lookup_metadata">Метаданные</string>
     <string name="dash_tag">Тег</string>
     <string name="save_checkbox">Сохранить</string>
     <string name="select_button">Выбрать</string>
+    <string name="settings_use_language_summary">Данная опция переопределяет указанный пользователем язык системы и отображает весь пользовательский интерфейс только на английском языке.</string>
+    <string name="settings_use_language">Использовать только английский интерфейс</string>
+    <string name="releaseadd">Добавить релиз</string>
+    <string name="tagger_file_chooser_pickAfile">Выбрать файл</string>
+    <string name="no_user_tag">Либо вы ещё не добавили какие-либо теги к данной сущности, либо вы не выполнили вход в систему.</string>
+    <string name="welcome_loggedin">Выполнен вход как</string>
+    <string name="search_type_release_group">Группа релизов</string>
+    <string name="search_name">MusicBrainz</string>
+    <string name="bio_powered_by">ИСТОЧНИК ОПИСАНИЯ:</string>
+    <string name="tab_edits">ТЕГИ И ОЦЕНКИ</string>
+    <string name="tab_mediums">НОСИТЕЛИ</string>
+    <string name="app_name_official">MusicBrainz Android</string>
+    <string name="loading">Загрузка...</string>
+    <string name="settings_device_theme_use_device_theme">Как в системе</string>
+    <string name="settings_device_theme_light">Светлая</string>
+    <string name="settings_device_theme_dark">Темная</string>
+    <string name="toast_feedback_fail">Не найдено почтовых клиентов</string>
+    <string name="login_required">Войдите, чтобы просматривать свои коллекции.</string>
+    <string name="user_ratings">Ваша оценка</string>
+    <string name="user_genres">Ваши жанры</string>
+    <string name="no_tag">Теги не найдены</string>
+    <string name="no_user_rating">Либо вы ещё не оценивали данную сущность, либо вы не выполнили вход в систему.</string>
+    <string name="no_rating">Оценки не найдены</string>
+    <string name="lookup_label">Искать, используя</string>
+    <string name="logout">Выйти</string>
+    <string name="logout_prompt">Эй! Вы уже выполнили вход</string>
+    <string name="artistadd">Добавить исполнителя</string>
+    <string name="eventadd">Добавить событие</string>
 </resources>
