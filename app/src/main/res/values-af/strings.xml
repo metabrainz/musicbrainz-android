@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    </resources>
+    <string name="icon_button">Ikoonknop</string>
+    <string name="title_tracks">Snitte</string>
+    <string name="releases">Vrystellings</string>
+    <string name="dash_scan">Skandeer</string>
+    <string name="dash_collections">Versamelings</string>
+    <string name="dash_donate">Skenk</string>
+    <string name="dash_about">Oor</string>
+    <string name="welcome">Welkom by MusicBrainz!</string>
+    <string name="welcome_loggedin">Aangeteken as</string>
+    <string name="search_type_artist">Kunstenaar</string>
+    <string name="search_type_release">Vrystelling</string>
+    <string name="search_type_label">Etiket</string>
+    <string name="search_type_recording">Opname</string>
+    <string name="search_type_release_group">Vrystellingsgroep</string>
+    <string name="search_type_instrument">Instrument</string>
+    <string name="search_name">MusicBrainz</string>
+    <string name="donate_title">Skenk</string>
+    <string name="about_title">Oor</string>
+    <string name="app_name_official">MusicBrainz Android</string>
+    <string name="version_text">Weergawe</string>
+    <string name="action_search">Soek</string>
+    <string name="action_feedback">Terugvoer</string>
+    <string name="get_collection_state">Kry versamelingstatus</string>
+    <string name="save_uri">Bewaar na versameling</string>
+    <string name="connecting">Koppel tans</string>
+    <string name="connected">Gekoppel</string>
+    <string name="disconnect">Koppel los</string>
+    <string name="on_demand_feedback">Kan op versoek speel? %1$b</string>
+    <string name="is_in_collection_feedback">Is in die gebruikerversameling? %1$s</string>
+    <string name="command_feedback">‘%1$s’-bevel suksesvol!</string>
+    <string name="command_response">‘%1$s’-bevel respons</string>
+    <string name="connect_switch_to_local">Wissel na lokale afspeel</string>
+    <string name="play_album_button_label">Speel album af</string>
+    <string name="play_podcast_button_label">Speel podsending af</string>
+    <string name="play_artist_button_label">Speel kunstenaar af</string>
+    <string name="play_playlist_button_label">Speel afspeellys af</string>
+    <string name="play_track_button_label">Speel snit af</string>
+    <string name="title_image_scale_type">Skaaltipe</string>
+    <string name="title_player_context">Spelerkonteks</string>
+    <string name="title_current_track">Huidige snit</string>
+    <string name="title_image_size">Beeldgrootte</string>
+    <string name="remove_uri">Verwyder uit versameling</string>
+    <string name="browse_content">Blaai deur inhoud</string>
+    <string name="subscribe_to_capabilities">Kry vermoëns</string>
+    <string name="subscribe_to_current_track">Teken in op spelerstatus</string>
+    <string name="subscribe_to_player_context">Teken in op spelerkonteks</string>
+</resources>
