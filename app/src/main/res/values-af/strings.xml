@@ -46,4 +46,14 @@
     <string name="subscribe_to_capabilities">Kry vermoëns</string>
     <string name="subscribe_to_current_track">Teken in op spelerstatus</string>
     <string name="subscribe_to_player_context">Teken in op spelerkonteks</string>
+    <string name="recording_releases">Verskyn op vrystellings</string>
+    <string name="search_hint">Deursoek MusicBrainz</string>
+    <string name="search_card">Verken MusicBrainz-data</string>
+    <string name="tagger_card">Kies u oudio, heg die etiket</string>
+    <string name="collection_card">Verken u MusicBrainz-versameling</string>
+    <string name="news_card">MusicBrainz-nuusopdaterings</string>
+    <string name="search_type_event">gebeurtenis</string>
+    <string name="auth_title">Waarmerking</string>
+    <string name="no_results">Geen resultate gevind</string>
+    <string name="release_title">Vrystelling</string>
 </resources>
