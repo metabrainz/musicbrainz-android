@@ -56,4 +56,14 @@
     <string name="auth_title">Waarmerking</string>
     <string name="no_results">Geen resultate gevind</string>
     <string name="release_title">Vrystelling</string>
+    <string name="settings_ratings_tags_summary">Haal graderings en entiteitetikette op as gebruiker aangeteken is.</string>
+    <string name="settings_use_language_summary">Hierdie opsie oorheers die gebruikergespesifiseerde taal en vertoon die gebruikerskoppelvlak slegs in Engels.</string>
+    <string name="settings_suggestions_summary">Bewaar en vertoon soekvoorstelle</string>
+    <string name="settings_private_collections">Privaat versamelings</string>
+    <string name="settings_private_collections_summary">Haal privaat versamelings op ook as gebruiker aangeteken is.</string>
+    <string name="settings_clear">Wis soekgeskiedenis</string>
+    <string name="settings_user_data">Gebruikerdata</string>
+    <string name="settings_ratings_tags">Graderings en etikette</string>
+    <string name="settings_appearance">Voorkoms</string>
+    <string name="settings_use_language">Gebruik slegs Engels</string>
 </resources>
