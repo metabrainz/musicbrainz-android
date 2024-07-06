@@ -66,4 +66,24 @@
     <string name="settings_ratings_tags">Graderings en etikette</string>
     <string name="settings_appearance">Voorkoms</string>
     <string name="settings_use_language">Gebruik slegs Engels</string>
+    <string name="artist_title">Kunstenaar</string>
+    <string name="bio_powered_by">BIO AANGEDRYF DEUR</string>
+    <string name="tab_links">NOG</string>
+    <string name="tab_releases">VRYSTELLING</string>
+    <string name="tab_mediums">MEDIUMS</string>
+    <string name="tab_info">INLIGTING</string>
+    <string name="tab_edits">ETIKETTEER &amp; GRADEER</string>
+    <string name="action_settings">Instellings</string>
+    <string name="action_authentication">Waarmerking</string>
+    <string name="action_login">Teken aan</string>
+    <string name="action_logout">Teken af</string>
+    <string name="loading">Laai tans…</string>
+    <string name="noresult">Geen resultate gevind</string>
+    <string name="preferences_title">Instellings</string>
+    <string name="settings_search">Soek</string>
+    <string name="settings_suggestions">Voorstelle</string>
+    <string name="settings_tagger">Etiketteerder</string>
+    <string name="settings_tagger_directory">Lêergids</string>
+    <string name="settings_tagger_directory_summary">Kies die gids waar Picard u lêers kan vind</string>
+    <string name="settings_device_theme_use_device_theme">U toesteltema</string>
 </resources>
