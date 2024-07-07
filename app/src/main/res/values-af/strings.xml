@@ -86,4 +86,10 @@
     <string name="settings_tagger_directory">Lêergids</string>
     <string name="settings_tagger_directory_summary">Kies die gids waar Picard u lêers kan vind</string>
     <string name="settings_device_theme_use_device_theme">U toesteltema</string>
+    <string name="settings_device_theme_light">Lig</string>
+    <string name="settings_device_theme_dark">Donker</string>
+    <string name="toast_search_err">Voeg teks toe om te soek</string>
+    <string name="toast_feedback_fail">Geen e-posleser gevind</string>
+    <string name="toast_search_cleared">Soekgeskiedenis is geskrap</string>
+    <string name="login_required">U moet aanteken om u versamelings te kan sien.</string>
 </resources>
