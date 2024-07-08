@@ -92,4 +92,22 @@
     <string name="toast_feedback_fail">Geen e-posleser gevind</string>
     <string name="toast_search_cleared">Soekgeskiedenis is geskrap</string>
     <string name="login_required">U moet aanteken om u versamelings te kan sien.</string>
+    <string name="links">Nog skakels</string>
+    <string name="ratings">Gradering</string>
+    <string name="user_ratings">U gradering</string>
+    <string name="tags">Etikette</string>
+    <string name="user_tags">U etikette</string>
+    <string name="tagger_file_chooser_pickAfile">Kies ’n lêer</string>
+    <string name="tagger_file_chooser_SeeTags">Oorspronklike etikette</string>
+    <string name="tagger_file_chooser_ShowCorrectags">Nuwe etikette</string>
+    <string name="tagger_file_chooser_pickDirectory">Kies gids</string>
+    <string name="tagger_file_chooser_Instructions">Kies ’n oudiolêer om etikette aan te heg</string>
+    <string name="tagger_file_save">Skryf oor etikette</string>
+    <string name="instruction">Kies die gids waar u oudiolêers lê.
+\n
+\n Klik op die verlangde lêer uit die lys en skryf oor die etikette nadat die oudiolêers gelys is.
+\n
+\n In geval die lys leeg is kon geen oudiolêer in die gekose gids gevind word nie. Probeer ’n ander gids kies.</string>
+    <string name="genres">Genres</string>
+    <string name="user_genres">U genres</string>
 </resources>
