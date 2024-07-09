@@ -1,2 +1,0 @@
-- De hele UI is vernieuwd en herschreven in Compose
-- Maar nog belangrijker: er zijn officiële ListenBrainz-functies aan de app toegevoegd

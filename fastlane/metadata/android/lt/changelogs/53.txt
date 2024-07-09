@@ -1,1 +1,0 @@
-Atlikta UI ir UX esminė pertvarka. Iš programėlės pašalintos žymeklio ir BrainzPlayer funkcijos. Išsamesnės informacijos rasi mūsų tinklaraščiuose.
