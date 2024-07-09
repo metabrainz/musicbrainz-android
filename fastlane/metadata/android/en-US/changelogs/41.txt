@@ -1,3 +1,0 @@
-Send releases to Picard
-Revamped Search UI
-Bug fixes
