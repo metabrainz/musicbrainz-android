@@ -1,0 +1,3 @@
+- ListenBrainz officieel in de app geïntegreerd
+- De SDK van Spotify Android zijn aanpassingen gedaan
+- De hele UI is vernieuwd en herschreven in Compose

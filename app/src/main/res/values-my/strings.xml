@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-
+    <string name="artist_title">အနုပညာရှင်</string>
+    <string name="tab_info">အချက်လက်</string>
+    <string name="dash_about">အကြောင်း</string>
+    <string name="settings_suggestions">အကြံပြုချက်များ</string>
+    <string name="noresult">မည်သည့် ရလဒ် မှမတွေ့</string>
+    <string name="action_logout">ထွက်ရန်</string>
+    <string name="welcome">MusicBrainz မှ ကြိုဆိုပါတယ်!</string>
+    <string name="settings_tagger">တက်တွဲရန်</string>
+    <string name="app_name_official">MusicBrainz အန်းဒရိုက်</string>
+    <string name="search_name">MusicBrainz</string>
+    <string name="search_type_label">အမှတ်တံဆိပ်</string>
+    <string name="releases">ဖြန့်ချီမှုများ</string>
+    <string name="search_type_instrument">တူရိယာ</string>
+    <string name="icon_button">အိုင်ကွန် ခလုပ်</string>
+    <string name="settings_search">ရှာရန်</string>
+    <string name="settings_private_collections">သီးသန့် စုစည်းမှုများ</string>
+    <string name="search_type_release_group">ဖြန့်ချီီမှု အစု</string>
+    <string name="release_title">ဖြန့်ချီမှု</string>
+    <string name="search_hint">MusicBrainz တွင် ရှာ</string>
+    <string name="collection_card">သင့် MusicBrainz စုစည်းမှု ကို စူးစမ်းရန်</string>
+    <string name="dash_donate">လှူဒါန်းရန်</string>
+    <string name="tagger_card">သင့် အသံဖိုင် ကိုရွေးပြီး၊ တက် ကို ပြင်ဆင်ပါ</string>
+    <string name="search_type_recording">အသံသွင်းမှု</string>
+    <string name="donate_title">လှူဒါန်းမှု</string>
+    <string name="search_card">MusicBrainz မှ ဒေတာများကို စူးစမ်းရန်</string>
+    <string name="settings_tagger_directory_summary">Picard မှ သင့်ဖိုင်များ ကို တွေ့နိုင်ရန် လမ်းကြောင်းရွေးပေးပါ</string>
+    <string name="action_feedback">တုံ့ပြန်ချက်</string>
+    <string name="tab_mediums">မီဒီယာ</string>
+    <string name="version_text">ဗားရှင်း</string>
+    <string name="title_tracks">သီချင်းများ</string>
+    <string name="auth_title">အထောက်အထားစီစစ်ခြင်း</string>
+    <string name="tab_edits">တက် နှင့် အဆင့်သတ်မှတ်ချက်</string>
+    <string name="dash_scan">စကန်ဖတ်</string>
+    <string name="settings_tagger_directory">ဖိုင် လမ်းကြောင်း</string>
+    <string name="preferences_title">ဆက်တင်များ</string>
+    <string name="tab_releases">ဖြန့်ချီမှု</string>
+    <string name="tab_links">နောက်ထပ်</string>
+    <string name="recording_releases">ဖြန့်ချီမှုတွင် ဖော်ပြသည်များ</string>
+    <string name="action_search">ရှာပါ</string>
+    <string name="search_type_artist">အနုပညာရှင်</string>
+    <string name="cover_art_front">ရှေ့</string>
+    <string name="action_settings">ဆက်တင်များ</string>
+    <string name="dash_collections">စုစည်းမှုများ</string>
+    <string name="search_type_event">ပွဲ</string>
+    <string name="loading">လုပ်ဆောင်နေသည်..</string>
+    <string name="bio_powered_by">BIO POWERED BY</string>
+    <string name="action_authentication">အထောက်အထားစီစစ်ခြင်း</string>
+    <string name="welcome_loggedin">ဝင်ထားသော အကောင့်မှာ</string>
+    <string name="action_login">ဝင်ရန်</string>
+    <string name="about_title">အကြောင်း</string>
+    <string name="news_card">MusicBrainz နောက်ဆုံးရ သတင်းများ</string>
+    <string name="search_type_release">ဖြန့်ချီမှု</string>
+    <string name="settings_suggestions_summary">ရှာဖွေမှု အကြံပြုချက်များကို ပြသပြီး သိမ်းပါ</string>
+    <string name="no_results">မည်သည့် ရလဒ် မှမတွေ့</string>
 </resources>

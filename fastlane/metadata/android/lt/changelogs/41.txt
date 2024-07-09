@@ -1,0 +1,3 @@
+Siųsti leidinius į Picard
+Atnaujinta paieškos UI
+Klaidų taisymai
