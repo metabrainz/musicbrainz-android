@@ -33,7 +33,7 @@ android {
         applicationId = "org.metabrainz.android"
         targetSdk = 34
         minSdk = 21
-        versionCode = 58
+        versionCode = 59
         versionName = "7.0.3"
 
         multiDexEnabled = true
@@ -58,25 +58,6 @@ android {
             isMinifyEnabled = false
             // proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-    }
-
-    sourceSets {
-        val sharedTestDir = "src/sharedTest/java"
-        val sharedTestResourcesDir = "src/sharedTest/resources"
-
-        getByName("test") {
-            java.srcDirs(sharedTestDir)
-            resources.srcDirs(sharedTestResourcesDir)
-        }
-
-        getByName("androidTest") {
-            java.srcDirs(sharedTestDir)
-            resources.srcDirs(sharedTestResourcesDir)
-        }
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
 
     compileOptions {
