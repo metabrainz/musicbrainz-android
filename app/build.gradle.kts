@@ -60,6 +60,21 @@ android {
         }
     }
 
+    sourceSets {
+        val sharedTestDir = "src/sharedTest/java"
+        val sharedTestResourcesDir = "src/sharedTest/resources"
+
+        getByName("test") {
+            java.srcDirs(sharedTestDir)
+            resources.srcDirs(sharedTestResourcesDir)
+        }
+
+        getByName("androidTest") {
+            java.srcDirs(sharedTestDir)
+            resources.srcDirs(sharedTestResourcesDir)
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
