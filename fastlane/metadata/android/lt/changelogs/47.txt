@@ -1,2 +1,0 @@
-Visa naudotojo UI pertvarkyta ir perrašyta iš naujo Compose.
-Svarbiausia, kad į programėlę pridėta oficialių ListenBrainz funkcijų!
