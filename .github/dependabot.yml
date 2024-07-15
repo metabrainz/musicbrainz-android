@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Updates for Github Actions used in the repo
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "monthly"
+      day: "wednesday"
+      time: "00:00"
+
+  # Updates for Gradle dependencies used in the app
+  - package-ecosystem: "gradle"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "monthly"
+      day: "wednesday"
+      time: "00:00"
+    open-pull-requests-limit: 10
