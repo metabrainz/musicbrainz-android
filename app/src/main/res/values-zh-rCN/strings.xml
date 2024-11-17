@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-
     <string name="icon_button">图标按钮</string>
     <string name="title_tracks">音轨</string>
     <string name="releases">专辑</string>
@@ -15,7 +13,6 @@
     <string name="dash_about">关于</string>
     <string name="login">登录</string>
     <string name="welcome">欢迎使用 MusicBrainz!</string>
-
     <string name="welcome_loggedin">登录为</string>
     <string name="search_type_artist">艺术家</string>
     <string name="search_type_release">专辑</string>
@@ -23,49 +20,37 @@
     <string name="search_type_recording">录音</string>
     <string name="search_type_release_group">专辑组</string>
     <string name="search_type_instrument">乐器</string>
-
     <!-- Searchable -->
     <string name="search_type_event">事件</string>
     <string name="search_name">MusicBrainz</string>
-
     <!-- LoginActivity -->
     <string name="auth_title">登录</string>
-
     <!-- SearchResultsActivity -->
     <string name="no_results">未找到结果</string>
-
     <!-- ReleaseActivity -->
     <string name="release_title">专辑</string>
-
     <string name="cover_art_front">正面</string>
-
     <!-- ReleaseActivity -->
     <string name="artist_title">艺术家</string>
-
     <!-- BioFragment -->
     <string name="bio_powered_by">简介来源</string>
-
     <!-- Pager tabs -->
     <string name="tab_links">更多</string>
     <string name="tab_releases">专辑</string>
     <string name="tab_info">简介</string>
     <string name="tab_edits">标签 &amp; 评分</string>
-
     <!-- DonateActivity -->
     <string name="donate_title">捐助</string>
-
     <!-- AboutActivity -->
     <string name="about_title">关于</string>
     <string name="app_name_official">MusicBrainz Android</string>
     <string name="version_text">版本</string>
-
     <!-- Actions -->
     <string name="action_search">搜索</string>
     <string name="action_feedback">反馈</string>
     <string name="action_settings">设置</string>
     <string name="action_login">登录</string>
     <string name="action_logout">退出</string>
-
     <!-- Preferences -->
     <string name="preferences_title">设置</string>
     <string name="settings_search">搜索</string>
@@ -80,33 +65,25 @@
     <string name="settings_user_data">用户数据</string>
     <string name="settings_ratings_tags">评分及标签</string>
     <string name="settings_ratings_tags_summary">当用户处于登录状态时，装取各项目的评分及标签。</string>
-
     <!-- Toasts -->
     <string name="toast_search_err">请输入要搜索的文字</string>
     <string name="toast_feedback_fail">未找到电子邮件客户端</string>
     <string name="toast_search_cleared">搜索历史已删除</string>
-
     <string name="login_prompt">要成功登录，需要将您的 MusicBrainz 账号与此 app 相关联。
     接下来的页面会提示您登录 MusicBrainz 网站。
     请根据提示操作并返回，即可完成身份认证。</string>
-
     <string name="login_required">您需要登录，方可查看收藏集。</string>
-
     <string name="links">更多链接</string>
-
     <string name="ratings">评分</string>
     <string name="user_ratings">您的评分</string>
     <string name="tags">标签</string>
     <string name="user_tags">您的标签</string>
-
     <string name="genres">流派</string>
     <string name="user_genres">自定义流派</string>
-
     <string name="no_user_tag">尚未给项目添加任何标签或者未登录</string>
     <string name="no_tag">未找到标签</string>
     <string name="no_user_rating">尚未给项目评分或者未登录</string>
     <string name="no_rating">未找到评分</string>
-
     <string name="lookup_metadata">元数据</string>
     <string name="lookup_fingerprint">指纹</string>
     <string name="lookup_label">查找使用</string>
@@ -120,5 +97,46 @@
     <string name="up_button">向上</string>
     <string name="settings_use_language">只使用英语</string>
     <string name="settings_use_language_summary">本选项将忽略系统语言配置，并仅以英文显示所有用户界面。</string>
-
+    <string name="explain_fetch_metadata">完善您的音频元数据</string>
+    <string name="search_card">浏览MusicBrainz数据</string>
+    <string name="tagger_card">选择您的音频，完善标签</string>
+    <string name="collection_card">浏览您的MusicBrainz收藏集</string>
+    <string name="news_card">MusicBrainz 新更新</string>
+    <string name="tab_mediums">媒介</string>
+    <string name="action_authentication">验证</string>
+    <string name="loading">加载中…</string>
+    <string name="noresult">无结果</string>
+    <string name="settings_appearance">外观</string>
+    <string name="settings_device_theme_use_device_theme">使用设备主题</string>
+    <string name="settings_device_theme_light">日间</string>
+    <string name="settings_device_theme_dark">夜间</string>
+    <string name="tagger_file_chooser_pickAfile">选取一个文件</string>
+    <string name="tagger_file_chooser_SeeTags">原始标签</string>
+    <string name="tagger_file_chooser_ShowCorrectags">新增标签</string>
+    <string name="tagger_file_chooser_pickDirectory">选择目录</string>
+    <string name="tagger_file_chooser_Instructions">选择一个音频文件完善标签</string>
+    <string name="tagger_file_save">覆盖标签</string>
+    <string name="splashscreen_text">新一代音乐标签工具</string>
+    <string name="logout">登出</string>
+    <string name="logout_prompt">嘿！您已经登录了</string>
+    <string name="Onboarding_landing_page">欢迎来到 MusicBrainz！让我带您了解一下基本知识！</string>
+    <string name="lets_go">开始吧!</string>
+    <string name="skip">跳过</string>
+    <string name="next">下一步</string>
+    <string name="previous">上一步</string>
+    <string name="finish">完成</string>
+    <string name="instruction_to_add">若找不到，请添加</string>
+    <string name="artistadd">添加艺术家</string>
+    <string name="releaseadd">添加发行</string>
+    <string name="eventadd">添加活动</string>
+    <string name="releasegroupadd">添加发行组</string>
+    <string name="labeladd">添加厂牌</string>
+    <string name="recordingadd">添加录音</string>
+    <string name="explain_search_feature">浏览MusicBrainz数据</string>
+    <string name="explain_collection">浏览您的MusicBrainz收藏集</string>
+    <string name="explain_scan">搜索条码</string>
+    <string name="open_on_website">在网站上打开</string>
+    <string name="settings_listenbrainz_token">ListenBrainz用户令牌</string>
+    <string name="settings_listenbrainz_token_summary">输入ListenBrainz用户令牌，可在https://listenbrainz.org/profile/ 查看</string>
+    <string name="settings_listenbrainz_enabled">启用</string>
 </resources>
