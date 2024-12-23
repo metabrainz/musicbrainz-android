@@ -159,4 +159,6 @@
     <string name="title_current_track">Traccia attuale</string>
     <string name="tab_mediums">SUPPORTI</string>
     <string name="save_uri">Salva in una collezione</string>
+    <string name="title_image_scale_type">Tipo di scala</string>
+    <string name="title_image_size">Dimensioni dell\'immagine</string>
 </resources>
