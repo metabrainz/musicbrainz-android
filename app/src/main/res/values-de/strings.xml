@@ -81,4 +81,6 @@
     <string name="dash_tag">Tag</string>
     <string name="save_checkbox">Speichern</string>
     <string name="select_button">Auswählen</string>
+    <string name="action_authentication">Authentifizierung</string>
+    <string name="noresult">Kein Ergebnis gefunden</string>
 </resources>
