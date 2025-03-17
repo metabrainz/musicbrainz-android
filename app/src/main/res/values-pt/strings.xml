@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-
     <string name="title_tracks">Faixas</string>
     <string name="dash_collections">Coleções</string>
     <string name="search_type_label">Etiqueta</string>
     <string name="tags">Etiquetas</string>
+    <string name="dash_donate">Doar</string>
+    <string name="search_type_event">Evento</string>
+    <string name="app_name_official">MusicBrainz Android</string>
+    <string name="settings_suggestions">Sugestões</string>
+    <string name="settings_user_data">Dados do usuário</string>
+    <string name="releases">Lançamentos</string>
+    <string name="dash_about">Sobre</string>
+    <string name="welcome">Bem-vindo ao MusicBrainz!</string>
+    <string name="search_type_artist">Artista</string>
+    <string name="search_type_release">Lançamento</string>
+    <string name="search_type_recording">Gravação</string>
+    <string name="search_type_instrument">Instrumento</string>
+    <string name="search_name">MusicBrainz</string>
+    <string name="auth_title">Autenticação</string>
+    <string name="no_results">Nenhum resultado encontrado</string>
+    <string name="release_title">Lançamento</string>
+    <string name="artist_title">Artista</string>
+    <string name="tab_links">MAIS</string>
+    <string name="tab_releases">LANÇAMENTO</string>
+    <string name="tab_info">INFORMAÇÃO</string>
+    <string name="donate_title">Doar</string>
+    <string name="about_title">Sobre</string>
+    <string name="version_text">Versão</string>
+    <string name="action_search">Pesquisar</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_authentication">Autenticação</string>
+    <string name="loading">Carregando...</string>
+    <string name="noresult">Nenhum resultado encontrado</string>
+    <string name="preferences_title">Configurações</string>
+    <string name="settings_search">Pesquisar</string>
+    <string name="settings_tagger_directory">Diretório de arquivos</string>
+    <string name="settings_tagger_directory_summary">Escolha o diretório onde Picard pode encontrar seus arquivos</string>
+    <string name="settings_private_collections">Coleções privadas</string>
+    <string name="settings_clear">Limpar histórico de pesquisa</string>
+    <string name="settings_appearance">Aparência</string>
+    <string name="settings_use_language">Usar apenas Inglês</string>
+    <string name="settings_device_theme_use_device_theme">Usar tema do dispositivo</string>
+    <string name="settings_device_theme_light">Claro</string>
+    <string name="settings_device_theme_dark">Escuro</string>
+    <string name="previous">Anterior</string>
+    <string name="finish">Finalizar</string>
+    <string name="next">Próximo</string>
+    <string name="skip">Pular</string>
+    <string name="settings_listens">Reproduções</string>
+    <string name="title_image_size">Tamanho da imagem</string>
+    <string name="is_in_collection_feedback">Está na coleção do usuário? %1$s</string>
 </resources>
