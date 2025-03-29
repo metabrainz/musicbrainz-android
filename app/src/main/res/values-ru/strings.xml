@@ -78,4 +78,7 @@
     <string name="logout_prompt">Эй! Вы уже выполнили вход</string>
     <string name="artistadd">Добавить исполнителя</string>
     <string name="eventadd">Добавить событие</string>
+    <string name="icon_button">Иконка кнопки</string>
+    <string name="recording_releases">Появляется в релизах</string>
+    <string name="search_hint">Поиск по MusicBrainz</string>
 </resources>
