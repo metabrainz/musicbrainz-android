@@ -113,7 +113,7 @@
     <string name="logout">Wyloguj</string>
     <string name="logout_prompt">Hej! Jesteś już zalogowany</string>
     <string name="Onboarding_landing_page">Witamy w MusicBrainz! Pozwól, że przeprowadzę Cię przez podstawy!</string>
-    <string name="lets_go">No to jedziemy!</string>
+    <string name="lets_go">Zaczynajmy!</string>
     <string name="skip">Pomiń</string>
     <string name="next">Następny</string>
     <string name="previous">Poprzedni</string>
@@ -132,7 +132,7 @@
     <string name="err_generic_toast">Wystąpił błąd. Sprawdź logi, aby dowiedzieć się więcej.</string>
     <string name="connect">Połącz</string>
     <string name="authorize">Połącz i autoryzuj</string>
-    <string name="connecting">Połączono</string>
+    <string name="connecting">Łączenie</string>
     <string name="connected">Połączony</string>
     <string name="disconnect">Odłącz</string>
     <string name="on_demand_feedback">Czy można grać na żądanie? %1$b</string>
@@ -152,4 +152,5 @@
     <string name="subscribe_to_capabilities">Uzyskaj możliwości</string>
     <string name="title_current_track">Aktualny utwór</string>
     <string name="title_image_size">Rozmiar obrazu</string>
+    <string name="settings_listens">Odtworzenia</string>
 </resources>
