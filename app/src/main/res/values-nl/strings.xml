@@ -123,4 +123,12 @@
     <string name="tagger_file_chooser_ShowCorrectags">Nieuwe tags</string>
     <string name="news_card">Nieuws over MusicBrainz</string>
     <string name="lookup_fingerprint">Vingerafdruk</string>
+    <string name="action_authentication">Verificatie</string>
+    <string name="tagger_file_chooser_pickAfile">Kies een bestand</string>
+    <string name="tagger_file_chooser_pickDirectory">Kies een map</string>
+    <string name="tagger_file_chooser_Instructions">Selecteer een audiobestand om de tags te fiksen</string>
+    <string name="tagger_file_save">Tags overschrijven</string>
+    <string name="lookup_label">Opzoeken met</string>
+    <string name="directory_path_label">Mappad</string>
+    <string name="hello_blank_fragment">Hallo leeg fragment</string>
 </resources>
