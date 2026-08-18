@@ -46,4 +46,16 @@
     <string name="settings_suggestions">Soovitused</string>
     <string name="settings_tagger_directory">Failide kaust</string>
     <string name="settings_tagger_directory_summary">Vali kaust, kust Picard sinu failid leiab</string>
+    <string name="settings_device_theme_use_device_theme">Kasuta seadme kujundust</string>
+    <string name="settings_device_theme_light">Hele kujundus</string>
+    <string name="settings_device_theme_dark">Tume kujundus</string>
+    <string name="settings_listens">Kuulamised</string>
+    <string name="settings_listenbrainz_token">ListenBrainzi kasutajakohane tunnusluba</string>
+    <string name="settings_listenbrainz_token_summary">Sisesta ListenBrainzi kasutajakohane tunnusluba, mille leiad lehelt https://listenbrainz.org/profile/</string>
+    <string name="settings_listenbrainz_enabled">Lülita kuulamiste teenus sisse</string>
+    <string name="connect">Ühenda</string>
+    <string name="authorize">Ühenda ja volita</string>
+    <string name="connecting">Ühendamisel</string>
+    <string name="connected">Ühendatud</string>
+    <string name="disconnect">Katkesta ühendus</string>
 </resources>
